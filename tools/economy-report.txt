@@ -1,0 +1,19 @@
+Economy simulation: 300 pack-only trials per set, max 1000 packs each
+
+SummerSlam — Series 1: 171 cards · 8 Superstars
+firstSetSuperstar        complete 300/300  mean 1.0  p25 1  median 1  p75 1  p90 1
+secondSetSuperstar       complete 300/300  mean 8.1  p25 3  median 6  p75 12  p90 20
+fourthSetSuperstar       complete 300/300  mean 24.7  p25 16  median 24  p75 33  p90 38
+allSetSuperstars         complete 300/300  mean 71.8  p25 60  median 72  p75 83  p90 92
+unique25                 complete 300/300  mean 3.1  p25 3  median 3  p75 4  p90 4
+unique50                 complete 300/300  mean 12.9  p25 10  median 13  p75 16  p90 19
+unique75                 complete 300/300  mean 30.3  p25 26  median 31  p75 34  p90 37
+unique100                complete 300/300  mean 103.8  p25 91  median 106  p75 116  p90 124
+foilUnique25             complete 300/300  mean 50.9  p25 48  median 51  p75 53  p90 55
+foilUnique50             complete 300/300  mean 123.6  p25 118  median 124  p75 129  p90 133
+foilUnique100            complete 300/300  mean 250.7  p25 245  median 251  p75 257  p90 261
+allCardsAtPlayableCap    complete 300/300  mean 136.2  p25 134  median 136  p75 139  p90 141
+foilCopies50             complete 300/300  mean 188.3  p25 186  median 188  p75 190  p90 192
+foilCopies75             complete 300/300  mean 227.8  p25 226  median 228  p75 230  p90 232
+foilCopies90             complete 300/300  mean 251.5  p25 249  median 251  p75 253  p90 255
+foilCopies95             complete 300/300  mean 259.5  p25 257  median 259  p75 261  p90 263

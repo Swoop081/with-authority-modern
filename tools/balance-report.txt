@@ -1,0 +1,46 @@
+Matches: 3072 | stalls 0
+P1 1501 (48.9%) | P2 1571 (51.1%) | draws 0
+Avg turns 17.52 | Avg control changes 16.49
+Moves declared 33102 | countered 7214 (21.8%) | auto 2
+Finish: pin 2959 (96.3%) | submission 113 (3.7%) | count-out 0 (0.0%)
+Avg winner HP 27.36 | loser HP 16.79
+
+Counter rate by Move Type:
+Arm Extended: 1803/6639 27.2%
+Scoop: 902/5901 15.3%
+Mad Rush: 1500/5390 27.8%
+Leg Extended: 918/3742 24.5%
+In Close: 1019/3395 30.0%
+Victim Below: 186/2499 7.4%
+Head Down: 382/2015 19.0%
+Hit or Miss: 302/1107 27.3%
+Standing Above: 18/666 2.7%
+Back to Foe: 44/626 7.0%
+Behind Opponent: 48/618 7.8%
+High Risk: 92/504 18.3%
+
+Counter rate by Method:
+strike: 4250/16124 26.4%
+strength: 1510/9062 16.7%
+technical: 679/5009 13.6%
+agility: 775/2907 26.7%
+
+Win rate by Superstar:
+CM Punk: 221/384 57.6%
+Kevin Owens: 219/384 57.0%
+Seth Rollins: 211/384 54.9%
+Stone Cold Steve Austin: 211/384 54.9%
+Cody Rhodes: 210/384 54.7%
+Randy Savage: 210/384 54.7%
+Oba Femi: 207/384 53.9%
+Brock Lesnar: 191/384 49.7%
+Mankind: 182/384 47.4%
+André the Giant: 179/384 46.6%
+Roman Reigns: 177/384 46.1%
+The Undertaker: 177/384 46.1%
+Kane: 176/384 45.8%
+Hulk Hogan: 174/384 45.3%
+Ultimate Warrior: 164/384 42.7%
+Gunther: 163/384 42.4%
+
+Move pool: 272 total | 264 offensive | 8 defensive-only | 208/264 offensive Moves can counter at least one Move Type.

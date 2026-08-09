@@ -1,0 +1,77 @@
+import { cards } from "./cards.js";
+import { hallCards } from "./hall-of-fame-cards.js";
+import { superstars } from "./superstars.js";
+import { sets } from "./sets.js";
+
+const rarity = { common: 1, uncommon: 2, rare: 3, veryRare: 4 };
+const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
+
+const summerStarOrder = [superstars.codyRhodes, superstars.cmPunk, superstars.romanReigns, superstars.sethRollins, superstars.obaFemi, superstars.brockLesnar, superstars.kevinOwens, superstars.gunther];
+const hallStarOrder = [superstars.hulkHogan, superstars.andreTheGiant, superstars.randySavage, superstars.ultimateWarrior, superstars.stoneCold, superstars.undertaker, superstars.mankind, superstars.kane];
+
+function flattenCardObject(source) {
+  const out = [];
+  for (const value of Object.values(source)) {
+    if (value?.id) out.push(value);
+    else if (value && typeof value === "object") for (const nested of Object.values(value)) if (nested?.id) out.push(nested);
+  }
+  return out;
+}
+
+const summerCards = flattenCardObject(cards);
+const hofCards = flattenCardObject(hallCards);
+
+const rarityFor = (card) => {
+  if (card.finisher) return rarity.veryRare;
+  if (card.kind === "entrance" || card.kind === "support" || card.kind === "manager" || card.counterAny) return rarity.rare;
+  if (card.superstarId || card.kind === "special" || card.kind === "action") return rarity.uncommon;
+  return rarity.common;
+};
+
+const superstarEntry = (star) => ({
+  id: `superstar-${star.id}`,
+  name: star.name,
+  kind: "superstar",
+  superstarId: star.id,
+  subtitle: star.nickname,
+  rarity: rarity.veryRare,
+  hp: star.hp,
+  abilityName: star.ability.name,
+  abilityText: star.ability.text,
+  setId: star.setId,
+  era: star.era ?? null
+});
+
+function buildSetCollection(setId, starOrder, sourceCards) {
+  const ordered = [];
+  for (const star of starOrder) {
+    ordered.push(superstarEntry(star));
+    const starCards = sourceCards.filter(c => c.superstarId === star.id);
+    const entranceCards = starCards.filter(c => c.kind === "entrance");
+    const otherCards = starCards.filter(c => c.kind !== "entrance");
+    for (const card of [...entranceCards, ...otherCards]) ordered.push({ ...card, rarity: rarityFor(card), setId });
+  }
+  for (const card of sourceCards) {
+    if (card.superstarId) continue;
+    if (!ordered.some(x => x.id === card.id)) ordered.push({ ...card, rarity: rarityFor(card), setId });
+  }
+  return ordered.map((entry, index) => ({ ...entry, cardNumber: index + 1, cardCode: `${sets[setId].shortCode}-${String(index + 1).padStart(3, "0")}` }));
+}
+
+export const collectionCardsBySet = {
+  "summerslam-series-1": buildSetCollection("summerslam-series-1", summerStarOrder, summerCards),
+  "hall-of-fame-series-1": buildSetCollection("hall-of-fame-series-1", hallStarOrder, hofCards)
+};
+
+export const collectionCards = Object.values(collectionCardsBySet).flat();
+export const setCollections = Object.fromEntries(Object.entries(collectionCardsBySet).map(([setId, list]) => [setId, {
+  ...sets[setId],
+  cardCount: list.length,
+  superstarCount: list.filter(c => c.kind === "superstar").length,
+  rarityLabels
+}]));
+
+// Backwards-compatible alias for SummerSlam code/tests while the UI becomes multi-set aware.
+export const setCollection = setCollections["summerslam-series-1"];
+export function cardsForSet(setId) { return collectionCardsBySet[setId] ?? []; }
+export function setCollectionFor(setId) { return setCollections[setId] ?? null; }

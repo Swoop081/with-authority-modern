@@ -1,0 +1,54 @@
+0 {
+  terminal: 12815,
+  move: 7708,
+  pass: 4972,
+  passWithMoves: 3106,
+  ret: 135,
+  moveRate: 0.6014826375341397,
+  deadPassRate: 0.2423722200546235
+}
+2 {
+  terminal: 12117,
+  move: 7684,
+  pass: 4298,
+  passWithMoves: 2432,
+  ret: 135,
+  moveRate: 0.6341503672526203,
+  deadPassRate: 0.20070974663695634
+}
+3 {
+  terminal: 10570,
+  move: 6689,
+  pass: 3747,
+  passWithMoves: 1885,
+  ret: 134,
+  moveRate: 0.6328287606433302,
+  deadPassRate: 0.1783349101229896
+}
+4 {
+  terminal: 9317,
+  move: 5765,
+  pass: 3423,
+  passWithMoves: 1587,
+  ret: 129,
+  moveRate: 0.6187614038853708,
+  deadPassRate: 0.170333798432972
+}
+5 {
+  terminal: 7804,
+  move: 4684,
+  pass: 2998,
+  passWithMoves: 1254,
+  ret: 122,
+  moveRate: 0.6002050230650948,
+  deadPassRate: 0.16068682726806766
+}
+6 {
+  terminal: 6276,
+  move: 3644,
+  pass: 2519,
+  passWithMoves: 923,
+  ret: 113,
+  moveRate: 0.5806246016571064,
+  deadPassRate: 0.14706819630337795
+}
