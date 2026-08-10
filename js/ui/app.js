@@ -2,7 +2,7 @@ import { superstars } from "../data/superstars.js";
 import { decks } from "../data/decks.js";
 import { sets } from "../data/sets.js";
 import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js";
-import { artworkFor, superstarArtwork } from "../data/artwork.js";
+import { artworkFor, superstarArtwork, superstarCardArtFor } from "../data/artwork.js";
 import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js";
 import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js";
 import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js";
@@ -61,12 +61,20 @@ const rosterForBranch = (branch) => roster.filter(star => star.setId === branch.
 const $ = selector => document.querySelector(selector);
 const nameFor = id => id ? game.state().players[id]?.superstar.name ?? id : "No one";
 const cardNameFor = id => id ? collectionById.get(id)?.name ?? id : "";
-const portraitMarkup = (id, name, cls = "") => superstarArtwork[id] ? `<img class="${cls}" src="${superstarArtwork[id]}" alt="${name}">` : `<span class="portrait-placeholder ${cls}"><b>${name}</b><small>Artwork pending</small></span>`;
+const superstarVisualMarkup = (id, name, cls = "") => {
+  const cardArt = superstarCardArtFor(id);
+  const fallback = superstarArtwork[id];
+  if (cardArt && fallback) return `<img class="${cls} superstar-card-visual" src="${cardArt}" alt="${name}" data-superstar-card-art="${id}" onerror="this.onerror=null;this.dataset.artFallback=\'portrait\';this.src=\'${fallback}\';">`;
+  if (fallback) return `<img class="${cls} superstar-card-visual" src="${fallback}" alt="${name}" data-art-fallback="portrait">`;
+  return `<span class="portrait-placeholder ${cls}"><b>${name}</b><small>Artwork pending</small></span>`;
+};
+const portraitMarkup = superstarVisualMarkup;
 
 const SET_LOGO_ASSETS = {
   "summerslam-series-1": "assets/art/summerslam-series-1/summerslam-2026-logo.png",
   "hall-of-fame-series-1": "assets/art/hall-of-fame-series-1/hall-of-fame-logo.png",
-  "evolution-series-1": "assets/art/evolution-series-1/evolution-logo.png"
+  "evolution-series-1": "assets/art/evolution-series-1/evolution-logo.png",
+  "season-1-final-boss": "assets/art/season-1-final-boss/rewards-logo.png"
 };
 function setLogoMarkup(setId, className = "") {
   const src = SET_LOGO_ASSETS[setId];
@@ -441,7 +449,7 @@ function renderSeasons() {
     </article>`;
   }).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen">
-    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock","cody-rhodes","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Every match, challenge and booster moves your Legacy toward Tier 50. Complete Season 1 to unlock <b>The Rock — The Final Boss</b> and his complete 55-page deck.</p><div class="season-hero-actions"><button id="season-home" class="nav-button">Main Menu</button><button id="season-challenges" class="nav-button">Daily / Weekly</button><button id="season-boosters" class="nav-button">Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
+    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock","cody-rhodes","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Every match, challenge and booster moves your Legacy toward Tier 50. Complete Season 1 to unlock <b>The Rock — The Final Boss</b> and his complete 55-page deck.</p><div class="season-hero-actions"><button id="season-home" class="nav-button">Main Menu</button><button id="season-challenges" class="nav-button">Daily / Weekly</button><button id="season-boosters" class="nav-button">Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
     <section class="season-live-releases">
       <div class="section-title"><h3>Season 1 · Featured Releases</h3><span>Build the launch roster while you chase The Final Boss</span></div>
@@ -840,7 +848,7 @@ function renderStarter() {
     <div class="onboarding-brand">${legacyLogoMarkup(true)}</div>
     <div class="starter-hero"><span class="eyebrow">FIRST-TIME ONBOARDING</span><h2>Choose Your Champion</h2><p>Your first decision creates your local profile. Choose one World Champion and receive their Superstar card, linked five-card Lead Off package and complete 55-card starter deck.</p></div>
     <div class="starter-choice-grid champion-choice-grid">${choices.map(star => `<button class="starter-choice champion-starter" data-starter="${star.id}">
-      <div class="starter-photo"><img src="${superstarArtwork[star.id]}" alt="${star.name}"></div>
+      <div class="starter-photo">${superstarVisualMarkup(star.id,star.name)}</div>
       <span class="champion-tag">${titleFor(star.id)}</span>
       <strong>${star.name}</strong><small>${star.nickname}</small>
       <span>${star.hp} HP · ${star.archetype.replaceAll("-", " ")}</span>
@@ -904,9 +912,12 @@ function cardFrontBottom(card) {
 }
 
 function cardArtFace(card) {
-  const art = artworkFor(card);
   const star = card.superstarId ? superstarById[card.superstarId] : null;
-  const fallback = card.kind === "superstar" ? (star?.name ?? card.name) : card.name;
+  if (card.kind === "superstar" && card.superstarId) {
+    return superstarVisualMarkup(card.superstarId, star?.name ?? card.name, "ccg-superstar-art-image");
+  }
+  const art = artworkFor(card);
+  const fallback = card.name;
   return art
     ? `<img src="${art}" alt="${card.name}">`
     : `<span class="ccg-art-placeholder"><b>${fallback}</b><small>ARTWORK SLOT</small><em>${card.id}</em></span>`;

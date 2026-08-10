@@ -41,6 +41,18 @@ export const superstarArtwork = {
   "the-rock": `${WWE_PROFILE_ROOT}/the-rock.png`,
   ...superstarArtOverrides
 };
+// Finished Superstar collectible fronts exported by Superstar Art Studio.
+// These are intentionally separate from wrestler portraits: move/Entrance cards
+// can continue using action/profile art while every Superstar-facing UI surface
+// can prefer the finished collectible card. Missing custom files fall back in
+// the UI to superstarArtwork without breaking the game.
+export const superstarCardArtwork = Object.fromEntries(
+  Object.keys(superstarArtwork).map(id => [id, `assets/cards/art/custom/superstars/${id}.webp`])
+);
+
+export function superstarCardArtFor(superstarId) {
+  return superstarCardArtwork[superstarId] ?? null;
+}
 
 // Exact card-photo replacements always win. This is the long-term migration
 // path from temporary fallback art to a unique photo for every individual card.

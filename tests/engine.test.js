@@ -2355,3 +2355,21 @@ test("Best in the World pin escape is only playable by CM Punk", () => {
   g2.state().phase="PIN_RESPONSE"; g2.state().pin={attackerId:"p2",defenderId:"p1"};
   assert.equal(canPlayPinEscape(g2.state(),"p1",punkSpecial),false);
 });
+
+test("finished Superstar card fronts are the canonical UI visual with portrait fallback", async () => {
+  const { superstarCardArtwork, superstarArtwork } = await import("../js/data/artwork.js");
+  assert.equal(Object.keys(superstarCardArtwork).length, Object.keys(superstarArtwork).length);
+  assert.equal(Object.keys(superstarCardArtwork).length, 25);
+  for (const id of Object.keys(superstarArtwork)) {
+    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp`);
+  }
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("const portraitMarkup = superstarVisualMarkup"), true);
+  assert.equal(app.includes('card.kind === "superstar" && card.superstarId'), true);
+  assert.equal(app.includes("superstarCardArtFor"), true);
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.equal(css.includes("finished Superstar collectible art is the canonical UI visual"), true);
+  assert.equal(css.includes(".season-ad-rock img.superstar-card-visual"), true);
+  assert.equal(css.includes(".tile-bg-art img.superstar-card-visual"), true);
+  assert.equal(css.includes(".season-release-art .mode-portrait img.superstar-card-visual"), true);
+});

@@ -1422,3 +1422,80 @@ body[data-screen="splash"] main{padding-top:0!important}
 .theme-hof .feature-set-logo{max-height:92px}.theme-evolution .feature-set-logo{max-height:78px}
 .season-release-grid .season-set-logo{position:absolute;z-index:4;top:9px;right:10px;width:92px;height:48px;object-fit:contain;object-position:right top;filter:drop-shadow(0 5px 8px rgba(0,0,0,.62));pointer-events:none}
 @media(max-width:760px){.feature-set-logo{width:min(145px,42vw);max-height:68px}.season-release-grid .season-set-logo{width:78px;height:40px;top:7px;right:8px}}
+
+/* v0.11.16 — finished Superstar collectible art is the canonical UI visual. */
+img.superstar-card-visual{object-position:center center}
+
+/* Editorial heroes now present the actual collectible cards rather than
+   re-cropping the old source portraits into wrestler cut-outs. */
+.feature-art{inset:0 0 0 40%}
+.feature-art .mode-portrait{display:grid;place-items:center}
+.feature-art .mode-portrait img.superstar-card-visual{
+  width:42%;height:92%;right:1%;bottom:3%;top:auto;
+  object-fit:contain;object-position:center;
+  filter:drop-shadow(0 18px 26px rgba(0,0,0,.48));
+  mask-image:none;-webkit-mask-image:none;
+  transform:rotate(3deg);
+}
+.feature-art .p2 img.superstar-card-visual{right:31%;width:35%;height:82%;bottom:2%;opacity:.78;transform:rotate(-4deg)}
+.feature-art .p3 img.superstar-card-visual{right:58%;width:29%;height:72%;bottom:1%;opacity:.40;transform:rotate(4deg)}
+
+.premium-menu-art img.superstar-card-visual{
+  position:absolute;right:4%;top:4%;width:43%;height:94%;
+  object-fit:contain;object-position:center;
+  mask-image:none;-webkit-mask-image:none;
+  filter:drop-shadow(0 18px 28px rgba(0,0,0,.5));
+  transform:rotate(3deg);
+}
+.tile-bg-art img.superstar-card-visual{
+  position:absolute;right:-2%;left:auto;top:-4%;
+  width:53%;height:112%;object-fit:contain;object-position:center;
+  mask-image:none;-webkit-mask-image:none;
+  filter:drop-shadow(0 12px 24px rgba(0,0,0,.48));
+  transform:rotate(3deg);opacity:.90;
+}
+.tile-play .tile-bg-art img.superstar-card-visual{width:44%;right:2%;top:-1%;height:104%}
+
+/* Splash / Final Boss promotion uses the Reward collectible itself. */
+.season-ad-rock{display:grid;place-items:center;padding:13px 0 13px 12px}
+.season-ad-rock img.superstar-card-visual{
+  position:relative;inset:auto;left:auto;top:auto;
+  width:88%;height:100%;object-fit:contain;object-position:center;
+  filter:drop-shadow(0 18px 30px rgba(0,0,0,.55));
+  mask-image:none;-webkit-mask-image:none;
+  transform:rotate(-2deg);
+}
+
+/* Onboarding makes the collectible card the hero of each starter choice. */
+.champion-starter .starter-photo{height:360px;background:radial-gradient(circle at 50% 35%,rgba(139,57,68,.2),transparent 68%)}
+.champion-starter .starter-photo img.superstar-card-visual{width:100%;height:100%;object-fit:contain;object-position:center;padding:6px}
+
+/* Compact roster, HUD and profile surfaces still use the same card image,
+   scaled to fit rather than cropping away the frame/name. */
+.roster-card .roster-photo img.superstar-card-visual{object-fit:contain;object-position:center;padding:5px}
+.ladder-portrait img.superstar-card-visual,.hud-portrait img.superstar-card-visual,.profile-summary-photo img.superstar-card-visual{object-fit:contain!important;object-position:center!important;background:#090a0e}
+
+/* Season release adverts: three mini collectible cards, not three portrait strips. */
+.season-release-art{align-items:center;justify-content:flex-end;gap:4px;padding:5px}
+.season-release-art .mode-portrait{width:31%;height:100%;display:grid;place-items:center}
+.season-release-art .mode-portrait img.superstar-card-visual{width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 8px 12px rgba(0,0,0,.42))}
+
+/* Full-art Superstar card faces preserve the exported 680×1000 composition. */
+.ccg-card.is-full-art-superstar .ccg-superstar-full-art img.superstar-card-visual{object-fit:cover;object-position:center}
+
+@media(max-width:760px){
+  .feature-art{inset:0 0 0 34%}
+  .feature-art .mode-portrait img.superstar-card-visual{width:48%;height:88%;right:-2%;bottom:2%}
+  .feature-art .p2 img.superstar-card-visual{right:34%;width:38%;height:76%;opacity:.64}
+  .feature-art .p3{display:none}
+  .premium-menu-art img.superstar-card-visual{width:52%;right:-2%;height:90%;top:7%}
+  .tile-bg-art img.superstar-card-visual{width:62%;right:-10%;height:116%;top:-7%}
+  .tile-play .tile-bg-art img.superstar-card-visual{width:50%;right:-1%}
+  .champion-starter .starter-photo{height:350px}
+  .season-ad-rock{padding:10px 0 10px 8px}
+  .season-ad-rock img.superstar-card-visual{width:96%;height:100%;left:auto!important}
+}
+@media(max-width:430px){
+  .season-ad-rock img.superstar-card-visual{width:100%;left:auto!important}
+  .champion-starter .starter-photo{height:330px}
+}

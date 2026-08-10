@@ -72,3 +72,13 @@ test("Superstar Art Studio local file uploads stay origin-clean for WebP export"
   assert.match(fileUploader, /readFileAsDataUrl\(file\)/);
   assert.doesNotMatch(fileUploader, /URL\.createObjectURL/);
 });
+
+
+test("Rewards Superstar template carries its own reusable top-right set logo", () => {
+  assert.match(studioJs, /"season-1-final-boss": \{[\s\S]*?logo: "assets\/art\/season-1-final-boss\/rewards-logo\.png"/);
+  assert.match(studioJs, /"season-1-final-boss": "data:image\/png;base64,/);
+  const rewardsSvg = fs.readFileSync(new URL("../assets/templates/superstar/rewards.svg", import.meta.url), "utf8");
+  assert.match(rewardsSvg, /id="SET_LOGO"/);
+  assert.match(rewardsSvg, />REWARDS<\/text>/);
+  assert.ok(fs.existsSync(new URL("../assets/art/season-1-final-boss/rewards-logo.png", import.meta.url)));
+});
