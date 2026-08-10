@@ -223,7 +223,7 @@ function updateStars(){
   if(!ids.length){
     select.innerHTML='<option value="">No Superstars found — reload this build</option>';
     updateDestination();
-    status("The studio roster did not load. Use v0.11.17 or newer.",false);
+    status("The studio roster did not load. Use v0.11.18 or newer.",false);
     draw();
     return;
   }

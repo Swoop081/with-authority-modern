@@ -1,6 +1,23 @@
-# WWE Legacy: Collectible Card Game — v0.11.17
+# WWE Legacy: Collectible Card Game — v0.11.18
 
 
+
+
+## v0.11.18 — Full-Art Move Card Studio
+
+Move cards now have the same premium art workflow as Superstar cards. **Profile → Move Card Studio** opens `tools/card-art-studio.html`, a self-contained editor containing all **261 active Season 1 Move cards** across SummerSlam, Hall of Fame, Evolution and Rewards.
+
+The finished Move front contains only:
+
+- the set-specific background/frame,
+- the small transparent set logo in the top-right,
+- the creator-supplied Move image,
+- the Move name across the bottom, and
+- compact, legible `COST` and `DAM` values beneath the name.
+
+Method, Move Type, requirements, counters, effects, Superstar restrictions, rarity and Signature/Trademark/Finisher identity are intentionally **back-only information**. The studio exports a flattened WebP to the canonical path `assets/cards/art/custom/moves/<card-id>.webp`; no card-art manifest edit is required. The game automatically prefers that finished front and falls back to the legacy photo + generated overlays until a particular Move WebP is installed, so the 261-card conversion can be done progressively.
+
+Four editable SVG references are also included in `assets/templates/move/`.
 
 ## v0.8.4 — Endgame, submission AI & starter flow
 

@@ -1499,3 +1499,17 @@ img.superstar-card-visual{object-position:center center}
   .season-ad-rock img.superstar-card-visual{width:100%;left:auto!important}
   .champion-starter .starter-photo{height:330px}
 }
+
+/* v0.11.18 — finished Move card fronts ---------------------------------- */
+/* Move Card Studio bakes the set background, set logo, Move name, Cost and
+   Damage into the WebP. The legacy overlays remain in markup only as a safe
+   fallback when the canonical custom/moves/<id>.webp file is not installed. */
+.ccg-card.is-full-art-move .ccg-card-title,
+.ccg-card.is-full-art-move .ccg-card-stats{display:none}
+.ccg-card.is-full-art-move .ccg-card-art:after{display:none}
+.ccg-card.is-full-art-move .ccg-card-front{border-width:1px;background:#050506}
+.ccg-card.is-full-art-move .ccg-card-front:before{display:none!important}
+.ccg-card.is-full-art-move.set-summerslam-series-1 .ccg-card-front{border-color:rgba(95,161,255,.62)}
+.ccg-card.is-full-art-move.set-hall-of-fame-series-1 .ccg-card-front{border-color:rgba(231,193,91,.68)}
+.ccg-card.is-full-art-move.set-evolution-series-1 .ccg-card-front{border-color:rgba(230,91,215,.68)}
+.ccg-card.is-full-art-move.set-season-1-final-boss .ccg-card-front{border-color:rgba(232,44,57,.78)}

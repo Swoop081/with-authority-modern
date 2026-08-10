@@ -82,3 +82,50 @@ test("Rewards Superstar template carries its own reusable top-right set logo", (
   assert.match(rewardsSvg, />REWARDS<\/text>/);
   assert.ok(fs.existsSync(new URL("../assets/art/season-1-final-boss/rewards-logo.png", import.meta.url)));
 });
+
+
+test("Move Card Studio contains all 261 active Move cards across the four Season 1 pools", () => {
+  const js = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
+  const ids = [...js.matchAll(/\{\"id\":\"([^\"]+)\",\"name\":/g)].map(match => match[1]);
+  assert.equal(ids.length, 261);
+  assert.equal(new Set(ids).size, 261);
+  for (const id of ["cross-rhodes", "hof1-austin-stunner-reviewed", "evo1-rhea-riptide", "s1rock-rock-bottom-final-boss"]) {
+    assert.ok(ids.includes(id), `${id} should be editable in Move Card Studio`);
+  }
+});
+
+test("Move Card Studio front is restricted to set logo, Move name, Cost and Damage", () => {
+  const html = fs.readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
+  const js = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
+  assert.match(html, /SET LOGO[\s\S]*TOP RIGHT · AUTOMATIC/);
+  assert.match(html, /MOVE NAME[\s\S]*BOTTOM · AUTOMATIC/);
+  assert.match(html, /COST \/ DAM[\s\S]*SMALL · BOTTOM · AUTOMATIC/);
+  assert.match(html, /OTHER RULES[\s\S]*BACK ONLY/);
+  assert.match(js, /drawSetLogo/);
+  assert.match(js, /drawBottomIdentity/);
+  assert.doesNotMatch(js, /FINISHER.*strokeText|TRADEMARK.*strokeText|SIGNATURE.*strokeText/);
+});
+
+test("Move Card Studio has four matching editable full-bleed SVG templates", () => {
+  for (const filename of ["summerslam-series-1.svg","hall-of-fame-series-1.svg","evolution-series-1.svg","rewards.svg"]) {
+    const svg = fs.readFileSync(new URL(`../assets/templates/move/${filename}`, import.meta.url), "utf8");
+    assert.match(svg, /width="680" height="1000"/);
+    assert.match(svg, /id="MOVE_ART"/);
+    assert.match(svg, /id="SET_LOGO"/);
+    assert.match(svg, /id="MOVE_NAME"/);
+    assert.match(svg, /id="COST_DAMAGE"/);
+  }
+});
+
+test("finished Move WebPs become the canonical front with automatic legacy fallback", () => {
+  const artwork = fs.readFileSync(new URL("../js/data/artwork.js", import.meta.url), "utf8");
+  const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = fs.readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.match(artwork, /export function moveCardArtFor/);
+  assert.match(artwork, /assets\/cards\/art\/custom\/moves\/\$\{cardId\}\.webp/);
+  assert.match(app, /data-move-card-art/);
+  assert.match(app, /classList\.remove\('is-full-art-move'\)/);
+  assert.match(css, /\.ccg-card\.is-full-art-move \.ccg-card-title/);
+  assert.match(css, /\.ccg-card\.is-full-art-move \.ccg-card-stats/);
+}
+);

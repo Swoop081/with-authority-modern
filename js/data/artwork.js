@@ -54,6 +54,14 @@ export function superstarCardArtFor(superstarId) {
   return superstarCardArtwork[superstarId] ?? null;
 }
 
+// Finished Move collectible fronts exported by Move Card Studio. As with
+// Superstar fronts, these are a separate presentation layer from the older
+// action-photo artwork resolver. Missing files fall back in the UI without
+// changing gameplay data or the legacy card-art manifest.
+export function moveCardArtFor(cardId) {
+  return cardId ? `assets/cards/art/custom/moves/${cardId}.webp` : null;
+}
+
 // Exact card-photo replacements always win. This is the long-term migration
 // path from temporary fallback art to a unique photo for every individual card.
 export const cardArtwork = cardArtOverrides;

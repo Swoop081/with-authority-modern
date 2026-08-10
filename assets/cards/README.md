@@ -36,3 +36,15 @@ Temporary source/provenance notes are in `ART_SOURCES.md`.
 Open `tools/card-art-studio.html` (or use Profile → Card Art Studio in the game). Select a card and the tool will generate the final filename/path and manifest entry automatically. The recommended export is **680×1000 WebP at 82% quality**. Exact card replacements go under `assets/cards/art/custom/`.
 
 On supported desktop browsers, connect the unzipped WWE Legacy project folder and the tool will write the image and update `js/data/card-art-overrides.js` directly. Otherwise, download the WebP and updated manifest and place them into the paths shown by the tool.
+
+## Finished Move card fronts (v0.11.18+)
+
+Move Card Studio now exports complete Move fronts rather than photo-only artwork.
+
+Canonical path:
+
+`assets/cards/art/custom/moves/<card-id>.webp`
+
+Each finished Move WebP contains the set background/frame, set logo, Move image, Move name and compact COST / DAM line. No manifest entry is required. The UI checks this canonical path automatically and, if the file is absent, falls back to the older artwork + generated title/stat overlays so cards can be converted progressively.
+
+All detailed rules remain on the shared card back.
