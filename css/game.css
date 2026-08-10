@@ -626,3 +626,43 @@ body[data-screen="match"] .mobile-game-nav,body[data-screen="splash"] .mobile-ga
  .menu-season-campaign{grid-template-columns:95px 1fr 56px;min-height:100px}.menu-season-copy{padding:8px}.menu-season-copy small{font-size:.65rem}.menu-season-tier b{font-size:1.4rem}
  .season-release-grid{grid-template-columns:1fr}.season-release-grid button{min-height:145px;display:grid;grid-template-columns:1fr 1.15fr;grid-template-rows:auto 1fr auto auto;align-items:center}.season-release-grid em,.season-release-grid strong,.season-release-grid span{grid-column:1}.season-release-art{grid-column:2;grid-row:1/5;height:145px;margin:0}.season-release-grid strong{align-self:end}
 }
+
+/* v0.9.1 — persistent menu navigation */
+.mobile-game-nav{
+  position:fixed;
+  left:50%;
+  right:auto;
+  bottom:max(7px,env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  z-index:500;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  width:min(680px,calc(100% - 14px));
+  margin:0;
+}
+body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="starter"]) main{
+  padding-bottom:calc(82px + env(safe-area-inset-bottom));
+}
+body[data-screen="match"] .mobile-game-nav,
+body[data-screen="splash"] .mobile-game-nav,
+body[data-screen="starter"] .mobile-game-nav,
+body[data-screen="unlock-celebration"] .mobile-game-nav{display:none!important}
+body[data-screen="match"] main,
+body[data-screen="splash"] main,
+body[data-screen="starter"] main,
+body[data-screen="unlock-celebration"] main{padding-bottom:0}
+.options-screen{width:min(1120px,100%);margin:0 auto}
+.options-feature{min-height:220px}
+.options-hero-icon{position:absolute;right:8%;top:50%;transform:translateY(-50%);font-size:clamp(7rem,25vw,17rem);opacity:.09;line-height:1}
+.options-panel{width:min(900px,94vw);margin:16px auto;padding:18px;border-radius:18px}
+.option-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-top:1px solid rgba(255,255,255,.09)}
+.option-row:first-of-type{border-top:0}
+.option-row strong{display:block;font-size:1rem}.option-row p{margin:.35rem 0 0;max-width:650px;opacity:.7;line-height:1.45}
+.danger-zone{border-color:rgba(255,90,90,.18)}
+.reset-confirm-actions{display:flex;gap:8px;flex-shrink:0}.reset-warning{padding:12px;border-radius:12px;background:rgba(150,20,25,.18);border:1px solid rgba(255,80,80,.25)}
+.options-gear-art{display:grid;place-items:center;width:100%;height:100%;font-size:8rem;opacity:.14}
+@media(max-width:760px){
+  .mobile-game-nav{width:calc(100% - 8px);grid-template-columns:repeat(6,minmax(0,1fr));padding:5px}
+  .mobile-game-nav button{min-height:49px;padding-left:0;padding-right:0}
+  .mobile-game-nav b{font-size:.40rem;letter-spacing:.045em}
+  .option-row{display:grid;gap:12px}.reset-confirm-actions{width:100%}.reset-confirm-actions>*{flex:1}
+}

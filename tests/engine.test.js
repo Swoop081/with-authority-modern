@@ -1935,3 +1935,24 @@ test("Season 1 campaign is carried through menu, Seasons hub and booster release
   assert.equal(app.includes('data-season-booster-set="evolution-series-1"'), true);
   assert.equal(app.includes("SEASON 1 · NOW AVAILABLE"), true);
 });
+
+
+test("primary navigation is fixed on menu screens, hidden in matches, and exposes Options", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(css.includes("position:fixed"), true);
+  assert.equal(css.includes('body[data-screen="match"] .mobile-game-nav'), true);
+  assert.equal(html.includes('data-mobile-nav="options"'), true);
+  assert.equal(app.includes('screen = "options"'), true);
+  assert.equal(app.includes("function renderOptions()"), true);
+});
+
+test("Options provides an explicit two-step local progress reset for testing", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes('id="reset-progress"'), true);
+  assert.equal(app.includes('id="confirm-reset-progress"'), true);
+  assert.equal(app.includes('id="cancel-reset-progress"'), true);
+  assert.equal(app.includes("resetProfile();"), true);
+  assert.equal(app.includes("This cannot be undone on this device."), true);
+});

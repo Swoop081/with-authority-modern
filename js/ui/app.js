@@ -44,6 +44,7 @@ let activeCollectionSetId = "summerslam-series-1";
 let activeBoosterSetId = "summerslam-series-1";
 let unlockCelebration = null;
 let unlockCelebrationIndex = 0;
+let optionsResetArmed = false;
 let ladderBranchId = "modern";
 let championshipBranchId = "modern";
 let flippedHandCards = new Set();
@@ -69,7 +70,7 @@ function setChrome({ hideTopbar = false } = {}) {
 
   const mobileNav = document.querySelector("#mobile-game-nav");
   if (mobileNav) {
-    const navScreens = new Set(["menu", "play-menu", "setup", "ladder", "championship", "collection", "boosters", "challenges", "seasons", "deck-builder", "profile"]);
+    const navScreens = new Set(["menu", "play-menu", "setup", "ladder", "championship", "collection", "boosters", "challenges", "seasons", "deck-builder", "profile", "options"]);
     mobileNav.hidden = !profile || !navScreens.has(screen);
     const activeTarget = screen === "setup" || screen === "ladder" || screen === "championship" ? "play-menu" : screen === "deck-builder" ? "collection" : screen;
     mobileNav.querySelectorAll("[data-mobile-nav]").forEach(button => {
@@ -91,6 +92,14 @@ function showPlayMenu() {
 function showProfile() {
   if (!profile) { screen = "starter"; renderStarter(); return; }
   screen = "profile"; message = ""; renderProfile();
+}
+
+function showOptions() {
+  if (!profile) { screen = "starter"; renderStarter(); return; }
+  screen = "options";
+  message = "";
+  optionsResetArmed = false;
+  renderOptions();
 }
 
 function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibition" } = {}) {
@@ -540,6 +549,7 @@ function renderMainMenu() {
       <button id="menu-decks" class="main-menu-tile premium-menu-tile tile-decks"><span class="tile-bg-art">${portraitMarkup("cm-punk","CM Punk")}</span><span class="tile-shade"></span><span class="tile-copy"><em>DECKS</em><strong>Deck Lab</strong><small>Build, optimize and save</small></span></button>
       <button id="menu-challenges" class="main-menu-tile premium-menu-tile tile-challenges"><span class="tile-bg-art">${portraitMarkup("becky-lynch","Becky Lynch")}</span><span class="tile-shade"></span><span class="tile-copy"><em>CHALLENGES</em><strong>Daily & Weekly</strong><small>Earn packs + Season XP</small></span></button>
       <button id="menu-profile" class="main-menu-tile premium-menu-tile tile-profile"><span class="tile-bg-art">${portraitMarkup(starter.id,starter.name)}</span><span class="tile-shade"></span><span class="tile-copy"><em>PROFILE</em><strong>My Legacy</strong><small>Progress, stats and tools</small></span></button>
+      <button id="menu-options" class="main-menu-tile premium-menu-tile tile-options"><span class="tile-bg-art"><span class="options-gear-art">⚙</span></span><span class="tile-shade"></span><span class="tile-copy"><em>OPTIONS</em><strong>Game & Testing</strong><small>Settings · Reset Progress</small></span></button>
     </div>
   </section>`;
   $("#menu-season-campaign")?.addEventListener("click", showSeasons);
@@ -550,6 +560,7 @@ function renderMainMenu() {
   $("#menu-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1));
   $("#menu-challenges")?.addEventListener("click", showChallenges);
   $("#menu-profile")?.addEventListener("click", showProfile);
+  $("#menu-options")?.addEventListener("click", showOptions);
   refreshSeasonClocks();
 }
 
@@ -580,11 +591,62 @@ function renderProfile() {
   root.innerHTML = `<section class="profile-screen premium-screen profile-premium">
     <section class="feature-hero profile-feature">${modePortraits([starter.id,"the-undertaker","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("profile")}<p>This career and collection are stored locally on this device.</p></div></section>
     <div class="profile-summary-card premium-panel"><div class="profile-summary-photo">${portraitMarkup(starter.id, starter.name)}</div><div><span>ORIGINAL STARTER</span><strong>${starter.name}</strong><small>${starter.nickname}</small></div></div>
-    <div class="profile-stat-grid premium-stats"><article><span>SUPERSTARS</span><b>${profile.unlockedSuperstars.length}/24</b></article><article><span>PACKS OPENED</span><b>${profile.packsOpened ?? 0}</b></article><article><span>LADDER CLEARS</span><b>${ladder.clears ?? 0}</b></article><article><span>CHAMPIONSHIP CLEARS</span><b>${championship.clears ?? 0}</b></article></div>
+    <div class="profile-stat-grid premium-stats"><article><span>SUPERSTARS</span><b>${profile.unlockedSuperstars.length}/${roster.length}</b></article><article><span>PACKS OPENED</span><b>${profile.packsOpened ?? 0}</b></article><article><span>LADDER CLEARS</span><b>${ladder.clears ?? 0}</b></article><article><span>CHAMPIONSHIP CLEARS</span><b>${championship.clears ?? 0}</b></article></div>
     <div class="profile-actions"><button id="profile-home" class="start-match">Main Menu</button><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a><button id="profile-reset" class="nav-button danger">Reset Local Save</button></div>
   </section>`;
   $("#profile-home")?.addEventListener("click", showMainMenu);
   $("#profile-reset")?.addEventListener("click", () => { resetProfile(); profile = null; game = null; selection = { p1: "cm-punk", p2: "roman-reigns" }; message = ""; showSplash(); });
+}
+
+
+function renderOptions() {
+  setChrome();
+  const root = $("#game");
+  root.innerHTML = `<section class="options-screen premium-screen">
+    <section class="feature-hero options-feature">
+      <div class="options-hero-icon">⚙</div>
+      <div class="feature-shade"></div>
+      <div class="feature-copy">${modeLogoMarkup("profile")}<span class="premium-kicker">OPTIONS</span><h2>Game & Testing</h2><p>Local settings and developer conveniences for this WWE Legacy build.</p></div>
+    </section>
+    ${message ? `<p class="setup-message">${message}</p>` : ""}
+    <section class="options-panel premium-panel">
+      <div class="section-title"><h3>Local Save</h3><span>Testing tools</span></div>
+      <article class="option-row danger-zone">
+        <div><strong>Reset Progress</strong><p>Erase this device's WWE Legacy profile, collection, unlocked Superstars, Season progress and saved decks. You will return to the first-time starter selection.</p></div>
+        ${optionsResetArmed
+          ? `<div class="reset-confirm-actions"><button id="cancel-reset-progress" class="nav-button">Cancel</button><button id="confirm-reset-progress" class="start-match danger">CONFIRM RESET</button></div>`
+          : `<button id="reset-progress" class="nav-button danger">Reset Progress</button>`}
+      </article>
+      ${optionsResetArmed ? `<p class="reset-warning"><b>Testing reset armed.</b> This cannot be undone on this device.</p>` : ""}
+    </section>
+    <section class="options-panel premium-panel">
+      <div class="section-title"><h3>Build</h3><span>WWE Legacy development</span></div>
+      <div class="option-row"><div><strong>Version</strong><p>WWE Legacy: Collectible Card Game v0.9.1</p></div></div>
+    </section>
+  </section>`;
+
+  $("#reset-progress")?.addEventListener("click", () => {
+    optionsResetArmed = true;
+    message = "Confirm the reset below to erase all local progress.";
+    renderOptions();
+  });
+  $("#cancel-reset-progress")?.addEventListener("click", () => {
+    optionsResetArmed = false;
+    message = "Reset cancelled.";
+    renderOptions();
+  });
+  $("#confirm-reset-progress")?.addEventListener("click", () => {
+    resetProfile();
+    profile = null;
+    game = null;
+    optionsResetArmed = false;
+    selection = { p1: "cm-punk", p2: "roman-reigns" };
+    lastMatchup = { ...selection };
+    lastPack = null;
+    pendingUpgrades = [];
+    message = "";
+    showSplash();
+  });
 }
 
 function chooseStarter(starId) {
@@ -1148,8 +1210,9 @@ document.querySelectorAll("[data-mobile-nav]").forEach(button => button.addEvent
   else if (target === "collection") showCollection();
   else if (target === "boosters") showBoosters();
   else if (target === "seasons") showSeasons();
+  else if (target === "options") showOptions();
 }));
 
-if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "boosters") renderBoosters(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
+if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "options") renderOptions(); else if (screen === "boosters") renderBoosters(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
 
 setInterval(refreshSeasonClocks, 1000);
