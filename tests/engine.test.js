@@ -1472,25 +1472,27 @@ test("card artwork can be swapped through one manifest without changing gameplay
   assert.equal(guide.includes("Replacing a card photo"), true);
 });
 
-test("Move Card Studio exports finished set-branded fronts without manifest edits", () => {
+test("unified Card Art Studio exports finished set-branded fronts without manifest edits", () => {
   const html = readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
   const css = readFileSync(new URL("../css/card-art-studio.css", import.meta.url), "utf8");
   const js = readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
-  assert.equal(html.includes('MOVE CARD STUDIO'), true);
-  assert.equal(html.includes('id="move-file"'), true);
+  assert.equal(html.includes('CARD ART STUDIO'), true);
+  assert.equal(html.includes('id="art-file"'), true);
+  assert.equal(html.includes('id="type-select"'), true);
   assert.equal(html.includes('accept="image/*"'), true);
   assert.equal(html.includes('id="card-canvas"'), true);
   assert.equal(html.includes('680 × 1000'), true);
-  assert.equal(html.includes('Export Move WebP'), true);
+  assert.equal(html.includes('Export Card WebP'), true);
   assert.equal(js.includes('"image/webp"'), true);
   assert.equal(js.includes('EMBEDDED_SET_LOGOS'), true);
-  assert.equal(js.includes('assets/cards/art/custom/moves/${move.id}.webp'), true);
+  assert.equal(js.includes('KIND_FOLDERS'), true);
   assert.equal(js.includes('readAsDataURL'), true);
   assert.equal(js.includes('drawBottomIdentity'), true);
   assert.equal(css.includes('touch-action:none'), true);
   assert.equal(app.includes('./tools/card-art-studio.html'), true);
-  assert.equal(app.includes('Move Card Studio'), true);
+  assert.equal(app.includes('Card Art Studio'), true);
+  assert.equal(app.includes('Superstar Art Studio'), false);
 });
 
 

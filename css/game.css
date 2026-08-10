@@ -1513,3 +1513,13 @@ img.superstar-card-visual{object-position:center center}
 .ccg-card.is-full-art-move.set-hall-of-fame-series-1 .ccg-card-front{border-color:rgba(231,193,91,.68)}
 .ccg-card.is-full-art-move.set-evolution-series-1 .ccg-card-front{border-color:rgba(230,91,215,.68)}
 .ccg-card.is-full-art-move.set-season-1-final-boss .ccg-card-front{border-color:rgba(232,44,57,.78)}
+
+/* v0.11.19 — unified Card Art Studio finished fronts. Any non-Superstar
+   collectible can now replace the generated front with one complete WebP.
+   The image onerror handler removes this class when the custom file is absent. */
+.ccg-card.is-full-art-finished .ccg-card-art{inset:0;border:0;border-radius:inherit;background:#050506}
+.ccg-card.is-full-art-finished .ccg-card-art img{width:100%;height:100%;object-fit:cover}
+.ccg-card.is-full-art-finished .ccg-card-title,
+.ccg-card.is-full-art-finished .ccg-card-stats{display:none}
+.ccg-card.is-full-art-finished .ccg-card-front::before,
+.ccg-card.is-full-art-finished .ccg-card-front::after{display:none}

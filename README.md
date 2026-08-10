@@ -1,23 +1,15 @@
-# WWE Legacy: Collectible Card Game — v0.11.18
+# WWE Legacy: Collectible Card Game — v0.11.19
 
 
 
 
-## v0.11.18 — Full-Art Move Card Studio
+## v0.11.19 — Unified Card Art Studio
 
-Move cards now have the same premium art workflow as Superstar cards. **Profile → Move Card Studio** opens `tools/card-art-studio.html`, a self-contained editor containing all **261 active Season 1 Move cards** across SummerSlam, Hall of Fame, Evolution and Rewards.
+**Profile → Card Art Studio** is now the single artwork workspace for the entire active Season 1 collection. It contains all **372 active collectibles** across SummerSlam, Hall of Fame, Evolution and Rewards, with filters for Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum cards.
 
-The finished Move front contains only:
+Every finished front uses the same premium full-art language: the set-specific background/frame, a small transparent set logo in the top-right, creator-supplied artwork, and a minimal bottom identity. Superstar fronts use the Superstar name only. Move fronts use the Move name plus compact `COST` / `DAM`. Entrances, Specials, Managers, Actions and Supports use the card name plus a small card-type label. Momentum uses the card name plus its compact Momentum identity. Detailed rules, restrictions, effects, rarity and signature status remain **back-only**.
 
-- the set-specific background/frame,
-- the small transparent set logo in the top-right,
-- the creator-supplied Move image,
-- the Move name across the bottom, and
-- compact, legible `COST` and `DAM` values beneath the name.
-
-Method, Move Type, requirements, counters, effects, Superstar restrictions, rarity and Signature/Trademark/Finisher identity are intentionally **back-only information**. The studio exports a flattened WebP to the canonical path `assets/cards/art/custom/moves/<card-id>.webp`; no card-art manifest edit is required. The game automatically prefers that finished front and falls back to the legacy photo + generated overlays until a particular Move WebP is installed, so the 261-card conversion can be done progressively.
-
-Four editable SVG references are also included in `assets/templates/move/`.
+The studio is self-contained for direct `file://` use, reads chosen images into export-safe browser memory, and exports a flattened WebP to an automatic path under `assets/cards/art/custom/`. No manifest edit is required. The game automatically prefers a finished front when installed and falls back to the existing artwork/generated layout when it is missing. The old Superstar Studio URL now redirects into this one unified editor.
 
 ## v0.8.4 — Endgame, submission AI & starter flow
 

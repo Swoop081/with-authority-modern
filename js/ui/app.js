@@ -2,7 +2,7 @@ import { superstars } from "../data/superstars.js";
 import { decks } from "../data/decks.js";
 import { sets } from "../data/sets.js";
 import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js";
-import { artworkFor, superstarArtwork, superstarCardArtFor, moveCardArtFor } from "../data/artwork.js";
+import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor } from "../data/artwork.js";
 import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js";
 import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js";
 import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js";
@@ -771,7 +771,7 @@ function renderProfile() {
     <section class="feature-hero profile-feature">${modePortraits([starter.id,"the-undertaker","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("profile")}<p>This career and collection are stored locally on this device.</p></div></section>
     <div class="profile-summary-card premium-panel"><div class="profile-summary-photo">${portraitMarkup(starter.id, starter.name)}</div><div><span>ORIGINAL STARTER</span><strong>${starter.name}</strong><small>${starter.nickname}</small></div></div>
     <div class="profile-stat-grid premium-stats"><article><span>SUPERSTARS</span><b>${profile.unlockedSuperstars.length}/${roster.length}</b></article><article><span>PACKS OPENED</span><b>${profile.packsOpened ?? 0}</b></article><article><span>LADDER CLEARS</span><b>${ladder.clears ?? 0}</b></article><article><span>CHAMPIONSHIP CLEARS</span><b>${championship.clears ?? 0}</b></article></div>
-    <div class="profile-actions"><button id="profile-home" class="start-match">Main Menu</button><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Move Card Studio</a><a class="nav-button profile-tool-link" href="./tools/superstar-card-studio.html">Superstar Art Studio</a><button id="profile-reset" class="nav-button danger">Reset Local Save</button></div>
+    <div class="profile-actions"><button id="profile-home" class="start-match">Main Menu</button><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a><button id="profile-reset" class="nav-button danger">Reset Local Save</button></div>
   </section>`;
   $("#profile-home")?.addEventListener("click", showMainMenu);
   $("#profile-reset")?.addEventListener("click", () => { resetProfile(); profile = null; game = null; selection = { p1: "cm-punk", p2: "roman-reigns" }; message = ""; showSplash(); });
@@ -917,9 +917,9 @@ function cardArtFace(card) {
     return superstarVisualMarkup(card.superstarId, star?.name ?? card.name, "ccg-superstar-art-image");
   }
   const art = artworkFor(card);
-  if (card.kind === "move") {
-    const finished = moveCardArtFor(card.id);
-    if (finished && art) return `<img class="ccg-move-card-art-image" src="${finished}" alt="${card.name}" data-move-card-art="${card.id}" onerror="this.onerror=null;this.dataset.artFallback='legacy';this.src='${art}';this.closest('.ccg-card')?.classList.remove('is-full-art-move');">`;
+  const finished = finishedCardArtFor(card);
+  if (finished && art) {
+    return `<img class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" onerror="this.onerror=null;this.dataset.artFallback='legacy';this.src='${art}';this.closest('.ccg-card')?.classList.remove('is-full-art-finished','is-full-art-move');">`;
   }
   const fallback = card.name;
   return art
@@ -947,13 +947,13 @@ function cardPlayRestrictionText(card) {
 }
 
 function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "" } = {}) {
-  // Superstar and finished Move fronts are premium full-art collectibles. Their
-  // exported WebPs already contain the intentional front-facing identity. Move
-  // cards keep the old overlay markup as a fallback until a custom finished file
-  // exists; the image onerror handler removes is-full-art-move automatically.
+  // Superstar and all Card Art Studio exports are premium full-art fronts.
+  // Non-Superstar cards keep their generated legacy overlays only as a fallback
+  // until the corresponding custom WebP exists on disk.
   const superstarFront = card.kind === "superstar";
   const moveFront = card.kind === "move";
-  const visualFoil = !superstarFront && !moveFront && (foil || card.kind === "entrance");
+  const finishedFront = !superstarFront && Boolean(finishedCardArtFor(card));
+  const visualFoil = !superstarFront && !finishedFront && (foil || card.kind === "entrance");
   const setClass = `set-${card.setId ?? "global"}`;
   const typeClass = `type-${card.kind}`;
   const finisherClass = card.finisher ? "is-finisher" : card.trademark ? "is-trademark" : card.signature ? "is-signature" : "";
@@ -966,7 +966,7 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
   const frontMarkup = superstarFront
     ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
     : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span><span class="ccg-card-title"><small>${typeLabel}${visualFoil ? " · FOIL" : ""}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
-  return `<button type="button" class="ccg-card ${flipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${moveFront ? "is-full-art-move" : ""} ${extraClass}" ${flipAttr} aria-label="${card.name}. Tap to ${flipped ? "view artwork" : "view effects"}.">
+  return `<button type="button" class="ccg-card ${flipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${extraClass}" ${flipAttr} aria-label="${card.name}. Tap to ${flipped ? "view artwork" : "view effects"}.">
     <span class="ccg-card-inner">
       <span class="ccg-card-face ccg-card-front">${frontMarkup}</span>
       <span class="ccg-card-face ccg-card-rules">

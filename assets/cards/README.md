@@ -33,18 +33,17 @@ Temporary source/provenance notes are in `ART_SOURCES.md`.
 
 ## Card Art Studio
 
-Open `tools/card-art-studio.html` (or use Profile → Card Art Studio in the game). Select a card and the tool will generate the final filename/path and manifest entry automatically. The recommended export is **680×1000 WebP at 82% quality**. Exact card replacements go under `assets/cards/art/custom/`.
+Open `tools/card-art-studio.html` (or use **Profile → Card Art Studio**). The unified editor contains every active Season 1 card and can be filtered by set and card type. Choose your artwork, position/scale it, and export a complete **680×1000 WebP**.
 
-On supported desktop browsers, connect the unzipped WWE Legacy project folder and the tool will write the image and update `js/data/card-art-overrides.js` directly. Otherwise, download the WebP and updated manifest and place them into the paths shown by the tool.
+Canonical finished-front paths are automatic:
 
-## Finished Move card fronts (v0.11.18+)
+- Superstars: `assets/cards/art/custom/superstars/<superstar-id>.webp`
+- Moves: `assets/cards/art/custom/moves/<card-id>.webp`
+- Entrances: `assets/cards/art/custom/entrances/<card-id>.webp`
+- Specials: `assets/cards/art/custom/specials/<card-id>.webp`
+- Managers: `assets/cards/art/custom/managers/<card-id>.webp`
+- Actions: `assets/cards/art/custom/actions/<card-id>.webp`
+- Supports: `assets/cards/art/custom/supports/<card-id>.webp`
+- Momentum: `assets/cards/art/custom/momentum/<card-id>.webp`
 
-Move Card Studio now exports complete Move fronts rather than photo-only artwork.
-
-Canonical path:
-
-`assets/cards/art/custom/moves/<card-id>.webp`
-
-Each finished Move WebP contains the set background/frame, set logo, Move image, Move name and compact COST / DAM line. No manifest entry is required. The UI checks this canonical path automatically and, if the file is absent, falls back to the older artwork + generated title/stat overlays so cards can be converted progressively.
-
-All detailed rules remain on the shared card back.
+No manifest edit is required. The game checks the canonical path automatically and falls back to the older artwork/generated front when a finished WebP is absent, so the collection can be converted progressively. Detailed gameplay information remains on the shared card back.

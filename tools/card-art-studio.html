@@ -4,83 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09090b">
-  <title>WWE Legacy — Move Card Studio</title>
+  <title>WWE Legacy — Card Art Studio</title>
   <link rel="stylesheet" href="../css/card-art-studio.css">
 </head>
 <body>
   <header class="studio-topbar">
-    <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>MOVE CARD STUDIO</small></a>
-    <span class="studio-build">v0.11.18</span>
+    <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>CARD ART STUDIO</small></a>
+    <span class="studio-build">v0.11.20</span>
   </header>
-
   <main class="studio-shell">
     <section class="studio-intro">
-      <span class="eyebrow">FULL-ART MOVE TEMPLATE</span>
-      <h1>Build the collectible Move front.</h1>
-      <p>Choose a Move and add your own action image. The studio automatically applies the set design, transparent set logo in the top-right, Move name at the bottom, and compact COST / DAM values. Every gameplay rule, method, Move Type, requirement, counter and rarity stays on the card back.</p>
+      <span class="eyebrow">ONE STUDIO · EVERY ACTIVE CARD FRONT</span>
+      <h1>Build the collectible front.</h1>
+      <p>Work on Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum artwork in one place. Choose a set and card type, add your image, position it, and export a finished WebP with the correct set identity.</p>
     </section>
-
     <section class="studio-layout">
       <aside class="studio-controls">
         <section class="control-group">
-          <div class="group-heading"><span>1</span><div><b>Choose Move</b><small>Only active Season 1 Move cards are listed. Cost and damage come directly from the certified card data frozen into this studio.</small></div></div>
-          <label>Set
-            <select id="set-select">
-              <option value="summerslam-series-1">SummerSlam — Series 1</option>
-              <option value="hall-of-fame-series-1">Hall of Fame — Series 1</option>
-              <option value="evolution-series-1">Evolution — Series 1</option>
-              <option value="season-1-final-boss">Rewards / Season 1 Final Boss</option>
-            </select>
-          </label>
-          <label>Search<input id="move-search" type="search" placeholder="Cross Rhodes, Spear, Suplex…"></label>
-          <label>Move<select id="move-select"><option value="disaster-kick">Disaster Kick</option></select></label>
-          <div class="move-summary"><span id="move-code">SS1-003</span><b id="move-summary-name">Disaster Kick</b><small><em>COST <strong id="move-summary-cost">3</strong></em><em>DAM <strong id="move-summary-damage">5</strong></em></small></div>
-          <div class="destination"><span>GAME FILE · AUTOMATIC FRONT ART</span><code id="destination-path">assets/cards/art/custom/moves/disaster-kick.webp</code></div>
+          <div class="group-heading"><span>1</span><div><b>Choose card</b><small>All 372 active Season 1 collectibles are available. Collector numbering stays exactly the same as the game.</small></div></div>
+          <label>Set<select id="set-select"><option value="summerslam-series-1">SummerSlam — Series 1</option><option value="hall-of-fame-series-1">Hall of Fame — Series 1</option><option value="evolution-series-1">Evolution — Series 1</option><option value="season-1-final-boss">Rewards / Season 1 Final Boss</option></select></label>
+          <label>Card type<select id="type-select"><option value="all">All card types</option><option value="superstar">Superstars</option><option value="move">Moves</option><option value="entrance">Entrances</option><option value="special">Specials</option><option value="manager">Managers</option><option value="action">Actions</option><option value="support">Supports</option><option value="momentum">Momentum</option></select></label>
+          <label>Search<input id="card-search" type="search" placeholder="Cross Rhodes, Glass Shatters, Heenan…"></label>
+          <label>Card<select id="card-select"><option value="superstar-cody-rhodes">SS1-001 · Cody Rhodes · SUPERSTAR</option></select></label>
+          <div class="move-summary card-summary"><span id="card-code">SS1-001</span><b id="card-summary-name">Cody Rhodes</b><small><em id="card-summary-kind">SUPERSTAR</em><em id="card-summary-stats">FRONT ART + NAME</em></small></div>
+          <div class="destination"><span>GAME FILE · AUTOMATIC FINISHED FRONT</span><code id="destination-path">assets/cards/art/custom/superstars/cody-rhodes.webp</code></div>
         </section>
-
         <section class="control-group">
-          <div class="group-heading"><span>2</span><div><b>Move artwork</b><small>Choose any PNG, WebP or photo. The image fills the card; transparent artwork lets more of the set background show through.</small></div></div>
-          <label class="file-picker">Choose move image<input id="move-file" type="file" accept="image/*"></label>
+          <div class="group-heading"><span>2</span><div><b>Artwork</b><small>Choose any PNG, WebP or photo. Drag directly on the preview or use the position controls.</small></div></div>
+          <label class="file-picker">Choose card image<input id="art-file" type="file" accept="image/*"></label>
+          <div class="art-or"><span>OR</span></div>
+          <div class="url-loader">
+            <label>Load artwork from URL<input id="art-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://…/image.jpg"></label>
+            <button id="load-art-url" type="button">Load URL Artwork</button>
+            <small>Paste a direct image URL. The studio imports it into browser memory so the finished WebP remains export-safe. Some sites block third-party image access; if they do, the studio will tell you.</small>
+          </div>
           <div class="button-row"><button id="use-current-art" type="button">Use current game art</button><button id="clear-art" type="button">Clear</button></div>
           <label>Zoom <output id="art-zoom-value">100%</output><input id="art-zoom" type="range" min="45" max="320" value="100"></label>
           <label>Horizontal <output id="art-x-value">0</output><input id="art-x" type="range" min="-260" max="260" value="0"></label>
           <label>Vertical <output id="art-y-value">0</output><input id="art-y" type="range" min="-320" max="320" value="0"></label>
         </section>
-
         <section class="control-group">
-          <div class="group-heading"><span>3</span><div><b>Front identity</b><small>Automatic. There are no Move Type, method, rarity, Finisher, Trademark, Signature, Foil or effect labels on the front.</small></div></div>
-          <div class="identity-preview">
-            <span>SET LOGO</span><b>TOP RIGHT · AUTOMATIC</b>
-            <span>MOVE NAME</span><b>BOTTOM · AUTOMATIC</b>
-            <span>COST / DAM</span><b>SMALL · BOTTOM · AUTOMATIC</b>
-            <span>OTHER RULES</span><b>BACK ONLY</b>
-          </div>
+          <div class="group-heading"><span>3</span><div><b>Front identity</b><small>Automatic and deliberately minimal. Detailed gameplay text, restrictions, rarity and effects remain on the back.</small></div></div>
+          <div class="identity-preview"><span>SET LOGO</span><b>TOP RIGHT · AUTOMATIC</b><span>SUPERSTAR</span><b>NAME ONLY</b><span>MOVE</span><b>NAME + COST / DAM</b><span>OTHER TYPES</span><b>NAME + SMALL TYPE LABEL</b><span>RULES / EFFECTS</span><b>BACK ONLY</b></div>
           <button id="reset-layout" type="button">Reset Artwork Position</button>
         </section>
-
         <section class="control-group">
-          <div class="group-heading"><span>4</span><div><b>Export finished card</b><small>Downloads one flattened WebP containing the set background/frame, your Move artwork, set logo, Move name, Cost and Damage. Put it at the GAME FILE path shown above; no manifest edit is required.</small></div></div>
-          <label>Output size
-            <select id="output-size">
-              <option value="680x1000" selected>680 × 1000 — game standard</option>
-              <option value="816x1200">816 × 1200 — high quality</option>
-              <option value="1020x1500">1020 × 1500 — archive quality</option>
-            </select>
-          </label>
+          <div class="group-heading"><span>4</span><div><b>Export finished card</b><small>Downloads one flattened WebP. Put it at the exact path below and WWE Legacy will use it automatically without a manifest edit.</small></div></div>
+          <label>Output size<select id="output-size"><option value="680x1000" selected>680 × 1000 — game standard</option><option value="816x1200">816 × 1200 — high quality</option><option value="1020x1500">1020 × 1500 — archive quality</option></select></label>
           <label>WebP quality <output id="quality-value">88%</output><input id="quality" type="range" min="65" max="96" value="88"></label>
-          <button id="export-webp" class="primary export-button" type="button">Export Move WebP</button>
-          <div class="manifest"><span>INSTALL THIS FILE</span><code id="install-path">assets/cards/art/custom/moves/disaster-kick.webp</code></div>
+          <button id="export-webp" class="primary export-button" type="button">Export Card WebP</button>
+          <div class="manifest"><span>INSTALL THIS FILE</span><code id="install-path">assets/cards/art/custom/superstars/cody-rhodes.webp</code></div>
           <p id="status" class="status" aria-live="polite"></p>
         </section>
       </aside>
-
       <section class="preview-panel">
-        <div class="preview-toolbar"><div><span>LIVE TEMPLATE</span><b id="preview-label">SummerSlam — Series 1</b></div><small id="preview-move">Disaster Kick</small></div>
-        <div class="canvas-wrap"><canvas id="card-canvas" width="680" height="1000" aria-label="Finished Move card front preview"></canvas></div>
-        <div class="template-key">
-          <span class="key summerslam">SUMMERSLAM</span><span class="key hof">HALL OF FAME</span><span class="key evolution">EVOLUTION</span><span class="key rewards">REWARDS</span>
-        </div>
-        <p>The WebP is the complete front of the Move card. WWE Legacy will show this finished artwork untouched and flip it to the shared rules back when the card is tapped.</p>
+        <div class="preview-toolbar"><div><span>LIVE TEMPLATE</span><b id="preview-label">SummerSlam — Series 1</b></div><small id="preview-card">SS1-001 · Cody Rhodes</small></div>
+        <div class="canvas-wrap"><canvas id="card-canvas" width="680" height="1000" aria-label="Finished WWE Legacy card front preview"></canvas></div>
+        <div class="template-key"><span class="key summerslam">SUMMERSLAM</span><span class="key hof">HALL OF FAME</span><span class="key evolution">EVOLUTION</span><span class="key rewards">REWARDS</span></div>
+        <p>The exported WebP is the complete collectible front. The game flips to its shared information back for every rule, effect, requirement and rarity detail.</p>
       </section>
     </section>
   </main>

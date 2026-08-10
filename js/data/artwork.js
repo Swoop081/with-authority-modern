@@ -41,7 +41,7 @@ export const superstarArtwork = {
   "the-rock": `${WWE_PROFILE_ROOT}/the-rock.png`,
   ...superstarArtOverrides
 };
-// Finished Superstar collectible fronts exported by Superstar Art Studio.
+// Finished Superstar collectible fronts exported by the unified Card Art Studio.
 // These are intentionally separate from wrestler portraits: move/Entrance cards
 // can continue using action/profile art while every Superstar-facing UI surface
 // can prefer the finished collectible card. Missing custom files fall back in
@@ -54,10 +54,27 @@ export function superstarCardArtFor(superstarId) {
   return superstarCardArtwork[superstarId] ?? null;
 }
 
-// Finished Move collectible fronts exported by Move Card Studio. As with
-// Superstar fronts, these are a separate presentation layer from the older
-// action-photo artwork resolver. Missing files fall back in the UI without
-// changing gameplay data or the legacy card-art manifest.
+// Finished collectible fronts exported by the unified Card Art Studio.
+// Each type gets a predictable folder, so installing an exported WebP never
+// requires a manifest edit. Missing finished fronts fall back to legacy art.
+const finishedFrontFolders = {
+  move: "moves",
+  entrance: "entrances",
+  special: "specials",
+  manager: "managers",
+  action: "actions",
+  support: "supports",
+  momentum: "momentum",
+};
+
+export function finishedCardArtFor(card) {
+  if (!card) return null;
+  if (card.kind === "superstar") return superstarCardArtFor(card.superstarId);
+  const folder = finishedFrontFolders[card.kind];
+  return folder && card.id ? `assets/cards/art/custom/${folder}/${card.id}.webp` : null;
+}
+
+// Backwards-compatible helper retained for existing Move-specific callers/tests.
 export function moveCardArtFor(cardId) {
   return cardId ? `assets/cards/art/custom/moves/${cardId}.webp` : null;
 }
