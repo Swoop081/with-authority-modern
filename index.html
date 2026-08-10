@@ -4,16 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#0b0b0d">
-  <title>Modern Wrestling Card Engine</title>
+  <title>WWE Legacy: Collectible Card Game</title>
   <link rel="stylesheet" href="./css/game.css">
 </head>
 <body>
   <main>
-    <header class="topbar">
-      <div><span class="eyebrow">CLEAN ENGINE · v0.4.5</span><h1>Modern Wrestling Card Engine</h1></div>
-      <p>SummerSlam — Series 1 + Hall of Fame — Series 1 · 16-Superstar collectible match engine</p>
+    <header class="topbar" id="app-topbar">
+      <button class="brand-home" id="brand-home" type="button" aria-label="WWE Legacy main menu">
+        <span class="brand-wwe">WWE</span><span class="brand-legacy">LEGACY</span><small>COLLECTIBLE CARD GAME</small>
+      </button>
+      <span class="build-label">v0.8.2</span>
     </header>
     <div id="game" aria-live="polite"></div>
+    <nav class="mobile-game-nav" id="mobile-game-nav" aria-label="Primary navigation" hidden>
+      <button type="button" data-mobile-nav="menu"><span class="nav-glyph">⌂</span><b>HOME</b></button>
+      <button type="button" data-mobile-nav="play-menu"><span class="nav-glyph">▶</span><b>PLAY</b></button>
+      <button type="button" data-mobile-nav="collection"><span class="nav-glyph">▣</span><b>CARDS</b></button>
+      <button type="button" data-mobile-nav="boosters"><span class="nav-glyph">✦</span><b>PACKS</b></button>
+      <button type="button" data-mobile-nav="seasons"><span class="nav-glyph">◆</span><b>SEASON</b></button>
+    </nav>
   </main>
   <script type="module" src="./js/ui/app.js"></script>
 </body>

@@ -19,9 +19,9 @@ export function cardForDeckEntry(entry) {
 
 export function buildPlayableDeck(profile, superstarId) {
   const saved = profile?.savedDecks?.[superstarId];
-  if (!saved?.length) return decks[superstarId];
+  if (!saved?.length) return null;
   const materialized = saved.map(cardForDeckEntry).filter(Boolean);
-  return materialized.length === 55 ? materialized : decks[superstarId];
+  return materialized.length === 55 ? materialized : null;
 }
 
 function effectScore(effect = {}) {

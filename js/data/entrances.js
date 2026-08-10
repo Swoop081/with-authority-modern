@@ -1,0 +1,22 @@
+import { cards } from "./cards.js";
+import { hallCards } from "./hall-of-fame-cards.js";
+import { evolutionCards } from "./evolution-cards.js";
+import { rockCards } from "./season1-rock-cards.js";
+
+function flatten(source) {
+  const out = [];
+  for (const value of Object.values(source)) {
+    if (value?.id) out.push(value);
+    else if (value && typeof value === "object") {
+      for (const nested of Object.values(value)) if (nested?.id) out.push(nested);
+    }
+  }
+  return out;
+}
+
+const all = [...flatten(cards), ...flatten(hallCards), ...flatten(evolutionCards), ...flatten(rockCards)];
+const bySuperstar = new Map(all.filter(card => card.kind === "entrance" && card.superstarId).map(card => [card.superstarId, card]));
+
+export function entranceForSuperstar(superstarId) {
+  return bySuperstar.get(superstarId) ?? null;
+}

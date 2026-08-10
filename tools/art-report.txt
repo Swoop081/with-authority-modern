@@ -1,0 +1,11 @@
+
+> wwe-legacy-ccg@0.8.0 art
+> node tools/art-audit.mjs
+
+WWE Legacy artwork audit
+Collectibles: 510
+Cards with a valid local image: 510/510
+Unique local image files in active use: 28
+Exact card-specific overrides: 3
+Temporary Superstar-image fallbacks: 296
+Temporary generic fallbacks: 211

@@ -1,18 +1,22 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync, existsSync } from "node:fs";
 import { MatchEngine } from "../js/engine/MatchEngine.js";
 import { superstars } from "../js/data/superstars.js";
 import { cards } from "../js/data/cards.js";
 import { hallCards } from "../js/data/hall-of-fame-cards.js";
+import { evolutionCards } from "../js/data/evolution-cards.js";
 import { decks } from "../js/data/decks.js";
 import { collectionCards, setCollection, cardsForSet, setCollectionFor } from "../js/data/collection.js";
 import { STARTER_CHOICES, createProfile, hasSuperstar, unlockSuperstar, addOwnedCard, ownedCount, setDeckAssistance } from "../js/data/profile.js";
 import { openBooster, openLadderCompletionPack, grantBooster, BOOSTER_SIZE, GUARANTEED_FOILS, RARITY_WEIGHTS, finishEligible } from "../js/data/boosters.js";
 import { buildPlayableDeck, findSafeUpgrade, applyUpgrade } from "../js/data/deck-assistant.js";
-import { moveEligibility, canAttemptPin, canReturnToRing, effectiveTotalMomentum } from "../js/engine/rules.js";
+import { moveEligibility, canAttemptPin, canReturnToRing, effectiveTotalMomentum, submissionThreshold } from "../js/engine/rules.js";
 import { cpuDecision, executeCpuDecision, decisionOwner } from "../js/ai/WrestlingAI.js";
+import { advanceCpuUntilHuman } from "../js/ui/turn-driver.js";
 import { isOffensiveMove, MOVE_TYPES } from "../js/data/move-types.js";
 import { LADDER_LIVES, startLadderRun, currentLadderOpponent, recordLadderMatch, ladderState } from "../js/data/ladder.js";
+import { artworkFor } from "../js/data/artwork.js";
 
 function game() {
   return new MatchEngine({
@@ -27,6 +31,24 @@ function putInHand(g, playerId, card) {
   g.state().players[playerId].hand.unshift(structuredClone(card));
   return g.state().players[playerId].hand[0];
 }
+
+
+test("CPU opening Control is advanced until the human has a decision", () => {
+  const g = new MatchEngine({
+    superstarA: superstars.romanReigns,
+    superstarB: superstars.codyRhodes,
+    deckA: decks["roman-reigns"],
+    deckB: decks["cody-rhodes"],
+    startingControl: "p2"
+  });
+  assert.equal(decisionOwner(g.state()), "p2");
+  const beforeLog = g.state().log.length;
+  const result = advanceCpuUntilHuman(g, "p2");
+  assert.ok(result.steps > 0, "CPU should take at least one opening decision");
+  assert.ok(g.state().log.length > beforeLog, "CPU opening turn must advance game state");
+  assert.notEqual(decisionOwner(g.state()), "p2", "CPU must not remain stuck as decision owner after its opening sequence");
+  assert.ok(["p1", null].includes(decisionOwner(g.state())), "human should own the next response/action unless the match ended");
+});
 
 test("move costs are eligibility thresholds and are never spent", () => {
   const g = game();
@@ -82,6 +104,16 @@ test("original-style Move Type is separate from Momentum method", () => {
   assert.ok(cards.slingBlade.counters.includes("scoop"));
 });
 
+test("every collectible resolves to a local artwork file", () => {
+  assert.equal(collectionCards.length, 537);
+  for (const card of collectionCards) {
+    const art = artworkFor(card);
+    assert.ok(art, `${card.id} has no artwork path`);
+    const local = new URL(`../${art}`, import.meta.url);
+    assert.ok(existsSync(local), `${card.id} artwork file missing: ${art}`);
+  }
+});
+
 test("every collectible Move has a valid tactical Move Type and method", () => {
   for (const card of collectionCards.filter(c => c.kind === "move")) {
     assert.ok(MOVE_TYPES.includes(card.moveType), `${card.id} has invalid Move Type ${card.moveType}`);
@@ -99,7 +131,7 @@ test("auto counter requires seven pages from hand and transfers control", () => 
   assert.throws(() => g.autoCounter("p2", g.state().players.p2.hand.slice(0, 6)), /7/);
   g.autoCounter("p2", [...g.state().players.p2.hand]);
   assert.equal(g.state().playerInControl, "p2");
-  assert.equal(g.state().players.p2.hand.length, 1); // new Control draws one; Punk Counter Culture now grants Technical Momentum
+  assert.equal(g.state().players.p2.hand.length, 0); // first Control uses the fixed Lead Off hand; no random draw is added
 });
 
 test("one momentum page per control turn and played Momentum leaves hand", () => {
@@ -112,18 +144,21 @@ test("one momentum page per control turn and played Momentum leaves hand", () =>
   assert.throws(() => g.playMomentum("p1", strength));
 });
 
-test("connected move opens a post-move window, then ending offense passes control and draws", () => {
+test("connected move opens a post-move window, then ending offense retains Control and starts a fresh turn", () => {
   const g = game();
   g.state().players.p1.momentum.strike = 1;
   const jab = putInHand(g, "p1", cards.jab);
-  const handBefore = g.state().players.p2.hand.length;
+  const turnBefore = g.state().turnNumber;
   g.declareMove("p1", jab);
   g.passCounter("p2");
   assert.equal(g.state().phase, "POST_MOVE");
   assert.equal(g.state().playerInControl, "p1");
+  const handBeforeFreshTurn = g.state().players.p1.hand.length;
   g.endPostMove("p1");
-  assert.equal(g.state().playerInControl, "p2");
-  assert.equal(g.state().players.p2.hand.length, handBefore + 1);
+  assert.equal(g.state().playerInControl, "p1");
+  assert.equal(g.state().turnNumber, turnBefore + 1);
+  assert.equal(g.state().players.p1.hand.length, handBeforeFreshTurn + 1);
+  assert.equal(g.state().log.some(e => e.type === "CONTROL_RETAINED" && e.playerId === "p1"), true);
 });
 
 test("submission can be maintained by ditching one page", () => {
@@ -156,26 +191,25 @@ test("releasing a submission keeps control", () => {
   assert.equal(g.state().submission, null);
 });
 
-test("all 16 linked Entrances resolve automatically pre-match and leave four fixed Lead Off pages", () => {
+test("all 24 linked Entrances resolve automatically pre-match outside the five-card Lead Off hand", () => {
   for (const star of Object.values(superstars)) {
     const opponent = star.id === "cody-rhodes" ? superstars.cmPunk : superstars.codyRhodes;
     const g = new MatchEngine({ superstarA: star, superstarB: opponent, deckA: decks[star.id], deckB: decks[opponent.id], startingControl: "p1" });
     const p = g.state().players.p1;
-    const entranceId = star.leadOffIds[0];
     assert.equal(p.entrancePlayed, true, star.id);
-    assert.equal(p.discard.some(card => card.id === entranceId), true, `${star.id} Entrance should be in discard after PRE-MATCH`);
-    assert.equal(p.hand.some(card => card.kind === "entrance"), false, `${star.id} Entrance must not remain in hand`);
-    for (const id of star.leadOffIds.slice(1)) assert.equal(p.hand.some(card => card.id === id), true, `${star.id} missing fixed Lead Off ${id}`);
-    assert.equal(p.hand.length, 5, `${star.id} should start Turn 1 with four fixed pages plus one random draw`);
-    assert.equal(g.state().players.p2.hand.length, 4, "the non-starting wrestler waits for their first-turn draw");
-    assert.equal(g.state().log.filter(e => e.type === "ENTRANCE_PREMATCH").length, 2);
-    assert.equal(g.state().log.some(e => e.type === "BELL_RANG"), true);
+    assert.equal(p.hand.some(card => card.kind === "entrance"), false, `${star.id} Entrance must never occupy the hand`);
+    assert.deepEqual(p.hand.map(card => card.id), star.leadOffIds, `${star.id} must begin with its exact five playable Lead Off pages`);
+    assert.equal(p.hand.length, 5);
+    assert.equal(g.state().players.p2.hand.length, 5, "both wrestlers begin with five fixed playable pages");
+    const entranceLog = g.state().log.find(e => e.type === "ENTRANCE_PREMATCH" && e.playerId === "p1");
+    assert.equal(entranceLog?.cardId, star.entranceId, `${star.id} linked Entrance should resolve from the Superstar card`);
   }
 });
 
-test("the non-starting wrestler draws their fifth card on their first Control turn", () => {
+test("neither wrestler receives a random draw on their first Control turn", () => {
   const g = game();
-  assert.equal(g.state().players.p2.hand.length, 4);
+  assert.equal(g.state().players.p1.hand.length, 5);
+  assert.equal(g.state().players.p2.hand.length, 5);
   g.passTurn("p1");
   assert.equal(g.state().players.p2.hand.length, 5);
 });
@@ -227,7 +261,7 @@ test("Cody's Superstar ability rewards the first new Move Type once", () => {
   const first = putInHand(g, "p1", cards.clothesline);
   g.declareMove("p1", first); g.passCounter("p2");
   assert.equal(cody.abilityUses, 1);
-  g.endPostMove("p1"); g.passTurn("p2");
+  g.endPostMove("p1");
   const second = putInHand(g, "p1", cards.ddt);
   g.declareMove("p1", second); g.passCounter("p2");
   assert.equal(cody.abilityUses, 1);
@@ -388,6 +422,21 @@ test("failed pin gives the defender Control rather than causing a KO", () => {
   assert.equal(g.state().playerInControl, "p2");
 });
 
+test("pin-escape Special ends the failed pin and transfers Control to the defender", () => {
+  const g = game();
+  const p1 = g.state().players.p1;
+  p1.momentum.technical = 1;
+  p1.momentum.attitude = 2;
+  const move = putInHand(g, "p1", cards.codyPowerslam);
+  const escape = putInHand(g, "p2", cards.shoulderUp);
+  g.declareMove("p1", move);
+  g.passCounter("p2");
+  g.attemptPin("p1");
+  g.playPinEscape("p2", escape);
+  assert.equal(g.state().playerInControl, "p2");
+  assert.equal(g.state().phase, "ACTION");
+});
+
 test("maintained submissions apply repeated body-part pressure and can win", () => {
   const g = new MatchEngine({ superstarA: superstars.cmPunk, superstarB: superstars.codyRhodes, deckA: decks["cm-punk"], deckB: decks["cody-rhodes"] });
   const punk = g.state().players.p1;
@@ -401,9 +450,13 @@ test("maintained submissions apply repeated body-part pressure and can win", () 
   g.passCounter("p2");
   assert.equal(cody.submissionDamage.head, 4);
   assert.equal(g.state().phase, "SUBMISSION_MAINTAIN");
-  const ditch = punk.hand[0];
-  g.maintainSubmission("p1", ditch);
-  assert.equal(cody.submissionDamage.head, 8);
+  let squeezes = 0;
+  while (g.state().phase === "SUBMISSION_MAINTAIN" && squeezes < 10) {
+    const ditch = punk.hand[0];
+    g.maintainSubmission("p1", ditch);
+    squeezes += 1;
+  }
+  assert.ok(cody.submissionDamage.head >= 8);
   assert.equal(g.state().phase, "MATCH_OVER");
   assert.equal(g.state().winner, "p1");
   assert.equal(g.state().finish.type, "submission");
@@ -414,11 +467,11 @@ function seededRng(seed) {
   return () => ((x = (1664525 * x + 1013904223) >>> 0) / 4294967296);
 }
 
-test("all 16 strategy decks contain exactly 55 pages with fixed five-card openings", () => {
+test("all 24 strategy decks contain exactly 55 pages with fixed five-card openings", () => {
   for (const deck of Object.values(decks)) assert.equal(deck.length, 55);
 });
 
-test("CPU can complete all 240 non-mirror roster matchups without stalling", () => {
+test("CPU can complete all 552 non-mirror roster matchups without stalling", () => {
   const roster = Object.values(superstars);
   for (let i = 0; i < roster.length; i += 1) {
     for (let j = 0; j < roster.length; j += 1) {
@@ -434,8 +487,9 @@ test("CPU can complete all 240 non-mirror roster matchups without stalling", () 
         steps += 1;
       }
       assert.equal(g.state().phase, "MATCH_OVER", `${a.id} vs ${b.id} did not finish`);
-      assert.ok(g.state().winner === "p1" || g.state().winner === "p2");
-      assert.ok(["pin", "submission"].includes(g.state().finish.type));
+      assert.ok(g.state().winner === "p1" || g.state().winner === "p2" || g.state().winner === null);
+      assert.ok(["pin", "submission", "time-limit-draw"].includes(g.state().finish.type));
+      assert.ok(g.state().turnNumber <= 50, `${a.id} vs ${b.id} exceeded the Turn-50 safety limit`);
     }
   }
 });
@@ -676,7 +730,7 @@ test("SummerSlam Series 1 now contains at least 130 distinct Move cards", () => 
   assert.ok(moveCards.length >= 130, `expected at least 130 Moves, got ${moveCards.length}`);
 });
 
-test("all 16 recommended decks respect the five-copy per-card cap", () => {
+test("all 24 recommended decks respect the five-copy per-card cap", () => {
   for (const [id, deck] of Object.entries(decks)) {
     const counts = new Map();
     for (const card of deck) counts.set(card.id, (counts.get(card.id) ?? 0) + 1);
@@ -729,7 +783,8 @@ test("starter profile owns its full normal starter deck and begins with three bo
   const p = createProfile("cm-punk");
   assert.equal(p.boosterCredits, 3);
   assert.equal(p.savedDecks["cm-punk"].length, 55);
-  assert.equal(ownedCount(p, "superstar-cm-punk"), 1);
+  assert.equal(ownedCount(p, "superstar-cm-punk", "normal"), 0);
+  assert.equal(ownedCount(p, "superstar-cm-punk", "foil"), 1);
   const expectedRoundhouse = decks["cm-punk"].filter(c => c.id === "punk-roundhouse").length;
   assert.equal(ownedCount(p, "punk-roundhouse"), expectedRoundhouse);
 });
@@ -750,7 +805,7 @@ test("opening a booster consumes one credit and records five owned pulls", () =>
   assert.equal(pulls.reduce((sum,x) => sum + (x.foil ? 1 : 0), 0), 1);
 });
 
-test("pulling a locked Superstar card unlocks them and grants a functional 55-card starter deck", () => {
+test("pulling a locked Superstar unlocks them with an ownership-backed deck and essential package", () => {
   const p = createProfile("cm-punk");
   p.packsSinceSuperstarUnlock = 19;
   p.packsSinceSuperstarUnlockBySet = { "summerslam-series-1": 19 };
@@ -761,7 +816,14 @@ test("pulling a locked Superstar card unlocks them and grants a functional 55-ca
   assert.equal(pulls[0].card.id, "superstar-gunther");
   assert.equal(pulls[0].superstarUnlocked, true);
   assert.equal(hasSuperstar(p, "gunther"), true);
-  assert.equal(p.savedDecks.gunther.length, 55);
+  assert.equal(p.savedDecks.gunther.length <= 55, true);
+  assert.equal(p.savedDecks.gunther.length >= 5, true);
+  assert.deepEqual(p.savedDecks.gunther.slice(0,5).map(e=>e.id), superstars.gunther.leadOffIds);
+  for (const entry of p.savedDecks.gunther) {
+    const used = p.savedDecks.gunther.filter(e => e.id === entry.id).length;
+    const owned = ownedCount(p, entry.id, "normal") + ownedCount(p, entry.id, "foil");
+    assert.equal(used <= owned, true, `${entry.id} must be genuinely owned`);
+  }
 });
 
 test("card ownership caps at five total copies and Foils replace Normals at the cap", () => {
@@ -806,7 +868,7 @@ test("Deck Assistance supports ask, auto-upgrade and manual modes", () => {
   assert.throws(() => setDeckAssistance(p, "reckless"), /Invalid/);
 });
 
-test("all 16 recommended decks satisfy shared deck-health floors", async () => {
+test("all 24 recommended decks satisfy shared deck-health floors", async () => {
   const { evaluateDeck } = await import("../js/data/deck-health.js");
   for (const [superstarId, deck] of Object.entries(decks)) {
     const health = evaluateDeck(deck, { superstarId });
@@ -814,9 +876,9 @@ test("all 16 recommended decks satisfy shared deck-health floors", async () => {
     assert.equal(health.counts.lowCostMoves >= 6, true);
     assert.equal(health.counts.midCostMoves >= 5, true);
     assert.equal(health.counts.counters >= 5, true);
-    assert.equal(health.openingCounts.entrance, 1);
+    assert.equal(health.openingCounts.entrance, 0);
     assert.equal(health.openingCounts.momentum >= 2, true);
-    assert.equal(health.openingCounts.offensiveMoves >= 2, true);
+    assert.equal(health.openingCounts.offensiveMoves >= 3, true);
   }
 });
 
@@ -888,7 +950,7 @@ test("Climb the Ladder Completion Pack guarantees one Foil, a Very Rare and a lo
   const beforeUnlocked = p.unlockedSuperstars.length;
   const pulls = openLadderCompletionPack(p, () => 0);
   assert.equal(pulls.length, 5);
-  assert.equal(pulls.filter(x => x.foil).length, 1);
+  assert.equal(pulls.filter(x => x.foil).length >= 1, true);
   assert.equal(pulls.some(x => x.card.rarity === 4), true);
   assert.equal(p.unlockedSuperstars.length, beforeUnlocked + 1);
   assert.equal(ladderState(p).completionPackCredits, 0);
@@ -906,7 +968,7 @@ test("ladder draws do not consume a life or advance the rung", () => {
 });
 
 
-test("all 16 Superstar mirror matches can complete without AI stalls", () => {
+test("all 24 Superstar mirror matches can complete without AI stalls", () => {
   const seededRng = (seed) => { let x = seed >>> 0; return () => ((x = (1664525 * x + 1013904223) >>> 0) / 4294967296); };
   for (const [index, star] of Object.values(superstars).entries()) {
     const g = new MatchEngine({ superstarA: star, superstarB: star, deckA: decks[star.id], deckB: decks[star.id], rng: seededRng(9000 + index) });
@@ -995,7 +1057,8 @@ test("each Superstar card is linked to the exact fixed five-card Lead Off packag
   for (const star of Object.values(superstars)) {
     assert.equal(star.cardId, `superstar-${star.id}`);
     assert.deepEqual(star.leadOffIds, decks[star.id].slice(0, 5).map(c => c.id), star.id);
-    assert.equal(star.leadOffIds[0].includes("entrance-"), true, star.id);
+    assert.equal(star.entranceId.includes("entrance-"), true, star.id);
+    assert.equal(star.leadOffIds.some(id => id.includes("entrance-")), false, star.id);
   }
 });
 
@@ -1004,9 +1067,10 @@ test("Entrance cards are unique one-copy collectibles and Foil replaces the Norm
   const p = createProfile("cm-punk");
   const entrance = cards.punkEntrance;
   assert.equal(ownershipCapFor(entrance), 1);
-  assert.equal(ownedCount(p, entrance.id, "normal"), 1);
+  assert.equal(ownedCount(p, entrance.id, "normal"), 0);
+  assert.equal(ownedCount(p, entrance.id, "foil"), 1);
   assert.equal(finishEligible(p, entrance.id, false), false);
-  assert.equal(finishEligible(p, entrance.id, true), true);
+  assert.equal(finishEligible(p, entrance.id, true), false);
   addOwnedCard(p, entrance.id, { foil: true });
   assert.equal(ownedCount(p, entrance.id, "normal"), 0);
   assert.equal(ownedCount(p, entrance.id, "foil"), 1);
@@ -1035,28 +1099,26 @@ test("Optimize Deck preserves the Superstar-linked Lead Off five and legal deck 
   assert.equal(validateDeckDraft(p, "roman-reigns", optimized).healthy, true);
 });
 
-test("Normal Entrances never appear in boosters and Entrance Foils require the Superstar to be unlocked", async () => {
+test("Entrance cards are always Foil unlock rewards and never appear in boosters", async () => {
   const { boosterEligible } = await import("../js/data/boosters.js");
   const p = createProfile("cm-punk");
   const codyEntrance = collectionCards.find(c => c.id === "entrance-cody-rhodes");
   assert.equal(boosterEligible(p, codyEntrance, false), false);
   assert.equal(boosterEligible(p, codyEntrance, true), false);
   unlockSuperstar(p, "cody-rhodes");
-  assert.equal(ownedCount(p, codyEntrance.id, "normal"), 1);
+  assert.equal(ownedCount(p, codyEntrance.id, "normal"), 0);
+  assert.equal(ownedCount(p, codyEntrance.id, "foil"), 1);
   assert.equal(boosterEligible(p, codyEntrance, false), false);
-  assert.equal(boosterEligible(p, codyEntrance, true), true);
+  assert.equal(boosterEligible(p, codyEntrance, true), false);
 });
 
-test("Superstar cards are unique collectibles: Normal stops after unlock and one Foil can replace it", async () => {
-  const { ownershipCapFor } = await import("../js/data/card-limits.js");
+test("Superstar cards are always Foil and have no Normal version", async () => {
+  const { boosterEligible } = await import("../js/data/boosters.js");
   const p = createProfile("cm-punk");
   const superstar = collectionCards.find(c => c.id === "superstar-cm-punk");
-  assert.equal(ownershipCapFor(superstar), 1);
-  assert.equal(finishEligible(p, superstar.id, false), false);
-  assert.equal(finishEligible(p, superstar.id, true), true);
-  addOwnedCard(p, superstar.id, { foil: true });
   assert.deepEqual(p.ownedCards[superstar.id], { normal: 0, foil: 1 });
-  assert.equal(finishEligible(p, superstar.id, true), false);
+  assert.equal(boosterEligible(p, superstar, false), false);
+  assert.equal(boosterEligible(p, superstar, true), false);
 });
 
 test("Championship Road creates three unique contenders then a World Champion final", async () => {
@@ -1232,7 +1294,6 @@ test("Move secondary effects can draw, discard and add extra Attitude without ex
 
   // Discard effect.
   g.endPostMove("p1");
-  g.passTurn("p2");
   brock.momentum.strength = 3; brock.momentum.attitude = 7;
   const romanHandBefore = roman.hand.length;
   const f5 = putInHand(g, "p1", cards.f5);
@@ -1243,7 +1304,6 @@ test("Move secondary effects can draw, discard and add extra Attitude without ex
 
   // Extra Attitude effect beyond the universal +1 on a connected Move.
   g.endPostMove("p1");
-  g.passTurn("p2");
   brock.momentum.strength = 1; brock.momentum.attitude = 3;
   const belly = putInHand(g, "p1", cards.bellyToBelly);
   const beforeAttitude = brock.momentum.attitude;
@@ -1329,4 +1389,526 @@ test("deck health rejects a single Manager that is not eligible for the selected
   const health = evaluateDeck(illegal, { superstarId: "andre-the-giant" });
   assert.equal(health.healthy, false);
   assert.equal(health.violations.some(v => v.includes("not eligible")), true);
+});
+
+
+test("mobile booster reveal has a single-card phone layout and Next Card navigation", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(css.includes(".booster-flip-card.is-current{display:block}"), true);
+  assert.equal(css.includes(".booster-flip-card.is-revealed .card-back{display:none}"), true);
+  assert.equal(app.includes("Next Card"), true);
+  assert.equal(app.includes("nextBoosterCard"), true);
+});
+
+
+test("mobile Deck Assistance suggestions cannot force horizontal overflow", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.equal(css.includes(".upgrade-row b,.upgrade-row span{display:block;max-width:100%;white-space:normal;overflow-wrap:anywhere;word-break:break-word}"), true);
+  assert.equal(css.includes(".upgrade-row>div:last-child{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}"), true);
+  assert.equal(css.includes("@media(max-width:420px){\n  .upgrade-row>div:last-child{grid-template-columns:1fr}"), true);
+});
+
+test("mobile match screen uses compact wrestler HUDs, one play pile, player-only hand and collapsible log", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("renderMatchHud()"), true);
+  assert.equal(app.includes("renderPlayPile()"), true);
+  assert.equal(app.includes("renderHumanHand()"), true);
+  assert.equal(app.includes("renderMatchLog()"), true);
+  assert.equal(app.includes("cpu-hand"), false);
+  assert.equal(css.includes(".match-hud-grid{display:grid;grid-template-columns:1fr 1fr"), true);
+  assert.equal(css.includes(".play-pile-card{width:min(240px,70vw)"), true);
+  assert.equal(css.includes(".compact-log>summary"), true);
+});
+
+test("WWE Legacy splash, Champion onboarding and Main Menu are wired as the front-door flow", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(html.includes("WWE Legacy: Collectible Card Game"), true);
+  assert.equal(app.includes('let screen = "splash"'), true);
+  assert.equal(app.includes("function renderSplash()"), true);
+  assert.equal(app.includes("function renderMainMenu()"), true);
+  assert.equal(app.includes("function renderPlayMenu()"), true);
+  assert.equal(app.includes("START WITH ${star.name.toUpperCase()}"), true);
+  assert.equal(app.includes('screen = "menu";'), true);
+  assert.equal(css.includes(".splash-screen{"), true);
+  assert.equal(css.includes(".main-menu-grid{"), true);
+});
+
+test("collectible card fronts are artwork-first and flip to a shared rules back", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("function collectibleCardMarkup"), true);
+  assert.equal(app.includes("cardFrontBottom(card)"), true);
+  assert.equal(app.includes("data-flip-hand"), true);
+  assert.equal(app.includes("data-play-hand"), true);
+  assert.equal(app.includes("data-flip-play-pile"), true);
+  assert.equal(css.includes(".ccg-card-art{position:absolute;inset:0"), true);
+  assert.equal(css.includes(".ccg-card-title{position:absolute"), true);
+  assert.equal(css.includes(".ccg-card-stats{position:absolute"), true);
+  assert.equal(css.includes(".ccg-card.is-flipped .ccg-card-inner{transform:rotateY(180deg)"), true);
+});
+
+test("card artwork can be swapped through one manifest without changing gameplay data", () => {
+  const artwork = readFileSync(new URL("../js/data/artwork.js", import.meta.url), "utf8");
+  const overrides = readFileSync(new URL("../js/data/card-art-overrides.js", import.meta.url), "utf8");
+  const guide = readFileSync(new URL("../assets/cards/README.md", import.meta.url), "utf8");
+  assert.equal(artwork.includes('import { cardArtOverrides, superstarArtOverrides }'), true);
+  assert.equal(artwork.includes("if (cardArtwork[card.id]) return cardArtwork[card.id]"), true);
+  assert.equal(overrides.includes("export const cardArtOverrides"), true);
+  assert.equal(guide.includes("Replacing a card photo"), true);
+});
+
+test("Card Art Studio supports URL/upload crop, WebP export and manifest automation", () => {
+  const html = readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/card-art-studio.css", import.meta.url), "utf8");
+  const js = readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(html.includes('id="image-url"'), true);
+  assert.equal(html.includes('accept="image/*"'), true);
+  assert.equal(html.includes('id="crop-canvas"'), true);
+  assert.equal(html.includes('680 × 1000'), true);
+  assert.equal(js.includes('"image/webp"'), true);
+  assert.equal(js.includes('showDirectoryPicker'), true);
+  assert.equal(js.includes('writeProjectFile("js/data/card-art-overrides.js"'), true);
+  assert.equal(js.includes('assets/cards/art/custom/${state.card.id}.webp'), true);
+  assert.equal(js.includes('event.clipboardData'), true);
+  assert.equal(css.includes('touch-action:none'), true);
+  assert.equal(app.includes('./tools/card-art-studio.html'), true);
+});
+
+
+test("Evolution Series 1 contains eight women and a launch-sized 172-card collection", () => {
+  const evo = cardsForSet("evolution-series-1");
+  const info = setCollectionFor("evolution-series-1");
+  assert.equal(info.displayName, "Evolution — Series 1");
+  assert.equal(evo.length, 172);
+  assert.equal(evo.filter(c => c.kind === "superstar").length, 8);
+  assert.equal(evo.filter(c => c.kind === "move" && !c.superstarId).length, 53);
+  assert.deepEqual(evo.filter(c => c.kind === "superstar").map(c => c.superstarId), ["rhea-ripley","liv-morgan","becky-lynch","bayley","charlotte-flair","iyo-sky","paige","stephanie-vaquer"]);
+});
+
+test("Evolution named Entrances, Signatures, Trademarks and Finishers are Superstar-locked", () => {
+  const evo = cardsForSet("evolution-series-1");
+  const named = evo.filter(c => c.kind === "entrance" || c.signature || c.trademark || c.finisher);
+  assert.ok(named.length >= 32);
+  for (const card of named) assert.ok(card.superstarId, `${card.id} should be locked to its named Superstar`);
+  assert.equal(evolutionCards.riptide.finisher, true);
+  assert.equal(evolutionCards.oblivion.finisher, true);
+  assert.equal(evolutionCards.disarmher.trademark, true);
+  assert.equal(evolutionCards.bayleyToBelly.trademark, true);
+  assert.equal(evolutionCards.naturalSelection.trademark, true);
+  assert.equal(evolutionCards.bulletTrain.trademark, true);
+  assert.equal(evolutionCards.pto.trademark, true);
+  assert.equal(evolutionCards.devilsKiss.trademark, true);
+});
+
+test("Evolution shared common Moves are legal cross-roster while named Moves are restricted", async () => {
+  const { legalForSuperstar } = await import("../js/data/deck-builder.js");
+  assert.equal(legalForSuperstar(evolutionCards.dropkick, "rhea-ripley"), true);
+  assert.equal(legalForSuperstar(evolutionCards.dropkick, "cm-punk"), true);
+  assert.equal(legalForSuperstar(evolutionCards.riptide, "rhea-ripley"), true);
+  assert.equal(legalForSuperstar(evolutionCards.riptide, "cm-punk"), false);
+});
+
+test("Evolution adds an eight-opponent Ladder path and four-stage Championship Road", async () => {
+  const { LADDER_BRANCHES } = await import("../js/data/ladder.js");
+  const { CHAMPIONSHIP_BRANCHES, startChampionshipRoad } = await import("../js/data/championship-road.js");
+  const p = createProfile("cm-punk");
+  const ids = Object.values(superstars).map(s => s.id);
+  const ladder = startLadderRun(p, "cm-punk", ids, seededRng(88), "evolution");
+  assert.equal(ladder.opponents.length, 8);
+  assert.equal(ladder.opponents.every(id => Object.values(superstars).find(s => s.id === id)?.setId === "evolution-series-1"), true);
+  assert.equal(LADDER_BRANCHES.evolution.length, 8);
+  const road = startChampionshipRoad(p, "cm-punk", ids, seededRng(89), "evolution");
+  assert.equal(road.opponents.length, 4);
+  assert.equal(road.setId, "evolution-series-1");
+  assert.equal(CHAMPIONSHIP_BRANCHES.evolution.finals.includes(road.opponents.at(-1)), true);
+});
+
+test("starter onboarding remains Punk or Roman after Evolution expansion", () => {
+  assert.deepEqual(STARTER_CHOICES, ["cm-punk", "roman-reigns"]);
+  assert.equal(Object.values(superstars).length, 25);
+});
+
+test("Season 1 roadmap runs from August 10 to Survivor Series on November 28 with 50 tiers", async () => {
+  const { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, seasonTimeRemaining } = await import("../js/data/seasons.js");
+  assert.equal(SEASON_TIER_COUNT, 50);
+  assert.equal(XP_PER_TIER, 100);
+  assert.equal(SEASON_1.roadmap.find(n => n.id === "worlds-collide")?.date.startsWith("2026-09-26"), true);
+  assert.equal(SEASON_1.roadmap.find(n => n.id === "money-in-the-bank")?.date.startsWith("2026-10-10"), true);
+  assert.equal(SEASON_1.roadmap.find(n => n.id === "season-2")?.date.startsWith("2026-11-28"), true);
+  const remaining = seasonTimeRemaining(new Date("2026-08-10T00:00:00"));
+  assert.equal(Math.round(remaining.ms / 86400000), 110);
+});
+
+test("Season XP rewards wins, participation and unlocks claimable tier boosters", async () => {
+  const { awardMatchSeasonXp, seasonTier, claimSeasonTier } = await import("../js/data/seasons.js");
+  const p = createProfile("cm-punk");
+  assert.equal(awardMatchSeasonXp(p, "win").awarded, 25);
+  assert.equal(awardMatchSeasonXp(p, "loss").awarded, 5);
+  for (let i = 0; i < 3; i += 1) awardMatchSeasonXp(p, "win");
+  assert.equal(seasonTier(p), 1);
+  const before = Object.values(p.boosterCreditsBySet).reduce((a,b)=>a+b,0);
+  const reward = claimSeasonTier(p, 1);
+  const after = Object.values(p.boosterCreditsBySet).reduce((a,b)=>a+b,0);
+  assert.equal(after, before + reward.amount);
+  assert.throws(() => claimSeasonTier(p, 1), /already claimed/);
+});
+
+test("Free Season booster is available immediately then returns after a rolling 24 hours", async () => {
+  const { freePackStatus, claimFreeSeasonBooster } = await import("../js/data/seasons.js");
+  const p = createProfile("roman-reigns");
+  const start = new Date("2026-08-10T10:00:00");
+  assert.equal(freePackStatus(p, start).available, true);
+  const reward = claimFreeSeasonBooster(p, () => 0, start);
+  assert.equal(reward.setId, "summerslam-series-1");
+  assert.equal(freePackStatus(p, new Date("2026-08-11T09:59:59")).available, false);
+  assert.equal(freePackStatus(p, new Date("2026-08-11T10:00:00")).available, true);
+});
+
+test("Main Menu exposes Seasons with roadmap, live free-pack countdown and 50-tier mobile road", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes('id="menu-seasons"'), true);
+  assert.equal(app.includes("function renderSeasons()"), true);
+  assert.equal(app.includes("data-free-pack-countdown"), true);
+  assert.equal(app.includes("Season 1 Content Roadmap"), true);
+  assert.equal(app.includes("50-Tier Season Road"), true);
+  assert.equal(css.includes(".season-tier-road"), true);
+  assert.equal(css.includes("@media(max-width:760px)"), true);
+});
+
+
+test("submission tap threshold falls as overall health is worn down", () => {
+  const g = game();
+  const defender = g.state().players.p2;
+  defender.hp = defender.maxHp;
+  const fresh = submissionThreshold(defender);
+  defender.hp = Math.floor(defender.maxHp / 2);
+  const hurt = submissionThreshold(defender);
+  defender.hp = 1;
+  const critical = submissionThreshold(defender);
+  assert.ok(fresh > hurt, `fresh threshold ${fresh} should exceed hurt threshold ${hurt}`);
+  assert.ok(hurt >= critical, `hurt threshold ${hurt} should not be below critical threshold ${critical}`);
+  assert.ok(critical >= 12, "tap threshold keeps the stronger late-match resilience floor");
+});
+
+test("CPU maintains a submission when the next squeeze can force a tap even with one page left", () => {
+  const g = new MatchEngine({
+    superstarA: superstars.romanReigns,
+    superstarB: superstars.codyRhodes,
+    deckA: decks["roman-reigns"],
+    deckB: decks["cody-rhodes"],
+    startingControl: "p1"
+  });
+  const attacker = g.state().players.p1;
+  const defender = g.state().players.p2;
+  attacker.momentum.strength = 1;
+  attacker.momentum.attitude = 6;
+  defender.hp = 12;
+  const hold = putInHand(g, "p1", cards.guillotine);
+  g.declareMove("p1", hold);
+  g.passCounter("p2");
+  assert.equal(g.state().phase, "SUBMISSION_MAINTAIN");
+  // Put the defender exactly one squeeze away from the current dynamic tap threshold.
+  defender.submissionDamage[g.state().submission.bodyPart] = Math.max(0, submissionThreshold(defender) - g.state().submission.damage);
+  attacker.hand = [structuredClone(cards.momentum.strength)];
+  const decision = cpuDecision(g.state(), "p1");
+  assert.equal(decision.type, "maintain");
+});
+
+test("premium UI exposes distinct mode identities and graphical submission pressure", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  for (const mode of ["exhibition", "ladder", "championship", "seasons", "challenges", "collection", "boosters", "decks", "profile"]) {
+    assert.ok(app.includes(`modeLogoMarkup("${mode}"`), `missing ${mode} mode logo`);
+  }
+  assert.match(app, /hud-sub-limb/);
+  assert.match(app, /SUBMISSION · TAP/);
+  assert.match(css, /premium-menu-tile/);
+  assert.match(css, /feature-hero/);
+  assert.match(css, /premium-submission/);
+});
+
+test("premium mobile shell provides persistent primary navigation outside live matches", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  for (const target of ["menu", "play-menu", "collection", "boosters", "seasons"]) {
+    assert.ok(html.includes(`data-mobile-nav="${target}"`), `missing ${target} mobile nav target`);
+  }
+  assert.match(app, /mobile-game-nav/);
+  assert.match(app, /navScreens/);
+  assert.match(css, /\.mobile-game-nav/);
+  assert.match(css, /body\[data-screen="match"\] \.mobile-game-nav/);
+});
+
+test("European Uppercut used as a counter becomes a real counter-attack and deals its printed damage", () => {
+  const g = new MatchEngine({ superstarA: superstars.rheaRipley, superstarB: superstars.beckyLynch, deckA: decks["rhea-ripley"], deckB: decks["becky-lynch"], startingControl: "p1" });
+  g.state().players.p1.momentum.strike = 4;
+  const incoming = putInHand(g, "p1", evolutionCards.rheaShortArmClothesline); // Mad Rush
+  const uppercut = putInHand(g, "p2", evolutionCards.europeanUppercut);       // Arm Extended counters Mad Rush
+  const hpBefore = g.state().players.p1.hp;
+
+  g.declareMove("p1", incoming);
+  g.counter("p2", uppercut);
+
+  assert.equal(g.state().phase, "COUNTER");
+  assert.equal(g.state().proposedMove?.card.id, evolutionCards.europeanUppercut.id);
+  assert.equal(g.state().proposedMove?.attackerId, "p2");
+  assert.equal(g.state().proposedMove?.defenderId, "p1");
+  assert.equal(g.state().players.p1.hp, hpBefore, "damage waits until the counter-to-counter window closes");
+
+  g.passCounter("p1");
+  assert.equal(g.state().players.p1.hp, hpBefore - evolutionCards.europeanUppercut.damage);
+  assert.equal(g.state().phase, "POST_MOVE");
+  assert.equal(g.state().postMove?.attackerId, "p2");
+});
+
+test("Rhea receives a legal counter-to-counter window against European Uppercut", () => {
+  const g = new MatchEngine({ superstarA: superstars.rheaRipley, superstarB: superstars.beckyLynch, deckA: decks["rhea-ripley"], deckB: decks["becky-lynch"], startingControl: "p1" });
+  g.state().players.p1.momentum.strike = 5;
+  g.state().players.p1.momentum.strength = 5;
+  const clothesline = putInHand(g, "p1", evolutionCards.rheaShortArmClothesline); // Mad Rush
+  const uppercut = putInHand(g, "p2", evolutionCards.europeanUppercut);           // Arm Extended
+  const ripcord = putInHand(g, "p1", evolutionCards.rheaRipcordKnee);             // Leg Extended counters Arm Extended
+  const beckyHpBefore = g.state().players.p2.hp;
+
+  g.declareMove("p1", clothesline);
+  g.counter("p2", uppercut);
+  assert.equal(g.state().proposedMove?.defenderId, "p1", "Rhea must get the response window");
+
+  g.counter("p1", ripcord);
+  assert.equal(g.state().proposedMove?.card.id, evolutionCards.rheaRipcordKnee.id);
+  assert.equal(g.state().proposedMove?.defenderId, "p2");
+  g.passCounter("p2");
+
+  assert.equal(g.state().players.p2.hp, beckyHpBefore - evolutionCards.rheaRipcordKnee.damage);
+  assert.equal(g.state().log.some(e => e.type === "COUNTER_ATTACK_DECLARED" && e.cardId === evolutionCards.europeanUppercut.id), true);
+  assert.equal(g.state().log.some(e => e.type === "COUNTER_ATTACK_DECLARED" && e.cardId === evolutionCards.rheaRipcordKnee.id), true);
+});
+
+test("every collectible offensive Move with a counter relationship opens a counter-attack response window", () => {
+  const qualifying = collectionCards.filter(card =>
+    card.kind === "move" && !card.defensiveOnly && (card.counters?.length ?? 0) > 0 &&
+    ((card.damage ?? 0) > 0 || !!card.submission || (card.onConnect?.length ?? 0) > 0)
+  );
+  assert.ok(qualifying.length > 100, "expected the rule to cover the full offensive Move pool, not a hand-written shortlist");
+
+  for (const counterCard of qualifying) {
+    const g = game();
+    const targetType = counterCard.counters[0];
+    const incoming = { id: `test-incoming-${counterCard.id}`, name: "Test Incoming Move", kind: "move", method: "strike", moveType: targetType, damage: 1 };
+    g.state().players.p1.hand.unshift(structuredClone(incoming));
+    g.state().players.p2.hand.unshift(structuredClone(counterCard));
+    g.state().proposedMove = { attackerId: "p1", defenderId: "p2", card: structuredClone(incoming), damageBonus: 0 };
+    g.state().phase = "COUNTER";
+    g.state().playerInControl = "p1";
+
+    g.counter("p2", g.state().players.p2.hand[0]);
+    assert.equal(g.state().phase, "COUNTER", `${counterCard.id} should create a response window`);
+    assert.equal(g.state().proposedMove?.card.id, counterCard.id, `${counterCard.id} should become the proposed counter-attack`);
+    assert.equal(g.state().proposedMove?.attackerId, "p2", `${counterCard.id} should attack back`);
+    assert.equal(g.state().proposedMove?.defenderId, "p1", `${counterCard.id} should be counterable by the original attacker`);
+  }
+});
+
+test("Turn 50 is playable and attempting to advance beyond it produces a time-limit draw", () => {
+  const g = game();
+  g.state().turnNumber = 50;
+  const controller = g.state().playerInControl;
+  g.passTurn(controller);
+  assert.equal(g.state().phase, "MATCH_OVER");
+  assert.equal(g.state().winner, null);
+  assert.equal(g.state().finish.type, "time-limit-draw");
+  assert.equal(g.state().turnNumber, 50);
+});
+
+test("recommended starter decks contain no ringside-only Moves", () => {
+  for (const [superstarId, deck] of Object.entries(decks)) {
+    const offenders = deck.filter(card => card.kind === "move" && card.requiresLocation === "ringside");
+    assert.deepEqual(offenders.map(card => card.id), [], `${superstarId} starter contains ringside-only Moves`);
+  }
+});
+
+test("a wrestler at 0 HP loses retained Control through Critical Exhaustion after completing offense", () => {
+  const g = game();
+  const p1 = g.state().players.p1;
+  p1.hp = 0;
+  p1.momentum.strike = 1;
+  const jab = putInHand(g, "p1", cards.jab);
+  g.declareMove("p1", jab);
+  g.passCounter("p2");
+  assert.equal(g.state().phase, "POST_MOVE");
+  g.endPostMove("p1");
+  assert.equal(g.state().playerInControl, "p2");
+  assert.equal(g.state().phase, "ACTION");
+  assert.equal(g.state().log.some(e => e.type === "CRITICAL_EXHAUSTION" && e.playerId === "p1"), true);
+});
+
+test("CPU never voluntarily releases a Finisher submission while it has a page to ditch", () => {
+  const g = new MatchEngine({
+    superstarA: superstars.charlotteFlair,
+    superstarB: superstars.rheaRipley,
+    deckA: decks["charlotte-flair"],
+    deckB: decks["rhea-ripley"],
+    startingControl: "p1"
+  });
+  const attacker = g.state().players.p1;
+  const defender = g.state().players.p2;
+  attacker.momentum.technical = 7;
+  attacker.momentum.attitude = 7;
+  defender.posture = "on-mat";
+  const hold = putInHand(g, "p1", evolutionCards.figureEight);
+  g.declareMove("p1", hold);
+  g.passCounter("p2");
+  assert.equal(g.state().phase, "SUBMISSION_MAINTAIN");
+  attacker.hand = [structuredClone(cards.momentum.strength)];
+  const decision = cpuDecision(g.state(), "p1");
+  assert.equal(decision.type, "maintain");
+  assert.equal(decision.card.id, cards.momentum.strength.id);
+});
+
+test("all 24 Superstars can play Momentum then an immediate Lead Off Move on first Control", () => {
+  const roster = Object.values(superstars);
+  for (let i = 0; i < roster.length; i += 1) {
+    const star = roster[i];
+    const opponent = roster[(i + 1) % roster.length];
+    const g = new MatchEngine({ superstarA: star, superstarB: opponent, deckA: decks[star.id], deckB: decks[opponent.id], startingControl: "p1", rng: () => 0.5 });
+    assert.equal(g.state().players.p1.hand.length, 5, star.id);
+    assert.deepEqual(g.state().players.p1.hand.map(c => c.id), star.leadOffIds, star.id);
+    const first = cpuDecision(g.state(), "p1");
+    assert.equal(first.type, "momentum", `${star.id} should open with Momentum`);
+    executeCpuDecision(g, "p1");
+    const second = cpuDecision(g.state(), "p1");
+    assert.equal(second.type, "move", `${star.id} should have an immediate legal Lead Off Move after Momentum`);
+  }
+});
+
+test("attached Entrances never count toward the 55 playable deck pages", () => {
+  for (const star of Object.values(superstars)) {
+    assert.equal(decks[star.id].length, 55, star.id);
+    assert.equal(decks[star.id].some(card => card.kind === "entrance"), false, star.id);
+    assert.equal(star.leadOffIds.length, 5, star.id);
+    assert.equal(star.leadOffIds.some(id => id === star.entranceId), false, star.id);
+  }
+});
+
+
+test("unlocking a new Superstar grants only the essential identity package and builds from real ownership", async () => {
+  const { buildBestOwnedDeck } = await import("../js/data/profile.js");
+  const p = createProfile("cm-punk");
+  // Simulate having already collected a couple of Cody cards from boosters.
+  addOwnedCard(p, cards.disasterKick.id, { amount: 1 });
+  addOwnedCard(p, cards.codyCutter.id, { amount: 1 });
+  const beforeDisaster = ownedCount(p, cards.disasterKick.id, "normal");
+  unlockSuperstar(p, "cody-rhodes");
+
+  assert.equal(ownedCount(p, "superstar-cody-rhodes", "normal") + ownedCount(p, "superstar-cody-rhodes", "foil"), 1);
+  assert.equal(ownedCount(p, superstars.codyRhodes.entranceId, "normal") + ownedCount(p, superstars.codyRhodes.entranceId, "foil"), 1);
+  assert.equal(ownedCount(p, cards.disasterKick.id, "normal"), beforeDisaster, "existing booster ownership is preserved, not replaced");
+
+  const leadCounts = new Map();
+  for (const id of superstars.codyRhodes.leadOffIds) leadCounts.set(id, (leadCounts.get(id) ?? 0) + 1);
+  for (const [id, count] of leadCounts) {
+    assert.equal(ownedCount(p, id, "normal") + ownedCount(p, id, "foil") >= count, true, `Lead Off ownership: ${id}`);
+  }
+
+  const signatureIds = [...new Set(decks["cody-rhodes"].filter(c => c.finisher || c.trademark).map(c => c.id))];
+  assert.equal(signatureIds.length > 0, true);
+  for (const id of signatureIds) assert.equal(ownedCount(p, id, "normal") + ownedCount(p, id, "foil") >= 1, true, `signature ownership: ${id}`);
+
+  // A full recommended deck is NOT silently granted.
+  const recommendedCounts = new Map();
+  for (const card of decks["cody-rhodes"]) recommendedCounts.set(card.id, (recommendedCounts.get(card.id) ?? 0) + 1);
+  assert.equal([...recommendedCounts].some(([id, count]) => (ownedCount(p, id, "normal") + ownedCount(p, id, "foil")) < count), true);
+
+  const built = buildBestOwnedDeck(p, "cody-rhodes");
+  assert.deepEqual(built.slice(0, 5).map(e => e.id), superstars.codyRhodes.leadOffIds);
+  for (const [id] of new Set(built.map(e => e.id)).entries()) {
+    const used = built.filter(e => e.id === id).length;
+    const owned = ownedCount(p, id, "normal") + ownedCount(p, id, "foil");
+    assert.equal(used <= owned, true, `${id}: used ${used}, owned ${owned}`);
+  }
+});
+
+test("unlock package does not award extra copies of Finishers or Trademarks already owned", () => {
+  const p = createProfile("cm-punk");
+  const signatures = [...new Set(decks["rhea-ripley"].filter(c => c.finisher || c.trademark).map(c => c.id))];
+  for (const id of signatures) addOwnedCard(p, id, { amount: 1 });
+  const before = Object.fromEntries(signatures.map(id => [id, ownedCount(p, id, "normal") + ownedCount(p, id, "foil")]));
+  unlockSuperstar(p, "rhea-ripley");
+  for (const id of signatures) assert.equal(ownedCount(p, id, "normal") + ownedCount(p, id, "foil"), before[id]);
+});
+
+
+test("Superstar and Entrance cards are intrinsically Foil while Entrances are never booster eligible", async () => {
+  const { boosterEligible } = await import("../js/data/boosters.js");
+  const p = createProfile("roman-reigns");
+  assert.deepEqual(p.ownedCards["superstar-roman-reigns"], { normal: 0, foil: 1 });
+  assert.deepEqual(p.ownedCards[superstars.romanReigns.entranceId], { normal: 0, foil: 1 });
+  for (const entrance of collectionCards.filter(c => c.kind === "entrance")) {
+    assert.equal(boosterEligible(p, entrance, false, entrance.setId), false);
+    assert.equal(boosterEligible(p, entrance, true, entrance.setId), false);
+  }
+});
+
+test("Season 1 Tier 50 is The Rock full-deck completion exclusive instead of boosters", async () => {
+  const { tierReward, claimSeasonTier, awardSeasonXp, MAX_SEASON_XP } = await import("../js/data/seasons.js");
+  const p = createProfile("cm-punk");
+  const reward = tierReward(50);
+  assert.equal(reward.kind, "full-deck-superstar");
+  assert.equal(reward.superstarId, "the-rock");
+  awardSeasonXp(p, MAX_SEASON_XP);
+  const claimed = claimSeasonTier(p, 50);
+  assert.equal(claimed.superstarId, "the-rock");
+  assert.equal(p.seasons["season-1"].completionRewardClaimed, true);
+  assert.equal(p.seasons["season-1"].completionSuperstarId, "the-rock");
+});
+
+test("unlocking queues a sequential celebration containing Superstar, Entrance, Lead Off and signatures", () => {
+  const p = createProfile("cm-punk");
+  unlockSuperstar(p, "cody-rhodes");
+  const event = p.pendingUnlockCelebrations.at(-1);
+  assert.equal(event.superstarId, "cody-rhodes");
+  assert.equal(event.cardIds[0], "superstar-cody-rhodes");
+  assert.equal(event.cardIds.includes(superstars.codyRhodes.entranceId), true);
+  for (const id of superstars.codyRhodes.leadOffIds) assert.equal(event.cardIds.includes(id), true);
+  for (const card of decks["cody-rhodes"].filter(c => c.finisher || c.trademark)) assert.equal(event.cardIds.includes(card.id), true);
+});
+
+
+test("Season 1 Tier 50 Final Boss Rock is a distinct 55-card season-exclusive persona", async () => {
+  const { rockCards } = await import("../js/data/season1-rock-cards.js");
+  const rock = superstars.theRock;
+  assert.equal(rock.nickname, "The Final Boss");
+  assert.equal(rock.era, "final-boss");
+  assert.equal(rock.seasonExclusive, true);
+  assert.equal(decks["the-rock"].length, 55);
+  assert.deepEqual(decks["the-rock"].slice(0,5).map(c=>c.id), rock.leadOffIds);
+  assert.equal(rock.signatures.includes(rockCards.rockBottomFinalBoss.id), true);
+  assert.equal(rock.signatures.includes(rockCards.peoplesElbowFinalBoss.id), true);
+  assert.equal(rock.signatures.includes(rockCards.finalBossSpinebuster.id), true);
+  assert.equal(rock.signatures.includes(rockCards.finalBossSharpshooter.id), true);
+});
+
+test("claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned deck", async () => {
+  const { claimSeasonTier, MAX_SEASON_XP } = await import("../js/data/seasons.js");
+  const p = createProfile("cm-punk");
+  p.seasons["season-1"].xp = MAX_SEASON_XP;
+  const reward = claimSeasonTier(p, 50);
+  assert.equal(reward.superstarId, "the-rock");
+  assert.equal(hasSuperstar(p, "the-rock"), true);
+  assert.equal(p.savedDecks["the-rock"].length, 55);
+  assert.equal(p.deckNeedsCards["the-rock"], 0);
+  for (const entry of p.savedDecks["the-rock"]) {
+    const used = p.savedDecks["the-rock"].filter(e => e.id === entry.id).length;
+    const owned = ownedCount(p, entry.id, "normal") + ownedCount(p, entry.id, "foil");
+    assert.equal(used <= owned, true, `${entry.id}: full Season reward must be genuinely owned`);
+  }
+  assert.equal(ownedCount(p, "superstar-the-rock", "foil"), 1);
+  assert.equal(ownedCount(p, superstars.theRock.entranceId, "foil"), 1);
 });

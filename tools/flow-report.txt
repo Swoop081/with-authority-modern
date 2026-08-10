@@ -1,54 +1,58 @@
+
+> wwe-legacy-ccg@0.8.4 flow
+> node tools/flow-audit.mjs
+
 0 {
-  terminal: 12815,
-  move: 7708,
-  pass: 4972,
-  passWithMoves: 3106,
-  ret: 135,
-  moveRate: 0.6014826375341397,
-  deadPassRate: 0.2423722200546235
+  terminal: 39943,
+  move: 25718,
+  pass: 13704,
+  passWithMoves: 5722,
+  ret: 521,
+  moveRate: 0.643867511203465,
+  deadPassRate: 0.14325413714543225
 }
 2 {
-  terminal: 12117,
-  move: 7684,
-  pass: 4298,
-  passWithMoves: 2432,
-  ret: 135,
-  moveRate: 0.6341503672526203,
-  deadPassRate: 0.20070974663695634
+  terminal: 39087,
+  move: 25685,
+  pass: 12882,
+  passWithMoves: 4901,
+  ret: 520,
+  moveRate: 0.6571238519200757,
+  deadPassRate: 0.1253869573003812
 }
 3 {
-  terminal: 10570,
-  move: 6689,
-  pass: 3747,
-  passWithMoves: 1885,
-  ret: 134,
-  moveRate: 0.6328287606433302,
-  deadPassRate: 0.1783349101229896
+  terminal: 36762,
+  move: 23976,
+  pass: 12276,
+  passWithMoves: 4316,
+  ret: 510,
+  moveRate: 0.6521952015668353,
+  deadPassRate: 0.1174038409226919
 }
 4 {
-  terminal: 9317,
-  move: 5765,
-  pass: 3423,
-  passWithMoves: 1587,
-  ret: 129,
-  moveRate: 0.6187614038853708,
-  deadPassRate: 0.170333798432972
+  terminal: 34920,
+  move: 22591,
+  pass: 11849,
+  passWithMoves: 3970,
+  ret: 480,
+  moveRate: 0.6469358533791524,
+  deadPassRate: 0.11368843069873998
 }
 5 {
-  terminal: 7804,
-  move: 4684,
-  pass: 2998,
-  passWithMoves: 1254,
-  ret: 122,
-  moveRate: 0.6002050230650948,
-  deadPassRate: 0.16068682726806766
+  terminal: 32080,
+  move: 20420,
+  pass: 11218,
+  passWithMoves: 3504,
+  ret: 442,
+  moveRate: 0.6365336658354115,
+  deadPassRate: 0.10922693266832918
 }
 6 {
-  terminal: 6276,
-  move: 3644,
-  pass: 2519,
-  passWithMoves: 923,
-  ret: 113,
-  moveRate: 0.5806246016571064,
-  deadPassRate: 0.14706819630337795
+  terminal: 29037,
+  move: 18314,
+  pass: 10314,
+  passWithMoves: 2919,
+  ret: 409,
+  moveRate: 0.6307125391741571,
+  deadPassRate: 0.10052691393739023
 }

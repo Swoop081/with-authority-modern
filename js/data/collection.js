@@ -1,5 +1,7 @@
 import { cards } from "./cards.js";
 import { hallCards } from "./hall-of-fame-cards.js";
+import { evolutionCards } from "./evolution-cards.js";
+import { rockCards } from "./season1-rock-cards.js";
 import { superstars } from "./superstars.js";
 import { sets } from "./sets.js";
 
@@ -8,6 +10,7 @@ const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 
 const summerStarOrder = [superstars.codyRhodes, superstars.cmPunk, superstars.romanReigns, superstars.sethRollins, superstars.obaFemi, superstars.brockLesnar, superstars.kevinOwens, superstars.gunther];
 const hallStarOrder = [superstars.hulkHogan, superstars.andreTheGiant, superstars.randySavage, superstars.ultimateWarrior, superstars.stoneCold, superstars.undertaker, superstars.mankind, superstars.kane];
+const evolutionStarOrder = [superstars.rheaRipley, superstars.livMorgan, superstars.beckyLynch, superstars.bayley, superstars.charlotteFlair, superstars.iyoSky, superstars.paige, superstars.stephanieVaquer];
 
 function flattenCardObject(source) {
   const out = [];
@@ -20,9 +23,12 @@ function flattenCardObject(source) {
 
 const summerCards = flattenCardObject(cards);
 const hofCards = flattenCardObject(hallCards);
+const evolutionSourceCards = flattenCardObject(evolutionCards);
+const rockSourceCards = flattenCardObject(rockCards);
 
 const rarityFor = (card) => {
   if (card.finisher) return rarity.veryRare;
+  if (card.trademark) return rarity.rare;
   if (card.kind === "entrance" || card.kind === "support" || card.kind === "manager" || card.counterAny) return rarity.rare;
   if (card.superstarId || card.kind === "special" || card.kind === "action") return rarity.uncommon;
   return rarity.common;
@@ -60,7 +66,9 @@ function buildSetCollection(setId, starOrder, sourceCards) {
 
 export const collectionCardsBySet = {
   "summerslam-series-1": buildSetCollection("summerslam-series-1", summerStarOrder, summerCards),
-  "hall-of-fame-series-1": buildSetCollection("hall-of-fame-series-1", hallStarOrder, hofCards)
+  "hall-of-fame-series-1": buildSetCollection("hall-of-fame-series-1", hallStarOrder, hofCards),
+  "evolution-series-1": buildSetCollection("evolution-series-1", evolutionStarOrder, evolutionSourceCards),
+  "season-1-final-boss": buildSetCollection("season-1-final-boss", [superstars.theRock], rockSourceCards)
 };
 
 export const collectionCards = Object.values(collectionCardsBySet).flat();

@@ -16,7 +16,7 @@ export const RECOMMENDED_DECK_SHAPE = Object.freeze({
   utility: { min: 6, target: 8, max: 12 },             // Actions + Supports + Managers
   defensiveSpecials: { min: 1, target: 2, max: 4 },
   finishers: { min: 2, target: 3, max: 5 },
-  entrance: { min: 1, target: 1, max: 1 }
+  entrance: { min: 0, target: 0, max: 0 }
 });
 
 export function cardRoles(card) {
@@ -82,8 +82,8 @@ export function evaluateDeck(deck, { superstarId = null } = {}) {
   }
 
   if (deck.length !== DECK_SIZE) violations.push(`Deck must contain exactly ${DECK_SIZE} pages.`);
-  if (opening.length !== OPENING_SIZE || openingCounts.entrance !== 1 || openingCounts.momentum < 2 || openingCounts.offensiveMoves < 2) {
-    violations.push("Opening five must contain exactly one Entrance, at least two Momentum pages, and at least two offensive Moves.");
+  if (opening.length !== OPENING_SIZE || openingCounts.entrance !== 0 || openingCounts.momentum < 2 || openingCounts.offensiveMoves < 3) {
+    violations.push("Lead Off five must contain no Entrance, at least two Momentum pages, and at least three offensive/counter Moves.");
   }
   const managerCount = deck.filter(card => card.kind === "manager").length;
   if (managerCount > 1) violations.push("Deck may contain at most one Manager.");

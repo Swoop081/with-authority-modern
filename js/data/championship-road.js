@@ -7,7 +7,8 @@ export const CHAMPIONSHIP_STAGES = ["Opening Bout", "Momentum Match", "No. 1 Con
 export const CHAMPIONSHIP_BRANCHES = {
   modern: { id: "modern", label: "Current Era", setId: "summerslam-series-1", finals: ["cm-punk","roman-reigns"] },
   "golden-era": { id: "golden-era", label: "Golden Era", setId: "hall-of-fame-series-1", era: "golden-era", finals: ["hulk-hogan","andre-the-giant"] },
-  "attitude-era": { id: "attitude-era", label: "Attitude Era", setId: "hall-of-fame-series-1", era: "attitude-era", finals: ["stone-cold-steve-austin","the-undertaker"] }
+  "attitude-era": { id: "attitude-era", label: "Attitude Era", setId: "hall-of-fame-series-1", era: "attitude-era", finals: ["stone-cold-steve-austin","the-undertaker"] },
+  evolution: { id: "evolution", label: "Evolution", setId: "evolution-series-1", finals: ["rhea-ripley","liv-morgan"] }
 };
 function ensure(profile) {
   profile.championshipRoad ??= { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, completedBy: [] };

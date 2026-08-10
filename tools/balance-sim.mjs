@@ -10,10 +10,12 @@ const cardById = new Map(collectionCards.map(c => [c.id, c]));
 for (const deck of Object.values(decks)) for (const c of deck) if (!cardById.has(c.id)) cardById.set(c.id,c);
 const seededRng = (seed) => { let x = seed >>> 0; return () => ((x = (1664525 * x + 1013904223) >>> 0) / 4294967296); };
 
-const totals = { matches:0,p1:0,p2:0,draw:0,turns:0,controlChanges:0,moveDeclared:0,counters:0,autoCounters:0,pin:0,submission:0,countOut:0,other:0,winnerHp:0,loserHp:0,steps:0,stalls:0 };
+const totals = { matches:0,p1:0,p2:0,draw:0,turns:0,controlChanges:0,moveDeclared:0,counters:0,autoCounters:0,pin:0,submission:0,countOut:0,other:0,winnerHp:0,loserHp:0,steps:0,stalls:0,submissionMovesConnected:0,submissionMaintains:0,submissionReleases:0 };
 const byType = new Map();
-const byStar = new Map(roster.map(s => [s.id,{matches:0,wins:0}]));
+const byStar = new Map(roster.map(s => [s.id,{matches:0,wins:0,submissionWins:0}]));
 const methods = new Map();
+const passReasons = new Map();
+let criticalExhaustions = 0;
 
 function row(map,key){ if(!map.has(key)) map.set(key,{declared:0,countered:0}); return map.get(key); }
 
@@ -38,7 +40,12 @@ for (let rep=0; rep<12; rep++) {
         } else if(e.type==="AUTO_COUNTER"){
           totals.counters++; totals.autoCounters++;
           const c=cardById.get(e.incomingCardId); if(c){ row(byType,c.moveType).countered++; row(methods,c.method).countered++; }
-        }
+        } else if(e.type==="MOVE_CONNECTED"){
+          const c=cardById.get(e.cardId); if(c?.submission) totals.submissionMovesConnected++;
+        } else if(e.type==="SUBMISSION_MAINTAINED") totals.submissionMaintains++;
+        else if(e.type==="SUBMISSION_RELEASED") totals.submissionReleases++;
+        else if(e.type==="CONTROL_PASSED") passReasons.set(e.reason ?? "unspecified", (passReasons.get(e.reason ?? "unspecified") ?? 0) + 1);
+        else if(e.type==="CRITICAL_EXHAUSTION") criticalExhaustions++;
       }
     }
     totals.matches++; totals.steps += steps;
@@ -51,7 +58,7 @@ for (let rep=0; rep<12; rep++) {
     else if(winner==="p2"){ totals.p2++; byStar.get(b.id).wins++; }
     else totals.draw++;
     const finish=st.finish?.type ?? "other";
-    if(finish==="pin") totals.pin++; else if(finish==="submission") totals.submission++; else if(finish==="count-out") totals.countOut++; else totals.other++;
+    if(finish==="pin") totals.pin++; else if(finish==="submission") { totals.submission++; if(winner){ const winnerStar=winner==="p1"?a.id:b.id; byStar.get(winnerStar).submissionWins++; } } else if(finish==="count-out") totals.countOut++; else totals.other++;
     if(winner){
       const loser=winner==="p1"?"p2":"p1";
       totals.winnerHp += st.players[winner].hp;
@@ -66,13 +73,16 @@ console.log(`P1 ${totals.p1} (${pct(totals.p1)}) | P2 ${totals.p2} (${pct(totals
 console.log(`Avg turns ${(totals.turns/(totals.matches-totals.stalls)).toFixed(2)} | Avg control changes ${(totals.controlChanges/totals.matches).toFixed(2)}`);
 console.log(`Moves declared ${totals.moveDeclared} | countered ${totals.counters} (${pct(totals.counters,totals.moveDeclared)}) | auto ${totals.autoCounters}`);
 console.log(`Finish: pin ${totals.pin} (${pct(totals.pin)}) | submission ${totals.submission} (${pct(totals.submission)}) | count-out ${totals.countOut} (${pct(totals.countOut)})`);
+console.log(`Submission flow: ${totals.submissionMovesConnected} holds connected | ${totals.submissionMaintains} maintains | ${totals.submissionReleases} releases | ${(100*totals.submission/Math.max(1,totals.submissionMovesConnected)).toFixed(1)}% of connected holds ultimately produced submission wins`);
 console.log(`Avg winner HP ${(totals.winnerHp/(totals.matches-totals.stalls)).toFixed(2)} | loser HP ${(totals.loserHp/(totals.matches-totals.stalls)).toFixed(2)}`);
+console.log(`Critical exhaustion control losses: ${criticalExhaustions}`);
+console.log(`Pass reasons: ${[...passReasons.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${k} ${v}`).join(" | ")}`);
 console.log("\nCounter rate by Move Type:");
 for(const [type,r] of [...byType].sort((a,b)=>b[1].declared-a[1].declared)) console.log(`${MOVE_TYPE_LABELS[type]??type}: ${r.countered}/${r.declared} ${pct(r.countered,r.declared)}`);
 console.log("\nCounter rate by Method:");
 for(const [m,r] of [...methods].sort((a,b)=>b[1].declared-a[1].declared)) console.log(`${m}: ${r.countered}/${r.declared} ${pct(r.countered,r.declared)}`);
 console.log("\nWin rate by Superstar:");
-for(const s of roster.map(s=>({name:s.name,...byStar.get(s.id)})).sort((a,b)=>b.wins/b.matches-a.wins/a.matches)) console.log(`${s.name}: ${s.wins}/${s.matches} ${pct(s.wins,s.matches)}`);
+for(const s of roster.map(s=>({name:s.name,...byStar.get(s.id)})).sort((a,b)=>b.wins/b.matches-a.wins/a.matches)) console.log(`${s.name}: ${s.wins}/${s.matches} ${pct(s.wins,s.matches)} | submission wins ${s.submissionWins}`);
 
 const moveCards=collectionCards.filter(c=>c.kind==="move");
 const offensive=moveCards.filter(isOffensiveMove);

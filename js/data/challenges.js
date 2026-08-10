@@ -1,21 +1,22 @@
+import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js";
 const DAY_MS = 86400000;
 const DAILY_POOL = [
-  { key: 'win-match', label: 'Win a match', metric: 'wins', target: 1, reward: 1 },
-  { key: 'connect-finisher', label: 'Connect with a Finisher', metric: 'finishers', target: 1, reward: 1 },
-  { key: 'counter-moves', label: 'Counter 2 Moves', metric: 'counters', target: 2, reward: 1 },
-  { key: 'open-pack', label: 'Open a booster pack', metric: 'packs', target: 1, reward: 1 },
-  { key: 'ladder-rung', label: 'Clear a Climb the Ladder rung', metric: 'ladderRungs', target: 1, reward: 1 },
-  { key: 'championship-win', label: 'Win a Championship Road match', metric: 'championshipWins', target: 1, reward: 1 },
-  { key: 'play-matches', label: 'Complete 2 matches', metric: 'matches', target: 2, reward: 1 }
+  { key: 'win-match', label: 'Win a match', metric: 'wins', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'connect-finisher', label: 'Connect with a Finisher', metric: 'finishers', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'counter-moves', label: 'Counter 2 Moves', metric: 'counters', target: 2, reward: 1, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'open-pack', label: 'Open a booster pack', metric: 'packs', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'ladder-rung', label: 'Clear a Climb the Ladder rung', metric: 'ladderRungs', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'championship-win', label: 'Win a Championship Road match', metric: 'championshipWins', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'play-matches', label: 'Complete 2 matches', metric: 'matches', target: 2, reward: 1, xpReward: DAILY_CHALLENGE_XP }
 ];
 const WEEKLY_POOL = [
-  { key: 'weekly-wins', label: 'Win 5 matches', metric: 'wins', target: 5, reward: 2 },
-  { key: 'weekly-ladder', label: 'Clear 4 Ladder rungs', metric: 'ladderRungs', target: 4, reward: 2 },
-  { key: 'weekly-championship', label: 'Win 3 Championship Road matches', metric: 'championshipWins', target: 3, reward: 2 },
-  { key: 'weekly-packs', label: 'Open 5 booster packs', metric: 'packs', target: 5, reward: 2 },
-  { key: 'weekly-finishers', label: 'Connect with 5 Finishers', metric: 'finishers', target: 5, reward: 2 },
-  { key: 'weekly-counters', label: 'Counter 10 Moves', metric: 'counters', target: 10, reward: 2 },
-  { key: 'weekly-matches', label: 'Complete 10 matches', metric: 'matches', target: 10, reward: 2 }
+  { key: 'weekly-wins', label: 'Win 5 matches', metric: 'wins', target: 5, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-ladder', label: 'Clear 4 Ladder rungs', metric: 'ladderRungs', target: 4, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-championship', label: 'Win 3 Championship Road matches', metric: 'championshipWins', target: 3, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-packs', label: 'Open 5 booster packs', metric: 'packs', target: 5, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-finishers', label: 'Connect with 5 Finishers', metric: 'finishers', target: 5, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-counters', label: 'Counter 10 Moves', metric: 'counters', target: 10, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-matches', label: 'Complete 10 matches', metric: 'matches', target: 10, reward: 2, xpReward: WEEKLY_CHALLENGE_XP }
 ];
 
 const localDayKey = (date = new Date()) => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
@@ -75,6 +76,7 @@ export function claimChallenge(profile, id, now = new Date()) {
   profile.boosterCredits = (profile.boosterCredits ?? 0) + challenge.reward;
   profile.boosterCreditsBySet ??= {};
   profile.boosterCreditsBySet["summerslam-series-1"] = profile.boosterCredits;
+  awardSeasonXp(profile, challenge.xpReward ?? (id.startsWith('weekly-') ? WEEKLY_CHALLENGE_XP : DAILY_CHALLENGE_XP), 'challenge');
   return challenge.reward;
 }
 export function nextDailyReset(now = new Date()) { const n = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); return n; }

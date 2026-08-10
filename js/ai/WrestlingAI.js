@@ -17,7 +17,20 @@ function moveScore(match, playerId, card) {
   const opponent = match.players[match.opponentOf(playerId)];
   let score = (card.damage ?? 0) * 4 - (card.cost ?? 0) * 0.35;
   if (card.finisher) score += 30;
-  if (card.submission) score += 12 + Math.max(0, 20 - opponent.hp) * 0.5;
+  if (card.submission) {
+    const part = card.submission.bodyPart;
+    const existing = opponent.submissionDamage?.[part] ?? 0;
+    const pressure = card.submission.damage ?? 0;
+    const threshold = submissionThreshold(opponent);
+    const projected = existing + pressure;
+    score += 10 + pressure * 1.4 + existing * 0.9 + Math.max(0, 18 - opponent.hp) * 0.35;
+    // A hold that can force a tap now or after one maintained squeeze should
+    // become a priority instead of losing to a generic high-damage move.
+    if (projected >= threshold) score += 55;
+    else if (projected + pressure >= threshold) score += 32;
+    else if (projected >= threshold * 0.6) score += 14;
+    if (card.trademark) score += 5;
+  }
   if (card.setOpponentPosture === "on-mat") score += 5;
   if (card.stunTurns) score += 4;
   if (card.requiresPosture && opponent.posture === card.requiresPosture) score += 4;
@@ -36,7 +49,17 @@ function chooseMomentum(match, playerId) {
       if (method in need) need[method] += Math.max(0, amount - (p.momentum[method] ?? 0)) * ((move.finisher ? 6 : 1) + (move.damage ?? 0));
     }
   }
-  legal.sort((a, b) => (need[b.method] ?? 0) - (need[a.method] ?? 0));
+  const unlocksNow = card => {
+    p.momentum[card.method] = (p.momentum[card.method] ?? 0) + (card.amount ?? 1);
+    const count = p.hand.filter(c => isOffensiveMove(c) && moveEligibility(match, playerId, c).legal).length;
+    p.momentum[card.method] -= (card.amount ?? 1);
+    return count;
+  };
+  legal.sort((a, b) => {
+    const immediate = unlocksNow(b) - unlocksNow(a);
+    if (immediate) return immediate;
+    return (need[b.method] ?? 0) - (need[a.method] ?? 0);
+  });
   return legal[0];
 }
 
@@ -79,6 +102,20 @@ function chooseMove(match, playerId) {
     .sort((a, b) => moveScore(match, playerId, b) - moveScore(match, playerId, a))[0] ?? null;
 }
 
+
+function passReason(match, playerId) {
+  const p = match.players[playerId];
+  const offensive = p.hand.filter(isOffensiveMove);
+  if (!offensive.length) return "no-move-in-hand";
+  const reasons = offensive.map(c => moveEligibility(match, playerId, c).reason).filter(Boolean);
+  if (reasons.some(r => r.startsWith("Not enough total momentum"))) return "insufficient-total-momentum";
+  if (reasons.some(r => r.startsWith("Requires "))) return "missing-method-momentum";
+  if (reasons.some(r => r.includes("same location") || r.includes("must be ring") || r.includes("must be ringside"))) return "location-restriction";
+  if (reasons.some(r => r.includes("Opponent must be"))) return "posture-restriction";
+  if (reasons.some(r => r === "Stunned")) return "stunned";
+  return "no-legal-move";
+}
+
 function chooseCounter(match, defenderId) {
   const incoming = match.proposedMove.card;
   const valid = match.players[defenderId].hand.filter(c => canCounter(incoming, c));
@@ -113,7 +150,7 @@ export function cpuDecision(match, playerId) {
     const move = chooseMove(match, playerId);
     if (move) return { type: "move", card: move };
     if (canReturnToRing(match, playerId)) return { type: "returnToRing" };
-    return { type: "pass" };
+    return { type: "pass", reason: passReason(match, playerId) };
   }
 
   if (match.phase === "COUNTER" && match.proposedMove?.defenderId === playerId) {
@@ -131,7 +168,7 @@ export function cpuDecision(match, playerId) {
     if (check.legal) {
       // Create pin state temporarily only through the engine; estimate from HP here.
       const hpRatio = opponent.hp / opponent.maxHp;
-      if (match.postMove.finisher || hpRatio <= 0.42 || (hpRatio <= 0.55 && p.momentum.attitude >= check.cost + 2)) return { type: "pin" };
+      if ((match.postMove.finisher && hpRatio <= 0.15) || hpRatio <= 0.08 || (hpRatio <= 0.12 && p.momentum.attitude >= check.cost + 2)) return { type: "pin" };
     }
     return { type: "endPostMove" };
   }
@@ -147,7 +184,16 @@ export function cpuDecision(match, playerId) {
     const sub = match.submission;
     const total = opponent.submissionDamage[sub.bodyPart];
     const threshold = submissionThreshold(opponent);
-    if (p.hand.length >= 2 && (total + sub.damage >= threshold || p.hand.length >= 4 || total >= threshold * 0.5)) {
+    const nextTotal = total + sub.damage;
+    const remaining = Math.max(0, threshold - total);
+    const squeezesNeeded = sub.damage > 0 ? Math.ceil(remaining / sub.damage) : 99;
+    const canDitch = p.hand.length >= 1;
+    const identityHold = sub.finisher || sub.trademark;
+    // Finishers and Trademarks should never be voluntarily released while an
+    // eligible page exists to pay the maintain cost. Other submissions remain
+    // strategic and are maintained when pressure is meaningfully advanced.
+    const worthMaintaining = identityHold || nextTotal >= threshold || squeezesNeeded <= 2 || (p.hand.length >= 3 && total >= threshold * 0.35);
+    if (canDitch && worthMaintaining) {
       // Ditch the least valuable page: excess Momentum first, then a low-damage move.
       const sorted = [...p.hand].sort((a, b) => {
         const value = c => c.kind === "momentum" ? 2 : c.kind === "entrance" ? 30 : c.kind === "special" ? 25 : (c.finisher ? 40 : (c.damage ?? 0) * 3);
@@ -169,7 +215,7 @@ export function executeCpuDecision(engine, playerId) {
     case "support": engine.playSupport(playerId, decision.card); break;
     case "manager": engine.playManager(playerId, decision.card); break;
     case "move": engine.declareMove(playerId, decision.card); break;
-    case "pass": engine.passTurn(playerId); break;
+    case "pass": engine.passTurn(playerId, decision.reason); break;
     case "counter": engine.counter(playerId, decision.card); break;
     case "autoCounter": engine.autoCounter(playerId, decision.cards); break;
     case "passCounter": engine.passCounter(playerId); break;

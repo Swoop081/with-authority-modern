@@ -16,7 +16,7 @@ export function leadOffIds(superstarId) {
 
 export function legalForSuperstar(card, superstarId) {
   if (!card || card.kind === "superstar") return false;
-  if (card.kind === "entrance") return card.id === leadOffIds(superstarId)[0];
+  if (card.kind === "entrance") return false; // Entrance is linked to the Superstar, outside the playable deck.
   if (card.kind === "manager") { const allowed = card.allowedSuperstarIds ?? []; return !allowed.length || allowed.includes(superstarId); }
   return !card.superstarId || card.superstarId === superstarId;
 }
@@ -55,9 +55,9 @@ export function normalizeDeckFinishes(profile, superstarId, entries) {
 }
 
 export function createDeckDraft(profile, superstarId) {
-  const source = profile?.savedDecks?.[superstarId]?.length === DECK_SIZE
+  const source = profile?.savedDecks?.[superstarId]?.length
     ? profile.savedDecks[superstarId]
-    : (decks[superstarId] ?? []).map(card => ({ id: card.id, foil: false }));
+    : [];
   return normalizeDeckFinishes(profile, superstarId, source.map(e => ({ id: e.id, foil: !!e.foil })));
 }
 

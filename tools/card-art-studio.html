@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0d">
+  <title>WWE Legacy — Card Art Studio</title>
+  <link rel="stylesheet" href="../css/card-art-studio.css">
+</head>
+<body>
+  <header class="studio-topbar">
+    <a class="studio-brand" href="../index.html" aria-label="Return to WWE Legacy">
+      <span>WWE</span><b>LEGACY</b><small>CARD ART STUDIO</small>
+    </a>
+    <span class="studio-build">v0.7.0</span>
+  </header>
+
+  <main class="studio-shell">
+    <section class="studio-intro">
+      <span class="eyebrow">LOCAL ARTWORK TOOL</span>
+      <h1>Card Art Studio</h1>
+      <p>Select a card, paste a direct image URL or upload a photo, position it inside the exact card crop, then export an optimized WebP with the correct card ID already used as the filename.</p>
+    </section>
+
+    <section class="studio-layout">
+      <aside class="studio-controls">
+        <section class="control-group">
+          <div class="group-heading"><span>1</span><div><b>Choose the card</b><small>The output filename and manifest path are generated automatically.</small></div></div>
+          <label>Set
+            <select id="set-filter"></select>
+          </label>
+          <label>Card type
+            <select id="kind-filter"></select>
+          </label>
+          <label>Search
+            <input id="card-search" type="search" placeholder="Spear, Stone Cold, Entrance…">
+          </label>
+          <label>Card
+            <select id="card-select"></select>
+          </label>
+          <div class="selected-card-summary" id="selected-card-summary"></div>
+        </section>
+
+        <section class="control-group">
+          <div class="group-heading"><span>2</span><div><b>Load a photo</b><small>Direct image URLs are attempted first; file upload is the reliable fallback when a host blocks CORS.</small></div></div>
+          <label>Direct image URL
+            <input id="image-url" type="url" inputmode="url" placeholder="https://…/photo.jpg">
+          </label>
+          <div class="button-row">
+            <button type="button" id="load-url" class="primary">Load URL</button>
+            <button type="button" id="use-current">Use current art</button>
+          </div>
+          <label class="file-picker">Upload / choose photo
+            <input id="image-file" type="file" accept="image/*">
+          </label>
+          <div class="drop-zone" id="drop-zone">Drop an image here, or paste an image from the clipboard.</div>
+          <p class="source-status" id="source-status" aria-live="polite">Choose a card to begin.</p>
+        </section>
+
+        <section class="control-group crop-controls">
+          <div class="group-heading"><span>3</span><div><b>Frame the image</b><small>Drag the preview to reposition. Pinch, mouse-wheel or use Zoom to resize.</small></div></div>
+          <label>Zoom <output id="zoom-value">100%</output>
+            <input id="zoom" type="range" min="100" max="400" step="1" value="100">
+          </label>
+          <label>Horizontal <output id="x-value">0</output>
+            <input id="offset-x" type="range" min="-100" max="100" step="1" value="0">
+          </label>
+          <label>Vertical <output id="y-value">0</output>
+            <input id="offset-y" type="range" min="-100" max="100" step="1" value="0">
+          </label>
+          <div class="button-row">
+            <button type="button" id="auto-center">Auto Centre</button>
+            <button type="button" id="reset-crop">Reset Crop</button>
+          </div>
+        </section>
+
+        <section class="control-group export-controls">
+          <div class="group-heading"><span>4</span><div><b>Export</b><small>WebP keeps the GitHub Pages build much smaller than source JPEG/PNG files.</small></div></div>
+          <label>Output size
+            <select id="output-size">
+              <option value="680x1000" selected>680 × 1000 — recommended</option>
+              <option value="816x1200">816 × 1200 — high quality</option>
+              <option value="1020x1500">1020 × 1500 — archive quality</option>
+            </select>
+          </label>
+          <label>WebP quality <output id="quality-value">82%</output>
+            <input id="quality" type="range" min="55" max="95" step="1" value="82">
+          </label>
+          <label class="check-row" id="wrestler-default-row" hidden>
+            <input id="wrestler-default" type="checkbox">
+            <span>Use this image as this wrestler's temporary default art too</span>
+          </label>
+          <div class="export-path"><span>GAME PATH</span><code id="export-path">assets/cards/art/custom/…</code></div>
+
+          <div class="project-save-box">
+            <button type="button" id="connect-project">Connect Project Folder</button>
+            <p id="project-status">Optional. On supported desktop browsers this lets the studio write the WebP and manifest directly into the game folder.</p>
+          </div>
+
+          <div class="button-row export-buttons">
+            <button type="button" id="export-webp" class="primary">Export WebP</button>
+            <button type="button" id="download-manifest">Download Updated Manifest</button>
+          </div>
+          <div class="manifest-preview">
+            <span>MANIFEST ENTRY</span>
+            <code id="manifest-entry">Select a card first.</code>
+          </div>
+          <p class="export-status" id="export-status" aria-live="polite"></p>
+        </section>
+      </aside>
+
+      <section class="studio-preview-panel">
+        <div class="preview-toolbar">
+          <div><span>LIVE CARD CROP</span><b id="preview-card-name">Choose a card</b></div>
+          <small id="preview-source-label">No image loaded</small>
+        </div>
+        <div class="card-frame-preview" id="card-frame-preview">
+          <canvas id="crop-canvas" width="680" height="1000" aria-label="Card artwork crop preview"></canvas>
+          <div class="card-title-overlay"><small id="preview-type">CARD</small><strong id="preview-title">WWE Legacy</strong></div>
+          <div class="card-bottom-overlay" id="preview-stats"><span><small>COST</small><b>—</b></span><span><small>DAMAGE</small><b>—</b></span></div>
+          <div class="safe-guide" aria-hidden="true"></div>
+        </div>
+        <p class="preview-help">The title and stat bars are preview-only. The exported WebP contains just the cropped photo, because the game draws the collectible-card frame and text itself.</p>
+        <div class="current-art-strip">
+          <div class="current-art-thumb"><img id="current-art-image" alt="Current card art"></div>
+          <div><span>CURRENT GAME ART</span><b id="current-art-label">—</b><small>Useful for comparison. Loading a new image does not modify the game until you export and install it.</small></div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="../js/tools/card-art-studio.js"></script>
+</body>
+</html>

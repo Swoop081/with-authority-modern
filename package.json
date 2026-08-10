@@ -1,12 +1,13 @@
 {
-  "name": "with-authority-modern",
-  "version": "0.4.5",
+  "name": "wwe-legacy-ccg",
+  "version": "0.8.5",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test",
     "flow": "node tools/flow-audit.mjs",
     "economy": "node tools/economy-sim.mjs",
-    "balance": "node tools/balance-sim.mjs"
+    "balance": "node tools/balance-sim.mjs",
+    "art": "node tools/art-audit.mjs"
   }
 }

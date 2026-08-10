@@ -1,5 +1,6 @@
 import { PHASES } from "./constants.js";
 import { clone } from "./utils.js";
+import { entranceForSuperstar } from "../data/entrances.js";
 import {
   canPlayMomentum,
   canPlayEntrance,
@@ -22,6 +23,7 @@ export class MatchEngine {
       phase: PHASES.PRE_MATCH,
       playerInControl: startingControl,
       turnNumber: 1,
+      turnLimit: 50,
       proposedMove: null,
       postMove: null,
       submission: null,
@@ -73,6 +75,8 @@ export class MatchEngine {
       activeManager: null,
       managerAbilityUsed: false,
       entrancePlayed: false,
+      hasHadControl: false,
+      leadOffActive: true,
       entranceSchedules: [],
       abilityUses: 0,
       abilityUsed: false,
@@ -237,9 +241,8 @@ export class MatchEngine {
 
   #resolvePreMatchEntrance(playerId) {
     const p = this.match.players[playerId];
-    const index = p.hand.findIndex(card => card.kind === "entrance" && card.superstarId === p.superstar.id);
-    if (index < 0) throw new Error(`Missing linked Entrance for ${p.superstar.name}`);
-    const [entrance] = p.hand.splice(index, 1);
+    const entrance = clone(entranceForSuperstar(p.superstar.id));
+    if (!entrance) throw new Error(`Missing linked Entrance for ${p.superstar.name}`);
     p.entrancePlayed = true;
     this.#applyEffects(playerId, entrance.effects ?? [], { sourceCardId: entrance.id, preMatch: true });
     p.entranceSchedules = (entrance.scheduled ?? []).map((schedule, i) => ({
@@ -249,7 +252,6 @@ export class MatchEngine {
       sourceName: entrance.name,
       triggerCount: 0
     }));
-    p.discard.push(entrance);
     this.#log("ENTRANCE_PREMATCH", { playerId, cardId: entrance.id, cardName: entrance.name, scheduledCount: p.entranceSchedules.length });
   }
 
@@ -362,6 +364,7 @@ export class MatchEngine {
     if (!check.legal) throw new Error(check.reason);
     const p = this.match.players[playerId];
     const played = this.#takeFromHand(playerId, card);
+    p.leadOffActive = false;
     const damageBonus = (p.turn.nextMoveDamageBonus ?? 0) + (p.pendingMoveDamageBonus ?? 0);
     p.turn.nextMoveCostModifier = 0;
     p.turn.nextMoveDamageBonus = 0;
@@ -377,10 +380,16 @@ export class MatchEngine {
     if (this.match.phase !== PHASES.COUNTER || !pending || pending.defenderId !== defenderId) throw new Error("No counter window");
     if (!canCounter(pending.card, card)) throw new Error("Invalid counter");
     const counterCard = this.#takeFromHand(defenderId, card);
+
+    // The incoming Move has been stopped, so it is always discarded now.
     this.match.players[pending.attackerId].discard.push(pending.card);
-    this.match.players[defenderId].discard.push(counterCard);
-    this.#log("MOVE_COUNTERED", { defenderId, incomingCardId: pending.card.id, counterCardId: counterCard.id });
-    this.match.proposedMove = null;
+    this.#log("MOVE_COUNTERED", {
+      defenderId,
+      incomingCardId: pending.card.id,
+      counterCardId: counterCard.id,
+      counterDepth: pending.counterDepth ?? 0
+    });
+
     if (counterCard.onCounter?.length) {
       this.#applyEffects(defenderId, counterCard.onCounter, { sourceCardId: counterCard.id, incomingCardId: pending.card.id });
       this.#log("COUNTER_EFFECTS_RESOLVED", { defenderId, counterCardId: counterCard.id, effectCount: counterCard.onCounter.length });
@@ -390,6 +399,38 @@ export class MatchEngine {
     this.#triggerManager(defenderId, "ON_COUNTER_SUCCESS", { incomingMove: pending.card, counterCard });
     const bonusDraw = supportPassive(this.match.players[defenderId], "counterDraw");
     if (bonusDraw) this.#draw(defenderId, bonusDraw);
+
+    // Offensive Moves are genuine counter-attacks, not disposable reversal text.
+    // They now become the next proposed Move, which gives the original attacker
+    // the same legal Counter window. This applies recursively to every Move Type
+    // relationship in the card data (including future cards), so counter chains
+    // such as Move -> European Uppercut -> counter-to-counter work naturally.
+    const offensiveCounter = counterCard.kind === "move" && !counterCard.defensiveOnly &&
+      ((counterCard.damage ?? 0) > 0 || !!counterCard.submission || (counterCard.onConnect?.length ?? 0) > 0);
+    if (offensiveCounter) {
+      this.match.playerInControl = defenderId;
+      this.match.proposedMove = {
+        attackerId: defenderId,
+        defenderId: pending.attackerId,
+        card: clone(counterCard),
+        damageBonus: 0,
+        counterDepth: (pending.counterDepth ?? 0) + 1,
+        counterAttack: true
+      };
+      this.match.phase = PHASES.COUNTER;
+      this.#log("COUNTER_ATTACK_DECLARED", {
+        attackerId: defenderId,
+        defenderId: pending.attackerId,
+        cardId: counterCard.id,
+        counterDepth: (pending.counterDepth ?? 0) + 1
+      });
+      return;
+    }
+
+    // Pure defensive counters (Dodge, Duck, Reversal, Scramble, Counter Any)
+    // still resolve immediately and transfer Control without dealing Move damage.
+    this.match.players[defenderId].discard.push(counterCard);
+    this.match.proposedMove = null;
     this.#transferControl(defenderId, { incrementTurn: true, draw: true });
   }
 
@@ -472,7 +513,10 @@ export class MatchEngine {
         defenderId,
         bodyPart: card.submission.bodyPart,
         damage: card.submission.damage,
-        cardId: card.id
+        cardId: card.id,
+        finisher: !!card.finisher,
+        trademark: !!card.trademark,
+        signature: !!card.signature
       };
       this.#applySubmissionDamage();
       return;
@@ -581,6 +625,7 @@ export class MatchEngine {
     this.match.players[attackerId].discard.push(ditched);
     this.#log("SUBMISSION_MAINTAINED", { attackerId, ditchedCardId: ditched.id });
     this.match.turnNumber += 1;
+    if (this.#enforceTurnLimit()) return;
     this.match.playerInControl = attackerId;
     this.#startFreshControl(attackerId, { draw: true, preservePhase: true, triggerTurnStart: true, triggerControlStart: false });
     this.#applySubmissionDamage();
@@ -622,11 +667,12 @@ export class MatchEngine {
     }
   }
 
-  passTurn(playerId) {
+  passTurn(playerId, reason = "unspecified") {
     this.#assertMatchActive();
     if (this.match.phase !== PHASES.ACTION || this.match.playerInControl !== playerId) throw new Error("Cannot pass now");
     const opponent = this.opponentOf(playerId);
-    this.#log("CONTROL_PASSED", { from: playerId, to: opponent });
+    this.match.players[playerId].leadOffActive = false;
+    this.#log("CONTROL_PASSED", { from: playerId, to: opponent, reason });
     this.#transferControl(opponent, { incrementTurn: true, draw: true });
   }
 
@@ -659,20 +705,58 @@ export class MatchEngine {
   }
 
   #endOffense(playerId) {
-    const opponent = this.opponentOf(playerId);
-    this.#transferControl(opponent, { incrementTurn: true, draw: true });
+    // A connected Move normally retains Control. At 0 HP the wrestler is in a
+    // critical/exhausted state: they can still mount a comeback, but cannot
+    // sustain an unanswered offensive run unless they finish the match.
+    this.match.turnNumber += 1;
+    if (this.#enforceTurnLimit()) return;
+    const player = this.match.players[playerId];
+    if (player.hp <= 0) {
+      const opponent = this.opponentOf(playerId);
+      this.#log("CRITICAL_EXHAUSTION", { playerId, hp: player.hp, controlTo: opponent });
+      this.#transferControl(opponent, { incrementTurn: false, draw: true });
+      return;
+    }
+    this.match.playerInControl = playerId;
+    this.#startFreshControl(playerId, { draw: true, triggerTurnStart: true, triggerControlStart: false });
+    if (this.match.phase !== PHASES.MATCH_OVER) this.#advanceCountOut();
+    this.#log("CONTROL_RETAINED", { playerId, reason: "successful-move" });
   }
 
   #transferControl(playerId, { incrementTurn = false, draw = false } = {}) {
-    if (incrementTurn) this.match.turnNumber += 1;
+    if (incrementTurn) {
+      this.match.turnNumber += 1;
+      if (this.#enforceTurnLimit()) return;
+    }
     this.match.playerInControl = playerId;
     this.#startFreshControl(playerId, { draw, triggerTurnStart: incrementTurn, triggerControlStart: true });
     if (this.match.phase !== PHASES.MATCH_OVER) this.#advanceCountOut();
   }
 
+
+  #enforceTurnLimit() {
+    // Turn 50 is playable. Attempting to advance to Turn 51 ends the match as
+    // a time-limit draw so pathological loops can never run forever.
+    if (this.match.turnNumber <= (this.match.turnLimit ?? 50)) return false;
+    this.match.turnNumber = this.match.turnLimit ?? 50;
+    this.match.winner = null;
+    this.match.finish = { type: "time-limit-draw", turnLimit: this.match.turnLimit ?? 50 };
+    this.match.phase = PHASES.MATCH_OVER;
+    this.match.proposedMove = null;
+    this.match.postMove = null;
+    this.match.pin = null;
+    this.match.submission = null;
+    this.#log("MATCH_ENDED", { winnerId: null, finishType: "time-limit-draw", turnLimit: this.match.turnLimit ?? 50 });
+    return true;
+  }
+
   #startFreshControl(playerId, { draw = false, preservePhase = false, triggerTurnStart = false, triggerControlStart = false } = {}) {
     if (!preservePhase) this.match.phase = PHASES.ACTION;
     const p = this.match.players[playerId];
+    if (!p.hasHadControl) {
+      draw = false;
+      p.hasHadControl = true;
+    }
     p.turn.momentumPlayed = 0;
     p.turn.actionPlayed = 0;
     p.turn.supportPlayed = 0;

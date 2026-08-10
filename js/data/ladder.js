@@ -7,7 +7,8 @@ export const LADDER_BRANCHES = {
   modern: { id: "modern", label: "Current Era", setId: "summerslam-series-1", era: null, length: 8 },
   "golden-era": { id: "golden-era", label: "Golden Era", setId: "hall-of-fame-series-1", era: "golden-era", length: 4 },
   "attitude-era": { id: "attitude-era", label: "Attitude Era", setId: "hall-of-fame-series-1", era: "attitude-era", length: 4 },
-  "hall-of-fame": { id: "hall-of-fame", label: "Hall of Fame — Series 1", setId: "hall-of-fame-series-1", era: null, length: 8 }
+  "hall-of-fame": { id: "hall-of-fame", label: "Hall of Fame — Series 1", setId: "hall-of-fame-series-1", era: null, length: 8 },
+  evolution: { id: "evolution", label: "Evolution — Series 1", setId: "evolution-series-1", era: null, length: 8 }
 };
 
 function ensure(profile) {

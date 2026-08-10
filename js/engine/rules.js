@@ -51,7 +51,8 @@ export function moveEligibility(match, playerId, card) {
   if (card.requiresLocation && player.location !== card.requiresLocation) return { legal: false, reason: `You must be ${card.requiresLocation}` };
   if (card.superstarId && card.superstarId !== player.superstar.id) return { legal: false, reason: "Wrong Superstar" };
   if (player.status.stunnedTurns > 0 && !card.playableWhileStunned) return { legal: false, reason: "Stunned" };
-  const threshold = Math.max(0, (card.cost ?? 0) + (player.turn.nextMoveCostModifier ?? 0));
+  const leadOffDiscount = player.leadOffActive && (card.cost ?? 0) <= 2 ? 1 : 0;
+  const threshold = Math.max(0, (card.cost ?? 0) + (player.turn.nextMoveCostModifier ?? 0) - leadOffDiscount);
   if (effectiveTotalMomentum(player) < threshold) return { legal: false, reason: `Not enough total momentum (need ${threshold})` };
   for (const [method, amount] of Object.entries(card.requirements ?? {})) {
     if ((player.momentum[method] ?? 0) < amount) return { legal: false, reason: `Requires ${amount} ${method}` };
@@ -90,12 +91,27 @@ export function pinChancePercent(match) {
   const pin = match.pin;
   if (!pin) return 0;
   const defender = match.players[pin.defenderId];
-  const missingHpRatio = 1 - (defender.hp / defender.maxHp);
-  const finisherBonus = pin.finisher ? 15 : 0;
-  return Math.max(5, Math.min(95, Math.round(15 + missingHpRatio * 65 + finisherBonus)));
+  const hpRatio = Math.max(0, defender.hp) / Math.max(1, defender.maxHp);
+  const missingHpRatio = 1 - hpRatio;
+  const finisherBonus = pin.finisher ? 8 : 0;
+  // Critical-state pressure: 0 HP is not an automatic KO, but a wrestler who
+  // has been completely depleted should be in genuine danger of being pinned.
+  // This scales in before 0 so the intended 0-10% finishing window matters.
+  const criticalBonus = hpRatio <= 0 ? 23 : hpRatio <= 0.05 ? 16 : hpRatio <= 0.10 ? 10 : hpRatio <= 0.15 ? 5 : 0;
+  const lateMatchBonus = match.turnNumber >= 45 ? 50 : match.turnNumber >= 35 ? 25 : 0;
+  return Math.max(5, Math.min(95, Math.round(1 + missingHpRatio * 15 + finisherBonus + criticalBonus + lateMatchBonus)));
 }
 
-export function submissionThreshold(player) { return Math.max(6, Math.ceil(player.hp / 2)); }
+export function submissionThreshold(player) {
+  // Submission resilience is based on both the Superstar's durability and their
+  // current condition. At full health a fresh opponent is difficult to submit,
+  // but accumulated match damage lowers the pressure required to force a tap.
+  // Body-part pressure persists independently, so repeated attacks to one limb
+  // create a genuine alternate finishing route rather than a one-card lottery.
+  const maxHp = Math.max(1, player.maxHp ?? player.hp ?? 1);
+  const hp = Math.max(0, Math.min(maxHp, player.hp ?? maxHp));
+  return Math.max(12, Math.ceil(maxHp * 0.45 + hp * 0.20));
+}
 
 export function canReturnToRing(match, playerId) {
   const p = match.players[playerId];
