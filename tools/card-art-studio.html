@@ -10,7 +10,7 @@
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>CARD ART STUDIO</small></a>
-    <span class="studio-build">v0.11.20</span>
+    <span class="studio-build">v0.11.21</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
@@ -36,7 +36,8 @@
           <div class="url-loader">
             <label>Load artwork from URL<input id="art-url" type="url" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://…/image.jpg"></label>
             <button id="load-art-url" type="button">Load URL Artwork</button>
-            <small>Paste a direct image URL. The studio imports it into browser memory so the finished WebP remains export-safe. Some sites block third-party image access; if they do, the studio will tell you.</small>
+            <p id="url-status" class="url-status" aria-live="polite"></p>
+            <small>Paste a direct image URL. The studio tries the source first; if that host blocks browser access, it automatically retries through the wsrv.nl image proxy so you do not have to save the photo locally.</small>
           </div>
           <div class="button-row"><button id="use-current-art" type="button">Use current game art</button><button id="clear-art" type="button">Clear</button></div>
           <label>Zoom <output id="art-zoom-value">100%</output><input id="art-zoom" type="range" min="45" max="320" value="100"></label>

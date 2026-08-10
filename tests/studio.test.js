@@ -67,11 +67,22 @@ test("Card Art Studio is self-contained and direct-file compatible", () => {
 test("Card Art Studio can import artwork from a URL without requiring a local save", () => {
   assert.match(studioHtml, /id="art-url" type="url"/);
   assert.match(studioHtml, /id="load-art-url"[^>]*>Load URL Artwork<\/button>/);
+  assert.match(studioHtml, /id="url-status"/);
   assert.match(studioJs, /async function urlToImage\(rawUrl\)/);
-  assert.match(studioJs, /fetch\(url\.href,\{mode:"cors"/);
+  assert.match(studioJs, /async function fetchImageBlob\(url,viaProxy=false\)/);
   assert.match(studioJs, /readFileAsDataUrl\(blob\)/);
-  assert.match(studioJs, /URL artwork loaded/);
-  assert.match(studioJs, /CORS\/hotlink protection/);
+  assert.match(studioJs, /URL artwork loaded directly/);
+  assert.match(studioJs, /image proxy/);
+});
+
+
+
+test("URL artwork loader retries CORS-blocked hosts through an image proxy and reports progress beside the button", () => {
+  assert.match(studioJs, /https:\/\/wsrv\.nl\/\?url=\$\{encodeURIComponent\(url\.href\)\}/);
+  assert.match(studioJs, /Retrying automatically through the image proxy/);
+  assert.match(studioJs, /button\.textContent="Loading…"/);
+  assert.match(studioJs, /function urlStatus\(text,ok=null\)/);
+  assert.match(studioHtml, /automatically retries through the wsrv\.nl image proxy/);
 });
 
 test("front identity is minimal by type and every set gets its top-right logo", () => {

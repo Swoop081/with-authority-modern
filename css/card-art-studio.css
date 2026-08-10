@@ -4,5 +4,7 @@
 @media(max-width:430px){.studio-shell{padding-left:10px;padding-right:10px}.studio-intro p{font-size:.77rem}.control-group,.preview-panel{padding:11px;border-radius:14px}.button-row{grid-template-columns:1fr}.template-key{grid-template-columns:1fr 1fr}.canvas-wrap{width:min(340px,94vw)}}
 .card-summary>small{justify-content:space-between;flex-wrap:wrap}.card-summary>small em:last-child{text-align:right;color:#f0f0f3}
 
-/* v0.11.20 — direct URL artwork loader */
+/* v0.11.21 — URL artwork loader with automatic proxy fallback */
 .url-loader{display:grid;gap:8px;border:1px solid #34343d;border-radius:11px;background:#0a0a0d;padding:10px}.url-loader label{display:grid;grid-template-columns:1fr;gap:6px}.url-loader input[type=url]{width:100%;border:1px solid #42424c;border-radius:10px;background:#0b0b0f;color:#f4f4f6;padding:9px 10px;font-size:.75rem}.url-loader small{color:#85858f;font-size:.58rem;line-height:1.4}.art-or{display:flex;align-items:center;gap:9px;color:#686873;font-size:.5rem;font-weight:1000;letter-spacing:.16em}.art-or:before,.art-or:after{content:"";height:1px;flex:1;background:#2b2b33}.url-loader button{background:#24242b;border-color:#50505b}
+
+.url-status{min-height:1.05rem;margin:0;font-size:.6rem;line-height:1.35;color:#9a9aa4}.url-status.ok{color:#9fd2aa}.url-status.error{color:#efa1a7}.url-loader button:disabled{opacity:.65;cursor:wait}

@@ -1,3 +1,7 @@
+## v0.11.21 — URL Artwork Loader Fix
+
+The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
+
 # WWE Legacy: Collectible Card Game — v0.11.19
 
 
