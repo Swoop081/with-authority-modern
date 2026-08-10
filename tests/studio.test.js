@@ -49,3 +49,13 @@ test("Superstar card set backgrounds remain full-bleed through the bottom edge",
     assert.match(svg, /(?:<rect width="680" height="1000"|<rect width="680" height="1000" rx="28")/);
   }
 });
+
+
+test("Superstar Art Studio WebP export is visible, guarded and direct-file safe", () => {
+  assert.match(studioHtml, /id="export-webp"[^>]*>Export Superstar WebP<\/button>/);
+  assert.match(studioJs, /function canvasToWebp\(quality\)/);
+  assert.match(studioJs, /EMBEDDED_SET_LOGOS/);
+  assert.match(studioJs, /document\.location\.protocol==="file:" && state\.wrestlerIsProjectAsset/);
+  assert.match(studioJs, /Downloaded \${id}\.webp/);
+  assert.match(studioJs, /Export failed:/);
+});
