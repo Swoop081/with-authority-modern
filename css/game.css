@@ -577,3 +577,52 @@ body[data-screen="match"] .mobile-game-nav,body[data-screen="splash"] .mobile-ga
 
 /* v0.8.7 Superstar unlock celebration */
 .unlock-celebration{min-height:100%;display:grid;place-items:center;padding:24px;text-align:center}.unlock-burst{width:min(560px,100%);padding:28px;border-radius:28px;background:rgba(10,10,14,.94);box-shadow:0 0 60px rgba(255,255,255,.14)}.unlock-burst>span{font-weight:900;letter-spacing:.18em}.unlock-burst h2{font-size:clamp(2rem,8vw,4rem);margin:.25em 0}.unlock-burst p{opacity:.8}.unlock-reward-card{margin:18px auto;transform:scale(1.03)}.unlock-progress{font-weight:800;margin:12px 0}.season-final-reward{outline:2px solid currentColor}.season-final-reward .season-tier-reward strong{font-size:1.08rem}
+
+/* v0.8.9 — Season 1 launch takeover */
+.season-launch-showcase{width:min(1120px,96vw);margin:14px auto 18px;display:grid;gap:10px}
+.season-final-boss-promo{position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(130px,230px) 1fr;align-items:center;min-height:260px;padding:18px;border:1px solid rgba(255,255,255,.18);border-radius:18px;background:linear-gradient(115deg,rgba(8,8,10,.98),rgba(48,11,12,.94));box-shadow:0 18px 55px rgba(0,0,0,.45)}
+.season-final-boss-promo:after{content:"FINAL BOSS";position:absolute;right:-18px;bottom:-18px;font-size:clamp(54px,10vw,150px);font-weight:1000;letter-spacing:-.07em;opacity:.055;white-space:nowrap}
+.season-final-boss-card{position:relative;z-index:2;display:flex;justify-content:center;transform:rotate(-2deg)}
+.season-final-boss-card .collectible-card{width:min(190px,35vw)}
+.season-final-boss-copy{position:relative;z-index:2;padding:10px 4vw 10px 20px;text-align:left}
+.season-final-boss-copy>span,.season-final-boss-copy>strong{display:block;font-weight:900;letter-spacing:.14em;font-size:.72rem}
+.season-final-boss-copy h2{margin:.35rem 0;font-size:clamp(1.55rem,4.5vw,3.5rem);line-height:.92;letter-spacing:-.04em}
+.season-final-boss-copy p{max-width:620px;margin:.65rem 0 1rem;opacity:.84}
+.season-set-promos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.season-set-promos article{overflow:hidden;min-width:0;padding:12px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(10,10,13,.9);text-align:left}
+.season-set-promos em,.season-set-promos b,.season-set-promos span{display:block}
+.season-set-promos em{font-style:normal;font-weight:900;font-size:.68rem;letter-spacing:.1em;opacity:.75}
+.season-set-promos b{margin-top:5px;font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.season-set-promos span{margin-top:4px;font-weight:1000;font-size:.64rem;letter-spacing:.08em}
+.launch-set-art{height:92px;margin:8px -12px 0;position:relative;overflow:hidden}
+.launch-set-art img{height:100%;width:33.333%;object-fit:cover;object-position:top;filter:saturate(.9) contrast(1.08)}
+@media(max-width:760px){
+ .premium-splash{overflow:auto}
+ .season-final-boss-promo{grid-template-columns:115px 1fr;min-height:190px;padding:10px}
+ .season-final-boss-copy{padding-left:10px}
+ .season-final-boss-copy p{font-size:.75rem}
+ .season-set-promos{grid-template-columns:1fr}
+ .season-set-promos article{display:grid;grid-template-columns:1fr 1.2fr;column-gap:10px;align-items:center}
+ .season-set-promos article em,.season-set-promos article b,.season-set-promos article span{grid-column:1}
+ .season-set-promos article div{grid-column:2;grid-row:1/4;margin:-12px;height:105px}
+}
+
+/* v0.9.0 — Season 1 is the live front page */
+.menu-season-campaign{width:min(1120px,96vw);margin:12px auto;min-height:118px;display:grid;grid-template-columns:145px 1fr 92px;align-items:center;overflow:hidden;border:1px solid rgba(255,255,255,.18);border-radius:16px;background:linear-gradient(105deg,#09090b 15%,#3a0d0f 100%);text-align:left;box-shadow:0 14px 35px rgba(0,0,0,.32)}
+.menu-season-rock{align-self:stretch;overflow:hidden}.menu-season-rock img{width:100%;height:100%;object-fit:cover;object-position:top}.menu-season-rock .portrait-placeholder{height:100%;min-height:118px}
+.menu-season-copy{padding:12px 18px}.menu-season-copy em,.menu-season-copy strong,.menu-season-copy small{display:block}.menu-season-copy em{font-style:normal;font-size:.68rem;font-weight:900;letter-spacing:.14em;opacity:.7}.menu-season-copy strong{font-size:clamp(1.25rem,3vw,2.25rem);letter-spacing:-.04em}.menu-season-copy small{opacity:.8}
+.menu-season-tier{text-align:center;border-left:1px solid rgba(255,255,255,.14)}.menu-season-tier b{display:block;font-size:2rem}.menu-season-tier small{font-weight:900}
+.season-live-label,.booster-live-label{display:inline-block;margin-bottom:7px;font-size:.68rem;font-weight:1000;letter-spacing:.13em}
+.season-final-boss-hero .feature-copy h2{font-size:clamp(1.8rem,4.6vw,4rem);letter-spacing:-.045em}
+.season-live-releases{margin:16px auto;width:min(1180px,96vw)}
+.season-release-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.season-release-grid button{position:relative;overflow:hidden;min-height:205px;padding:0;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:#0b0b0e;text-align:left}
+.season-release-grid em,.season-release-grid strong,.season-release-grid span{display:block;position:relative;z-index:2;padding-left:12px;padding-right:12px}
+.season-release-grid em{padding-top:10px;font-style:normal;font-size:.65rem;font-weight:900;letter-spacing:.1em;opacity:.75}
+.season-release-grid strong{margin-top:7px;font-size:.9rem}.season-release-grid span{padding-bottom:10px;margin-top:4px;font-size:.7rem;font-weight:1000;letter-spacing:.07em}
+.season-release-art{height:118px;margin-top:8px;display:flex;overflow:hidden}.season-release-art img,.season-release-art .portrait-placeholder{width:33.333%;height:100%;object-fit:cover;object-position:top}
+.booster-release-headline{margin:.2rem 0 .6rem;font-size:clamp(.9rem,2vw,1.25rem);letter-spacing:.02em}
+@media(max-width:760px){
+ .menu-season-campaign{grid-template-columns:95px 1fr 56px;min-height:100px}.menu-season-copy{padding:8px}.menu-season-copy small{font-size:.65rem}.menu-season-tier b{font-size:1.4rem}
+ .season-release-grid{grid-template-columns:1fr}.season-release-grid button{min-height:145px;display:grid;grid-template-columns:1fr 1.15fr;grid-template-rows:auto 1fr auto auto;align-items:center}.season-release-grid em,.season-release-grid strong,.season-release-grid span{grid-column:1}.season-release-art{grid-column:2;grid-row:1/5;height:145px;margin:0}.season-release-grid strong{align-self:end}
+}

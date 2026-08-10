@@ -1912,3 +1912,26 @@ test("claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned de
   assert.equal(ownedCount(p, "superstar-the-rock", "foil"), 1);
   assert.equal(ownedCount(p, superstars.theRock.entranceId, "foil"), 1);
 });
+
+
+test("Season 1 splash takeover advertises Final Boss and all three launch booster sets", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("COMPLETE SEASON 1.<br>UNLOCK THE FINAL BOSS."), true);
+  assert.equal(app.includes("Reach Tier 50 to earn <b>The Rock — The Final Boss</b> and his complete 55-page deck."), true);
+  assert.equal(app.includes("Cody Rhodes · Brock Lesnar · Roman Reigns"), true);
+  assert.equal(app.includes("Hulk Hogan · Stone Cold · The Undertaker"), true);
+  assert.equal(app.includes("Becky Lynch · Rhea Ripley · Charlotte Flair"), true);
+  assert.equal((app.match(/NOW AVAILABLE IN BOOSTERS/g) ?? []).length >= 3, true);
+});
+
+
+test("Season 1 campaign is carried through menu, Seasons hub and booster releases", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes('id="menu-season-campaign"'), true);
+  assert.equal(app.includes("THE ROAD TO THE FINAL BOSS"), true);
+  assert.equal(app.includes("Season 1 · Featured Releases"), true);
+  assert.equal(app.includes('data-season-booster-set="summerslam-series-1"'), true);
+  assert.equal(app.includes('data-season-booster-set="hall-of-fame-series-1"'), true);
+  assert.equal(app.includes('data-season-booster-set="evolution-series-1"'), true);
+  assert.equal(app.includes("SEASON 1 · NOW AVAILABLE"), true);
+});
