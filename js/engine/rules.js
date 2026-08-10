@@ -21,6 +21,7 @@ export function canPlayEntrance() {
 export function canPlayAction(match, playerId, card) {
   const player = match.players[playerId];
   const opponent = match.players[match.opponentOf(playerId)];
+  if (player.specialFlags?.blockActionUntilMove) return false;
   if (!(match.phase === "ACTION" && match.playerInControl === playerId && card.kind === "action" && player.turn.actionPlayed < 1 && (!card.superstarId || card.superstarId === player.superstar.id))) return false;
   if (card.requiresLocation && player.location !== card.requiresLocation) return false;
   if (card.requiresOpponentLocation && opponent.location !== card.requiresOpponentLocation) return false;
@@ -40,32 +41,85 @@ export function canPlayManager(match, playerId, card) {
   return !allowed.length || allowed.includes(player.superstar.id);
 }
 
-export function moveEligibility(match, playerId, card) {
+function moveStateAndResourceEligibility(match, playerId, card, { counterContext = false } = {}) {
   const player = match.players[playerId];
-  if (match.phase !== "ACTION") return { legal: false, reason: "Wrong phase" };
-  if (match.playerInControl !== playerId) return { legal: false, reason: "Not in control" };
   if (card.kind !== "move") return { legal: false, reason: "Not a move" };
-  if (card.defensiveOnly) return { legal: false, reason: "Defensive counter only" };
   const opponent = match.players[match.opponentOf(playerId)];
+
+  if (!counterContext && card.defensiveOnly) return { legal: false, reason: "Defensive counter only" };
   if (!card.crossLocation && player.location !== opponent.location) return { legal: false, reason: "Wrestlers must be at the same location" };
   if (card.requiresLocation && player.location !== card.requiresLocation) return { legal: false, reason: `You must be ${card.requiresLocation}` };
+  if (card.requiresOpponentLocation && opponent.location !== card.requiresOpponentLocation) return { legal: false, reason: `Opponent must be ${card.requiresOpponentLocation}` };
+  if (card.requiresSameLocation && player.location !== opponent.location) return { legal: false, reason: "Wrestlers must be at the same location" };
   if (card.superstarId && card.superstarId !== player.superstar.id) return { legal: false, reason: "Wrong Superstar" };
   if (player.status.stunnedTurns > 0 && !card.playableWhileStunned) return { legal: false, reason: "Stunned" };
+
+  // Lead Off is a one-time first-Move discount and applies equally if that
+  // first Move is used as a legal counter-attack. Printed method gates remain.
   const leadOffDiscount = player.leadOffActive && (card.cost ?? 0) <= 2 ? 1 : 0;
-  const threshold = Math.max(0, (card.cost ?? 0) + (player.turn.nextMoveCostModifier ?? 0) - leadOffDiscount);
-  if (effectiveTotalMomentum(player) < threshold) return { legal: false, reason: `Not enough total momentum (need ${threshold})` };
-  for (const [method, amount] of Object.entries(card.requirements ?? {})) {
-    if ((player.momentum[method] ?? 0) < amount) return { legal: false, reason: `Requires ${amount} ${method}` };
+  // Turn-only action modifiers are only generated while that wrestler has
+  // Control. They must not leak into an out-of-Control counter window.
+  const turnModifier = counterContext ? 0 : (player.turn.nextMoveCostModifier ?? 0);
+  const cardModifier = counterContext ? 0 : (player.pendingCardCostModifiers?.[card.id] ?? 0);
+  const threshold = Math.max(0, (card.cost ?? 0) + turnModifier + cardModifier - leadOffDiscount);
+
+  if (effectiveTotalMomentum(player) < threshold) {
+    return { legal: false, reason: `Not enough total momentum (need ${threshold})`, threshold };
   }
-  if (card.requiresPosture && opponent.posture !== card.requiresPosture) return { legal: false, reason: `Opponent must be ${card.requiresPosture}` };
+  for (const [method, amount] of Object.entries(card.requirements ?? {})) {
+    if ((player.momentum[method] ?? 0) < amount) {
+      return { legal: false, reason: `Requires ${amount} ${method}`, threshold };
+    }
+  }
+  if (card.requiresPosture && opponent.posture !== card.requiresPosture) {
+    return { legal: false, reason: `Opponent must be ${card.requiresPosture}`, threshold };
+  }
   return { legal: true, threshold };
 }
 
-export function canCounter(incomingMove, counterCard) {
-  if (counterCard.kind === "special" && counterCard.counterAny) return true;
-  if (counterCard.kind !== "move") return false;
+export function moveEligibility(match, playerId, card) {
+  if (match.phase !== "ACTION") return { legal: false, reason: "Wrong phase" };
+  if (match.playerInControl !== playerId) return { legal: false, reason: "Not in control" };
+  return moveStateAndResourceEligibility(match, playerId, card);
+}
+
+export function counterEligibility(match, defenderId, incomingMove, counterCard) {
+  if (match.phase !== "COUNTER") return { legal: false, reason: "Wrong phase" };
+  if (!match.proposedMove || match.proposedMove.defenderId !== defenderId) return { legal: false, reason: "No counter window" };
+
+  // Bloodline Rules taxes the first Counter of any kind, including Counter Any Specials.
+  const bloodlineDefender = match.players[defenderId];
+  if ((bloodlineDefender?.specialFlags?.bloodlineCounterTax ?? 0) > 0 && (bloodlineDefender?.specialFlags?.bloodlineCounterTaxRemaining ?? 0) > 0) {
+    if ((bloodlineDefender.momentum.attitude ?? 0) < bloodlineDefender.specialFlags.bloodlineCounterTax) {
+      return { legal: false, reason: "Bloodline Rules: need +1 Attitude to Counter" };
+    }
+  }
+
+  // Counter Any Specials are purpose-built defensive pages and do not inherit
+  // Move resource gates.
+  if (counterCard.kind === "special" && counterCard.counterAny) {
+    if (counterCard.superstarId && match.players[defenderId]?.superstar?.id !== counterCard.superstarId) return { legal: false, reason: "Wrong Superstar" };
+    return { legal: true };
+  }
+
+  if (counterCard.kind !== "move") return { legal: false, reason: "Not a counter Move" };
   const targets = counterCard.counters ?? [];
-  return targets.includes("any") || targets.includes(incomingMove.moveType);
+  const methodTargets = counterCard.counterMethods ?? [];
+  const matchesType = targets.includes("any") || targets.includes(incomingMove.moveType);
+  const matchesMethod = methodTargets.includes("any") || methodTargets.includes(incomingMove.method);
+  if (!matchesType && !matchesMethod) {
+    return { legal: false, reason: methodTargets.length ? `Does not counter ${incomingMove.method ?? "this"} Moves` : "Does not counter this Move Type" };
+  }
+
+  // A Move does not become free simply because it is being used as a counter.
+  // It must satisfy the same Superstar, Momentum, method, location, posture and
+  // stun gates as a normal Move, with only phase/Control bypassed for the
+  // response window.
+  return moveStateAndResourceEligibility(match, defenderId, counterCard, { counterContext: true });
+}
+
+export function canCounter(match, defenderId, incomingMove, counterCard) {
+  return counterEligibility(match, defenderId, incomingMove, counterCard).legal;
 }
 
 export function pinAttemptCost(match, playerId) { return match.players[playerId].pinAttempts; }
@@ -84,7 +138,10 @@ export function canAttemptPin(match, playerId) {
 }
 
 export function canPlayPinEscape(match, playerId, card) {
-  return match.phase === "PIN_RESPONSE" && match.pin?.defenderId === playerId && card.kind === "special" && card.pinEscape === true;
+  if (!(match.phase === "PIN_RESPONSE" && match.pin?.defenderId === playerId && card.kind === "special" && card.pinEscape === true)) return false;
+  if (card.superstarId && match.players[playerId]?.superstar?.id !== card.superstarId) return false;
+  if (match.pin?.noGenericPinEscape && !card.superstarId) return false;
+  return true;
 }
 
 export function pinChancePercent(match) {
@@ -99,7 +156,7 @@ export function pinChancePercent(match) {
   // This scales in before 0 so the intended 0-10% finishing window matters.
   const criticalBonus = hpRatio <= 0 ? 23 : hpRatio <= 0.05 ? 16 : hpRatio <= 0.10 ? 10 : hpRatio <= 0.15 ? 5 : 0;
   const lateMatchBonus = match.turnNumber >= 45 ? 50 : match.turnNumber >= 35 ? 25 : 0;
-  return Math.max(5, Math.min(95, Math.round(1 + missingHpRatio * 15 + finisherBonus + criticalBonus + lateMatchBonus)));
+  return Math.max(5, Math.min(95, Math.round(1 + missingHpRatio * 15 + finisherBonus + criticalBonus + lateMatchBonus + (pin.chanceModifier ?? 0))));
 }
 
 export function submissionThreshold(player) {

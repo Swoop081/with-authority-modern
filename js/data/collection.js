@@ -4,6 +4,7 @@ import { evolutionCards } from "./evolution-cards.js";
 import { rockCards } from "./season1-rock-cards.js";
 import { superstars } from "./superstars.js";
 import { sets } from "./sets.js";
+import { decks } from "./decks.js";
 
 const rarity = { common: 1, uncommon: 2, rare: 3, veryRare: 4 };
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
@@ -49,15 +50,29 @@ const superstarEntry = (star) => ({
 });
 
 function buildSetCollection(setId, starOrder, sourceCards) {
+  // Active booster pools contain only cards used by a current starter in this set,
+  // plus linked Entrances and approved Managers. Shared cards first printed in an
+  // earlier set are referenced directly by later starter decks and are not reprinted.
+  const activeIds = new Set();
+  const starIds = new Set(starOrder.map(star => star.id));
+  for (const star of starOrder) {
+    for (const card of decks[star.id] ?? []) activeIds.add(card.id);
+    if (star.entranceId) activeIds.add(star.entranceId);
+  }
+  for (const card of sourceCards) {
+    if (card.kind === "manager" && (card.allowedSuperstarIds ?? []).some(id => starIds.has(id))) activeIds.add(card.id);
+  }
+  const activeSourceCards = sourceCards.filter(card => activeIds.has(card.id));
+
   const ordered = [];
   for (const star of starOrder) {
     ordered.push(superstarEntry(star));
-    const starCards = sourceCards.filter(c => c.superstarId === star.id);
+    const starCards = activeSourceCards.filter(c => c.superstarId === star.id);
     const entranceCards = starCards.filter(c => c.kind === "entrance");
     const otherCards = starCards.filter(c => c.kind !== "entrance");
     for (const card of [...entranceCards, ...otherCards]) ordered.push({ ...card, rarity: rarityFor(card), setId });
   }
-  for (const card of sourceCards) {
+  for (const card of activeSourceCards) {
     if (card.superstarId) continue;
     if (!ordered.some(x => x.id === card.id)) ordered.push({ ...card, rarity: rarityFor(card), setId });
   }

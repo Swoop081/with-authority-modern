@@ -82,7 +82,21 @@ export function inferMoveType(id = "", name = "", options = {}) {
   return "in-close";
 }
 
+function reviewedDamageScale(options = {}) {
+  const d = Number(options.damage ?? 0);
+  if (d <= 0 || options.finisher || options.trademark || options.submission) return d;
+  const cost = Number(options.cost ?? 0);
+  if (cost <= 1) return 3;
+  if (cost === 2) return Math.max(4, Math.min(5, d));
+  if (cost === 3) return 5;
+  if (cost === 4) return Math.max(7, Math.min(8, d));
+  if (cost === 5) return Math.max(8, Math.min(9, d));
+  if (cost === 6) return Math.max(10, Math.min(11, d));
+  return Math.max(10, Math.min(12, d));
+}
+
 export function normalizeMoveOptions(id, name, options = {}) {
+  options = { ...options, damage: reviewedDamageScale(options) };
   const method = inferMethod(options);
   const moveType = inferMoveType(id, name, options);
   const defensiveOnly = options.defensiveOnly ?? (moveType === "defensive" && (options.damage ?? 0) <= 0);
@@ -100,6 +114,10 @@ export function normalizeMoveOptions(id, name, options = {}) {
     else if (lower.includes("scramble")) counters = ["in-close", "head-down", "back-to-foe", "victim-below"];
     else counters = ["scoop", "in-close", "head-down", "back-to-foe", "behind-opponent", "victim-below"];
   }
+  // Method-family counters such as Chain Wrestling and Duck are deliberately
+  // broader by wrestling method, so they do not inherit an additional
+  // positional counter list from the generic defensive-name inference.
+  if ((options.counterMethods?.length ?? 0) > 0) counters = [];
 
   const cleaned = { ...options, method, moveType, counters, defensiveOnly };
   delete cleaned.tacticalType;

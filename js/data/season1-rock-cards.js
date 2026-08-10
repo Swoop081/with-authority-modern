@@ -10,17 +10,17 @@ export const rockCards = {
   momentum: { strength: momentum("strength"), strike: momentum("strike"), technical: momentum("technical") },
 
   entrance: entrance("s1rock-entrance-final-boss", "Final Boss Has Arrived", "the-rock",
-    "Pre-Match — Begin with +1 Strength Momentum. At Turn 8, gain +1 Attitude Momentum.",
+    "Pre-Match — Begin with +1 Strength. First Strength/Strike Move for 8+ damage gains +1 Attitude.",
     [{ type: "gainMomentum", method: "strength", amount: 1 }],
-    [{ trigger: "TURN_START", atTurn: 8, effects: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }]),
+    [{ trigger: "ON_MOVE_CONNECTED", maxTriggers: 1, when: { methods: ["strength","strike"], minDamage: 8 }, effects: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }]),
 
   // Final Boss identity package — intentionally modern Bloodline-era Rock, not Attitude/Hollywood Rock.
-  finalBossSpinebuster: move("s1rock-final-boss-spinebuster", "Final Boss Spinebuster", { superstarId: "the-rock", method: "strength", cost: 5, requirements: { strength: 2 }, damage: 7, setOpponentPosture: "on-mat", trademark: true }),
-  peoplesElbowFinalBoss: move("s1rock-peoples-elbow-final-boss", "People's Elbow — Final Boss", { superstarId: "the-rock", method: "strike", cost: 7, requirements: { strike: 2, strength: 1 }, damage: 10, requiresOpponentPosture: "on-mat", finisher: true }),
-  rockBottomFinalBoss: move("s1rock-rock-bottom-final-boss", "Rock Bottom — Final Boss", { superstarId: "the-rock", method: "strength", cost: 8, requirements: { strength: 2, technical: 1 }, damage: 11, setOpponentPosture: "on-mat", finisher: true }),
+  finalBossSpinebuster: move("s1rock-final-boss-spinebuster", "Rock's Spinebuster", { superstarId:"the-rock", method:"strength", cost:7, requirements:{strength:2,strike:1}, damage:11, setOpponentPosture:"on-mat", trademark:true, pinBonus:4, pinAtHpRatio:0.22, onConnect:[{type:"searchDeck",cardId:"s1rock-peoples-elbow-final-boss"},{type:"cardCostModifier",cardId:"s1rock-peoples-elbow-final-boss",amount:-2},{type:"gainMomentum",method:"strike",amount:1},{type:"gainMomentum",method:"attitude",amount:2}] }),
+  peoplesElbowFinalBoss: move("s1rock-peoples-elbow-final-boss", "People's Elbow", { superstarId:"the-rock", method:"strike", cost:10, requirements:{strike:2,strength:1}, damage:16, requiresPosture:"on-mat", finisher:true, pinBonus:12, pinAtHpRatio:0.28 }),
+  rockBottomFinalBoss: move("s1rock-rock-bottom-final-boss", "Rock Bottom", { superstarId:"the-rock", method:"strength", cost:8, requirements:{strength:2,technical:1}, damage:13, setOpponentPosture:"on-mat", trademark:true, finisher:true, pinBonus:14, pinAtHpRatio:0.32, onConnect:[{type:"searchDeck",cardId:"s1rock-peoples-elbow-final-boss"},{type:"cardCostModifier",cardId:"s1rock-peoples-elbow-final-boss",amount:-2},{type:"gainMomentum",method:"strike",amount:2},{type:"gainMomentum",method:"attitude",amount:2}] }),
   finalBossSharpshooter: move("s1rock-final-boss-sharpshooter", "Final Boss Sharpshooter", { superstarId: "the-rock", method: "technical", cost: 7, requirements: { technical: 2 }, damage: 4, requiresOpponentPosture: "on-mat", submission: true, submissionPressure: 4, trademark: true }),
 
-  samoanDrop: move("s1rock-samoan-drop", "Samoan Drop", { superstarId: "the-rock", method: "strength", cost: 4, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
+  samoanDrop: move("s1rock-samoan-drop", "Samoan Drop", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   spinebuster: move("s1rock-spinebuster", "Spinebuster", { superstarId: "the-rock", method: "strength", cost: 4, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   snapDDT: move("s1rock-snap-ddt", "Snap DDT", { superstarId: "the-rock", method: "technical", cost: 3, requirements: { technical: 1 }, damage: 5, setOpponentPosture: "on-mat" }),
   clothesline: move("s1rock-clothesline", "Final Boss Clothesline", { superstarId: "the-rock", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4 }),
@@ -30,7 +30,7 @@ export const rockCards = {
   runningLariat: move("s1rock-running-lariat", "Running Lariat", { superstarId: "the-rock", method: "strike", cost: 4, requirements: { strike: 1 }, damage: 6 }),
   powerslam: move("s1rock-powerslam", "Powerslam", { superstarId: "the-rock", method: "strength", cost: 3, requirements: { strength: 1 }, damage: 5, setOpponentPosture: "on-mat" }),
   gutbuster: move("s1rock-gutbuster", "Gutbuster", { superstarId: "the-rock", method: "strength", cost: 5, requirements: { strength: 2 }, damage: 7 }),
-  neckbreaker: move("s1rock-neckbreaker", "Neckbreaker", { superstarId: "the-rock", method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
+  neckbreaker: move("s1rock-neckbreaker", "Neckbreaker", { method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   cornerPunches: move("s1rock-corner-punches", "Final Boss Corner Punches", { superstarId: "the-rock", method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5 }),
 
   eyebrow: action("s1rock-raise-eyebrow", "Raise the Eyebrow", "Action — Gain 2 Attitude Momentum.", [{ type: "gainMomentum", method: "attitude", amount: 2 }]),
@@ -38,5 +38,26 @@ export const rockCards = {
   finalBossOrder: action("s1rock-final-boss-order", "Orders From the Final Boss", "Action — Draw 1 page.", [{ type: "draw", amount: 1 }]),
   crowd: support("s1rock-brahma-bull-presence", "Brahma Bull Presence", "Support — The Final Boss brings constant pressure.", {}),
   kickout: special("s1rock-shoulder-up", "Final Boss Shoulder Up", { abilityText: "Pin response — stop the pin and take Control.", pinEscape: true }),
-  counter: special("s1rock-desperation-counter", "Final Boss Counter", { abilityText: "Counter response — counter any Move.", counterAny: true })
+  counter: special("s1rock-desperation-counter", "Final Boss Counter", { abilityText: "Counter response — counter any Move.", counterAny: true }),
+
+  finalBossPunches: move("s1rock-final-boss-punches","Final Boss Punches",{superstarId:"the-rock",moveFamily:"punch",method:"strike",cost:3,requirements:{strike:1},damage:5}),
+  finalBossSlap: move("s1rock-final-boss-slap","The Final Boss Slap",{superstarId:"the-rock",method:"strike",cost:4,requirements:{strike:1},damage:6,onConnect:[{type:"loseMomentum",target:"opponent",method:"attitude",amount:1}]}),
+  beltWhip: move("s1rock-belt-whip","Belt Whip",{superstarId:"the-rock",method:"strike",cost:5,requirements:{strike:1,technical:1},damage:7,setOpponentPosture:"standing",onConnect:[{type:"loseMomentum",target:"opponent",method:"attitude",amount:1}]}),
+  finalBossCombination: move("s1rock-final-boss-combination","Final Boss Combination",{superstarId:"the-rock",method:"strike",cost:6,requirements:{strike:2},damage:9,onConnect:[{type:"searchDeck",cardId:"s1rock-rock-bottom-final-boss"}]}),
+  bloodlineRules: action("s1rock-bloodline-rules","Bloodline Rules","Final Boss only — opponent's first Counter this Control costs +1 Attitude.",[]),
+  mamaRhodes: special("s1rock-mama-rhodes","Mama Rhodes",{superstarId:"the-rock",mamaRhodes:true}),
+  knowYourRoleCounter: move("s1rock-know-your-role-counter","Know Your Role",{superstarId:"the-rock",method:"technical",cost:3,requirements:{technical:1},counterMethods:["strike","strength"],defensiveOnly:true,onCounter:[{type:"loseMomentum",target:"opponent",method:"attitude",amount:1}]}),
+
+  duckCounter: move("s1rock-duck-counter","Duck",{method:"strike",cost:2,requirements:{strike:1},counterMethods:["strike"],defensiveOnly:true}),
+  noSellCounter: move("s1rock-no-sell","No Sell",{method:"strength",cost:3,requirements:{strength:1},counterMethods:["strength"],defensiveOnly:true}),
+  technicalCounter: move("s1rock-technical-reversal","Technical Reversal",{method:"technical",cost:3,requirements:{technical:1},counterMethods:["technical"],defensiveOnly:true}),
+  sharedPunch: move("s1rock-punch","Punch",{moveFamily:"punch",method:"strike",cost:2,requirements:{strike:1},damage:4}),
+  headbutt: move("s1rock-headbutt","Headbutt",{method:"strike",cost:2,requirements:{strike:1},damage:4}),
+  bodySlam: move("s1rock-body-slam","Body Slam",{method:"strength",cost:2,requirements:{strength:1},damage:5,setOpponentPosture:"on-mat"}),
+  shortArmClothesline: move("s1rock-short-arm-clothesline","Short-Arm Clothesline",{method:"strike",cost:3,requirements:{strike:1},damage:5}),
+  bigBoot: move("s1rock-big-boot","Big Boot",{method:"strike",cost:3,requirements:{strike:1},damage:5}),
+  bellyToBelly: move("s1rock-belly-to-belly","Belly-to-Belly Suplex",{method:"strength",cost:5,requirements:{strength:1},damage:8,setOpponentPosture:"on-mat"}),
+  ddt: move("s1rock-ddt","DDT",{method:"technical",cost:4,requirements:{technical:1},damage:7,setOpponentPosture:"on-mat"}),
+  sharpshooterShared: move("s1rock-sharpshooter-shared","Sharpshooter",{method:"technical",cost:6,requirements:{technical:2},damage:4,requiresPosture:"on-mat",submission:{bodyPart:"leg",damage:5}})
+
 };

@@ -11,7 +11,7 @@ import { collectionCards, setCollection, cardsForSet, setCollectionFor } from ".
 import { STARTER_CHOICES, createProfile, hasSuperstar, unlockSuperstar, addOwnedCard, ownedCount, setDeckAssistance } from "../js/data/profile.js";
 import { openBooster, openLadderCompletionPack, grantBooster, BOOSTER_SIZE, GUARANTEED_FOILS, RARITY_WEIGHTS, finishEligible } from "../js/data/boosters.js";
 import { buildPlayableDeck, findSafeUpgrade, applyUpgrade } from "../js/data/deck-assistant.js";
-import { moveEligibility, canAttemptPin, canReturnToRing, effectiveTotalMomentum, submissionThreshold } from "../js/engine/rules.js";
+import { moveEligibility, counterEligibility, canAttemptPin, canPlayPinEscape, canReturnToRing, effectiveTotalMomentum, submissionThreshold } from "../js/engine/rules.js";
 import { cpuDecision, executeCpuDecision, decisionOwner } from "../js/ai/WrestlingAI.js";
 import { advanceCpuUntilHuman } from "../js/ui/turn-driver.js";
 import { isOffensiveMove, MOVE_TYPES } from "../js/data/move-types.js";
@@ -105,7 +105,7 @@ test("original-style Move Type is separate from Momentum method", () => {
 });
 
 test("every collectible resolves to a local artwork file", () => {
-  assert.equal(collectionCards.length, 537);
+  assert.equal(collectionCards.length, 540);
   for (const card of collectionCards) {
     const art = artworkFor(card);
     assert.ok(art, `${card.id} has no artwork path`);
@@ -1242,6 +1242,7 @@ test("Bobby Heenan triggers once after Andre successfully Counters a Move", () =
   assert.equal(andre.activeManager.id, hallCards.bobbyHeenan.id);
   g.passTurn("p1");
   g.state().players.p2.momentum.attitude = 1;
+  andre.momentum.agility = Math.max(andre.momentum.agility, 1);
   let incoming = putInHand(g, "p2", hallCards.jab);
   let counter = putInHand(g, "p1", hallCards.duck);
   g.declareMove("p2", incoming);
@@ -1251,6 +1252,7 @@ test("Bobby Heenan triggers once after Andre successfully Counters a Move", () =
   assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id).length, 1);
   g.passTurn("p1");
   g.state().players.p2.momentum.attitude = 1;
+  andre.momentum.agility = Math.max(andre.momentum.agility, 1);
   incoming = putInHand(g, "p2", hallCards.jab);
   counter = putInHand(g, "p1", hallCards.duck);
   g.declareMove("p2", incoming);
@@ -1691,7 +1693,7 @@ test("Rhea receives a legal counter-to-counter window against European Uppercut"
   assert.equal(g.state().log.some(e => e.type === "COUNTER_ATTACK_DECLARED" && e.cardId === evolutionCards.rheaRipcordKnee.id), true);
 });
 
-test("every collectible offensive Move with a counter relationship opens a counter-attack response window", () => {
+test("every collectible offensive Move with a counter relationship opens a counter-attack response window when fully legal", () => {
   const qualifying = collectionCards.filter(card =>
     card.kind === "move" && !card.defensiveOnly && (card.counters?.length ?? 0) > 0 &&
     ((card.damage ?? 0) > 0 || !!card.submission || (card.onConnect?.length ?? 0) > 0)
@@ -1699,9 +1701,29 @@ test("every collectible offensive Move with a counter relationship opens a count
   assert.ok(qualifying.length > 100, "expected the rule to cover the full offensive Move pool, not a hand-written shortlist");
 
   for (const counterCard of qualifying) {
-    const g = game();
+    const counterStar = counterCard.superstarId
+      ? Object.values(superstars).find(s => s.id === counterCard.superstarId)
+      : superstars.cmPunk;
+    assert.ok(counterStar, `missing Superstar for ${counterCard.id}`);
+    const attackerStar = counterStar.id === "roman-reigns" ? superstars.cmPunk : superstars.romanReigns;
+    const g = new MatchEngine({
+      superstarA: attackerStar,
+      superstarB: counterStar,
+      deckA: decks[attackerStar.id],
+      deckB: decks[counterStar.id],
+      rng: () => 0
+    });
     const targetType = counterCard.counters[0];
-    const incoming = { id: `test-incoming-${counterCard.id}`, name: "Test Incoming Move", kind: "move", method: "strike", moveType: targetType, damage: 1 };
+    const incoming = { id: `test-incoming-${counterCard.id}`, name: "Test Incoming Move", kind: "move", method: "strike", moveType: targetType === "any" ? "standing-strike" : targetType, damage: 1 };
+    const defender = g.state().players.p2;
+    defender.leadOffActive = false;
+    for (const method of Object.keys(defender.momentum)) defender.momentum[method] = 20;
+    if (counterCard.requiresLocation) {
+      defender.location = counterCard.requiresLocation;
+      g.state().players.p1.location = counterCard.requiresLocation;
+    }
+    if (counterCard.requiresPosture) g.state().players.p1.posture = counterCard.requiresPosture;
+
     g.state().players.p1.hand.unshift(structuredClone(incoming));
     g.state().players.p2.hand.unshift(structuredClone(counterCard));
     g.state().proposedMove = { attackerId: "p1", defenderId: "p2", card: structuredClone(incoming), damageBonus: 0 };
@@ -1715,6 +1737,7 @@ test("every collectible offensive Move with a counter relationship opens a count
     assert.equal(g.state().proposedMove?.defenderId, "p1", `${counterCard.id} should be counterable by the original attacker`);
   }
 });
+
 
 test("Turn 50 is playable and attempting to advance beyond it produces a time-limit draw", () => {
   const g = game();
@@ -2060,4 +2083,251 @@ test("remaining Momentum moves to the rear after Momentum has been played this t
   assert.equal(app.includes("Once Momentum has been played this turn, all remaining Momentum moves to the end."), true);
   assert.equal(app.includes("else priority = 3"), true);
   assert.equal(app.includes("Momentum returns to front next turn"), true);
+});
+
+
+test("Roundhouse Kick cannot counter on Turn 1 without its printed Momentum gates", () => {
+  const roundhouse = collectionCards.find(c => c.id === "punk-roundhouse");
+  assert.ok(roundhouse);
+  assert.equal(roundhouse.cost, 3);
+  assert.equal(roundhouse.requirements?.strike, 1);
+
+  const g = new MatchEngine({
+    superstarA: superstars.romanReigns,
+    superstarB: superstars.cmPunk,
+    deckA: decks["roman-reigns"],
+    deckB: decks["cm-punk"],
+    rng: () => 0
+  });
+  const defender = g.state().players.p2;
+  defender.leadOffActive = false;
+  for (const method of Object.keys(defender.momentum)) defender.momentum[method] = 0;
+  const incoming = { id: "audit-arm-extended", name: "Audit Arm Extended", kind: "move", moveType: "arm-extended", damage: 1 };
+  g.state().proposedMove = { attackerId: "p1", defenderId: "p2", card: incoming, damageBonus: 0 };
+  g.state().phase = "COUNTER";
+  g.state().playerInControl = "p1";
+
+  let check = counterEligibility(g.state(), "p2", incoming, roundhouse);
+  assert.equal(check.legal, false);
+  assert.match(check.reason, /Not enough total momentum/);
+
+  defender.momentum.attitude = 3;
+  check = counterEligibility(g.state(), "p2", incoming, roundhouse);
+  assert.equal(check.legal, false);
+  assert.match(check.reason, /Requires 1 strike/);
+
+  defender.momentum.strike = 1;
+  check = counterEligibility(g.state(), "p2", incoming, roundhouse);
+  assert.equal(check.legal, true);
+});
+
+test("full collectible Move counter audit enforces relation, Superstar, Momentum, method, location, posture and stun gates", () => {
+  const counterMoves = collectionCards.filter(card => card.kind === "move" && (card.counters?.length ?? 0) > 0);
+  assert.ok(counterMoves.length > 300, "expected a full-pool counter audit");
+
+  let costGates = 0, methodGates = 0, superstarGates = 0, locationGates = 0, postureGates = 0, stunGates = 0;
+
+  for (const card of counterMoves) {
+    const counterStar = card.superstarId
+      ? Object.values(superstars).find(s => s.id === card.superstarId)
+      : superstars.cmPunk;
+    assert.ok(counterStar, `missing Superstar for ${card.id}`);
+    const attackerStar = counterStar.id === "roman-reigns" ? superstars.cmPunk : superstars.romanReigns;
+    const g = new MatchEngine({
+      superstarA: attackerStar,
+      superstarB: counterStar,
+      deckA: decks[attackerStar.id],
+      deckB: decks[counterStar.id],
+      rng: () => 0
+    });
+    const state = g.state();
+    const defender = state.players.p2;
+    const attacker = state.players.p1;
+    defender.leadOffActive = false;
+
+    const targetType = card.counters.includes("any") ? "arm-extended" : card.counters[0];
+    const incoming = { id: `audit-incoming-${card.id}`, name: "Audit Incoming", kind: "move", moveType: targetType, damage: 1 };
+    state.proposedMove = { attackerId: "p1", defenderId: "p2", card: incoming, damageBonus: 0 };
+    state.phase = "COUNTER";
+    state.playerInControl = "p1";
+    // Put state/location gates in their valid configuration before auditing
+    // resource gates so the failure reason is unambiguous.
+    if (card.requiresLocation) {
+      defender.location = card.requiresLocation;
+      attacker.location = card.requiresLocation;
+    } else {
+      defender.location = "ring";
+      attacker.location = "ring";
+    }
+    attacker.posture = card.requiresPosture ?? "standing";
+
+    // Relationship gate.
+    if (!card.counters.includes("any")) {
+      const badIncoming = { ...incoming, moveType: "__not-countered__" };
+      assert.equal(counterEligibility(state, "p2", badIncoming, card).legal, false, `${card.id}: relationship gate`);
+    }
+
+    // Superstar gate.
+    if (card.superstarId) {
+      const correct = defender.superstar;
+      defender.superstar = counterStar.id === "cm-punk" ? structuredClone(superstars.romanReigns) : structuredClone(superstars.cmPunk);
+      for (const method of Object.keys(defender.momentum)) defender.momentum[method] = 20;
+      assert.equal(counterEligibility(state, "p2", incoming, card).legal, false, `${card.id}: Superstar gate`);
+      defender.superstar = correct;
+      superstarGates += 1;
+    }
+
+    // Printed total Momentum gate (Lead Off disabled so this is the printed threshold).
+    for (const method of Object.keys(defender.momentum)) defender.momentum[method] = 0;
+    if ((card.cost ?? 0) > 0) {
+      const check = counterEligibility(state, "p2", incoming, card);
+      assert.equal(check.legal, false, `${card.id}: zero Momentum must fail cost ${card.cost}`);
+      assert.match(check.reason, /Not enough total momentum/, `${card.id}: total Momentum reason`);
+      costGates += 1;
+    }
+
+    // Method requirements are independent of total Momentum.
+    for (const method of Object.keys(defender.momentum)) defender.momentum[method] = 0;
+    defender.momentum.attitude = 50;
+    for (const [method, amount] of Object.entries(card.requirements ?? {})) {
+      if (amount <= 0) continue;
+      defender.momentum[method] = Math.max(0, amount - 1);
+      const check = counterEligibility(state, "p2", incoming, card);
+      assert.equal(check.legal, false, `${card.id}: missing ${method} must fail`);
+      assert.match(check.reason, new RegExp(`Requires ${amount} ${method}`), `${card.id}: method reason`);
+      defender.momentum[method] = amount;
+      methodGates += 1;
+    }
+
+    // Fully fund before state-specific checks.
+    for (const method of Object.keys(defender.momentum)) defender.momentum[method] = 20;
+
+    if (card.requiresLocation) {
+      const required = card.requiresLocation;
+      const wrong = required === "ring" ? "ringside" : "ring";
+      defender.location = wrong;
+      attacker.location = wrong;
+      assert.equal(counterEligibility(state, "p2", incoming, card).legal, false, `${card.id}: location gate`);
+      defender.location = required;
+      attacker.location = required;
+      locationGates += 1;
+    } else {
+      defender.location = "ring";
+      attacker.location = "ring";
+    }
+
+    if (card.requiresPosture) {
+      const required = card.requiresPosture;
+      const wrong = required === "on-mat" ? "standing" : "on-mat";
+      attacker.posture = wrong;
+      assert.equal(counterEligibility(state, "p2", incoming, card).legal, false, `${card.id}: posture gate`);
+      attacker.posture = required;
+      postureGates += 1;
+    } else {
+      attacker.posture = "standing";
+    }
+
+    if (!card.playableWhileStunned) {
+      defender.status.stunnedTurns = 1;
+      assert.equal(counterEligibility(state, "p2", incoming, card).legal, false, `${card.id}: stunned gate`);
+      defender.status.stunnedTurns = 0;
+      stunGates += 1;
+    }
+
+    const fullyLegal = counterEligibility(state, "p2", incoming, card);
+    assert.equal(fullyLegal.legal, true, `${card.id}: fully funded legal counter should pass (${fullyLegal.reason ?? ""})`);
+  }
+
+  assert.ok(costGates > 300, `cost gates audited: ${costGates}`);
+  assert.ok(methodGates > 200, `method gates audited: ${methodGates}`);
+  assert.ok(superstarGates > 150, `Superstar gates audited: ${superstarGates}`);
+  assert.ok(locationGates > 0, `location gates audited: ${locationGates}`);
+  assert.ok(postureGates > 0, `posture gates audited: ${postureGates}`);
+  assert.ok(stunGates > 300, `stun gates audited: ${stunGates}`);
+});
+
+
+test("obvious generic wrestling techniques from the first exclusivity audit are shared cards", () => {
+  const ids = [
+    "punk-roundhouse","running-knee","punk-snap-suplex","samoan-drop","seth-superkick",
+    "oba-powerbomb","oba-chokeslam","german-suplex","brock-powerbomb","owens-superkick",
+    "owens-ddt","gunther-german","hof1-mankind-knee","s1rock-samoan-drop","s1rock-neckbreaker"
+  ];
+  for (const id of ids) {
+    const card = collectionCards.find(c => c.id === id);
+    assert.ok(card, id);
+    assert.equal(card.superstarId ?? null, null, `${id} should be shared`);
+  }
+});
+
+test("CM Punk identity keeps GTS exclusive Finisher and Anaconda Vise exclusive Trademark", () => {
+  const gts = collectionCards.find(c => c.id === "gts");
+  const vise = collectionCards.find(c => c.id === "anaconda-vise");
+  assert.equal(gts.superstarId, "cm-punk");
+  assert.equal(gts.finisher, true);
+  assert.equal(vise.superstarId, "cm-punk");
+  assert.equal(vise.trademark, true);
+});
+
+
+test("CM Punk branding and exclusive pin Special are updated", async () => {
+  const { entranceForSuperstar } = await import("../js/data/entrances.js");
+  assert.equal(superstars.cmPunk.ability.name, "Pipe Bomb");
+  assert.equal(superstars.cmPunk.ability.id, "pipe-bomb");
+  assert.equal(entranceForSuperstar("cm-punk").name, "It's Clobbering Time!");
+  const punkDeck = decks["cm-punk"];
+  const special = punkDeck.find(c => c.id === "punk-best-in-the-world");
+  assert.ok(special);
+  assert.equal(special.name, "Best in the World");
+  assert.equal(special.superstarId, "cm-punk");
+  assert.equal(special.pinEscape, true);
+  assert.equal(punkDeck.some(c => c.id === "shoulder-up"), false);
+});
+
+test("Chain Wrestling counters any Technical Move but still pays its own gates", () => {
+  const g = new MatchEngine({ superstarA: superstars.romanReigns, superstarB: superstars.cmPunk, deckA: decks["roman-reigns"], deckB: decks["cm-punk"], rng: () => 0 });
+  const defender = g.state().players.p2;
+  const incoming = { id:"method-tech", name:"Technical Attack", kind:"move", method:"technical", moveType:"scoop", damage:4 };
+  const chain = cards.chainWrestling;
+  g.state().phase="COUNTER"; g.state().playerInControl="p1";
+  g.state().proposedMove={ attackerId:"p1", defenderId:"p2", card:incoming, damageBonus:0 };
+  defender.leadOffActive=false;
+  for (const method of Object.keys(defender.momentum)) defender.momentum[method]=0;
+  let check=counterEligibility(g.state(),"p2",incoming,chain);
+  assert.equal(check.legal,false);
+  assert.match(check.reason,/Not enough total momentum/);
+  defender.momentum.attitude=3;
+  check=counterEligibility(g.state(),"p2",incoming,chain);
+  assert.equal(check.legal,false);
+  assert.match(check.reason,/Requires 1 technical/);
+  defender.momentum.technical=1;
+  check=counterEligibility(g.state(),"p2",incoming,chain);
+  assert.equal(check.legal,true);
+  const strikeIncoming={...incoming,method:"strike"};
+  assert.equal(counterEligibility(g.state(),"p2",strikeIncoming,chain).legal,false);
+});
+
+test("Duck counters any Strike Move and Punk starter no longer uses Technical Reversal or Scramble Free", () => {
+  const punkDeck=decks["cm-punk"];
+  assert.equal(punkDeck.filter(c=>c.id==="chain-wrestling").length,2);
+  assert.equal(punkDeck.filter(c=>c.id==="duck-strike").length,1);
+  assert.equal(punkDeck.some(c=>c.id==="reversal"||c.id==="scramble"),false);
+  const g = new MatchEngine({ superstarA: superstars.romanReigns, superstarB: superstars.cmPunk, deckA: decks["roman-reigns"], deckB: punkDeck, rng:()=>0 });
+  const defender=g.state().players.p2;
+  const incoming={id:"method-strike",name:"Strike Attack",kind:"move",method:"strike",moveType:"in-close",damage:4};
+  g.state().phase="COUNTER"; g.state().playerInControl="p1"; g.state().proposedMove={attackerId:"p1",defenderId:"p2",card:incoming,damageBonus:0};
+  defender.leadOffActive=false;
+  for(const method of Object.keys(defender.momentum)) defender.momentum[method]=0;
+  defender.momentum.attitude=3; defender.momentum.strike=1;
+  assert.equal(counterEligibility(g.state(),"p2",incoming,cards.duckStrike).legal,true);
+});
+
+test("Best in the World pin escape is only playable by CM Punk", () => {
+  const punkSpecial=cards.bestInTheWorld;
+  const g = new MatchEngine({ superstarA: superstars.cmPunk, superstarB: superstars.romanReigns, deckA: decks["cm-punk"], deckB: decks["roman-reigns"], rng:()=>0 });
+  g.state().phase="PIN_RESPONSE"; g.state().pin={attackerId:"p2",defenderId:"p1"};
+  assert.equal(canPlayPinEscape(g.state(),"p1",punkSpecial),true);
+  const g2 = new MatchEngine({ superstarA: superstars.romanReigns, superstarB: superstars.cmPunk, deckA: decks["roman-reigns"], deckB: decks["cm-punk"], rng:()=>0 });
+  g2.state().phase="PIN_RESPONSE"; g2.state().pin={attackerId:"p2",defenderId:"p1"};
+  assert.equal(canPlayPinEscape(g2.state(),"p1",punkSpecial),false);
 });

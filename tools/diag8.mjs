@@ -1,0 +1,6 @@
+
+import { MatchEngine } from "../js/engine/MatchEngine.js";import {superstars} from "../js/data/superstars.js";import{decks}from"../js/data/decks.js";import{executeCpuDecision,decisionOwner}from"../js/ai/WrestlingAI.js";
+const ids=["cody-rhodes","cm-punk","roman-reigns","seth-rollins","oba-femi","brock-lesnar","kevin-owens","gunther"], rs=ids.map(id=>Object.values(superstars).find(s=>s.id===id));
+const rng=s=>{let x=s>>>0;return()=>((x=(1664525*x+1013904223)>>>0)/4294967296)};let q={};for(const id of ids)q[id]={decl:{},conn:{},wins:{}};
+for(let rep=0;rep<10;rep++)for(let i=0;i<8;i++)for(let j=0;j<8;j++){let a=rs[i],b=rs[j],g=new MatchEngine({superstarA:a,superstarB:b,deckA:decks[a.id],deckB:decks[b.id],rng:rng(44e4+rep*1e4+i*100+j)}),li=0,k=0;while(g.state().phase!=="MATCH_OVER"&&k++<700){let o=decisionOwner(g.state());if(!o)break;executeCpuDecision(g,o);let f=g.state().log.slice(li);li=g.state().log.length;for(const e of f){let sid=e.playerId==="p1"?a.id:b.id;if(e.type==="MOVE_DECLARED")q[sid].decl[e.cardId]=(q[sid].decl[e.cardId]||0)+1;if(e.type==="MOVE_CONNECTED")q[sid].conn[e.cardId]=(q[sid].conn[e.cardId]||0)+1;}}}
+for(const id of ids){console.log("\n"+id);console.log("decl",Object.entries(q[id].decl).sort((a,b)=>b[1]-a[1]).slice(0,12));console.log("conn",Object.entries(q[id].conn).sort((a,b)=>b[1]-a[1]).slice(0,12));}

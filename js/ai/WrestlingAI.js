@@ -117,8 +117,9 @@ function passReason(match, playerId) {
 }
 
 function chooseCounter(match, defenderId) {
+  if (match.proposedMove?.uncounterable) return null;
   const incoming = match.proposedMove.card;
-  const valid = match.players[defenderId].hand.filter(c => canCounter(incoming, c));
+  const valid = match.players[defenderId].hand.filter(c => canCounter(match, defenderId, incoming, c));
   if (!valid.length) return null;
   // Preserve broader counters when a narrower counter will do.
   valid.sort((a, b) => {
@@ -158,7 +159,7 @@ export function cpuDecision(match, playerId) {
     if (counter) return { type: "counter", card: counter };
     const incoming = match.proposedMove.card;
     const danger = (incoming.damage ?? 0) + (incoming.finisher ? 12 : 0) + (incoming.submission ? 8 : 0);
-    if (p.hand.length >= 8 && danger >= 16) return { type: "autoCounter", cards: p.hand.slice(0, 7) };
+    if (!match.proposedMove.uncounterable && p.hand.length >= 8 && danger >= 16) return { type: "autoCounter", cards: p.hand.slice(0, 7) };
     return { type: "passCounter" };
   }
 
@@ -168,7 +169,8 @@ export function cpuDecision(match, playerId) {
     if (check.legal) {
       // Create pin state temporarily only through the engine; estimate from HP here.
       const hpRatio = opponent.hp / opponent.maxHp;
-      if ((match.postMove.finisher && hpRatio <= 0.15) || hpRatio <= 0.08 || (hpRatio <= 0.12 && p.momentum.attitude >= check.cost + 2)) return { type: "pin" };
+      const explicitPinPressure = match.postMove.pinAtHpRatio != null && hpRatio <= match.postMove.pinAtHpRatio;
+      if ((match.postMove.finisher && hpRatio <= 0.15) || explicitPinPressure || hpRatio <= 0.08 || (hpRatio <= 0.12 && p.momentum.attitude >= check.cost + 2)) return { type: "pin" };
     }
     return { type: "endPostMove" };
   }
