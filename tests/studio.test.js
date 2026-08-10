@@ -59,3 +59,16 @@ test("Superstar Art Studio WebP export is visible, guarded and direct-file safe"
   assert.match(studioJs, /Downloaded \${id}\.webp/);
   assert.match(studioJs, /Export failed:/);
 });
+
+test("Superstar Art Studio local file uploads stay origin-clean for WebP export", () => {
+  assert.match(studioJs, /function readFileAsDataUrl\(file\)/);
+  assert.match(studioJs, /reader\.readAsDataURL\(file\)/);
+  assert.match(studioJs, /function resetCanvasSurface\(\)/);
+  assert.match(studioJs, /canvas\.cloneNode\(false\)/);
+  assert.match(studioJs, /function canvasIsOriginClean\(\)/);
+  assert.match(studioJs, /ctx\.getImageData\(0,0,1,1\)/);
+  assert.match(studioJs, /if\(document\.location\.protocol==="file:"\)[\s\S]*?state\.wrestler=null;[\s\S]*?resetCanvasSurface\(\)/);
+  const fileUploader = studioJs.match(/async function fileToImage\(file\)\{[\s\S]*?\n\}/)?.[0] || "";
+  assert.match(fileUploader, /readFileAsDataUrl\(file\)/);
+  assert.doesNotMatch(fileUploader, /URL\.createObjectURL/);
+});

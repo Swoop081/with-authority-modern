@@ -59,8 +59,8 @@ const superstarArtwork = {
 };
 
 const $ = s => document.querySelector(s);
-const canvas = $("#card-canvas");
-const ctx = canvas.getContext("2d", { alpha: false });
+let canvas = $("#card-canvas");
+let ctx = canvas.getContext("2d", { alpha: false });
 const roster = STUDIO_SUPERSTARS;
 
 const SETS = {
@@ -100,12 +100,34 @@ const EMBEDDED_SET_LOGOS = {
 };
 
 const state = {
-  wrestler: null, wrestlerUrl: null, wrestlerIsProjectAsset: false,
+  wrestler: null, wrestlerIsProjectAsset: false,
   wrestlerZoom: 1, wrestlerX: 0, wrestlerY: 0
 };
 
 function assetUrl(path){ return new URL(`../${path.replace(/^\.\//, "")}`, document.baseURI).href; }
 function loadImage(src){ return new Promise((resolve,reject)=>{ const im=new Image(); im.onload=()=>resolve(im); im.onerror=()=>reject(new Error("Could not load image.")); im.src=src; }); }
+function readFileAsDataUrl(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(String(reader.result||""));
+    reader.onerror=()=>reject(reader.error || new Error("Could not read image file."));
+    reader.readAsDataURL(file);
+  });
+}
+function resetCanvasSurface(){
+  // Canvas taint is permanent for the lifetime of a canvas element. Replacing the
+  // preview surface gives file:// users a fresh origin-clean canvas after they
+  // choose their own image, even if built-in game art was previewed earlier.
+  const replacement=canvas.cloneNode(false);
+  replacement.width=canvas.width;
+  replacement.height=canvas.height;
+  canvas.replaceWith(replacement);
+  canvas=replacement;
+  ctx=canvas.getContext("2d", { alpha: false });
+}
+function canvasIsOriginClean(){
+  try{ ctx.getImageData(0,0,1,1); return true; }catch{ return false; }
+}
 function roundedRect(c,x,y,w,h,r){ c.beginPath(); c.roundRect(x,y,w,h,r); }
 function setCanvasSize(){ const [w,h]=$("#output-size").value.split("x").map(Number); canvas.width=w; canvas.height=h; draw(); }
 function scale(){ return canvas.width/680; }
@@ -174,6 +196,21 @@ function drawName(){
 function drawFrameOverlay(){ const set=$("#set-select").value,w=canvas.width,h=canvas.height; if(set==="hall-of-fame-series-1")frame(ctx,w,h,"#f0cf76","#8e6720");else if(set==="evolution-series-1")frame(ctx,w,h,"#ff8ee8","#8b6cff");else if(set==="season-1-final-boss")frame(ctx,w,h,"#f04a56","#e8bd65");else frame(ctx,w,h,"#67b9ff","#f6a253"); }
 function draw(){ drawTemplate(); drawWrestler(); const vignette=ctx.createLinearGradient(0,0,0,canvas.height);vignette.addColorStop(0,"rgba(0,0,0,.08)");vignette.addColorStop(.60,"rgba(0,0,0,0)");vignette.addColorStop(1,"rgba(0,0,0,.34)");ctx.fillStyle=vignette;ctx.fillRect(0,0,canvas.width,canvas.height);drawSetLogo();drawName();drawFrameOverlay(); }
 
+function prepareSelectedStar(){
+  updateDestination();
+  resetLayout();
+  if(document.location.protocol==="file:"){
+    // Never auto-draw project assets into a local-file canvas: doing so taints
+    // the preview permanently until the canvas element itself is replaced.
+    state.wrestler=null;
+    state.wrestlerIsProjectAsset=false;
+    resetCanvasSurface();
+    draw();
+    status("Choose your wrestler image with the file picker. Local-file export is ready.",true);
+    return;
+  }
+  useCurrent();
+}
 function updateStars(){
   const set=$("#set-select").value;
   const setConfig=SETS[set];
@@ -185,11 +222,11 @@ function updateStars(){
   if(!ids.length){
     select.innerHTML='<option value="">No Superstars found — reload this build</option>';
     updateDestination();
-    status("The studio roster did not load. Use v0.11.14 or newer.",false);
+    status("The studio roster did not load. Use v0.11.15 or newer.",false);
     draw();
     return;
   }
-  resetLayout(); updateDestination(); useCurrent(); draw();
+  prepareSelectedStar();
 }
 function updateDestination(){ const id=$("#star-select").value; const path=id?`assets/cards/art/custom/superstars/${id}.webp`:"assets/cards/art/custom/superstars/…"; $("#destination-path").textContent=path; $("#manifest-entry").textContent=id?`"${id}": "${path}",`:"Select a Superstar."; }
 function resetLayout(){ state.wrestlerZoom=1;state.wrestlerX=0;state.wrestlerY=0; [["#wrestler-zoom",100],["#wrestler-x",0],["#wrestler-y",0]].forEach(([sel,v])=>$(sel).value=v); updateOutputs();draw(); }
@@ -207,11 +244,23 @@ async function useCurrent(){
       : "Loaded current game portrait.", true);
   }catch{status("Could not load the current portrait.",false)}
 }
-function fileToImage(file){
+async function fileToImage(file){
   if(!file)return;
-  if(state.wrestlerUrl)URL.revokeObjectURL(state.wrestlerUrl);
-  const url=URL.createObjectURL(file);state.wrestlerUrl=url;
-  loadImage(url).then(im=>{state.wrestler=im;state.wrestlerIsProjectAsset=false;draw();status("Wrestler image loaded and ready to export.",true)}).catch(()=>status("Could not read that image.",false));
+  status("Reading wrestler image into export-safe memory…");
+  try{
+    // Do not use blob: URLs here. Chrome can treat blob: images as an opaque
+    // origin when the studio itself is opened from file://, which taints canvas.
+    const dataUrl=await readFileAsDataUrl(file);
+    const im=await loadImage(dataUrl);
+    state.wrestler=im;
+    state.wrestlerIsProjectAsset=false;
+    resetCanvasSurface();
+    draw();
+    status("Wrestler image loaded. Preview canvas is export-safe.",true);
+  }catch(error){
+    console.error("Could not read wrestler image",error);
+    status(`Could not read that image: ${error?.message || error}`,false);
+  }
 }
 function status(text,ok){ const el=$("#status");el.textContent=text;el.className=`status ${ok===true?"ok":ok===false?"error":""}`; }
 function download(blob,name){
@@ -239,6 +288,14 @@ async function exportWebp(){
     return status("Your browser blocks exporting built-in project artwork from a local file. Choose your wrestler image with the file picker, or open the studio from GitHub Pages/localhost, then export again.",false);
   }
   draw();
+  // If anything previously tainted the preview (for example the user manually
+  // previewed built-in game art under file://), automatically rebuild a fresh
+  // canvas and redraw the currently selected uploaded image before exporting.
+  if(!canvasIsOriginClean() && !state.wrestlerIsProjectAsset){
+    resetCanvasSurface();
+    draw();
+  }
+  if(!canvasIsOriginClean())return status("This preview still contains a browser-blocked local asset. Choose the wrestler image with the file picker again; the studio will rebuild a clean canvas automatically.",false);
   const q=Number($("#quality").value)/100;
   status("Encoding finished Superstar card as WebP…");
   try{
@@ -254,7 +311,7 @@ async function exportWebp(){
   }
 }
 
-$("#set-select").addEventListener("change",updateStars);$("#star-select").addEventListener("change",()=>{updateDestination();useCurrent();draw();});$("#wrestler-file").addEventListener("change",e=>fileToImage(e.target.files[0]));$("#use-current-wrestler").addEventListener("click",useCurrent);$("#clear-wrestler").addEventListener("click",()=>{state.wrestler=null;state.wrestlerIsProjectAsset=false;draw()});$("#reset-layout").addEventListener("click",resetLayout);$("#output-size").addEventListener("change",setCanvasSize);$("#quality").addEventListener("input",updateOutputs);$("#export-webp").addEventListener("click",exportWebp);
+$("#set-select").addEventListener("change",updateStars);$("#star-select").addEventListener("change",prepareSelectedStar);$("#wrestler-file").addEventListener("change",e=>fileToImage(e.target.files[0]));$("#use-current-wrestler").addEventListener("click",useCurrent);$("#clear-wrestler").addEventListener("click",()=>{state.wrestler=null;state.wrestlerIsProjectAsset=false;draw()});$("#reset-layout").addEventListener("click",resetLayout);$("#output-size").addEventListener("change",setCanvasSize);$("#quality").addEventListener("input",updateOutputs);$("#export-webp").addEventListener("click",exportWebp);
 [["#wrestler-zoom",v=>state.wrestlerZoom=Number(v)/100],["#wrestler-x",v=>state.wrestlerX=Number(v)],["#wrestler-y",v=>state.wrestlerY=Number(v)]].forEach(([sel,set])=>$(sel).addEventListener("input",e=>{set(e.target.value);updateOutputs();draw()}));
 try {
   updateStars();

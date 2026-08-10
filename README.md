@@ -1,4 +1,4 @@
-# WWE Legacy: Collectible Card Game — v0.11.14
+# WWE Legacy: Collectible Card Game — v0.11.15
 
 
 
