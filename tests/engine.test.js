@@ -55,7 +55,7 @@ test("move costs are eligibility thresholds and are never spent", () => {
   const p = g.state().players.p1;
   p.momentum.technical = 2;
   p.momentum.strength = 1;
-  p.momentum.attitude = 4;
+  p.momentum.attitude = 6;
   const move = putInHand(g, "p1", cards.crossRhodes);
   const before = structuredClone(p.momentum);
   g.declareMove("p1", move);
@@ -105,7 +105,7 @@ test("original-style Move Type is separate from Momentum method", () => {
 });
 
 test("every collectible resolves to a local artwork file", () => {
-  assert.equal(collectionCards.length, 540);
+  assert.equal(collectionCards.length, 372);
   for (const card of collectionCards) {
     const art = artworkFor(card);
     assert.ok(art, `${card.id} has no artwork path`);
@@ -165,7 +165,7 @@ test("submission can be maintained by ditching one page", () => {
   const g = new MatchEngine({ superstarA: superstars.cmPunk, superstarB: superstars.codyRhodes, deckA: decks["cm-punk"], deckB: decks["cody-rhodes"] });
   const p = g.state().players.p1;
   p.momentum.technical = 2;
-  p.momentum.attitude = 4;
+  p.momentum.attitude = 5;
   g.state().players.p2.posture = "on-mat";
   const sub = putInHand(g, "p1", cards.anacondaVise);
   g.declareMove("p1", sub);
@@ -181,7 +181,7 @@ test("releasing a submission keeps control", () => {
   const g = new MatchEngine({ superstarA: superstars.cmPunk, superstarB: superstars.codyRhodes, deckA: decks["cm-punk"], deckB: decks["cody-rhodes"] });
   const p = g.state().players.p1;
   p.momentum.technical = 2;
-  p.momentum.attitude = 4;
+  p.momentum.attitude = 5;
   g.state().players.p2.posture = "on-mat";
   const sub = putInHand(g, "p1", cards.anacondaVise);
   g.declareMove("p1", sub);
@@ -191,7 +191,7 @@ test("releasing a submission keeps control", () => {
   assert.equal(g.state().submission, null);
 });
 
-test("all 24 linked Entrances resolve automatically pre-match outside the five-card Lead Off hand", () => {
+test("all 25 linked Entrances resolve automatically pre-match outside the five-card Lead Off hand", () => {
   for (const star of Object.values(superstars)) {
     const opponent = star.id === "cody-rhodes" ? superstars.cmPunk : superstars.codyRhodes;
     const g = new MatchEngine({ superstarA: star, superstarB: opponent, deckA: decks[star.id], deckB: decks[opponent.id], startingControl: "p1" });
@@ -305,27 +305,35 @@ test("Seth's Architect rewards first-time Methods without adding setup requireme
   assert.equal(seth.hand.length >= before, true); // Move leaves, ability draws one.
 });
 
-test("Undertaker draws when a cost-6+ Move is Countered", () => {
-  const g = new MatchEngine({ superstarA: superstars.undertaker, superstarB: superstars.codyRhodes, deckA: decks["the-undertaker"], deckB: decks["cody-rhodes"] });
-  const taker = g.state().players.p1;
-  taker.momentum.strength = 5; taker.momentum.attitude = 5;
-  const heavy = putInHand(g, "p1", { ...hallCards.takerChokeslam, cost: 6 });
-  const counter = putInHand(g, "p2", cards.desperationCounter);
-  g.declareMove("p1", heavy); g.counter("p2", counter);
-  assert.equal(taker.abilityUses, 1);
-  assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_ABILITY" && e.playerId === "p1"), true);
+test("Undertaker's Deadman Walking survives a lethal Move once and triggers the comeback", () => {
+  const g = new MatchEngine({ superstarA: superstars.codyRhodes, superstarB: superstars.undertaker, deckA: decks["cody-rhodes"], deckB: decks["the-undertaker"] });
+  const cody = g.state().players.p1;
+  const taker = g.state().players.p2;
+  cody.momentum.strike = 1;
+  const beforeAttitude = taker.momentum.attitude;
+  const beforeHand = taker.hand.length;
+  const lethal = putInHand(g, "p1", { ...cards.jab, id: "deadman-lethal-test", damage: taker.hp + 20 });
+  g.declareMove("p1", lethal); g.passCounter("p2");
+  assert.equal(taker.hp, 1);
+  assert.equal(taker.passiveFlags.surviveAtOneUsed, true);
+  assert.equal(taker.momentum.attitude, beforeAttitude + 1); // +2 comeback, then the connected Move removes 1 Attitude
+  assert.equal(taker.hand.length, beforeHand + 1);
+  assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_PASSIVE" && e.playerId === "p2" && e.effect === "SURVIVE_AT_ONE"), true);
 });
 
-test("Kane's Superstar card passively reduces High Risk damage and ignores his first Stun", () => {
-  const g = new MatchEngine({ superstarA: superstars.codyRhodes, superstarB: superstars.kane, deckA: decks["cody-rhodes"], deckB: decks["kane"] });
-  const cody = g.state().players.p1;
-  cody.momentum.strike = 3; cody.momentum.attitude = 3;
-  const incoming = putInHand(g, "p1", { ...cards.clothesline, damage: 6, stunTurns: 1, moveType: "high-risk" });
-  const before = g.state().players.p2.hp;
-  g.declareMove("p1", incoming); g.passCounter("p2");
-  assert.equal(g.state().players.p2.hp, before - 5);
-  assert.equal(g.state().players.p2.status.stunnedTurns, 0);
-  assert.equal(g.state().players.p2.passiveFlags.firstStunIgnored, true);
+test("Kane's Big Red Machine rewards his first two 8+ damage connections", () => {
+  const g = new MatchEngine({ superstarA: superstars.kane, superstarB: superstars.codyRhodes, deckA: decks["kane"], deckB: decks["cody-rhodes"] });
+  const kane = g.state().players.p1;
+  kane.momentum.strike = 1;
+  const beforeAttitude = kane.momentum.attitude;
+  const heavy = putInHand(g, "p1", { ...hallCards.jab, id: "kane-heavy-test", superstarId: "kane", requirements: { strike: 1 }, damage: 8, setOpponentPosture: "on-mat" });
+  const beforeHand = kane.hand.length;
+  g.declareMove("p1", heavy); g.passCounter("p2");
+  assert.equal(kane.abilityUses, 1);
+  assert.equal(kane.momentum.attitude, beforeAttitude + 2); // universal connection + Superstar ability
+  assert.equal(kane.hand.length, beforeHand); // played one, ability drew one
+  assert.equal(kane.specialFlags.kaneStrikeBonus, true);
+  assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_ABILITY" && e.playerId === "p1" && e.abilityId === "big-red-machine"), true);
 });
 
 test("a knockdown Move opens a legal first pin attempt at zero Attitude cost", () => {
@@ -388,7 +396,7 @@ test("successful pin ends the match and blocks further play", () => {
   const cody = g.state().players.p1;
   cody.momentum.technical = 2;
   cody.momentum.strength = 1;
-  cody.momentum.attitude = 4;
+  cody.momentum.attitude = 6;
   const finisher = putInHand(g, "p1", cards.crossRhodes);
   g.declareMove("p1", finisher);
   g.passCounter("p2");
@@ -442,13 +450,14 @@ test("maintained submissions apply repeated body-part pressure and can win", () 
   const punk = g.state().players.p1;
   const cody = g.state().players.p2;
   punk.momentum.technical = 2;
-  punk.momentum.attitude = 4;
+  punk.momentum.attitude = 5;
   cody.hp = 12;
   cody.posture = "on-mat";
   const sub = putInHand(g, "p1", cards.anacondaVise);
   g.declareMove("p1", sub);
   g.passCounter("p2");
-  assert.equal(cody.submissionDamage.head, 4);
+  const initialPressure = cards.anacondaVise.submission.damage;
+  assert.equal(cody.submissionDamage.head, initialPressure);
   assert.equal(g.state().phase, "SUBMISSION_MAINTAIN");
   let squeezes = 0;
   while (g.state().phase === "SUBMISSION_MAINTAIN" && squeezes < 10) {
@@ -456,7 +465,7 @@ test("maintained submissions apply repeated body-part pressure and can win", () 
     g.maintainSubmission("p1", ditch);
     squeezes += 1;
   }
-  assert.ok(cody.submissionDamage.head >= 8);
+  assert.ok(cody.submissionDamage.head >= initialPressure * 2);
   assert.equal(g.state().phase, "MATCH_OVER");
   assert.equal(g.state().winner, "p1");
   assert.equal(g.state().finish.type, "submission");
@@ -467,7 +476,7 @@ function seededRng(seed) {
   return () => ((x = (1664525 * x + 1013904223) >>> 0) / 4294967296);
 }
 
-test("all 24 strategy decks contain exactly 55 pages with fixed five-card openings", () => {
+test("all 25 strategy decks contain exactly 55 pages with fixed five-card openings", () => {
   for (const deck of Object.values(decks)) assert.equal(deck.length, 55);
 });
 
@@ -568,7 +577,7 @@ test("Fighting Spirit reduces Move damage and Crowd Connection adds Attitude", (
   const attitudeBefore = attacker.momentum.attitude;
   g.declareMove("p1", jab);
   g.passCounter("p2");
-  assert.equal(defender.hp, hpBefore - 1);
+  assert.equal(defender.hp, hpBefore - Math.max(0, cards.jab.damage - 1));
   assert.equal(attacker.momentum.attitude, attitudeBefore + 2);
 });
 
@@ -599,7 +608,7 @@ test("signature Moves no longer need corner, ropes, orientation, barricade or ap
 
   const codyGame = game();
   const cody = codyGame.state().players.p1;
-  cody.momentum.agility = 2; cody.momentum.attitude = 3;
+  cody.momentum.agility = 2; cody.momentum.attitude = 5;
   const cutter = putInHand(codyGame, "p1", cards.codyCutter);
   assert.equal(moveEligibility(codyGame.state(), "p1", cutter).legal, true);
 });
@@ -725,12 +734,14 @@ test("flow guard keeps mature 3+ Momentum dead-Move passes below 20 percent", ()
 });
 
 
-test("SummerSlam Series 1 now contains at least 130 distinct Move cards", () => {
-  const moveCards = cardsForSet("summerslam-series-1").filter(card => card.kind === "move");
-  assert.ok(moveCards.length >= 130, `expected at least 130 Moves, got ${moveCards.length}`);
+test("SummerSlam Series 1 matches the audited active card pool", () => {
+  const summer = cardsForSet("summerslam-series-1");
+  assert.equal(summer.length, 135);
+  assert.equal(summer.filter(card => card.kind === "move").length, 101);
+  assert.equal(summer.filter(card => card.kind === "superstar").length, 8);
 });
 
-test("all 24 recommended decks respect the five-copy per-card cap", () => {
+test("all 25 recommended decks respect the five-copy per-card cap", () => {
   for (const [id, deck] of Object.entries(decks)) {
     const counts = new Map();
     for (const card of deck) counts.set(card.id, (counts.get(card.id) ?? 0) + 1);
@@ -868,7 +879,7 @@ test("Deck Assistance supports ask, auto-upgrade and manual modes", () => {
   assert.throws(() => setDeckAssistance(p, "reckless"), /Invalid/);
 });
 
-test("all 24 recommended decks satisfy shared deck-health floors", async () => {
+test("all 25 recommended decks satisfy shared deck-health floors", async () => {
   const { evaluateDeck } = await import("../js/data/deck-health.js");
   for (const [superstarId, deck] of Object.entries(decks)) {
     const health = evaluateDeck(deck, { superstarId });
@@ -900,10 +911,10 @@ test("deck health rejects swaps that damage functional deck shape", async () => 
 
 test("recommended deck shape exposes role targets used by auto-building", async () => {
   const { RECOMMENDED_DECK_SHAPE } = await import("../js/data/deck-health.js");
-  assert.deepEqual(RECOMMENDED_DECK_SHAPE.lowCostMoves, { min: 6, target: 10, max: 16 });
-  assert.deepEqual(RECOMMENDED_DECK_SHAPE.midCostMoves, { min: 5, target: 9, max: 14 });
-  assert.deepEqual(RECOMMENDED_DECK_SHAPE.counters, { min: 12, target: 18, max: 28 });
-  assert.deepEqual(RECOMMENDED_DECK_SHAPE.momentum, { min: 12, target: 14, max: 16 });
+  assert.deepEqual(RECOMMENDED_DECK_SHAPE.lowCostMoves, { min: 10, target: 16, max: 26 });
+  assert.deepEqual(RECOMMENDED_DECK_SHAPE.midCostMoves, { min: 5, target: 12, max: 20 });
+  assert.deepEqual(RECOMMENDED_DECK_SHAPE.counters, { min: 12, target: 30, max: 42 });
+  assert.deepEqual(RECOMMENDED_DECK_SHAPE.momentum, { min: 10, target: 12, max: 16 });
 });
 
 
@@ -968,7 +979,7 @@ test("ladder draws do not consume a life or advance the rung", () => {
 });
 
 
-test("all 24 Superstar mirror matches can complete without AI stalls", () => {
+test("all 25 Superstar mirror matches can complete without AI stalls", () => {
   const seededRng = (seed) => { let x = seed >>> 0; return () => ((x = (1664525 * x + 1013904223) >>> 0) / 4294967296); };
   for (const [index, star] of Object.values(superstars).entries()) {
     const g = new MatchEngine({ superstarA: star, superstarB: star, deckA: decks[star.id], deckB: decks[star.id], rng: seededRng(9000 + index) });
@@ -1198,11 +1209,11 @@ test("Championship Road wins feed Championship challenge metrics", async () => {
 });
 
 
-test("Hall of Fame Series 1 contains eight legends, two eras and three Managers", () => {
+test("Hall of Fame Series 1 contains the audited active pool, eight legends, two eras and three Managers", () => {
   const hall = cardsForSet("hall-of-fame-series-1");
   const info = setCollectionFor("hall-of-fame-series-1");
   assert.equal(info.displayName, "Hall of Fame — Series 1");
-  assert.equal(hall.length, 167);
+  assert.equal(hall.length, 106);
   assert.equal(hall.filter(c => c.kind === "superstar").length, 8);
   assert.equal(hall.filter(c => c.kind === "manager").length, 3);
   assert.deepEqual(
@@ -1225,7 +1236,7 @@ test("Managers are unique, Superstar-restricted and only one may be included in 
   assert.equal(ownershipCapFor(hallCards.bobbyHeenan), 1);
   assert.deepEqual(hallCards.bobbyHeenan.allowedSuperstarIds, ["andre-the-giant"]);
   assert.deepEqual(hallCards.missElizabeth.allowedSuperstarIds, ["randy-savage"]);
-  assert.deepEqual(hallCards.paulBearer.allowedSuperstarIds, ["the-undertaker", "kane"]);
+  assert.deepEqual(hallCards.paulBearer.allowedSuperstarIds, ["the-undertaker"]);
   const illegal = [...decks["andre-the-giant"]];
   illegal[5] = hallCards.missElizabeth;
   illegal[6] = hallCards.bobbyHeenan;
@@ -1234,30 +1245,20 @@ test("Managers are unique, Superstar-restricted and only one may be included in 
   assert.equal(health.violations.some(v => v.includes("at most one Manager")), true);
 });
 
-test("Bobby Heenan triggers once after Andre successfully Counters a Move", () => {
+test("Bobby Heenan recovers Andre's first important Move that gets Countered", () => {
   const g = new MatchEngine({ superstarA: superstars.andreTheGiant, superstarB: superstars.hulkHogan, deckA: decks["andre-the-giant"], deckB: decks["hulk-hogan"], rng: () => 0 });
   const andre = g.state().players.p1;
-  const heenan = putInHand(g, "p1", hallCards.bobbyHeenan);
-  g.playManager("p1", heenan);
-  assert.equal(andre.activeManager.id, hallCards.bobbyHeenan.id);
-  g.passTurn("p1");
-  g.state().players.p2.momentum.attitude = 1;
-  andre.momentum.agility = Math.max(andre.momentum.agility, 1);
-  let incoming = putInHand(g, "p2", hallCards.jab);
-  let counter = putInHand(g, "p1", hallCards.duck);
-  g.declareMove("p2", incoming);
-  g.counter("p1", counter);
+  g.playManager("p1", putInHand(g, "p1", hallCards.bobbyHeenan));
+  andre.momentum.strike = 1;
+  andre.momentum.attitude = 6;
+  const important = putInHand(g, "p1", { ...hallCards.andreHeadbuttReviewed, id: "heenan-important-test", cost: 7 });
+  const counter = putInHand(g, "p2", cards.desperationCounter);
+  g.declareMove("p1", important);
+  g.counter("p2", counter);
   assert.equal(andre.managerAbilityUsed, true);
-  assert.equal(andre.momentum.attitude, 1);
-  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id).length, 1);
-  g.passTurn("p1");
-  g.state().players.p2.momentum.attitude = 1;
-  andre.momentum.agility = Math.max(andre.momentum.agility, 1);
-  incoming = putInHand(g, "p2", hallCards.jab);
-  counter = putInHand(g, "p1", hallCards.duck);
-  g.declareMove("p2", incoming);
-  g.counter("p1", counter);
-  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id).length, 1);
+  assert.equal(andre.hand.some(c => c.id === important.id), true);
+  assert.equal(andre.discard.some(c => c.id === important.id), false);
+  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id && e.trigger === "COUNTERED_MOVE_RECOVERY").length, 1);
 });
 
 test("a Manager cannot be played for an unrelated Superstar", () => {
@@ -1266,52 +1267,52 @@ test("a Manager cannot be played for an unrelated Superstar", () => {
   assert.throws(() => g.playManager("p1", heenan), /Illegal Manager/);
 });
 
-test("Stone Cold's Kick to the Gut searches the Playbook for Stone Cold Stunner", () => {
+test("Stone Cold's reviewed Kick to the Gut searches the Playbook for the reviewed Stone Cold Stunner", () => {
   const g = new MatchEngine({ superstarA: superstars.stoneCold, superstarB: superstars.mankind, deckA: decks["stone-cold-steve-austin"], deckB: decks.mankind, rng: () => 0.4 });
   const austin = g.state().players.p1;
-  austin.momentum.strike = 1;
-  austin.momentum.attitude = 2;
-  const kick = austin.hand.find(c => c.id === hallCards.austinKickGut.id) ?? putInHand(g, "p1", hallCards.austinKickGut);
-  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunner.id), false);
+  austin.momentum.strike = 2;
+  austin.momentum.attitude = 4;
+  const kick = austin.hand.find(c => c.id === hallCards.austinKickReviewed.id) ?? putInHand(g, "p1", hallCards.austinKickReviewed);
+  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunnerReviewed.id), false);
+  assert.equal(austin.deck.some(c => c.id === hallCards.austinStunnerReviewed.id), true);
   g.declareMove("p1", kick);
   g.passCounter("p2");
-  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunner.id), true);
-  assert.equal(g.state().log.some(e => e.type === "CARD_SEARCHED" && e.playerId === "p1" && e.cardId === hallCards.austinStunner.id), true);
+  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunnerReviewed.id), true);
+  assert.equal(g.state().log.some(e => e.type === "CARD_SEARCHED" && e.playerId === "p1" && e.cardId === hallCards.austinStunnerReviewed.id), true);
 });
 
-test("Move secondary effects can draw, discard and add extra Attitude without extra setup cards", () => {
-  const g = new MatchEngine({ superstarA: superstars.brockLesnar, superstarB: superstars.romanReigns, deckA: decks["brock-lesnar"], deckB: decks["roman-reigns"], rng: () => 0 });
-  const brock = g.state().players.p1;
-  const roman = g.state().players.p2;
+test("active shared Move secondary effects can draw, discard and add extra Attitude", () => {
+  const g = new MatchEngine({ superstarA: superstars.brockLesnar, superstarB: superstars.cmPunk, deckA: decks["brock-lesnar"], deckB: decks["cm-punk"], rng: () => 0 });
+  const cody = g.state().players.p1;
+  const punk = g.state().players.p2;
 
   // Draw effect.
-  brock.momentum.strength = 2;
-  brock.momentum.attitude = 3;
-  const handBeforeDraw = brock.hand.length;
-  const suplexCity = putInHand(g, "p1", cards.brockTripleGermans);
-  g.declareMove("p1", suplexCity);
+  cody.momentum.technical = 1; cody.momentum.attitude = 1;
+  const drawMove = putInHand(g, "p1", cards.armDrag);
+  const handBeforeDraw = cody.hand.length;
+  g.declareMove("p1", drawMove);
   g.passCounter("p2");
-  assert.equal(brock.hand.length >= handBeforeDraw, true); // played card leaves, then effect draws
+  assert.equal(cody.hand.length, handBeforeDraw); // played one, then drew one
   assert.equal(g.state().log.some(e => e.type === "CARDS_DRAWN" && e.playerId === "p1"), true);
 
   // Discard effect.
   g.endPostMove("p1");
-  brock.momentum.strength = 3; brock.momentum.attitude = 7;
-  const romanHandBefore = roman.hand.length;
-  const f5 = putInHand(g, "p1", cards.f5);
-  g.declareMove("p1", f5);
+  cody.momentum.technical = 1; cody.momentum.attitude = 1;
+  const punkHandBefore = punk.hand.length;
+  const discardMove = putInHand(g, "p1", cards.snapmare);
+  g.declareMove("p1", discardMove);
   g.passCounter("p2");
-  assert.equal(roman.hand.length, romanHandBefore - 1);
+  assert.equal(punk.hand.length, punkHandBefore - 1);
   assert.equal(g.state().log.some(e => e.type === "CARDS_DISCARDED" && e.playerId === "p2"), true);
 
   // Extra Attitude effect beyond the universal +1 on a connected Move.
   g.endPostMove("p1");
-  brock.momentum.strength = 1; brock.momentum.attitude = 3;
-  const belly = putInHand(g, "p1", cards.bellyToBelly);
-  const beforeAttitude = brock.momentum.attitude;
-  g.declareMove("p1", belly);
+  cody.momentum.strike = 1; cody.momentum.attitude = 1;
+  const attitudeMove = putInHand(g, "p1", cards.runningForearm);
+  const beforeAttitude = cody.momentum.attitude;
+  g.declareMove("p1", attitudeMove);
   g.passCounter("p2");
-  assert.equal(brock.momentum.attitude, beforeAttitude + 2);
+  assert.equal(cody.momentum.attitude, beforeAttitude + 2);
 });
 
 test("Hall of Fame boosters stay inside their own set and still guarantee exactly one Foil", () => {
@@ -1351,34 +1352,42 @@ test("Championship Road has Golden Era and Attitude Era Hall of Fame finals", as
   assert.equal(CHAMPIONSHIP_BRANCHES["attitude-era"].finals.includes(attitude.opponents.at(-1)), true);
 });
 
-test("Miss Elizabeth triggers once when Randy Savage falls to half HP or less", () => {
+test("Miss Elizabeth triggers once below half HP: draw 2, then bottom 1", () => {
   const g = new MatchEngine({ superstarA: superstars.randySavage, superstarB: superstars.hulkHogan, deckA: decks["randy-savage"], deckB: decks["hulk-hogan"], rng: () => 0 });
   const savage = g.state().players.p1;
-  const elizabeth = putInHand(g, "p1", hallCards.missElizabeth);
-  g.playManager("p1", elizabeth);
+  g.playManager("p1", putInHand(g, "p1", hallCards.missElizabeth));
   savage.hp = 21;
   g.passTurn("p1");
   g.state().players.p2.momentum.attitude = 1;
+  const beforeHand = savage.hand.length;
+  const beforeHp = savage.hp;
   const jab = putInHand(g, "p2", hallCards.jab);
   g.declareMove("p2", jab);
   g.passCounter("p1");
   assert.equal(savage.managerAbilityUsed, true);
-  assert.equal(savage.hp, 21); // 21 -> 19 from the hit, then Elizabeth recovers 2.
+  assert.equal(savage.hp, beforeHp - hallCards.jab.damage);
+  assert.equal(savage.hand.length, beforeHand + 1);
+  assert.equal(g.state().log.some(e => e.type === "MANAGER_BOTTOMED_PAGE" && e.managerId === hallCards.missElizabeth.id), true);
   assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.missElizabeth.id).length, 1);
 });
 
-test("Paul Bearer triggers once after Undertaker connects a qualifying Power Move", () => {
+test("Paul Bearer triggers once below half HP and grants Urn momentum when no card can be recovered", () => {
   const g = new MatchEngine({ superstarA: superstars.undertaker, superstarB: superstars.mankind, deckA: decks["the-undertaker"], deckB: decks.mankind, rng: () => 0 });
   const taker = g.state().players.p1;
-  const bearer = putInHand(g, "p1", hallCards.paulBearer);
-  g.playManager("p1", bearer);
-  taker.momentum.strength = 1;
-  taker.momentum.attitude = 4;
-  const chokeslam = putInHand(g, "p1", hallCards.takerChokeslam);
-  g.declareMove("p1", chokeslam);
-  g.passCounter("p2");
+  g.playManager("p1", putInHand(g, "p1", hallCards.paulBearer));
+  taker.hp = 38;
+  taker.discard = [];
+  const strengthBefore = taker.momentum.strength;
+  const attitudeBefore = taker.momentum.attitude;
+  g.passTurn("p1");
+  g.state().players.p2.momentum.attitude = 1;
+  g.declareMove("p2", putInHand(g, "p2", hallCards.jab));
+  g.passCounter("p1");
+  assert.equal(taker.hp <= taker.maxHp * 0.5, true);
   assert.equal(taker.managerAbilityUsed, true);
-  assert.equal(taker.momentum.attitude, 6); // +1 normal connection, +1 from Bearer.
+  assert.equal(taker.momentum.strength, strengthBefore + 1);
+  assert.equal(taker.momentum.attitude, attitudeBefore); // Bearer +1 offsets the connected Move’s universal -1
+  assert.equal(g.state().log.some(e => e.type === "MOMENTUM_EFFECT" && e.playerId === "p1" && e.sourceCardId === hallCards.paulBearer.id && e.method === "attitude" && e.amount === 1), true);
   assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.paulBearer.id).length, 1);
 });
 
@@ -1482,29 +1491,32 @@ test("Card Art Studio supports URL/upload crop, WebP export and manifest automat
 });
 
 
-test("Evolution Series 1 contains eight women and a launch-sized 172-card collection", () => {
+test("Evolution Series 1 contains the audited active pool and eight women", () => {
   const evo = cardsForSet("evolution-series-1");
   const info = setCollectionFor("evolution-series-1");
   assert.equal(info.displayName, "Evolution — Series 1");
-  assert.equal(evo.length, 172);
+  assert.equal(evo.length, 110);
+  assert.equal(evo.filter(c => c.kind === "move").length, 78);
   assert.equal(evo.filter(c => c.kind === "superstar").length, 8);
-  assert.equal(evo.filter(c => c.kind === "move" && !c.superstarId).length, 53);
   assert.deepEqual(evo.filter(c => c.kind === "superstar").map(c => c.superstarId), ["rhea-ripley","liv-morgan","becky-lynch","bayley","charlotte-flair","iyo-sky","paige","stephanie-vaquer"]);
 });
 
-test("Evolution named Entrances, Signatures, Trademarks and Finishers are Superstar-locked", () => {
+test("Evolution linked Entrances and every active Superstar signature are locked to the correct wrestler", () => {
   const evo = cardsForSet("evolution-series-1");
-  const named = evo.filter(c => c.kind === "entrance" || c.signature || c.trademark || c.finisher);
-  assert.ok(named.length >= 32);
-  for (const card of named) assert.ok(card.superstarId, `${card.id} should be locked to its named Superstar`);
-  assert.equal(evolutionCards.riptide.finisher, true);
-  assert.equal(evolutionCards.oblivion.finisher, true);
-  assert.equal(evolutionCards.disarmher.trademark, true);
-  assert.equal(evolutionCards.bayleyToBelly.trademark, true);
-  assert.equal(evolutionCards.naturalSelection.trademark, true);
-  assert.equal(evolutionCards.bulletTrain.trademark, true);
-  assert.equal(evolutionCards.pto.trademark, true);
-  assert.equal(evolutionCards.devilsKiss.trademark, true);
+  const evoStars = Object.values(superstars).filter(star => star.setId === "evolution-series-1");
+  for (const star of evoStars) {
+    const entrance = evo.find(card => card.id === star.entranceId);
+    assert.ok(entrance, `${star.id}: linked Entrance must remain active`);
+    assert.equal(entrance.superstarId, star.id, `${entrance.id} should be locked to ${star.id}`);
+    for (const signatureId of star.signatures) {
+      const signature = evo.find(card => card.id === signatureId);
+      assert.ok(signature, `${star.id}: active signature ${signatureId} missing from Evolution pool`);
+      assert.equal(signature.superstarId, star.id, `${signatureId} should be locked to ${star.id}`);
+    }
+  }
+  for (const card of evo.filter(c => c.kind === "entrance" || c.signature || c.trademark || c.finisher)) {
+    assert.ok(card.superstarId, `${card.id} should be Superstar-locked`);
+  }
 });
 
 test("Evolution shared common Moves are legal cross-roster while named Moves are restricted", async () => {
@@ -1609,8 +1621,10 @@ test("CPU maintains a submission when the next squeeze can force a tap even with
   const attacker = g.state().players.p1;
   const defender = g.state().players.p2;
   attacker.momentum.strength = 1;
+  attacker.momentum.technical = 1;
   attacker.momentum.attitude = 6;
   defender.hp = 12;
+  defender.posture = "on-mat";
   const hold = putInHand(g, "p1", cards.guillotine);
   g.declareMove("p1", hold);
   g.passCounter("p2");
@@ -1651,6 +1665,8 @@ test("premium mobile shell provides persistent primary navigation outside live m
 test("European Uppercut used as a counter becomes a real counter-attack and deals its printed damage", () => {
   const g = new MatchEngine({ superstarA: superstars.rheaRipley, superstarB: superstars.beckyLynch, deckA: decks["rhea-ripley"], deckB: decks["becky-lynch"], startingControl: "p1" });
   g.state().players.p1.momentum.strike = 4;
+  g.state().players.p2.momentum.strike = 1;
+  g.state().players.p2.momentum.attitude = 1;
   const incoming = putInHand(g, "p1", evolutionCards.rheaShortArmClothesline); // Mad Rush
   const uppercut = putInHand(g, "p2", evolutionCards.europeanUppercut);       // Arm Extended counters Mad Rush
   const hpBefore = g.state().players.p1.hp;
@@ -1674,9 +1690,12 @@ test("Rhea receives a legal counter-to-counter window against European Uppercut"
   const g = new MatchEngine({ superstarA: superstars.rheaRipley, superstarB: superstars.beckyLynch, deckA: decks["rhea-ripley"], deckB: decks["becky-lynch"], startingControl: "p1" });
   g.state().players.p1.momentum.strike = 5;
   g.state().players.p1.momentum.strength = 5;
+  g.state().players.p1.momentum.agility = 1;
+  g.state().players.p2.momentum.strike = 1;
+  g.state().players.p2.momentum.attitude = 1;
   const clothesline = putInHand(g, "p1", evolutionCards.rheaShortArmClothesline); // Mad Rush
   const uppercut = putInHand(g, "p2", evolutionCards.europeanUppercut);           // Arm Extended
-  const ripcord = putInHand(g, "p1", evolutionCards.rheaRipcordKnee);             // Leg Extended counters Arm Extended
+  const ripcord = putInHand(g, "p1", evolutionCards.enzuigiri);                    // Leg Extended counters Arm Extended
   const beckyHpBefore = g.state().players.p2.hp;
 
   g.declareMove("p1", clothesline);
@@ -1684,13 +1703,13 @@ test("Rhea receives a legal counter-to-counter window against European Uppercut"
   assert.equal(g.state().proposedMove?.defenderId, "p1", "Rhea must get the response window");
 
   g.counter("p1", ripcord);
-  assert.equal(g.state().proposedMove?.card.id, evolutionCards.rheaRipcordKnee.id);
+  assert.equal(g.state().proposedMove?.card.id, evolutionCards.enzuigiri.id);
   assert.equal(g.state().proposedMove?.defenderId, "p2");
   g.passCounter("p2");
 
-  assert.equal(g.state().players.p2.hp, beckyHpBefore - evolutionCards.rheaRipcordKnee.damage);
+  assert.equal(g.state().players.p2.hp, beckyHpBefore - evolutionCards.enzuigiri.damage);
   assert.equal(g.state().log.some(e => e.type === "COUNTER_ATTACK_DECLARED" && e.cardId === evolutionCards.europeanUppercut.id), true);
-  assert.equal(g.state().log.some(e => e.type === "COUNTER_ATTACK_DECLARED" && e.cardId === evolutionCards.rheaRipcordKnee.id), true);
+  assert.equal(g.state().log.some(e => e.type === "COUNTER_ATTACK_DECLARED" && e.cardId === evolutionCards.enzuigiri.id), true);
 });
 
 test("every collectible offensive Move with a counter relationship opens a counter-attack response window when fully legal", () => {
@@ -1783,6 +1802,7 @@ test("CPU never voluntarily releases a Finisher submission while it has a page t
   const attacker = g.state().players.p1;
   const defender = g.state().players.p2;
   attacker.momentum.technical = 7;
+  attacker.momentum.agility = 1;
   attacker.momentum.attitude = 7;
   defender.posture = "on-mat";
   const hold = putInHand(g, "p1", evolutionCards.figureEight);
@@ -1795,7 +1815,7 @@ test("CPU never voluntarily releases a Finisher submission while it has a page t
   assert.equal(decision.card.id, cards.momentum.strength.id);
 });
 
-test("all 24 Superstars can play Momentum then an immediate Lead Off Move on first Control", () => {
+test("all 25 Superstars can play Momentum then an immediate Lead Off Move on first Control", () => {
   const roster = Object.values(superstars);
   for (let i = 0; i < roster.length; i += 1) {
     const star = roster[i];
@@ -1915,7 +1935,7 @@ test("Season 1 Tier 50 Final Boss Rock is a distinct 55-card season-exclusive pe
   assert.equal(rock.signatures.includes(rockCards.rockBottomFinalBoss.id), true);
   assert.equal(rock.signatures.includes(rockCards.peoplesElbowFinalBoss.id), true);
   assert.equal(rock.signatures.includes(rockCards.finalBossSpinebuster.id), true);
-  assert.equal(rock.signatures.includes(rockCards.finalBossSharpshooter.id), true);
+  assert.equal(collectionCards.some(c => c.id === rockCards.finalBossSharpshooter.id), false, "dormant Sharpshooter should stay outside the active reward pool");
 });
 
 test("claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned deck", async () => {
@@ -2123,7 +2143,7 @@ test("Roundhouse Kick cannot counter on Turn 1 without its printed Momentum gate
 
 test("full collectible Move counter audit enforces relation, Superstar, Momentum, method, location, posture and stun gates", () => {
   const counterMoves = collectionCards.filter(card => card.kind === "move" && (card.counters?.length ?? 0) > 0);
-  assert.ok(counterMoves.length > 300, "expected a full-pool counter audit");
+  assert.ok(counterMoves.length > 0, "active card pool must contain counter-capable Moves");
 
   let costGates = 0, methodGates = 0, superstarGates = 0, locationGates = 0, postureGates = 0, stunGates = 0;
 
@@ -2238,26 +2258,30 @@ test("full collectible Move counter audit enforces relation, Superstar, Momentum
     assert.equal(fullyLegal.legal, true, `${card.id}: fully funded legal counter should pass (${fullyLegal.reason ?? ""})`);
   }
 
-  assert.ok(costGates > 300, `cost gates audited: ${costGates}`);
-  assert.ok(methodGates > 200, `method gates audited: ${methodGates}`);
-  assert.ok(superstarGates > 150, `Superstar gates audited: ${superstarGates}`);
-  assert.ok(locationGates > 0, `location gates audited: ${locationGates}`);
-  assert.ok(postureGates > 0, `posture gates audited: ${postureGates}`);
-  assert.ok(stunGates > 300, `stun gates audited: ${stunGates}`);
+  assert.equal(costGates, counterMoves.filter(card => (card.cost ?? 0) > 0).length, `cost gates audited: ${costGates}`);
+  assert.equal(methodGates, counterMoves.reduce((sum, card) => sum + Object.values(card.requirements ?? {}).filter(amount => amount > 0).length, 0), `method gates audited: ${methodGates}`);
+  assert.equal(superstarGates, counterMoves.filter(card => !!card.superstarId).length, `Superstar gates audited: ${superstarGates}`);
+  assert.equal(locationGates, counterMoves.filter(card => !!card.requiresLocation).length, `location gates audited: ${locationGates}`);
+  assert.equal(postureGates, counterMoves.filter(card => !!card.requiresPosture).length, `posture gates audited: ${postureGates}`);
+  assert.equal(stunGates, counterMoves.filter(card => !card.playableWhileStunned).length, `stun gates audited: ${stunGates}`);
 });
 
 
-test("obvious generic wrestling techniques from the first exclusivity audit are shared cards", () => {
-  const ids = [
+test("active generic wrestling techniques remain shared while pruned duplicates stay dormant", () => {
+  const activeShared = [
     "punk-roundhouse","running-knee","punk-snap-suplex","samoan-drop","seth-superkick",
-    "oba-powerbomb","oba-chokeslam","german-suplex","brock-powerbomb","owens-superkick",
-    "owens-ddt","gunther-german","hof1-mankind-knee","s1rock-samoan-drop","s1rock-neckbreaker"
+    "oba-powerbomb","oba-chokeslam"
   ];
-  for (const id of ids) {
+  for (const id of activeShared) {
     const card = collectionCards.find(c => c.id === id);
-    assert.ok(card, id);
+    assert.ok(card, `${id} should remain in the active pool`);
     assert.equal(card.superstarId ?? null, null, `${id} should be shared`);
   }
+  const prunedDuplicates = [
+    "german-suplex","brock-powerbomb","owens-superkick","owens-ddt","gunther-german",
+    "hof1-mankind-knee","s1rock-samoan-drop","s1rock-neckbreaker"
+  ];
+  for (const id of prunedDuplicates) assert.equal(collectionCards.some(c => c.id === id), false, `${id} should stay outside the active pool`);
 });
 
 test("CM Punk identity keeps GTS exclusive Finisher and Anaconda Vise exclusive Trademark", () => {
@@ -2309,7 +2333,7 @@ test("Chain Wrestling counters any Technical Move but still pays its own gates",
 
 test("Duck counters any Strike Move and Punk starter no longer uses Technical Reversal or Scramble Free", () => {
   const punkDeck=decks["cm-punk"];
-  assert.equal(punkDeck.filter(c=>c.id==="chain-wrestling").length,2);
+  assert.equal(punkDeck.filter(c=>c.id==="chain-wrestling").length,1);
   assert.equal(punkDeck.filter(c=>c.id==="duck-strike").length,1);
   assert.equal(punkDeck.some(c=>c.id==="reversal"||c.id==="scramble"),false);
   const g = new MatchEngine({ superstarA: superstars.romanReigns, superstarB: superstars.cmPunk, deckA: decks["roman-reigns"], deckB: punkDeck, rng:()=>0 });

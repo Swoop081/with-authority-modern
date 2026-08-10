@@ -10,7 +10,7 @@
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>SUPERSTAR ART STUDIO</small></a>
-    <span class="studio-build">v0.11.10</span>
+    <span class="studio-build">v0.11.12</span>
   </header>
 
   <main class="studio-shell">
@@ -32,7 +32,16 @@
               <option value="season-1-final-boss">Rewards / Season 1 Final Boss</option>
             </select>
           </label>
-          <label>Superstar<select id="star-select"></select></label>
+          <label>Superstar<select id="star-select">
+            <option value="cody-rhodes">Cody Rhodes</option>
+            <option value="cm-punk">CM Punk</option>
+            <option value="roman-reigns">Roman Reigns</option>
+            <option value="seth-rollins">Seth Rollins</option>
+            <option value="oba-femi">Oba Femi</option>
+            <option value="brock-lesnar">Brock Lesnar</option>
+            <option value="kevin-owens">Kevin Owens</option>
+            <option value="gunther">Gunther</option>
+          </select></label>
           <div class="destination"><span>GAME PATH</span><code id="destination-path">assets/cards/art/custom/superstars/…</code></div>
         </section>
 
@@ -77,6 +86,6 @@
       </section>
     </section>
   </main>
-  <script type="module" src="../js/tools/superstar-card-studio.js"></script>
+  <script src="../js/tools/superstar-card-studio.js"></script>
 </body>
 </html>

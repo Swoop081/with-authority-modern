@@ -1,10 +1,67 @@
-import { superstars } from "../data/superstars.js";
-import { superstarArtwork } from "../data/artwork.js";
+// This studio is intentionally self-contained. Do not import the game data modules here:
+// creators often open tools/superstar-card-studio.html directly from an extracted ZIP,
+// where browser security blocks ES-module imports from file:// URLs. Keeping the small
+// 25-Superstar art roster local makes the editor work both from GitHub Pages and locally.
+const STUDIO_SUPERSTARS = [
+  { id: "cody-rhodes", name: "Cody Rhodes", setId: "summerslam-series-1" },
+  { id: "cm-punk", name: "CM Punk", setId: "summerslam-series-1" },
+  { id: "roman-reigns", name: "Roman Reigns", setId: "summerslam-series-1" },
+  { id: "seth-rollins", name: "Seth Rollins", setId: "summerslam-series-1" },
+  { id: "oba-femi", name: "Oba Femi", setId: "summerslam-series-1" },
+  { id: "brock-lesnar", name: "Brock Lesnar", setId: "summerslam-series-1" },
+  { id: "kevin-owens", name: "Kevin Owens", setId: "summerslam-series-1" },
+  { id: "gunther", name: "Gunther", setId: "summerslam-series-1" },
+  { id: "hulk-hogan", name: "Hulk Hogan", setId: "hall-of-fame-series-1" },
+  { id: "andre-the-giant", name: "André the Giant", setId: "hall-of-fame-series-1" },
+  { id: "randy-savage", name: "Randy Savage", setId: "hall-of-fame-series-1" },
+  { id: "ultimate-warrior", name: "Ultimate Warrior", setId: "hall-of-fame-series-1" },
+  { id: "stone-cold-steve-austin", name: "Stone Cold Steve Austin", setId: "hall-of-fame-series-1" },
+  { id: "the-undertaker", name: "The Undertaker", setId: "hall-of-fame-series-1" },
+  { id: "mankind", name: "Mankind", setId: "hall-of-fame-series-1" },
+  { id: "kane", name: "Kane", setId: "hall-of-fame-series-1" },
+  { id: "rhea-ripley", name: "Rhea Ripley", setId: "evolution-series-1" },
+  { id: "liv-morgan", name: "Liv Morgan", setId: "evolution-series-1" },
+  { id: "becky-lynch", name: "Becky Lynch", setId: "evolution-series-1" },
+  { id: "bayley", name: "Bayley", setId: "evolution-series-1" },
+  { id: "charlotte-flair", name: "Charlotte Flair", setId: "evolution-series-1" },
+  { id: "iyo-sky", name: "IYO SKY", setId: "evolution-series-1" },
+  { id: "paige", name: "Paige", setId: "evolution-series-1" },
+  { id: "stephanie-vaquer", name: "Stephanie Vaquer", setId: "evolution-series-1" },
+  { id: "the-rock", name: "The Rock", setId: "season-1-final-boss" }
+];
+
+const superstarArtwork = {
+  "cody-rhodes": "assets/art/summerslam-series-1/superstars/cody-rhodes.webp",
+  "cm-punk": "assets/art/summerslam-series-1/superstars/cm-punk.webp",
+  "roman-reigns": "assets/art/summerslam-series-1/superstars/roman-reigns.webp",
+  "seth-rollins": "assets/art/summerslam-series-1/superstars/seth-rollins.webp",
+  "oba-femi": "assets/art/summerslam-series-1/superstars/oba-femi.webp",
+  "brock-lesnar": "assets/art/summerslam-series-1/superstars/brock-lesnar.webp",
+  "kevin-owens": "assets/art/summerslam-series-1/superstars/kevin-owens.webp",
+  "gunther": "assets/art/summerslam-series-1/superstars/gunther.webp",
+  "hulk-hogan": "assets/art/wwe-profile-portraits/hulk-hogan.png",
+  "andre-the-giant": "assets/art/wwe-profile-portraits/andre-the-giant.png",
+  "randy-savage": "assets/art/wwe-profile-portraits/randy-savage.png",
+  "ultimate-warrior": "assets/art/wwe-profile-portraits/ultimate-warrior.png",
+  "stone-cold-steve-austin": "assets/art/wwe-profile-portraits/stone-cold-steve-austin.png",
+  "the-undertaker": "assets/art/wwe-profile-portraits/the-undertaker.png",
+  "mankind": "assets/art/wwe-profile-portraits/mankind.png",
+  "kane": "assets/art/wwe-profile-portraits/kane.png",
+  "rhea-ripley": "assets/art/wwe-profile-portraits/rhea-ripley.png",
+  "liv-morgan": "assets/art/wwe-profile-portraits/liv-morgan.png",
+  "becky-lynch": "assets/art/wwe-profile-portraits/becky-lynch.png",
+  "bayley": "assets/art/wwe-profile-portraits/bayley.png",
+  "charlotte-flair": "assets/art/wwe-profile-portraits/charlotte-flair.png",
+  "iyo-sky": "assets/art/wwe-profile-portraits/iyo-sky.png",
+  "paige": "assets/art/wwe-profile-portraits/paige.png",
+  "stephanie-vaquer": "assets/art/wwe-profile-portraits/stephanie-vaquer.png",
+  "the-rock": "assets/art/wwe-profile-portraits/the-rock.png"
+};
 
 const $ = s => document.querySelector(s);
 const canvas = $("#card-canvas");
 const ctx = canvas.getContext("2d", { alpha: false });
-const roster = Object.values(superstars);
+const roster = STUDIO_SUPERSTARS;
 
 const SETS = {
   "summerslam-series-1": {
@@ -40,7 +97,7 @@ const state = {
   wrestlerZoom: 1, wrestlerX: 0, wrestlerY: 0
 };
 
-function assetUrl(path){ return new URL(`../../${path.replace(/^\.\//,"")}`, import.meta.url).href; }
+function assetUrl(path){ return new URL(`../${path.replace(/^\.\//, "")}`, document.baseURI).href; }
 function loadImage(src){ return new Promise((resolve,reject)=>{ const im=new Image(); im.onload=()=>resolve(im); im.onerror=()=>reject(new Error("Could not load image.")); im.src=src; }); }
 function roundedRect(c,x,y,w,h,r){ c.beginPath(); c.roundRect(x,y,w,h,r); }
 function setCanvasSize(){ const [w,h]=$("#output-size").value.split("x").map(Number); canvas.width=w; canvas.height=h; draw(); }
@@ -111,7 +168,23 @@ function drawName(){
 function drawFrameOverlay(){ const set=$("#set-select").value,w=canvas.width,h=canvas.height; if(set==="hall-of-fame-series-1")frame(ctx,w,h,"#f0cf76","#8e6720");else if(set==="evolution-series-1")frame(ctx,w,h,"#ff8ee8","#8b6cff");else if(set==="season-1-final-boss")frame(ctx,w,h,"#f04a56","#e8bd65");else frame(ctx,w,h,"#67b9ff","#f6a253"); }
 function draw(){ drawTemplate(); drawWrestler(); const vignette=ctx.createLinearGradient(0,0,0,canvas.height);vignette.addColorStop(0,"rgba(0,0,0,.08)");vignette.addColorStop(.60,"rgba(0,0,0,0)");vignette.addColorStop(1,"rgba(0,0,0,.34)");ctx.fillStyle=vignette;ctx.fillRect(0,0,canvas.width,canvas.height);drawSetLogo();drawName();drawFrameOverlay(); }
 
-function updateStars(){ const set=$("#set-select").value; const ids=SETS[set].ids; $("#star-select").innerHTML=ids.map(id=>`<option value="${id}">${byId[id].name}</option>`).join(""); $("#preview-label").textContent=SETS[set].label; resetLayout(); updateDestination(); useCurrent(); draw(); }
+function updateStars(){
+  const set=$("#set-select").value;
+  const setConfig=SETS[set];
+  const ids=(setConfig?.ids || []).filter(id=>byId[id]);
+  const select=$("#star-select");
+  select.innerHTML=ids.map(id=>`<option value="${id}">${byId[id].name}</option>`).join("");
+  select.disabled=ids.length===0;
+  $("#preview-label").textContent=setConfig?.label || "Unknown set";
+  if(!ids.length){
+    select.innerHTML='<option value="">No Superstars found — reload this build</option>';
+    updateDestination();
+    status("The studio roster did not load. Use v0.11.12 or newer.",false);
+    draw();
+    return;
+  }
+  resetLayout(); updateDestination(); useCurrent(); draw();
+}
 function updateDestination(){ const id=$("#star-select").value; const path=id?`assets/cards/art/custom/superstars/${id}.webp`:"assets/cards/art/custom/superstars/…"; $("#destination-path").textContent=path; $("#manifest-entry").textContent=id?`"${id}": "${path}",`:"Select a Superstar."; }
 function resetLayout(){ state.wrestlerZoom=1;state.wrestlerX=0;state.wrestlerY=0; [["#wrestler-zoom",100],["#wrestler-x",0],["#wrestler-y",0]].forEach(([sel,v])=>$(sel).value=v); updateOutputs();draw(); }
 function updateOutputs(){ $("#wrestler-zoom-value").textContent=`${Math.round(state.wrestlerZoom*100)}%`;$("#wrestler-x-value").textContent=Math.round(state.wrestlerX);$("#wrestler-y-value").textContent=Math.round(state.wrestlerY);$("#quality-value").textContent=`${$("#quality").value}%`; }
@@ -123,4 +196,12 @@ async function exportWebp(){ const id=$("#star-select").value;if(!id)return;draw
 
 $("#set-select").addEventListener("change",updateStars);$("#star-select").addEventListener("change",()=>{updateDestination();useCurrent();draw();});$("#wrestler-file").addEventListener("change",e=>fileToImage(e.target.files[0]));$("#use-current-wrestler").addEventListener("click",useCurrent);$("#clear-wrestler").addEventListener("click",()=>{state.wrestler=null;draw()});$("#reset-layout").addEventListener("click",resetLayout);$("#output-size").addEventListener("change",setCanvasSize);$("#quality").addEventListener("input",updateOutputs);$("#export-webp").addEventListener("click",exportWebp);
 [["#wrestler-zoom",v=>state.wrestlerZoom=Number(v)/100],["#wrestler-x",v=>state.wrestlerX=Number(v)],["#wrestler-y",v=>state.wrestlerY=Number(v)]].forEach(([sel,set])=>$(sel).addEventListener("input",e=>{set(e.target.value);updateOutputs();draw()}));
-preloadSetLogos();updateStars();updateOutputs();
+try {
+  updateStars();
+  updateOutputs();
+  preloadSetLogos();
+  window.WWE_LEGACY_SUPERSTAR_STUDIO_READY = true;
+} catch (error) {
+  console.error("Superstar Art Studio failed to initialise", error);
+  status(`Studio failed to initialise: ${error?.message || error}`, false);
+}

@@ -7,15 +7,17 @@ export const OPENING_SIZE = 5;
 // Hard floors keep a deck functional; targets steer auto-building without forcing every
 // Superstar into the same exact list. Buckets intentionally overlap only where noted.
 export const RECOMMENDED_DECK_SHAPE = Object.freeze({
-  momentum: { min: 12, target: 14, max: 16 },
-  offensiveMoves: { min: 18, target: 22, max: 27 },
-  lowCostMoves: { min: 6, target: 10, max: 16 },       // printed Cost 1–3
-  midCostMoves: { min: 5, target: 9, max: 14 },        // printed Cost 4–6
-  highCostMoves: { min: 2, target: 3, max: 6 },        // printed Cost 7+
-  counters: { min: 12, target: 18, max: 28 },          // Offensive/defensive Move pages that can reverse a tactical Move Type
-  utility: { min: 6, target: 8, max: 12 },             // Actions + Supports + Managers
-  defensiveSpecials: { min: 1, target: 2, max: 4 },
-  finishers: { min: 2, target: 3, max: 5 },
+  // v0.11.x decks deliberately moved to an offense-forward 55-page shape. These
+  // guardrails describe that reviewed architecture rather than the older utility-heavy lists.
+  momentum: { min: 10, target: 12, max: 16 },
+  offensiveMoves: { min: 28, target: 34, max: 40 },
+  lowCostMoves: { min: 10, target: 16, max: 26 },       // printed Cost 1–3
+  midCostMoves: { min: 5, target: 12, max: 20 },        // printed Cost 4–6
+  highCostMoves: { min: 2, target: 6, max: 10 },        // printed Cost 7+
+  counters: { min: 12, target: 30, max: 42 },           // Offensive/defensive Moves that can reverse a tactical Move Type
+  utility: { min: 1, target: 4, max: 8 },               // Actions + Supports + Managers
+  defensiveSpecials: { min: 0, target: 1, max: 4 },
+  finishers: { min: 1, target: 3, max: 6 },
   entrance: { min: 0, target: 0, max: 0 }
 });
 

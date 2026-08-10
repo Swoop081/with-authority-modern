@@ -1,57 +1,62 @@
-Matches: 6912 | stalls 0
-P1 3316 (48.0%) | P2 3493 (50.5%) | draws 103
-Avg turns 24.86 | Avg control changes 14.24
-Moves declared 112870 | countered 23401 (20.7%) | auto 0
-Finish: pin 5873 (85.0%) | submission 936 (13.5%) | count-out 0 (0.0%)
-Submission flow: 5195 holds connected | 2536 maintains | 4256 releases | 18.0% of connected holds ultimately produced submission wins
-Avg winner HP 17.78 | loser HP 3.24
-Critical exhaustion control losses: 4067
-Pass reasons: no-move-in-hand 38733 | missing-method-momentum 11353 | insufficient-total-momentum 7368 | posture-restriction 2719 | location-restriction 545
+
+> wwe-legacy-ccg@0.11.11 balance
+> node tools/balance-sim.mjs
+
+Matches: 7500 | stalls 0
+P1 3696 (49.3%) | P2 3763 (50.2%) | draws 41
+Avg turns 22.08 | Avg control changes 7.97
+Moves declared 122032 | countered 15131 (12.4%) | auto 124
+Finish: pin 5529 (73.7%) | submission 1930 (25.7%) | count-out 0 (0.0%)
+Submission flow: 3585 holds connected | 12955 maintains | 1649 releases | 53.8% of connected holds ultimately produced submission wins
+Avg winner HP 39.82 | loser HP 7.65
+Critical exhaustion control losses: 2993
+Pass reasons: no-move-in-hand 13741 | insufficient-total-momentum 10354 | missing-method-momentum 6637 | posture-restriction 1508
 
 Counter rate by Move Type:
-Arm Extended: 4588/21483 21.4%
-Mad Rush: 7173/18108 39.6%
-In Close: 2722/15823 17.2%
-Scoop: 2346/15516 15.1%
-Leg Extended: 3247/11456 28.3%
-Victim Below: 419/7623 5.5%
-Hit or Miss: 1610/6706 24.0%
-Head Down: 494/5147 9.6%
-Standing Above: 108/4182 2.6%
-High Risk: 474/2978 15.9%
-Back to Foe: 110/2186 5.0%
-Behind Opponent: 110/1662 6.6%
+Arm Extended: 2591/24511 10.6%
+In Close: 2228/23688 9.4%
+Scoop: 1846/18522 10.0%
+Mad Rush: 4921/16645 29.6%
+Leg Extended: 1685/9417 17.9%
+Victim Below: 288/6919 4.2%
+Hit or Miss: 783/5977 13.1%
+Standing Above: 192/5224 3.7%
+High Risk: 320/4533 7.1%
+Head Down: 127/3823 3.3%
+Behind Opponent: 134/2094 6.4%
+Back to Foe: 16/679 2.4%
 
 Counter rate by Method:
-strike: 12603/46332 27.2%
-strength: 4509/25768 17.5%
-technical: 2990/24430 12.2%
-agility: 3299/16340 20.2%
+strike: 7912/53535 14.8%
+strength: 4029/27986 14.4%
+technical: 1592/24479 6.5%
+agility: 1598/16032 10.0%
 
 Win rate by Superstar:
-Paige: 324/576 56.3% | submission wins 203
-Rhea Ripley: 317/576 55.0% | submission wins 76
-Cody Rhodes: 315/576 54.7% | submission wins 0
-Seth Rollins: 314/576 54.5% | submission wins 0
-Bayley: 307/576 53.3% | submission wins 0
-Randy Savage: 305/576 53.0% | submission wins 0
-IYO SKY: 304/576 52.8% | submission wins 0
-Liv Morgan: 301/576 52.3% | submission wins 9
-CM Punk: 283/576 49.1% | submission wins 3
-Mankind: 283/576 49.1% | submission wins 119
-Brock Lesnar: 281/576 48.8% | submission wins 8
-Becky Lynch: 280/576 48.6% | submission wins 182
-Hulk Hogan: 277/576 48.1% | submission wins 0
-André the Giant: 274/576 47.6% | submission wins 7
-Kevin Owens: 273/576 47.4% | submission wins 0
-Charlotte Flair: 272/576 47.2% | submission wins 108
-Stephanie Vaquer: 270/576 46.9% | submission wins 31
-Stone Cold Steve Austin: 269/576 46.7% | submission wins 0
-The Undertaker: 269/576 46.7% | submission wins 3
-Ultimate Warrior: 263/576 45.7% | submission wins 0
-Gunther: 260/576 45.1% | submission wins 181
-Oba Femi: 257/576 44.6% | submission wins 0
-Roman Reigns: 256/576 44.4% | submission wins 6
-Kane: 255/576 44.3% | submission wins 0
+CM Punk: 355/600 59.2% | submission wins 112
+André the Giant: 346/600 57.7% | submission wins 172
+Cody Rhodes: 342/600 57.0% | submission wins 0
+Seth Rollins: 326/600 54.3% | submission wins 0
+Bayley: 323/600 53.8% | submission wins 0
+Roman Reigns: 314/600 52.3% | submission wins 89
+Stephanie Vaquer: 309/600 51.5% | submission wins 0
+Mankind: 307/600 51.2% | submission wins 253
+Gunther: 303/600 50.5% | submission wins 248
+The Rock: 303/600 50.5% | submission wins 0
+Brock Lesnar: 299/600 49.8% | submission wins 171
+Becky Lynch: 297/600 49.5% | submission wins 277
+Kevin Owens: 294/600 49.0% | submission wins 0
+IYO SKY: 292/600 48.7% | submission wins 0
+The Undertaker: 289/600 48.2% | submission wins 0
+Ultimate Warrior: 288/600 48.0% | submission wins 0
+Stone Cold Steve Austin: 284/600 47.3% | submission wins 0
+Rhea Ripley: 283/600 47.2% | submission wins 128
+Kane: 281/600 46.8% | submission wins 0
+Hulk Hogan: 279/600 46.5% | submission wins 0
+Paige: 276/600 46.0% | submission wins 251
+Randy Savage: 274/600 45.7% | submission wins 0
+Charlotte Flair: 271/600 45.2% | submission wins 229
+Liv Morgan: 263/600 43.8% | submission wins 0
+Oba Femi: 261/600 43.5% | submission wins 0
 
-Move pool: 413 total | 402 offensive | 11 defensive-only | 315/402 offensive Moves can counter at least one Move Type.
+Move pool: 261 total | 252 offensive | 9 defensive-only | 201/252 offensive Moves can counter at least one Move Type.

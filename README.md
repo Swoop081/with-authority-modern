@@ -1,4 +1,4 @@
-# WWE Legacy: Collectible Card Game — v0.8.4
+# WWE Legacy: Collectible Card Game — v0.11.12
 
 
 
@@ -417,21 +417,13 @@ npm run balance
 npm run art
 ```
 
-Current certification: **114/114 automated tests**. The suite includes all **552 non-mirror ordered matchups across the 24-Superstar roster**, all 24 mirror matches, three collection sets, set-specific boosters, Evolution deck restrictions, mobile UI regressions and validation that every collectible resolves to a local image.
+Current certification: **163/163 automated tests passing** across the **25-Superstar roster**. The suite covers current card-pool legality, all linked Lead Off packages, counter chains, submissions, pins, Managers, Season 1 Final Boss rewards, deck construction, boosters, mobile UI regressions and validation that every one of the **372 active collectibles** resolves to a local image.
 
-### 6,912-match tactical balance audit
+### Current tactical balance audit
 
-Run `npm run balance` for the seeded report in `tools/balance-report.txt`. Current headline results:
+Run `npm run balance` for the seeded report in `tools/balance-report.txt`. The v0.11.11 audit is **7,500 matches with 0 stalls and 41 time-limit draws**; seeded Superstar win rates range from **43.5% to 59.2%**. A separate full 25-Superstar 10,000-match matrix completed with **0 stalls and 46 draws**.
 
-- **6,912 matches · 0 stalls · 0 draws**
-- P1 **49.5%** / P2 **50.5%**
-- average **16.77 turns** and **15.73 Control changes**
-- **21.3%** of declared Moves countered
-- **95.4% pin / 4.6% submission** finishes
-- average winner HP **27.02** / loser HP **16.53**
-- all 24 seeded Superstar win rates fall between **40.8% and 59.7%**
-
-The free-flow audit is also inside target: once a wrestler has 3+ Total Momentum, dead-offense passes are **18.3%**, under the 20% guard.
+The AI legal-pass audit also reports **0 voluntary passes while a legal offensive Move is available**. The free-flow audit remains below the 20% dead-offense guard at every audited Momentum threshold.
 
 
 The project remains a direct static GitHub Pages root.

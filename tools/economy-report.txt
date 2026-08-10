@@ -1,59 +1,59 @@
 
-> wwe-legacy-ccg@0.7.0 economy
+> wwe-legacy-ccg@0.11.11 economy
 > node tools/economy-sim.mjs
 
-Economy simulation: 50 pack-only trials per set, max 500 packs each
+Economy simulation: 300 pack-only trials per set, max 1000 packs each
 
-SummerSlam — Series 1: 171 cards · 8 Superstars
-firstSetSuperstar        complete  50/50  mean 1.0  p25 1  median 1  p75 1  p90 1
-secondSetSuperstar       complete  50/50  mean 6.7  p25 2  median 4  p75 10  p90 15
-fourthSetSuperstar       complete  50/50  mean 24.0  p25 14  median 23  p75 30  p90 42
-allSetSuperstars         complete  50/50  mean 74.6  p25 63  median 74  p75 87  p90 99
-unique25                 complete  50/50  mean 2.8  p25 2  median 3  p75 4  p90 4
-unique50                 complete  50/50  mean 12.0  p25 8  median 13  p75 15  p90 17
-unique75                 complete  50/50  mean 30.0  p25 26  median 31  p75 34  p90 36
-unique100                complete  50/50  mean 104.2  p25 90  median 104  p75 117  p90 122
-foilUnique25             complete  50/50  mean 50.3  p25 48  median 50  p75 52  p90 54
-foilUnique50             complete  50/50  mean 123.9  p25 119  median 124  p75 130  p90 135
-foilUnique100            complete  50/50  mean 251.3  p25 246  median 253  p75 256  p90 258
-allCardsAtPlayableCap    complete  50/50  mean 136.6  p25 134  median 137  p75 139  p90 141
-foilCopies50             complete  50/50  mean 188.6  p25 186  median 189  p75 191  p90 192
-foilCopies75             complete  50/50  mean 228.2  p25 226  median 228  p75 230  p90 232
-foilCopies90             complete  50/50  mean 251.8  p25 250  median 252  p75 254  p90 255
-foilCopies95             complete  50/50  mean 259.8  p25 258  median 260  p75 262  p90 263
+SummerSlam — Series 1: 135 cards · 8 Superstars
+firstSetSuperstar        complete 300/300  mean 1.0  p25 1  median 1  p75 1  p90 1
+secondSetSuperstar       complete 300/300  mean 16.4  p25 13  median 20  p75 20  p90 20
+fourthSetSuperstar       complete 300/300  mean 49.7  p25 43  median 51  p75 60  p90 60
+allSetSuperstars         complete 300/300  mean 120.0  p25 113  median 121  p75 129  p90 137
+unique25                 complete 300/300  mean 1.5  p25 1  median 2  p75 2  p90 2
+unique50                 complete 300/300  mean 12.6  p25 12  median 13  p75 14  p90 15
+unique75                 complete 300/300  mean 31.9  p25 29  median 32  p75 34  p90 36
+unique100                complete 300/300  mean 120.2  p25 113  median 121  p75 129  p90 137
+foilUnique25             complete 300/300  mean 33.9  p25 32  median 34  p75 35  p90 37
+foilUnique50             complete 300/300  mean 80.7  p25 78  median 80  p75 84  p90 86
+foilUnique100            complete 300/300  mean 196.9  p25 191  median 198  p75 204  p90 207
+allCardsAtPlayableCap    complete 300/300  mean 123.3  p25 116  median 121  p75 129  p90 137
+foilCopies50             complete 300/300  mean 151.4  p25 151  median 151  p75 152  p90 152
+foilCopies75             complete 300/300  mean 182.0  p25 181  median 182  p75 183  p90 183
+foilCopies90             complete 300/300  mean 200.2  p25 200  median 200  p75 201  p90 201
+foilCopies95             complete 300/300  mean 206.4  p25 206  median 206  p75 207  p90 207
 
-Hall of Fame — Series 1: 167 cards · 8 Superstars
-firstSetSuperstar        complete  50/50  mean 7.6  p25 3  median 6  p75 11  p90 19
-secondSetSuperstar       complete  50/50  mean 14.4  p25 7  median 14  p75 22  p90 25
-fourthSetSuperstar       complete  50/50  mean 30.7  p25 20  median 30  p75 39  p90 44
-allSetSuperstars         complete  50/50  mean 75.8  p25 64  median 74  p75 87  p90 95
-unique25                 complete  50/50  mean 6.3  p25 3  median 6  p75 10  p90 11
-unique50                 complete  50/50  mean 14.4  p25 11  median 14  p75 18  p90 20
-unique75                 complete  50/50  mean 31.1  p25 26  median 31  p75 35  p90 40
-unique100                complete  50/50  mean 86.1  p25 75  median 86  p75 94  p90 111
-foilUnique25             complete  50/50  mean 49.5  p25 47  median 50  p75 51  p90 54
-foilUnique50             complete  50/50  mean 122.7  p25 116  median 124  p75 130  p90 133
-foilUnique100            complete  50/50  mean 249.6  p25 243  median 250  p75 256  p90 260
-allCardsAtPlayableCap    complete  50/50  mean 136.2  p25 133  median 136  p75 138  p90 143
-foilCopies50             complete  50/50  mean 190.6  p25 188  median 191  p75 192  p90 195
-foilCopies75             complete  50/50  mean 229.5  p25 227  median 229  p75 231  p90 235
-foilCopies90             complete  50/50  mean 252.3  p25 250  median 252  p75 254  p90 257
-foilCopies95             complete  50/50  mean 259.8  p25 257  median 260  p75 261  p90 265
+Hall of Fame — Series 1: 106 cards · 8 Superstars
+firstSetSuperstar        complete 300/300  mean 16.5  p25 15  median 20  p75 20  p90 20
+secondSetSuperstar       complete 300/300  mean 32.6  p25 26  median 36  p75 40  p90 40
+fourthSetSuperstar       complete 300/300  mean 66.3  p25 58  median 68  p75 78  p90 80
+allSetSuperstars         complete 300/300  mean 125.7  p25 119  median 126  p75 133  p90 140
+unique25                 complete 300/300  mean 6.9  p25 6  median 7  p75 7  p90 8
+unique50                 complete 300/300  mean 17.5  p25 16  median 17  p75 19  p90 20
+unique75                 complete 300/300  mean 39.0  p25 36  median 40  p75 41  p90 44
+unique100                complete 300/300  mean 125.7  p25 119  median 126  p75 133  p90 140
+foilUnique25             complete 300/300  mean 30.0  p25 28  median 30  p75 31  p90 33
+foilUnique50             complete 300/300  mean 70.8  p25 66  median 71  p75 75  p90 79
+foilUnique100            complete 299/300  mean 152.6  p25 148  median 153  p75 157  p90 161
+allCardsAtPlayableCap    complete 300/300  mean 125.8  p25 119  median 126  p75 133  p90 140
+foilCopies50             complete 300/300  mean 120.3  p25 120  median 120  p75 121  p90 121
+foilCopies75             complete 300/300  mean 142.9  p25 142  median 143  p75 143  p90 144
+foilCopies90             complete 300/300  mean 156.5  p25 156  median 156  p75 157  p90 157
+foilCopies95             complete 300/300  mean 161.1  p25 160  median 161  p75 162  p90 162
 
-Evolution — Series 1: 172 cards · 8 Superstars
-firstSetSuperstar        complete  50/50  mean 7.6  p25 2  median 6  p75 12  p90 17
-secondSetSuperstar       complete  50/50  mean 16.3  p25 7  median 16  p75 23  p90 29
-fourthSetSuperstar       complete  50/50  mean 32.9  p25 21  median 31  p75 45  p90 55
-allSetSuperstars         complete  50/50  mean 81.2  p25 70  median 83  p75 93  p90 105
-unique25                 complete  50/50  mean 6.2  p25 3  median 6  p75 10  p90 11
-unique50                 complete  50/50  mean 14.5  p25 11  median 15  p75 18  p90 20
-unique75                 complete  50/50  mean 30.9  p25 26  median 31  p75 35  p90 41
-unique100                complete  50/50  mean 87.6  p25 79  median 85  p75 96  p90 105
-foilUnique25             complete  50/50  mean 51.0  p25 49  median 51  p75 53  p90 55
-foilUnique50             complete  50/50  mean 124.6  p25 120  median 125  p75 129  p90 132
-foilUnique100            complete  50/50  mean 264.4  p25 258  median 265  p75 273  p90 276
-allCardsAtPlayableCap    complete  50/50  mean 145.6  p25 142  median 145  p75 148  p90 152
-foilCopies50             complete  50/50  mean 199.0  p25 197  median 199  p75 201  p90 204
-foilCopies75             complete  50/50  mean 241.6  p25 239  median 241  p75 244  p90 247
-foilCopies90             complete  50/50  mean 266.4  p25 264  median 266  p75 268  p90 271
-foilCopies95             complete  50/50  mean 274.4  p25 272  median 274  p75 276  p90 279
+Evolution — Series 1: 110 cards · 8 Superstars
+firstSetSuperstar        complete 300/300  mean 16.3  p25 13  median 20  p75 20  p90 20
+secondSetSuperstar       complete 300/300  mean 32.4  p25 27  median 36  p75 40  p90 40
+fourthSetSuperstar       complete 300/300  mean 65.3  p25 59  median 66  p75 76  p90 80
+allSetSuperstars         complete 300/300  mean 130.0  p25 121  median 131  p75 141  p90 146
+unique25                 complete 300/300  mean 7.1  p25 7  median 7  p75 8  p90 8
+unique50                 complete 300/300  mean 18.1  p25 17  median 18  p75 20  p90 20
+unique75                 complete 300/300  mean 41.9  p25 39  median 41  p75 45  p90 48
+unique100                complete 300/300  mean 130.1  p25 121  median 131  p75 141  p90 146
+foilUnique25             complete 300/300  mean 31.3  p25 29  median 31  p75 33  p90 35
+foilUnique50             complete 300/300  mean 74.1  p25 69  median 74  p75 79  p90 82
+foilUnique100            complete 300/300  mean 164.6  p25 160  median 165  p75 169  p90 173
+allCardsAtPlayableCap    complete 300/300  mean 130.3  p25 121  median 131  p75 141  p90 146
+foilCopies50             complete 300/300  mean 129.3  p25 129  median 129  p75 130  p90 130
+foilCopies75             complete 300/300  mean 153.6  p25 153  median 153  p75 154  p90 155
+foilCopies90             complete 300/300  mean 168.2  p25 168  median 168  p75 169  p90 169
+foilCopies95             complete 300/300  mean 172.9  p25 172  median 173  p75 173  p90 174

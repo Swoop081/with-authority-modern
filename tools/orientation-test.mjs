@@ -3,7 +3,7 @@ import {MatchEngine} from "../js/engine/MatchEngine.js";
 import {superstars} from "../js/data/superstars.js";
 import {decks} from "../js/data/decks.js";
 import {executeCpuDecision,decisionOwner} from "../js/ai/WrestlingAI.js";
-const subject=process.argv[2];
+const subject=process.argv[2] ?? "the-rock";
 const all=["cody-rhodes","cm-punk","roman-reigns","seth-rollins","oba-femi","brock-lesnar","kevin-owens","gunther","hulk-hogan","andre-the-giant","randy-savage","ultimate-warrior","stone-cold-steve-austin","the-undertaker","mankind","kane","rhea-ripley","liv-morgan","becky-lynch","bayley","charlotte-flair","iyo-sky","paige","stephanie-vaquer","the-rock"].filter(x=>x!==subject);
 const S=id=>Object.values(superstars).find(s=>s.id===id),rng=s=>{let x=s>>>0;return()=>((x=(1664525*x+1013904223)>>>0)/4294967296)};
 let res={p1:{m:0,w:0},p2:{m:0,w:0}};

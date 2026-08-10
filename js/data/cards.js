@@ -153,7 +153,7 @@ export const cards = {
   falconArrow: move("falcon-arrow", "Falcon Arrow", { method: "technical", cost: 5, requirements: { technical: 1 }, damage: 7, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   pedigree: move("pedigree", "Pedigree", { superstarId: "seth-rollins", method: "technical", cost: 7, requirements: { technical: 2 }, damage: 11, trademark: true, setOpponentPosture: "on-mat", effectText: "On connect: search your Playbook for Curb Stomp.", onConnect: [{ type: "searchDeck", cardId: "stomp" }] }),
   phoenixSplash: move("phoenix-splash", "Phoenix Splash", { superstarId: "seth-rollins", method: "agility", cost: 6, requirements: { agility: 2 }, damage: 8, requiresPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
-  stomp: move("stomp", "Curb Stomp", { superstarId: "seth-rollins", method: "strike", cost: 10, requirements: { strike: 2 }, damage: 16, requiresPosture: "on-mat", finisher: true }),
+  stomp: move("stomp", "Curb Stomp", { superstarId: "seth-rollins", method: "strike", tacticalType: "standing-above", cost: 10, requirements: { strike: 2 }, damage: 16, requiresPosture: "on-mat", finisher: true }),
 
   sethSuperkick: move("seth-superkick", "Superkick", { method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4 }),
   sethSuicideDive: move("seth-suicide-dive", "Suicide Dive", { method: "agility", cost: 4, requirements: { agility: 1 }, damage: 6, requiresLocation: "ring", sendOpponentOutside: true }),
