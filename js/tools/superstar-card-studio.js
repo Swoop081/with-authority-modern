@@ -114,29 +114,25 @@ async function preloadSetLogos(){
 function drawSummerSlam(c,w,h){
   const g=c.createLinearGradient(0,0,w,h); g.addColorStop(0,"#07172b"); g.addColorStop(.42,"#153d70"); g.addColorStop(.72,"#8d2c58"); g.addColorStop(1,"#ee6f32"); c.fillStyle=g;c.fillRect(0,0,w,h);
   const sun=c.createRadialGradient(w*.77,h*.18,0,w*.77,h*.18,w*.52); sun.addColorStop(0,"rgba(255,204,87,.46)"); sun.addColorStop(.35,"rgba(245,87,65,.17)"); sun.addColorStop(1,"rgba(0,0,0,0)"); c.fillStyle=sun;c.fillRect(0,0,w,h);
-  c.save();c.globalAlpha=.34;c.strokeStyle="#75d9ff";c.lineWidth=3*scale();for(let i=-4;i<10;i++){c.beginPath();c.moveTo(-w*.15,h*(.17+i*.105));c.lineTo(w*1.12,h*(-.04+i*.105));c.stroke()}c.restore();
-  c.fillStyle="rgba(2,7,16,.72)";c.fillRect(0,h*.78,w,h*.22);
+  c.save();c.globalAlpha=.34;c.strokeStyle="#75d9ff";c.lineWidth=3*scale();for(let i=-4;i<14;i++){c.beginPath();c.moveTo(-w*.15,h*(.17+i*.105));c.lineTo(w*1.12,h*(-.04+i*.105));c.stroke()}c.restore();
   c.fillStyle="rgba(255,255,255,.035)";c.font=`900 ${150*scale()}px sans-serif`;c.textAlign="center";c.fillText("SS",w*.77,h*.93);
 }
 function drawHall(c,w,h){
   const g=c.createLinearGradient(0,0,w,h); g.addColorStop(0,"#060606");g.addColorStop(.52,"#17130b");g.addColorStop(1,"#4b3710");c.fillStyle=g;c.fillRect(0,0,w,h);
   const glow=c.createRadialGradient(w*.5,h*.28,0,w*.5,h*.28,w*.55);glow.addColorStop(0,"rgba(255,220,125,.25)");glow.addColorStop(.45,"rgba(198,146,42,.07)");glow.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=glow;c.fillRect(0,0,w,h);
   c.save();c.strokeStyle="rgba(223,184,77,.18)";c.lineWidth=2*scale();for(let i=0;i<7;i++){const inset=w*(.04+i*.018);roundedRect(c,inset,inset,w-inset*2,h-inset*2,28*scale());c.stroke()}c.restore();
-  c.save();c.globalAlpha=.14;c.fillStyle="#e5bd55";for(let i=0;i<9;i++){c.beginPath();c.moveTo(w*.5,h*.02);c.lineTo(w*(.04+i*.12),h*.72);c.lineTo(w*(.12+i*.12),h*.72);c.closePath();c.fill()}c.restore();
-  c.fillStyle="rgba(0,0,0,.70)";c.fillRect(0,h*.79,w,h*.21);
+  c.save();c.globalAlpha=.14;c.fillStyle="#e5bd55";for(let i=0;i<9;i++){c.beginPath();c.moveTo(w*.5,h*.02);c.lineTo(w*(.04+i*.12),h*1.03);c.lineTo(w*(.12+i*.12),h*1.03);c.closePath();c.fill()}c.restore();
 }
 function drawEvolution(c,w,h){
   const g=c.createLinearGradient(0,0,w,h);g.addColorStop(0,"#160b22");g.addColorStop(.38,"#3f1d65");g.addColorStop(.72,"#b1278f");g.addColorStop(1,"#28102f");c.fillStyle=g;c.fillRect(0,0,w,h);
   const glow=c.createRadialGradient(w*.76,h*.26,0,w*.76,h*.26,w*.55);glow.addColorStop(0,"rgba(255,115,227,.42)");glow.addColorStop(.35,"rgba(108,86,255,.13)");glow.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=glow;c.fillRect(0,0,w,h);
   c.save();c.globalAlpha=.24;c.fillStyle="#f48de8";for(let i=0;i<8;i++){c.beginPath();c.moveTo(w*(-.12+i*.19),h);c.lineTo(w*(.18+i*.19),0);c.lineTo(w*(.29+i*.19),0);c.lineTo(w*(-.01+i*.19),h);c.closePath();c.fill()}c.restore();
   c.save();c.strokeStyle="rgba(255,255,255,.16)";c.lineWidth=2*scale();for(let i=0;i<4;i++){roundedRect(c,w*(.05+i*.016),h*(.05+i*.011),w*(.90-i*.032),h*(.90-i*.022),24*scale());c.stroke()}c.restore();
-  c.fillStyle="rgba(11,4,15,.66)";c.fillRect(0,h*.79,w,h*.21);
 }
 function drawRewards(c,w,h){
   const g=c.createLinearGradient(0,0,w,h);g.addColorStop(0,"#050506");g.addColorStop(.42,"#180508");g.addColorStop(.72,"#680b14");g.addColorStop(1,"#170305");c.fillStyle=g;c.fillRect(0,0,w,h);
   const glow=c.createRadialGradient(w*.55,h*.22,0,w*.55,h*.22,w*.58);glow.addColorStop(0,"rgba(244,48,64,.35)");glow.addColorStop(.30,"rgba(255,182,71,.09)");glow.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=glow;c.fillRect(0,0,w,h);
   c.save();c.globalAlpha=.28;c.strokeStyle="#ef3345";c.lineWidth=4*scale();for(let i=-5;i<8;i++){c.beginPath();c.moveTo(w*(-.2+i*.18),h);c.lineTo(w*(.28+i*.18),0);c.stroke()}c.restore();
-  c.fillStyle="rgba(0,0,0,.66)";c.fillRect(0,h*.78,w,h*.22);
   c.fillStyle="rgba(255,255,255,.035)";c.font=`1000 ${132*scale()}px sans-serif`;c.textAlign="center";c.fillText("BOSS",w*.59,h*.93);
 }
 function frame(c,w,h,a,b){
@@ -179,7 +175,7 @@ function updateStars(){
   if(!ids.length){
     select.innerHTML='<option value="">No Superstars found — reload this build</option>';
     updateDestination();
-    status("The studio roster did not load. Use v0.11.12 or newer.",false);
+    status("The studio roster did not load. Use v0.11.13 or newer.",false);
     draw();
     return;
   }

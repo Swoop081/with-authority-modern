@@ -34,3 +34,18 @@ test("Superstar Art Studio is direct-file compatible and has a non-empty initial
   assert.match(studioHtml, /<option value="cody-rhodes">Cody Rhodes<\/option>/);
   assert.match(studioJs, /WWE_LEGACY_SUPERSTAR_STUDIO_READY = true/);
 });
+
+
+test("Superstar card set backgrounds remain full-bleed through the bottom edge", () => {
+  assert.doesNotMatch(studioJs, /fillRect\(0,h\*\.7[89],w,h\*\.2[12]\)/);
+  for (const filename of [
+    "summerslam-series-1.svg",
+    "hall-of-fame-series-1.svg",
+    "evolution-series-1.svg",
+    "rewards.svg",
+  ]) {
+    const svg = fs.readFileSync(new URL(`../assets/templates/superstar/${filename}`, import.meta.url), "utf8");
+    assert.doesNotMatch(svg, /<rect y="(?:780|790)" width="680" height="(?:220|210)"/);
+    assert.match(svg, /(?:<rect width="680" height="1000"|<rect width="680" height="1000" rx="28")/);
+  }
+});
