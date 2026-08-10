@@ -10,3 +10,7 @@ These portraits are temporary in-game artwork, cropped/resized to WebP for WWE L
 - IYO SKY — Wikimedia Commons: `Iyo Sky, WrestleMania XL (cropped).jpg` — Diego Serrano — CC BY 2.0
 - Paige — Wikimedia Commons: `Paige at WrestleMania Axxess 32 (cropped).jpg` — Miguel Discart — CC BY-SA 2.0
 - Stephanie Vaquer — Wikimedia Commons: `Stephanie Vaquer RR25.jpg` — Diego Serrano — CC BY 2.0
+
+## Official transparent set logo
+- WWE-hosted WWE Evolution transparent PNG: https://www.wwe.com/f/styles/wwe_show_logo_med/public/all/2018/07/Evolution--fd2b670f3a2aec8f4de19779442c27f5.png
+- Used locally as `evolution-logo.png` for card templates and set branding UI.

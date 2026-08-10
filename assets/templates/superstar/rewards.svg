@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="1000" viewBox="0 0 680 1000">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#050506"/><stop offset=".42" stop-color="#180508"/><stop offset=".72" stop-color="#680b14"/><stop offset="1" stop-color="#170305"/></linearGradient><radialGradient id="glow" cx="55%" cy="22%" r="60%"><stop stop-color="#f43040" stop-opacity=".35"/><stop offset=".32" stop-color="#ffb647" stop-opacity=".09"/><stop offset="1" stop-opacity="0"/></radialGradient><linearGradient id="frame" x1="0" x2="1"><stop stop-color="#f04a56"/><stop offset=".5" stop-color="#fff" stop-opacity=".72"/><stop offset="1" stop-color="#e8bd65"/></linearGradient><linearGradient id="nameFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff4c8"/><stop offset=".58" stop-color="#fff4c8"/><stop offset="1" stop-color="#ef3d4c"/></linearGradient></defs>
+  <rect width="680" height="1000" rx="28" fill="url(#bg)"/><rect width="680" height="1000" fill="url(#glow)"/>
+  <g opacity=".26" stroke="#ef3345" stroke-width="4"><path d="M-130 1000L350 0"/><path d="M-10 1000L470 0"/><path d="M110 1000L590 0"/><path d="M230 1000L710 0"/><path d="M350 1000L830 0"/></g>
+  <rect y="780" width="680" height="220" fill="#000" opacity=".66"/><text x="420" y="935" text-anchor="middle" fill="#fff" opacity=".04" font-size="132" font-family="Arial,sans-serif" font-weight="900">BOSS</text>
+  <g id="WRESTLER_ARTWORK"/>
+  <text id="SUPERSTAR_NAME" x="340" y="935" text-anchor="middle" fill="url(#nameFill)" stroke="#260307" stroke-width="8" paint-order="stroke fill" font-size="68" font-family="Arial Black, Impact, sans-serif" font-style="italic" font-weight="900">SUPERSTAR NAME</text>
+  <rect x="115" y="955" width="450" height="3" fill="#ef3d4c"/>
+  <rect x="8" y="8" width="664" height="984" rx="28" fill="none" stroke="url(#frame)" stroke-width="8"/><rect x="20" y="20" width="640" height="960" rx="21" fill="none" stroke="#fff" stroke-opacity=".24" stroke-width="2"/>
+</svg>

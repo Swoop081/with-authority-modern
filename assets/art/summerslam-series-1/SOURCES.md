@@ -19,3 +19,7 @@ Images are stored locally as optimized WebP files so the GitHub Pages build does
 - WWE 2026 event page — https://www.wwe.com/shows/summerslam/2026
 
 The locally stored WebP is used only as private-project pack branding/reference imagery.
+
+## Official transparent set logo
+- WWE-hosted SummerSlam 2026 transparent PNG: https://www.wwe.com/f/styles/medium/public/2026/06/IMG_0391.png
+- Used locally as `summerslam-2026-logo.png` for card templates and set branding UI.

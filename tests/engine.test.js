@@ -1939,8 +1939,8 @@ test("claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned de
 
 test("Season 1 entry is a clean Final Boss splash followed by three-card-set discovery", () => {
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
-  assert.equal(app.includes("COMPLETE SEASON 1.<br>UNLOCK THE FINAL BOSS."), true);
-  assert.equal(app.includes("Reach Tier 50 to earn <b>The Rock — The Final Boss</b> and his complete 55-page deck."), true);
+  assert.equal(app.includes("THE FINAL<br>BOSS AWAITS."), true);
+  assert.equal(app.includes("Complete Season 1 and reach Tier 50 to unlock <b>The Rock</b> and his complete 55-page deck."), true);
   assert.equal(app.includes("function renderLaunchReleases()"), true);
   assert.equal(app.includes('stars: ["cody-rhodes","brock-lesnar"]'), true);
   assert.equal(app.includes('stars: ["hulk-hogan","stone-cold-steve-austin"]'), true);
