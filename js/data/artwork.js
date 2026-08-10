@@ -2,6 +2,7 @@ import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
+const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
 const EVOLUTION_ROOT = "assets/art/evolution-series-1";
 const TEMP_GENERIC_ART = "assets/cards/art/temp/generic-wrestling-action.webp";
 
@@ -19,24 +20,25 @@ export const superstarArtwork = {
 
   // Temporary Hall of Fame photos. These are intentionally easy to replace
   // when final era/move-specific art is sourced.
-  "hulk-hogan": `${TEMP_SUPERSTAR_ROOT}/hulk-hogan.webp`,
-  "andre-the-giant": `${TEMP_SUPERSTAR_ROOT}/andre-the-giant.webp`,
-  "randy-savage": `${TEMP_SUPERSTAR_ROOT}/randy-savage.webp`,
-  "ultimate-warrior": `${TEMP_SUPERSTAR_ROOT}/ultimate-warrior.webp`,
-  "stone-cold-steve-austin": `${TEMP_SUPERSTAR_ROOT}/stone-cold-steve-austin.webp`,
-  "the-undertaker": `${TEMP_SUPERSTAR_ROOT}/the-undertaker.webp`,
-  "mankind": `${TEMP_SUPERSTAR_ROOT}/mankind.webp`,
-  "kane": `${TEMP_SUPERSTAR_ROOT}/kane.webp`,
+  "hulk-hogan": `${WWE_PROFILE_ROOT}/hulk-hogan.png`,
+  "andre-the-giant": `${WWE_PROFILE_ROOT}/andre-the-giant.png`,
+  "randy-savage": `${WWE_PROFILE_ROOT}/randy-savage.png`,
+  "ultimate-warrior": `${WWE_PROFILE_ROOT}/ultimate-warrior.png`,
+  "stone-cold-steve-austin": `${WWE_PROFILE_ROOT}/stone-cold-steve-austin.png`,
+  "the-undertaker": `${WWE_PROFILE_ROOT}/the-undertaker.png`,
+  "mankind": `${WWE_PROFILE_ROOT}/mankind.png`,
+  "kane": `${WWE_PROFILE_ROOT}/kane.png`,
 
   // Evolution — Series 1 temporary sourced portraits.
-  "rhea-ripley": `${EVOLUTION_ROOT}/superstars/rhea-ripley.webp`,
-  "liv-morgan": `${EVOLUTION_ROOT}/superstars/liv-morgan.webp`,
-  "becky-lynch": `${EVOLUTION_ROOT}/superstars/becky-lynch.webp`,
-  "bayley": `${EVOLUTION_ROOT}/superstars/bayley.webp`,
-  "charlotte-flair": `${EVOLUTION_ROOT}/superstars/charlotte-flair.webp`,
-  "iyo-sky": `${EVOLUTION_ROOT}/superstars/iyo-sky.webp`,
-  "paige": `${EVOLUTION_ROOT}/superstars/paige.webp`,
-  "stephanie-vaquer": `${EVOLUTION_ROOT}/superstars/stephanie-vaquer.webp`,
+  "rhea-ripley": `${WWE_PROFILE_ROOT}/rhea-ripley.png`,
+  "liv-morgan": `${WWE_PROFILE_ROOT}/liv-morgan.png`,
+  "becky-lynch": `${WWE_PROFILE_ROOT}/becky-lynch.png`,
+  "bayley": `${WWE_PROFILE_ROOT}/bayley.png`,
+  "charlotte-flair": `${WWE_PROFILE_ROOT}/charlotte-flair.png`,
+  "iyo-sky": `${WWE_PROFILE_ROOT}/iyo-sky.png`,
+  "paige": `${WWE_PROFILE_ROOT}/paige.png`,
+  "stephanie-vaquer": `${WWE_PROFILE_ROOT}/stephanie-vaquer.png`,
+  "the-rock": `${WWE_PROFILE_ROOT}/the-rock.png`,
   ...superstarArtOverrides
 };
 
@@ -72,8 +74,8 @@ export function artworkRequirement(card) {
 export function isTemporaryArtwork(card) {
   if (!card) return true;
   if (cardArtwork[card.id]) return false;
-  // The eight existing SummerSlam Superstar portraits are treated as sourced
-  // base assets; all inherited move/entrance uses remain temporary until an
-  // exact card override is supplied.
-  return card.kind !== "superstar" || card.setId !== "summerslam-series-1";
+  // All current Superstar cards now use sourced local profile portraits.
+  // Inherited move/entrance usage is still temporary until exact action art exists.
+  if (card.kind === "superstar" && superstarArtwork[card.superstarId]) return false;
+  return true;
 }

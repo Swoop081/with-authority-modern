@@ -41,7 +41,7 @@ function recordPull(profile,card,foil){const before={normal:ownedCount(profile,c
   // Newly owned cards automatically fill any incomplete collection-built deck.
   // Once a deck reaches 55, we stop rebuilding it so player customization is preserved.
   for(const superstarId of profile.unlockedSuperstars??[]){const saved=profile.savedDecks?.[superstarId]??[];if(saved.length>=55)continue;const rebuilt=buildBestOwnedDeck(profile,superstarId);profile.savedDecks??={};profile.savedDecks[superstarId]=rebuilt;profile.deckNeedsCards??={};profile.deckNeedsCards[superstarId]=Math.max(0,55-rebuilt.length);}
-  return{card,foil,isNewFinish:before[foil?"foil":"normal"]===0,superstarUnlocked,replacedNormal:!!result.replacedNormal};}
+  return{card,foil,isNewCard:(before.normal+before.foil)===0,isNewFinish:before[foil?"foil":"normal"]===0,superstarUnlocked,replacedNormal:!!result.replacedNormal};}
 function setSuperstarIds(setId){return cardsForSet(setId).filter(c=>c.kind==="superstar").map(c=>c.superstarId);}
 export function openBooster(profile,rng=Math.random,setId=DEFAULT_BOOSTER_SET_ID){
   if(!profile)throw new Error("Profile required");if(boosterCreditsFor(profile,setId)<1)throw new Error(`No ${setCollectionFor(setId)?.displayName??setId} booster packs available`);if(!boosterSetAvailable(profile,setId))throw new Error(`${setCollectionFor(setId)?.displayName??setId} is currently vaulted from standard boosters.`);

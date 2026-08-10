@@ -1627,7 +1627,7 @@ test("premium UI exposes distinct mode identities and graphical submission press
     assert.ok(app.includes(`modeLogoMarkup("${mode}"`), `missing ${mode} mode logo`);
   }
   assert.match(app, /hud-sub-limb/);
-  assert.match(app, /SUBMISSION · TAP/);
+  assert.match(app, /SUB \$\{submissionThreshold\(p\)\}/);
   assert.match(css, /premium-menu-tile/);
   assert.match(css, /feature-hero/);
   assert.match(css, /premium-submission/);
@@ -1914,14 +1914,16 @@ test("claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned de
 });
 
 
-test("Season 1 splash takeover advertises Final Boss and all three launch booster sets", () => {
+test("Season 1 entry is a clean Final Boss splash followed by three-card-set discovery", () => {
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   assert.equal(app.includes("COMPLETE SEASON 1.<br>UNLOCK THE FINAL BOSS."), true);
   assert.equal(app.includes("Reach Tier 50 to earn <b>The Rock — The Final Boss</b> and his complete 55-page deck."), true);
-  assert.equal(app.includes("Cody Rhodes · Brock Lesnar · Roman Reigns"), true);
-  assert.equal(app.includes("Hulk Hogan · Stone Cold · The Undertaker"), true);
-  assert.equal(app.includes("Becky Lynch · Rhea Ripley · Charlotte Flair"), true);
-  assert.equal((app.match(/NOW AVAILABLE IN BOOSTERS/g) ?? []).length >= 3, true);
+  assert.equal(app.includes("function renderLaunchReleases()"), true);
+  assert.equal(app.includes('stars: ["cody-rhodes","brock-lesnar"]'), true);
+  assert.equal(app.includes('stars: ["hulk-hogan","stone-cold-steve-austin"]'), true);
+  assert.equal(app.includes('stars: ["rhea-ripley","becky-lynch"]'), true);
+  assert.equal(app.includes("TAKE ME THERE"), true);
+  assert.equal(app.includes("Continue to WWE Legacy"), true);
 });
 
 
@@ -1955,4 +1957,107 @@ test("Options provides an explicit two-step local progress reset for testing", (
   assert.equal(app.includes('id="cancel-reset-progress"'), true);
   assert.equal(app.includes("resetProfile();"), true);
   assert.equal(app.includes("This cannot be undone on this device."), true);
+});
+
+
+test("card backs explicitly communicate Superstar play restrictions", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("function cardPlayRestrictionText(card)"), true);
+  assert.equal(app.includes("SUPERSTAR RESTRICTION"), true);
+  assert.equal(app.includes("Only playable by"), true);
+  assert.equal(app.includes("Playable by any Superstar."), true);
+  assert.equal(app.includes("LINKED SUPERSTAR"), true);
+});
+
+test("booster flow reveals exactly one focused card at a time then shows summary before upgrades", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("single-card-reveal-stage"), true);
+  assert.equal(app.includes("View Pack Summary"), true);
+  assert.equal(app.includes("function preparePackSummary()"), true);
+  assert.equal(app.includes('packStage = "summary"'), true);
+  assert.equal(app.includes("Your New Cards"), true);
+  assert.equal(app.includes("Review Roster & Deck Upgrades"), true);
+  assert.equal(app.includes("function beginPackUpgradeReview()"), true);
+  assert.equal(app.includes('packStage = "upgrades"'), true);
+});
+
+test("booster pull metadata distinguishes the first-ever owned copy for NEW badges", () => {
+  const boosters = readFileSync(new URL("../js/data/boosters.js", import.meta.url), "utf8");
+  assert.equal(boosters.includes("isNewCard:(before.normal+before.foil)===0"), true);
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("new-card-symbol"), true);
+  assert.equal(app.includes("First time owned"), true);
+});
+
+
+test("all non-SummerSlam launch Superstars use local WWE profile portrait assets", async () => {
+  const { superstarArtwork } = await import("../js/data/artwork.js");
+  const ids = [
+    "hulk-hogan","andre-the-giant","randy-savage","ultimate-warrior",
+    "stone-cold-steve-austin","the-undertaker","mankind","kane",
+    "rhea-ripley","liv-morgan","becky-lynch","bayley",
+    "charlotte-flair","iyo-sky","paige","stephanie-vaquer","the-rock"
+  ];
+  for (const id of ids) {
+    const path = superstarArtwork[id];
+    assert.equal(path.startsWith("assets/art/wwe-profile-portraits/"), true, id);
+    assert.equal(existsSync(new URL(`../${path}`, import.meta.url)), true, `${id} portrait exists locally`);
+  }
+});
+
+test("home-screen icon and web app manifest are bundled", () => {
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.equal(html.includes('rel="apple-touch-icon"'), true);
+  assert.equal(html.includes('rel="manifest"'), true);
+  assert.equal(existsSync(new URL("../assets/icons/apple-touch-icon.png", import.meta.url)), true);
+  assert.equal(existsSync(new URL("../assets/icons/icon-192.png", import.meta.url)), true);
+  assert.equal(existsSync(new URL("../assets/icons/icon-512.png", import.meta.url)), true);
+  assert.equal(existsSync(new URL("../manifest.webmanifest", import.meta.url)), true);
+});
+
+test("card rarity uses gold star count without hollow filler stars or RARITY label", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.equal(app.includes('"☆"'), false);
+  assert.equal(app.includes("<small>STARS</small>"), true);
+  assert.equal(css.includes(".rarity-stars"), true);
+  assert.equal(css.includes("#e5b84b"), true);
+});
+
+test("first-time starter selection routes to the Season 1 release discovery screen", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes('screen = "launch-releases";'), true);
+  assert.equal(app.includes("renderLaunchReleases();"), true);
+  assert.equal(app.includes("showBoosterSet(btn.dataset.launchSet)"), true);
+});
+
+
+test("match HUD uses compact two-wrestler status cards", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.equal(app.includes("compact-match-hud"), true);
+  assert.equal(app.includes("compact-wrestler-hud"), true);
+  assert.equal(app.includes("compact-methods"), true);
+  assert.equal(css.includes(".compact-hud-top"), true);
+  assert.equal(css.includes("grid-template-columns:42px minmax(0,1fr) 34px"), true);
+});
+
+test("human hand is horizontal and sorted by current playability without changing original hand indexes", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.equal(app.includes("horizontal-card-hand"), true);
+  assert.equal(app.includes("p.turn.momentumPlayed < p.turn.momentumPlayLimit"), true);
+  assert.equal(app.includes('card.kind === "momentum" && legal && momentumAvailable'), true);
+  assert.equal(app.includes('else if (legal) priority = 1'), true);
+  assert.equal(app.includes('else if (card.kind !== "momentum") priority = 2'), true);
+  assert.equal(app.includes('data-play-hand="${index}"'), true);
+  assert.equal(css.includes("overflow-x:auto!important"), true);
+  assert.equal(css.includes("scroll-snap-type:x mandatory"), true);
+});
+
+test("remaining Momentum moves to the rear after Momentum has been played this turn", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  assert.equal(app.includes("Once Momentum has been played this turn, all remaining Momentum moves to the end."), true);
+  assert.equal(app.includes("else priority = 3"), true);
+  assert.equal(app.includes("Momentum returns to front next turn"), true);
 });
