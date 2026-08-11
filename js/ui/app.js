@@ -85,7 +85,11 @@ function setLogoMarkup(setId, className = "") {
 
 function setChrome({ hideTopbar = false } = {}) {
   const bar = document.querySelector("#app-topbar");
-  if (bar) bar.hidden = hideTopbar;
+  if (bar) {
+    bar.hidden = hideTopbar;
+    bar.style.display = hideTopbar ? "none" : "";
+    bar.setAttribute("aria-hidden", hideTopbar ? "true" : "false");
+  }
   document.body.dataset.screen = screen;
   document.body.dataset.mode = activeMode ?? "";
 
@@ -852,7 +856,7 @@ function renderStarter() {
       <span class="champion-tag">${titleFor(star.id)}</span>
       <strong>${star.name}</strong><small>${star.nickname}</small>
       <span>${star.hp} HP · ${star.archetype.replaceAll("-", " ")}</span>
-      <em><b>${star.ability.name}</b> — ${star.ability.text}</em>
+      <div class="starter-ability"><span class="starter-ability-name">${star.ability.name}</span><span class="starter-ability-text">${star.ability.text}</span></div>
       <b class="choose-starter-cta">START WITH ${star.name.toUpperCase()}</b>
     </button>`).join("")}</div>
     <p class="starter-note">The champion you do not choose remains collectible and can be unlocked later. Your starter choice is permanent for this local save unless you reset the profile.</p>

@@ -1,10 +1,10 @@
-## v0.11.28 — Full-Height Launch Screen
+## v0.11.30 — Champion Onboarding Overlay Fix
 
-- Launch/splash screen now uses the full visible phone viewport instead of stacking content at the top and leaving a large dead area below.
-- The Season 1 Final Boss promo expands into the available vertical space while keeping the profile panel, Enter button and local-profile note visible on one screen.
-- Final Boss copy is larger and right-aligned, with extra separation from the Superstar card art/border.
-- Compact-height phones retain a dedicated reduced-size layout so the complete launch screen still fits without scrolling.
-- Gameplay, decks, active pool, collector numbers and Card Art Studio card data are unchanged from v0.11.27.
+The first-time **Choose Your Champion** screen no longer has UI elements sitting over its copy. The global sticky WWE Legacy/version header is force-hidden while onboarding is active, and Superstar ability names such as **Pipe Bomb** and **Head of the Table** are now true inline emphasis inside their ability descriptions instead of inheriting the white starter CTA-pill styling. No gameplay/card/deck data changed.
+
+## v0.11.29 — Full-Scale Launch Logo
+
+The launch-screen WWE Legacy brand now fills its reserved top-third area on phones instead of appearing undersized inside it. The brand row has a dedicated responsive height, the WWE/LEGACY wordmark and subtitle scale up substantially, and short-height phones use a compact proportional version so the Final Boss promo and launch controls still fit without scrolling. Gameplay and card data are unchanged.
 
 ## v0.11.27 — Shared Spinebuster Consolidation
 
@@ -36,7 +36,7 @@ Move-card fronts now reserve a consistent three-line footer: **Move name**, **CO
 
 The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
 
-# WWE Legacy: Collectible Card Game — v0.11.28
+# WWE Legacy: Collectible Card Game — v0.11.30
 
 
 

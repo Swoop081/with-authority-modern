@@ -2469,3 +2469,20 @@ test("launch screen fills the visible viewport and keeps Final Boss copy clear o
   assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?\.season-ad-title\{font-size:clamp\(2\.02rem,9\.3vw,3rem\)/);
   assert.match(css, /@media\(max-height:720px\) and \(max-width:760px\)\{[\s\S]*?\.season-ad-title\{font-size:1\.72rem\}/);
 });
+
+
+test("launch logo fills its reserved mobile top-third brand area", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?\.clean-splash-content\{[^}]*grid-template-rows:clamp\(210px,28svh,290px\) minmax\(0,1fr\) auto auto auto/);
+  assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?\.clean-splash-brand\{[^}]*height:100%;[^}]*transform:none;[^}]*place-items:center/);
+  assert.match(css, /\.clean-splash-brand \.legacy-word\{font-size:clamp\(5\.25rem,23vw,6\.45rem\);line-height:\.79;letter-spacing:\.045em\}/);
+  assert.match(css, /@media\(max-height:720px\) and \(max-width:760px\)\{[\s\S]*?grid-template-rows:clamp\(150px,23svh,178px\)/);
+});
+
+test('v0.11.30 champion onboarding has no header or ability-pill overlays', async () => {
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  assert.match(css, /body\[data-screen="starter"\] \.topbar\{display:none!important\}/);
+  assert.match(css, /\.starter-choice > b:last-child\{/);
+  assert.doesNotMatch(css, /\.starter-choice b:last-child\{/);
+  assert.match(css, /\.champion-starter em b\{display:inline;background:transparent!important/);
+});
