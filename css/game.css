@@ -1677,3 +1677,194 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .mobile-game-nav .nav-icon{width:30px;height:30px}
   .mobile-game-nav .nav-icon svg{width:27px;height:27px}
 }
+
+/* v0.11.36 — focused Challenges hub: one return action, compact set summary. */
+.challenges-feature{min-height:230px!important;padding-top:56px}
+.challenge-home-button{position:absolute;z-index:8;top:14px;right:14px;border:1px solid rgba(255,255,255,.22);border-radius:12px;background:rgba(8,10,14,.86);color:#f5f7fb;padding:9px 12px;font-size:.62rem;font-weight:950;letter-spacing:.12em;box-shadow:0 9px 24px rgba(0,0,0,.28);backdrop-filter:blur(14px);cursor:pointer}
+.challenge-home-button:hover,.challenge-home-button:focus-visible{border-color:var(--mode-accent);color:var(--mode-accent)}
+.challenge-set-stats{grid-template-columns:repeat(2,minmax(150px,1fr));align-self:end;max-width:470px}
+.challenge-set-stat{padding:10px 12px}
+.challenge-set-stat b{font-size:1.02rem;line-height:1.05}
+.challenge-set-stat span{font-size:.58rem}
+@media(max-width:760px){
+  .challenges-feature{min-height:210px!important;padding-top:52px!important}
+  .challenge-home-button{top:10px;right:10px;padding:8px 10px;font-size:.56rem}
+  .challenges-feature .feature-copy{max-width:78%;align-content:start}
+  .challenge-set-stats{grid-template-columns:repeat(2,minmax(0,1fr));max-width:100%;gap:6px;margin-top:4px}
+  .challenge-set-stat{padding:8px 9px}
+  .challenge-set-stat b{font-size:.88rem}
+  .challenge-set-stat span{font-size:.5rem}
+}
+
+/* v0.11.37 — focused Booster Vault + full-screen pack opening */
+.booster-vault-hero{
+  min-height:220px!important;
+  padding:18px 20px!important;
+}
+.booster-vault-hero .feature-copy{gap:8px!important}
+.booster-vault-hero .mode-logo{margin-bottom:0!important}
+.booster-vault-hero .feature-set-logo{max-height:68px!important}
+.booster-vault-hero .booster-release-headline{margin:.1rem 0!important;font-size:clamp(.9rem,2.8vw,1.25rem)!important}
+.booster-vault-hero .feature-copy p{max-width:570px}
+.booster-set-tabs{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  width:min(690px,100%)!important;
+  margin:.45rem 0 0!important;
+}
+.booster-set-tabs .nav-button{
+  width:100%!important;
+  min-width:0!important;
+  padding:10px 8px!important;
+  white-space:nowrap!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-size:.78rem!important;
+}
+.booster-primary-controls{
+  margin:0!important;
+  padding:10px!important;
+  display:block!important;
+}
+.booster-button-row{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:7px!important;
+  width:100%!important;
+}
+.booster-button-row .start-match,.booster-button-row .nav-button{
+  width:100%!important;
+  min-width:0!important;
+  white-space:nowrap!important;
+  padding:11px 7px!important;
+  font-size:clamp(.72rem,2.4vw,.95rem)!important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.booster-vault-pack-stage{
+  margin:0!important;
+  min-height:390px!important;
+  padding:10px 4px 14px!important;
+  border-radius:22px;
+  background:radial-gradient(circle at 50% 34%,color-mix(in srgb,var(--mode-accent) 10%,transparent),transparent 52%);
+}
+.booster-vault-pack-stage .booster-pack{width:min(285px,72vw)!important}
+.booster-vault-lower{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(230px,.42fr);
+  gap:10px;
+  align-items:stretch;
+}
+.booster-vault-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+.booster-assistance{
+  display:grid;
+  align-content:center;
+  gap:7px;
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:15px;
+  background:linear-gradient(145deg,rgba(20,23,31,.92),rgba(10,12,17,.94));
+  font-weight:850;
+}
+.booster-assistance select{
+  width:100%;
+  min-width:0;
+  background:#0d0d11;
+  color:#fff;
+  border:1px solid #3a3a44;
+  border-radius:10px;
+  padding:10px 12px;
+}
+body.booster-modal-open{overflow:hidden!important;overscroll-behavior:none}
+.booster-pack-modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:max(calc(env(safe-area-inset-top,0px) + 12px),58px) 12px max(calc(env(safe-area-inset-bottom,0px) + 14px),18px);
+  background:
+    radial-gradient(circle at 50% 15%,color-mix(in srgb,var(--mode-accent) 15%,transparent),transparent 34%),
+    linear-gradient(180deg,#08090d 0%,#050609 100%);
+}
+.booster-pack-modal-shell{
+  width:min(1080px,100%);
+  min-height:calc(100svh - max(calc(env(safe-area-inset-top,0px) + 12px),58px) - max(calc(env(safe-area-inset-bottom,0px) + 14px),18px));
+  margin:0 auto;
+  display:grid;
+  grid-template-rows:auto auto 1fr;
+  align-content:start;
+}
+.booster-pack-modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:12px;
+  padding:7px 4px 10px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  text-transform:uppercase;
+}
+.booster-pack-modal-head span{font-size:.62rem;font-weight:950;letter-spacing:.18em;color:var(--mode-accent-2)}
+.booster-pack-modal-head b{font-size:.78rem;letter-spacing:.08em;color:#fff;text-align:right}
+.booster-modal-message{
+  margin:10px auto 0;
+  color:#cdd2dd;
+  text-align:center;
+  font-size:.78rem;
+}
+.booster-pack-modal-body{
+  min-height:0;
+  display:grid;
+  align-items:center;
+  justify-items:center;
+  width:100%;
+}
+.booster-pack-modal .pack-opening-stage{
+  min-height:calc(100svh - 150px)!important;
+  margin:0!important;
+  padding:12px 0!important;
+  display:grid;
+  place-items:center;
+}
+.booster-pack-modal .booster-pack{width:min(330px,76vw)!important}
+.booster-pack-modal .single-card-reveal-stage{
+  margin:8px auto 0!important;
+  min-height:calc(100svh - 145px);
+  align-content:center;
+}
+.booster-pack-modal .pack-summary-screen{
+  margin:16px auto 8px!important;
+  width:min(1040px,100%)!important;
+}
+.booster-modal-upgrades{width:min(1040px,100%);margin:8px auto 18px!important}
+.booster-pack-modal .setup-message{margin-top:8px}
+
+@media(max-width:760px){
+  .booster-vault-hero{min-height:205px!important;padding:14px!important}
+  .booster-vault-hero .feature-copy{max-width:88%!important}
+  .booster-vault-hero .feature-copy p{font-size:.72rem!important}
+  .booster-set-tabs{gap:5px!important}
+  .booster-set-tabs .nav-button{font-size:.66rem!important;padding:9px 4px!important;letter-spacing:0!important}
+  .booster-primary-controls{padding:7px!important}
+  .booster-button-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important}
+  .booster-button-row .start-match,.booster-button-row .nav-button{font-size:.68rem!important;padding:10px 4px!important;white-space:nowrap!important}
+  .booster-vault-pack-stage{min-height:345px!important;padding-top:4px!important}
+  .booster-vault-pack-stage .booster-pack{width:min(255px,70vw)!important}
+  .booster-vault-lower{grid-template-columns:1fr!important}
+  .booster-vault-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .booster-vault-stats .set-stat{padding:9px 7px!important}
+  .booster-vault-stats .set-stat b{font-size:1.15rem!important}
+  .booster-vault-stats .set-stat span{font-size:.54rem!important}
+  .booster-assistance{grid-template-columns:auto 1fr;align-items:center;padding:10px 12px}
+  .booster-assistance select{padding:9px 10px}
+  .booster-pack-modal{padding-left:8px;padding-right:8px}
+  .booster-pack-modal-head{padding-left:4px;padding-right:4px}
+  .booster-pack-modal .pack-opening-stage{min-height:calc(100svh - 135px)!important}
+  .booster-pack-modal .booster-pack{width:min(300px,76vw)!important}
+  .booster-pack-modal .single-card-reveal-stage{min-height:calc(100svh - 135px);gap:8px!important}
+  .booster-pack-modal .single-card-slot{min-height:455px!important}
+  .booster-pack-modal .single-pack-card{width:min(330px,78vw)!important}
+  .booster-pack-modal .pack-summary-screen{margin-top:10px!important}
+}

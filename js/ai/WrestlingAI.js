@@ -1,6 +1,6 @@
-import { canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, pinChancePercent, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.35";
-import { totalMomentum } from "../engine/utils.js?v=0.11.35";
-import { isOffensiveMove } from "../data/move-types.js?v=0.11.35";
+import { canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, pinChancePercent, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.37";
+import { totalMomentum } from "../engine/utils.js?v=0.11.37";
+import { isOffensiveMove } from "../data/move-types.js?v=0.11.37";
 
 function effectValue(effect = {}) {
   const amount = effect.amount ?? 1;

@@ -1,4 +1,4 @@
-import { METHODS } from "./constants.js?v=0.11.35";
+import { METHODS } from "./constants.js?v=0.11.37";
 
 export function totalMomentum(player) {
   return METHODS.reduce((sum, key) => sum + (player.momentum[key] || 0), 0) + (player.momentum.attitude || 0);

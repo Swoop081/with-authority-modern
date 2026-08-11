@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=0.11.35";
-import { ownershipCapFor } from "./card-limits.js?v=0.11.35";
-import { isOffensiveMove, isCounterMove } from "./move-types.js?v=0.11.35";
+import { superstars } from "./superstars.js?v=0.11.37";
+import { ownershipCapFor } from "./card-limits.js?v=0.11.37";
+import { isOffensiveMove, isCounterMove } from "./move-types.js?v=0.11.37";
 export const DECK_SIZE = 55;
 export const OPENING_SIZE = 5;
 

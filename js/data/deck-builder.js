@@ -1,10 +1,10 @@
-import { collectionCards } from "./collection.js?v=0.11.35";
-import { decks } from "./decks.js?v=0.11.35";
-import { superstars } from "./superstars.js?v=0.11.35";
-import { ownedCount } from "./profile.js?v=0.11.35";
-import { ownershipCapFor } from "./card-limits.js?v=0.11.35";
-import { cardForDeckEntry } from "./deck-assistant.js?v=0.11.35";
-import { evaluateDeck, isDeckSwapSafe, DECK_SIZE, OPENING_SIZE } from "./deck-health.js?v=0.11.35";
+import { collectionCards } from "./collection.js?v=0.11.37";
+import { decks } from "./decks.js?v=0.11.37";
+import { superstars } from "./superstars.js?v=0.11.37";
+import { ownedCount } from "./profile.js?v=0.11.37";
+import { ownershipCapFor } from "./card-limits.js?v=0.11.37";
+import { cardForDeckEntry } from "./deck-assistant.js?v=0.11.37";
+import { evaluateDeck, isDeckSwapSafe, DECK_SIZE, OPENING_SIZE } from "./deck-health.js?v=0.11.37";
 
 const cardById = new Map(collectionCards.filter(c => c.kind !== "superstar").map(c => [c.id, c]));
 for (const deck of Object.values(decks)) for (const card of deck) if (!cardById.has(card.id)) cardById.set(card.id, card);

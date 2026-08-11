@@ -2413,7 +2413,7 @@ test("finished Superstar card fronts are the canonical UI visual with portrait f
   assert.equal(Object.keys(superstarCardArtwork).length, Object.keys(superstarArtwork).length);
   assert.equal(Object.keys(superstarCardArtwork).length, 25);
   for (const id of Object.keys(superstarArtwork)) {
-    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=0.11.35`);
+    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=0.11.37`);
   }
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   assert.equal(app.includes("const portraitMarkup = superstarVisualMarkup"), true);
@@ -2550,21 +2550,21 @@ test('v0.11.33 restores a normal Options tile to Home without restoring Game & T
 });
 
 
-test('v0.11.35 stamps the full browser dependency graph and runtime artwork URLs with one build version', async () => {
+test('v0.11.37 stamps the full browser dependency graph and runtime artwork URLs with one build version', async () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
   const profileSource = readFileSync(new URL('../js/data/profile.js', import.meta.url), 'utf8');
   const buildSource = readFileSync(new URL('../js/config/build.js', import.meta.url), 'utf8');
   const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
-  assert.equal(pkg.version, '0.11.35');
-  assert.match(html, /css\/game\.css\?v=0\.11\.35/);
-  assert.match(html, /js\/ui\/app\.js\?v=0\.11\.35/);
-  assert.match(html, /manifest\.webmanifest\?v=0\.11\.35/);
-  assert.match(app, /data\/superstars\.js\?v=0\.11\.35/);
-  assert.match(profileSource, /\.\/decks\.js\?v=0\.11\.35/);
-  assert.match(buildSource, /BUILD_VERSION = "0\.11\.35"/);
+  assert.equal(pkg.version, '0.11.37');
+  assert.match(html, /css\/game\.css\?v=0\.11\.37/);
+  assert.match(html, /js\/ui\/app\.js\?v=0\.11\.37/);
+  assert.match(html, /manifest\.webmanifest\?v=0\.11\.37/);
+  assert.match(app, /data\/superstars\.js\?v=0\.11\.37/);
+  assert.match(profileSource, /\.\/decks\.js\?v=0\.11\.37/);
+  assert.match(buildSource, /BUILD_VERSION = "0\.11\.37"/);
   const { artworkFor } = await import('../js/data/artwork.js');
-  assert.match(artworkFor(cards.crossRhodes), /\?v=0\.11\.35$/);
+  assert.match(artworkFor(cards.crossRhodes), /\?v=0\.11\.37$/);
   assert.equal(pkg.scripts['stamp-cache'], 'node tools/stamp-cache-version.mjs');
 });
 
@@ -2579,4 +2579,48 @@ test('v0.11.35 gives Options Superstar art and tightens the persistent hub witho
   assert.match(css, /min-height:78px!important/);
   assert.match(css, /gap:2px!important/);
   assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?grid-auto-columns:88px!important[\s\S]*?min-height:76px!important/);
+});
+
+test('v0.11.36 focuses Challenges on goals with one Main Menu action and compact set summary', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderChallenges()'), app.indexOf('function beginLadderRun()'));
+  assert.match(block, /id="challenge-main-menu"[^>]*>← MAIN MENU<\/button>/);
+  assert.match(block, /\$\("#challenge-main-menu"\)\?\.addEventListener\("click", showMainMenu\)/);
+  for (const id of ['challenge-seasons','challenge-play','challenge-ladder','challenge-championship','challenge-boosters','challenge-collection','challenge-decks']) {
+    assert.equal(block.includes(`id="${id}"`), false, `${id} should be removed from Challenges hero`);
+  }
+  assert.match(block, /challenge-set-stats/);
+  assert.match(block, /Daily Challenges/);
+  assert.match(css, /\.challenges-feature\{min-height:230px!important;padding-top:56px\}/);
+  assert.match(css, /\.challenge-home-button\{position:absolute;[\s\S]*?top:14px;right:14px/);
+  assert.match(css, /\.challenge-set-stats\{grid-template-columns:repeat\(2,minmax\(150px,1fr\)\)/);
+});
+
+
+test('v0.11.37 focuses Booster Vault on pack opening and removes hero shortcuts', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderBoosters()'), app.indexOf('function formatCountdown'));
+  for (const id of ['booster-back','booster-play','booster-ladder','booster-championship','booster-decks']) {
+    assert.equal(block.includes(`id="${id}"`), false, `${id} should be removed from Booster Vault`);
+  }
+  assert.match(block, /class="mode-branch-tabs booster-set-tabs"/);
+  assert.match(block, /class="booster-button-row"/);
+  assert.match(block, /class="pack-opening-stage booster-vault-pack-stage"/);
+  assert.match(css, /\.booster-set-tabs\{[\s\S]*?grid-template-columns:repeat\(3,minmax\(0,1fr\)\)!important/);
+  assert.match(css, /\.booster-button-row\{[\s\S]*?grid-template-columns:repeat\(3,minmax\(0,1fr\)\)!important/);
+});
+
+test('v0.11.37 opens packs in a full-screen modal and returns to the Booster Vault when finished', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderBoosters()'), app.indexOf('function formatCountdown'));
+  assert.match(block, /class="booster-pack-modal [^"$]*\$\{setVisualClass\(activeBoosterSetId\)\}" role="dialog" aria-modal="true"/);
+  assert.match(block, /document\.body\.classList\.toggle\("booster-modal-open", packInProgress\)/);
+  assert.match(block, /mobileNav\.hidden=packInProgress/);
+  assert.match(block, /Finish Pack & Return to Booster Vault/);
+  assert.match(block, /document\.body\.classList\.remove\("booster-modal-open"\);renderBoosters\(\);requestAnimationFrame\(\(\)=>window\.scrollTo\(0,0\)\)/);
+  assert.match(css, /\.booster-pack-modal\{[\s\S]*?position:fixed;[\s\S]*?inset:0;[\s\S]*?z-index:1000;[\s\S]*?overflow-y:auto/);
+  assert.match(css, /body\.booster-modal-open\{overflow:hidden!important/);
 });

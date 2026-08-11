@@ -1,4 +1,9 @@
-## v0.11.35 — Compact Hub Navigation + Options Superstar Art
+## v0.11.37 — Full-Screen Booster Opening
+
+### Booster Vault focus
+- Booster Vault shortcut clutter removed; live set selectors and the three pack types stay in compact single rows.
+- The pack presentation now appears before secondary stats/settings.
+- Opening a pack launches a full-screen reveal/review flow and returns to the Booster Vault when finished.
 
 The Home **Options** tile now uses Cody Rhodes Superstar artwork so it visually matches the rest of the wrestler-backed hub. The persistent bottom navigation has been tightened: less outer padding, smaller gaps, closer icon-to-label spacing, and a modestly shorter overall bar while retaining large mobile tap targets and horizontal scrolling. No gameplay/card data changed.
 
@@ -515,3 +520,9 @@ The live match screen was rebuilt around a compact mobile wrestling layout:
 - Human hand cards use concise at-a-glance stats rather than dumping the full rules string onto every card; complete metadata remains available via the card title/tooltip.
 - The Match Log is collapsed by default and stores the full event history in an internal scroll area.
 - Mobile HUD/card sizing is tuned specifically for narrow iPhone screens with no opponent-deck clutter.
+
+### Focused Challenges Screen
+- Removed the seven mode/navigation buttons from the Challenges hero.
+- Added one compact **← MAIN MENU** action in the hero's top-right corner.
+- Condensed per-set pack/collection progress into four compact summary cards so Daily and Weekly challenges begin much higher on the page.
+- Existing challenge, milestone, reward, gameplay, collection and season logic is unchanged.

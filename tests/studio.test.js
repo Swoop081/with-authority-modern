@@ -68,7 +68,7 @@ test("Card Art Studio exposes one type-filtered workflow for every collectible k
 
 test("Card Art Studio is self-contained and direct-file compatible", () => {
   assert.doesNotMatch(studioJs, /^import\s/m);
-  assert.match(studioHtml, /<script src="\.\.\/js\/tools\/card-art-studio\.js\?v=0\.11\.35"><\/script>/);
+  assert.match(studioHtml, /<script src="\.\.\/js\/tools\/card-art-studio\.js\?v=0\.11\.37"><\/script>/);
   assert.doesNotMatch(studioHtml, /card-art-studio\.js"[^>]*type="module"/);
   assert.match(studioHtml, /<option value="superstar-cody-rhodes">SS1-001 · Cody Rhodes · SUPERSTAR<\/option>/);
   assert.match(studioJs, /WWE_LEGACY_CARD_ART_STUDIO_READY=true/);
