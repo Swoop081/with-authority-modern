@@ -55,7 +55,6 @@ export const cards = {
   runningForearm: move("running-forearm", "Running Forearm", { method: "strike", cost: 2, requirements: { strike: 1 }, damage: 3, effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
   elbowSmash: move("elbow-smash", "Elbow Smash", { method: "strike", cost: 2, requirements: { strike: 1 }, damage: 3 }),
   uppercut: move("uppercut", "Uppercut", { method: "strike", cost: 2, requirements: { strike: 1 }, damage: 3 }),
-  hipToss: move("hip-toss", "Hip Toss", { method: "technical", cost: 2, requirements: { technical: 1 }, damage: 3, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   snapmare: move("snapmare", "Snapmare", { method: "technical", cost: 2, requirements: { technical: 1 }, damage: 3, setOpponentPosture: "on-mat", effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
   bodyslam: move("bodyslam", "Bodyslam", { method: "strength", cost: 2, requirements: { strength: 1 }, damage: 4, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   clothesline: move("clothesline", "Clothesline", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5, effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
@@ -66,15 +65,9 @@ export const cards = {
   neckbreaker: move("neckbreaker", "Neckbreaker", { method: "technical", cost: 3, requirements: { technical: 1 }, damage: 5, setOpponentPosture: "on-mat" }),
   backbreaker: move("backbreaker", "Backbreaker", { method: "strength", cost: 3, requirements: { strength: 1 }, damage: 5, setOpponentPosture: "on-mat" }),
   legSweep: move("leg-sweep", "Leg Sweep", { method: "technical", cost: 3, requirements: { technical: 1 }, damage: 4, setOpponentPosture: "on-mat" }),
-  elbowDrop: move("elbow-drop", "Elbow Drop", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5, requiresPosture: "on-mat" }),
-  kneeDrop: move("knee-drop", "Knee Drop", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5, requiresPosture: "on-mat" }),
-  legDrop: move("leg-drop", "Leg Drop", { method: "agility", cost: 3, requirements: { agility: 1 }, damage: 5, requiresPosture: "on-mat" }),
-  verticalSuplex: move("vertical-suplex", "Vertical Suplex", { method: "technical", cost: 4, requirements: { technical: 1, strength: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   snapSuplex: move("snap-suplex", "Snap Suplex", { method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   germanSuplexCommon: move("german-suplex-common", "German Suplex", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   bellyToBellyCommon: move("belly-to-belly-common", "Belly-to-Belly Suplex", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
-  russianLegSweep: move("russian-leg-sweep", "Russian Leg Sweep", { method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
-  bulldog: move("bulldog", "Bulldog", { method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   spinebuster: move("spinebuster", "Spinebuster", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 7, setOpponentPosture: "on-mat", effectText: "On connect: opponent loses 1 additional Attitude.", onConnect: [{ type: "loseMomentum", target: "opponent", method: "attitude", amount: 1 }] }),
   powerslam: move("powerslam", "Powerslam", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 7, setOpponentPosture: "on-mat" }),
   samoanDropCommon: move("samoan-drop-common", "Samoan Drop", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 7, setOpponentPosture: "on-mat" }),
@@ -85,7 +78,6 @@ export const cards = {
   sentonCommon: move("senton-common", "Senton", { method: "agility", cost: 4, requirements: { agility: 1 }, damage: 6, requiresPosture: "on-mat" }),
   splash: move("splash", "Body Splash", { method: "agility", cost: 4, requirements: { agility: 1 }, damage: 6, requiresPosture: "on-mat" }),
   bostonCrab: move("boston-crab", "Boston Crab", { cost: 5, requirements: { technical: 1 }, damage: 1, requiresPosture: "on-mat", submission: { bodyPart: "leg", damage: 3 } }),
-  sleeperCommon: move("sleeper-common", "Sleeper Hold", { cost: 5, requirements: { technical: 1 }, damage: 1, submission: { bodyPart: "head", damage: 3 } }),
   armbar: move("armbar", "Armbar", { cost: 5, requirements: { technical: 2 }, damage: 1, requiresPosture: "on-mat", submission: { bodyPart: "arm", damage: 3 } }),
   powerbomb: move("powerbomb", "Powerbomb", { method: "strength", cost: 5, requirements: { strength: 2 }, damage: 8, setOpponentPosture: "on-mat", effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
   piledriver: move("piledriver", "Piledriver", { method: "strength", cost: 6, requirements: { strength: 2 }, damage: 8, setOpponentPosture: "on-mat" }),
@@ -113,17 +105,15 @@ export const cards = {
   codyCutter: move("cody-cutter", "Cody Cutter", { superstarId: "cody-rhodes", method: "agility", cost: 7, requirements: { agility: 2 }, damage: 11, trademark: true, setOpponentPosture: "on-mat", effectText: "On connect: search your Playbook for Cross Rhodes.", onConnect: [{ type: "searchDeck", cardId: "cross-rhodes" }] }),
   crossRhodes: move("cross-rhodes", "Cross Rhodes", { superstarId: "cody-rhodes", method: "technical", cost: 9, requirements: { technical: 2 }, damage: 15, setOpponentPosture: "on-mat", finisher: true }),
 
-  codyDropDownPunch: move("cody-drop-down-punch", "Drop-Down Punch", { superstarId: "cody-rhodes", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 3, effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
+  codyDropDownPunch: move("cody-drop-down-punch", "Drop-Down Punch", { superstarId: "cody-rhodes", moveFamily: "punch", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 3, effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   codySuicideDive: move("cody-suicide-dive", "Cody Suicide Dive", { method: "agility", cost: 4, requirements: { agility: 1 }, damage: 6, requiresLocation: "ring", sendOpponentOutside: true }),
   codyMoonsault: move("cody-moonsault", "Cody Moonsault", { method: "agility", cost: 5, requirements: { agility: 2 }, damage: 7, requiresPosture: "on-mat" }),
-  codyPedigree: move("cody-pedigree", "Pedigree", { superstarId: "cody-rhodes", method: "technical", cost: 6, requirements: { technical: 2 }, damage: 8, setOpponentPosture: "on-mat" }),
   codySpear: move("cody-spear", "Spear", { method: "strength", cost: 5, requirements: { strength: 1 }, damage: 7, setOpponentPosture: "on-mat" }),
 
   // CM Punk — technical counters, strikes and submission pressure.
   punkRoundhouse: move("punk-roundhouse", "Roundhouse Kick", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5, effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
   runningKnee: move("running-knee", "Running Knee", { method: "strike", cost: 4, requirements: { strike: 1, technical: 1 }, damage: 6, stunTurns: 1, effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
   punkNeckbreaker: move("punk-neckbreaker", "Swinging Neckbreaker", { method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
-  divingElbow: move("diving-elbow", "Diving Elbow Drop", { superstarId: "cm-punk", method: "agility", cost: 5, requirements: { agility: 1, technical: 1 }, damage: 7, requiresPosture: "on-mat" }),
   anacondaVise: move("anaconda-vise", "Anaconda Vise", { superstarId: "cm-punk", method: "technical", cost: 7, requirements: { technical: 2 }, damage: 10, requiresPosture: "on-mat", submission: { bodyPart: "head", damage: 3 }, trademark: true }),
   gts: move("gts", "G.T.S.", { superstarId: "cm-punk", method: "strike", cost: 9, requirements: { technical: 2 }, damage: 15, stunTurns: 1, finisher: true, effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
 
@@ -131,28 +121,22 @@ export const cards = {
   punkSnapSuplex: move("punk-snap-suplex", "Snap Suplex", { method: "technical", cost: 3, requirements: { technical: 1 }, damage: 5, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   punkBulldog: move("punk-bulldog", "Running Bulldog", { superstarId: "cm-punk", method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
   punkHighKick: move("punk-high-kick", "High Kick", { method: "strike", cost: 4, requirements: { strike: 1 }, damage: 6, stunTurns: 1 }),
-  punkPiledriver: move("punk-piledriver", "Piledriver", { superstarId: "cm-punk", method: "technical", cost: 6, requirements: { technical: 2 }, damage: 8, setOpponentPosture: "on-mat" }),
 
   // Roman Reigns — high-damage power/strike offense and a submission route.
   driveBy: move("drive-by", "Drive-By", { superstarId: "roman-reigns", method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5, effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
-  uranage: move("uranage", "Uranage", { superstarId: "roman-reigns", method: "strength", cost: 4, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat", effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
   samoanDrop: move("samoan-drop", "Samoan Drop", { method: "strength", cost: 5, requirements: { strength: 2 }, damage: 7, setOpponentPosture: "on-mat" }),
-  supermanPunch: move("superman-punch", "Superman Punch", { superstarId: "roman-reigns", method: "strike", cost: 7, requirements: { strike: 2 }, damage: 11, trademark: true, stunTurns: 1, effectText: "On connect: search your Playbook for Spear.", onConnect: [{ type: "searchDeck", cardId: "spear" }] }),
+  supermanPunch: move("superman-punch", "Superman Punch", { superstarId: "roman-reigns", moveFamily: "punch", method: "strike", cost: 7, requirements: { strike: 2 }, damage: 11, trademark: true, stunTurns: 1, effectText: "On connect: search your Playbook for Spear.", onConnect: [{ type: "searchDeck", cardId: "spear" }] }),
   guillotine: move("guillotine", "Guillotine", { superstarId: "roman-reigns", method: "technical", cost: 8, requirements: { technical: 1, strength: 1 }, damage: 10, requiresPosture: "on-mat", submission: { bodyPart: "head", damage: 3 }, trademark: true }),
   spear: move("spear", "Roman\'s Spear", { superstarId: "roman-reigns", moveFamily: "spear", method: "strength", cost: 10, requirements: { strength: 2 }, damage: 16, setOpponentPosture: "on-mat", finisher: true, effectText: "On connect: opponent ditches 2 pages.", onConnect: [{ type: "discard", target: "opponent", amount: 2 }] }),
 
   romanUppercut: move("roman-uppercut", "Leaping Uppercut", { method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4, effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
   romanClothesline: move("roman-clothesline", "Running Clothesline", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5 }),
-  romanPowerbomb: move("roman-powerbomb", "Sit-Out Powerbomb", { superstarId: "roman-reigns", method: "strength", cost: 5, requirements: { strength: 2 }, damage: 8, setOpponentPosture: "on-mat" }),
-  romanDriveByRingside: move("roman-drive-by-ringside", "Drive-By Dropkick", { superstarId: "roman-reigns", method: "agility", cost: 5, requirements: { strike: 1 }, damage: 7, requiresLocation: "ringside" }),
-  romanCrucifixPowerbomb: move("roman-crucifix-powerbomb", "Crucifix Powerbomb", { superstarId: "roman-reigns", method: "strength", cost: 6, requirements: { strength: 2 }, damage: 9, setOpponentPosture: "on-mat" }),
 
   // Seth Rollins — fast multi-method offense that rewards setup and sequencing.
   slingBlade: move("sling-blade", "Sling Blade", { method: "agility", cost: 2, requirements: { agility: 1 }, damage: 5, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page and leave the opponent On the Mat.", onConnect: [{ type: "draw", amount: 1 }] }),
   enzuigiri: move("enzuigiri", "Enzuigiri", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5, stunTurns: 1, effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
   falconArrow: move("falcon-arrow", "Falcon Arrow", { method: "technical", cost: 5, requirements: { technical: 1 }, damage: 7, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   pedigree: move("pedigree", "Pedigree", { superstarId: "seth-rollins", method: "technical", cost: 7, requirements: { technical: 2 }, damage: 11, trademark: true, setOpponentPosture: "on-mat", effectText: "On connect: search your Playbook for Curb Stomp.", onConnect: [{ type: "searchDeck", cardId: "stomp" }] }),
-  phoenixSplash: move("phoenix-splash", "Phoenix Splash", { superstarId: "seth-rollins", method: "agility", cost: 6, requirements: { agility: 2 }, damage: 8, requiresPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   stomp: move("stomp", "Curb Stomp", { superstarId: "seth-rollins", method: "strike", tacticalType: "standing-above", cost: 10, requirements: { strike: 2 }, damage: 16, requiresPosture: "on-mat", finisher: true }),
 
   sethSuperkick: move("seth-superkick", "Superkick", { method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4 }),
@@ -163,19 +147,16 @@ export const cards = {
 
   // Oba Femi — overwhelming Strength and power.
   obaLariat: move("oba-lariat", "Ruler's Lariat", { superstarId: "oba-femi", method: "strike", cost: 3, requirements: { strength: 1 }, damage: 5, effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
-  obaSpinebuster: move("oba-spinebuster", "Spinebuster", { superstarId: "oba-femi", method: "strength", cost: 3, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat", effectText: "On connect: opponent loses 1 additional Attitude.", onConnect: [{ type: "loseMomentum", target: "opponent", method: "attitude", amount: 1 }] }),
   obaPowerbomb: move("oba-powerbomb", "Powerbomb", { method: "strength", cost: 5, requirements: { strength: 2 }, damage: 8, setOpponentPosture: "on-mat" }),
   fallFromGrace: move("fall-from-grace", "Fall from Grace", { superstarId: "oba-femi", method: "strength", cost: 10, requirements: { strength: 3 }, damage: 16, setOpponentPosture: "on-mat", finisher: true }),
 
   obaShoulderBlock: move("oba-shoulder-block", "Running Shoulder Block", { method: "strength", cost: 2, requirements: { strength: 1 }, damage: 4 }),
   obaChokeslam: move("oba-chokeslam", "Chokeslam", { method: "strength", cost: 4, requirements: { strength: 2 }, damage: 7, setOpponentPosture: "on-mat" }),
   obaBackbreaker: move("oba-backbreaker", "Backbreaker", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 7, setOpponentPosture: "on-mat" }),
-  obaPopUpPowerbomb: move("oba-pop-up-powerbomb", "Pop-Up Powerbomb", { superstarId: "oba-femi", method: "strength", cost: 6, requirements: { strength: 3 }, damage: 9, setOpponentPosture: "on-mat" }),
   obaRunningUppercut: move("oba-running-uppercut", "Running Uppercut", { method: "strike", cost: 3, requirements: { strike: 1 }, damage: 5 }),
 
   // Brock Lesnar — explosive power plus Kimura submission threat.
   germanSuplex: move("german-suplex", "German Suplex", { method: "strength", cost: 3, requirements: { strength: 1 }, damage: 5, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
-  bellyToBelly: move("belly-to-belly", "Belly-to-Belly Suplex", { superstarId: "brock-lesnar", method: "strength", cost: 3, requirements: { strength: 1 }, damage: 6, setOpponentPosture: "on-mat", effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
   kimuraLock: move("kimura-lock", "Kimura Lock", { superstarId: "brock-lesnar", method: "technical", cost: 8, requirements: { strength: 2, technical: 1 }, damage: 10, requiresPosture: "on-mat", submission: { bodyPart: "arm", damage: 3 }, trademark: true }),
   f5: move("f5", "F-5", { superstarId: "brock-lesnar", method: "strength", cost: 10, requirements: { strength: 2 }, damage: 16, setOpponentPosture: "on-mat", finisher: true, stunTurns: 1 }),
 
@@ -192,22 +173,12 @@ export const cards = {
   popUpPowerbomb: move("pop-up-powerbomb", "Pop-Up Powerbomb", { superstarId: "kevin-owens", moveFamily: "powerbomb", method: "strength", cost: 10, requirements: { strength: 1, strike: 1 }, damage: 16, setOpponentPosture: "on-mat", finisher: true }),
   koStunner: move("ko-stunner", "KO\'s Stunner", { superstarId: "kevin-owens", moveFamily: "stunner", method: "strike", cost: 9, requirements: { strike: 1 }, damage: 15, stunTurns: 1, finisher: true }),
 
-  owensForearm: move("owens-forearm", "Running Forearm", { superstarId: "kevin-owens", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4, effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
   owensDDT: move("owens-ddt", "DDT", { method: "technical", cost: 3, requirements: { technical: 1 }, damage: 5, setOpponentPosture: "on-mat", effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
-  owensSwanton: move("owens-swanton", "Swanton Bomb", { superstarId: "kevin-owens", method: "agility", cost: 5, requirements: { agility: 1 }, damage: 7, requiresPosture: "on-mat" }),
   owensPackagePiledriver: move("owens-package-piledriver", "Package Piledriver", { superstarId: "kevin-owens", method: "strength", cost: 8, requirements: { strength: 2 }, damage: 12, trademark: true, setOpponentPosture: "on-mat", effectText: "On connect: search your Playbook for a Finisher.", onConnect: [{ type: "searchDeck", finisher: true }] }),
-  owensFrogSplash: move("owens-frog-splash", "Frog Splash", { superstarId: "kevin-owens", method: "agility", cost: 5, requirements: { agility: 1 }, damage: 7, requiresPosture: "on-mat" }),
 
   // Gunther — punishing strikes, Powerbomb and Sleeper Hold.
-  guntherChop: move("gunther-chop", "Knife-Edge Chop", { superstarId: "gunther", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4, effectText: "On connect: opponent loses 1 additional Attitude.", onConnect: [{ type: "loseMomentum", target: "opponent", method: "attitude", amount: 1 }] }),
-  guntherLariat: move("gunther-lariat", "Lariat", { superstarId: "gunther", method: "strike", cost: 3, requirements: { strike: 2 }, damage: 7, effectText: "On connect: opponent ditches 1 page.", onConnect: [{ type: "discard", target: "opponent", amount: 1 }] }),
-  guntherPowerbomb: move("gunther-powerbomb", "Powerbomb", { superstarId: "gunther", method: "strength", cost: 6, requirements: { strength: 1 }, damage: 9, setOpponentPosture: "on-mat", finisher: true, effectText: "On connect: gain +1 additional Attitude.", onConnect: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }),
-  guntherBigBoot: move("gunther-big-boot", "Big Boot", { superstarId: "gunther", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4 }),
   guntherGerman: move("gunther-german", "German Suplex", { method: "strength", cost: 4, requirements: { strength: 1 }, damage: 7, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
   guntherButterflySuplex: move("gunther-butterfly-suplex", "Butterfly Suplex", { superstarId: "gunther", method: "technical", cost: 4, requirements: { technical: 1, strength: 1 }, damage: 7, setOpponentPosture: "on-mat" }),
-  guntherBostonCrab: move("gunther-boston-crab", "Boston Crab", { superstarId: "gunther", cost: 5, requirements: { technical: 1 }, damage: 1, requiresPosture: "on-mat", submission: { bodyPart: "leg", damage: 4 } }),
-  guntherSplash: move("gunther-splash", "Top-Rope Splash", { superstarId: "gunther", method: "agility", cost: 6, requirements: { strength: 1 }, damage: 8, requiresPosture: "on-mat" }),
-  sleeperHold: move("sleeper-hold", "Sleeper Hold", { superstarId: "gunther", cost: 7, requirements: { technical: 1, strength: 1 }, damage: 2, submission: { bodyPart: "head", damage: 8 }, finisher: true }),
 
   // v0.9.8 reviewed SummerSlam — Series 1 cards
   noSell: move("no-sell", "No Sell", { method: "strength", cost: 3, requirements: { strength: 1 }, counterMethods: ["strength"], defensiveOnly: true, effectText: "Counter any Strength Move." }),
@@ -249,6 +220,26 @@ export const cards = {
   burningLariat: move("burning-lariat", "Burning Lariat", { superstarId: "gunther", moveFamily: "lariat", method: "strike", cost: 7, requirements: { strike: 2 }, damage: 11, bodySubmissionPressure: 1, effectText: "On connect: +1 Body submission pressure." }),
   foldingPowerbomb: move("folding-powerbomb", "Folding Powerbomb", { superstarId: "gunther", moveFamily: "powerbomb", method: "strength", cost: 8, requirements: { strength: 1, technical: 1 }, damage: 12, trademark: true, setOpponentPosture: "on-mat", effectText: "On connect: search your Playbook for Gojira Clutch.", onConnect: [{ type: "searchDeck", cardId: "gojira-clutch" }] }),
   gojiraClutch: move("gojira-clutch", "Gojira Clutch", { superstarId: "gunther", method: "technical", cost: 10, requirements: { technical: 1, strength: 1 }, damage: 10, submission: { bodyPart: "head", damage: 5 }, finisher: true }),
-  matIsSacred: special("mat-is-sacred", "The Mat Is Sacred", { superstarId: "gunther", abilityText: "Gunther only. After a successful Counter, opponent loses 2 Attitude and cannot play an Action before their next Move.", matSacred: true })
+  matIsSacred: special("mat-is-sacred", "The Mat Is Sacred", { superstarId: "gunther", abilityText: "Gunther only. After a successful Counter, opponent loses 2 Attitude and cannot play an Action before their next Move.", matSacred: true }),
+
+  // v0.11.23 — shared wrestling fundamentals. Appended deliberately so all existing
+  // SummerSlam collector numbers and finished-art filenames remain stable.
+  punch: move("punch", "Punch", { moveFamily: "punch", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4 }),
+  frontKick: move("front-kick", "Front Kick", { moveFamily: "kick", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 4 }),
+  basicStomp: move("basic-stomp", "Stomp", { moveFamily: "stomp", method: "strike", tacticalType: "standing-above", cost: 2, requirements: { strike: 1 }, damage: 4, requiresPosture: "on-mat" }),
+  hipToss: move("hip-toss", "Hip Toss", { moveFamily: "hip-toss", method: "technical", cost: 2, requirements: { technical: 1 }, damage: 3, setOpponentPosture: "on-mat", effectText: "On connect: draw 1 page.", onConnect: [{ type: "draw", amount: 1 }] }),
+  elbowDrop: move("elbow-drop", "Elbow Drop", { moveFamily: "elbow-drop", method: "strike", tacticalType: "standing-above", cost: 3, requirements: { strike: 1 }, damage: 5, requiresPosture: "on-mat" }),
+  kneeDrop: move("knee-drop", "Knee Drop", { moveFamily: "knee-drop", method: "strike", tacticalType: "standing-above", cost: 3, requirements: { strike: 1 }, damage: 5, requiresPosture: "on-mat" }),
+  legDrop: move("leg-drop", "Leg Drop", { moveFamily: "leg-drop", method: "agility", cost: 3, requirements: { agility: 1 }, damage: 5, requiresPosture: "on-mat" }),
+  verticalSuplex: move("vertical-suplex", "Vertical Suplex", { moveFamily: "vertical-suplex", method: "technical", cost: 4, requirements: { technical: 1, strength: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
+  russianLegSweep: move("russian-leg-sweep", "Russian Leg Sweep", { moveFamily: "leg-sweep", method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
+  bulldog: move("bulldog", "Bulldog", { moveFamily: "bulldog", method: "technical", cost: 4, requirements: { technical: 1 }, damage: 6, setOpponentPosture: "on-mat" }),
+  sleeperCommon: move("sleeper-common", "Sleeper Hold", { moveFamily: "sleeper", cost: 5, requirements: { technical: 1 }, damage: 1, submission: { bodyPart: "head", damage: 3 } }),
+  irishWhip: move("irish-whip", "Irish Whip", { moveFamily: "irish-whip", method: "technical", tacticalType: "in-close", cost: 2, requirements: { technical: 1 }, damage: 0, setOpponentPosture: "standing", effectText: "On connect: draw 1 page and keep the opponent Standing.", onConnect: [{ type: "draw", amount: 1 }] }),
+  knifeEdgeChopCommon: move("knife-edge-chop-common", "Knife-Edge Chop", { moveFamily: "knife-edge-chop", method: "strike", cost: 2, requirements: { strike: 1 }, damage: 3 }),
+  dropToeHold: move("drop-toe-hold", "Drop Toe Hold", { moveFamily: "drop-toe-hold", method: "technical", cost: 2, requirements: { technical: 1 }, damage: 3, setOpponentPosture: "on-mat" }),
+  firemansCarry: move("firemans-carry", "Fireman's Carry", { moveFamily: "firemans-carry", method: "strength", cost: 3, requirements: { strength: 1 }, damage: 4, setOpponentPosture: "on-mat" }),
+  schoolboy: move("schoolboy", "Schoolboy", { moveFamily: "roll-up", method: "technical", cost: 2, requirements: { technical: 1 }, damage: 1, setOpponentPosture: "on-mat", pinBonus: 5 }),
+  smallPackage: move("small-package", "Small Package", { moveFamily: "roll-up", method: "technical", cost: 3, requirements: { technical: 1 }, damage: 2, setOpponentPosture: "on-mat", pinBonus: 7 })
 
 };

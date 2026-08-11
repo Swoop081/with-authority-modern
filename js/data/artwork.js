@@ -1,4 +1,5 @@
 import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js";
+import { finishedFrontKeys } from "./finished-front-keys.js";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
@@ -70,6 +71,16 @@ const finishedFrontFolders = {
 export function finishedCardArtFor(card) {
   if (!card) return null;
   if (card.kind === "superstar") return superstarCardArtFor(card.superstarId);
+  const folder = finishedFrontFolders[card.kind];
+  const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
+  return folder && key ? `assets/cards/art/custom/${folder}/${key}.webp` : null;
+}
+
+// v0.11.18–v0.11.22 documentation sometimes described raw card-ID filenames.
+// Keep that location as a secondary candidate so any art already installed there
+// continues to work while the Studio uses stable collector-code filenames.
+export function legacyFinishedCardArtFor(card) {
+  if (!card || card.kind === "superstar") return null;
   const folder = finishedFrontFolders[card.kind];
   return folder && card.id ? `assets/cards/art/custom/${folder}/${card.id}.webp` : null;
 }

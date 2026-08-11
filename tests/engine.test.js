@@ -105,7 +105,7 @@ test("original-style Move Type is separate from Momentum method", () => {
 });
 
 test("every collectible resolves to a local artwork file", () => {
-  assert.equal(collectionCards.length, 372);
+  assert.equal(collectionCards.length, 389);
   for (const card of collectionCards) {
     const art = artworkFor(card);
     assert.ok(art, `${card.id} has no artwork path`);
@@ -616,8 +616,8 @@ test("signature Moves no longer need corner, ropes, orientation, barricade or ap
 test("on-mat remains the only positional prerequisite for grounded attacks", () => {
   const g = new MatchEngine({ superstarA: superstars.cmPunk, superstarB: superstars.codyRhodes, deckA: decks["cm-punk"], deckB: decks["cody-rhodes"] });
   const punk = g.state().players.p1;
-  punk.momentum.agility = 1; punk.momentum.technical = 1; punk.momentum.attitude = 3;
-  const elbow = putInHand(g, "p1", cards.divingElbow);
+  punk.momentum.agility = 2; punk.momentum.technical = 1; punk.momentum.attitude = 4;
+  const elbow = putInHand(g, "p1", cards.divingElbowDrop);
   assert.equal(moveEligibility(g.state(), "p1", elbow).legal, false);
   g.state().players.p2.posture = "on-mat";
   assert.equal(moveEligibility(g.state(), "p1", elbow).legal, true);
@@ -736,9 +736,27 @@ test("flow guard keeps mature 3+ Momentum dead-Move passes below 20 percent", ()
 
 test("SummerSlam Series 1 matches the audited active card pool", () => {
   const summer = cardsForSet("summerslam-series-1");
-  assert.equal(summer.length, 135);
-  assert.equal(summer.filter(card => card.kind === "move").length, 101);
+  assert.equal(summer.length, 152);
+  assert.equal(summer.filter(card => card.kind === "move").length, 118);
   assert.equal(summer.filter(card => card.kind === "superstar").length, 8);
+});
+
+test("SummerSlam fundamentals cover the core shared wrestling vocabulary and exclusive punches remain better family members", () => {
+  const summer = cardsForSet("summerslam-series-1");
+  const fundamentals = ["punch","front-kick","basic-stomp","hip-toss","elbow-drop","knee-drop","leg-drop","vertical-suplex","russian-leg-sweep","bulldog","sleeper-common","irish-whip","knife-edge-chop-common","drop-toe-hold","firemans-carry","schoolboy","small-package"];
+  for (const id of fundamentals) assert.ok(summer.some(card => card.id === id), `${id} should be active in SummerSlam`);
+  assert.equal(cards.punch.moveFamily, "punch");
+  assert.equal(hallCards.jab.moveFamily, "punch");
+  assert.equal(cards.punch.cost, 2);
+  assert.equal(cards.punch.damage, 4);
+  assert.equal(cards.codyDropDownPunch.moveFamily, "punch");
+  assert.ok(cards.codyDropDownPunch.onConnect?.length, "Cody's punch should be better than the shared baseline via card advantage");
+  assert.equal(cards.supermanPunch.moveFamily, "punch");
+  assert.ok(cards.supermanPunch.damage > cards.punch.damage);
+  assert.equal(cards.elbowDrop.moveType, "standing-above");
+  assert.equal(cards.kneeDrop.moveType, "standing-above");
+  assert.equal(cards.schoolboy.pinBonus, 5);
+  assert.equal(cards.smallPackage.pinBonus, 7);
 });
 
 test("all 25 recommended decks respect the five-copy per-card cap", () => {
@@ -1940,7 +1958,7 @@ test("Season 1 Tier 50 Final Boss Rock is a distinct 55-card season-exclusive pe
   assert.equal(rock.signatures.includes(rockCards.rockBottomFinalBoss.id), true);
   assert.equal(rock.signatures.includes(rockCards.peoplesElbowFinalBoss.id), true);
   assert.equal(rock.signatures.includes(rockCards.finalBossSpinebuster.id), true);
-  assert.equal(collectionCards.some(c => c.id === rockCards.finalBossSharpshooter.id), false, "dormant Sharpshooter should stay outside the active reward pool");
+  assert.equal(rockCards.finalBossSharpshooter, undefined, "retired Final Boss Sharpshooter should not remain in production card data");
 });
 
 test("claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned deck", async () => {
@@ -2377,4 +2395,37 @@ test("finished Superstar card fronts are the canonical UI visual with portrait f
   assert.equal(css.includes(".season-ad-rock img.superstar-card-visual"), true);
   assert.equal(css.includes(".tile-bg-art img.superstar-card-visual"), true);
   assert.equal(css.includes(".season-release-art .mode-portrait img.superstar-card-visual"), true);
+});
+
+test("production data has no dormant Superstar-specific Move definitions", async () => {
+  const { rockCards } = await import("../js/data/season1-rock-cards.js");
+  const flatten = source => {
+    const out = [];
+    for (const value of Object.values(source)) {
+      if (value?.id) out.push(value);
+      else if (value && typeof value === "object") {
+        for (const nested of Object.values(value)) if (nested?.id) out.push(nested);
+      }
+    }
+    return out;
+  };
+  const activeIds = new Set(collectionCards.map(card => card.id));
+  const sourceCards = [...flatten(cards), ...flatten(hallCards), ...flatten(evolutionCards), ...flatten(rockCards)];
+  const phantomExclusives = sourceCards.filter(card => card.kind === "move" && card.superstarId && !activeIds.has(card.id));
+  assert.deepEqual(phantomExclusives.map(card => card.id), []);
+});
+
+test("active Superstar-specific cards belong to and are used by their owning Superstar", () => {
+  const usage = new Map();
+  for (const [superstarId, deck] of Object.entries(decks)) {
+    for (const card of deck) {
+      if (!usage.has(card.id)) usage.set(card.id, new Set());
+      usage.get(card.id).add(superstarId);
+    }
+  }
+  for (const card of collectionCards.filter(card => card.superstarId && !["superstar", "entrance"].includes(card.kind))) {
+    const users = [...(usage.get(card.id) ?? [])];
+    assert.equal(users.includes(card.superstarId), true, `${card.id} is active but absent from ${card.superstarId}'s deck`);
+    assert.deepEqual(users.filter(id => id !== card.superstarId), [], `${card.id} is used by the wrong Superstar: ${users.join(", ")}`);
+  }
 });

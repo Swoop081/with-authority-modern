@@ -1,15 +1,33 @@
+## v0.11.25 — All-Sets Card Studio Search
+
+The Card Art Studio now opens with **All Sets** selected, so its normal search scans the entire active 389-card pool across SummerSlam, Hall of Fame, Evolution and Rewards. Choose a specific set only when you want to narrow the list. The Superstar filter also spans all 25 Superstars while All Sets is selected.
+
+## v0.11.24 — Phantom Exclusive Cleanup
+
+The active game structure is unchanged, but production card data now matches it more closely: 153 retired Superstar-specific Move definitions were removed, including obsolete Kevin Owens and Becky Lynch Running Forearm variants. A regression test now prevents dormant exclusive Moves from lingering in source.
+
+## v0.11.23 — Core Wrestling Fundamentals + Studio Sync
+
+Before the large finished-art pass, SummerSlam now contains a deliberate shared wrestling foundation. Seventeen core techniques are appended at **SS1-136–SS1-152** without renumbering any existing card: Punch, Front Kick, Stomp, Hip Toss, Elbow Drop, Knee Drop, Leg Drop, Vertical Suplex, Russian Leg Sweep, Bulldog, Sleeper Hold, Irish Whip, Knife-Edge Chop, Drop Toe Hold, Fireman's Carry, Schoolboy and Small Package. Wrestler-specific versions remain separate and stronger/more flavorful members of their move family. Card Art Studio has been regenerated against the resulting **389-card / 278-Move** active pool. The Studio and game now also share the same collector-coded finished-art filenames, with raw-ID fallback retained for previously exported art.
+
+## v0.11.22 — Move Requirement Fronts + Superstar Studio Filter
+
+The unified Card Art Studio now has a true **Superstar filter** built from current card ownership and recommended-deck usage rather than legacy internal IDs. `Superstar-specific / linked cards only` shows the Superstar card plus genuinely locked/linked Entrances, Moves and Specials; `Everything in current recommended deck` additionally includes shared generic cards that Superstar currently uses. Text search now matches only the current display name, collector number and card type, so old internal slugs such as `roman-clothesline` can no longer make a renamed generic card appear to be Roman-specific. Stable internal IDs remain untouched for save/deck compatibility.
+
+Move-card fronts now reserve a consistent three-line footer: **Move name**, **COST / DAM**, and a fixed **method-requirement row**. Requirements render compactly as e.g. `◆ 2 STRENGTH • ◆ 1 TECHNICAL`. If a Move has no method requirement, the third row remains blank so every Move name and COST/DAM line stays perfectly aligned across the set. The Studio frozen data carries the live requirements for all 278 active Moves.
+
 ## v0.11.21 — URL Artwork Loader Fix
 
 The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
 
-# WWE Legacy: Collectible Card Game — v0.11.19
+# WWE Legacy: Collectible Card Game — v0.11.25
 
 
 
 
 ## v0.11.19 — Unified Card Art Studio
 
-**Profile → Card Art Studio** is now the single artwork workspace for the entire active Season 1 collection. It contains all **372 active collectibles** across SummerSlam, Hall of Fame, Evolution and Rewards, with filters for Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum cards.
+**Profile → Card Art Studio** is now the single artwork workspace for the entire active Season 1 collection. It contains all **389 active collectibles** across SummerSlam, Hall of Fame, Evolution and Rewards, with filters for Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum cards.
 
 Every finished front uses the same premium full-art language: the set-specific background/frame, a small transparent set logo in the top-right, creator-supplied artwork, and a minimal bottom identity. Superstar fronts use the Superstar name only. Move fronts use the Move name plus compact `COST` / `DAM`. Entrances, Specials, Managers, Actions and Supports use the card name plus a small card-type label. Momentum uses the card name plus its compact Momentum identity. Detailed rules, restrictions, effects, rarity and signature status remain **back-only**.
 
@@ -430,7 +448,7 @@ npm run balance
 npm run art
 ```
 
-Current certification: **163/163 automated tests passing** across the **25-Superstar roster**. The suite covers current card-pool legality, all linked Lead Off packages, counter chains, submissions, pins, Managers, Season 1 Final Boss rewards, deck construction, boosters, mobile UI regressions and validation that every one of the **372 active collectibles** resolves to a local image.
+Current certification: **163/163 automated tests passing** across the **25-Superstar roster**. The suite covers current card-pool legality, all linked Lead Off packages, counter chains, submissions, pins, Managers, Season 1 Final Boss rewards, deck construction, boosters, mobile UI regressions and validation that every one of the **389 active collectibles** resolves to a local image.
 
 ### Current tactical balance audit
 

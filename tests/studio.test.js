@@ -2,23 +2,30 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { collectionCards, collectionCardsBySet } from "../js/data/collection.js";
+import { finishedFrontKeys } from "../js/data/finished-front-keys.js";
 
 const studioJs = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
 const studioHtml = fs.readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
 const legacySuperstarHtml = fs.readFileSync(new URL("../tools/superstar-card-studio.html", import.meta.url), "utf8");
 
 function studioEntries() {
-  const match = studioJs.match(/const STUDIO_CARDS = (\[.*?\]);\nconst SETS =/s);
+  const match = studioJs.match(/const STUDIO_CARDS = (\[.*?\]);\nconst STUDIO_SUPERSTARS =/s);
   assert.ok(match, "STUDIO_CARDS frozen data should be present");
   return JSON.parse(match[1]);
 }
 
-test("Card Art Studio contains all 372 active Season 1 collectibles", () => {
+function studioSuperstars() {
+  const match = studioJs.match(/const STUDIO_SUPERSTARS = (\[.*?\]);\nconst SETS =/s);
+  assert.ok(match, "STUDIO_SUPERSTARS frozen data should be present");
+  return JSON.parse(match[1]);
+}
+
+test("Card Art Studio contains all 389 active Season 1 collectibles", () => {
   const entries = studioEntries();
   assert.equal(entries.length, collectionCards.length);
-  assert.equal(entries.length, 372);
-  assert.equal(new Set(entries.map(c => c.id)).size, 372);
-  const expectedKinds = { superstar:25, entrance:25, move:261, special:27, momentum:4, action:21, support:6, manager:3 };
+  assert.equal(entries.length, 389);
+  assert.equal(new Set(entries.map(c => c.id)).size, 389);
+  const expectedKinds = { superstar:25, entrance:25, move:278, special:27, momentum:4, action:21, support:6, manager:3 };
   const actualKinds = entries.reduce((acc,c) => { acc[c.kind] = (acc[c.kind] || 0) + 1; return acc; }, {});
   assert.deepEqual(actualKinds, expectedKinds);
   for (const id of ["superstar-cody-rhodes","entrance-cody-rhodes","cross-rhodes","punk-best-in-the-world","hof1-manager-bobby-heenan","evo1-rhea-riptide","s1rock-rock-bottom-final-boss"]) {
@@ -30,7 +37,7 @@ test("Card Art Studio preserves the four active set pools and collector numberin
   const entries = studioEntries();
   const counts = Object.fromEntries(Object.entries(collectionCardsBySet).map(([id,list]) => [id,list.length]));
   assert.deepEqual(counts, {
-    "summerslam-series-1":135,
+    "summerslam-series-1":152,
     "hall-of-fame-series-1":106,
     "evolution-series-1":110,
     "season-1-final-boss":21,
@@ -41,12 +48,20 @@ test("Card Art Studio preserves the four active set pools and collector numberin
   }
 });
 
+
+
+test("Card Art Studio defaults to All Sets and searches the full active pool", () => {
+  assert.match(studioHtml, /<select id="set-select"><option value="all" selected>All Sets<\/option>/);
+  assert.match(studioJs, /set==="all"\|\|s\.setId===set/);
+  assert.match(studioJs, /if\(set!=="all"&&c\.setId!==set\)return false/);
+  assert.match(studioHtml, /Search all active sets at once by default/);
+});
 test("Card Art Studio exposes one type-filtered workflow for every collectible kind", () => {
   for (const value of ["all","superstar","move","entrance","special","manager","action","support","momentum"]) {
     assert.match(studioHtml, new RegExp(`<option value="${value}">`));
   }
   assert.match(studioHtml, /ONE STUDIO · EVERY ACTIVE CARD FRONT/);
-  assert.match(studioHtml, /All 372 active Season 1 collectibles/);
+  assert.match(studioHtml, /All 389 active Season 1 collectibles/);
   assert.match(studioJs, /KIND_LABELS/);
   assert.match(studioJs, /refreshCardList/);
 });
@@ -88,13 +103,67 @@ test("URL artwork loader retries CORS-blocked hosts through an image proxy and r
 test("front identity is minimal by type and every set gets its top-right logo", () => {
   assert.match(studioHtml, /SET LOGO[\s\S]*TOP RIGHT · AUTOMATIC/);
   assert.match(studioHtml, /SUPERSTAR[\s\S]*NAME ONLY/);
-  assert.match(studioHtml, /MOVE[\s\S]*NAME \+ COST \/ DAM/);
+  assert.match(studioHtml, /MOVE[\s\S]*NAME \+ COST \/ DAM \+ METHOD REQUIREMENTS/);
   assert.match(studioHtml, /OTHER TYPES[\s\S]*NAME \+ SMALL TYPE LABEL/);
   assert.match(studioHtml, /RULES \/ EFFECTS[\s\S]*BACK ONLY/);
   assert.match(studioJs, /drawSetLogo/);
-  assert.match(studioJs, /card\.kind==="move"\)sub=`COST/);
+  assert.match(studioJs, /sub=`COST  \${card\.cost\?\?0}/);
+  assert.match(studioJs, /function moveRequirementText\(card\)/);
+  assert.match(studioJs, /h\*\.875/);
+  assert.match(studioJs, /h\*\.925/);
+  assert.match(studioJs, /h\*\.965/);
   assert.match(studioJs, /if\(card\.kind!=="superstar"\)/);
   assert.doesNotMatch(studioJs, /FINISHER.*strokeText|TRADEMARK.*strokeText|SIGNATURE.*strokeText/);
+});
+
+test("Move Studio data carries the live method requirements and reserves the third footer row", () => {
+  const entries = studioEntries();
+  const studioMoves = entries.filter(c => c.kind === "move");
+  const liveMoves = collectionCards.filter(c => c.kind === "move");
+  assert.equal(studioMoves.length, 278);
+  for (const live of liveMoves) {
+    const entry = studioMoves.find(c => c.id === live.id);
+    assert.deepEqual(entry?.requirements ?? {}, live.requirements ?? {}, `${live.cardCode} ${live.name} requirements should match live data`);
+  }
+  assert.deepEqual(studioMoves.find(c => c.id === "gts")?.requirements, { technical: 2 });
+  assert.deepEqual(studioMoves.find(c => c.id === "punk-step-up-high-knee")?.requirements, { strike: 2, technical: 1 });
+  assert.match(studioJs, /moveRequirementText\(card\)/);
+  assert.match(studioJs, /ctx\.fillText\(requirement,w\*\.5,h\*\.965\)/);
+  assert.match(studioJs, /ctx\.fillStyle=requirement\?set\.nameTop:"rgba\(255,255,255,0\)"/);
+});
+
+test("Card Art Studio Superstar filter uses current ownership and deck usage, not legacy ID text", () => {
+  const entries = studioEntries();
+  const stars = studioSuperstars();
+  assert.equal(stars.length, 25);
+  assert.match(studioHtml, /id="superstar-select"/);
+  assert.match(studioHtml, /Superstar-specific \/ linked cards only/);
+  assert.match(studioHtml, /Everything in current recommended deck/);
+  assert.match(studioJs, /focus==="deck"\?c\.deckSuperstarIds:c\.specificSuperstarIds/);
+  assert.match(studioJs, /`\${c\.name} \${c\.cardCode} \${KIND_LABELS\[c\.kind\]\|\|c\.kind}`/);
+  assert.doesNotMatch(studioJs, /`\${c\.id} \${c\.name}/);
+
+  const running = entries.find(c => c.id === "roman-clothesline");
+  assert.equal(running?.name, "Running Clothesline");
+  assert.deepEqual(running?.specificSuperstarIds, []);
+  assert.ok(running?.deckSuperstarIds.includes("roman-reigns"));
+
+  const spear = entries.find(c => c.id === "spear");
+  assert.equal(spear?.name, "Roman's Spear");
+  assert.deepEqual(spear?.specificSuperstarIds, ["roman-reigns"]);
+});
+
+test("Card Art Studio includes the SummerSlam fundamentals pass without renumbering existing cards", () => {
+  const entries = studioEntries();
+  const expected = [
+    ["punch","SS1-136"],["front-kick","SS1-137"],["basic-stomp","SS1-138"],["hip-toss","SS1-139"],
+    ["elbow-drop","SS1-140"],["knee-drop","SS1-141"],["leg-drop","SS1-142"],["vertical-suplex","SS1-143"],
+    ["russian-leg-sweep","SS1-144"],["bulldog","SS1-145"],["sleeper-common","SS1-146"],["irish-whip","SS1-147"],
+    ["knife-edge-chop-common","SS1-148"],["drop-toe-hold","SS1-149"],["firemans-carry","SS1-150"],
+    ["schoolboy","SS1-151"],["small-package","SS1-152"]
+  ];
+  assert.equal(entries.find(c => c.id === "front-dropkick")?.cardCode, "SS1-135");
+  for (const [id,code] of expected) assert.equal(entries.find(c => c.id === id)?.cardCode, code, `${id} should be appended after the locked pool`);
 });
 
 test("unified export gives every card kind a predictable automatic game path", () => {
@@ -122,6 +191,9 @@ test("finished WebPs are canonical fronts for all supported card types with lega
   const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   const css = fs.readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
   assert.match(artwork, /export function finishedCardArtFor/);
+  assert.match(artwork, /finishedFrontKeys\[card\.id\] \?\? card\.id/);
+  assert.equal(finishedFrontKeys["punch"], "ss1-136-punch");
+  assert.equal(finishedFrontKeys["front-dropkick"], "ss1-135-front-dropkick");
   for (const folder of ["moves","entrances","specials","managers","actions","supports","momentum"]) assert.match(artwork, new RegExp(`"${folder}"`));
   assert.match(app, /data-finished-card-art/);
   assert.match(app, /classList\.remove\('is-full-art-finished'/);

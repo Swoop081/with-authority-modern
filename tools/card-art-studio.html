@@ -10,21 +10,24 @@
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>CARD ART STUDIO</small></a>
-    <span class="studio-build">v0.11.21</span>
+    <span class="studio-build">v0.11.25</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
       <span class="eyebrow">ONE STUDIO · EVERY ACTIVE CARD FRONT</span>
       <h1>Build the collectible front.</h1>
-      <p>Work on Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum artwork in one place. Choose a set and card type, add your image, position it, and export a finished WebP with the correct set identity.</p>
+      <p>Work on Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum artwork in one place. Search all active sets at once by default, or narrow to a set, card type or Superstar. Add your image, position it, and export a finished WebP with the correct set identity.</p>
     </section>
     <section class="studio-layout">
       <aside class="studio-controls">
         <section class="control-group">
-          <div class="group-heading"><span>1</span><div><b>Choose card</b><small>All 372 active Season 1 collectibles are available. Collector numbering stays exactly the same as the game.</small></div></div>
-          <label>Set<select id="set-select"><option value="summerslam-series-1">SummerSlam — Series 1</option><option value="hall-of-fame-series-1">Hall of Fame — Series 1</option><option value="evolution-series-1">Evolution — Series 1</option><option value="season-1-final-boss">Rewards / Season 1 Final Boss</option></select></label>
+          <div class="group-heading"><span>1</span><div><b>Choose card</b><small>All 389 active Season 1 collectibles are available. Filter by Superstar to work through their unique cards or complete recommended deck.</small></div></div>
+          <label>Set<select id="set-select"><option value="all" selected>All Sets</option><option value="summerslam-series-1">SummerSlam — Series 1</option><option value="hall-of-fame-series-1">Hall of Fame — Series 1</option><option value="evolution-series-1">Evolution — Series 1</option><option value="season-1-final-boss">Rewards / Season 1 Final Boss</option></select></label>
           <label>Card type<select id="type-select"><option value="all">All card types</option><option value="superstar">Superstars</option><option value="move">Moves</option><option value="entrance">Entrances</option><option value="special">Specials</option><option value="manager">Managers</option><option value="action">Actions</option><option value="support">Supports</option><option value="momentum">Momentum</option></select></label>
-          <label>Search<input id="card-search" type="search" placeholder="Cross Rhodes, Glass Shatters, Heenan…"></label>
+          <label>Superstar<select id="superstar-select"><option value="all">All Superstars</option></select></label>
+          <label>Superstar focus<select id="superstar-focus"><option value="specific" selected>Superstar-specific / linked cards only</option><option value="deck">Everything in current recommended deck</option></select></label>
+          <small class="filter-help">Use Superstar-specific to work through unique moves, Entrances and Specials first. Deck mode also includes shared generic cards currently used by that Superstar.</small>
+          <label>Search<input id="card-search" type="search" placeholder="Card name or collector number…"></label>
           <label>Card<select id="card-select"><option value="superstar-cody-rhodes">SS1-001 · Cody Rhodes · SUPERSTAR</option></select></label>
           <div class="move-summary card-summary"><span id="card-code">SS1-001</span><b id="card-summary-name">Cody Rhodes</b><small><em id="card-summary-kind">SUPERSTAR</em><em id="card-summary-stats">FRONT ART + NAME</em></small></div>
           <div class="destination"><span>GAME FILE · AUTOMATIC FINISHED FRONT</span><code id="destination-path">assets/cards/art/custom/superstars/cody-rhodes.webp</code></div>
@@ -46,7 +49,7 @@
         </section>
         <section class="control-group">
           <div class="group-heading"><span>3</span><div><b>Front identity</b><small>Automatic and deliberately minimal. Detailed gameplay text, restrictions, rarity and effects remain on the back.</small></div></div>
-          <div class="identity-preview"><span>SET LOGO</span><b>TOP RIGHT · AUTOMATIC</b><span>SUPERSTAR</span><b>NAME ONLY</b><span>MOVE</span><b>NAME + COST / DAM</b><span>OTHER TYPES</span><b>NAME + SMALL TYPE LABEL</b><span>RULES / EFFECTS</span><b>BACK ONLY</b></div>
+          <div class="identity-preview"><span>SET LOGO</span><b>TOP RIGHT · AUTOMATIC</b><span>SUPERSTAR</span><b>NAME ONLY</b><span>MOVE</span><b>NAME + COST / DAM + METHOD REQUIREMENTS</b><span>OTHER TYPES</span><b>NAME + SMALL TYPE LABEL</b><span>RULES / EFFECTS</span><b>BACK ONLY</b></div>
           <button id="reset-layout" type="button">Reset Artwork Position</button>
         </section>
         <section class="control-group">
@@ -62,7 +65,7 @@
         <div class="preview-toolbar"><div><span>LIVE TEMPLATE</span><b id="preview-label">SummerSlam — Series 1</b></div><small id="preview-card">SS1-001 · Cody Rhodes</small></div>
         <div class="canvas-wrap"><canvas id="card-canvas" width="680" height="1000" aria-label="Finished WWE Legacy card front preview"></canvas></div>
         <div class="template-key"><span class="key summerslam">SUMMERSLAM</span><span class="key hof">HALL OF FAME</span><span class="key evolution">EVOLUTION</span><span class="key rewards">REWARDS</span></div>
-        <p>The exported WebP is the complete collectible front. The game flips to its shared information back for every rule, effect, requirement and rarity detail.</p>
+        <p>The exported WebP is the complete collectible front. Move method requirements stay on the front; all other rules, effects, restrictions and rarity details remain on the shared information back.</p>
       </section>
     </section>
   </main>

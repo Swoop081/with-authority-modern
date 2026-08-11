@@ -67,13 +67,13 @@ function buildSetCollection(setId, starOrder, sourceCards) {
   const ordered = [];
   for (const star of starOrder) {
     ordered.push(superstarEntry(star));
-    const starCards = activeSourceCards.filter(c => c.superstarId === star.id);
+    const starCards = activeSourceCards.filter(c => c.superstarId === star.id && !c.preserveSharedCollectorOrder);
     const entranceCards = starCards.filter(c => c.kind === "entrance");
     const otherCards = starCards.filter(c => c.kind !== "entrance");
     for (const card of [...entranceCards, ...otherCards]) ordered.push({ ...card, rarity: rarityFor(card), setId });
   }
   for (const card of activeSourceCards) {
-    if (card.superstarId) continue;
+    if (card.superstarId && !card.preserveSharedCollectorOrder) continue;
     if (!ordered.some(x => x.id === card.id)) ordered.push({ ...card, rarity: rarityFor(card), setId });
   }
   return ordered.map((entry, index) => ({ ...entry, cardNumber: index + 1, cardCode: `${sets[setId].shortCode}-${String(index + 1).padStart(3, "0")}` }));

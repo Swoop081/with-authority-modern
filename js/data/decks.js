@@ -4,128 +4,12 @@ import { evolutionCards } from "./evolution-cards.js";
 import { rockCards } from "./season1-rock-cards.js";
 
 const M = cards.momentum;
-const HM = hallCards.momentum;
-const EM = evolutionCards.momentum;
 const copies = (card, count) => Array.from({ length: count }, () => card);
-
-// With the restored tactical Move-Type system, ordinary offensive Moves also act as
-// counters. Keep a small specialist defensive package, but do not let pure reversal
-// pages crowd useful offense out of a 55-card deck.
-const tacticalOffense = {
-  "cody-rhodes": [cards.armDrag, cards.runningForearm, cards.dropkick, cards.ddt],
-  "cm-punk": [cards.sideHeadlock, cards.armDrag, cards.runningForearm, cards.dropkick],
-  "roman-reigns": [cards.shoulderTackle, cards.romanUppercut, cards.clothesline, cards.bigBoot],
-  "seth-rollins": [cards.dropkick, cards.sethSuperkick, cards.slingBlade, cards.runningForearm],
-  "oba-femi": [cards.shoulderTackle, cards.bodyslam, cards.bigBoot, cards.powerslam],
-  "brock-lesnar": [cards.shoulderTackle, cards.germanSuplexCommon, cards.clothesline, cards.bellyToBellyCommon],
-  "kevin-owens": [cards.runningForearm, cards.clothesline, cards.superkick, cards.ddt],
-  gunther: [cards.uppercut, cards.bigBoot, cards.lariat, cards.backbreaker],
-  "hulk-hogan": [hallCards.jab, cards.clothesline, hallCards.bodyslam, cards.bigBoot],
-  "andre-the-giant": [cards.uppercut, hallCards.bodyslam, cards.bigBoot, hallCards.sideSlam],
-  "randy-savage": [hallCards.jab, hallCards.dropkick, hallCards.neckbreaker, cards.flyingClothesline],
-  "ultimate-warrior": [cards.shoulderTackle, cards.clothesline, cards.bigBoot, hallCards.bodyslam],
-  "stone-cold-steve-austin": [hallCards.jab, cards.clothesline, hallCards.forearm, cards.ddt],
-  "the-undertaker": [hallCards.forearm, cards.bigBoot, cards.clothesline, cards.sideHeadlock],
-  mankind: [hallCards.forearm, cards.sideHeadlock, cards.ddt, hallCards.neckbreaker],
-  kane: [cards.bigBoot, cards.clothesline, hallCards.sideSlam, hallCards.bodyslam],
-  "rhea-ripley": [evolutionCards.clothesline, cards.bigBoot, cards.powerslam, hallCards.forearm],
-  "liv-morgan": [cards.dropkick, evolutionCards.enzuigiri, evolutionCards.armDrag, evolutionCards.hurricanrana],
-  "becky-lynch": [evolutionCards.europeanUppercut, evolutionCards.armDrag, evolutionCards.snapSuplex, hallCards.forearm],
-  bayley: [evolutionCards.armDrag, cards.dropkick, evolutionCards.snapSuplex, hallCards.runningKnee],
-  "charlotte-flair": [evolutionCards.knifeEdgeChop, cards.bigBoot, evolutionCards.spear, evolutionCards.exploderSuplex],
-  "iyo-sky": [cards.dropkick, evolutionCards.hurricanrana, evolutionCards.springboardDropkick, evolutionCards.enzuigiri],
-  paige: [evolutionCards.armDrag, hallCards.forearm, evolutionCards.ddt, cards.neckbreaker],
-  "stephanie-vaquer": [evolutionCards.legSweep, hallCards.runningKnee, evolutionCards.snapSuplex, hallCards.forearm],
-  "the-rock": [rockCards.bodyShot, rockCards.shoulderBlock, rockCards.clothesline, rockCards.snapDDT]
-};
 
 const reviewedDeck = (leadOff, tailGroups) => {
   const deck = [...leadOff, ...tailGroups.flat()];
   if (leadOff.length !== 5) throw new Error(`Reviewed Lead Off must contain 5 pages, got ${leadOff.length}`);
   if (deck.length !== 55) throw new Error(`Reviewed playable deck must contain 55 pages, got ${deck.length}`);
-  return deck;
-};
-
-const buildDeck = (opening, tailGroups) => {
-  // The Entrance is permanently linked to the Superstar and resolves from outside
-  // the playable 55-page deck. Lead Off is now five fixed PLAYABLE pages.
-  const entrance = opening.find(card => card.kind === "entrance");
-  const superstarId = entrance?.superstarId;
-  const replacements = tacticalOffense[superstarId] ?? [];
-  const fixedFour = opening.filter(card => card.kind !== "entrance");
-  const ids = new Set(fixedFour.map(card => card.id));
-  const fifth = replacements.find(card => card.kind === "move" && card.requiresLocation !== "ringside" && !ids.has(card.id))
-    ?? replacements.find(card => card.kind === "move" && card.requiresLocation !== "ringside")
-    ?? fixedFour.find(card => card.kind === "move");
-  if (!entrance || fixedFour.length !== 4 || !fifth) throw new Error(`Invalid linked opening package for ${superstarId ?? "unknown Superstar"}`);
-  const deck = [...fixedFour, fifth, ...tailGroups.flat()];
-  if (deck.length !== 55) throw new Error(`Playable deck must contain 55 pages, got ${deck.length}`);
-  const counts = new Map();
-  for (const card of deck) counts.set(card.id, (counts.get(card.id) ?? 0) + 1);
-  let defensiveSeen = 0, replacementIndex = 0;
-  for (let i = 5; i < deck.length; i += 1) {
-    if (!(deck[i].kind === "move" && deck[i].defensiveOnly)) continue;
-    defensiveSeen += 1;
-    if (defensiveSeen <= 3 || !replacements.length) continue;
-    let attempts = 0;
-    while (attempts < replacements.length) {
-      const replacement = replacements[replacementIndex++ % replacements.length];
-      attempts += 1;
-      if ((counts.get(replacement.id) ?? 0) >= 5) continue;
-      counts.set(deck[i].id, (counts.get(deck[i].id) ?? 1) - 1);
-      counts.set(replacement.id, (counts.get(replacement.id) ?? 0) + 1);
-      deck[i] = replacement;
-      break;
-    }
-  }
-  // Standard starter decks should not be clogged by Moves that are legal only
-  // at ringside. Those cards remain collectible/custom-deck legal and are ideal
-  // for Falls Count Anywhere / ringside-focused builds, but ordinary Moves are
-  // already playable outside in standard matches. Replace any ringside-only Move
-  // in a starter with a broadly playable tactical Move, preferring the same method.
-  for (let i = 5; i < deck.length; i += 1) {
-    const current = deck[i];
-    if (!(current.kind === "move" && current.requiresLocation === "ringside")) continue;
-    const candidates = replacements.filter(card => !(card.requiresLocation === "ringside") && card.kind === "move");
-    const ordered = [...candidates].sort((a, b) => Number(b.method === current.method) - Number(a.method === current.method));
-    for (const replacement of ordered) {
-      if ((counts.get(replacement.id) ?? 0) >= 5) continue;
-      counts.set(current.id, (counts.get(current.id) ?? 1) - 1);
-      counts.set(replacement.id, (counts.get(replacement.id) ?? 0) + 1);
-      deck[i] = replacement;
-      break;
-    }
-  }
-  // Keep standard starters offense-forward. Telemetry showed too many Control
-  // turns with no Move in hand. Preserve tactical identity, but trim surplus
-  // utility once minimum packages are met: 13 Momentum, 3 Actions, 3 Supports.
-  const kindCount = kind => deck.filter(card => card.kind === kind).length;
-  const replaceOneUtility = () => {
-    const priorities = [
-      card => card.kind === "support" && kindCount("support") > 3,
-      card => card.kind === "action" && kindCount("action") > 3,
-      card => card.kind === "momentum" && kindCount("momentum") > 13
-    ];
-    for (const eligible of priorities) {
-      const index = deck.findIndex((card, i) => i >= 5 && eligible(card));
-      if (index < 0) continue;
-      const current = deck[index];
-      for (const replacement of replacements) {
-        if (replacement.kind !== "move" || replacement.requiresLocation === "ringside") continue;
-        if ((counts.get(replacement.id) ?? 0) >= 5) continue;
-        counts.set(current.id, (counts.get(current.id) ?? 1) - 1);
-        counts.set(replacement.id, (counts.get(replacement.id) ?? 0) + 1);
-        deck[index] = replacement;
-        return true;
-      }
-    }
-    return false;
-  };
-  const offenseFloor = superstarId === "the-rock" ? 31 : 32;
-  while (deck.filter(card => card.kind === "move").length < offenseFloor && replaceOneUtility()) {}
-
-  const overCap = [...counts.entries()].filter(([, count]) => count > 5);
-  if (overCap.length) throw new Error(`Deck exceeds five-copy cap: ${overCap.map(([id,c]) => `${id} x${c}`).join(", ")}`);
   return deck;
 };
 
@@ -142,10 +26,10 @@ export const decks = {
       copies(cards.codyFinishStory,1),
       [cards.gamePlan,cards.createOpening,cards.fireUp],
       [cards.crowdConnection],
-      copies(cards.codyDropDownPunch,2), copies(cards.armDrag,2), copies(cards.runningForearm,2), copies(cards.dropkick,2),
-      copies(cards.codyPowerslam,2), copies(cards.disasterKick,2), copies(cards.ddt,1), copies(cards.neckbreaker,1),
+      copies(cards.codyDropDownPunch,2), copies(cards.armDrag,1), copies(cards.hipToss,1), copies(cards.runningForearm,1), copies(cards.knifeEdgeChopCommon,1), copies(cards.dropkick,2),
+      copies(cards.codyPowerslam,2), copies(cards.disasterKick,2), copies(cards.russianLegSweep,1), copies(cards.neckbreaker,1),
       copies(cards.flyingClothesline,3), copies(cards.alabamaSlam,3), copies(cards.bionicElbow,2),
-      copies(cards.codyCutter,2), copies(cards.codyMoonsault,2), copies(cards.crossRhodes,2), copies(cards.snapSuplex,3)
+      copies(cards.codyCutter,2), copies(cards.codyMoonsault,2), copies(cards.crossRhodes,2), copies(cards.snapSuplex,2), copies(cards.dropToeHold,1)
     ]
   ),
 
@@ -159,9 +43,9 @@ export const decks = {
       [cards.fightingSpirit],
       copies(cards.punkLegLariat,2), copies(cards.punkRoundhouse,2), copies(cards.punkSnapSuplex,2), copies(cards.runningKnee,2),
       copies(cards.punkNeckbreaker,1), copies(cards.punkBulldog,1), copies(cards.punkHighKick,1),
-      copies(cards.shiningWizard,2), copies(cards.divingElbowDrop,2), copies(cards.springboardClothesline,2),
+      copies(cards.shiningWizard,2), copies(cards.divingElbowDrop,1), copies(cards.elbowDrop,1), copies(cards.springboardClothesline,2),
       copies(cards.punkStepUpHighKnee,2), copies(cards.anacondaVise,1), copies(cards.gts,2), copies(cards.runningForearm,1),
-      copies(cards.runningForearm,1), copies(cards.snapmare,2), copies(cards.ddt,1), copies(cards.armbar,1), copies(cards.neckbreaker,1), copies(cards.dropkick,2)
+      copies(cards.bulldog,1), copies(cards.snapmare,1), copies(cards.schoolboy,1), copies(cards.ddt,1), copies(cards.armbar,1), copies(cards.neckbreaker,1), copies(cards.dropkick,1), copies(cards.smallPackage,1)
     ]
   ),
 
@@ -173,8 +57,8 @@ export const decks = {
       copies(cards.tribalChief,1),
       [cards.fireUp,cards.gamePlan,cards.createOpening],
       [cards.fightingSpirit,cards.crowdConnection],
-      copies(cards.romanUppercut,2), copies(cards.headbutt,2), copies(cards.shoulderTackle,3), copies(cards.bigBoot,2),
-      copies(cards.leapingClothesline,2), copies(cards.driveBy,2), copies(cards.romanClothesline,2),
+      copies(cards.romanUppercut,2), copies(cards.headbutt,2), copies(cards.shoulderTackle,3), copies(cards.bigBoot,1), copies(cards.firemansCarry,1),
+      copies(cards.leapingClothesline,2), copies(cards.driveBy,2), copies(cards.romanClothesline,1), copies(cards.irishWhip,1),
       copies(cards.samoanUranage,2), copies(cards.samoanDrop,3), copies(cards.spinebuster,2),
       copies(cards.romanCornerClotheslines,2), copies(cards.supermanPunch,2), copies(cards.guillotine,2), copies(cards.spear,2)
     ]
@@ -188,8 +72,8 @@ export const decks = {
       copies(cards.sethVisionary,1),
       [cards.gamePlan,cards.createOpening,cards.fireUp],
       [cards.crowdConnection,cards.scoutingReport],
-      copies(cards.superkick,2), copies(cards.slingBlade,2), copies(cards.dropkick,2), copies(cards.enzuigiri,2),
-      copies(cards.runningForearm,2), copies(cards.runningKneeCommon,2), copies(cards.snapSuplex,2), copies(cards.flyingClothesline,2),
+      copies(cards.superkick,2), copies(cards.slingBlade,2), copies(cards.dropkick,2), copies(cards.frontKick,1), copies(cards.enzuigiri,1),
+      copies(cards.runningForearm,2), copies(cards.runningKneeCommon,1), copies(cards.kneeDrop,1), copies(cards.legDrop,1), copies(cards.snapSuplex,1), copies(cards.basicStomp,1), copies(cards.flyingClothesline,1),
       copies(cards.falconArrow,2), copies(cards.sethSpringboardKnee,2), copies(cards.sethRipcordKnee,1),
       copies(cards.sethBuckleBomb,2), copies(cards.pedigree,2), copies(cards.sethSuperplexFalcon,1),
       copies(cards.sethPhoenixSplashReviewed,1), copies(cards.stomp,2)
@@ -222,7 +106,7 @@ export const decks = {
       copies(cards.brockGermanSuplex,3), copies(cards.bellyToBellyCommon,2), copies(cards.shoulderTackle,2), copies(cards.clothesline,2),
       copies(cards.brockOverheadBelly,2), copies(cards.powerbomb,2), copies(cards.brockKneeStrike,2), copies(cards.brockTripleGermans,3),
       copies(cards.kimuraLock,2), copies(cards.f5,2), copies(cards.headbutt,1), copies(cards.bigBoot,1),
-      copies(cards.spinebuster,1), copies(cards.lariat,1), copies(cards.runningForearm,1)
+      copies(cards.spinebuster,1), copies(cards.lariat,1), copies(cards.verticalSuplex,1)
     ]
   ),
 
@@ -234,7 +118,7 @@ export const decks = {
       copies(cards.koShow,1),
       [cards.fireUp,cards.gamePlan,cards.createOpening],
       [cards.fightingSpirit,cards.crowdConnection],
-      copies(cards.runningForearm,2), copies(cards.superkick,2), copies(cards.cannonball,3), copies(cards.bigBoot,1),
+      copies(cards.runningForearm,2), copies(cards.superkick,2), copies(cards.cannonball,3), copies(cards.punch,1),
       copies(cards.senton,2), copies(cards.cannonball,2), copies(cards.clothesline,2), copies(cards.lariat,3),
       copies(cards.powerbomb,2), copies(cards.frogSplash,3), copies(cards.owensPackagePiledriver,3),
       copies(cards.popUpPowerbomb,1), copies(cards.koStunner,1), copies(cards.headbutt,3), copies(cards.bigBoot,1)
@@ -249,9 +133,9 @@ export const decks = {
       copies(cards.matIsSacred,1),
       [cards.fireUp,cards.gamePlan,cards.createOpening],
       [cards.fightingSpirit,cards.crowdConnection],
-      copies(cards.guntherChopReviewed,4), copies(cards.uppercut,2), copies(cards.bigBoot,2), copies(cards.frontDropkick,2),
+      copies(cards.guntherChopReviewed,4), copies(cards.uppercut,2), copies(cards.bigBoot,2), copies(cards.frontDropkick,1), copies(cards.kneeDrop,1),
       copies(cards.germanSuplexCommon,2), copies(cards.guntherButterflySuplex,2), copies(cards.backbreaker,2),
-      copies(cards.runningKneeCommon,2), copies(cards.bostonCrab,2), copies(cards.burningLariat,2),
+      copies(cards.runningKneeCommon,2), copies(cards.bostonCrab,1), copies(cards.sleeperCommon,1), copies(cards.burningLariat,2),
       copies(cards.foldingPowerbomb,2), copies(cards.gojiraClutch,2), copies(cards.powerbomb,1), copies(cards.lariat,1), copies(cards.headbutt,0)
     ]
   ),

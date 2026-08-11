@@ -1,996 +1,1092 @@
 
-> wwe-legacy-ccg@0.11.11 test
+> wwe-legacy-ccg@0.11.23 test
 > node --test
 
 TAP version 13
 # Subtest: CPU opening Control is advanced until the human has a decision
 ok 1 - CPU opening Control is advanced until the human has a decision
   ---
-  duration_ms: 3.348431
+  duration_ms: 3.572788
   type: 'test'
   ...
 # Subtest: move costs are eligibility thresholds and are never spent
 ok 2 - move costs are eligibility thresholds and are never spent
   ---
-  duration_ms: 1.36985
+  duration_ms: 1.446844
   type: 'test'
   ...
 # Subtest: specific method requirements are additional eligibility checks
 ok 3 - specific method requirements are additional eligibility checks
   ---
-  duration_ms: 0.685475
+  duration_ms: 0.736637
   type: 'test'
   ...
 # Subtest: successful counter consumes both cards and transfers control
 ok 4 - successful counter consumes both cards and transfers control
   ---
-  duration_ms: 1.020773
+  duration_ms: 2.068528
   type: 'test'
   ...
 # Subtest: original-style Move Type is separate from Momentum method
 ok 5 - original-style Move Type is separate from Momentum method
   ---
-  duration_ms: 0.527572
+  duration_ms: 0.59799
   type: 'test'
   ...
 # Subtest: every collectible resolves to a local artwork file
 ok 6 - every collectible resolves to a local artwork file
   ---
-  duration_ms: 2.555366
+  duration_ms: 1.992816
   type: 'test'
   ...
 # Subtest: every collectible Move has a valid tactical Move Type and method
 ok 7 - every collectible Move has a valid tactical Move Type and method
   ---
-  duration_ms: 0.41854
+  duration_ms: 0.38293
   type: 'test'
   ...
 # Subtest: auto counter requires seven pages from hand and transfers control
 ok 8 - auto counter requires seven pages from hand and transfers control
   ---
-  duration_ms: 0.679777
+  duration_ms: 0.697779
   type: 'test'
   ...
 # Subtest: one momentum page per control turn and played Momentum leaves hand
 ok 9 - one momentum page per control turn and played Momentum leaves hand
   ---
-  duration_ms: 0.584707
+  duration_ms: 0.634665
   type: 'test'
   ...
 # Subtest: connected move opens a post-move window, then ending offense retains Control and starts a fresh turn
 ok 10 - connected move opens a post-move window, then ending offense retains Control and starts a fresh turn
   ---
-  duration_ms: 0.892783
+  duration_ms: 0.765139
   type: 'test'
   ...
 # Subtest: submission can be maintained by ditching one page
 ok 11 - submission can be maintained by ditching one page
   ---
-  duration_ms: 0.607831
+  duration_ms: 0.690508
   type: 'test'
   ...
 # Subtest: releasing a submission keeps control
 ok 12 - releasing a submission keeps control
   ---
-  duration_ms: 0.484108
+  duration_ms: 0.45705
   type: 'test'
   ...
 # Subtest: all 25 linked Entrances resolve automatically pre-match outside the five-card Lead Off hand
 ok 13 - all 25 linked Entrances resolve automatically pre-match outside the five-card Lead Off hand
   ---
-  duration_ms: 9.332607
+  duration_ms: 7.433114
   type: 'test'
   ...
 # Subtest: neither wrestler receives a random draw on their first Control turn
 ok 14 - neither wrestler receives a random draw on their first Control turn
   ---
-  duration_ms: 0.649923
+  duration_ms: 0.457691
   type: 'test'
   ...
 # Subtest: Cody Entrance registers delayed Turn 5 Agility Momentum without changing the pre-match hand size
 ok 15 - Cody Entrance registers delayed Turn 5 Agility Momentum without changing the pre-match hand size
   ---
-  duration_ms: 0.728099
+  duration_ms: 0.480245
   type: 'test'
   ...
 # Subtest: Punk Entrance grants Technical Momentum during PRE-MATCH
 ok 16 - Punk Entrance grants Technical Momentum during PRE-MATCH
   ---
-  duration_ms: 0.569214
+  duration_ms: 0.374668
   type: 'test'
   ...
 # Subtest: Roman Entrance waits until Turn 6 to grant Attitude
 ok 17 - Roman Entrance waits until Turn 6 to grant Attitude
   ---
-  duration_ms: 0.783861
+  duration_ms: 0.523389
   type: 'test'
   ...
 # Subtest: Seth Entrance grants Technical Momentum during PRE-MATCH without changing the normal Momentum play limit
 ok 18 - Seth Entrance grants Technical Momentum during PRE-MATCH without changing the normal Momentum play limit
   ---
-  duration_ms: 0.707869
+  duration_ms: 0.49076
   type: 'test'
   ...
 # Subtest: Cody's Superstar ability rewards the first new Move Type once
 ok 19 - Cody's Superstar ability rewards the first new Move Type once
   ---
-  duration_ms: 0.875557
+  duration_ms: 0.637919
   type: 'test'
   ...
 # Subtest: Punk's Counter Culture triggers once and grants Technical Momentum
 ok 20 - Punk's Counter Culture triggers once and grants Technical Momentum
   ---
-  duration_ms: 0.774057
+  duration_ms: 0.539383
   type: 'test'
   ...
 # Subtest: Roman's Head of the Table grants extra Attitude on 7+ damage Moves
 ok 21 - Roman's Head of the Table grants extra Attitude on 7+ damage Moves
   ---
-  duration_ms: 0.76306
+  duration_ms: 0.453655
   type: 'test'
   ...
 # Subtest: Seth's Architect rewards first-time Methods without adding setup requirements
 ok 22 - Seth's Architect rewards first-time Methods without adding setup requirements
   ---
-  duration_ms: 0.659136
+  duration_ms: 0.434597
   type: 'test'
   ...
 # Subtest: Undertaker's Deadman Walking survives a lethal Move once and triggers the comeback
 ok 23 - Undertaker's Deadman Walking survives a lethal Move once and triggers the comeback
   ---
-  duration_ms: 1.184865
+  duration_ms: 0.72603
   type: 'test'
   ...
 # Subtest: Kane's Big Red Machine rewards his first two 8+ damage connections
 ok 24 - Kane's Big Red Machine rewards his first two 8+ damage connections
   ---
-  duration_ms: 0.805343
+  duration_ms: 0.516759
   type: 'test'
   ...
 # Subtest: a knockdown Move opens a legal first pin attempt at zero Attitude cost
 ok 25 - a knockdown Move opens a legal first pin attempt at zero Attitude cost
   ---
-  duration_ms: 0.957659
+  duration_ms: 0.914321
   type: 'test'
   ...
 # Subtest: repeat pin attempts spend escalating Attitude but never Ability Momentum
 ok 26 - repeat pin attempts spend escalating Attitude but never Ability Momentum
   ---
-  duration_ms: 0.617345
+  duration_ms: 0.386936
   type: 'test'
   ...
 # Subtest: pin-escape Special stops the pin and gives the defender Control
 ok 27 - pin-escape Special stops the pin and gives the defender Control
   ---
-  duration_ms: 0.809629
+  duration_ms: 0.485623
   type: 'test'
   ...
 # Subtest: successful pin ends the match and blocks further play
 ok 28 - successful pin ends the match and blocks further play
   ---
-  duration_ms: 1.274238
+  duration_ms: 0.598611
   type: 'test'
   ...
 # Subtest: failed pin gives the defender Control rather than causing a KO
 ok 29 - failed pin gives the defender Control rather than causing a KO
   ---
-  duration_ms: 0.593269
+  duration_ms: 0.408087
   type: 'test'
   ...
 # Subtest: pin-escape Special ends the failed pin and transfers Control to the defender
 ok 30 - pin-escape Special ends the failed pin and transfers Control to the defender
   ---
-  duration_ms: 0.575743
+  duration_ms: 0.432093
   type: 'test'
   ...
 # Subtest: maintained submissions apply repeated body-part pressure and can win
 ok 31 - maintained submissions apply repeated body-part pressure and can win
   ---
-  duration_ms: 0.78962
+  duration_ms: 0.546023
   type: 'test'
   ...
 # Subtest: all 25 strategy decks contain exactly 55 pages with fixed five-card openings
 ok 32 - all 25 strategy decks contain exactly 55 pages with fixed five-card openings
   ---
-  duration_ms: 0.124615
+  duration_ms: 0.089784
   type: 'test'
   ...
 # Subtest: CPU can complete all 552 non-mirror roster matchups without stalling
 ok 33 - CPU can complete all 552 non-mirror roster matchups without stalling
   ---
-  duration_ms: 539.496137
+  duration_ms: 470.296588
   type: 'test'
   ...
 # Subtest: Actions resolve immediately and only one may be played per Control turn
 ok 34 - Actions resolve immediately and only one may be played per Control turn
   ---
-  duration_ms: 0.541462
+  duration_ms: 0.492062
   type: 'test'
   ...
 # Subtest: Game Plan lowers only the next Move eligibility threshold and spends no Momentum
 ok 35 - Game Plan lowers only the next Move eligibility threshold and spends no Momentum
   ---
-  duration_ms: 0.450618
+  duration_ms: 0.42338
   type: 'test'
   ...
 # Subtest: Supports remain active, cap at two, and replace the oldest Support
 ok 36 - Supports remain active, cap at two, and replace the oldest Support
   ---
-  duration_ms: 0.358431
+  duration_ms: 0.378553
   type: 'test'
   ...
 # Subtest: Ring Generalship contributes virtual Total Momentum without satisfying method requirements
 ok 37 - Ring Generalship contributes virtual Total Momentum without satisfying method requirements
   ---
-  duration_ms: 0.396648
+  duration_ms: 0.422619
   type: 'test'
   ...
 # Subtest: Fighting Spirit reduces Move damage and Crowd Connection adds Attitude
 ok 38 - Fighting Spirit reduces Move damage and Crowd Connection adds Attitude
   ---
-  duration_ms: 0.335227
+  duration_ms: 0.394377
   type: 'test'
   ...
 # Subtest: Desperation Counter is a Special that can counter any Move
 ok 39 - Desperation Counter is a Special that can counter any Move
   ---
-  duration_ms: 0.354335
+  duration_ms: 0.372054
   type: 'test'
   ...
 # Subtest: SummerSlam Series 1 contains the eight launch Superstars
 ok 40 - SummerSlam Series 1 contains the eight launch Superstars
   ---
-  duration_ms: 0.103654
+  duration_ms: 0.104786
   type: 'test'
   ...
 # Subtest: signature Moves no longer need corner, ropes, orientation, barricade or apron setup
 ok 41 - signature Moves no longer need corner, ropes, orientation, barricade or apron setup
   ---
-  duration_ms: 0.523616
+  duration_ms: 0.525863
   type: 'test'
   ...
 # Subtest: on-mat remains the only positional prerequisite for grounded attacks
 ok 42 - on-mat remains the only positional prerequisite for grounded attacks
   ---
-  duration_ms: 0.305212
+  duration_ms: 0.359475
   type: 'test'
   ...
 # Subtest: Throw Over the Ropes sends the opponent outside and prevents an in-ring pin
 ok 43 - Throw Over the Ropes sends the opponent outside and prevents an in-ring pin
   ---
-  duration_ms: 0.358832
+  duration_ms: 0.673222
   type: 'test'
   ...
 # Subtest: attacker may follow a wrestler sent outside, but cannot leave voluntarily
 ok 44 - attacker may follow a wrestler sent outside, but cannot leave voluntarily
   ---
-  duration_ms: 0.463327
+  duration_ms: 0.446435
   type: 'test'
   ...
 # Subtest: a non-stunned wrestler in Control can always return to the ring
 ok 45 - a non-stunned wrestler in Control can always return to the ring
   ---
-  duration_ms: 0.392121
+  duration_ms: 0.36265
   type: 'test'
   ...
 # Subtest: count-out advances on Control changes and ends the match at ten
 ok 46 - count-out advances on Control changes and ends the match at ten
   ---
-  duration_ms: 0.362807
+  duration_ms: 0.37601
   type: 'test'
   ...
 # Subtest: ringside Moves are directly playable outside without a separate setup card
 ok 47 - ringside Moves are directly playable outside without a separate setup card
   ---
-  duration_ms: 0.319513
+  duration_ms: 0.381017
   type: 'test'
   ...
 # Subtest: Cut Off the Ring remains a tactical ringside Action, not a Move setup requirement
 ok 48 - Cut Off the Ring remains a tactical ringside Action, not a Move setup requirement
   ---
-  duration_ms: 0.369288
+  duration_ms: 0.383832
   type: 'test'
   ...
 # Subtest: decks contain no setup-only positional dependencies beyond posture and ring/ringside location
 ok 49 - decks contain no setup-only positional dependencies beyond posture and ring/ringside location
   ---
-  duration_ms: 1.614091
+  duration_ms: 1.373444
   type: 'test'
   ...
 # Subtest: flow guard keeps mature 3+ Momentum dead-Move passes below 20 percent
 ok 50 - flow guard keeps mature 3+ Momentum dead-Move passes below 20 percent
   ---
-  duration_ms: 992.891408
+  duration_ms: 1155.681369
   type: 'test'
   ...
 # Subtest: SummerSlam Series 1 matches the audited active card pool
 ok 51 - SummerSlam Series 1 matches the audited active card pool
   ---
-  duration_ms: 0.260526
+  duration_ms: 0.236202
+  type: 'test'
+  ...
+# Subtest: SummerSlam fundamentals cover the core shared wrestling vocabulary and exclusive punches remain better family members
+ok 52 - SummerSlam fundamentals cover the core shared wrestling vocabulary and exclusive punches remain better family members
+  ---
+  duration_ms: 0.23494
   type: 'test'
   ...
 # Subtest: all 25 recommended decks respect the five-copy per-card cap
-ok 52 - all 25 recommended decks respect the five-copy per-card cap
+ok 53 - all 25 recommended decks respect the five-copy per-card cap
   ---
-  duration_ms: 0.449025
+  duration_ms: 0.464081
   type: 'test'
   ...
 # Subtest: SummerSlam Series 1 collection has stable sequential numbering and rarity metadata
-ok 53 - SummerSlam Series 1 collection has stable sequential numbering and rarity metadata
+ok 54 - SummerSlam Series 1 collection has stable sequential numbering and rarity metadata
   ---
-  duration_ms: 0.33063
+  duration_ms: 0.164956
   type: 'test'
   ...
 # Subtest: SummerSlam Series 1 catalogue includes one Superstar card for each launch wrestler
-ok 54 - SummerSlam Series 1 catalogue includes one Superstar card for each launch wrestler
+ok 55 - SummerSlam Series 1 catalogue includes one Superstar card for each launch wrestler
   ---
-  duration_ms: 0.141399
+  duration_ms: 0.129092
   type: 'test'
   ...
 # Subtest: new saves offer only CM Punk or Roman Reigns as starter choices
-ok 55 - new saves offer only CM Punk or Roman Reigns as starter choices
+ok 56 - new saves offer only CM Punk or Roman Reigns as starter choices
   ---
-  duration_ms: 0.168329
+  duration_ms: 0.179958
   type: 'test'
   ...
 # Subtest: starter profile unlocks exactly the chosen Champion
-ok 56 - starter profile unlocks exactly the chosen Champion
+ok 57 - starter profile unlocks exactly the chosen Champion
   ---
-  duration_ms: 0.476897
+  duration_ms: 0.473364
   type: 'test'
   ...
 # Subtest: collecting a Superstar card can unlock another wrestler without changing the starter
-ok 57 - collecting a Superstar card can unlock another wrestler without changing the starter
+ok 58 - collecting a Superstar card can unlock another wrestler without changing the starter
   ---
-  duration_ms: 1.069865
+  duration_ms: 1.211343
   type: 'test'
   ...
 # Subtest: starter profile owns its full normal starter deck and begins with three boosters
-ok 58 - starter profile owns its full normal starter deck and begins with three boosters
+ok 59 - starter profile owns its full normal starter deck and begins with three boosters
   ---
-  duration_ms: 0.156652
+  duration_ms: 0.169912
   type: 'test'
   ...
 # Subtest: booster configuration is five cards with one guaranteed foil and 50/30/15/5 rarity
-ok 59 - booster configuration is five cards with one guaranteed foil and 50/30/15/5 rarity
+ok 60 - booster configuration is five cards with one guaranteed foil and 50/30/15/5 rarity
   ---
-  duration_ms: 0.080319
+  duration_ms: 0.132096
   type: 'test'
   ...
 # Subtest: opening a booster consumes one credit and records five owned pulls
-ok 60 - opening a booster consumes one credit and records five owned pulls
+ok 61 - opening a booster consumes one credit and records five owned pulls
   ---
-  duration_ms: 1.089003
+  duration_ms: 1.516166
   type: 'test'
   ...
 # Subtest: pulling a locked Superstar unlocks them with an ownership-backed deck and essential package
-ok 61 - pulling a locked Superstar unlocks them with an ownership-backed deck and essential package
+ok 62 - pulling a locked Superstar unlocks them with an ownership-backed deck and essential package
   ---
-  duration_ms: 6.940654
+  duration_ms: 7.090734
   type: 'test'
   ...
 # Subtest: card ownership caps at five total copies and Foils replace Normals at the cap
-ok 62 - card ownership caps at five total copies and Foils replace Normals at the cap
+ok 63 - card ownership caps at five total copies and Foils replace Normals at the cap
   ---
-  duration_ms: 0.178955
+  duration_ms: 0.183724
   type: 'test'
   ...
 # Subtest: Normal booster copies stop at five total while Foils remain eligible until five Foils
-ok 63 - Normal booster copies stop at five total while Foils remain eligible until five Foils
+ok 64 - Normal booster copies stop at five total while Foils remain eligible until five Foils
   ---
-  duration_ms: 0.123243
+  duration_ms: 0.140529
   type: 'test'
   ...
 # Subtest: Foil Move is a safe same-card upgrade and deals exactly one extra damage
-ok 64 - Foil Move is a safe same-card upgrade and deals exactly one extra damage
+ok 65 - Foil Move is a safe same-card upgrade and deals exactly one extra damage
   ---
-  duration_ms: 0.724203
+  duration_ms: 0.702065
   type: 'test'
   ...
 # Subtest: Deck Assistance supports ask, auto-upgrade and manual modes
-ok 65 - Deck Assistance supports ask, auto-upgrade and manual modes
+ok 66 - Deck Assistance supports ask, auto-upgrade and manual modes
   ---
-  duration_ms: 0.174668
+  duration_ms: 0.184244
   type: 'test'
   ...
 # Subtest: all 25 recommended decks satisfy shared deck-health floors
-ok 66 - all 25 recommended decks satisfy shared deck-health floors
+ok 67 - all 25 recommended decks satisfy shared deck-health floors
   ---
-  duration_ms: 3.061626
+  duration_ms: 3.029689
   type: 'test'
   ...
 # Subtest: deck health rejects swaps that damage functional deck shape
-ok 67 - deck health rejects swaps that damage functional deck shape
+ok 68 - deck health rejects swaps that damage functional deck shape
   ---
-  duration_ms: 4.153063
+  duration_ms: 4.579987
   type: 'test'
   ...
 # Subtest: recommended deck shape exposes role targets used by auto-building
-ok 68 - recommended deck shape exposes role targets used by auto-building
+ok 69 - recommended deck shape exposes role targets used by auto-building
   ---
-  duration_ms: 0.639828
+  duration_ms: 0.159737
   type: 'test'
   ...
 # Subtest: Climb the Ladder creates an eight-opponent run including the selected Superstar mirror
-ok 69 - Climb the Ladder creates an eight-opponent run including the selected Superstar mirror
+ok 70 - Climb the Ladder creates an eight-opponent run including the selected Superstar mirror
   ---
-  duration_ms: 0.43845
+  duration_ms: 0.323642
   type: 'test'
   ...
 # Subtest: ladder losses consume lives, retry the same rung and third loss ends the run
-ok 70 - ladder losses consume lives, retry the same rung and third loss ends the run
+ok 71 - ladder losses consume lives, retry the same rung and third loss ends the run
   ---
-  duration_ms: 0.392842
+  duration_ms: 0.323622
   type: 'test'
   ...
 # Subtest: eight ladder wins clear the run and award a Completion Pack
-ok 71 - eight ladder wins clear the run and award a Completion Pack
+ok 72 - eight ladder wins clear the run and award a Completion Pack
   ---
-  duration_ms: 0.227046
+  duration_ms: 0.258585
   type: 'test'
   ...
 # Subtest: Climb the Ladder Completion Pack guarantees one Foil, a Very Rare and a locked Superstar on first clear
-ok 72 - Climb the Ladder Completion Pack guarantees one Foil, a Very Rare and a locked Superstar on first clear
+ok 73 - Climb the Ladder Completion Pack guarantees one Foil, a Very Rare and a locked Superstar on first clear
   ---
-  duration_ms: 1.340686
+  duration_ms: 1.447404
   type: 'test'
   ...
 # Subtest: ladder draws do not consume a life or advance the rung
-ok 73 - ladder draws do not consume a life or advance the rung
+ok 74 - ladder draws do not consume a life or advance the rung
   ---
-  duration_ms: 0.177913
+  duration_ms: 0.246807
   type: 'test'
   ...
 # Subtest: all 25 Superstar mirror matches can complete without AI stalls
-ok 74 - all 25 Superstar mirror matches can complete without AI stalls
+ok 75 - all 25 Superstar mirror matches can complete without AI stalls
   ---
-  duration_ms: 13.531388
+  duration_ms: 14.192875
   type: 'test'
   ...
 # Subtest: daily challenges rotate deterministically and can be claimed for boosters
-ok 75 - daily challenges rotate deterministically and can be claimed for boosters
+ok 76 - daily challenges rotate deterministically and can be claimed for boosters
   ---
-  duration_ms: 0.556244
+  duration_ms: 0.665991
   type: 'test'
   ...
 # Subtest: weekly challenges persist within the same Monday-to-Sunday period
-ok 76 - weekly challenges persist within the same Monday-to-Sunday period
+ok 77 - weekly challenges persist within the same Monday-to-Sunday period
   ---
-  duration_ms: 0.342848
+  duration_ms: 0.357622
   type: 'test'
   ...
 # Subtest: completed matches feed win, finisher, counter and ladder-rung challenge metrics
-ok 77 - completed matches feed win, finisher, counter and ladder-rung challenge metrics
+ok 78 - completed matches feed win, finisher, counter and ladder-rung challenge metrics
   ---
-  duration_ms: 0.30382
+  duration_ms: 0.311253
   type: 'test'
   ...
 # Subtest: SummerSlam Series 1 lifecycle supports Featured, Vaulted and Returning
-ok 78 - SummerSlam Series 1 lifecycle supports Featured, Vaulted and Returning
+ok 79 - SummerSlam Series 1 lifecycle supports Featured, Vaulted and Returning
   ---
-  duration_ms: 0.252274
+  duration_ms: 0.291584
   type: 'test'
   ...
 # Subtest: collection milestone rewards are based on unique owned cards and cannot be claimed twice
-ok 79 - collection milestone rewards are based on unique owned cards and cannot be claimed twice
+ok 80 - collection milestone rewards are based on unique owned cards and cannot be claimed twice
   ---
-  duration_ms: 0.871992
+  duration_ms: 1.139115
   type: 'test'
   ...
 # Subtest: each Superstar card is linked to the exact fixed five-card Lead Off package
-ok 80 - each Superstar card is linked to the exact fixed five-card Lead Off package
+ok 81 - each Superstar card is linked to the exact fixed five-card Lead Off package
   ---
-  duration_ms: 0.192996
+  duration_ms: 0.202591
   type: 'test'
   ...
 # Subtest: Entrance cards are unique one-copy collectibles and Foil replaces the Normal
-ok 81 - Entrance cards are unique one-copy collectibles and Foil replaces the Normal
+ok 82 - Entrance cards are unique one-copy collectibles and Foil replaces the Normal
   ---
-  duration_ms: 0.297421
+  duration_ms: 0.310141
   type: 'test'
   ...
 # Subtest: Deck Builder locks Lead Off identities and only edits the remaining 50 cards
-ok 82 - Deck Builder locks Lead Off identities and only edits the remaining 50 cards
+ok 83 - Deck Builder locks Lead Off identities and only edits the remaining 50 cards
   ---
-  duration_ms: 25.892873
+  duration_ms: 34.314494
   type: 'test'
   ...
 # Subtest: Optimize Deck preserves the Superstar-linked Lead Off five and legal deck shape
-ok 83 - Optimize Deck preserves the Superstar-linked Lead Off five and legal deck shape
+ok 84 - Optimize Deck preserves the Superstar-linked Lead Off five and legal deck shape
   ---
-  duration_ms: 1.458471
+  duration_ms: 1.37078
   type: 'test'
   ...
 # Subtest: Entrance cards are always Foil unlock rewards and never appear in boosters
-ok 84 - Entrance cards are always Foil unlock rewards and never appear in boosters
+ok 85 - Entrance cards are always Foil unlock rewards and never appear in boosters
   ---
-  duration_ms: 0.541212
+  duration_ms: 0.626252
   type: 'test'
   ...
 # Subtest: Superstar cards are always Foil and have no Normal version
-ok 85 - Superstar cards are always Foil and have no Normal version
+ok 86 - Superstar cards are always Foil and have no Normal version
   ---
-  duration_ms: 0.170212
+  duration_ms: 0.171855
   type: 'test'
   ...
 # Subtest: Championship Road creates three unique contenders then a World Champion final
-ok 86 - Championship Road creates three unique contenders then a World Champion final
+ok 87 - Championship Road creates three unique contenders then a World Champion final
   ---
-  duration_ms: 0.58018
+  duration_ms: 0.527174
   type: 'test'
   ...
 # Subtest: Championship Road losses and draws retry the same stage while wins advance
-ok 87 - Championship Road losses and draws retry the same stage while wins advance
+ok 88 - Championship Road losses and draws retry the same stage while wins advance
   ---
-  duration_ms: 0.381525
+  duration_ms: 0.307427
   type: 'test'
   ...
 # Subtest: four Championship Road wins award a Championship Pack and a one-time clear flag for that Superstar
-ok 88 - four Championship Road wins award a Championship Pack and a one-time clear flag for that Superstar
+ok 89 - four Championship Road wins award a Championship Pack and a one-time clear flag for that Superstar
   ---
-  duration_ms: 0.335897
+  duration_ms: 0.298014
   type: 'test'
   ...
 # Subtest: Championship Pack contains five cards, at least one Foil and at least one Rare+
-ok 89 - Championship Pack contains five cards, at least one Foil and at least one Rare+
+ok 90 - Championship Pack contains five cards, at least one Foil and at least one Rare+
   ---
-  duration_ms: 0.432651
+  duration_ms: 0.585641
   type: 'test'
   ...
 # Subtest: standard booster Superstar bad-luck protection guarantees a locked Superstar by pack 20 without one
-ok 90 - standard booster Superstar bad-luck protection guarantees a locked Superstar by pack 20 without one
+ok 91 - standard booster Superstar bad-luck protection guarantees a locked Superstar by pack 20 without one
   ---
-  duration_ms: 0.558167
+  duration_ms: 0.634004
   type: 'test'
   ...
 # Subtest: Championship Road wins feed Championship challenge metrics
-ok 91 - Championship Road wins feed Championship challenge metrics
+ok 92 - Championship Road wins feed Championship challenge metrics
   ---
-  duration_ms: 0.241057
+  duration_ms: 0.192827
   type: 'test'
   ...
 # Subtest: Hall of Fame Series 1 contains the audited active pool, eight legends, two eras and three Managers
-ok 92 - Hall of Fame Series 1 contains the audited active pool, eight legends, two eras and three Managers
+ok 93 - Hall of Fame Series 1 contains the audited active pool, eight legends, two eras and three Managers
   ---
-  duration_ms: 0.204012
+  duration_ms: 0.192847
   type: 'test'
   ...
 # Subtest: Managers are unique, Superstar-restricted and only one may be included in a deck
-ok 93 - Managers are unique, Superstar-restricted and only one may be included in a deck
+ok 94 - Managers are unique, Superstar-restricted and only one may be included in a deck
   ---
-  duration_ms: 0.361295
+  duration_ms: 0.257453
   type: 'test'
   ...
 # Subtest: Bobby Heenan recovers Andre's first important Move that gets Countered
-ok 94 - Bobby Heenan recovers Andre's first important Move that gets Countered
+ok 95 - Bobby Heenan recovers Andre's first important Move that gets Countered
   ---
-  duration_ms: 0.530355
+  duration_ms: 0.623749
   type: 'test'
   ...
 # Subtest: a Manager cannot be played for an unrelated Superstar
-ok 95 - a Manager cannot be played for an unrelated Superstar
+ok 96 - a Manager cannot be played for an unrelated Superstar
   ---
-  duration_ms: 0.481384
+  duration_ms: 0.381037
   type: 'test'
   ...
 # Subtest: Stone Cold's reviewed Kick to the Gut searches the Playbook for the reviewed Stone Cold Stunner
-ok 96 - Stone Cold's reviewed Kick to the Gut searches the Playbook for the reviewed Stone Cold Stunner
+ok 97 - Stone Cold's reviewed Kick to the Gut searches the Playbook for the reviewed Stone Cold Stunner
   ---
-  duration_ms: 0.88384
+  duration_ms: 0.478733
   type: 'test'
   ...
 # Subtest: active shared Move secondary effects can draw, discard and add extra Attitude
-ok 97 - active shared Move secondary effects can draw, discard and add extra Attitude
+ok 98 - active shared Move secondary effects can draw, discard and add extra Attitude
   ---
-  duration_ms: 0.569895
+  duration_ms: 0.525242
   type: 'test'
   ...
 # Subtest: Hall of Fame boosters stay inside their own set and still guarantee exactly one Foil
-ok 98 - Hall of Fame boosters stay inside their own set and still guarantee exactly one Foil
+ok 99 - Hall of Fame boosters stay inside their own set and still guarantee exactly one Foil
   ---
-  duration_ms: 0.37806
+  duration_ms: 0.22184
   type: 'test'
   ...
 # Subtest: Climb the Ladder branches into Golden Era, Attitude Era and full Hall of Fame runs
-ok 99 - Climb the Ladder branches into Golden Era, Attitude Era and full Hall of Fame runs
+ok 100 - Climb the Ladder branches into Golden Era, Attitude Era and full Hall of Fame runs
   ---
-  duration_ms: 0.343228
+  duration_ms: 0.336751
   type: 'test'
   ...
 # Subtest: Championship Road has Golden Era and Attitude Era Hall of Fame finals
-ok 100 - Championship Road has Golden Era and Attitude Era Hall of Fame finals
+ok 101 - Championship Road has Golden Era and Attitude Era Hall of Fame finals
   ---
-  duration_ms: 0.259504
+  duration_ms: 0.230063
   type: 'test'
   ...
 # Subtest: Miss Elizabeth triggers once below half HP: draw 2, then bottom 1
-ok 101 - Miss Elizabeth triggers once below half HP: draw 2, then bottom 1
+ok 102 - Miss Elizabeth triggers once below half HP: draw 2, then bottom 1
   ---
-  duration_ms: 0.503366
+  duration_ms: 0.408868
   type: 'test'
   ...
 # Subtest: Paul Bearer triggers once below half HP and grants Urn momentum when no card can be recovered
-ok 102 - Paul Bearer triggers once below half HP and grants Urn momentum when no card can be recovered
+ok 103 - Paul Bearer triggers once below half HP and grants Urn momentum when no card can be recovered
   ---
-  duration_ms: 0.61407
+  duration_ms: 0.494636
   type: 'test'
   ...
 # Subtest: deck health rejects a single Manager that is not eligible for the selected Superstar
-ok 103 - deck health rejects a single Manager that is not eligible for the selected Superstar
+ok 104 - deck health rejects a single Manager that is not eligible for the selected Superstar
   ---
-  duration_ms: 0.313334
+  duration_ms: 0.260588
   type: 'test'
   ...
 # Subtest: mobile booster reveal has a single-card phone layout and Next Card navigation
-ok 104 - mobile booster reveal has a single-card phone layout and Next Card navigation
+ok 105 - mobile booster reveal has a single-card phone layout and Next Card navigation
   ---
-  duration_ms: 0.909047
+  duration_ms: 0.975752
   type: 'test'
   ...
 # Subtest: mobile Deck Assistance suggestions cannot force horizontal overflow
-ok 105 - mobile Deck Assistance suggestions cannot force horizontal overflow
+ok 106 - mobile Deck Assistance suggestions cannot force horizontal overflow
   ---
-  duration_ms: 0.406222
+  duration_ms: 0.401258
   type: 'test'
   ...
 # Subtest: mobile match screen uses compact wrestler HUDs, one play pile, player-only hand and collapsible log
-ok 106 - mobile match screen uses compact wrestler HUDs, one play pile, player-only hand and collapsible log
+ok 107 - mobile match screen uses compact wrestler HUDs, one play pile, player-only hand and collapsible log
   ---
-  duration_ms: 0.970999
+  duration_ms: 0.886409
   type: 'test'
   ...
 # Subtest: WWE Legacy splash, Champion onboarding and Main Menu are wired as the front-door flow
-ok 107 - WWE Legacy splash, Champion onboarding and Main Menu are wired as the front-door flow
+ok 108 - WWE Legacy splash, Champion onboarding and Main Menu are wired as the front-door flow
   ---
-  duration_ms: 0.764373
+  duration_ms: 0.818869
   type: 'test'
   ...
 # Subtest: collectible card fronts are artwork-first and flip to a shared rules back
-ok 108 - collectible card fronts are artwork-first and flip to a shared rules back
+ok 109 - collectible card fronts are artwork-first and flip to a shared rules back
   ---
-  duration_ms: 1.063656
+  duration_ms: 0.848473
   type: 'test'
   ...
 # Subtest: card artwork can be swapped through one manifest without changing gameplay data
-ok 109 - card artwork can be swapped through one manifest without changing gameplay data
+ok 110 - card artwork can be swapped through one manifest without changing gameplay data
   ---
-  duration_ms: 0.155941
+  duration_ms: 0.129312
   type: 'test'
   ...
-# Subtest: Card Art Studio supports URL/upload crop, WebP export and manifest automation
-ok 110 - Card Art Studio supports URL/upload crop, WebP export and manifest automation
+# Subtest: unified Card Art Studio exports finished set-branded fronts without manifest edits
+ok 111 - unified Card Art Studio exports finished set-branded fronts without manifest edits
   ---
-  duration_ms: 0.501724
+  duration_ms: 1.861882
   type: 'test'
   ...
 # Subtest: Evolution Series 1 contains the audited active pool and eight women
-ok 111 - Evolution Series 1 contains the audited active pool and eight women
+ok 112 - Evolution Series 1 contains the audited active pool and eight women
   ---
-  duration_ms: 0.180117
+  duration_ms: 0.136373
   type: 'test'
   ...
 # Subtest: Evolution linked Entrances and every active Superstar signature are locked to the correct wrestler
-ok 112 - Evolution linked Entrances and every active Superstar signature are locked to the correct wrestler
+ok 113 - Evolution linked Entrances and every active Superstar signature are locked to the correct wrestler
   ---
-  duration_ms: 0.582503
+  duration_ms: 0.331143
   type: 'test'
   ...
 # Subtest: Evolution shared common Moves are legal cross-roster while named Moves are restricted
-ok 113 - Evolution shared common Moves are legal cross-roster while named Moves are restricted
+ok 114 - Evolution shared common Moves are legal cross-roster while named Moves are restricted
   ---
-  duration_ms: 0.123152
+  duration_ms: 0.10096
   type: 'test'
   ...
 # Subtest: Evolution adds an eight-opponent Ladder path and four-stage Championship Road
-ok 114 - Evolution adds an eight-opponent Ladder path and four-stage Championship Road
+ok 115 - Evolution adds an eight-opponent Ladder path and four-stage Championship Road
   ---
-  duration_ms: 0.43239
+  duration_ms: 0.245385
   type: 'test'
   ...
 # Subtest: starter onboarding remains Punk or Roman after Evolution expansion
-ok 115 - starter onboarding remains Punk or Roman after Evolution expansion
+ok 116 - starter onboarding remains Punk or Roman after Evolution expansion
   ---
-  duration_ms: 0.112217
+  duration_ms: 0.058727
   type: 'test'
   ...
 # Subtest: Season 1 roadmap runs from August 10 to Survivor Series on November 28 with 50 tiers
-ok 116 - Season 1 roadmap runs from August 10 to Survivor Series on November 28 with 50 tiers
+ok 117 - Season 1 roadmap runs from August 10 to Survivor Series on November 28 with 50 tiers
   ---
-  duration_ms: 0.421464
+  duration_ms: 0.263502
   type: 'test'
   ...
 # Subtest: Season XP rewards wins, participation and unlocks claimable tier boosters
-ok 117 - Season XP rewards wins, participation and unlocks claimable tier boosters
+ok 118 - Season XP rewards wins, participation and unlocks claimable tier boosters
   ---
-  duration_ms: 0.584486
+  duration_ms: 0.3628
   type: 'test'
   ...
 # Subtest: Free Season booster is available immediately then returns after a rolling 24 hours
-ok 118 - Free Season booster is available immediately then returns after a rolling 24 hours
+ok 119 - Free Season booster is available immediately then returns after a rolling 24 hours
   ---
-  duration_ms: 0.27614
+  duration_ms: 0.23498
   type: 'test'
   ...
 # Subtest: Main Menu exposes Seasons with roadmap, live free-pack countdown and 50-tier mobile road
-ok 119 - Main Menu exposes Seasons with roadmap, live free-pack countdown and 50-tier mobile road
+ok 120 - Main Menu exposes Seasons with roadmap, live free-pack countdown and 50-tier mobile road
   ---
-  duration_ms: 0.825763
+  duration_ms: 0.72561
   type: 'test'
   ...
 # Subtest: submission tap threshold falls as overall health is worn down
-ok 120 - submission tap threshold falls as overall health is worn down
+ok 121 - submission tap threshold falls as overall health is worn down
   ---
-  duration_ms: 0.382377
+  duration_ms: 0.381708
   type: 'test'
   ...
 # Subtest: CPU maintains a submission when the next squeeze can force a tap even with one page left
-ok 121 - CPU maintains a submission when the next squeeze can force a tap even with one page left
+ok 122 - CPU maintains a submission when the next squeeze can force a tap even with one page left
   ---
-  duration_ms: 0.564566
+  duration_ms: 0.473024
   type: 'test'
   ...
 # Subtest: premium UI exposes distinct mode identities and graphical submission pressure
-ok 122 - premium UI exposes distinct mode identities and graphical submission pressure
+ok 123 - premium UI exposes distinct mode identities and graphical submission pressure
   ---
-  duration_ms: 1.651828
+  duration_ms: 1.947088
   type: 'test'
   ...
 # Subtest: premium mobile shell provides persistent primary navigation outside live matches
-ok 123 - premium mobile shell provides persistent primary navigation outside live matches
+ok 124 - premium mobile shell provides persistent primary navigation outside live matches
   ---
-  duration_ms: 4.433429
+  duration_ms: 1.14868
   type: 'test'
   ...
 # Subtest: European Uppercut used as a counter becomes a real counter-attack and deals its printed damage
-ok 124 - European Uppercut used as a counter becomes a real counter-attack and deals its printed damage
+ok 125 - European Uppercut used as a counter becomes a real counter-attack and deals its printed damage
   ---
-  duration_ms: 0.532599
+  duration_ms: 0.569017
   type: 'test'
   ...
 # Subtest: Rhea receives a legal counter-to-counter window against European Uppercut
-ok 125 - Rhea receives a legal counter-to-counter window against European Uppercut
+ok 126 - Rhea receives a legal counter-to-counter window against European Uppercut
   ---
-  duration_ms: 0.448394
+  duration_ms: 0.400827
   type: 'test'
   ...
 # Subtest: every collectible offensive Move with a counter relationship opens a counter-attack response window when fully legal
-ok 126 - every collectible offensive Move with a counter relationship opens a counter-attack response window when fully legal
+ok 127 - every collectible offensive Move with a counter relationship opens a counter-attack response window when fully legal
   ---
-  duration_ms: 49.162559
+  duration_ms: 46.755276
   type: 'test'
   ...
 # Subtest: Turn 50 is playable and attempting to advance beyond it produces a time-limit draw
-ok 127 - Turn 50 is playable and attempting to advance beyond it produces a time-limit draw
+ok 128 - Turn 50 is playable and attempting to advance beyond it produces a time-limit draw
   ---
-  duration_ms: 0.366233
+  duration_ms: 0.433395
   type: 'test'
   ...
 # Subtest: recommended starter decks contain no ringside-only Moves
-ok 128 - recommended starter decks contain no ringside-only Moves
+ok 129 - recommended starter decks contain no ringside-only Moves
   ---
-  duration_ms: 0.271051
+  duration_ms: 0.291364
   type: 'test'
   ...
 # Subtest: a wrestler at 0 HP loses retained Control through Critical Exhaustion after completing offense
-ok 129 - a wrestler at 0 HP loses retained Control through Critical Exhaustion after completing offense
+ok 130 - a wrestler at 0 HP loses retained Control through Critical Exhaustion after completing offense
   ---
-  duration_ms: 0.375165
+  duration_ms: 0.392435
   type: 'test'
   ...
 # Subtest: CPU never voluntarily releases a Finisher submission while it has a page to ditch
-ok 130 - CPU never voluntarily releases a Finisher submission while it has a page to ditch
+ok 131 - CPU never voluntarily releases a Finisher submission while it has a page to ditch
   ---
-  duration_ms: 0.36447
+  duration_ms: 0.371103
   type: 'test'
   ...
 # Subtest: all 25 Superstars can play Momentum then an immediate Lead Off Move on first Control
-ok 131 - all 25 Superstars can play Momentum then an immediate Lead Off Move on first Control
+ok 132 - all 25 Superstars can play Momentum then an immediate Lead Off Move on first Control
   ---
-  duration_ms: 5.505768
+  duration_ms: 5.85171
   type: 'test'
   ...
 # Subtest: attached Entrances never count toward the 55 playable deck pages
-ok 132 - attached Entrances never count toward the 55 playable deck pages
+ok 133 - attached Entrances never count toward the 55 playable deck pages
   ---
-  duration_ms: 0.186546
+  duration_ms: 0.193398
   type: 'test'
   ...
 # Subtest: unlocking a new Superstar grants only the essential identity package and builds from real ownership
-ok 133 - unlocking a new Superstar grants only the essential identity package and builds from real ownership
+ok 134 - unlocking a new Superstar grants only the essential identity package and builds from real ownership
   ---
-  duration_ms: 0.888907
+  duration_ms: 0.921051
   type: 'test'
   ...
 # Subtest: unlock package does not award extra copies of Finishers or Trademarks already owned
-ok 134 - unlock package does not award extra copies of Finishers or Trademarks already owned
+ok 135 - unlock package does not award extra copies of Finishers or Trademarks already owned
   ---
-  duration_ms: 0.368706
+  duration_ms: 0.345414
   type: 'test'
   ...
 # Subtest: Superstar and Entrance cards are intrinsically Foil while Entrances are never booster eligible
-ok 135 - Superstar and Entrance cards are intrinsically Foil while Entrances are never booster eligible
+ok 136 - Superstar and Entrance cards are intrinsically Foil while Entrances are never booster eligible
   ---
-  duration_ms: 0.229741
+  duration_ms: 0.227158
   type: 'test'
   ...
 # Subtest: Season 1 Tier 50 is The Rock full-deck completion exclusive instead of boosters
-ok 136 - Season 1 Tier 50 is The Rock full-deck completion exclusive instead of boosters
+ok 137 - Season 1 Tier 50 is The Rock full-deck completion exclusive instead of boosters
   ---
-  duration_ms: 0.476456
+  duration_ms: 0.489899
   type: 'test'
   ...
 # Subtest: unlocking queues a sequential celebration containing Superstar, Entrance, Lead Off and signatures
-ok 137 - unlocking queues a sequential celebration containing Superstar, Entrance, Lead Off and signatures
+ok 138 - unlocking queues a sequential celebration containing Superstar, Entrance, Lead Off and signatures
   ---
-  duration_ms: 0.272563
+  duration_ms: 0.300417
   type: 'test'
   ...
 # Subtest: Season 1 Tier 50 Final Boss Rock is a distinct 55-card season-exclusive persona
-ok 138 - Season 1 Tier 50 Final Boss Rock is a distinct 55-card season-exclusive persona
+ok 139 - Season 1 Tier 50 Final Boss Rock is a distinct 55-card season-exclusive persona
   ---
-  duration_ms: 0.329768
+  duration_ms: 0.333186
   type: 'test'
   ...
 # Subtest: claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned deck
-ok 139 - claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned deck
+ok 140 - claiming Season 1 Tier 50 awards Final Boss Rock and his complete owned deck
   ---
-  duration_ms: 0.589854
+  duration_ms: 0.619682
   type: 'test'
   ...
 # Subtest: Season 1 entry is a clean Final Boss splash followed by three-card-set discovery
-ok 140 - Season 1 entry is a clean Final Boss splash followed by three-card-set discovery
+ok 141 - Season 1 entry is a clean Final Boss splash followed by three-card-set discovery
   ---
-  duration_ms: 0.518598
+  duration_ms: 0.556688
   type: 'test'
   ...
 # Subtest: Season 1 campaign is carried through menu, Seasons hub and booster releases
-ok 141 - Season 1 campaign is carried through menu, Seasons hub and booster releases
+ok 142 - Season 1 campaign is carried through menu, Seasons hub and booster releases
   ---
-  duration_ms: 0.429556
+  duration_ms: 0.419043
   type: 'test'
   ...
 # Subtest: primary navigation is fixed on menu screens, hidden in matches, and exposes Options
-ok 142 - primary navigation is fixed on menu screens, hidden in matches, and exposes Options
+ok 143 - primary navigation is fixed on menu screens, hidden in matches, and exposes Options
   ---
-  duration_ms: 0.796049
+  duration_ms: 0.817617
   type: 'test'
   ...
 # Subtest: Options provides an explicit two-step local progress reset for testing
-ok 143 - Options provides an explicit two-step local progress reset for testing
+ok 144 - Options provides an explicit two-step local progress reset for testing
   ---
-  duration_ms: 0.436807
+  duration_ms: 0.454196
   type: 'test'
   ...
 # Subtest: card backs explicitly communicate Superstar play restrictions
-ok 144 - card backs explicitly communicate Superstar play restrictions
+ok 145 - card backs explicitly communicate Superstar play restrictions
   ---
-  duration_ms: 0.473622
+  duration_ms: 0.469749
   type: 'test'
   ...
 # Subtest: booster flow reveals exactly one focused card at a time then shows summary before upgrades
-ok 145 - booster flow reveals exactly one focused card at a time then shows summary before upgrades
+ok 146 - booster flow reveals exactly one focused card at a time then shows summary before upgrades
   ---
-  duration_ms: 0.375096
+  duration_ms: 0.379705
   type: 'test'
   ...
 # Subtest: booster pull metadata distinguishes the first-ever owned copy for NEW badges
-ok 146 - booster pull metadata distinguishes the first-ever owned copy for NEW badges
+ok 147 - booster pull metadata distinguishes the first-ever owned copy for NEW badges
   ---
-  duration_ms: 0.354185
+  duration_ms: 0.364603
   type: 'test'
   ...
 # Subtest: all non-SummerSlam launch Superstars use local WWE profile portrait assets
-ok 147 - all non-SummerSlam launch Superstars use local WWE profile portrait assets
+ok 148 - all non-SummerSlam launch Superstars use local WWE profile portrait assets
   ---
-  duration_ms: 0.286604
+  duration_ms: 0.240008
   type: 'test'
   ...
 # Subtest: home-screen icon and web app manifest are bundled
-ok 148 - home-screen icon and web app manifest are bundled
+ok 149 - home-screen icon and web app manifest are bundled
   ---
-  duration_ms: 0.117324
+  duration_ms: 0.117385
   type: 'test'
   ...
 # Subtest: card rarity uses gold star count without hollow filler stars or RARITY label
-ok 149 - card rarity uses gold star count without hollow filler stars or RARITY label
+ok 150 - card rarity uses gold star count without hollow filler stars or RARITY label
   ---
-  duration_ms: 0.75603
+  duration_ms: 0.778979
   type: 'test'
   ...
 # Subtest: first-time starter selection routes to the Season 1 release discovery screen
-ok 150 - first-time starter selection routes to the Season 1 release discovery screen
+ok 151 - first-time starter selection routes to the Season 1 release discovery screen
   ---
-  duration_ms: 0.379432
+  duration_ms: 0.437912
   type: 'test'
   ...
 # Subtest: match HUD uses compact two-wrestler status cards
-ok 151 - match HUD uses compact two-wrestler status cards
+ok 152 - match HUD uses compact two-wrestler status cards
   ---
-  duration_ms: 0.888487
+  duration_ms: 0.940089
   type: 'test'
   ...
 # Subtest: human hand is horizontal and sorted by current playability without changing original hand indexes
-ok 152 - human hand is horizontal and sorted by current playability without changing original hand indexes
+ok 153 - human hand is horizontal and sorted by current playability without changing original hand indexes
   ---
-  duration_ms: 0.832934
+  duration_ms: 0.903605
   type: 'test'
   ...
 # Subtest: remaining Momentum moves to the rear after Momentum has been played this turn
-ok 153 - remaining Momentum moves to the rear after Momentum has been played this turn
+ok 154 - remaining Momentum moves to the rear after Momentum has been played this turn
   ---
-  duration_ms: 0.396567
+  duration_ms: 0.416921
   type: 'test'
   ...
 # Subtest: Roundhouse Kick cannot counter on Turn 1 without its printed Momentum gates
-ok 154 - Roundhouse Kick cannot counter on Turn 1 without its printed Momentum gates
+ok 155 - Roundhouse Kick cannot counter on Turn 1 without its printed Momentum gates
   ---
-  duration_ms: 0.473371
+  duration_ms: 0.466063
   type: 'test'
   ...
 # Subtest: full collectible Move counter audit enforces relation, Superstar, Momentum, method, location, posture and stun gates
-ok 155 - full collectible Move counter audit enforces relation, Superstar, Momentum, method, location, posture and stun gates
+ok 156 - full collectible Move counter audit enforces relation, Superstar, Momentum, method, location, posture and stun gates
   ---
-  duration_ms: 42.39327
+  duration_ms: 49.891638
   type: 'test'
   ...
 # Subtest: active generic wrestling techniques remain shared while pruned duplicates stay dormant
-ok 156 - active generic wrestling techniques remain shared while pruned duplicates stay dormant
+ok 157 - active generic wrestling techniques remain shared while pruned duplicates stay dormant
   ---
-  duration_ms: 0.279995
+  duration_ms: 0.358263
   type: 'test'
   ...
 # Subtest: CM Punk identity keeps GTS exclusive Finisher and Anaconda Vise exclusive Trademark
-ok 157 - CM Punk identity keeps GTS exclusive Finisher and Anaconda Vise exclusive Trademark
+ok 158 - CM Punk identity keeps GTS exclusive Finisher and Anaconda Vise exclusive Trademark
   ---
-  duration_ms: 0.079958
+  duration_ms: 0.098477
   type: 'test'
   ...
 # Subtest: CM Punk branding and exclusive pin Special are updated
-ok 158 - CM Punk branding and exclusive pin Special are updated
+ok 159 - CM Punk branding and exclusive pin Special are updated
   ---
-  duration_ms: 0.328487
+  duration_ms: 0.416981
   type: 'test'
   ...
 # Subtest: Chain Wrestling counters any Technical Move but still pays its own gates
-ok 159 - Chain Wrestling counters any Technical Move but still pays its own gates
+ok 160 - Chain Wrestling counters any Technical Move but still pays its own gates
   ---
-  duration_ms: 0.431089
+  duration_ms: 0.429309
   type: 'test'
   ...
 # Subtest: Duck counters any Strike Move and Punk starter no longer uses Technical Reversal or Scramble Free
-ok 160 - Duck counters any Strike Move and Punk starter no longer uses Technical Reversal or Scramble Free
+ok 161 - Duck counters any Strike Move and Punk starter no longer uses Technical Reversal or Scramble Free
   ---
-  duration_ms: 0.443658
+  duration_ms: 0.388799
   type: 'test'
   ...
 # Subtest: Best in the World pin escape is only playable by CM Punk
-ok 161 - Best in the World pin escape is only playable by CM Punk
+ok 162 - Best in the World pin escape is only playable by CM Punk
   ---
-  duration_ms: 0.571076
+  duration_ms: 0.540745
   type: 'test'
   ...
-# {"p1":{"m":384,"w":199},"p2":{"m":384,"w":190}}
+# Subtest: finished Superstar card fronts are the canonical UI visual with portrait fallback
+ok 163 - finished Superstar card fronts are the canonical UI visual with portrait fallback
+  ---
+  duration_ms: 0.995912
+  type: 'test'
+  ...
+# Subtest: Card Art Studio contains all 389 active Season 1 collectibles
+ok 164 - Card Art Studio contains all 389 active Season 1 collectibles
+  ---
+  duration_ms: 2.434263
+  type: 'test'
+  ...
+# Subtest: Card Art Studio preserves the four active set pools and collector numbering
+ok 165 - Card Art Studio preserves the four active set pools and collector numbering
+  ---
+  duration_ms: 2.294184
+  type: 'test'
+  ...
+# Subtest: Card Art Studio exposes one type-filtered workflow for every collectible kind
+ok 166 - Card Art Studio exposes one type-filtered workflow for every collectible kind
+  ---
+  duration_ms: 0.533374
+  type: 'test'
+  ...
+# Subtest: Card Art Studio is self-contained and direct-file compatible
+ok 167 - Card Art Studio is self-contained and direct-file compatible
+  ---
+  duration_ms: 0.636327
+  type: 'test'
+  ...
+# Subtest: Card Art Studio can import artwork from a URL without requiring a local save
+ok 168 - Card Art Studio can import artwork from a URL without requiring a local save
+  ---
+  duration_ms: 0.538351
+  type: 'test'
+  ...
+# Subtest: URL artwork loader retries CORS-blocked hosts through an image proxy and reports progress beside the button
+ok 169 - URL artwork loader retries CORS-blocked hosts through an image proxy and reports progress beside the button
+  ---
+  duration_ms: 0.346236
+  type: 'test'
+  ...
+# Subtest: front identity is minimal by type and every set gets its top-right logo
+ok 170 - front identity is minimal by type and every set gets its top-right logo
+  ---
+  duration_ms: 0.982111
+  type: 'test'
+  ...
+# Subtest: Move Studio data carries the live method requirements and reserves the third footer row
+ok 171 - Move Studio data carries the live method requirements and reserves the third footer row
+  ---
+  duration_ms: 2.33832
+  type: 'test'
+  ...
+# Subtest: Card Art Studio Superstar filter uses current ownership and deck usage, not legacy ID text
+ok 172 - Card Art Studio Superstar filter uses current ownership and deck usage, not legacy ID text
+  ---
+  duration_ms: 2.135118
+  type: 'test'
+  ...
+# Subtest: Card Art Studio includes the SummerSlam fundamentals pass without renumbering existing cards
+ok 173 - Card Art Studio includes the SummerSlam fundamentals pass without renumbering existing cards
+  ---
+  duration_ms: 1.02789
+  type: 'test'
+  ...
+# Subtest: unified export gives every card kind a predictable automatic game path
+ok 174 - unified export gives every card kind a predictable automatic game path
+  ---
+  duration_ms: 1.46466
+  type: 'test'
+  ...
+# Subtest: Rewards identity remains embedded and direct-file safe in the unified studio
+ok 175 - Rewards identity remains embedded and direct-file safe in the unified studio
+  ---
+  duration_ms: 0.322119
+  type: 'test'
+  ...
+# Subtest: finished WebPs are canonical fronts for all supported card types with legacy fallback
+ok 176 - finished WebPs are canonical fronts for all supported card types with legacy fallback
+  ---
+  duration_ms: 1.028852
+  type: 'test'
+  ...
+# Subtest: Profile exposes one Card Art Studio and the old Superstar editor URL redirects into it
+ok 177 - Profile exposes one Card Art Studio and the old Superstar editor URL redirects into it
+  ---
+  duration_ms: 0.641876
+  type: 'test'
+  ...
+# {"p1":{"m":384,"w":200},"p2":{"m":384,"w":195}}
 # Subtest: tools/orientation-test.mjs
-ok 2 - tools/orientation-test.mjs
+ok 3 - tools/orientation-test.mjs
   ---
-  duration_ms: 805.438972
+  duration_ms: 770.731365
   type: 'test'
   ...
-# base 0.5135416666666667
+# base 0.5229166666666667
 # swap1 0.5666666666666667
-# swap2 0.515625
+# swap2 0.5197916666666667
 # Subtest: tools/rock-momentum-test.mjs
-ok 3 - tools/rock-momentum-test.mjs
+ok 4 - tools/rock-momentum-test.mjs
   ---
-  duration_ms: 1760.841056
+  duration_ms: 1816.859259
   type: 'test'
   ...
-1..163
-# tests 163
+1..179
+# tests 179
 # suites 0
-# pass 163
+# pass 179
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 1901.669432
+# duration_ms 2007.136393

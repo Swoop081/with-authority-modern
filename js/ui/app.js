@@ -2,7 +2,7 @@ import { superstars } from "../data/superstars.js";
 import { decks } from "../data/decks.js";
 import { sets } from "../data/sets.js";
 import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js";
-import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor } from "../data/artwork.js";
+import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js";
 import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js";
 import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js";
 import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js";
@@ -918,8 +918,10 @@ function cardArtFace(card) {
   }
   const art = artworkFor(card);
   const finished = finishedCardArtFor(card);
+  const legacyFinished = legacyFinishedCardArtFor(card);
   if (finished && art) {
-    return `<img class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" onerror="this.onerror=null;this.dataset.artFallback='legacy';this.src='${art}';this.closest('.ccg-card')?.classList.remove('is-full-art-finished','is-full-art-move');">`;
+    const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
+    return `<img class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" data-legacy-finished-art="${legacyCandidate}" onerror="if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.dataset.artFallback='legacy';this.src='${art}';this.closest('.ccg-card')?.classList.remove('is-full-art-finished','is-full-art-move');">`;
   }
   const fallback = card.name;
   return art
