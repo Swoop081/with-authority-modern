@@ -1,3 +1,11 @@
+## v0.11.32 — Home Hub Rebuild
+
+The main Home hub has been rebuilt for mobile clarity. The global sticky WWE Legacy/version banner is removed everywhere; Home now starts with a tappable LED Season 1 countdown, followed by a true **My Collection** destination, the Final Boss reward promo, and compact/direct menu tiles. **My Collection** now means owned cards only, while **Card Catalogue** means the full 387-card active pool with All Sets + search/type/rarity filters. The persistent bottom hub is roughly twice its former size, horizontally scrollable, and uses distinct SVG icons.
+
+## v0.11.31 — Always Start New Screens at the Top
+
+Every WWE Legacy in-app screen transition now opens at scroll position 0,0. The app also disables browser scroll restoration and repeats the reset after paint to prevent mobile Safari from carrying the previous screen's scroll position into the next screen. Same-screen interactions retain their position.
+
 ## v0.11.30 — Champion Onboarding Overlay Fix
 
 The first-time **Choose Your Champion** screen no longer has UI elements sitting over its copy. The global sticky WWE Legacy/version header is force-hidden while onboarding is active, and Superstar ability names such as **Pipe Bomb** and **Head of the Table** are now true inline emphasis inside their ability descriptions instead of inheriting the white starter CTA-pill styling. No gameplay/card/deck data changed.
@@ -36,7 +44,7 @@ Move-card fronts now reserve a consistent three-line footer: **Move name**, **CO
 
 The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
 
-# WWE Legacy: Collectible Card Game — v0.11.30
+# WWE Legacy: Collectible Card Game — v0.11.32
 
 
 

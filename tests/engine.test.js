@@ -1634,16 +1634,17 @@ test("Free Season booster is available immediately then returns after a rolling 
   assert.equal(freePackStatus(p, new Date("2026-08-11T10:00:00")).available, true);
 });
 
-test("Main Menu exposes Seasons with roadmap, live free-pack countdown and 50-tier mobile road", () => {
+test("Main Menu exposes the Season 1 hub through its LED countdown and 50-tier road", () => {
   const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
-  assert.equal(app.includes('id="menu-seasons"'), true);
+  assert.equal(app.includes('id="menu-season-countdown"'), true);
+  assert.equal(app.includes('data-season-countdown'), true);
+  assert.equal(app.includes('$("#menu-season-countdown")?.addEventListener("click", showSeasons)'), true);
   assert.equal(app.includes("function renderSeasons()"), true);
-  assert.equal(app.includes("data-free-pack-countdown"), true);
   assert.equal(app.includes("Season 1 Content Roadmap"), true);
   assert.equal(app.includes("50-Tier Season Road"), true);
+  assert.equal(css.includes(".season-led-strip"), true);
   assert.equal(css.includes(".season-tier-road"), true);
-  assert.equal(css.includes("@media(max-width:760px)"), true);
 });
 
 
@@ -2485,4 +2486,42 @@ test('v0.11.30 champion onboarding has no header or ability-pill overlays', asyn
   assert.match(css, /\.starter-choice > b:last-child\{/);
   assert.doesNotMatch(css, /\.starter-choice b:last-child\{/);
   assert.match(css, /\.champion-starter em b\{display:inline;background:transparent!important/);
+});
+
+
+test('v0.11.32 home hub removes the global banner and separates owned Collection from the full Catalogue', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  assert.equal(html.includes('id="app-topbar"'), false);
+  assert.match(css, /\.topbar\{display:none!important\}/);
+  assert.equal(app.includes('id="menu-owned-collection"'), true);
+  assert.equal(app.includes('id="menu-catalogue"'), true);
+  assert.equal(app.includes('function showOwnedCollection()'), true);
+  assert.equal(app.includes('function showCardCatalogue()'), true);
+  assert.match(app, /activeCollectionSetId = "all"/);
+  assert.match(app, /collectionView === "owned"/);
+  assert.equal(app.includes('id="menu-seasons"'), false);
+  assert.equal(app.includes('id="menu-options"'), false);
+  const menuBlock = app.slice(app.indexOf('function renderMainMenu()'), app.indexOf('function renderPlayMenu()'));
+  assert.equal(menuBlock.includes('Game & Testing'), false);
+});
+
+test('v0.11.32 bottom hub uses oversized scrollable icon buttons with Collection and Catalogue separated', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  for (const target of ['menu','play-menu','collection','catalogue','boosters','seasons','profile','options']) {
+    assert.ok(html.includes(`data-mobile-nav="${target}"`), `missing ${target} hub target`);
+  }
+  assert.match(html, /class="nav-icon"><svg/);
+  assert.match(css, /grid-auto-columns:108px!important/);
+  assert.match(css, /overflow-x:auto!important/);
+  assert.match(css, /min-height:96px!important/);
+});
+
+test('v0.11.31 every app screen transition resets viewport to the top', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  assert.match(app, /if \("scrollRestoration" in history\) history\.scrollRestoration = "manual";/);
+  assert.match(app, /function scrollNewScreenToTop\(\) \{[\s\S]*?if \(lastChromeScreen === screen\) return;[\s\S]*?window\.scrollTo\(0, 0\);[\s\S]*?requestAnimationFrame/);
+  assert.match(app, /document\.body\.dataset\.mode = activeMode \?\? "";\n  scrollNewScreenToTop\(\);/);
 });

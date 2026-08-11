@@ -29,6 +29,7 @@ let screen = "splash";
 let selection = { p1: profile?.starterId ?? "cm-punk", p2: profile?.starterId === "roman-reigns" ? "cm-punk" : "roman-reigns" };
 let lastMatchup = { ...selection };
 let collectionFilter = { kind: "all", rarity: "all", search: "" };
+let collectionView = "catalogue";
 let lastPack = null;
 let pendingUpgrades = [];
 let packStage = "idle";
@@ -41,7 +42,7 @@ let currentPackType = "standard";
 let deckBuilderStarId = profile?.starterId ?? "cm-punk";
 let deckDraft = null;
 let deckBuilderFilter = "";
-let activeCollectionSetId = "summerslam-series-1";
+let activeCollectionSetId = "all";
 let activeBoosterSetId = "summerslam-series-1";
 let unlockCelebration = null;
 let unlockCelebrationIndex = 0;
@@ -53,6 +54,27 @@ let flippedCollectionCards = new Set();
 let playPileFlipped = false;
 let playPileCardKey = null;
 let boosterRulesFlipped = new Set();
+let lastChromeScreen = null;
+
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+function scrollNewScreenToTop() {
+  if (lastChromeScreen === screen) return;
+  lastChromeScreen = screen;
+  const reset = () => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    window.scrollTo(0, 0);
+  };
+  // Reset immediately, then again after the newly rendered screen has been
+  // painted. The second pass prevents mobile Safari from restoring the old
+  // page's scroll offset after a large DOM replacement.
+  reset();
+  requestAnimationFrame(() => {
+    reset();
+    requestAnimationFrame(reset);
+  });
+}
 
 const roster = Object.values(superstars);
 const superstarById = Object.fromEntries(roster.map(star => [star.id, star]));
@@ -92,12 +114,13 @@ function setChrome({ hideTopbar = false } = {}) {
   }
   document.body.dataset.screen = screen;
   document.body.dataset.mode = activeMode ?? "";
+  scrollNewScreenToTop();
 
   const mobileNav = document.querySelector("#mobile-game-nav");
   if (mobileNav) {
     const navScreens = new Set(["menu", "play-menu", "setup", "ladder", "championship", "collection", "boosters", "challenges", "seasons", "deck-builder", "profile", "options"]);
     mobileNav.hidden = !profile || !navScreens.has(screen);
-    const activeTarget = screen === "setup" || screen === "ladder" || screen === "championship" ? "play-menu" : screen === "deck-builder" ? "collection" : screen;
+    const activeTarget = screen === "setup" || screen === "ladder" || screen === "championship" ? "play-menu" : screen === "deck-builder" ? "collection" : screen === "collection" ? (collectionView === "owned" ? "collection" : "catalogue") : screen;
     mobileNav.querySelectorAll("[data-mobile-nav]").forEach(button => {
       button.classList.toggle("is-active", button.dataset.mobileNav === activeTarget);
       button.setAttribute("aria-current", button.dataset.mobileNav === activeTarget ? "page" : "false");
@@ -169,7 +192,23 @@ function restartMatch() { startMatch(lastMatchup.p1, lastMatchup.p2, { mode: act
 function showSetup() { if (!profile) { screen = "starter"; renderStarter(); return; } activeMode = "exhibition"; screen = "setup"; message = ""; renderSetup(); }
 function showLadder() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "ladder"; message = ""; setChrome(); renderLadder(); }
 function showChampionship() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "championship"; message = ""; setChrome(); renderChampionship(); }
-function showCollection() { screen = "collection"; message = ""; setChrome(); renderCollection(); }
+function showCollection() { showCardCatalogue(); }
+function showOwnedCollection() {
+  collectionView = "owned";
+  lastChromeScreen = null;
+  activeCollectionSetId = "all";
+  collectionFilter = { kind: "all", rarity: "all", search: "" };
+  flippedCollectionCards = new Set();
+  screen = "collection"; message = ""; setChrome(); renderCollection();
+}
+function showCardCatalogue() {
+  collectionView = "catalogue";
+  lastChromeScreen = null;
+  activeCollectionSetId = "all";
+  collectionFilter = { kind: "all", rarity: "all", search: "" };
+  flippedCollectionCards = new Set();
+  screen = "collection"; message = ""; setChrome(); renderCollection();
+}
 function entranceFor(starId) { return decks[starId]?.slice(0, 5).find(card => card.kind === "entrance"); }
 function showBoosters() { screen = "boosters"; message = ""; setChrome(); renderBoosters(); }
 function showBoosterSet(setId) {
@@ -710,40 +749,53 @@ function renderMainMenu() {
   const hofCredits = boosterCreditsFor(profile, "hall-of-fame-series-1");
   const evoCredits = boosterCreditsFor(profile, "evolution-series-1");
   const seasonProgress = seasonLevelProgress(profile);
-  const freeSeasonPack = freePackStatus(profile, new Date());
   const seasonRemaining = seasonTimeRemaining(new Date());
-  root.innerHTML = `<section class="main-menu-screen premium-screen">
-    <section class="premium-menu-hero">
-      <div class="premium-menu-art">${portraitMarkup(starter.id,starter.name)}</div>
-      <div class="premium-menu-copy">${legacyLogoMarkup(true)}<span class="premium-kicker">WELCOME BACK, ${starter.name.toUpperCase()}</span><h2>Create your Legacy.</h2><p>${profile.unlockedSuperstars.length}/${roster.length} Superstars unlocked · Season 1 Tier ${seasonProgress.tier}/${SEASON_TIER_COUNT}</p></div>
-      <div class="premium-menu-season"><span>SEASON 1</span><b data-season-countdown>${formatCountdown(seasonRemaining.ms)}</b><small>until Survivor Series</small></div>
-    </section>
+  const ownedUnique = collectionCards.filter(card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0).length;
+  const ownedCopies = collectionCards.reduce((sum, card) => sum + ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil"), 0);
+  root.innerHTML = `<section class="main-menu-screen premium-screen home-hub-v2">
+    <button id="menu-season-countdown" class="season-led-strip" aria-label="Open Season 1 hub">
+      <span class="season-led-live"><i></i> SEASON 1 · LIVE</span>
+      <span class="season-led-clock"><small>ENDS IN</small><b data-season-countdown>${seasonRemaining.ended ? 'SEASON COMPLETE' : formatCountdown(seasonRemaining.ms)}</b></span>
+      <span class="season-led-next">SURVIVOR SERIES · 28 NOV</span>
+    </button>
+
+    <button id="menu-owned-collection" class="menu-owned-hero">
+      <span class="owned-hero-copy">
+        <em>YOUR CARDS</em>
+        <strong>MY COLLECTION</strong>
+        <small>${ownedUnique} / ${collectionCards.length} unique cards owned · ${ownedCopies} total copies</small>
+        <span>${profile.unlockedSuperstars.length}/${roster.length} Superstars unlocked</span>
+      </span>
+      <span class="owned-hero-art">${portraitMarkup(starter.id, starter.name)}</span>
+      <span class="owned-hero-arrow">VIEW OWNED CARDS →</span>
+    </button>
+
     ${message ? `<p class="menu-message">${message}</p>` : ""}
+
     <button id="menu-season-campaign" class="menu-season-campaign">
       <span class="menu-season-rock">${portraitMarkup("the-rock","The Rock")}</span>
       <span class="menu-season-copy"><em>SEASON 1 · TIER 50 REWARD</em><strong>UNLOCK THE FINAL BOSS</strong><small>Complete Season 1 to earn The Rock + his complete 55-page deck</small></span>
       <span class="menu-season-tier"><b>${seasonProgress.tier}</b><small>/ ${SEASON_TIER_COUNT}</small></span>
     </button>
-    <div class="main-menu-grid premium-menu-grid">
-      <button id="menu-play" class="main-menu-tile premium-menu-tile primary-tile tile-play"><span class="tile-bg-art">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="tile-shade"></span><span class="tile-copy"><em>PLAY</em><strong>Enter the Ring</strong><small>Exhibition · Ladder · Championship</small></span></button>
-      <button id="menu-seasons" class="main-menu-tile premium-menu-tile tile-seasons"><span class="tile-bg-art">${portraitMarkup("the-rock","The Rock")}</span><span class="tile-shade"></span><span class="tile-copy"><em>SEASON 1 · FINAL BOSS</em><strong>Tier ${seasonProgress.tier}/${SEASON_TIER_COUNT}</strong><small>${freeSeasonPack.available ? 'FREE BOOSTER READY' : 'Free pack in <b data-free-pack-countdown>'+formatCountdown(freeSeasonPack.msRemaining)+'</b>'}</small></span></button>
-      <button id="menu-collection" class="main-menu-tile premium-menu-tile tile-collection"><span class="tile-bg-art">${portraitMarkup("stone-cold-steve-austin","Stone Cold Steve Austin")}</span><span class="tile-shade"></span><span class="tile-copy"><em>COLLECTION</em><strong>${profile.unlockedSuperstars.length}/${roster.length}</strong><small>${collectionCards.length} collectible cards</small></span></button>
-      <button id="menu-boosters" class="main-menu-tile premium-menu-tile tile-boosters"><span class="tile-bg-art">${portraitMarkup("iyo-sky","IYO SKY")}</span><span class="tile-shade"></span><span class="tile-copy"><em>BOOSTERS</em><strong>${ssCredits + hofCredits + evoCredits} Packs</strong><small>Rip. Reveal. Collect.</small></span></button>
-      <button id="menu-decks" class="main-menu-tile premium-menu-tile tile-decks"><span class="tile-bg-art">${portraitMarkup("cm-punk","CM Punk")}</span><span class="tile-shade"></span><span class="tile-copy"><em>DECKS</em><strong>Deck Lab</strong><small>Build, optimize and save</small></span></button>
-      <button id="menu-challenges" class="main-menu-tile premium-menu-tile tile-challenges"><span class="tile-bg-art">${portraitMarkup("becky-lynch","Becky Lynch")}</span><span class="tile-shade"></span><span class="tile-copy"><em>CHALLENGES</em><strong>Daily & Weekly</strong><small>Earn packs + Season XP</small></span></button>
-      <button id="menu-profile" class="main-menu-tile premium-menu-tile tile-profile"><span class="tile-bg-art">${portraitMarkup(starter.id,starter.name)}</span><span class="tile-shade"></span><span class="tile-copy"><em>PROFILE</em><strong>My Legacy</strong><small>Progress, stats and tools</small></span></button>
-      <button id="menu-options" class="main-menu-tile premium-menu-tile tile-options"><span class="tile-bg-art"><span class="options-gear-art">⚙</span></span><span class="tile-shade"></span><span class="tile-copy"><em>OPTIONS</em><strong>Game & Testing</strong><small>Settings · Reset Progress</small></span></button>
+
+    <div class="main-menu-grid premium-menu-grid compact-hub-grid">
+      <button id="menu-play" class="main-menu-tile premium-menu-tile primary-tile tile-play"><span class="tile-bg-art">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="tile-shade"></span><span class="tile-copy"><em>PLAY</em><strong>ENTER THE RING</strong><small>Exhibition · Ladder · Championship</small></span></button>
+      <button id="menu-catalogue" class="main-menu-tile premium-menu-tile tile-collection"><span class="tile-bg-art">${portraitMarkup("stone-cold-steve-austin","Stone Cold Steve Austin")}</span><span class="tile-shade"></span><span class="tile-copy"><em>ALL ${collectionCards.length} CARDS</em><strong>CARD CATALOGUE</strong><small>Search and filter every set</small></span></button>
+      <button id="menu-boosters" class="main-menu-tile premium-menu-tile tile-boosters"><span class="tile-bg-art">${portraitMarkup("iyo-sky","IYO SKY")}</span><span class="tile-shade"></span><span class="tile-copy"><em>${ssCredits + hofCredits + evoCredits} AVAILABLE</em><strong>BOOSTER PACKS</strong><small>Rip · Reveal · Collect</small></span></button>
+      <button id="menu-decks" class="main-menu-tile premium-menu-tile tile-decks"><span class="tile-bg-art">${portraitMarkup("cm-punk","CM Punk")}</span><span class="tile-shade"></span><span class="tile-copy"><em>BUILD YOUR ROSTER</em><strong>DECK LAB</strong><small>Build · Optimize · Save</small></span></button>
+      <button id="menu-challenges" class="main-menu-tile premium-menu-tile tile-challenges"><span class="tile-bg-art">${portraitMarkup("becky-lynch","Becky Lynch")}</span><span class="tile-shade"></span><span class="tile-copy"><em>EARN REWARDS</em><strong>CHALLENGES</strong><small>Daily · Weekly · Season XP</small></span></button>
+      <button id="menu-profile" class="main-menu-tile premium-menu-tile tile-profile"><span class="tile-bg-art">${portraitMarkup(starter.id,starter.name)}</span><span class="tile-shade"></span><span class="tile-copy"><em>YOUR CAREER</em><strong>MY LEGACY</strong><small>Progress · Stats · Tools</small></span></button>
     </div>
   </section>`;
+  $("#menu-season-countdown")?.addEventListener("click", showSeasons);
+  $("#menu-owned-collection")?.addEventListener("click", showOwnedCollection);
   $("#menu-season-campaign")?.addEventListener("click", showSeasons);
   $("#menu-play")?.addEventListener("click", showPlayMenu);
-  $("#menu-seasons")?.addEventListener("click", showSeasons);
-  $("#menu-collection")?.addEventListener("click", showCollection);
+  $("#menu-catalogue")?.addEventListener("click", showCardCatalogue);
   $("#menu-boosters")?.addEventListener("click", showBoosters);
   $("#menu-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1));
   $("#menu-challenges")?.addEventListener("click", showChallenges);
   $("#menu-profile")?.addEventListener("click", showProfile);
-  $("#menu-options")?.addEventListener("click", showOptions);
   refreshSeasonClocks();
 }
 
@@ -1000,18 +1052,56 @@ function collectionText(card) {
   return [`Cost ${card.cost ?? 0}`, `${card.damage ?? 0} damage`, method, moveType, counters, req ? `Requires ${req}` : "", stateReq, defense, card.finisher ? "Finisher" : card.trademark ? "Trademark" : card.signature ? "Signature" : "", card.effectText ?? ""].filter(Boolean).join(" · ");
 }
 function renderCollection() {
-  const root=$("#game"), setInfo=setCollections[activeCollectionSetId]??setCollection, setCards=cardsForSet(activeCollectionSetId);
-  const kinds=["all","superstar","entrance","momentum","move","action","support","manager","special"],query=collectionFilter.search.trim().toLowerCase();
-  const visible=setCards.filter(card=>{if(collectionFilter.kind!=="all"&&card.kind!==collectionFilter.kind)return false;if(collectionFilter.rarity!=="all"&&String(card.rarity)!==collectionFilter.rarity)return false;if(query&&!`${card.name} ${card.subtitle??""} ${card.kind} ${collectionText(card)}`.toLowerCase().includes(query))return false;return true;});
-  const rarityCounts=[1,2,3,4].map(r=>setCards.filter(c=>c.rarity===r).length), starIds=setCards.filter(c=>c.kind==='superstar').map(c=>c.superstarId), unlocked=starIds.filter(id=>hasSuperstar(profile,id)).length;
-  const tabs=Object.values(setCollections).map(set=>`<button class="nav-button ${set.id===activeCollectionSetId?'active':''}" data-collection-set="${set.id}">${set.displayName}</button>`).join('');
-  const intro=activeCollectionSetId==='hall-of-fame-series-1'?'Eight Hall of Fame legends split between Golden Era and Attitude Era branches. Cards from this set enter the same global deck-building collection once owned.':activeCollectionSetId==='evolution-series-1'?'Eight women of WWE with a broad shared common-Move pool plus wrestler-locked Entrances, Signatures, Trademarks and Finishers. All eight can face every Superstar in WWE Legacy.':'The inaugural eight-Superstar modern release. SummerSlam cards remain compatible across the global collection.';
+  const root = $("#game");
+  const allSets = activeCollectionSetId === "all";
+  const rarityLabels = setCollection.rarityLabels;
+  const baseCards = allSets ? collectionCards : cardsForSet(activeCollectionSetId);
+  const isOwned = card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0;
+  const scopedCards = collectionView === "owned" ? baseCards.filter(isOwned) : baseCards;
+  const kinds = ["all","superstar","entrance","momentum","move","action","support","manager","special"];
+  const query = collectionFilter.search.trim().toLowerCase();
+  const visible = scopedCards.filter(card => {
+    if (collectionFilter.kind !== "all" && card.kind !== collectionFilter.kind) return false;
+    if (collectionFilter.rarity !== "all" && String(card.rarity) !== collectionFilter.rarity) return false;
+    if (query && !`${card.name} ${card.subtitle ?? ""} ${card.kind} ${card.cardCode ?? ""} ${sets[card.setId]?.displayName ?? ""} ${collectionText(card)}`.toLowerCase().includes(query)) return false;
+    return true;
+  });
+  const ownedUniqueAll = collectionCards.filter(isOwned).length;
+  const ownedUniqueHere = baseCards.filter(isOwned).length;
+  const starCards = baseCards.filter(c => c.kind === "superstar");
+  const unlocked = starCards.filter(c => hasSuperstar(profile, c.superstarId)).length;
+  const tabs = [`<button class="nav-button ${allSets ? 'active' : ''}" data-collection-set="all">All Sets</button>`, ...Object.values(setCollections).map(set => `<button class="nav-button ${set.id === activeCollectionSetId ? 'active' : ''}" data-collection-set="${set.id}">${set.displayName}</button>`)].join('');
+  const heroIds = allSets ? [profile.starterId, "stone-cold-steve-austin", "rhea-ripley"] : setHeroSuperstars(activeCollectionSetId);
+  const setLogo = allSets ? "" : setLogoMarkup(activeCollectionSetId, "feature-set-logo");
+  const title = collectionView === "owned" ? "MY COLLECTION" : "CARD CATALOGUE";
+  const eyebrow = collectionView === "owned" ? "OWNED CARDS" : "EVERY ACTIVE CARD";
+  const intro = collectionView === "owned"
+    ? `Everything you currently own. Search ${ownedUniqueAll} unique cards across every set, or narrow the view below.`
+    : `The complete active WWE Legacy card catalogue. Search and filter all ${collectionCards.length} cards across every set.`;
+  const themeClass = allSets ? "theme-catalogue-all" : setVisualClass(activeCollectionSetId);
   document.body.dataset.set = activeCollectionSetId;
-  root.innerHTML=`<section class="collection-screen premium-screen ${setVisualClass(activeCollectionSetId)}"><section class="feature-hero collection-feature">${modePortraits(setHeroSuperstars(activeCollectionSetId),"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("collection",true)}${setLogoMarkup(activeCollectionSetId,"feature-set-logo")}<span class="set-feature-name">${setInfo.displayName}</span><p>${intro}</p><div class="mode-branch-tabs">${tabs}</div><div class="top-actions"><button id="collection-play" class="nav-button active">Play Match</button><button id="collection-ladder" class="nav-button">Climb the Ladder</button><button id="collection-championship" class="nav-button">Championship Road</button><button id="collection-decks" class="nav-button">Deck Builder</button><button id="collection-boosters" class="nav-button">Booster Packs (${boosterCreditsFor(profile,activeCollectionSetId)})</button></div></div><div class="set-stats"><div class="set-stat"><b>${unlocked}/${setInfo.superstarCount}</b><span>Set Superstars unlocked</span></div><div class="set-stat"><b>${setInfo.cardCount}</b><span>Set cards</span></div><div class="set-stat"><b>${rarityCounts[2]+rarityCounts[3]}</b><span>Rare +</span></div><div class="set-stat"><b>${collectionCards.length}</b><span>Total game cards</span></div></div></section><section class="collection-tools"><input id="collection-search" type="search" placeholder="Search cards, moves or abilities" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k=>`<option value="${k}" ${collectionFilter.kind===k?'selected':''}>${k==='all'?'All card types':k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r=>`<option value="${r}" ${collectionFilter.rarity===String(r)?'selected':''}>${rarityStars(r)} ${setInfo.rarityLabels[r]}</option>`).join('')}</select><span class="collection-count">Showing ${visible.length} / ${setCards.length}</span></section><section class="catalogue-grid collectible-catalogue">${visible.length?visible.map(card=>`<article class="catalogue-collectible ${card.kind==='superstar'&&!hasSuperstar(profile,card.superstarId)?'collection-locked':''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${setInfo.rarityLabels[card.rarity]}</b><small>${card.kind==='superstar'||card.kind==='entrance'?`Owned ${ownedCount(profile,card.id,'foil')?'FOIL':'—'}`:`Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small></div></article>`).join(''):'<div class="collection-empty">No cards match these filters.</div>'}</section></section>`;
-  root.querySelectorAll('[data-flip-collection]').forEach(btn=>btn.addEventListener('click',()=>{const id=btn.dataset.flipCollection;if(flippedCollectionCards.has(id))flippedCollectionCards.delete(id);else flippedCollectionCards.add(id);renderCollection();}));
-  root.querySelectorAll('[data-collection-set]').forEach(btn=>btn.addEventListener('click',()=>{activeCollectionSetId=btn.dataset.collectionSet;collectionFilter={kind:'all',rarity:'all',search:''};flippedCollectionCards=new Set();renderCollection();}));
-  $("#collection-play")?.addEventListener("click",showSetup); $("#collection-ladder")?.addEventListener("click",showLadder); $("#collection-boosters")?.addEventListener("click",()=>{activeBoosterSetId=activeCollectionSetId;showBoosters();}); $("#collection-championship")?.addEventListener("click",showChampionship); $("#collection-decks")?.addEventListener("click",()=>showDeckBuilder(selection.p1));
-  $("#collection-search")?.addEventListener("input",e=>{collectionFilter.search=e.target.value;renderCollection();requestAnimationFrame(()=>$("#collection-search")?.focus());}); $("#collection-kind")?.addEventListener("change",e=>{collectionFilter.kind=e.target.value;renderCollection();}); $("#collection-rarity")?.addEventListener("change",e=>{collectionFilter.rarity=e.target.value;renderCollection();});
+  root.innerHTML = `<section class="collection-screen premium-screen ${themeClass}">
+    <section class="feature-hero collection-feature collection-all-hero">
+      ${modePortraits(heroIds, "feature-art")}<div class="feature-shade"></div>
+      <div class="feature-copy">${modeLogoMarkup("collection", true)}${setLogo}<span class="set-feature-name">${title}</span><p>${intro}</p>
+        <div class="collection-view-switch"><button id="collection-owned-view" class="nav-button ${collectionView === 'owned' ? 'active' : ''}">My Collection</button><button id="collection-catalogue-view" class="nav-button ${collectionView === 'catalogue' ? 'active' : ''}">Card Catalogue</button></div>
+        <div class="mode-branch-tabs collection-set-tabs">${tabs}</div>
+      </div>
+      <div class="set-stats"><div class="set-stat"><b>${collectionView === 'owned' ? ownedUniqueHere : baseCards.length}</b><span>${collectionView === 'owned' ? 'Unique cards owned' : 'Cards in view'}</span></div><div class="set-stat"><b>${unlocked}/${starCards.length}</b><span>Superstars unlocked</span></div><div class="set-stat"><b>${ownedUniqueAll}</b><span>Total unique owned</span></div><div class="set-stat"><b>${collectionCards.length}</b><span>Total catalogue</span></div></div>
+    </section>
+    <section class="collection-tools"><span class="collection-mode-label">${eyebrow}</span><input id="collection-search" type="search" placeholder="Search name, move, ability or card code" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select><span class="collection-count">Showing ${visible.length} / ${scopedCards.length}</span></section>
+    <section class="catalogue-grid collectible-catalogue">${visible.length ? visible.map(card => {
+      const cardSet = setCollections[card.setId] ?? setCollection;
+      return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' || card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small></div></article>`;
+    }).join('') : `<div class="collection-empty">${collectionView === 'owned' ? 'No owned cards match these filters.' : 'No cards match these filters.'}</div>`}</section>
+  </section>`;
+  root.querySelectorAll('[data-flip-collection]').forEach(btn => btn.addEventListener('click', () => { const id = btn.dataset.flipCollection; if (flippedCollectionCards.has(id)) flippedCollectionCards.delete(id); else flippedCollectionCards.add(id); renderCollection(); }));
+  root.querySelectorAll('[data-collection-set]').forEach(btn => btn.addEventListener('click', () => { activeCollectionSetId = btn.dataset.collectionSet; collectionFilter = {kind:'all',rarity:'all',search:''}; flippedCollectionCards = new Set(); renderCollection(); }));
+  $("#collection-owned-view")?.addEventListener("click", showOwnedCollection);
+  $("#collection-catalogue-view")?.addEventListener("click", showCardCatalogue);
+  $("#collection-search")?.addEventListener("input", e => { collectionFilter.search = e.target.value; renderCollection(); requestAnimationFrame(() => $("#collection-search")?.focus()); });
+  $("#collection-kind")?.addEventListener("change", e => { collectionFilter.kind = e.target.value; renderCollection(); });
+  $("#collection-rarity")?.addEventListener("change", e => { collectionFilter.rarity = e.target.value; renderCollection(); });
 }
 
 
@@ -1439,15 +1529,15 @@ function render() {
   root.querySelectorAll("[data-ditch]").forEach(btn => btn.addEventListener("click", () => maintainSubmission(Number(btn.dataset.ditch))));
 }
 
-document.querySelector("#brand-home")?.addEventListener("click", () => profile ? showMainMenu() : showSplash());
-
 document.querySelectorAll("[data-mobile-nav]").forEach(button => button.addEventListener("click", () => {
   const target = button.dataset.mobileNav;
   if (target === "menu") showMainMenu();
   else if (target === "play-menu") showPlayMenu();
-  else if (target === "collection") showCollection();
+  else if (target === "collection") showOwnedCollection();
+  else if (target === "catalogue") showCardCatalogue();
   else if (target === "boosters") showBoosters();
   else if (target === "seasons") showSeasons();
+  else if (target === "profile") showProfile();
   else if (target === "options") showOptions();
 }));
 
