@@ -1,4 +1,4 @@
-import { normalizeMoveOptions } from "./move-types.js?v=0.11.41";
+import { normalizeMoveOptions } from "./move-types.js?v=0.11.42";
 const momentum = (method) => ({ id: `hof1-momentum-${method}`, name: `${method[0].toUpperCase()}${method.slice(1)} Momentum`, kind: "momentum", method, amount: 1, setId: "hall-of-fame-series-1" });
 const entrance = (id, name, superstarId, abilityText, effects = [], scheduled = []) => ({ id, name, superstarId, kind: "entrance", abilityText, effects, scheduled, setId: "hall-of-fame-series-1" });
 const move = (id, name, options = {}) => ({ id, name, kind: "move", setId: "hall-of-fame-series-1", ...normalizeMoveOptions(id, name, options) });

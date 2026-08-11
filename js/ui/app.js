@@ -1,26 +1,26 @@
-import { assetUrl } from "../config/build.js?v=0.11.41";
-import { superstars } from "../data/superstars.js?v=0.11.41";
-import { decks } from "../data/decks.js?v=0.11.41";
-import { sets } from "../data/sets.js?v=0.11.41";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.41";
-import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.41";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.41";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js?v=0.11.41";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.41";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.41";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.41";
-import { totalMomentum } from "../engine/utils.js?v=0.11.41";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.41";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.41";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.41";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.41";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.41";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.41";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.41";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.41";
-import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.41";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.41";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.41";
+import { BUILD_VERSION, assetUrl } from "../config/build.js?v=0.11.42";
+import { superstars } from "../data/superstars.js?v=0.11.42";
+import { decks } from "../data/decks.js?v=0.11.42";
+import { sets } from "../data/sets.js?v=0.11.42";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.42";
+import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.42";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.42";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js?v=0.11.42";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.42";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.42";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.42";
+import { totalMomentum } from "../engine/utils.js?v=0.11.42";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.42";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.42";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.42";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.42";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.42";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.42";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.42";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.42";
+import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.42";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.42";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.42";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -61,6 +61,10 @@ let playPileFlipped = false;
 let playPileCardKey = null;
 let boosterRulesFlipped = new Set();
 let lastChromeScreen = null;
+let selectorFlips = new Set();
+let setupConfirmed = { p1: false, p2: false };
+let ladderSelectionConfirmed = false;
+let championshipSelectionConfirmed = false;
 
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
@@ -84,6 +88,37 @@ function scrollNewScreenToTop() {
 
 const roster = Object.values(superstars);
 const superstarById = Object.fromEntries(roster.map(star => [star.id, star]));
+const isFavoriteSuperstar = id => !!profile?.favoriteSuperstars?.includes(id);
+function ownedRoster(excludeId = null) {
+  const ids = new Set(profile?.unlockedSuperstars ?? []);
+  return roster.filter(star => ids.has(star.id) && star.id !== excludeId).sort((a, b) => {
+    const fav = Number(isFavoriteSuperstar(b.id)) - Number(isFavoriteSuperstar(a.id));
+    if (fav) return fav;
+    return a.name.localeCompare(b.name);
+  });
+}
+function normalizeSelection() {
+  const owned = ownedRoster();
+  if (!owned.length) return;
+  if (!hasSuperstar(profile, selection.p1)) selection.p1 = owned[0].id;
+  const opponentPool = ownedRoster(selection.p1);
+  if (!opponentPool.some(star => star.id === selection.p2)) selection.p2 = opponentPool[0]?.id ?? selection.p1;
+}
+function selectorKey(context, id) { return `${context}:${id}`; }
+function selectorCardMarkup(star, context, selected, status = "READY") {
+  const flipped = selectorFlips.has(selectorKey(context, star.id));
+  const favourite = isFavoriteSuperstar(star.id);
+  return `<button class="superstar-select-card ${selected ? 'selected' : ''} ${flipped ? 'is-flipped' : ''}" data-selector-context="${context}" data-selector-star="${star.id}" aria-pressed="${selected}">
+    <span class="superstar-select-inner">
+      <span class="superstar-select-front"><span class="superstar-select-badge">${favourite ? '★ FAVOURITE' : status}</span>${portraitMarkup(star.id, star.name)}<strong>${star.name}</strong><small>${star.nickname ?? ''}</small></span>
+      <span class="superstar-select-back"><span class="superstar-select-badge">${favourite ? '★ FAVOURITE' : 'DETAILS'}</span><strong>${star.name}</strong><small>${star.nickname ?? ''}</small><span><b>${star.hp} HP</b> · ${String(star.archetype ?? '').replaceAll('-', ' ')}</span><span><b>Entrance</b><br>${entranceFor(star.id)?.name ?? '—'}</span><span><b>${star.ability?.name ?? 'Ability'}</b><br>${star.ability?.text ?? '—'}</span></span>
+    </span>
+  </button>`;
+}
+function flipAndSelect(context, starId) {
+  for (const key of [...selectorFlips]) if (key.startsWith(`${context}:`)) selectorFlips.delete(key);
+  selectorFlips.add(selectorKey(context, starId));
+}
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));
 const rosterForBranch = (branch) => roster.filter(star => star.setId === branch.setId && (!branch.era || star.era === branch.era));
 const $ = selector => document.querySelector(selector);
@@ -195,9 +230,9 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
 }
 
 function restartMatch() { startMatch(lastMatchup.p1, lastMatchup.p2, { mode: activeMode }); }
-function showSetup() { if (!profile) { screen = "starter"; renderStarter(); return; } activeMode = "exhibition"; screen = "setup"; message = ""; renderSetup(); }
-function showLadder() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "ladder"; message = ""; setChrome(); renderLadder(); }
-function showChampionship() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "championship"; message = ""; setChrome(); renderChampionship(); }
+function showSetup() { if (!profile) { screen = "starter"; renderStarter(); return; } activeMode = "exhibition"; normalizeSelection(); setupConfirmed = { p1: false, p2: false }; selectorFlips = new Set(); screen = "setup"; message = ""; renderSetup(); }
+function showLadder() { if (!profile) { screen = "starter"; renderStarter(); return; } normalizeSelection(); ladderSelectionConfirmed = false; selectorFlips = new Set(); screen = "ladder"; message = ""; setChrome(); renderLadder(); }
+function showChampionship() { if (!profile) { screen = "starter"; renderStarter(); return; } normalizeSelection(); championshipSelectionConfirmed = false; selectorFlips = new Set(); screen = "championship"; message = ""; setChrome(); renderChampionship(); }
 function showCollection() { showOwnedCollection(); }
 function showOwnedCollection() {
   collectionView = "owned";
@@ -594,6 +629,7 @@ function renderChallenges() {
 }
 
 function beginLadderRun() {
+  if (!ladderSelectionConfirmed) { message = "Confirm your Superstar before starting the run."; renderLadder(); return; }
   const starId = selection.p1;
   if (!hasSuperstar(profile, starId)) { message = "Choose an unlocked Superstar."; renderLadder(); return; }
   const branch = LADDER_BRANCHES[ladderBranchId] ?? LADDER_BRANCHES.modern;
@@ -615,22 +651,25 @@ function renderLadder() {
   if (active) ladderBranchId = run.branchId ?? "modern";
   const branch = LADDER_BRANCHES[ladderBranchId] ?? LADDER_BRANCHES.modern;
   const branchRoster = rosterForBranch(branch);
-  const chosenId = active ? run.superstarId : (hasSuperstar(profile, selection.p1) ? selection.p1 : profile.starterId);
+  const choices = ownedRoster();
+  const chosenId = active ? run.superstarId : (choices.some(star => star.id === selection.p1) ? selection.p1 : (choices[0]?.id ?? profile.starterId));
   selection.p1 = chosenId;
   const lives = active ? run.lives : LADDER_LIVES;
   const opponents = active ? run.opponents : branchRoster.map(s => s.id);
   const totalRungs = opponents.length;
   const ladderRows = opponents.map((id,index)=>{ const star=superstarById[id]; const state=active?(index<run.rung?'cleared':index===run.rung?'current':'upcoming'):'upcoming'; return `<div class="ladder-rung ${state}"><span>${index+1}</span><div class="ladder-portrait">${portraitMarkup(id,star.name)}</div><div><b>${star.name}${active&&id===run.superstarId?' · MIRROR':''}</b><small>${state==='cleared'?'Defeated':state==='current'?'Next opponent':branch.label}</small></div></div>`; }).join('');
-  const tabs = Object.values(LADDER_BRANCHES).map(b=>`<button class="nav-button ${b.id===ladderBranchId?'active':''}" data-ladder-branch="${b.id}" ${active?'disabled':''}>${b.label}</button>`).join('');
+  const tabs = Object.values(LADDER_BRANCHES).map(b=>{ const tabLabel=b.id==='hall-of-fame'?'Hall of Fame':b.id==='evolution'?'Evolution':b.label; return `<button class="nav-button ${b.id===ladderBranchId?'active':''}" data-ladder-branch="${b.id}" ${active?'disabled':''}>${tabLabel}</button>`; }).join('');
   const statusText = run?.status==='failed'?'Run ended — all 3 lives were lost.':run?.status==='cleared'?`${branch.label} Ladder cleared! Your ${sets[run.setId]?.displayName} Completion Pack is waiting in Boosters.`:active?`Rung ${run.rung+1} of ${run.opponents.length} · ${superstarById[currentLadderOpponent(profile)]?.name}`:`Defeat every ${branch.label} opponent consecutively.`;
-  root.innerHTML=`<section class="ladder-screen premium-screen"><section class="feature-hero ladder-feature">${modePortraits([chosenId,branch.finals?.[0] ?? rosterForBranch(branch)[0]?.id],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("ladder")}<p>Choose a path: Current Era, Golden Era, Attitude Era, the complete Hall of Fame run, or the eight-wrestler Evolution path. Any unlocked Superstar can enter any path, including mixed matchups. You have three lives; the third defeat ends the run.</p><div class="mode-branch-tabs">${tabs}</div><div class="top-actions"><button id="ladder-exhibition" class="nav-button">Exhibition</button><button id="ladder-championship" class="nav-button">Championship Road</button><button id="ladder-boosters" class="nav-button">Boosters</button><button id="ladder-collection" class="nav-button">Collection</button></div></div><div class="ladder-summary"><div><b>${ladder.clearsByBranch?.[branch.id]??0}</b><span>${branch.label} clears</span></div><div><b>${ladder.bestRungByBranch?.[branch.id]??0}/${totalRungs}</b><span>Best rung</span></div><div><b>${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)}</b><span>Lives</span></div><div><b>${ladder.completionPackCreditsBySet?.[branch.setId]??0}</b><span>${sets[branch.setId]?.name} packs</span></div></div></section><p class="setup-message">${message||statusText}</p>${!active?`<section class="ladder-picker"><h3>Choose any unlocked Superstar</h3><div class="roster-grid">${roster.map(star=>{const locked=!hasSuperstar(profile,star.id),selected=chosenId===star.id;return `<button class="roster-card ${selected?'selected':''} ${locked?'locked-star blocked':''}" data-ladder-star="${star.id}" ${locked?'disabled':''}><div class="roster-photo">${portraitMarkup(star.id,star.name)}</div><strong>${star.name}</strong><small>${locked?'LOCKED':sets[star.setId]?.displayName}</small></button>`}).join('')}</div><button id="start-ladder" class="start-match">Start ${totalRungs}-Match ${branch.label} Run</button></section>`:`<section class="ladder-current"><div><span>PATH</span><strong>${branch.label}</strong></div><div><span>YOUR SUPERSTAR</span><strong>${superstarById[run.superstarId].name}</strong></div><div><span>NEXT RUNG</span><strong>${run.rung+1}/${run.opponents.length} · ${superstarById[currentLadderOpponent(profile)].name}</strong></div><button id="continue-ladder" class="start-match">Fight Rung ${run.rung+1}</button></section>`}<section class="ladder-stack">${ladderRows}</section>${run&&run.status!=='active'?`<button id="new-ladder" class="start-match">Start Another Run</button>`:''}</section>`;
-  root.querySelectorAll('[data-ladder-branch]').forEach(btn=>btn.addEventListener('click',()=>{ladderBranchId=btn.dataset.ladderBranch;message='';renderLadder();}));
-  root.querySelectorAll('[data-ladder-star]').forEach(btn=>btn.addEventListener('click',()=>{selection.p1=btn.dataset.ladderStar;renderLadder();}));
-  $("#start-ladder")?.addEventListener("click",beginLadderRun); $("#continue-ladder")?.addEventListener("click",startCurrentLadderMatch); $("#new-ladder")?.addEventListener("click",()=>{ladder.activeRun=null;saveProfile(profile);renderLadder();});
-  $("#ladder-exhibition")?.addEventListener("click",showSetup); $("#ladder-championship")?.addEventListener("click",showChampionship); $("#ladder-boosters")?.addEventListener("click",showBoosters); $("#ladder-collection")?.addEventListener("click",showCollection);
+  const pickerCards = choices.map(star => selectorCardMarkup(star, 'ladder', star.id === chosenId, sets[star.setId]?.displayName ?? 'OWNED')).join('');
+  root.innerHTML=`<section class="ladder-screen premium-screen carousel-select-screen"><section class="feature-hero ladder-feature">${modePortraits([chosenId],"feature-art single-feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("ladder")}<p>Choose your path, then choose one of your owned Superstars. You have three lives; the third defeat ends the run.</p><div class="mode-branch-tabs horizontal-path-tabs">${tabs}</div></div><div class="ladder-summary"><div><b>${ladder.clearsByBranch?.[branch.id]??0}</b><span>${branch.label} clears</span></div><div><b>${ladder.bestRungByBranch?.[branch.id]??0}/${totalRungs}</b><span>Best rung</span></div><div><b>${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)}</b><span>Lives</span></div><div><b>${ladder.completionPackCreditsBySet?.[branch.setId]??0}</b><span>${sets[branch.setId]?.name} packs</span></div></div></section><p class="setup-message">${message||statusText}</p>${!active?`<section class="ladder-picker horizontal-selector"><div class="selector-title"><span>YOUR SUPERSTAR</span><strong>${superstarById[chosenId]?.name ?? 'Choose a Superstar'}</strong></div><div class="superstar-carousel">${pickerCards}</div><button id="confirm-ladder-star" class="selector-confirm ${ladderSelectionConfirmed ? 'is-confirmed' : ''}">${ladderSelectionConfirmed ? `✓ ${superstarById[chosenId].name} CONFIRMED` : 'CONFIRM SUPERSTAR'}</button><button id="start-ladder" class="start-match" ${!ladderSelectionConfirmed ? 'disabled' : ''}>Start ${totalRungs}-Match ${branch.label} Run</button></section>`:`<section class="ladder-current"><div><span>PATH</span><strong>${branch.label}</strong></div><div><span>YOUR SUPERSTAR</span><strong>${superstarById[run.superstarId].name}</strong></div><div><span>NEXT RUNG</span><strong>${run.rung+1}/${run.opponents.length} · ${superstarById[currentLadderOpponent(profile)].name}</strong></div><button id="continue-ladder" class="start-match">Fight Rung ${run.rung+1}</button></section>`}<section class="ladder-stack">${ladderRows}</section>${run&&run.status!=='active'?`<button id="new-ladder" class="start-match">Start Another Run</button>`:''}</section>`;
+  root.querySelectorAll('[data-ladder-branch]').forEach(btn=>btn.addEventListener('click',()=>{ladderBranchId=btn.dataset.ladderBranch;ladderSelectionConfirmed=false;selectorFlips=new Set();message='';renderLadder();}));
+  root.querySelectorAll('[data-selector-context="ladder"]').forEach(btn=>btn.addEventListener('click',()=>{selection.p1=btn.dataset.selectorStar;ladderSelectionConfirmed=false;flipAndSelect('ladder',selection.p1);renderLadder();}));
+  $("#confirm-ladder-star")?.addEventListener("click",()=>{ladderSelectionConfirmed=true;renderLadder();});
+  $("#start-ladder")?.addEventListener("click",beginLadderRun); $("#continue-ladder")?.addEventListener("click",startCurrentLadderMatch); $("#new-ladder")?.addEventListener("click",()=>{ladder.activeRun=null;ladderSelectionConfirmed=false;saveProfile(profile);renderLadder();});
 }
 
 function beginChampionshipRoad() {
+  if (!championshipSelectionConfirmed) { message="Confirm your Superstar before starting the road."; renderChampionship(); return; }
   const starId=selection.p1;
   if(!hasSuperstar(profile,starId)){message="Choose an unlocked Superstar.";renderChampionship();return;}
   const branch=CHAMPIONSHIP_BRANCHES[championshipBranchId]??CHAMPIONSHIP_BRANCHES.modern;
@@ -642,17 +681,19 @@ function renderChampionship(){
   const root=$("#game"),road=championshipRoadState(profile),run=road.activeRun,active=run?.status==="active";
   if(active) championshipBranchId=run.branchId??"modern";
   const branch=CHAMPIONSHIP_BRANCHES[championshipBranchId]??CHAMPIONSHIP_BRANCHES.modern;
-  const chosenId=active?run.superstarId:(hasSuperstar(profile,selection.p1)?selection.p1:profile.starterId);selection.p1=chosenId;
+  const choices=ownedRoster();
+  const chosenId=active?run.superstarId:(choices.some(star=>star.id===selection.p1)?selection.p1:(choices[0]?.id??profile.starterId));selection.p1=chosenId;
   const tabs=Object.values(CHAMPIONSHIP_BRANCHES).map(b=>`<button class="nav-button ${b.id===championshipBranchId?'active':''}" data-champ-branch="${b.id}" ${active?'disabled':''}>${b.label}</button>`).join('');
   const routeRows=active?run.opponents.map((id,index)=>{const star=superstarById[id],state=index<run.stage?'cleared':index===run.stage?'current':'upcoming';return `<div class="ladder-rung ${state}"><span>${index+1}</span><div class="ladder-portrait">${portraitMarkup(id,star.name)}</div><div><b>${CHAMPIONSHIP_STAGES[index]}</b><small>${star.name} · ${state==='cleared'?'Defeated':state==='current'?'Next match':'Waiting'}</small></div></div>`}).join(''):CHAMPIONSHIP_STAGES.map((stage,index)=>`<div class="ladder-rung upcoming"><span>${index+1}</span><div><b>${stage}</b><small>${index===3?`Final: ${branch.finals.map(id=>superstarById[id]?.name).join(' or ')}`:`Opponent from ${branch.label}`}</small></div></div>`).join('');
   const completed=road.completedByBranch?.[branch.id]?.length??0;
   const status=run?.status==='cleared'?`${branch.label} Championship Road cleared!`:active?`${CHAMPIONSHIP_STAGES[run.stage]} · ${superstarById[currentChampionshipOpponent(profile)]?.name}`:`Win four matches on the ${branch.label} road.`;
-  root.innerHTML=`<section class="ladder-screen championship-screen premium-screen"><section class="feature-hero championship-feature">${modePortraits([chosenId,branch.finals?.[0]],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("championship")}<p>Choose Current Era, Golden Era, Attitude Era or Evolution. Each road is four matches, ending against one of that branch's headline opponents. Losses and draws replay the current stage rather than resetting the run.</p><div class="mode-branch-tabs">${tabs}</div><div class="top-actions"><button id="champ-exhibition" class="nav-button">Exhibition</button><button id="champ-ladder" class="nav-button">Climb the Ladder</button><button id="champ-boosters" class="nav-button">Boosters</button><button id="champ-collection" class="nav-button">Collection</button></div></div><div class="ladder-summary"><div><b>${road.clearsByBranch?.[branch.id]??0}</b><span>${branch.label} clears</span></div><div><b>${road.bestStageByBranch?.[branch.id]??0}/4</b><span>Best stage</span></div><div><b>${completed}/${Object.values(superstars).length}</b><span>Superstar clears</span></div><div><b>${road.championshipPackCreditsBySet?.[branch.setId]??0}</b><span>${sets[branch.setId]?.name} packs</span></div></div></section><p class="setup-message">${message||status}</p>${!active?`<section class="ladder-picker"><h3>Choose any unlocked Superstar</h3><div class="roster-grid">${roster.map(star=>{const locked=!hasSuperstar(profile,star.id),selected=chosenId===star.id,crowned=road.completedByBranch?.[branch.id]?.includes(star.id);return `<button class="roster-card ${selected?'selected':''} ${locked?'locked-star blocked':''}" data-champ-star="${star.id}" ${locked?'disabled':''}><div class="roster-photo">${portraitMarkup(star.id,star.name)}</div><strong>${star.name}</strong><small>${locked?'LOCKED':crowned?'ROAD CLEARED':'READY'}</small></button>`}).join('')}</div><button id="start-championship" class="start-match">Start ${branch.label} Road</button></section>`:`<section class="ladder-current"><div><span>ROAD</span><strong>${branch.label}</strong></div><div><span>YOUR SUPERSTAR</span><strong>${superstarById[run.superstarId].name}</strong></div><div><span>NEXT MATCH</span><strong>${run.stage+1}/4 · ${CHAMPIONSHIP_STAGES[run.stage]} · ${superstarById[currentChampionshipOpponent(profile)].name}</strong></div><button id="continue-championship" class="start-match">Fight ${CHAMPIONSHIP_STAGES[run.stage]}</button></section>`}<section class="ladder-stack">${routeRows}</section>${run&&run.status!=='active'?`<button id="new-championship" class="start-match">Start Another Road</button>`:''}</section>`;
-  root.querySelectorAll('[data-champ-branch]').forEach(btn=>btn.addEventListener('click',()=>{championshipBranchId=btn.dataset.champBranch;message='';renderChampionship();}));root.querySelectorAll('[data-champ-star]').forEach(btn=>btn.addEventListener('click',()=>{selection.p1=btn.dataset.champStar;renderChampionship();}));
-  $("#start-championship")?.addEventListener("click",beginChampionshipRoad);$("#continue-championship")?.addEventListener("click",startCurrentChampionshipMatch);$("#new-championship")?.addEventListener("click",()=>{resetChampionshipRoad(profile);saveProfile(profile);renderChampionship();});$("#champ-exhibition")?.addEventListener("click",showSetup);$("#champ-ladder")?.addEventListener("click",showLadder);$("#champ-boosters")?.addEventListener("click",showBoosters);$("#champ-collection")?.addEventListener("click",showCollection);
+  const pickerCards=choices.map(star=>selectorCardMarkup(star,'championship',star.id===chosenId,road.completedByBranch?.[branch.id]?.includes(star.id)?'ROAD CLEARED':'READY')).join('');
+  root.innerHTML=`<section class="ladder-screen championship-screen premium-screen carousel-select-screen"><section class="feature-hero championship-feature">${modePortraits([chosenId],"feature-art single-feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("championship")}<p>Choose a road, then choose one of your owned Superstars. Each road is four matches and ends against a headline opponent.</p><div class="mode-branch-tabs horizontal-path-tabs">${tabs}</div></div><div class="ladder-summary"><div><b>${road.clearsByBranch?.[branch.id]??0}</b><span>${branch.label} clears</span></div><div><b>${road.bestStageByBranch?.[branch.id]??0}/4</b><span>Best stage</span></div><div><b>${completed}/${Object.values(superstars).length}</b><span>Superstar clears</span></div><div><b>${road.championshipPackCreditsBySet?.[branch.setId]??0}</b><span>${sets[branch.setId]?.name} packs</span></div></div></section><p class="setup-message">${message||status}</p>${!active?`<section class="ladder-picker horizontal-selector"><div class="selector-title"><span>YOUR SUPERSTAR</span><strong>${superstarById[chosenId]?.name ?? 'Choose a Superstar'}</strong></div><div class="superstar-carousel">${pickerCards}</div><button id="confirm-champ-star" class="selector-confirm ${championshipSelectionConfirmed?'is-confirmed':''}">${championshipSelectionConfirmed?`✓ ${superstarById[chosenId].name} CONFIRMED`:'CONFIRM SUPERSTAR'}</button><button id="start-championship" class="start-match" ${!championshipSelectionConfirmed?'disabled':''}>Start ${branch.label} Road</button></section>`:`<section class="ladder-current"><div><span>ROAD</span><strong>${branch.label}</strong></div><div><span>YOUR SUPERSTAR</span><strong>${superstarById[run.superstarId].name}</strong></div><div><span>NEXT MATCH</span><strong>${run.stage+1}/4 · ${CHAMPIONSHIP_STAGES[run.stage]} · ${superstarById[currentChampionshipOpponent(profile)].name}</strong></div><button id="continue-championship" class="start-match">Fight ${CHAMPIONSHIP_STAGES[run.stage]}</button></section>`}<section class="ladder-stack">${routeRows}</section>${run&&run.status!=='active'?`<button id="new-championship" class="start-match">Start Another Road</button>`:''}</section>`;
+  root.querySelectorAll('[data-champ-branch]').forEach(btn=>btn.addEventListener('click',()=>{championshipBranchId=btn.dataset.champBranch;championshipSelectionConfirmed=false;selectorFlips=new Set();message='';renderChampionship();}));
+  root.querySelectorAll('[data-selector-context="championship"]').forEach(btn=>btn.addEventListener('click',()=>{selection.p1=btn.dataset.selectorStar;championshipSelectionConfirmed=false;flipAndSelect('championship',selection.p1);renderChampionship();}));
+  $("#confirm-champ-star")?.addEventListener("click",()=>{championshipSelectionConfirmed=true;renderChampionship();});
+  $("#start-championship")?.addEventListener("click",beginChampionshipRoad);$("#continue-championship")?.addEventListener("click",startCurrentChampionshipMatch);$("#new-championship")?.addEventListener("click",()=>{resetChampionshipRoad(profile);championshipSelectionConfirmed=false;saveProfile(profile);renderChampionship();});
 }
-
-
 
 function legacyLogoMarkup(compact = false) {
   return `<div class="legacy-logo ${compact ? "compact" : ""}" aria-label="WWE Legacy Collectible Card Game">
@@ -698,11 +739,10 @@ function renderSplash() {
   setChrome({ hideTopbar: true });
   const root = $("#game");
   const returning = !!profile;
-  const starter = returning ? superstarById[profile.starterId] : null;
   root.innerHTML = `<section class="splash-screen premium-splash clean-launch-splash">
     <div class="splash-glow"></div>
     <div class="clean-splash-content">
-      <div class="clean-splash-brand">${legacyLogoMarkup()}</div>
+      <div class="clean-splash-brand">${legacyLogoMarkup()}<span class="splash-build-version">v${BUILD_VERSION}</span></div>
       <section class="season-one-ad" aria-label="Season 1 Final Boss promotion">
         <div class="season-ad-effects" aria-hidden="true"><span></span><span></span><span></span></div>
         <div class="season-ad-rock">${portraitMarkup("the-rock","The Rock")}</div>
@@ -716,7 +756,7 @@ function renderSplash() {
       </section>
       <div class="clean-splash-profile">
         <span>${returning ? "WELCOME BACK" : "NEW PLAYER"}</span>
-        <strong>${returning ? `Continue ${starter?.name ?? "your"} Legacy` : "Begin your WWE Legacy"}</strong>
+        <strong>${returning ? "Continue Your Legacy" : "Begin your WWE Legacy"}</strong>
         <small>${returning ? `${profile.unlockedSuperstars.length}/${roster.length} Superstars unlocked · Season progress saved locally` : "Choose your first World Champion, receive their full starter deck, then discover the three live Season 1 booster sets."}</small>
       </div>
       <button id="enter-legacy" class="legacy-enter">${returning ? "ENTER WWE LEGACY" : "START NEW LEGACY"}</button>
@@ -839,17 +879,15 @@ function renderPlayMenu() {
   const root = $("#game");
   root.innerHTML = `<section class="play-menu-screen premium-screen">
     <div class="premium-screen-title"><span>PLAY</span><h2>Choose Your Path</h2><p>Three modes. Three identities. One WWE Legacy roster.</p></div>
-    <div class="play-mode-grid premium-mode-grid">
-      <button id="play-exhibition" class="play-mode-card premium-mode-card exhibition-card">${modePortraits(["cody-rhodes","rhea-ripley"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("exhibition",true)}<p>Pick any unlocked Superstar and any opponent for a single showcase match.</p><b>PLAY EXHIBITION →</b></div></button>
-      <button id="play-ladder" class="play-mode-card premium-mode-card ladder-card">${modePortraits(["gunther","becky-lynch"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("ladder",true)}<p>Three lives. Clear a full branch. Survive every rung.</p><b>START THE CLIMB →</b></div></button>
-      <button id="play-championship" class="play-mode-card premium-mode-card championship-card">${modePortraits(["roman-reigns","charlotte-flair"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("championship",true)}<p>Opening Bout to Championship Match across a four-fight road.</p><b>CHASE THE TITLE →</b></div></button>
+    <div class="play-mode-grid premium-mode-grid clean-mode-grid">
+      <button id="play-exhibition" class="play-mode-card premium-mode-card exhibition-card single-hero-mode"><div class="mode-single-hero">${portraitMarkup("cody-rhodes","Cody Rhodes")}</div><div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("exhibition",true)}<p>Pick any unlocked Superstar and opponent for a single showcase match.</p><b>PLAY EXHIBITION →</b></div></button>
+      <button id="play-ladder" class="play-mode-card premium-mode-card ladder-card single-hero-mode"><div class="mode-single-hero">${portraitMarkup("gunther","Gunther")}</div><div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("ladder",true)}<p>Three lives. Clear a full branch. Survive every rung.</p><b>START THE CLIMB →</b></div></button>
+      <button id="play-championship" class="play-mode-card premium-mode-card championship-card single-hero-mode"><div class="mode-single-hero">${portraitMarkup("roman-reigns","Roman Reigns")}</div><div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("championship",true)}<p>Opening Bout to Championship Match across a four-fight road.</p><b>CHASE THE TITLE →</b></div></button>
     </div>
-    <button id="play-home" class="nav-button menu-back-button">Back to Main Menu</button>
   </section>`;
   $("#play-exhibition")?.addEventListener("click", showSetup);
   $("#play-ladder")?.addEventListener("click", showLadder);
   $("#play-championship")?.addEventListener("click", showChampionship);
-  $("#play-home")?.addEventListener("click", showMainMenu);
 }
 
 function renderProfile() {
@@ -862,7 +900,7 @@ function renderProfile() {
     <section class="feature-hero profile-feature">${modePortraits([starter.id,"the-undertaker","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("profile")}<p>This career and collection are stored locally on this device.</p></div></section>
     <div class="profile-summary-card premium-panel"><div class="profile-summary-photo">${portraitMarkup(starter.id, starter.name)}</div><div><span>ORIGINAL STARTER</span><strong>${starter.name}</strong><small>${starter.nickname}</small></div></div>
     <div class="profile-stat-grid premium-stats"><article><span>SUPERSTARS</span><b>${profile.unlockedSuperstars.length}/${roster.length}</b></article><article><span>PACKS OPENED</span><b>${profile.packsOpened ?? 0}</b></article><article><span>LADDER CLEARS</span><b>${ladder.clears ?? 0}</b></article><article><span>CHAMPIONSHIP CLEARS</span><b>${championship.clears ?? 0}</b></article></div>
-    <div class="profile-actions"><button id="profile-home" class="start-match">Main Menu</button><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a><button id="profile-reset" class="nav-button danger">Reset Local Save</button></div>
+    <div class="profile-actions"><button id="profile-home" class="start-match">Main Menu</button><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a><a class="nav-button profile-tool-link" href="./tools/png-to-webp.html">PNG → WebP Converter</a><button id="profile-reset" class="nav-button danger">Reset Local Save</button></div>
   </section>`;
   $("#profile-home")?.addEventListener("click", showMainMenu);
   $("#profile-reset")?.addEventListener("click", () => { resetProfile(); profile = null; game = null; selection = { p1: "cm-punk", p2: "roman-reigns" }; message = ""; showSplash(); });
@@ -891,7 +929,7 @@ function renderOptions() {
     </section>
     <section class="options-panel premium-panel">
       <div class="section-title"><h3>Build</h3><span>WWE Legacy development</span></div>
-      <div class="option-row"><div><strong>Version</strong><p>WWE Legacy: Collectible Card Game v0.9.1</p></div></div>
+      <div class="option-row"><div><strong>Version</strong><p>WWE Legacy: Collectible Card Game v${BUILD_VERSION}</p></div></div>
     </section>
   </section>`;
 
@@ -954,36 +992,41 @@ function renderStarter() {
 
 function renderSetup() {
   setChrome();
+  normalizeSelection();
   const root = $("#game");
-  const rosterCard = (star, player) => {
-    const selected = selection[player] === star.id;
-    const duplicate = selection[player === HUMAN ? CPU : HUMAN] === star.id;
-    const locked = player === HUMAN && !hasSuperstar(profile, star.id);
-    const blocked = duplicate || locked;
-    return `<button class="roster-card ${selected ? "selected" : ""} ${blocked ? "blocked" : ""} ${locked ? "locked-star" : ""}" data-select-player="${player}" data-star="${star.id}" ${blocked ? "disabled" : ""}>
-      <span class="player-label">${locked ? "LOCKED" : selected ? "SELECTED" : star.archetype.replaceAll("-", " ").toUpperCase()}</span>
-      <div class="roster-photo">${portraitMarkup(star.id, star.name)}</div>
-      <strong>${star.name}</strong><small>${star.nickname}</small><span class="roster-hp">${star.hp} HP</span>
-      <span class="roster-entrance"><b>Entrance:</b> ${entranceFor(star.id)?.name ?? "—"}</span>
-      <span class="roster-ability"><b>Ability:</b> ${star.ability?.name ?? "—"}</span><span class="roster-set">${sets[star.setId]?.displayName ?? "Unassigned Set"}</span>
-    </button>`;
-  };
-  const p1 = superstarById[selection.p1], p2 = superstarById[selection.p2];
-  root.innerHTML = `<section class="setup-screen premium-screen exhibition-screen">
-    <section class="feature-hero exhibition-feature">${modePortraits([selection.p1,selection.p2],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("exhibition")}<p>Choose any unlocked Superstar and any CPU opponent. All ${Object.values(superstars).length} Superstars share one match engine.</p><small>${profile.unlockedSuperstars.length}/${Object.values(superstars).length} unlocked · Starter: ${superstarById[profile.starterId].name}</small></div></section>
-    <section class="selector-panel"><div class="selector-title"><span>YOU · PLAYER 1</span><strong>${p1.name}</strong></div><div class="roster-grid">${roster.map(s => rosterCard(s, HUMAN)).join("")}</div></section>
-    <div class="versus-strip"><span>${p1.name}</span><b>VS</b><span>${p2.name}</span></div>
-    <section class="selector-panel"><div class="selector-title"><span>CPU OPPONENT</span><strong>${p2.name}</strong></div><div class="roster-grid">${roster.map(s => rosterCard(s, CPU)).join("")}</div></section>
-    ${message ? `<p class="setup-message">${message}</p>` : ""}<div class="setup-actions exhibition-actions"><button id="start-match" class="start-match">Start Exhibition</button><button id="setup-play-menu" class="nav-button">Back to Play</button><button id="setup-main-menu" class="nav-button">Main Menu</button></div>
+  const owned = ownedRoster();
+  const p1 = superstarById[selection.p1];
+  const cpuChoices = ownedRoster(selection.p1);
+  if (!cpuChoices.some(star => star.id === selection.p2)) selection.p2 = cpuChoices[0]?.id ?? selection.p1;
+  const p2 = superstarById[selection.p2];
+  const canMatch = owned.length >= 2 && p1 && p2 && p1.id !== p2.id;
+  const playerCards = owned.map(star => selectorCardMarkup(star, "exhibition-p1", star.id === selection.p1, "PLAYER 1")).join("");
+  const cpuCards = cpuChoices.map(star => selectorCardMarkup(star, "exhibition-p2", star.id === selection.p2, "CPU")).join("");
+  root.innerHTML = `<section class="setup-screen premium-screen exhibition-screen carousel-select-screen">
+    <section class="feature-hero exhibition-feature">${modePortraits([selection.p1],"feature-art single-feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("exhibition")}<p>Choose from the Superstars you own. Tap a card for details, then confirm each side.</p><small>${owned.length}/${roster.length} unlocked · Favourites appear first</small></div></section>
+    <section class="selector-panel horizontal-selector"><div class="selector-title"><span>YOU · PLAYER 1</span><strong>${p1?.name ?? "Choose a Superstar"}</strong></div><div class="superstar-carousel">${playerCards}</div><button id="confirm-player" class="selector-confirm ${setupConfirmed.p1 ? 'is-confirmed' : ''}">${setupConfirmed.p1 ? `✓ ${p1.name} CONFIRMED` : 'CONFIRM PLAYER 1'}</button></section>
+    <div class="versus-strip"><span>${p1?.name ?? '—'}</span><b>VS</b><span>${p2?.name ?? '—'}</span></div>
+    <section class="selector-panel horizontal-selector"><div class="selector-title"><span>CPU OPPONENT</span><strong>${p2?.name ?? "Choose an Opponent"}</strong></div>${cpuChoices.length ? `<div class="superstar-carousel">${cpuCards}</div><button id="confirm-cpu" class="selector-confirm ${setupConfirmed.p2 ? 'is-confirmed' : ''}">${setupConfirmed.p2 ? `✓ ${p2.name} CONFIRMED` : 'CONFIRM OPPONENT'}</button>` : `<p class="selector-empty">Unlock at least two Superstars to play Exhibition.</p>`}</section>
+    ${message ? `<p class="setup-message">${message}</p>` : ""}<div class="setup-actions exhibition-actions"><button id="start-match" class="start-match" ${!(canMatch && setupConfirmed.p1 && setupConfirmed.p2) ? 'disabled' : ''}>Start Exhibition</button></div>
   </section>`;
-  root.querySelectorAll("[data-select-player]").forEach(btn => btn.addEventListener("click", () => {
-    const player = btn.dataset.selectPlayer, other = player === HUMAN ? CPU : HUMAN;
-    if (selection[other] === btn.dataset.star) return;
-    selection[player] = btn.dataset.star; message = ""; renderSetup();
+  root.querySelectorAll('[data-selector-context="exhibition-p1"]').forEach(btn => btn.addEventListener('click', () => {
+    selection.p1 = btn.dataset.selectorStar;
+    flipAndSelect('exhibition-p1', selection.p1);
+    setupConfirmed.p1 = false;
+    setupConfirmed.p2 = false;
+    const nextCpu = ownedRoster(selection.p1);
+    if (!nextCpu.some(star => star.id === selection.p2)) selection.p2 = nextCpu[0]?.id ?? selection.p1;
+    renderSetup();
   }));
+  root.querySelectorAll('[data-selector-context="exhibition-p2"]').forEach(btn => btn.addEventListener('click', () => {
+    selection.p2 = btn.dataset.selectorStar;
+    flipAndSelect('exhibition-p2', selection.p2);
+    setupConfirmed.p2 = false;
+    renderSetup();
+  }));
+  $("#confirm-player")?.addEventListener("click", () => { setupConfirmed.p1 = true; renderSetup(); });
+  $("#confirm-cpu")?.addEventListener("click", () => { setupConfirmed.p2 = true; renderSetup(); });
   $("#start-match")?.addEventListener("click", () => startMatch());
-  $("#setup-play-menu")?.addEventListener("click", showPlayMenu);
-  $("#setup-main-menu")?.addEventListener("click", showMainMenu);
 }
 
 function rarityStars(level) { return "★".repeat(Math.max(1, Math.min(4, Number(level) || 1))); }
@@ -1137,10 +1180,11 @@ function renderCollection() {
     <section class="collection-tools"><span class="collection-mode-label">${eyebrow}</span><input id="collection-search" type="search" placeholder="Search name, move, ability or card code" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select><select id="collection-sort" aria-label="Sort My Collection"><option value="newest" ${collectionSort === 'newest' ? 'selected' : ''}>Newest Owned</option><option value="alpha-asc" ${collectionSort === 'alpha-asc' ? 'selected' : ''}>A–Z</option><option value="alpha-desc" ${collectionSort === 'alpha-desc' ? 'selected' : ''}>Z–A</option><option value="rarity-desc" ${collectionSort === 'rarity-desc' ? 'selected' : ''}>Rarity High → Low</option><option value="rarity-asc" ${collectionSort === 'rarity-asc' ? 'selected' : ''}>Rarity Low → High</option><option value="copies-desc" ${collectionSort === 'copies-desc' ? 'selected' : ''}>Most Copies</option></select><span class="collection-count">Showing ${visible.length} / ${scopedCards.length}</span></section>
     <section class="catalogue-grid collectible-catalogue">${visible.length ? visible.map(card => {
       const cardSet = setCollections[card.setId] ?? setCollection;
-      return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' || card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small></div></article>`;
+      return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' || card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small>${card.kind === 'superstar' && hasSuperstar(profile,card.superstarId) ? `<button class="favorite-superstar-button ${isFavoriteSuperstar(card.superstarId)?'is-favorite':''}" data-favorite-superstar="${card.superstarId}">${isFavoriteSuperstar(card.superstarId)?'★ Favourite':'☆ Add Favourite'}</button>` : ''}</div></article>`;
     }).join('') : `<div class="collection-empty">${collectionView === 'owned' ? 'No owned cards match these filters.' : 'No cards match these filters.'}</div>`}</section>
   </section>`;
   root.querySelectorAll('[data-flip-collection]').forEach(btn => btn.addEventListener('click', () => { const id = btn.dataset.flipCollection; if (flippedCollectionCards.has(id)) flippedCollectionCards.delete(id); else flippedCollectionCards.add(id); renderCollection(); }));
+  root.querySelectorAll('[data-favorite-superstar]').forEach(btn => btn.addEventListener('click', () => { const id = btn.dataset.favoriteSuperstar; profile.favoriteSuperstars ??= []; profile.favoriteSuperstars = profile.favoriteSuperstars.includes(id) ? profile.favoriteSuperstars.filter(starId => starId !== id) : [...profile.favoriteSuperstars, id]; saveProfile(profile); renderCollection(); }));
   root.querySelectorAll('[data-collection-set]').forEach(btn => btn.addEventListener('click', () => { activeCollectionSetId = btn.dataset.collectionSet; collectionFilter = {kind:'all',rarity:'all',search:''}; flippedCollectionCards = new Set(); renderCollection(); }));
   $("#collection-owned-view")?.addEventListener("click", showOwnedCollection);
   $("#collection-catalogue-view")?.addEventListener("click", showCardCatalogue);

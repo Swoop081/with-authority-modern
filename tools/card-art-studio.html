@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#09090b">
   <title>WWE Legacy — Card Art Studio</title>
-  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.11.41">
+  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.11.42">
 </head>
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>CARD ART STUDIO</small></a>
-    <span class="studio-build">v0.11.41</span>
+    <span class="studio-build">v0.11.42</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
       <span class="eyebrow">ONE STUDIO · EVERY ACTIVE CARD FRONT</span>
       <h1>Build the collectible front.</h1>
-      <p>Work on Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum artwork in one place. Search all active sets at once by default, or narrow to a set, card type or Superstar. Add your image, position it, and export a finished WebP with the correct set identity.</p>
+      <p>Work on Superstar, Move, Entrance, Special, Manager, Action, Support and Momentum artwork in one place. Search all active sets at once by default, or narrow to a set, card type or Superstar. Add your image, position it, and export/share the finished card with the correct set identity. WebP is preferred; iPhone PNG fallback is supported.</p>
     </section>
     <section class="studio-layout">
       <aside class="studio-controls">
@@ -53,10 +53,10 @@
           <button id="reset-layout" type="button">Reset Artwork Position</button>
         </section>
         <section class="control-group">
-          <div class="group-heading"><span>4</span><div><b>Export finished card</b><small>Downloads one flattened WebP. Put it at the exact path below and WWE Legacy will use it automatically without a manifest edit.</small></div></div>
+          <div class="group-heading"><span>4</span><div><b>Export finished card</b><small>Exports one flattened card. WebP is preferred; iPhone browsers that cannot encode WebP automatically fall back to PNG and can open the iOS share sheet for Google Drive or Files.</small></div></div>
           <label>Output size<select id="output-size"><option value="680x1000" selected>680 × 1000 — game standard</option><option value="816x1200">816 × 1200 — high quality</option><option value="1020x1500">1020 × 1500 — archive quality</option></select></label>
           <label>WebP quality <output id="quality-value">88%</output><input id="quality" type="range" min="65" max="96" value="88"></label>
-          <button id="export-webp" class="primary export-button" type="button">Export Card WebP</button>
+          <button id="export-webp" class="primary export-button" type="button">Export / Share Card</button><small class="export-help">On iPhone, PNG fallback is automatic if WebP encoding is unavailable. Convert those PNGs later with the <a href="png-to-webp.html">bulk PNG → WebP tool</a>.</small>
           <div class="manifest"><span>INSTALL THIS FILE</span><code id="install-path">assets/cards/art/custom/superstars/cody-rhodes.webp</code></div>
           <p id="status" class="status" aria-live="polite"></p>
         </section>
@@ -65,10 +65,10 @@
         <div class="preview-toolbar"><div><span>LIVE TEMPLATE</span><b id="preview-label">SummerSlam — Series 1</b></div><small id="preview-card">SS1-001 · Cody Rhodes</small></div>
         <div class="canvas-wrap"><canvas id="card-canvas" width="680" height="1000" aria-label="Finished WWE Legacy card front preview"></canvas></div>
         <div class="template-key"><span class="key summerslam">SUMMERSLAM</span><span class="key hof">HALL OF FAME</span><span class="key evolution">EVOLUTION</span><span class="key rewards">REWARDS</span></div>
-        <p>The exported WebP is the complete collectible front. Move method requirements stay on the front; all other rules, effects, restrictions and rarity details remain on the shared information back.</p>
+        <p>The exported file is the complete collectible front. WebP is game-ready; iPhone PNG fallback can be bulk-converted with the PNG → WebP tool. Move method requirements stay on the front; all other rules, effects, restrictions and rarity details remain on the shared information back.</p>
       </section>
     </section>
   </main>
-  <script src="../js/tools/card-art-studio.js?v=0.11.41"></script>
+  <script src="../js/tools/card-art-studio.js?v=0.11.42"></script>
 </body>
 </html>

@@ -1,3 +1,11 @@
+## v0.11.42 — Final Menu & Match-Select Pass
+
+- Final menu redesign consolidated into one release: cleaner single-hero Play tiles, generic Continue Your Legacy splash copy, live build version display, and reordered bottom navigation.
+- Exhibition, Climb the Ladder and Championship Road now use larger horizontal **owned-only** Superstar carousels with tap-for-details, explicit confirmation and Favourite Superstars first.
+- My Collection can mark owned Superstars as favourites.
+- Card Art Studio now falls back to PNG + iOS share when iPhone WebP encoding is unavailable.
+- New bulk **PNG → WebP Converter** in `tools/` with folder/multi-file input and ZIP export.
+
 ## v0.11.41 — My Collection Sort + Season Hub Polish
 
 - My Collection gets a compact sort dropdown: Newest Owned, A–Z, Z–A, rarity high/low, and Most Copies.

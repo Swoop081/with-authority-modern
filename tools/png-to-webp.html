@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#09090b">
+  <title>WWE Legacy — PNG to WebP Bulk Converter</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07080b;--panel:#11141a;--line:#303641;--text:#f6f7fa;--muted:#a5adba;--gold:#e9c863;--red:#e52b3e}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#241014 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{width:min(980px,calc(100% - 24px));margin:0 auto;padding:max(62px,calc(env(safe-area-inset-top) + 16px)) 0 40px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.top a{color:#fff;text-decoration:none;font-weight:950;letter-spacing:.08em}.top small{color:#8e96a4}.hero,.panel{border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,#151820,#0b0d12);padding:20px;box-shadow:0 18px 42px #0007}.hero span{color:var(--gold);font-size:.65rem;font-weight:950;letter-spacing:.16em}.hero h1{font-size:clamp(2rem,7vw,4rem);line-height:.9;margin:8px 0}.hero p{color:var(--muted);line-height:1.5;max-width:760px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}.panel{display:grid;gap:12px}.filebox{border:1px dashed #4a5361;border-radius:14px;padding:18px;background:#0c0f14}.filebox input{width:100%;margin-top:8px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row label{flex:1;display:grid;gap:6px;color:#c7cdd7}.row output{color:var(--gold);font-weight:900}.row input[type=range]{width:100%}button{border:1px solid #404754;border-radius:12px;background:#171b22;color:#fff;padding:12px 16px;font-weight:900;cursor:pointer}.primary{background:linear-gradient(180deg,#ef3448,#c91429);border-color:#f15b6a}.primary:disabled{opacity:.4;cursor:not-allowed}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{border:1px solid #343a45;border-radius:12px;padding:10px;background:#090b10}.stat b{display:block;font-size:1.3rem}.stat small{color:#8d96a4}.results{margin-top:14px;overflow:auto;border:1px solid #303641;border-radius:16px;background:#0a0c11}.results table{width:100%;border-collapse:collapse;min-width:650px}.results th,.results td{padding:10px;border-bottom:1px solid #242a33;text-align:left;font-size:.78rem}.results th{color:#98a1ae;font-size:.63rem;letter-spacing:.08em;text-transform:uppercase}.good{color:#68d99a}.bad{color:#ff9b9b}.status{min-height:1.4em;color:#aeb6c3}@media(max-width:700px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.hero,.panel{padding:15px}}
+  </style>
+</head>
+<body>
+<main>
+  <div class="top"><a href="../index.html">WWE LEGACY · TOOLS</a><small>PNG → WebP</small></div>
+  <section class="hero"><span>BULK ARTWORK UTILITY</span><h1>PNG → WebP Converter</h1><p>Convert finished PNG/JPG card fronts to smaller WebP files in one batch. Folder selection works on supported desktop browsers; mobile can select multiple images. Filenames and relative folder paths are preserved inside one ZIP.</p></section>
+  <div class="grid">
+    <section class="panel">
+      <div class="filebox"><b>Choose a folder</b><small>Best for desktop card-art batches.</small><input id="folder-input" type="file" accept="image/png,image/jpeg,image/webp" webkitdirectory multiple></div>
+      <div class="filebox"><b>Or choose multiple images</b><small>Works on mobile and desktop.</small><input id="files-input" type="file" accept="image/png,image/jpeg,image/webp" multiple></div>
+    </section>
+    <section class="panel">
+      <div class="row"><label>WebP quality <output id="quality-value">88%</output><input id="quality" type="range" min="65" max="96" value="88"></label></div>
+      <div class="stats"><div class="stat"><b id="file-count">0</b><small>images</small></div><div class="stat"><b id="input-size">0 MB</b><small>original</small></div><div class="stat"><b id="output-size">—</b><small>converted</small></div></div>
+      <button id="convert" class="primary" disabled>Convert Batch to WebP</button>
+      <button id="download" disabled>Download Converted ZIP</button>
+      <div id="status" class="status" aria-live="polite">Choose images to begin.</div>
+    </section>
+  </div>
+  <section class="results" id="results" hidden><table><thead><tr><th>File</th><th>Original</th><th>WebP</th><th>Saved</th><th>Status</th></tr></thead><tbody id="result-body"></tbody></table></section>
+</main>
+<script src="../js/tools/png-to-webp.js?v=0.11.42"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
-import { cards } from "./cards.js?v=0.11.41";
-import { hallCards } from "./hall-of-fame-cards.js?v=0.11.41";
-import { evolutionCards } from "./evolution-cards.js?v=0.11.41";
-import { rockCards } from "./season1-rock-cards.js?v=0.11.41";
+import { cards } from "./cards.js?v=0.11.42";
+import { hallCards } from "./hall-of-fame-cards.js?v=0.11.42";
+import { evolutionCards } from "./evolution-cards.js?v=0.11.42";
+import { rockCards } from "./season1-rock-cards.js?v=0.11.42";
 
 function flatten(source) {
   const out = [];

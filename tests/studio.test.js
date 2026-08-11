@@ -194,9 +194,11 @@ test("unified export gives every card kind a predictable automatic game path", (
     assert.match(studioJs, new RegExp(`${pair[0]}:"${pair[1]}"`));
   }
   assert.match(studioJs, /assets\/cards\/art\/custom\/\$\{KIND_FOLDERS\[card\.kind\]/);
-  assert.match(studioHtml, /id="export-webp"[^>]*>Export Card WebP<\/button>/);
-  assert.match(studioJs, /function canvasToWebp\(quality\)/);
-  assert.match(studioJs, /Downloaded \$\{id\}\.webp/);
+  assert.match(studioHtml, /id="export-webp"[^>]*>Export \/ Share Card<\/button>/);
+  assert.match(studioJs, /function canvasToPreferredBlob\(quality\)/);
+  assert.match(studioJs, /isIOSDevice\(\)/);
+  assert.match(studioJs, /navigator\.share/);
+  assert.match(studioJs, /fallback/);
   assert.match(studioJs, /Export failed:/);
 });
 

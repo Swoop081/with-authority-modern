@@ -43,6 +43,9 @@ rewrite("index.html", source => source
 rewrite("tools/card-art-studio.html", source => source
   .replace(/(href|src)="(\.\.\/[^"?]+\.(?:css|js))(?:\?v=[^"]*)?"/g, (_m, attr, path) => `${attr}="${path}?${stamp}"`)
 );
+rewrite("tools/png-to-webp.html", source => source
+  .replace(/(href|src)="(\.\.\/[^"?]+\.(?:css|js))(?:\?v=[^"]*)?"/g, (_m, attr, path) => `${attr}="${path}?${stamp}"`)
+);
 rewrite("manifest.webmanifest", source => source
   .replace(/("src"\s*:\s*")([^"?]+\.png)(?:\?v=[^"]*)?"/g, (_m, prefix, path) => `${prefix}${path}?${stamp}"`)
 );

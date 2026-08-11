@@ -1529,7 +1529,7 @@ test("unified Card Art Studio exports finished set-branded fronts without manife
   assert.equal(html.includes('accept="image/*"'), true);
   assert.equal(html.includes('id="card-canvas"'), true);
   assert.equal(html.includes('680 × 1000'), true);
-  assert.equal(html.includes('Export Card WebP'), true);
+  assert.equal(html.includes('Export / Share Card'), true);
   assert.equal(js.includes('"image/webp"'), true);
   assert.equal(js.includes('EMBEDDED_SET_LOGOS'), true);
   assert.equal(js.includes('KIND_FOLDERS'), true);
@@ -2682,4 +2682,84 @@ test('v0.11.41 simplifies Season hero actions and moves Featured Release set log
   assert.match(block, /id="season-boosters"[^>]*>Boosters<\/button>/);
   assert.match(css, /\.season-release-grid \.season-set-logo\{[^}]*left:12px;right:auto;[^}]*object-position:left top/);
   assert.match(css, /\.season-hero-actions\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)!important/);
+});
+
+
+test('v0.11.42 final menu pass uses one hero per Play tile and removes redundant menu return', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderPlayMenu()'), app.indexOf('function renderProfile()'));
+  assert.match(block, /single-hero-mode/);
+  assert.match(block, /mode-single-hero/);
+  assert.equal(block.includes('modePortraits(["cody-rhodes","rhea-ripley"]'), false);
+  assert.equal(block.includes('Back to Main Menu'), false);
+  assert.equal(block.includes('id="play-home"'), false);
+});
+
+test('v0.11.42 splash and Options use the central build version and generic continue copy', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  assert.match(app, /import \{ BUILD_VERSION, assetUrl \}/);
+  const splash = app.slice(app.indexOf('function renderSplash()'), app.indexOf('function renderLaunchReleases()'));
+  const options = app.slice(app.indexOf('function renderOptions()'), app.indexOf('function chooseStarter()'));
+  assert.match(splash, /splash-build-version[^`]*\$\{BUILD_VERSION\}/);
+  assert.match(splash, /Continue Your Legacy/);
+  assert.doesNotMatch(splash, /Continue \$\{starter/);
+  assert.match(options, /Collectible Card Game v\$\{BUILD_VERSION\}/);
+  assert.doesNotMatch(options, /v0\.9\.1/);
+});
+
+test('v0.11.42 persistent navigation order follows play and progression priority', () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const nav = html.slice(html.indexOf('id="mobile-game-nav"'), html.indexOf('</nav>', html.indexOf('id="mobile-game-nav"')));
+  const targets = [...nav.matchAll(/data-mobile-nav="([^"]+)"/g)].map(m => m[1]);
+  assert.deepEqual(targets, ['menu','play-menu','seasons','boosters','collection','catalogue','profile','options']);
+});
+
+test('v0.11.42 match selectors are horizontal, owned-only, favourite-first and explicitly confirmed', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  assert.match(app, /function ownedRoster\(excludeId = null\)/);
+  assert.match(app, /favoriteSuperstars/);
+  assert.match(app, /superstar-carousel/);
+  assert.match(app, /CONFIRM PLAYER 1/);
+  assert.match(app, /CONFIRM OPPONENT/);
+  assert.match(app, /CONFIRM SUPERSTAR/);
+  assert.match(app, /data-selector-context="ladder"/);
+  assert.match(app, /data-selector-context="championship"/);
+  const ladder = app.slice(app.indexOf('function renderLadder()'), app.indexOf('function beginChampionshipRoad()'));
+  const champ = app.slice(app.indexOf('function renderChampionship()'), app.indexOf('function legacyLogoMarkup'));
+  for (const id of ['ladder-exhibition','ladder-championship','ladder-boosters','ladder-collection']) assert.equal(ladder.includes(id), false);
+  for (const id of ['champ-exhibition','champ-ladder','champ-boosters','champ-collection']) assert.equal(champ.includes(id), false);
+  assert.match(ladder, /horizontal-path-tabs/);
+  assert.match(champ, /horizontal-path-tabs/);
+  assert.match(css, /\.superstar-carousel\{[^}]*grid-auto-flow:column/);
+  assert.match(css, /\.horizontal-path-tabs\{[^}]*overflow-x:auto/);
+});
+
+test('v0.11.42 My Collection can persist Favourite Superstars for character select ordering', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const profileSource = readFileSync(new URL('../js/data/profile.js', import.meta.url), 'utf8');
+  assert.match(app, /data-favorite-superstar/);
+  assert.match(app, /★ Favourite/);
+  assert.match(profileSource, /favoriteSuperstars: \[\]/);
+  assert.match(profileSource, /profile\.favoriteSuperstars \?\?= \[\]/);
+  const p = createProfile('roman-reigns');
+  assert.deepEqual(p.favoriteSuperstars, []);
+});
+
+test('v0.11.42 Card Art Studio has iPhone PNG/share fallback and a bulk PNG to WebP tool', () => {
+  const studio = readFileSync(new URL('../js/tools/card-art-studio.js', import.meta.url), 'utf8');
+  const studioHtml = readFileSync(new URL('../tools/card-art-studio.html', import.meta.url), 'utf8');
+  const converterHtml = readFileSync(new URL('../tools/png-to-webp.html', import.meta.url), 'utf8');
+  const converterJs = readFileSync(new URL('../js/tools/png-to-webp.js', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  assert.match(studioHtml, /Export \/ Share Card/);
+  assert.match(studio, /navigator\.share/);
+  assert.match(studio, /ext:isWebp\?"webp":"png"/);
+  assert.match(studio, /PNG → WebP Converter/);
+  assert.match(converterHtml, /webkitdirectory/);
+  assert.match(converterHtml, /Download Converted ZIP/);
+  assert.match(converterJs, /image\/webp/);
+  assert.match(converterJs, /function crc32/);
+  assert.match(converterJs, /makeZip/);
+  assert.match(app, /tools\/png-to-webp\.html/);
 });
