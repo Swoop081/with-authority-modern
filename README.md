@@ -1,4 +1,4 @@
-## v0.11.32 — Home Hub Rebuild
+## v0.11.33 — Safe-Area + Season Countdown Polish
 
 The main Home hub has been rebuilt for mobile clarity. The global sticky WWE Legacy/version banner is removed everywhere; Home now starts with a tappable LED Season 1 countdown, followed by a true **My Collection** destination, the Final Boss reward promo, and compact/direct menu tiles. **My Collection** now means owned cards only, while **Card Catalogue** means the full 387-card active pool with All Sets + search/type/rarity filters. The persistent bottom hub is roughly twice its former size, horizontally scrollable, and uses distinct SVG icons.
 
@@ -44,7 +44,7 @@ Move-card fronts now reserve a consistent three-line footer: **Move name**, **CO
 
 The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
 
-# WWE Legacy: Collectible Card Game — v0.11.32
+# WWE Legacy: Collectible Card Game — v0.11.33
 
 
 

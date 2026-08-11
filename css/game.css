@@ -1598,3 +1598,47 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .mobile-game-nav{grid-auto-columns:104px!important}.mobile-game-nav button{min-width:104px!important;width:104px;min-height:94px!important}.mobile-game-nav .nav-icon{width:36px;height:36px}.mobile-game-nav .nav-icon svg{width:30px;height:30px}
   .collection-all-hero{min-height:280px}.collection-view-switch .nav-button{padding:8px 10px}
 }
+
+/* v0.11.33 — iPhone safe-area discipline + centered Season 1 LED panel. */
+.season-led-strip{
+  min-height:124px;
+  padding:15px 18px 14px;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:auto auto auto auto;
+  place-items:center;
+  align-content:center;
+  gap:4px;
+  text-align:center;
+}
+.season-led-live{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  white-space:normal;color:#79f6ff;
+}
+.season-led-live b{font-size:clamp(.95rem,2.4vw,1.24rem);font-weight:1000;letter-spacing:.16em;line-height:1;text-shadow:0 0 10px rgba(77,232,255,.45)}
+.season-led-live i{width:10px;height:10px;margin:0;flex:0 0 auto;background:#39ff87;box-shadow:0 0 8px #39ff87,0 0 17px rgba(57,255,135,.75)}
+.season-led-label{font-size:.58rem;font-weight:1000;letter-spacing:.22em;color:#7aa3b5;line-height:1.2}
+.season-led-countdown{font:1000 clamp(2rem,6vw,3.25rem)/.98 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.055em;color:#fff;text-shadow:0 0 8px #31cfff,0 0 20px rgba(41,199,255,.68);overflow-wrap:anywhere}
+.season-led-next{font-size:.55rem;font-weight:950;letter-spacing:.16em;color:#b8bdff;white-space:normal;text-align:center}
+.options-tile-gear{display:grid;place-items:center;width:100%;height:100%;font-size:6rem;line-height:1;color:#b7c4d9;opacity:.22;filter:drop-shadow(0 0 12px rgba(130,170,255,.25));mask-image:linear-gradient(90deg,transparent 0%,#000 28%)}
+.tile-options .tile-copy em{color:#8fb7ff}
+
+@media(max-width:760px){
+  /* Important content must always start below iPhone status / floating bars.
+     The fixed floor covers Safari/PWA cases where env(safe-area-inset-top)
+     resolves smaller than the visible status region. */
+  body:not([data-screen="splash"]) main{
+    padding-top:max(calc(env(safe-area-inset-top,0px) + 12px),58px)!important;
+  }
+  body[data-screen="starter"] .onboarding-screen{padding-top:0!important}
+  body[data-screen="splash"] .clean-launch-splash{
+    padding-top:max(calc(env(safe-area-inset-top,0px) + 10px),48px)!important;
+  }
+  .main-menu-screen,.play-menu-screen,.profile-screen,.options-screen,.collection-screen,.booster-screen,.challenges-screen,.seasons-screen,.deck-builder-screen{padding-top:0!important}
+  .season-led-strip{min-height:132px;padding:15px 12px 13px;gap:5px}
+  .season-led-live b{font-size:clamp(1rem,4.2vw,1.24rem)}
+  .season-led-live i{width:9px;height:9px}
+  .season-led-label{font-size:.55rem}
+  .season-led-countdown{font-size:clamp(2rem,9.5vw,2.85rem);letter-spacing:.035em}
+  .season-led-next{font-size:.50rem}
+}

@@ -2502,7 +2502,6 @@ test('v0.11.32 home hub removes the global banner and separates owned Collection
   assert.match(app, /activeCollectionSetId = "all"/);
   assert.match(app, /collectionView === "owned"/);
   assert.equal(app.includes('id="menu-seasons"'), false);
-  assert.equal(app.includes('id="menu-options"'), false);
   const menuBlock = app.slice(app.indexOf('function renderMainMenu()'), app.indexOf('function renderPlayMenu()'));
   assert.equal(menuBlock.includes('Game & Testing'), false);
 });
@@ -2524,4 +2523,28 @@ test('v0.11.31 every app screen transition resets viewport to the top', () => {
   assert.match(app, /if \("scrollRestoration" in history\) history\.scrollRestoration = "manual";/);
   assert.match(app, /function scrollNewScreenToTop\(\) \{[\s\S]*?if \(lastChromeScreen === screen\) return;[\s\S]*?window\.scrollTo\(0, 0\);[\s\S]*?requestAnimationFrame/);
   assert.match(app, /document\.body\.dataset\.mode = activeMode \?\? "";\n  scrollNewScreenToTop\(\);/);
+});
+
+
+test('v0.11.33 keeps important phone content below the iPhone status area and centers the Season countdown', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  assert.match(app, /<span class="season-led-live"><i><\/i><b>SEASON ONE LIVE<\/b><i><\/i><\/span>/);
+  assert.match(app, /<span class="season-led-label">ENDS IN<\/span>/);
+  assert.match(app, /class="season-led-countdown" data-season-countdown/);
+  assert.match(css, /body:not\(\[data-screen="splash"\]\) main\{[\s\S]*?padding-top:max\(calc\(env\(safe-area-inset-top,0px\) \+ 12px\),58px\)!important/);
+  assert.match(css, /\.season-led-strip\{[\s\S]*?grid-template-columns:1fr;[\s\S]*?place-items:center;[\s\S]*?text-align:center/);
+  assert.match(css, /\.season-led-countdown\{font:1000 clamp\(2rem,6vw,3\.25rem\)/);
+  const studioCss = readFileSync(new URL('../css/card-art-studio.css', import.meta.url), 'utf8');
+  assert.match(studioCss, /\.studio-topbar\{padding-top:max\(calc\(env\(safe-area-inset-top,0px\) \+ 12px\),58px\)\}/);
+});
+
+test('v0.11.33 restores a normal Options tile to Home without restoring Game & Testing', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const menuBlock = app.slice(app.indexOf('function renderMainMenu()'), app.indexOf('function renderPlayMenu()'));
+  assert.equal(menuBlock.includes('id="menu-options"'), true);
+  assert.equal(menuBlock.includes('SETTINGS'), true);
+  assert.equal(menuBlock.includes('Game & Testing'), false);
+  assert.match(menuBlock, /\$\("#menu-options"\)\?\.addEventListener\("click", showOptions\)/);
+  assert.equal(app.includes('<h2>Game Options</h2>'), true);
 });

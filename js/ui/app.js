@@ -754,8 +754,9 @@ function renderMainMenu() {
   const ownedCopies = collectionCards.reduce((sum, card) => sum + ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil"), 0);
   root.innerHTML = `<section class="main-menu-screen premium-screen home-hub-v2">
     <button id="menu-season-countdown" class="season-led-strip" aria-label="Open Season 1 hub">
-      <span class="season-led-live"><i></i> SEASON 1 · LIVE</span>
-      <span class="season-led-clock"><small>ENDS IN</small><b data-season-countdown>${seasonRemaining.ended ? 'SEASON COMPLETE' : formatCountdown(seasonRemaining.ms)}</b></span>
+      <span class="season-led-live"><i></i><b>SEASON ONE LIVE</b><i></i></span>
+      <span class="season-led-label">ENDS IN</span>
+      <strong class="season-led-countdown" data-season-countdown>${seasonRemaining.ended ? 'SEASON COMPLETE' : formatCountdown(seasonRemaining.ms)}</strong>
       <span class="season-led-next">SURVIVOR SERIES · 28 NOV</span>
     </button>
 
@@ -785,6 +786,7 @@ function renderMainMenu() {
       <button id="menu-decks" class="main-menu-tile premium-menu-tile tile-decks"><span class="tile-bg-art">${portraitMarkup("cm-punk","CM Punk")}</span><span class="tile-shade"></span><span class="tile-copy"><em>BUILD YOUR ROSTER</em><strong>DECK LAB</strong><small>Build · Optimize · Save</small></span></button>
       <button id="menu-challenges" class="main-menu-tile premium-menu-tile tile-challenges"><span class="tile-bg-art">${portraitMarkup("becky-lynch","Becky Lynch")}</span><span class="tile-shade"></span><span class="tile-copy"><em>EARN REWARDS</em><strong>CHALLENGES</strong><small>Daily · Weekly · Season XP</small></span></button>
       <button id="menu-profile" class="main-menu-tile premium-menu-tile tile-profile"><span class="tile-bg-art">${portraitMarkup(starter.id,starter.name)}</span><span class="tile-shade"></span><span class="tile-copy"><em>YOUR CAREER</em><strong>MY LEGACY</strong><small>Progress · Stats · Tools</small></span></button>
+      <button id="menu-options" class="main-menu-tile premium-menu-tile tile-options"><span class="tile-bg-art"><span class="options-tile-gear" aria-hidden="true">⚙</span></span><span class="tile-shade"></span><span class="tile-copy"><em>SETTINGS</em><strong>OPTIONS</strong><small>Audio · Gameplay · Profile</small></span></button>
     </div>
   </section>`;
   $("#menu-season-countdown")?.addEventListener("click", showSeasons);
@@ -796,6 +798,7 @@ function renderMainMenu() {
   $("#menu-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1));
   $("#menu-challenges")?.addEventListener("click", showChallenges);
   $("#menu-profile")?.addEventListener("click", showProfile);
+  $("#menu-options")?.addEventListener("click", showOptions);
   refreshSeasonClocks();
 }
 
@@ -841,7 +844,7 @@ function renderOptions() {
     <section class="feature-hero options-feature">
       <div class="options-hero-icon">⚙</div>
       <div class="feature-shade"></div>
-      <div class="feature-copy">${modeLogoMarkup("profile")}<span class="premium-kicker">OPTIONS</span><h2>Game & Testing</h2><p>Local settings and developer conveniences for this WWE Legacy build.</p></div>
+      <div class="feature-copy">${modeLogoMarkup("profile")}<span class="premium-kicker">OPTIONS</span><h2>Game Options</h2><p>Local gameplay, audio and profile controls for WWE Legacy.</p></div>
     </section>
     ${message ? `<p class="setup-message">${message}</p>` : ""}
     <section class="options-panel premium-panel">
