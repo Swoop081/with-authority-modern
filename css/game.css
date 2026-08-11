@@ -1642,3 +1642,38 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .season-led-countdown{font-size:clamp(2rem,9.5vw,2.85rem);letter-spacing:.035em}
   .season-led-next{font-size:.50rem}
 }
+
+
+/* v0.11.35 — wrestler-backed Options tile + tighter persistent hub. */
+.tile-options{--tile-accent:#8fb7ff}
+
+/* Keep the hub comfortably tappable while removing the oversized dead space
+   around each icon and between icon + label. */
+.mobile-game-nav{
+  grid-auto-columns:92px!important;
+  width:min(700px,calc(100% - 8px))!important;
+  padding:4px!important;
+  gap:3px!important;
+  border-radius:19px!important;
+}
+.mobile-game-nav button{
+  min-width:92px!important;
+  width:92px;
+  min-height:78px!important;
+  padding:5px 4px 4px!important;
+  border-radius:14px!important;
+  grid-template-rows:auto auto!important;
+  align-content:center!important;
+  gap:2px!important;
+}
+.mobile-game-nav .nav-icon{width:31px;height:31px}
+.mobile-game-nav .nav-icon svg{width:28px;height:28px}
+.mobile-game-nav b{font-size:.54rem!important;line-height:1!important}
+body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="starter"]):not([data-screen="unlock-celebration"]) main{padding-bottom:calc(104px + env(safe-area-inset-bottom))!important}
+
+@media(max-width:760px){
+  .mobile-game-nav{grid-auto-columns:88px!important}
+  .mobile-game-nav button{min-width:88px!important;width:88px;min-height:76px!important}
+  .mobile-game-nav .nav-icon{width:30px;height:30px}
+  .mobile-game-nav .nav-icon svg{width:27px;height:27px}
+}

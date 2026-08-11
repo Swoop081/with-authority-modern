@@ -4,7 +4,8 @@ import { artworkFor, cardArtwork, superstarArtwork } from "../js/data/artwork.js
 
 const rows = collectionCards.map(card => {
   const art = artworkFor(card);
-  const exists = art ? existsSync(new URL(`../${art}`, import.meta.url)) : false;
+  const diskArt = art?.replace(/\?v=[^#]+$/, "");
+  const exists = diskArt ? existsSync(new URL(`../${diskArt}`, import.meta.url)) : false;
   return { card, art, exists, exact: Boolean(cardArtwork[card.id]) };
 });
 

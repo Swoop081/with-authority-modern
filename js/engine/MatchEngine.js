@@ -1,6 +1,6 @@
-import { PHASES } from "./constants.js";
-import { clone } from "./utils.js";
-import { entranceForSuperstar } from "../data/entrances.js";
+import { PHASES } from "./constants.js?v=0.11.35";
+import { clone } from "./utils.js?v=0.11.35";
+import { entranceForSuperstar } from "../data/entrances.js?v=0.11.35";
 import {
   canPlayMomentum,
   canPlayEntrance,
@@ -15,7 +15,7 @@ import {
   canPlayPinEscape,
   pinChancePercent,
   submissionThreshold
-} from "./rules.js";
+} from "./rules.js?v=0.11.35";
 
 export class MatchEngine {
   constructor({ superstarA, superstarB, deckA = [], deckB = [], startingControl = "p1", rng = Math.random }) {

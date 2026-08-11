@@ -1513,7 +1513,7 @@ test("card artwork can be swapped through one manifest without changing gameplay
   const overrides = readFileSync(new URL("../js/data/card-art-overrides.js", import.meta.url), "utf8");
   const guide = readFileSync(new URL("../assets/cards/README.md", import.meta.url), "utf8");
   assert.equal(artwork.includes('import { cardArtOverrides, superstarArtOverrides }'), true);
-  assert.equal(artwork.includes("if (cardArtwork[card.id]) return cardArtwork[card.id]"), true);
+  assert.equal(artwork.includes("if (cardArtwork[card.id]) return assetUrl(cardArtwork[card.id])"), true);
   assert.equal(overrides.includes("export const cardArtOverrides"), true);
   assert.equal(guide.includes("Replacing a card photo"), true);
 });
@@ -2413,7 +2413,7 @@ test("finished Superstar card fronts are the canonical UI visual with portrait f
   assert.equal(Object.keys(superstarCardArtwork).length, Object.keys(superstarArtwork).length);
   assert.equal(Object.keys(superstarCardArtwork).length, 25);
   for (const id of Object.keys(superstarArtwork)) {
-    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp`);
+    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=0.11.35`);
   }
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   assert.equal(app.includes("const portraitMarkup = superstarVisualMarkup"), true);
@@ -2513,9 +2513,9 @@ test('v0.11.32 bottom hub uses oversized scrollable icon buttons with Collection
     assert.ok(html.includes(`data-mobile-nav="${target}"`), `missing ${target} hub target`);
   }
   assert.match(html, /class="nav-icon"><svg/);
-  assert.match(css, /grid-auto-columns:108px!important/);
+  assert.match(css, /grid-auto-columns:92px!important/);
   assert.match(css, /overflow-x:auto!important/);
-  assert.match(css, /min-height:96px!important/);
+  assert.match(css, /min-height:78px!important/);
 });
 
 test('v0.11.31 every app screen transition resets viewport to the top', () => {
@@ -2547,4 +2547,36 @@ test('v0.11.33 restores a normal Options tile to Home without restoring Game & T
   assert.equal(menuBlock.includes('Game & Testing'), false);
   assert.match(menuBlock, /\$\("#menu-options"\)\?\.addEventListener\("click", showOptions\)/);
   assert.equal(app.includes('<h2>Game Options</h2>'), true);
+});
+
+
+test('v0.11.35 stamps the full browser dependency graph and runtime artwork URLs with one build version', async () => {
+  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const profileSource = readFileSync(new URL('../js/data/profile.js', import.meta.url), 'utf8');
+  const buildSource = readFileSync(new URL('../js/config/build.js', import.meta.url), 'utf8');
+  const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
+  assert.equal(pkg.version, '0.11.35');
+  assert.match(html, /css\/game\.css\?v=0\.11\.35/);
+  assert.match(html, /js\/ui\/app\.js\?v=0\.11\.35/);
+  assert.match(html, /manifest\.webmanifest\?v=0\.11\.35/);
+  assert.match(app, /data\/superstars\.js\?v=0\.11\.35/);
+  assert.match(profileSource, /\.\/decks\.js\?v=0\.11\.35/);
+  assert.match(buildSource, /BUILD_VERSION = "0\.11\.35"/);
+  const { artworkFor } = await import('../js/data/artwork.js');
+  assert.match(artworkFor(cards.crossRhodes), /\?v=0\.11\.35$/);
+  assert.equal(pkg.scripts['stamp-cache'], 'node tools/stamp-cache-version.mjs');
+});
+
+
+test('v0.11.35 gives Options Superstar art and tightens the persistent hub without shrinking tap targets too far', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const menuBlock = app.slice(app.indexOf('function renderMainMenu()'), app.indexOf('function renderPlayMenu()'));
+  assert.match(menuBlock, /id="menu-options"[\s\S]*?portraitMarkup\("cody-rhodes","Cody Rhodes"\)/);
+  assert.doesNotMatch(menuBlock, /options-tile-gear/);
+  assert.match(css, /grid-auto-columns:92px!important/);
+  assert.match(css, /min-height:78px!important/);
+  assert.match(css, /gap:2px!important/);
+  assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?grid-auto-columns:88px!important[\s\S]*?min-height:76px!important/);
 });

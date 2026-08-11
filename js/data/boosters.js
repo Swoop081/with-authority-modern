@@ -1,10 +1,10 @@
-import { cardsForSet, setCollectionFor } from "./collection.js";
-import { addOwnedCard, unlockSuperstar, ownedCount, buildBestOwnedDeck } from "./profile.js";
-import { ladderState, consumeFirstClearSuperstarGuarantee } from "./ladder.js";
-import { championshipRoadState } from "./championship-road.js";
-import { recordChallengeMetric } from "./challenges.js";
-import { boosterSetAvailable } from "./set-progression.js";
-import { ownershipCapFor } from "./card-limits.js";
+import { cardsForSet, setCollectionFor } from "./collection.js?v=0.11.35";
+import { addOwnedCard, unlockSuperstar, ownedCount, buildBestOwnedDeck } from "./profile.js?v=0.11.35";
+import { ladderState, consumeFirstClearSuperstarGuarantee } from "./ladder.js?v=0.11.35";
+import { championshipRoadState } from "./championship-road.js?v=0.11.35";
+import { recordChallengeMetric } from "./challenges.js?v=0.11.35";
+import { boosterSetAvailable } from "./set-progression.js?v=0.11.35";
+import { ownershipCapFor } from "./card-limits.js?v=0.11.35";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;

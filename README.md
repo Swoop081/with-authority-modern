@@ -1,3 +1,7 @@
+## v0.11.35 — Compact Hub Navigation + Options Superstar Art
+
+The Home **Options** tile now uses Cody Rhodes Superstar artwork so it visually matches the rest of the wrestler-backed hub. The persistent bottom navigation has been tightened: less outer padding, smaller gaps, closer icon-to-label spacing, and a modestly shorter overall bar while retaining large mobile tap targets and horizontal scrolling. No gameplay/card data changed.
+
 ## v0.11.33 — Safe-Area + Season Countdown Polish
 
 The main Home hub has been rebuilt for mobile clarity. The global sticky WWE Legacy/version banner is removed everywhere; Home now starts with a tappable LED Season 1 countdown, followed by a true **My Collection** destination, the Final Boss reward promo, and compact/direct menu tiles. **My Collection** now means owned cards only, while **Card Catalogue** means the full 387-card active pool with All Sets + search/type/rarity filters. The persistent bottom hub is roughly twice its former size, horizontally scrollable, and uses distinct SVG icons.

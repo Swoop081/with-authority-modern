@@ -1,5 +1,6 @@
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js";
-import { finishedFrontKeys } from "./finished-front-keys.js";
+import { assetUrl } from "../config/build.js?v=0.11.35";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.35";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.35";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
@@ -9,7 +10,7 @@ const TEMP_GENERIC_ART = "assets/cards/art/temp/generic-wrestling-action.webp";
 
 // Superstar art is deliberately centralized. Replacing a portrait later only
 // requires changing one path here (or using superstarArtOverrides below).
-export const superstarArtwork = {
+const rawSuperstarArtwork = {
   "cody-rhodes": `${SUMMERSLAM_ROOT}/superstars/cody-rhodes.webp`,
   "cm-punk": `${SUMMERSLAM_ROOT}/superstars/cm-punk.webp`,
   "roman-reigns": `${SUMMERSLAM_ROOT}/superstars/roman-reigns.webp`,
@@ -42,13 +43,17 @@ export const superstarArtwork = {
   "the-rock": `${WWE_PROFILE_ROOT}/the-rock.png`,
   ...superstarArtOverrides
 };
+
+export const superstarArtwork = Object.fromEntries(
+  Object.entries(rawSuperstarArtwork).map(([id, path]) => [id, assetUrl(path)])
+);
 // Finished Superstar collectible fronts exported by the unified Card Art Studio.
 // These are intentionally separate from wrestler portraits: move/Entrance cards
 // can continue using action/profile art while every Superstar-facing UI surface
 // can prefer the finished collectible card. Missing custom files fall back in
 // the UI to superstarArtwork without breaking the game.
 export const superstarCardArtwork = Object.fromEntries(
-  Object.keys(superstarArtwork).map(id => [id, `assets/cards/art/custom/superstars/${id}.webp`])
+  Object.keys(superstarArtwork).map(id => [id, assetUrl(`assets/cards/art/custom/superstars/${id}.webp`)])
 );
 
 export function superstarCardArtFor(superstarId) {
@@ -73,7 +78,7 @@ export function finishedCardArtFor(card) {
   if (card.kind === "superstar") return superstarCardArtFor(card.superstarId);
   const folder = finishedFrontFolders[card.kind];
   const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
-  return folder && key ? `assets/cards/art/custom/${folder}/${key}.webp` : null;
+  return folder && key ? assetUrl(`assets/cards/art/custom/${folder}/${key}.webp`) : null;
 }
 
 // v0.11.18–v0.11.22 documentation sometimes described raw card-ID filenames.
@@ -82,12 +87,12 @@ export function finishedCardArtFor(card) {
 export function legacyFinishedCardArtFor(card) {
   if (!card || card.kind === "superstar") return null;
   const folder = finishedFrontFolders[card.kind];
-  return folder && card.id ? `assets/cards/art/custom/${folder}/${card.id}.webp` : null;
+  return folder && card.id ? assetUrl(`assets/cards/art/custom/${folder}/${card.id}.webp`) : null;
 }
 
 // Backwards-compatible helper retained for existing Move-specific callers/tests.
 export function moveCardArtFor(cardId) {
-  return cardId ? `assets/cards/art/custom/moves/${cardId}.webp` : null;
+  return cardId ? assetUrl(`assets/cards/art/custom/moves/${cardId}.webp`) : null;
 }
 
 // Exact card-photo replacements always win. This is the long-term migration
@@ -98,7 +103,7 @@ export function artworkFor(card) {
   if (!card) return null;
 
   // 1. Exact card photo supplied by the user / final sourcing pass.
-  if (cardArtwork[card.id]) return cardArtwork[card.id];
+  if (cardArtwork[card.id]) return assetUrl(cardArtwork[card.id]);
 
   // 2. Superstar card, or any wrestler-specific card awaiting its own action
   //    shot, uses that wrestler's local portrait as temporary art.
@@ -108,7 +113,7 @@ export function artworkFor(card) {
 
   // 3. Every remaining collectible receives a local wrestling-action image so
   //    there are no blank ARTWORK SLOT cards in the playable build.
-  return TEMP_GENERIC_ART;
+  return assetUrl(TEMP_GENERIC_ART);
 }
 
 export function artworkRequirement(card) {
