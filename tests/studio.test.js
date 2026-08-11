@@ -20,12 +20,12 @@ function studioSuperstars() {
   return JSON.parse(match[1]);
 }
 
-test("Card Art Studio contains all 389 active Season 1 collectibles", () => {
+test("Card Art Studio contains all 387 active Season 1 collectibles", () => {
   const entries = studioEntries();
   assert.equal(entries.length, collectionCards.length);
-  assert.equal(entries.length, 389);
-  assert.equal(new Set(entries.map(c => c.id)).size, 389);
-  const expectedKinds = { superstar:25, entrance:25, move:278, special:27, momentum:4, action:21, support:6, manager:3 };
+  assert.equal(entries.length, 387);
+  assert.equal(new Set(entries.map(c => c.id)).size, 387);
+  const expectedKinds = { superstar:25, entrance:25, move:276, special:27, momentum:4, action:21, support:6, manager:3 };
   const actualKinds = entries.reduce((acc,c) => { acc[c.kind] = (acc[c.kind] || 0) + 1; return acc; }, {});
   assert.deepEqual(actualKinds, expectedKinds);
   for (const id of ["superstar-cody-rhodes","entrance-cody-rhodes","cross-rhodes","punk-best-in-the-world","hof1-manager-bobby-heenan","evo1-rhea-riptide","s1rock-rock-bottom-final-boss"]) {
@@ -38,7 +38,7 @@ test("Card Art Studio preserves the four active set pools and collector numberin
   const counts = Object.fromEntries(Object.entries(collectionCardsBySet).map(([id,list]) => [id,list.length]));
   assert.deepEqual(counts, {
     "summerslam-series-1":152,
-    "hall-of-fame-series-1":106,
+    "hall-of-fame-series-1":104,
     "evolution-series-1":110,
     "season-1-final-boss":21,
   });
@@ -61,7 +61,7 @@ test("Card Art Studio exposes one type-filtered workflow for every collectible k
     assert.match(studioHtml, new RegExp(`<option value="${value}">`));
   }
   assert.match(studioHtml, /ONE STUDIO · EVERY ACTIVE CARD FRONT/);
-  assert.match(studioHtml, /All 389 active Season 1 collectibles/);
+  assert.match(studioHtml, /All 387 active Season 1 collectibles/);
   assert.match(studioJs, /KIND_LABELS/);
   assert.match(studioJs, /refreshCardList/);
 });
@@ -120,7 +120,7 @@ test("Move Studio data carries the live method requirements and reserves the thi
   const entries = studioEntries();
   const studioMoves = entries.filter(c => c.kind === "move");
   const liveMoves = collectionCards.filter(c => c.kind === "move");
-  assert.equal(studioMoves.length, 278);
+  assert.equal(studioMoves.length, 276);
   for (const live of liveMoves) {
     const entry = studioMoves.find(c => c.id === live.id);
     assert.deepEqual(entry?.requirements ?? {}, live.requirements ?? {}, `${live.cardCode} ${live.name} requirements should match live data`);
@@ -164,6 +164,25 @@ test("Card Art Studio includes the SummerSlam fundamentals pass without renumber
   ];
   assert.equal(entries.find(c => c.id === "front-dropkick")?.cardCode, "SS1-135");
   for (const [id,code] of expected) assert.equal(entries.find(c => c.id === id)?.cardCode, code, `${id} should be appended after the locked pool`);
+});
+
+test("Double Sledge is retired from the Studio without shifting later Hall of Fame collector codes", () => {
+  const entries = studioEntries();
+  assert.equal(entries.some(c => c.id === "hof1-double-sledge-reviewed"), false);
+  assert.equal(entries.some(c => c.cardCode === "HOF1-100"), false);
+  assert.equal(entries.find(c => c.id === "hof1-flying-shoulder-reviewed")?.cardCode, "HOF1-101");
+  assert.equal(entries.find(c => c.id === "hof1-tilt-whirl-reviewed")?.cardCode, "HOF1-106");
+  assert.ok(entries.find(c => c.id === "hof1-axe-handle")?.deckSuperstarIds.includes("ultimate-warrior"));
+});
+
+test("shared Spinebuster is consolidated to the SummerSlam printing in the Studio", () => {
+  const entries = studioEntries();
+  const spine = entries.find(c => c.id === "spinebuster");
+  assert.equal(spine?.cardCode, "SS1-091");
+  assert.ok(spine?.deckSuperstarIds.includes("stone-cold-steve-austin"));
+  assert.equal(entries.some(c => c.id === "hof1-spinebuster"), false);
+  assert.equal(entries.some(c => c.cardCode === "HOF1-092"), false);
+  assert.equal(finishedFrontKeys["hof1-spinebuster"], undefined);
 });
 
 test("unified export gives every card kind a predictable automatic game path", () => {

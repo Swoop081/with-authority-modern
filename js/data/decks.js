@@ -190,7 +190,7 @@ export const decks = {
       [hallCards.warriorSpecial,hallCards.warriorShakeRopes],
       [hallCards.rallyCrowd,hallCards.ironWill,hallCards.crowdRoar],
       copies(hallCards.warriorPunch,2), copies(cards.headbutt,2), copies(cards.shoulderTackle,2), copies(cards.clothesline,1),
-      copies(hallCards.bodyslam,2), copies(cards.bigBoot,2), copies(hallCards.doubleSledgeReviewed,2), copies(hallCards.runningClotheslineReviewed,2),
+      copies(hallCards.bodyslam,2), copies(cards.bigBoot,2), copies(hallCards.axeHandle,2), copies(hallCards.runningClotheslineReviewed,2),
       copies(hallCards.flyingShoulderReviewed,2), copies(hallCards.warriorShoulderReviewed,2), copies(cards.powerslam,2),
       copies(hallCards.militaryPressDropReviewed,2), copies(hallCards.warriorClotheslineReviewed,2),
       copies(hallCards.warriorPressReviewed,3), copies(hallCards.warriorSplashReviewed,3), copies(hallCards.bearhug,1)
@@ -204,7 +204,7 @@ export const decks = {
       [hallCards.austinSpecial,hallCards.austinWhoopAss,hallCards.austinWhat],
       [hallCards.rallyCrowd,hallCards.veteranGamePlan,hallCards.crowdRoar],
       copies(hallCards.austinPunch,2), copies(cards.headbutt,2), copies(hallCards.runningClotheslineReviewed,2), copies(hallCards.elbowSmash,2),
-      copies(hallCards.bodyslam,2), copies(hallCards.verticalSuplex,2), copies(hallCards.backSuplexReviewed,2), copies(hallCards.spinebuster,2),
+      copies(hallCards.bodyslam,2), copies(hallCards.verticalSuplex,2), copies(hallCards.backSuplexReviewed,2), copies(cards.spinebuster,2),
       copies(hallCards.piledriver,1), copies(hallCards.middleRopeElbowReviewed,2), copies(hallCards.austinMudholeReviewed,2),
       copies(hallCards.austinLouTheszReviewed,3), copies(hallCards.austinKickReviewed,3), copies(hallCards.austinStunnerReviewed,3),
       copies(hallCards.eyeRakeReviewed,1),

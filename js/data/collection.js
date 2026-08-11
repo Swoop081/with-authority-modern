@@ -9,6 +9,12 @@ import { decks } from "./decks.js";
 const rarity = { common: 1, uncommon: 2, rare: 3, veryRare: 4 };
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 
+// Collector numbers are permanent once published/artwork production begins.
+// Retired numbers stay as gaps instead of being reused or shifting later cards.
+const retiredCollectorNumbersBySet = {
+  "hall-of-fame-series-1": new Set([92, 100]),
+};
+
 const summerStarOrder = [superstars.codyRhodes, superstars.cmPunk, superstars.romanReigns, superstars.sethRollins, superstars.obaFemi, superstars.brockLesnar, superstars.kevinOwens, superstars.gunther];
 const hallStarOrder = [superstars.hulkHogan, superstars.andreTheGiant, superstars.randySavage, superstars.ultimateWarrior, superstars.stoneCold, superstars.undertaker, superstars.mankind, superstars.kane];
 const evolutionStarOrder = [superstars.rheaRipley, superstars.livMorgan, superstars.beckyLynch, superstars.bayley, superstars.charlotteFlair, superstars.iyoSky, superstars.paige, superstars.stephanieVaquer];
@@ -76,7 +82,13 @@ function buildSetCollection(setId, starOrder, sourceCards) {
     if (card.superstarId && !card.preserveSharedCollectorOrder) continue;
     if (!ordered.some(x => x.id === card.id)) ordered.push({ ...card, rarity: rarityFor(card), setId });
   }
-  return ordered.map((entry, index) => ({ ...entry, cardNumber: index + 1, cardCode: `${sets[setId].shortCode}-${String(index + 1).padStart(3, "0")}` }));
+  const retiredNumbers = retiredCollectorNumbersBySet[setId] ?? new Set();
+  let nextNumber = 1;
+  return ordered.map((entry) => {
+    while (retiredNumbers.has(nextNumber)) nextNumber += 1;
+    const cardNumber = nextNumber++;
+    return { ...entry, cardNumber, cardCode: `${sets[setId].shortCode}-${String(cardNumber).padStart(3, "0")}` };
+  });
 }
 
 export const collectionCardsBySet = {

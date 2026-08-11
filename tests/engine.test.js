@@ -105,7 +105,7 @@ test("original-style Move Type is separate from Momentum method", () => {
 });
 
 test("every collectible resolves to a local artwork file", () => {
-  assert.equal(collectionCards.length, 389);
+  assert.equal(collectionCards.length, 387);
   for (const card of collectionCards) {
     const art = artworkFor(card);
     assert.ok(art, `${card.id} has no artwork path`);
@@ -1231,7 +1231,7 @@ test("Hall of Fame Series 1 contains the audited active pool, eight legends, two
   const hall = cardsForSet("hall-of-fame-series-1");
   const info = setCollectionFor("hall-of-fame-series-1");
   assert.equal(info.displayName, "Hall of Fame — Series 1");
-  assert.equal(hall.length, 106);
+  assert.equal(hall.length, 104);
   assert.equal(hall.filter(c => c.kind === "superstar").length, 8);
   assert.equal(hall.filter(c => c.kind === "manager").length, 3);
   assert.deepEqual(
@@ -1242,10 +1242,38 @@ test("Hall of Fame Series 1 contains the audited active pool, eight legends, two
     hall.filter(c => c.kind === "superstar" && c.era === "attitude-era").map(c => c.superstarId).sort(),
     ["kane", "mankind", "stone-cold-steve-austin", "the-undertaker"]
   );
-  hall.forEach((card, index) => {
-    assert.equal(card.cardNumber, index + 1);
+  assert.equal(hall.some(card => card.cardCode === "HOF1-092"), false);
+  assert.equal(hall.some(card => card.cardCode === "HOF1-100"), false);
+  assert.equal(hall.find(card => card.id === "hof1-flying-shoulder-reviewed")?.cardCode, "HOF1-101");
+  assert.equal(hall.find(card => card.id === "hof1-tilt-whirl-reviewed")?.cardCode, "HOF1-106");
+  for (const card of hall) {
     assert.equal(card.setId, "hall-of-fame-series-1");
-  });
+    assert.equal(card.rarity >= 1 && card.rarity <= 4, true);
+  }
+});
+
+test("Double Sledge is consolidated into shared Double Axe Handle without changing Warrior's deck structure", () => {
+  const hall = cardsForSet("hall-of-fame-series-1");
+  const warrior = decks["ultimate-warrior"];
+  assert.equal(hall.some(card => card.id === "hof1-double-sledge-reviewed"), false);
+  assert.equal("doubleSledgeReviewed" in hallCards, false);
+  assert.equal(warrior.filter(card => card.id === hallCards.axeHandle.id).length, 2);
+  assert.equal(hallCards.axeHandle.name, "Double Axe Handle");
+  assert.equal(hallCards.savageDoubleAxeReviewed.name, "Diving Double Axe Handle");
+});
+
+test("Hall of Fame duplicate Spinebuster is consolidated into the canonical SummerSlam card", () => {
+  const hall = cardsForSet("hall-of-fame-series-1");
+  const stoneCold = decks["stone-cold-steve-austin"];
+  assert.equal("spinebuster" in hallCards, false);
+  assert.equal(hall.some(card => card.id === "hof1-spinebuster"), false);
+  assert.equal(hall.some(card => card.cardCode === "HOF1-092"), false);
+  assert.equal(stoneCold.filter(card => card.id === cards.spinebuster.id).length, 2);
+  assert.equal(cards.spinebuster.name, "Spinebuster");
+  assert.equal(cards.spinebuster.cost, 4);
+  assert.equal(cards.spinebuster.damage, 7);
+  assert.deepEqual(cards.spinebuster.requirements, { strength: 1 });
+  assert.equal(cards.spinebuster.onConnect?.some(effect => effect.type === "loseMomentum" && effect.method === "attitude" && effect.amount === 1), true);
 });
 
 test("Managers are unique, Superstar-restricted and only one may be included in a deck", async () => {

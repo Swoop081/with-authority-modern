@@ -1,44 +1,44 @@
 
-> wwe-legacy-ccg@0.11.11 economy
+> wwe-legacy-ccg@0.11.26 economy
 > node tools/economy-sim.mjs
 
 Economy simulation: 300 pack-only trials per set, max 1000 packs each
 
-SummerSlam — Series 1: 135 cards · 8 Superstars
+SummerSlam — Series 1: 152 cards · 8 Superstars
 firstSetSuperstar        complete 300/300  mean 1.0  p25 1  median 1  p75 1  p90 1
 secondSetSuperstar       complete 300/300  mean 16.4  p25 13  median 20  p75 20  p90 20
 fourthSetSuperstar       complete 300/300  mean 49.7  p25 43  median 51  p75 60  p90 60
-allSetSuperstars         complete 300/300  mean 120.0  p25 113  median 121  p75 129  p90 137
-unique25                 complete 300/300  mean 1.5  p25 1  median 2  p75 2  p90 2
-unique50                 complete 300/300  mean 12.6  p25 12  median 13  p75 14  p90 15
-unique75                 complete 300/300  mean 31.9  p25 29  median 32  p75 34  p90 36
-unique100                complete 300/300  mean 120.2  p25 113  median 121  p75 129  p90 137
-foilUnique25             complete 300/300  mean 33.9  p25 32  median 34  p75 35  p90 37
-foilUnique50             complete 300/300  mean 80.7  p25 78  median 80  p75 84  p90 86
-foilUnique100            complete 300/300  mean 196.9  p25 191  median 198  p75 204  p90 207
-allCardsAtPlayableCap    complete 300/300  mean 123.3  p25 116  median 121  p75 129  p90 137
-foilCopies50             complete 300/300  mean 151.4  p25 151  median 151  p75 152  p90 152
-foilCopies75             complete 300/300  mean 182.0  p25 181  median 182  p75 183  p90 183
-foilCopies90             complete 300/300  mean 200.2  p25 200  median 200  p75 201  p90 201
-foilCopies95             complete 300/300  mean 206.4  p25 206  median 206  p75 207  p90 207
+allSetSuperstars         complete 300/300  mean 121.2  p25 113  median 122  p75 132  p90 140
+unique25                 complete 300/300  mean 1.7  p25 1  median 2  p75 2  p90 3
+unique50                 complete 300/300  mean 14.1  p25 13  median 14  p75 15  p90 16
+unique75                 complete 300/300  mean 35.2  p25 33  median 35  p75 38  p90 40
+unique100                complete 300/300  mean 124.4  p25 117  median 124  p75 132  p90 140
+foilUnique25             complete 300/300  mean 38.3  p25 37  median 38  p75 40  p90 40
+foilUnique50             complete 300/300  mean 90.9  p25 87  median 91  p75 95  p90 98
+foilUnique100            complete 300/300  mean 226.5  p25 220  median 227  p75 234  p90 239
+allCardsAtPlayableCap    complete 300/300  mean 135.4  p25 134  median 135  p75 136  p90 140
+foilCopies50             complete 300/300  mean 174.7  p25 174  median 175  p75 175  p90 176
+foilCopies75             complete 300/300  mean 209.5  p25 209  median 209  p75 210  p90 210
+foilCopies90             complete 300/300  mean 230.5  p25 230  median 230  p75 231  p90 231
+foilCopies95             complete 300/300  mean 237.5  p25 237  median 237  p75 238  p90 238
 
-Hall of Fame — Series 1: 106 cards · 8 Superstars
+Hall of Fame — Series 1: 105 cards · 8 Superstars
 firstSetSuperstar        complete 300/300  mean 16.5  p25 15  median 20  p75 20  p90 20
 secondSetSuperstar       complete 300/300  mean 32.6  p25 26  median 36  p75 40  p90 40
 fourthSetSuperstar       complete 300/300  mean 66.3  p25 58  median 68  p75 78  p90 80
-allSetSuperstars         complete 300/300  mean 125.7  p25 119  median 126  p75 133  p90 140
+allSetSuperstars         complete 300/300  mean 124.9  p25 119  median 125  p75 132  p90 140
 unique25                 complete 300/300  mean 6.9  p25 6  median 7  p75 7  p90 8
-unique50                 complete 300/300  mean 17.5  p25 16  median 17  p75 19  p90 20
-unique75                 complete 300/300  mean 39.0  p25 36  median 40  p75 41  p90 44
-unique100                complete 300/300  mean 125.7  p25 119  median 126  p75 133  p90 140
-foilUnique25             complete 300/300  mean 30.0  p25 28  median 30  p75 31  p90 33
-foilUnique50             complete 300/300  mean 70.8  p25 66  median 71  p75 75  p90 79
-foilUnique100            complete 299/300  mean 152.6  p25 148  median 153  p75 157  p90 161
-allCardsAtPlayableCap    complete 300/300  mean 125.8  p25 119  median 126  p75 133  p90 140
-foilCopies50             complete 300/300  mean 120.3  p25 120  median 120  p75 121  p90 121
-foilCopies75             complete 300/300  mean 142.9  p25 142  median 143  p75 143  p90 144
-foilCopies90             complete 300/300  mean 156.5  p25 156  median 156  p75 157  p90 157
-foilCopies95             complete 300/300  mean 161.1  p25 160  median 161  p75 162  p90 162
+unique50                 complete 300/300  mean 17.7  p25 16  median 18  p75 19  p90 20
+unique75                 complete 300/300  mean 38.8  p25 36  median 40  p75 41  p90 44
+unique100                complete 300/300  mean 124.9  p25 119  median 125  p75 132  p90 140
+foilUnique25             complete 300/300  mean 30.2  p25 28  median 30  p75 32  p90 34
+foilUnique50             complete 300/300  mean 71.7  p25 68  median 71  p75 75  p90 80
+foilUnique100            complete 300/300  mean 150.2  p25 146  median 150  p75 155  p90 159
+allCardsAtPlayableCap    complete 300/300  mean 124.9  p25 119  median 125  p75 132  p90 140
+foilCopies50             complete 300/300  mean 119.1  p25 119  median 119  p75 120  p90 120
+foilCopies75             complete 300/300  mean 141.3  p25 141  median 141  p75 142  p90 142
+foilCopies90             complete 300/300  mean 154.9  p25 154  median 155  p75 155  p90 156
+foilCopies95             complete 300/300  mean 159.3  p25 159  median 159  p75 160  p90 160
 
 Evolution — Series 1: 110 cards · 8 Superstars
 firstSetSuperstar        complete 300/300  mean 16.3  p25 13  median 20  p75 20  p90 20

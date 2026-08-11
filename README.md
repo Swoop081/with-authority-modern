@@ -1,3 +1,11 @@
+## v0.11.27 — Shared Spinebuster Consolidation
+
+The duplicate generic **Hall of Fame Spinebuster** has been removed. Stone Cold now uses the canonical shared **SummerSlam Spinebuster (SS1-091)**, so only one generic Spinebuster front needs artwork. The SummerSlam version remains Cost 4 / Damage 7 / 1 Strength and keeps its on-connect Attitude loss. **HOF1-092 is permanently retired** as a gap, just like HOF1-100, so every later Hall of Fame collector code and artwork filename stays fixed. Card Art Studio is synced to the resulting **387-card / 276-Move** active pool.
+
+## v0.11.26 — Double Sledge Consolidation
+
+Hall of Fame no longer carries two generic names for the same double axe-handle strike. **Double Sledge** has been removed from production data and Ultimate Warrior now uses the existing shared **Double Axe Handle**. Randy Savage's **Diving Double Axe Handle** remains a distinct exclusive Trademark. **HOF1-100 is permanently retired** rather than reused, so HOF1-101–HOF1-106 and any artwork already tied to those collector codes do not shift. Card Art Studio has been synced to the resulting 388-card active pool.
+
 ## v0.11.25 — All-Sets Card Studio Search
 
 The Card Art Studio now opens with **All Sets** selected, so its normal search scans the entire active 389-card pool across SummerSlam, Hall of Fame, Evolution and Rewards. Choose a specific set only when you want to narrow the list. The Superstar filter also spans all 25 Superstars while All Sets is selected.
@@ -20,7 +28,7 @@ Move-card fronts now reserve a consistent three-line footer: **Move name**, **CO
 
 The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
 
-# WWE Legacy: Collectible Card Game — v0.11.25
+# WWE Legacy: Collectible Card Game — v0.11.27
 
 
 
