@@ -1,5 +1,5 @@
 
-> wwe-legacy-ccg@0.11.27 art
+> wwe-legacy-ccg@0.11.28 art
 > node tools/art-audit.mjs
 
 WWE Legacy artwork audit

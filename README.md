@@ -1,3 +1,11 @@
+## v0.11.28 — Full-Height Launch Screen
+
+- Launch/splash screen now uses the full visible phone viewport instead of stacking content at the top and leaving a large dead area below.
+- The Season 1 Final Boss promo expands into the available vertical space while keeping the profile panel, Enter button and local-profile note visible on one screen.
+- Final Boss copy is larger and right-aligned, with extra separation from the Superstar card art/border.
+- Compact-height phones retain a dedicated reduced-size layout so the complete launch screen still fits without scrolling.
+- Gameplay, decks, active pool, collector numbers and Card Art Studio card data are unchanged from v0.11.27.
+
 ## v0.11.27 — Shared Spinebuster Consolidation
 
 The duplicate generic **Hall of Fame Spinebuster** has been removed. Stone Cold now uses the canonical shared **SummerSlam Spinebuster (SS1-091)**, so only one generic Spinebuster front needs artwork. The SummerSlam version remains Cost 4 / Damage 7 / 1 Strength and keeps its on-connect Attitude loss. **HOF1-092 is permanently retired** as a gap, just like HOF1-100, so every later Hall of Fame collector code and artwork filename stays fixed. Card Art Studio is synced to the resulting **387-card / 276-Move** active pool.
@@ -28,7 +36,7 @@ Move-card fronts now reserve a consistent three-line footer: **Move name**, **CO
 
 The unified Card Art Studio URL loader now gives immediate status directly under the URL button and automatically retries CORS/hotlink-blocked image hosts through the public `wsrv.nl` image proxy. Successful URL imports are converted into browser-memory data URLs before entering the preview canvas, preserving WebP export safety even when the Studio is opened directly from `file://`.
 
-# WWE Legacy: Collectible Card Game — v0.11.27
+# WWE Legacy: Collectible Card Game — v0.11.28
 
 
 

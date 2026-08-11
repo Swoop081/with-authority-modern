@@ -2457,3 +2457,15 @@ test("active Superstar-specific cards belong to and are used by their owning Sup
     assert.deepEqual(users.filter(id => id !== card.superstarId), [], `${card.id} is used by the wrong Superstar: ${users.join(", ")}`);
   }
 });
+
+test("launch screen fills the visible viewport and keeps Final Boss copy clear of the card art", () => {
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  assert.match(css, /body\[data-screen="splash"\] #game\{padding-top:0;min-height:100svh\}/);
+  assert.match(css, /\.clean-launch-splash\{[\s\S]*?height:100svh;[\s\S]*?align-items:stretch;[\s\S]*?overflow:hidden;/);
+  assert.match(css, /\.clean-splash-content\{[\s\S]*?height:100%;[\s\S]*?grid-template-rows:auto minmax\(0,1fr\) auto auto auto;[\s\S]*?align-content:stretch;/);
+  assert.match(css, /\.season-ad-copy\{[^}]*justify-items:end;[^}]*text-align:right/);
+  assert.match(css, /\.season-ad-copy p\{[^}]*margin:0 0 0 auto/);
+  assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?\.season-one-ad\{min-height:0;height:clamp\(292px,37svh,360px\);max-height:100%;align-self:center/);
+  assert.match(css, /@media\(max-width:760px\)\{[\s\S]*?\.season-ad-title\{font-size:clamp\(2\.02rem,9\.3vw,3rem\)/);
+  assert.match(css, /@media\(max-height:720px\) and \(max-width:760px\)\{[\s\S]*?\.season-ad-title\{font-size:1\.72rem\}/);
+});
