@@ -1,7 +1,7 @@
-import { cards } from "./cards.js?v=0.11.37";
-import { hallCards } from "./hall-of-fame-cards.js?v=0.11.37";
-import { evolutionCards } from "./evolution-cards.js?v=0.11.37";
-import { rockCards } from "./season1-rock-cards.js?v=0.11.37";
+import { cards } from "./cards.js?v=0.11.40";
+import { hallCards } from "./hall-of-fame-cards.js?v=0.11.40";
+import { evolutionCards } from "./evolution-cards.js?v=0.11.40";
+import { rockCards } from "./season1-rock-cards.js?v=0.11.40";
 
 const M = cards.momentum;
 const copies = (card, count) => Array.from({ length: count }, () => card);

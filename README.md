@@ -1,11 +1,17 @@
-## v0.11.37 — Full-Screen Booster Opening
+## v0.11.40 — Master Card Catalogue + Super Sort
 
-### Booster Vault focus
-- Booster Vault shortcut clutter removed; live set selectors and the three pack types stay in compact single rows.
-- The pack presentation now appears before secondary stats/settings.
-- Opening a pack launches a full-screen reveal/review flow and returns to the Booster Vault when finished.
+**Card Catalogue is now a dedicated crash-safe master database.** Every one of the 387 released cards is browsable whether owned or not; unowned cards are greyed, owned quantities are shown, and results render in mobile-safe 48-card pages rather than trying to mount the entire artwork catalogue at once. A new **SUPER SORT** can combine text, set, Superstar usage/exclusive scope, ownership, card type, rarity, Method, Move Type, Move Family, Finisher/Trademark/Signature class, Cost, Damage, and exact Strength/Strike/Technical/Agility requirements, then sort by collector number, alphabet, set, Superstar, type, rarity, gameplay values or owned quantity. Collection-labelled links now go to My Collection, while Catalogue-labelled links open the standalone database.
 
-The Home **Options** tile now uses Cody Rhodes Superstar artwork so it visually matches the rest of the wrestler-backed hub. The persistent bottom navigation has been tightened: less outer padding, smaller gaps, closer icon-to-label spacing, and a modestly shorter overall bar while retaining large mobile tap targets and horizontal scrolling. No gameplay/card data changed.
+## v0.11.39 — Booster Reveal + Summary Polish
+
+### Booster opening refinements
+- Revealed cards now sit clear of the **Next Card** control instead of overlapping it on iPhone.
+- Every revealed pull displays its actual **Common / Uncommon / Rare / Very Rare** rarity, with Foil called out separately.
+- Pack Complete uses a fixed **2 / 1 / 2** five-card layout; the rarest pull is featured in the centre rather than forcing a horizontal scroll.
+- Pack Complete now offers a direct **Finish Pack & Return to Booster Vault** action in addition to deck-upgrade review.
+- A set with no standard boosters no longer displays a misleading **Tap to Open** pack. If special packs remain the Vault points to them; if no packs remain at all it shows a clear empty state with **Back to Main Menu**.
+
+No gameplay, card, deck, collection, balance, collector-number or Card Art Studio data changed.
 
 ## v0.11.33 — Safe-Area + Season Countdown Polish
 

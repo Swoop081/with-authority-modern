@@ -1,4 +1,4 @@
-import { executeCpuDecision, decisionOwner } from "../ai/WrestlingAI.js?v=0.11.37";
+import { executeCpuDecision, decisionOwner } from "../ai/WrestlingAI.js?v=0.11.40";
 
 /**
  * Drive CPU decisions until control reaches the human, a human response window

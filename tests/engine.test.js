@@ -2413,7 +2413,7 @@ test("finished Superstar card fronts are the canonical UI visual with portrait f
   assert.equal(Object.keys(superstarCardArtwork).length, Object.keys(superstarArtwork).length);
   assert.equal(Object.keys(superstarCardArtwork).length, 25);
   for (const id of Object.keys(superstarArtwork)) {
-    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=0.11.37`);
+    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=0.11.40`);
   }
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   assert.equal(app.includes("const portraitMarkup = superstarVisualMarkup"), true);
@@ -2550,21 +2550,21 @@ test('v0.11.33 restores a normal Options tile to Home without restoring Game & T
 });
 
 
-test('v0.11.37 stamps the full browser dependency graph and runtime artwork URLs with one build version', async () => {
+test('v0.11.40 stamps the full browser dependency graph and runtime artwork URLs with one build version', async () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
   const profileSource = readFileSync(new URL('../js/data/profile.js', import.meta.url), 'utf8');
   const buildSource = readFileSync(new URL('../js/config/build.js', import.meta.url), 'utf8');
   const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
-  assert.equal(pkg.version, '0.11.37');
-  assert.match(html, /css\/game\.css\?v=0\.11\.37/);
-  assert.match(html, /js\/ui\/app\.js\?v=0\.11\.37/);
-  assert.match(html, /manifest\.webmanifest\?v=0\.11\.37/);
-  assert.match(app, /data\/superstars\.js\?v=0\.11\.37/);
-  assert.match(profileSource, /\.\/decks\.js\?v=0\.11\.37/);
-  assert.match(buildSource, /BUILD_VERSION = "0\.11\.37"/);
+  assert.equal(pkg.version, '0.11.40');
+  assert.match(html, /css\/game\.css\?v=0\.11\.40/);
+  assert.match(html, /js\/ui\/app\.js\?v=0\.11\.40/);
+  assert.match(html, /manifest\.webmanifest\?v=0\.11\.40/);
+  assert.match(app, /data\/superstars\.js\?v=0\.11\.40/);
+  assert.match(profileSource, /\.\/decks\.js\?v=0\.11\.40/);
+  assert.match(buildSource, /BUILD_VERSION = "0\.11\.40"/);
   const { artworkFor } = await import('../js/data/artwork.js');
-  assert.match(artworkFor(cards.crossRhodes), /\?v=0\.11\.37$/);
+  assert.match(artworkFor(cards.crossRhodes), /\?v=0\.11\.40$/);
   assert.equal(pkg.scripts['stamp-cache'], 'node tools/stamp-cache-version.mjs');
 });
 
@@ -2620,7 +2620,40 @@ test('v0.11.37 opens packs in a full-screen modal and returns to the Booster Vau
   assert.match(block, /document\.body\.classList\.toggle\("booster-modal-open", packInProgress\)/);
   assert.match(block, /mobileNav\.hidden=packInProgress/);
   assert.match(block, /Finish Pack & Return to Booster Vault/);
-  assert.match(block, /document\.body\.classList\.remove\("booster-modal-open"\);renderBoosters\(\);requestAnimationFrame\(\(\)=>window\.scrollTo\(0,0\)\)/);
+  assert.match(block, /\$\("#finish-pack-review"\)\?\.addEventListener\("click", finishPackFlow\)/);
+  assert.match(app, /function finishPackFlow\(\)[\s\S]*?document\.body\.classList\.remove\("booster-modal-open"\)[\s\S]*?window\.scrollTo\(0,0\)/);
   assert.match(css, /\.booster-pack-modal\{[\s\S]*?position:fixed;[\s\S]*?inset:0;[\s\S]*?z-index:1000;[\s\S]*?overflow-y:auto/);
   assert.match(css, /body\.booster-modal-open\{overflow:hidden!important/);
+});
+
+
+test('v0.11.39 compacts Collection controls so owned cards appear sooner', () => {
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  assert.match(css, /\.collection-view-switch\{[\s\S]*?grid-template-columns:repeat\(2,max-content\)!important[\s\S]*?padding:3px!important/);
+  assert.match(css, /\.collection-set-tabs\{[\s\S]*?flex-wrap:nowrap!important[\s\S]*?overflow-x:auto!important/);
+  assert.match(css, /\.collection-feature>\.set-stats\{[\s\S]*?grid-template-columns:repeat\(4,minmax\(0,1fr\)\)!important/);
+  assert.match(css, /\.collection-feature\.collection-all-hero\{[\s\S]*?min-height:210px!important/);
+  assert.match(app, /Owned here/);
+  assert.match(app, /<span>Superstars<\/span>/);
+});
+
+
+test('v0.11.39 polishes booster reveals, rarity, summary layout and exhausted-pack escape', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderBoosters()'), app.indexOf('function formatCountdown'));
+  assert.match(block, /booster-pull-rarity rarity-\$\{p\.card\.rarity\}/);
+  assert.match(block, /rarityName\(p\)\.toUpperCase\(\)/);
+  assert.match(block, /pack-summary-grid pack-summary-pyramid/);
+  assert.match(block, /featuredPullIndex/);
+  assert.match(block, /summary-center/);
+  assert.match(block, /finish-pack-summary/);
+  assert.match(block, /booster-empty-state/);
+  assert.match(block, /NO PACKS AVAILABLE/);
+  assert.match(block, /booster-empty-home/);
+  assert.match(css, /\.booster-pack-modal \.single-card-slot\{[\s\S]*?min-height:0!important[\s\S]*?padding:0 0 10px/);
+  assert.match(css, /\.pack-summary-grid\.pack-summary-pyramid\{[\s\S]*?grid-template-areas:[\s\S]*?center/);
+  assert.match(css, /\.pack-summary-pyramid \.summary-center\{grid-area:center/);
+  assert.match(css, /\.booster-empty-stage\{min-height:250px!important\}/);
 });

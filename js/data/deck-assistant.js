@@ -1,7 +1,7 @@
-import { collectionCards } from "./collection.js?v=0.11.37";
-import { decks } from "./decks.js?v=0.11.37";
-import { ensureSavedDeck, ownedCount } from "./profile.js?v=0.11.37";
-import { evaluateDeck, isDeckSwapSafe } from "./deck-health.js?v=0.11.37";
+import { collectionCards } from "./collection.js?v=0.11.40";
+import { decks } from "./decks.js?v=0.11.40";
+import { ensureSavedDeck, ownedCount } from "./profile.js?v=0.11.40";
+import { evaluateDeck, isDeckSwapSafe } from "./deck-health.js?v=0.11.40";
 
 const byId = new Map(collectionCards.filter(c => c.kind !== "superstar").map(c => [c.id, c]));
 for (const deck of Object.values(decks)) for (const card of deck) if (!byId.has(card.id)) byId.set(card.id, card);
