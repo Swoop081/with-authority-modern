@@ -7,6 +7,7 @@ import { finishedFrontKeys } from "../js/data/finished-front-keys.js";
 const studioJs = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
 const studioHtml = fs.readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
 const legacySuperstarHtml = fs.readFileSync(new URL("../tools/superstar-card-studio.html", import.meta.url), "utf8");
+const currentVersion = JSON.parse(fs.readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
 
 function studioEntries() {
   const match = studioJs.match(/const STUDIO_CARDS = (\[.*?\]);\nconst STUDIO_SUPERSTARS =/s);
@@ -68,7 +69,7 @@ test("Card Art Studio exposes one type-filtered workflow for every collectible k
 
 test("Card Art Studio is self-contained and direct-file compatible", () => {
   assert.doesNotMatch(studioJs, /^import\s/m);
-  assert.match(studioHtml, /<script src="\.\.\/js\/tools\/card-art-studio\.js\?v=0\.11\.40"><\/script>/);
+  assert.equal(studioHtml.includes(`<script src="../js/tools/card-art-studio.js?v=${currentVersion}"></script>`), true);
   assert.doesNotMatch(studioHtml, /card-art-studio\.js"[^>]*type="module"/);
   assert.match(studioHtml, /<option value="superstar-cody-rhodes">SS1-001 · Cody Rhodes · SUPERSTAR<\/option>/);
   assert.match(studioJs, /WWE_LEGACY_CARD_ART_STUDIO_READY=true/);

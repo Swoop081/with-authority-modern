@@ -1,4 +1,4 @@
-import { normalizeMoveOptions } from "./move-types.js?v=0.11.40";
+import { normalizeMoveOptions } from "./move-types.js?v=0.11.41";
 
 const SET_ID = "evolution-series-1";
 const momentum = (method) => ({ id: `evo1-momentum-${method}`, name: `${method[0].toUpperCase()}${method.slice(1)} Momentum`, kind: "momentum", method, amount: 1, setId: SET_ID });

@@ -1,26 +1,26 @@
-import { assetUrl } from "../config/build.js?v=0.11.40";
-import { superstars } from "../data/superstars.js?v=0.11.40";
-import { decks } from "../data/decks.js?v=0.11.40";
-import { sets } from "../data/sets.js?v=0.11.40";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.40";
-import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.40";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.40";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js?v=0.11.40";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.40";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.40";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.40";
-import { totalMomentum } from "../engine/utils.js?v=0.11.40";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.40";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.40";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.40";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.40";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.40";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.40";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.40";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.40";
-import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.40";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.40";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.40";
+import { assetUrl } from "../config/build.js?v=0.11.41";
+import { superstars } from "../data/superstars.js?v=0.11.41";
+import { decks } from "../data/decks.js?v=0.11.41";
+import { sets } from "../data/sets.js?v=0.11.41";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.41";
+import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.41";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.41";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor } from "../data/boosters.js?v=0.11.41";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.41";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.41";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.41";
+import { totalMomentum } from "../engine/utils.js?v=0.11.41";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.41";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.41";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.41";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.41";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.41";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.41";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.41";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.41";
+import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.41";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.41";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.41";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -31,6 +31,7 @@ let screen = "splash";
 let selection = { p1: profile?.starterId ?? "cm-punk", p2: profile?.starterId === "roman-reigns" ? "cm-punk" : "roman-reigns" };
 let lastMatchup = { ...selection };
 let collectionFilter = { kind: "all", rarity: "all", search: "" };
+let collectionSort = "newest";
 let collectionView = "owned";
 let catalogueFilter = defaultCatalogueFilters();
 let cataloguePage = 1;
@@ -524,7 +525,7 @@ function renderSeasons() {
     </article>`;
   }).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen">
-    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock","cody-rhodes","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Every match, challenge and booster moves your Legacy toward Tier 50. Complete Season 1 to unlock <b>The Rock — The Final Boss</b> and his complete 55-page deck.</p><div class="season-hero-actions"><button id="season-home" class="nav-button">Main Menu</button><button id="season-challenges" class="nav-button">Daily / Weekly</button><button id="season-boosters" class="nav-button">Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
+    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock","cody-rhodes","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Every match, challenge and booster moves your Legacy toward Tier 50. Complete Season 1 to unlock <b>The Rock — The Final Boss</b> and his complete 55-page deck.</p><div class="season-hero-actions"><button id="season-challenges" class="nav-button">Challenges</button><button id="season-boosters" class="nav-button">Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
     <section class="season-live-releases">
       <div class="section-title"><h3>Season 1 · Featured Releases</h3><span>Build the launch roster while you chase The Final Boss</span></div>
@@ -545,7 +546,6 @@ function renderSeasons() {
     <section class="season-section"><div class="section-title"><h3>Season 1 Content Roadmap</h3><span>Launch → Worlds Collide → Money in the Bank → Survivor Series</span></div><div class="season-roadmap">${roadmap}</div><div class="season-rotation-note"><b>Season 2 Rotation Preview</b><span>Owned cards never disappear and remain playable.</span>${SEASON_1.rotationPreview.map(item=>`<small><strong>${sets[item.setId]?.displayName ?? item.setId}</strong> · ${item.from.toUpperCase()} → ${item.to.toUpperCase()} · ${item.note}</small>`).join('')}</div></section>
     <section class="season-section"><div class="section-title"><h3>50-Tier Season Road</h3><span>${claimable.length ? `${claimable.length} reward${claimable.length===1?'':'s'} ready` : 'Earn XP to unlock rewards'}</span></div>${claimable.length ? '<button id="claim-all-season" class="primary season-claim-all">Claim All Available</button>' : ''}<div class="season-tier-road">${tierRoad}</div></section>
   </section>`;
-  $("#season-home")?.addEventListener("click", showMainMenu);
   $("#season-challenges")?.addEventListener("click", showChallenges);
   $("#season-boosters")?.addEventListener("click", showBoosters);
   root.querySelectorAll("[data-season-booster-set]").forEach(btn => btn.addEventListener("click", () => {
@@ -1095,12 +1095,22 @@ function renderCollection() {
   const scopedCards = collectionView === "owned" ? baseCards.filter(isOwned) : baseCards;
   const kinds = ["all","superstar","entrance","momentum","move","action","support","manager","special"];
   const query = collectionFilter.search.trim().toLowerCase();
-  const visible = scopedCards.filter(card => {
+  const acquisitionOrder = new Map(Object.keys(profile.ownedCards ?? {}).map((id, index) => [id, index]));
+  const copiesOwned = card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil");
+  const sortOwnedCards = cards => [...cards].sort((a, b) => {
+    if (collectionSort === "alpha-asc") return a.name.localeCompare(b.name) || String(a.cardCode ?? "").localeCompare(String(b.cardCode ?? ""));
+    if (collectionSort === "alpha-desc") return b.name.localeCompare(a.name) || String(b.cardCode ?? "").localeCompare(String(a.cardCode ?? ""));
+    if (collectionSort === "rarity-desc") return (b.rarity ?? 0) - (a.rarity ?? 0) || a.name.localeCompare(b.name);
+    if (collectionSort === "rarity-asc") return (a.rarity ?? 0) - (b.rarity ?? 0) || a.name.localeCompare(b.name);
+    if (collectionSort === "copies-desc") return copiesOwned(b) - copiesOwned(a) || a.name.localeCompare(b.name);
+    return (acquisitionOrder.get(b.id) ?? -1) - (acquisitionOrder.get(a.id) ?? -1) || a.name.localeCompare(b.name);
+  });
+  const visible = sortOwnedCards(scopedCards.filter(card => {
     if (collectionFilter.kind !== "all" && card.kind !== collectionFilter.kind) return false;
     if (collectionFilter.rarity !== "all" && String(card.rarity) !== collectionFilter.rarity) return false;
     if (query && !`${card.name} ${card.subtitle ?? ""} ${card.kind} ${card.cardCode ?? ""} ${sets[card.setId]?.displayName ?? ""} ${collectionText(card)}`.toLowerCase().includes(query)) return false;
     return true;
-  });
+  }));
   const ownedUniqueAll = collectionCards.filter(isOwned).length;
   const ownedUniqueHere = baseCards.filter(isOwned).length;
   const starCards = baseCards.filter(c => c.kind === "superstar");
@@ -1124,7 +1134,7 @@ function renderCollection() {
       </div>
       <div class="set-stats"><div class="set-stat"><b>${collectionView === 'owned' ? ownedUniqueHere : baseCards.length}</b><span>${collectionView === 'owned' ? 'Owned here' : 'In view'}</span></div><div class="set-stat"><b>${unlocked}/${starCards.length}</b><span>Superstars</span></div><div class="set-stat"><b>${ownedUniqueAll}</b><span>Total owned</span></div><div class="set-stat"><b>${collectionCards.length}</b><span>Catalogue</span></div></div>
     </section>
-    <section class="collection-tools"><span class="collection-mode-label">${eyebrow}</span><input id="collection-search" type="search" placeholder="Search name, move, ability or card code" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select><span class="collection-count">Showing ${visible.length} / ${scopedCards.length}</span></section>
+    <section class="collection-tools"><span class="collection-mode-label">${eyebrow}</span><input id="collection-search" type="search" placeholder="Search name, move, ability or card code" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select><select id="collection-sort" aria-label="Sort My Collection"><option value="newest" ${collectionSort === 'newest' ? 'selected' : ''}>Newest Owned</option><option value="alpha-asc" ${collectionSort === 'alpha-asc' ? 'selected' : ''}>A–Z</option><option value="alpha-desc" ${collectionSort === 'alpha-desc' ? 'selected' : ''}>Z–A</option><option value="rarity-desc" ${collectionSort === 'rarity-desc' ? 'selected' : ''}>Rarity High → Low</option><option value="rarity-asc" ${collectionSort === 'rarity-asc' ? 'selected' : ''}>Rarity Low → High</option><option value="copies-desc" ${collectionSort === 'copies-desc' ? 'selected' : ''}>Most Copies</option></select><span class="collection-count">Showing ${visible.length} / ${scopedCards.length}</span></section>
     <section class="catalogue-grid collectible-catalogue">${visible.length ? visible.map(card => {
       const cardSet = setCollections[card.setId] ?? setCollection;
       return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' || card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small></div></article>`;
@@ -1137,6 +1147,7 @@ function renderCollection() {
   $("#collection-search")?.addEventListener("input", e => { collectionFilter.search = e.target.value; renderCollection(); requestAnimationFrame(() => $("#collection-search")?.focus()); });
   $("#collection-kind")?.addEventListener("change", e => { collectionFilter.kind = e.target.value; renderCollection(); });
   $("#collection-rarity")?.addEventListener("change", e => { collectionFilter.rarity = e.target.value; renderCollection(); });
+  $("#collection-sort")?.addEventListener("change", e => { collectionSort = e.target.value; renderCollection(); });
 }
 
 

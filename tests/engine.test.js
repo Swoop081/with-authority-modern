@@ -2410,10 +2410,11 @@ test("Best in the World pin escape is only playable by CM Punk", () => {
 
 test("finished Superstar card fronts are the canonical UI visual with portrait fallback", async () => {
   const { superstarCardArtwork, superstarArtwork } = await import("../js/data/artwork.js");
+  const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
   assert.equal(Object.keys(superstarCardArtwork).length, Object.keys(superstarArtwork).length);
   assert.equal(Object.keys(superstarCardArtwork).length, 25);
   for (const id of Object.keys(superstarArtwork)) {
-    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=0.11.40`);
+    assert.equal(superstarCardArtwork[id], `assets/cards/art/custom/superstars/${id}.webp?v=${pkg.version}`);
   }
   const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   assert.equal(app.includes("const portraitMarkup = superstarVisualMarkup"), true);
@@ -2550,24 +2551,23 @@ test('v0.11.33 restores a normal Options tile to Home without restoring Game & T
 });
 
 
-test('v0.11.40 stamps the full browser dependency graph and runtime artwork URLs with one build version', async () => {
+test('build-wide cache busting stamps the full browser dependency graph and runtime artwork URLs with one version', async () => {
   const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
   const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
   const profileSource = readFileSync(new URL('../js/data/profile.js', import.meta.url), 'utf8');
   const buildSource = readFileSync(new URL('../js/config/build.js', import.meta.url), 'utf8');
   const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
-  assert.equal(pkg.version, '0.11.40');
-  assert.match(html, /css\/game\.css\?v=0\.11\.40/);
-  assert.match(html, /js\/ui\/app\.js\?v=0\.11\.40/);
-  assert.match(html, /manifest\.webmanifest\?v=0\.11\.40/);
-  assert.match(app, /data\/superstars\.js\?v=0\.11\.40/);
-  assert.match(profileSource, /\.\/decks\.js\?v=0\.11\.40/);
-  assert.match(buildSource, /BUILD_VERSION = "0\.11\.40"/);
+  const escaped = pkg.version.replaceAll('.', '\\.');
+  assert.match(html, new RegExp(`css/game\\.css\\?v=${escaped}`));
+  assert.match(html, new RegExp(`js/ui/app\\.js\\?v=${escaped}`));
+  assert.match(html, new RegExp(`manifest\\.webmanifest\\?v=${escaped}`));
+  assert.match(app, new RegExp(`data/superstars\\.js\\?v=${escaped}`));
+  assert.match(profileSource, new RegExp(`\\./decks\\.js\\?v=${escaped}`));
+  assert.match(buildSource, new RegExp(`BUILD_VERSION = "${escaped}"`));
   const { artworkFor } = await import('../js/data/artwork.js');
-  assert.match(artworkFor(cards.crossRhodes), /\?v=0\.11\.40$/);
+  assert.match(artworkFor(cards.crossRhodes), new RegExp(`\\?v=${escaped}$`));
   assert.equal(pkg.scripts['stamp-cache'], 'node tools/stamp-cache-version.mjs');
 });
-
 
 test('v0.11.35 gives Options Superstar art and tightens the persistent hub without shrinking tap targets too far', () => {
   const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
@@ -2656,4 +2656,30 @@ test('v0.11.39 polishes booster reveals, rarity, summary layout and exhausted-pa
   assert.match(css, /\.pack-summary-grid\.pack-summary-pyramid\{[\s\S]*?grid-template-areas:[\s\S]*?center/);
   assert.match(css, /\.pack-summary-pyramid \.summary-center\{grid-area:center/);
   assert.match(css, /\.booster-empty-stage\{min-height:250px!important\}/);
+});
+
+
+test('v0.11.41 adds simple owned-card sorting without copying Catalogue Super Sort', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderCollection()'), app.indexOf('function catalogueOwned'));
+  assert.match(app, /let collectionSort = "newest"/);
+  assert.match(block, /id="collection-sort"/);
+  for (const label of ['Newest Owned','A–Z','Z–A','Rarity High → Low','Rarity Low → High','Most Copies']) {
+    assert.ok(block.includes(label), `missing Collection sort option: ${label}`);
+  }
+  assert.match(block, /acquisitionOrder/);
+  assert.match(block, /collectionSort === "copies-desc"/);
+  assert.doesNotMatch(block, /SUPER SORT/);
+});
+
+test('v0.11.41 simplifies Season hero actions and moves Featured Release set logos left of card art', () => {
+  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
+  const block = app.slice(app.indexOf('function renderSeasons()'), app.indexOf('function renderChallenges()'));
+  assert.equal(block.includes('id="season-home"'), false);
+  assert.equal(block.includes('Daily / Weekly'), false);
+  assert.match(block, /id="season-challenges"[^>]*>Challenges<\/button>/);
+  assert.match(block, /id="season-boosters"[^>]*>Boosters<\/button>/);
+  assert.match(css, /\.season-release-grid \.season-set-logo\{[^}]*left:12px;right:auto;[^}]*object-position:left top/);
+  assert.match(css, /\.season-hero-actions\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)!important/);
 });

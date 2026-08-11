@@ -1,10 +1,10 @@
-import { cards } from "./cards.js?v=0.11.40";
-import { hallCards } from "./hall-of-fame-cards.js?v=0.11.40";
-import { evolutionCards } from "./evolution-cards.js?v=0.11.40";
-import { rockCards } from "./season1-rock-cards.js?v=0.11.40";
-import { superstars } from "./superstars.js?v=0.11.40";
-import { sets } from "./sets.js?v=0.11.40";
-import { decks } from "./decks.js?v=0.11.40";
+import { cards } from "./cards.js?v=0.11.41";
+import { hallCards } from "./hall-of-fame-cards.js?v=0.11.41";
+import { evolutionCards } from "./evolution-cards.js?v=0.11.41";
+import { rockCards } from "./season1-rock-cards.js?v=0.11.41";
+import { superstars } from "./superstars.js?v=0.11.41";
+import { sets } from "./sets.js?v=0.11.41";
+import { decks } from "./decks.js?v=0.11.41";
 
 const rarity = { common: 1, uncommon: 2, rare: 3, veryRare: 4 };
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };

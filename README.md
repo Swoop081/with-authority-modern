@@ -1,3 +1,9 @@
+## v0.11.41 — My Collection Sort + Season Hub Polish
+
+- My Collection gets a compact sort dropdown: Newest Owned, A–Z, Z–A, rarity high/low, and Most Copies.
+- Season hub hero now keeps only Challenges and Boosters.
+- Featured Release set logos move to the left side so they never cover the three Superstar cards.
+
 ## v0.11.40 — Master Card Catalogue + Super Sort
 
 **Card Catalogue is now a dedicated crash-safe master database.** Every one of the 387 released cards is browsable whether owned or not; unowned cards are greyed, owned quantities are shown, and results render in mobile-safe 48-card pages rather than trying to mount the entire artwork catalogue at once. A new **SUPER SORT** can combine text, set, Superstar usage/exclusive scope, ownership, card type, rarity, Method, Move Type, Move Family, Finisher/Trademark/Signature class, Cost, Damage, and exact Strength/Strike/Technical/Agility requirements, then sort by collector number, alphabet, set, Superstar, type, rarity, gameplay values or owned quantity. Collection-labelled links now go to My Collection, while Catalogue-labelled links open the standalone database.

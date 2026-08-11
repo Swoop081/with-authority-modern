@@ -1,4 +1,4 @@
-import { totalMomentum } from "./utils.js?v=0.11.40";
+import { totalMomentum } from "./utils.js?v=0.11.41";
 
 export function supportPassive(player, key) {
   return (player.activeSupports ?? []).reduce((sum, card) => sum + (card.passive?.[key] ?? 0), 0);
