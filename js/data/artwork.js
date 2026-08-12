@@ -1,134 +1,31 @@
-import { assetUrl } from "../config/build.js?v=0.11.44";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.44";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.44";
+import { assetUrl } from "../config/build.js";
 
-const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
-const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
-const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
-const EVOLUTION_ROOT = "assets/art/evolution-series-1";
-const TEMP_GENERIC_ART = "assets/cards/art/temp/generic-wrestling-action.webp";
-
-// Superstar art is deliberately centralized. Replacing a portrait later only
-// requires changing one path here (or using superstarArtOverrides below).
-const rawSuperstarArtwork = {
-  "cody-rhodes": `${SUMMERSLAM_ROOT}/superstars/cody-rhodes.webp`,
-  "cm-punk": `${SUMMERSLAM_ROOT}/superstars/cm-punk.webp`,
-  "roman-reigns": `${SUMMERSLAM_ROOT}/superstars/roman-reigns.webp`,
-  "seth-rollins": `${SUMMERSLAM_ROOT}/superstars/seth-rollins.webp`,
-  "oba-femi": `${SUMMERSLAM_ROOT}/superstars/oba-femi.webp`,
-  "brock-lesnar": `${SUMMERSLAM_ROOT}/superstars/brock-lesnar.webp`,
-  "kevin-owens": `${SUMMERSLAM_ROOT}/superstars/kevin-owens.webp`,
-  "gunther": `${SUMMERSLAM_ROOT}/superstars/gunther.webp`,
-
-  // Temporary Hall of Fame photos. These are intentionally easy to replace
-  // when final era/move-specific art is sourced.
-  "hulk-hogan": `${WWE_PROFILE_ROOT}/hulk-hogan.png`,
-  "andre-the-giant": `${WWE_PROFILE_ROOT}/andre-the-giant.png`,
-  "randy-savage": `${WWE_PROFILE_ROOT}/randy-savage.png`,
-  "ultimate-warrior": `${WWE_PROFILE_ROOT}/ultimate-warrior.png`,
-  "stone-cold-steve-austin": `${WWE_PROFILE_ROOT}/stone-cold-steve-austin.png`,
-  "the-undertaker": `${WWE_PROFILE_ROOT}/the-undertaker.png`,
-  "mankind": `${WWE_PROFILE_ROOT}/mankind.png`,
-  "kane": `${WWE_PROFILE_ROOT}/kane.png`,
-
-  // Evolution — Series 1 temporary sourced portraits.
-  "rhea-ripley": `${WWE_PROFILE_ROOT}/rhea-ripley.png`,
-  "liv-morgan": `${WWE_PROFILE_ROOT}/liv-morgan.png`,
-  "becky-lynch": `${WWE_PROFILE_ROOT}/becky-lynch.png`,
-  "bayley": `${WWE_PROFILE_ROOT}/bayley.png`,
-  "charlotte-flair": `${WWE_PROFILE_ROOT}/charlotte-flair.png`,
-  "iyo-sky": `${WWE_PROFILE_ROOT}/iyo-sky.png`,
-  "paige": `${WWE_PROFILE_ROOT}/paige.png`,
-  "stephanie-vaquer": `${WWE_PROFILE_ROOT}/stephanie-vaquer.png`,
-  "the-rock": `${WWE_PROFILE_ROOT}/the-rock.png`,
-  ...superstarArtOverrides
+const portraits = {
+  "cody-rhodes": "assets/art/summerslam-series-1/superstars/cody-rhodes.webp",
+  "cm-punk": "assets/art/summerslam-series-1/superstars/cm-punk.webp",
+  "roman-reigns": "assets/art/summerslam-series-1/superstars/roman-reigns.webp",
+  "seth-rollins": "assets/art/summerslam-series-1/superstars/seth-rollins.webp",
+  "oba-femi": "assets/art/summerslam-series-1/superstars/oba-femi.webp",
+  "brock-lesnar": "assets/art/summerslam-series-1/superstars/brock-lesnar.webp",
+  "kevin-owens": "assets/art/summerslam-series-1/superstars/kevin-owens.webp",
+  "gunther": "assets/art/summerslam-series-1/superstars/gunther.webp",
+  "hulk-hogan": "assets/art/wwe-profile-portraits/hulk-hogan.png",
+  "andre-the-giant": "assets/art/wwe-profile-portraits/andre-the-giant.png",
+  "randy-savage": "assets/art/wwe-profile-portraits/randy-savage.png",
+  "ultimate-warrior": "assets/art/wwe-profile-portraits/ultimate-warrior.png",
+  "stone-cold-steve-austin": "assets/art/wwe-profile-portraits/stone-cold-steve-austin.png",
+  "the-undertaker": "assets/art/wwe-profile-portraits/the-undertaker.png",
+  "mankind": "assets/art/wwe-profile-portraits/mankind.png",
+  "kane": "assets/art/wwe-profile-portraits/kane.png",
+  "rhea-ripley": "assets/art/wwe-profile-portraits/rhea-ripley.png",
+  "liv-morgan": "assets/art/wwe-profile-portraits/liv-morgan.png",
+  "becky-lynch": "assets/art/wwe-profile-portraits/becky-lynch.png",
+  "bayley": "assets/art/wwe-profile-portraits/bayley.png",
+  "charlotte-flair": "assets/art/wwe-profile-portraits/charlotte-flair.png",
+  "iyo-sky": "assets/art/wwe-profile-portraits/iyo-sky.png",
+  "paige": "assets/art/wwe-profile-portraits/paige.png",
+  "stephanie-vaquer": "assets/art/wwe-profile-portraits/stephanie-vaquer.png",
+  "the-rock": "assets/art/wwe-profile-portraits/the-rock.png"
 };
 
-export const superstarArtwork = Object.fromEntries(
-  Object.entries(rawSuperstarArtwork).map(([id, path]) => [id, assetUrl(path)])
-);
-// Finished Superstar collectible fronts exported by the unified Card Art Studio.
-// These are intentionally separate from wrestler portraits: move/Entrance cards
-// can continue using action/profile art while every Superstar-facing UI surface
-// can prefer the finished collectible card. Missing custom files fall back in
-// the UI to superstarArtwork without breaking the game.
-export const superstarCardArtwork = Object.fromEntries(
-  Object.keys(superstarArtwork).map(id => [id, assetUrl(`assets/cards/art/custom/superstars/${id}.webp`)])
-);
-
-export function superstarCardArtFor(superstarId) {
-  return superstarCardArtwork[superstarId] ?? null;
-}
-
-// Finished collectible fronts exported by the unified Card Art Studio.
-// Each type gets a predictable folder, so installing an exported WebP never
-// requires a manifest edit. Missing finished fronts fall back to legacy art.
-const finishedFrontFolders = {
-  move: "moves",
-  entrance: "entrances",
-  special: "specials",
-  manager: "managers",
-  action: "actions",
-  support: "supports",
-  momentum: "momentum",
-};
-
-export function finishedCardArtFor(card) {
-  if (!card) return null;
-  if (card.kind === "superstar") return superstarCardArtFor(card.superstarId);
-  const folder = finishedFrontFolders[card.kind];
-  const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
-  return folder && key ? assetUrl(`assets/cards/art/custom/${folder}/${key}.webp`) : null;
-}
-
-// v0.11.18–v0.11.22 documentation sometimes described raw card-ID filenames.
-// Keep that location as a secondary candidate so any art already installed there
-// continues to work while the Studio uses stable collector-code filenames.
-export function legacyFinishedCardArtFor(card) {
-  if (!card || card.kind === "superstar") return null;
-  const folder = finishedFrontFolders[card.kind];
-  return folder && card.id ? assetUrl(`assets/cards/art/custom/${folder}/${card.id}.webp`) : null;
-}
-
-// Backwards-compatible helper retained for existing Move-specific callers/tests.
-export function moveCardArtFor(cardId) {
-  return cardId ? assetUrl(`assets/cards/art/custom/moves/${cardId}.webp`) : null;
-}
-
-// Exact card-photo replacements always win. This is the long-term migration
-// path from temporary fallback art to a unique photo for every individual card.
-export const cardArtwork = cardArtOverrides;
-
-export function artworkFor(card) {
-  if (!card) return null;
-
-  // 1. Exact card photo supplied by the user / final sourcing pass.
-  if (cardArtwork[card.id]) return assetUrl(cardArtwork[card.id]);
-
-  // 2. Superstar card, or any wrestler-specific card awaiting its own action
-  //    shot, uses that wrestler's local portrait as temporary art.
-  if (card.superstarId && superstarArtwork[card.superstarId]) {
-    return superstarArtwork[card.superstarId];
-  }
-
-  // 3. Every remaining collectible receives a local wrestling-action image so
-  //    there are no blank ARTWORK SLOT cards in the playable build.
-  return assetUrl(TEMP_GENERIC_ART);
-}
-
-export function artworkRequirement(card) {
-  if (card.kind === "superstar") return "unique-superstar-photo";
-  if (card.kind === "entrance") return "unique-entrance-photo";
-  if (card.kind === "momentum") return "graphic-momentum-art";
-  if (card.superstarId && card.kind === "move") return "unique-move-photo";
-  return "generic-wwe-concept-photo";
-}
-
-export function isTemporaryArtwork(card) {
-  if (!card) return true;
-  if (cardArtwork[card.id]) return false;
-  // All current Superstar cards now use sourced local profile portraits.
-  // Inherited move/entrance usage is still temporary until exact action art exists.
-  if (card.kind === "superstar" && superstarArtwork[card.superstarId]) return false;
-  return true;
-}
+export const superstarArtwork = Object.fromEntries(Object.entries(portraits).map(([id,path]) => [id, assetUrl(path)]));
