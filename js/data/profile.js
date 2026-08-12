@@ -1,6 +1,6 @@
-import { decks } from "./decks.js?v=0.11.44";
-import { ownershipCapFor } from "./card-limits.js?v=0.11.44";
-import { superstars } from "./superstars.js?v=0.11.44";
+import { decks } from "./decks.js?v=0.11.43";
+import { ownershipCapFor } from "./card-limits.js?v=0.11.43";
+import { superstars } from "./superstars.js?v=0.11.43";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];

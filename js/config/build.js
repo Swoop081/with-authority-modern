@@ -1,4 +1,7 @@
-export const BUILD_VERSION = "0.11.43-ui-reset";
+// WWE Legacy build identity + local asset cache-busting.
+// `npm run stamp-cache` rewrites this value from package.json on each release.
+export const BUILD_VERSION = "0.11.43";
+
 export function assetUrl(path) {
   if (!path || /^(?:data:|blob:)/i.test(path)) return path;
   const joiner = String(path).includes("?") ? "&" : "?";

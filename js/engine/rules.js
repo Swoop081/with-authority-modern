@@ -1,4 +1,4 @@
-import { totalMomentum } from "./utils.js?v=0.11.44";
+import { totalMomentum } from "./utils.js?v=0.11.43";
 
 export function supportPassive(player, key) {
   return (player.activeSupports ?? []).reduce((sum, card) => sum + (card.passive?.[key] ?? 0), 0);
@@ -61,9 +61,7 @@ function moveStateAndResourceEligibility(match, playerId, card, { counterContext
   // Control. They must not leak into an out-of-Control counter window.
   const turnModifier = counterContext ? 0 : (player.turn.nextMoveCostModifier ?? 0);
   const cardModifier = counterContext ? 0 : (player.pendingCardCostModifiers?.[card.id] ?? 0);
-  const methodModifier = (!counterContext && player.specialFlags?.nextMethodMoveCostModifier?.method === card.method)
-    ? (player.specialFlags.nextMethodMoveCostModifier.amount ?? 0) : 0;
-  const threshold = Math.max(0, (card.cost ?? 0) + turnModifier + cardModifier + methodModifier - leadOffDiscount);
+  const threshold = Math.max(0, (card.cost ?? 0) + turnModifier + cardModifier - leadOffDiscount);
 
   if (effectiveTotalMomentum(player) < threshold) {
     return { legal: false, reason: `Not enough total momentum (need ${threshold})`, threshold };

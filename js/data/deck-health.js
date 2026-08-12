@@ -1,7 +1,6 @@
-import { superstars } from "./superstars.js?v=0.11.44";
-import { ownershipCapFor } from "./card-limits.js?v=0.11.44";
-import { isOffensiveMove, isCounterMove } from "./move-types.js?v=0.11.44";
-import { entranceForSuperstar } from "./entrances.js?v=0.11.44";
+import { superstars } from "./superstars.js?v=0.11.43";
+import { ownershipCapFor } from "./card-limits.js?v=0.11.43";
+import { isOffensiveMove, isCounterMove } from "./move-types.js?v=0.11.43";
 export const DECK_SIZE = 55;
 export const OPENING_SIZE = 5;
 
@@ -52,7 +51,6 @@ function distancePenalty(value, rule) {
 export function evaluateDeck(deck, { superstarId = null } = {}) {
   const counts = Object.fromEntries(Object.keys(RECOMMENDED_DECK_SHAPE).map(k => [k, 0]));
   const methodSupply = { agility: 0, knowledge: 0, strength: 0, strike: 0, technical: 0 };
-  const entranceSupply = { agility: 0, knowledge: 0, strength: 0, strike: 0, technical: 0 };
   const methodDemand = { agility: 0, knowledge: 0, strength: 0, strike: 0, technical: 0 };
   const maxMethodRequirement = { agility: 0, knowledge: 0, strength: 0, strike: 0, technical: 0 };
 
@@ -67,18 +65,6 @@ export function evaluateDeck(deck, { superstarId = null } = {}) {
       }
     }
   }
-
-  if (superstarId) {
-    const linkedEntrance = entranceForSuperstar(superstarId);
-    for (const effect of linkedEntrance?.effects ?? []) {
-      if (effect.type === "gainMomentum" && effect.method in entranceSupply && effect.method !== "attitude") {
-        entranceSupply[effect.method] += effect.amount ?? 1;
-      }
-    }
-  }
-  const effectiveMethodSupply = Object.fromEntries(
-    Object.keys(methodSupply).map(method => [method, methodSupply[method] + entranceSupply[method]])
-  );
 
   const opening = deck.slice(0, OPENING_SIZE);
   const openingCounts = {
@@ -111,11 +97,11 @@ export function evaluateDeck(deck, { superstarId = null } = {}) {
   }
 
   for (const method of Object.keys(methodSupply)) {
-    if (methodDemand[method] > 0 && effectiveMethodSupply[method] < maxMethodRequirement[method]) {
-      violations.push(`${method} Momentum cannot satisfy the deck's highest ${method} requirement (${effectiveMethodSupply[method]}/${maxMethodRequirement[method]}, including Entrance).`);
+    if (methodDemand[method] > 0 && methodSupply[method] < maxMethodRequirement[method]) {
+      violations.push(`${method} Momentum cannot satisfy the deck's highest ${method} requirement (${methodSupply[method]}/${maxMethodRequirement[method]}).`);
     }
-    if (methodDemand[method] >= 3 && effectiveMethodSupply[method] === 0) {
-      violations.push(`${method} is required by multiple Moves but neither the deck nor Entrance supplies ${method} Momentum.`);
+    if (methodDemand[method] >= 3 && methodSupply[method] === 0) {
+      violations.push(`${method} is required by multiple Moves but the deck contains no ${method} Momentum.`);
     }
   }
 
@@ -140,8 +126,6 @@ export function evaluateDeck(deck, { superstarId = null } = {}) {
     counts,
     openingCounts,
     methodSupply,
-    entranceSupply,
-    effectiveMethodSupply,
     methodDemand,
     maxMethodRequirement,
     violations,

@@ -4,7 +4,6 @@ import {decks} from "../js/data/decks.js";
 import {superstars} from "../js/data/superstars.js";
 import {MatchEngine} from "../js/engine/MatchEngine.js";
 import {moveEligibility} from "../js/engine/rules.js";
-import {evaluateDeck} from "../js/data/deck-health.js";
 
 const ids=[
 "cody-rhodes","cm-punk","roman-reigns","seth-rollins","oba-femi","brock-lesnar","kevin-owens","gunther",
@@ -16,14 +15,13 @@ for(const id of ids){
  const d=decks[id],s=S(id);
  if(!d||d.length!==55)issues.push(`${id}: deck ${d?.length}`);
  if(JSON.stringify(d.slice(0,5).map(c=>c.id))!==JSON.stringify(s.leadOffIds))issues.push(`${id}: lead-off mismatch`);
- const health=evaluateDeck(d,{superstarId:id});
- const effectiveMethodSupply=health.effectiveMethodSupply;
+ const methods=new Set(d.filter(c=>c.kind==="momentum").map(c=>c.method));
  const counts={}, families={};
  for(const c of d){
   counts[c.id]=(counts[c.id]??0)+1;
   if(c.moveFamily)families[c.moveFamily]=(families[c.moveFamily]??0)+1;
   if(c.superstarId && c.superstarId!==id)issues.push(`${id}: illegal exclusive ${c.name} (${c.superstarId})`);
-  if(c.kind==="move"&&!c.defensiveOnly)for(const [m,n] of Object.entries(c.requirements??{}))if(n>0&&(effectiveMethodSupply[m]??0)<n)issues.push(`${id}: ${c.name} unsupported ${m} (${effectiveMethodSupply[m]??0}/${n}, including Entrance)`);
+  if(c.kind==="move"&&!c.defensiveOnly)for(const [m,n] of Object.entries(c.requirements??{}))if(n>0&&!methods.has(m))issues.push(`${id}: ${c.name} unsupported ${m}`);
  }
  for(const [cid,n] of Object.entries(counts))if(n>5 && !cid.includes("momentum"))issues.push(`${id}: ${cid} x${n}`);
  for(const [fam,n] of Object.entries(families))if(n>5)issues.push(`${id}: family ${fam} x${n}`);

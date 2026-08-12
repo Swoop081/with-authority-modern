@@ -305,34 +305,34 @@ test("Seth's Architect rewards first-time Methods without adding setup requireme
   assert.equal(seth.hand.length >= before, true); // Move leaves, ability draws one.
 });
 
-test("Undertaker's Lord of Darkness survives a lethal Move once without extra resources", () => {
+test("Undertaker's Deadman Walking survives a lethal Move once and triggers the comeback", () => {
   const g = new MatchEngine({ superstarA: superstars.codyRhodes, superstarB: superstars.undertaker, deckA: decks["cody-rhodes"], deckB: decks["the-undertaker"] });
   const cody = g.state().players.p1;
   const taker = g.state().players.p2;
   cody.momentum.strike = 1;
   const beforeAttitude = taker.momentum.attitude;
   const beforeHand = taker.hand.length;
-  const lethal = putInHand(g, "p1", { ...cards.jab, id: "lord-darkness-lethal-test", damage: taker.hp + 20 });
+  const lethal = putInHand(g, "p1", { ...cards.jab, id: "deadman-lethal-test", damage: taker.hp + 20 });
   g.declareMove("p1", lethal); g.passCounter("p2");
   assert.equal(taker.hp, 1);
   assert.equal(taker.passiveFlags.surviveAtOneUsed, true);
-  assert.equal(taker.momentum.attitude, Math.max(0, beforeAttitude - 1));
-  assert.equal(taker.hand.length, beforeHand);
+  assert.equal(taker.momentum.attitude, beforeAttitude + 1); // +2 comeback, then the connected Move removes 1 Attitude
+  assert.equal(taker.hand.length, beforeHand + 1);
   assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_PASSIVE" && e.playerId === "p2" && e.effect === "SURVIVE_AT_ONE"), true);
 });
 
 test("Kane's Big Red Machine rewards his first two 8+ damage connections", () => {
   const g = new MatchEngine({ superstarA: superstars.kane, superstarB: superstars.codyRhodes, deckA: decks["kane"], deckB: decks["cody-rhodes"] });
   const kane = g.state().players.p1;
-  kane.momentum.strike = 2;
-  kane.momentum.attitude = 8;
+  kane.momentum.strike = 1;
   const beforeAttitude = kane.momentum.attitude;
-  const heavy = putInHand(g, "p1", { ...hallCards.jab, id: "kane-heavy-test", superstarId: "kane", requirements: { strike: 1 }, cost: 2, damage: 8, setOpponentPosture: "on-mat" });
+  const heavy = putInHand(g, "p1", { ...hallCards.jab, id: "kane-heavy-test", superstarId: "kane", requirements: { strike: 1 }, damage: 8, setOpponentPosture: "on-mat" });
   const beforeHand = kane.hand.length;
   g.declareMove("p1", heavy); g.passCounter("p2");
   assert.equal(kane.abilityUses, 1);
   assert.equal(kane.momentum.attitude, beforeAttitude + 2); // universal connection + Superstar ability
   assert.equal(kane.hand.length, beforeHand); // played one, ability drew one
+  assert.equal(kane.specialFlags.kaneStrikeBonus, true);
   assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_ABILITY" && e.playerId === "p1" && e.abilityId === "big-red-machine"), true);
 });
 
@@ -1291,23 +1291,20 @@ test("Managers are unique, Superstar-restricted and only one may be included in 
   assert.equal(health.violations.some(v => v.includes("at most one Manager")), true);
 });
 
-test("Bobby Heenan draws 1 and regains Control after Andre's first non-Finisher Move is Countered", () => {
+test("Bobby Heenan recovers Andre's first important Move that gets Countered", () => {
   const g = new MatchEngine({ superstarA: superstars.andreTheGiant, superstarB: superstars.hulkHogan, deckA: decks["andre-the-giant"], deckB: decks["hulk-hogan"], rng: () => 0 });
   const andre = g.state().players.p1;
   g.playManager("p1", putInHand(g, "p1", hallCards.bobbyHeenan));
-  andre.momentum.strike = 2;
+  andre.momentum.strike = 1;
   andre.momentum.attitude = 6;
-  const important = putInHand(g, "p1", { ...hallCards.andreHeadbuttReviewed, id: "heenan-important-test", cost: 3 });
-  const beforeHand = andre.hand.length;
-  const counter = putInHand(g, "p2", hallCards.hofDesperationCounter);
+  const important = putInHand(g, "p1", { ...hallCards.andreHeadbuttReviewed, id: "heenan-important-test", cost: 7 });
+  const counter = putInHand(g, "p2", cards.desperationCounter);
   g.declareMove("p1", important);
   g.counter("p2", counter);
   assert.equal(andre.managerAbilityUsed, true);
-  assert.equal(andre.hand.length, beforeHand); // played one, Heenan drew one
-  assert.equal(andre.discard.some(c => c.id === important.id), true);
-  assert.equal(g.state().playerInControl, "p1");
-  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id && e.trigger === "COUNTERED_MOVE_REGAIN_CONTROL").length, 1);
-  assert.equal(g.state().log.some(e => e.type === "MANAGER_CONTROL_RECOVERED" && e.playerId === "p1"), true);
+  assert.equal(andre.hand.some(c => c.id === important.id), true);
+  assert.equal(andre.discard.some(c => c.id === important.id), false);
+  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id && e.trigger === "COUNTERED_MOVE_RECOVERY").length, 1);
 });
 
 test("a Manager cannot be played for an unrelated Superstar", () => {
@@ -1316,20 +1313,18 @@ test("a Manager cannot be played for an unrelated Superstar", () => {
   assert.throws(() => g.playManager("p1", heenan), /Illegal Manager/);
 });
 
-test("Stone Cold's Kick to the Gut protects Stone Cold Stunner only on Austin's immediately following turn", () => {
+test("Stone Cold's reviewed Kick to the Gut searches the Playbook for the reviewed Stone Cold Stunner", () => {
   const g = new MatchEngine({ superstarA: superstars.stoneCold, superstarB: superstars.mankind, deckA: decks["stone-cold-steve-austin"], deckB: decks.mankind, rng: () => 0.4 });
   const austin = g.state().players.p1;
-  austin.momentum.strike = 3;
-  austin.momentum.attitude = 9;
-  const kick = putInHand(g, "p1", hallCards.austinKickReviewed);
-  const stunner = putInHand(g, "p1", hallCards.austinStunnerReviewed);
+  austin.momentum.strike = 2;
+  austin.momentum.attitude = 4;
+  const kick = austin.hand.find(c => c.id === hallCards.austinKickReviewed.id) ?? putInHand(g, "p1", hallCards.austinKickReviewed);
+  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunnerReviewed.id), false);
+  assert.equal(austin.deck.some(c => c.id === hallCards.austinStunnerReviewed.id), true);
   g.declareMove("p1", kick);
   g.passCounter("p2");
-  assert.equal(austin.specialFlags.austinKickSetupTurn, g.state().turnNumber + 1);
-  g.endPostMove("p1");
-  g.declareMove("p1", stunner);
-  assert.equal(g.state().proposedMove.uncounterable, true);
-  assert.throws(() => g.counter("p2", putInHand(g, "p2", hallCards.hofDesperationCounter)), /cannot be Countered/);
+  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunnerReviewed.id), true);
+  assert.equal(g.state().log.some(e => e.type === "CARD_SEARCHED" && e.playerId === "p1" && e.cardId === hallCards.austinStunnerReviewed.id), true);
 });
 
 test("active shared Move secondary effects can draw, discard and add extra Attitude", () => {
@@ -1403,19 +1398,22 @@ test("Championship Road has Golden Era and Attitude Era Hall of Fame finals", as
   assert.equal(CHAMPIONSHIP_BRANCHES["attitude-era"].finals.includes(attitude.opponents.at(-1)), true);
 });
 
-test("Miss Elizabeth triggers once when Savage loses Control: draw 1 and gain 1 Adrenaline", () => {
+test("Miss Elizabeth triggers once below half HP: draw 2, then bottom 1", () => {
   const g = new MatchEngine({ superstarA: superstars.randySavage, superstarB: superstars.hulkHogan, deckA: decks["randy-savage"], deckB: decks["hulk-hogan"], rng: () => 0 });
   const savage = g.state().players.p1;
   g.playManager("p1", putInHand(g, "p1", hallCards.missElizabeth));
+  savage.hp = 21;
+  g.passTurn("p1");
+  g.state().players.p2.momentum.attitude = 1;
   const beforeHand = savage.hand.length;
-  const beforeAttitude = savage.momentum.attitude;
-  g.passTurn("p1");
+  const beforeHp = savage.hp;
+  const jab = putInHand(g, "p2", hallCards.jab);
+  g.declareMove("p2", jab);
+  g.passCounter("p1");
   assert.equal(savage.managerAbilityUsed, true);
+  assert.equal(savage.hp, beforeHp - hallCards.jab.damage);
   assert.equal(savage.hand.length, beforeHand + 1);
-  assert.equal(savage.momentum.attitude, beforeAttitude + 1);
-  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.missElizabeth.id && e.trigger === "CONTROL_LOST").length, 1);
-  g.passTurn("p2");
-  g.passTurn("p1");
+  assert.equal(g.state().log.some(e => e.type === "MANAGER_BOTTOMED_PAGE" && e.managerId === hallCards.missElizabeth.id), true);
   assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.missElizabeth.id).length, 1);
 });
 

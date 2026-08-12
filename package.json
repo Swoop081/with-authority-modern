@@ -1,6 +1,14 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.11.43-ui-reset",
+  "version": "0.11.43",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "flow": "node tools/flow-audit.mjs",
+    "economy": "node tools/economy-sim.mjs",
+    "balance": "node tools/balance-sim.mjs",
+    "art": "node tools/art-audit.mjs",
+    "stamp-cache": "node tools/stamp-cache-version.mjs"
+  }
 }
