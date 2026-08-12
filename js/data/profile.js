@@ -1,6 +1,6 @@
-import { decks } from "./decks.js?v=0.11.42";
-import { ownershipCapFor } from "./card-limits.js?v=0.11.42";
-import { superstars } from "./superstars.js?v=0.11.42";
+import { decks } from "./decks.js?v=0.11.44";
+import { ownershipCapFor } from "./card-limits.js?v=0.11.44";
+import { superstars } from "./superstars.js?v=0.11.44";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -159,7 +159,7 @@ export function createProfile(starterId) {
     version: 11,
     starterId,
     unlockedSuperstars: [starterId],
-    favoriteSuperstars: [],
+    favouriteSuperstars: [],
     ownedCards: starterOwnership(starterId),
     savedDecks: { [starterId]: starterDeckState(starterId) },
     deckAssistance: "ask",
@@ -241,8 +241,8 @@ export function migrateProfile(profile) {
   if (!profile) return null;
   profile.ownedCards ??= Object.keys(profile.ownedCards ?? {}).length ? profile.ownedCards : starterOwnership(profile.starterId);
   profile.savedDecks ??= { [profile.starterId]: starterDeckState(profile.starterId) };
-  profile.favoriteSuperstars ??= [];
-  profile.favoriteSuperstars = [...new Set(profile.favoriteSuperstars.filter(id => profile.unlockedSuperstars?.includes(id) && Object.values(superstars).some(star => star.id === id)))];
+  profile.favouriteSuperstars ??= [];
+  profile.favouriteSuperstars = profile.favouriteSuperstars.filter(id => profile.unlockedSuperstars?.includes(id));
   profile.deckAssistance ??= "ask";
   profile.boosterCredits ??= 0;
   profile.boosterCreditsBySet ??= { "summerslam-series-1": profile.boosterCredits ?? 0, "hall-of-fame-series-1": 0 };

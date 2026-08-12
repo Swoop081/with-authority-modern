@@ -1,0 +1,32 @@
+WWE Legacy: Collectible Card Game v0.11.44 — Hall of Fame Native Hooks
+Validation date: 2026-08-12
+
+Full automated test suite:
+- 229 tests
+- 229 passed
+- 0 failed
+- 0 skipped
+
+16-Superstar CPU smoke simulation:
+- 5,120 matches
+- 0 stalls
+- 21 time-limit draws
+- 24.90 average turns
+- 89,246 Moves declared
+- 9,671 Counters
+
+Focus regression coverage includes:
+- Hulk Up counter restrictions + Big Boot -> Atomic Leg Drop
+- Kane Rise From the Flames
+- Mankind Mr. Socko and Deranged Resilience
+- Warrior Shake the Ropes and Feel the Power
+- Savage Oh Yeah! and Macho Madness
+- Andre Nobody Slams Andre and Giant's Reach
+- Undertaker Snake Eyes setup, Lord of Darkness and Sit Up
+- Stone Cold Kick to the Gut -> immediately-following-turn Stunner protection
+- Bobby Heenan non-Finisher counter recovery and Finisher exclusion
+- Miss Elizabeth Control-loss trigger
+- Entrance-supplied tertiary Momentum in deck-health validation
+- CPU legality for Move-counter protection
+
+No balance tuning was applied in this release.

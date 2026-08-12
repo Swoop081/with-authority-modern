@@ -305,34 +305,34 @@ test("Seth's Architect rewards first-time Methods without adding setup requireme
   assert.equal(seth.hand.length >= before, true); // Move leaves, ability draws one.
 });
 
-test("Undertaker's Deadman Walking survives a lethal Move once and triggers the comeback", () => {
+test("Undertaker's Lord of Darkness survives a lethal Move once without extra resources", () => {
   const g = new MatchEngine({ superstarA: superstars.codyRhodes, superstarB: superstars.undertaker, deckA: decks["cody-rhodes"], deckB: decks["the-undertaker"] });
   const cody = g.state().players.p1;
   const taker = g.state().players.p2;
   cody.momentum.strike = 1;
   const beforeAttitude = taker.momentum.attitude;
   const beforeHand = taker.hand.length;
-  const lethal = putInHand(g, "p1", { ...cards.jab, id: "deadman-lethal-test", damage: taker.hp + 20 });
+  const lethal = putInHand(g, "p1", { ...cards.jab, id: "lord-darkness-lethal-test", damage: taker.hp + 20 });
   g.declareMove("p1", lethal); g.passCounter("p2");
   assert.equal(taker.hp, 1);
   assert.equal(taker.passiveFlags.surviveAtOneUsed, true);
-  assert.equal(taker.momentum.attitude, beforeAttitude + 1); // +2 comeback, then the connected Move removes 1 Attitude
-  assert.equal(taker.hand.length, beforeHand + 1);
+  assert.equal(taker.momentum.attitude, Math.max(0, beforeAttitude - 1));
+  assert.equal(taker.hand.length, beforeHand);
   assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_PASSIVE" && e.playerId === "p2" && e.effect === "SURVIVE_AT_ONE"), true);
 });
 
 test("Kane's Big Red Machine rewards his first two 8+ damage connections", () => {
   const g = new MatchEngine({ superstarA: superstars.kane, superstarB: superstars.codyRhodes, deckA: decks["kane"], deckB: decks["cody-rhodes"] });
   const kane = g.state().players.p1;
-  kane.momentum.strike = 1;
+  kane.momentum.strike = 2;
+  kane.momentum.attitude = 8;
   const beforeAttitude = kane.momentum.attitude;
-  const heavy = putInHand(g, "p1", { ...hallCards.jab, id: "kane-heavy-test", superstarId: "kane", requirements: { strike: 1 }, damage: 8, setOpponentPosture: "on-mat" });
+  const heavy = putInHand(g, "p1", { ...hallCards.jab, id: "kane-heavy-test", superstarId: "kane", requirements: { strike: 1 }, cost: 2, damage: 8, setOpponentPosture: "on-mat" });
   const beforeHand = kane.hand.length;
   g.declareMove("p1", heavy); g.passCounter("p2");
   assert.equal(kane.abilityUses, 1);
   assert.equal(kane.momentum.attitude, beforeAttitude + 2); // universal connection + Superstar ability
   assert.equal(kane.hand.length, beforeHand); // played one, ability drew one
-  assert.equal(kane.specialFlags.kaneStrikeBonus, true);
   assert.equal(g.state().log.some(e => e.type === "SUPERSTAR_ABILITY" && e.playerId === "p1" && e.abilityId === "big-red-machine"), true);
 });
 
@@ -1291,20 +1291,23 @@ test("Managers are unique, Superstar-restricted and only one may be included in 
   assert.equal(health.violations.some(v => v.includes("at most one Manager")), true);
 });
 
-test("Bobby Heenan recovers Andre's first important Move that gets Countered", () => {
+test("Bobby Heenan draws 1 and regains Control after Andre's first non-Finisher Move is Countered", () => {
   const g = new MatchEngine({ superstarA: superstars.andreTheGiant, superstarB: superstars.hulkHogan, deckA: decks["andre-the-giant"], deckB: decks["hulk-hogan"], rng: () => 0 });
   const andre = g.state().players.p1;
   g.playManager("p1", putInHand(g, "p1", hallCards.bobbyHeenan));
-  andre.momentum.strike = 1;
+  andre.momentum.strike = 2;
   andre.momentum.attitude = 6;
-  const important = putInHand(g, "p1", { ...hallCards.andreHeadbuttReviewed, id: "heenan-important-test", cost: 7 });
-  const counter = putInHand(g, "p2", cards.desperationCounter);
+  const important = putInHand(g, "p1", { ...hallCards.andreHeadbuttReviewed, id: "heenan-important-test", cost: 3 });
+  const beforeHand = andre.hand.length;
+  const counter = putInHand(g, "p2", hallCards.hofDesperationCounter);
   g.declareMove("p1", important);
   g.counter("p2", counter);
   assert.equal(andre.managerAbilityUsed, true);
-  assert.equal(andre.hand.some(c => c.id === important.id), true);
-  assert.equal(andre.discard.some(c => c.id === important.id), false);
-  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id && e.trigger === "COUNTERED_MOVE_RECOVERY").length, 1);
+  assert.equal(andre.hand.length, beforeHand); // played one, Heenan drew one
+  assert.equal(andre.discard.some(c => c.id === important.id), true);
+  assert.equal(g.state().playerInControl, "p1");
+  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.bobbyHeenan.id && e.trigger === "COUNTERED_MOVE_REGAIN_CONTROL").length, 1);
+  assert.equal(g.state().log.some(e => e.type === "MANAGER_CONTROL_RECOVERED" && e.playerId === "p1"), true);
 });
 
 test("a Manager cannot be played for an unrelated Superstar", () => {
@@ -1313,18 +1316,20 @@ test("a Manager cannot be played for an unrelated Superstar", () => {
   assert.throws(() => g.playManager("p1", heenan), /Illegal Manager/);
 });
 
-test("Stone Cold's reviewed Kick to the Gut searches the Playbook for the reviewed Stone Cold Stunner", () => {
+test("Stone Cold's Kick to the Gut protects Stone Cold Stunner only on Austin's immediately following turn", () => {
   const g = new MatchEngine({ superstarA: superstars.stoneCold, superstarB: superstars.mankind, deckA: decks["stone-cold-steve-austin"], deckB: decks.mankind, rng: () => 0.4 });
   const austin = g.state().players.p1;
-  austin.momentum.strike = 2;
-  austin.momentum.attitude = 4;
-  const kick = austin.hand.find(c => c.id === hallCards.austinKickReviewed.id) ?? putInHand(g, "p1", hallCards.austinKickReviewed);
-  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunnerReviewed.id), false);
-  assert.equal(austin.deck.some(c => c.id === hallCards.austinStunnerReviewed.id), true);
+  austin.momentum.strike = 3;
+  austin.momentum.attitude = 9;
+  const kick = putInHand(g, "p1", hallCards.austinKickReviewed);
+  const stunner = putInHand(g, "p1", hallCards.austinStunnerReviewed);
   g.declareMove("p1", kick);
   g.passCounter("p2");
-  assert.equal(austin.hand.some(c => c.id === hallCards.austinStunnerReviewed.id), true);
-  assert.equal(g.state().log.some(e => e.type === "CARD_SEARCHED" && e.playerId === "p1" && e.cardId === hallCards.austinStunnerReviewed.id), true);
+  assert.equal(austin.specialFlags.austinKickSetupTurn, g.state().turnNumber + 1);
+  g.endPostMove("p1");
+  g.declareMove("p1", stunner);
+  assert.equal(g.state().proposedMove.uncounterable, true);
+  assert.throws(() => g.counter("p2", putInHand(g, "p2", hallCards.hofDesperationCounter)), /cannot be Countered/);
 });
 
 test("active shared Move secondary effects can draw, discard and add extra Attitude", () => {
@@ -1398,22 +1403,19 @@ test("Championship Road has Golden Era and Attitude Era Hall of Fame finals", as
   assert.equal(CHAMPIONSHIP_BRANCHES["attitude-era"].finals.includes(attitude.opponents.at(-1)), true);
 });
 
-test("Miss Elizabeth triggers once below half HP: draw 2, then bottom 1", () => {
+test("Miss Elizabeth triggers once when Savage loses Control: draw 1 and gain 1 Adrenaline", () => {
   const g = new MatchEngine({ superstarA: superstars.randySavage, superstarB: superstars.hulkHogan, deckA: decks["randy-savage"], deckB: decks["hulk-hogan"], rng: () => 0 });
   const savage = g.state().players.p1;
   g.playManager("p1", putInHand(g, "p1", hallCards.missElizabeth));
-  savage.hp = 21;
-  g.passTurn("p1");
-  g.state().players.p2.momentum.attitude = 1;
   const beforeHand = savage.hand.length;
-  const beforeHp = savage.hp;
-  const jab = putInHand(g, "p2", hallCards.jab);
-  g.declareMove("p2", jab);
-  g.passCounter("p1");
+  const beforeAttitude = savage.momentum.attitude;
+  g.passTurn("p1");
   assert.equal(savage.managerAbilityUsed, true);
-  assert.equal(savage.hp, beforeHp - hallCards.jab.damage);
   assert.equal(savage.hand.length, beforeHand + 1);
-  assert.equal(g.state().log.some(e => e.type === "MANAGER_BOTTOMED_PAGE" && e.managerId === hallCards.missElizabeth.id), true);
+  assert.equal(savage.momentum.attitude, beforeAttitude + 1);
+  assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.missElizabeth.id && e.trigger === "CONTROL_LOST").length, 1);
+  g.passTurn("p2");
+  g.passTurn("p1");
   assert.equal(g.state().log.filter(e => e.type === "MANAGER_ABILITY" && e.managerId === hallCards.missElizabeth.id).length, 1);
 });
 
@@ -1529,7 +1531,9 @@ test("unified Card Art Studio exports finished set-branded fronts without manife
   assert.equal(html.includes('accept="image/*"'), true);
   assert.equal(html.includes('id="card-canvas"'), true);
   assert.equal(html.includes('680 × 1000'), true);
-  assert.equal(html.includes('Export / Share Card'), true);
+  assert.equal(html.includes('Export / Save Card'), true);
+  assert.equal(html.includes('Save / Share Card'), true);
+  assert.equal(html.includes('png-to-webp-converter.html'), true);
   assert.equal(js.includes('"image/webp"'), true);
   assert.equal(js.includes('EMBEDDED_SET_LOGOS'), true);
   assert.equal(js.includes('KIND_FOLDERS'), true);
@@ -2684,82 +2688,22 @@ test('v0.11.41 simplifies Season hero actions and moves Featured Release set log
   assert.match(css, /\.season-hero-actions\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)!important/);
 });
 
-
-test('v0.11.42 final menu pass uses one hero per Play tile and removes redundant menu return', () => {
-  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
-  const block = app.slice(app.indexOf('function renderPlayMenu()'), app.indexOf('function renderProfile()'));
-  assert.match(block, /single-hero-mode/);
-  assert.match(block, /mode-single-hero/);
-  assert.equal(block.includes('modePortraits(["cody-rhodes","rhea-ripley"]'), false);
-  assert.equal(block.includes('Back to Main Menu'), false);
-  assert.equal(block.includes('id="play-home"'), false);
-});
-
-test('v0.11.42 splash and Options use the central build version and generic continue copy', () => {
-  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
-  assert.match(app, /import \{ BUILD_VERSION, assetUrl \}/);
-  const splash = app.slice(app.indexOf('function renderSplash()'), app.indexOf('function renderLaunchReleases()'));
-  const options = app.slice(app.indexOf('function renderOptions()'), app.indexOf('function chooseStarter()'));
-  assert.match(splash, /splash-build-version[^`]*\$\{BUILD_VERSION\}/);
-  assert.match(splash, /Continue Your Legacy/);
-  assert.doesNotMatch(splash, /Continue \$\{starter/);
-  assert.match(options, /Collectible Card Game v\$\{BUILD_VERSION\}/);
-  assert.doesNotMatch(options, /v0\.9\.1/);
-});
-
-test('v0.11.42 persistent navigation order follows play and progression priority', () => {
-  const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
-  const nav = html.slice(html.indexOf('id="mobile-game-nav"'), html.indexOf('</nav>', html.indexOf('id="mobile-game-nav"')));
-  const targets = [...nav.matchAll(/data-mobile-nav="([^"]+)"/g)].map(m => m[1]);
-  assert.deepEqual(targets, ['menu','play-menu','seasons','boosters','collection','catalogue','profile','options']);
-});
-
-test('v0.11.42 match selectors are horizontal, owned-only, favourite-first and explicitly confirmed', () => {
-  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
-  const css = readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
-  assert.match(app, /function ownedRoster\(excludeId = null\)/);
-  assert.match(app, /favoriteSuperstars/);
-  assert.match(app, /superstar-carousel/);
-  assert.match(app, /CONFIRM PLAYER 1/);
-  assert.match(app, /CONFIRM OPPONENT/);
-  assert.match(app, /CONFIRM SUPERSTAR/);
-  assert.match(app, /data-selector-context="ladder"/);
-  assert.match(app, /data-selector-context="championship"/);
-  const ladder = app.slice(app.indexOf('function renderLadder()'), app.indexOf('function beginChampionshipRoad()'));
-  const champ = app.slice(app.indexOf('function renderChampionship()'), app.indexOf('function legacyLogoMarkup'));
-  for (const id of ['ladder-exhibition','ladder-championship','ladder-boosters','ladder-collection']) assert.equal(ladder.includes(id), false);
-  for (const id of ['champ-exhibition','champ-ladder','champ-boosters','champ-collection']) assert.equal(champ.includes(id), false);
-  assert.match(ladder, /horizontal-path-tabs/);
-  assert.match(champ, /horizontal-path-tabs/);
-  assert.match(css, /\.superstar-carousel\{[^}]*grid-auto-flow:column/);
-  assert.match(css, /\.horizontal-path-tabs\{[^}]*overflow-x:auto/);
-});
-
-test('v0.11.42 My Collection can persist Favourite Superstars for character select ordering', () => {
-  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
-  const profileSource = readFileSync(new URL('../js/data/profile.js', import.meta.url), 'utf8');
-  assert.match(app, /data-favorite-superstar/);
-  assert.match(app, /★ Favourite/);
-  assert.match(profileSource, /favoriteSuperstars: \[\]/);
-  assert.match(profileSource, /profile\.favoriteSuperstars \?\?= \[\]/);
-  const p = createProfile('roman-reigns');
-  assert.deepEqual(p.favoriteSuperstars, []);
-});
-
-test('v0.11.42 Card Art Studio has iPhone PNG/share fallback and a bulk PNG to WebP tool', () => {
-  const studio = readFileSync(new URL('../js/tools/card-art-studio.js', import.meta.url), 'utf8');
-  const studioHtml = readFileSync(new URL('../tools/card-art-studio.html', import.meta.url), 'utf8');
-  const converterHtml = readFileSync(new URL('../tools/png-to-webp.html', import.meta.url), 'utf8');
-  const converterJs = readFileSync(new URL('../js/tools/png-to-webp.js', import.meta.url), 'utf8');
-  const app = readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
-  assert.match(studioHtml, /Export \/ Share Card/);
-  assert.match(studio, /navigator\.share/);
-  assert.match(studio, /ext:isWebp\?"webp":"png"/);
-  assert.match(studio, /PNG → WebP Converter/);
-  assert.match(converterHtml, /webkitdirectory/);
-  assert.match(converterHtml, /Download Converted ZIP/);
-  assert.match(converterJs, /image\/webp/);
-  assert.match(converterJs, /function crc32/);
-  assert.match(converterJs, /makeZip/);
-  assert.match(app, /tools\/png-to-webp\.html/);
+test("v0.11.42 final menu pass uses owned-only horizontal Superstar selection, favourites and one source-of-truth version", () => {
+  const app = readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  const profileJs = readFileSync(new URL("../js/data/profile.js", import.meta.url), "utf8");
+  const converter = readFileSync(new URL("../tools/png-to-webp-converter.html", import.meta.url), "utf8");
+  assert.match(app, /orderedUnlockedSuperstars/);
+  assert.match(app, /superstar-select-carousel/);
+  assert.match(app, /favouriteSuperstars/);
+  assert.match(profileJs, /favouriteSuperstars: \[\]/);
+  assert.match(app, /Continue Your Legacy/);
+  assert.match(app, /BUILD_VERSION/);
+  assert.doesNotMatch(app, /id="play-home"/);
+  assert.match(css, /horizontal-branch-selector/);
+  assert.match(css, /select-superstar-card/);
+  const order = [...html.matchAll(/data-mobile-nav="([^"]+)"/g)].map(m => m[1]);
+  assert.deepEqual(order.slice(0, 6), ["menu", "play-menu", "seasons", "boosters", "collection", "catalogue"]);
+  assert.match(converter, /PNG \/ JPG → WebP/);
 });

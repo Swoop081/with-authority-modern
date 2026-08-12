@@ -1,6 +1,6 @@
-import { canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, pinChancePercent, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.42";
-import { totalMomentum } from "../engine/utils.js?v=0.11.42";
-import { isOffensiveMove } from "../data/move-types.js?v=0.11.42";
+import { canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, pinChancePercent, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.44";
+import { totalMomentum } from "../engine/utils.js?v=0.11.44";
+import { isOffensiveMove } from "../data/move-types.js?v=0.11.44";
 
 function effectValue(effect = {}) {
   const amount = effect.amount ?? 1;
@@ -119,7 +119,10 @@ function passReason(match, playerId) {
 function chooseCounter(match, defenderId) {
   if (match.proposedMove?.uncounterable) return null;
   const incoming = match.proposedMove.card;
-  const valid = match.players[defenderId].hand.filter(c => canCounter(match, defenderId, incoming, c));
+  const valid = match.players[defenderId].hand.filter(c => {
+    if (match.proposedMove?.uncounterableByMove && c?.kind === "move") return false;
+    return canCounter(match, defenderId, incoming, c);
+  });
   if (!valid.length) return null;
   // Preserve broader counters when a narrower counter will do.
   valid.sort((a, b) => {

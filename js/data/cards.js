@@ -1,4 +1,4 @@
-import { normalizeMoveOptions } from "./move-types.js?v=0.11.42";
+import { normalizeMoveOptions } from "./move-types.js?v=0.11.44";
 const momentum = (method) => ({ id: `momentum-${method}`, name: `${method[0].toUpperCase()}${method.slice(1)} Momentum`, kind: "momentum", method, amount: 1 });
 const entrance = (id, name, superstarId, abilityText, effects = [], scheduled = []) => ({ id, name, superstarId, kind: "entrance", abilityText, effects, scheduled });
 const move = (id, name, options = {}) => ({ id, name, kind: "move", ...normalizeMoveOptions(id, name, options) });

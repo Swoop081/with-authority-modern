@@ -194,11 +194,10 @@ test("unified export gives every card kind a predictable automatic game path", (
     assert.match(studioJs, new RegExp(`${pair[0]}:"${pair[1]}"`));
   }
   assert.match(studioJs, /assets\/cards\/art\/custom\/\$\{KIND_FOLDERS\[card\.kind\]/);
-  assert.match(studioHtml, /id="export-webp"[^>]*>Export \/ Share Card<\/button>/);
-  assert.match(studioJs, /function canvasToPreferredBlob\(quality\)/);
-  assert.match(studioJs, /isIOSDevice\(\)/);
-  assert.match(studioJs, /navigator\.share/);
-  assert.match(studioJs, /fallback/);
+  assert.match(studioHtml, /id="export-webp"[^>]*>Export \/ Save Card<\/button>/);
+  assert.match(studioHtml, /id="share-card"/);
+  assert.match(studioJs, /function canvasToBlob\(type,quality\)/);
+  assert.match(studioJs, /PNG fallback saved/);
   assert.match(studioJs, /Export failed:/);
 });
 
@@ -228,4 +227,28 @@ test("Profile exposes one Card Art Studio and the old Superstar editor URL redir
   assert.match(app, /href="\.\/tools\/card-art-studio\.html">Card Art Studio<\/a>/);
   assert.doesNotMatch(app, />Move Card Studio<\/a>|>Superstar Art Studio<\/a>/);
   assert.match(legacySuperstarHtml, /http-equiv="refresh" content="0;url=card-art-studio\.html"/);
+});
+
+test("Momentum cards have built-in method-specific mockups in game and Studio", () => {
+  const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
+  const css = fs.readFileSync(new URL("../css/game.css", import.meta.url), "utf8");
+  const entries = studioEntries();
+  const expected = [
+    ["momentum-agility","SS1-064","agility"],
+    ["momentum-strength","SS1-065","strength"],
+    ["momentum-strike","SS1-066","strike"],
+    ["momentum-technical","SS1-067","technical"]
+  ];
+  for (const [id,code,method] of expected) {
+    const card = entries.find(c => c.id === id);
+    assert.equal(card?.cardCode, code);
+    assert.equal(card?.method, method);
+  }
+  assert.match(app, /function momentumMockupMarkup\(card\)/);
+  assert.match(app, /momentum-\$\{method\}/);
+  for (const cls of ["momentum-strength","momentum-strike","momentum-technical","momentum-agility"]) assert.match(css, new RegExp(`\\.${cls}`));
+  assert.match(css, /v0\.11\.43 — built-in premium Momentum mockups/);
+  assert.match(studioJs, /function drawMomentumMockup\(\)/);
+  assert.match(studioJs, /Built-in Momentum mockup ready/);
+  assert.match(studioJs, /card\.kind!=="momentum"/);
 });

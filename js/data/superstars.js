@@ -51,25 +51,25 @@ export const superstars = {
     id: "hulk-hogan", name: "Hulk Hogan", nickname: "Hulkster", hp: 72, setId: "hall-of-fame-series-1", era: "golden-era",
     cardId: "superstar-hulk-hogan", entranceId: "hof1-entrance-hulk-hogan", leadOffIds: ["momentum-strength", "momentum-strike", "hof1-hogan-punch-reviewed", "hof1-bodyslam", "hof1-jab"],
     signatures: ["hof1-hogan-big-boot-reviewed", "hof1-hogan-atomic-leg-drop-reviewed"], archetype: "power-strike",
-    ability: { id: "hulkamania", name: "Hulkamania", text: "First time Hogan falls below 40% HP: gain +2 Attitude, draw 2, and ignore the next Stun.", trigger: "ON_DAMAGE_TAKEN", maxUses: 1, when: { hpAtOrBelowPercent: 40 }, effects: [{ type: "gainMomentum", method: "attitude", amount: 2 }, { type: "draw", amount: 2 }, { type: "ignoreNextStun", amount: 1 }] }
+    ability: { id: "hulkamania", name: "Hulkamania", text: "The first 2 times Hogan connects with a Strength Move dealing 5+ Damage, gain +1 Adrenaline.", trigger: "ON_MOVE_CONNECTED", maxUses: 2, when: { minDamage: 5, methods: ["strength"] }, effects: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }
   },
   andreTheGiant: {
     id: "andre-the-giant", name: "André the Giant", nickname: "The Eighth Wonder of the World", hp: 60, setId: "hall-of-fame-series-1", era: "golden-era",
     cardId: "superstar-andre-the-giant", entranceId: "hof1-entrance-andre-the-giant", leadOffIds: ["momentum-strength", "momentum-strike", "hof1-andre-headbutt-reviewed", "hof1-andre-chop", "hof1-bodyslam"],
     signatures: ["hof1-andre-giant-bodyslam", "hof1-andre-giant-splash"], archetype: "giant-power",
-    ability: { id: "eighth-wonder", name: "The Eighth Wonder", text: "The first time André would be Stunned or sent Ringside, ignore that effect.", passive: { ignoreFirstStun: true, ignoreFirstRingside: true } }
+    ability: { id: "giants-reach", name: "Giant's Reach", text: "The first 2 times André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less.", trigger: "ON_MOVE_CONNECTED", maxUses: 2, when: { methods: ["strike"] }, effects: [{ type: "nextMethodMoveCostModifier", method: "strength", amount: -1 }] }
   },
   randySavage: {
     id: "randy-savage", name: "Randy Savage", nickname: "Macho Man", hp: 66, setId: "hall-of-fame-series-1", era: "golden-era",
     cardId: "superstar-randy-savage", entranceId: "hof1-entrance-randy-savage", leadOffIds: ["momentum-agility", "momentum-strike", "hof1-savage-jab", "hof1-forearm", "hof1-jab"],
     signatures: ["hof1-savage-diving-double-axe", "hof1-savage-flying-elbow-reviewed"], archetype: "agility-strike",
-    ability: { id: "madness", name: "Madness", text: "Once per match after Savage connects two different Move methods during the same Control sequence, draw 1 and gain +1 Attitude.", passive: { madness: true } }
+    ability: { id: "macho-madness", name: "Macho Madness", text: "The first 2 times Savage connects with an Agility Move after previously connecting with a Strike Move during that Control sequence, draw 1 page.", passive: { savageStrikeAgilityDraw: true, maxUses: 2 } }
   },
   ultimateWarrior: {
     id: "ultimate-warrior", name: "Ultimate Warrior", nickname: "The Ultimate Warrior", hp: 72, setId: "hall-of-fame-series-1", era: "golden-era",
     cardId: "superstar-ultimate-warrior", entranceId: "hof1-entrance-ultimate-warrior", leadOffIds: ["momentum-strength", "momentum-strike", "hof1-warrior-punch", "hof1-warrior-clothesline-reviewed", "shoulder-tackle"],
     signatures: ["hof1-warrior-gorilla-press-reviewed", "hof1-warrior-splash-reviewed"], archetype: "power-rush",
-    ability: { id: "feel-the-power", name: "Feel the Power", text: "The first 2 times Warrior connects a Move for 6+ damage, gain +1 Attitude.", trigger: "ON_MOVE_CONNECTED", maxUses: 2, when: { minDamage: 6 }, effects: [{ type: "gainMomentum", method: "attitude", amount: 1 }] }
+    ability: { id: "feel-the-power", name: "Feel the Power", text: "The first 2 times Warrior connects with two Moves during the same Control sequence, draw 1 page.", passive: { warriorComboDraw: true, maxUses: 2 } }
   },
   stoneCold: {
     id: "stone-cold-steve-austin", name: "Stone Cold Steve Austin", nickname: "Stone Cold", hp: 68, setId: "hall-of-fame-series-1", era: "attitude-era",
@@ -81,19 +81,19 @@ export const superstars = {
     id: "the-undertaker", name: "The Undertaker", nickname: "The Deadman", hp: 74, setId: "hall-of-fame-series-1", era: "attitude-era",
     cardId: "superstar-the-undertaker", entranceId: "hof1-entrance-undertaker", leadOffIds: ["momentum-strength", "momentum-strike", "hof1-taker-punch", "headbutt", "hof1-jab"],
     signatures: ["hof1-taker-old-school-reviewed", "hof1-taker-chokeslam-reviewed", "hof1-taker-tombstone-reviewed"], archetype: "power-strike",
-    ability: { id: "deadman-walking", name: "Deadman Walking", text: "Once per match, if a Move would reduce Undertaker to 0 HP, leave him at 1 HP, gain +2 Attitude and draw 1 page.", passive: { surviveAtOneOnce: true, deadmanComeback: true } }
+    ability: { id: "lord-of-darkness", name: "Lord of Darkness", text: "Once per match, when a Move would reduce Undertaker to 0 HP, remain at 1 HP instead.", passive: { surviveAtOneOnce: true } }
   },
   mankind: {
     id: "mankind", name: "Mankind", nickname: "The Deranged One", hp: 64, setId: "hall-of-fame-series-1", era: "attitude-era",
     cardId: "superstar-mankind", entranceId: "hof1-entrance-mankind", leadOffIds: ["momentum-technical", "momentum-strike", "hof1-mankind-punch", "side-headlock", "hof1-forearm"],
     signatures: ["hof1-mankind-double-arm-reviewed", "hof1-mankind-claw-reviewed"], archetype: "hardcore-technical",
-    ability: { id: "have-a-nice-day", name: "Have a Nice Day!", text: "First time below 50% HP draw 2; first time below 25% HP gain +1 Attitude.", trigger: "ON_DAMAGE_TAKEN", maxUses: 2, effects: [{ type: "mankindThresholds" }] }
+    ability: { id: "deranged-resilience", name: "Deranged Resilience", text: "The first 2 times Mankind would take 8+ Damage from a single Move, reduce that Damage by 2.", passive: { damageReduction: { amount: 2, minIncomingDamage: 8, maxUses: 2 } } }
   },
   kane: {
     id: "kane", name: "Kane", nickname: "The Big Red Machine", hp: 74, setId: "hall-of-fame-series-1", era: "attitude-era",
     cardId: "superstar-kane", entranceId: "hof1-entrance-kane", leadOffIds: ["momentum-strength", "momentum-strike", "headbutt", "hof1-jab", "shoulder-tackle"],
     signatures: ["hof1-kane-chokeslam-reviewed", "hof1-kane-tombstone-reviewed"], archetype: "power-strike",
-    ability: { id: "big-red-machine", name: "The Big Red Machine", text: "The first 2 times Kane connects a Move for 8+ damage, draw 1 page and gain +1 Attitude. If that Move leaves the opponent On Mat, Kane's next Strike Move this Control gets +1 damage.", trigger: "ON_MOVE_CONNECTED", maxUses: 2, when: { minDamage: 8 }, effects: [{ type: "draw", amount: 1 }, { type: "gainMomentum", method: "attitude", amount: 1 }] }
+    ability: { id: "big-red-machine", name: "Big Red Machine", text: "The first 2 times Kane connects with a Move dealing 8+ Damage, gain +1 Adrenaline and draw 1 page.", trigger: "ON_MOVE_CONNECTED", maxUses: 2, when: { minDamage: 8 }, effects: [{ type: "draw", amount: 1 }, { type: "gainMomentum", method: "attitude", amount: 1 }] }
   },
   rheaRipley: {
     id: "rhea-ripley", name: "Rhea Ripley", nickname: "Mami", hp: 66, setId: "evolution-series-1",

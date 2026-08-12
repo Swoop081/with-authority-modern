@@ -1,6 +1,6 @@
-import { PHASES } from "./constants.js?v=0.11.42";
-import { clone } from "./utils.js?v=0.11.42";
-import { entranceForSuperstar } from "../data/entrances.js?v=0.11.42";
+import { PHASES } from "./constants.js?v=0.11.44";
+import { clone } from "./utils.js?v=0.11.44";
+import { entranceForSuperstar } from "../data/entrances.js?v=0.11.44";
 import {
   canPlayMomentum,
   canPlayEntrance,
@@ -15,7 +15,7 @@ import {
   canPlayPinEscape,
   pinChancePercent,
   submissionThreshold
-} from "./rules.js?v=0.11.42";
+} from "./rules.js?v=0.11.44";
 
 export class MatchEngine {
   constructor({ superstarA, superstarB, deckA = [], deckB = [], startingControl = "p1", rng = Math.random }) {
@@ -233,6 +233,7 @@ export class MatchEngine {
         if (target.hp !== before) this.#log("HP_RECOVERED", { playerId: targetId, amount: target.hp - before, sourceCardId: context.sourceCardId ?? null });
       }
       if (effect.type === "nextMoveCostModifier") target.turn.nextMoveCostModifier += effect.amount ?? 0;
+      if (effect.type === "nextMethodMoveCostModifier") target.specialFlags.nextMethodMoveCostModifier = { method: effect.method, amount: effect.amount ?? 0 };
       if (effect.type === "nextControlMoveCostModifier") target.pendingMoveCostModifier = (target.pendingMoveCostModifier ?? 0) + (effect.amount ?? 0);
       if (effect.type === "cardCostModifier") {
         target.pendingCardCostModifiers ??= {};
@@ -369,11 +370,15 @@ export class MatchEngine {
     }
   }
 
-  #superstarDamageReduction(player, card) {
+  #superstarDamageReduction(player, card, incomingDamage = card?.damage ?? 0) {
     const rule = player.superstar.ability?.passive?.damageReduction;
     if (!rule) return 0;
     if (rule.methods && !rule.methods.includes(card.method)) return 0;
     if (rule.moveTypes && !rule.moveTypes.includes(card.moveType)) return 0;
+    if (rule.minIncomingDamage != null && incomingDamage < rule.minIncomingDamage) return 0;
+    const uses = player.passiveFlags.damageReductionUses ?? 0;
+    if (rule.maxUses != null && uses >= rule.maxUses) return 0;
+    player.passiveFlags.damageReductionUses = uses + 1;
     return rule.amount ?? 0;
   }
 
@@ -481,13 +486,13 @@ export class MatchEngine {
       if (played.id === "s1rock-final-boss-punches" && p.momentum.attitude > rockOpp.momentum.attitude) damageBonus += 1;
       if (played.id === "s1rock-belt-whip" && rockOpp.momentum.attitude === 0) damageBonus += 2;
     }
-    if (p.specialFlags.hoganPunchBonus && (played.id.includes("punch") || played.id.includes("big-boot"))) {
-      damageBonus += 2;
-      p.specialFlags.hoganPunchBonus = false;
+    if (p.specialFlags.takerBigBootDamageBonus && (played.id === "hof1-running-big-boot" || played.name === "Running Big Boot")) {
+      damageBonus += p.specialFlags.takerBigBootDamageBonus;
+      p.specialFlags.takerBigBootDamageBonus = 0;
     }
-    if (p.specialFlags.kaneStrikeBonus && played.method === "strike") {
-      damageBonus += 1;
-      p.specialFlags.kaneStrikeBonus = false;
+    if (p.specialFlags.kaneChokeslamDamageBonus && (played.id === "hof1-kane-chokeslam-reviewed" || played.name === "Chokeslam From Hell")) {
+      damageBonus += p.specialFlags.kaneChokeslamDamageBonus;
+      p.specialFlags.kaneChokeslamDamageBonus = 0;
     }
     if ((p.turn.nextMoveCostModifier ?? 0) < 0 && (played.cost ?? 0) < 6) {
       p.pendingMoveCostModifier = p.turn.nextMoveCostModifier;
@@ -495,11 +500,26 @@ export class MatchEngine {
     p.turn.nextMoveCostModifier = 0;
     p.turn.nextMoveDamageBonus = 0;
     p.pendingMoveDamageBonus = 0;
+    const methodDiscount = p.specialFlags.nextMethodMoveCostModifier;
+    if (methodDiscount?.method === played.method) p.specialFlags.nextMethodMoveCostModifier = null;
     const specialUncounterable = !!(p.specialFlags.uncounterableStrength && played.method === "strength" && !played.finisher);
     if (specialUncounterable) p.specialFlags.uncounterableStrength = false;
-    this.match.proposedMove = { attackerId: playerId, defenderId: this.opponentOf(playerId), card: clone(played), damageBonus, uncounterable: specialUncounterable };
+    const austinKickSetup = p.superstar.id === "stone-cold-steve-austin" &&
+      (played.id === "hof1-austin-stunner-reviewed" || played.name === "Stone Cold Stunner") &&
+      p.specialFlags.austinKickSetupTurn === this.match.turnNumber;
+    const hoganBigBootProtected = p.superstar.id === "hulk-hogan" && p.specialFlags.hoganBigBootUncounterableByMove &&
+      (played.id === "hof1-hogan-big-boot-reviewed" || played.name === "Hogan's Big Boot" || played.name === "Hogan’s Big Boot");
+    if (hoganBigBootProtected) p.specialFlags.hoganBigBootUncounterableByMove = false;
+    this.match.proposedMove = {
+      attackerId: playerId,
+      defenderId: this.opponentOf(playerId),
+      card: clone(played),
+      damageBonus,
+      uncounterable: specialUncounterable || austinKickSetup,
+      uncounterableByMove: hoganBigBootProtected
+    };
     this.match.phase = PHASES.COUNTER;
-    this.#log("MOVE_DECLARED", { playerId, cardId: played.id, uncounterable: specialUncounterable });
+    this.#log("MOVE_DECLARED", { playerId, cardId: played.id, uncounterable: specialUncounterable || austinKickSetup, uncounterableByMove: hoganBigBootProtected });
   }
 
   counter(defenderId, card) {
@@ -507,6 +527,7 @@ export class MatchEngine {
     const pending = this.match.proposedMove;
     if (this.match.phase !== PHASES.COUNTER || !pending || pending.defenderId !== defenderId) throw new Error("No counter window");
     if (pending.uncounterable) throw new Error("This Move cannot be Countered");
+    if (pending.uncounterableByMove && card?.kind === "move") throw new Error("This Move cannot be Countered by a Move");
     const taxedDefender=this.match.players[defenderId];
     if ((taxedDefender.specialFlags.bloodlineCounterTax ?? 0) > 0 && (taxedDefender.specialFlags.bloodlineCounterTaxRemaining ?? 0) > 0) {
       if ((taxedDefender.momentum.attitude ?? 0) < taxedDefender.specialFlags.bloodlineCounterTax) throw new Error("Bloodline Rules: need +1 Attitude to Counter");
@@ -573,42 +594,32 @@ export class MatchEngine {
       if (bigCounterSpecial.superstarId === "paige") opp.momentum.attitude=Math.max(0,(opp.momentum.attitude??0)-1);
     }
 
-    if (counterDefender.superstar.id === "stone-cold-steve-austin" && !counterDefender.passiveFlags.glassShattersCounterDraw) {
-      counterDefender.passiveFlags.glassShattersCounterDraw = true;
-      this.#draw(defenderId, 1);
-      this.#log("ENTRANCE_EFFECT", { playerId: defenderId, entranceName: "Glass Shatters", effect: "COUNTER_DRAW" });
-    }
-
     // Austin 3:16 — successful Counter reloads a low-cost Strike.
     const a316 = this.#specialInHand(defenderId, "austinSpecial");
     if (a316) {
       this.#consumeSpecial(defenderId, a316, "COUNTER_SUCCESS");
-      this.match.players[defenderId].momentum.attitude += 1;
       this.#searchDeck(defenderId, { method: "strike", maxCost: 5 }, a316.id);
     }
 
-    // Mankind — Bang Bang! Reload after his Move is Countered.
-    const bangBang = this.#specialInHand(pending.attackerId, "mankindSpecial");
-    const mankindP = this.match.players[pending.attackerId];
-    if (bangBang && mankindP.hand.length > 1) {
-      this.#consumeSpecial(pending.attackerId, bangBang, "MOVE_COUNTERED", { incomingCardId: pending.card.id });
-      const ditched = mankindP.hand.shift();
-      mankindP.discard.push(ditched);
-      this.#searchDeck(pending.attackerId, { kind: "move", maxCost: 5 }, bangBang.id);
-      this.#log("SPECIAL_DITCHED_PAGE", { playerId: pending.attackerId, cardId: ditched.id, sourceCardId: bangBang.id });
+    // Randy Savage — Oh Yeah!: after a successful Counter, his next Agility
+    // Move in the resulting Control sequence costs 2 less.
+    const ohYeah = this.#specialInHand(defenderId, "savageFinalSpecial");
+    if (ohYeah) {
+      this.#consumeSpecial(defenderId, ohYeah, "COUNTER_SUCCESS", { incomingCardId: pending.card.id });
+      counterDefender.specialFlags.nextMethodMoveCostModifier = { method: "agility", amount: -2 };
+      this.#log("SUPERSTAR_SPECIAL_EFFECT", { playerId: defenderId, effect: "NEXT_AGILITY_COST_MINUS_2", sourceCardId: ohYeah.id });
     }
 
-    // Bobby Heenan — protect an important countered Move.
+    // Bobby Heenan — once per match, a non-Finisher being Countered does not
+    // surrender the initiative. The Counter still resolves; André draws 1 and
+    // regains Control after the response has finished.
     const heenanOwner = this.match.players[pending.attackerId];
     const heenan = heenanOwner.activeManager;
-    if (heenan?.managerChoice === "heenan" && !heenanOwner.managerAbilityUsed && ((pending.card.cost ?? 0) >= 7 || pending.card.trademark || pending.card.finisher)) {
-      const idx = heenanOwner.discard.findIndex(c => c.id === pending.card.id);
-      if (idx >= 0) {
-        const [recovered] = heenanOwner.discard.splice(idx,1);
-        heenanOwner.hand.push(recovered);
-        heenanOwner.managerAbilityUsed = true;
-        this.#log("MANAGER_ABILITY", { playerId: pending.attackerId, managerId: heenan.id, managerName: heenan.name, trigger: "COUNTERED_MOVE_RECOVERY", cardId: recovered.id });
-      }
+    const heenanRecovery = !!(heenan?.managerChoice === "heenan" && !heenanOwner.managerAbilityUsed && !pending.card.finisher);
+    if (heenanRecovery) {
+      heenanOwner.managerAbilityUsed = true;
+      this.#draw(pending.attackerId, 1);
+      this.#log("MANAGER_ABILITY", { playerId: pending.attackerId, managerId: heenan.id, managerName: heenan.name, trigger: "COUNTERED_MOVE_REGAIN_CONTROL", cardId: pending.card.id });
     }
     this.#triggerManager(defenderId, "ON_COUNTER_SUCCESS", { incomingMove: pending.card, counterCard });
     const bonusDraw = supportPassive(this.match.players[defenderId], "counterDraw");
@@ -633,6 +644,7 @@ export class MatchEngine {
     const offensiveCounter = counterCard.kind === "move" && !counterCard.defensiveOnly &&
       ((counterCard.damage ?? 0) > 0 || !!counterCard.submission || (counterCard.onConnect?.length ?? 0) > 0);
     if (offensiveCounter) {
+      if (heenanRecovery) this.match.pendingHeenanControlRecovery = { playerId: pending.attackerId, managerId: heenan.id };
       this.match.playerInControl = defenderId;
       this.match.proposedMove = {
         attackerId: defenderId,
@@ -655,6 +667,16 @@ export class MatchEngine {
     // Pure defensive counters normally transfer Control.
     this.match.players[defenderId].discard.push(counterCard);
     this.match.proposedMove = null;
+
+    if (heenanRecovery) {
+      this.match.turnNumber += 1;
+      if (this.#enforceTurnLimit()) return;
+      this.match.playerInControl = pending.attackerId;
+      this.match.players[pending.attackerId].controlMethods = [];
+      this.#startFreshControl(pending.attackerId, { draw: false, triggerTurnStart: true, triggerControlStart: true });
+      this.#log("MANAGER_CONTROL_RECOVERED", { playerId: pending.attackerId, managerId: heenan.id });
+      return;
+    }
 
     // Seth Rollins — The Visionary: turn the successful defensive Counter
     // directly into an offensive Control window without advancing the turn.
@@ -684,9 +706,24 @@ export class MatchEngine {
     this.match.proposedMove = null;
     this.#triggerAbility(pending.attackerId, "ON_MOVE_COUNTERED", { card: pending.card, incomingMove: pending.card, auto: true });
     this.#triggerAbility(defenderId, "ON_COUNTER_SUCCESS", { incomingMove: pending.card, auto: true });
+    const heenanOwner = this.match.players[pending.attackerId];
+    const heenan = heenanOwner.activeManager;
+    const heenanRecovery = !!(heenan?.managerChoice === "heenan" && !heenanOwner.managerAbilityUsed && !pending.card.finisher);
+    if (heenanRecovery) {
+      heenanOwner.managerAbilityUsed = true;
+      this.#draw(pending.attackerId, 1);
+      this.#log("MANAGER_ABILITY", { playerId: pending.attackerId, managerId: heenan.id, managerName: heenan.name, trigger: "COUNTERED_MOVE_REGAIN_CONTROL", cardId: pending.card.id, auto: true });
+    }
     this.#triggerManager(defenderId, "ON_COUNTER_SUCCESS", { incomingMove: pending.card, auto: true });
     const bonusDraw = supportPassive(this.match.players[defenderId], "counterDraw");
     if (bonusDraw) this.#draw(defenderId, bonusDraw);
+
+    const ohYeah = this.#specialInHand(defenderId, "savageFinalSpecial");
+    if (ohYeah) {
+      this.#consumeSpecial(defenderId, ohYeah, "AUTO_COUNTER_SUCCESS", { incomingCardId: pending.card.id });
+      p.specialFlags.nextMethodMoveCostModifier = { method: "agility", amount: -2 };
+      this.#log("SUPERSTAR_SPECIAL_EFFECT", { playerId: defenderId, effect: "NEXT_AGILITY_COST_MINUS_2", sourceCardId: ohYeah.id });
+    }
 
     const matSacred = this.#specialInHand(defenderId, "matSacred");
     if (matSacred) {
@@ -696,6 +733,16 @@ export class MatchEngine {
       punished.momentum.attitude = Math.max(0, (punished.momentum.attitude ?? 0) - 2);
       punished.specialFlags.blockActionUntilMove = true;
       if (lost) this.#log("MOMENTUM_EFFECT", { playerId: pending.attackerId, method: "attitude", amount: -lost, sourceCardId: matSacred.id });
+    }
+
+    if (heenanRecovery) {
+      this.match.turnNumber += 1;
+      if (this.#enforceTurnLimit()) return;
+      this.match.playerInControl = pending.attackerId;
+      this.match.players[pending.attackerId].controlMethods = [];
+      this.#startFreshControl(pending.attackerId, { draw: false, triggerTurnStart: true, triggerControlStart: true });
+      this.#log("MANAGER_CONTROL_RECOVERED", { playerId: pending.attackerId, managerId: heenan.id, auto: true });
+      return;
     }
 
     const visionary = this.#specialInHand(defenderId, "counterFollowup");
@@ -724,7 +771,10 @@ export class MatchEngine {
     const defender = this.match.players[defenderId];
     const rawDamage = (card.damage ?? 0) + (pending.damageBonus ?? 0);
     const supportReduction = supportPassive(defender, "damageReduction");
-    const superstarReduction = this.#superstarDamageReduction(defender, card);
+    const superstarReduction = this.#superstarDamageReduction(defender, card, rawDamage);
+    if (superstarReduction > 0) {
+      this.#log("SUPERSTAR_PASSIVE", { playerId: defenderId, abilityName: defender.superstar.ability?.name, effect: "DAMAGE_REDUCTION", amount: superstarReduction, sourceCardId: card.id });
+    }
     let specialReduction = 0;
     const beast = rawDamage >= 10 ? this.#specialInHand(defenderId, "beastIncarnate") : null;
     if (beast) {
@@ -739,81 +789,57 @@ export class MatchEngine {
     defender.hp = Math.max(0, defender.hp - damage);
     defender.lastDamageTaken = damage;
 
-    // Undertaker — Deadman Walking.
+    // Undertaker — Lord of Darkness.
     if (defender.hp <= 0 && defender.superstar.ability?.passive?.surviveAtOneOnce && !defender.passiveFlags.surviveAtOneUsed) {
       defender.hp = 1;
       defender.passiveFlags.surviveAtOneUsed = true;
-      const deadmanBoost = defender.superstar.ability?.passive?.deadmanComeback === true;
-      defender.momentum.attitude += deadmanBoost ? 2 : 1;
-      if (deadmanBoost) this.#draw(defenderId, 1);
+      if (defender.superstar.ability?.passive?.deadmanComeback === true) {
+        defender.momentum.attitude += 2;
+        this.#draw(defenderId, 1);
+      }
       this.#log("SUPERSTAR_PASSIVE", { playerId: defenderId, abilityName: defender.superstar.ability.name, effect: "SURVIVE_AT_ONE", sourceCardId: card.id });
     }
 
-    // André — Unstoppable Giant.
-    const giantSpecial = rawDamage >= 10 ? this.#specialInHand(defenderId, "giantSpecial") : null;
-    let giantProtected = false;
-    if (giantSpecial) {
-      this.#consumeSpecial(defenderId, giantSpecial, "INCOMING_10_PLUS_DAMAGE", { incomingCardId: card.id });
-      this.#draw(defenderId, 1);
-      giantProtected = true;
+    // André — Nobody Slams André: the Strength Move still deals damage, but
+    // its grounding effect is ignored once and André gains +1 Adrenaline.
+    const andreSpecial = card.method === "strength" && card.setOpponentPosture === "on-mat"
+      ? this.#specialInHand(defenderId, "andreFinalSpecial") : null;
+    let preventGrounding = false;
+    if (andreSpecial) {
+      this.#consumeSpecial(defenderId, andreSpecial, "STRENGTH_MOVE_WOULD_GROUND", { incomingCardId: card.id });
+      defender.momentum.attitude += 1;
+      this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "attitude", amount: 1, sourceCardId: andreSpecial.id });
+      preventGrounding = true;
     }
 
-    // Kane — Through Hellfire.
-    const kaneSpecial = rawDamage >= 10 ? this.#specialInHand(defenderId, "kaneSpecial") : null;
-    if (kaneSpecial) {
-      this.#consumeSpecial(defenderId, kaneSpecial, "INCOMING_10_PLUS_DAMAGE", { incomingCardId: card.id });
-      defender.pendingMoveCostModifier = Math.min(defender.pendingMoveCostModifier ?? 0, -2);
-      defender.specialFlags.kaneRevenge = true;
-    }
-
-    // Miss Elizabeth / Paul Bearer Manager Zone decisions.
+    // Paul Bearer Manager Zone decision. Miss Elizabeth now triggers only when
+    // Savage loses Control (handled centrally in #transferControl).
     const manager = defender.activeManager;
-    if (manager && !defender.managerAbilityUsed && defender.hp <= defender.maxHp * 0.5) {
-      if (manager.managerChoice === "elizabeth") {
-        this.#draw(defenderId, 2);
-        if (defender.hand.length) {
-          const bottomed = defender.hand.shift();
-          defender.deck.push(bottomed);
-          this.#log("MANAGER_BOTTOMED_PAGE", { playerId: defenderId, managerId: manager.id, cardId: bottomed.id });
-        }
-        defender.managerAbilityUsed = true;
-        this.#log("MANAGER_ABILITY", { playerId: defenderId, managerId: manager.id, managerName: manager.name, trigger: "BELOW_HALF_HP" });
-      } else if (manager.managerChoice === "bearer") {
-        const idx = defender.discard.findIndex(c => c.superstarId === "the-undertaker" && !c.finisher);
-        if (idx >= 0) {
-          const [recovered] = defender.discard.splice(idx,1);
-          defender.hand.push(recovered);
-          this.#log("MANAGER_RECOVERED_CARD", { playerId: defenderId, managerId: manager.id, cardId: recovered.id });
-        } else {
-          defender.momentum.strength += 1;
-          defender.momentum.attitude += 1;
-          this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "strength", amount: 1, sourceCardId: manager.id });
-          this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "attitude", amount: 1, sourceCardId: manager.id });
-        }
-        defender.managerAbilityUsed = true;
-        this.#log("MANAGER_ABILITY", { playerId: defenderId, managerId: manager.id, managerName: manager.name, trigger: "BELOW_HALF_HP" });
-      }
-    }
-
-    // Mankind's two threshold comeback.
-    if (defender.superstar.id === "mankind") {
-      if (!defender.passiveFlags.mankindHalfTriggered && defender.hp <= defender.maxHp * 0.5) {
-        defender.passiveFlags.mankindHalfTriggered = true;
-        this.#draw(defenderId, 2);
-        this.#log("SUPERSTAR_ABILITY", { playerId: defenderId, abilityName: "Have a Nice Day!", trigger: "BELOW_HALF_HP" });
-      }
-      if (!defender.passiveFlags.mankindQuarterTriggered && defender.hp <= defender.maxHp * 0.25) {
-        defender.passiveFlags.mankindQuarterTriggered = true;
+    if (manager && !defender.managerAbilityUsed && defender.hp <= defender.maxHp * 0.5 && manager.managerChoice === "bearer") {
+      const idx = defender.discard.findIndex(c => c.superstarId === "the-undertaker" && !c.finisher);
+      if (idx >= 0) {
+        const [recovered] = defender.discard.splice(idx,1);
+        defender.hand.push(recovered);
+        this.#log("MANAGER_RECOVERED_CARD", { playerId: defenderId, managerId: manager.id, cardId: recovered.id });
+      } else {
+        defender.momentum.strength += 1;
         defender.momentum.attitude += 1;
-        this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "attitude", amount: 1, sourceCardId: "have-a-nice-day" });
+        this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "strength", amount: 1, sourceCardId: manager.id });
+        this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "attitude", amount: 1, sourceCardId: manager.id });
       }
+      defender.managerAbilityUsed = true;
+      this.#log("MANAGER_ABILITY", { playerId: defenderId, managerId: manager.id, managerName: manager.name, trigger: "BELOW_HALF_HP" });
     }
 
     attacker.momentum.attitude += 1 + supportPassive(attacker, "connectedAttitudeBonus");
     defender.momentum.attitude = Math.max(0, defender.momentum.attitude - 1);
     if (card.stunTurns) {
+      const riseFromFlames = this.#specialInHand(defenderId, "kaneFinalSpecial");
       const ignoresFirstStun = defender.superstar.ability?.passive?.ignoreFirstStun === true;
-      if (giantProtected) {
+      if (riseFromFlames) {
+        this.#consumeSpecial(defenderId, riseFromFlames, "WOULD_BECOME_STUNNED", { incomingCardId: card.id });
+        defender.momentum.attitude += 1;
+        this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "attitude", amount: 1, sourceCardId: riseFromFlames.id });
         this.#log("SUPERSTAR_SPECIAL_EFFECT", { playerId: defenderId, effect: "IGNORE_STUN", sourceCardId: card.id });
       } else if ((defender.passiveFlags.ignoreNextStun ?? 0) > 0) {
         defender.passiveFlags.ignoreNextStun -= 1;
@@ -825,13 +851,13 @@ export class MatchEngine {
         defender.status.stunnedTurns = Math.max(defender.status.stunnedTurns, card.stunTurns);
       }
     }
-    if (card.setOpponentPosture) {
+    if (card.setOpponentPosture && !preventGrounding) {
       defender.posture = card.setOpponentPosture;
     }
     if (card.sendOpponentOutside) {
       const ignoreFirstRingside = defender.superstar.ability?.passive?.ignoreFirstRingside === true && !defender.passiveFlags.firstRingsideIgnored;
-      if (giantProtected || ignoreFirstRingside) {
-        if (ignoreFirstRingside) defender.passiveFlags.firstRingsideIgnored = true;
+      if (ignoreFirstRingside) {
+        defender.passiveFlags.firstRingsideIgnored = true;
         this.#log("SUPERSTAR_PASSIVE", { playerId: defenderId, abilityName: defender.superstar.ability?.name, effect: "IGNORE_RINGSIDE", sourceCardId: card.id });
       } else {
         defender.location = "ringside";
@@ -845,9 +871,6 @@ export class MatchEngine {
       attacker.hp = Math.max(0, attacker.hp - card.selfDamage);
       this.#log("SELF_DAMAGE", { playerId: attackerId, amount: card.selfDamage, sourceCardId: card.id });
     }
-    if (card.id === "hof1-mankind-claw-reviewed" && attacker.activeSupports.some(c => c.socko)) {
-      card.submission = { ...card.submission, damage: (card.submission?.damage ?? 0) + 1 };
-    }
     this.#log("MOVE_CONNECTED", { attackerId, defenderId, cardId: card.id, damage, rawDamage, damageReduction: reduction, method: card.method, moveType: card.moveType, finisher: !!card.finisher });
     this.match.proposedMove = null;
 
@@ -855,22 +878,21 @@ export class MatchEngine {
       this.#applyEffects(attackerId, card.onConnect, { sourceCardId: card.id, attackerId, defenderId, damage });
       this.#log("MOVE_EFFECTS_RESOLVED", { attackerId, defenderId, cardId: card.id, effectCount: card.onConnect.length });
     }
-    if (attacker.specialFlags.kaneRevenge) {
-      attacker.specialFlags.kaneRevenge = false;
-      attacker.momentum.attitude += 1;
-      this.#log("MOMENTUM_EFFECT", { playerId: attackerId, method: "attitude", amount: 1, sourceCardId: "hof1-kane-through-hellfire" });
+    if (attacker.superstar.id === "stone-cold-steve-austin" && (card.id === "hof1-austin-kick-reviewed" || card.name === "Kick to the Gut")) {
+      attacker.specialFlags.austinKickSetupTurn = this.match.turnNumber + 1;
+      this.#log("SIGNATURE_SETUP", { playerId: attackerId, sourceCardId: card.id, targetCard: "Stone Cold Stunner", activeTurn: this.match.turnNumber + 1 });
     }
-    const savageSpecial = damage >= 8 ? this.#specialInHand(attackerId, "savageSpecial") : null;
-    if (savageSpecial) {
-      this.#consumeSpecial(attackerId, savageSpecial, "CONNECTED_8_PLUS", { sourceMoveId: card.id });
-      if (attacker.hand.some(c => c.trademark)) this.#draw(attackerId, 2);
-      else this.#searchDeck(attackerId, { trademark: true }, savageSpecial.id);
+    if (attacker.superstar.id === "the-undertaker" && (card.id === "hof1-taker-snake-eyes-reviewed" || card.name === "Snake Eyes")) {
+      attacker.specialFlags.takerBigBootDamageBonus = 2;
+      this.#log("SIGNATURE_SETUP", { playerId: attackerId, sourceCardId: card.id, targetCard: "Running Big Boot", damageBonus: 2 });
     }
-
+    if (attacker.superstar.id === "kane" && (card.id === "hof1-kane-choke-lift" || card.name === "Two-Handed Choke Lift")) {
+      attacker.specialFlags.kaneChokeslamDamageBonus = 1;
+      this.#log("SIGNATURE_SETUP", { playerId: attackerId, sourceCardId: card.id, targetCard: "Chokeslam From Hell", damageBonus: 1 });
+    }
     this.#triggerEntranceSchedules(attackerId, "ON_MOVE_CONNECTED", { damage, method: card.method, moveType: card.moveType, card });
     const finalBossOppAttitudeBefore = attacker.superstar.id === "the-rock" ? (defender.momentum.attitude ?? 0) : null;
     const abilityTriggered = this.#triggerAbility(attackerId, "ON_MOVE_CONNECTED", { damage, method: card.method, moveType: card.moveType, card });
-    if (abilityTriggered && attacker.superstar.id === "kane" && card.setOpponentPosture === "on-mat") attacker.specialFlags.kaneStrikeBonus = true;
     if (attacker.superstar.id === "the-rock") {
       if (abilityTriggered && finalBossOppAttitudeBefore === 0) {
         attacker.momentum.attitude += 1;
@@ -895,13 +917,30 @@ export class MatchEngine {
     }
     this.#triggerManager(attackerId, "ON_MOVE_CONNECTED", { damage, method: card.method, moveType: card.moveType, card });
 
-    if (attacker.superstar.id === "randy-savage") {
-      if (card.method && !attacker.controlMethods.includes(card.method)) attacker.controlMethods.push(card.method);
-      if (!attacker.passiveFlags.madnessTriggered && attacker.controlMethods.length >= 2) {
-        attacker.passiveFlags.madnessTriggered = true;
-        this.#draw(attackerId, 1);
-        attacker.momentum.attitude += 1;
-        this.#log("SUPERSTAR_ABILITY", { playerId: attackerId, abilityName: "Madness", trigger: "TWO_METHOD_CONTROL" });
+    if (attacker.superstar.ability?.passive?.savageStrikeAgilityDraw) {
+      if (card.method === "strike") attacker.passiveFlags.savageStrikeConnectedThisControl = true;
+      if (card.method === "agility" && attacker.passiveFlags.savageStrikeConnectedThisControl) {
+        const uses = attacker.passiveFlags.savageMadnessUses ?? 0;
+        const maxUses = attacker.superstar.ability.passive.maxUses ?? 2;
+        if (uses < maxUses) {
+          attacker.passiveFlags.savageMadnessUses = uses + 1;
+          this.#draw(attackerId, 1);
+          this.#log("SUPERSTAR_ABILITY", { playerId: attackerId, abilityName: "Macho Madness", trigger: "STRIKE_TO_AGILITY", use: uses + 1, maxUses });
+        }
+      }
+    }
+
+    if (attacker.superstar.ability?.passive?.warriorComboDraw) {
+      attacker.passiveFlags.warriorMovesConnectedThisControl = (attacker.passiveFlags.warriorMovesConnectedThisControl ?? 0) + 1;
+      if (attacker.passiveFlags.warriorMovesConnectedThisControl >= 2 && !attacker.passiveFlags.warriorComboTriggeredThisControl) {
+        const uses = attacker.passiveFlags.warriorComboUses ?? 0;
+        const maxUses = attacker.superstar.ability.passive.maxUses ?? 2;
+        if (uses < maxUses) {
+          attacker.passiveFlags.warriorComboUses = uses + 1;
+          attacker.passiveFlags.warriorComboTriggeredThisControl = true;
+          this.#draw(attackerId, 1);
+          this.#log("SUPERSTAR_ABILITY", { playerId: attackerId, abilityName: "Feel the Power", trigger: "TWO_MOVES_SAME_CONTROL", use: uses + 1, maxUses });
+        }
       }
     }
 
@@ -918,12 +957,6 @@ export class MatchEngine {
         attacker.momentum.attitude += 1;
         this.#log("MOMENTUM_EFFECT",{playerId:attackerId,method:"attitude",amount:1,sourceCardId:card.id});
       }
-    }
-
-    if (attacker.superstar.id === "ultimate-warrior" && damage >= 6 && !attacker.passiveFlags.warriorFirstPowerDraw) {
-      attacker.passiveFlags.warriorFirstPowerDraw = true;
-      this.#draw(attackerId,1);
-      this.#log("SUPERSTAR_ABILITY",{playerId:attackerId,abilityName:"Feel the Power",trigger:"FIRST_POWER_DRAW"});
     }
 
     if (attacker.superstar.id === "brock-lesnar" && card.id === "brock-german-suplex" && !attacker.passiveFlags.brockFirstGermanDraw) {
@@ -1034,11 +1067,6 @@ export class MatchEngine {
       attacker.turn.nextMoveDamageBonus += 1;
     }
 
-    if (attacker.superstar.id === "the-undertaker" && !attacker.passiveFlags.restInPeaceTriggered && (card.submission || (card.cost ?? 0) >= 7)) {
-      attacker.passiveFlags.restInPeaceTriggered = true;
-      attacker.momentum.attitude += 1;
-      this.#log("ENTRANCE_EFFECT", { playerId: attackerId, entranceName: "Rest in Peace", effect: "HIGH_LEVEL_ATTITUDE" });
-    }
     if (card.method === "strength") {
       const destroyer = this.#specialInHand(attackerId, "destroyerSpecial");
       if (destroyer && !attacker.specialFlags.uncounterableStrength) {
@@ -1091,20 +1119,13 @@ export class MatchEngine {
     attacker.momentum.attitude -= cost;
     attacker.pinAttempts += 1;
     const defender = this.match.players[post.defenderId];
-    let managerPinPenalty = 0;
-    const mgr = defender.activeManager;
-    if (mgr?.managerChoice === "heenan" && !defender.managerAbilityUsed) {
-      defender.managerAbilityUsed = true;
-      managerPinPenalty = -10;
-      this.#log("MANAGER_ABILITY", { playerId: post.defenderId, managerId: mgr.id, managerName: mgr.name, trigger: "PIN_INTERFERENCE" });
-    }
     this.match.pin = {
       attackerId,
       defenderId: post.defenderId,
       sourceMoveId: post.cardId,
       finisher: !!post.finisher,
       noGenericPinEscape: !!post.noGenericPinEscape,
-      chanceModifier: managerPinPenalty + (post.pinBonus ?? 0),
+      chanceModifier: (post.pinBonus ?? 0),
       attemptNumber: attacker.pinAttempts,
       cost
     };
@@ -1149,7 +1170,8 @@ export class MatchEngine {
     const sitUp = this.#specialInHand(defenderId, "takerSpecial");
     if (sitUp) {
       this.#consumeSpecial(defenderId, sitUp, "SURVIVED_PIN");
-      this.#draw(defenderId, 1);
+      this.match.players[defenderId].momentum.attitude += 1;
+      this.#log("MOMENTUM_EFFECT", { playerId: defenderId, method: "attitude", amount: 1, sourceCardId: sitUp.id });
     }
     this.#transferControl(defenderId, { incrementTurn: true, draw: true });
     return { success: false, chance, roll };
@@ -1270,6 +1292,16 @@ export class MatchEngine {
     // sustain an unanswered offensive run unless they finish the match.
     this.match.turnNumber += 1;
     if (this.#enforceTurnLimit()) return;
+    const heenanRecovery = this.match.pendingHeenanControlRecovery;
+    if (heenanRecovery?.playerId === playerId) this.match.pendingHeenanControlRecovery = null;
+    if (heenanRecovery && heenanRecovery.playerId !== playerId) {
+      this.match.pendingHeenanControlRecovery = null;
+      this.match.playerInControl = heenanRecovery.playerId;
+      this.match.players[heenanRecovery.playerId].controlMethods = [];
+      this.#startFreshControl(heenanRecovery.playerId, { draw: false, triggerTurnStart: true, triggerControlStart: true });
+      this.#log("MANAGER_CONTROL_RECOVERED", { playerId: heenanRecovery.playerId, managerId: heenanRecovery.managerId, afterCounterAttack: true });
+      return;
+    }
     const player = this.match.players[playerId];
     if (player.hp <= 0) {
       const opponent = this.opponentOf(playerId);
@@ -1285,17 +1317,59 @@ export class MatchEngine {
 
   #transferControl(playerId, { incrementTurn = false, draw = false } = {}) {
     const previousControl = this.match.playerInControl;
+    // If André naturally regains Control while a Heenan recovery is pending
+    // (for example by Countering the counter-attack), the deferred recovery is
+    // already satisfied and must not leak into a later Control sequence.
+    if (this.match.pendingHeenanControlRecovery?.playerId === playerId) {
+      this.match.pendingHeenanControlRecovery = null;
+    }
     if (incrementTurn) {
       this.match.turnNumber += 1;
       if (this.#enforceTurnLimit()) return;
     }
     this.match.playerInControl = playerId;
     if (previousControl !== playerId) {
-      this.match.players[playerId].controlMethods = [];
-      this.match.players[playerId].passiveFlags.iyoAgilityInControl = 0;
-      this.match.players[playerId].passiveFlags.lastComboMethod = null;
-      this.match.players[playerId].passiveFlags.charlotteChopConnected = false;
-      this.match.players[playerId].passiveFlags.charlotteChopAttitudeThisControl = false;
+      const previous = previousControl ? this.match.players[previousControl] : null;
+      if (previous) {
+        // Sequence-scoped HOF setup effects expire when Control is lost.
+        previous.specialFlags.hoganBigBootUncounterableByMove = false;
+        previous.specialFlags.takerBigBootDamageBonus = 0;
+        previous.specialFlags.kaneChokeslamDamageBonus = 0;
+        previous.specialFlags.nextMethodMoveCostModifier = null;
+        if (previous.specialFlags.mankindSockoDiscountCardIds?.length) {
+          for (const id of previous.specialFlags.mankindSockoDiscountCardIds) delete previous.pendingCardCostModifiers[id];
+          previous.specialFlags.mankindSockoDiscountCardIds = [];
+        }
+
+        // Miss Elizabeth — once per match after Savage loses Control.
+        const elizabeth = previous.activeManager;
+        if (elizabeth?.managerChoice === "elizabeth" && !previous.managerAbilityUsed) {
+          previous.managerAbilityUsed = true;
+          this.#draw(previousControl, 1);
+          previous.momentum.attitude += 1;
+          this.#log("MOMENTUM_EFFECT", { playerId: previousControl, method: "attitude", amount: 1, sourceCardId: elizabeth.id });
+          this.#log("MANAGER_ABILITY", { playerId: previousControl, managerId: elizabeth.id, managerName: elizabeth.name, trigger: "CONTROL_LOST" });
+        }
+
+        // Ultimate Warrior — Shake the Ropes.
+        const shake = this.#specialInHand(previousControl, "warriorSpecial");
+        if (shake && previous.hp <= previous.maxHp * 0.50) {
+          this.#consumeSpecial(previousControl, shake, "CONTROL_LOST_BELOW_50_PERCENT_HP", { controlTakenBy: playerId });
+          previous.momentum.attitude += 2;
+          previous.specialFlags.warriorClearStunOnNextControl = true;
+          this.#log("MOMENTUM_EFFECT", { playerId: previousControl, method: "attitude", amount: 2, sourceCardId: shake.id });
+        }
+      }
+
+      const incoming = this.match.players[playerId];
+      incoming.controlMethods = [];
+      incoming.passiveFlags.iyoAgilityInControl = 0;
+      incoming.passiveFlags.lastComboMethod = null;
+      incoming.passiveFlags.charlotteChopConnected = false;
+      incoming.passiveFlags.charlotteChopAttitudeThisControl = false;
+      incoming.passiveFlags.warriorMovesConnectedThisControl = 0;
+      incoming.passiveFlags.warriorComboTriggeredThisControl = false;
+      incoming.passiveFlags.savageStrikeConnectedThisControl = false;
       for (const px of Object.values(this.match.players)) {
         px.specialFlags.bloodlineCounterTax = 0;
         px.specialFlags.bloodlineCounterTaxRemaining = 0;
@@ -1320,21 +1394,35 @@ export class MatchEngine {
 
     const newController = this.match.players[playerId];
 
-    // Hulk Hogan — Hulking Up.
-    const hoganSpecial = this.#specialInHand(playerId, "hoganSpecial");
-    if (hoganSpecial && newController.hp <= newController.maxHp * 0.40) {
-      this.#consumeSpecial(playerId, hoganSpecial, "GAIN_CONTROL_BELOW_30_PERCENT_HP");
-      this.#draw(playerId, 2);
-      newController.specialFlags.hoganPunchBonus = true;
+    if (newController.specialFlags.warriorClearStunOnNextControl) {
+      newController.specialFlags.warriorClearStunOnNextControl = false;
+      newController.status.stunnedTurns = 0;
+      this.#log("SUPERSTAR_SPECIAL_EFFECT", { playerId, effect: "CLEAR_STUN", sourceCardId: "hof1-warrior-comeback" });
     }
 
-    // Ultimate Warrior — Warrior's Comeback.
-    const warriorSpecial = this.#specialInHand(playerId, "warriorSpecial");
-    if (warriorSpecial && (newController.lastDamageTaken ?? 0) >= 8) {
-      this.#consumeSpecial(playerId, warriorSpecial, "GAIN_CONTROL_AFTER_8_PLUS_DAMAGE");
-      newController.momentum.attitude += 1;
-      newController.turn.nextMoveDamageBonus += 2;
+    // Hulk Hogan — Hulk Up.
+    const hoganSpecial = this.#specialInHand(playerId, "hoganSpecial");
+    if (hoganSpecial && newController.hp <= newController.maxHp * 0.50) {
+      this.#consumeSpecial(playerId, hoganSpecial, "GAIN_CONTROL_BELOW_50_PERCENT_HP");
+      newController.status.stunnedTurns = 0;
+      newController.momentum.attitude += 2;
+      newController.specialFlags.hoganBigBootUncounterableByMove = true;
+      this.#log("MOMENTUM_EFFECT", { playerId, method: "attitude", amount: 2, sourceCardId: hoganSpecial.id });
+    }
+
+    // Mankind — Mr. Socko.
+    const socko = this.#specialInHand(playerId, "mankindSockoFinal");
+    const sockoOpponent = this.match.players[this.opponentOf(playerId)];
+    if (socko && sockoOpponent.posture === "on-mat") {
+      this.#consumeSpecial(playerId, socko, "GAIN_CONTROL_OPPONENT_GROUNDED");
       this.#draw(playerId, 1);
+      const clawIds = new Set(["hof1-mankind-claw-reviewed"]);
+      for (const candidate of [...newController.hand, ...newController.deck, ...newController.discard]) {
+        if (candidate?.name === "Mandible Claw") clawIds.add(candidate.id);
+      }
+      newController.specialFlags.mankindSockoDiscountCardIds = [...clawIds];
+      for (const id of clawIds) newController.pendingCardCostModifiers[id] = -2;
+      this.#log("SUPERSTAR_SPECIAL_EFFECT", { playerId, effect: "MANDIBLE_CLAW_COST_MINUS_2", sourceCardId: socko.id });
     }
 
     // Cody Rhodes — Finish the Story: late-match comeback card.

@@ -1,10 +1,16 @@
-## v0.11.42 — Final Menu & Match-Select Pass
+## v0.11.43 — Momentum Card Mockups
 
-- Final menu redesign consolidated into one release: cleaner single-hero Play tiles, generic Continue Your Legacy splash copy, live build version display, and reordered bottom navigation.
-- Exhibition, Climb the Ladder and Championship Road now use larger horizontal **owned-only** Superstar carousels with tap-for-details, explicit confirmation and Favourite Superstars first.
-- My Collection can mark owned Superstars as favourites.
-- Card Art Studio now falls back to PNG + iOS share when iPhone WebP encoding is unavailable.
-- New bulk **PNG → WebP Converter** in `tools/` with folder/multi-file input and ZIP export.
+- Added built-in premium fronts for the four active shared Momentum cards: Agility, Strength, Strike and Technical.
+- Each method has its own colour and emblem while sharing one WWE Legacy Momentum family design.
+- Card Art Studio previews and exports the built-in Momentum mockups without requiring source artwork; installed custom Momentum WebPs still override them automatically.
+- No cards, collector numbers, decks or gameplay values changed.
+
+## v0.11.42 — Final Menu + Match Select Pass
+
+- Consolidated menu redesign: clean single-image Play tiles, live version display, generic Continue Your Legacy copy, reordered persistent navigation, and redundant menu buttons removed.
+- Exhibition, Ladder and Championship character select now use owned-only horizontal Superstar carousels with larger flip-to-details cards, confirmation, and favourites first.
+- My Collection can favourite owned Superstars.
+- Card Art Studio gains iPhone PNG/share fallback plus a bulk PNG/JPG → WebP ZIP converter.
 
 ## v0.11.41 — My Collection Sort + Season Hub Polish
 
