@@ -14,3 +14,5 @@
   .studio-topbar{padding-top:max(calc(env(safe-area-inset-top,0px) + 12px),58px)}
 }
 .converter-link{display:block;text-align:center;text-decoration:none;border:1px solid #44444d;background:#15151a;color:#eee;border-radius:10px;padding:10px;font-weight:900;font-size:.7rem}.converter-link:hover{border-color:#777}
+
+.key.raw{border-color:#e21e2d;color:#f4f4f5;background:linear-gradient(135deg,#0b0b0d,#321016 62%,#8f0e1b)}

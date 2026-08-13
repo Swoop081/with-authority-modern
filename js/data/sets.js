@@ -1,4 +1,10 @@
 export const sets = {
+  "raw-series-1": {
+    id: "raw-series-1", name: "Raw", series: 1, type: "brand-subset",
+    displayName: "Raw — Series 1", shortCode: "RAW1", lifecycleDefault: "future",
+    releaseDate: "2026-09-05", developmentOnly: true,
+    lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
+  },
   "season-1-final-boss": { id: "season-1-final-boss", name: "Season 1", series: 1, type: "season-exclusive", displayName: "Season 1 — Final Boss", shortCode: "S1FB", lifecycleDefault: "exclusive", lifecycleLabels: { exclusive: "Season Exclusive" } },
   "summerslam-series-1": {
     id: "summerslam-series-1", name: "SummerSlam", series: 1, type: "ple", eventYear: 2026,

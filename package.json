@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.11.43",
+  "version": "0.11.56",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,9 @@
     "economy": "node tools/economy-sim.mjs",
     "balance": "node tools/balance-sim.mjs",
     "art": "node tools/art-audit.mjs",
-    "stamp-cache": "node tools/stamp-cache-version.mjs"
+    "stamp-cache": "node tools/stamp-cache-version.mjs",
+    "validate": "node tools/rebuild-validate.mjs",
+    "generate-studio": "node tools/generate-card-studio-data.mjs",
+    "card-ids": "node tools/card-id-audit.mjs"
   }
 }

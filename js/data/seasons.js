@@ -1,6 +1,6 @@
-import { unlockSuperstar, addOwnedCard } from "./profile.js?v=0.11.43";
-import { decks } from "./decks.js?v=0.11.43";
-import { superstars } from "./superstars.js?v=0.11.43";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.56";
+import { decks } from "./decks.js?v=0.11.56";
+import { superstars } from "./superstars.js?v=0.11.56";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -37,6 +37,17 @@ export const SEASON_1 = {
       description: "SummerSlam — Series 1, Hall of Fame — Series 1 and Evolution — Series 1 launch the collection.",
       superstarCount: 24,
       type: "launch"
+    },
+    {
+      id: "raw-series-1",
+      date: "2026-09-05T00:00:00",
+      dateLabel: "05 SEP",
+      title: "Raw — Series 1",
+      kicker: "NEW SUBSET",
+      description: "Four-Superstar RAW subset featuring Logan Paul, Chad Gable, Raquel Rodriguez and Sol Ruca.",
+      superstarCount: 4,
+      type: "subset",
+      setId: "raw-series-1"
     },
     {
       id: "worlds-collide",
@@ -132,12 +143,14 @@ export function awardMatchSeasonXp(profile, result) {
 
 export function tierReward(tier) {
   const n = Math.max(1, Math.min(SEASON_TIER_COUNT, Number(tier) || 1));
-  const setId = FEATURED_SET_IDS[(n - 1) % FEATURED_SET_IDS.length];
-  let amount = 1;
-  if (n % 5 === 0) amount = 2;
-  if (n === 25) amount = 3;
   if (n === 50) return { tier: n, kind: "full-deck-superstar", superstarId: SEASON_1_COMPLETION_SUPERSTAR, name: "The Rock", exclusive: true };
-  return { tier: n, setId, amount, kind: "booster" };
+  // Universe Points replace the old every-fifth-tier booster spikes. The
+  // discussion locked 100/200 UP as the Season values but did not assign exact
+  // tiers; this release uses clean milestone tiers: 100 UP through Tier 20,
+  // then 200 UP from Tier 25 through Tier 45.
+  if (n % 5 === 0) return { tier: n, kind: "universe-points", amount: n < 25 ? 100 : 200 };
+  const setId = FEATURED_SET_IDS[(n - 1) % FEATURED_SET_IDS.length];
+  return { tier: n, setId, amount: 1, kind: "booster" };
 }
 function grantSetBooster(profile, setId, amount = 1) {
   profile.boosterCreditsBySet ??= {};
@@ -166,7 +179,8 @@ export function claimSeasonTier(profile, tier) {
     profile.deckNeedsCards[reward.superstarId] = 0;
     state.completionRewardClaimed = true;
     state.completionSuperstarId = reward.superstarId;
-  } else grantSetBooster(profile, reward.setId, reward.amount);
+  } else if (reward.kind === "universe-points") addUniversePoints(profile, reward.amount);
+  else grantSetBooster(profile, reward.setId, reward.amount);
   state.claimedTiers.push(n);
   state.claimedTiers.sort((a,b) => a-b);
   return reward;

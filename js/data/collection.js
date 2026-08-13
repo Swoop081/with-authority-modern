@@ -1,112 +1,59 @@
-import { cards } from "./cards.js?v=0.11.43";
-import { hallCards } from "./hall-of-fame-cards.js?v=0.11.43";
-import { evolutionCards } from "./evolution-cards.js?v=0.11.43";
-import { rockCards } from "./season1-rock-cards.js?v=0.11.43";
-import { superstars } from "./superstars.js?v=0.11.43";
-import { sets } from "./sets.js?v=0.11.43";
-import { decks } from "./decks.js?v=0.11.43";
+import { superstars } from "./superstars.js?v=0.11.56";
+import { sets } from "./sets.js?v=0.11.56";
+import { allGameplayCards } from "./content.js?v=0.11.56";
+import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=0.11.56";
 
-const rarity = { common: 1, uncommon: 2, rare: 3, veryRare: 4 };
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
-
-// Collector numbers are permanent once published/artwork production begins.
-// Retired numbers stay as gaps instead of being reused or shifting later cards.
-const retiredCollectorNumbersBySet = {
-  "hall-of-fame-series-1": new Set([92, 100]),
-};
-
-const summerStarOrder = [superstars.codyRhodes, superstars.cmPunk, superstars.romanReigns, superstars.sethRollins, superstars.obaFemi, superstars.brockLesnar, superstars.kevinOwens, superstars.gunther];
-const hallStarOrder = [superstars.hulkHogan, superstars.andreTheGiant, superstars.randySavage, superstars.ultimateWarrior, superstars.stoneCold, superstars.undertaker, superstars.mankind, superstars.kane];
-const evolutionStarOrder = [superstars.rheaRipley, superstars.livMorgan, superstars.beckyLynch, superstars.bayley, superstars.charlotteFlair, superstars.iyoSky, superstars.paige, superstars.stephanieVaquer];
-
-function flattenCardObject(source) {
-  const out = [];
-  for (const value of Object.values(source)) {
-    if (value?.id) out.push(value);
-    else if (value && typeof value === "object") for (const nested of Object.values(value)) if (nested?.id) out.push(nested);
-  }
-  return out;
-}
-
-const summerCards = flattenCardObject(cards);
-const hofCards = flattenCardObject(hallCards);
-const evolutionSourceCards = flattenCardObject(evolutionCards);
-const rockSourceCards = flattenCardObject(rockCards);
-
-const rarityFor = (card) => {
-  if (card.finisher) return rarity.veryRare;
-  if (card.trademark) return rarity.rare;
-  if (card.kind === "entrance" || card.kind === "support" || card.kind === "manager" || card.counterAny) return rarity.rare;
-  if (card.superstarId || card.kind === "special" || card.kind === "action") return rarity.uncommon;
-  return rarity.common;
-};
-
-const superstarEntry = (star) => ({
-  id: `superstar-${star.id}`,
-  name: star.name,
+const orderedStars = Object.values(superstars);
+const starCards = orderedStars.map(s => ({
+  id: `superstar-${s.id}`,
+  name: s.name,
   kind: "superstar",
-  superstarId: star.id,
-  subtitle: star.nickname,
-  rarity: rarity.veryRare,
-  hp: star.hp,
-  abilityName: star.ability.name,
-  abilityText: star.ability.text,
-  setId: star.setId,
-  era: star.era ?? null
-});
+  superstarId: s.id,
+  subtitle: s.nickname,
+  rarity: 4,
+  setId: s.setId,
+  era: s.era ?? null,
+}));
 
-function buildSetCollection(setId, starOrder, sourceCards) {
-  // Active booster pools contain only cards used by a current starter in this set,
-  // plus linked Entrances and approved Managers. Shared cards first printed in an
-  // earlier set are referenced directly by later starter decks and are not reprinted.
-  const activeIds = new Set();
-  const starIds = new Set(starOrder.map(star => star.id));
-  for (const star of starOrder) {
-    for (const card of decks[star.id] ?? []) activeIds.add(card.id);
-    if (star.entranceId) activeIds.add(star.entranceId);
-  }
-  for (const card of sourceCards) {
-    if (card.kind === "manager" && (card.allowedSuperstarIds ?? []).some(id => starIds.has(id))) activeIds.add(card.id);
-  }
-  const activeSourceCards = sourceCards.filter(card => activeIds.has(card.id));
+const base = [...allGameplayCards, ...starCards];
+const baseById = new Map(base.map(card => [card.id, card]));
 
-  const ordered = [];
-  for (const star of starOrder) {
-    ordered.push(superstarEntry(star));
-    const starCards = activeSourceCards.filter(c => c.superstarId === star.id && !c.preserveSharedCollectorOrder);
-    const entranceCards = starCards.filter(c => c.kind === "entrance");
-    const otherCards = starCards.filter(c => c.kind !== "entrance");
-    for (const card of [...entranceCards, ...otherCards]) ordered.push({ ...card, rarity: rarityFor(card), setId });
-  }
-  for (const card of activeSourceCards) {
-    if (card.superstarId && !card.preserveSharedCollectorOrder) continue;
-    if (!ordered.some(x => x.id === card.id)) ordered.push({ ...card, rarity: rarityFor(card), setId });
-  }
-  const retiredNumbers = retiredCollectorNumbersBySet[setId] ?? new Set();
-  let nextNumber = 1;
-  return ordered.map((entry) => {
-    while (retiredNumbers.has(nextNumber)) nextNumber += 1;
-    const cardNumber = nextNumber++;
-    return { ...entry, cardNumber, cardCode: `${sets[setId].shortCode}-${String(cardNumber).padStart(3, "0")}` };
-  });
+if (baseById.size !== base.length) {
+  throw new Error("WWE Legacy collection contains duplicate active card IDs.");
+}
+if (CARD_NUMBER_MANIFEST.length !== base.length) {
+  throw new Error(`Canonical card manifest has ${CARD_NUMBER_MANIFEST.length} entries for ${base.length} active cards.`);
+}
+for (const card of base) {
+  const manifest = CARD_NUMBER_BY_ID[card.id];
+  if (!manifest) throw new Error(`Active card ${card.id} is missing from the canonical card-number manifest.`);
+  if (manifest.setId !== card.setId) throw new Error(`Canonical manifest set mismatch for ${card.id}: ${manifest.setId} != ${card.setId}.`);
+  // Preserve the existing shared card objects used by decks/gameplay, but stamp
+  // their collector identity from the one authoritative manifest.
+  card.cardNumber = manifest.cardNumber;
+  card.cardCode = manifest.cardCode;
+}
+for (const manifest of CARD_NUMBER_MANIFEST) {
+  if (!baseById.has(manifest.id)) throw new Error(`Canonical manifest contains inactive card ${manifest.id}.`);
 }
 
-export const collectionCardsBySet = {
-  "summerslam-series-1": buildSetCollection("summerslam-series-1", summerStarOrder, summerCards),
-  "hall-of-fame-series-1": buildSetCollection("hall-of-fame-series-1", hallStarOrder, hofCards),
-  "evolution-series-1": buildSetCollection("evolution-series-1", evolutionStarOrder, evolutionSourceCards),
-  "season-1-final-boss": buildSetCollection("season-1-final-boss", [superstars.theRock], rockSourceCards)
-};
+export const collectionCardsBySet = {};
+for (const setId of Object.keys(sets)) {
+  const ids = CARD_IDS_BY_SET[setId] ?? [];
+  const list = ids.map(id => baseById.get(id)).filter(Boolean);
+  collectionCardsBySet[setId] = list;
+}
 
 export const collectionCards = Object.values(collectionCardsBySet).flat();
-export const setCollections = Object.fromEntries(Object.entries(collectionCardsBySet).map(([setId, list]) => [setId, {
-  ...sets[setId],
-  cardCount: list.length,
-  superstarCount: list.filter(c => c.kind === "superstar").length,
-  rarityLabels
-}]));
-
-// Backwards-compatible alias for SummerSlam code/tests while the UI becomes multi-set aware.
+export const setCollections = Object.fromEntries(
+  Object.entries(collectionCardsBySet).map(([setId, list]) => [setId, {
+    ...sets[setId],
+    cardCount: list.length,
+    superstarCount: list.filter(c => c.kind === "superstar").length,
+    rarityLabels,
+  }])
+);
 export const setCollection = setCollections["summerslam-series-1"];
 export function cardsForSet(setId) { return collectionCardsBySet[setId] ?? []; }
 export function setCollectionFor(setId) { return setCollections[setId] ?? null; }
