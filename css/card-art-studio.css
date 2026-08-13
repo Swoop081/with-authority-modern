@@ -16,3 +16,5 @@
 .converter-link{display:block;text-align:center;text-decoration:none;border:1px solid #44444d;background:#15151a;color:#eee;border-radius:10px;padding:10px;font-weight:900;font-size:.7rem}.converter-link:hover{border-color:#777}
 
 .key.raw{border-color:#e21e2d;color:#f4f4f5;background:linear-gradient(135deg,#0b0b0d,#321016 62%,#8f0e1b)}
+
+.key.worldscollide{border-color:#e52a35;color:#fff;background:linear-gradient(135deg,#050506 0%,#3a0d14 46%,#0f5b2a 72%,#9b711c 100%)}

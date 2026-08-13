@@ -1,28 +1,28 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.56";
-import { superstars } from "../data/superstars.js?v=0.11.56";
-import { decks } from "../data/decks.js?v=0.11.56";
-import { sets } from "../data/sets.js?v=0.11.56";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.56";
-import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.56";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.56";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.56";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.56";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.56";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.56";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.56";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.56";
-import { totalMomentum } from "../engine/utils.js?v=0.11.56";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.56";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.56";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.56";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.56";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.56";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.56";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.56";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.56";
-import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.56";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.56";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.56";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.61";
+import { superstars } from "../data/superstars.js?v=0.11.61";
+import { decks } from "../data/decks.js?v=0.11.61";
+import { sets } from "../data/sets.js?v=0.11.61";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.61";
+import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.61";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.61";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.61";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.61";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.61";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.61";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.61";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.61";
+import { totalMomentum } from "../engine/utils.js?v=0.11.61";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.61";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.61";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.61";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.61";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.61";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.61";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.61";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.61";
+import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.61";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.61";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.61";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -65,6 +65,13 @@ let boosterRulesFlipped = new Set();
 let lastChromeScreen = null;
 let exhibitionConfirmed = { p1: false, p2: true };
 let selectDetailKeys = new Set();
+let pendingMatch = null;
+let matchPresentationSetId = null;
+let entranceIntroPlayerId = null;
+let entranceIntroFlipped = false;
+let entranceIntroRevealed = false;
+let superstarOverlayId = null;
+let superstarOverlayFlipped = false;
 
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
@@ -107,13 +114,46 @@ const SET_LOGO_ASSETS = {
   "hall-of-fame-series-1": assetUrl("assets/art/hall-of-fame-series-1/hall-of-fame-logo.png"),
   "evolution-series-1": assetUrl("assets/art/evolution-series-1/evolution-logo.png"),
   "season-1-final-boss": assetUrl("assets/art/season-1-final-boss/rewards-logo.png"),
-  "raw-series-1": assetUrl("assets/branding/raw-series-1/raw-logo.webp")
+  "raw-series-1": assetUrl("assets/branding/raw-series-1/raw-logo.webp"),
+  "worlds-collide-series-1": assetUrl("assets/branding/worlds-collide-series-1/worlds-collide-logo.webp")
 };
 function setLogoMarkup(setId, className = "") {
   const src = SET_LOGO_ASSETS[setId];
   if (!src) return "";
   const label = sets[setId]?.displayName ?? sets[setId]?.name ?? "WWE set";
   return `<img class="set-brand-logo ${className}" src="${src}" alt="${label}">`;
+}
+
+const MATCH_PRESENTATION_SETS = [
+  "summerslam-series-1",
+  "evolution-series-1",
+  "raw-series-1",
+  "worlds-collide-series-1"
+];
+function randomMatchPresentationSet() {
+  return MATCH_PRESENTATION_SETS[Math.floor(Math.random() * MATCH_PRESENTATION_SETS.length)] ?? "summerslam-series-1";
+}
+function presentationThemeClass(setId) { return `presentation-${setId ?? "summerslam-series-1"}`; }
+function superstarCollectibleFor(starId) {
+  const star = superstarById[starId];
+  return collectionCards.find(card => card.kind === "superstar" && card.superstarId === starId)
+    ?? (star?.cardId ? collectionById.get(star.cardId) : null);
+}
+function entranceCollectibleFor(starId) {
+  const star = superstarById[starId];
+  return collectionCards.find(card => card.kind === "entrance" && card.superstarId === starId)
+    ?? (star?.entranceId ? collectionById.get(star.entranceId) : null);
+}
+function entranceEffectCallouts(star) {
+  const entrance = star?.entrance ?? {};
+  const callouts = [];
+  for (const [method, amount] of Object.entries(entrance.preMatchMomentum ?? {})) {
+    if (amount) callouts.push(`+${amount} ${method.toUpperCase()}`);
+  }
+  if (entrance.preMatchAdrenaline) callouts.push(`+${entrance.preMatchAdrenaline} ADRENALINE`);
+  if (entrance.firstStrikeMomentum) callouts.push(`FIRST STRIKE +${entrance.firstStrikeMomentum} STRIKE`);
+  if (entrance.delayedTurn5) callouts.push("TURN 5 ENTRANCE EFFECT");
+  return callouts;
 }
 
 function setChrome({ hideTopbar = false } = {}) {
@@ -163,17 +203,110 @@ function showOptions() {
 
 function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibition" } = {}) {
   if (!profile) { screen = "starter"; renderStarter(); return; }
-  const p1Star=superstarById[p1Id], p2Star=superstarById[p2Id];
-  if (!p1Star || !p2Star) { message="That Superstar is not active in this build."; renderSetup(); return; }
-  const p1Deck=buildPlayableDeck(profile,p1Id), p2Deck=decks[p2Id] ?? [];
-  if (p1Deck.length!==55 || p2Deck.length!==55) { message="One of these Superstar decks is not yet complete."; renderSetup(); return; }
-  activeMode=mode; selection={p1:p1Id,p2:p2Id}; lastMatchup={...selection}; matchRewarded=false; flippedHandCards=new Set(); playPileFlipped=false;
-  game=new MatchEngine({p1:p1Star,p2:p2Star,decks:{[p1Id]:p1Deck,[p2Id]:p2Deck}});
-  screen="match"; message=""; advanceCpuUntilHuman(game,HUMAN,CPU); render();
+  const p1Star = superstarById[p1Id], p2Star = superstarById[p2Id];
+  if (!p1Star || !p2Star) { message = "That Superstar is not active in this build."; renderSetup(); return; }
+  const p1Deck = buildPlayableDeck(profile, p1Id), p2Deck = decks[p2Id] ?? [];
+  if (p1Deck.length !== 55 || p2Deck.length !== 55) { message = "One of these Superstar decks is not yet complete."; renderSetup(); return; }
+  activeMode = mode;
+  selection = { p1: p1Id, p2: p2Id };
+  lastMatchup = { ...selection };
+  matchRewarded = false;
+  flippedHandCards = new Set();
+  playPileFlipped = false;
+  superstarOverlayId = null;
+  superstarOverlayFlipped = false;
+  matchPresentationSetId = randomMatchPresentationSet();
+  pendingMatch = { p1Id, p2Id, mode, p1Star, p2Star, p1Deck, p2Deck, brandSetId: matchPresentationSetId };
+  screen = "matchup";
+  message = "";
+  renderMatchupSplash();
+}
+
+function createPendingMatchEngine() {
+  if (!pendingMatch) return false;
+  const { p1Star, p2Star, p1Deck, p2Deck } = pendingMatch;
+  game = new MatchEngine({ p1: p1Star, p2: p2Star, decks: { [p1Star.id]: p1Deck, [p2Star.id]: p2Deck } });
+  return true;
+}
+
+function renderMatchupSplash() {
+  if (!pendingMatch) { showSetup(); return; }
+  setChrome({ hideTopbar: true });
+  const root = $("#game");
+  const { p1Star, p2Star, brandSetId } = pendingMatch;
+  const p1Card = superstarCollectibleFor(p1Star.id);
+  const p2Card = superstarCollectibleFor(p2Star.id);
+  root.innerHTML = `<section class="prematch-screen matchup-splash ${presentationThemeClass(brandSetId)}">
+    <div class="prematch-brand">${setLogoMarkup(brandSetId, "prematch-show-logo")}</div>
+    <div class="prematch-heading"><span>TONIGHT’S</span><h2>MAIN EVENT</h2></div>
+    <div class="prematch-versus">
+      <article class="prematch-side player-side"><span class="prematch-side-label">YOU</span><div class="prematch-superstar-card">${p1Card ? collectibleCardMarkup(p1Card,{extraClass:"matchup-superstar-card"}) : superstarVisualMarkup(p1Star.id,p1Star.name)}</div></article>
+      <div class="prematch-vs">VS</div>
+      <article class="prematch-side cpu-side"><span class="prematch-side-label">CPU</span><div class="prematch-superstar-card">${p2Card ? collectibleCardMarkup(p2Card,{extraClass:"matchup-superstar-card"}) : superstarVisualMarkup(p2Star.id,p2Star.name)}</div></article>
+    </div>
+    <button id="begin-entrances" class="start-match prematch-start">Start Match</button>
+  </section>`;
+  $("#begin-entrances")?.addEventListener("click", () => {
+    if (!createPendingMatchEngine()) return;
+    entranceIntroPlayerId = HUMAN;
+    entranceIntroFlipped = false;
+    entranceIntroRevealed = false;
+    screen = "entrance-intro";
+    renderEntranceIntro();
+  });
+}
+
+function renderEntranceIntro() {
+  if (!game || !entranceIntroPlayerId) { renderMatchupSplash(); return; }
+  setChrome({ hideTopbar: true });
+  const root = $("#game");
+  const player = game.state().players[entranceIntroPlayerId];
+  const star = player.superstar;
+  const starCard = superstarCollectibleFor(star.id);
+  const entranceCard = entranceCollectibleFor(star.id);
+  const isHuman = entranceIntroPlayerId === HUMAN;
+  const callouts = entranceEffectCallouts(star);
+  const brandSetId = pendingMatch?.brandSetId ?? matchPresentationSetId ?? star.setId;
+  root.innerHTML = `<section class="prematch-screen entrance-intro-screen ${presentationThemeClass(brandSetId)}">
+    <div class="prematch-brand">${setLogoMarkup(brandSetId, "prematch-show-logo")}</div>
+    <div class="entrance-intro-heading"><span>${isHuman ? "YOUR ENTRANCE" : "OPPONENT ENTRANCE"}</span><h2>${star.name}</h2></div>
+    <div class="entrance-stage ${entranceIntroRevealed ? "entrance-revealed" : ""}">
+      <div class="entrance-card-transition intro-superstar-layer">${starCard ? collectibleCardMarkup(starCard,{extraClass:"intro-superstar-card"}) : superstarVisualMarkup(star.id,star.name)}</div>
+      <div class="entrance-card-transition intro-entrance-layer">${entranceCard ? collectibleCardMarkup(entranceCard,{flipped:entranceIntroFlipped,extraClass:"intro-main-card",flipAttr:'data-flip-entrance="1"'}) : `<div class="entrance-card-fallback"><b>${star.entrance?.name ?? "Entrance"}</b><p>${star.entrance?.rulesText ?? ""}</p></div>`}</div>
+      <div class="entrance-callouts">${callouts.map((text,index)=>`<span class="entrance-callout callout-${index+1}">${text}</span>`).join("")}</div>
+    </div>
+    <small class="entrance-tap-hint">Tap the Entrance card to ${entranceIntroFlipped ? "return to artwork" : "flip and view effects"}.</small>
+    <button id="entrance-next" class="start-match prematch-start">Next</button>
+  </section>`;
+  if (!entranceIntroRevealed) requestAnimationFrame(() => requestAnimationFrame(() => { root.querySelector(".entrance-stage")?.classList.add("entrance-revealed"); entranceIntroRevealed = true; }));
+  root.querySelectorAll("[data-flip-entrance]").forEach(btn => btn.addEventListener("click", () => { entranceIntroFlipped = !entranceIntroFlipped; renderEntranceIntro(); }));
+  $("#entrance-next")?.addEventListener("click", () => {
+    if (isHuman) { entranceIntroPlayerId = CPU; entranceIntroFlipped = false; entranceIntroRevealed = false; renderEntranceIntro(); return; }
+    entranceIntroPlayerId = null;
+    entranceIntroFlipped = false;
+    entranceIntroRevealed = false;
+    pendingMatch = null;
+    screen = "match";
+    advanceCpuUntilHuman(game, HUMAN, CPU);
+    render();
+  });
 }
 
 function restartMatch() { startMatch(lastMatchup.p1, lastMatchup.p2, { mode: activeMode }); }
-function showSetup() { if (!profile) { screen = "starter"; renderStarter(); return; } activeMode = "exhibition"; screen = "setup"; message = ""; exhibitionConfirmed = { p1: false, p2: true }; selectDetailKeys = new Set(); const owned = orderedUnlockedSuperstars(); if (!owned.some(s=>s.id===selection.p1)) selection.p1 = owned[0]?.id ?? profile.starterId; selection.p2 = randomExhibitionOpponent(selection.p1) ?? selection.p1; renderSetup(); }
+function showSetup() {
+  if (!profile) { screen = "starter"; renderStarter(); return; }
+  activeMode = "exhibition";
+  screen = "setup";
+  message = "";
+  pendingMatch = null;
+  game = null;
+  exhibitionConfirmed = { p1: false, p2: true };
+  selectDetailKeys = new Set();
+  const owned = orderedUnlockedSuperstars();
+  if (!owned.some(s => s.id === selection.p1)) selection.p1 = owned[0]?.id ?? profile.starterId;
+  selection.p2 = null;
+  renderSetup();
+}
 function showLadder() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "ladder"; message = ""; setChrome(); renderLadder(); }
 function showChampionship() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "championship"; message = ""; setChrome(); renderChampionship(); }
 function showCollection() { showOwnedCollection(); }
@@ -732,7 +865,7 @@ function selectionCarouselMarkup(stars, selectedId, context, labelFor = null) {
   return `<div class="superstar-select-carousel" data-carousel="${context}">${stars.map(star => {
     const key = `${context}:${star.id}`;
     const flipped = selectDetailKeys.has(key);
-    return `<button type="button" class="select-superstar-card ${star.id===selectedId?'selected':''} ${flipped?'is-flipped':''}" data-select-context="${context}" data-select-star="${star.id}" aria-label="${star.name}. Tap for details."><span class="select-card-inner"><span class="select-card-face select-card-front"><span class="select-favourite">${fav.has(star.id)?'★':''}</span>${portraitMarkup(star.id,star.name)}<b>${star.name}</b><small>${labelFor ? labelFor(star) : sets[star.setId]?.displayName ?? ''}</small></span><span class="select-card-face select-card-back"><strong>${star.name}</strong><span>${star.nickname}</span><b>${star.hp} HP</b><small>${star.archetype.replaceAll('-', ' ')}</small><em>${star.ability?.name ?? ''}</em><p>${star.ability?.text ?? ''}</p><i>TAP AGAIN FOR CARD</i></span></span></button>`;
+    return `<button type="button" class="select-superstar-card ${star.id===selectedId?'selected':''} ${flipped?'is-flipped':''}" data-select-context="${context}" data-select-star="${star.id}" aria-label="${star.name}. Tap for details."><span class="select-card-inner"><span class="select-card-face select-card-front"><span class="select-favourite">${fav.has(star.id)?'★':''}</span>${portraitMarkup(star.id,star.name)}</span><span class="select-card-face select-card-back"><strong>${star.name}</strong><span>${star.nickname}</span><b>${star.hp} HP</b><small>${star.archetype.replaceAll('-', ' ')}</small><em>${star.ability?.name ?? ''}</em><p>${star.ability?.text ?? ''}</p><i>TAP AGAIN FOR CARD</i></span></span></button>`;
   }).join('')}</div>`;
 }
 
@@ -912,7 +1045,7 @@ function renderPlayMenu() {
   root.innerHTML = `<section class="play-menu-screen premium-screen">
     <div class="premium-screen-title"><span>PLAY</span><h2>Choose Your Path</h2><p>Three modes. Three identities. One WWE Legacy roster.</p></div>
     <div class="play-mode-grid premium-mode-grid">
-      <button id="play-exhibition" class="play-mode-card premium-mode-card exhibition-card single-hero-mode">${modePortraits(["cody-rhodes"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("exhibition",true)}<p>Choose any Superstar you own. Your CPU opponent is randomly drawn from the other 24 complete roster decks.</p><b>PLAY EXHIBITION →</b></div></button>
+      <button id="play-exhibition" class="play-mode-card premium-mode-card exhibition-card single-hero-mode">${modePortraits(["cody-rhodes"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("exhibition",true)}<p>Choose any Superstar you own. Your CPU opponent is randomly drawn from the other ${Math.max(0,roster.length-1)} complete roster decks.</p><b>PLAY EXHIBITION →</b></div></button>
       <button id="play-ladder" class="play-mode-card premium-mode-card ladder-card single-hero-mode">${modePortraits(["gunther"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("ladder",true)}<p>Three lives. Clear a full branch. Survive every rung.</p><b>START THE CLIMB →</b></div></button>
       <button id="play-championship" class="play-mode-card premium-mode-card championship-card single-hero-mode">${modePortraits(["roman-reigns"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("championship",true)}<p>Opening Bout to Championship Match across a four-fight road.</p><b>CHASE THE TITLE →</b></div></button>
     </div>
@@ -1016,7 +1149,7 @@ function renderStarter() {
       <div class="starter-ability"><span class="starter-ability-name">Ready for WWE Legacy</span><span class="starter-ability-text">Superstar, Entrance, Lead Off and full recommended deck are unlocked with your starter choice.</span></div>
       <b class="choose-starter-cta">START WITH ${star.name.toUpperCase()}</b>
     </button>`).join("")}</div>
-    <p class="starter-note">The champion you do not choose remains available to unlock later. Exhibition opponents can still be drawn from the full 25-deck roster.</p>
+    <p class="starter-note">The champion you do not choose remains available to unlock later. Exhibition opponents can still be drawn from the full ${roster.length}-deck roster.</p>
   </section>`;
   root.querySelectorAll("[data-starter]").forEach(btn => btn.addEventListener("click", () => chooseStarter(btn.dataset.starter)));
 }
@@ -1027,27 +1160,23 @@ function renderSetup() {
   const root = $("#game");
   const unlocked = orderedUnlockedSuperstars();
   if (!unlocked.some(s => s.id === selection.p1)) selection.p1 = unlocked[0]?.id ?? profile.starterId;
-  if (!selection.p2 || selection.p2 === selection.p1 || !decks[selection.p2] || decks[selection.p2].length !== 55) selection.p2 = randomExhibitionOpponent(selection.p1) ?? selection.p1;
-  const p1 = superstarById[selection.p1], p2 = superstarById[selection.p2];
+  const p1 = superstarById[selection.p1];
   root.innerHTML = `<section class="setup-screen premium-screen exhibition-screen compact-match-select">
-    <section class="feature-hero exhibition-feature single-feature-hero">${modePortraits([selection.p1],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("exhibition")}<p>Choose a Superstar you own. The CPU is automatically matched from the full 25-deck roster with mirror matches excluded.</p><small>${unlocked.length}/${Object.values(superstars).length} unlocked · opponent pool ${Math.max(0,Object.values(superstars).length-1)}</small></div></section>
-    <section class="selector-panel horizontal-selector"><div class="selector-title"><span>YOU · PLAYER 1</span><strong>${p1?.name ?? 'Choose Superstar'}</strong></div>${selectionCarouselMarkup(unlocked,selection.p1,'exhibition-p1')}<button id="confirm-p1" class="select-confirm ${exhibitionConfirmed.p1?'confirmed':''}">${exhibitionConfirmed.p1?'✓ CONFIRMED':`CONFIRM ${p1?.name?.toUpperCase() ?? 'SUPERSTAR'}`}</button></section>
-    <div class="versus-strip"><span>${p1?.name ?? '—'}</span><b>VS</b><span>${p2?.name ?? '—'}</span></div>
-    <section class="selector-panel random-opponent-panel"><div class="selector-title"><span>CPU OPPONENT · RANDOM</span><strong>${p2?.name ?? 'Assigning Opponent'}</strong></div><div class="random-opponent-card">${p2 ? selectionCarouselMarkup([p2],selection.p2,'exhibition-random',()=> 'RANDOM CPU · FULL ROSTER') : '<p class="setup-message">No eligible opponent deck found.</p>'}</div><p class="random-opponent-note">CPU ownership is not restricted by your collection. Any of the other 24 complete Superstar decks can be selected.</p></section>
-    ${message ? `<p class="setup-message">${message}</p>` : ""}<div class="setup-actions exhibition-actions"><button id="start-match" class="start-match" ${exhibitionConfirmed.p1&&selection.p1!==selection.p2?'':'disabled'}>Start Exhibition</button></div>
+    <section class="feature-hero exhibition-feature single-feature-hero">${modePortraits([selection.p1],"feature-art")}<div class="feature-shade"></div><div class="feature-copy exhibition-clean-hero">${modeLogoMarkup("exhibition")}</div></section>
+    <section class="selector-panel horizontal-selector"><div class="selector-title"><span>YOU · PLAYER 1</span><strong>${p1?.name ?? 'Choose Superstar'}</strong></div>${selectionCarouselMarkup(unlocked,selection.p1,'exhibition-p1')}<button id="confirm-p1" class="select-confirm">${`CONFIRM ${p1?.name?.toUpperCase() ?? 'SUPERSTAR'}`}</button></section>
+    ${message ? `<p class="setup-message">${message}</p>` : ""}
   </section>`;
   wireSelectionCarousel('exhibition-p1', id => {
-    if (selection.p1 !== id) {
-      selection.p1 = id;
-      selection.p2 = randomExhibitionOpponent(id) ?? id;
-      exhibitionConfirmed.p1 = false;
-      exhibitionConfirmed.p2 = true;
-      selectDetailKeys.delete(`exhibition-random:${selection.p2}`);
-    }
+    if (selection.p1 !== id) { selection.p1 = id; selection.p2 = null; exhibitionConfirmed.p1 = false; }
     renderSetup();
   });
-  $("#confirm-p1")?.addEventListener('click',()=>{ exhibitionConfirmed.p1 = true; renderSetup(); });
-  $("#start-match")?.addEventListener("click", () => startMatch());
+  $("#confirm-p1")?.addEventListener('click', () => {
+    const opponent = randomExhibitionOpponent(selection.p1);
+    if (!opponent) { message = "No eligible Exhibition opponent deck is available."; renderSetup(); return; }
+    exhibitionConfirmed.p1 = true;
+    selection.p2 = opponent;
+    startMatch(selection.p1, opponent, { mode: "exhibition" });
+  });
 }
 
 function rarityStars(level) { return "★".repeat(Math.max(1, Math.min(4, Number(level) || 1))); }
@@ -1433,7 +1562,7 @@ function cardReason(playerId, card) {
   if (playerId === CPU) return "CPU controlled";
   if (state.phase === "MATCH_OVER") return "Match over";
   if (state.playerInControl !== playerId && state.phase === "ACTION") return "Not in Control";
-  if (card.kind === "momentum") return state.players[playerId].turn.momentumPlayed >= state.players[playerId].turn.momentumPlayLimit ? "Momentum limit reached" : "";
+  if (card.kind === "momentum") return state.players[playerId].momentumControlSequence === state.controlSequence ? "Momentum limit reached for this Control sequence" : "";
   if (card.kind === "entrance") return "Entrance resolves automatically pre-match";
   if (card.kind === "action") return state.players[playerId].turn.actionPlayed >= 1 ? "Action already played this turn" : "";
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
@@ -1494,8 +1623,14 @@ function maintainSubmission(index) {
 }
 
 function renderMomentum(player) {
-  const labels = { agility: "AG", knowledge: "KN", strength: "ST", strike: "SR", technical: "TE", attitude: "AT" };
-  return Object.entries(player.momentum).map(([method, value]) => `<span class="hud-momentum ${method}" title="${method}"><b>${labels[method] ?? method.slice(0,2).toUpperCase()}</b><strong>${value}</strong></span>`).join("");
+  const resources = [
+    ["agility","AG",player.momentum.agility ?? 0],
+    ["strength","ST",player.momentum.strength ?? 0],
+    ["strike","SR",player.momentum.strike ?? 0],
+    ["technical","TE",player.momentum.technical ?? 0],
+    ["adrenaline","AD",player.adrenaline ?? 0]
+  ];
+  return resources.map(([method,label,value]) => `<span class="hud-resource ${method}" title="${method}"><i>${label}</i><b>${value}</b></span>`).join("");
 }
 
 function abilityStatus(player) {
@@ -1507,46 +1642,56 @@ function abilityStatus(player) {
 }
 
 function submissionHud(player) {
-  const labels = { head: "H", arm: "A", back: "B", leg: "L" };
+  const labels = { head: "HD", arms: "AR", legs: "LG", back: "BK", chest: "CH", arm: "AR", leg: "LG" };
   const threshold = submissionThreshold(player);
   return Object.entries(player.submissionDamage).map(([part, value]) => {
     const pct = Math.max(0, Math.min(100, (value / threshold) * 100));
-    return `<span class="hud-sub-limb ${pct >= 75 ? "danger" : pct >= 45 ? "warning" : ""}" title="${part} pressure ${value}/${threshold}"><b>${labels[part] ?? part[0].toUpperCase()}</b><i><em style="width:${pct}%"></em></i><strong>${value}</strong></span>`;
+    const stateClass = pct >= 75 ? "danger" : pct >= 45 ? "warning" : "";
+    return `<span class="hud-body-part ${stateClass}" title="${part} submission damage ${value}/${threshold}"><small>${labels[part] ?? part.slice(0,2).toUpperCase()}</small><b>${value}</b></span>`;
   }).join("");
+}
+
+function healthClass(player) {
+  const pct = player.maxHp ? player.hp / player.maxHp : 0;
+  return pct > .60 ? "healthy" : pct > .30 ? "average" : "danger";
 }
 
 function renderWrestlerHud(playerId) {
   const state = game.state(), p = state.players[playerId], cpu = playerId === CPU;
-  const hpPercent = Math.max(0, Math.min(100, (p.hp / p.maxHp) * 100));
-  const total = effectiveTotalMomentum(p);
-  const statusText = `${p.location === "ring" ? "IN RING" : "RINGSIDE"} · ${p.posture === "on-mat" ? "GROUNDED" : "STANDING"}${p.status.stunnedTurns ? ` · STUN ${p.status.stunnedTurns}` : ""}`;
-  const methodValues = [
-    ["AG",p.momentum.agility],["KN",p.momentum.knowledge],["ST",p.momentum.strength],
-    ["SR",p.momentum.strike],["TE",p.momentum.technical],["AT",p.momentum.attitude]
-  ];
-  return `<article class="wrestler-hud compact-wrestler-hud ${cpu ? "cpu" : "human"} ${state.playerInControl === playerId && state.phase !== "MATCH_OVER" ? "in-control" : ""}">
-    <div class="compact-hud-top">
-      <div class="hud-portrait">${portraitMarkup(p.superstar.id, p.superstar.name, "hud-photo")}</div>
-      <div class="compact-hud-identity">
-        <span>${cpu ? "CPU" : "YOU"}${state.playerInControl === playerId && state.phase !== "MATCH_OVER" ? ' · <b>CONTROL</b>' : ""}</span>
-        <strong>${p.superstar.name}</strong>
-        <div class="compact-hp"><b>${p.hp}</b><small>/ ${p.maxHp} HP</small></div>
-      </div>
-      <div class="compact-total"><small>TOTAL</small><b>${total}</b></div>
+  const control = state.playerInControl === playerId && state.phase !== "MATCH_OVER";
+  const statusText = `${p.posture === "on-mat" ? "GROUNDED" : "STANDING"}${p.status.stunnedTurns ? ` · STUN ${p.status.stunnedTurns}` : ""}`;
+  const art = superstarArtwork[p.superstar.id];
+  return `<article class="wrestler-hud cinematic-wrestler-hud ${cpu ? "cpu" : "human"} ${control ? "in-control" : ""}">
+    <button type="button" class="hud-wrestler-trigger" data-open-superstar="${p.superstar.id}" aria-label="Open ${p.superstar.name} Superstar card">
+      ${art ? `<img class="hud-wrestler-art" src="${art}" alt="${p.superstar.name}">` : superstarVisualMarkup(p.superstar.id,p.superstar.name,"hud-wrestler-art")}
+      <span>VIEW CARD</span>
+    </button>
+    <div class="cinematic-hud-info">
+      <div class="cinematic-hud-label">${cpu ? "CPU" : "YOU"}${control ? " · CONTROL" : ""}</div>
+      <strong>${p.superstar.name}</strong>
+      <div class="hud-hp-number ${healthClass(p)}"><b>${p.hp}</b><small>HP</small></div>
+      <div class="hud-resource-row">${renderMomentum(p)}</div>
+      <div class="hud-body-damage"><span>SUBMISSION DAMAGE</span><div>${submissionHud(p)}</div></div>
+      <div class="cinematic-hud-status">${statusText}</div>
     </div>
-    <div class="hud-hp-track"><span style="width:${hpPercent}%"></span></div>
-    <div class="compact-methods">${methodValues.map(([label,value])=>`<span><small>${label}</small><b>${value ?? 0}</b></span>`).join("")}</div>
-    <div class="compact-hud-bottom"><span>${statusText}</span><span>SUB ${submissionThreshold(p)}</span></div>
   </article>`;
+}
+
+function renderSuperstarOverlay() {
+  if (!superstarOverlayId) return "";
+  const star = superstarById[superstarOverlayId];
+  const card = superstarCollectibleFor(superstarOverlayId);
+  if (!star || !card) return "";
+  return `<div class="superstar-card-modal" data-superstar-modal-backdrop="1"><div class="superstar-card-modal-inner">${collectibleCardMarkup(card,{flipped:superstarOverlayFlipped,extraClass:"hud-superstar-modal-card",flipAttr:'data-flip-superstar-modal="1"'})}<small>Tap card to ${superstarOverlayFlipped ? "show front" : "flip"} · Tap outside to close</small></div></div>`;
 }
 
 function renderMatchHud() {
   const state = game.state();
   const location = state.players[CPU].location === "ring" && state.players[HUMAN].location === "ring" ? "IN THE RING" : "RINGSIDE";
   const posture = state.players[CPU].posture === "on-mat" || state.players[HUMAN].posture === "on-mat" ? "GROUNDED" : "STANDING";
-  return `<section class="match-hud-shell compact-match-hud">
+  return `<section class="match-hud-shell compact-match-hud cinematic-match-hud">
     <div class="compact-match-title"><span>${activeMode === "ladder" ? "CLIMB THE LADDER" : activeMode === "championship" ? "CHAMPIONSHIP ROAD" : "EXHIBITION"}</span><b>${state.players[HUMAN].superstar.name} <em>VS</em> ${state.players[CPU].superstar.name}</b><small>T${state.turnNumber}</small></div>
-    <div class="match-hud-grid">${renderWrestlerHud(CPU)}${renderWrestlerHud(HUMAN)}</div>
+    <div class="match-hud-grid">${renderWrestlerHud(HUMAN)}${renderWrestlerHud(CPU)}</div>
     <div class="compact-ring-strip"><span>${state.countOut.count ? `COUNT ${state.countOut.count}/${state.countOut.limit}` : location}</span><b>${posture}</b></div>
   </section>`;
 }
@@ -1572,7 +1717,7 @@ function playedCardFromEvent(event) {
 
 function latestPlayPile() {
   const state = game.state();
-  const significant = new Set(["MOVE_DECLARED","MOVE_COUNTERED","MOVE_CONNECTED","MOMENTUM_PLAYED","ACTION_PLAYED","SUPPORT_PLAYED","MANAGER_PLAYED","SPECIAL_PLAYED","ENTRANCE_PREMATCH","PIN_ESCAPED_SPECIAL"]);
+  const significant = new Set(["MOVE_DECLARED","MOVE_COUNTERED","MOVE_CONNECTED","MOMENTUM_PLAYED","ACTION_PLAYED","SUPPORT_PLAYED","MANAGER_PLAYED","SPECIAL_PLAYED","PIN_ESCAPED_SPECIAL"]);
   for (const event of [...state.log].reverse()) {
     if (!significant.has(event.type)) continue;
     const found = playedCardFromEvent(event);
@@ -1615,7 +1760,7 @@ function renderPlayPile() {
 function renderHumanHand() {
   const state = game.state(), p = state.players[HUMAN];
   const active = decisionOwner(state) === HUMAN && state.phase !== "MATCH_OVER";
-  const momentumAvailable = p.turn.momentumPlayed < p.turn.momentumPlayLimit;
+  const momentumAvailable = p.momentumControlSequence !== state.controlSequence;
 
   const entries = p.hand.map((card, index) => {
     const legal = active && cardLegal(HUMAN, card);
@@ -1769,10 +1914,13 @@ function render() {
   if (screen === "setup" || !game) { renderSetup(); return; }
   handleCompletedMatch();
   const root = $("#game");
-  root.innerHTML = `${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderHumanHand()}${renderMatchLog()}`;
+  root.innerHTML = `${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderHumanHand()}${renderMatchLog()}${renderSuperstarOverlay()}`;
   root.querySelectorAll("[data-flip-hand]").forEach(btn => btn.addEventListener("click", () => { const key = btn.dataset.flipHand; if (flippedHandCards.has(key)) flippedHandCards.delete(key); else flippedHandCards.add(key); render(); }));
   root.querySelectorAll("[data-play-hand]").forEach(btn => btn.addEventListener("click", () => playCard(HUMAN, Number(btn.dataset.playHand))));
   root.querySelectorAll("[data-flip-play-pile]").forEach(btn => btn.addEventListener("click", () => { playPileFlipped = !playPileFlipped; render(); }));
+  root.querySelectorAll("[data-open-superstar]").forEach(btn => btn.addEventListener("click", () => { superstarOverlayId = btn.dataset.openSuperstar; superstarOverlayFlipped = false; render(); }));
+  root.querySelectorAll("[data-flip-superstar-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); superstarOverlayFlipped = !superstarOverlayFlipped; render(); }));
+  root.querySelectorAll("[data-superstar-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if (event.target !== backdrop) return; superstarOverlayId = null; superstarOverlayFlipped = false; render(); }));
   $("#pass-action")?.addEventListener("click", passAction); $("#attempt-pin")?.addEventListener("click", attemptPin); $("#end-post-move")?.addEventListener("click", endPostMove);
   $("#return-ring")?.addEventListener("click", returnToRing); $("#follow-outside")?.addEventListener("click", followOutside);
   $("#reset-match")?.addEventListener("click", restartMatch); $("#change-matchup")?.addEventListener("click", activeMode === "ladder" ? showLadder : activeMode === "championship" ? showChampionship : showSetup); $("#browse-main-menu")?.addEventListener("click", showMainMenu); $("#ladder-hub")?.addEventListener("click", showLadder); $("#championship-hub")?.addEventListener("click", showChampionship); $("#browse-collection")?.addEventListener("click", showCollection); $("#browse-boosters")?.addEventListener("click", showBoosters); $("#browse-challenges")?.addEventListener("click", showChallenges); $("#browse-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1)); $("#release-submission")?.addEventListener("click", releaseSubmission);

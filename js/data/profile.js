@@ -1,24 +1,26 @@
-import { decks } from "./decks.js?v=0.11.56";
-import { collectionCards } from "./collection.js?v=0.11.56";
-import { superstars } from "./superstars.js?v=0.11.56";
+import { decks } from "./decks.js?v=0.11.61";
+import { collectionCards } from "./collection.js?v=0.11.61";
+import { superstars } from "./superstars.js?v=0.11.61";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 16;
+export const PROFILE_VERSION = 18;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
   "hall-of-fame-series-1": 0,
   "evolution-series-1": 0,
   "season-1-final-boss": 0,
-  "raw-series-1": 0
+  "raw-series-1": 0,
+  "worlds-collide-series-1": 0
 });
 const defaultSetProgress = () => ({
   "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
   "hall-of-fame-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
   "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
-  "raw-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] }
+  "raw-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
+  "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] }
 });
 const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt: null, freePacksClaimed: 0, matchXpEarned: 0, challengeXpEarned: 0 });
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
@@ -152,6 +154,10 @@ export function createProfile(starterId) {
   grantSuperstarUnlockPackage(p, "sol-ruca");
   grantSuperstarUnlockPackage(p, "chad-gable");
   grantSuperstarUnlockPackage(p, "raquel-rodriguez");
+  grantSuperstarUnlockPackage(p, "rey-mysterio");
+  grantSuperstarUnlockPackage(p, "dominik-mysterio");
+  grantSuperstarUnlockPackage(p, "penta");
+  grantSuperstarUnlockPackage(p, "el-grande-americano");
   return p;
 }
 
@@ -208,6 +214,10 @@ export function migrateProfile(old) {
   grantSuperstarUnlockPackage(p, "sol-ruca");
   grantSuperstarUnlockPackage(p, "chad-gable");
   grantSuperstarUnlockPackage(p, "raquel-rodriguez");
+  grantSuperstarUnlockPackage(p, "rey-mysterio");
+  grantSuperstarUnlockPackage(p, "dominik-mysterio");
+  grantSuperstarUnlockPackage(p, "penta");
+  grantSuperstarUnlockPackage(p, "el-grande-americano");
   return p;
 }
 

@@ -1,6 +1,6 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.56";
-import { decks } from "./decks.js?v=0.11.56";
-import { superstars } from "./superstars.js?v=0.11.56";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.61";
+import { decks } from "./decks.js?v=0.11.61";
+import { superstars } from "./superstars.js?v=0.11.61";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -53,11 +53,12 @@ export const SEASON_1 = {
       id: "worlds-collide",
       date: "2026-09-26T00:00:00",
       dateLabel: "26 SEP",
-      title: "Worlds Collide",
-      kicker: "MID-SEASON DROP",
-      description: "WWE × AAA themed 4-Superstar subset. Superstar slots stay hidden until the real event card is clear.",
+      title: "Worlds Collide — Series 1",
+      kicker: "NEW SUBSET",
+      description: "Four-Superstar WWE × AAA lucha subset featuring Rey Mysterio, Dominik Mysterio, Penta and El Grande Americano.",
       superstarCount: 4,
-      type: "subset"
+      type: "subset",
+      setId: "worlds-collide-series-1"
     },
     {
       id: "money-in-the-bank",

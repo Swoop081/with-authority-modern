@@ -366,7 +366,7 @@ test("Chad Gable RAW Series 1 package is locked, playable and wired to Olympic P
 
 
 test("starting HP roster uses the locked durability spread",()=>{
-  const expected = {"iyo-sky": 48, "mankind": 52, "the-rock": 58, "hulk-hogan": 52, "bayley": 50, "cm-punk": 49, "paige": 49, "seth-rollins": 50, "andre-the-giant": 56, "stephanie-vaquer": 49, "randy-savage": 50, "roman-reigns": 53, "charlotte-flair": 52, "kevin-owens": 52, "kane": 54, "the-undertaker": 54, "ultimate-warrior": 52, "rhea-ripley": 52, "cody-rhodes": 51, "oba-femi": 55, "stone-cold-steve-austin": 51, "liv-morgan": 48, "brock-lesnar": 55, "gunther": 53, "becky-lynch": 51, "logan-paul": 48, "sol-ruca": 48, "chad-gable": 50, "raquel-rodriguez": 53};
+  const expected = {"iyo-sky": 48, "mankind": 52, "the-rock": 58, "hulk-hogan": 52, "bayley": 50, "cm-punk": 49, "paige": 49, "seth-rollins": 50, "andre-the-giant": 56, "stephanie-vaquer": 49, "randy-savage": 50, "roman-reigns": 53, "charlotte-flair": 52, "kevin-owens": 52, "kane": 54, "the-undertaker": 54, "ultimate-warrior": 52, "rhea-ripley": 52, "cody-rhodes": 51, "oba-femi": 55, "stone-cold-steve-austin": 51, "liv-morgan": 48, "brock-lesnar": 55, "gunther": 53, "becky-lynch": 51, "logan-paul": 48, "sol-ruca": 48, "chad-gable": 50, "raquel-rodriguez": 53, "rey-mysterio": 48, "dominik-mysterio": 49, "penta": 50};
   for (const [id,hp] of Object.entries(expected)) assert.equal(starById.get(id)?.hp,hp,`${id} starting HP`);
   const values=[...new Set(stars.map(s=>s.hp))].sort((a,b)=>a-b);
   assert.deepEqual(values,[48,49,50,51,52,53,54,55,56,58]);
@@ -394,4 +394,166 @@ test("Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RA
   const big=byName('Running Powerslam'), backup=allGameplayCards.find(c=>c.id==='special-raquel-rodriguez');
   s2.playerInControl='p1'; s2.phase='ACTION'; s2.players.p1.hand=[big]; s2.players.p1.momentum.strength=5; s2.players.p1.adrenaline=3; s2.players.p1.momentum.attitude=3; s2.players.p2.hand=[backup]; const rhp=s2.players.p2.hp;
   assert.equal(e2.declareMove('p1',big),true); e2.passCounter('p2'); assert.equal(rhp-s2.players.p2.hp,5,'Judgment Day Backup reduces 8 damage to 5'); assert.equal(s2.players.p2.specialUsed,true); assert.equal(s2.players.p1.adrenaline,2,'Judgment Day Backup drains 1 opponent Adrenaline');
+});
+
+
+test("Rey Mysterio Worlds Collide Series 1 package is locked, family-gated and playable",()=>{
+  const rey=starById.get('rey-mysterio'); assert.ok(rey);
+  assert.equal(rey.hp,48);
+  assert.deepEqual(rey.methodLimits,{agility:null,strength:0,strike:2,technical:3});
+  assert.deepEqual(rey.starterMomentum,{agility:8,technical:2,strike:2});
+  assert.equal(decks['rey-mysterio'].length,55);
+  assert.equal(decks['rey-mysterio'].filter(c=>c.kind==='momentum').length,12);
+  assert.equal(decks['rey-mysterio'].filter(c=>c.id==='619').length,3);
+  assert.equal(decks['rey-mysterio'].filter(c=>c.id==='shoulder-up').length,2,'55-page correction preserves the locked deck by adding a second Shoulder Up');
+  const six=allGameplayCards.find(c=>c.id==='619'); assert.ok(six);
+  assert.deepEqual(six.allowedSuperstarIds,['rey-mysterio','dominik-mysterio']);
+  assert.equal(six.superstarId,null); assert.equal(six.stun,1); assert.equal(six.groundedOnly,true);
+  const pop=allGameplayCards.find(c=>c.id==='rey-mysterio-west-coast-pop'); assert.equal(pop.finisher,true); assert.deepEqual(pop.requirements,{}); assert.equal(pop.pinBonus,4); assert.deepEqual(pop.pinBonusAfterNamed,{name:'619',pinBonus:6});
+  const mex=allGameplayCards.find(c=>c.id==='rey-mysterio-mysterio-express'); assert.equal(mex.trademark,true); assert.equal(mex.kickoutRetainControl,true); assert.equal(mex.pinBonus,2);
+  const tilt=allGameplayCards.find(c=>c.id==='tilt-a-whirl-headscissors'); assert.ok(tilt.counters.includes('grapple')); assert.equal(tilt.drawOnCounter,1);
+  assert.equal(CARD_NUMBER_BY_ID['tilt-a-whirl-headscissors']?.cardCode,'WC1-001');
+  assert.equal(CARD_NUMBER_BY_ID['619']?.cardCode,'WC1-002');
+  assert.equal(CARD_NUMBER_BY_ID['superstar-rey-mysterio']?.cardCode,'WC1-007');
+  assert.equal(CARD_NUMBER_BY_ID['drop-toe-hold']?.cardCode,'WC1-008');
+  const nonFamily=stars.find(s=>!['rey-mysterio','dominik-mysterio'].includes(s.id));
+  const bad=new MatchEngine({p1:nonFamily,p2:rey,decks,rng:rng(1601)}),bs=bad.state(); bs.playerInControl='p1';bs.phase='ACTION';bs.players.p1.hand=[six];bs.players.p1.momentum.agility=10;bs.players.p1.momentum.strike=10;bs.players.p1.momentum.technical=10;bs.players.p1.momentum.strength=10;bs.players.p2.posture='on-mat';assert.equal(moveEligibility(bs,'p1',six).legal,false);
+  const opp=stars.find(s=>s.id!=='rey-mysterio');
+  const g=new MatchEngine({p1:rey,p2:opp,decks,rng:rng(1602)}),st=g.state();
+  assert.equal(st.players.p1.momentum.agility,1); assert.equal(st.players.p1.adrenaline,1);
+  st.playerInControl='p1';st.phase='ACTION';st.players.p2.posture='on-mat';st.players.p1.hand=[six];st.players.p1.deck.unshift(pop);st.players.p1.momentum.agility=10;st.players.p1.momentum.strike=10;
+  assert.equal(g.declareMove('p1',six),true); if(st.phase==='COUNTER')g.passCounter('p2');
+  assert.ok(st.players.p1.hand.some(c=>c.id===pop.id),'Rey 619 searches West Coast Pop');
+  const searched=st.players.p1.hand.find(c=>c.id===pop.id); g.endPostMove('p1');
+  assert.equal(moveEligibility(st,'p1',searched).effectiveCost,7,'searched West Coast Pop costs 2 less');
+  st.players.p2.posture='on-mat'; assert.equal(g.declareMove('p1',searched),true); if(st.phase==='COUNTER')g.passCounter('p2'); assert.equal(st.postMove.pinBonus,6,'West Coast Pop gets Pin +6 immediately after 619');
+});
+
+test("Rey Ultimate Underdog and Lucha Libre Legend mechanics execute",()=>{
+  const rey=starById.get('rey-mysterio'),opp=stars.find(s=>s.id!=='rey-mysterio');
+  const g=new MatchEngine({p1:rey,p2:opp,decks,rng:()=>0.999}),s=g.state();
+  s.phase='PIN_RESPONSE';s.playerInControl='p2';s.postMove={attackerId:'p2',defenderId:'p1',cardId:null,pinBonus:0};s.proposedPin={attackerId:'p2',defenderId:'p1'};s.players.p1.deck=[byName('Dropkick'),byName('Arm Drag')];const before=s.players.p1.hand.length;assert.equal(g.passPinResponse('p1'),true);assert.equal(s.players.p1.abilityUses,1);assert.equal(s.players.p1.adrenaline,2,'Entrance + first kickout = 2 Adrenaline');assert.ok(s.players.p1.hand.length>=before+2,'kickout ability draw plus normal control draw');
+  const g2=new MatchEngine({p1:opp,p2:rey,decks,rng:rng(1603)}),q=g2.state();const incoming=byName('Bulldog'),tilt=allGameplayCards.find(c=>c.id==='tilt-a-whirl-headscissors'),special=allGameplayCards.find(c=>c.id==='special-rey-mysterio');q.phase='COUNTER';q.playerInControl='p1';q.proposedMove={attackerId:'p1',defenderId:'p2',card:incoming};q.players.p2.hand=[tilt,special];q.players.p2.deck=[byName('Dropkick')];q.players.p2.momentum.agility=10;q.players.p2.momentum.technical=10;assert.equal(g2.counter('p2',tilt),true);assert.equal(q.players.p2.specialUsed,true);assert.equal(q.proposedMove.abilityBonusDamage,2);assert.ok(q.players.p2.hand.some(c=>c.name==='Dropkick'),'Tilt-a-Whirl counter draws 1 page');
+});
+
+
+test("Dominik Mysterio Worlds Collide package is locked and playable",()=>{
+  const dom=starById.get('dominik-mysterio'); assert.ok(dom);
+  assert.equal(dom.hp,49); assert.deepEqual(dom.starterMomentum,{agility:7,strike:3,technical:2});
+  assert.equal(decks['dominik-mysterio'].length,55);
+  assert.equal(decks['dominik-mysterio'].filter(c=>c.kind==='momentum').length,12);
+  assert.equal(decks['dominik-mysterio'].filter(c=>c.id==='momentum-strength').length,0);
+  assert.equal(decks['dominik-mysterio'].filter(c=>c.id==='619').length,3);
+  assert.equal(decks['dominik-mysterio'].filter(c=>c.id==='dominik-mysterio-frog-splash').length,3);
+  const six=allGameplayCards.find(c=>c.id==='619');
+  assert.deepEqual(six.allowedSuperstarIds,['rey-mysterio','dominik-mysterio']);
+  assert.ok(six.effects.some(e=>e.name==='Dominik’s Frog Splash'&&e.discount===2&&e.ifSuperstarIds?.includes('dominik-mysterio')));
+  const fin=allGameplayCards.find(c=>c.id==='dominik-mysterio-frog-splash');
+  assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,15); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,4); assert.deepEqual(fin.pinBonusAfterNamed,{name:'619',pinBonus:5});
+  assert.equal(CARD_NUMBER_BY_ID['low-blow']?.cardCode,'WC1-009');
+  assert.equal(CARD_NUMBER_BY_ID['three-amigos']?.cardCode,'WC1-010');
+  assert.equal(CARD_NUMBER_BY_ID['dominik-mysterio-frog-splash']?.cardCode,'WC1-011');
+  assert.equal(CARD_NUMBER_BY_ID['superstar-dominik-mysterio']?.cardCode,'WC1-014');
+  const opp=stars.find(s=>!['rey-mysterio','dominik-mysterio'].includes(s.id));
+  const g=new MatchEngine({p1:dom,p2:opp,decks,rng:rng(1801)}),q=g.state();
+  assert.equal(q.players.p1.momentum.agility,1); assert.equal(q.players.p1.momentum.strength,1); assert.equal(q.players.p1.adrenaline,1);
+  const sixCard=allGameplayCards.find(c=>c.id==='619'),finCard=fin; q.players.p1.hand=[sixCard]; q.players.p1.deck=[finCard]; q.players.p1.momentum.agility=10;q.players.p1.momentum.strike=10;q.players.p1.adrenaline=20;q.players.p2.posture='on-mat';
+  assert.equal(g.declareMove('p1',sixCard),true); g.passCounter('p2');
+  assert.ok(q.players.p1.hand.some(c=>c.id==='dominik-mysterio-frog-splash')); assert.equal(q.players.p1.namedDiscount['Dominik’s Frog Splash'],2);
+});
+
+test("Penta Worlds Collide package is locked and playable",()=>{
+  const penta=starById.get('penta'); assert.ok(penta);
+  assert.equal(penta.hp,50); assert.deepEqual(penta.starterMomentum,{agility:6,strike:4,technical:2});
+  assert.equal(decks.penta.length,55); assert.equal(decks.penta.filter(c=>c.kind==='momentum').length,12); assert.equal(decks.penta.filter(c=>c.id==='momentum-strength').length,0);
+  assert.equal(decks.penta.filter(c=>c.id==='penta-mexican-destroyer').length,3); assert.equal(decks.penta.filter(c=>c.id==='special-penta').length,1);
+  const back=allGameplayCards.find(c=>c.id==='backstabber'),tope=allGameplayCards.find(c=>c.id==='tope-con-hilo'),sac=allGameplayCards.find(c=>c.id==='penta-the-sacrifice'),driver=allGameplayCards.find(c=>c.id==='penta-driver'),fin=allGameplayCards.find(c=>c.id==='penta-mexican-destroyer'),sp=allGameplayCards.find(c=>c.id==='special-penta');
+  assert.ok(back.counters.includes('aerial')); assert.equal(back.counterBonusDamage,2); assert.equal(tope.selfStunIfCountered,1);
+  assert.equal(driver.trademark,true); assert.equal(fin.finisher,true); assert.equal(fin.damage,16); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,4); assert.equal(sp.name,'Fearless Assault');
+  assert.equal(CARD_NUMBER_BY_ID.backstabber.cardCode,'WC1-015'); assert.equal(CARD_NUMBER_BY_ID['superstar-penta'].cardCode,'WC1-022');
+  const opp=stars.find(s=>s.id!=='penta'); const g=new MatchEngine({p1:penta,p2:opp,decks,rng:rng(1901)}),q=g.state();
+  assert.equal(q.players.p1.momentum.agility,1); assert.equal(q.players.p1.momentum.strength,1); assert.equal(q.players.p1.adrenaline,1);
+  q.playerInControl='p1';q.phase='ACTION';q.players.p1.hand=[sac];q.players.p1.deck=[driver];q.players.p1.momentum.technical=10;q.players.p1.momentum.strength=10;q.players.p1.adrenaline=20;
+  assert.equal(g.declareMove('p1',sac),true); if(q.phase==='COUNTER')g.passCounter('p2'); assert.ok(q.players.p1.hand.some(c=>c.id==='penta-driver')); assert.equal(q.players.p1.namedDiscount['Penta Driver'],1);
+  g.endPostMove('p1');
+  const agility=allGameplayCards.find(c=>c.id==='dropkick'),strike=allGameplayCards.find(c=>c.id==='superkick'); q.players.p1.hand=[agility,sp,strike];q.players.p1.momentum.agility=10;q.players.p1.momentum.strike=10;q.players.p1.adrenaline=20;q.players.p2.posture='standing';
+  assert.equal(g.declareMove('p1',agility),true); if(q.phase==='COUNTER')g.passCounter('p2'); assert.equal(q.players.p1.specialUsed,true); g.endPostMove('p1'); assert.equal(moveEligibility(q,'p1',strike).effectiveCost,Math.max(0,strike.cost-2));
+});
+
+
+
+test("El Grande Americano completes Worlds Collide Series 1 and is fully playable",()=>{
+  const ega=starById.get('el-grande-americano'); assert.ok(ega);
+  assert.equal(ega.hp,51);
+  assert.deepEqual(ega.methodLimits,{agility:3,strength:4,strike:3,technical:null});
+  assert.deepEqual(ega.starterMomentum,{technical:4,strength:3,agility:3,strike:2});
+  assert.deepEqual(ega.leadOffIds,['momentum-technical','momentum-strike','headbutt','german-suplex','dropkick']);
+  assert.equal(decks['el-grande-americano'].length,55);
+  assert.equal(decks['el-grande-americano'].filter(c=>c.kind==='momentum').length,12);
+  assert.equal(decks['el-grande-americano'].filter(c=>c.id==='el-grande-americano-loaded-mask-headbutt').length,3);
+  assert.equal(decks['el-grande-americano'].filter(c=>c.id==='special-el-grande-americano').length,1);
+  const jump=allGameplayCards.find(c=>c.id==='el-grande-americano-jumping-headbutt');
+  const fin=allGameplayCards.find(c=>c.id==='el-grande-americano-loaded-mask-headbutt');
+  const sp=allGameplayCards.find(c=>c.id==='special-el-grande-americano');
+  assert.equal(jump.trademark,true); assert.equal(jump.damage,11); assert.equal(jump.stun,1); assert.equal(jump.pinBonus,2); assert.deepEqual(jump.requirements,{strike:2,agility:1});
+  assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,16); assert.deepEqual(fin.requirements,{}); assert.equal(fin.stun,1); assert.equal(fin.pinBonus,4);
+  assert.equal(sp.name,'Steel Plate');
+  assert.equal(CARD_NUMBER_BY_ID['el-grande-americano-jumping-headbutt']?.cardCode,'WC1-023');
+  assert.equal(CARD_NUMBER_BY_ID['el-grande-americano-loaded-mask-headbutt']?.cardCode,'WC1-024');
+  assert.equal(CARD_NUMBER_BY_ID['entrance-el-grande-americano']?.cardCode,'WC1-025');
+  assert.equal(CARD_NUMBER_BY_ID['special-el-grande-americano']?.cardCode,'WC1-026');
+  assert.equal(CARD_NUMBER_BY_ID['superstar-el-grande-americano']?.cardCode,'WC1-027');
+
+  const opp=stars.find(s=>s.id!=='el-grande-americano');
+  const g=new MatchEngine({p1:ega,p2:opp,decks,rng:rng(2001)}),q=g.state();
+  assert.equal(q.players.p1.momentum.technical,1); assert.equal(q.players.p1.adrenaline,1);
+  const head=byName('Headbutt'), drop=byName('Dropkick');
+  q.playerInControl='p1';q.phase='ACTION';q.players.p1.hand=[head,sp,drop];q.players.p1.deck=[fin,byName('Arm Drag'),byName('Duck')];
+  q.players.p1.momentum.strike=10;q.players.p1.momentum.agility=10;q.players.p1.momentum.technical=10;q.players.p1.momentum.strength=10;q.players.p1.adrenaline=20;q.players.p2.hand=[];
+  assert.equal(g.declareMove('p1',head),true); if(q.phase==='COUNTER')g.passCounter('p2');
+  assert.equal(q.players.p1.specialUsed,true); assert.ok(q.players.p1.hand.some(c=>c.id===fin.id),'Steel Plate tutors Loaded Mask Headbutt'); assert.equal(q.players.p1.namedDiscount['Loaded Mask Headbutt'],2);
+  assert.equal(q.players.p1.abilityUses,0,'first move in a Control sequence cannot trigger Masked Opportunist');
+  g.endPostMove('p1');
+  assert.equal(g.declareMove('p1',drop),true); if(q.phase==='COUNTER')g.passCounter('p2');
+  assert.equal(q.players.p1.abilityUses,1,'different Method on second connected move triggers Masked Opportunist');
+  assert.ok(q.players.p1.adrenaline>=21,'Masked Opportunist gains 1 Adrenaline');
+});
+
+
+test("Momentum can be played once per Control sequence and becomes available again after Control leaves and returns",()=>{
+  const a=stars[0], b=stars[1];
+  const g=new MatchEngine({p1:a,p2:b,decks,rng:rng(1161)});
+  const s=g.state();
+  const p1Momentum=(decks[a.id]??[]).filter(c=>c.kind==='momentum').slice(0,2);
+  assert.equal(p1Momentum.length,2);
+  s.players.p1.hand=[...p1Momentum];
+  const firstSequence=s.controlSequence;
+  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),true);
+  assert.equal(s.players.p1.momentumControlSequence,firstSequence);
+  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),false,'second Momentum in same Control sequence must be blocked');
+  assert.equal(g.passTurn('p1'),true);
+  assert.equal(s.playerInControl,'p2');
+  assert.ok(s.controlSequence>firstSequence);
+  const cpuSequence=s.controlSequence;
+  assert.equal(g.passTurn('p2'),true);
+  assert.equal(s.playerInControl,'p1');
+  assert.ok(s.controlSequence>cpuSequence);
+  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),true,'Momentum must reset when Control returns to p1');
+});
+
+test("v0.11.61 Exhibition and match UI source contains the locked cinematic flow and removes the old opponent preview", async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.ok(ui.includes('TONIGHT’S'));
+  assert.ok(ui.includes('MAIN EVENT'));
+  assert.ok(ui.includes('YOUR ENTRANCE'));
+  assert.ok(ui.includes('OPPONENT ENTRANCE'));
+  assert.equal(ui.includes('CPU OPPONENT · RANDOM'),false);
+  assert.equal(ui.includes('CPU ownership is not restricted by your collection.'),false);
+  assert.ok(ui.includes('data-open-superstar'));
+  assert.ok(ui.includes('SUBMISSION DAMAGE'));
+  assert.ok(css.includes('.ccg-card.type-momentum .ccg-card-art img.momentum-set-logo'));
+  assert.ok(css.includes('.hud-hp-number.healthy'));
+  assert.ok(css.includes('.hud-resource.adrenaline'));
 });

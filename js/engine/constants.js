@@ -9,4 +9,4 @@ export const PHASES = {
   MATCH_OVER: "MATCH_OVER"
 };
 
-export { MOVE_TYPES, MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.56";
+export { MOVE_TYPES, MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.61";

@@ -1808,6 +1808,38 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"special-raquel-rodriguez","setId":"raw-series-1","cardNumber":26,"cardCode":"RAW1-026"},
 {"id":"superstar-raquel-rodriguez","setId":"raw-series-1","cardNumber":27,"cardCode":"RAW1-027"}
 
+,
+{"id":"tilt-a-whirl-headscissors","setId":"worlds-collide-series-1","cardNumber":1,"cardCode":"WC1-001"},
+{"id":"619","setId":"worlds-collide-series-1","cardNumber":2,"cardCode":"WC1-002"},
+{"id":"rey-mysterio-mysterio-express","setId":"worlds-collide-series-1","cardNumber":3,"cardCode":"WC1-003"},
+{"id":"rey-mysterio-west-coast-pop","setId":"worlds-collide-series-1","cardNumber":4,"cardCode":"WC1-004"},
+{"id":"entrance-rey-mysterio","setId":"worlds-collide-series-1","cardNumber":5,"cardCode":"WC1-005"},
+{"id":"special-rey-mysterio","setId":"worlds-collide-series-1","cardNumber":6,"cardCode":"WC1-006"},
+{"id":"superstar-rey-mysterio","setId":"worlds-collide-series-1","cardNumber":7,"cardCode":"WC1-007"},
+{"id":"drop-toe-hold","setId":"worlds-collide-series-1","cardNumber":8,"cardCode":"WC1-008"}
+,
+{"id":"low-blow","setId":"worlds-collide-series-1","cardNumber":9,"cardCode":"WC1-009"},
+{"id":"three-amigos","setId":"worlds-collide-series-1","cardNumber":10,"cardCode":"WC1-010"},
+{"id":"dominik-mysterio-frog-splash","setId":"worlds-collide-series-1","cardNumber":11,"cardCode":"WC1-011"},
+{"id":"entrance-dominik-mysterio","setId":"worlds-collide-series-1","cardNumber":12,"cardCode":"WC1-012"},
+{"id":"special-dominik-mysterio","setId":"worlds-collide-series-1","cardNumber":13,"cardCode":"WC1-013"},
+{"id":"superstar-dominik-mysterio","setId":"worlds-collide-series-1","cardNumber":14,"cardCode":"WC1-014"}
+,
+{"id":"backstabber","setId":"worlds-collide-series-1","cardNumber":15,"cardCode":"WC1-015"},
+{"id":"tope-con-hilo","setId":"worlds-collide-series-1","cardNumber":16,"cardCode":"WC1-016"},
+{"id":"penta-the-sacrifice","setId":"worlds-collide-series-1","cardNumber":17,"cardCode":"WC1-017"},
+{"id":"penta-driver","setId":"worlds-collide-series-1","cardNumber":18,"cardCode":"WC1-018"},
+{"id":"penta-mexican-destroyer","setId":"worlds-collide-series-1","cardNumber":19,"cardCode":"WC1-019"},
+{"id":"entrance-penta","setId":"worlds-collide-series-1","cardNumber":20,"cardCode":"WC1-020"},
+{"id":"special-penta","setId":"worlds-collide-series-1","cardNumber":21,"cardCode":"WC1-021"},
+{"id":"superstar-penta","setId":"worlds-collide-series-1","cardNumber":22,"cardCode":"WC1-022"},
+{"id":"el-grande-americano-jumping-headbutt","setId":"worlds-collide-series-1","cardNumber":23,"cardCode":"WC1-023"},
+{"id":"el-grande-americano-loaded-mask-headbutt","setId":"worlds-collide-series-1","cardNumber":24,"cardCode":"WC1-024"},
+{"id":"entrance-el-grande-americano","setId":"worlds-collide-series-1","cardNumber":25,"cardCode":"WC1-025"},
+{"id":"special-el-grande-americano","setId":"worlds-collide-series-1","cardNumber":26,"cardCode":"WC1-026"},
+{"id":"superstar-el-grande-americano","setId":"worlds-collide-series-1","cardNumber":27,"cardCode":"WC1-027"}
+
+
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

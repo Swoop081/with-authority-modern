@@ -7,7 +7,7 @@ export function cpuDecision(game,pid="p2"){
  if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length&&s.players[s.submission.defenderId].submissionDamage[s.submission.bodyPart]<12?{type:"maintain",index:0}:{type:"release"};
  if(s.phase==="POST_MOVE"){const def=s.players[pid==="p1"?"p2":"p1"],sp=p.hand.find(x=>canPlaySpecial(s,pid,x));if(sp&&(def.hp<=def.maxHp*.7||(s.postMove?.cardId&&p.discard.find(x=>x.id===s.postMove.cardId)?.damage>=8)))return{type:"special",card:sp};if(def.hp<=def.maxHp*.5)return{type:"pin"};return{type:"endPost"};}
  if(s.phase==="ACTION"){
-   const mom=p.hand.find(x=>x.kind==="momentum"&&(p.turn?.momentumPlayed??0)<(p.turn?.momentumPlayLimit??1));if(mom)return{type:"momentum",card:mom};
+   const mom=p.hand.find(x=>x.kind==="momentum"&&p.momentumControlSequence!==s.controlSequence);if(mom)return{type:"momentum",card:mom};
    const moves=p.hand.filter(x=>x.kind==="move"&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal).sort((a,b)=>(Number(!!b.finisher)-Number(!!a.finisher))||((b.damage??0)-(a.damage??0)));if(moves[0])return{type:"move",card:moves[0]};
    const utility=p.hand.find(x=>(x.kind==="action"&&!p.actionLocked&&(p.turn?.actionPlayed??0)<1)||(x.kind==="support"&&(p.turn?.supportPlayed??0)<1)||(x.kind==="manager"&&!p.activeManager));if(utility)return{type:utility.kind,card:utility};
    return{type:"pass"};

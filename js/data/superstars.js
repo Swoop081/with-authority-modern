@@ -1824,4 +1824,128 @@ export const superstars = {
     "special": {"type":"reduceIncomingBig","minDamage":8,"reduce":3,"opponentAdrenaline":-1}
   }
 
+,
+  "reyMysterio": {
+    "id": "rey-mysterio",
+    "name": "Rey Mysterio",
+    "nickname": "The Ultimate Underdog",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-rey-mysterio",
+    "entranceId": "entrance-rey-mysterio",
+    "specialId": "special-rey-mysterio",
+    "leadOffIds": ["momentum-agility","momentum-technical","dropkick","hurricanrana","arm-drag"],
+    "signatures": ["619","rey-mysterio-mysterio-express","rey-mysterio-west-coast-pop"],
+    "archetype": "agility-technical-lucha-underdog",
+    "hp": 48,
+    "methodLimits": {"agility": null,"strength": 0,"strike": 2,"technical": 3},
+    "starterMomentum": {"agility": 8,"technical": 2,"strike": 2},
+    "ability": {
+      "name": "The Ultimate Underdog",
+      "text": "The first 2 times each match Rey successfully kicks out of a Pin, draw 1 page. After the first of those kick-outs, gain +1 Adrenaline.",
+      "trigger": {"type":"reyUltimateUnderdog","maxUses":2,"draw":1,"firstAdrenaline":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-rey-mysterio","name":"Booyaka 619","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"rey-mysterio",
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"luchaLibreLegend","method":"agility","bonusDamage":2,"retainControl":true}
+  }
+,
+  "dominikMysterio": {
+    "id": "dominik-mysterio",
+    "name": "Dominik Mysterio",
+    "nickname": "Dirty Dom",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-dominik-mysterio",
+    "entranceId": "entrance-dominik-mysterio",
+    "specialId": "special-dominik-mysterio",
+    "leadOffIds": ["momentum-agility","momentum-strike","dropkick","vertical-suplex","hurricanrana"],
+    "signatures": ["three-amigos","619","dominik-mysterio-frog-splash"],
+    "archetype": "agility-strike-technical-heel-lucha",
+    "hp": 49,
+    "methodLimits": {"agility": null,"strength": 1,"strike": 3,"technical": 3},
+    "starterMomentum": {"agility": 7,"strike": 3,"technical": 2},
+    "ability": {
+      "name": "Nuclear Heat",
+      "text": "The first 2 times each match an opponent kicks out of one of Dominik’s Pin attempts, that opponent loses 1 Adrenaline. The first time this happens, draw 1 page.",
+      "trigger": {"type":"dominikNuclearHeat","maxUses":2,"opponentAdrenaline":-1,"firstDraw":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-dominik-mysterio","name":"Dirty Dom","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"dominik-mysterio",
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1,"strength":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"hammerInBoot","opponentAdrenaline":-2,"regainControl":true}
+  }
+
+,
+  "penta": {
+    "id": "penta",
+    "name": "Penta",
+    "nickname": "Cero Miedo",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-penta",
+    "entranceId": "entrance-penta",
+    "specialId": "special-penta",
+    "leadOffIds": ["momentum-agility","momentum-strike","dropkick","chop","arm-drag"],
+    "signatures": ["penta-the-sacrifice","penta-driver","penta-mexican-destroyer"],
+    "archetype": "agility-strike-technical-hybrid-lucha",
+    "hp": 50,
+    "methodLimits": {"agility": null,"strength": 1,"strike": 4,"technical": 3},
+    "starterMomentum": {"agility": 6,"strike": 4,"technical": 2},
+    "ability": {
+      "name": "Zero Fear, Zero Mercy",
+      "text": "The first 2 times each match Penta connects with a Strike Move immediately after a Technical Move in the same Control sequence, that Strike deals +2 Damage and Penta gains +1 Adrenaline.",
+      "trigger": {"type":"pentaZeroFearZeroMercy","maxUses":2,"bonusDamage":2,"adrenaline":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-penta","name":"Cero Miedo","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"penta",
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1,"strength":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"fearlessAssault","afterMethod":"agility","nextMethod":"strike","discount":2,"bonusDamage":2}
+  }
+,
+  "elGrandeAmericano": {
+    "id": "el-grande-americano",
+    "name": "El Grande Americano",
+    "nickname": "El Grande Americano",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-el-grande-americano",
+    "entranceId": "entrance-el-grande-americano",
+    "specialId": "special-el-grande-americano",
+    "leadOffIds": ["momentum-technical","momentum-strike","headbutt","german-suplex","dropkick"],
+    "signatures": ["el-grande-americano-jumping-headbutt","el-grande-americano-loaded-mask-headbutt"],
+    "archetype": "four-method-lucha-opportunist",
+    "hp": 51,
+    "methodLimits": {"agility": 3,"strength": 4,"strike": 3,"technical": null},
+    "starterMomentum": {"technical": 4,"strength": 3,"agility": 3,"strike": 2},
+    "ability": {
+      "name": "Masked Opportunist",
+      "text": "The first 2 times each match El Grande Americano connects with a Move whose Method differs from the immediately previous Move he connected with during the same Control sequence, draw 1 page and gain +1 Adrenaline.",
+      "trigger": {"type":"differentMethod","maxUses":2,"draw":1,"adrenaline":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-el-grande-americano","name":"Los Americanos","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"el-grande-americano",
+      "rulesText":"Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"steelPlate","afterNames":["Headbutt","Jumping Headbutt"],"searchName":"Loaded Mask Headbutt","discount":2}
+  }
+
+
+
 };
