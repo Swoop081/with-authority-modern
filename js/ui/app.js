@@ -1,28 +1,28 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.76";
-import { superstars } from "../data/superstars.js?v=0.11.76";
-import { decks } from "../data/decks.js?v=0.11.76";
-import { sets } from "../data/sets.js?v=0.11.76";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.76";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.76";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.76";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.76";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.76";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.76";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.76";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.76";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.76";
-import { totalMomentum } from "../engine/utils.js?v=0.11.76";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.76";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.76";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.76";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.76";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.76";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.76";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.76";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.76";
-import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft } from "../data/deck-builder.js?v=0.11.76";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.76";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.76";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.84";
+import { superstars } from "../data/superstars.js?v=0.11.84";
+import { decks } from "../data/decks.js?v=0.11.84";
+import { sets } from "../data/sets.js?v=0.11.84";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.84";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.84";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.84";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.84";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.84";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.84";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.84";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.84";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.84";
+import { totalMomentum } from "../engine/utils.js?v=0.11.84";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.84";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.84";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.84";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.84";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.84";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.84";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.84";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.84";
+import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft } from "../data/deck-builder.js?v=0.11.84";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.84";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.84";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1640,7 +1640,14 @@ function advanceCpu() {
   else if (steps) message = `${nameFor(CPU)} completed its CPU decisions. Your response is ready.`;
 }
 
-function afterHumanAction() { flippedHandCards = new Set(); advanceCpu(); render(); }
+function afterHumanAction() {
+  flippedHandCards = new Set();
+  const before = game.state().log.length;
+  advanceCpu();
+  const events = game.state().log.slice(before);
+  const sequence = presentationFromEvents(events);
+  if (sequence) spectacleSequence(sequence, () => render()); else render();
+}
 
 function playCard(playerId, index) {
   const state = game.state(), card = state.players[playerId].hand[index];
@@ -1662,13 +1669,20 @@ function playCard(playerId, index) {
 
 function passAction() {
   const state = game.state();
+  const logBefore = state.log.length;
   try {
     if (decisionOwner(state) !== HUMAN) return;
     if (state.phase === "COUNTER") game.passCounter(HUMAN);
     else if (state.phase === "PIN_RESPONSE") game.passPinResponse(HUMAN);
     else if (state.phase === "ACTION") game.passTurn(HUMAN);
   } catch (error) { message = error.message; }
-  afterHumanAction();
+  const immediateEvents = game.state().log.slice(logBefore);
+  if (immediateEvents.some(e => ["PIN_CHECK","KICK_OUT","MATCH_ENDED"].includes(e.type))) {
+    flippedHandCards = new Set();
+    const beforeCpu = game.state().log.length; advanceCpu();
+    const sequence = presentationFromEvents([...immediateEvents,...game.state().log.slice(beforeCpu)]);
+    if (sequence) spectacleSequence(sequence, () => render()); else render();
+  } else afterHumanAction();
 }
 
 function attemptPin() { try { game.attemptPin(HUMAN); } catch (e) { message = e.message; } afterHumanAction(); }
@@ -1713,7 +1727,7 @@ function submissionHud(player) {
 
 function healthClass(player) {
   const pct = player.maxHp ? player.hp / player.maxHp : 0;
-  return pct > .60 ? "healthy" : pct > .30 ? "average" : "danger";
+  return pct > .60 ? "healthy" : pct > .40 ? "average" : "danger";
 }
 
 function renderWrestlerHud(playerId) {
@@ -1736,12 +1750,53 @@ function renderWrestlerHud(playerId) {
     <div class="cinematic-hud-status">${statusText}</div>
   </article>`;
 }
+let playPileOverlayCard = null, playPileOverlayFlipped = false;
+let matchSpectacle = null, matchSpectacleTimer = null;
+
 function renderSuperstarOverlay() {
   if (!superstarOverlayId) return "";
   const star = superstarById[superstarOverlayId];
   const card = superstarCollectibleFor(superstarOverlayId);
   if (!star || !card) return "";
   return `<div class="superstar-card-modal" data-superstar-modal-backdrop="1"><div class="superstar-card-modal-inner">${collectibleCardMarkup(card,{flipped:superstarOverlayFlipped,extraClass:"hud-superstar-modal-card",flipAttr:'data-flip-superstar-modal="1"'})}<small>Tap card to ${superstarOverlayFlipped ? "show front" : "flip"} · Tap outside to close</small></div></div>`;
+}
+
+function renderPlayPileOverlay() {
+  if (!playPileOverlayCard) return "";
+  return `<div class="play-pile-card-modal" data-play-pile-modal-backdrop="1"><div class="play-pile-card-modal-inner">${collectibleCardMarkup(playPileOverlayCard,{flipped:playPileOverlayFlipped,extraClass:"play-pile-modal-card",flipAttr:'data-flip-play-pile-modal="1"'})}<small>Tap card to ${playPileOverlayFlipped ? "show front" : "flip"} · Tap outside to close</small></div></div>`;
+}
+
+function renderMatchSpectacle() {
+  if (!matchSpectacle) return "";
+  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${matchSpectacle.text}</div></div>`;
+}
+
+function spectacleSequence(steps, done) {
+  if (matchSpectacleTimer) clearTimeout(matchSpectacleTimer);
+  let i = 0;
+  const next = () => {
+    if (i >= steps.length) { matchSpectacle = null; matchSpectacleTimer = null; done?.(); return; }
+    matchSpectacle = steps[i++];
+    render();
+    matchSpectacleTimer = setTimeout(next, matchSpectacle.duration ?? 650);
+  };
+  next();
+}
+
+function presentationFromEvents(events) {
+  if (!events?.length) return null;
+  const ended = [...events].reverse().find(e => e.type === "MATCH_ENDED");
+  const pinCheck = [...events].reverse().find(e => e.type === "PIN_CHECK");
+  const kicked = events.some(e => e.type === "KICK_OUT");
+  if (ended?.finishType === "submission") return [{text:"TAP OUT!",kind:"submission",duration:1150}];
+  if (ended?.finishType === "i-quit" || ended?.finishType === "i quit") return [{text:"I QUIT!",kind:"submission",duration:1150}];
+  if (pinCheck || ended?.finishType === "pin") {
+    const success = ended?.finishType === "pin";
+    return success
+      ? [{text:"1!",kind:"pin",duration:620},{text:"2!!",kind:"pin",duration:760},{text:"3!!!",kind:"pin final",duration:1100}]
+      : kicked ? [{text:"1!",kind:"pin",duration:560},{text:"2!!",kind:"pin",duration:success?760:920},{text:"KICK OUT!",kind:"kickout",duration:950}] : null;
+  }
+  return null;
 }
 
 function renderMatchHud() {
@@ -1811,7 +1866,7 @@ function renderPlayPile() {
     const key=`${card.id}:${item.event?.type??"played"}:${item.playerId??"match"}`;
     const flipped=latest&&playPileCardKey===key&&playPileFlipped;
     if(latest&&key!==playPileCardKey){playPileCardKey=key;playPileFlipped=false;}
-    return `<div class="play-pile-item ${isHuman?"from-you":"from-cpu"} ${latest?"is-latest":""}"><div class="play-pile-context"><span>${owner}</span><b>${actionLabel}</b></div>${collectibleCardMarkup(card,{flipped,extraClass:"play-pile-ccg",flipAttr:latest?'data-flip-play-pile="1"':''})}<small>${shortCardMeta(card)}</small></div>`;
+    return `<div class="play-pile-item ${isHuman?"from-you":"from-cpu"} ${latest?"is-latest":""}"><div class="play-pile-context"><span>${owner}</span><b>${actionLabel}</b></div><button type="button" class="play-pile-card-trigger" data-open-play-pile="${card.id}" aria-label="Inspect ${card.name}">${collectibleCardMarkup(card,{flipped:false,extraClass:"play-pile-ccg"})}</button><small>${shortCardMeta(card)}</small></div>`;
   }).join("");
   return `<section class="play-pile premium-play-pile ${presentationThemeClass(matchPresentationSetId)}"><div class="play-pile-label"><span>PLAY PILE</span><small>${items.length} card${items.length===1?"":"s"} in current exchange</small></div><div class="ring-play-surface"><span class="ring-ropes"></span>${setLogoMarkup(matchPresentationSetId,"ring-centre-logo")}<div class="play-pile-track">${cards}</div></div></section>`;
 }
@@ -1990,10 +2045,12 @@ function render() {
     return;
   }
   document.body.dataset.matchTheme = matchPresentationSetId ?? "summerslam-series-1";
-  root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)}">${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderHumanHand()}${renderMatchLog()}</section>${renderSuperstarOverlay()}`;
+  root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)}">${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderHumanHand()}${renderMatchLog()}</section>${renderSuperstarOverlay()}${renderPlayPileOverlay()}${renderMatchSpectacle()}`;
   root.querySelectorAll("[data-flip-hand]").forEach(btn => btn.addEventListener("click", () => { const key = btn.dataset.flipHand; if (flippedHandCards.has(key)) flippedHandCards.delete(key); else flippedHandCards.add(key); render(); }));
   root.querySelectorAll("[data-play-hand]").forEach(btn => btn.addEventListener("click", () => playCard(HUMAN, Number(btn.dataset.playHand))));
-  root.querySelectorAll("[data-flip-play-pile]").forEach(btn => btn.addEventListener("click", () => { playPileFlipped = !playPileFlipped; render(); }));
+  root.querySelectorAll("[data-open-play-pile]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); playPileOverlayCard = collectionById.get(btn.dataset.openPlayPile) ?? null; playPileOverlayFlipped = false; render(); }));
+  root.querySelectorAll("[data-flip-play-pile-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); playPileOverlayFlipped = !playPileOverlayFlipped; render(); }));
+  root.querySelectorAll("[data-play-pile-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if (event.target !== backdrop) return; playPileOverlayCard = null; playPileOverlayFlipped = false; render(); }));
   root.querySelectorAll("[data-open-superstar]").forEach(btn => btn.addEventListener("click", () => { superstarOverlayId = btn.dataset.openSuperstar; superstarOverlayFlipped = false; render(); }));
   root.querySelectorAll("[data-flip-superstar-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); superstarOverlayFlipped = !superstarOverlayFlipped; render(); }));
   root.querySelectorAll("[data-superstar-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if (event.target !== backdrop) return; superstarOverlayId = null; superstarOverlayFlipped = false; render(); }));

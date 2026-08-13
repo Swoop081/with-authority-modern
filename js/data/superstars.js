@@ -36,12 +36,13 @@ export const superstars = {
     },
     "ability": {
       "name": "Genius of the Sky",
-      "text": "The first 2 times IYO connects with a Move requiring Agility 2+, gain +1 Adrenaline.",
+      "text": "The first 2 times IYO connects with a Move requiring Agility 2+, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "agilityRequirement",
         "minRequirement": 2,
         "maxUses": 2,
-        "adrenaline": 1
+        "adrenaline": 1,
+        "draw": 1
       },
       "maxUses": 2
     },
@@ -52,9 +53,10 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "iyo-sky",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
       "preMatchMomentum": {
-        "strength": 1
+        "strength": 1,
+        "agility": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -165,7 +167,7 @@ export const superstars = {
       "text": "The first 2 times Rock connects with a Move dealing 7+ damage, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "connectDamage",
-        "minDamage": 7,
+        "minDamage": 6,
         "maxUses": 2,
         "draw": 1,
         "adrenaline": 1
@@ -292,11 +294,12 @@ export const superstars = {
     },
     "ability": {
       "name": "The Role Model",
-      "text": "The first 3 times Bayley connects with a Move using a different Method than the previous Move she connected with, gain +1 Adrenaline.",
+      "text": "The first 3 times Bayley connects with a Move using a different Method than the previous Move she connected with, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "differentMethod",
         "maxUses": 3,
-        "adrenaline": 1
+        "adrenaline": 1,
+        "draw": 1
       },
       "maxUses": 3
     },
@@ -307,9 +310,10 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "bayley",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strike Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "technical": 1,
+        "strike": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -355,13 +359,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Pipe Bomb",
-      "text": "The first time Punk successfully Counters a Move, gain +1 Technical Momentum.",
+      "text": "The first 2 times Punk successfully Counters a Move, gain +1 Technical Momentum, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "firstCounterMomentum",
         "method": "technical",
-        "maxUses": 1
+        "maxUses": 2,
+        "draw": 1,
+        "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-cm-punk",
@@ -370,9 +376,10 @@ export const superstars = {
       "setId": "summerslam-series-1",
       "rarity": 4,
       "superstarId": "cm-punk",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strike Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "technical": 1,
+        "strike": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -545,7 +552,7 @@ export const superstars = {
     },
     "ability": {
       "name": "Giant’s Reach",
-      "text": "The first 2 times André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less.",
+      "text": "The first time André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less.",
       "trigger": {
         "type": "strikeDiscountStrength",
         "maxUses": 2,
@@ -607,11 +614,12 @@ export const superstars = {
     },
     "ability": {
       "name": "La Primera",
-      "text": "The first 2 times Vaquer connects with an Agility Move immediately after a Technical Move in the same Control sequence, gain +1 Adrenaline.",
+      "text": "The first 2 times Vaquer connects with an Agility Move immediately after a Technical Move in the same Control sequence, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "agilityAfterTechnical",
         "maxUses": 2,
-        "adrenaline": 1
+        "adrenaline": 1,
+        "draw": 1
       },
       "maxUses": 2
     },
@@ -622,9 +630,10 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "stephanie-vaquer",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "technical": 1,
+        "agility": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -731,15 +740,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Head of the Table",
-      "text": "The first 2 times Roman connects with a Move dealing 7+ damage, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first time Roman connects with a Move dealing 7+ damage, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "connectDamage",
         "minDamage": 7,
-        "maxUses": 2,
+        "maxUses": 1,
         "draw": 1,
         "adrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-roman-reigns",
@@ -798,11 +807,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Genetically Superior",
-      "text": "The first 2 times Charlotte connects with a Technical Move, her next Agility Move during that Control sequence costs 1 less.",
+      "text": "The first 2 times Charlotte connects with a Technical Move, draw 1 page and her next Agility Move during that Control sequence costs 1 less.",
       "trigger": {
         "type": "technicalDiscountAgility",
         "maxUses": 2,
-        "discount": 1
+        "discount": 1,
+        "draw": 1
       },
       "maxUses": 2
     },
@@ -813,9 +823,11 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "charlotte-flair",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "technical": 1,
+        "agility": 1,
+        "strength": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -823,7 +835,7 @@ export const superstars = {
     "special": {
       "type": "counterDrawAdrenaline",
       "draw": 1,
-      "adrenaline": 2
+      "adrenaline": 1
     }
   },
   "kevinOwens": {
@@ -861,7 +873,7 @@ export const superstars = {
     },
     "ability": {
       "name": "The Prize Fighter",
-      "text": "The first 2 times Kevin takes 7+ damage from a single Move, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first 2 times Kevin takes 6+ damage from a single Move, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "takeDamage",
         "minDamage": 7,
@@ -878,9 +890,10 @@ export const superstars = {
       "setId": "summerslam-series-1",
       "rarity": 4,
       "superstarId": "kevin-owens",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "strength": 1
+        "strength": 1,
+        "strike": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -924,15 +937,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Big Red Machine",
-      "text": "The first 2 times Kane connects with a Move dealing 8+ damage, gain +1 Adrenaline and draw 1 page.",
+      "text": "The first time Kane connects with a Move dealing 8+ damage, gain +1 Adrenaline.",
       "trigger": {
         "type": "connectDamage",
         "minDamage": 8,
-        "maxUses": 2,
-        "draw": 1,
+        "maxUses": 1,
         "adrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-kane",
@@ -941,9 +953,9 @@ export const superstars = {
       "setId": "hall-of-fame-series-1",
       "rarity": 4,
       "superstarId": "kane",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "agility": 1
+        "technical": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -1051,13 +1063,13 @@ export const superstars = {
     },
     "ability": {
       "name": "Feel the Power",
-      "text": "The first 2 times Warrior connects with two Moves during the same Control sequence, draw 1 page.",
+      "text": "The first time Warrior connects with two Moves during the same Control sequence, draw 1 page.",
       "trigger": {
         "type": "secondMoveInControl",
-        "maxUses": 2,
+        "maxUses": 1,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-ultimate-warrior",
@@ -1129,9 +1141,10 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "rhea-ripley",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "strength": 1
+        "strength": 1,
+        "strike": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -1437,13 +1450,13 @@ export const superstars = {
     },
     "ability": {
       "name": "Suplex City",
-      "text": "The first 2 times Brock connects with German Suplex, search your Playbook for another German Suplex and gain +1 Adrenaline.",
+      "text": "The first 2 times Brock connects with German Suplex, search your Playbook for another German Suplex and gain +2 Adrenaline.",
       "trigger": {
         "type": "connectNamed",
         "name": "German Suplex",
         "maxUses": 2,
         "drawNamed": true,
-        "adrenaline": 1
+        "adrenaline": 2
       },
       "maxUses": 2
     },
@@ -1454,16 +1467,17 @@ export const superstars = {
       "setId": "summerslam-series-1",
       "rarity": 4,
       "superstarId": "brock-lesnar",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "strength": 1
+        "strength": 1,
+        "technical": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
     "special": {
       "type": "reduceIncomingBig",
-      "minDamage": 10,
+      "minDamage": 8,
       "reduce": 5,
       "methodMomentum": "strength"
     }
@@ -1568,13 +1582,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Man",
-      "text": "The first 2 times Becky connects with a Strike Move, her next Technical Move during that Control sequence costs 1 less.",
+      "text": "The first 3 times Becky connects with a Strike Move, her next Technical Move during that Control sequence costs 2 less.",
       "trigger": {
         "type": "strikeDiscountTechnical",
-        "maxUses": 2,
-        "discount": 1
+        "maxUses": 3,
+        "discount": 2,
+        "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-becky-lynch",
@@ -1583,17 +1598,17 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "becky-lynch",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "agility": 1
+        "technical": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
     "special": {
-      "type": "counterDiscountNamed",
+      "type": "counterTutorNamed",
       "name": "Dis-arm-her",
-      "amount": 2
+      "amount": 3
     }
   },
   "loganPaul": {
@@ -1618,7 +1633,7 @@ export const superstars = {
       "logan-paul-paulverizer"
     ],
     "archetype": "strike-agility-showman",
-    "hp": 48,
+    "hp": 46,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -1631,14 +1646,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Viral Athlete",
-      "text": "The first time Logan connects with a Strike Move, gain +1 Strength Momentum. The first 2 times each match Logan then connects with an Agility Move after a Strike Move in the same Control sequence, draw 1 page.",
+      "text": "The first time Logan connects with a Strike Move, gain +1 Strength Momentum. The first time each match Logan then connects with an Agility Move after a Strike Move in the same Control sequence, draw 1 page.",
       "trigger": {
         "type": "loganViralAthlete",
         "strengthOnFirstStrike": 1,
         "drawAfterStrikeAgility": 1,
-        "drawUses": 2
+        "drawUses": 1
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-logan-paul",
@@ -1647,18 +1662,17 @@ export const superstars = {
       "setId": "raw-series-1",
       "rarity": 4,
       "superstarId": "logan-paul",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline. Logan’s first connected Strike supplies +1 Strength Momentum through Viral Athlete.",
       "preMatchMomentum": {
-        "agility": 1,
-        "strength": 1
+        "agility": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
     "special": {
       "type": "brassKnuckles",
-      "bonusDamage": 3,
-      "stun": 1,
+      "bonusDamage": 1,
+      "stun": 0,
       "requireMethod": "strike",
       "endControl": true
     }
@@ -1699,14 +1713,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Daredevil Instincts",
-      "text": "The first 2 times each match Sol successfully Counters an opponent's Move, draw 1 page. If the card used to Counter was an Agility Move, it deals +2 Damage.",
+      "text": "The first 3 times each match Sol successfully Counters an opponent's Move, draw 1 page. If the card used to Counter was an Agility Move, it deals +3 Damage.",
       "trigger": {
         "type": "solDaredevil",
-        "maxUses": 2,
+        "maxUses": 3,
         "draw": 1,
-        "agilityCounterDamage": 2
+        "agilityCounterDamage": 3
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-sol-ruca",
@@ -1715,9 +1729,10 @@ export const superstars = {
       "setId": "raw-series-1",
       "rarity": 4,
       "superstarId": "sol-ruca",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "agility": 1
+        "agility": 1,
+        "technical": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -1807,21 +1822,21 @@ export const superstars = {
     "leadOffIds": ["momentum-strength","momentum-strike","shoulder-tackle","fallaway-slam","big-boot"],
     "signatures": ["raquel-rodriguez-corkscrew-splash","raquel-rodriguez-tejana-bomb"],
     "archetype": "strength-strike-powerhouse",
-    "hp": 53,
+    "hp": 52,
     "methodLimits": {"agility": 1,"strength": null,"strike": 3,"technical": 0},
     "starterMomentum": {"strength": 8,"strike": 4},
     "ability": {
       "name": "Unmatched Power",
-      "text": "The first 2 times each match Raquel connects with a Strength Move dealing 8+ printed Damage, that Move deals +2 Damage.",
-      "trigger": {"type":"raquelUnmatchedPower","minPrintedDamage":8,"bonusDamage":2,"maxUses":2},
-      "maxUses": 2
+      "text": "The first time each match Raquel connects with a Strength Move dealing 8+ printed Damage, that Move deals +1 Damage.",
+      "trigger": {"type":"raquelUnmatchedPower","minPrintedDamage":8,"bonusDamage":1,"maxUses":1},
+      "maxUses": 1
     },
     "entrance": {
       "id":"entrance-raquel-rodriguez","name":"Big Mami Cool","kind":"entrance","setId":"raw-series-1","rarity":4,"superstarId":"raquel-rodriguez",
-      "rulesText":"Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"strength":1,"agility":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
+      "preMatchMomentum":{"strength":1,"agility":1},"preMatchAdrenaline":0,"delayedTurn5":false
     },
-    "special": {"type":"reduceIncomingBig","minDamage":8,"reduce":3,"opponentAdrenaline":-1}
+    "special": {"type":"reduceIncomingBig","minDamage":10,"reduce":1}
   }
 
 ,
@@ -1843,16 +1858,16 @@ export const superstars = {
     "starterMomentum": {"agility": 8,"technical": 2,"strike": 2},
     "ability": {
       "name": "The Ultimate Underdog",
-      "text": "The first 2 times each match Rey successfully kicks out of a Pin, draw 1 page. After the first of those kick-outs, gain +1 Adrenaline.",
-      "trigger": {"type":"reyUltimateUnderdog","maxUses":2,"draw":1,"firstAdrenaline":1},
+      "text": "The first 2 times each match Rey successfully kicks out of a Pin, draw 2 pages. After the first of those kick-outs, gain +1 Adrenaline.",
+      "trigger": {"type":"reyUltimateUnderdog","maxUses":2,"draw":2,"firstAdrenaline":1},
       "maxUses": 2
     },
     "entrance": {
       "id":"entrance-rey-mysterio","name":"Booyaka 619","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"rey-mysterio",
-      "rulesText":"Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"agility":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1,"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
     },
-    "special": {"type":"luchaLibreLegend","method":"agility","bonusDamage":2,"retainControl":true}
+    "special": {"type":"luchaLibreLegend","method":"agility","bonusDamage":3,"retainControl":true}
   }
 ,
   "dominikMysterio": {
@@ -1879,8 +1894,8 @@ export const superstars = {
     },
     "entrance": {
       "id":"entrance-dominik-mysterio","name":"Dirty Dom","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"dominik-mysterio",
-      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"agility":1,"strength":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1,"strength":1,"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
     },
     "special": {"type":"hammerInBoot","opponentAdrenaline":-2,"regainControl":true}
   }
@@ -1910,8 +1925,8 @@ export const superstars = {
     },
     "entrance": {
       "id":"entrance-penta","name":"Cero Miedo","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"penta",
-      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"agility":1,"strength":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1,"strength":1,"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
     },
     "special": {"type":"fearlessAssault","afterMethod":"agility","nextMethod":"strike","discount":2,"bonusDamage":2}
   }
@@ -1936,14 +1951,14 @@ export const superstars = {
       "name": "Masked Opportunist",
       "text": "The first 2 times each match El Grande Americano connects with a Move whose Method differs from the immediately previous Move he connected with during the same Control sequence, draw 1 page and gain +1 Adrenaline.",
       "trigger": {"type":"differentMethod","maxUses":2,"draw":1,"adrenaline":1},
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id":"entrance-el-grande-americano","name":"Los Americanos","kind":"entrance","setId":"worlds-collide-series-1","rarity":4,"superstarId":"el-grande-americano",
-      "rulesText":"Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum, +1 Agility Momentum and +1 Strike Momentum, plus +1 Adrenaline.",
+      "preMatchMomentum":{"technical":1,"strength":1,"agility":1,"strike":1},"preMatchAdrenaline":1,"delayedTurn5":false
     },
-    "special": {"type":"steelPlate","afterNames":["Headbutt","Jumping Headbutt"],"searchName":"Loaded Mask Headbutt","discount":2}
+    "special": {"type":"steelPlate","afterNames":["Headbutt","Jumping Headbutt"],"searchName":"Loaded Mask Headbutt","discount":3}
   }
 
 ,
@@ -1996,14 +2011,14 @@ export const superstars = {
     "starterMomentum": {"strike":5,"strength":3,"technical":2,"agility":2},
     "ability": {
       "name": "The Megastar",
-      "text": "The first 2 times each match LA Knight connects with a Move dealing 8+ printed Damage, gain +1 Adrenaline. If LA Knight had 4+ Adrenaline before that Move connected, also draw 1 page.",
-      "trigger": {"type":"laKnightMegastar","maxUses":2,"minPrintedDamage":8,"adrenaline":1,"drawThreshold":4,"draw":1},
+      "text": "The first 2 times each match LA Knight connects with a Move dealing 7+ printed Damage, gain +1 Adrenaline and draw 1 page.",
+      "trigger": {"type":"laKnightMegastar","maxUses":2,"minPrintedDamage":7,"adrenaline":1,"drawThreshold":0,"draw":1},
       "maxUses": 2
     },
     "entrance": {
       "id":"entrance-la-knight","name":"Let Me Talk to Ya!","kind":"entrance","setId":"money-in-the-bank-series-1","rarity":4,"superstarId":"la-knight",
-      "rulesText":"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"strike":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Strike Momentum, +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"strike":1,"strength":1,"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
     },
     "special": {"type":"yeahTutor","afterName":"Diving Elbow Drop","searchName":"BFT","discount":2}
   }
@@ -2034,8 +2049,8 @@ export const superstars = {
     },
     "entrance": {
       "id":"entrance-alexa-bliss","name":"The Goddess","kind":"entrance","setId":"money-in-the-bank-series-1","rarity":4,"superstarId":"alexa-bliss",
-      "rulesText":"Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
-      "preMatchMomentum":{"agility":1},"preMatchAdrenaline":1,"delayedTurn5":false
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1,"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
     },
     "special": {"type":"mindGames","pinBonusModifier":-2,"drawOnKickout":1,"adrenalineOnKickout":1}
   }
@@ -2102,5 +2117,162 @@ export const superstars = {
     "special": {"type":"jarOfTeeth","ditchOpponent":1,"opponentAdrenaline":-1,"draw":1}
   }
 
+
+,
+"tiffanyStratton": {
+  "id": "tiffany-stratton",
+  "name": "Tiffany Stratton",
+  "nickname": "The Center of the Universe",
+  "setId": "smackdown-series-1",
+  "era": null,
+  "seasonExclusive": false,
+  "cardId": "superstar-tiffany-stratton",
+  "entranceId": "entrance-tiffany-stratton",
+  "specialId": "special-tiffany-stratton",
+  "leadOffIds": [
+    "momentum-agility",
+    "momentum-strength",
+    "dropkick",
+    "body-slam",
+    "standing-moonsault"
+  ],
+  "signatures": [
+    "tiffany-stratton-handspring-back-elbow",
+    "tiffany-stratton-prettiest-moonsault-ever"
+  ],
+  "archetype": "strength-to-agility-showstopper",
+  "hp": 50,
+  "methodLimits": {
+    "agility": null,
+    "strength": 4,
+    "technical": 1,
+    "strike": 1
+  },
+  "starterMomentum": {
+    "agility": 7,
+    "strength": 4,
+    "technical": 1
+  },
+  "ability": {
+    "name": "Tiffy Time",
+    "text": "Once per Control sequence, after Tiffany connects with a Strength Move that grounds the opponent, her next Agility Move costs 1 less.",
+    "trigger": {
+      "type": "tiffanyStrengthGroundAgilityDiscount",
+      "discount": 1
+    }
+  },
+  "entrance": {
+    "id": "entrance-tiffany-stratton",
+    "name": "It’s Tiffy Time",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "tiffany-stratton",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  "special": {
+    "type": "tiffanyEpiphany",
+    "methods": [
+      "strength",
+      "agility"
+    ]
+  }
+},
+"chelseaGreen": {
+  "id": "chelsea-green",
+  "name": "Chelsea Green",
+  "nickname": "The Hot Mess",
+  "setId": "smackdown-series-1",
+  "era": null,
+  "seasonExclusive": false,
+  "cardId": "superstar-chelsea-green",
+  "entranceId": "entrance-chelsea-green",
+  "specialId": "special-chelsea-green",
+  "leadOffIds": [
+    "momentum-technical",
+    "momentum-agility",
+    "chain-wrestling",
+    "sidestep",
+    "ddt"
+  ],
+  "signatures": [
+    "chelsea-green-im-prettier",
+    "chelsea-green-green-with-envy"
+  ],
+  "archetype": "counter-control-opportunist",
+  "hp": 49,
+  "methodLimits": {
+    "agility": 3,
+    "strength": 1,
+    "strike": 2,
+    "technical": null
+  },
+  "starterMomentum": {
+    "technical": 7,
+    "agility": 3,
+    "strike": 2
+  },
+  "ability": {
+    "name": "The Complaints Department",
+    "text": "Once per Control sequence, when Chelsea successfully Counters an opponent’s Move, that opponent loses 1 Adrenaline and Chelsea draws 1 page.",
+    "trigger": {
+      "type": "chelseaComplaints",
+      "opponentAdrenaline": -1,
+      "draw": 1
+    }
+  },
+  "entrance": {
+    "id": "entrance-chelsea-green",
+    "name": "Hot Mess",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "chelsea-green",
+    "rulesText": "Pre-Match: Begin with +2 Adrenaline. Your first Counter this match costs 1 less.",
+    "preMatchMomentum": {},
+    "preMatchAdrenaline": 2,
+    "preMatchCounterDiscount": 1,
+    "delayedTurn5": false
+  },
+  "special": {
+    "type": "fileComplaint",
+    "counterDiscount": 1
+  }
+}
+
+,
+"damianPriest": {
+  "id": "damian-priest",
+  "name": "Damian Priest",
+  "nickname": "The Punisher",
+  "setId": "smackdown-series-1",
+  "era": null,
+  "seasonExclusive": false,
+  "cardId": "superstar-damian-priest",
+  "entranceId": "entrance-damian-priest",
+  "specialId": "special-damian-priest",
+  "leadOffIds": ["momentum-strength","momentum-strike","punch","body-slam","clothesline"],
+  "signatures": ["damian-priest-south-of-heaven","damian-priest-razors-edge","damian-priest-hit-the-lights"],
+  "archetype": "counter-punishment-heavy-hitter",
+  "hp": 54,
+  "methodLimits": {"strength":null,"strike":4,"agility":2,"technical":1},
+  "starterMomentum": {"strength":7,"strike":4,"agility":1},
+  "ability": {
+    "name":"The Punishment",
+    "text":"Once per Control sequence, after Damian successfully Counters a Move, his next Strength or Strike Move deals +3 damage.",
+    "trigger":{"type":"priestPunishment","damage":3}
+  },
+  "entrance": {
+    "id":"entrance-damian-priest","name":"Rise of the Punisher","kind":"entrance","setId":"smackdown-series-1","rarity":4,"superstarId":"damian-priest",
+    "rulesText":"Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum":{"strength":1,"strike":1},"preMatchAdrenaline":1,"delayedTurn5":false
+  },
+  "special":{"type":"lastRites","strengthDiscount":2}
+}
 
 };

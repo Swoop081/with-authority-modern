@@ -1,6 +1,6 @@
-import { decks } from "./decks.js?v=0.11.76";
-import { collectionCards } from "./collection.js?v=0.11.76";
-import { superstars } from "./superstars.js?v=0.11.76";
+import { decks } from "./decks.js?v=0.11.83";
+import { collectionCards } from "./collection.js?v=0.11.83";
+import { superstars } from "./superstars.js?v=0.11.83";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -159,6 +159,8 @@ export function createProfile(starterId) {
   grantSuperstarUnlockPackage(p, "alexa-bliss");
   grantSuperstarUnlockPackage(p, "finn-balor");
   grantSuperstarUnlockPackage(p, "danhausen");
+  grantSuperstarUnlockPackage(p, "tiffany-stratton");
+  grantSuperstarUnlockPackage(p, "chelsea-green");
   return p;
 }
 
@@ -235,6 +237,8 @@ export function migrateProfile(old) {
   grantSuperstarUnlockPackage(p, "alexa-bliss");
   grantSuperstarUnlockPackage(p, "finn-balor");
   grantSuperstarUnlockPackage(p, "danhausen");
+  grantSuperstarUnlockPackage(p, "tiffany-stratton");
+  grantSuperstarUnlockPackage(p, "chelsea-green");
   return p;
 }
 

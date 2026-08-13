@@ -2523,3 +2523,30 @@ body[data-screen="match"] .premium-headshot-hud .hud-hp-number{margin-left:-18px
 body[data-screen="match"] .premium-play-pile{margin:0!important;padding:0 10px 14px!important;overflow:hidden!important}body[data-screen="match"] .ring-play-surface{aspect-ratio:1200/520!important;min-height:0!important;height:auto!important;border-radius:16px!important;background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}body[data-screen="match"] .play-pile-track{position:absolute!important;inset:0!important;min-height:0!important;height:100%!important;padding:18px!important;overflow-x:auto!important;overflow-y:hidden!important}
 body[data-screen="match"] .play-pile-item{flex:0 0 78px!important;width:78px!important;max-width:78px!important;margin-right:-9px!important}body[data-screen="match"] .play-pile-item .ccg-card{width:78px!important;max-width:78px!important}body[data-screen="match"] .play-pile-context{width:78px!important;max-width:78px!important}
 @media(max-width:390px){body[data-screen="match"] .play-pile-item{flex-basis:72px!important;width:72px!important;max-width:72px!important}body[data-screen="match"] .play-pile-item .ccg-card{width:72px!important;max-width:72px!important}body[data-screen="match"] .play-pile-context{width:72px!important;max-width:72px!important}body[data-screen="match"] .premium-match-hud{padding-left:4px!important;padding-right:4px!important}body[data-screen="match"] .premium-match-hud .match-hud-grid{gap:4px!important}body[data-screen="match"] .premium-headshot-hud{padding-left:5px!important;padding-right:5px!important}}
+
+/* v0.11.84 — compact one-page match + play-pile inspection + finish spectacle */
+body[data-screen="match"] .premium-match-hud{top:0!important;padding:4px 6px!important}
+body[data-screen="match"] main{padding-top:0!important}
+body[data-screen="match"] .match-experience{padding-top:0!important}
+.play-pile-card-trigger{appearance:none;border:0;background:transparent;padding:0;margin:0;display:block;width:100%;cursor:pointer;color:inherit}
+.play-pile-card-trigger:active{transform:scale(.97)}
+.play-pile-card-modal{position:fixed;z-index:1400;inset:0;display:grid;place-items:center;padding:env(safe-area-inset-top) 12px env(safe-area-inset-bottom);background:rgba(0,0,0,.78);backdrop-filter:blur(11px)}
+.play-pile-card-modal-inner{height:min(64svh,620px);max-width:90vw;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.play-pile-modal-card{height:min(60svh,580px);width:auto!important;aspect-ratio:680/1000;filter:drop-shadow(0 26px 54px rgba(0,0,0,.78))}
+.play-pile-card-modal-inner>small{font-size:.54rem;color:#b9c0cb;text-align:center}
+/* Hand cards at ~70% of previous visual footprint. */
+body[data-screen="match"] .horizontal-hand-card{flex:0 0 clamp(105px,30vw,133px)!important;width:clamp(105px,30vw,133px)!important;min-width:105px!important}
+body[data-screen="match"] .compact-hand-panel{padding:7px 7px 8px!important}
+body[data-screen="match"] .compact-hand-panel .player-hand-head{margin-bottom:3px!important}
+body[data-screen="match"] .compact-hand-panel .hand-instruction{margin-bottom:4px!important;font-size:.43rem!important}
+body[data-screen="match"] .horizontal-card-hand{gap:6px!important;padding-bottom:4px!important}
+body[data-screen="match"] .horizontal-hand-card .hand-card-action button{min-height:28px!important;font-size:.48rem!important}
+body[data-screen="match"] .horizontal-hand-card .hand-card-action span{min-height:16px!important;font-size:.38rem!important}
+.match-spectacle{position:fixed;z-index:2000;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.48);backdrop-filter:blur(3px);pointer-events:none;animation:spectacleFade .14s ease-out}
+.match-spectacle-copy{width:100%;text-align:center;font-weight:1000;font-style:italic;font-size:clamp(7rem,38vw,17rem);line-height:.8;letter-spacing:-.07em;color:#fff;text-shadow:0 0 18px var(--presentation-accent,#2eb5ff),0 12px 42px #000;transform:scale(.72);animation:spectacleHit .28s cubic-bezier(.18,.85,.25,1.25) forwards}
+.match-spectacle.kickout .match-spectacle-copy,.match-spectacle.submission .match-spectacle-copy{font-size:clamp(4.2rem,20vw,10rem);letter-spacing:-.045em;padding:0 4vw}
+.match-spectacle.kickout .match-spectacle-copy{color:#fff;text-shadow:0 0 22px #2eb5ff,0 12px 42px #000}
+.match-spectacle.submission .match-spectacle-copy{color:#fff;text-shadow:0 0 22px #e73952,0 12px 42px #000}
+@keyframes spectacleHit{0%{transform:scale(.62);opacity:.15}72%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+@keyframes spectacleFade{from{opacity:0}to{opacity:1}}
+@media(max-width:390px){body[data-screen="match"] .horizontal-hand-card{flex-basis:102px!important;width:102px!important;min-width:102px!important}.play-pile-card-modal-inner{height:min(62svh,570px)}.play-pile-modal-card{height:min(58svh,540px)}}

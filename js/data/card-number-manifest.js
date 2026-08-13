@@ -1873,7 +1873,132 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"entrance-danhausen","setId":"smackdown-series-1","cardNumber":6,"cardCode":"SD1-006"},
 {"id":"special-danhausen","setId":"smackdown-series-1","cardNumber":7,"cardCode":"SD1-007"},
 {"id":"superstar-danhausen","setId":"smackdown-series-1","cardNumber":8,"cardCode":"SD1-008"},
-{"id":"cutter","setId":"smackdown-series-1","cardNumber":9,"cardCode":"SD1-009"}
+{"id":"cutter","setId":"smackdown-series-1","cardNumber":9,"cardCode":"SD1-009"},
+{
+  "id": "front-kick",
+  "setId": "smackdown-series-1",
+  "cardNumber": 10,
+  "cardCode": "SD1-010"
+},
+{
+  "id": "snap-suplex",
+  "setId": "smackdown-series-1",
+  "cardNumber": 11,
+  "cardCode": "SD1-011"
+},
+{
+  "id": "finlay-roll",
+  "setId": "smackdown-series-1",
+  "cardNumber": 12,
+  "cardCode": "SD1-012"
+},
+{
+  "id": "tiffany-stratton-handspring-back-elbow",
+  "setId": "smackdown-series-1",
+  "cardNumber": 13,
+  "cardCode": "SD1-013"
+},
+{
+  "id": "tiffany-stratton-prettiest-moonsault-ever",
+  "setId": "smackdown-series-1",
+  "cardNumber": 14,
+  "cardCode": "SD1-014"
+},
+{
+  "id": "entrance-tiffany-stratton",
+  "setId": "smackdown-series-1",
+  "cardNumber": 15,
+  "cardCode": "SD1-015"
+},
+{
+  "id": "special-tiffany-stratton",
+  "setId": "smackdown-series-1",
+  "cardNumber": 16,
+  "cardCode": "SD1-016"
+},
+{
+  "id": "superstar-tiffany-stratton",
+  "setId": "smackdown-series-1",
+  "cardNumber": 17,
+  "cardCode": "SD1-017"
+},
+{
+  "id": "chelsea-green-im-prettier",
+  "setId": "smackdown-series-1",
+  "cardNumber": 18,
+  "cardCode": "SD1-018"
+},
+{
+  "id": "chelsea-green-green-with-envy",
+  "setId": "smackdown-series-1",
+  "cardNumber": 19,
+  "cardCode": "SD1-019"
+},
+{
+  "id": "entrance-chelsea-green",
+  "setId": "smackdown-series-1",
+  "cardNumber": 20,
+  "cardCode": "SD1-020"
+},
+{
+  "id": "special-chelsea-green",
+  "setId": "smackdown-series-1",
+  "cardNumber": 21,
+  "cardCode": "SD1-021"
+},
+{
+  "id": "superstar-chelsea-green",
+  "setId": "smackdown-series-1",
+  "cardNumber": 22,
+  "cardCode": "SD1-022"
+},
+{
+  "id": "damian-priest-south-of-heaven",
+  "setId": "smackdown-series-1",
+  "cardNumber": 23,
+  "cardCode": "SD1-023"
+},
+{
+  "id": "damian-priest-razors-edge",
+  "setId": "smackdown-series-1",
+  "cardNumber": 24,
+  "cardCode": "SD1-024"
+},
+{
+  "id": "damian-priest-hit-the-lights",
+  "setId": "smackdown-series-1",
+  "cardNumber": 25,
+  "cardCode": "SD1-025"
+},
+{
+  "id": "entrance-damian-priest",
+  "setId": "smackdown-series-1",
+  "cardNumber": 26,
+  "cardCode": "SD1-026"
+},
+{
+  "id": "special-damian-priest",
+  "setId": "smackdown-series-1",
+  "cardNumber": 27,
+  "cardCode": "SD1-027"
+},
+{
+  "id": "superstar-damian-priest",
+  "setId": "smackdown-series-1",
+  "cardNumber": 28,
+  "cardCode": "SD1-028"
+}
+
+,
+{"id":"running-clothesline","setId":"raw-series-1","cardNumber":28,"cardCode":"RAW1-028"},
+{"id":"clothesline-over-the-top-rope","setId":"raw-series-1","cardNumber":29,"cardCode":"RAW1-029"},
+{"id":"mexican-surfboard","setId":"worlds-collide-series-1","cardNumber":28,"cardCode":"WC1-028"},
+{"id":"firemans-carry","setId":"money-in-the-bank-series-1","cardNumber":25,"cardCode":"MITB1-025"},
+{"id":"leapfrog","setId":"money-in-the-bank-series-1","cardNumber":26,"cardCode":"MITB1-026"},
+{"id":"abdominal-stretch","setId":"money-in-the-bank-series-1","cardNumber":27,"cardCode":"MITB1-027"},
+{"id":"punches-in-the-corner","setId":"money-in-the-bank-series-1","cardNumber":28,"cardCode":"MITB1-028"}
+
+
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

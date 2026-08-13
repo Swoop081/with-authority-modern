@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.11.76",
+  "version": "0.11.84",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,6 +12,7 @@
     "stamp-cache": "node tools/stamp-cache-version.mjs",
     "validate": "node tools/rebuild-validate.mjs",
     "generate-studio": "node tools/generate-card-studio-data.mjs",
-    "card-ids": "node tools/card-id-audit.mjs"
+    "card-ids": "node tools/card-id-audit.mjs",
+    "final-balance": "node tools/final-season1-sim.mjs"
   }
 }
