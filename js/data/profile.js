@@ -1,6 +1,6 @@
-import { decks } from "./decks.js?v=0.11.71";
-import { collectionCards } from "./collection.js?v=0.11.71";
-import { superstars } from "./superstars.js?v=0.11.71";
+import { decks } from "./decks.js?v=0.11.73";
+import { collectionCards } from "./collection.js?v=0.11.73";
+import { superstars } from "./superstars.js?v=0.11.73";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -104,25 +104,17 @@ export function grantStoreSuperstarUnlockPackage(profile, sid) {
   const star = starById.get(sid), d = decks[sid] ?? [];
   if (!star || d.length !== 55) throw new Error("That Superstar deck is not available.");
   profile.unlockedSuperstars ??= [];
-  if (profile.unlockedSuperstars.includes(sid)) return { alreadyOwned: true, superstarId: sid, leadOff: star.leadOffIds ?? [] };
+  if (profile.unlockedSuperstars.includes(sid)) return { alreadyOwned: true, superstarId: sid };
   profile.unlockedSuperstars.push(sid);
-  ensureSavedRecommendedDeck(profile, sid);
+  // A Superstar unlock grants identity + linked Entrance only. The recommended
+  // deck is a blueprint and is assembled later from cards actually owned.
   addOwnedCard(profile, `superstar-${sid}`, { foil: true });
   if (star.entranceId) addOwnedCard(profile, star.entranceId, { foil: true });
-  const leadOff = star.leadOffIds ?? d.slice(0, 5).map(c => c.id);
-  const counts = new Map();
-  for (const id of leadOff) counts.set(id, (counts.get(id) ?? 0) + 1);
-  for (const [id, count] of counts) {
-    const need = Math.max(0, count - totalOwnedCopies(profile, id));
-    if (need) addOwnedCard(profile, id, { amount: need });
-  }
+  profile.savedDecks ??= {};
+  delete profile.savedDecks[sid];
   profile.deckNeedsCards ??= {};
-  const deckCounts = new Map();
-  for (const c of d) deckCounts.set(c.id, (deckCounts.get(c.id) ?? 0) + 1);
-  let missing = 0;
-  for (const [id, count] of deckCounts) missing += Math.max(0, count - totalOwnedCopies(profile, id));
-  profile.deckNeedsCards[sid] = missing;
-  return { alreadyOwned: false, superstarId: sid, leadOff, entranceId: star.entranceId, deckSize: d.length, missing };
+  profile.deckNeedsCards[sid] = 55;
+  return { alreadyOwned: false, superstarId: sid, entranceId: star.entranceId, deckSize: d.length, missing: 55 };
 }
 
 export function createProfile(starterId) {
@@ -210,14 +202,25 @@ export function migrateProfile(old) {
   p.pendingUnlockCelebrations ??= [];
   p.createdAt ??= new Date().toISOString();
 
-  // Preserve the existing collection, but repair identity/Entrance and playable
-  // deck hooks for every already-unlocked Superstar without gifting missing
-  // 55-card collection copies during migration.
+  // Preserve identity/Entrance ownership, but never let a saved deck contain
+  // more copies than the Collection actually owns. Older builds auto-installed
+  // recommended 55-card lists, so migration trims those phantom copies.
   for (const sid of p.unlockedSuperstars) {
     const star = starById.get(sid);
-    ensureSavedRecommendedDeck(p, sid);
     addOwnedCard(p, `superstar-${sid}`, { foil: true });
     if (star?.entranceId) addOwnedCard(p, star.entranceId, { foil: true });
+    const saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
+    if (saved) {
+      const used = new Map();
+      p.savedDecks[sid] = saved.filter(entry => {
+        const id = typeof entry === "string" ? entry : entry?.id;
+        if (!id) return false;
+        const n = used.get(id) ?? 0;
+        const owned = totalOwnedCopies(p,id);
+        if (n >= owned) return false;
+        used.set(id,n+1); return true;
+      }).map(entry => typeof entry === "string" ? {id:entry,foil:false} : entry);
+    }
   }
   if (!p.unlockedSuperstars.includes("logan-paul")) grantSuperstarUnlockPackage(p, "logan-paul");
   grantSuperstarUnlockPackage(p, "sol-ruca");

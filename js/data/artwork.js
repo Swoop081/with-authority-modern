@@ -1,12 +1,12 @@
-import { assetUrl } from "../config/build.js?v=0.11.71";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.71";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.71";
+import { assetUrl } from "../config/build.js?v=0.11.73";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.73";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.73";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
 const EVOLUTION_ROOT = "assets/art/evolution-series-1";
-const TEMP_GENERIC_ART = "assets/cards/art/temp/generic-wrestling-action.webp";
+const TEMP_GENERIC_ART = "assets/cards/art/temp/superstar-placeholder.svg";
 
 // Superstar art is deliberately centralized. Replacing a portrait later only
 // requires changing one path here (or using superstarArtOverrides below).

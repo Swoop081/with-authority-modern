@@ -1,14 +1,9 @@
-# WWE Legacy: Collectible Card Game — v0.11.65
+# WWE Legacy: Collectible Card Game — v0.11.73
 
-Internal Season 1 development build containing the current **35-Superstar** pool through the second playable **Money in the Bank — Series 1** Superstar, LA Knight.
+Current canonical development baseline: **v0.11.73 — Consolidated Gameplay + Presentation Completion Pass**.
 
-Current post-launch subset status:
-- Raw — Series 1: complete (4 Superstars)
-- Worlds Collide — Series 1: complete (4 Superstars)
-- Money in the Bank — Series 1: Jey Uso and LA Knight playable; Alexa Bliss and Finn Bálor reserved next
+This build completes the outstanding v0.11.69–v0.11.72 playtest presentation work: sticky show-themed match HUD, ring-mat Play Pile, complete card backs, revised Superstar unlock/recommended-deck flow, card-shop Store presentation, compact full navigation, improved matchup/results screens, and Card Art Studio local-export hardening.
 
-This build preserves the v0.11.63 turn / Control-sequence state model: a connected Move advances the turn and refreshes per-turn Momentum while retained Control preserves sequence-only combo state; actual Control changes clear sequence state.
+Season 1 currently contains 38 development Superstars across SummerSlam, Hall of Fame, Evolution, Raw, Worlds Collide, Money in the Bank, SmackDown and the Season 1 Final Boss reward package.
 
-Money in the Bank retains its dedicated Card Art Studio front and randomized Tonight’s Main Event presentation branding.
-
-Run `npm test`, `npm run validate`, `npm run card-ids`, `npm run flow`, `npm run economy`, `npm run art`, and `npm run balance` for release validation.
+Run `npm test`, `npm run validate`, `npm run card-ids`, and `npm run flow` for release validation. The art audit intentionally reports missing final artwork while placeholder production is in progress.
