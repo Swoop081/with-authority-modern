@@ -1,6 +1,6 @@
-# WWE Legacy: Collectible Card Game — v0.11.73
+# WWE Legacy: Collectible Card Game — v0.11.76
 
-Current canonical development baseline: **v0.11.73 — Consolidated Gameplay + Presentation Completion Pass**.
+Current canonical development baseline: **v0.11.76 — v1.0 Completion + Outstanding Regression Closure**.
 
 This build completes the outstanding v0.11.69–v0.11.72 playtest presentation work: sticky show-themed match HUD, ring-mat Play Pile, complete card backs, revised Superstar unlock/recommended-deck flow, card-shop Store presentation, compact full navigation, improved matchup/results screens, and Card Art Studio local-export hardening.
 
