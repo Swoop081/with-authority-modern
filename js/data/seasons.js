@@ -1,6 +1,6 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.61";
-import { decks } from "./decks.js?v=0.11.61";
-import { superstars } from "./superstars.js?v=0.11.61";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.67";
+import { decks } from "./decks.js?v=0.11.67";
+import { superstars } from "./superstars.js?v=0.11.67";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -64,11 +64,12 @@ export const SEASON_1 = {
       id: "money-in-the-bank",
       date: "2026-10-10T00:00:00",
       dateLabel: "10 OCT",
-      title: "Money in the Bank",
-      kicker: "MID-SEASON DROP",
-      description: "4-Superstar subset tied to Money in the Bank, with its own event presentation and rewards.",
+      title: "Money in the Bank — Series 1",
+      kicker: "NEW SUBSET",
+      description: "Four-Superstar Money in the Bank subset featuring Jey Uso, LA Knight, Alexa Bliss and Finn Bálor.",
       superstarCount: 4,
-      type: "subset"
+      type: "subset",
+      setId: "money-in-the-bank-series-1"
     },
     {
       id: "season-2",

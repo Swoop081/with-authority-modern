@@ -1,4 +1,10 @@
 export const sets = {
+  "money-in-the-bank-series-1": {
+    id: "money-in-the-bank-series-1", name: "Money in the Bank", series: 1, type: "event-subset",
+    displayName: "Money in the Bank — Series 1", shortCode: "MITB1", lifecycleDefault: "future",
+    releaseDate: "2026-10-10", developmentOnly: true,
+    lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
+  },
   "worlds-collide-series-1": {
     id: "worlds-collide-series-1", name: "Worlds Collide", series: 1, type: "event-subset",
     displayName: "Worlds Collide — Series 1", shortCode: "WC1", lifecycleDefault: "future",

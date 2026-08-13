@@ -2,7 +2,7 @@ import { totalMomentum } from "./utils.js";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
-export function canPlayMomentum(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="momentum"&&p?.momentumControlSequence!==state.controlSequence; }
+export function canPlayMomentum(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="momentum"&&(p?.turn?.momentumPlayed??0)<(p?.turn?.momentumPlayLimit??1); }
 export function canPlayEntrance(){ return false; }
 export function canPlayAction(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="action"&&(p?.turn?.actionPlayed??0)<1&&!p?.actionLocked; }
 export function canPlaySupport(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="support"&&(p?.turn?.supportPlayed??0)<1; }

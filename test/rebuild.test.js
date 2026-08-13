@@ -11,7 +11,7 @@ import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOff
 import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js";
 import { tierReward, claimSeasonTier } from "../js/data/seasons.js";
 import { MatchEngine } from "../js/engine/MatchEngine.js";
-import { moveEligibility } from "../js/engine/rules.js";
+import { moveEligibility, canPlayMomentum } from "../js/engine/rules.js";
 import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js";
 
 const stars=Object.values(superstars);
@@ -86,6 +86,40 @@ test("0 HP does not cause an automatic knockout and Critical Exhaustion passes C
   assert.ok(s.log.some(e=>e.type==='CRITICAL_EXHAUSTION'&&e.playerId==='p1'));
 });
 
+
+
+test("Momentum refreshes after a connected Move, not after Specials or utility within the same turn",()=>{
+  const p1=starById.get('roman-reigns') ?? stars[0], p2=starById.get('andre-the-giant') ?? stars[1];
+  const g=new MatchEngine({p1,p2,decks,rng:rng(1162)}), s=g.state(), p=s.players.p1;
+  const momentumA=allGameplayCards.find(c=>c.kind==='momentum'&&c.method==='strike');
+  const momentumB={...momentumA,id:`${momentumA.id}-test-copy`};
+  const move=byName('Shoulder Tackle') ?? allGameplayCards.find(c=>c.kind==='move'&&!c.defensiveOnly&&!c.groundedOnly);
+  assert.ok(momentumA&&move);
+  s.playerInControl='p1'; s.phase='ACTION';
+  p.hand=[momentumA,momentumB,move];
+  p.momentum.strength=10; p.momentum.strike=10; p.momentum.technical=10; p.momentum.agility=10;
+  const startTurn=s.turnNumber;
+  assert.equal(canPlayMomentum(s,'p1',momentumA),true);
+  assert.equal(g.playMomentum('p1',momentumA),true);
+  assert.equal(canPlayMomentum(s,'p1',momentumB),false,'second Momentum cannot be played before a Move');
+
+  // Specials/utility do not create a fresh Momentum window.
+  const testSpecial={id:'test-special',name:'Test Special',kind:'special',special:{type:'test-special'}};
+  p.hand.push(testSpecial);
+  assert.ok(g._consumeSpecial('p1','test-special'));
+  assert.equal(canPlayMomentum(s,'p1',momentumB),false,'Special must not refresh Momentum');
+  p.specialUsed=false;
+
+  assert.equal(g.declareMove('p1',move),true);
+  if(s.phase==='COUNTER') assert.equal(g.passCounter('p2'),true);
+  assert.equal(s.phase,'POST_MOVE');
+  assert.equal(g.endPostMove('p1'),true);
+  assert.equal(s.phase,'ACTION');
+  assert.equal(s.playerInControl,'p1');
+  assert.equal(s.turnNumber,startTurn+1,'connected Move advances the turn while Control is retained');
+  assert.equal(canPlayMomentum(s,'p1',momentumB),true,'new Move cycle immediately refreshes Momentum');
+  assert.equal(g.playMomentum('p1',momentumB),true);
+});
 test("offensive counter Moves become counter-attacks and can be countered again",()=>{
   const boot=byName('Big Boot'), shortArm=byName('Short-Arm Clothesline'), enzuigiri=byName('Enzuigiri');
   if(!(boot&&shortArm&&enzuigiri)) return;
@@ -520,28 +554,26 @@ test("El Grande Americano completes Worlds Collide Series 1 and is fully playabl
 });
 
 
-test("Momentum can be played once per Control sequence and becomes available again after Control leaves and returns",()=>{
+test("Momentum is once per turn and refreshes on normal new-turn Control progression",()=>{
   const a=stars[0], b=stars[1];
-  const g=new MatchEngine({p1:a,p2:b,decks,rng:rng(1161)});
+  const g=new MatchEngine({p1:a,p2:b,decks,rng:rng(1162)});
   const s=g.state();
   const p1Momentum=(decks[a.id]??[]).filter(c=>c.kind==='momentum').slice(0,2);
   assert.equal(p1Momentum.length,2);
   s.players.p1.hand=[...p1Momentum];
-  const firstSequence=s.controlSequence;
+  const firstTurn=s.turnNumber;
   assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),true);
-  assert.equal(s.players.p1.momentumControlSequence,firstSequence);
-  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),false,'second Momentum in same Control sequence must be blocked');
+  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),false,'second Momentum in same turn must be blocked');
   assert.equal(g.passTurn('p1'),true);
   assert.equal(s.playerInControl,'p2');
-  assert.ok(s.controlSequence>firstSequence);
-  const cpuSequence=s.controlSequence;
+  assert.equal(s.turnNumber,firstTurn+1);
   assert.equal(g.passTurn('p2'),true);
   assert.equal(s.playerInControl,'p1');
-  assert.ok(s.controlSequence>cpuSequence);
-  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),true,'Momentum must reset when Control returns to p1');
+  assert.equal(s.turnNumber,firstTurn+2);
+  assert.equal(g.playMomentum('p1',s.players.p1.hand[0]),true,'Momentum refreshes when a genuinely new turn begins for p1');
 });
 
-test("v0.11.61 Exhibition and match UI source contains the locked cinematic flow and removes the old opponent preview", async()=>{
+test("v0.11.63 Exhibition and match UI source contains the locked cinematic flow and removes the old opponent preview", async()=>{
   const fs=await import('node:fs');
   const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
@@ -556,4 +588,228 @@ test("v0.11.61 Exhibition and match UI source contains the locked cinematic flow
   assert.ok(css.includes('.ccg-card.type-momentum .ccg-card-art img.momentum-set-logo'));
   assert.ok(css.includes('.hud-hp-number.healthy'));
   assert.ok(css.includes('.hud-resource.adrenaline'));
+});
+
+test("turn advancement preserves Control-sequence combo memory until Control actually changes",()=>{
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(1163)}),s=g.state();
+  const p=s.players.p1;
+  p.lastConnectedMethod='strike'; p.lastConnectedCardName='Punch'; p.controlMoveCount=2;
+  p.events.strikeConnectedThisControl=true; p.events.counteredThisControl=true;
+  p.methodDiscount.agility=2; p.namedDiscount['Test Move']=2; p.namedDamageBuff['Test Move']=3;
+  p.turn.momentumPlayed=1;
+  s.playerInControl='p1'; s.phase='POST_MOVE'; s.postMove={attackerId:'p1',defenderId:'p2',cardId:null};
+  const beforeTurn=s.turnNumber, beforeSeq=s.controlSequence;
+  assert.equal(g.endPostMove('p1'),true);
+  assert.equal(s.turnNumber,beforeTurn+1);
+  assert.equal(s.controlSequence,beforeSeq,'same wrestler retaining Control stays in the same Control sequence');
+  assert.equal(p.turn.momentumPlayed,0,'new Move cycle refreshes Momentum');
+  assert.equal(p.lastConnectedMethod,'strike');
+  assert.equal(p.controlMoveCount,2);
+  assert.equal(p.methodDiscount.agility,2);
+  assert.equal(p.namedDiscount['Test Move'],2);
+  assert.equal(p.namedDamageBuff['Test Move'],3);
+  assert.equal(g.passTurn('p1'),true);
+  assert.equal(p.lastConnectedMethod,null,'Control loss clears previous Method memory');
+  assert.equal(p.lastConnectedCardName,null);
+  assert.equal(p.controlMoveCount,0);
+  assert.equal(p.events.strikeConnectedThisControl,false);
+  assert.equal(p.events.counteredThisControl,false);
+  assert.deepEqual(p.methodDiscount,{});
+  assert.deepEqual(p.namedDiscount,{});
+  assert.deepEqual(p.namedDamageBuff,{});
+});
+
+test("retained-Control kickouts advance the turn and refresh Momentum without erasing the Control sequence",()=>{
+  const sol=starById.get('sol-ruca'), opp=stars.find(x=>x.id!=='sol-ruca');
+  const g=new MatchEngine({p1:sol,p2:opp,decks,rng:()=>0.99}),s=g.state();
+  const standing=byName('Standing Moonsault');
+  s.playerInControl='p1'; s.phase='PIN_RESPONSE';
+  s.players.p1.discard=[standing]; s.players.p1.turn.momentumPlayed=1;
+  s.players.p1.lastConnectedMethod='agility'; s.players.p1.lastConnectedCardName='Standing Moonsault'; s.players.p1.controlMoveCount=2;
+  s.postMove={attackerId:'p1',defenderId:'p2',cardId:standing.id,pinBonus:standing.pinBonus??0};
+  s.proposedPin={attackerId:'p1',defenderId:'p2'};
+  const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence;
+  assert.equal(g.passPinResponse('p2'),true);
+  assert.equal(s.playerInControl,'p1');
+  assert.equal(s.turnNumber,beforeTurn+1);
+  assert.equal(s.controlSequence,beforeSeq);
+  assert.equal(s.players.p1.turn.momentumPlayed,0);
+  assert.equal(s.players.p1.lastConnectedMethod,'agility');
+  assert.equal(s.players.p1.controlMoveCount,2);
+});
+
+test("queued Method/name discounts and named damage buffs survive unrelated Moves and are consumed by their matching Move",()=>{
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(2163)}),s=g.state(),p=s.players.p1;
+  const unrelated=byName('Headbutt')??byName('Punch'), target=byName('Dropkick');
+  p.methodDiscount.agility=2; p.namedDiscount[target.name]=2; p.namedDamageBuff[target.name]=3;
+  s.playerInControl='p1'; s.proposedMove={attackerId:'p1',defenderId:'p2',card:unrelated}; s.phase='RESOLVE_MOVE';
+  g._connect();
+  assert.equal(p.methodDiscount.agility,2);
+  assert.equal(p.namedDiscount[target.name],2);
+  assert.equal(p.namedDamageBuff[target.name],3);
+  g.endPostMove('p1');
+  s.proposedMove={attackerId:'p1',defenderId:'p2',card:target}; s.phase='RESOLVE_MOVE';
+  g._connect();
+  assert.equal(p.methodDiscount.agility,undefined);
+  assert.equal(p.namedDiscount[target.name],undefined);
+  assert.equal(p.namedDamageBuff[target.name],undefined);
+});
+
+test("The Mat Is Sacred Action lock survives Control changes and clears only when the affected wrestler commits a Move",()=>{
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(3163)}),s=g.state();
+  s.playerInControl='p2'; s.phase='ACTION'; s.players.p1.actionLocked=true;
+  assert.equal(g.passTurn('p2'),true);
+  assert.equal(s.playerInControl,'p1');
+  assert.equal(s.players.p1.actionLocked,true,'lock must survive gaining a new turn');
+  const move=byName('Punch')??allGameplayCards.find(c=>c.kind==='move'&&!c.defensiveOnly);
+  s.players.p1.hand=[move]; s.players.p1.adrenaline=99;
+  for(const m of ['agility','strength','strike','technical'])s.players.p1.momentum[m]=99;
+  assert.equal(g.declareMove('p1',move),true);
+  assert.equal(s.players.p1.actionLocked,false,'committing the Move clears the Action lock');
+});
+
+test("counterattack return paths advance the turn and start a fresh Control sequence for the wrestler who regains Control",()=>{
+  const dom=starById.get('dominik-mysterio'), opp=stars.find(x=>x.id!=='dominik-mysterio');
+  const g=new MatchEngine({p1:dom,p2:opp,decks,rng:rng(4163)}),s=g.state();
+  const move=byName('Dropkick');
+  s.playerInControl='p2'; s.phase='RESOLVE_MOVE'; s.players.p1.turn.momentumPlayed=1;
+  s.players.p1.lastConnectedMethod='strike'; s.players.p1.controlMoveCount=2;
+  const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence;
+  s.proposedMove={attackerId:'p2',defenderId:'p1',card:move,isCounterAttack:true,returnControlAfterResolve:'p1'};
+  g._connect();
+  assert.equal(s.playerInControl,'p1');
+  assert.equal(s.phase,'ACTION');
+  assert.equal(s.turnNumber,beforeTurn+1);
+  assert.ok(s.controlSequence>beforeSeq);
+  assert.equal(s.players.p1.turn.momentumPlayed,0);
+  assert.equal(s.players.p1.lastConnectedMethod,null);
+  assert.equal(s.players.p1.controlMoveCount,0);
+});
+
+test("Turn 5 and Turn 6 delayed Entrances fire exactly on corrected Move-cycle turn advancement",()=>{
+  const cody=starById.get('cody-rhodes'),seth=starById.get('seth-rollins');
+  const g5=new MatchEngine({p1:cody,p2:seth,decks,rng:rng(5163)}),s5=g5.state();
+  const codyTech=s5.players.p1.momentum.technical,sethHand=s5.players.p2.hand.length,sethAd=s5.players.p2.adrenaline;
+  s5.turnNumber=4;s5.playerInControl='p1';s5.phase='POST_MOVE';s5.postMove={attackerId:'p1',defenderId:'p2',cardId:null};
+  g5.endPostMove('p1');
+  assert.equal(s5.turnNumber,5);
+  assert.equal(s5.players.p1.momentum.technical,codyTech+1);
+  assert.equal(s5.players.p2.adrenaline,sethAd+1);
+  assert.ok(s5.players.p2.hand.length>=sethHand+1);
+  g5.passTurn('p1');
+  assert.equal(s5.players.p1.events.turn5EntranceDone,true); assert.equal(s5.players.p2.events.turn5EntranceDone,true);
+
+  const roman=starById.get('roman-reigns'),otherStar=stars.find(x=>x.id!=='roman-reigns');
+  const g6=new MatchEngine({p1:roman,p2:otherStar,decks,rng:rng(6163)}),s6=g6.state(),before=s6.players.p1.adrenaline;
+  s6.turnNumber=5;s6.playerInControl='p1';s6.phase='POST_MOVE';s6.postMove={attackerId:'p1',defenderId:'p2',cardId:null};
+  g6.endPostMove('p1');
+  assert.equal(s6.turnNumber,6); assert.equal(s6.players.p1.adrenaline,before+1); assert.equal(s6.players.p1.events.romanTurn6EntranceDone,true);
+});
+
+test("v0.11.63 wording audit uses turn and Control sequence consistently",()=>{
+  const seth=starById.get('seth-rollins'),roman=starById.get('roman-reigns');
+  assert.ok(seth.ability.text.includes('next Move this turn'));
+  assert.equal(seth.ability.text.includes('Control turn'),false);
+  assert.equal((roman.entrance.rulesText.match(/At the start of Turn 6/g)??[]).length,1);
+});
+
+test("Seth's The Visionary opens Control after a defensive Counter without advancing the turn",()=>{
+  const seth=starById.get('seth-rollins'),opp=stars.find(x=>x.id!=='seth-rollins');
+  const g=new MatchEngine({p1:opp,p2:seth,decks,rng:rng(7163)}),s=g.state();
+  const incoming=allGameplayCards.find(c=>c.kind==='move'&&!c.defensiveOnly&&(c.moveType||c.tacticalType));
+  const counter=allGameplayCards.find(c=>c.kind==='move'&&c.defensiveOnly&&(c.counters??[]).some(t=>[incoming.moveType,incoming.tacticalType].includes(t)));
+  assert.ok(incoming&&counter,'need a defensive Counter pair');
+  s.playerInControl='p1';s.phase='COUNTER';s.proposedMove={attackerId:'p1',defenderId:'p2',card:incoming};
+  s.players.p1.hand=[incoming];s.players.p2.hand=[counter,allGameplayCards.find(c=>c.id==='special-seth-rollins')].filter(Boolean);
+  for(const m of ['agility','strength','strike','technical'])s.players.p2.momentum[m]=99;
+  s.players.p2.turn.momentumPlayed=1;
+  const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence;
+  assert.equal(g.counter('p2',counter),true);
+  assert.equal(s.playerInControl,'p2');
+  assert.equal(s.phase,'ACTION');
+  assert.equal(s.turnNumber,beforeTurn,'The Visionary must not advance the turn');
+  assert.ok(s.controlSequence>beforeSeq,'Seth still begins a new Control sequence');
+  assert.equal(s.players.p2.turn.momentumPlayed,1,'no turn advance means Momentum allowance is not refreshed');
+  assert.equal(s.players.p2.specialUsed,true);
+});
+
+
+test("Money in the Bank Series 1 Jey Uso package is locked and playable",()=>{
+  const jey=starById.get('jey-uso'); assert.ok(jey); assert.equal(jey.hp,52);
+  assert.deepEqual(jey.starterMomentum,{strike:6,strength:4,agility:2});
+  assert.equal(decks['jey-uso'].length,55); assert.equal(decks['jey-uso'].filter(c=>c.kind==='momentum').length,12);
+  const splash=byName('Uso Splash'); assert.ok(splash); assert.equal(splash.finisher,true); assert.equal(splash.damage,16); assert.deepEqual(splash.requirements,{}); assert.deepEqual(splash.allowedSuperstarIds,['jey-uso']); assert.equal(splash.pinBonusAfterNamed.name,'Spear'); assert.equal(splash.pinBonusAfterNamed.pinBonus,5);
+  assert.equal(CARD_NUMBER_BY_ID['running-hip-attack'].cardCode,'MITB1-001'); assert.equal(CARD_NUMBER_BY_ID['uso-splash'].cardCode,'MITB1-002'); assert.equal(CARD_NUMBER_BY_ID['superstar-jey-uso'].cardCode,'MITB1-005');
+  const opp=stars.find(x=>x.id!=='jey-uso'); const g=new MatchEngine({p1:jey,p2:opp,decks,rng:rng(1164)}),st=g.state(),p1=st.players.p1;
+  // Entrance applies.
+  assert.equal(p1.momentum.strike,1); assert.equal(p1.adrenaline,1);
+  // Strike ability queues Strength discount/adrenaline in same Control sequence.
+  const strike=byName('Punch'), strength=byName('Spear'); p1.hand=[strike,strength,allGameplayCards.find(c=>c.id==='special-jey-uso'),splash].filter(Boolean); p1.adrenaline=99; for(const m of ['agility','strength','strike','technical'])p1.momentum[m]=99;
+  st.playerInControl='p1'; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:strike}; g._connect();
+  assert.equal(p1.methodDiscount.strength,1); assert.equal(p1.events.jeyStrengthAdrenaline,1);
+  g.endPostMove('p1'); const ad=p1.adrenaline; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:strength}; g._connect(); assert.equal(p1.adrenaline,ad+1);
+});
+
+
+test("Money in the Bank Series 1 LA Knight package is locked and playable",()=>{
+  const knight=starById.get('la-knight'); assert.ok(knight); assert.equal(knight.hp,52);
+  assert.deepEqual(knight.starterMomentum,{strike:5,strength:3,technical:2,agility:2});
+  assert.equal(decks['la-knight'].length,55); assert.equal(decks['la-knight'].filter(c=>c.kind==='momentum').length,12);
+  const bft=byName('BFT'), jump=byName('Jumping Neckbreaker'), hammer=byName('Burning Hammer');
+  assert.ok(bft&&jump&&hammer); assert.equal(bft.finisher,true); assert.equal(bft.damage,16); assert.deepEqual(bft.requirements,{}); assert.equal(bft.superstarId,'la-knight'); assert.equal(bft.pinBonusAfterNamed.name,'Diving Elbow Drop'); assert.equal(bft.pinBonusAfterNamed.pinBonus,5);
+  assert.equal(CARD_NUMBER_BY_ID['jumping-neckbreaker'].cardCode,'MITB1-006'); assert.equal(CARD_NUMBER_BY_ID['la-knight-bft'].cardCode,'MITB1-008'); assert.equal(CARD_NUMBER_BY_ID['superstar-la-knight'].cardCode,'MITB1-011');
+  const opp=stars.find(x=>x.id!=='la-knight'); const g=new MatchEngine({p1:knight,p2:opp,decks,rng:rng(1165)}),st=g.state(),p=st.players.p1;
+  assert.equal(p.momentum.strike,1); assert.equal(p.adrenaline,1);
+  // Megastar: qualifying 8+ printed Damage gives Adrenaline, and at 4+ pre-connect also draws.
+  p.adrenaline=4; const beforeHand=p.hand.length; const heavy=hammer; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:heavy};g._connect(); assert.equal(p.adrenaline,5); assert.ok(p.hand.length>=beforeHand+1);
+  // Jumping Neckbreaker only draws when the immediately previous connected Method was Strike.
+  g.endPostMove('p1'); p.lastConnectedMethod='strike'; const before=p.hand.length; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:jump};g._connect(); assert.ok(p.hand.length>=before+1);
+});
+
+test("Money in the Bank Series 1 Alexa Bliss package is locked and playable",()=>{
+  const alexa=starById.get('alexa-bliss'); assert.ok(alexa); assert.equal(alexa.hp,48);
+  assert.deepEqual(alexa.starterMomentum,{agility:6,strike:3,technical:3});
+  assert.equal(decks['alexa-bliss'].length,55); assert.equal(decks['alexa-bliss'].filter(c=>c.kind==='momentum').length,12);
+  const knees=byName('Double Knees'), code=byName('Code Red'), sister=byName('Sister Abigail'), twisted=byName('Twisted Bliss');
+  assert.ok(knees&&code&&sister&&twisted); assert.equal(sister.trademark,true); assert.equal(twisted.finisher,true); assert.equal(twisted.damage,15); assert.deepEqual(twisted.requirements,{}); assert.equal(twisted.superstarId,'alexa-bliss'); assert.equal(twisted.pinBonusAfterNamed.name,'Sister Abigail'); assert.equal(twisted.pinBonusAfterNamed.pinBonus,6);
+  assert.equal(CARD_NUMBER_BY_ID['double-knees'].cardCode,'MITB1-012'); assert.equal(CARD_NUMBER_BY_ID['alexa-bliss-twisted-bliss'].cardCode,'MITB1-015'); assert.equal(CARD_NUMBER_BY_ID['superstar-alexa-bliss'].cardCode,'MITB1-018');
+  const opp=stars.find(x=>x.id!=='alexa-bliss'); const g=new MatchEngine({p1:alexa,p2:opp,decks,rng:rng(1166)}),st=g.state(),p=st.players.p1,d=st.players.p2;
+  assert.equal(p.momentum.agility,1); assert.equal(p.adrenaline,1);
+  // Five Feet of Fury only rewards a Move that begins while the opponent is already Stunned.
+  p.adrenaline=5; d.status.stunnedTurns=1; d.stun=1; const beforeHand=p.hand.length; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:code};g._connect(); assert.equal(p.adrenaline,6); assert.ok(p.hand.length>=beforeHand+1);
+  // Sister Abigail tutors/discounts Twisted Bliss and its combo pin bonus is +6.
+  g.endPostMove('p1'); d.status.stunnedTurns=0; d.stun=0; p.deck=[twisted]; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sister};g._connect(); assert.ok(p.hand.some(c=>c.id==='alexa-bliss-twisted-bliss')); assert.equal(p.namedDiscount['Twisted Bliss'],1);
+});
+
+test("Alexa Bliss Mind Games reduces one Pin and rewards a successful kickout",()=>{
+  const alexa=starById.get('alexa-bliss'),opp=stars.find(x=>x.id!=='alexa-bliss'); const g=new MatchEngine({p1:opp,p2:alexa,decks,rng:()=>0.99}),st=g.state(),a=st.players.p1,d=st.players.p2;
+  const special=allGameplayCards.find(c=>c.id==='special-alexa-bliss'); d.hand=[special]; d.adrenaline=2; const beforeHand=d.hand.length;
+  st.playerInControl='p1'; st.phase='POST_MOVE'; st.postMove={attackerId:'p1',defenderId:'p2',cardId:'test',pinBonus:4};
+  assert.equal(g.attemptPin('p1'),true); assert.equal(st.proposedPin.pinBonusModifier,-2); assert.equal(d.specialUsed,true);
+  assert.equal(g.passPinResponse('p2'),true); assert.equal(d.adrenaline,3); assert.ok(d.hand.length>=beforeHand); assert.equal(d.events.mindGamesPending,undefined);
+});
+
+
+
+test("Money in the Bank Series 1 Finn Bálor package is locked and playable",()=>{
+  const finn=starById.get('finn-balor'); assert.ok(finn); assert.equal(finn.hp,50);
+  assert.deepEqual(finn.starterMomentum,{agility:6,strike:4,technical:2});
+  assert.equal(decks['finn-balor'].length,55); assert.equal(decks['finn-balor'].filter(c=>c.kind==='momentum').length,12);
+  const shotgun=byName('Shotgun Dropkick'), move1916=byName('1916'), coup=byName('Coup de Grâce');
+  assert.ok(shotgun&&move1916&&coup); assert.equal(move1916.trademark,true); assert.equal(coup.finisher,true); assert.equal(coup.damage,16); assert.deepEqual(coup.requirements,{}); assert.equal(coup.superstarId,'finn-balor'); assert.equal(coup.pinBonusAfterNamed.name,'Shotgun Dropkick'); assert.equal(coup.pinBonusAfterNamed.pinBonus,5);
+  assert.equal(CARD_NUMBER_BY_ID['shotgun-dropkick'].cardCode,'MITB1-019'); assert.equal(CARD_NUMBER_BY_ID['finn-balor-coup-de-grace'].cardCode,'MITB1-021'); assert.equal(CARD_NUMBER_BY_ID['superstar-finn-balor'].cardCode,'MITB1-024');
+  const opp=stars.find(x=>x.id!=='finn-balor'); const g=new MatchEngine({p1:finn,p2:opp,decks,rng:rng(1167)}),st=g.state(),p=st.players.p1;
+  assert.equal(p.momentum.strength,1); assert.equal(p.adrenaline,1);
+  // Relentless Pace triggers on the second and later connected Move in a Control sequence.
+  p.adrenaline=5; const first=byName('Dropkick'),second=byName('Enzuigiri'); for(const m of ['agility','strength','strike','technical'])p.momentum[m]=99;
+  st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:first};g._connect(); const afterFirstAd=p.adrenaline; const afterFirstHand=p.hand.length;
+  g.endPostMove('p1'); st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:second};g._connect(); assert.equal(p.adrenaline,afterFirstAd+1); assert.ok(p.hand.length>=afterFirstHand+1);
+});
+
+test("Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce",()=>{
+  const finn=starById.get('finn-balor'),opp=stars.find(x=>x.id!=='finn-balor'); const g=new MatchEngine({p1:finn,p2:opp,decks,rng:rng(2167)}),st=g.state(),p=st.players.p1;
+  const sling=byName('Sling Blade'),shotgun=byName('Shotgun Dropkick'),coup=byName('Coup de Grâce'),special=allGameplayCards.find(c=>c.id==='special-finn-balor');
+  p.hand=[sling,special]; p.deck=[shotgun,byName('Punch'),coup]; p.adrenaline=99; for(const m of ['agility','strength','strike','technical'])p.momentum[m]=99;
+  st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sling};g._connect(); assert.ok(p.hand.some(c=>c.id==='shotgun-dropkick')); assert.equal(p.namedDiscount['Shotgun Dropkick'],2); assert.equal(p.specialUsed,true);
+  g.endPostMove('p1'); const sg=p.hand.find(c=>c.id==='shotgun-dropkick'); st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sg};g._connect(); assert.ok(p.hand.some(c=>c.id==='finn-balor-coup-de-grace')); assert.equal(p.namedDiscount['Coup de Grâce'],1);
 });

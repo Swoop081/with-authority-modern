@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.11.61";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.61";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.61";
+import { assetUrl } from "../config/build.js?v=0.11.67";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.67";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.67";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
@@ -45,6 +45,10 @@ const rawSuperstarArtwork = {
   "dominik-mysterio": TEMP_GENERIC_ART,
   "penta": TEMP_GENERIC_ART,
   "el-grande-americano": TEMP_GENERIC_ART,
+  "jey-uso": TEMP_GENERIC_ART,
+  "la-knight": TEMP_GENERIC_ART,
+  "alexa-bliss": TEMP_GENERIC_ART,
+  "finn-balor": TEMP_GENERIC_ART,
   ...superstarArtOverrides
 };
 

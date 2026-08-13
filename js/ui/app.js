@@ -1,28 +1,28 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.61";
-import { superstars } from "../data/superstars.js?v=0.11.61";
-import { decks } from "../data/decks.js?v=0.11.61";
-import { sets } from "../data/sets.js?v=0.11.61";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.61";
-import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.61";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.61";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.61";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.61";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.61";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.61";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.61";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.61";
-import { totalMomentum } from "../engine/utils.js?v=0.11.61";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.61";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.61";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.61";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.61";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.61";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.61";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.61";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.61";
-import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.61";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.61";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.61";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.67";
+import { superstars } from "../data/superstars.js?v=0.11.67";
+import { decks } from "../data/decks.js?v=0.11.67";
+import { sets } from "../data/sets.js?v=0.11.67";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.67";
+import { artworkFor, superstarArtwork, superstarCardArtFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.67";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.67";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.67";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.67";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.67";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.67";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.67";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.67";
+import { totalMomentum } from "../engine/utils.js?v=0.11.67";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.67";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.67";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.67";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.67";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.67";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.67";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.67";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.67";
+import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds } from "../data/deck-builder.js?v=0.11.67";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.67";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.67";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -115,7 +115,8 @@ const SET_LOGO_ASSETS = {
   "evolution-series-1": assetUrl("assets/art/evolution-series-1/evolution-logo.png"),
   "season-1-final-boss": assetUrl("assets/art/season-1-final-boss/rewards-logo.png"),
   "raw-series-1": assetUrl("assets/branding/raw-series-1/raw-logo.webp"),
-  "worlds-collide-series-1": assetUrl("assets/branding/worlds-collide-series-1/worlds-collide-logo.webp")
+  "worlds-collide-series-1": assetUrl("assets/branding/worlds-collide-series-1/worlds-collide-logo.webp"),
+  "money-in-the-bank-series-1": assetUrl("assets/branding/money-in-the-bank-series-1/money-in-the-bank-logo.webp")
 };
 function setLogoMarkup(setId, className = "") {
   const src = SET_LOGO_ASSETS[setId];
@@ -128,7 +129,8 @@ const MATCH_PRESENTATION_SETS = [
   "summerslam-series-1",
   "evolution-series-1",
   "raw-series-1",
-  "worlds-collide-series-1"
+  "worlds-collide-series-1",
+  "money-in-the-bank-series-1"
 ];
 function randomMatchPresentationSet() {
   return MATCH_PRESENTATION_SETS[Math.floor(Math.random() * MATCH_PRESENTATION_SETS.length)] ?? "summerslam-series-1";
@@ -1562,7 +1564,7 @@ function cardReason(playerId, card) {
   if (playerId === CPU) return "CPU controlled";
   if (state.phase === "MATCH_OVER") return "Match over";
   if (state.playerInControl !== playerId && state.phase === "ACTION") return "Not in Control";
-  if (card.kind === "momentum") return state.players[playerId].momentumControlSequence === state.controlSequence ? "Momentum limit reached for this Control sequence" : "";
+  if (card.kind === "momentum") return (state.players[playerId].turn?.momentumPlayed ?? 0) >= (state.players[playerId].turn?.momentumPlayLimit ?? 1) ? "Momentum already played this turn — connect a Move or begin a new turn to refresh it" : "";
   if (card.kind === "entrance") return "Entrance resolves automatically pre-match";
   if (card.kind === "action") return state.players[playerId].turn.actionPlayed >= 1 ? "Action already played this turn" : "";
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
@@ -1760,18 +1762,18 @@ function renderPlayPile() {
 function renderHumanHand() {
   const state = game.state(), p = state.players[HUMAN];
   const active = decisionOwner(state) === HUMAN && state.phase !== "MATCH_OVER";
-  const momentumAvailable = p.momentumControlSequence !== state.controlSequence;
+  const momentumAvailable = (p.turn?.momentumPlayed ?? 0) < (p.turn?.momentumPlayLimit ?? 1);
 
   const entries = p.hand.map((card, index) => {
     const legal = active && cardLegal(HUMAN, card);
     let priority;
-    // Before the turn's Momentum is used, legal Momentum is the first thing shown.
+    // Before this turn's Momentum is used, legal Momentum is the first thing shown.
     if (card.kind === "momentum" && legal && momentumAvailable) priority = 0;
     // Then show every other card that can be played right now.
     else if (legal) priority = 1;
     // Non-playable non-Momentum pages stay ahead of spent-turn Momentum.
     else if (card.kind !== "momentum") priority = 2;
-    // Once Momentum has been played this turn, all remaining Momentum moves to the end.
+    // Once Momentum has been played this turn, all remaining Momentum moves to the end until a Move connects or a new turn begins.
     else priority = 3;
     return { card, index, legal, priority };
   }).sort((a,b) => a.priority - b.priority || a.index - b.index);
@@ -1786,7 +1788,7 @@ function renderHumanHand() {
     </article>`;
   }).join("");
 
-  const sortHint = momentumAvailable ? "Playable Momentum first · then playable pages" : "Playable pages first · Momentum returns to front next turn";
+  const sortHint = momentumAvailable ? "Playable Momentum first · then playable pages" : "Momentum used this turn · connect a Move or begin a new turn to refresh it";
   return `<section class="player-hand-panel compact-hand-panel">
     <div class="player-hand-head"><div><span>YOUR HAND</span><h3>${p.superstar.name}</h3></div><div class="deck-counts"><b>${p.hand.length}</b> hand · <b>${p.deck.length}</b> deck · <b>${p.discard.length}</b> discard</div></div>
     <p class="hand-instruction">${sortHint} · Swipe horizontally to browse.</p>

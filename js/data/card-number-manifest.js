@@ -1839,7 +1839,32 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"special-el-grande-americano","setId":"worlds-collide-series-1","cardNumber":26,"cardCode":"WC1-026"},
 {"id":"superstar-el-grande-americano","setId":"worlds-collide-series-1","cardNumber":27,"cardCode":"WC1-027"}
 
-
+,
+{"id":"running-hip-attack","setId":"money-in-the-bank-series-1","cardNumber":1,"cardCode":"MITB1-001"},
+{"id":"uso-splash","setId":"money-in-the-bank-series-1","cardNumber":2,"cardCode":"MITB1-002"},
+{"id":"entrance-jey-uso","setId":"money-in-the-bank-series-1","cardNumber":3,"cardCode":"MITB1-003"},
+{"id":"special-jey-uso","setId":"money-in-the-bank-series-1","cardNumber":4,"cardCode":"MITB1-004"},
+{"id":"superstar-jey-uso","setId":"money-in-the-bank-series-1","cardNumber":5,"cardCode":"MITB1-005"}
+,
+{"id":"jumping-neckbreaker","setId":"money-in-the-bank-series-1","cardNumber":6,"cardCode":"MITB1-006"},
+{"id":"burning-hammer","setId":"money-in-the-bank-series-1","cardNumber":7,"cardCode":"MITB1-007"},
+{"id":"la-knight-bft","setId":"money-in-the-bank-series-1","cardNumber":8,"cardCode":"MITB1-008"},
+{"id":"entrance-la-knight","setId":"money-in-the-bank-series-1","cardNumber":9,"cardCode":"MITB1-009"},
+{"id":"special-la-knight","setId":"money-in-the-bank-series-1","cardNumber":10,"cardCode":"MITB1-010"},
+{"id":"superstar-la-knight","setId":"money-in-the-bank-series-1","cardNumber":11,"cardCode":"MITB1-011"},
+{"id":"double-knees","setId":"money-in-the-bank-series-1","cardNumber":12,"cardCode":"MITB1-012"},
+{"id":"code-red","setId":"money-in-the-bank-series-1","cardNumber":13,"cardCode":"MITB1-013"},
+{"id":"alexa-bliss-sister-abigail","setId":"money-in-the-bank-series-1","cardNumber":14,"cardCode":"MITB1-014"},
+{"id":"alexa-bliss-twisted-bliss","setId":"money-in-the-bank-series-1","cardNumber":15,"cardCode":"MITB1-015"},
+{"id":"entrance-alexa-bliss","setId":"money-in-the-bank-series-1","cardNumber":16,"cardCode":"MITB1-016"},
+{"id":"special-alexa-bliss","setId":"money-in-the-bank-series-1","cardNumber":17,"cardCode":"MITB1-017"},
+{"id":"superstar-alexa-bliss","setId":"money-in-the-bank-series-1","cardNumber":18,"cardCode":"MITB1-018"},
+{"id":"shotgun-dropkick","setId":"money-in-the-bank-series-1","cardNumber":19,"cardCode":"MITB1-019"},
+{"id":"finn-balor-1916","setId":"money-in-the-bank-series-1","cardNumber":20,"cardCode":"MITB1-020"},
+{"id":"finn-balor-coup-de-grace","setId":"money-in-the-bank-series-1","cardNumber":21,"cardCode":"MITB1-021"},
+{"id":"entrance-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":22,"cardCode":"MITB1-022"},
+{"id":"special-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":23,"cardCode":"MITB1-023"},
+{"id":"superstar-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":24,"cardCode":"MITB1-024"}
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

@@ -484,7 +484,7 @@ export const superstars = {
     },
     "ability": {
       "name": "The Architect",
-      "text": "The first 2 times Seth plays a Momentum page, his next Move that Control turn gets +2 Damage.",
+      "text": "The first 2 times Seth plays a Momentum page, his next Move this turn gets +2 Damage.",
       "trigger": {
         "type": "momentumBuff",
         "maxUses": 2,
@@ -748,7 +748,7 @@ export const superstars = {
       "setId": "summerslam-series-1",
       "rarity": 4,
       "superstarId": "roman-reigns",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum. The first Strike Move Roman connects with gains +1 Strike Momentum. At the start of Turn 6, gain +1 Adrenaline. At the start of Turn 6, gain +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum. The first Strike Move Roman connects with gains +1 Strike Momentum. At the start of Turn 6, gain +1 Adrenaline.",
       "preMatchMomentum": {
         "strength": 1
       },
@@ -1946,6 +1946,130 @@ export const superstars = {
     "special": {"type":"steelPlate","afterNames":["Headbutt","Jumping Headbutt"],"searchName":"Loaded Mask Headbutt","discount":2}
   }
 
+,
+  "jeyUso": {
+    "id": "jey-uso",
+    "name": "Jey Uso",
+    "nickname": "Main Event Jey",
+    "setId": "money-in-the-bank-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-jey-uso",
+    "entranceId": "entrance-jey-uso",
+    "specialId": "special-jey-uso",
+    "leadOffIds": ["momentum-strike","momentum-strength","punch","superkick","samoan-drop"],
+    "signatures": ["spear","uso-splash"],
+    "archetype": "strike-strength-main-event",
+    "hp": 52,
+    "methodLimits": {"agility":2,"strength":4,"strike":null,"technical":0},
+    "starterMomentum": {"strike":6,"strength":4,"agility":2},
+    "ability": {
+      "name": "Main Event Momentum",
+      "text": "The first 2 times each match Jey connects with a Strike Move, his next Strength Move during the same Control sequence costs 1 less. If that Strength Move connects, gain +1 Adrenaline.",
+      "trigger": {"type":"strikeDiscountStrength","maxUses":2,"discount":1,"adrenalineOnStrength":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-jey-uso","name":"Main Event Jey","kind":"entrance","setId":"money-in-the-bank-series-1","rarity":4,"superstarId":"jey-uso",
+      "rulesText":"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"strike":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"yeetTutor","afterName":"Spear","searchName":"Uso Splash","discount":2}
+  }
+
+,
+  "laKnight": {
+    "id": "la-knight",
+    "name": "LA Knight",
+    "nickname": "The Megastar",
+    "setId": "money-in-the-bank-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-la-knight",
+    "entranceId": "entrance-la-knight",
+    "specialId": "special-la-knight",
+    "leadOffIds": ["momentum-strike","momentum-strength","punch","shoulder-tackle","clothesline"],
+    "signatures": ["diving-elbow-drop","la-knight-bft"],
+    "archetype": "crowd-powered-all-rounder",
+    "hp": 52,
+    "methodLimits": {"agility":2,"strength":4,"strike":null,"technical":3},
+    "starterMomentum": {"strike":5,"strength":3,"technical":2,"agility":2},
+    "ability": {
+      "name": "The Megastar",
+      "text": "The first 2 times each match LA Knight connects with a Move dealing 8+ printed Damage, gain +1 Adrenaline. If LA Knight had 4+ Adrenaline before that Move connected, also draw 1 page.",
+      "trigger": {"type":"laKnightMegastar","maxUses":2,"minPrintedDamage":8,"adrenaline":1,"drawThreshold":4,"draw":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-la-knight","name":"Let Me Talk to Ya!","kind":"entrance","setId":"money-in-the-bank-series-1","rarity":4,"superstarId":"la-knight",
+      "rulesText":"Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"strike":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"yeahTutor","afterName":"Diving Elbow Drop","searchName":"BFT","discount":2}
+  }
+
+
+,
+  "alexaBliss": {
+    "id": "alexa-bliss",
+    "name": "Alexa Bliss",
+    "nickname": "Five Feet of Fury",
+    "setId": "money-in-the-bank-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-alexa-bliss",
+    "entranceId": "entrance-alexa-bliss",
+    "specialId": "special-alexa-bliss",
+    "leadOffIds": ["momentum-agility","momentum-strike","punch","dropkick","forearm-smash"],
+    "signatures": ["alexa-bliss-sister-abigail","alexa-bliss-twisted-bliss"],
+    "archetype": "stun-setup-resource-control",
+    "hp": 48,
+    "methodLimits": {"agility":null,"strength":0,"strike":3,"technical":3},
+    "starterMomentum": {"agility":6,"strike":3,"technical":3},
+    "ability": {
+      "name": "Five Feet of Fury",
+      "text": "The first 2 times each match Alexa connects with a Move while the opponent is already Stunned, draw 1 page and gain +1 Adrenaline.",
+      "trigger": {"type":"alexaFiveFeetFury","maxUses":2,"draw":1,"adrenaline":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-alexa-bliss","name":"The Goddess","kind":"entrance","setId":"money-in-the-bank-series-1","rarity":4,"superstarId":"alexa-bliss",
+      "rulesText":"Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"agility":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"mindGames","pinBonusModifier":-2,"drawOnKickout":1,"adrenalineOnKickout":1}
+  }
+
+,
+  "finnBalor": {
+    "id": "finn-balor",
+    "name": "Finn Bálor",
+    "nickname": "The Prince",
+    "setId": "money-in-the-bank-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-finn-balor",
+    "entranceId": "entrance-finn-balor",
+    "specialId": "special-finn-balor",
+    "leadOffIds": ["momentum-agility","momentum-strike","dropkick","enzuigiri","sling-blade"],
+    "signatures": ["finn-balor-1916","finn-balor-coup-de-grace"],
+    "archetype": "relentless-control-pace",
+    "hp": 50,
+    "methodLimits": {"agility":null,"strength":1,"strike":4,"technical":3},
+    "starterMomentum": {"agility":6,"strike":4,"technical":2},
+    "ability": {
+      "name": "Relentless Pace",
+      "text": "The first 2 times each match Finn connects with his second or later Move during the same Control sequence, draw 1 page and gain +1 Adrenaline.",
+      "trigger": {"type":"secondMoveInControl","maxUses":2,"draw":1,"adrenaline":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-finn-balor","name":"The Prince","kind":"entrance","setId":"money-in-the-bank-series-1","rarity":4,"superstarId":"finn-balor",
+      "rulesText":"Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"strength":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"balorClubTutor","afterName":"Sling Blade","searchName":"Shotgun Dropkick","discount":2}
+  }
 
 
 };
