@@ -1997,7 +1997,20 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"leapfrog","setId":"money-in-the-bank-series-1","cardNumber":26,"cardCode":"MITB1-026"},
 {"id":"abdominal-stretch","setId":"money-in-the-bank-series-1","cardNumber":27,"cardCode":"MITB1-027"},
 {"id":"punches-in-the-corner","setId":"money-in-the-bank-series-1","cardNumber":28,"cardCode":"MITB1-028"}
+,
+{"id": "bron-breakker-gorilla-press-powerslam", "setId": "survivor-series-series-1", "cardNumber": 1, "cardCode": "SVS1-001"},
+{"id": "bron-breakker-breakkers-spear", "setId": "survivor-series-series-1", "cardNumber": 2, "cardCode": "SVS1-002"},
+{"id": "bron-breakker-steiner-recliner", "setId": "survivor-series-series-1", "cardNumber": 3, "cardCode": "SVS1-003"},
+{"id": "entrance-bron-breakker", "setId": "survivor-series-series-1", "cardNumber": 4, "cardCode": "SVS1-004"},
+{"id": "special-bron-breakker", "setId": "survivor-series-series-1", "cardNumber": 5, "cardCode": "SVS1-005"},
+{"id": "superstar-bron-breakker", "setId": "survivor-series-series-1", "cardNumber": 6, "cardCode": "SVS1-006"}
 
+,
+{"id":"penta-handstand-dropkick","setId":"worlds-collide-series-1","cardNumber":29,"cardCode":"WC1-029"},
+{"id":"apron-german-suplex","setId":"worlds-collide-series-1","cardNumber":30,"cardCode":"WC1-030"},
+{"id":"corner-clothesline","setId":"money-in-the-bank-series-1","cardNumber":29,"cardCode":"MITB1-029"},
+{"id":"dropkick-to-the-back","setId":"smackdown-series-1","cardNumber":29,"cardCode":"SD1-029"},
+{"id":"elbow","setId":"smackdown-series-1","cardNumber":30,"cardCode":"SD1-030"}
 
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));

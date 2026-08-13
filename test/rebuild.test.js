@@ -146,7 +146,8 @@ test("Exhibition CPU matchmaking uses every complete roster deck except the sele
   p.unlockedSuperstars=[starter];
   assert.equal(p.unlockedSuperstars.length,1);
   const pool=exhibitionOpponentIds(starter);
-  assert.equal(pool.length,stars.length-1);
+  const liveStars=stars.filter(s=>!s.developmentOnly);
+  assert.equal(pool.length,liveStars.length-1);
   assert.equal(pool.includes(starter),false);
   assert.ok(pool.every(id=>(decks[id]?.length??0)===55));
   assert.notEqual(randomExhibitionOpponent(starter,()=>0),starter);

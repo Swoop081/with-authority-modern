@@ -1,9 +1,9 @@
-import { superstars } from "./superstars.js?v=0.99.0";
-import { decks } from "./decks.js?v=0.99.0";
+import { superstars } from "./superstars.js?v=0.11.88";
+import { decks } from "./decks.js?v=0.11.88";
 
 export function exhibitionOpponentIds(playerSuperstarId) {
   return Object.values(superstars)
-    .filter(star => star.id !== playerSuperstarId && (decks[star.id]?.length ?? 0) === 55)
+    .filter(star => !star.developmentOnly && star.id !== playerSuperstarId && (decks[star.id]?.length ?? 0) === 55)
     .map(star => star.id);
 }
 

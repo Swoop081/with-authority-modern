@@ -1,4 +1,4 @@
-# WWE Legacy v0.99.0 — HUD Headshot Studio Fix
+# WWE Legacy v0.11.86 — HUD Headshot Studio Fix
 
 - HUD Headshot export now uses its own **720 × 960 portrait canvas**, replacing the incorrect 1200 × 720 horizontal card-derived surface.
 - Headshot crop/zoom/position state is independent from Finished Card Front positioning, so switching modes no longer carries the card crop into the HUD portrait.

@@ -21,5 +21,5 @@
 
 .key.smackdown{border-color:#1597ff;color:#fff;background:linear-gradient(135deg,#031326 0%,#0757a9 62%,#1597ff 100%)}
 
-/* v0.99.0 — HUD Headshot Studio owns a true portrait canvas; JS updates aspect-ratio per export target. */
+/* v0.11.88 — HUD Headshot Studio uses a dedicated 3:1 head-and-shoulders canvas; JS updates aspect-ratio per export target. */
 .canvas-wrap{transition:aspect-ratio .18s ease,width .18s ease}

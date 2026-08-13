@@ -2550,9 +2550,28 @@ body[data-screen="match"] .horizontal-hand-card .hand-card-action span{min-heigh
 @keyframes spectacleHit{0%{transform:scale(.62);opacity:.15}72%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
 @keyframes spectacleFade{from{opacity:0}to{opacity:1}}
 @media(max-width:390px){body[data-screen="match"] .horizontal-hand-card{flex-basis:102px!important;width:102px!important;min-width:102px!important}.play-pile-card-modal-inner{height:min(62svh,570px)}.play-pile-modal-card{height:min(58svh,540px)}}
-/* v0.99.0 RC1 — v1 presentation / onboarding / resilience pass */
-body{transition:background .22s ease} #game>section{animation:screenIn .22s ease both}@keyframes screenIn{from{opacity:.25;transform:translateY(7px)}to{opacity:1;transform:none}}
-.onboarding-coach{position:sticky;top:calc(env(safe-area-inset-top) + 4px);z-index:70;margin:0 12px 10px;padding:12px 14px;border:1px solid #49cfff;border-radius:14px;background:rgba(5,16,27,.96);box-shadow:0 0 28px rgba(48,194,255,.2);display:grid;grid-template-columns:1fr auto;gap:5px 12px}.onboarding-coach span{grid-column:1/-1;color:#69dcff;font-size:10px;letter-spacing:.2em;font-weight:900}.onboarding-coach b{font-size:13px;line-height:1.35}.onboarding-coach button{border:0;border-radius:9px;padding:6px 10px;font-weight:800}
-.season-next-reward{margin:12px 18px;padding:18px;border:1px solid #8e64ff;border-radius:18px;background:radial-gradient(circle at 90% 10%,rgba(129,74,255,.25),transparent 45%),#0d0e14;box-shadow:0 0 30px rgba(126,74,255,.15)}.season-next-reward span{display:block;color:#d2b6ff;font-size:11px;font-weight:900;letter-spacing:.2em}.season-next-reward strong{display:block;font-size:clamp(22px,6vw,34px);margin:6px 0}.season-next-reward small{color:#f0c95b;font-weight:800}.up-pulse{display:inline-block;animation:upPulse .8s ease}@keyframes upPulse{40%{transform:scale(1.22);text-shadow:0 0 20px #7eeaff}100%{transform:scale(1)}}
-.upgrade-why{display:block;margin-top:5px;max-width:34ch;opacity:.7;line-height:1.3}.match-spectacle.finisher .match-spectacle-copy{font-size:min(20vw,130px);text-shadow:0 0 35px #ffbd38}.match-spectacle.counter .match-spectacle-copy{font-size:min(18vw,115px);text-shadow:0 0 30px #52d8ff}
-@media(max-width:760px){.options-panel .option-row{gap:10px}.season-next-reward{margin-inline:12px}}
+
+/* v0.11.88 — first-match coach layer + Dynamic-Island-safe HUD refinement */
+body[data-screen="match"] .onboarding-coach{
+  position:fixed!important;
+  top:calc(env(safe-area-inset-top) + 8px)!important;
+  left:12px!important;right:12px!important;
+  z-index:1200!important;
+  margin:0!important;padding:11px 13px!important;
+  border:1px solid color-mix(in srgb,var(--presentation-accent,#49cfff) 76%,#fff 8%)!important;
+  border-radius:14px!important;
+  background:rgba(4,12,22,.985)!important;
+  box-shadow:0 12px 36px rgba(0,0,0,.58),0 0 24px color-mix(in srgb,var(--presentation-accent,#49cfff) 18%,transparent)!important;
+  display:grid!important;grid-template-columns:1fr auto!important;gap:5px 10px!important;
+}
+body[data-screen="match"] .onboarding-coach span{grid-column:1/-1;color:#73ddff;font-size:.58rem;letter-spacing:.2em;font-weight:1000}
+body[data-screen="match"] .onboarding-coach b{font-size:.78rem;line-height:1.32}
+body[data-screen="match"] .onboarding-coach button{align-self:center;border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:7px 10px;background:#242833;color:#fff;font-weight:900}
+body[data-screen="match"] .match-experience.has-onboarding .premium-match-hud{margin-top:calc(70px + env(safe-area-inset-top))!important}
+/* Keep the oversized score below the iPhone status/Dynamic Island zone and directly above the resource rows. */
+body[data-screen="match"] .premium-headshot-hud .hud-hp-number{align-self:end!important;padding-top:0!important;padding-bottom:5px!important;transform:translateY(3px)!important}
+body[data-screen="match"] .premium-headshot-hud.cpu .hud-hp-number{align-self:end!important}
+@media(max-width:390px){
+ body[data-screen="match"] .match-experience.has-onboarding .premium-match-hud{margin-top:calc(66px + env(safe-area-inset-top))!important}
+ body[data-screen="match"] .premium-headshot-hud .hud-hp-number{padding-bottom:4px!important;transform:translateY(4px)!important}
+}

@@ -1,11 +1,11 @@
-import { decks } from "./decks.js?v=0.99.0";
-import { collectionCards } from "./collection.js?v=0.99.0";
-import { superstars } from "./superstars.js?v=0.99.0";
+import { decks } from "./decks.js?v=0.11.88";
+import { collectionCards } from "./collection.js?v=0.11.88";
+import { superstars } from "./superstars.js?v=0.11.88";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 20;
+export const PROFILE_VERSION = 19;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -142,7 +142,6 @@ export function createProfile(starterId) {
     setProgress: defaultSetProgress(),
     storePurchases: [],
     pendingUnlockCelebrations: [],
-    settings: { music: true, sfx: true },
     onboarding: { complete: false, step: 0 },
     createdAt: new Date().toISOString()
   };
@@ -204,7 +203,7 @@ export function migrateProfile(old) {
   for (const [setId, state] of Object.entries(defaultSetProgress())) p.setProgress[setId] = { ...state, ...(p.setProgress[setId] ?? {}) };
   p.storePurchases ??= [];
   p.pendingUnlockCelebrations ??= [];
-  p.settings = { music: true, sfx: true, ...(p.settings ?? {}) };
+  // Existing profiles should not be forced back through the first-match coach.
   p.onboarding = { complete: true, step: 0, ...(p.onboarding ?? {}) };
   p.createdAt ??= new Date().toISOString();
 
@@ -263,7 +262,3 @@ export function resetProfile(storage = globalThis.localStorage) {
   storage?.removeItem("wa-modern-profile-v1");
 }
 export function buildBestOwnedDeck(_p, sid) { return decks[sid] ?? []; }
-
-export function resetSavedDecks(p) { p.savedDecks = {}; for (const sid of p.unlockedSuperstars ?? []) ensureSavedRecommendedDeck(p, sid); return p; }
-export function resetSettings(p) { p.settings = { music: true, sfx: true }; return p; }
-export function exportProfile(p) { return JSON.stringify(p, null, 2); }

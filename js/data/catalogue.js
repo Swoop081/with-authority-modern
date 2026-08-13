@@ -1,13 +1,13 @@
-import { decks } from "./decks.js?v=0.99.0";
-import { superstars } from "./superstars.js?v=0.99.0";
-import { sets } from "./sets.js?v=0.99.0";
-import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.99.0";
+import { decks } from "./decks.js?v=0.11.88";
+import { superstars } from "./superstars.js?v=0.11.88";
+import { sets } from "./sets.js?v=0.11.88";
+import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.11.88";
 
 export const CATALOGUE_PAGE_SIZE = 48;
 export const CATALOGUE_NUMERIC_OPERATORS = ["any", "eq", "lte", "gte"];
 export const CATALOGUE_REQUIREMENT_METHODS = ["strength", "strike", "technical", "agility"];
 
-const starList = Object.values(superstars);
+const starList = Object.values(superstars).filter(star => !star.developmentOnly);
 const starById = Object.fromEntries(starList.map(star => [star.id, star]));
 const setOrder = Object.keys(sets);
 const setRank = Object.fromEntries(setOrder.map((id, index) => [id, index]));
@@ -152,6 +152,7 @@ function compareCards(a, b, sortBy, ownershipFor) {
 export function filterAndSortCatalogue(cards, filters = defaultCatalogueFilters(), ownershipFor = () => ({ total: 0 })) {
   const query = String(filters.search ?? "").trim().toLowerCase();
   const out = cards.filter(card => {
+    if (sets[card?.setId]?.season === 2 && sets[card?.setId]?.developmentOnly) return false;
     if (filters.setId && filters.setId !== "all" && card.setId !== filters.setId) return false;
     if (filters.kind && filters.kind !== "all" && card.kind !== filters.kind) return false;
     if (filters.rarity && filters.rarity !== "all" && String(card.rarity) !== String(filters.rarity)) return false;

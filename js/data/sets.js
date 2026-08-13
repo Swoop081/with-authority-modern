@@ -1,4 +1,10 @@
 export const sets = {
+  "survivor-series-series-1": {
+    id: "survivor-series-series-1", name: "Survivor Series", series: 1, type: "season-2-launch",
+    displayName: "Survivor Series — Series 1", shortCode: "SVS1", lifecycleDefault: "future",
+    releaseDate: "2026-11-28", developmentOnly: true, season: 2,
+    lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
+  },
   "smackdown-series-1": {
     id: "smackdown-series-1", name: "SmackDown", series: 1, type: "brand-subset",
     displayName: "SmackDown — Series 1", shortCode: "SD1", lifecycleDefault: "future",

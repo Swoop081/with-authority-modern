@@ -2275,4 +2275,18 @@ export const superstars = {
   "special":{"type":"lastRites","strengthDiscount":2}
 }
 
+,
+"bronBreakker": {
+  "id":"bron-breakker","name":"Bron Breakker","nickname":"The Dog-Faced Gremlin","setId":"survivor-series-series-1","era":null,"seasonExclusive":false,"developmentOnly":true,
+  "cardId":"superstar-bron-breakker","entranceId":"entrance-bron-breakker","specialId":"special-bron-breakker",
+  "leadOffIds":["momentum-strength","momentum-agility","punch","dropkick","hurricanrana"],
+  "signatures":["bron-breakker-gorilla-press-powerslam","bron-breakker-breakkers-spear","bron-breakker-steiner-recliner"],
+  "archetype":"agility-to-strength-acceleration","hp":53,
+  "methodLimits":{"strength":null,"agility":4,"strike":3,"technical":1},
+  "starterMomentum":{"strength":7,"agility":3,"strike":2},
+  "ability":{"name":"Dog-Faced Gremlin","text":"Once per Control sequence, after Bron connects with an Agility Move, his next Strength Move costs 1 less.","trigger":{"type":"bronAgilityToStrength","discount":1}},
+  "entrance":{"id":"entrance-bron-breakker","name":"Breakker Unleashed","kind":"entrance","setId":"survivor-series-series-1","rarity":4,"superstarId":"bron-breakker","rulesText":"Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.","preMatchMomentum":{"strength":1,"agility":1},"preMatchAdrenaline":0,"delayedTurn5":false},
+  "special":{"type":"fullSpeed","damage":2,"agilityDraw":1}
+}
+
 };

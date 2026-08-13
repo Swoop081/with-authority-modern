@@ -6866,5 +6866,140 @@ export const allGameplayCards = [
   "rulesText":"Playable in the ring. On Connect: opponent loses 1 Adrenaline.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"opponentAdrenalineOnConnect":-1,"effects":[]
 }
 
+,
+{
+  "id": "bron-breakker-gorilla-press-powerslam",
+  "name": "Gorilla Press Powerslam",
+  "kind": "move",
+  "setId": "survivor-series-series-1",
+  "cost": 7,
+  "damage": 11,
+  "requirements": {
+    "strength": 2
+  },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": "bron-breakker",
+  "rarity": 3,
+  "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker’s Spear.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "pinBonus": 0,
+  "selfDamage": 0,
+  "trademark": true,
+  "searchOnConnectName": "Breakker’s Spear",
+  "effects": []
+},
+{
+  "id": "bron-breakker-breakkers-spear",
+  "name": "Breakker’s Spear",
+  "kind": "move",
+  "setId": "survivor-series-series-1",
+  "cost": 10,
+  "damage": 16,
+  "requirements": {
+    "strength": 3
+  },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": "bron-breakker",
+  "rarity": 4,
+  "rulesText": "Bron Breakker-exclusive Finisher. Pin Bonus +4. If Bron connected with an Agility Move earlier in this Control sequence, costs 2 less.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "pinBonus": 4,
+  "selfDamage": 0,
+  "finisher": true,
+  "discountIfPriorAgility": 2,
+  "effects": []
+},
+{
+  "id": "bron-breakker-steiner-recliner",
+  "name": "Steiner Recliner",
+  "kind": "move",
+  "setId": "survivor-series-series-1",
+  "cost": 7,
+  "damage": 2,
+  "requirements": {
+    "strength": 2
+  },
+  "moveType": "submission",
+  "method": "strength",
+  "superstarId": "bron-breakker",
+  "rarity": 3,
+  "rulesText": "Bron Breakker-exclusive Back Submission. Pressure 5.",
+  "groundOpponent": true,
+  "groundedOnly": true,
+  "stun": 0,
+  "pinBonus": 0,
+  "selfDamage": 0,
+  "submission": {
+    "bodyPart": "back",
+    "pressure": 5
+  },
+  "effects": []
+},
+{
+  "id": "entrance-bron-breakker",
+  "name": "Breakker Unleashed",
+  "kind": "entrance",
+  "setId": "survivor-series-series-1",
+  "rarity": 4,
+  "superstarId": "bron-breakker",
+  "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
+  "preMatchMomentum": {
+    "strength": 1,
+    "agility": 1
+  },
+  "preMatchAdrenaline": 0,
+  "delayedTurn5": false
+},
+{
+  "id": "special-bron-breakker",
+  "name": "Full Speed",
+  "kind": "special",
+  "setId": "survivor-series-series-1",
+  "rarity": 3,
+  "superstarId": "bron-breakker",
+  "rulesText": "Once per match during your Control sequence: your next connected Move this Control sequence deals +2 Damage; if it is an Agility Move, draw 1 page.",
+  "special": {
+    "type": "fullSpeed",
+    "damage": 2,
+    "agilityDraw": 1
+  }
+}
+,
+{
+  "id":"penta-handstand-dropkick","name":"Penta’s Handstand Dropkick","kind":"move","setId":"worlds-collide-series-1",
+  "cost":4,"damage":7,"requirements":{"agility":2},"moveType":"strike","method":"agility","superstarId":"penta","rarity":2,
+  "rulesText":"Penta-exclusive. Grounds opponent. If Penta connected with another Agility Move earlier in this Control sequence, +1 Damage.",
+  "groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,
+  "priorConnectedMethodBonus":{"method":"agility","damage":1},"effects":[]
+},
+{
+  "id":"apron-german-suplex","name":"Apron German Suplex","kind":"move","setId":"worlds-collide-series-1",
+  "cost":6,"damage":10,"requirements":{"strength":1,"technical":1},"moveType":"grapple","method":"strength","superstarId":null,"rarity":2,
+  "rulesText":"Grounds opponent. Opponent loses 1 Adrenaline. Counts as German Suplex for card effects and synergies.",
+  "groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"opponentAdrenalineOnConnect":-1,"countsAs":["German Suplex"],"effects":[]
+},
+{
+  "id":"corner-clothesline","name":"Corner Clothesline","kind":"move","setId":"money-in-the-bank-series-1",
+  "cost":2,"damage":4,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
+  "rulesText":"Standing opponent only. Grounds opponent.","groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
+},
+{
+  "id":"dropkick-to-the-back","name":"Dropkick to the Back","kind":"move","setId":"smackdown-series-1",
+  "cost":3,"damage":5,"requirements":{"agility":1},"moveType":"strike","method":"agility","superstarId":null,"rarity":1,
+  "rulesText":"Standing opponent only. Grounds opponent.","groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
+},
+{
+  "id":"elbow","name":"Elbow","kind":"move","setId":"smackdown-series-1",
+  "cost":2,"damage":3,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
+  "rulesText":"Standing opponent only. May also Counter a Strike Move.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,
+  "counters":["strike"],"effects":[]
+}
+
 
 ];
