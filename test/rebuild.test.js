@@ -112,8 +112,6 @@ test("Momentum refreshes after a connected Move, not after Specials or utility w
 
   assert.equal(g.declareMove('p1',move),true);
   if(s.phase==='COUNTER') assert.equal(g.passCounter('p2'),true);
-  assert.equal(s.phase,'POST_MOVE');
-  assert.equal(g.endPostMove('p1'),true);
   assert.equal(s.phase,'ACTION');
   assert.equal(s.playerInControl,'p1');
   assert.equal(s.turnNumber,startTurn+1,'connected Move advances the turn while Control is retained');
@@ -135,7 +133,7 @@ test("offensive counter Moves become counter-attacks and can be countered again"
   assert.equal(s.phase,'COUNTER'); assert.equal(s.proposedMove.attackerId,'p1'); assert.equal(s.proposedMove.defenderId,'p2');
   assert.equal(s.log.filter(e=>e.type==='COUNTER_ATTACK_DECLARED').length,2);
   assert.equal(g.passCounter('p2'),true);
-  assert.equal(s.phase,'POST_MOVE');
+  assert.equal(s.phase,'ACTION');
   assert.equal(s.players.p2.hp,Math.max(0,s.players.p2.maxHp-(enzuigiri.damage??0)));
 });
 
@@ -331,7 +329,7 @@ test("RAW aerial mechanics execute: Standing Moonsault kickout retains Control a
   const g2=new MatchEngine({p1:iyo,p2:opp,decks,rng:rng(1302)}), q=g2.state();
   q.playerInControl='p1'; q.phase='ACTION'; q.players.p1.hand=[punch,spring]; q.players.p2.hand=[];
   q.players.p1.momentum.strike=5; q.players.p1.momentum.agility=5;
-  assert.equal(g2.declareMove('p1',punch),true); assert.equal(g2.passCounter('p2'),true); assert.equal(g2.endPostMove('p1'),true);
+  assert.equal(g2.declareMove('p1',punch),true); assert.equal(g2.passCounter('p2'),true); assert.equal(q.phase,'ACTION');
   assert.equal(g2.declareMove('p1',spring),true); assert.equal(g2.passCounter('p2'),true);
   assert.equal(q.players.p1.hand.length,1,'Springboard draw 2 / ditch 1 creates net +1 page after a prior Strike');
 });
@@ -427,7 +425,7 @@ test("Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RA
   const e2=new MatchEngine({p1:opp,p2:raquel,decks,rng:()=>0.99}); const s2=e2.state();
   const big=byName('Running Powerslam'), backup=allGameplayCards.find(c=>c.id==='special-raquel-rodriguez');
   s2.playerInControl='p1'; s2.phase='ACTION'; s2.players.p1.hand=[big]; s2.players.p1.momentum.strength=5; s2.players.p1.adrenaline=3; s2.players.p1.momentum.attitude=3; s2.players.p2.hand=[backup]; const rhp=s2.players.p2.hp;
-  assert.equal(e2.declareMove('p1',big),true); e2.passCounter('p2'); assert.equal(rhp-s2.players.p2.hp,5,'Judgment Day Backup reduces 8 damage to 5'); assert.equal(s2.players.p2.specialUsed,true); assert.equal(s2.players.p1.adrenaline,2,'Judgment Day Backup drains 1 opponent Adrenaline');
+  assert.equal(e2.declareMove('p1',big),true); e2.passCounter('p2'); assert.equal(rhp-s2.players.p2.hp,5,'Judgment Day Backup reduces 8 damage to 5'); assert.equal(s2.players.p2.specialUsed,true); assert.equal(s2.players.p1.adrenaline,3,'base +1 on connect offsets Judgment Day Backup’s -1 drain');
 });
 
 
@@ -584,7 +582,7 @@ test("v0.11.63 Exhibition and match UI source contains the locked cinematic flow
   assert.equal(ui.includes('CPU OPPONENT · RANDOM'),false);
   assert.equal(ui.includes('CPU ownership is not restricted by your collection.'),false);
   assert.ok(ui.includes('data-open-superstar'));
-  assert.ok(ui.includes('SUBMISSION DAMAGE'));
+  assert.ok(ui.includes('premium-headshot-hud'));
   assert.ok(css.includes('.ccg-card.type-momentum .ccg-card-art img.momentum-set-logo'));
   assert.ok(css.includes('.hud-hp-number.healthy'));
   assert.ok(css.includes('.hud-resource.adrenaline'));
@@ -747,7 +745,7 @@ test("Money in the Bank Series 1 Jey Uso package is locked and playable",()=>{
   const strike=byName('Punch'), strength=byName('Spear'); p1.hand=[strike,strength,allGameplayCards.find(c=>c.id==='special-jey-uso'),splash].filter(Boolean); p1.adrenaline=99; for(const m of ['agility','strength','strike','technical'])p1.momentum[m]=99;
   st.playerInControl='p1'; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:strike}; g._connect();
   assert.equal(p1.methodDiscount.strength,1); assert.equal(p1.events.jeyStrengthAdrenaline,1);
-  g.endPostMove('p1'); const ad=p1.adrenaline; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:strength}; g._connect(); assert.equal(p1.adrenaline,ad+1);
+  const ad=p1.adrenaline; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:strength}; g._connect(); assert.equal(p1.adrenaline,ad+2);
 });
 
 
@@ -761,9 +759,9 @@ test("Money in the Bank Series 1 LA Knight package is locked and playable",()=>{
   const opp=stars.find(x=>x.id!=='la-knight'); const g=new MatchEngine({p1:knight,p2:opp,decks,rng:rng(1165)}),st=g.state(),p=st.players.p1;
   assert.equal(p.momentum.strike,1); assert.equal(p.adrenaline,1);
   // Megastar: qualifying 8+ printed Damage gives Adrenaline, and at 4+ pre-connect also draws.
-  p.adrenaline=4; const beforeHand=p.hand.length; const heavy=hammer; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:heavy};g._connect(); assert.equal(p.adrenaline,5); assert.ok(p.hand.length>=beforeHand+1);
+  p.adrenaline=4; const beforeHand=p.hand.length; const heavy=hammer; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:heavy};g._connect(); assert.equal(p.adrenaline,6); assert.ok(p.hand.length>=beforeHand+1);
   // Jumping Neckbreaker only draws when the immediately previous connected Method was Strike.
-  g.endPostMove('p1'); p.lastConnectedMethod='strike'; const before=p.hand.length; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:jump};g._connect(); assert.ok(p.hand.length>=before+1);
+  p.lastConnectedMethod='strike'; const before=p.hand.length; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:jump};g._connect(); assert.ok(p.hand.length>=before+1);
 });
 
 test("Money in the Bank Series 1 Alexa Bliss package is locked and playable",()=>{
@@ -776,15 +774,15 @@ test("Money in the Bank Series 1 Alexa Bliss package is locked and playable",()=
   const opp=stars.find(x=>x.id!=='alexa-bliss'); const g=new MatchEngine({p1:alexa,p2:opp,decks,rng:rng(1166)}),st=g.state(),p=st.players.p1,d=st.players.p2;
   assert.equal(p.momentum.agility,1); assert.equal(p.adrenaline,1);
   // Five Feet of Fury only rewards a Move that begins while the opponent is already Stunned.
-  p.adrenaline=5; d.status.stunnedTurns=1; d.stun=1; const beforeHand=p.hand.length; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:code};g._connect(); assert.equal(p.adrenaline,6); assert.ok(p.hand.length>=beforeHand+1);
+  p.adrenaline=5; d.status.stunnedTurns=1; d.stun=1; const beforeHand=p.hand.length; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:code};g._connect(); assert.equal(p.adrenaline,7); assert.ok(p.hand.length>=beforeHand+1);
   // Sister Abigail tutors/discounts Twisted Bliss and its combo pin bonus is +6.
-  g.endPostMove('p1'); d.status.stunnedTurns=0; d.stun=0; p.deck=[twisted]; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sister};g._connect(); assert.ok(p.hand.some(c=>c.id==='alexa-bliss-twisted-bliss')); assert.equal(p.namedDiscount['Twisted Bliss'],1);
+  d.status.stunnedTurns=0; d.stun=0; p.deck=[twisted]; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sister};g._connect(); assert.ok(p.hand.some(c=>c.id==='alexa-bliss-twisted-bliss')); assert.equal(p.namedDiscount['Twisted Bliss'],1);
 });
 
 test("Alexa Bliss Mind Games reduces one Pin and rewards a successful kickout",()=>{
   const alexa=starById.get('alexa-bliss'),opp=stars.find(x=>x.id!=='alexa-bliss'); const g=new MatchEngine({p1:opp,p2:alexa,decks,rng:()=>0.99}),st=g.state(),a=st.players.p1,d=st.players.p2;
   const special=allGameplayCards.find(c=>c.id==='special-alexa-bliss'); d.hand=[special]; d.adrenaline=2; const beforeHand=d.hand.length;
-  st.playerInControl='p1'; st.phase='POST_MOVE'; st.postMove={attackerId:'p1',defenderId:'p2',cardId:'test',pinBonus:4};
+  st.playerInControl='p1'; st.phase='ACTION'; d.hp=Math.floor(d.maxHp*.5); st.postMove={attackerId:'p1',defenderId:'p2',cardId:'test',pinBonus:4};
   assert.equal(g.attemptPin('p1'),true); assert.equal(st.proposedPin.pinBonusModifier,-2); assert.equal(d.specialUsed,true);
   assert.equal(g.passPinResponse('p2'),true); assert.equal(d.adrenaline,3); assert.ok(d.hand.length>=beforeHand); assert.equal(d.events.mindGamesPending,undefined);
 });
@@ -803,7 +801,7 @@ test("Money in the Bank Series 1 Finn Bálor package is locked and playable",()=
   // Relentless Pace triggers on the second and later connected Move in a Control sequence.
   p.adrenaline=5; const first=byName('Dropkick'),second=byName('Enzuigiri'); for(const m of ['agility','strength','strike','technical'])p.momentum[m]=99;
   st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:first};g._connect(); const afterFirstAd=p.adrenaline; const afterFirstHand=p.hand.length;
-  g.endPostMove('p1'); st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:second};g._connect(); assert.equal(p.adrenaline,afterFirstAd+1); assert.ok(p.hand.length>=afterFirstHand+1);
+  st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:second};g._connect(); assert.equal(p.adrenaline,afterFirstAd+2); assert.ok(p.hand.length>=afterFirstHand+1);
 });
 
 test("Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce",()=>{
@@ -811,5 +809,31 @@ test("Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce",()
   const sling=byName('Sling Blade'),shotgun=byName('Shotgun Dropkick'),coup=byName('Coup de Grâce'),special=allGameplayCards.find(c=>c.id==='special-finn-balor');
   p.hand=[sling,special]; p.deck=[shotgun,byName('Punch'),coup]; p.adrenaline=99; for(const m of ['agility','strength','strike','technical'])p.momentum[m]=99;
   st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sling};g._connect(); assert.ok(p.hand.some(c=>c.id==='shotgun-dropkick')); assert.equal(p.namedDiscount['Shotgun Dropkick'],2); assert.equal(p.specialUsed,true);
-  g.endPostMove('p1'); const sg=p.hand.find(c=>c.id==='shotgun-dropkick'); st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sg};g._connect(); assert.ok(p.hand.some(c=>c.id==='finn-balor-coup-de-grace')); assert.equal(p.namedDiscount['Coup de Grâce'],1);
+  const sg=p.hand.find(c=>c.id==='shotgun-dropkick'); st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sg};g._connect(); assert.ok(p.hand.some(c=>c.id==='finn-balor-coup-de-grace')); assert.equal(p.namedDiscount['Coup de Grâce'],1);
 });
+
+test("SmackDown Series 1 Danhausen package is locked and playable",()=>{
+  const dan=starById.get('danhausen'); assert.ok(dan); assert.equal(dan.hp,49);
+  assert.deepEqual(dan.starterMomentum,{technical:6,strike:4,strength:2});
+  assert.equal(decks.danhausen.length,55); assert.equal(decks.danhausen.filter(c=>c.kind==='momentum').length,12);
+  const pump=byName('Pump Kick'), inv=byName('Inverted DDT'), oct=byName('Octopus Hold'), knee=byName('Very Nice, Very Knee-vil'), triple=byName('Triple D'), cutter=byName('Cutter');
+  assert.ok(pump&&inv&&oct&&knee&&triple&&cutter); assert.equal(knee.trademark,true); assert.equal(triple.finisher,true); assert.equal(triple.damage,15); assert.deepEqual(triple.requirements,{}); assert.equal(triple.superstarId,'danhausen'); assert.equal(triple.pinBonusIfOpponentStunned,5);
+  assert.equal(CARD_NUMBER_BY_ID['pump-kick'].cardCode,'SD1-001'); assert.equal(CARD_NUMBER_BY_ID['superstar-danhausen'].cardCode,'SD1-008'); assert.equal(CARD_NUMBER_BY_ID['cutter'].cardCode,'SD1-009');
+  const opp=stars.find(x=>x.id!=='danhausen'),g=new MatchEngine({p1:dan,p2:opp,decks,rng:rng(1168)}),st=g.state(),p=st.players.p1;
+  assert.equal(p.momentum.technical,1); assert.equal(p.adrenaline,1);
+});
+
+test("Danhausen curse, Jar of Teeth and stunned finish interactions resolve",()=>{
+  const dan=starById.get('danhausen'),opp=stars.find(x=>x.id!=='danhausen'),g=new MatchEngine({p1:dan,p2:opp,decks,rng:()=>0.5}),st=g.state(),a=st.players.p1,d=st.players.p2;
+  // Give opponent sufficient resources and Adrenaline, then pass from Danhausen to trigger curse.
+  d.momentum.strength=10;d.momentum.strike=10;d.momentum.technical=10;d.momentum.agility=10;d.adrenaline=3; d.momentum.attitude=3;
+  st.playerInControl='p1';st.phase='ACTION'; assert.equal(g.passTurn('p1'),true); assert.equal(st.playerInControl,'p2'); assert.equal(d.events.danhausenCurseAdrenalineCost,1); assert.equal(a.abilityUses,1);
+  const move=allGameplayCards.find(c=>c.id==='punch'); d.hand.unshift(move); const before=d.adrenaline; assert.equal(g.declareMove('p2',move),true); assert.equal(d.adrenaline,before-1); assert.equal(d.events.danhausenCurseAdrenalineCost,undefined);
+  // Countering the cursed first Move drains another Adrenaline.
+  const counter=allGameplayCards.find(c=>!c.defensiveOnly&&(c.counters??[]).some(Boolean)); if(counter){a.hand.unshift(counter); const cb=d.adrenaline; if(g.counter('p1',counter)) assert.equal(d.adrenaline,Math.max(0,cb-1));}
+  // Directly verify Jar post-grounding window and effect.
+  const jar=allGameplayCards.find(c=>c.id==='special-danhausen'),ground=allGameplayCards.find(c=>c.id==='inverted-ddt'); a.hand=[jar]; a.specialUsed=false; a.momentum.technical=10;a.momentum.strike=10; d.hand=[allGameplayCards.find(c=>c.id==='momentum-strike')]; d.adrenaline=2; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:ground}; g._connect(); assert.equal(a.events.jarOfTeethWindow,true); const handBefore=a.hand.length; assert.equal(g.playSpecial('p1',jar),true); assert.equal(d.hand.length,0); assert.equal(d.adrenaline,0); assert.ok(a.hand.length>=handBefore);
+  // Triple D gains +5 Pin Bonus against a previously Stunned opponent.
+  const triple=allGameplayCards.find(c=>c.id==='danhausen-triple-d'); a.specialUsed=true; d.status.stunnedTurns=1;d.stun=1; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:triple}; g._connect(); assert.equal(st.postMove.pinBonus,5);
+});
+

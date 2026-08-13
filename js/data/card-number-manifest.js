@@ -1864,7 +1864,16 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"finn-balor-coup-de-grace","setId":"money-in-the-bank-series-1","cardNumber":21,"cardCode":"MITB1-021"},
 {"id":"entrance-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":22,"cardCode":"MITB1-022"},
 {"id":"special-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":23,"cardCode":"MITB1-023"},
-{"id":"superstar-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":24,"cardCode":"MITB1-024"}
+{"id":"superstar-finn-balor","setId":"money-in-the-bank-series-1","cardNumber":24,"cardCode":"MITB1-024"},
+{"id":"pump-kick","setId":"smackdown-series-1","cardNumber":1,"cardCode":"SD1-001"},
+{"id":"inverted-ddt","setId":"smackdown-series-1","cardNumber":2,"cardCode":"SD1-002"},
+{"id":"octopus-hold","setId":"smackdown-series-1","cardNumber":3,"cardCode":"SD1-003"},
+{"id":"danhausen-very-nice-knee-vil","setId":"smackdown-series-1","cardNumber":4,"cardCode":"SD1-004"},
+{"id":"danhausen-triple-d","setId":"smackdown-series-1","cardNumber":5,"cardCode":"SD1-005"},
+{"id":"entrance-danhausen","setId":"smackdown-series-1","cardNumber":6,"cardCode":"SD1-006"},
+{"id":"special-danhausen","setId":"smackdown-series-1","cardNumber":7,"cardCode":"SD1-007"},
+{"id":"superstar-danhausen","setId":"smackdown-series-1","cardNumber":8,"cardCode":"SD1-008"},
+{"id":"cutter","setId":"smackdown-series-1","cardNumber":9,"cardCode":"SD1-009"}
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

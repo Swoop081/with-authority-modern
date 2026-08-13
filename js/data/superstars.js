@@ -2071,5 +2071,36 @@ export const superstars = {
     "special": {"type":"balorClubTutor","afterName":"Sling Blade","searchName":"Shotgun Dropkick","discount":2}
   }
 
+,
+  "danhausen": {
+    "id": "danhausen",
+    "name": "Danhausen",
+    "nickname": "Very Nice, Very Evil",
+    "setId": "smackdown-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-danhausen",
+    "entranceId": "entrance-danhausen",
+    "specialId": "special-danhausen",
+    "leadOffIds": ["momentum-technical","momentum-strike","ddt","punch","big-boot"],
+    "signatures": ["danhausen-very-nice-knee-vil","danhausen-triple-d"],
+    "archetype": "curse-disruption-trickster",
+    "hp": 49,
+    "methodLimits": {"agility":0,"strength":2,"strike":4,"technical":null},
+    "starterMomentum": {"technical":6,"strike":4,"strength":2},
+    "ability": {
+      "name": "You Are Cursed!",
+      "text": "The first 2 times each match an opponent gains Control from Danhausen, their first Move during that Control sequence costs 1 additional Adrenaline. If that Move is successfully Countered, they lose 1 additional Adrenaline.",
+      "trigger": {"type":"danhausenCurseControl","maxUses":2,"adrenalineCost":1,"counterDrain":1},
+      "maxUses": 2
+    },
+    "entrance": {
+      "id":"entrance-danhausen","name":"Very Nice, Very Evil","kind":"entrance","setId":"smackdown-series-1","rarity":4,"superstarId":"danhausen",
+      "rulesText":"Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum":{"technical":1},"preMatchAdrenaline":1,"delayedTurn5":false
+    },
+    "special": {"type":"jarOfTeeth","ditchOpponent":1,"opponentAdrenaline":-1,"draw":1}
+  }
+
 
 };

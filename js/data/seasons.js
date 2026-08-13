@@ -1,6 +1,6 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.67";
-import { decks } from "./decks.js?v=0.11.67";
-import { superstars } from "./superstars.js?v=0.11.67";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.11.69";
+import { decks } from "./decks.js?v=0.11.69";
+import { superstars } from "./superstars.js?v=0.11.69";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -70,6 +70,17 @@ export const SEASON_1 = {
       superstarCount: 4,
       type: "subset",
       setId: "money-in-the-bank-series-1"
+    },
+    {
+      id: "smackdown-series-1",
+      date: "2026-10-31T00:00:00",
+      dateLabel: "31 OCT",
+      title: "SmackDown — Series 1",
+      kicker: "HALLOWEEN SUBSET",
+      description: "Four-Superstar SmackDown subset featuring Tiffany Stratton, Chelsea Green, Damian Priest and Danhausen.",
+      superstarCount: 4,
+      type: "subset",
+      setId: "smackdown-series-1"
     },
     {
       id: "season-2",

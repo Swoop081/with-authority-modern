@@ -1,6 +1,6 @@
-import { decks } from "./decks.js?v=0.11.67";
-import { collectionCards } from "./collection.js?v=0.11.67";
-import { superstars } from "./superstars.js?v=0.11.67";
+import { decks } from "./decks.js?v=0.11.69";
+import { collectionCards } from "./collection.js?v=0.11.69";
+import { superstars } from "./superstars.js?v=0.11.69";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -14,7 +14,8 @@ const blankSetCounters = () => ({
   "season-1-final-boss": 0,
   "raw-series-1": 0,
   "worlds-collide-series-1": 0,
-  "money-in-the-bank-series-1": 0
+  "money-in-the-bank-series-1": 0,
+  "smackdown-series-1": 0
 });
 const defaultSetProgress = () => ({
   "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
@@ -22,7 +23,8 @@ const defaultSetProgress = () => ({
   "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
   "raw-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
   "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
-  "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] }
+  "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
+  "smackdown-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] }
 });
 const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt: null, freePacksClaimed: 0, matchXpEarned: 0, challengeXpEarned: 0 });
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
@@ -164,6 +166,7 @@ export function createProfile(starterId) {
   grantSuperstarUnlockPackage(p, "la-knight");
   grantSuperstarUnlockPackage(p, "alexa-bliss");
   grantSuperstarUnlockPackage(p, "finn-balor");
+  grantSuperstarUnlockPackage(p, "danhausen");
   return p;
 }
 
@@ -228,6 +231,7 @@ export function migrateProfile(old) {
   grantSuperstarUnlockPackage(p, "la-knight");
   grantSuperstarUnlockPackage(p, "alexa-bliss");
   grantSuperstarUnlockPackage(p, "finn-balor");
+  grantSuperstarUnlockPackage(p, "danhausen");
   return p;
 }
 

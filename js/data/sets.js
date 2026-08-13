@@ -1,4 +1,10 @@
 export const sets = {
+  "smackdown-series-1": {
+    id: "smackdown-series-1", name: "SmackDown", series: 1, type: "brand-subset",
+    displayName: "SmackDown — Series 1", shortCode: "SD1", lifecycleDefault: "future",
+    releaseDate: "2026-10-31", developmentOnly: true,
+    lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
+  },
   "money-in-the-bank-series-1": {
     id: "money-in-the-bank-series-1", name: "Money in the Bank", series: 1, type: "event-subset",
     displayName: "Money in the Bank — Series 1", shortCode: "MITB1", lifecycleDefault: "future",

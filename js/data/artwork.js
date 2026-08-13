@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.11.67";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.67";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.67";
+import { assetUrl } from "../config/build.js?v=0.11.69";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.11.69";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.11.69";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
@@ -49,6 +49,7 @@ const rawSuperstarArtwork = {
   "la-knight": TEMP_GENERIC_ART,
   "alexa-bliss": TEMP_GENERIC_ART,
   "finn-balor": TEMP_GENERIC_ART,
+  "danhausen": TEMP_GENERIC_ART,
   ...superstarArtOverrides
 };
 
@@ -66,6 +67,14 @@ export const superstarCardArtwork = Object.fromEntries(
 
 export function superstarCardArtFor(superstarId) {
   return superstarCardArtwork[superstarId] ?? null;
+}
+
+export const superstarHeadshotArtwork = Object.fromEntries(
+  Object.keys(superstarArtwork).map(id => [id, assetUrl(`assets/cards/art/custom/headshots/${id}.webp`)])
+);
+
+export function superstarHeadshotFor(superstarId) {
+  return superstarHeadshotArtwork[superstarId] ?? superstarArtwork[superstarId] ?? null;
 }
 
 // Finished collectible fronts exported by the unified Card Art Studio.
@@ -109,19 +118,9 @@ export const cardArtwork = cardArtOverrides;
 
 export function artworkFor(card) {
   if (!card) return null;
-
-  // 1. Exact card photo supplied by the user / final sourcing pass.
   if (cardArtwork[card.id]) return assetUrl(cardArtwork[card.id]);
-
-  // 2. Superstar card, or any wrestler-specific card awaiting its own action
-  //    shot, uses that wrestler's local portrait as temporary art.
-  if (card.superstarId && superstarArtwork[card.superstarId]) {
-    return superstarArtwork[card.superstarId];
-  }
-
-  // 3. Every remaining collectible receives a local wrestling-action image so
-  //    there are no blank ARTWORK SLOT cards in the playable build.
-  return assetUrl(TEMP_GENERIC_ART);
+  if (card.kind === "superstar" && card.superstarId && superstarArtwork[card.superstarId]) return superstarArtwork[card.superstarId];
+  return null;
 }
 
 export function artworkRequirement(card) {
