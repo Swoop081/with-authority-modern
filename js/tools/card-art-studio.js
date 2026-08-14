@@ -1,4 +1,4 @@
-// WWE Legacy Card Art Studio — v0.12.05
+// WWE Legacy Card Art Studio — v0.12.06
 // Unified creator for every active Season 1 collectible front.
 // STUDIO_CARDS is generated from the canonical collector manifest and loaded first by the Studio HTML.
 const SETS = {"survivor-series-series-1":{"label":"Survivor Series — Series 1","border":"#ff6b1b","nameTop":"#ffffff","nameBottom":"#ff8a3d","stroke":"#041329","glow":"rgba(255,107,27,.58)","accent":"#ff6b1b","accent2":"#d8dee8"},"smackdown-series-1":{"label":"SmackDown — Series 1","border":"#1597ff","nameTop":"#ffffff","nameBottom":"#75c8ff","stroke":"#031326","glow":"rgba(21,151,255,.62)","accent":"#1597ff","accent2":"#ffffff"},"money-in-the-bank-series-1":{"label":"Money in the Bank — Series 1","border":"#74ef40","nameTop":"#f6fff2","nameBottom":"#74ef40","stroke":"#13051c","glow":"rgba(117,239,65,.60)","accent":"#74ef40","accent2":"#a855f7"},"worlds-collide-series-1":{"label":"Worlds Collide — Series 1","border":"#62f13f","nameTop":"#f7fff1","nameBottom":"#73ff42","stroke":"#040504","glow":"rgba(84,255,57,.58)","accent":"#62f13f","accent2":"#e5b642"},"raw-series-1":{"label":"Raw — Series 1","border":"#ef2637","nameTop":"#f7f7f8","nameBottom":"#c7ccd2","stroke":"#110305","glow":"rgba(238,30,48,.60)","accent":"#ef2637","accent2":"#bfc5cc"},"summerslam-series-1":{"label":"SummerSlam — Series 1","border":"#f6a253","nameTop":"#ffffff","nameBottom":"#ff9d38","stroke":"#071b36","glow":"rgba(93,210,255,.62)","accent":"#67b9ff","accent2":"#f6a253"},"hall-of-fame-series-1":{"label":"Hall of Fame — Series 1","border":"#e5b642","nameTop":"#fff8cf","nameBottom":"#d0a337","stroke":"#171005","glow":"rgba(230,188,75,.52)","accent":"#f0cf76","accent2":"#8e6720"},"evolution-series-1":{"label":"Evolution — Series 1","border":"#ff54d7","nameTop":"#ffffff","nameBottom":"#ff54d7","stroke":"#351044","glow":"rgba(76,221,255,.55)","accent":"#ff8ee8","accent2":"#8b6cff"},"season-1-final-boss":{"label":"Rewards / Season 1 Final Boss","border":"#ef3d4c","nameTop":"#fff4c8","nameBottom":"#ef3d4c","stroke":"#260307","glow":"rgba(228,183,76,.50)","accent":"#f04a56","accent2":"#e8bd65"}};
@@ -11,7 +11,7 @@ const KIND_FOLDERS={superstar:"superstars",move:"moves",entrance:"entrances",spe
 const $=s=>document.querySelector(s);
 let canvas=$("#card-canvas"),ctx=canvas.getContext("2d");
 const state={art:null,artIsProjectAsset:false,artZoom:1,artX:0,artY:0,setLogos:new Map(),pointerMap:new Map(),dragPointerId:null,dragLast:null,lastPinchDistance:null,activeLayoutKey:"card",layouts:{card:{zoom:1,x:0,y:0},headshot:{zoom:1,x:0,y:0}}};
-const BUILD_VERSION="0.12.05";
+const BUILD_VERSION="0.12.06";
 function assetUrl(path){
   const url=new URL(`../${path}`,document.location.href);
   if(url.protocol==="http:"||url.protocol==="https:") url.searchParams.set("v",BUILD_VERSION);

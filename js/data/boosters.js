@@ -1,6 +1,6 @@
-import { cardsForSet } from "./collection.js?v=0.12.05";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.05";
-import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.05";
+import { cardsForSet } from "./collection.js?v=0.12.06";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.06";
+import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.06";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -9,7 +9,7 @@ export const SUPERSTAR_PITY_PACKS = 20;
 export const DEFAULT_BOOSTER_SET_ID = "summerslam-series-1";
 
 export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) { return p?.boosterCreditsBySet?.[setId] ?? p?.boosterCredits ?? 0; }
-export function boosterEligible(card) { return !!card && card.kind !== "entrance"; }
+export function boosterEligible(card) { return !!card && (card.kind !== "entrance" || (!card.superstarId && card.boosterEligible !== false)); }
 export function underOwnershipCap(profile, card) { return totalOwnedCopies(profile, card.id) < cardOwnershipCap(card); }
 
 function weighted(pool, rng = Math.random) {

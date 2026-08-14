@@ -9,7 +9,7 @@ import { createProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalO
 import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js";
 import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js";
 import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft } from "../js/data/deck-builder.js";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js";
 import { tierReward, claimSeasonTier } from "../js/data/seasons.js";
 import { MatchEngine } from "../js/engine/MatchEngine.js";
 import { moveEligibility, canPlayMomentum, canAttemptPin } from "../js/engine/rules.js";
@@ -1151,7 +1151,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.05/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.06/,'Studio script cache key must match the current release');
 });
 
 
@@ -1179,11 +1179,11 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.05/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.06/,'Studio visible build label should match the current release');
 });
 
 
-test("v0.12.05 Card Art Studio moves rarity stars inward, emphasizes stats and removes corner microtext", async()=>{
+test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", async()=>{
   const fs=await import('node:fs');
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
   const html=fs.readFileSync(new URL('../tools/card-art-studio.html',import.meta.url),'utf8');
@@ -1192,5 +1192,83 @@ test("v0.12.05 Card Art Studio moves rarity stars inward, emphasizes stats and r
   assert.ok(studio.includes('cardFont(NUMBER_STACK,35,900)'),'COST/DAMAGE values should be substantially larger and bold');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.05/,'Studio visible build label should match v0.12.05');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.06/,'Studio visible build label should match v0.12.06');
+});
+
+test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
+  const p=createProfile("roman-reigns");
+  const star=starById.get("roman-reigns");
+  const draft=recommendedDeckDraft(star.id);
+  const illegal=collectionCards.find(c=>c.kind==='move'&&c.superstarId&&c.superstarId!==star.id);
+  assert.ok(illegal);
+  const eligibility=cardEligibilityForSuperstar(star,illegal);
+  assert.equal(eligibility.legal,false);
+  assert.ok(eligibility.reason.length>0);
+  const replacement=collectionCards.find(c=>c.kind==='momentum'&&totalOwnedCopies(p,c.id)>0&&c.id!==draft[0].id);
+  assert.ok(replacement);
+  const changed=replaceLeadOffSlot(p,star.id,draft,0,replacement.id);
+  assert.equal(changed.length,55);
+  assert.equal(changed[0].id,replacement.id);
+  assert.equal(validateDeckDraft(p,star.id,changed,selectedEntranceId(p,star.id)).healthy,true);
+});
+
+test("v0.12.06 Deck Lab recommendations are guidance rather than hard composition locks",()=>{
+  const p=createProfile("roman-reigns");
+  const star=starById.get("roman-reigns");
+  const draft=recommendedDeckDraft(star.id);
+  const recommended=recommendedCategoryCounts(star.id);
+  const current=currentCategoryCounts(draft);
+  assert.deepEqual(current,recommended);
+  // Deck validity is based on legal 55-page construction, not an exact 12-Momentum quota.
+  const firstMove=draft.findIndex((e,i)=>i>=5&&collectionCards.find(c=>c.id===e.id)?.kind==='move');
+  const momentum=collectionCards.find(c=>c.kind==='momentum'&&totalOwnedCopies(p,c.id)>0);
+  addOwnedCard(p,momentum.id,{amount:1});
+  const custom=draft.map(e=>({...e}));
+  custom[firstMove]={id:momentum.id,foil:false};
+  assert.equal(custom.filter(e=>collectionCards.find(c=>c.id===e.id)?.kind==='momentum').length,13);
+  assert.equal(validateDeckDraft(p,star.id,custom,selectedEntranceId(p,star.id)).healthy,true);
+});
+
+test("v0.12.06 selected Entrances persist separately from the 55-page deck and shared Entrances are booster-ready",()=>{
+  const p=createProfile("roman-reigns");
+  const defaultEntrance=selectedEntranceId(p,"roman-reigns");
+  assert.equal(defaultEntrance,starById.get("roman-reigns").entranceId);
+  assert.equal(setSelectedEntrance(p,"roman-reigns",defaultEntrance),true);
+  assert.equal(p.selectedEntrances["roman-reigns"],defaultEntrance);
+  assert.equal(boosterEligible({id:"shared-entrance-test",kind:"entrance",superstarId:null}),true);
+  assert.equal(boosterEligible({id:"roman-entrance-test",kind:"entrance",superstarId:"roman-reigns"}),false);
+});
+
+test("v0.12.06 scrollable navigation includes Challenges, Deck Lab and Options while Home retains their tiles",async()=>{
+  const fs=await import('node:fs');
+  const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+  const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  for(const target of ['challenges','deck-builder','options']) assert.ok(html.includes(`data-mobile-nav="${target}"`),`${target} must be in the bottom nav`);
+  assert.ok(app.includes('showDeckBuilder()'));
+  assert.ok(app.includes('id="menu-decks"'));
+  assert.ok(app.includes('id="menu-challenges"'));
+  assert.ok(app.includes('id="menu-options"'));
+  assert.ok(css.includes('overflow-x:auto!important'),'bottom nav must remain horizontally scrollable');
+});
+
+test("v0.12.06 held mobile presentation pass compacts select, enlarges show logos and moves Entrance callouts off-card",async()=>{
+  const fs=await import('node:fs');
+  const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.ok(css.includes('height:236px!important'),'mobile Superstar select cards should be compact enough for one viewport');
+  assert.ok(css.includes('width:min(560px,84vw)!important'),'Main Event show logo should be substantially larger');
+  assert.ok(css.includes('width:min(440px,72vw)!important'),'Entrance show logo should be substantially larger');
+  assert.ok(app.includes('entrance-crowd-chants'),'Entrance effect callouts should live outside the card stage');
+  assert.equal(/entrance-stage[^`]*entrance-callouts/.test(app),false,'callouts must not overlay the Entrance card');
+});
+
+test("v0.12.06 match buttons and Momentum presentation use live show/method colours",async()=>{
+  const fs=await import('node:fs');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  assert.ok(css.includes('.hand-card-action button.primary:not(:disabled)'),'hand Play buttons should inherit presentation colours');
+  assert.ok(css.includes('--presentation-accent2:#e5cf58!important'),'Money in the Bank should use the arena green/gold family');
+  assert.ok(css.includes('color-mix(in srgb,var(--mom) 64%'),'Momentum faces should use stronger method colour saturation');
+  assert.ok(app.includes('return momentumMockupMarkup(card);'),'live Momentum cards should render from the colour-responsive UI template');
 });

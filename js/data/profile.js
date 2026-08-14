@@ -1,11 +1,11 @@
-import { decks } from "./decks.js?v=0.12.05";
-import { collectionCards } from "./collection.js?v=0.12.05";
-import { superstars } from "./superstars.js?v=0.12.05";
+import { decks } from "./decks.js?v=0.12.06";
+import { collectionCards } from "./collection.js?v=0.12.06";
+import { superstars } from "./superstars.js?v=0.12.06";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 19;
+export const PROFILE_VERSION = 20;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -91,6 +91,8 @@ export function grantSuperstarUnlockPackage(profile, sid) {
   for (const c of d) addOwnedCard(profile, c.id, { amount: 1 });
   addOwnedCard(profile, `superstar-${sid}`, { foil: true });
   if (star.entranceId) addOwnedCard(profile, star.entranceId, { foil: true });
+  profile.selectedEntrances ??= {};
+  profile.selectedEntrances[sid] ??= star.entranceId;
   profile.deckNeedsCards ??= {};
   profile.deckNeedsCards[sid] = 0;
   return { leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id), signatures: star.signatures ?? [], rewardCards: [`superstar-${sid}`, star.entranceId].filter(Boolean), deckSize: d.length, missing: 0 };
@@ -110,6 +112,8 @@ export function grantStoreSuperstarUnlockPackage(profile, sid) {
   // deck is a blueprint and is assembled later from cards actually owned.
   addOwnedCard(profile, `superstar-${sid}`, { foil: true });
   if (star.entranceId) addOwnedCard(profile, star.entranceId, { foil: true });
+  profile.selectedEntrances ??= {};
+  profile.selectedEntrances[sid] ??= star.entranceId;
   profile.savedDecks ??= {};
   delete profile.savedDecks[sid];
   profile.deckNeedsCards ??= {};
@@ -127,6 +131,7 @@ export function createProfile(starterId) {
     favouriteSuperstars: [],
     ownedCards: {},
     savedDecks: {},
+    selectedEntrances: {},
     deckNeedsCards: {},
     deckAssistance: "ask",
     boosterCredits: 0,
@@ -182,6 +187,7 @@ export function migrateProfile(old) {
   p.favouriteSuperstars = (p.favouriteSuperstars ?? []).filter(id => p.unlockedSuperstars.includes(id));
   p.ownedCards ??= {};
   p.savedDecks ??= {};
+  p.selectedEntrances ??= {};
   p.deckNeedsCards ??= {};
   p.deckAssistance = DECK_ASSISTANCE_MODES.includes(p.deckAssistance) ? p.deckAssistance : "ask";
   p.boosterCredits = Math.max(0, Number(p.boosterCredits) || 0);
@@ -214,6 +220,7 @@ export function migrateProfile(old) {
     const star = starById.get(sid);
     addOwnedCard(p, `superstar-${sid}`, { foil: true });
     if (star?.entranceId) addOwnedCard(p, star.entranceId, { foil: true });
+    if (!p.selectedEntrances[sid] && star?.entranceId) p.selectedEntrances[sid] = star.entranceId;
     const saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
     if (saved) {
       const used = new Map();

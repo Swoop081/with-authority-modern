@@ -1,1 +1,73 @@
-export const RECOMMENDED_DECK_SHAPE={size:55,momentum:12,leadOff:5,copyCap:5,momentumCopyCap:12};export function evaluateDeckHealth(cards=[]){const momentum=cards.filter(c=>c.kind==='momentum').length,counts=new Map(),violations=[];for(const c of cards)counts.set(c.id,(counts.get(c.id)??0)+1);if(cards.length!==55)violations.push(`Deck must contain 55 pages (${cards.length}/55).`);if(momentum!==12)violations.push(`Deck must contain exactly 12 Momentum pages (${momentum}/12).`);for(const[id,n]of counts){const c=cards.find(x=>x.id===id),cap=c?.kind==='momentum'?12:5;if(n>cap)violations.push(`${c?.name??id} exceeds copy cap (${n}/${cap}).`);}return{healthy:violations.length===0,score:Math.max(0,100-violations.length*20),violations,counts:{momentum,lowCostMoves:cards.filter(c=>c.kind==='move'&&(c.cost??99)<=3&&!c.defensiveOnly).length,midCostMoves:cards.filter(c=>c.kind==='move'&&(c.cost??0)>=4&&(c.cost??0)<=6&&!c.defensiveOnly).length,highCostMoves:cards.filter(c=>c.kind==='move'&&(c.cost??0)>=7&&!c.defensiveOnly).length,counters:cards.filter(c=>c.defensiveOnly).length,utility:cards.filter(c=>['action','support','special','manager'].includes(c.kind)).length,finishers:cards.filter(c=>c.finisher).length}};}
+export const RECOMMENDED_DECK_SHAPE = Object.freeze({
+  size: 55,
+  leadOff: 5,
+  copyCap: 5,
+  momentumCopyCap: 12
+});
+
+export function deckBucket(card) {
+  if (!card) return "other";
+  if (card.kind === "momentum") return "momentum";
+  if (["action", "special", "support", "manager"].includes(card.kind)) return "utility";
+  if (card.kind !== "move") return "other";
+  if (card.finisher || card.trademark) return "signature";
+  const cost = Number(card.cost ?? 0);
+  if (cost <= 3) return "low";
+  if (cost <= 6) return "mid";
+  return "high";
+}
+
+export function deckComposition(cards = []) {
+  const counts = {
+    momentum: 0,
+    low: 0,
+    mid: 0,
+    high: 0,
+    signature: 0,
+    utility: 0,
+    counters: 0,
+    finishers: 0,
+    trademarks: 0
+  };
+  for (const card of cards) {
+    const bucket = deckBucket(card);
+    if (bucket in counts) counts[bucket] += 1;
+    if (card?.kind === "move" && (card.defensiveOnly || card.moveType === "counter" || card.counters?.length)) counts.counters += 1;
+    if (card?.finisher) counts.finishers += 1;
+    if (card?.trademark) counts.trademarks += 1;
+  }
+  return counts;
+}
+
+export function evaluateDeckHealth(cards = []) {
+  const countsById = new Map();
+  const violations = [];
+  for (const card of cards) countsById.set(card.id, (countsById.get(card.id) ?? 0) + 1);
+
+  if (cards.length !== RECOMMENDED_DECK_SHAPE.size) {
+    violations.push(`Deck must contain ${RECOMMENDED_DECK_SHAPE.size} pages (${cards.length}/${RECOMMENDED_DECK_SHAPE.size}).`);
+  }
+  for (const [id, count] of countsById) {
+    const card = cards.find(c => c.id === id);
+    const cap = card?.kind === "momentum" ? RECOMMENDED_DECK_SHAPE.momentumCopyCap : RECOMMENDED_DECK_SHAPE.copyCap;
+    if (count > cap) violations.push(`${card?.name ?? id} exceeds copy cap (${count}/${cap}).`);
+  }
+
+  const comp = deckComposition(cards);
+  return {
+    healthy: violations.length === 0,
+    score: Math.max(0, 100 - violations.length * 20),
+    violations,
+    counts: {
+      momentum: comp.momentum,
+      lowCostMoves: comp.low,
+      midCostMoves: comp.mid,
+      highCostMoves: comp.high,
+      counters: comp.counters,
+      utility: comp.utility,
+      finishers: comp.finishers,
+      trademarks: comp.trademarks,
+      signatures: comp.signature
+    }
+  };
+}
