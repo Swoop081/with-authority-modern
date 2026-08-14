@@ -23,3 +23,5 @@
 
 /* v0.11.88 — HUD Headshot Studio uses a dedicated 3:1 head-and-shoulders canvas; JS updates aspect-ratio per export target. */
 .canvas-wrap{transition:aspect-ratio .18s ease,width .18s ease}
+
+/* v0.11.89 — HUD headshots have free panning and expanded 15–500% zoom; card-front controls remain bounded. */
