@@ -49,7 +49,8 @@ export function evaluateDeckHealth(cards = []) {
   }
   for (const [id, count] of countsById) {
     const card = cards.find(c => c.id === id);
-    const cap = card?.kind === "momentum" ? RECOMMENDED_DECK_SHAPE.momentumCopyCap : RECOMMENDED_DECK_SHAPE.copyCap;
+    const defaultCap = card?.kind === "momentum" ? RECOMMENDED_DECK_SHAPE.momentumCopyCap : RECOMMENDED_DECK_SHAPE.copyCap;
+    const cap = Math.min(defaultCap, Number.isFinite(card?.maxCopies) ? card.maxCopies : defaultCap);
     if (count > cap) violations.push(`${card?.name ?? id} exceeds copy cap (${count}/${cap}).`);
   }
 

@@ -1,11 +1,12 @@
-import { decks } from "./decks.js?v=0.12.08";
-import { collectionCards } from "./collection.js?v=0.12.08";
-import { superstars } from "./superstars.js?v=0.12.08";
+import { decks } from "./decks.js?v=0.12.12";
+import { collectionCards } from "./collection.js?v=0.12.12";
+import { superstars } from "./superstars.js?v=0.12.12";
+import { isUnreleasedSetId } from "./release.js?v=0.12.12";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 20;
+export const PROFILE_VERSION = 21;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -151,22 +152,6 @@ export function createProfile(starterId) {
     createdAt: new Date().toISOString()
   };
   grantSuperstarUnlockPackage(p, starterId);
-  // Internal Season 1 development build: future RAW content is unlocked for testing/artwork.
-  grantSuperstarUnlockPackage(p, "logan-paul");
-  grantSuperstarUnlockPackage(p, "sol-ruca");
-  grantSuperstarUnlockPackage(p, "chad-gable");
-  grantSuperstarUnlockPackage(p, "raquel-rodriguez");
-  grantSuperstarUnlockPackage(p, "rey-mysterio");
-  grantSuperstarUnlockPackage(p, "dominik-mysterio");
-  grantSuperstarUnlockPackage(p, "penta");
-  grantSuperstarUnlockPackage(p, "el-grande-americano");
-  grantSuperstarUnlockPackage(p, "jey-uso");
-  grantSuperstarUnlockPackage(p, "la-knight");
-  grantSuperstarUnlockPackage(p, "alexa-bliss");
-  grantSuperstarUnlockPackage(p, "finn-balor");
-  grantSuperstarUnlockPackage(p, "danhausen");
-  grantSuperstarUnlockPackage(p, "tiffany-stratton");
-  grantSuperstarUnlockPackage(p, "chelsea-green");
   return p;
 }
 
@@ -234,21 +219,32 @@ export function migrateProfile(old) {
       }).map(entry => typeof entry === "string" ? {id:entry,foil:false} : entry);
     }
   }
-  if (!p.unlockedSuperstars.includes("logan-paul")) grantSuperstarUnlockPackage(p, "logan-paul");
-  grantSuperstarUnlockPackage(p, "sol-ruca");
-  grantSuperstarUnlockPackage(p, "chad-gable");
-  grantSuperstarUnlockPackage(p, "raquel-rodriguez");
-  grantSuperstarUnlockPackage(p, "rey-mysterio");
-  grantSuperstarUnlockPackage(p, "dominik-mysterio");
-  grantSuperstarUnlockPackage(p, "penta");
-  grantSuperstarUnlockPackage(p, "el-grande-americano");
-  grantSuperstarUnlockPackage(p, "jey-uso");
-  grantSuperstarUnlockPackage(p, "la-knight");
-  grantSuperstarUnlockPackage(p, "alexa-bliss");
-  grantSuperstarUnlockPackage(p, "finn-balor");
-  grantSuperstarUnlockPackage(p, "danhausen");
-  grantSuperstarUnlockPackage(p, "tiffany-stratton");
-  grantSuperstarUnlockPackage(p, "chelsea-green");
+  // Public launch-state migration: unreleased development content is kept in
+  // the authored data files, but it must not leak into a player profile.
+  const releasedStarIds = new Set(Object.values(superstars).filter(star => !star.developmentOnly && !isUnreleasedSetId(star.setId)).map(star => star.id));
+  p.unlockedSuperstars = p.unlockedSuperstars.filter(id => releasedStarIds.has(id));
+  if (!p.unlockedSuperstars.includes(p.starterId)) p.unlockedSuperstars.unshift(p.starterId);
+  p.favouriteSuperstars = p.favouriteSuperstars.filter(id => p.unlockedSuperstars.includes(id));
+  for (const id of Object.keys(p.ownedCards)) {
+    const card = cardById.get(id);
+    if (card && isUnreleasedSetId(card.setId)) delete p.ownedCards[id];
+  }
+  for (const sid of Object.keys(p.savedDecks)) {
+    const star = starById.get(sid);
+    if (!star || isUnreleasedSetId(star.setId)) { delete p.savedDecks[sid]; continue; }
+    p.savedDecks[sid] = (p.savedDecks[sid] ?? []).filter(entry => {
+      const card = cardById.get(typeof entry === "string" ? entry : entry?.id);
+      return card && !isUnreleasedSetId(card.setId);
+    });
+  }
+  for (const sid of Object.keys(p.selectedEntrances)) {
+    const star = starById.get(sid);
+    if (!star || isUnreleasedSetId(star.setId)) delete p.selectedEntrances[sid];
+  }
+  for (const setId of Object.keys(p.boosterCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.boosterCreditsBySet[setId] = 0;
+  for (const setId of Object.keys(p.ladder?.completionPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.ladder.completionPackCreditsBySet[setId] = 0;
+  for (const setId of Object.keys(p.championshipRoad?.championshipPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.championshipRoad.championshipPackCreditsBySet[setId] = 0;
+  p.pendingUnlockCelebrations = (p.pendingUnlockCelebrations ?? []).filter(event => releasedStarIds.has(event?.superstarId));
   return p;
 }
 

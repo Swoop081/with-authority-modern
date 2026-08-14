@@ -1,11 +1,11 @@
-# WWE Legacy: Collectible Card Game — v0.12.08
+# WWE Legacy: Collectible Card Game
 
-Current canonical development baseline: **v0.12.08 — Premium Navigation + Dashboard Pass**.
+Current working build: **v0.12.12 — Public Launch Pool + Roman Ooh Ahh!! Pass**.
 
-This release completes the latest mobile UI cleanup without changing gameplay balance. **Deck Lab** now shows every unlocked Superstar as a full collectible-style card, including generated full-card fallbacks when finished art is still pending. The **Choose Your Path** tiles now use substantially larger full Superstar cards instead of tiny portrait stamps while keeping the mode names dominant.
+The player-facing game is restored to the intended Season 1 launch state: **SummerSlam — Series 1, Hall of Fame — Series 1 and Evolution — Series 1** are the three live series, representing **24 launch Superstars and 271 launch collector cards**. Already-authored future RAW, Worlds Collide, Money in the Bank, SmackDown, Survivor Series and Season 2 reward content remains safely in development data but is hidden from normal roster, Collection, Catalogue, Deck Lab, boosters, Challenges and matchmaking until deliberately released. Existing profiles are migrated to remove stale future unlock/card/pack state.
 
-**Season** and **Challenges** are rebuilt into more premium icon-led dashboards with stronger hierarchy, compact progress visuals, reward/status icons, set logos, progress rings and less duplicated explanatory text. Navigation alert badges are now physically removed when their actionable count reaches zero, so red `0` badges can no longer remain visible.
+Roman Reigns — SummerSlam Series 1 no longer uses Sitout Crucifix Powerbomb. **SS1-034 is now Ooh Ahh!!**, a Roman-exclusive Cost 2 Action that tutors Roman's Spear (or grants +1 Adrenaline if it is already in hand) and reduces the next Spear this Control sequence by 1 Cost. Roman's 55-page recommended deck replaces the two retired Crucifix Powerbomb copies with **1× Ooh Ahh!! + 1× additional Headbutt**.
 
-All v0.12.06/v0.12.07 Deck Lab functionality, scrollable all-tab navigation, show-coloured match controls, Momentum presentation, larger event logos, Entrance callout layout and Card Art Studio work remain intact.
+Canonical global Finisher rule from v0.12.11 remains intact: **Finishers have no Method Momentum requirements**.
 
-See `RELEASE-NOTES-v0.12.08.md` for full details.
+Validation: **94/94 tests pass; 50 authored Superstars; 50 decks; 422 gameplay cards; 472 collector cards; 0 orphans/issues; card-ID and flow audits clean; 2,450-match deterministic simulation with 0 stalls and 36.39 average turns.**

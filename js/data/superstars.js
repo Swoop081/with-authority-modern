@@ -3007,5 +3007,268 @@ export const superstars = {
       "draw": 1,
       "adrenaline": 2
     }
+  },
+  "soloSikoa": {
+    "id": "solo-sikoa",
+    "name": "Solo Sikoa",
+    "nickname": "The Street Champion",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-solo-sikoa",
+    "entranceId": "entrance-solo-sikoa",
+    "specialId": "special-solo-sikoa",
+    "leadOffIds": [
+      "momentum-strike",
+      "momentum-strength",
+      "punch",
+      "headbutt",
+      "superkick"
+    ],
+    "signatures": [
+      "solo-sikoa-spinning-solo",
+      "solo-sikoa-samoan-spike"
+    ],
+    "archetype": "strike-pressure-samoan-spike",
+    "hp": 54,
+    "methodLimits": {
+      "strike": null,
+      "strength": 5,
+      "agility": 2,
+      "technical": 1
+    },
+    "starterMomentum": {
+      "strike": 6,
+      "strength": 5,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Street Champion",
+      "text": "Once per Control sequence, the first time Solo connects with a Strike Move dealing 5+ Damage, the opponent loses 1 Adrenaline.",
+      "trigger": {
+        "type": "soloStreetChampion",
+        "minDamage": 5,
+        "opponentAdrenaline": -1
+      }
+    },
+    "entrance": {
+      "id": "entrance-solo-sikoa",
+      "name": "Taking Over",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "solo-sikoa",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strike": 1,
+        "strength": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "soleSurvivor",
+      "draw": 2,
+      "adrenaline": 1
+    }
+  },
+  "jadeCargill": {
+    "id": "jade-cargill",
+    "name": "Jade Cargill",
+    "nickname": "The Storm",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-jade-cargill",
+    "entranceId": "entrance-jade-cargill",
+    "specialId": "special-jade-cargill",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "punch",
+      "shoulder-block",
+      "superkick"
+    ],
+    "signatures": [
+      "pump-kick",
+      "jade-cargill-jaded"
+    ],
+    "archetype": "dominant-power-athlete-jaded-sequencing",
+    "hp": 55,
+    "methodLimits": {
+      "strength": null,
+      "strike": 5,
+      "agility": 3,
+      "technical": 1
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "strike": 4,
+      "agility": 2
+    },
+    "ability": {
+      "name": "Believe the Hype",
+      "text": "Once per Control sequence, the first time Jade connects with a Move dealing 7+ Damage, gain +1 Adrenaline.",
+      "trigger": {
+        "type": "jadeBelieveHype",
+        "minDamage": 7,
+        "adrenaline": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-jade-cargill",
+      "name": "A Storm Is Coming",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "jade-cargill",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "superhuman",
+      "afterMethod": "strength",
+      "draw": 1,
+      "bonusDamage": 2
+    }
+  },
+  "niaJax": {
+    "id": "nia-jax",
+    "name": "Nia Jax",
+    "nickname": "The Irresistible Force",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-nia-jax",
+    "entranceId": "entrance-nia-jax",
+    "specialId": "special-nia-jax",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "punch",
+      "shoulder-block",
+      "body-slam"
+    ],
+    "signatures": [
+      "nia-jax-avalanche-samoan-drop",
+      "nia-jax-annihilator"
+    ],
+    "archetype": "durable-grounded-powerhouse-annihilator",
+    "hp": 57,
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "agility": 2,
+      "technical": 1
+    },
+    "starterMomentum": {
+      "strength": 7,
+      "strike": 4,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Crushing Weight",
+      "text": "Once per Control sequence, after Nia connects with a Strength Move that grounds the opponent, her next Move against a grounded opponent costs 1 less.",
+      "trigger": {
+        "type": "niaCrushingWeight",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-nia-jax",
+      "name": "Irresistible Force",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "nia-jax",
+      "rulesText": "Pre-Match: Begin with +2 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 2
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "reduceIncomingBig",
+      "minDamage": 10,
+      "reduce": 4,
+      "adrenaline": 1
+    }
+  },
+  "goldberg": {
+    "id": "goldberg",
+    "name": "Goldberg",
+    "nickname": "Who’s Next?",
+    "setId": "season-2-whos-next",
+    "era": "wcw-streak",
+    "seasonExclusive": true,
+    "developmentOnly": true,
+    "cardId": "superstar-goldberg",
+    "entranceId": "entrance-goldberg",
+    "specialId": "special-goldberg",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "punch",
+      "shoulder-block",
+      "body-slam"
+    ],
+    "signatures": [
+      "goldberg-military-press-powerslam",
+      "goldberg-spear",
+      "goldberg-jackhammer"
+    ],
+    "archetype": "prestige-streak-snowball",
+    "hp": 58,
+    "methodLimits": {
+      "strength": null,
+      "strike": null,
+      "agility": 2,
+      "technical": 1
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "strike": 6
+    },
+    "ability": {
+      "name": "The Streak",
+      "text": "Whenever Goldberg connects with a Move dealing 6+ Damage, gain 1 Streak counter, maximum 3. Each Streak counter reduces the cost of Goldberg’s Trademarks and Finishers by 1 while he keeps Control. Lose all Streak counters when Goldberg loses Control.",
+      "trigger": {
+        "type": "goldbergStreak",
+        "minDamage": 6,
+        "maxStreak": 3,
+        "discountPerStreak": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-goldberg",
+      "name": "Who’s Next?",
+      "kind": "entrance",
+      "setId": "season-2-whos-next",
+      "rarity": 4,
+      "superstarId": "goldberg",
+      "rulesText": "Pre-Match: Begin with +2 Strength Momentum, +2 Strike Momentum and +2 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 2,
+        "strike": 2
+      },
+      "preMatchAdrenaline": 2,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "goldberg173",
+      "adrenaline": 1,
+      "retainControl": true,
+      "preserveStreak": true
+    }
   }
+
 };

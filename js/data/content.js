@@ -721,25 +721,21 @@ export const allGameplayCards = [
     "effects": []
   },
   {
-    "id": "roman-reigns-sitout-crucifix-powerbomb",
-    "name": "Sitout Crucifix Powerbomb",
-    "kind": "move",
+    "id": "roman-reigns-ooh-ahh",
+    "name": "Ooh Ahh!!",
+    "kind": "action",
     "setId": "summerslam-series-1",
-    "cost": 7,
-    "damage": 11,
-    "requirements": {
-      "strength": 3
-    },
-    "moveType": "grapple",
-    "method": "strength",
-    "superstarId": "roman-reigns",
+    "cost": 2,
     "rarity": 2,
-    "rulesText": "Distinct Roman career signature.",
-    "groundOpponent": false,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": []
+    "superstarId": "roman-reigns",
+    "maxCopies": 1,
+    "rulesText": "Roman Reigns-exclusive Action. Search/draw Roman’s Spear. If Roman’s Spear is already in hand, gain +1 Adrenaline instead. Roman’s next Spear this Control sequence costs 1 less.",
+    "effect": {
+      "type": "romanOohAhh",
+      "name": "Roman's Spear",
+      "discount": 1,
+      "adrenalineIfInHand": 1
+    }
   },
   {
     "id": "roman-reigns-guillotine",
@@ -3601,9 +3597,7 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "cost": 6,
     "damage": 9,
-    "requirements": {
-      "strength": 2
-    },
+    "requirements": {},
     "moveType": "grapple",
     "method": "strength",
     "superstarId": null,
@@ -3651,9 +3645,7 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "cost": 10,
     "damage": 4,
-    "requirements": {
-      "technical": 2
-    },
+    "requirements": {},
     "moveType": "submission",
     "method": null,
     "superstarId": "charlotte-flair",
@@ -6408,22 +6400,38 @@ export const allGameplayCards = [
     "name": "Pump Kick",
     "kind": "move",
     "setId": "smackdown-series-1",
-    "cost": 5,
-    "damage": 8,
+    "cost": 6,
+    "damage": 9,
     "requirements": {
       "strike": 2
     },
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
-    "rarity": 2,
-    "rulesText": "Grounds opponent. If the opponent was already Stunned when this Move connected, +2 Damage.",
+    "rarity": 3,
+    "rulesText": "Grounds opponent. Jade Cargill: On connect, search/draw Jaded and Jade\u2019s next Jaded this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "bonusDamageIfOpponentStunned": 2,
     "selfDamage": 0,
-    "effects": []
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Jaded",
+        "ifSuperstarIds": [
+          "jade-cargill"
+        ]
+      },
+      {
+        "type": "discountNextByName",
+        "name": "Jaded",
+        "amount": 2,
+        "ifSuperstarIds": [
+          "jade-cargill"
+        ]
+      }
+    ]
   },
   {
     "id": "inverted-ddt",
@@ -7050,9 +7058,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 10,
     "damage": 16,
-    "requirements": {
-      "strength": 3
-    },
+    "requirements": {},
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "bron-breakker",
@@ -7617,9 +7623,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 10,
     "damage": 17,
-    "requirements": {
-      "strike": 3
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": "drew-mcintyre",
@@ -7701,10 +7705,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 10,
     "damage": 17,
-    "requirements": {
-      "technical": 2,
-      "strength": 1
-    },
+    "requirements": {},
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "randy-orton",
@@ -7729,9 +7730,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 8,
     "damage": 13,
-    "requirements": {
-      "strike": 3
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": "randy-orton",
@@ -7847,9 +7846,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 9,
     "damage": 16,
-    "requirements": {
-      "strike": 3
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": "sami-zayn",
@@ -7930,9 +7927,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 10,
     "damage": 17,
-    "requirements": {
-      "agility": 3
-    },
+    "requirements": {},
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "jacob-fatu",
@@ -7952,9 +7947,7 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 8,
     "damage": 2,
-    "requirements": {
-      "strength": 2
-    },
+    "requirements": {},
     "moveType": "submission",
     "method": "strength",
     "superstarId": "jacob-fatu",
@@ -8000,6 +7993,220 @@ export const allGameplayCards = [
       "minDamage": 8,
       "draw": 1,
       "adrenaline": 2
+    }
+  },
+  {
+    "id": "solo-sikoa-spinning-solo",
+    "name": "Spinning Solo",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "solo-sikoa",
+    "rarity": 3,
+    "rulesText": "Solo Sikoa-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Samoan Spike; Solo\u2019s next Samoan Spike this Control sequence costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "standingOnly": true,
+    "searchOnConnectName": "Samoan Spike",
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Samoan Spike",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "solo-sikoa-samoan-spike",
+    "name": "Samoan Spike",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "solo-sikoa",
+    "rarity": 4,
+    "rulesText": "Solo Sikoa-exclusive Finisher. Standing opponent only. Grounds opponent. On Connect: deal +1 Head body-part damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "standingOnly": true,
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "effects": []
+  },
+  {
+    "id": "entrance-solo-sikoa",
+    "name": "Taking Over",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "solo-sikoa",
+    "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strike": 1,
+      "strength": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-solo-sikoa",
+    "name": "Sole Survivor",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "solo-sikoa",
+    "rulesText": "Once per match, after Solo loses Control: draw 2 cards and gain +1 Adrenaline.",
+    "special": {
+      "type": "soleSurvivor",
+      "draw": 2,
+      "adrenaline": 1
+    }
+  },
+  {
+    "id": "jade-cargill-jaded",
+    "name": "Jaded",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "jade-cargill",
+    "rarity": 4,
+    "rulesText": "Jade Cargill-exclusive Finisher. Standing opponent only. Grounds opponent. Pump Kick can reduce this Move\u2019s cost by 2 during the same Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "standingOnly": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-jade-cargill",
+    "name": "A Storm Is Coming",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "jade-cargill",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-jade-cargill",
+    "name": "Superhuman",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "jade-cargill",
+    "rulesText": "Once per match, after Jade connects with a Strength Move: draw 1 card and her next Move this Control sequence deals +2 Damage.",
+    "special": {
+      "type": "superhuman",
+      "afterMethod": "strength",
+      "draw": 1,
+      "bonusDamage": 2
+    }
+  },
+  {
+    "id": "nia-jax-avalanche-samoan-drop",
+    "name": "Avalanche Samoan Drop",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "strength": 3
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "nia-jax",
+    "rarity": 3,
+    "rulesText": "Nia Jax-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Annihilator; Nia\u2019s next Annihilator this Control sequence costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "standingOnly": true,
+    "searchOnConnectName": "Annihilator",
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Annihilator",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "nia-jax-annihilator",
+    "name": "Annihilator",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "strike",
+    "method": "strength",
+    "superstarId": "nia-jax",
+    "rarity": 4,
+    "rulesText": "Nia Jax-exclusive Finisher. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-nia-jax",
+    "name": "Irresistible Force",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "nia-jax",
+    "rulesText": "Pre-Match: Begin with +2 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 2
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-nia-jax",
+    "name": "Not Like Most",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "nia-jax",
+    "rulesText": "Once per match, when Nia would take 10 or more Damage from a single Move: reduce that Damage by 4 and gain +1 Adrenaline.",
+    "special": {
+      "type": "reduceIncomingBig",
+      "minDamage": 10,
+      "reduce": 4,
+      "adrenaline": 1
     }
   },
   {
@@ -8304,5 +8511,121 @@ export const allGameplayCards = [
     },
     "effects": [],
     "boosterOnly": true
+  },
+  {
+    "id": "goldberg-military-press-powerslam",
+    "name": "Military Press Powerslam",
+    "kind": "move",
+    "setId": "season-2-whos-next",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "strength": 3
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "goldberg",
+    "rarity": 3,
+    "rulesText": "Goldberg-exclusive Trademark. Standing opponent only. Grounds opponent. On connect, gain 1 additional Streak counter (maximum 3).",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "gainStreak",
+        "amount": 1,
+        "max": 3
+      }
+    ]
+  },
+  {
+    "id": "goldberg-spear",
+    "name": "Goldberg’s Spear",
+    "kind": "move",
+    "setId": "season-2-whos-next",
+    "cost": 8,
+    "damage": 13,
+    "requirements": {
+      "strength": 2,
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "goldberg",
+    "rarity": 3,
+    "rulesText": "Goldberg-exclusive Trademark. Standing opponent only. Grounds opponent. On connect, search/draw Jackhammer and it costs 3 less this Control sequence. If Goldberg had 2+ Streak counters before playing this Move, the opponent loses 1 Adrenaline.",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Jackhammer",
+        "discount": 3
+      },
+      {
+        "type": "loseOpponentAdrenalineIfStreak",
+        "min": 2,
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "goldberg-jackhammer",
+    "name": "Jackhammer",
+    "kind": "move",
+    "setId": "season-2-whos-next",
+    "cost": 11,
+    "damage": 19,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "goldberg",
+    "rarity": 4,
+    "rulesText": "Goldberg-exclusive Finisher. Standing opponent only. Grounds opponent. If Goldberg connected with Goldberg’s Spear earlier in this Control sequence, Jackhammer costs 3 less.",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-goldberg",
+    "name": "Who’s Next?",
+    "kind": "entrance",
+    "setId": "season-2-whos-next",
+    "rarity": 4,
+    "superstarId": "goldberg",
+    "rulesText": "Pre-Match: Begin with +2 Strength Momentum, +2 Strike Momentum and +2 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 2,
+      "strike": 2
+    },
+    "preMatchAdrenaline": 2,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-goldberg",
+    "name": "173–0",
+    "kind": "special",
+    "setId": "season-2-whos-next",
+    "rarity": 4,
+    "superstarId": "goldberg",
+    "rulesText": "Once per match, when one of Goldberg’s Moves is Countered and he would lose Control: the Counter still resolves normally, Goldberg retains Control, keeps all Streak counters and gains +1 Adrenaline.",
+    "special": {
+      "type": "goldberg173",
+      "adrenaline": 1,
+      "retainControl": true,
+      "preserveStreak": true
+    }
   }
+
 ];

@@ -2,6 +2,7 @@ import { decks } from "./decks.js";
 import { collectionCards } from "./collection.js";
 import { superstars } from "./superstars.js";
 import { evaluateDeckHealth, deckBucket } from "./deck-health.js";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.12";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -31,7 +32,7 @@ export function cardEligibilityForSuperstar(star, card) {
   if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(star.id)) {
     return { legal: false, reason: "Family / Superstar restriction" };
   }
-  for (const [method, requirement] of Object.entries(card.requirements ?? {})) {
+  for (const [method, requirement] of Object.entries(card.finisher ? {} : (card.requirements ?? {}))) {
     const limit = star.methodLimits?.[method];
     if (limit === 0) return { legal: false, reason: `${star.name} cannot use ${method[0].toUpperCase() + method.slice(1)} cards` };
     if (Number.isFinite(limit) && requirement > limit) {
@@ -80,9 +81,9 @@ export function currentCategoryCounts(draft = []) {
 }
 
 export function allOwnedDeckCards(profile) {
-  return collectionCards.filter(card => !["superstar", "entrance"].includes(card.kind) && ownedTotal(profile, card.id) > 0);
+  return collectionCards.filter(card => isPlayerReleasedSetId(card.setId) && !["superstar", "entrance"].includes(card.kind) && ownedTotal(profile, card.id) > 0);
 }
-export function allOwnedEntrances(profile) { return collectionCards.filter(card => card.kind === "entrance" && ownedTotal(profile, card.id) > 0); }
+export function allOwnedEntrances(profile) { return collectionCards.filter(card => isPlayerReleasedSetId(card.setId) && card.kind === "entrance" && ownedTotal(profile, card.id) > 0); }
 export function ownedCardsForCategory(profile, category) { return cardsInCategory(allOwnedDeckCards(profile), category); }
 export function eligibleOwnedCards(profile, sid) {
   const star = starById.get(sid);
@@ -109,7 +110,8 @@ export function aggregateDeck(d, { tailOnly = false } = {}) {
 export function canAddCard(profile, sid, draft, id) {
   const card = byId.get(id), star = starById.get(sid);
   if (!card || !legalForSuperstar(star, card) || draft.length >= 55) return false;
-  const cap = card.kind === "momentum" ? 12 : 5;
+  const defaultCap = card.kind === "momentum" ? 12 : 5;
+  const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
   return usedCount(draft, id) < Math.min(cap, ownedTotal(profile, id));
 }
 export function addCardToDraft(profile, sid, draft, id) {
@@ -219,7 +221,8 @@ export function autoFillOwnedDraft(profile, sid, draft = []) {
   while (out.length < target && guard++ < target * 20) {
     let added = false;
     for (const card of candidates) {
-      const cap = card.kind === "momentum" ? 12 : 5;
+      const defaultCap = card.kind === "momentum" ? 12 : 5;
+      const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
       if (usedCount(out, card.id) >= Math.min(cap, ownedTotal(profile, card.id))) continue;
       out.push({ id: card.id, foil: false }); added = true;
       if (out.length >= target) break;

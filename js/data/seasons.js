@@ -1,6 +1,6 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.08";
-import { decks } from "./decks.js?v=0.12.08";
-import { superstars } from "./superstars.js?v=0.12.08";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.12";
+import { decks } from "./decks.js?v=0.12.12";
+import { superstars } from "./superstars.js?v=0.12.12";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -11,6 +11,7 @@ export const MATCH_XP = { win: 25, loss: 5, draw: 5 };
 export const DAILY_CHALLENGE_XP = 50;
 export const WEEKLY_CHALLENGE_XP = 200;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";
+export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
 export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1"];
 
 export const SEASON_1 = {
@@ -44,7 +45,7 @@ export const SEASON_1 = {
       dateLabel: "05 SEP",
       title: "Raw — Series 1",
       kicker: "NEW SUBSET",
-      description: "Four-Superstar RAW subset featuring Logan Paul, Chad Gable, Raquel Rodriguez and Sol Ruca.",
+      description: "Four-Superstar RAW subset joins Season 1. Roster reveal coming closer to release.",
       superstarCount: 4,
       type: "subset",
       setId: "raw-series-1"
@@ -55,7 +56,7 @@ export const SEASON_1 = {
       dateLabel: "26 SEP",
       title: "Worlds Collide — Series 1",
       kicker: "NEW SUBSET",
-      description: "Four-Superstar WWE × AAA lucha subset featuring Rey Mysterio, Dominik Mysterio, Penta and El Grande Americano.",
+      description: "Four-Superstar WWE × AAA lucha subset joins Season 1. Roster reveal coming closer to release.",
       superstarCount: 4,
       type: "subset",
       setId: "worlds-collide-series-1"
@@ -66,7 +67,7 @@ export const SEASON_1 = {
       dateLabel: "10 OCT",
       title: "Money in the Bank — Series 1",
       kicker: "NEW SUBSET",
-      description: "Four-Superstar Money in the Bank subset featuring Jey Uso, LA Knight, Alexa Bliss and Finn Bálor.",
+      description: "Four-Superstar Money in the Bank subset joins Season 1. Roster reveal coming closer to release.",
       superstarCount: 4,
       type: "subset",
       setId: "money-in-the-bank-series-1"
@@ -77,7 +78,7 @@ export const SEASON_1 = {
       dateLabel: "31 OCT",
       title: "SmackDown — Series 1",
       kicker: "HALLOWEEN SUBSET",
-      description: "Four-Superstar SmackDown subset featuring Tiffany Stratton, Chelsea Green, Damian Priest and Danhausen.",
+      description: "Four-Superstar SmackDown subset joins Season 1. Roster reveal coming closer to release.",
       superstarCount: 4,
       type: "subset",
       setId: "smackdown-series-1"
@@ -88,7 +89,7 @@ export const SEASON_1 = {
       dateLabel: "28 NOV",
       title: "Season 2 · Survivor Series",
       kicker: "NEXT SEASON",
-      description: "Season 2 launches with an 8-Superstar Survivor Series set and a fresh 50-tier Season Road. Selected Season 1 sets move out of the Featured pool in the Season 2 content update, while owned cards remain playable.",
+      description: "Season 2 launches with an 8-Superstar Survivor Series set and a fresh 50-tier Season Road with a new prestige reward. Selected Season 1 sets move out of the Featured pool while owned cards remain playable.",
       superstarCount: 8,
       type: "season"
     }

@@ -1,4 +1,10 @@
 export const sets = {
+  "season-2-whos-next": {
+    id: "season-2-whos-next", name: "Season 2", series: 2, type: "season-exclusive",
+    displayName: "Season 2 — Who’s Next?", shortCode: "S2WN", lifecycleDefault: "exclusive",
+    developmentOnly: true, season: 2,
+    lifecycleLabels: { exclusive: "Season Exclusive" }
+  },
   "survivor-series-series-1": {
     id: "survivor-series-series-1", name: "Survivor Series", series: 1, type: "season-2-launch",
     displayName: "Survivor Series — Series 1", shortCode: "SVS1", lifecycleDefault: "future",

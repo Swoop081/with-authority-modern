@@ -1,9 +1,10 @@
-import { superstars } from "./superstars.js?v=0.12.08";
-import { decks } from "./decks.js?v=0.12.08";
+import { superstars } from "./superstars.js?v=0.12.12";
+import { decks } from "./decks.js?v=0.12.12";
+import { isLaunchRosterSuperstar } from "./release.js?v=0.12.12";
 
 export function exhibitionOpponentIds(playerSuperstarId) {
   return Object.values(superstars)
-    .filter(star => !star.developmentOnly && star.id !== playerSuperstarId && (decks[star.id]?.length ?? 0) === 55)
+    .filter(star => isLaunchRosterSuperstar(star) && star.id !== playerSuperstarId && (decks[star.id]?.length ?? 0) === 55)
     .map(star => star.id);
 }
 

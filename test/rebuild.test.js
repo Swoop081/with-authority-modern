@@ -5,16 +5,19 @@ import { decks } from "../js/data/decks.js";
 import { allGameplayCards } from "../js/data/content.js";
 import { collectionCards } from "../js/data/collection.js";
 import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js";
-import { createProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js";
 import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js";
 import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js";
 import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js";
 import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js";
-import { tierReward, claimSeasonTier } from "../js/data/seasons.js";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js";
 import { MatchEngine } from "../js/engine/MatchEngine.js";
-import { moveEligibility, canPlayMomentum, canAttemptPin } from "../js/engine/rules.js";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js";
 import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js";
 import { healthZone } from "../js/engine/health.js";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -35,6 +38,20 @@ test("reviewed decks are 55 pages with 12 Momentum and no orphan gameplay cards"
   }
   assert.equal(allGameplayCards.filter(c=>c.kind!=='entrance'&&!c.boosterOnly&&!used.has(c.id)).length,0);
   assert.equal(allGameplayCards.some(c=>'pinBonus' in c||'pinBonusAfterNamed' in c||'pinBonusIfOpponentStunned' in c||/Pin Bonus|Pin \+\d+/i.test(c.rulesText??'')),false,'active card pool contains no Pin Bonus mechanic');
+});
+
+test("all Finishers are globally free of Method Momentum requirements",()=>{
+  const finishers=allGameplayCards.filter(c=>c.finisher);
+  assert.ok(finishers.length>=50);
+  assert.deepEqual(finishers.filter(c=>Object.keys(c.requirements??{}).length).map(c=>c.id),[]);
+
+  // Engine-level guard: even stale/custom Finisher data cannot reintroduce a Method gate.
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(1211)}),s=g.state(),p=s.players.p1;
+  p.momentum={...p.momentum,strength:10,strike:0,agility:0,technical:0,attitude:10};
+  const staleFinisher={id:"test-stale-finisher",name:"Test Stale Finisher",kind:"move",cost:5,damage:15,finisher:true,method:"strike",requirements:{strike:99}};
+  const result=moveEligibility(s,"p1",staleFinisher);
+  assert.equal(result.legal,true);
+  assert.equal(result.effectiveCost,5);
 });
 
 test("profile, Foil replacement, Entrance ownership and boosters use rebuilt rules",()=>{
@@ -144,11 +161,11 @@ test("offensive counter Moves become counter-attacks and can be countered again"
 test("Exhibition CPU matchmaking uses every complete roster deck except the selected player and never needs a second owned Superstar",()=>{
   const starter=stars.find(s=>s.id==='cm-punk')?.id ?? stars[0].id;
   const p=createProfile(starter);
-  // Simulate a future live profile with exactly one owned Superstar; internal dev builds also unlock Logan.
+  // Public launch matchmaking works even when the player owns only one Superstar.
   p.unlockedSuperstars=[starter];
   assert.equal(p.unlockedSuperstars.length,1);
   const pool=exhibitionOpponentIds(starter);
-  const liveStars=stars.filter(s=>!s.developmentOnly);
+  const liveStars=stars.filter(s=>isLaunchLiveSetId(s.setId));
   assert.equal(pool.length,liveStars.length-1);
   assert.equal(pool.includes(starter),false);
   assert.ok(pool.every(id=>(decks[id]?.length??0)===55));
@@ -419,7 +436,7 @@ test("starting HP roster uses the locked durability spread",()=>{
   const expected = {"iyo-sky": 48, "mankind": 52, "the-rock": 58, "hulk-hogan": 52, "bayley": 50, "cm-punk": 49, "paige": 49, "seth-rollins": 50, "andre-the-giant": 56, "stephanie-vaquer": 49, "randy-savage": 50, "roman-reigns": 53, "charlotte-flair": 52, "kevin-owens": 52, "kane": 54, "the-undertaker": 54, "ultimate-warrior": 52, "rhea-ripley": 52, "cody-rhodes": 51, "oba-femi": 55, "stone-cold-steve-austin": 51, "liv-morgan": 48, "brock-lesnar": 55, "gunther": 53, "becky-lynch": 51, "logan-paul": 46, "sol-ruca": 48, "chad-gable": 50, "raquel-rodriguez": 52, "rey-mysterio": 48, "dominik-mysterio": 49, "penta": 50};
   for (const [id,hp] of Object.entries(expected)) assert.equal(starById.get(id)?.hp,hp,`${id} starting HP`);
   const values=[...new Set(stars.map(s=>s.hp))].sort((a,b)=>a-b);
-  assert.deepEqual(values,[46,48,49,50,51,52,53,54,55,56,58]);
+  assert.deepEqual(values,[46,48,49,50,51,52,53,54,55,56,57,58]);
   assert.equal(starById.get('the-rock').hp,Math.max(...stars.map(s=>s.hp)),'Final Boss remains the clear HP ceiling');
 });
 
@@ -927,7 +944,8 @@ test("Fight Forever is a booster-only 4-star RAW Action and is absent from all r
   assert.equal(card.rarity,4);
   assert.equal(card.setId,'raw-series-1');
   assert.equal(card.boosterOnly,true);
-  assert.equal(boosterEligible(card),true);
+  assert.equal(card.boosterEligible!==false,true);
+  assert.equal(boosterEligible(card),false,'future RAW card is authored booster-ready but hidden until release');
   assert.equal(Object.values(decks).some(deck=>deck.some(c=>c.id===card.id)),false);
   assert.equal(CARD_NUMBER_BY_ID[card.id]?.cardCode,'RAW1-030');
 });
@@ -969,7 +987,8 @@ test("v0.11.96 staged move/action expansion remains fully registered after later
   for(const [id,[code,cost,damage]] of Object.entries(expected)){
     const card=allGameplayCards.find(c=>c.id===id);assert.ok(card,id);assert.equal(card.boosterOnly,true,id);assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
     if(cost!==null)assert.equal(card.cost,cost,id);if(damage!==null)assert.equal(card.damage,damage,id);
-    assert.equal(boosterEligible(card),true,id);
+    assert.equal(card.boosterEligible!==false,true,id);
+    assert.equal(boosterEligible(card),isLaunchLiveSetId(card.setId),`${id} live booster gate`);
   }
   const expectedPools={
     'raw-series-1':[30,26],
@@ -978,7 +997,10 @@ test("v0.11.96 staged move/action expansion remains fully registered after later
     'smackdown-series-1':[30,26]
   };
   for(const [setId,[gameplayCount,boosterCount]] of Object.entries(expectedPools)){
-    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.ok(pool.length>=gameplayCount,`${setId} gameplay pool retains at least the v0.11.96 floor`);assert.ok(pool.filter(boosterEligible).length>=boosterCount,`${setId} booster pool retains at least the v0.11.96 floor`);
+    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.ok(pool.length>=gameplayCount,`${setId} gameplay pool retains at least the v0.11.96 floor`);
+    const authoredPool=pool.filter(card=>card.boosterEligible!==false&&(card.kind!=='entrance'||!card.superstarId));
+    assert.ok(authoredPool.length>=boosterCount,`${setId} authored booster pool retains at least the v0.11.96 floor`);
+    assert.equal(pool.filter(boosterEligible).length,0,`${setId} remains hidden from public boosters until release`);
   }
 });
 
@@ -1059,6 +1081,50 @@ test("Jacob strength-to-agility sequencing, Built Different and both finishers e
 });
 
 
+test("Survivor Series Series 1 is complete with Solo Sikoa, Jade Cargill and Nia Jax",()=>{
+  const setStars=stars.filter(s=>s.setId==='survivor-series-series-1');
+  assert.deepEqual(setStars.map(s=>s.id).sort(),['bron-breakker','drew-mcintyre','jacob-fatu','jade-cargill','nia-jax','randy-orton','sami-zayn','solo-sikoa'].sort());
+  const expected={
+    'solo-sikoa':{hp:54,momentum:{strike:6,strength:5,agility:1},card:'SVS1-040'},
+    'jade-cargill':{hp:55,momentum:{strength:6,strike:4,agility:2},card:'SVS1-044'},
+    'nia-jax':{hp:57,momentum:{strength:7,strike:4,agility:1},card:'SVS1-049'}
+  };
+  for(const [id,x] of Object.entries(expected)){
+    const star=starById.get(id);assert.ok(star,id);assert.equal(star.hp,x.hp,id);assert.deepEqual(star.starterMomentum,x.momentum,id);
+    assert.equal(decks[id].length,55,id);assert.equal(decks[id].filter(c=>c.kind==='momentum').length,12,id);assert.equal(CARD_NUMBER_BY_ID[star.cardId]?.cardCode,x.card,id);
+  }
+  assert.equal(CARD_NUMBER_BY_ID['solo-sikoa-spinning-solo']?.cardCode,'SVS1-036');
+  assert.equal(CARD_NUMBER_BY_ID['solo-sikoa-samoan-spike']?.cardCode,'SVS1-037');
+  assert.equal(CARD_NUMBER_BY_ID['jade-cargill-jaded']?.cardCode,'SVS1-041');
+  assert.equal(CARD_NUMBER_BY_ID['nia-jax-avalanche-samoan-drop']?.cardCode,'SVS1-045');
+  assert.equal(CARD_NUMBER_BY_ID['nia-jax-annihilator']?.cardCode,'SVS1-046');
+});
+
+test("Solo Sikoa Street Champion, Sole Survivor and Spinning Solo chain execute",()=>{
+  const solo=starById.get('solo-sikoa'),opp=starById.get('sami-zayn'),g=new MatchEngine({p1:solo,p2:opp,decks,rng:rng(1209)}),st=g.state(),a=st.players.p1,d=st.players.p2;
+  for(const m of ['strength','strike','technical','agility'])a.momentum[m]=99;
+  d.adrenaline=5;d.momentum.attitude=5;const kick=byName('Superkick'),before=d.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:kick};g._connect();assert.equal(d.adrenaline,before-2,'normal connect drains 1 and Street Champion drains an additional 1');
+  const afterFirst=d.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:byName('Running Clothesline')};g._connect();assert.equal(d.adrenaline,Math.max(0,afterFirst-1),'Street Champion fires only once per Control sequence');
+  const spin=allGameplayCards.find(c=>c.id==='solo-sikoa-spinning-solo'),spike=allGameplayCards.find(c=>c.id==='solo-sikoa-samoan-spike');a.deck=[spike];st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:spin};g._connect();assert.ok(a.hand.some(c=>c.id===spike.id));assert.equal(a.namedDiscount['Samoan Spike'],2);
+  const special=allGameplayCards.find(c=>c.id==='special-solo-sikoa');a.hand=[special];a.deck=[byName('Punch'),byName('Headbutt')];a.specialUsed=false;st.phase='ACTION';st.playerInControl='p1';assert.equal(g.passTurn('p1'),true);assert.equal(a.specialUsed,true);assert.equal(a.hand.length,2);assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='sole-survivor'));
+});
+
+test("Jade Cargill uses the shared Pump Kick as her Trademark setup and Superhuman fires",()=>{
+  const jade=starById.get('jade-cargill'),opp=starById.get('solo-sikoa'),g=new MatchEngine({p1:jade,p2:opp,decks,rng:rng(2209)}),st=g.state(),a=st.players.p1,d=st.players.p2;
+  for(const m of ['strength','strike','technical','agility'])a.momentum[m]=99;
+  const pump=allGameplayCards.find(c=>c.id==='pump-kick'),jaded=allGameplayCards.find(c=>c.id==='jade-cargill-jaded');assert.equal(pump.cost,6);assert.equal(pump.damage,9);assert.equal(pump.trademark,true);assert.equal(pump.superstarId,null);
+  a.deck=[jaded];const ad=a.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:pump};g._connect();assert.ok(a.hand.some(c=>c.id===jaded.id));assert.equal(a.namedDiscount['Jaded'],2);assert.equal(a.adrenaline,ad+2,'move connect + Believe the Hype each add 1 Adrenaline');
+  const special=allGameplayCards.find(c=>c.id==='special-jade-cargill'),power=byName('Spinebuster');a.hand=[special];a.deck=[byName('Punch')];a.specialUsed=false;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:power};g._connect();assert.equal(a.specialUsed,true);assert.equal(a.nextDamageBuff,2);assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='superhuman'));
+});
+
+test("Nia Jax Crushing Weight and Not Like Most execute with the Annihilator chain",()=>{
+  const nia=starById.get('nia-jax'),opp=starById.get('jade-cargill'),g=new MatchEngine({p1:nia,p2:opp,decks,rng:rng(3209)}),st=g.state(),a=st.players.p1,d=st.players.p2;
+  assert.equal(a.momentum.strength,2);assert.equal(a.adrenaline,1);for(const m of ['strength','strike','technical','agility'])a.momentum[m]=99;
+  const body=byName('Body Slam');st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:body};g._connect();assert.equal(d.posture,'on-mat');assert.equal(a.nextMoveDiscount,1);
+  const avalanche=allGameplayCards.find(c=>c.id==='nia-jax-avalanche-samoan-drop'),ann=allGameplayCards.find(c=>c.id==='nia-jax-annihilator');a.deck=[ann];d.posture='standing';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:avalanche};g._connect();assert.ok(a.hand.some(c=>c.id===ann.id));assert.equal(a.namedDiscount['Annihilator'],2);
+  const special=allGameplayCards.find(c=>c.id==='special-nia-jax');a.hand=[special];a.specialUsed=false;const hp=a.hp,ad=a.adrenaline,hit={...byName('Powerbomb'),damage:10};st.playerInControl='p2';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p2',defenderId:'p1',card:hit};g._connect();assert.equal(a.hp,hp-6);assert.equal(a.specialUsed,true);assert.equal(a.adrenaline,ad,'incoming move drains 1 Adrenaline and Not Like Most restores 1');assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='reduce-incoming-big'));
+});
+
 test("v0.11.98 shared move batch is registered, numbered and booster-ready",()=>{
   const expected={
     'shoulder-block':['SVS1-031',3,4,1],
@@ -1071,7 +1137,7 @@ test("v0.11.98 shared move batch is registered, numbered and booster-ready",()=>
   };
   for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
     const card=allGameplayCards.find(c=>c.id===id); assert.ok(card,id); assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
-    assert.equal(card.cost,cost,id); assert.equal(card.damage,damage,id); assert.equal(card.rarity,rarity,id); assert.equal(boosterEligible(card),true,id);
+    assert.equal(card.cost,cost,id); assert.equal(card.damage,damage,id); assert.equal(card.rarity,rarity,id); assert.equal(card.boosterEligible!==false,true,id); assert.equal(boosterEligible(card),isLaunchLiveSetId(card.setId),`${id} live booster gate`);
   }
   assert.equal(allGameplayCards.find(c=>c.id==='shoulder-block').groundOpponent,true);
   assert.deepEqual(allGameplayCards.find(c=>c.id==='shining-wizard').bodyDamage,{bodyPart:'head',pressure:1});
@@ -1102,7 +1168,7 @@ test("v0.12.01 shared fundamentals batch is registered, numbered and executes it
   };
   for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
     const card=allGameplayCards.find(c=>c.id===id);assert.ok(card,id);assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
-    assert.equal(card.cost,cost,id);assert.equal(card.damage,damage,id);assert.equal(card.rarity,rarity,id);assert.equal(card.boosterOnly,true,id);assert.equal(boosterEligible(card),true,id);
+    assert.equal(card.cost,cost,id);assert.equal(card.damage,damage,id);assert.equal(card.rarity,rarity,id);assert.equal(card.boosterOnly,true,id);assert.equal(card.boosterEligible!==false,true,id);assert.equal(boosterEligible(card),isLaunchLiveSetId(card.setId),`${id} live booster gate`);
   }
   const elbow=allGameplayCards.find(c=>c.id==='elbow-to-back-of-head'),hip=allGameplayCards.find(c=>c.id==='hip-toss'),leg=allGameplayCards.find(c=>c.id==='leg-drop'),choke=allGameplayCards.find(c=>c.id==='choke-on-the-ropes'),chops=allGameplayCards.find(c=>c.id==='chops-in-the-corner');
   assert.deepEqual(elbow.bodyDamage,{bodyPart:'head',pressure:1});assert.deepEqual(chops.bodyDamage,{bodyPart:'chest',pressure:1});
@@ -1144,14 +1210,14 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   const renderers=['drawSummerSlam','drawHall','drawEvolution','drawRewards','drawRaw','drawWorldsCollide','drawMoneyInTheBank','drawSmackDown','drawSurvivorSeries'];
   for(const fn of renderers) assert.match(studio,new RegExp(`function ${fn}\\(`),`${fn} renderer must remain defined`);
   assert.match(studio,/function isDanhausenHalloweenCard\(/,'SmackDown Danhausen variant helper must remain defined');
-  for(const setId of ['summerslam-series-1','hall-of-fame-series-1','evolution-series-1','season-1-final-boss','raw-series-1','worlds-collide-series-1','money-in-the-bank-series-1','smackdown-series-1','survivor-series-series-1']){
+  for(const setId of ['summerslam-series-1','hall-of-fame-series-1','evolution-series-1','season-1-final-boss','season-2-whos-next','raw-series-1','worlds-collide-series-1','money-in-the-bank-series-1','smackdown-series-1','survivor-series-series-1']){
     assert.ok(studio.includes(`set===\"${setId}\"`)||setId==='summerslam-series-1',`${setId} must be routed to a renderer`);
     assert.ok(data.includes(`\"setId\":\"${setId}\"`),`${setId} must have Studio cards`);
   }
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.08/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.12/,'Studio script cache key must match the current release');
 });
 
 
@@ -1235,8 +1301,9 @@ test("v0.12.06 selected Entrances persist separately from the 55-page deck and s
   assert.equal(defaultEntrance,starById.get("roman-reigns").entranceId);
   assert.equal(setSelectedEntrance(p,"roman-reigns",defaultEntrance),true);
   assert.equal(p.selectedEntrances["roman-reigns"],defaultEntrance);
-  assert.equal(boosterEligible({id:"shared-entrance-test",kind:"entrance",superstarId:null}),true);
-  assert.equal(boosterEligible({id:"roman-entrance-test",kind:"entrance",superstarId:"roman-reigns"}),false);
+  assert.equal(boosterEligible({id:"shared-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:null}),true);
+  assert.equal(boosterEligible({id:"roman-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:"roman-reigns"}),false);
+  assert.equal(boosterEligible({id:"future-shared-entrance-test",kind:"entrance",setId:"raw-series-1",superstarId:null}),false);
 });
 
 test("v0.12.06 scrollable navigation includes Challenges, Deck Lab and Options while Home retains their tiles",async()=>{
@@ -1326,4 +1393,154 @@ test("v0.12.08 Season and Challenges use icon-led premium dashboard components",
   assert.ok(css.includes('.season-command-center'));
   assert.ok(css.includes('.challenge-set-stats'));
   assert.ok(css.includes('.premium-challenge-card'));
+});
+
+test("Season 2 Goldberg reward package is locked, future-scoped and collector-numbered",()=>{
+  const goldberg=starById.get('goldberg');
+  assert.ok(goldberg);
+  assert.equal(goldberg.nickname,'Who’s Next?');
+  assert.equal(goldberg.setId,'season-2-whos-next');
+  assert.equal(goldberg.seasonExclusive,true);
+  assert.equal(goldberg.developmentOnly,true);
+  assert.equal(goldberg.hp,58);
+  assert.deepEqual(goldberg.methodLimits,{strength:null,strike:null,agility:2,technical:1});
+  assert.deepEqual(goldberg.starterMomentum,{strength:6,strike:6});
+  assert.equal(SEASON_2_COMPLETION_SUPERSTAR,'goldberg');
+  assert.equal(seasonExclusiveSuperstars.goldberg?.seasonId,'season-2');
+  assert.equal(seasonExclusiveSuperstars.goldberg?.boosterEligible,false);
+  assert.equal(seasonExclusiveSuperstars.goldberg?.fullDeckReward,true);
+  assert.equal(boosterEligible(season2GoldbergCards['goldberg-spear']),false);
+  assert.equal(boosterEligible(allGameplayCards.find(c=>c.id==='rock-bottom')),false);
+  assert.equal(Object.keys(season2GoldbergCards).length,5);
+  assert.equal(CARD_NUMBER_BY_ID['goldberg-military-press-powerslam']?.cardCode,'S2WN-001');
+  assert.equal(CARD_NUMBER_BY_ID['goldberg-spear']?.cardCode,'S2WN-002');
+  assert.equal(CARD_NUMBER_BY_ID['goldberg-jackhammer']?.cardCode,'S2WN-003');
+  assert.equal(CARD_NUMBER_BY_ID['entrance-goldberg']?.cardCode,'S2WN-004');
+  assert.equal(CARD_NUMBER_BY_ID['special-goldberg']?.cardCode,'S2WN-005');
+  assert.equal(CARD_NUMBER_BY_ID['superstar-goldberg']?.cardCode,'S2WN-006');
+});
+
+test("Goldberg has a complete 55-page reward deck and Who’s Next? Entrance fires exactly",()=>{
+  const goldberg=starById.get('goldberg'),rock=starById.get('the-rock');
+  assert.equal(decks.goldberg.length,55);
+  assert.equal(decks.goldberg.filter(c=>c.kind==='momentum').length,12);
+  assert.equal(decks.goldberg.filter(c=>c.id==='momentum-strength').length,6);
+  assert.equal(decks.goldberg.filter(c=>c.id==='momentum-strike').length,6);
+  const g=new MatchEngine({p1:goldberg,p2:rock,decks,rng:rng(1210)}),p=g.state().players.p1;
+  assert.equal(p.momentum.strength,2);
+  assert.equal(p.momentum.strike,2);
+  assert.equal(p.adrenaline,2);
+  assert.equal(p.momentum.attitude,2);
+});
+
+test("Goldberg The Streak builds, discounts prestige Moves, gets an extra Military Press counter and breaks on lost Control",()=>{
+  const goldberg=starById.get('goldberg'),rock=starById.get('the-rock');
+  const military=allGameplayCards.find(c=>c.id==='goldberg-military-press-powerslam');
+  const spear=allGameplayCards.find(c=>c.id==='goldberg-spear');
+  const jackhammer=allGameplayCards.find(c=>c.id==='goldberg-jackhammer');
+  const g=new MatchEngine({p1:goldberg,p2:rock,decks,rng:rng(1211)}),s=g.state(),p=s.players.p1;
+  p.hand=[military]; p.momentum.strength=10; p.momentum.strike=10;
+  assert.equal(g.declareMove('p1',military),true);
+  assert.equal(g.passCounter('p2'),true);
+  assert.equal(p.streakCounters,2,'Military Press earns normal Streak plus its additional Streak counter');
+  assert.equal(moveEligibility(s,'p1',spear).effectiveCost,6);
+  assert.equal(moveEligibility(s,'p1',jackhammer).effectiveCost,9);
+  assert.equal(g.passTurn('p1'),true);
+  assert.equal(p.streakCounters,0,'losing Control breaks The Streak');
+  assert.ok(s.log.some(e=>e.effect==='streak-broken'&&e.lost===2));
+});
+
+test("Goldberg Spear chains into Jackhammer and 173–0 preserves Control and Streak through a Counter",()=>{
+  const goldberg=starById.get('goldberg'),rock=starById.get('the-rock');
+  const spear=allGameplayCards.find(c=>c.id==='goldberg-spear');
+  const jackhammer=allGameplayCards.find(c=>c.id==='goldberg-jackhammer');
+  const special=allGameplayCards.find(c=>c.id==='special-goldberg');
+  const duck=allGameplayCards.find(c=>c.id==='duck');
+
+  const chain=new MatchEngine({p1:goldberg,p2:rock,decks,rng:rng(1212)}),cs=chain.state(),cp=cs.players.p1,co=cs.players.p2;
+  cp.streakCounters=2; cp.momentum.strength=10; cp.momentum.strike=10; co.adrenaline=3; co.momentum.attitude=3;
+  cp.hand=[spear]; cp.deck=[jackhammer,...cp.deck.filter(c=>c.id!=='goldberg-jackhammer')];
+  assert.equal(chain.declareMove('p1',spear),true);
+  assert.equal(chain.passCounter('p2'),true);
+  assert.equal(co.adrenaline,1,'Spear connection and 2+ pre-declare Streak each drain 1 Adrenaline');
+  assert.equal(cp.streakCounters,3);
+  assert.ok(cp.hand.some(c=>c.id==='goldberg-jackhammer'));
+  assert.equal(cp.namedDiscount.Jackhammer,3);
+  assert.equal(moveEligibility(cs,'p1',cp.hand.find(c=>c.id==='goldberg-jackhammer')).effectiveCost,5,'Spear discount and max Streak stack into Jackhammer');
+
+  const retain=new MatchEngine({p1:goldberg,p2:rock,decks,rng:rng(1213)}),rs=retain.state(),rp=rs.players.p1,ro=rs.players.p2;
+  rp.streakCounters=2; rp.adrenaline=0; rp.momentum.attitude=0; rp.momentum.strength=10; rp.momentum.strike=10;
+  ro.momentum.strike=10;
+  rp.hand=[spear,special]; ro.hand=[duck];
+  assert.equal(retain.declareMove('p1',spear),true);
+  assert.equal(retain.counter('p2',duck),true);
+  assert.equal(rs.playerInControl,'p1');
+  assert.equal(rs.phase,'ACTION');
+  assert.equal(rp.streakCounters,2);
+  assert.equal(rp.adrenaline,1);
+  assert.equal(rp.specialUsed,true);
+  assert.ok(rs.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='173-0'));
+  assert.ok(rs.log.some(e=>e.type==='CONTROL_RETAINED'&&e.reason==='173-0'));
+});
+
+
+test("v0.12.12 Roman replaces Sitout Crucifix Powerbomb with Ooh Ahh!! at SS1-034",()=>{
+  const deck=decks['roman-reigns'],ooh=allGameplayCards.find(c=>c.id==='roman-reigns-ooh-ahh');
+  assert.ok(ooh);assert.equal(allGameplayCards.some(c=>c.id==='roman-reigns-sitout-crucifix-powerbomb'),false);
+  assert.equal(deck.filter(c=>c.id==='roman-reigns-ooh-ahh').length,1);assert.equal(deck.filter(c=>c.id==='headbutt').length,2);assert.equal(deck.length,55);
+  assert.equal(ooh.kind,'action');assert.equal(ooh.cost,2);assert.equal(ooh.rarity,2);assert.equal(ooh.superstarId,'roman-reigns');assert.equal(ooh.maxCopies,1);
+  assert.equal(CARD_NUMBER_BY_ID['roman-reigns-ooh-ahh']?.cardCode,'SS1-034');assert.equal(CARD_NUMBER_BY_ID['roman-reigns-sitout-crucifix-powerbomb'],undefined);
+});
+
+test("Ooh Ahh!! costs 2, tutors Roman's Spear, discounts it, and converts an already-held Spear to Adrenaline",()=>{
+  const roman=starById.get('roman-reigns'),punk=starById.get('cm-punk'),ooh=allGameplayCards.find(c=>c.id==='roman-reigns-ooh-ahh'),spear=allGameplayCards.find(c=>c.id==='roman-reigns-spear');
+  const g=new MatchEngine({p1:roman,p2:punk,decks,rng:rng(1212)}),s=g.state(),p=s.players.p1;p.hand=[ooh];p.deck=[spear,...p.deck.filter(c=>c.id!==spear.id)];p.momentum.strength=1;p.momentum.strike=0;
+  assert.equal(canPlayAction(s,'p1',ooh),false);p.momentum.strength=2;assert.equal(canPlayAction(s,'p1',ooh),true);assert.equal(g.playAction('p1',ooh),true);
+  assert.ok(p.hand.some(c=>c.id===spear.id));assert.equal(p.namedDiscount["Roman's Spear"],1);p.momentum.strength=10;assert.equal(moveEligibility(s,'p1',p.hand.find(c=>c.id===spear.id)).effectiveCost,9);
+  const g2=new MatchEngine({p1:roman,p2:punk,decks,rng:rng(1213)}),s2=g2.state(),p2=s2.players.p1,ooh2=allGameplayCards.find(c=>c.id==='roman-reigns-ooh-ahh'),spear2=allGameplayCards.find(c=>c.id==='roman-reigns-spear');
+  p2.hand=[ooh2,spear2];p2.momentum.strength=2;p2.momentum.strike=0;const before=p2.adrenaline;assert.equal(g2.playAction('p1',ooh2),true);assert.equal(p2.adrenaline,before+1);assert.equal(p2.namedDiscount["Roman's Spear"],1);
+});
+
+
+test("v0.12.12 public game exposes only the three launch series",()=>{
+  assert.deepEqual([...LAUNCH_LIVE_SET_IDS],["summerslam-series-1","hall-of-fame-series-1","evolution-series-1"]);
+  const launchStars=stars.filter(star=>isLaunchLiveSetId(star.setId));
+  const launchCards=collectionCards.filter(card=>isLaunchLiveSetId(card.setId));
+  assert.equal(launchStars.length,24);
+  assert.equal(launchCards.length,271);
+  assert.equal(exhibitionOpponentIds("roman-reigns").length,23);
+  assert.ok(exhibitionOpponentIds("roman-reigns").every(id=>isLaunchLiveSetId(starById.get(id)?.setId)));
+  for(const setId of ["raw-series-1","worlds-collide-series-1","money-in-the-bank-series-1","smackdown-series-1","survivor-series-series-1","season-2-whos-next"]){
+    assert.equal(isUnreleasedSetId(setId),true,setId);
+    assert.equal(collectionCards.filter(card=>card.setId===setId).some(boosterEligible),false,setId);
+  }
+});
+
+test("v0.12.12 migration strips unreleased Superstar, card and pack state without deleting authored data",()=>{
+  const p=createProfile("roman-reigns");
+  const bron=starById.get("bron-breakker"),goldberg=starById.get("goldberg");
+  assert.ok(bron&&goldberg);
+  p.unlockedSuperstars.push(bron.id,goldberg.id);
+  const futureCard=collectionCards.find(card=>card.setId==="survivor-series-series-1"&&card.kind==="move");
+  assert.ok(futureCard);
+  p.ownedCards[futureCard.id]={normal:1,foil:0};
+  p.savedDecks[bron.id]=[{id:futureCard.id,foil:false}];
+  p.selectedEntrances[bron.id]=bron.entranceId;
+  p.boosterCreditsBySet["survivor-series-series-1"]=3;
+  p.championshipRoad.championshipPackCreditsBySet["survivor-series-series-1"]=2;
+  const migrated=migrateProfile(p);
+  assert.equal(migrated.unlockedSuperstars.includes(bron.id),false);
+  assert.equal(migrated.unlockedSuperstars.includes(goldberg.id),false);
+  assert.equal(migrated.ownedCards[futureCard.id],undefined);
+  assert.equal(migrated.savedDecks[bron.id],undefined);
+  assert.equal(migrated.selectedEntrances[bron.id],undefined);
+  assert.equal(migrated.boosterCreditsBySet["survivor-series-series-1"],0);
+  assert.equal(migrated.championshipRoad.championshipPackCreditsBySet["survivor-series-series-1"],0);
+  assert.ok(allGameplayCards.some(card=>card.setId==="survivor-series-series-1"),"future authored data stays in development build");
+});
+
+test("v0.12.12 roadmap does not reveal unreleased Superstar names",()=>{
+  const futureCopy=SEASON_1.roadmap.filter(node=>node.id!=="launch").map(node=>node.description).join(" ");
+  const hiddenNames=["Logan Paul","Chad Gable","Raquel Rodriguez","Sol Ruca","Rey Mysterio","Dominik Mysterio","Penta","El Grande Americano","Jey Uso","LA Knight","Alexa Bliss","Finn Bálor","Tiffany Stratton","Chelsea Green","Damian Priest","Danhausen","Bron Breakker","Drew McIntyre","Randy Orton","Sami Zayn","Jacob Fatu","Solo Sikoa","Jade Cargill","Nia Jax","Goldberg"];
+  for(const name of hiddenNames) assert.equal(futureCopy.includes(name),false,name);
 });

@@ -1,29 +1,30 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.08";
-import { superstars } from "../data/superstars.js?v=0.12.08";
-import { decks } from "../data/decks.js?v=0.12.08";
-import { sets } from "../data/sets.js?v=0.12.08";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.08";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.08";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.08";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.08";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.08";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.08";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.08";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.08";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.08";
-import { totalMomentum } from "../engine/utils.js?v=0.12.08";
-import { healthZone } from "../engine/health.js?v=0.12.08";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.08";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.08";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.08";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.08";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.08";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.08";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.08";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.08";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.08";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.08";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.08";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.12";
+import { superstars } from "../data/superstars.js?v=0.12.12";
+import { decks } from "../data/decks.js?v=0.12.12";
+import { sets } from "../data/sets.js?v=0.12.12";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.12";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.12";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.12";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.12";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.12";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.12";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.12";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.12";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.12";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.12";
+import { totalMomentum } from "../engine/utils.js?v=0.12.12";
+import { healthZone } from "../engine/health.js?v=0.12.12";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.12";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.12";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.12";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.12";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.12";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.12";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.12";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.12";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.12";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.12";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.12";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -101,8 +102,19 @@ function scrollNewScreenToTop() {
   });
 }
 
-const roster = Object.values(superstars).filter(star => !star.developmentOnly);
-const superstarById = Object.fromEntries(roster.map(star => [star.id, star]));
+const roster = Object.values(superstars).filter(star => !star.developmentOnly && isLaunchLiveSetId(star.setId));
+const superstarById = Object.fromEntries(Object.values(superstars).filter(star => !star.developmentOnly && isPlayerReleasedSetId(star.setId)).map(star => [star.id, star]));
+const launchCollectionCards = collectionCards.filter(card => isLaunchLiveSetId(card.setId));
+const launchSetCollections = Object.fromEntries(Object.entries(setCollections).filter(([setId]) => isLaunchLiveSetId(setId)));
+function playerFacingCollectionCards() {
+  const rewardCards = collectionCards.filter(card => card.setId === "season-1-final-boss" && (ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0));
+  return [...launchCollectionCards, ...rewardCards];
+}
+function playerFacingSetCollections() {
+  const out = { ...launchSetCollections };
+  if (playerFacingCollectionCards().some(card => card.setId === "season-1-final-boss")) out["season-1-final-boss"] = setCollections["season-1-final-boss"];
+  return out;
+}
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));
 function onboardingMarkup() {
   if (!profile?.onboarding || profile.onboarding.complete || !game) return "";
@@ -138,6 +150,7 @@ const SET_LOGO_ASSETS = {
   "hall-of-fame-series-1": assetUrl("assets/art/hall-of-fame-series-1/hall-of-fame-logo.png"),
   "evolution-series-1": assetUrl("assets/art/evolution-series-1/evolution-logo.png"),
   "season-1-final-boss": assetUrl("assets/art/season-1-final-boss/rewards-logo.png"),
+  "season-2-whos-next": assetUrl("assets/art/season-1-final-boss/rewards-logo.png"),
   "raw-series-1": assetUrl("assets/branding/raw-series-1/raw-logo.webp"),
   "worlds-collide-series-1": assetUrl("assets/branding/worlds-collide-series-1/worlds-collide-logo.webp"),
   "money-in-the-bank-series-1": assetUrl("assets/branding/money-in-the-bank-series-1/money-in-the-bank-logo.webp"),
@@ -167,14 +180,7 @@ function uiIcon(name, className = "ui-icon") {
   return `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icons[name] ?? icons.star}</svg>`;
 }
 
-const MATCH_PRESENTATION_SETS = [
-  "summerslam-series-1",
-  "evolution-series-1",
-  "raw-series-1",
-  "worlds-collide-series-1",
-  "money-in-the-bank-series-1",
-  "smackdown-series-1"
-];
+const MATCH_PRESENTATION_SETS = [...LAUNCH_LIVE_SET_IDS];
 function randomMatchPresentationSet() {
   return MATCH_PRESENTATION_SETS[Math.floor(Math.random() * MATCH_PRESENTATION_SETS.length)] ?? "summerslam-series-1";
 }
@@ -649,7 +655,7 @@ function renderBoosters() {
     </section>`;
   }
 
-  const vaultSets = Object.values(setCollections).filter(set => set.id !== "season-1-final-boss");
+  const vaultSets = Object.values(launchSetCollections);
   const vaultBuckets = [];
   for (const vaultSet of vaultSets) {
     const standard = boosterCreditsFor(profile, vaultSet.id);
@@ -887,7 +893,7 @@ function renderSeasons() {
 function renderChallenges() {
   const root = $("#game");
   const challenges = challengeState(profile);
-  const setRows = Object.values(setCollections).map(set => {
+  const setRows = Object.values(launchSetCollections).map(set => {
     const progress = collectionProgress(profile, set.id);
     const state = setProgressState(profile, set.id);
     const rewards = availableMilestoneRewards(profile, set.id);
@@ -976,7 +982,7 @@ function renderChampionship(){
   const routeRows=active?run.opponents.map((id,index)=>{const star=superstarById[id],state=index<run.stage?'cleared':index===run.stage?'current':'upcoming';return `<div class="ladder-rung ${state}"><span>${index+1}</span><div class="ladder-portrait">${portraitMarkup(id,star.name)}</div><div><b>${CHAMPIONSHIP_STAGES[index]}</b><small>${star.name} · ${state==='cleared'?'Defeated':state==='current'?'Next match':'Waiting'}</small></div></div>`}).join(''):'';
   const completed=road.completedByBranch?.[branch.id]?.length??0;
   const status=run?.status==='cleared'?`${branch.label} Championship Road cleared!`:active?`${CHAMPIONSHIP_STAGES[run.stage]} · ${superstarById[currentChampionshipOpponent(profile)]?.name}`:`Win four matches on the ${branch.label} road.`;
-  root.innerHTML=`<section class="ladder-screen championship-screen premium-screen compact-mode-run"><section class="feature-hero championship-feature single-feature-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("championship")}<p>Choose a road and an owned Superstar. Four matches lead to the title.</p><div class="horizontal-branch-selector">${tabs}</div></div><div class="ladder-summary"><div><b>${road.clearsByBranch?.[branch.id]??0}</b><span>${branch.label} clears</span></div><div><b>${road.bestStageByBranch?.[branch.id]??0}/4</b><span>Best stage</span></div><div><b>${completed}/${Object.values(superstars).length}</b><span>Superstar clears</span></div><div><b>${road.championshipPackCreditsBySet?.[branch.setId]??0}</b><span>${sets[branch.setId]?.name} packs</span></div></div></section><p class="setup-message">${message||status}</p>${!active?`<section class="ladder-picker horizontal-selector"><h3>Choose your Superstar</h3>${selectionCarouselMarkup(unlocked,chosenId,'champ-select',star=>road.completedByBranch?.[branch.id]?.includes(star.id)?'ROAD CLEARED':'READY')}<button id="start-championship" class="start-match">Confirm & Start ${branch.label.replace(' — Series 1','')} Road</button></section>`:`<section class="ladder-current"><div><span>ROAD</span><strong>${branch.label}</strong></div><div><span>YOUR SUPERSTAR</span><strong>${superstarById[run.superstarId].name}</strong></div><div><span>NEXT MATCH</span><strong>${run.stage+1}/4 · ${CHAMPIONSHIP_STAGES[run.stage]} · ${superstarById[currentChampionshipOpponent(profile)].name}</strong></div><button id="continue-championship" class="start-match">Fight ${CHAMPIONSHIP_STAGES[run.stage]}</button></section>`}${routeRows?`<section class="ladder-stack">${routeRows}</section>`:''}${run&&run.status!=='active'?`<button id="new-championship" class="start-match">Start Another Road</button>`:''}</section>`;
+  root.innerHTML=`<section class="ladder-screen championship-screen premium-screen compact-mode-run"><section class="feature-hero championship-feature single-feature-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("championship")}<p>Choose a road and an owned Superstar. Four matches lead to the title.</p><div class="horizontal-branch-selector">${tabs}</div></div><div class="ladder-summary"><div><b>${road.clearsByBranch?.[branch.id]??0}</b><span>${branch.label} clears</span></div><div><b>${road.bestStageByBranch?.[branch.id]??0}/4</b><span>Best stage</span></div><div><b>${completed}/${roster.length}</b><span>Launch Superstar clears</span></div><div><b>${road.championshipPackCreditsBySet?.[branch.setId]??0}</b><span>${sets[branch.setId]?.name} packs</span></div></div></section><p class="setup-message">${message||status}</p>${!active?`<section class="ladder-picker horizontal-selector"><h3>Choose your Superstar</h3>${selectionCarouselMarkup(unlocked,chosenId,'champ-select',star=>road.completedByBranch?.[branch.id]?.includes(star.id)?'ROAD CLEARED':'READY')}<button id="start-championship" class="start-match">Confirm & Start ${branch.label.replace(' — Series 1','')} Road</button></section>`:`<section class="ladder-current"><div><span>ROAD</span><strong>${branch.label}</strong></div><div><span>YOUR SUPERSTAR</span><strong>${superstarById[run.superstarId].name}</strong></div><div><span>NEXT MATCH</span><strong>${run.stage+1}/4 · ${CHAMPIONSHIP_STAGES[run.stage]} · ${superstarById[currentChampionshipOpponent(profile)].name}</strong></div><button id="continue-championship" class="start-match">Fight ${CHAMPIONSHIP_STAGES[run.stage]}</button></section>`}${routeRows?`<section class="ladder-stack">${routeRows}</section>`:''}${run&&run.status!=='active'?`<button id="new-championship" class="start-match">Start Another Road</button>`:''}</section>`;
   root.querySelectorAll('[data-champ-branch]').forEach(btn=>btn.addEventListener('click',()=>{championshipBranchId=btn.dataset.champBranch;message='';renderChampionship();}));
   wireSelectionCarousel('champ-select', id=>{selection.p1=id;renderChampionship();});
   $("#start-championship")?.addEventListener("click",beginChampionshipRoad);$("#continue-championship")?.addEventListener("click",startCurrentChampionshipMatch);$("#new-championship")?.addEventListener("click",()=>{resetChampionshipRoad(profile);saveProfile(profile);renderChampionship();});
@@ -1000,7 +1006,7 @@ function modeLogoMarkup(mode, compact = false) {
     championship: { kicker: "FOUR FIGHTS · ONE TITLE", top: "CHAMPIONSHIP", bottom: "ROAD" },
     seasons: { kicker: "LIVE CONTENT · 110 DAYS", top: "LEGACY", bottom: "SEASONS" },
     challenges: { kicker: "DAILY · WEEKLY · MILESTONES", top: "LIVE", bottom: "CHALLENGES" },
-    collection: { kicker: `${collectionCards.length} CARDS · ${Object.keys(setCollections).length} SETS`, top: "THE", bottom: "COLLECTION" },
+    collection: { kicker: `${playerFacingCollectionCards().length} CARDS · ${Object.keys(playerFacingSetCollections()).length} SETS`, top: "THE", bottom: "COLLECTION" },
     boosters: { kicker: "RIP · REVEAL · COLLECT", top: "BOOSTER", bottom: "VAULT" },
     decks: { kicker: "BUILD · TUNE · COMPETE", top: "DECK", bottom: "LAB" },
     profile: { kicker: "YOUR CAREER · YOUR CARDS", top: "MY", bottom: "LEGACY" }
@@ -1015,7 +1021,7 @@ function modePortraits(ids = [], cls = "") {
 
 function orderedUnlockedSuperstars(excludeId = null) {
   const fav = new Set(profile?.favouriteSuperstars ?? []);
-  return (profile?.unlockedSuperstars ?? []).map(id => superstarById[id]).filter(Boolean).filter(star => star.id !== excludeId).sort((a,b) => {
+  return (profile?.unlockedSuperstars ?? []).map(id => superstarById[id]).filter(Boolean).filter(star => isPlayerVisibleSuperstar(star, profile)).filter(star => star.id !== excludeId).sort((a,b) => {
     const fd = Number(fav.has(b.id)) - Number(fav.has(a.id));
     return fd || a.name.localeCompare(b.name);
   });
@@ -1058,6 +1064,7 @@ function renderSplash() {
   const root = $("#game");
   const returning = !!profile;
   const starter = returning ? superstarById[profile.starterId] : null;
+  const launchUnlocked = (profile?.unlockedSuperstars ?? []).filter(id => roster.some(star => star.id === id)).length;
   root.innerHTML = `<section class="splash-screen premium-splash clean-launch-splash">
     <div class="splash-glow"></div>
     <div class="clean-splash-content">
@@ -1076,7 +1083,7 @@ function renderSplash() {
       <div class="clean-splash-profile">
         <span>${returning ? "WELCOME BACK" : "NEW PLAYER"}</span>
         <strong>${returning ? "Continue Your Legacy" : "Begin your WWE Legacy"}</strong>
-        <small>${returning ? `${profile.unlockedSuperstars.length}/${roster.length} Superstars unlocked · Season progress saved locally` : "Choose your first World Champion, receive their full starter deck, then discover the three live Season 1 booster sets."}</small>
+        <small>${returning ? `${launchUnlocked}/${roster.length} Launch Superstars unlocked · Season progress saved locally` : "Choose your first World Champion, receive their full starter deck, then discover the three live Season 1 booster sets."}</small>
       </div>
       <button id="enter-legacy" class="legacy-enter">${returning ? "ENTER WWE LEGACY" : "START NEW LEGACY"}</button>
       <small class="splash-local-note">Local single-player profile · no online account required</small>
@@ -1142,8 +1149,10 @@ function renderMainMenu() {
   const allBoosterCredits = Object.values(profile.boosterCreditsBySet ?? {}).reduce((sum, value) => sum + (Number(value) || 0), 0);
   const seasonProgress = seasonLevelProgress(profile);
   const seasonRemaining = seasonTimeRemaining(new Date());
-  const ownedUnique = collectionCards.filter(card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0).length;
-  const ownedCopies = collectionCards.reduce((sum, card) => sum + ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil"), 0);
+  const visibleCards = playerFacingCollectionCards();
+  const ownedUnique = visibleCards.filter(card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0).length;
+  const ownedCopies = visibleCards.reduce((sum, card) => sum + ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil"), 0);
+  const launchUnlocked = (profile.unlockedSuperstars ?? []).filter(id => roster.some(star => star.id === id)).length;
   root.innerHTML = `<section class="main-menu-screen premium-screen home-hub-v2">
     <button id="menu-season-countdown" class="season-led-strip ${attentionClass("seasons")}" aria-label="Open Season 1 hub">${attentionBadge("seasons")}
       <span class="season-led-live"><i></i><b>SEASON ONE LIVE</b><i></i></span>
@@ -1157,8 +1166,8 @@ function renderMainMenu() {
       <span class="owned-hero-copy">
         <em>YOUR CARDS</em>
         <strong>MY COLLECTION</strong>
-        <small>${ownedUnique} / ${collectionCards.length} unique cards owned · ${ownedCopies} total copies</small>
-        <span>${profile.unlockedSuperstars.length}/${roster.length} Superstars unlocked</span>
+        <small>${ownedUnique} / ${visibleCards.length} unique cards owned · ${ownedCopies} total copies</small>
+        <span>${launchUnlocked}/${roster.length} Launch Superstars unlocked</span>
       </span>
       <span class="owned-hero-art">${portraitMarkup(starter.id, starter.name)}</span>
       <span class="owned-hero-arrow">VIEW OWNED CARDS →</span>
@@ -1174,12 +1183,12 @@ function renderMainMenu() {
 
     <div class="main-menu-grid premium-menu-grid compact-hub-grid">
       <button id="menu-play" class="main-menu-tile premium-menu-tile primary-tile tile-play"><span class="tile-bg-art">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="tile-shade"></span><span class="tile-copy"><em>PLAY</em><strong>ENTER THE RING</strong><small>Exhibition · Ladder · Championship</small></span></button>
-      <button id="menu-catalogue" class="main-menu-tile premium-menu-tile tile-collection"><span class="tile-bg-art">${portraitMarkup("stone-cold-steve-austin","Stone Cold Steve Austin")}</span><span class="tile-shade"></span><span class="tile-copy"><em>ALL ${collectionCards.length} CARDS</em><strong>CARD CATALOGUE</strong><small>Search and filter every set</small></span></button>
+      <button id="menu-catalogue" class="main-menu-tile premium-menu-tile tile-collection"><span class="tile-bg-art">${portraitMarkup("stone-cold-steve-austin","Stone Cold Steve Austin")}</span><span class="tile-shade"></span><span class="tile-copy"><em>ALL ${visibleCards.length} CARDS</em><strong>CARD CATALOGUE</strong><small>Search the live card pool</small></span></button>
       <button id="menu-boosters" class="main-menu-tile premium-menu-tile tile-boosters ${attentionClass("boosters")}">${attentionBadge("boosters")}<span class="tile-bg-art">${portraitMarkup("iyo-sky","IYO SKY")}</span><span class="tile-shade"></span><span class="tile-copy"><em>${allBoosterCredits} AVAILABLE</em><strong>BOOSTER PACKS</strong><small>Rip · Reveal · Collect</small></span></button>
       <button id="menu-decks" class="main-menu-tile premium-menu-tile tile-decks"><span class="tile-bg-art">${portraitMarkup("cm-punk","CM Punk")}</span><span class="tile-shade"></span><span class="tile-copy"><em>BUILD YOUR ROSTER</em><strong>DECK LAB</strong><small>Build · Optimize · Save</small></span></button>
       <button id="menu-challenges" class="main-menu-tile premium-menu-tile tile-challenges ${attentionClass("challenges")}">${attentionBadge("challenges")}<span class="tile-bg-art">${portraitMarkup("becky-lynch","Becky Lynch")}</span><span class="tile-shade"></span><span class="tile-copy"><em>EARN REWARDS</em><strong>CHALLENGES</strong><small>Daily · Weekly · Season XP</small></span></button>
       <button id="menu-profile" class="main-menu-tile premium-menu-tile tile-profile"><span class="tile-bg-art">${portraitMarkup(starter.id,starter.name)}</span><span class="tile-shade"></span><span class="tile-copy"><em>YOUR CAREER</em><strong>MY LEGACY</strong><small>Progress · Stats · Tools</small></span></button>
-      <button id="menu-store" class="main-menu-tile premium-menu-tile tile-store"><span class="tile-bg-art">${portraitMarkup("la-knight","LA Knight")}</span><span class="tile-shade"></span><span class="tile-copy"><em>DAILY ROTATION</em><strong>CARD SHOP</strong><small>Spend Universe Points</small></span></button>
+      <button id="menu-store" class="main-menu-tile premium-menu-tile tile-store"><span class="tile-bg-art">${portraitMarkup("gunther","Gunther")}</span><span class="tile-shade"></span><span class="tile-copy"><em>DAILY ROTATION</em><strong>CARD SHOP</strong><small>Spend Universe Points</small></span></button>
       <button id="menu-options" class="main-menu-tile premium-menu-tile tile-options"><span class="tile-bg-art">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="tile-shade"></span><span class="tile-copy"><em>GAME SETTINGS</em><strong>OPTIONS</strong><small>Assistance · Data · Build</small></span></button>
     </div>
   </section>`;
@@ -1471,7 +1480,7 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
         ${card.kind === "move" ? `<span class="ccg-rules-statline"><span><small>COST</small><b>${card.cost ?? 0}</b></span><span><small>DAMAGE</small><b>${card.damage ?? 0}</b></span></span>` : ""}
         <span class="ccg-rules-body"><b class="ccg-effect-label">${card.kind === "move" ? "EFFECT" : card.kind === "superstar" ? "SUPERSTAR ABILITY" : card.kind === "entrance" ? "ENTRANCE EFFECT" : "RULES"}</b><span>${ruleText}</span></span>
         ${card.kind === "superstar" ? (()=>{const star=superstarById[card.superstarId]; if(!star)return ""; const limits=Object.entries(star.methodLimits??{}).map(([m,v])=>`${m.slice(0,2).toUpperCase()} ${v==null?"∞":v}`).join(" · "); const starter=Object.entries(star.starterMomentum??{}).map(([m,v])=>`${m.slice(0,2).toUpperCase()} ×${v}`).join(" · "); return `<span class="ccg-rules-reference"><b>METHOD LIMITS</b>${limits}</span><span class="ccg-rules-reference"><b>STARTER MOMENTUM</b>${starter}</span>`;})() : ""}
-        ${card.kind === "move" && card.requirements && Object.keys(card.requirements).length ? `<span class="ccg-rules-requirements"><b>REQUIRES</b> ${Object.entries(card.requirements).map(([m,n])=>`${n} ${m}`).join(" · ")}</span>` : ""}
+        ${card.kind === "move" && !card.finisher && card.requirements && Object.keys(card.requirements).length ? `<span class="ccg-rules-requirements"><b>REQUIRES</b> ${Object.entries(card.requirements).map(([m,n])=>`${n} ${m}`).join(" · ")}</span>` : ""}
         ${card.kind === "move" && card.counters?.length ? `<span class="ccg-rules-requirements"><b>COUNTERS</b> ${card.counters.map(t=>MOVE_TYPE_LABELS[t] ?? t).join(", ")}</span>` : ""}
         ${card.kind === "move" && card.counterMethods?.length ? `<span class="ccg-rules-requirements"><b>COUNTERS</b> Any ${card.counterMethods.map(m=>m[0].toUpperCase()+m.slice(1)).join(" / ")} Move</span>` : ""}
         ${cardPlayRestrictionText(card)}
@@ -1484,7 +1493,7 @@ function collectionText(card) {
   if (card.kind === "superstar") return `${card.hp} HP · ${card.abilityName}: ${card.abilityText}`;
   if (card.kind === "momentum") return `Gain 1 permanent ${card.method[0].toUpperCase() + card.method.slice(1)} Momentum. Move costs never spend Momentum.`;
   if (["entrance", "special", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
-  const req = Object.entries(card.requirements ?? {}).map(([m,n]) => `${n} ${m}`).join(", ");
+  const req = Object.entries(card.finisher ? {} : (card.requirements ?? {})).map(([m,n]) => `${n} ${m}`).join(", ");
   const stateReq = [card.requiresPosture ? `opponent ${card.requiresPosture}` : "", card.requiresLocation ? card.requiresLocation : ""].filter(Boolean).join(" · ");
   const method = card.method ? `Method ${card.method[0].toUpperCase() + card.method.slice(1)}` : "";
   const moveType = card.moveType ? `Move Type ${MOVE_TYPE_LABELS[card.moveType] ?? card.moveType}` : "";
@@ -1496,7 +1505,9 @@ function renderCollection() {
   const root = $("#game");
   const allSets = activeCollectionSetId === "all";
   const rarityLabels = setCollection.rarityLabels;
-  const baseCards = allSets ? collectionCards : cardsForSet(activeCollectionSetId);
+  const visibleCards = playerFacingCollectionCards();
+  const visibleSets = playerFacingSetCollections();
+  const baseCards = allSets ? visibleCards : visibleCards.filter(card => card.setId === activeCollectionSetId);
   const isOwned = card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0;
   const scopedCards = collectionView === "owned" ? baseCards.filter(isOwned) : baseCards;
   const kinds = ["all","superstar","entrance","momentum","move","action","support","manager","special"];
@@ -1519,18 +1530,18 @@ function renderCollection() {
   }));
   const displayed = visible.slice(0, collectionRenderLimit);
   const hasMoreCollection = displayed.length < visible.length;
-  const ownedUniqueAll = collectionCards.filter(isOwned).length;
+  const ownedUniqueAll = visibleCards.filter(isOwned).length;
   const ownedUniqueHere = baseCards.filter(isOwned).length;
   const starCards = baseCards.filter(c => c.kind === "superstar");
   const unlocked = starCards.filter(c => hasSuperstar(profile, c.superstarId)).length;
-  const tabs = [`<button class="nav-button ${allSets ? 'active' : ''}" data-collection-set="all">All Sets</button>`, ...Object.values(setCollections).map(set => `<button class="nav-button ${set.id === activeCollectionSetId ? 'active' : ''}" data-collection-set="${set.id}">${set.displayName}</button>`)].join('');
+  const tabs = [`<button class="nav-button ${allSets ? 'active' : ''}" data-collection-set="all">All Sets</button>`, ...Object.values(visibleSets).map(set => `<button class="nav-button ${set.id === activeCollectionSetId ? 'active' : ''}" data-collection-set="${set.id}">${set.displayName}</button>`)].join('');
   const heroIds = allSets ? [profile.starterId, "stone-cold-steve-austin", "rhea-ripley"] : setHeroSuperstars(activeCollectionSetId);
   const setLogo = allSets ? "" : setLogoMarkup(activeCollectionSetId, "feature-set-logo");
   const title = collectionView === "owned" ? "MY COLLECTION" : "CARD CATALOGUE";
   const eyebrow = collectionView === "owned" ? "OWNED CARDS" : "EVERY ACTIVE CARD";
   const intro = collectionView === "owned"
     ? `Everything you currently own. Search ${ownedUniqueAll} unique cards across every set, or narrow the view below.`
-    : `The complete active WWE Legacy card catalogue. Search and filter all ${collectionCards.length} cards across every set.`;
+    : `The live WWE Legacy card catalogue. Search and filter all ${visibleCards.length} currently available cards.`;
   const themeClass = allSets ? "theme-catalogue-all" : setVisualClass(activeCollectionSetId);
   document.body.dataset.set = activeCollectionSetId;
   root.innerHTML = `<section class="collection-screen premium-screen ${themeClass}">
@@ -1540,7 +1551,7 @@ function renderCollection() {
         <div class="collection-view-switch"><button id="collection-owned-view" class="nav-button ${collectionView === 'owned' ? 'active' : ''}">My Collection</button><button id="collection-catalogue-view" class="nav-button ${collectionView === 'catalogue' ? 'active' : ''}">Card Catalogue</button></div>
         <div class="mode-branch-tabs collection-set-tabs">${tabs}</div>
       </div>
-      <div class="set-stats"><div class="set-stat"><b>${collectionView === 'owned' ? ownedUniqueHere : baseCards.length}</b><span>${collectionView === 'owned' ? 'Owned here' : 'In view'}</span></div><div class="set-stat"><b>${unlocked}/${starCards.length}</b><span>Superstars</span></div><div class="set-stat"><b>${ownedUniqueAll}</b><span>Total owned</span></div><div class="set-stat"><b>${collectionCards.length}</b><span>Catalogue</span></div></div>
+      <div class="set-stats"><div class="set-stat"><b>${collectionView === 'owned' ? ownedUniqueHere : baseCards.length}</b><span>${collectionView === 'owned' ? 'Owned here' : 'In view'}</span></div><div class="set-stat"><b>${unlocked}/${starCards.length}</b><span>Superstars</span></div><div class="set-stat"><b>${ownedUniqueAll}</b><span>Total owned</span></div><div class="set-stat"><b>${visibleCards.length}</b><span>Catalogue</span></div></div>
     </section>
     <section class="collection-tools"><span class="collection-mode-label">${eyebrow}</span><input id="collection-search" type="search" placeholder="Search name, move, ability or card code" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select><select id="collection-sort" aria-label="Sort My Collection"><option value="newest" ${collectionSort === 'newest' ? 'selected' : ''}>Newest Owned</option><option value="alpha-asc" ${collectionSort === 'alpha-asc' ? 'selected' : ''}>A–Z</option><option value="alpha-desc" ${collectionSort === 'alpha-desc' ? 'selected' : ''}>Z–A</option><option value="rarity-desc" ${collectionSort === 'rarity-desc' ? 'selected' : ''}>Rarity High → Low</option><option value="rarity-asc" ${collectionSort === 'rarity-asc' ? 'selected' : ''}>Rarity Low → High</option><option value="copies-desc" ${collectionSort === 'copies-desc' ? 'selected' : ''}>Most Copies</option></select><span class="collection-count">Showing ${displayed.length} / ${visible.length} matching · ${scopedCards.length} in scope</span></section>
     <section class="catalogue-grid collectible-catalogue">${displayed.length ? displayed.map(card => {
@@ -1576,10 +1587,12 @@ function catalogueCardUsageLabel(card) {
 
 function renderCardCatalogue() {
   const root = $("#game");
-  const options = catalogueOptions(collectionCards);
+  const visibleCards = playerFacingCollectionCards();
+  const visibleSets = playerFacingSetCollections();
+  const options = catalogueOptions(visibleCards);
   const ownershipFor = card => catalogueOwned(card);
-  const filtered = filterAndSortCatalogue(collectionCards, catalogueFilter, ownershipFor);
-  const ownedUnique = collectionCards.filter(card => ownershipFor(card).total > 0).length;
+  const filtered = filterAndSortCatalogue(visibleCards, catalogueFilter, ownershipFor);
+  const ownedUnique = visibleCards.filter(card => ownershipFor(card).total > 0).length;
   const pageCount = Math.max(1, Math.ceil(filtered.length / CATALOGUE_PAGE_SIZE));
   cataloguePage = Math.min(Math.max(1, cataloguePage), pageCount);
   const start = (cataloguePage - 1) * CATALOGUE_PAGE_SIZE;
@@ -1599,7 +1612,7 @@ function renderCardCatalogue() {
     select("shared","Shared / Generic",catalogueFilter.superstarId),
     ...options.superstars.map(star => select(star.id, star.name, catalogueFilter.superstarId))
   ].join("");
-  const setOptions = [select("all","All Sets",catalogueFilter.setId), ...Object.values(setCollections).map(set => select(set.id,set.displayName,catalogueFilter.setId))].join("");
+  const setOptions = [select("all","All Sets",catalogueFilter.setId), ...Object.values(visibleSets).map(set => select(set.id,set.displayName,catalogueFilter.setId))].join("");
   const moveTypeOptions = [select("all","All Move Types",catalogueFilter.moveType), ...options.moveTypes.map(type => select(type, MOVE_TYPE_LABELS[type] ?? type, catalogueFilter.moveType))].join("");
   const moveFamilyOptions = [select("all","All Move Families",catalogueFilter.moveFamily), ...options.moveFamilies.map(family => select(family, family.replaceAll("-"," ").replace(/\b\w/g,m=>m.toUpperCase()), catalogueFilter.moveFamily))].join("");
   const methodOptions = [select("all","All Methods",catalogueFilter.method), ...options.methods.map(method => select(method, method[0].toUpperCase()+method.slice(1), catalogueFilter.method))].join("");
@@ -1608,7 +1621,7 @@ function renderCardCatalogue() {
   root.innerHTML = `<section class="catalogue-screen premium-screen theme-catalogue-all">
     <section class="catalogue-master-hero">
       <div><span class="eyebrow">MASTER CARD DATABASE</span><h1>CARD CATALOGUE</h1><p>Every released WWE Legacy card stays visible here. Unowned cards are greyed out; owned quantities are shown on every card.</p></div>
-      <div class="catalogue-master-stats"><span><b>${collectionCards.length}</b> Released</span><span><b>${ownedUnique}</b> Owned</span><span><b>${filtered.length}</b> Matching</span></div>
+      <div class="catalogue-master-stats"><span><b>${visibleCards.length}</b> Released</span><span><b>${ownedUnique}</b> Owned</span><span><b>${filtered.length}</b> Matching</span></div>
       <button id="catalogue-my-collection" class="nav-button catalogue-owned-link">My Collection</button>
     </section>
 
@@ -1735,7 +1748,7 @@ function renderDeckBuilder() {
     } else if (pickType === "lead") {
       title = `Change Lead Off ${Number(deckLabPicker.slot) + 1}`;
       subtitle = "Choose any owned Move or Momentum page. Invalid Method or Superstar restrictions remain visible but shaded.";
-      cards = collectionCards.filter(card => ["move", "momentum"].includes(card.kind) && ownedTotal(profile, card.id) > 0).map(card => ({ card, eligibility: cardEligibilityForSuperstar(star, card) }));
+      cards = playerFacingCollectionCards().filter(card => ["move", "momentum"].includes(card.kind) && ownedTotal(profile, card.id) > 0).map(card => ({ card, eligibility: cardEligibilityForSuperstar(star, card) }));
     } else {
       const category = DECK_LAB_CATEGORIES.find(c => c.id === deckLabPicker.category);
       title = category?.label ?? "Deck Cards";
@@ -1825,7 +1838,7 @@ function renderDeckBuilder() {
 function cardMeta(card) {
   if (card.kind === "momentum") return `${card.method.toUpperCase()} +${card.amount ?? 1}`;
   if (["entrance", "special", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
-  const req = Object.entries(card.requirements ?? {}).map(([m, n]) => `${n} ${m}`).join(" · ");
+  const req = Object.entries(card.finisher ? {} : (card.requirements ?? {})).map(([m, n]) => `${n} ${m}`).join(" · ");
   const position = [
     card.requiresPosture ? `Foe: ${card.requiresPosture}` : "",
     card.requiresLocation ? `Location: ${card.requiresLocation}` : ""
@@ -1860,7 +1873,7 @@ function cardReason(playerId, card) {
   if (state.playerInControl !== playerId && state.phase === "ACTION") return "Not in Control";
   if (card.kind === "momentum") return (state.players[playerId].turn?.momentumPlayed ?? 0) >= (state.players[playerId].turn?.momentumPlayLimit ?? 1) ? "Momentum already played this turn — connect a Move or begin a new turn to refresh it" : "";
   if (card.kind === "entrance") return "Entrance resolves automatically pre-match";
-  if (card.kind === "action") return state.players[playerId].turn.actionPlayed >= 1 ? "Action already played this turn" : "";
+  if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} total Momentum` : ""; }
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
   if (card.kind === "manager") return state.players[playerId].activeManager ? "Manager already active" : "";
   if (card.kind === "special") return canPlaySpecial(state, playerId, card) ? "PLAY SPECIAL" : "Special trigger not available";
@@ -1945,6 +1958,7 @@ function renderMomentum(player) {
 
 function abilityStatus(player) {
   const ability = player.superstar.ability;
+  if (player.superstar?.id === "goldberg") return `${player.streakCounters ?? 0}/3 STREAK`;
   if (ability?.passive) return "PASSIVE";
   const max = ability?.maxUses ?? 1;
   if (max > 1) return `${player.abilityUses ?? 0}/${max}`;

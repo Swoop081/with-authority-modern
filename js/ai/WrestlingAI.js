@@ -1,4 +1,4 @@
-import { moveEligibility, counterEligibility, canPlaySpecial, canPlayMomentum, canAttemptPin, submissionThreshold } from "../engine/rules.js";
+import { moveEligibility, counterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canAttemptPin, submissionThreshold } from "../engine/rules.js";
 import { healthRatio, healthZone } from "../engine/health.js";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
@@ -45,7 +45,7 @@ export function cpuDecision(game,pid="p2"){
    if(['tiffany-stratton','damian-priest','chelsea-green','bayley','becky-lynch'].includes(p.superstar.id))moves=moves.sort((a,b)=>moveScore(s,pid,b)-moveScore(s,pid,a));
    else moves=moves.sort((a,b)=>(Number(!!b.finisher)-Number(!!a.finisher))||((b.damage??0)-(a.damage??0)));
    if(moves[0])return{type:"move",card:moves[0]};
-   const utility=p.hand.find(x=>(x.kind==="action"&&!p.actionLocked&&(p.turn?.actionPlayed??0)<1)||(x.kind==="support"&&(p.turn?.supportPlayed??0)<1)||(x.kind==="manager"&&!p.activeManager));if(utility)return{type:utility.kind,card:utility};
+   const utility=p.hand.find(x=>(x.kind==="action"&&canPlayAction(s,pid,x))||(x.kind==="support"&&(p.turn?.supportPlayed??0)<1)||(x.kind==="manager"&&!p.activeManager));if(utility)return{type:utility.kind,card:utility};
    return{type:"pass"};
  }
  return null;

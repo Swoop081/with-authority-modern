@@ -1,4 +1,4 @@
-// WWE Legacy canonical collector numbering — v0.11.99
+// WWE Legacy canonical collector numbering — v0.12.12
 // Authoritative card-code manifest. Runtime Collection/Catalogue and generated Studio data must resolve through this table.
 export const CARD_NUMBER_MANIFEST = Object.freeze([
   {
@@ -1688,7 +1688,7 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "SS1-033"
   },
   {
-    "id": "roman-reigns-sitout-crucifix-powerbomb",
+    "id": "roman-reigns-ooh-ahh",
     "setId": "summerslam-series-1",
     "cardNumber": 34,
     "cardCode": "SS1-034"
@@ -2510,6 +2510,90 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "SVS1-035"
   },
   {
+    "id": "solo-sikoa-spinning-solo",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 36,
+    "cardCode": "SVS1-036"
+  },
+  {
+    "id": "solo-sikoa-samoan-spike",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 37,
+    "cardCode": "SVS1-037"
+  },
+  {
+    "id": "entrance-solo-sikoa",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 38,
+    "cardCode": "SVS1-038"
+  },
+  {
+    "id": "special-solo-sikoa",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 39,
+    "cardCode": "SVS1-039"
+  },
+  {
+    "id": "superstar-solo-sikoa",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 40,
+    "cardCode": "SVS1-040"
+  },
+  {
+    "id": "jade-cargill-jaded",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 41,
+    "cardCode": "SVS1-041"
+  },
+  {
+    "id": "entrance-jade-cargill",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 42,
+    "cardCode": "SVS1-042"
+  },
+  {
+    "id": "special-jade-cargill",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 43,
+    "cardCode": "SVS1-043"
+  },
+  {
+    "id": "superstar-jade-cargill",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 44,
+    "cardCode": "SVS1-044"
+  },
+  {
+    "id": "nia-jax-avalanche-samoan-drop",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 45,
+    "cardCode": "SVS1-045"
+  },
+  {
+    "id": "nia-jax-annihilator",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 46,
+    "cardCode": "SVS1-046"
+  },
+  {
+    "id": "entrance-nia-jax",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 47,
+    "cardCode": "SVS1-047"
+  },
+  {
+    "id": "special-nia-jax",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 48,
+    "cardCode": "SVS1-048"
+  },
+  {
+    "id": "superstar-nia-jax",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 49,
+    "cardCode": "SVS1-049"
+  },
+  {
     "id": "tilt-a-whirl-headscissors",
     "setId": "worlds-collide-series-1",
     "cardNumber": 1,
@@ -2712,7 +2796,43 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "worlds-collide-series-1",
     "cardNumber": 34,
     "cardCode": "WC1-034"
-  }
+  },
+  {
+    "id": "goldberg-military-press-powerslam",
+    "setId": "season-2-whos-next",
+    "cardNumber": 1,
+    "cardCode": "S2WN-001"
+  },
+  {
+    "id": "goldberg-spear",
+    "setId": "season-2-whos-next",
+    "cardNumber": 2,
+    "cardCode": "S2WN-002"
+  },
+  {
+    "id": "goldberg-jackhammer",
+    "setId": "season-2-whos-next",
+    "cardNumber": 3,
+    "cardCode": "S2WN-003"
+  },
+  {
+    "id": "entrance-goldberg",
+    "setId": "season-2-whos-next",
+    "cardNumber": 4,
+    "cardCode": "S2WN-004"
+  },
+  {
+    "id": "special-goldberg",
+    "setId": "season-2-whos-next",
+    "cardNumber": 5,
+    "cardCode": "S2WN-005"
+  },
+  {
+    "id": "superstar-goldberg",
+    "setId": "season-2-whos-next",
+    "cardNumber": 6,
+    "cardCode": "S2WN-006"
+  },
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));
