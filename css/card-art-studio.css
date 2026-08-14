@@ -25,3 +25,6 @@
 .canvas-wrap{transition:aspect-ratio .18s ease,width .18s ease}
 
 /* v0.11.89 — HUD headshots have free panning and expanded 15–500% zoom; card-front controls remain bounded. */
+
+/* v0.12.00 — Survivor Series identity */
+.key.survivor{border-color:#6f8eff;color:#fff;background:linear-gradient(135deg,#061126 0%,#164fa8 44%,#161a25 50%,#87172c 72%,#d62646 100%)}

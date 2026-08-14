@@ -277,6 +277,12 @@ test("canonical collector manifest is gap-free and matches Collection plus Card 
   }
   const studioHtml = fs.readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
   assert.ok(studioHtml.indexOf("card-art-studio-data.js") < studioHtml.indexOf("card-art-studio.js"));
+  assert.match(studioHtml,/value="survivor-series-series-1"/);
+  assert.match(studioHtml,/key survivor">SURVIVOR SERIES/);
+  const studioRenderer = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
+  assert.match(studioRenderer,/function drawSurvivorSeries/);
+  assert.match(studioRenderer,/survivor-series-logo\.svg/);
+  assert.ok(fs.existsSync(new URL("../assets/branding/survivor-series-series-1/survivor-series-logo.svg", import.meta.url)));
 });
 
 test("Liv Morgan uses Jersey Codebreaker as her exclusive Trademark and the superseded generic variant is absent",()=>{
@@ -1081,4 +1087,17 @@ test("Charlotte uses Flair Chop while shared Chop remains intact and Wooo! trigg
   p.hand=[flair,wooo]; p.momentum.strike=99; const hp=d.hp,adrenalineBefore=p.adrenaline; st.playerInControl='p1'; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:flair}; g._connect();
   assert.equal(d.hp,hp-6); assert.equal(d.submissionDamage.chest,1); assert.equal(p.specialUsed,true); assert.equal(p.adrenaline,adrenalineBefore+3,'move connect gives +1 Adrenaline and Wooo! adds +2');
   assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='flair-chop-wooo'));
+});
+
+test("v0.11.99 Play Pile inspector uses a mobile-safe non-nested hit target and HUD headshots fill their viewport", async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.ok(ui.includes('class="play-pile-card-trigger" data-open-play-pile="${card.id}" role="button" tabindex="0"'));
+  assert.equal(ui.includes('<button type="button" class="play-pile-card-trigger"'),false,'Play Pile must not nest a collectible button inside another button');
+  assert.ok(ui.includes('superstar-card-modal play-pile-card-modal'),'Play Pile reuses the front-of-screen Superstar inspector presentation');
+  assert.ok(css.includes('.play-pile-card-trigger .ccg-card'));
+  assert.ok(css.includes('pointer-events:none!important'));
+  assert.ok(css.includes('object-fit:cover!important'));
+  assert.ok(css.includes('min-height:96px!important'));
 });

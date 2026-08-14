@@ -1,12 +1,12 @@
-# WWE Legacy: Collectible Card Game — v0.11.98
+# WWE Legacy: Collectible Card Game — v0.12.00
 
-Current canonical development baseline: **v0.11.98 — Flair Chop + Shared Move Expansion**.
+Current canonical development baseline: **v0.12.00 — Survivor Series Identity Pass**.
 
-This build carries forward v0.11.96 and adds four newly locked Survivor Series — Series 1 Superstars: **Drew McIntyre, Randy Orton, Sami Zayn, and Jacob Fatu**. Together with the already implemented **Bron Breakker**, Survivor Series — Series 1 now has five of its planned eight Superstars built and playable in development.
+Survivor Series — Series 1 now has a fully independent visual identity instead of inheriting SummerSlam in Card Art Studio. The Studio includes Survivor Series in its set selector, renders a dedicated **cobalt blue vs crimson red** template with silver/white trim, and uses a dedicated local Survivor Series logo asset. The same identity is available to booster/card-back, Collection feature and live presentation styling.
 
-Each new Superstar has a complete 55-page recommended deck with exactly 12 Momentum, a locked Entrance, Ability, Special, exclusive signature package, and canonical Survivor Series collector numbering. Randy Orton has two Finishers (RKO and Punt Kick); Jacob Fatu has both a damage Finisher (Moonsault) and a Submission Finisher (Tongan Death Grip).
+The v0.11.99 HUD + Play Pile inspector fixes remain intact. The complete v0.11.98 Flair Chop/shared-move expansion and the five implemented Survivor Series — Series 1 Superstars are unchanged by this presentation-only release.
 
-The canonical health bands remain **Green = 65–100% HP, Amber = 25–64% HP, Red = 0–24% HP**. Pin Bonus remains retired. Fight Forever, the v0.11.96 shared move/action expansion, the match HUD safe-area work, and all earlier locked systems remain intact.
+The canonical health bands remain **Green = 65–100% HP, Amber = 25–64%, Red = 0–24%**. Pin Bonus remains retired. Fight Forever, the v0.11.96 shared move/action expansion, match HUD safe-area work and all earlier locked systems remain intact.
 
 Current roster count: **46 implemented Superstars** total — 41 Season 1 Superstars plus five development-only Survivor Series — Series 1 Superstars.
 

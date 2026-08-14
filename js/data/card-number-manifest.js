@@ -1,4 +1,4 @@
-// WWE Legacy canonical collector numbering — v0.11.98
+// WWE Legacy canonical collector numbering — v0.11.99
 // Authoritative card-code manifest. Runtime Collection/Catalogue and generated Studio data must resolve through this table.
 export const CARD_NUMBER_MANIFEST = Object.freeze([
   {
