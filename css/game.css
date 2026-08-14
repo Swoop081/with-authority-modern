@@ -3168,7 +3168,7 @@ body[data-screen="match"] .match-command .primary,body[data-screen="match"] .mat
 /* Explicit final rule: never shade over printed collectible card artwork. */
 .ccg-card .ccg-card-art:after{display:none!important}
 
-/* v0.12.15 — verified corrective presentation pass */
+/* v0.12.16 — runtime match-flow hotfix on top of corrective presentation pass */
 body.tier-up-open{overflow:hidden!important;touch-action:none}
 #tier-up-layer{position:fixed;inset:0;z-index:20000;pointer-events:auto}
 #tier-up-layer .tier-up-celebration{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;min-height:100svh!important;z-index:20000!important;box-sizing:border-box!important;overflow:hidden!important;display:grid!important;place-items:center!important;padding:max(22px,env(safe-area-inset-top)) 16px max(22px,env(safe-area-inset-bottom))!important;background:radial-gradient(circle at 50% 28%,rgba(179,102,255,.48),transparent 29%),radial-gradient(circle at 50% 58%,rgba(57,210,255,.16),transparent 36%),linear-gradient(180deg,#080411 0%,#0d0619 48%,#030509 100%)!important;backdrop-filter:none!important;animation:tierUpScreenIn .28s ease-out both!important}

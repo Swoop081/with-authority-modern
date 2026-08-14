@@ -1,30 +1,30 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.15";
-import { superstars } from "../data/superstars.js?v=0.12.15";
-import { decks } from "../data/decks.js?v=0.12.15";
-import { sets } from "../data/sets.js?v=0.12.15";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.15";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.15";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.15";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.15";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.15";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.15";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.15";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.15";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.15";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.15";
-import { totalMomentum } from "../engine/utils.js?v=0.12.15";
-import { healthZone } from "../engine/health.js?v=0.12.15";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.15";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.15";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.15";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.15";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.15";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.15";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.15";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.15";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.15";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.15";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.15";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.16";
+import { superstars } from "../data/superstars.js?v=0.12.16";
+import { decks } from "../data/decks.js?v=0.12.16";
+import { sets } from "../data/sets.js?v=0.12.16";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.16";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.16";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.16";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.16";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.16";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.16";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.16";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.16";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.16";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.16";
+import { totalMomentum } from "../engine/utils.js?v=0.12.16";
+import { healthZone } from "../engine/health.js?v=0.12.16";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.16";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.16";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.16";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.16";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.16";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.16";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.16";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.16";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.16";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.16";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.16";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1858,7 +1858,7 @@ function cardReason(playerId, card) {
   if (state.playerInControl !== playerId && state.phase === "ACTION") return "Not in Control";
   if (card.kind === "momentum") return (state.players[playerId].turn?.momentumPlayed ?? 0) >= (state.players[playerId].turn?.momentumPlayLimit ?? 1) ? "Momentum already played this turn — connect a Move or begin a new turn to refresh it" : "";
   if (card.kind === "entrance") return "Entrance resolves automatically pre-match";
-  if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} total Momentum` : ""; }
+  if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} Momentum + Attitude` : ""; }
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
   if (card.kind === "manager") return state.players[playerId].activeManager ? "Manager already active" : "";
   if (card.kind === "special") return canPlaySpecial(state, playerId, card) ? "PLAY SPECIAL" : "Special trigger not available";
@@ -2317,8 +2317,15 @@ function renderMatchResults() {
 function render() {
   setChrome();
   if (screen === "setup" || !game) { renderSetup(); return; }
-  handleCompletedMatch();
   const root = $("#game");
+  // A successful pin/submission may already have resolved in the engine, but the
+  // finish presentation must complete before Match Complete is allowed to render.
+  if (game.state().phase === "MATCH_OVER" && matchSpectacle) {
+    document.body.dataset.matchTheme = matchPresentationSetId ?? "summerslam-series-1";
+    root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)} match-finish-presentation">${renderMatchHud()}${renderPlayPile()}</section>${renderMatchSpectacle()}`;
+    return;
+  }
+  handleCompletedMatch();
   if (game.state().phase === "MATCH_OVER") {
     root.innerHTML = renderMatchResults();
     showTierUpCelebration();

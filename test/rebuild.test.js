@@ -362,7 +362,7 @@ test("RAW aerial mechanics execute under the global failed-pin Control transfer 
   s.proposedPin={attackerId:'p1',defenderId:'p2'}; s.players.p1.discard.push(standing);
   const handBefore=s.players.p1.hand.length;
   assert.equal(g.passPinResponse('p2'),true);
-  assert.equal(s.playerInControl,'p2'); assert.equal(s.phase,'ACTION'); assert.equal(s.players.p1.hand.length,handBefore); assert.ok(s.players.p2.hand.length>=1);
+  assert.equal(s.playerInControl,'p2'); assert.equal(s.phase,'ACTION'); assert.equal(s.players.p1.hand.length,handBefore+1,'global turn advance draws for the non-controller too'); assert.ok(s.players.p2.hand.length>=1);
 
   const neutral=starById.get('alexa-bliss');
   const g2=new MatchEngine({p1:neutral,p2:opp,decks,rng:rng(1302)}), q=g2.state();
@@ -869,7 +869,7 @@ test("Danhausen curse, Jar of Teeth and stunned finish interactions resolve",()=
   // Countering the cursed first Move drains another Adrenaline.
   const counter=allGameplayCards.find(c=>!c.defensiveOnly&&(c.counters??[]).some(Boolean)); if(counter){a.hand.unshift(counter); const cb=d.adrenaline; if(g.counter('p1',counter)) assert.equal(d.adrenaline,Math.max(0,cb-1));}
   // Directly verify Jar post-grounding window and effect.
-  const jar=allGameplayCards.find(c=>c.id==='special-danhausen'),ground=allGameplayCards.find(c=>c.id==='inverted-ddt'); a.hand=[jar]; a.specialUsed=false; a.momentum.technical=10;a.momentum.strike=10; d.hand=[allGameplayCards.find(c=>c.id==='momentum-strike')]; d.adrenaline=2; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:ground}; g._connect(); assert.equal(a.events.jarOfTeethWindow,true); const handBefore=a.hand.length; assert.equal(g.playSpecial('p1',jar),true); assert.equal(d.hand.length,0); assert.equal(d.adrenaline,0); assert.ok(a.hand.length>=handBefore);
+  const jar=allGameplayCards.find(c=>c.id==='special-danhausen'),ground=allGameplayCards.find(c=>c.id==='inverted-ddt'); a.hand=[jar]; a.specialUsed=false; a.momentum.technical=10;a.momentum.strike=10; d.hand=[allGameplayCards.find(c=>c.id==='momentum-strike')]; d.adrenaline=2; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:ground}; g._connect(); assert.equal(a.events.jarOfTeethWindow,true); const handBefore=a.hand.length, defenderHandBeforeJar=d.hand.length; assert.equal(g.playSpecial('p1',jar),true); assert.equal(d.hand.length,Math.max(0,defenderHandBeforeJar-1)); assert.equal(d.adrenaline,0); assert.ok(a.hand.length>=handBefore);
   // Triple D gains +1 Damage against a previously Stunned opponent.
   const triple=allGameplayCards.find(c=>c.id==='danhausen-triple-d'); a.specialUsed=true; d.status.stunnedTurns=1;d.stun=1; const hpBeforeTriple=d.hp; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:triple}; g._connect(); assert.equal(d.hp,Math.max(0,hpBeforeTriple-16));
 });
@@ -1219,7 +1219,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.15/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.16/,'Studio script cache key must match the current release');
 });
 
 
@@ -1247,7 +1247,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.15/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.16/,'Studio visible build label should match the current release');
 });
 
 
@@ -1260,7 +1260,7 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,35,900)'),'COST/DAMAGE values should be substantially larger and bold');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.15/,'Studio visible build label should match v0.12.06');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.16/,'Studio visible build label should match v0.12.06');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1566,13 +1566,13 @@ test("v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that
   g.maintainSubmission('p1',0); assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'submission');
 });
 
-test("v0.12.15 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
+test("v0.12.16 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
   const here=path.dirname(fileURLToPath(import.meta.url));
   const root=path.resolve(here,"..");
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.equal(version,"0.12.15");
+  assert.equal(version,"0.12.16");
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }
