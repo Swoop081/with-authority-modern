@@ -1135,3 +1135,21 @@ test("v0.11.99 Play Pile inspector uses a mobile-safe non-nested hit target and 
   assert.ok(css.includes('object-fit:cover!important'));
   assert.ok(css.includes('min-height:96px!important'));
 });
+
+test("v0.12.02 Card Art Studio keeps every set renderer and card-selection wiring intact", async()=>{
+  const fs=await import('node:fs');
+  const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
+  const data=fs.readFileSync(new URL('../js/tools/card-art-studio-data.js',import.meta.url),'utf8');
+  const html=fs.readFileSync(new URL('../tools/card-art-studio.html',import.meta.url),'utf8');
+  const renderers=['drawSummerSlam','drawHall','drawEvolution','drawRewards','drawRaw','drawWorldsCollide','drawMoneyInTheBank','drawSmackDown','drawSurvivorSeries'];
+  for(const fn of renderers) assert.match(studio,new RegExp(`function ${fn}\\(`),`${fn} renderer must remain defined`);
+  assert.match(studio,/function isDanhausenHalloweenCard\(/,'SmackDown Danhausen variant helper must remain defined');
+  for(const setId of ['summerslam-series-1','hall-of-fame-series-1','evolution-series-1','season-1-final-boss','raw-series-1','worlds-collide-series-1','money-in-the-bank-series-1','smackdown-series-1','survivor-series-series-1']){
+    assert.ok(studio.includes(`set===\"${setId}\"`)||setId==='summerslam-series-1',`${setId} must be routed to a renderer`);
+    assert.ok(data.includes(`\"setId\":\"${setId}\"`),`${setId} must have Studio cards`);
+  }
+  assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
+  assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
+  assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.02/,'Studio script cache key must bump with the fix');
+});
