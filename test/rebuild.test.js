@@ -1219,7 +1219,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.14/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.15/,'Studio script cache key must match the current release');
 });
 
 
@@ -1247,7 +1247,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.08/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.15/,'Studio visible build label should match the current release');
 });
 
 
@@ -1260,7 +1260,7 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,35,900)'),'COST/DAMAGE values should be substantially larger and bold');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.08/,'Studio visible build label should match v0.12.06');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.15/,'Studio visible build label should match v0.12.06');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1566,13 +1566,13 @@ test("v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that
   g.maintainSubmission('p1',0); assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'submission');
 });
 
-test("v0.12.14 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
+test("v0.12.15 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
   const here=path.dirname(fileURLToPath(import.meta.url));
   const root=path.resolve(here,"..");
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.equal(version,"0.12.14");
+  assert.equal(version,"0.12.15");
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }

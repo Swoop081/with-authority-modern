@@ -955,9 +955,9 @@ export const superstars = {
       "setId": "hall-of-fame-series-1",
       "rarity": 4,
       "superstarId": "kane",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "agility": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -1600,9 +1600,9 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "becky-lynch",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "agility": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
