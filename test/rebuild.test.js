@@ -354,7 +354,7 @@ test("Logan Paul RAW Series 1 package is locked, playable and wired to its bespo
   assert.equal(g.playSpecial('p1',special),true); assert.equal(st.players.p2.hp,Math.max(0,hp-2)); assert.equal(st.playerInControl,'p2');
 });
 
-test("RAW aerial mechanics execute: Standing Moonsault kickout retains Control and Springboard Crossbody rewards a prior Strike",()=>{
+test("RAW aerial mechanics execute under the global failed-pin Control transfer rule and Springboard Crossbody rewards a prior Strike",()=>{
   const standing=byName('Standing Moonsault'), spring=byName('Springboard Crossbody'), punch=byName('Punch');
   const logan=starById.get('logan-paul'), opp=stars.find(s=>s.id!=='logan-paul');
   const g=new MatchEngine({p1:logan,p2:opp,decks,rng:()=>0.999}), s=g.state();
@@ -362,7 +362,7 @@ test("RAW aerial mechanics execute: Standing Moonsault kickout retains Control a
   s.proposedPin={attackerId:'p1',defenderId:'p2'}; s.players.p1.discard.push(standing);
   const handBefore=s.players.p1.hand.length;
   assert.equal(g.passPinResponse('p2'),true);
-  assert.equal(s.playerInControl,'p1'); assert.equal(s.phase,'ACTION'); assert.equal(s.players.p1.hand.length,handBefore+1);
+  assert.equal(s.playerInControl,'p2'); assert.equal(s.phase,'ACTION'); assert.equal(s.players.p1.hand.length,handBefore); assert.ok(s.players.p2.hand.length>=1);
 
   const neutral=starById.get('alexa-bliss');
   const g2=new MatchEngine({p1:neutral,p2:opp,decks,rng:rng(1302)}), q=g2.state();
@@ -370,7 +370,7 @@ test("RAW aerial mechanics execute: Standing Moonsault kickout retains Control a
   q.players.p1.momentum.strike=5; q.players.p1.momentum.agility=5;
   assert.equal(g2.declareMove('p1',punch),true); assert.equal(g2.passCounter('p2'),true); assert.equal(q.phase,'ACTION');
   assert.equal(g2.declareMove('p1',spring),true); assert.equal(g2.passCounter('p2'),true);
-  assert.equal(q.players.p1.hand.length,1,'Springboard draw 2 / ditch 1 creates net +1 page after a prior Strike');
+  assert.equal(q.players.p1.hand.length,3,'Springboard reward plus the new-turn draw keeps the attacking hand stocked');
 });
 
 
@@ -656,23 +656,21 @@ test("turn advancement preserves Control-sequence combo memory until Control act
   assert.deepEqual(p.namedDamageBuff,{});
 });
 
-test("retained-Control kickouts advance the turn and refresh Momentum without erasing the Control sequence",()=>{
+test("failed pins always transfer Control, advance the turn and draw for the new controller",()=>{
   const sol=starById.get('sol-ruca'), opp=stars.find(x=>x.id!=='sol-ruca');
   const g=new MatchEngine({p1:sol,p2:opp,decks,rng:()=>0.99}),s=g.state();
   const standing=byName('Standing Moonsault');
   s.playerInControl='p1'; s.phase='PIN_RESPONSE';
   s.players.p1.discard=[standing]; s.players.p1.turn.momentumPlayed=1;
-  s.players.p1.lastConnectedMethod='agility'; s.players.p1.lastConnectedCardName='Standing Moonsault'; s.players.p1.controlMoveCount=2;
   s.postMove={attackerId:'p1',defenderId:'p2',cardId:standing.id};
   s.proposedPin={attackerId:'p1',defenderId:'p2'};
-  const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence;
+  const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence,beforeHand=s.players.p2.hand.length;
   assert.equal(g.passPinResponse('p2'),true);
-  assert.equal(s.playerInControl,'p1');
+  assert.equal(s.playerInControl,'p2');
   assert.equal(s.turnNumber,beforeTurn+1);
-  assert.equal(s.controlSequence,beforeSeq);
-  assert.equal(s.players.p1.turn.momentumPlayed,0);
-  assert.equal(s.players.p1.lastConnectedMethod,'agility');
-  assert.equal(s.players.p1.controlMoveCount,2);
+  assert.equal(s.controlSequence,beforeSeq+1);
+  assert.equal(s.players.p2.turn.momentumPlayed,0);
+  assert.equal(s.players.p2.hand.length,beforeHand+1);
 });
 
 test("queued Method/name discounts and named damage buffs survive unrelated Moves and are consumed by their matching Move",()=>{
@@ -846,7 +844,7 @@ test("Money in the Bank Series 1 Finn Bálor package is locked and playable",()=
 test("Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce",()=>{
   const finn=starById.get('finn-balor'),opp=stars.find(x=>x.id!=='finn-balor'); const g=new MatchEngine({p1:finn,p2:opp,decks,rng:rng(2167)}),st=g.state(),p=st.players.p1;
   const sling=byName('Sling Blade'),shotgun=byName('Shotgun Dropkick'),coup=byName('Coup de Grâce'),special=allGameplayCards.find(c=>c.id==='special-finn-balor');
-  p.hand=[sling,special]; p.deck=[shotgun,byName('Punch'),coup]; p.adrenaline=99; for(const m of ['agility','strength','strike','technical'])p.momentum[m]=99;
+  p.hand=[sling,special]; p.deck=[shotgun,byName('Punch'),byName('Headbutt')??byName('Punch'),coup]; p.adrenaline=99; for(const m of ['agility','strength','strike','technical'])p.momentum[m]=99;
   st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sling};g._connect(); assert.ok(p.hand.some(c=>c.id==='shotgun-dropkick')); assert.equal(p.namedDiscount['Shotgun Dropkick'],2); assert.equal(p.specialUsed,true);
   const sg=p.hand.find(c=>c.id==='shotgun-dropkick'); st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sg};g._connect(); assert.ok(p.hand.some(c=>c.id==='finn-balor-coup-de-grace')); assert.equal(p.namedDiscount['Coup de Grâce'],1);
 });
@@ -1221,7 +1219,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.13/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.14/,'Studio script cache key must match the current release');
 });
 
 
@@ -1367,15 +1365,15 @@ test("v0.12.08 Deck Lab roster uses full collectible-style Superstar cards", asy
   assert.ok(css.includes('aspect-ratio:.68'));
 });
 
-test("v0.12.08 Play mode tiles use larger full Superstar cards without nested interactive buttons", async()=>{
+test("v0.12.14 Play mode tiles use integrated Superstar renders without nested interactive buttons", async()=>{
   const fs=await import('node:fs');
   const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
-  assert.ok(ui.includes('class="mode-art mode-full-card-art"'));
+  assert.ok(ui.includes('class="mode-art mode-superstar-render"'));
   assert.ok(ui.includes('<article id="play-exhibition" role="button" tabindex="0"'));
   assert.equal(ui.includes('<button id="play-exhibition" class="play-mode-card'),false);
-  assert.ok(css.includes('.premium-mode-card .mode-full-card-art'));
-  assert.ok(css.includes('width:min(31%,230px)!important'));
+  assert.ok(css.includes('.mode-art.mode-superstar-render'));
+  assert.ok(css.includes('width:46%'));
 });
 
 test("v0.12.08 zero-value navigation alerts are removed instead of rendering red zero badges", async()=>{
@@ -1550,13 +1548,31 @@ test("v0.12.12 roadmap does not reveal unreleased Superstar names",()=>{
 });
 
 
-test("v0.12.13 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
+test("v0.12.14 every new turn after Turn 1 draws exactly one page even when Control is retained",()=>{
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(1214)}),s=g.state();
+  const p=s.players.p1; const before=p.hand.length;
+  s.playerInControl='p1'; s.phase='POST_MOVE'; s.postMove={attackerId:'p1',defenderId:'p2',cardId:'punch'};
+  assert.equal(g.endPostMove('p1'),true);
+  assert.equal(s.turnNumber,2); assert.equal(s.playerInControl,'p1'); assert.equal(p.hand.length,before+1);
+});
+
+test("v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that body area was previously submitted",()=>{
+  const attacker=stars[0],defender=stars[1],sub=allGameplayCards.find(c=>c.kind==='move'&&c.submission); assert.ok(sub);
+  const g=new MatchEngine({p1:attacker,p2:defender,decks,rng:rng(1215)}),s=g.state(),a=s.players.p1,d=s.players.p2;
+  a.hand=[sub,byName('Punch'),byName('Headbutt'),byName('Dropkick')].filter(Boolean); for(const m of ['agility','strength','strike','technical'])a.momentum[m]=99; a.adrenaline=99; d.submissionDamage[sub.submission.bodyPart]=999;
+  s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:sub};g._connect();
+  assert.equal(s.phase,'SUBMISSION_MAINTAIN'); assert.equal(s.submission.holdTurn,1); assert.equal(s.winner,null);
+  g.maintainSubmission('p1',0); assert.equal(s.submission.holdTurn,2); assert.equal(s.winner,null);
+  g.maintainSubmission('p1',0); assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'submission');
+});
+
+test("v0.12.14 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
   const here=path.dirname(fileURLToPath(import.meta.url));
   const root=path.resolve(here,"..");
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.equal(version,"0.12.13");
+  assert.equal(version,"0.12.14");
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }

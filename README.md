@@ -1,6 +1,6 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.13 — Boot Cache-Coherence Hotfix**.
+Current working build: **v0.12.14 — Pre-1.0 Presentation + Rules Pass**.
 
 The player-facing game is currently gated to the intended launch pool: **SummerSlam — Series 1, Hall of Fame — Series 1, and Evolution — Series 1**, with 24 launch Superstars and 271 launch collector cards. Authored future sets remain preserved internally but hidden until release.
 
@@ -8,6 +8,6 @@ Roman Reigns — SummerSlam Series 1 no longer uses Sitout Crucifix Powerbomb. *
 
 Canonical global Finisher rule remains intact: Finishers have no Method Momentum requirements.
 
-v0.12.13 fixes the v0.12.12 boot regression by ensuring `index.html` and all explicitly versioned browser modules use the same cache key. Startup smoke tests now cover both fresh and migrated profiles.
+v0.12.14 builds on the v0.12.13 cache-coherent baseline with the consolidated pre-1.0 presentation pass, match-flow fixes, Season progression polish, Momentum redesign, and updated pin/submission rules. Cache-coherent startup coverage remains in place for fresh and migrated profiles.
 
 Validation: **95/95 tests pass; fresh/migrated boot smoke pass; 50 authored Superstars; 50 decks; 422 gameplay cards; 472 collector cards; 0 orphans/issues; card-ID and flow audits clean.**

@@ -3062,3 +3062,108 @@ body[data-screen="match"] .hand-card-action button.primary:not(:disabled){text-s
 .generated-superstar-logo{position:absolute;top:4%;right:5%;width:35%;height:12%;display:grid;place-items:center}.generated-superstar-logo img{max-width:100%;max-height:100%;object-fit:contain}
 .generated-superstar-preview>strong{position:absolute;left:6%;right:6%;bottom:5%;font-size:clamp(.62rem,2.5vw,1.05rem);line-height:.95;text-align:center;text-transform:uppercase;font-style:italic;font-weight:1000;text-shadow:0 2px 5px #000;white-space:normal}
 .mode-full-card-art .generated-superstar-preview{border-radius:12px}.deck-lab-star-art .generated-superstar-preview{border-radius:12px}
+
+
+/* v0.12.14 — final pre-1.0 global presentation & gameplay UI pass */
+:root{
+  --momentum-strength:#ff8a1f;
+  --momentum-strike:#ef3f4e;
+  --momentum-technical:#36c86f;
+  --momentum-agility:#2fa8ff;
+}
+/* Reduce prototype boxiness globally. */
+.premium-panel,.season-progress-panel,.season-section,.options-panel,.store-roster-section,.deck-lead-off-panel,.deck-section-panel{
+  box-shadow:none!important;
+}
+.section-title+ p,.store-roster-note{max-width:760px}
+.feature-hero .mode-portrait.p2,.feature-hero .mode-portrait.p3{display:none!important}
+.feature-shade{opacity:.35!important}
+/* Starter: one portrait screen, side by side. */
+.starter-screen{gap:10px!important;padding:12px 14px 18px!important;min-height:100svh;align-content:start}
+.onboarding-brand .legacy-logo{transform:scale(.82);transform-origin:top center;margin-bottom:-16px}
+.starter-hero h2{font-size:clamp(2rem,8vw,3.6rem)!important;margin:.08em 0!important;line-height:1!important}
+.starter-hero p{margin:.25rem 0 .45rem!important;font-size:.86rem!important}
+.starter-choice-grid,.champion-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;width:100%!important}
+.starter-choice.champion-starter{padding:9px!important;border-radius:16px!important;min-height:0!important;gap:4px!important}
+.starter-photo{height:min(46vw,285px)!important;margin:0!important;border-radius:11px!important}
+.starter-choice strong{font-size:clamp(1rem,4.5vw,1.45rem)!important;line-height:1.05}
+.starter-choice small{font-size:.72rem!important}.champion-tag{font-size:.47rem!important;letter-spacing:.08em!important;min-height:24px}
+.choose-starter-cta{padding:10px 5px!important;border-radius:9px!important;font-size:.58rem!important;letter-spacing:.05em!important;margin-top:5px!important}
+/* Options destructive action layout. */
+.reset-confirm-actions{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;width:100%!important;margin-top:14px!important}
+.reset-confirm-actions #confirm-reset-progress,.reset-confirm-actions #cancel-reset-progress{width:100%!important;min-height:52px!important;white-space:nowrap!important}
+.reset-confirm-actions #cancel-reset-progress{order:2!important}
+/* Play mode: integrated superstar render instead of mini trading-card-in-a-box. */
+.premium-mode-card{overflow:hidden!important;min-height:300px!important}
+.mode-art.mode-superstar-render{position:absolute!important;right:-4%!important;top:7%!important;bottom:0!important;width:46%!important;height:auto!important;border:0!important;background:none!important;box-shadow:none!important;overflow:hidden!important}
+.mode-art.mode-superstar-render img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center top!important;filter:none!important;border:0!important;border-radius:0!important;transform:scale(1.15);transform-origin:center top}
+.mode-card-shade{background:linear-gradient(90deg,rgba(4,7,12,.98) 0%,rgba(4,7,12,.92) 52%,rgba(4,7,12,.30) 78%,rgba(4,7,12,.08) 100%)!important}
+.mode-card-copy{width:64%!important;position:relative!important;z-index:3!important}
+/* Booster pack lines must never cross printed pack text. */
+.booster-pack:before,.booster-pack:after{display:none!important}
+/* Pack reveal: less dead space and stronger reward staging. */
+.single-card-reveal-stage{min-height:auto!important;padding-top:6px!important}
+.single-card-slot{height:min(61svh,650px)!important;min-height:430px!important}
+.pack-summary-top-actions{display:grid;grid-template-columns:1fr;gap:8px;width:min(620px,94vw);margin:10px auto 18px}
+.pack-summary-top-actions button{min-height:54px;border-radius:14px;font-weight:950;letter-spacing:.04em}
+.pack-summary-badges{position:static!important;margin-top:7px!important;transform:none!important;min-height:24px!important}
+.pack-summary-card.actual-card-summary{display:flex!important;flex-direction:column!important}
+/* Deck Lab: actual Lead Off card faces. */
+.deck-lead-off-row{display:flex!important;gap:8px!important;overflow-x:auto!important;padding:6px 2px 10px!important;scroll-snap-type:x proximity}
+.deck-lead-slot.visual-lead-slot{flex:0 0 118px!important;display:grid!important;gap:5px!important;background:transparent!important;border:0!important;padding:0!important;scroll-snap-align:start}
+.deck-lead-slot .lead-slot-label{font-size:.48rem;letter-spacing:.12em;color:#8f93a0;padding-left:2px}
+.deck-lead-slot .deck-lead-card{width:118px!important;max-width:118px!important;margin:0!important}
+.deck-lead-slot button{width:100%!important;min-height:38px!important;margin:0!important}
+/* Store: cleaner rows and breathing room around buy buttons. */
+.store-superstar-shelf{gap:8px!important}.store-superstar-row{padding:14px!important;column-gap:14px!important}
+.store-superstar-row button,[data-buy-store-star]{margin-top:12px!important;margin-bottom:4px!important;min-height:48px!important;max-width:210px!important}
+.store-roster-note{margin-bottom:18px!important}
+/* Season hero / dashboard polish. */
+.season-final-boss-hero .mode-portrait-stack{right:0!important;width:42%!important}.season-final-boss-hero .mode-portrait.p1{opacity:1!important;filter:none!important}
+.season-hero-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.season-hero-actions button{min-width:0!important;white-space:nowrap!important;min-height:52px!important;font-size:.86rem!important}
+.season-tier-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+.season-stat-card{background:linear-gradient(145deg,rgba(99,58,170,.26),rgba(20,24,38,.82))!important;border:1px solid rgba(163,117,255,.30)!important;box-shadow:inset 0 1px rgba(255,255,255,.04)!important}
+.season-stat-card:nth-child(2){background:linear-gradient(145deg,rgba(31,136,177,.22),rgba(20,24,38,.82))!important}
+.season-stat-card:nth-child(3){background:linear-gradient(145deg,rgba(180,132,37,.20),rgba(20,24,38,.82))!important}
+.season-stat-card.next-drop-card{background:linear-gradient(145deg,rgba(205,45,52,.20),rgba(20,24,38,.82))!important}
+.free-pack-panel{order:-1}
+.roadmap-future-logo{width:min(230px,66%)!important;max-height:92px!important;object-fit:contain!important;display:block!important;margin:8px 0 6px!important}
+.season-roadmap-node .roadmap-copy p{display:none!important}
+.season-rotation-note,.set-lifecycle-note{display:none!important}
+/* Event logos are event identity, not decoration. */
+.prematch-screen .presentation-set-logo,.entrance-intro .presentation-set-logo,.prematch-screen .set-logo,.entrance-intro .set-logo{width:min(58vw,430px)!important;max-height:150px!important;margin-inline:auto!important}
+/* Remove shading overlays from collectible card faces; preserve printed text. */
+.ccg-card-front:before,.ccg-card-front:after,.ccg-card-art:before,.ccg-card-art:after{pointer-events:none}
+.ccg-card.is-full-art-finished .ccg-card-front:after,.ccg-card.is-full-art-superstar .ccg-card-front:after{display:none!important}
+/* Set-themed rule backs rather than generic black. */
+.ccg-card-rules{background:linear-gradient(155deg,#18151f,#0c0d12)!important}
+.ccg-card-rules.set-summerslam-series-1{background:radial-gradient(circle at 75% 15%,rgba(255,99,55,.20),transparent 28%),linear-gradient(155deg,#142a47,#111321 58%,#251320)!important;border-color:#ef9147!important}
+.ccg-card-rules.set-hall-of-fame-series-1{background:radial-gradient(circle at 70% 12%,rgba(237,194,65,.20),transparent 30%),linear-gradient(155deg,#211b08,#0d0d0b 62%,#171205)!important;border-color:#d7b53d!important}
+.ccg-card-rules.set-evolution-series-1{background:radial-gradient(circle at 70% 14%,rgba(197,79,227,.24),transparent 32%),linear-gradient(155deg,#231338,#0d0d17 62%,#161027)!important;border-color:#a55ad0!important}
+.ccg-card-rules.set-raw-series-1{background:radial-gradient(circle at 70% 14%,rgba(255,42,42,.22),transparent 32%),linear-gradient(155deg,#300d0d,#100b0b 65%)!important;border-color:#e83c3c!important}
+.ccg-card-rules.set-worlds-collide-series-1{background:radial-gradient(circle at 70% 14%,rgba(45,169,255,.24),transparent 32%),linear-gradient(155deg,#0c2440,#0c1018 65%)!important;border-color:#43a9ef!important}
+.ccg-card-rules.set-money-in-the-bank-series-1{background:radial-gradient(circle at 70% 14%,rgba(64,215,83,.22),transparent 32%),linear-gradient(155deg,#0d2a16,#0b100d 65%)!important;border-color:#4cc968!important}
+.ccg-card-rules.set-smackdown-series-1{background:radial-gradient(circle at 70% 14%,rgba(45,104,255,.25),transparent 32%),linear-gradient(155deg,#102251,#0a0d19 65%)!important;border-color:#4e7cff!important}
+.ccg-card-rules.set-survivor-series-series-1{background:radial-gradient(circle at 70% 14%,rgba(255,112,34,.22),transparent 32%),linear-gradient(155deg,#10233a,#090e15 65%)!important;border-color:#d3793b!important}
+/* Momentum: new canonical method colours and full-card flame visual. */
+.momentum-strength{--mom:var(--momentum-strength)!important;--mom2:#ffd29e!important}.momentum-strike{--mom:var(--momentum-strike)!important;--mom2:#ffc0c5!important}.momentum-technical{--mom:var(--momentum-technical)!important;--mom2:#bdf5cf!important}.momentum-agility{--mom:var(--momentum-agility)!important;--mom2:#bfe7ff!important}
+.hud-resource.strength{--resource:var(--momentum-strength)!important}.hud-resource.strike{--resource:var(--momentum-strike)!important}.hud-resource.technical{--resource:var(--momentum-technical)!important}.hud-resource.agility{--resource:var(--momentum-agility)!important}
+.momentum-mock{background:radial-gradient(ellipse at 50% 82%,color-mix(in srgb,var(--mom) 88%,white 4%) 0 8%,color-mix(in srgb,var(--mom) 65%,transparent) 18%,transparent 48%),linear-gradient(160deg,color-mix(in srgb,var(--mom) 36%,#090b11),#06070a 65%)!important}
+.momentum-mock:before{content:""!important;position:absolute!important;left:6%!important;right:6%!important;bottom:-3%!important;top:16%!important;opacity:.92!important;background:radial-gradient(ellipse at 50% 100%,var(--mom) 0 12%,transparent 45%),conic-gradient(from 345deg at 50% 100%,transparent 0 7%,color-mix(in srgb,var(--mom2) 80%,transparent) 8% 13%,transparent 14% 20%,var(--mom) 21% 27%,transparent 28% 36%,color-mix(in srgb,var(--mom2) 70%,transparent) 37% 42%,transparent 43% 100%)!important;filter:blur(.2px) drop-shadow(0 -8px 16px color-mix(in srgb,var(--mom) 55%,transparent));transform:none!important;border-radius:45% 45% 8% 8%}
+.momentum-grid,.momentum-emblem,.momentum-permanent,.momentum-code{display:none!important}.momentum-topline{top:8%!important}.momentum-topline em{color:var(--mom2)!important}.momentum-value{font-size:clamp(4rem,20vw,7rem)!important;top:40%!important;text-shadow:0 0 25px var(--mom)!important}.momentum-method{bottom:11%!important;font-size:clamp(.9rem,4vw,1.25rem)!important;letter-spacing:.18em!important}.momentum-method:after{content:" MOMENTUM"}
+.ccg-card.type-momentum:has(.momentum-strength) .ccg-card-face{box-shadow:0 0 0 2px var(--momentum-strength),0 0 25px color-mix(in srgb,var(--momentum-strength) 35%,transparent)!important}.ccg-card.type-momentum:has(.momentum-strike) .ccg-card-face{box-shadow:0 0 0 2px var(--momentum-strike),0 0 25px color-mix(in srgb,var(--momentum-strike) 35%,transparent)!important}.ccg-card.type-momentum:has(.momentum-technical) .ccg-card-face{box-shadow:0 0 0 2px var(--momentum-technical),0 0 25px color-mix(in srgb,var(--momentum-technical) 35%,transparent)!important}.ccg-card.type-momentum:has(.momentum-agility) .ccg-card-face{box-shadow:0 0 0 2px var(--momentum-agility),0 0 25px color-mix(in srgb,var(--momentum-agility) 35%,transparent)!important}
+/* Match: align HP and inherit presentation theme throughout chrome. */
+body[data-screen="match"] .hud-primary-line{align-items:end!important}.premium-headshot-hud .hud-hp-number,.premium-headshot-hud.cpu .hud-hp-number{align-self:end!important;transform:none!important;padding-bottom:7px!important;margin:0!important;min-width:64px;text-align:center}
+body[data-screen="match"] .match-command .primary,body[data-screen="match"] .match-command .secondary,body[data-screen="match"] .onboarding-coach,body[data-screen="match"] .premium-headshot-hud.in-control{border-color:var(--presentation-accent,#2eb5ff)!important}
+body[data-screen="match"] .match-command .primary,body[data-screen="match"] .match-command .secondary{background:linear-gradient(180deg,color-mix(in srgb,var(--presentation-accent,#2eb5ff) 88%,white 7%),color-mix(in srgb,var(--presentation-accent,#2eb5ff) 64%,black 20%))!important;box-shadow:0 8px 22px color-mix(in srgb,var(--presentation-accent,#2eb5ff) 20%,transparent)!important}
+.command-actions{display:grid!important;place-items:center!important}.single-context-action{width:min(430px,88vw)!important;min-height:52px!important}
+/* Play-pile context labels must never be clipped. */
+.play-pile-track,.ring-play-surface{overflow:visible!important}.play-pile-context{overflow:visible!important;white-space:nowrap!important;text-overflow:ellipsis!important;max-width:100%!important;padding-left:4px!important;z-index:8!important}
+/* Badge never covers home tile copy. */
+.main-menu-card .attention-badge,.menu-tile .attention-badge{top:9px!important;right:9px!important;left:auto!important;transform:none!important}
+/* Premium Tier-Up overlay. */
+.tier-up-celebration{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 50% 38%,rgba(139,78,255,.46),transparent 38%),rgba(4,5,10,.94);backdrop-filter:blur(8px);animation:tierUpIn .25s ease-out}.tier-up-card{text-align:center;display:grid;gap:10px;justify-items:center}.tier-up-card>span{font-size:.72rem;letter-spacing:.28em;color:#78e5ff;font-weight:950}.tier-up-card h2{font-size:clamp(3.5rem,18vw,8rem);line-height:.85;margin:0;background:linear-gradient(180deg,#fff,#d8b8ff 55%,#8f55ff);-webkit-background-clip:text;color:transparent}.tier-up-card h3{font-size:clamp(1.5rem,7vw,2.7rem);margin:4px 0;color:#f3d477}.tier-up-card button{min-width:min(420px,88vw);min-height:56px;border:0;border-radius:15px;background:linear-gradient(180deg,#a85cff,#7138cf);color:#fff;font-weight:950;font-size:1rem}@keyframes tierUpIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@media(max-width:430px){.season-tier-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important}.season-stat-card{padding:12px!important}.season-stat-card b{font-size:1.2rem!important}.mode-card-copy{width:67%!important}.premium-mode-card{min-height:260px!important}}
+/* Explicit final rule: never shade over printed collectible card artwork. */
+.ccg-card .ccg-card-art:after{display:none!important}
