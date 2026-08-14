@@ -2185,7 +2185,10 @@ body.booster-modal-open{overflow:hidden!important;overscroll-behavior:none}
 .premium-headshot-hud.cpu .hud-primary-line{grid-template-columns:minmax(42px,20%) minmax(0,80%)}
 .hud-headshot-trigger{position:relative;min-width:0;height:76px;border:0;padding:0;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.10),rgba(255,255,255,.02) 58%,rgba(0,0,0,.18));cursor:pointer}
 .premium-headshot-hud.cpu .hud-headshot-trigger{grid-column:2}.premium-headshot-hud.cpu .hud-hp-number{grid-column:1;grid-row:1}
-.hud-headshot{display:block;width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:saturate(1.05) contrast(1.03)}
+/* v0.11.90 — HUD Portrait Scale Pass
+   The Studio exports a generous 3:1 headshot master. In-match we intentionally zoom that
+   master inside the clipped portrait window so the Superstar reads at fighting-HUD scale. */
+.hud-headshot{display:block;width:100%;height:100%;object-fit:cover;object-position:center 18%;transform:scale(1.68);transform-origin:center 52%;filter:saturate(1.05) contrast(1.03)}
 .hud-headshot-trigger.art-pending:after{content:"ARTWORK PENDING";position:absolute;inset:0;display:grid;place-items:center;padding:8px;background:linear-gradient(145deg,#171b24,#080a0f);font-size:.42rem;letter-spacing:.12em;font-weight:1000;color:#939ba8;text-align:center}
 .hud-side-label{position:absolute;left:5px;top:5px;padding:3px 5px;border-radius:999px;background:rgba(0,0,0,.66);backdrop-filter:blur(5px);font-size:.34rem;line-height:1;letter-spacing:.09em;font-weight:1000;color:#edf3fa}
 .premium-headshot-hud.cpu .hud-side-label{left:auto;right:5px}
