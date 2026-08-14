@@ -1,7 +1,53 @@
-import { moveEligibility, counterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canAttemptPin, submissionThreshold } from "../engine/rules.js";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js";
 import { healthRatio, healthZone } from "../engine/health.js";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
+function incomingSubmissionWouldTap(state,pid,card){
+ if(!card?.submission)return false;
+ const p=state.players?.[pid],part=card.submission.bodyPart;
+ if(!p||!part)return false;
+ const prior=(p.submissionHistory?.[part]??0)>0;
+ const projected=(p.submissionDamage?.[part]??0)+(card.submission.pressure??0);
+ return prior&&projected>=submissionThreshold(p);
+}
+function cpuShouldAutoCounter(state,pid,card){
+ if(!card||card.finisher)return false;
+ const p=state.players?.[pid];
+ if(!p)return false;
+ const midOrHigh=(card.cost??0)>=4;
+ const lethal=(card.damage??0)>=p.hp;
+ return !!card.trademark||midOrHigh||lethal||incomingSubmissionWouldTap(state,pid,card);
+}
+function cpuPostAutoCounterActionState(state,pid){
+ const p=state.players[pid];
+ return {...state,phase:'ACTION',playerInControl:pid,proposedMove:null,postMove:null,players:{...state.players,[pid]:{...p,turn:{momentumPlayed:0,momentumPlayLimit:1,actionPlayed:0,supportPlayed:0,specialPlayed:0},momentumPlayedThisTurn:false}}};
+}
+function cpuPlayableAfterAutoCounter(state,pid,card){
+ const sim=cpuPostAutoCounterActionState(state,pid);
+ if(card?.kind==='move')return !card.defensiveOnly&&moveEligibility(sim,pid,card).legal;
+ if(card?.kind==='momentum')return canPlayMomentum(sim,pid,card);
+ if(card?.kind==='action')return canPlayAction(sim,pid,card);
+ if(card?.kind==='support')return canPlaySupport(sim,pid,card);
+ if(card?.kind==='manager')return canPlayManager(sim,pid,card);
+ if(card?.kind==='special')return canPlaySpecial(sim,pid,card);
+ return false;
+}
+function cpuAutoCounterSelection(state,pid,cost){
+ const p=state.players[pid];
+ const ranked=p.hand.map((card,index)=>{
+   const playable=cpuPlayableAfterAutoCounter(state,pid,card);
+   let score=playable?10000:0;
+   if(card.kind==='special')score+=100;if(card.finisher)score+=90;if(card.trademark)score+=60;
+   if(card.kind==='move'){score+=(card.damage??0)*2+(card.cost??0);if((card.counterStates?.length??0)||(card.counterSubmissionTargets?.length??0)||(card.counters?.length??0)||(card.countersCardIds?.length??0))score+=25;}
+   else if(card.kind==='momentum')score+=20;else score+=18;
+   return {card,index,score,playable};
+ });
+ if(ranked.filter(x=>x.playable).length<2)return null;
+ const discard=ranked.sort((a,b)=>a.score-b.score||a.index-b.index).slice(0,cost);
+ const discardSet=new Set(discard.map(x=>x.index));
+ const playableRemaining=ranked.filter(x=>!discardSet.has(x.index)&&x.playable).length;
+ return playableRemaining>=2?discard.map(x=>x.index):null;
+}
 function moveScore(state,pid,card){
  const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
  let score=(card.damage??0)*2;
@@ -32,7 +78,7 @@ function moveScore(state,pid,card){
 }
 export function cpuDecision(game,pid="p2"){
  const s=game.state(),p=s.players[pid];if(decisionOwner(s)!==pid)return null;
- if(s.phase==="COUNTER"){const c=p.hand.find(x=>counterEligibility(s,pid,s.proposedMove.card,x).legal);return c?{type:"counter",card:c}:{type:"passCounter"};}
+ if(s.phase==="COUNTER"){const incoming=s.proposedMove.card,c=p.hand.find(x=>counterEligibility(s,pid,incoming,x).legal);if(c)return{type:"counter",card:c};const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}return{type:"passCounter"};}
  if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');return c?{type:"pinEscape",card:c}:{type:"passPin"};}
  if(s.phase==="SUBMISSION_MAINTAIN"){const def=s.players[s.submission.defenderId],threshold=submissionThreshold(def);return p.hand.length&&def.submissionDamage[s.submission.bodyPart]<threshold?{type:"maintain",index:0}:{type:"release"};}
  if(s.phase==="ACTION"){
@@ -50,4 +96,4 @@ export function cpuDecision(game,pid="p2"){
  }
  return null;
 }
-export function executeCpuDecision(game,d,pid="p2"){if(!d)return false;if(d.type==="counter")return game.counter(pid,d.card);if(d.type==="passCounter")return game.passCounter(pid);if(d.type==="pinEscape")return game.playPinEscape(pid,d.card);if(d.type==="passPin")return game.passPinResponse(pid);if(d.type==="maintain")return game.maintainSubmission(pid,d.index);if(d.type==="release")return game.releaseSubmission(pid);if(d.type==="pin")return game.attemptPin(pid);if(d.type==="endPost")return game.endPostMove(pid);if(d.type==="momentum")return game.playMomentum(pid,d.card);if(d.type==="move")return game.declareMove(pid,d.card);if(d.type==="action")return game.playAction(pid,d.card);if(d.type==="support")return game.playSupport(pid,d.card);if(d.type==="manager")return game.playManager(pid,d.card);if(d.type==="special")return game.playSpecial(pid,d.card);if(d.type==="pass")return game.passTurn(pid);return false;}
+export function executeCpuDecision(game,d,pid="p2"){if(!d)return false;if(d.type==="counter")return game.counter(pid,d.card);if(d.type==="autoCounter")return game.autoCounter(pid,d.indices);if(d.type==="passCounter")return game.passCounter(pid);if(d.type==="pinEscape")return game.playPinEscape(pid,d.card);if(d.type==="passPin")return game.passPinResponse(pid);if(d.type==="maintain")return game.maintainSubmission(pid,d.index);if(d.type==="release")return game.releaseSubmission(pid);if(d.type==="pin")return game.attemptPin(pid);if(d.type==="endPost")return game.endPostMove(pid);if(d.type==="momentum")return game.playMomentum(pid,d.card);if(d.type==="move")return game.declareMove(pid,d.card);if(d.type==="action")return game.playAction(pid,d.card);if(d.type==="support")return game.playSupport(pid,d.card);if(d.type==="manager")return game.playManager(pid,d.card);if(d.type==="special")return game.playSpecial(pid,d.card);if(d.type==="pass")return game.passTurn(pid);return false;}

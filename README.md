@@ -1,13 +1,11 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.16 — Runtime Match-Flow Hotfix**.
+Current working build: **v0.12.23 — Unlimited Match Clock + HP Pass**.
 
-The player-facing game is currently gated to the intended launch pool: **SummerSlam — Series 1, Hall of Fame — Series 1, and Evolution — Series 1**, with 24 launch Superstars and 271 launch collector cards. Authored future sets remain preserved internally but hidden until release.
+The player-facing game is currently gated to the intended launch pool: **SummerSlam — Series 1, Hall of Fame — Series 1, and Evolution — Series 1**, with authored future sets preserved internally but hidden until release.
 
-Roman Reigns — SummerSlam Series 1 no longer uses Sitout Crucifix Powerbomb. **SS1-034 is Ooh Ahh!!**, a Roman-exclusive Cost 2 Action that tutors Roman’s Spear (or grants +1 Adrenaline if it is already in hand) and reduces the next Roman’s Spear this Control sequence by 1 Cost. Roman’s 55-page recommended deck replaces the two retired Crucifix Powerbomb copies with 1× Ooh Ahh!! and 1× additional Headbutt.
+v0.12.23 raises every Superstar’s starting/max HP by 10, removes the 50-turn draw limit entirely while retaining the visible turn counter, and reworks Fight Forever so it is playable only after Turn 10 and restores 10 HP to both Superstars without extending a match clock.
 
-Canonical global Finisher rule remains intact: Finishers have no Method Momentum requirements.
+The eight physical counter states, Submission body-area response layer, 60-page recommended decks, full-art Move readability and flame Momentum presentation remain intact.
 
-v0.12.16 patches three confirmed phone-runtime defects from v0.12.15: numeric Cost now counts permanent Method Momentum + Attitude; both Superstars draw 1 page on every global turn advance after Turn 1, including during retained opponent Control; and successful pins must complete the visible 1–2–3 count before Match Complete can render. Cache-coherent startup coverage remains in place for fresh and migrated profiles.
-
-Validation: **105/105 tests pass; fresh/migrated boot smoke pass; 50 authored Superstars; 50 decks; 422 gameplay cards; 472 collector cards; 0 orphans/issues; card-ID and flow audits clean. Dead-turn audit: 0 matches with a 4+ consecutive-pass streak across 2,450 simulated matches.**
+Validation: **137/137 tests pass; 50 authored Superstars; 50 valid 60-page decks; 432 gameplay cards; 482 collector cards; 0 orphans/issues; counter-state, card-ID and flow audits clean. Ordered balance: 2,450 matches / 0 stalls / 21.11 average turns; extended balance: 4,900 matches / 0 stalls / 21.18 average turns / 0 draws.**

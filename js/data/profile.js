@@ -1,12 +1,12 @@
-import { decks } from "./decks.js?v=0.12.16";
-import { collectionCards } from "./collection.js?v=0.12.16";
-import { superstars } from "./superstars.js?v=0.12.16";
-import { isUnreleasedSetId } from "./release.js?v=0.12.16";
+import { decks } from "./decks.js?v=0.12.23";
+import { collectionCards } from "./collection.js?v=0.12.23";
+import { superstars } from "./superstars.js?v=0.12.23";
+import { isUnreleasedSetId } from "./release.js?v=0.12.23";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 21;
+export const PROFILE_VERSION = 23;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -77,7 +77,7 @@ export function spendUniversePoints(profile, amount) {
 
 function ensureSavedRecommendedDeck(profile, sid) {
   const d = decks[sid] ?? [];
-  if (d.length !== 55) return false;
+  if (d.length !== 60) return false;
   profile.savedDecks ??= {};
   profile.savedDecks[sid] = d.map(c => ({ id: c.id, foil: false }));
   return true;
@@ -85,7 +85,7 @@ function ensureSavedRecommendedDeck(profile, sid) {
 
 export function grantSuperstarUnlockPackage(profile, sid) {
   const star = starById.get(sid), d = decks[sid] ?? [];
-  if (!star || d.length !== 55) return { leadOff: [], signatures: [], rewardCards: [], deckSize: d.length, missing: 55 - d.length };
+  if (!star || d.length !== 60) return { leadOff: [], signatures: [], rewardCards: [], deckSize: d.length, missing: 60 - d.length };
   profile.unlockedSuperstars ??= [];
   if (!profile.unlockedSuperstars.includes(sid)) profile.unlockedSuperstars.push(sid);
   ensureSavedRecommendedDeck(profile, sid);
@@ -99,13 +99,13 @@ export function grantSuperstarUnlockPackage(profile, sid) {
   return { leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id), signatures: star.signatures ?? [], rewardCards: [`superstar-${sid}`, star.entranceId].filter(Boolean), deckSize: d.length, missing: 0 };
 }
 
-// Store Superstar unlocks deliberately do not grant all 55 owned copies. They
+// Store Superstar unlocks deliberately do not grant all 60 owned copies. They
 // provide the identity + Entrance + Lead Off 5, while a complete recommended
 // deck remains available for immediate play and boosters continue building the
 // owned collection around it.
 export function grantStoreSuperstarUnlockPackage(profile, sid) {
   const star = starById.get(sid), d = decks[sid] ?? [];
-  if (!star || d.length !== 55) throw new Error("That Superstar deck is not available.");
+  if (!star || d.length !== 60) throw new Error("That Superstar deck is not available.");
   profile.unlockedSuperstars ??= [];
   if (profile.unlockedSuperstars.includes(sid)) return { alreadyOwned: true, superstarId: sid };
   profile.unlockedSuperstars.push(sid);
@@ -118,8 +118,8 @@ export function grantStoreSuperstarUnlockPackage(profile, sid) {
   profile.savedDecks ??= {};
   delete profile.savedDecks[sid];
   profile.deckNeedsCards ??= {};
-  profile.deckNeedsCards[sid] = 55;
-  return { alreadyOwned: false, superstarId: sid, entranceId: star.entranceId, deckSize: d.length, missing: 55 };
+  profile.deckNeedsCards[sid] = 60;
+  return { alreadyOwned: false, superstarId: sid, entranceId: star.entranceId, deckSize: d.length, missing: 60 };
 }
 
 export function createProfile(starterId) {
@@ -162,7 +162,67 @@ export function getSavedDeck(p, id) { return p?.savedDecks?.[id] ?? []; }
 export function ensureSavedDeck(p, id) { p.savedDecks ??= {}; return p.savedDecks[id] ??= []; }
 export function setDeckAssistance(p, m) { if (DECK_ASSISTANCE_MODES.includes(m)) p.deckAssistance = m; return p; }
 
+const V01217_RECOMMENDED_FINGERPRINTS = Object.freeze({
+  "iyo-sky": "e1945d01",
+  "mankind": "40285002",
+  "the-rock": "3230842a",
+  "hulk-hogan": "572663b4",
+  "bayley": "022fe1de",
+  "cm-punk": "3f4c2901",
+  "paige": "31f92592",
+  "seth-rollins": "b3fe942e",
+  "andre-the-giant": "7dd41d74",
+  "stephanie-vaquer": "9eba48ee",
+  "randy-savage": "704ed879",
+  "roman-reigns": "3a1bc5b6",
+  "charlotte-flair": "344a1460",
+  "kevin-owens": "0652c47a",
+  "kane": "febbaa35",
+  "the-undertaker": "dbb5e1ea",
+  "ultimate-warrior": "a9ced08b",
+  "rhea-ripley": "f68b0f2d",
+  "cody-rhodes": "66e6cb43",
+  "oba-femi": "6dabc630",
+  "stone-cold-steve-austin": "c9c84373",
+  "liv-morgan": "56b08852",
+  "brock-lesnar": "f35c9053",
+  "gunther": "95a4e9a2",
+  "becky-lynch": "8558acb8",
+  "logan-paul": "8e815ef8",
+  "sol-ruca": "42e69c90",
+  "chad-gable": "455a051e",
+  "raquel-rodriguez": "64d2a576",
+  "rey-mysterio": "747be523",
+  "dominik-mysterio": "b9f8462c",
+  "penta": "64399d70",
+  "el-grande-americano": "2a006daf",
+  "jey-uso": "36f5a1e3",
+  "la-knight": "a3790ac2",
+  "alexa-bliss": "06f0c07b",
+  "finn-balor": "09669d5e",
+  "danhausen": "022d0736",
+  "tiffany-stratton": "af7af3db",
+  "chelsea-green": "432d399d",
+  "damian-priest": "d23c781d",
+  "bron-breakker": "c17982de",
+  "drew-mcintyre": "3161448e",
+  "randy-orton": "3349f999",
+  "sami-zayn": "3c2b2862",
+  "jacob-fatu": "83c2d7ba",
+  "solo-sikoa": "1c7d1845",
+  "jade-cargill": "9fdf9a8d",
+  "nia-jax": "1c249537",
+  "goldberg": "68409807"
+});
+const deckFingerprint = ids => {
+  let h = 2166136261 >>> 0;
+  const text = ids.join('|');
+  for (let i=0;i<text.length;i+=1) { h ^= text.charCodeAt(i); h = Math.imul(h,16777619) >>> 0; }
+  return h.toString(16).padStart(8,'0');
+};
+
 export function migrateProfile(old) {
+  const sourceVersion = Number(old?.version) || 0;
   if (!old?.starterId || !STARTER_CHOICES.includes(old.starterId) || !decks[old.starterId]) return null;
   const p = JSON.parse(JSON.stringify(old));
   p.version = PROFILE_VERSION;
@@ -200,13 +260,42 @@ export function migrateProfile(old) {
 
   // Preserve identity/Entrance ownership, but never let a saved deck contain
   // more copies than the Collection actually owns. Older builds auto-installed
-  // recommended 55-card lists, so migration trims those phantom copies.
+  // recommended 60-card lists, so migration trims those phantom copies.
   for (const sid of p.unlockedSuperstars) {
     const star = starById.get(sid);
     addOwnedCard(p, `superstar-${sid}`, { foil: true });
     if (star?.entranceId) addOwnedCard(p, star.entranceId, { foil: true });
     if (!p.selectedEntrances[sid] && star?.entranceId) p.selectedEntrances[sid] = star.entranceId;
-    const saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
+    let saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
+    // v0.12.18: untouched v0.12.17 60-page recommended lists migrate to the
+    // expanded counter package; custom 60-page decks remain untouched.
+    if (saved?.length === 60 && sourceVersion <= 22 && V01217_RECOMMENDED_FINGERPRINTS[sid]) {
+      const savedIds = saved.map(entry => typeof entry === 'string' ? entry : entry?.id);
+      if (deckFingerprint(savedIds) === V01217_RECOMMENDED_FINGERPRINTS[sid]) {
+        const needed = new Map();
+        for (const card of decks[sid] ?? []) needed.set(card.id,(needed.get(card.id)??0)+1);
+        for (const [id, amount] of needed) {
+          const missing = Math.max(0, amount - totalOwnedCopies(p,id));
+          if (missing) addOwnedCard(p,id,{amount:missing});
+        }
+        saved = (decks[sid] ?? []).map(card => ({id:card.id,foil:false}));
+        p.savedDecks[sid] = saved;
+      }
+    }
+    // v0.12.17: seamlessly extend untouched v0.12.16 recommended 55-page saves
+    // to the new 60-page standard. Custom 55-page decks are left untouched so
+    // the player can revise them manually in Deck Lab rather than having edits overwritten.
+    if (saved?.length === 55 && (decks[sid]?.length ?? 0) === 60) {
+      const savedIds = saved.map(entry => typeof entry === "string" ? entry : entry?.id);
+      const oldRecommendedIds = decks[sid].slice(0,55).map(card => card.id);
+      if (savedIds.every((id,index) => id === oldRecommendedIds[index])) {
+        const additions = decks[sid].slice(55);
+        for (const card of additions) {
+          addOwnedCard(p, card.id, { amount: 1 });
+          saved.push({ id: card.id, foil: false });
+        }
+      }
+    }
     if (saved) {
       const used = new Map();
       p.savedDecks[sid] = saved.filter(entry => {

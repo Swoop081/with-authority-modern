@@ -1,0 +1,10 @@
+WWE Legacy v0.12.22 — Auto Counter CPU Retention Audit
+
+- Auto Counter escalation: 5 pages, then 6, 7, 8, etc. per Superstar per match.
+- Human legality: full current cost must be payable while leaving at least 2 pages after payment.
+- CPU extra rule: at least 2 pages that are legal in its upcoming ACTION window must survive the ditch before the normal turn draw.
+- CPU discard selection strongly protects those playable pages and ditches lower-value/unplayable pages first.
+- CPU refuses Auto Counter if fewer than 2 playable pages can survive payment.
+- CPU still prefers matching Move reversal before Auto Counter.
+- Finishers remain immune to Auto Counter.
+- Dedicated regression tests verify both preservation and refusal cases.

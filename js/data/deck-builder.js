@@ -2,7 +2,7 @@ import { decks } from "./decks.js";
 import { collectionCards } from "./collection.js";
 import { superstars } from "./superstars.js";
 import { evaluateDeckHealth, deckBucket } from "./deck-health.js";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.16";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.23";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -24,7 +24,7 @@ export function ownedTotal(p, id) { const o = p?.ownedCards?.[id] ?? {}; return 
 
 export function cardEligibilityForSuperstar(star, card) {
   if (!star || !card) return { legal: false, reason: "Card unavailable" };
-  if (["superstar", "entrance"].includes(card.kind)) return { legal: false, reason: "Not a 55-page deck card" };
+  if (["superstar", "entrance"].includes(card.kind)) return { legal: false, reason: "Not a 60-page deck card" };
   if (card.superstarId && card.superstarId !== star.id) {
     const owner = starById.get(card.superstarId)?.name ?? "another Superstar";
     return { legal: false, reason: `${owner}-exclusive` };
@@ -109,7 +109,7 @@ export function aggregateDeck(d, { tailOnly = false } = {}) {
 
 export function canAddCard(profile, sid, draft, id) {
   const card = byId.get(id), star = starById.get(sid);
-  if (!card || !legalForSuperstar(star, card) || draft.length >= 55) return false;
+  if (!card || !legalForSuperstar(star, card) || draft.length >= 60) return false;
   const defaultCap = card.kind === "momentum" ? 12 : 5;
   const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
   return usedCount(draft, id) < Math.min(cap, ownedTotal(profile, id));
@@ -212,7 +212,7 @@ export function buildOwnedRecommendedDraft(profile, sid) {
 export function autoFillOwnedDraft(profile, sid, draft = []) {
   const star = starById.get(sid); if (!star) return [...draft];
   const out = [...draft.map(e => typeof e === "string" ? { id: e, foil: false } : { ...e })];
-  const target = (decks[sid] ?? []).length || 55;
+  const target = (decks[sid] ?? []).length || 60;
   const candidates = eligibleOwnedCards(profile, sid).sort((a, b) => {
     const ar = a.rarity ?? 0, br = b.rarity ?? 0; if (br !== ar) return br - ar;
     return (a.cost ?? 0) - (b.cost ?? 0) || a.name.localeCompare(b.name);

@@ -3235,3 +3235,66 @@ body[data-screen="match"] .premium-play-pile{overflow:visible!important}body[dat
 .deck-lab-star-status{display:none!important}.deck-lab-star-card.is-valid{border-color:rgba(87,220,126,.36)!important}.deck-lab-star-card.needs-work{border-color:rgba(243,185,71,.34)!important}
 .mode-portrait .superstar-render-visual,.tile-bg-art .superstar-render-visual{width:100%;height:100%;object-fit:cover;object-position:center top;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important}.mode-portrait-stack .mode-portrait{background:none!important;border:0!important;box-shadow:none!important}
 .ccg-card-rules{position:absolute!important;overflow:hidden!important;isolation:isolate}.ccg-rules-set-logo{position:absolute;z-index:0;left:50%;top:43%;width:72%;max-height:28%;object-fit:contain;transform:translate(-50%,-50%);opacity:.10;filter:grayscale(.15) drop-shadow(0 4px 8px rgba(0,0,0,.45));pointer-events:none}.ccg-card-rules>*:not(.ccg-rules-set-logo){position:relative;z-index:2}
+
+/* v0.12.17 — pin-escape Special spectacle */
+.match-spectacle.pin-escape{grid-template-rows:auto auto;align-content:center;gap:14px;background:rgba(0,0,0,.78)}
+.match-spectacle.pin-escape .match-spectacle-copy{font-size:clamp(3.6rem,18vw,8.5rem);letter-spacing:-.045em;color:#fff;text-shadow:0 0 24px var(--presentation-accent,#2eb5ff),0 12px 42px #000}
+.pin-escape-card-showcase{display:grid;justify-items:center;gap:7px;max-width:min(84vw,360px)}
+.pin-escape-card-showcase .pin-escape-special-card{width:min(42vw,170px);pointer-events:none;filter:drop-shadow(0 18px 30px rgba(0,0,0,.72))}
+.pin-escape-card-showcase small{font-size:.62rem;line-height:1.3;text-align:center;color:#e8eef7;font-weight:850;letter-spacing:.04em}
+
+/* v0.12.20 — mobile card-front readability + canonical flame Momentum cards. */
+.ccg-card{container-type:inline-size}
+/* Finished Move art keeps its authored full-art face, but Cost/Damage are repeated as
+   large live corner tiles so the gameplay values remain readable at iPhone hand size. */
+.ccg-card.is-full-art-move .ccg-card-stats,.ccg-card.type-move.is-full-art-finished .ccg-card-stats{
+  display:flex!important;position:absolute!important;z-index:8!important;
+  left:5.5%!important;right:5.5%!important;bottom:5.5%!important;
+  justify-content:space-between!important;align-items:flex-end!important;
+  gap:0!important;background:transparent!important;border:0!important;pointer-events:none!important;
+}
+.ccg-card.is-full-art-move .ccg-card-stats>span,.ccg-card.type-move.is-full-art-finished .ccg-card-stats>span{
+  width:25cqw!important;height:20cqw!important;min-width:0!important;padding:1.8cqw 2cqw!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:.6cqw!important;
+  border:1.2px solid rgba(255,255,255,.74)!important;border-radius:2.8cqw!important;
+  background:rgba(4,7,12,.94)!important;box-shadow:0 2px 7px rgba(0,0,0,.72),inset 0 0 0 1px rgba(255,255,255,.06)!important;
+}
+.ccg-card.is-full-art-move .ccg-card-stats>span+span,.ccg-card.type-move.is-full-art-finished .ccg-card-stats>span+span{border-left:1.2px solid rgba(255,255,255,.74)!important}
+.ccg-card.is-full-art-move .ccg-card-stats small,.ccg-card.type-move.is-full-art-finished .ccg-card-stats small{
+  font-size:4.2cqw!important;line-height:1!important;letter-spacing:.12em!important;color:#d7d9df!important;font-weight:950!important;
+}
+.ccg-card.is-full-art-move .ccg-card-stats b,.ccg-card.type-move.is-full-art-finished .ccg-card-stats b{
+  font-size:14.5cqw!important;line-height:.78!important;letter-spacing:-.04em!important;color:#fff!important;font-weight:1000!important;overflow:visible!important;
+}
+
+/* Momentum fronts: full-card method-coloured flames, no viewport-sized typography,
+   and no hidden/cropped footer copy. */
+.momentum-mock{
+  container-type:inline-size!important;overflow:hidden!important;
+  background:radial-gradient(ellipse at 50% 72%,color-mix(in srgb,var(--mom) 38%,transparent),transparent 47%),linear-gradient(160deg,#0a0c11 0%,#07080c 58%,color-mix(in srgb,var(--mom) 30%,#07080c) 100%)!important;
+}
+.momentum-mock:before{display:none!important}
+.momentum-mock:after{inset:3.5%!important;border:1.5px solid color-mix(in srgb,var(--mom) 80%,white 7%)!important;border-radius:4cqw!important;box-shadow:inset 0 0 18cqw color-mix(in srgb,var(--mom) 12%,transparent),0 0 8cqw color-mix(in srgb,var(--mom) 25%,transparent)!important}
+.momentum-flames{position:absolute;z-index:1;left:2%;right:2%;bottom:-2%;height:73%;display:block;filter:drop-shadow(0 -2cqw 4cqw color-mix(in srgb,var(--mom) 60%,transparent))}
+.momentum-flames i{position:absolute;bottom:0;display:block;width:18%;height:55%;background:linear-gradient(180deg,color-mix(in srgb,var(--mom2) 92%,white 5%) 0%,var(--mom) 56%,color-mix(in srgb,var(--mom) 20%,transparent) 100%);border-radius:52% 48% 48% 52% / 68% 68% 32% 32%;transform-origin:50% 100%;clip-path:polygon(50% 0,72% 26%,64% 47%,90% 69%,75% 100%,25% 100%,10% 69%,36% 47%,28% 26%)}
+.momentum-flames .flame-1{left:0;height:47%;transform:rotate(-10deg)}.momentum-flames .flame-2{left:12%;height:66%;transform:rotate(7deg)}.momentum-flames .flame-3{left:26%;height:56%;transform:rotate(-5deg)}.momentum-flames .flame-4{left:40%;height:78%;width:20%;transform:rotate(2deg)}.momentum-flames .flame-5{left:56%;height:60%;transform:rotate(-4deg)}.momentum-flames .flame-6{left:70%;height:69%;transform:rotate(8deg)}.momentum-flames .flame-7{left:84%;height:46%;transform:rotate(-7deg)}
+.momentum-topline{z-index:4!important;left:7%!important;top:7%!important;right:34%!important;display:grid!important;gap:1.4cqw!important;line-height:1!important;white-space:nowrap!important;overflow:visible!important}
+.momentum-topline b{font-size:4.5cqw!important;line-height:1!important;letter-spacing:.12em!important;color:#fff!important}
+.momentum-topline em{margin:0!important;font-size:7cqw!important;line-height:.95!important;letter-spacing:.08em!important;color:var(--mom2)!important}
+.momentum-set-logo{right:6%!important;top:5.5%!important;width:26%!important;height:11%!important;max-width:26%!important;max-height:11%!important}
+.momentum-value{z-index:4!important;left:0!important;right:0!important;top:34%!important;font-size:39cqw!important;line-height:.78!important;letter-spacing:-.09em!important;color:#fff!important;text-shadow:0 0 9cqw var(--mom),0 2cqw 3cqw rgba(0,0,0,.72)!important;white-space:nowrap!important}
+.momentum-method{z-index:4!important;left:6%!important;right:6%!important;top:auto!important;bottom:8%!important;display:grid!important;gap:1cqw!important;text-align:center!important;white-space:nowrap!important;color:#fff!important;text-shadow:0 1.2cqw 2cqw #000!important}
+.momentum-method:after{content:none!important}
+.momentum-method b{font-size:12cqw!important;line-height:.9!important;letter-spacing:.07em!important;color:var(--mom2)!important;text-transform:uppercase!important}
+.momentum-method small{font-size:5.2cqw!important;line-height:1!important;letter-spacing:.22em!important;color:#fff!important;font-weight:950!important}
+.momentum-grid,.momentum-emblem,.momentum-permanent,.momentum-code{display:none!important}
+
+/* v0.12.21 — Auto Counter card-selection treatment */
+body[data-screen="match"] .auto-counter-ditch-card{cursor:pointer;opacity:1!important;position:relative;transform:translateY(0);transition:transform .14s ease,filter .14s ease}
+body[data-screen="match"] .auto-counter-ditch-card .ccg-card{filter:none!important}
+body[data-screen="match"] .auto-counter-ditch-card.is-auto-selected{transform:translateY(-8px)}
+body[data-screen="match"] .auto-counter-ditch-card.is-auto-selected .ccg-card-face{box-shadow:0 0 0 3px var(--mode-accent),0 0 24px color-mix(in srgb,var(--mode-accent) 52%,transparent),0 14px 34px rgba(0,0,0,.46)!important}
+body[data-screen="match"] .auto-counter-card-action span{font-weight:900;letter-spacing:.04em;color:var(--mode-accent-2)}
+body[data-screen="match"] .auto-counter-ditch-card.is-auto-selected .auto-counter-card-action span{color:#fff}
+body[data-screen="match"] #auto-counter-action{box-shadow:0 0 0 1px color-mix(in srgb,var(--mode-accent) 58%,transparent),0 0 18px color-mix(in srgb,var(--mode-accent) 24%,transparent)}
+body[data-screen="match"] #confirm-auto-counter:disabled{opacity:.45;filter:saturate(.35)}

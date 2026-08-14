@@ -5,7 +5,7 @@ const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:s
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
 export function canPlayMomentum(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="momentum"&&(p?.turn?.momentumPlayed??0)<(p?.turn?.momentumPlayLimit??1); }
 export function canPlayEntrance(){ return false; }
-export function canPlayAction(state,playerId,card){ const p=state.players[playerId]; const cost=Math.max(0,card?.cost??0); return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="action"&&(p?.turn?.actionPlayed??0)<1&&!p?.actionLocked&&totalMomentum(p)>=cost; }
+export function canPlayAction(state,playerId,card){ const p=state.players[playerId]; const cost=Math.max(0,card?.cost??0); const afterTurn=Math.max(0,Number(card?.playableAfterTurn??0)); return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="action"&&(p?.turn?.actionPlayed??0)<1&&!p?.actionLocked&&totalMomentum(p)>=cost&&(state.turnNumber??1)>afterTurn; }
 export function canPlaySupport(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="support"&&(p?.turn?.supportPlayed??0)<1; }
 export function canPlayManager(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="manager"&&!p?.activeManager; }
 export function canPlaySpecial(state,playerId,card){ const p=state.players[playerId]; if(!p||p.specialUsed||card?.kind!=="special")return false; if(state.phase!=="ACTION"||state.playerInControl!==playerId)return false; if(card?.special?.type==="brassKnuckles")return !!p.events?.brassKnucklesWindow; if(card?.special?.type==="jarOfTeeth")return !!p.events?.jarOfTeethWindow; if(["tiffanyEpiphany","fileComplaint","lastRites","fullSpeed","claymoreCountdown"].includes(card?.special?.type))return true; return false; }
@@ -18,12 +18,17 @@ export function moveEligibility(state,playerId,card){
  const opp=state.players[playerId==="p1"?"p2":"p1"]; if(card.groundedOnly&&!['on-mat','grounded'].includes(opp?.posture))return fail("Opponent must be grounded");
  return {ok:true,legal:true,reason:null,effectiveCost:needed};
 }
-const incomingTypes=incoming=>[incoming?.tacticalType,incoming?.moveType].filter(Boolean);
+const incomingTypes=incoming=>[incoming?.counterState,incoming?.tacticalType,incoming?.moveType].filter(Boolean);
 export function canCounter(incoming,counter){
  if(!incoming||counter?.kind!=="move")return false;
  const direct=(counter.countersCardIds??[]).includes(incoming.id);
- const typed=(counter.counters??[]).some(t=>incomingTypes(incoming).includes(t));
- if(!direct&&!typed)return false;
+ const stateAware=(counter.counterStates?.length??0)>0||(counter.counterSubmissionTargets?.length??0)>0;
+ // Migrated counters use the eight physical states / four submission body targets.
+ // Legacy broad type matching is only a fallback for cards that have not yet been migrated.
+ const typed=!stateAware&&(counter.counters??[]).some(t=>incomingTypes(incoming).includes(t));
+ const stateMatch=(counter.counterStates??[]).includes(incoming.counterState);
+ const submissionMatch=incoming.moveType==='submission'&&(counter.counterSubmissionTargets??[]).includes(incoming.submissionTarget);
+ if(!direct&&!typed&&!stateMatch&&!submissionMatch)return false;
  if(counter.id==='no-sell'&&(incoming.damage??0)<7)return false;
  return true;
 }
@@ -36,6 +41,22 @@ export function counterEligibility(state,playerId,incoming,counter){
  if(!counter.finisher) for(const [m,n] of Object.entries(counter.requirements??{})){if(methodAmount(p,m)<n)return fail(`Need ${n} ${m} Momentum`);}
  const attacker=state.players[state.proposedMove.attackerId]; if(counter.groundedOnly&&!['on-mat','grounded'].includes(attacker?.posture))return fail("Opponent must be grounded");
  return {ok:true,legal:true,reason:null,effectiveCost:needed,offensive:!counter.defensiveOnly,outtaNowhere:outta,outtaNowhereDiscount:outta?(p.superstar.special?.discount??2):0};
+}
+export function autoCounterCost(state,playerId){
+ const uses=Math.max(0,Number(state?.players?.[playerId]?.autoCounterUses??0));
+ return 5+uses;
+}
+export function autoCounterEligibility(state,playerId,incoming=state?.proposedMove?.card){
+ const fail=reason=>({ok:false,legal:false,reason,cost:autoCounterCost(state,playerId)});
+ const p=state?.players?.[playerId];
+ if(state?.phase!=="COUNTER")return fail("Not a Counter window");
+ if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
+ if(!incoming||incoming.kind!=="move")return fail("No incoming Move");
+ if(incoming.finisher)return fail("Finishers cannot be Auto Countered");
+ const cost=autoCounterCost(state,playerId);
+ const handSize=p?.hand?.length??0;
+ if(handSize<cost+2)return fail(`Need ${cost} pages to ditch and at least 2 pages remaining`);
+ return {ok:true,legal:true,reason:null,cost,remaining:handSize-cost,useNumber:(p?.autoCounterUses??0)+1};
 }
 export function canAttemptPin(state,playerId){
  const p=state.players?.[playerId],opp=state.players?.[playerId==="p1"?"p2":"p1"];

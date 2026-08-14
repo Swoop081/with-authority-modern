@@ -1,4 +1,4 @@
-// WWE Legacy canonical collector numbering — v0.12.12
+// WWE Legacy canonical collector numbering — v0.12.20
 // Authoritative card-code manifest. Runtime Collection/Catalogue and generated Studio data must resolve through this table.
 export const CARD_NUMBER_MANIFEST = Object.freeze([
   {
@@ -2833,6 +2833,66 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardNumber": 6,
     "cardCode": "S2WN-006"
   },
+  {
+    "id": "knees-up",
+    "setId": "summerslam-series-1",
+    "cardNumber": 136,
+    "cardCode": "SS1-136"
+  },
+  {
+    "id": "dodge",
+    "setId": "summerslam-series-1",
+    "cardNumber": 137,
+    "cardCode": "SS1-137"
+  },
+  {
+    "id": "block",
+    "setId": "summerslam-series-1",
+    "cardNumber": 138,
+    "cardCode": "SS1-138"
+  },
+  {
+    "id": "up-and-over",
+    "setId": "summerslam-series-1",
+    "cardNumber": 139,
+    "cardCode": "SS1-139"
+  },
+  {
+    "id": "standing-switch",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 76,
+    "cardCode": "HOF1-076"
+  },
+  {
+    "id": "rollover-counter",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 77,
+    "cardCode": "HOF1-077"
+  },
+  {
+    "id": "backflip-counter",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 78,
+    "cardCode": "HOF1-078"
+  },
+  {
+    "id": "catch-the-foot",
+    "setId": "evolution-series-1",
+    "cardNumber": 62,
+    "cardCode": "EVO1-062"
+  },
+  {
+    "id": "arm-drag-counter",
+    "setId": "evolution-series-1",
+    "cardNumber": 63,
+    "cardCode": "EVO1-063"
+  },
+  {
+    "id": "jawbreaker",
+    "setId": "evolution-series-1",
+    "cardNumber": 64,
+    "cardCode": "EVO1-064"
+  }
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

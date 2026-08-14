@@ -1,5 +1,5 @@
 export const RECOMMENDED_DECK_SHAPE = Object.freeze({
-  size: 55,
+  size: 60,
   leadOff: 5,
   copyCap: 5,
   momentumCopyCap: 12
@@ -32,7 +32,7 @@ export function deckComposition(cards = []) {
   for (const card of cards) {
     const bucket = deckBucket(card);
     if (bucket in counts) counts[bucket] += 1;
-    if (card?.kind === "move" && (card.defensiveOnly || card.moveType === "counter" || card.counters?.length)) counts.counters += 1;
+    if (card?.kind === "move" && (card.defensiveOnly || card.moveType === "counter" || card.counters?.length || card.counterStates?.length || card.counterSubmissionTargets?.length || card.countersCardIds?.length)) counts.counters += 1;
     if (card?.finisher) counts.finishers += 1;
     if (card?.trademark) counts.trademarks += 1;
   }

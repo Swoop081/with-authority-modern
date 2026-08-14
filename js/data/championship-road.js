@@ -1,4 +1,4 @@
-import { superstars } from "./superstars.js?v=0.12.16";
+import { superstars } from "./superstars.js?v=0.12.23";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 4;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";
@@ -41,7 +41,7 @@ export function startChampionshipRoad(profile, superstarId, opponentIds, rng = M
 export function currentChampionshipOpponent(profile){const run=ensure(profile).activeRun;return !run||run.status!=="active"?null:run.opponents[run.stage]??null;}
 export function recordChampionshipMatch(profile,result){
   const state=ensure(profile),run=state.activeRun;if(!run||run.status!=="active")throw new Error("No active Championship Road run");
-  if(result==="draw"||result==="loss")return{status:"retry",run};if(result!=="win")throw new Error("Invalid Championship Road result");
+  if(result==="loss")return{status:"retry",run};if(result!=="win")throw new Error("Invalid Championship Road result");
   run.stage+=1;state.bestStage=Math.max(state.bestStage??0,run.stage);state.bestStageByBranch[run.branchId]=Math.max(state.bestStageByBranch[run.branchId]??0,run.stage);
   if(run.stage>=run.opponents.length){run.status="cleared";state.clears=(state.clears??0)+1;state.clearsByBranch[run.branchId]=(state.clearsByBranch[run.branchId]??0)+1;state.championshipPackCredits=(state.championshipPackCredits??0)+1;state.championshipPackCreditsBySet[run.setId]=(state.championshipPackCreditsBySet[run.setId]??0)+1;state.championshipPackQueue.push(run.setId);state.completedByBranch[run.branchId]??=[];const firstWithSuperstar=!state.completedByBranch[run.branchId].includes(run.superstarId);if(firstWithSuperstar)state.completedByBranch[run.branchId].push(run.superstarId);if(!state.completedBy.includes(run.superstarId))state.completedBy.push(run.superstarId);return{status:"cleared",run,championshipPackAwarded:true,firstWithSuperstar};}
   return{status:"advance",run};

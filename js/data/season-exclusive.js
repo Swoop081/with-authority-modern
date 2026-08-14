@@ -1,6 +1,6 @@
 // Season-exclusive Superstar registry. These rewards live outside normal set boosters.
 // Season 1's final boss is The Rock; Season 2's prestige chase reward is WCW-streak Goldberg.
-// Each full 55-card package is reserved for its Season completion flow and future post-season Store availability.
+// Each full 60-card package is reserved for its Season completion flow and future post-season Store availability.
 export const seasonExclusiveSuperstars = {
   "the-rock": {
     id: "the-rock",

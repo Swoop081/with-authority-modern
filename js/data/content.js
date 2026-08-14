@@ -1,3 +1,4 @@
+import { enrichCounterState } from "./counter-states.js";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -34,7 +35,7 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Opponent becomes grounded.",
+    "rulesText": "Opponent becomes grounded. May Counter a Running Aerial Move.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -433,14 +434,12 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "cost": 1,
     "damage": 3,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared fundamental",
+    "rulesText": "Shared fundamental. May Counter an Arm Extended Move.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -454,14 +453,12 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "cost": 2,
     "damage": 4,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared",
+    "rulesText": "Shared. May Counter a Torso Trapped Move or a Neck / Head-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -866,7 +863,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Clean shared strike.",
+    "rulesText": "Clean shared strike. Counters Short-Arm Clothesline and may Counter a Leg-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -1974,14 +1971,12 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "cost": 3,
     "damage": 5,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "New shared canonical",
+    "rulesText": "Shared. May Counter a Rear Control Move or a Neck / Head-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -2002,7 +1997,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "New shared canonical",
+    "rulesText": "Shared. May Counter a Rear Control Move or a Neck / Head-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -2953,14 +2948,12 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "cost": 2,
     "damage": 4,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "",
+    "rulesText": "May Counter a Rear Control Move or a Neck / Head-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -3293,14 +3286,12 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "cost": 3,
     "damage": 4,
-    "requirements": {
-      "technical": 1
-    },
+    "requirements": {},
     "moveType": "grapple",
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "New/shared",
+    "rulesText": "Shared. May Counter a Front Control Move or an Arm-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -3410,7 +3401,7 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "",
+    "rulesText": "May Counter a Body Elevated Move.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -3765,7 +3756,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "",
+    "rulesText": "May Counter a Leg Extended Move or a Leg-targeting Submission attempt.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -4093,16 +4084,14 @@ export const allGameplayCards = [
     "rarity": 1,
     "cost": 2,
     "damage": 0,
-    "requirements": {
-      "agility": 1
-    },
+    "requirements": {},
     "moveType": "counter",
     "defensiveOnly": true,
     "counters": [
       "grapple",
       "aerial"
     ],
-    "rulesText": "Counter a Grapple or Aerial Move."
+    "rulesText": "Counter a Running Aerial or Diving Aerial Move."
   },
   {
     "id": "duck",
@@ -4112,15 +4101,13 @@ export const allGameplayCards = [
     "rarity": 1,
     "cost": 1,
     "damage": 0,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "counter",
     "defensiveOnly": true,
     "counters": [
       "strike"
     ],
-    "rulesText": "Counter a Strike Move."
+    "rulesText": "Counter an Arm Extended or Leg Extended Move."
   },
   {
     "id": "no-sell",
@@ -4139,7 +4126,7 @@ export const allGameplayCards = [
       "strike",
       "grapple"
     ],
-    "rulesText": "Counter a Strike or Grapple Move dealing 7+ printed damage."
+    "rulesText": "Counter a Body Elevated or Torso Trapped Move dealing 7+ printed Damage."
   },
   {
     "id": "shoulder-up",
@@ -5483,7 +5470,7 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounds opponent. Counters Grapple Moves. If used to successfully Counter a Grapple Move, draw 1 page.",
+    "rulesText": "Grounds opponent. May Counter a Body Elevated Move. If used to successfully Counter it, draw 1 page.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -5629,14 +5616,12 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 3,
     "damage": 4,
-    "requirements": {
-      "technical": 1
-    },
+    "requirements": {},
     "moveType": "grapple",
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Grounds opponent.",
+    "rulesText": "Grounds opponent. May Counter a Leg Extended Move or a Leg-targeting Submission attempt.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -5764,7 +5749,7 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounds opponent. Counters Aerial Moves. When used as a successful Counter to an Aerial Move, +2 Damage.",
+    "rulesText": "Grounds opponent. May Counter a Diving Aerial Move. When used as a successful Counter, +2 Damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -6932,11 +6917,8 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 1,
     "defensiveOnly": true,
-    "counters": [
-      "strike",
-      "grapple"
-    ],
-    "rulesText": "Counter a Strike or Grapple Move. On success, gain Control."
+    "counters": [],
+    "rulesText": "Counter a Running Aerial Move. On success, gain Control."
   },
   {
     "id": "abdominal-stretch",
@@ -7226,14 +7208,12 @@ export const allGameplayCards = [
     "setId": "smackdown-series-1",
     "cost": 2,
     "damage": 3,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Standing opponent only. May also Counter a Strike Move.",
+    "rulesText": "Standing opponent only. May Counter an Arm Extended Move.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -7273,11 +7253,11 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 4,
     "boosterOnly": true,
-    "rulesText": "Restore 10 HP to both Superstars, up to their starting HP. Increase this match’s turn limit by 10.",
+    "rulesText": "Playable only after Turn 10. Restore 10 HP to both Superstars, up to their starting HP.",
+    "playableAfterTurn": 10,
     "effect": {
       "type": "fightForever",
-      "healEach": 10,
-      "turns": 10
+      "healEach": 10
     }
   },
   {
@@ -7377,15 +7357,13 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 3,
     "damage": 4,
-    "requirements": {
-      "strike": 1
-    },
+    "requirements": {},
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
     "boosterOnly": true,
-    "rulesText": "Standing opponent only. May also Counter a Grapple Move.",
+    "rulesText": "Standing opponent only. May Counter a Torso Trapped Move.",
     "standingOnly": true,
     "groundOpponent": false,
     "groundedOnly": false,
@@ -8417,14 +8395,12 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "cost": 2,
     "damage": 2,
-    "requirements": {
-      "technical": 1
-    },
+    "requirements": {},
     "moveType": "grapple",
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Standing opponent only. May also Counter a Grapple Move. Grounds opponent.",
+    "rulesText": "Standing opponent only. May Counter a Front Control Move or a Back-targeting Submission attempt. Grounds opponent.",
     "standingOnly": true,
     "groundOpponent": true,
     "groundedOnly": false,
@@ -8626,6 +8602,173 @@ export const allGameplayCards = [
       "retainControl": true,
       "preserveStreak": true
     }
+  },
+  {
+    "id": "knees-up",
+    "name": "Knees Up",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 2,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter a Diving Aerial Move.",
+    "effects": []
+  },
+  {
+    "id": "dodge",
+    "name": "Dodge",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter an Arm Extended, Leg Extended, Running Aerial or Diving Aerial Move.",
+    "effects": []
+  },
+  {
+    "id": "block",
+    "name": "Block",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter an Arm Extended or Leg Extended Move.",
+    "effects": []
+  },
+  {
+    "id": "up-and-over",
+    "name": "Up and Over",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter a Running Aerial Move.",
+    "effects": []
+  },
+  {
+    "id": "standing-switch",
+    "name": "Standing Switch",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter a Rear Control or Torso Trapped Move. Can also counter a Back-targeting Submission attempt.",
+    "effects": []
+  },
+  {
+    "id": "rollover-counter",
+    "name": "Rollover Counter",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter a Body Elevated or Front Control Move. Can also counter Arm-, Leg- or Back-targeting Submission attempts.",
+    "effects": []
+  },
+  {
+    "id": "backflip-counter",
+    "name": "Backflip Counter",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter a Diving Aerial or Body Elevated Move.",
+    "effects": []
+  },
+  {
+    "id": "catch-the-foot",
+    "name": "Catch the Foot",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 1,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "counter",
+    "method": null,
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "rulesText": "Counter a Leg Extended Move or a Leg-targeting Submission attempt.",
+    "effects": []
+  },
+  {
+    "id": "arm-drag-counter",
+    "name": "Arm Drag Counter",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Counter a Front Control Move or an Arm-targeting Submission attempt. If used as a Counter, this becomes a counter-attack.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "jawbreaker",
+    "name": "Jawbreaker",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {},
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Counter a Front Control or Rear Control Move, or a Neck / Head-targeting Submission attempt. If used as a Counter, this becomes a counter-attack.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
   }
-
 ];
+
+allGameplayCards.forEach(enrichCounterState);

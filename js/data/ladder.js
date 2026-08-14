@@ -1,5 +1,5 @@
-import { unlockSuperstar } from "./profile.js?v=0.12.16";
-import { superstars } from "./superstars.js?v=0.12.16";
+import { unlockSuperstar } from "./profile.js?v=0.12.23";
+import { superstars } from "./superstars.js?v=0.12.23";
 
 export const LADDER_LIVES = 3;
 export const LADDER_SET_ID = "summerslam-series-1";
@@ -37,7 +37,6 @@ export function currentLadderOpponent(profile) { const run = ensure(profile).act
 export function recordLadderMatch(profile, result) {
   const ladder = ensure(profile), run = ladder.activeRun;
   if (!run || run.status !== "active") throw new Error("No active Climb the Ladder run");
-  if (result === "draw") return { status: "retry", run };
   if (result === "loss") { run.lives -= 1; if (run.lives <= 0) { run.status = "failed"; return { status: "failed", run }; } return { status: "retry", run }; }
   if (result !== "win") throw new Error("Invalid ladder result");
   run.rung += 1; ladder.bestRung = Math.max(ladder.bestRung ?? 0, run.rung); ladder.bestRungByBranch[run.branchId] = Math.max(ladder.bestRungByBranch[run.branchId] ?? 0, run.rung);

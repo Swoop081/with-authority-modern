@@ -1,0 +1,529 @@
+
+> wwe-legacy-ccg@0.12.19 final-balance
+> node tools/final-season1-sim.mjs
+
+{
+  "matches": 4900,
+  "stalls": 0,
+  "averageTurns": 16.67,
+  "finishes": {
+    "pin": 4189,
+    "submission": 711
+  },
+  "pins": {
+    "green": {
+      "attempts": 0,
+      "successes": 0
+    },
+    "amber": {
+      "attempts": 0,
+      "successes": 0
+    },
+    "red": {
+      "attempts": 9329,
+      "successes": 4189
+    }
+  },
+  "rows": [
+    {
+      "name": "The Rock",
+      "w": 141,
+      "l": 55,
+      "d": 0,
+      "turns": 3151,
+      "winRate": 71.9,
+      "drawRate": 0,
+      "avgTurns": 16.1
+    },
+    {
+      "name": "Logan Paul",
+      "w": 133,
+      "l": 63,
+      "d": 0,
+      "turns": 1675,
+      "winRate": 67.9,
+      "drawRate": 0,
+      "avgTurns": 8.5
+    },
+    {
+      "name": "Goldberg",
+      "w": 128,
+      "l": 68,
+      "d": 0,
+      "turns": 2949,
+      "winRate": 65.3,
+      "drawRate": 0,
+      "avgTurns": 15
+    },
+    {
+      "name": "Oba Femi",
+      "w": 127,
+      "l": 69,
+      "d": 0,
+      "turns": 3431,
+      "winRate": 64.8,
+      "drawRate": 0,
+      "avgTurns": 17.5
+    },
+    {
+      "name": "Roman Reigns",
+      "w": 126,
+      "l": 70,
+      "d": 0,
+      "turns": 3061,
+      "winRate": 64.3,
+      "drawRate": 0,
+      "avgTurns": 15.6
+    },
+    {
+      "name": "Finn Bálor",
+      "w": 126,
+      "l": 70,
+      "d": 0,
+      "turns": 3417,
+      "winRate": 64.3,
+      "drawRate": 0,
+      "avgTurns": 17.4
+    },
+    {
+      "name": "Dominik Mysterio",
+      "w": 123,
+      "l": 73,
+      "d": 0,
+      "turns": 3345,
+      "winRate": 62.8,
+      "drawRate": 0,
+      "avgTurns": 17.1
+    },
+    {
+      "name": "Solo Sikoa",
+      "w": 120,
+      "l": 76,
+      "d": 0,
+      "turns": 2967,
+      "winRate": 61.2,
+      "drawRate": 0,
+      "avgTurns": 15.1
+    },
+    {
+      "name": "Ultimate Warrior",
+      "w": 119,
+      "l": 77,
+      "d": 0,
+      "turns": 2961,
+      "winRate": 60.7,
+      "drawRate": 0,
+      "avgTurns": 15.1
+    },
+    {
+      "name": "Rey Mysterio",
+      "w": 118,
+      "l": 78,
+      "d": 0,
+      "turns": 3280,
+      "winRate": 60.2,
+      "drawRate": 0,
+      "avgTurns": 16.7
+    },
+    {
+      "name": "Alexa Bliss",
+      "w": 117,
+      "l": 79,
+      "d": 0,
+      "turns": 3575,
+      "winRate": 59.7,
+      "drawRate": 0,
+      "avgTurns": 18.2
+    },
+    {
+      "name": "Chad Gable",
+      "w": 115,
+      "l": 81,
+      "d": 0,
+      "turns": 3033,
+      "winRate": 58.7,
+      "drawRate": 0,
+      "avgTurns": 15.5
+    },
+    {
+      "name": "El Grande Americano",
+      "w": 113,
+      "l": 83,
+      "d": 0,
+      "turns": 3565,
+      "winRate": 57.7,
+      "drawRate": 0,
+      "avgTurns": 18.2
+    },
+    {
+      "name": "Becky Lynch",
+      "w": 111,
+      "l": 85,
+      "d": 0,
+      "turns": 3216,
+      "winRate": 56.6,
+      "drawRate": 0,
+      "avgTurns": 16.4
+    },
+    {
+      "name": "Chelsea Green",
+      "w": 110,
+      "l": 86,
+      "d": 0,
+      "turns": 3961,
+      "winRate": 56.1,
+      "drawRate": 0,
+      "avgTurns": 20.2
+    },
+    {
+      "name": "Sol Ruca",
+      "w": 107,
+      "l": 89,
+      "d": 0,
+      "turns": 2968,
+      "winRate": 54.6,
+      "drawRate": 0,
+      "avgTurns": 15.1
+    },
+    {
+      "name": "Mankind",
+      "w": 106,
+      "l": 90,
+      "d": 0,
+      "turns": 3530,
+      "winRate": 54.1,
+      "drawRate": 0,
+      "avgTurns": 18
+    },
+    {
+      "name": "Brock Lesnar",
+      "w": 105,
+      "l": 91,
+      "d": 0,
+      "turns": 3462,
+      "winRate": 53.6,
+      "drawRate": 0,
+      "avgTurns": 17.7
+    },
+    {
+      "name": "Jade Cargill",
+      "w": 105,
+      "l": 91,
+      "d": 0,
+      "turns": 3073,
+      "winRate": 53.6,
+      "drawRate": 0,
+      "avgTurns": 15.7
+    },
+    {
+      "name": "Charlotte Flair",
+      "w": 103,
+      "l": 93,
+      "d": 0,
+      "turns": 3140,
+      "winRate": 52.6,
+      "drawRate": 0,
+      "avgTurns": 16
+    },
+    {
+      "name": "Penta",
+      "w": 102,
+      "l": 94,
+      "d": 0,
+      "turns": 3426,
+      "winRate": 52,
+      "drawRate": 0,
+      "avgTurns": 17.5
+    },
+    {
+      "name": "Bayley",
+      "w": 100,
+      "l": 96,
+      "d": 0,
+      "turns": 3115,
+      "winRate": 51,
+      "drawRate": 0,
+      "avgTurns": 15.9
+    },
+    {
+      "name": "Damian Priest",
+      "w": 100,
+      "l": 96,
+      "d": 0,
+      "turns": 3298,
+      "winRate": 51,
+      "drawRate": 0,
+      "avgTurns": 16.8
+    },
+    {
+      "name": "Bron Breakker",
+      "w": 100,
+      "l": 96,
+      "d": 0,
+      "turns": 3063,
+      "winRate": 51,
+      "drawRate": 0,
+      "avgTurns": 15.6
+    },
+    {
+      "name": "Jey Uso",
+      "w": 99,
+      "l": 97,
+      "d": 0,
+      "turns": 3592,
+      "winRate": 50.5,
+      "drawRate": 0,
+      "avgTurns": 18.3
+    },
+    {
+      "name": "CM Punk",
+      "w": 97,
+      "l": 99,
+      "d": 0,
+      "turns": 3337,
+      "winRate": 49.5,
+      "drawRate": 0,
+      "avgTurns": 17
+    },
+    {
+      "name": "The Undertaker",
+      "w": 96,
+      "l": 100,
+      "d": 0,
+      "turns": 3639,
+      "winRate": 49,
+      "drawRate": 0,
+      "avgTurns": 18.6
+    },
+    {
+      "name": "LA Knight",
+      "w": 95,
+      "l": 101,
+      "d": 0,
+      "turns": 3367,
+      "winRate": 48.5,
+      "drawRate": 0,
+      "avgTurns": 17.2
+    },
+    {
+      "name": "Danhausen",
+      "w": 95,
+      "l": 101,
+      "d": 0,
+      "turns": 3214,
+      "winRate": 48.5,
+      "drawRate": 0,
+      "avgTurns": 16.4
+    },
+    {
+      "name": "Liv Morgan",
+      "w": 94,
+      "l": 102,
+      "d": 0,
+      "turns": 3600,
+      "winRate": 48,
+      "drawRate": 0,
+      "avgTurns": 18.4
+    },
+    {
+      "name": "Drew McIntyre",
+      "w": 94,
+      "l": 102,
+      "d": 0,
+      "turns": 3304,
+      "winRate": 48,
+      "drawRate": 0,
+      "avgTurns": 16.9
+    },
+    {
+      "name": "IYO SKY",
+      "w": 93,
+      "l": 103,
+      "d": 0,
+      "turns": 3237,
+      "winRate": 47.4,
+      "drawRate": 0,
+      "avgTurns": 16.5
+    },
+    {
+      "name": "André the Giant",
+      "w": 92,
+      "l": 104,
+      "d": 0,
+      "turns": 3754,
+      "winRate": 46.9,
+      "drawRate": 0,
+      "avgTurns": 19.2
+    },
+    {
+      "name": "Kevin Owens",
+      "w": 91,
+      "l": 105,
+      "d": 0,
+      "turns": 3503,
+      "winRate": 46.4,
+      "drawRate": 0,
+      "avgTurns": 17.9
+    },
+    {
+      "name": "Stone Cold Steve Austin",
+      "w": 89,
+      "l": 107,
+      "d": 0,
+      "turns": 3446,
+      "winRate": 45.4,
+      "drawRate": 0,
+      "avgTurns": 17.6
+    },
+    {
+      "name": "Paige",
+      "w": 86,
+      "l": 110,
+      "d": 0,
+      "turns": 3215,
+      "winRate": 43.9,
+      "drawRate": 0,
+      "avgTurns": 16.4
+    },
+    {
+      "name": "Randy Orton",
+      "w": 86,
+      "l": 110,
+      "d": 0,
+      "turns": 2770,
+      "winRate": 43.9,
+      "drawRate": 0,
+      "avgTurns": 14.1
+    },
+    {
+      "name": "Hulk Hogan",
+      "w": 85,
+      "l": 111,
+      "d": 0,
+      "turns": 3457,
+      "winRate": 43.4,
+      "drawRate": 0,
+      "avgTurns": 17.6
+    },
+    {
+      "name": "Randy Savage",
+      "w": 84,
+      "l": 112,
+      "d": 0,
+      "turns": 3935,
+      "winRate": 42.9,
+      "drawRate": 0,
+      "avgTurns": 20.1
+    },
+    {
+      "name": "Tiffany Stratton",
+      "w": 84,
+      "l": 112,
+      "d": 0,
+      "turns": 3253,
+      "winRate": 42.9,
+      "drawRate": 0,
+      "avgTurns": 16.6
+    },
+    {
+      "name": "Jacob Fatu",
+      "w": 83,
+      "l": 113,
+      "d": 0,
+      "turns": 2828,
+      "winRate": 42.3,
+      "drawRate": 0,
+      "avgTurns": 14.4
+    },
+    {
+      "name": "Rhea Ripley",
+      "w": 82,
+      "l": 114,
+      "d": 0,
+      "turns": 3428,
+      "winRate": 41.8,
+      "drawRate": 0,
+      "avgTurns": 17.5
+    },
+    {
+      "name": "Nia Jax",
+      "w": 81,
+      "l": 115,
+      "d": 0,
+      "turns": 3211,
+      "winRate": 41.3,
+      "drawRate": 0,
+      "avgTurns": 16.4
+    },
+    {
+      "name": "Raquel Rodriguez",
+      "w": 80,
+      "l": 116,
+      "d": 0,
+      "turns": 3043,
+      "winRate": 40.8,
+      "drawRate": 0,
+      "avgTurns": 15.5
+    },
+    {
+      "name": "Stephanie Vaquer",
+      "w": 78,
+      "l": 118,
+      "d": 0,
+      "turns": 3462,
+      "winRate": 39.8,
+      "drawRate": 0,
+      "avgTurns": 17.7
+    },
+    {
+      "name": "Kane",
+      "w": 66,
+      "l": 130,
+      "d": 0,
+      "turns": 3612,
+      "winRate": 33.7,
+      "drawRate": 0,
+      "avgTurns": 18.4
+    },
+    {
+      "name": "Gunther",
+      "w": 58,
+      "l": 138,
+      "d": 0,
+      "turns": 3318,
+      "winRate": 29.6,
+      "drawRate": 0,
+      "avgTurns": 16.9
+    },
+    {
+      "name": "Cody Rhodes",
+      "w": 54,
+      "l": 142,
+      "d": 0,
+      "turns": 3072,
+      "winRate": 27.6,
+      "drawRate": 0,
+      "avgTurns": 15.7
+    },
+    {
+      "name": "Sami Zayn",
+      "w": 54,
+      "l": 142,
+      "d": 0,
+      "turns": 3160,
+      "winRate": 27.6,
+      "drawRate": 0,
+      "avgTurns": 16.1
+    },
+    {
+      "name": "Seth Rollins",
+      "w": 49,
+      "l": 147,
+      "d": 0,
+      "turns": 2967,
+      "winRate": 25,
+      "drawRate": 0,
+      "avgTurns": 15.1
+    }
+  ]
+}

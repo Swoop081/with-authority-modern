@@ -1,0 +1,4 @@
+{
+  "superstars": 50,
+  "issues": []
+}

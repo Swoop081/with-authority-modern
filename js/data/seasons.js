@@ -1,13 +1,13 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.16";
-import { decks } from "./decks.js?v=0.12.16";
-import { superstars } from "./superstars.js?v=0.12.16";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.23";
+import { decks } from "./decks.js?v=0.12.23";
+import { superstars } from "./superstars.js?v=0.12.23";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
 export const SEASON_TIER_COUNT = 50;
 export const XP_PER_TIER = 100;
 export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
-export const MATCH_XP = { win: 25, loss: 5, draw: 5 };
+export const MATCH_XP = { win: 25, loss: 5 };
 export const DAILY_CHALLENGE_XP = 50;
 export const WEEKLY_CHALLENGE_XP = 200;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";

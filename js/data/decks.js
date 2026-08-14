@@ -56,7 +56,12 @@ export const deckIds={
     "game-plan",
     "fire-up",
     "crowd-support",
-    "sidestep"
+    "sidestep",
+    "running-forearm",
+    "running-forearm",
+    "diving-crossbody",
+    "diving-crossbody",
+    "diving-crossbody"
   ],
   "mankind": [
     "momentum-strike",
@@ -113,7 +118,12 @@ export const deckIds={
     "crowd-support",
     "no-sell",
     "duck",
-    "chain-wrestling"
+    "chain-wrestling",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "stomp",
+    "stomp"
   ],
   "the-rock": [
     "momentum-strength",
@@ -170,7 +180,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "people-championship",
-    "no-sell"
+    "no-sell",
+    "body-slam",
+    "body-slam",
+    "clothesline",
+    "clothesline",
+    "the-rock-final-boss-slap"
   ],
   "hulk-hogan": [
     "momentum-strength",
@@ -227,7 +242,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "no-sell",
-    "duck"
+    "duck",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "shoulder-tackle",
+    "shoulder-tackle"
   ],
   "bayley": [
     "momentum-technical",
@@ -284,7 +304,12 @@ export const deckIds={
     "shoulder-up",
     "game-plan",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "running-forearm",
+    "running-forearm",
+    "stomp",
+    "stomp",
+    "stomp"
   ],
   "cm-punk": [
     "momentum-strike",
@@ -341,7 +366,12 @@ export const deckIds={
     "game-plan",
     "fire-up",
     "chain-wrestling",
-    "duck"
+    "duck",
+    "running-forearm",
+    "running-forearm",
+    "running-forearm",
+    "diving-crossbody",
+    "diving-crossbody"
   ],
   "paige": [
     "momentum-technical",
@@ -398,7 +428,12 @@ export const deckIds={
     "shoulder-up",
     "game-plan",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "running-forearm",
+    "running-forearm",
+    "stomp",
+    "stomp",
+    "stomp"
   ],
   "seth-rollins": [
     "momentum-agility",
@@ -455,7 +490,12 @@ export const deckIds={
     "game-plan",
     "fire-up",
     "crowd-support",
-    "sidestep"
+    "sidestep",
+    "chain-wrestling",
+    "running-forearm",
+    "running-forearm",
+    "running-forearm",
+    "sling-blade"
   ],
   "andre-the-giant": [
     "momentum-strength",
@@ -512,7 +552,12 @@ export const deckIds={
     "manager-bobby-heenan",
     "fire-up",
     "no-sell",
-    "duck"
+    "duck",
+    "chop",
+    "shoulder-tackle",
+    "shoulder-tackle",
+    "shoulder-tackle",
+    "stomp"
   ],
   "stephanie-vaquer": [
     "momentum-technical",
@@ -569,7 +614,12 @@ export const deckIds={
     "shoulder-up",
     "game-plan",
     "fire-up",
-    "chain-wrestling"
+    "chain-wrestling",
+    "running-forearm",
+    "running-forearm",
+    "running-forearm",
+    "knee-strike",
+    "knee-strike"
   ],
   "randy-savage": [
     "momentum-strike",
@@ -626,7 +676,12 @@ export const deckIds={
     "duck",
     "sidestep",
     "shoulder-up",
-    "manager-miss-elizabeth"
+    "manager-miss-elizabeth",
+    "clothesline",
+    "clothesline",
+    "clothesline",
+    "elbow-drop",
+    "elbow-drop"
   ],
   "roman-reigns": [
     "momentum-strength",
@@ -683,7 +738,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "duck",
-    "no-sell"
+    "no-sell",
+    "shoulder-tackle",
+    "shoulder-tackle",
+    "shoulder-tackle",
+    "throat-thrust",
+    "throat-thrust"
   ],
   "charlotte-flair": [
     "momentum-technical",
@@ -740,7 +800,12 @@ export const deckIds={
     "shoulder-up",
     "game-plan",
     "fire-up",
-    "chain-wrestling"
+    "chain-wrestling",
+    "big-boot",
+    "big-boot",
+    "ddt",
+    "ddt",
+    "ddt"
   ],
   "kevin-owens": [
     "momentum-strike",
@@ -797,7 +862,12 @@ export const deckIds={
     "sidestep",
     "no-sell",
     "duck",
-    "shoulder-up"
+    "shoulder-up",
+    "running-forearm",
+    "running-forearm",
+    "senton",
+    "senton",
+    "senton"
   ],
   "kane": [
     "momentum-strength",
@@ -854,7 +924,12 @@ export const deckIds={
     "sidestep",
     "fire-up",
     "crowd-support",
-    "no-sell"
+    "no-sell",
+    "stomp",
+    "stomp",
+    "stomp",
+    "throat-thrust",
+    "throat-thrust"
   ],
   "the-undertaker": [
     "momentum-strength",
@@ -911,7 +986,12 @@ export const deckIds={
     "shoulder-up",
     "manager-paul-bearer",
     "fire-up",
-    "no-sell"
+    "no-sell",
+    "stomp",
+    "stomp",
+    "stomp",
+    "throat-thrust",
+    "throat-thrust"
   ],
   "ultimate-warrior": [
     "momentum-strength",
@@ -968,7 +1048,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "no-sell",
-    "duck"
+    "duck",
+    "shoulder-tackle",
+    "shoulder-tackle",
+    "stomp",
+    "stomp",
+    "stomp"
   ],
   "rhea-ripley": [
     "momentum-strength",
@@ -1025,7 +1110,12 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "no-sell"
+    "no-sell",
+    "stomp",
+    "stomp",
+    "stomp",
+    "body-slam",
+    "body-slam"
   ],
   "cody-rhodes": [
     "momentum-technical",
@@ -1082,7 +1172,12 @@ export const deckIds={
     "game-plan",
     "got-all-of-it",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "duck",
+    "hurricanrana",
+    "headbutt",
+    "dropkick",
+    "cody-rhodes-dropdown-uppercut"
   ],
   "oba-femi": [
     "momentum-strength",
@@ -1139,7 +1234,12 @@ export const deckIds={
     "crowd-support",
     "no-sell",
     "duck",
-    "shoulder-up"
+    "shoulder-up",
+    "shoulder-tackle",
+    "shoulder-tackle",
+    "body-slam",
+    "body-slam",
+    "running-uppercut"
   ],
   "stone-cold-steve-austin": [
     "momentum-strike",
@@ -1196,7 +1296,12 @@ export const deckIds={
     "what",
     "fire-up",
     "crowd-support",
-    "duck"
+    "duck",
+    "kick-to-the-gut",
+    "kick-to-the-gut",
+    "body-slam",
+    "body-slam",
+    "body-slam"
   ],
   "liv-morgan": [
     "momentum-agility",
@@ -1253,7 +1358,12 @@ export const deckIds={
     "duck",
     "sidestep",
     "shoulder-up",
-    "game-plan"
+    "game-plan",
+    "running-forearm",
+    "running-forearm",
+    "stomp",
+    "stomp",
+    "stomp"
   ],
   "brock-lesnar": [
     "momentum-strength",
@@ -1310,7 +1420,12 @@ export const deckIds={
     "duck",
     "fire-up",
     "no-sell",
-    "chain-wrestling"
+    "chain-wrestling",
+    "back-body-drop",
+    "double-leg-takedown",
+    "double-leg-takedown",
+    "double-leg-takedown",
+    "shoulder-tackle"
   ],
   "gunther": [
     "momentum-strike",
@@ -1367,7 +1482,12 @@ export const deckIds={
     "duck",
     "fire-up",
     "crowd-support",
-    "no-sell"
+    "no-sell",
+    "back-body-drop",
+    "back-body-drop",
+    "back-body-drop",
+    "back-body-drop",
+    "stomp"
   ],
   "becky-lynch": [
     "momentum-strike",
@@ -1424,7 +1544,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "chain-wrestling",
-    "duck"
+    "duck",
+    "running-forearm",
+    "running-forearm",
+    "stomp",
+    "stomp",
+    "stomp"
   ],
   "logan-paul": [
     "momentum-agility",
@@ -1481,7 +1606,12 @@ export const deckIds={
     "duck",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "running-forearm",
+    "running-forearm",
+    "diving-crossbody",
+    "diving-crossbody",
+    "running-clothesline"
   ],
   "sol-ruca": [
     "momentum-agility",
@@ -1538,7 +1668,12 @@ export const deckIds={
     "leapfrog",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "diving-crossbody",
+    "diving-crossbody",
+    "diving-crossbody",
+    "standing-moonsault",
+    "standing-moonsault"
   ],
   "chad-gable": [
     "momentum-technical",
@@ -1595,7 +1730,12 @@ export const deckIds={
     "no-sell",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "double-leg-takedown",
+    "double-leg-takedown",
+    "abdominal-stretch",
+    "abdominal-stretch",
+    "abdominal-stretch"
   ],
   "raquel-rodriguez": [
     "momentum-strength",
@@ -1652,7 +1792,12 @@ export const deckIds={
     "duck",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "back-elbow",
+    "no-sell",
+    "back-body-drop",
+    "back-body-drop",
+    "back-body-drop"
   ],
   "rey-mysterio": [
     "momentum-agility",
@@ -1709,7 +1854,12 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "special-rey-mysterio"
+    "special-rey-mysterio",
+    "diving-crossbody",
+    "diving-crossbody",
+    "diving-crossbody",
+    "mexican-surfboard",
+    "mexican-surfboard"
   ],
   "dominik-mysterio": [
     "momentum-agility",
@@ -1766,7 +1916,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "low-blow",
+    "low-blow",
+    "back-suplex",
+    "back-suplex",
+    "back-suplex"
   ],
   "penta": [
     "momentum-agility",
@@ -1823,7 +1978,12 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "special-penta"
+    "special-penta",
+    "chop",
+    "chop",
+    "chop",
+    "sling-blade",
+    "sling-blade"
   ],
   "el-grande-americano": [
     "momentum-technical",
@@ -1880,7 +2040,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "low-blow",
+    "low-blow",
+    "low-blow",
+    "back-suplex",
+    "back-suplex"
   ],
   "jey-uso": [
     "momentum-strike",
@@ -1937,7 +2102,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "clothesline",
+    "clothesline"
   ],
   "la-knight": [
     "momentum-strike",
@@ -1994,7 +2164,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "corner-clothesline",
+    "corner-clothesline",
+    "corner-clothesline",
+    "corner-clothesline",
+    "shoulder-tackle"
   ],
   "alexa-bliss": [
     "momentum-agility",
@@ -2051,7 +2226,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "dropkick-to-the-back",
+    "dropkick-to-the-back"
   ],
   "finn-balor": [
     "momentum-agility",
@@ -2108,7 +2288,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "running-forearm",
+    "running-forearm"
   ],
   "danhausen": [
     "momentum-technical",
@@ -2165,7 +2350,12 @@ export const deckIds={
     "shoulder-up",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "low-blow",
+    "low-blow",
+    "low-blow",
+    "low-blow",
+    "big-boot"
   ],
   "tiffany-stratton": [
     "momentum-agility",
@@ -2222,7 +2412,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "tiffany-stratton-handspring-back-elbow",
-    "diving-crossbody"
+    "diving-crossbody",
+    "no-sell",
+    "front-kick",
+    "front-kick",
+    "front-kick",
+    "knees-up"
   ],
   "chelsea-green": [
     "momentum-technical",
@@ -2279,7 +2474,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "backstabber",
-    "backstabber"
+    "backstabber",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "forearm-smash",
+    "russian-leg-sweep"
   ],
   "damian-priest": [
     "momentum-strength",
@@ -2336,7 +2536,12 @@ export const deckIds={
     "duck",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "no-sell",
+    "back-body-drop",
+    "back-body-drop",
+    "back-body-drop",
+    "front-kick"
   ],
   "bron-breakker": [
     "momentum-strength",
@@ -2393,7 +2598,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "body-slam",
-    "body-slam"
+    "body-slam",
+    "body-slam",
+    "body-slam",
+    "body-slam",
+    "firemans-carry",
+    "firemans-carry"
   ],
   "drew-mcintyre": [
     "momentum-strength",
@@ -2450,7 +2660,12 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "back-elbow"
+    "back-elbow",
+    "chain-wrestling",
+    "body-slam",
+    "body-slam",
+    "body-slam",
+    "clothesline"
   ],
   "randy-orton": [
     "momentum-technical",
@@ -2507,7 +2722,12 @@ export const deckIds={
     "running-clothesline",
     "running-clothesline",
     "front-kick",
-    "elbow"
+    "elbow",
+    "chain-wrestling",
+    "sidestep",
+    "wristlock",
+    "wristlock",
+    "wristlock"
   ],
   "sami-zayn": [
     "momentum-technical",
@@ -2564,7 +2784,12 @@ export const deckIds={
     "special-sami-zayn",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "wristlock",
+    "wristlock",
+    "wristlock",
+    "side-headlock",
+    "side-headlock"
   ],
   "jacob-fatu": [
     "momentum-strength",
@@ -2621,7 +2846,12 @@ export const deckIds={
     "special-jacob-fatu",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "back-elbow",
+    "sidestep",
+    "hurricanrana",
+    "duck",
+    "body-slam"
   ],
   "solo-sikoa": [
     "momentum-strike",
@@ -2678,7 +2908,12 @@ export const deckIds={
     "special-solo-sikoa",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "stomp",
+    "stomp",
+    "stomp",
+    "stomp",
+    "shoulder-block"
   ],
   "jade-cargill": [
     "momentum-strength",
@@ -2735,7 +2970,12 @@ export const deckIds={
     "special-jade-cargill",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "back-elbow",
+    "no-sell",
+    "sidestep",
+    "duck",
+    "back-body-drop"
   ],
   "nia-jax": [
     "momentum-strength",
@@ -2792,7 +3032,12 @@ export const deckIds={
     "special-nia-jax",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "back-elbow",
+    "sidestep",
+    "hurricanrana",
+    "choke-on-the-ropes",
+    "choke-on-the-ropes"
   ],
   "goldberg": [
     "momentum-strength",
@@ -2849,8 +3094,52 @@ export const deckIds={
     "duck",
     "shoulder-up",
     "fire-up",
-    "crowd-support"
+    "crowd-support",
+    "back-elbow",
+    "shoulder-block",
+    "shoulder-block",
+    "body-slam",
+    "body-slam"
   ]
-
 };
+
+// v0.12.18 counter-access normalization.
+// The original 55-page core remains intact wherever possible; the five v0.12.17 extension slots
+// become a dependable reversal package, then low-value duplicate generic Moves are swapped only
+// when needed to reach the minimum counter density.
+const counterCapableId = id => {
+  const card = byId.get(id);
+  return !!(card?.kind === 'move' && ((card.counters?.length ?? 0) || (card.counterStates?.length ?? 0) || (card.counterSubmissionTargets?.length ?? 0) || (card.countersCardIds?.length ?? 0)));
+};
+const identityCounterChoices = ['block','up-and-over','backflip-counter','catch-the-foot','arm-drag-counter'];
+const extraCounterChoices = ['duck','punch','knees-up','headbutt','arm-drag','back-elbow','sidestep','elbow','reverse-elbow','knee-to-the-gut','hip-toss','drop-toe-hold','block','up-and-over','backflip-counter','catch-the-foot','arm-drag-counter'];
+const hashSid = sid => [...sid].reduce((n,ch)=>((n*33)+ch.charCodeAt(0))>>>0,5381);
+for (const [sid, ids] of Object.entries(deckIds)) {
+  const identity = identityCounterChoices[hashSid(sid) % identityCounterChoices.length];
+  ids.splice(-5, 5, 'dodge', 'standing-switch', 'rollover-counter', 'jawbreaker', identity);
+
+  const countCounterPages = () => ids.filter(counterCapableId).length;
+  const counts = () => ids.reduce((m,id)=>(m.set(id,(m.get(id)??0)+1),m),new Map());
+  let cursor = hashSid(sid) % extraCounterChoices.length;
+  let guard = 0;
+  while (countCounterPages() < 9 && guard++ < 40) {
+    const usedCounts = counts();
+    let candidate = null;
+    for (let step=0; step<extraCounterChoices.length; step+=1) {
+      const id = extraCounterChoices[(cursor+step)%extraCounterChoices.length];
+      if ((usedCounts.get(id)??0) < 2) { candidate=id; cursor=(cursor+step+1)%extraCounterChoices.length; break; }
+    }
+    if (!candidate) break;
+    let replaceIndex = -1;
+    for (let i=54; i>=5; i-=1) {
+      const id=ids[i], card=byId.get(id);
+      if (!card || card.kind!=='move' || card.superstarId || card.finisher || card.trademark || counterCapableId(id)) continue;
+      if ((usedCounts.get(id)??0) <= 1) continue;
+      replaceIndex=i; break;
+    }
+    if (replaceIndex < 0) break;
+    ids[replaceIndex]=candidate;
+  }
+}
+
 export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id)).filter(Boolean)]));

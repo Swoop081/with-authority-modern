@@ -1,30 +1,31 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.16";
-import { superstars } from "../data/superstars.js?v=0.12.16";
-import { decks } from "../data/decks.js?v=0.12.16";
-import { sets } from "../data/sets.js?v=0.12.16";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.16";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.16";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.16";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.16";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.16";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.16";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.16";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.16";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.16";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.16";
-import { totalMomentum } from "../engine/utils.js?v=0.12.16";
-import { healthZone } from "../engine/health.js?v=0.12.16";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.16";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.16";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.16";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.16";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.16";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.16";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.16";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.16";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.16";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.16";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.16";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.23";
+import { superstars } from "../data/superstars.js?v=0.12.23";
+import { decks } from "../data/decks.js?v=0.12.23";
+import { sets } from "../data/sets.js?v=0.12.23";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.23";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.23";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.23";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.23";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.23";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.23";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.23";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.23";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.23";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.23";
+import { totalMomentum } from "../engine/utils.js?v=0.12.23";
+import { healthZone } from "../engine/health.js?v=0.12.23";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.23";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.23";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.23";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.23";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.23";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.23";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.23";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.23";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.23";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.23";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.23";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.23";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -65,6 +66,8 @@ let optionsResetArmed = false;
 let ladderBranchId = "modern";
 let championshipBranchId = "modern";
 let flippedHandCards = new Set();
+let autoCounterSelecting = false;
+let autoCounterSelection = new Set();
 let flippedCollectionCards = new Set();
 let playPileFlipped = false;
 let playPileCardKey = null;
@@ -312,7 +315,7 @@ function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibiti
   const p1Star = superstarWithConfiguredEntrance(p1Id), p2Star = superstarById[p2Id];
   if (!p1Star || !p2Star) { message = "That Superstar is not active in this build."; renderSetup(); return; }
   const p1Deck = buildPlayableDeck(profile, p1Id), p2Deck = decks[p2Id] ?? [];
-  if (p1Deck.length !== 55 || p2Deck.length !== 55) { message = "One of these Superstar decks is not yet complete."; renderSetup(); return; }
+  if (p1Deck.length !== 60 || p2Deck.length !== 60) { message = "One of these Superstar decks is not yet complete."; renderSetup(); return; }
   activeMode = mode;
   selection = { p1: p1Id, p2: p2Id };
   lastMatchup = { ...selection };
@@ -879,7 +882,7 @@ function renderSeasons() {
       </div>
       <div class="season-progress-heading"><strong>${progress.tier >= SEASON_TIER_COUNT ? 'SEASON ROAD COMPLETE' : `TIER ${progress.tier + 1} PROGRESS`}</strong><span>${progress.intoTier}/${XP_PER_TIER} XP</span></div>
       <div class="season-xp-track"><i style="width:${progress.tier >= SEASON_TIER_COUNT ? 100 : Math.min(100,(progress.intoTier/XP_PER_TIER)*100)}%"></i></div>
-      <div class="season-xp-caption"><span>Win ${MATCH_XP.win} XP · Loss/Draw ${MATCH_XP.loss} XP</span><span>Daily 50 XP · Weekly 200 XP</span></div>
+      <div class="season-xp-caption"><span>Win ${MATCH_XP.win} XP · Loss ${MATCH_XP.loss} XP</span><span>Daily 50 XP · Weekly 200 XP</span></div>
     </section>
     <section class="season-section"><div class="section-title"><h3>50-Tier Season Road</h3><span>${claimable.length ? `${claimable.length} reward${claimable.length===1?'':'s'} ready` : 'Earn XP to unlock rewards'}</span></div>${claimable.length ? '<button id="claim-all-season" class="primary season-claim-all">Claim All Available</button>' : ''}<div class="season-tier-road">${tierRoad}</div></section>
 
@@ -1382,17 +1385,13 @@ const MOMENTUM_FRONT_META = {
 };
 function momentumMockupMarkup(card) {
   const method = String(card.method || "strength").toLowerCase();
-  const meta = MOMENTUM_FRONT_META[method] ?? MOMENTUM_FRONT_META.strength;
   const label = method[0].toUpperCase() + method.slice(1);
   return `<span class="momentum-mock momentum-${method}">
-    <span class="momentum-grid"></span>
+    <span class="momentum-flames" aria-hidden="true">${Array.from({length:7},(_,i)=>`<i class="flame-${i+1}"></i>`).join("")}</span>
     <span class="momentum-topline"><b>WWE LEGACY</b><em>MOMENTUM</em></span>
     ${setLogoMarkup(card.setId,"momentum-set-logo")}
-    <span class="momentum-emblem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${meta.icon}"></path></svg><i>${meta.short}</i></span>
     <span class="momentum-value">+${card.amount ?? 1}</span>
-    <span class="momentum-method">${label}</span>
-    <span class="momentum-permanent">PERMANENT MOMENTUM</span>
-    <span class="momentum-code">${card.cardCode ?? "WWE LEGACY"}</span>
+    <span class="momentum-method"><b>${label}</b><small>MOMENTUM</small></span>
   </span>`;
 }
 
@@ -1457,7 +1456,7 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
     : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span><span class="ccg-card-title"><small>${typeLabel}${visualFoil ? " · FOIL" : ""}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
   const rootTag = interactive ? "button" : "span";
   const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. Tap to ${flipped ? "view artwork" : "view effects"}."` : `aria-hidden="true"`;
-  return `<${rootTag} ${rootAttrs} class="ccg-card ${flipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${extraClass}">
+  return `<${rootTag} ${rootAttrs} class="ccg-card ${flipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${moveFront && finishedFront ? "is-full-art-move" : ""} ${extraClass}">
     <span class="ccg-card-inner">
       <span class="ccg-card-face ccg-card-front">${frontMarkup}</span>
       <span class="ccg-card-face ccg-card-rules ${setClass}">
@@ -1467,7 +1466,11 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
         <span class="ccg-rules-body"><b class="ccg-effect-label">${card.kind === "move" ? "EFFECT" : card.kind === "superstar" ? "SUPERSTAR ABILITY" : card.kind === "entrance" ? "ENTRANCE EFFECT" : "RULES"}</b><span>${ruleText}</span></span>
         ${card.kind === "superstar" ? (()=>{const star=superstarById[card.superstarId]; if(!star)return ""; const limits=Object.entries(star.methodLimits??{}).map(([m,v])=>`${m.slice(0,2).toUpperCase()} ${v==null?"∞":v}`).join(" · "); const starter=Object.entries(star.starterMomentum??{}).map(([m,v])=>`${m.slice(0,2).toUpperCase()} ×${v}`).join(" · "); return `<span class="ccg-rules-reference"><b>METHOD LIMITS</b>${limits}</span><span class="ccg-rules-reference"><b>STARTER MOMENTUM</b>${starter}</span>`;})() : ""}
         ${card.kind === "move" && !card.finisher && card.requirements && Object.keys(card.requirements).length ? `<span class="ccg-rules-requirements"><b>REQUIRES</b> ${Object.entries(card.requirements).map(([m,n])=>`${n} ${m}`).join(" · ")}</span>` : ""}
+        ${card.kind === "move" && card.counterState ? `<span class="ccg-rules-requirements"><b>COUNTER STATE</b> ${COUNTER_STATE_LABELS[card.counterState] ?? card.counterState}</span>` : ""}
+        ${card.kind === "move" && card.moveType === "submission" && card.submissionTarget ? `<span class="ccg-rules-requirements"><b>SUBMISSION TARGET</b> ${SUBMISSION_TARGET_LABELS[card.submissionTarget] ?? card.submissionTarget}</span>` : ""}
         ${card.kind === "move" && card.counters?.length ? `<span class="ccg-rules-requirements"><b>COUNTERS</b> ${card.counters.map(t=>MOVE_TYPE_LABELS[t] ?? t).join(", ")}</span>` : ""}
+        ${card.kind === "move" && card.counterStates?.length ? `<span class="ccg-rules-requirements"><b>REVERSES</b> ${card.counterStates.map(t=>COUNTER_STATE_LABELS[t] ?? t).join(", ")}</span>` : ""}
+        ${card.kind === "move" && card.counterSubmissionTargets?.length ? `<span class="ccg-rules-requirements"><b>SUBMISSION REVERSAL</b> ${card.counterSubmissionTargets.map(t=>SUBMISSION_TARGET_LABELS[t] ?? t).join(", ")}</span>` : ""}
         ${card.kind === "move" && card.counterMethods?.length ? `<span class="ccg-rules-requirements"><b>COUNTERS</b> Any ${card.counterMethods.map(m=>m[0].toUpperCase()+m.slice(1)).join(" / ")} Move</span>` : ""}
         ${cardPlayRestrictionText(card)}
         <span class="ccg-rules-foot"><span>${card.cardCode ?? card.setId ?? "WWE LEGACY"}</span><span class="rarity-stars">${rarityStars(card.rarity ?? 1)}</span></span>
@@ -1483,9 +1486,15 @@ function collectionText(card) {
   const stateReq = [card.requiresPosture ? `opponent ${card.requiresPosture}` : "", card.requiresLocation ? card.requiresLocation : ""].filter(Boolean).join(" · ");
   const method = card.method ? `Method ${card.method[0].toUpperCase() + card.method.slice(1)}` : "";
   const moveType = card.moveType ? `Move Type ${MOVE_TYPE_LABELS[card.moveType] ?? card.moveType}` : "";
-  const counters = card.counters?.length ? `Counters ${card.counters.map(t => MOVE_TYPE_LABELS[t] ?? t).join(", ")}` : "";
+  const state = card.counterState ? `State ${COUNTER_STATE_LABELS[card.counterState] ?? card.counterState}` : "";
+  const counters = [
+    ...(card.counters?.map(t => MOVE_TYPE_LABELS[t] ?? t) ?? []),
+    ...(card.counterStates?.map(t => COUNTER_STATE_LABELS[t] ?? t) ?? []),
+    ...(card.counterSubmissionTargets?.map(t => `Submission ${SUBMISSION_TARGET_LABELS[t] ?? t}`) ?? [])
+  ];
+  const counterText = counters.length ? `Counters ${counters.join(", ")}` : "";
   const defense = card.defensiveOnly ? "Counter only" : "";
-  return [`Cost ${card.cost ?? 0}`, `${card.damage ?? 0} damage`, method, moveType, counters, req ? `Requires ${req}` : "", stateReq, defense, card.finisher ? "Finisher" : card.trademark ? "Trademark" : card.signature ? "Signature" : "", card.effectText ?? ""].filter(Boolean).join(" · ");
+  return [`Cost ${card.cost ?? 0}`, `${card.damage ?? 0} damage`, method, moveType, state, counterText, req ? `Requires ${req}` : "", stateReq, defense, card.finisher ? "Finisher" : card.trademark ? "Trademark" : card.signature ? "Signature" : "", card.effectText ?? ""].filter(Boolean).join(" · ");
 }
 function renderCollection() {
   const root = $("#game");
@@ -1722,7 +1731,7 @@ function renderDeckBuilder() {
   const currentCounts = currentCategoryCounts(deckDraft);
   const recommendedCounts = recommendedCategoryCounts(deckBuilderStarId);
   const lead = deckDraft.slice(0, 5).map((entry, index) => ({ entry, index, card: collectionById.get(entry.id ?? entry) }));
-  const deckCountClass = health.healthy ? "valid" : deckDraft.length === 55 ? "invalid" : "incomplete";
+  const deckCountClass = health.healthy ? "valid" : deckDraft.length === 60 ? "invalid" : "incomplete";
 
   if (deckLabPicker) {
     let title = "Choose Card", subtitle = "All owned cards are shown. Invalid choices stay visible but shaded.", cards = [], pickType = deckLabPicker.type;
@@ -1746,13 +1755,13 @@ function renderDeckBuilder() {
     cards.sort((a, b) => Number(b.eligibility.legal) - Number(a.eligibility.legal) || a.card.name.localeCompare(b.card.name));
 
     root.innerHTML = `<section class="deck-builder-screen deck-lab-screen premium-screen deck-lab-picker-screen">
-      <header class="deck-lab-picker-head"><button id="deck-picker-back" type="button" class="ghost">← Deck</button><div><span>DECK LAB · ${star.name.toUpperCase()}</span><h2>${title}</h2><p>${subtitle}</p></div><strong class="deck-lab-counter ${deckCountClass}">${deckDraft.length}/55</strong></header>
+      <header class="deck-lab-picker-head"><button id="deck-picker-back" type="button" class="ghost">← Deck</button><div><span>DECK LAB · ${star.name.toUpperCase()}</span><h2>${title}</h2><p>${subtitle}</p></div><strong class="deck-lab-counter ${deckCountClass}">${deckDraft.length}/60</strong></header>
       <div class="deck-lab-picker-tools"><input id="deck-search" type="search" placeholder="Search owned cards" value="${deckBuilderFilter.replaceAll('"','&quot;')}"><label class="valid-only-toggle"><input id="deck-valid-only" type="checkbox" ${deckLabOnlyValid ? 'checked' : ''}><span>Only Show Valid</span></label></div>
       <section class="deck-lab-card-picker deck-lab-card-grid">${cards.length ? cards.map(({card, eligibility}) => {
         const used = deckDraft.filter(e => (e.id ?? e) === card.id).length;
         const owned = ownedTotal(profile, card.id);
         const cap = card.kind === "momentum" ? 12 : 5;
-        const canAdd = eligibility.legal && deckDraft.length < 55 && used < Math.min(cap, owned);
+        const canAdd = eligibility.legal && deckDraft.length < 60 && used < Math.min(cap, owned);
         const tailIndex = deckDraft.map(e => e.id ?? e).lastIndexOf(card.id);
         const canRemove = tailIndex >= 5 && pickType === "category";
         const action = pickType === "entrance"
@@ -1781,10 +1790,10 @@ function renderDeckBuilder() {
   const superstarCard = collectionById.get(star.cardId ?? `superstar-${star.id}`);
   const violations = health.violations.length
     ? `<div class="deck-validity-list">${health.violations.map(v => `<p>• ${v}</p>`).join("")}</div>`
-    : `<p class="deck-validity-ok">✓ 55/55 · Deck is valid and ready to save.</p>`;
+    : `<p class="deck-validity-ok">✓ 60/60 · Deck is valid and ready to save.</p>`;
 
   root.innerHTML = `<section class="deck-builder-screen deck-lab-screen premium-screen">
-    <header class="deck-lab-editor-head"><button id="deck-lab-roster-back" type="button" class="ghost">← Superstars</button><div><span>DECK LAB</span><h2>${star.name}</h2><p>Recommendations are guidance. Build your own legal 55-page deck.</p></div><strong class="deck-lab-counter ${deckCountClass}">${deckDraft.length}/55</strong></header>
+    <header class="deck-lab-editor-head"><button id="deck-lab-roster-back" type="button" class="ghost">← Superstars</button><div><span>DECK LAB</span><h2>${star.name}</h2><p>Recommendations are guidance. Build your own legal 60-page deck.</p></div><strong class="deck-lab-counter ${deckCountClass}">${deckDraft.length}/60</strong></header>
     ${message ? `<p class="setup-message">${message}</p>` : ""}
 
     <section class="deck-identity-row">
@@ -1806,8 +1815,8 @@ function renderDeckBuilder() {
   $("#change-entrance")?.addEventListener("click", () => { deckLabPicker = { type: "entrance" }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); });
   root.querySelectorAll("[data-change-lead]").forEach(btn => btn.addEventListener("click", () => { deckLabPicker = { type: "lead", slot: Number(btn.dataset.changeLead) }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); }));
   root.querySelectorAll("[data-deck-category]").forEach(btn => btn.addEventListener("click", () => { deckLabPicker = { type: "category", category: btn.dataset.deckCategory }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); }));
-  $("#optimize-deck")?.addEventListener("click", () => { deckDraft = autoFillOwnedDraft(profile, deckBuilderStarId, deckDraft.slice(0,5)); message = deckDraft.length === 55 ? "Auto Fill completed the deck using legal owned cards." : `Auto Fill used every legal owned card available. ${55-deckDraft.length} slots remain.`; renderDeckBuilder(); });
-  $("#reset-recommended")?.addEventListener("click", () => { deckDraft = buildOwnedRecommendedDraft(profile, deckBuilderStarId); deckLabEntranceId = star.entranceId; message = `Owned recommended cards restored. ${Math.max(0,55-deckDraft.length)} slots remain.`; renderDeckBuilder(); });
+  $("#optimize-deck")?.addEventListener("click", () => { deckDraft = autoFillOwnedDraft(profile, deckBuilderStarId, deckDraft.slice(0,5)); message = deckDraft.length === 60 ? "Auto Fill completed the deck using legal owned cards." : `Auto Fill used every legal owned card available. ${60-deckDraft.length} slots remain.`; renderDeckBuilder(); });
+  $("#reset-recommended")?.addEventListener("click", () => { deckDraft = buildOwnedRecommendedDraft(profile, deckBuilderStarId); deckLabEntranceId = star.entranceId; message = `Owned recommended cards restored. ${Math.max(0,60-deckDraft.length)} slots remain.`; renderDeckBuilder(); });
   $("#save-deck")?.addEventListener("click", () => {
     const check = validateDeckDraft(profile, deckBuilderStarId, deckDraft, deckLabEntranceId);
     if (!check.healthy) { message = "Deck is not valid yet. Review the checker below."; renderDeckBuilder(); return; }
@@ -1830,8 +1839,14 @@ function cardMeta(card) {
   ].filter(Boolean).join(" · ");
   const method = card.method ? `Method: ${card.method[0].toUpperCase() + card.method.slice(1)}` : "";
   const moveType = card.moveType ? `Type: ${MOVE_TYPE_LABELS[card.moveType] ?? card.moveType}` : "";
-  const counters = card.counters?.length ? `Counters: ${card.counters.map(t => MOVE_TYPE_LABELS[t] ?? t).join(", ")}` : "";
-  return [`Cost ${card.cost ?? 0}`, `${card.damage ?? 0} dmg`, method, moveType, counters, req, position, card.defensiveOnly ? "Counter only" : "", card.effectText ?? ""].filter(Boolean).join(" · ");
+  const state = card.counterState ? `State: ${COUNTER_STATE_LABELS[card.counterState] ?? card.counterState}` : "";
+  const counters = [
+    ...(card.counters?.map(t => MOVE_TYPE_LABELS[t] ?? t) ?? []),
+    ...(card.counterStates?.map(t => COUNTER_STATE_LABELS[t] ?? t) ?? []),
+    ...(card.counterSubmissionTargets?.map(t => `Submission ${SUBMISSION_TARGET_LABELS[t] ?? t}`) ?? [])
+  ];
+  const counterText = counters.length ? `Counters: ${counters.join(", ")}` : "";
+  return [`Cost ${card.cost ?? 0}`, `${card.damage ?? 0} dmg`, method, moveType, state, counterText, req, position, card.defensiveOnly ? "Counter only" : "", card.effectText ?? ""].filter(Boolean).join(" · ");
 }
 
 function cardLegal(playerId, card) {
@@ -1846,7 +1861,7 @@ function cardLegal(playerId, card) {
     if (card.kind === "move") return moveEligibility(state, playerId, card).legal;
   }
   if (state.phase === "POST_MOVE" && card.kind === "special") return canPlaySpecial(state, playerId, card);
-  if (state.phase === "COUNTER" && state.proposedMove?.defenderId === playerId) return canCounter(state.proposedMove.card, card);
+  if (state.phase === "COUNTER" && state.proposedMove?.defenderId === playerId) return counterEligibility(state, playerId, state.proposedMove.card, card).legal;
   if (state.phase === "PIN_RESPONSE") return canPlayPinEscape(state, playerId, card);
   return false;
 }
@@ -1863,7 +1878,7 @@ function cardReason(playerId, card) {
   if (card.kind === "manager") return state.players[playerId].activeManager ? "Manager already active" : "";
   if (card.kind === "special") return canPlaySpecial(state, playerId, card) ? "PLAY SPECIAL" : "Special trigger not available";
   if (card.kind === "move" && state.phase === "ACTION") return moveEligibility(state, playerId, card).reason ?? "";
-  if (state.phase === "COUNTER") return canCounter(state.proposedMove.card, card) ? "Counter" : "Not a valid counter";
+  if (state.phase === "COUNTER") return counterEligibility(state, playerId, state.proposedMove.card, card).reason ?? "Counter";
   if (state.phase === "PIN_RESPONSE") return canPlayPinEscape(state, playerId, card) ? "Escape pin" : "Not a pin response";
   return "";
 }
@@ -1874,11 +1889,13 @@ function advanceCpu() {
   else if (steps) message = `${nameFor(CPU)} completed its CPU decisions. Your response is ready.`;
 }
 
-function afterHumanAction() {
+function afterHumanAction(immediateEvents = []) {
   flippedHandCards = new Set();
+  autoCounterSelecting = false;
+  autoCounterSelection = new Set();
   const before = game.state().log.length;
   advanceCpu();
-  const events = game.state().log.slice(before);
+  const events = [...immediateEvents, ...game.state().log.slice(before)];
   const sequence = presentationFromEvents(events);
   if (sequence) spectacleSequence(sequence, () => render()); else render();
 }
@@ -1886,6 +1903,7 @@ function afterHumanAction() {
 function playCard(playerId, index) {
   const state = game.state(), card = state.players[playerId].hand[index];
   if (!card || playerId !== HUMAN) return;
+  const logBefore = state.log.length;
   try {
     if (state.phase === "COUNTER") game.counter(playerId, card);
     else if (state.phase === "PIN_RESPONSE") game.playPinEscape(playerId, card);
@@ -1898,7 +1916,35 @@ function playCard(playerId, index) {
     else game.declareMove(playerId, card);
     message = `${nameFor(playerId)} played ${card.name}.`;
   } catch (error) { message = error.message; }
-  afterHumanAction();
+  afterHumanAction(game.state().log.slice(logBefore));
+}
+
+function beginAutoCounter() {
+  const state = game.state(), eligibility = autoCounterEligibility(state, HUMAN, state.proposedMove?.card);
+  if (!eligibility.legal) { message = eligibility.reason ?? "Auto Counter is not available."; autoCounterSelecting = false; autoCounterSelection = new Set(); render(); return; }
+  autoCounterSelecting = true;
+  autoCounterSelection = new Set();
+  message = `Select exactly ${eligibility.cost} pages to ditch. At least 2 pages will remain in hand.`;
+  render();
+}
+function cancelAutoCounter() { autoCounterSelecting = false; autoCounterSelection = new Set(); message = "Auto Counter cancelled."; render(); }
+function toggleAutoCounterCard(index) {
+  if (!autoCounterSelecting) return;
+  const eligibility = autoCounterEligibility(game.state(), HUMAN, game.state().proposedMove?.card);
+  if (!eligibility.legal) { cancelAutoCounter(); return; }
+  if (autoCounterSelection.has(index)) autoCounterSelection.delete(index);
+  else if (autoCounterSelection.size < eligibility.cost) autoCounterSelection.add(index);
+  message = `${autoCounterSelection.size}/${eligibility.cost} pages selected to ditch.`;
+  render();
+}
+function confirmAutoCounter() {
+  const state = game.state(), eligibility = autoCounterEligibility(state, HUMAN, state.proposedMove?.card);
+  if (!eligibility.legal || autoCounterSelection.size !== eligibility.cost) { message = eligibility.legal ? `Select exactly ${eligibility.cost} pages.` : eligibility.reason; render(); return; }
+  const logBefore = state.log.length;
+  try { game.autoCounter(HUMAN, [...autoCounterSelection]); message = `${nameFor(HUMAN)} Auto Countered ${state.proposedMove?.card?.name ?? "the Move"}.`; }
+  catch (error) { message = error.message; }
+  autoCounterSelecting = false; autoCounterSelection = new Set();
+  afterHumanAction(game.state().log.slice(logBefore));
 }
 
 function passAction() {
@@ -2003,7 +2049,8 @@ function renderPlayPileOverlay() {
 
 function renderMatchSpectacle() {
   if (!matchSpectacle) return "";
-  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${matchSpectacle.text}</div></div>`;
+  const card = matchSpectacle.cardId ? collectionCards.find(c => c.id === matchSpectacle.cardId) : null;
+  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${matchSpectacle.text}</div>${card ? `<div class="pin-escape-card-showcase">${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:"pin-escape-special-card"})}<small>${matchSpectacle.detail ?? "This Special stopped the three-count."}</small></div>` : ""}</div>`;
 }
 
 function spectacleSequence(steps, done) {
@@ -2022,7 +2069,9 @@ function presentationFromEvents(events) {
   if (!events?.length) return null;
   const ended = [...events].reverse().find(e => e.type === "MATCH_ENDED");
   const pinCheck = [...events].reverse().find(e => e.type === "PIN_CHECK");
+  const pinEscape = [...events].reverse().find(e => e.type === "PIN_ESCAPED_SPECIAL");
   const kicked = events.some(e => e.type === "KICK_OUT");
+  if (pinEscape) return [{text:"1!",kind:"pin",duration:520},{text:"2!!",kind:"pin",duration:620},{text:"SHOULDER UP!",kind:"pin-escape",duration:1450,cardId:pinEscape.cardId,detail:"Pin-escape Special activated — the three-count is broken."}];
   if (ended?.finishType === "submission") return [{text:"SUBMISSION LOCKED IN",kind:"submission",duration:800},{text:"TAP OUT!",kind:"submission",duration:1150}];
   if (ended?.finishType === "i-quit" || ended?.finishType === "i quit") return [{text:"I QUIT!",kind:"submission",duration:1150}];
   if (pinCheck || ended?.finishType === "pin") {
@@ -2108,29 +2157,36 @@ function renderHumanHand() {
 
   const entries = p.hand.map((card, index) => {
     const legal = active && cardLegal(HUMAN, card);
-    let priority;
-    // Before this turn's Momentum is used, legal Momentum is the first thing shown.
-    if (card.kind === "momentum" && legal && momentumAvailable) priority = 0;
-    // Then show every other card that can be played right now.
-    else if (legal) priority = 1;
-    // Non-playable non-Momentum pages stay ahead of spent-turn Momentum.
-    else if (card.kind !== "momentum") priority = 2;
-    // Once Momentum has been played this turn, all remaining Momentum moves to the end until a Move connects or a new turn begins.
-    else priority = 3;
-    return { card, index, legal, priority };
-  }).sort((a,b) => a.priority - b.priority || a.index - b.index);
+    let priority = 9, damageRank = 0;
+    // Response windows always surface the valid answer first.
+    if ((state.phase === "COUNTER" || state.phase === "PIN_RESPONSE") && legal) priority = 0;
+    else if (state.phase === "ACTION" && card.kind === "momentum" && legal && momentumAvailable) priority = 1;
+    // Utility must stay visible before the damage stack so Specials/Actions are not buried.
+    else if (state.phase === "ACTION" && legal && ["action","special","support","manager"].includes(card.kind)) priority = 2;
+    else if (state.phase === "ACTION" && legal && card.kind === "move") { priority = 3; damageRank = -(Number(card.damage) || 0); }
+    else if (legal) priority = 4;
+    else if (card.kind !== "momentum") priority = 5;
+    else priority = 6;
+    return { card, index, legal, priority, damageRank };
+  }).sort((a,b) => a.priority - b.priority || a.damageRank - b.damageRank || a.index - b.index);
 
+  const autoEligibility = state.phase === "COUNTER" ? autoCounterEligibility(state, HUMAN, state.proposedMove?.card) : null;
   const cards = entries.map(({card,index,legal}) => {
     const reason = legal ? (state.phase === "COUNTER" ? "COUNTER" : state.phase === "PIN_RESPONSE" ? "ESCAPE" : "PLAY") : cardReason(HUMAN, card);
     const flipKey = `${index}:${card.id}`;
-    const flipped = flippedHandCards.has(flipKey);
+    const flipped = !autoCounterSelecting && flippedHandCards.has(flipKey);
+    const autoSelected = autoCounterSelecting && autoCounterSelection.has(index);
+    if (autoCounterSelecting) return `<article class="hand-card-slot horizontal-hand-card auto-counter-ditch-card ${autoSelected ? "is-auto-selected" : ""}" data-auto-ditch-index="${index}" data-original-hand-index="${index}">
+      ${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:`hand-ccg auto-ditch ${autoSelected ? "selected" : ""}`})}
+      <div class="hand-card-action auto-counter-card-action"><span>${autoSelected ? "SELECTED TO DITCH" : "TAP CARD TO DITCH"}</span><button type="button" data-auto-ditch-index="${index}" class="${autoSelected ? "primary" : "secondary"}">${autoSelected ? "Selected" : "Select"}</button></div>
+    </article>`;
     return `<article class="hand-card-slot horizontal-hand-card ${legal ? "is-playable" : "is-locked"}" data-original-hand-index="${index}">
       ${collectibleCardMarkup(card,{flipped,extraClass:`hand-ccg ${legal ? "playable" : "locked"}`,flipAttr:`data-flip-hand="${flipKey}"`})}
       <div class="hand-card-action"><span>${reason || "Not playable now"}</span><button type="button" data-play-hand="${index}" class="${legal ? "primary" : "secondary"}" ${legal ? "" : "disabled"}>${state.phase === "COUNTER" ? "Counter" : state.phase === "PIN_RESPONSE" ? "Escape" : "Play"}</button></div>
     </article>`;
   }).join("");
 
-  const sortHint = momentumAvailable ? "Playable Momentum first · then playable pages" : "Momentum used this turn · connect a Move or begin a new turn to refresh it";
+  const sortHint = autoCounterSelecting ? `AUTO COUNTER · Select ${autoCounterSelection.size}/${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)} pages to ditch` : state.phase === "COUNTER" ? "Valid Counters first" : state.phase === "PIN_RESPONSE" ? "Pin escapes first" : momentumAvailable ? "Playable Momentum · Actions/Specials · Moves by highest damage" : "Actions/Specials · playable Moves by highest damage";
   return `<section class="player-hand-panel compact-hand-panel">
     <div class="player-hand-head"><div><span>YOUR HAND</span><h3>${p.superstar.name}</h3></div><div class="deck-counts"><b>${p.hand.length}</b> hand · <b>${p.deck.length}</b> deck · <b>${p.discard.length}</b> discard</div></div>
     <p class="hand-instruction">${sortHint} · Swipe horizontally to browse.</p>
@@ -2141,15 +2197,19 @@ function renderHumanHand() {
 function renderCommandBar() {
   const state = game.state(), owner = decisionOwner(state);
   let prompt = state.phase === "MATCH_OVER" ? (state.winner ? `${nameFor(state.winner)} wins by ${state.finish.type.toUpperCase()}!` : `Match ends by ${state.finish.type.toUpperCase()}!`) : owner === CPU ? `${nameFor(CPU)} is thinking…` : `Your turn — choose a page or action.`;
-  if (state.phase === "COUNTER" && owner === HUMAN) prompt = `Counter ${state.proposedMove.card.name}, or pass.`;
+  const autoEligibility = state.phase === "COUNTER" && owner === HUMAN ? autoCounterEligibility(state, HUMAN, state.proposedMove?.card) : null;
+  if (state.phase === "COUNTER" && owner === HUMAN) prompt = autoCounterSelecting ? `AUTO COUNTER — select ${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)} pages to ditch.` : `Counter ${state.proposedMove.card.name}${autoEligibility?.legal ? ", Auto Counter," : ""} or pass.`;
   if (state.phase === "PIN_RESPONSE" && owner === HUMAN) prompt = `You are being pinned — escape or pass to the pin check.`;
   if (state.phase === "SUBMISSION_MAINTAIN" && owner === HUMAN) prompt = `Maintain the submission or release it and keep Control.`;
   const pinCheck = state.phase === "ACTION" && owner === HUMAN ? canAttemptPin(state, HUMAN) : null;
   return `<section class="match-command ${state.phase === "MATCH_OVER" ? "match-over" : ""}">
-    <div class="command-status"><span>TURN ${state.turnNumber} / ${state.turnLimit ?? 50}</span><b>${state.phase.replaceAll("_", " ")}</b></div>
+    <div class="command-status"><span>TURN ${state.turnNumber}</span><b>${state.phase.replaceAll("_", " ")}</b></div>
     <div class="command-prompt"><strong>${prompt}</strong><small>${message}</small></div>
     <div class="command-actions">
-      ${owner === HUMAN && state.phase === "COUNTER" ? '<button id="pass-action" class="primary show-command-button single-context-action">PASS</button>' : ""}
+      ${owner === HUMAN && state.phase === "COUNTER" && !autoCounterSelecting && autoEligibility?.legal ? `<button id="auto-counter-action" class="primary show-command-button">AUTO COUNTER · DITCH ${autoEligibility.cost}</button>` : ""}
+      ${owner === HUMAN && state.phase === "COUNTER" && !autoCounterSelecting ? '<button id="pass-action" class="primary show-command-button">PASS</button>' : ""}
+      ${owner === HUMAN && state.phase === "COUNTER" && autoCounterSelecting ? '<button id="cancel-auto-counter" class="secondary show-command-button">CANCEL</button>' : ""}
+      ${owner === HUMAN && state.phase === "COUNTER" && autoCounterSelecting ? `<button id="confirm-auto-counter" class="primary show-command-button" ${autoCounterSelection.size === (autoEligibility?.cost ?? -1) ? "" : "disabled"}>CONFIRM · DITCH ${autoCounterSelection.size}/${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)}</button>` : ""}
       ${owner === HUMAN && state.phase === "ACTION" && pinCheck?.legal ? `<button id="attempt-pin" class="primary pin-ready show-command-button single-context-action">PIN</button>` : ""}
       ${owner === HUMAN && state.phase === "ACTION" && !pinCheck?.legal && canReturnToRing(state, HUMAN) ? '<button id="return-ring" class="primary show-command-button single-context-action">RETURN TO RING</button>' : ""}
       ${owner === HUMAN && state.phase === "ACTION" && !pinCheck?.legal && !canReturnToRing(state, HUMAN) ? '<button id="pass-action" class="secondary show-command-button pass-control-button single-context-action">PASS</button>' : ""}
@@ -2174,8 +2234,8 @@ function logText(event) {
     ENTRANCE_EFFECT: () => `${event.cardName} triggered for ${n(event.playerId)}.`,
     BELL_RANG: () => `The bell rings! ${n(event.control)} has opening Control.`,
     MATCH_STARTED: () => `${n(event.control)} starts Turn 1 in Control.`, MOMENTUM_PLAYED: () => `${n(event.playerId)} played ${event.method} Momentum.`,
-    ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, HEALTH_RESTORED: () => `${cardNameFor(event.cardId)} restores ${event.amount} HP to ${n(event.playerId)}.`, FIGHT_FOREVER: () => `Fight Forever restores ${event.playerHeal} HP to ${n(event.playerId)} and ${event.opponentHeal} HP to ${n(event.opponentId)}; turn limit ${event.oldTurnLimit} → ${event.newTurnLimit}.`, SUPPORT_PLAYED: () => `${n(event.playerId)} put ${cardNameFor(event.cardId)} into play.`, SUPPORT_REPLACED: () => `${n(event.playerId)} discarded ${cardNameFor(event.cardId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
-    MOVE_COUNTERED: () => `${n(event.defenderId)} countered ${cardNameFor(event.incomingCardId)} with ${cardNameFor(event.counterCardId)}.`, AUTO_COUNTER: () => `${n(event.defenderId)} Auto Countered by ditching 7 pages.`,
+    ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, HEALTH_RESTORED: () => `${cardNameFor(event.cardId)} restores ${event.amount} HP to ${n(event.playerId)}.`, FIGHT_FOREVER: () => `Fight Forever restores ${event.playerHeal} HP to ${n(event.playerId)} and ${event.opponentHeal} HP to ${n(event.opponentId)}.`, SUPPORT_PLAYED: () => `${n(event.playerId)} put ${cardNameFor(event.cardId)} into play.`, SUPPORT_REPLACED: () => `${n(event.playerId)} discarded ${cardNameFor(event.cardId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
+    MOVE_COUNTERED: () => `${n(event.defenderId)} countered ${cardNameFor(event.incomingCardId)} with ${cardNameFor(event.counterCardId)}.`, AUTO_COUNTER: () => `${n(event.defenderId)} Auto Countered ${cardNameFor(event.incomingCardId)} by ditching ${event.cost} pages (use ${event.useNumber}); ${event.remaining} pages remained.`,
     COUNTER_PASSED: () => `${n(event.defenderId)} passed the counter window.`, MOVE_CONNECTED: () => `${cardNameFor(event.cardId)} connected for ${event.damage} damage${event.finisher ? " (FINISHER)" : ""}.`,
     CARDS_DRAWN: () => `${n(event.playerId)} drew ${event.cardIds.length} page${event.cardIds.length === 1 ? "" : "s"}.`, CONTROL_PASSED: () => `${n(event.from)} passed Control to ${n(event.to)}.`, CONTROL_RETAINED: () => `${n(event.playerId)} connected and keeps Control.`, CRITICAL_EXHAUSTION: () => `${n(event.playerId)} is at 0 HP and cannot retain Control. Control passes to ${n(event.to)}.`,
     POST_MOVE_WINDOW: () => `${n(event.attackerId)} has a post-move finish window.`, PIN_ATTEMPTED: () => `${n(event.attackerId)} attempts pin #${event.attemptNumber}; ${event.chance}% prototype chance.`,
@@ -2204,7 +2264,7 @@ function handleCompletedMatch() {
   if (profile.onboarding && !profile.onboarding.complete) profile.onboarding.complete = true;
   matchRewarded = true;
   recordCompletedMatchChallenges(profile, state, HUMAN, activeMode);
-  const result = state.winner === HUMAN ? "win" : state.winner === CPU ? "loss" : "draw";
+  const result = state.winner === HUMAN ? "win" : "loss";
   const seasonXpReward = awardMatchSeasonXp(profile, result);
   queueTierUps(seasonXpReward.tierBefore, seasonXpReward.tierAfter, seasonXpReward.before, seasonXpReward.after);
   const seasonXpText = seasonXpReward.awarded ? ` +${seasonXpReward.awarded} Season XP.` : "";
@@ -2217,7 +2277,6 @@ function handleCompletedMatch() {
     const run = championshipRoadState(profile).activeRun;
     if (outcome.status === "advance") message = `${CHAMPIONSHIP_STAGES[run.stage - 1]} won! +1 booster. Return to Championship Road for ${CHAMPIONSHIP_STAGES[run.stage]}.`;
     else if (outcome.status === "retry" && result === "loss") message = `Defeat. Championship Road is still alive — retry ${CHAMPIONSHIP_STAGES[run.stage]}.`;
-    else if (outcome.status === "retry") message = `Draw. Replay ${CHAMPIONSHIP_STAGES[run.stage]}.`;
     else if (outcome.status === "cleared") {
       if (outcome.firstWithSuperstar) { grantBooster(profile, 1, rewardSetId); message = `CHAMPIONSHIP ROAD CLEARED! Final win: +1 booster, Championship Pack awarded, plus a first-clear bonus booster for ${superstarById[run.superstarId].name}.`; }
       else message = `CHAMPIONSHIP ROAD CLEARED! Final win: +1 booster and a Championship Pack has been awarded.`;
@@ -2245,7 +2304,6 @@ function handleCompletedMatch() {
   const run = ladderState(profile).activeRun;
   if (outcome.status === "advance") message = `Rung cleared! +1 booster. ${run.lives} lives remain. Return to Climb the Ladder for rung ${run.rung + 1}.`;
   else if (outcome.status === "retry" && result === "loss") message = `Defeat. One life lost — ${run.lives} remaining. Return to Climb the Ladder to retry this rung.`;
-  else if (outcome.status === "retry") message = `Draw. No life lost; replay this rung.`;
   else if (outcome.status === "failed") message = `Run ended. All three lives are gone — start again from rung 1.`;
   else if (outcome.status === "cleared") message = `CLIMB THE LADDER CLEARED! +1 booster for the final win and a Completion Pack has been awarded.`;
   message += seasonXpText;
@@ -2303,15 +2361,15 @@ function showTierUpCelebration() {
 
 function renderMatchResults() {
   const state=game.state();
-  const humanWon=state.winner===HUMAN, draw=!state.winner;
-  const winnerName=state.winner ? nameFor(state.winner) : "DRAW";
+  const humanWon=state.winner===HUMAN;
+  const winnerName=state.winner ? nameFor(state.winner) : "NO RESULT";
   const loserId=state.winner===HUMAN?CPU:HUMAN;
   const finish=(state.finish?.type??"match").replaceAll("_"," ").toUpperCase();
   const humanStar=state.players[HUMAN].superstar;
   const rewardSetId=humanStar.setId??"summerslam-series-1";
   const rewardName=sets[rewardSetId]?.displayName??rewardSetId;
   const rewardLine=humanWon ? `1 × ${rewardName} Booster` : "Match progression recorded";
-  return `<section class="match-results-screen ${humanWon?"victory":draw?"draw":"defeat"}"><div class="results-aura"></div><span class="results-kicker">MATCH COMPLETE</span><h1>${humanWon?"VICTORY":draw?"DRAW":"DEFEAT"}</h1><div class="results-star results-winning-card">${(()=>{const sid=state.winner?state.players[state.winner].superstar.id:humanStar.id;const c=superstarCollectibleFor(sid);return c?collectibleCardMarkup(c,{extraClass:"results-superstar-card"}):portraitMarkup(sid,winnerName);})()}</div><h2>${winnerName}</h2>${state.winner?`<p>def. ${nameFor(loserId)} · ${finish} · TURN ${state.turnNumber}</p>`:`<p>${finish} · TURN ${state.turnNumber}</p>`}<section class="results-rewards"><span>MATCH REWARDS</span>${humanWon?`<div class="results-pack-reward"><div class="booster-pack results-booster pack-set-${state.players[HUMAN].superstar.setId}">${setLogoMarkup(state.players[HUMAN].superstar.setId,"pack-set-logo")}<b>BOOSTER</b></div><strong>${rewardLine}</strong></div>`:`<strong>${rewardLine}</strong>`}<small>${message}</small></section><div class="results-actions">${humanWon?`<button id="results-reward" class="start-match">VIEW REWARDS</button>`:""}<button id="results-continue" class="nav-button">${activeMode==="ladder"?"RETURN TO LADDER":activeMode==="championship"?"CHAMPIONSHIP ROAD":"CONTINUE"}</button>${activeMode==="exhibition"?'<button id="results-rematch" class="nav-button">REMATCH</button>':""}</div></section>`;
+  return `<section class="match-results-screen ${humanWon?"victory":"defeat"}"><div class="results-aura"></div><span class="results-kicker">MATCH COMPLETE</span><h1>${humanWon?"VICTORY":"DEFEAT"}</h1><div class="results-star results-winning-card">${(()=>{const sid=state.winner?state.players[state.winner].superstar.id:humanStar.id;const c=superstarCollectibleFor(sid);return c?collectibleCardMarkup(c,{extraClass:"results-superstar-card"}):portraitMarkup(sid,winnerName);})()}</div><h2>${winnerName}</h2>${state.winner?`<p>def. ${nameFor(loserId)} · ${finish} · TURN ${state.turnNumber}</p>`:`<p>${finish} · TURN ${state.turnNumber}</p>`}<section class="results-rewards"><span>MATCH REWARDS</span>${humanWon?`<div class="results-pack-reward"><div class="booster-pack results-booster pack-set-${state.players[HUMAN].superstar.setId}">${setLogoMarkup(state.players[HUMAN].superstar.setId,"pack-set-logo")}<b>BOOSTER</b></div><strong>${rewardLine}</strong></div>`:`<strong>${rewardLine}</strong>`}<small>${message}</small></section><div class="results-actions">${humanWon?`<button id="results-reward" class="start-match">VIEW REWARDS</button>`:""}<button id="results-continue" class="nav-button">${activeMode==="ladder"?"RETURN TO LADDER":activeMode==="championship"?"CHAMPIONSHIP ROAD":"CONTINUE"}</button>${activeMode==="exhibition"?'<button id="results-rematch" class="nav-button">REMATCH</button>':""}</div></section>`;
 }
 
 function render() {
@@ -2339,6 +2397,7 @@ function render() {
   $("#skip-onboarding")?.addEventListener("click",()=>{ profile.onboarding={complete:true,step:0}; saveProfile(profile); render(); });
   root.querySelectorAll("[data-flip-hand]").forEach(btn => btn.addEventListener("click", () => { const key = btn.dataset.flipHand; if (flippedHandCards.has(key)) flippedHandCards.delete(key); else flippedHandCards.add(key); render(); }));
   root.querySelectorAll("[data-play-hand]").forEach(btn => btn.addEventListener("click", () => playCard(HUMAN, Number(btn.dataset.playHand))));
+  root.querySelectorAll("[data-auto-ditch-index]").forEach(el => el.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); toggleAutoCounterCard(Number(el.dataset.autoDitchIndex)); }));
   const openPlayPileCard = (trigger, event) => { event?.stopPropagation?.(); playPileOverlayCard = collectionById.get(trigger.dataset.openPlayPile) ?? null; playPileOverlayFlipped = false; render(); };
   root.querySelectorAll("[data-open-play-pile]").forEach(trigger => {
     trigger.addEventListener("click", event => openPlayPileCard(trigger, event));
@@ -2350,6 +2409,7 @@ function render() {
   root.querySelectorAll("[data-flip-superstar-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); superstarOverlayFlipped = !superstarOverlayFlipped; render(); }));
   root.querySelectorAll("[data-superstar-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if (event.target !== backdrop) return; superstarOverlayId = null; superstarOverlayFlipped = false; render(); }));
   $("#pass-action")?.addEventListener("click", passAction); $("#attempt-pin")?.addEventListener("click", attemptPin);
+  $("#auto-counter-action")?.addEventListener("click", beginAutoCounter); $("#cancel-auto-counter")?.addEventListener("click", cancelAutoCounter); $("#confirm-auto-counter")?.addEventListener("click", confirmAutoCounter);
   $("#return-ring")?.addEventListener("click", returnToRing); $("#follow-outside")?.addEventListener("click", followOutside);
   $("#reset-match")?.addEventListener("click", restartMatch); $("#change-matchup")?.addEventListener("click", activeMode === "ladder" ? showLadder : activeMode === "championship" ? showChampionship : showSetup); $("#browse-main-menu")?.addEventListener("click", showMainMenu); $("#ladder-hub")?.addEventListener("click", showLadder); $("#championship-hub")?.addEventListener("click", showChampionship); $("#browse-collection")?.addEventListener("click", showCollection); $("#browse-boosters")?.addEventListener("click", showBoosters); $("#browse-challenges")?.addEventListener("click", showChallenges); $("#browse-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1)); $("#release-submission")?.addEventListener("click", releaseSubmission);
   root.querySelectorAll("[data-ditch]").forEach(btn => btn.addEventListener("click", () => maintainSubmission(Number(btn.dataset.ditch))));

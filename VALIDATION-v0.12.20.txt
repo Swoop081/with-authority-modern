@@ -1,0 +1,7 @@
+{
+  "superstars": 50,
+  "decks": 50,
+  "gameplayCards": 432,
+  "orphans": 0,
+  "issues": []
+}

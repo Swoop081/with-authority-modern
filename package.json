@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.12.16",
+  "version": "0.12.23",
   "private": true,
   "type": "module",
   "scripts": {
@@ -14,6 +14,7 @@
     "generate-studio": "node tools/generate-card-studio-data.mjs",
     "card-ids": "node tools/card-id-audit.mjs",
     "final-balance": "node tools/final-season1-sim.mjs",
-    "dead-turns": "node tools/dead-turn-audit.mjs"
+    "dead-turns": "node tools/dead-turn-audit.mjs",
+    "counter-states": "node tools/counter-state-audit.mjs"
   }
 }
