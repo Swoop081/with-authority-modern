@@ -1,6 +1,6 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.04";
-import { decks } from "./decks.js?v=0.12.04";
-import { superstars } from "./superstars.js?v=0.12.04";
+import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.05";
+import { decks } from "./decks.js?v=0.12.05";
+import { superstars } from "./superstars.js?v=0.12.05";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";

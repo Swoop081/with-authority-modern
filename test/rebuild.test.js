@@ -1151,7 +1151,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.04/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.05/,'Studio script cache key must match the current release');
 });
 
 
@@ -1163,7 +1163,6 @@ test("v0.12.03 Card Art Studio premium frame renders set border, rarity stars an
   assert.match(studio,/for\(let i=0;i<rarity;i\+\+\)/,'rarity should determine vertical star count');
   assert.ok(studio.includes('fillText("★",x,y)'),'rarity stars should be rendered as gold stars');
   assert.match(studio,/function drawStatTile\(/,'move cost and damage should use framed stat tiles');
-  assert.ok(studio.includes('"WWE LEGACY • COLLECTIBLE CARD GAME"'),'professional footer brand line should be present');
   assert.ok(studio.includes('Bahnschrift Condensed'),'card-name typography should use the premium condensed display stack');
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'card metadata should use the premium semi-condensed stack');
   assert.equal(studio.includes('italic 1000'),false,'premium card names should no longer use the old heavy italic treatment');
@@ -1180,5 +1179,18 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.04/,'Studio visible build label should match the typography release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.05/,'Studio visible build label should match the current release');
+});
+
+
+test("v0.12.05 Card Art Studio moves rarity stars inward, emphasizes stats and removes corner microtext", async()=>{
+  const fs=await import('node:fs');
+  const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
+  const html=fs.readFileSync(new URL('../tools/card-art-studio.html',import.meta.url),'utf8');
+  assert.ok(studio.includes('const x=51*s,y=62*s+i*31*s;'),'rarity stars should sit one outer-border width farther inside the card');
+  assert.ok(studio.includes('cardFont(META_STACK,11.5,800)'),'COST/DAMAGE labels should be larger and bolder');
+  assert.ok(studio.includes('cardFont(NUMBER_STACK,35,900)'),'COST/DAMAGE values should be substantially larger and bold');
+  assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
+  assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.05/,'Studio visible build label should match v0.12.05');
 });
