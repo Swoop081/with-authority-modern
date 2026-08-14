@@ -46,6 +46,8 @@ const studioCards = collectionCards.map(card => ({
   damage: card.damage ?? null,
   amount: card.amount ?? null,
   method: card.method ?? null,
+  moveType: card.moveType ?? null,
+  rarity: card.rarity ?? 1,
   currentArt: relativeArt(card),
   requirements: card.requirements ?? null,
 }));

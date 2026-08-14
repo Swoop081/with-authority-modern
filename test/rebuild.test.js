@@ -1136,7 +1136,7 @@ test("v0.11.99 Play Pile inspector uses a mobile-safe non-nested hit target and 
   assert.ok(css.includes('min-height:96px!important'));
 });
 
-test("v0.12.02 Card Art Studio keeps every set renderer and card-selection wiring intact", async()=>{
+test("Card Art Studio keeps every set renderer and card-selection wiring intact", async()=>{
   const fs=await import('node:fs');
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
   const data=fs.readFileSync(new URL('../js/tools/card-art-studio-data.js',import.meta.url),'utf8');
@@ -1151,5 +1151,20 @@ test("v0.12.02 Card Art Studio keeps every set renderer and card-selection wirin
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.02/,'Studio script cache key must bump with the fix');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.03/,'Studio script cache key must match the current release');
+});
+
+
+test("v0.12.03 Card Art Studio premium frame renders set border, rarity stars and structured footer", async()=>{
+  const fs=await import('node:fs');
+  const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
+  const data=fs.readFileSync(new URL('../js/tools/card-art-studio-data.js',import.meta.url),'utf8');
+  assert.match(studio,/function drawRarityStars\(/);
+  assert.match(studio,/for\(let i=0;i<rarity;i\+\+\)/,'rarity should determine vertical star count');
+  assert.ok(studio.includes('fillText("★",x,y)'),'rarity stars should be rendered as gold stars');
+  assert.match(studio,/function drawStatTile\(/,'move cost and damage should use framed stat tiles');
+  assert.ok(studio.includes('"WWE LEGACY • COLLECTIBLE CARD GAME"'),'professional footer brand line should be present');
+  assert.ok(studio.includes('set.border||set.accent'),'outer border must use the set main colour');
+  assert.ok(data.includes('"rarity":4'),'Studio dataset must carry rarity for four-star cards');
+  assert.ok(data.includes('"moveType":"strike"'),'Studio dataset should carry move type for the footer');
 });

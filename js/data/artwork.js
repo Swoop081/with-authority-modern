@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.12.02";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.02";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.02";
+import { assetUrl } from "../config/build.js?v=0.12.03";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.03";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.03";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";

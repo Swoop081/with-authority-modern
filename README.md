@@ -1,7 +1,9 @@
-# WWE Legacy: Collectible Card Game — v0.12.02
+WWE Legacy: Collectible Card Game — Current build: v0.12.03 — Premium Card Frame + Rarity Presentation Pass.
 
-Current canonical development baseline: **v0.12.02 — Card Art Studio Set Isolation Fix**.
+# WWE Legacy: Collectible Card Game — v0.12.01
 
-This release fixes the Card Art Studio regression from v0.12.01: Survivor Series retains its official WWE Survivor Series: WarGames 2026 — Houston identity, while SummerSlam, Hall of Fame, Evolution, Final Boss, RAW, Worlds Collide, Money in the Bank and SmackDown again render their own dedicated card fronts and selected card names update correctly.
+Current canonical development baseline: **v0.12.01 — Official Survivor Series Houston + Shared Fundamentals**.
 
-All v0.12.01 gameplay/content, shared fundamentals, v0.11.99 HUD/Play Pile fixes, v0.11.98 Flair Chop expansion and locked Survivor Series Superstar designs remain unchanged.
+This release replaces the temporary Survivor Series development logo with the official WWE **Survivor Series: WarGames 2026 — Houston** treatment and retunes the Survivor presentation to navy / orange / steel. It also adds the latest shared fundamentals batch: Elbow to the Back of the Head, Hip Toss, Leg Drop, Choke on the Ropes and Chops in the Corner.
+
+All previously locked v0.12.00 gameplay, v0.11.99 HUD/Play Pile fixes, v0.11.98 Flair Chop expansion and Survivor Series Superstar designs remain intact.
