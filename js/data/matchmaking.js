@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=0.12.12";
-import { decks } from "./decks.js?v=0.12.12";
-import { isLaunchRosterSuperstar } from "./release.js?v=0.12.12";
+import { superstars } from "./superstars.js?v=0.12.13";
+import { decks } from "./decks.js?v=0.12.13";
+import { isLaunchRosterSuperstar } from "./release.js?v=0.12.13";
 
 export function exhibitionOpponentIds(playerSuperstarId) {
   return Object.values(superstars)

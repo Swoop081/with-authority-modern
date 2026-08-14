@@ -1,5 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { superstars } from "../js/data/superstars.js";
 import { decks } from "../js/data/decks.js";
 import { allGameplayCards } from "../js/data/content.js";
@@ -1217,7 +1221,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.12/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.13/,'Studio script cache key must match the current release');
 });
 
 
@@ -1543,4 +1547,39 @@ test("v0.12.12 roadmap does not reveal unreleased Superstar names",()=>{
   const futureCopy=SEASON_1.roadmap.filter(node=>node.id!=="launch").map(node=>node.description).join(" ");
   const hiddenNames=["Logan Paul","Chad Gable","Raquel Rodriguez","Sol Ruca","Rey Mysterio","Dominik Mysterio","Penta","El Grande Americano","Jey Uso","LA Knight","Alexa Bliss","Finn Bálor","Tiffany Stratton","Chelsea Green","Damian Priest","Danhausen","Bron Breakker","Drew McIntyre","Randy Orton","Sami Zayn","Jacob Fatu","Solo Sikoa","Jade Cargill","Nia Jax","Goldberg"];
   for(const name of hiddenNames) assert.equal(futureCopy.includes(name),false,name);
+});
+
+
+test("v0.12.13 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
+  const here=path.dirname(fileURLToPath(import.meta.url));
+  const root=path.resolve(here,"..");
+  const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
+  const version=pkg.version;
+  const index=readFileSync(path.join(root,"index.html"),"utf8");
+  assert.equal(version,"0.12.13");
+  for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
+    assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
+  }
+  const browserFiles=["js/ui/app.js","js/data/profile.js","js/data/boosters.js","js/data/catalogue.js","js/data/deck-builder.js","js/data/matchmaking.js","js/data/release.js"];
+  for(const rel of browserFiles){
+    const text=readFileSync(path.join(root,rel),"utf8");
+    const mismatches=[...text.matchAll(/[?&]v=(0\.\d+\.\d+)/g)].map(m=>m[1]).filter(v=>v!==version);
+    assert.deepEqual(mismatches,[],`${rel} contains stale cache stamps`);
+  }
+
+  const appUrl=pathToFileURL(path.join(root,"js/ui/app.js")).href;
+  const runBoot=(rawProfile)=>{
+    const probe=`
+class FakeEl { constructor(id=''){this.id=id;this.hidden=false;this.style={};this.dataset={};this.classList={toggle(){},add(){},remove(){},contains(){return false}};this.innerHTML='';this.textContent='';} setAttribute(){} remove(){} appendChild(){} addEventListener(){} querySelector(){return null} querySelectorAll(){return []} }
+const gameEl=new FakeEl('game'), navEl=new FakeEl('mobile-game-nav'), body=new FakeEl('body');
+globalThis.document={body,documentElement:{scrollTop:0},querySelector(sel){if(sel==='#game')return gameEl;if(sel==='#mobile-game-nav')return navEl;return null},querySelectorAll(){return []},createElement(){return new FakeEl()}};
+globalThis.window={scrollTo(){}}; globalThis.history={scrollRestoration:'auto'}; globalThis.requestAnimationFrame=(fn)=>{fn();return 1};
+const RAW=${JSON.stringify(rawProfile)}; globalThis.localStorage={getItem(key){return key==='wa-modern-profile-v2'?RAW:null},setItem(){},removeItem(){}}; globalThis.setInterval=()=>0;
+await import(${JSON.stringify(appUrl)}+'?boot-smoke='+Math.random());
+if(!gameEl.innerHTML.includes('splash-screen')) throw new Error('Splash did not render');
+console.log('BOOT_OK');`;
+    return execFileSync(process.execPath,["--input-type=module","-e",probe],{cwd:root,encoding:"utf8"});
+  };
+  assert.match(runBoot(null),/BOOT_OK/);
+  assert.match(runBoot(JSON.stringify({starterId:"roman-reigns",version:20})),/BOOT_OK/);
 });
