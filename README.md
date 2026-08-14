@@ -1,9 +1,7 @@
-WWE Legacy: Collectible Card Game — Current build: v0.12.03 — Premium Card Frame + Rarity Presentation Pass.
+# WWE Legacy: Collectible Card Game — v0.12.04
 
-# WWE Legacy: Collectible Card Game — v0.12.01
+Current canonical development baseline: **v0.12.04 — Premium Card Typography Pass**.
 
-Current canonical development baseline: **v0.12.01 — Official Survivor Series Houston + Shared Fundamentals**.
+This release keeps the v0.12.03 premium set-coloured frame, rarity stars, set backgrounds and top-right show logos intact while upgrading Card Art Studio typography. Card names now use a clean condensed heavyweight display stack without the old exaggerated italic treatment; COST/DAMAGE tiles use dedicated condensed number typography; metadata, requirements, move type and footer copy use a restrained semi-condensed UI/trading-card stack with improved spacing and hierarchy.
 
-This release replaces the temporary Survivor Series development logo with the official WWE **Survivor Series: WarGames 2026 — Houston** treatment and retunes the Survivor presentation to navy / orange / steel. It also adds the latest shared fundamentals batch: Elbow to the Back of the Head, Hip Toss, Leg Drop, Choke on the Ropes and Chops in the Corner.
-
-All previously locked v0.12.00 gameplay, v0.11.99 HUD/Play Pile fixes, v0.11.98 Flair Chop expansion and Survivor Series Superstar designs remain intact.
+All v0.12.03 card presentation, v0.12.02 Studio set isolation, v0.12.01 official Survivor Series Houston branding and all previously locked gameplay/content remain intact.

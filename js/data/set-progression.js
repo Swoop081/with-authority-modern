@@ -1,5 +1,5 @@
-import { cardsForSet } from './collection.js?v=0.12.03';
-import { ownedCount } from './profile.js?v=0.12.03';
+import { cardsForSet } from './collection.js?v=0.12.04';
+import { ownedCount } from './profile.js?v=0.12.04';
 
 export const SET_LIFECYCLES = ['featured','vaulted','returning'];
 export const COLLECTION_MILESTONES = [
