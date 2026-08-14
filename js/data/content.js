@@ -2810,7 +2810,7 @@ export const allGameplayCards = [
   },
   {
     "id": "hogans-big-boot",
-    "name": "Hogan\u2019s Big Boot",
+    "name": "Hogan’s Big Boot",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 6,
@@ -3825,7 +3825,7 @@ export const allGameplayCards = [
   },
   {
     "id": "stephanie-vaquer-devils-kiss",
-    "name": "Devil\u2019s Kiss",
+    "name": "Devil’s Kiss",
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 6,
@@ -4212,7 +4212,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 1,
     "superstarId": "stone-cold-steve-austin",
-    "rulesText": "Austin\u2019s next Strike Move gets +2 damage.",
+    "rulesText": "Austin’s next Strike Move gets +2 damage.",
     "effect": {
       "type": "buffNextMethod",
       "method": "strike",
@@ -4259,7 +4259,7 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "andre-the-giant",
-    "rulesText": "Andr\u00e9 only. Once per match when an important Andr\u00e9 Move is Countered, protect it from being discarded and return it to hand."
+    "rulesText": "André only. Once per match when an important André Move is Countered, protect it from being discarded and return it to hand."
   },
   {
     "id": "manager-miss-elizabeth",
@@ -4356,7 +4356,7 @@ export const allGameplayCards = [
   },
   {
     "id": "entrance-cm-punk",
-    "name": "It\u2019s Clobbering Time!",
+    "name": "It’s Clobbering Time!",
     "kind": "entrance",
     "setId": "summerslam-series-1",
     "rarity": 4,
@@ -4496,7 +4496,7 @@ export const allGameplayCards = [
   },
   {
     "id": "entrance-ultimate-warrior",
-    "name": "Warrior\u2019s Charge",
+    "name": "Warrior’s Charge",
     "kind": "entrance",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
@@ -4829,7 +4829,7 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "hulk-hogan",
-    "rulesText": "Once per match when Hogan gains Control at 50% HP or less: clear Stun, gain +2 Adrenaline and his next Hogan\u2019s Big Boot this Control cannot be Countered by a Move.",
+    "rulesText": "Once per match when Hogan gains Control at 50% HP or less: clear Stun, gain +2 Adrenaline and his next Hogan’s Big Boot this Control cannot be Countered by a Move.",
     "special": {
       "type": "hulkUp"
     }
@@ -4862,12 +4862,12 @@ export const allGameplayCards = [
   },
   {
     "id": "special-andre-the-giant",
-    "name": "Nobody Slams Andr\u00e9",
+    "name": "Nobody Slams André",
     "kind": "special",
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "andre-the-giant",
-    "rulesText": "Once per match when an opponent Strength Move would ground Andr\u00e9: he remains standing and gains +1 Adrenaline.",
+    "rulesText": "Once per match when an opponent Strength Move would ground André: he remains standing and gains +1 Adrenaline.",
     "special": {
       "type": "nobodySlams"
     }
@@ -4992,7 +4992,7 @@ export const allGameplayCards = [
     "setId": "season-1-final-boss",
     "rarity": 3,
     "superstarId": "the-rock",
-    "rulesText": "Once per match after one of Rock\u2019s non-Finisher Moves is Countered: the Counter resolves, but Rock retains Control, draws 1 and the opponent loses 1 Adrenaline.",
+    "rulesText": "Once per match after one of Rock’s non-Finisher Moves is Countered: the Counter resolves, but Rock retains Control, draws 1 and the opponent loses 1 Adrenaline.",
     "special": {
       "type": "retainOnCounter",
       "draw": 1,
@@ -5396,7 +5396,7 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 3,
     "superstarId": "chad-gable",
-    "rulesText": "Once per match, after one of Chad\u2019s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
+    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
     "special": {
       "type": "moveCounteredDrawDrain",
       "draw": 1,
@@ -5524,7 +5524,7 @@ export const allGameplayCards = [
       "dominik-mysterio"
     ],
     "rarity": 3,
-    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik\u2019s Frog Splash and it costs 2 less this Control sequence.",
+    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik’s Frog Splash and it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 1,
@@ -5540,7 +5540,7 @@ export const allGameplayCards = [
       },
       {
         "type": "search",
-        "name": "Dominik\u2019s Frog Splash",
+        "name": "Dominik’s Frog Splash",
         "discount": 2,
         "ifSuperstarIds": [
           "dominik-mysterio"
@@ -5706,7 +5706,7 @@ export const allGameplayCards = [
   },
   {
     "id": "dominik-mysterio-frog-splash",
-    "name": "Dominik\u2019s Frog Splash",
+    "name": "Dominik’s Frog Splash",
     "kind": "move",
     "setId": "worlds-collide-series-1",
     "cost": 9,
@@ -5750,7 +5750,7 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "rarity": 3,
     "superstarId": "dominik-mysterio",
-    "rulesText": "Once per match, after one of Dominik\u2019s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
+    "rulesText": "Once per match, after one of Dominik’s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
     "special": {
       "type": "hammerInBoot",
       "opponentAdrenaline": -2,
@@ -6311,7 +6311,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounds opponent. Stun 1. When played by Finn B\u00e1lor, on connect search/draw Coup de Gr\u00e2ce; that searched Coup de Gr\u00e2ce costs 1 less during the current Control sequence.",
+    "rulesText": "Grounds opponent. Stun 1. When played by Finn Bálor, on connect search/draw Coup de Grâce; that searched Coup de Grâce costs 1 less during the current Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
@@ -6319,7 +6319,7 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "search",
-        "name": "Coup de Gr\u00e2ce",
+        "name": "Coup de Grâce",
         "discount": 1,
         "ifSuperstarIds": [
           "finn-balor"
@@ -6342,7 +6342,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "finn-balor",
     "rarity": 3,
-    "rulesText": "Finn B\u00e1lor-exclusive Trademark. Grounds opponent.",
+    "rulesText": "Finn Bálor-exclusive Trademark. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -6352,7 +6352,7 @@ export const allGameplayCards = [
   },
   {
     "id": "finn-balor-coup-de-grace",
-    "name": "Coup de Gr\u00e2ce",
+    "name": "Coup de Grâce",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 9,
@@ -6362,7 +6362,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "finn-balor",
     "rarity": 4,
-    "rulesText": "Finn B\u00e1lor-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Shotgun Dropkick in the same Control sequence, +1 Damage.",
+    "rulesText": "Finn Bálor-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Shotgun Dropkick in the same Control sequence, +1 Damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -6390,7 +6390,7 @@ export const allGameplayCards = [
   },
   {
     "id": "special-finn-balor",
-    "name": "B\u00e1lor Club",
+    "name": "Bálor Club",
     "kind": "special",
     "setId": "money-in-the-bank-series-1",
     "rarity": 3,
@@ -6674,7 +6674,7 @@ export const allGameplayCards = [
   },
   {
     "id": "entrance-tiffany-stratton",
-    "name": "It\u2019s Tiffy Time",
+    "name": "It’s Tiffy Time",
     "kind": "entrance",
     "setId": "smackdown-series-1",
     "rarity": 4,
@@ -6704,7 +6704,7 @@ export const allGameplayCards = [
   },
   {
     "id": "chelsea-green-im-prettier",
-    "name": "I\u2019m Prettier",
+    "name": "I’m Prettier",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 7,
@@ -6795,7 +6795,7 @@ export const allGameplayCards = [
   },
   {
     "id": "damian-priest-razors-edge",
-    "name": "Razor\u2019s Edge",
+    "name": "Razor’s Edge",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 8,
@@ -6890,7 +6890,7 @@ export const allGameplayCards = [
   },
   {
     "id": "firemans-carry",
-    "name": "Fireman\u2019s Carry",
+    "name": "Fireman’s Carry",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 3,
@@ -7034,18 +7034,18 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "bron-breakker",
     "rarity": 3,
-    "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker\u2019s Spear.",
+    "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker’s Spear.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "searchOnConnectName": "Breakker\u2019s Spear",
+    "searchOnConnectName": "Breakker’s Spear",
     "effects": []
   },
   {
     "id": "bron-breakker-breakkers-spear",
-    "name": "Breakker\u2019s Spear",
+    "name": "Breakker’s Spear",
     "kind": "move",
     "setId": "survivor-series-series-1",
     "cost": 10,
@@ -7122,7 +7122,7 @@ export const allGameplayCards = [
   },
   {
     "id": "penta-handstand-dropkick",
-    "name": "Penta\u2019s Handstand Dropkick",
+    "name": "Penta’s Handstand Dropkick",
     "kind": "move",
     "setId": "worlds-collide-series-1",
     "cost": 4,
@@ -7267,7 +7267,7 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 4,
     "boosterOnly": true,
-    "rulesText": "Restore 10 HP to both Superstars, up to their starting HP. Increase this match\u2019s turn limit by 10.",
+    "rulesText": "Restore 10 HP to both Superstars, up to their starting HP. Increase this match’s turn limit by 10.",
     "effect": {
       "type": "fightForever",
       "healEach": 10,
@@ -7793,7 +7793,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "sami-zayn",
     "rarity": 2,
-    "rulesText": "Sami Zayn-exclusive. Standing opponent only. Grounds opponent. On Connect: Sami\u2019s next Helluva Kick this Control sequence costs 2 less.",
+    "rulesText": "Sami Zayn-exclusive. Standing opponent only. Grounds opponent. On Connect: Sami’s next Helluva Kick this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -7907,7 +7907,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "jacob-fatu",
     "rarity": 3,
-    "rulesText": "Jacob Fatu-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Moonsault; Jacob\u2019s next Moonsault this Control sequence costs 2 less.",
+    "rulesText": "Jacob Fatu-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Moonsault; Jacob’s next Moonsault this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -8175,5 +8175,134 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": []
+  },
+  {
+    "id": "elbow-to-back-of-head",
+    "name": "Elbow to the Back of the Head",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Standing opponent only. On connect, deal +1 Head body-part damage. This impact damage is one-shot and cannot be maintained as a hold.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "hip-toss",
+    "name": "Hip Toss",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 2,
+    "damage": 2,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Standing opponent only. May also Counter a Grapple Move. Grounds opponent.",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "counters": [
+      "grapple"
+    ],
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "leg-drop",
+    "name": "Leg Drop",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "choke-on-the-ropes",
+    "name": "Choke on the Ropes",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 1,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "submission",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Standing opponent only. Submission. Head pressure 3.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 3
+    },
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "chops-in-the-corner",
+    "name": "Chops in the Corner",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Standing opponent only. On connect, deal +1 Chest body-part damage. This impact damage is one-shot and cannot be maintained as a hold.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    },
+    "effects": [],
+    "boosterOnly": true
   }
 ];

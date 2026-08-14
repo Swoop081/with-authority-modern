@@ -1016,6 +1016,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "MITB1-033"
   },
   {
+    "id": "leg-drop",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 34,
+    "cardCode": "MITB1-034"
+  },
+  {
     "id": "running-powerslam",
     "setId": "raw-series-1",
     "cardNumber": 1,
@@ -1218,6 +1224,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "raw-series-1",
     "cardNumber": 34,
     "cardCode": "RAW1-034"
+  },
+  {
+    "id": "choke-on-the-ropes",
+    "setId": "raw-series-1",
+    "cardNumber": 35,
+    "cardCode": "RAW1-035"
   },
   {
     "id": "the-rock-final-boss-slap",
@@ -1470,6 +1482,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "smackdown-series-1",
     "cardNumber": 34,
     "cardCode": "SD1-034"
+  },
+  {
+    "id": "chops-in-the-corner",
+    "setId": "smackdown-series-1",
+    "cardNumber": 35,
+    "cardCode": "SD1-035"
   },
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -2478,6 +2496,18 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "survivor-series-series-1",
     "cardNumber": 33,
     "cardCode": "SVS1-033"
+  },
+  {
+    "id": "elbow-to-back-of-head",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 34,
+    "cardCode": "SVS1-034"
+  },
+  {
+    "id": "hip-toss",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 35,
+    "cardCode": "SVS1-035"
   },
   {
     "id": "tilt-a-whirl-headscissors",

@@ -1,13 +1,7 @@
-# WWE Legacy: Collectible Card Game — v0.12.00
+# WWE Legacy: Collectible Card Game — v0.12.01
 
-Current canonical development baseline: **v0.12.00 — Survivor Series Identity Pass**.
+Current canonical development baseline: **v0.12.01 — Official Survivor Series Houston + Shared Fundamentals**.
 
-Survivor Series — Series 1 now has a fully independent visual identity instead of inheriting SummerSlam in Card Art Studio. The Studio includes Survivor Series in its set selector, renders a dedicated **cobalt blue vs crimson red** template with silver/white trim, and uses a dedicated local Survivor Series logo asset. The same identity is available to booster/card-back, Collection feature and live presentation styling.
+This release replaces the temporary Survivor Series development logo with the official WWE **Survivor Series: WarGames 2026 — Houston** treatment and retunes the Survivor presentation to navy / orange / steel. It also adds the latest shared fundamentals batch: Elbow to the Back of the Head, Hip Toss, Leg Drop, Choke on the Ropes and Chops in the Corner.
 
-The v0.11.99 HUD + Play Pile inspector fixes remain intact. The complete v0.11.98 Flair Chop/shared-move expansion and the five implemented Survivor Series — Series 1 Superstars are unchanged by this presentation-only release.
-
-The canonical health bands remain **Green = 65–100% HP, Amber = 25–64%, Red = 0–24%**. Pin Bonus remains retired. Fight Forever, the v0.11.96 shared move/action expansion, match HUD safe-area work and all earlier locked systems remain intact.
-
-Current roster count: **46 implemented Superstars** total — 41 Season 1 Superstars plus five development-only Survivor Series — Series 1 Superstars.
-
-Run `npm test`, `npm run validate`, `npm run card-ids`, `npm run flow`, and `npm run final-balance` for release validation. The art audit intentionally reports missing final artwork while production artwork is still being created.
+All previously locked v0.12.00 gameplay, v0.11.99 HUD/Play Pile fixes, v0.11.98 Flair Chop expansion and Survivor Series Superstar designs remain intact.

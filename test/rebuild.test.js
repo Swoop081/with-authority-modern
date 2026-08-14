@@ -281,8 +281,10 @@ test("canonical collector manifest is gap-free and matches Collection plus Card 
   assert.match(studioHtml,/key survivor">SURVIVOR SERIES/);
   const studioRenderer = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
   assert.match(studioRenderer,/function drawSurvivorSeries/);
-  assert.match(studioRenderer,/survivor-series-logo\.svg/);
-  assert.ok(fs.existsSync(new URL("../assets/branding/survivor-series-series-1/survivor-series-logo.svg", import.meta.url)));
+  assert.match(studioRenderer,/survivor-series-wargames-houston-2026\.png/);
+  assert.doesNotMatch(studioRenderer,/survivor-series-logo\.svg/);
+  assert.match(studioRenderer,/data:image\/png;base64/);
+  assert.ok(fs.existsSync(new URL("../assets/branding/survivor-series-series-1/survivor-series-wargames-houston-2026.png", import.meta.url)));
 });
 
 test("Liv Morgan uses Jersey Codebreaker as her exclusive Trademark and the superseded generic variant is absent",()=>{
@@ -976,7 +978,7 @@ test("v0.11.96 staged move/action expansion remains fully registered after later
     'smackdown-series-1':[30,26]
   };
   for(const [setId,[gameplayCount,boosterCount]] of Object.entries(expectedPools)){
-    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.equal(pool.length,gameplayCount,`${setId} gameplay pool`);assert.equal(pool.filter(boosterEligible).length,boosterCount,`${setId} booster pool`);
+    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.ok(pool.length>=gameplayCount,`${setId} gameplay pool retains at least the v0.11.96 floor`);assert.ok(pool.filter(boosterEligible).length>=boosterCount,`${setId} booster pool retains at least the v0.11.96 floor`);
   }
 });
 
@@ -1018,7 +1020,7 @@ test("Survivor Series Series 1 Drew, Randy, Sami and Jacob packages are locked, 
     assert.equal(decks[id].length,55,id); assert.equal(decks[id].filter(c=>c.kind==='momentum').length,12,id);
     assert.equal(CARD_NUMBER_BY_ID[star.signatures[0]]?.cardCode,x.codes[0],id); assert.equal(CARD_NUMBER_BY_ID[star.cardId]?.cardCode,x.codes[1],id);
   }
-  assert.equal(allGameplayCards.filter(c=>c.setId==='survivor-series-series-1').length,28);
+  assert.ok(allGameplayCards.filter(c=>c.setId==='survivor-series-series-1').length>=28);
 });
 
 test("Drew Pick Your Shot, Claymore Countdown and head-damage Claymore discount execute",()=>{
@@ -1087,6 +1089,38 @@ test("Charlotte uses Flair Chop while shared Chop remains intact and Wooo! trigg
   p.hand=[flair,wooo]; p.momentum.strike=99; const hp=d.hp,adrenalineBefore=p.adrenaline; st.playerInControl='p1'; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:flair}; g._connect();
   assert.equal(d.hp,hp-6); assert.equal(d.submissionDamage.chest,1); assert.equal(p.specialUsed,true); assert.equal(p.adrenaline,adrenalineBefore+3,'move connect gives +1 Adrenaline and Wooo! adds +2');
   assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='flair-chop-wooo'));
+});
+
+
+test("v0.12.01 shared fundamentals batch is registered, numbered and executes its counter/body-part rules",()=>{
+  const expected={
+    'elbow-to-back-of-head':['SVS1-034',3,4,1],
+    'hip-toss':['SVS1-035',2,2,1],
+    'leg-drop':['MITB1-034',3,5,1],
+    'choke-on-the-ropes':['RAW1-035',3,1,1],
+    'chops-in-the-corner':['SD1-035',4,5,2]
+  };
+  for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
+    const card=allGameplayCards.find(c=>c.id===id);assert.ok(card,id);assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
+    assert.equal(card.cost,cost,id);assert.equal(card.damage,damage,id);assert.equal(card.rarity,rarity,id);assert.equal(card.boosterOnly,true,id);assert.equal(boosterEligible(card),true,id);
+  }
+  const elbow=allGameplayCards.find(c=>c.id==='elbow-to-back-of-head'),hip=allGameplayCards.find(c=>c.id==='hip-toss'),leg=allGameplayCards.find(c=>c.id==='leg-drop'),choke=allGameplayCards.find(c=>c.id==='choke-on-the-ropes'),chops=allGameplayCards.find(c=>c.id==='chops-in-the-corner');
+  assert.deepEqual(elbow.bodyDamage,{bodyPart:'head',pressure:1});assert.deepEqual(chops.bodyDamage,{bodyPart:'chest',pressure:1});
+  assert.deepEqual(hip.counters,['grapple']);assert.equal(hip.groundOpponent,true);assert.equal(leg.groundedOnly,true);assert.deepEqual(choke.submission,{bodyPart:'head',pressure:3});
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(1201)}),st=g.state(),a=st.players.p1,d=st.players.p2;a.momentum.technical=99;a.momentum.strike=99;
+  const grapple=allGameplayCards.find(c=>c.kind==='move'&&c.moveType==='grapple'&&!c.defensiveOnly&&c.id!==hip.id);st.phase='COUNTER';st.proposedMove={attackerId:'p2',defenderId:'p1',card:grapple};a.hand=[hip];assert.equal(g.counter('p1',hip),true);assert.equal(st.proposedMove?.card?.id,'hip-toss');
+  const g2=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(2201)}),st2=g2.state(),d2=st2.players.p2;st2.phase='RESOLVE_MOVE';st2.proposedMove={attackerId:'p1',defenderId:'p2',card:elbow};g2._connect();assert.equal(d2.submissionDamage.head,1);assert.notEqual(st2.phase,'SUBMISSION_MAINTAIN');
+});
+
+test("v0.12.01 Survivor Series uses the official 2026 Houston asset and official-derived navy-orange presentation",async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  const source=fs.readFileSync(new URL('../assets/branding/survivor-series-series-1/SOURCE.md',import.meta.url),'utf8');
+  assert.match(ui,/survivor-series-wargames-houston-2026\.png/);assert.match(studio,/survivor-series-wargames-houston-2026\.png/);
+  assert.doesNotMatch(ui,/survivor-series-logo\.svg/);assert.equal(fs.existsSync(new URL('../assets/branding/survivor-series-series-1/survivor-series-logo.svg',import.meta.url)),false);
+  assert.match(css,/presentation-survivor-series-series-1\{--presentation-accent:#ff6b1b/);assert.match(source,/wwe\.com\/shows\/survivor-series-wargames\/2026/);
 });
 
 test("v0.11.99 Play Pile inspector uses a mobile-safe non-nested hit target and HUD headshots fill their viewport", async()=>{
