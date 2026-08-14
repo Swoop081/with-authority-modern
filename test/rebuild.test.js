@@ -868,9 +868,11 @@ test("SmackDown Series 1 Chelsea Green package is locked and counter-control mec
   assert.deepEqual(chelsea.starterMomentum,{technical:7,agility:3,strike:2});
   assert.deepEqual(chelsea.methodLimits,{agility:3,strength:1,strike:2,technical:null});
   assert.equal(decks['chelsea-green'].length,55); assert.equal(decks['chelsea-green'].filter(c=>c.kind==='momentum').length,12);
-  const prettier=allGameplayCards.find(c=>c.id==='chelsea-green-im-prettier'),envy=allGameplayCards.find(c=>c.id==='chelsea-green-green-with-envy'),special=allGameplayCards.find(c=>c.id==='special-chelsea-green');
-  assert.ok(prettier&&envy&&special); assert.equal(prettier.trademark,true); assert.equal(prettier.damage,11); assert.equal(envy.finisher,true); assert.equal(envy.damage,15); assert.deepEqual(envy.requirements,{}); assert.equal(envy.pinBonus,4);
-  assert.equal(CARD_NUMBER_BY_ID['chelsea-green-im-prettier'].cardCode,'SD1-018'); assert.equal(CARD_NUMBER_BY_ID['superstar-chelsea-green'].cardCode,'SD1-022');
+  const prettier=allGameplayCards.find(c=>c.id==='chelsea-green-im-prettier'),envy=allGameplayCards.find(c=>c.id==='chelsea-green-green-with-envy'),special=allGameplayCards.find(c=>c.id==='special-chelsea-green'),runningKnees=allGameplayCards.find(c=>c.id==='running-knees-to-the-back');
+  assert.ok(prettier&&envy&&special&&runningKnees); assert.equal(prettier.trademark,true); assert.equal(prettier.damage,11); assert.equal(envy.finisher,true); assert.equal(envy.damage,15); assert.deepEqual(envy.requirements,{}); assert.equal(envy.pinBonus,4);
+  assert.equal(runningKnees.cost,4); assert.equal(runningKnees.damage,6); assert.equal(runningKnees.method,'agility'); assert.deepEqual(runningKnees.requirements,{agility:1,strike:1}); assert.equal(runningKnees.standingOnly,true); assert.equal(runningKnees.groundOpponent,true);
+  assert.equal(decks['chelsea-green'].filter(c=>c.id==='running-knees-to-the-back').length,1); assert.deepEqual(Object.entries(decks).filter(([sid,deck])=>sid!=='chelsea-green'&&deck.some(c=>c.id==='running-knees-to-the-back')).map(([sid])=>sid),[]);
+  assert.equal(CARD_NUMBER_BY_ID['chelsea-green-im-prettier'].cardCode,'SD1-018'); assert.equal(CARD_NUMBER_BY_ID['superstar-chelsea-green'].cardCode,'SD1-022'); assert.equal(CARD_NUMBER_BY_ID['running-knees-to-the-back'].cardCode,'SD1-031');
   const opp=stars.find(x=>x.id!=='chelsea-green'),g=new MatchEngine({p1:opp,p2:chelsea,decks,rng:rng(2177)}),st=g.state(),c=st.players.p2,a=st.players.p1;
   assert.equal(c.adrenaline,2); assert.equal(c.events.nextCounterDiscount,1);
   // File a Complaint finds a Counter and queues another counter discount.

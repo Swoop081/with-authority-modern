@@ -2578,3 +2578,30 @@ body[data-screen="match"] .premium-headshot-hud.cpu .hud-hp-number{align-self:en
  body[data-screen="match"] .match-experience.has-onboarding .premium-match-hud{margin-top:calc(66px + env(safe-area-inset-top))!important}
  body[data-screen="match"] .premium-headshot-hud .hud-hp-number{padding-bottom:4px!important;transform:translateY(4px)!important}
 }
+
+
+/* v0.11.91 — HUD Portrait Anchor Fix
+   Keep the larger headshot crop, but constrain it to the portrait zone.
+   P1 grows inward from the left; CPU grows inward from the right. */
+body[data-screen="match"] .premium-headshot-hud .hud-primary-line{
+  overflow:hidden!important;
+  isolation:isolate;
+}
+body[data-screen="match"] .premium-headshot-hud .hud-headshot-trigger{
+  overflow:hidden!important;
+}
+body[data-screen="match"] .premium-headshot-hud.human .hud-headshot{
+  object-position:left bottom!important;
+  transform-origin:left bottom!important;
+}
+body[data-screen="match"] .premium-headshot-hud.cpu .hud-headshot{
+  object-position:right bottom!important;
+  transform-origin:right bottom!important;
+}
+body[data-screen="match"] .premium-headshot-hud .hud-superstar-name,
+body[data-screen="match"] .premium-headshot-hud .hud-resource-row,
+body[data-screen="match"] .premium-headshot-hud .hud-body-damage,
+body[data-screen="match"] .premium-headshot-hud .cinematic-hud-status{
+  position:relative;
+  z-index:6;
+}

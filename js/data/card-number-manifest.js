@@ -2010,7 +2010,8 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"apron-german-suplex","setId":"worlds-collide-series-1","cardNumber":30,"cardCode":"WC1-030"},
 {"id":"corner-clothesline","setId":"money-in-the-bank-series-1","cardNumber":29,"cardCode":"MITB1-029"},
 {"id":"dropkick-to-the-back","setId":"smackdown-series-1","cardNumber":29,"cardCode":"SD1-029"},
-{"id":"elbow","setId":"smackdown-series-1","cardNumber":30,"cardCode":"SD1-030"}
+{"id":"elbow","setId":"smackdown-series-1","cardNumber":30,"cardCode":"SD1-030"},
+{"id":"running-knees-to-the-back","setId":"smackdown-series-1","cardNumber":31,"cardCode":"SD1-031"}
 
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));

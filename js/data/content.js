@@ -6999,6 +6999,11 @@ export const allGameplayCards = [
   "cost":2,"damage":3,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
   "rulesText":"Standing opponent only. May also Counter a Strike Move.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,
   "counters":["strike"],"effects":[]
+},
+{
+  "id":"running-knees-to-the-back","name":"Running Knees to the Back","kind":"move","setId":"smackdown-series-1",
+  "cost":4,"damage":6,"requirements":{"agility":1,"strike":1},"moveType":"strike","method":"agility","superstarId":null,"rarity":2,
+  "rulesText":"Standing opponent only. Grounds opponent.","standingOnly":true,"groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
 }
 
 

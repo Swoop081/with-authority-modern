@@ -2265,7 +2265,7 @@ export const deckIds={
   "ddt",
   "ddt",
   "dropkick",
-  "dropkick",
+  "running-knees-to-the-back",
   "elbow",
   "forearm-smash",
   "clothesline",
