@@ -2810,7 +2810,7 @@ export const allGameplayCards = [
   },
   {
     "id": "hogans-big-boot",
-    "name": "Hogan’s Big Boot",
+    "name": "Hogan\u2019s Big Boot",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 6,
@@ -3825,7 +3825,7 @@ export const allGameplayCards = [
   },
   {
     "id": "stephanie-vaquer-devils-kiss",
-    "name": "Devil’s Kiss",
+    "name": "Devil\u2019s Kiss",
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 6,
@@ -4212,7 +4212,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 1,
     "superstarId": "stone-cold-steve-austin",
-    "rulesText": "Austin’s next Strike Move gets +2 damage.",
+    "rulesText": "Austin\u2019s next Strike Move gets +2 damage.",
     "effect": {
       "type": "buffNextMethod",
       "method": "strike",
@@ -4259,7 +4259,7 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "andre-the-giant",
-    "rulesText": "André only. Once per match when an important André Move is Countered, protect it from being discarded and return it to hand."
+    "rulesText": "Andr\u00e9 only. Once per match when an important Andr\u00e9 Move is Countered, protect it from being discarded and return it to hand."
   },
   {
     "id": "manager-miss-elizabeth",
@@ -4356,7 +4356,7 @@ export const allGameplayCards = [
   },
   {
     "id": "entrance-cm-punk",
-    "name": "It’s Clobbering Time!",
+    "name": "It\u2019s Clobbering Time!",
     "kind": "entrance",
     "setId": "summerslam-series-1",
     "rarity": 4,
@@ -4496,7 +4496,7 @@ export const allGameplayCards = [
   },
   {
     "id": "entrance-ultimate-warrior",
-    "name": "Warrior’s Charge",
+    "name": "Warrior\u2019s Charge",
     "kind": "entrance",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
@@ -4829,7 +4829,7 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "hulk-hogan",
-    "rulesText": "Once per match when Hogan gains Control at 50% HP or less: clear Stun, gain +2 Adrenaline and his next Hogan’s Big Boot this Control cannot be Countered by a Move.",
+    "rulesText": "Once per match when Hogan gains Control at 50% HP or less: clear Stun, gain +2 Adrenaline and his next Hogan\u2019s Big Boot this Control cannot be Countered by a Move.",
     "special": {
       "type": "hulkUp"
     }
@@ -4862,12 +4862,12 @@ export const allGameplayCards = [
   },
   {
     "id": "special-andre-the-giant",
-    "name": "Nobody Slams André",
+    "name": "Nobody Slams Andr\u00e9",
     "kind": "special",
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "andre-the-giant",
-    "rulesText": "Once per match when an opponent Strength Move would ground André: he remains standing and gains +1 Adrenaline.",
+    "rulesText": "Once per match when an opponent Strength Move would ground Andr\u00e9: he remains standing and gains +1 Adrenaline.",
     "special": {
       "type": "nobodySlams"
     }
@@ -4934,9 +4934,10 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 3,
     "superstarId": "charlotte-flair",
-    "rulesText": "Once per match after Charlotte successfully Counters, draw 1 page and gain +2 Adrenaline.",
+    "rulesText": "Once per match after Charlotte connects with Flair Chop, draw 1 page and gain +2 Adrenaline.",
     "special": {
-      "type": "counterDrawAdrenaline",
+      "type": "flairChopWooo",
+      "afterName": "Flair Chop",
       "draw": 1,
       "adrenaline": 2
     }
@@ -4991,7 +4992,7 @@ export const allGameplayCards = [
     "setId": "season-1-final-boss",
     "rarity": 3,
     "superstarId": "the-rock",
-    "rulesText": "Once per match after one of Rock’s non-Finisher Moves is Countered: the Counter resolves, but Rock retains Control, draws 1 and the opponent loses 1 Adrenaline.",
+    "rulesText": "Once per match after one of Rock\u2019s non-Finisher Moves is Countered: the Counter resolves, but Rock retains Control, draws 1 and the opponent loses 1 Adrenaline.",
     "special": {
       "type": "retainOnCounter",
       "draw": 1,
@@ -5395,7 +5396,7 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 3,
     "superstarId": "chad-gable",
-    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
+    "rulesText": "Once per match, after one of Chad\u2019s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
     "special": {
       "type": "moveCounteredDrawDrain",
       "draw": 1,
@@ -5523,7 +5524,7 @@ export const allGameplayCards = [
       "dominik-mysterio"
     ],
     "rarity": 3,
-    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik’s Frog Splash and it costs 2 less this Control sequence.",
+    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik\u2019s Frog Splash and it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 1,
@@ -5539,7 +5540,7 @@ export const allGameplayCards = [
       },
       {
         "type": "search",
-        "name": "Dominik’s Frog Splash",
+        "name": "Dominik\u2019s Frog Splash",
         "discount": 2,
         "ifSuperstarIds": [
           "dominik-mysterio"
@@ -5705,7 +5706,7 @@ export const allGameplayCards = [
   },
   {
     "id": "dominik-mysterio-frog-splash",
-    "name": "Dominik’s Frog Splash",
+    "name": "Dominik\u2019s Frog Splash",
     "kind": "move",
     "setId": "worlds-collide-series-1",
     "cost": 9,
@@ -5749,7 +5750,7 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "rarity": 3,
     "superstarId": "dominik-mysterio",
-    "rulesText": "Once per match, after one of Dominik’s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
+    "rulesText": "Once per match, after one of Dominik\u2019s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
     "special": {
       "type": "hammerInBoot",
       "opponentAdrenaline": -2,
@@ -6310,7 +6311,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounds opponent. Stun 1. When played by Finn Bálor, on connect search/draw Coup de Grâce; that searched Coup de Grâce costs 1 less during the current Control sequence.",
+    "rulesText": "Grounds opponent. Stun 1. When played by Finn B\u00e1lor, on connect search/draw Coup de Gr\u00e2ce; that searched Coup de Gr\u00e2ce costs 1 less during the current Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
@@ -6318,7 +6319,7 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "search",
-        "name": "Coup de Grâce",
+        "name": "Coup de Gr\u00e2ce",
         "discount": 1,
         "ifSuperstarIds": [
           "finn-balor"
@@ -6341,7 +6342,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "finn-balor",
     "rarity": 3,
-    "rulesText": "Finn Bálor-exclusive Trademark. Grounds opponent.",
+    "rulesText": "Finn B\u00e1lor-exclusive Trademark. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -6351,7 +6352,7 @@ export const allGameplayCards = [
   },
   {
     "id": "finn-balor-coup-de-grace",
-    "name": "Coup de Grâce",
+    "name": "Coup de Gr\u00e2ce",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 9,
@@ -6361,7 +6362,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "finn-balor",
     "rarity": 4,
-    "rulesText": "Finn Bálor-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Shotgun Dropkick in the same Control sequence, +1 Damage.",
+    "rulesText": "Finn B\u00e1lor-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Shotgun Dropkick in the same Control sequence, +1 Damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -6389,7 +6390,7 @@ export const allGameplayCards = [
   },
   {
     "id": "special-finn-balor",
-    "name": "Bálor Club",
+    "name": "B\u00e1lor Club",
     "kind": "special",
     "setId": "money-in-the-bank-series-1",
     "rarity": 3,
@@ -6673,7 +6674,7 @@ export const allGameplayCards = [
   },
   {
     "id": "entrance-tiffany-stratton",
-    "name": "It’s Tiffy Time",
+    "name": "It\u2019s Tiffy Time",
     "kind": "entrance",
     "setId": "smackdown-series-1",
     "rarity": 4,
@@ -6703,7 +6704,7 @@ export const allGameplayCards = [
   },
   {
     "id": "chelsea-green-im-prettier",
-    "name": "I’m Prettier",
+    "name": "I\u2019m Prettier",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 7,
@@ -6794,7 +6795,7 @@ export const allGameplayCards = [
   },
   {
     "id": "damian-priest-razors-edge",
-    "name": "Razor’s Edge",
+    "name": "Razor\u2019s Edge",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 8,
@@ -6889,7 +6890,7 @@ export const allGameplayCards = [
   },
   {
     "id": "firemans-carry",
-    "name": "Fireman’s Carry",
+    "name": "Fireman\u2019s Carry",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 3,
@@ -7033,18 +7034,18 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "bron-breakker",
     "rarity": 3,
-    "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker’s Spear.",
+    "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker\u2019s Spear.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "searchOnConnectName": "Breakker’s Spear",
+    "searchOnConnectName": "Breakker\u2019s Spear",
     "effects": []
   },
   {
     "id": "bron-breakker-breakkers-spear",
-    "name": "Breakker’s Spear",
+    "name": "Breakker\u2019s Spear",
     "kind": "move",
     "setId": "survivor-series-series-1",
     "cost": 10,
@@ -7121,7 +7122,7 @@ export const allGameplayCards = [
   },
   {
     "id": "penta-handstand-dropkick",
-    "name": "Penta’s Handstand Dropkick",
+    "name": "Penta\u2019s Handstand Dropkick",
     "kind": "move",
     "setId": "worlds-collide-series-1",
     "cost": 4,
@@ -7258,8 +7259,7 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": []
-  }
-  ,
+  },
   {
     "id": "fight-forever",
     "name": "Fight Forever",
@@ -7267,299 +7267,913 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 4,
     "boosterOnly": true,
-    "rulesText": "Restore 10 HP to both Superstars, up to their starting HP. Increase this match’s turn limit by 10.",
+    "rulesText": "Restore 10 HP to both Superstars, up to their starting HP. Increase this match\u2019s turn limit by 10.",
     "effect": {
       "type": "fightForever",
       "healEach": 10,
       "turns": 10
     }
+  },
+  {
+    "id": "flapjack",
+    "name": "Flapjack",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. Grounds opponent.",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "side-headlock",
+    "name": "Side Headlock",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 3,
+    "damage": 2,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. Submission. Head pressure 3.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 3
+    },
+    "effects": []
+  },
+  {
+    "id": "wristlock",
+    "name": "Wristlock",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 2,
+    "damage": 1,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. Submission. Arm pressure 2.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "arms",
+      "pressure": 2
+    },
+    "effects": []
+  },
+  {
+    "id": "catch-your-breath",
+    "name": "Catch Your Breath",
+    "kind": "action",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 3,
+    "boosterOnly": true,
+    "rulesText": "Restore 5 HP to your Superstar, up to starting HP.",
+    "effect": {
+      "type": "healSelf",
+      "amount": 5
+    }
+  },
+  {
+    "id": "knee-to-the-gut",
+    "name": "Knee to the Gut",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. May also Counter a Grapple Move.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "counters": [
+      "grapple"
+    ],
+    "effects": []
+  },
+  {
+    "id": "throw-into-steel-steps",
+    "name": "Throw Into Steel Steps",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "On connect, deal +1 Back body-part damage. This impact is not a maintainable hold.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    },
+    "effects": []
+  },
+  {
+    "id": "sleeper-hold",
+    "name": "Sleeper Hold",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 2,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. Submission. Head pressure 4.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 4
+    },
+    "effects": []
+  },
+  {
+    "id": "scissors-kick",
+    "name": "Scissors Kick",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. Grounds opponent.",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "senton-splash",
+    "name": "Senton Splash",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Grounded opponent only.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "spinning-back-kick",
+    "name": "Spinning Back Kick",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "throw-into-ringpost",
+    "name": "Throw Into Ringpost",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "On connect, deal +1 Head body-part damage. This impact is not a maintainable hold.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "effects": []
+  },
+  {
+    "id": "corner-barrage",
+    "name": "Corner Barrage",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Standing opponent only. If you connected with a Strike earlier in this Control sequence, +2 Damage.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bonusDamageIfStrikeEarlierThisControl": 2,
+    "effects": []
+  },
+  {
+    "id": "drew-mcintyre-glasgow-kiss",
+    "name": "Glasgow Kiss",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "drew-mcintyre",
+    "rarity": 2,
+    "rulesText": "Drew McIntyre-exclusive. On Connect: deal +1 Head body-part damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "drew-mcintyre-future-shock-ddt",
+    "name": "Future Shock DDT",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strength": 2,
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "drew-mcintyre",
+    "rarity": 3,
+    "rulesText": "Drew McIntyre-exclusive Trademark. Grounds opponent. On Connect: search/draw Claymore.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "trademark": true,
+    "searchOnConnectName": "Claymore"
+  },
+  {
+    "id": "drew-mcintyre-claymore",
+    "name": "Claymore",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {
+      "strike": 3
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "drew-mcintyre",
+    "rarity": 4,
+    "rulesText": "Drew McIntyre-exclusive Finisher. Standing opponent only. Grounds opponent. Costs 2 less if the opponent already has Head body-part damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "finisher": true,
+    "standingOnly": true,
+    "discountIfOpponentBodyDamage": {
+      "bodyPart": "head",
+      "min": 1,
+      "amount": 2
+    }
+  },
+  {
+    "id": "entrance-drew-mcintyre",
+    "name": "Scottish Warrior",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "drew-mcintyre",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-drew-mcintyre",
+    "name": "Claymore Countdown",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "drew-mcintyre",
+    "rulesText": "Once per match during your Control sequence: search/draw Claymore. Your next Claymore this Control sequence costs 2 less.",
+    "special": {
+      "type": "claymoreCountdown",
+      "name": "Claymore",
+      "discount": 2
+    }
+  },
+  {
+    "id": "randy-orton-draping-ddt",
+    "name": "Draping DDT",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 10,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "randy-orton",
+    "rarity": 3,
+    "rulesText": "Randy Orton-exclusive Trademark. Grounds opponent. On Connect: search/draw RKO and deal +1 Head body-part damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "trademark": true,
+    "searchOnConnectName": "RKO",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
+  },
+  {
+    "id": "randy-orton-rko",
+    "name": "RKO",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "randy-orton",
+    "rarity": 4,
+    "rulesText": "Randy Orton-exclusive Finisher. Standing opponent only. Grounds opponent. If Randy connected with a Technical Move earlier this Control sequence, costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "finisher": true,
+    "standingOnly": true,
+    "discountIfMethodConnectedThisControl": {
+      "method": "technical",
+      "amount": 2
+    }
+  },
+  {
+    "id": "randy-orton-punt-kick",
+    "name": "Punt Kick",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 8,
+    "damage": 13,
+    "requirements": {
+      "strike": 3
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "randy-orton",
+    "rarity": 4,
+    "rulesText": "Randy Orton-exclusive Finisher. Grounded opponent only. On Connect: deal +1 Head body-part damage and opponent loses 1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "finisher": true,
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "opponentAdrenalineOnConnect": -1
+  },
+  {
+    "id": "entrance-randy-orton",
+    "name": "Voices",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "randy-orton",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-randy-orton",
+    "name": "Outta Nowhere",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "randy-orton",
+    "rulesText": "Once per match, when the opponent attempts a Move: Randy may play RKO from hand as a Counter. If he does, RKO costs 2 less.",
+    "special": {
+      "type": "outtaNowhere",
+      "name": "RKO",
+      "discount": 2
+    }
+  },
+  {
+    "id": "sami-zayn-exploder-turnbuckle",
+    "name": "Exploder Suplex Into Turnbuckle",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 1,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "sami-zayn",
+    "rarity": 2,
+    "rulesText": "Sami Zayn-exclusive. Standing opponent only. Grounds opponent. On Connect: Sami\u2019s next Helluva Kick this Control sequence costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Helluva Kick",
+        "amount": 2
+      }
+    ],
+    "standingOnly": true
+  },
+  {
+    "id": "sami-zayn-blue-thunder-bomb",
+    "name": "Blue Thunder Bomb",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "sami-zayn",
+    "rarity": 3,
+    "rulesText": "Sami Zayn-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: draw 1. If Sami has less HP than his opponent, also gain +1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      },
+      {
+        "type": "gainAdrenalineIfBehind",
+        "amount": 1
+      }
+    ],
+    "trademark": true,
+    "standingOnly": true
+  },
+  {
+    "id": "sami-zayn-helluva-kick",
+    "name": "Helluva Kick",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {
+      "strike": 3
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "sami-zayn",
+    "rarity": 4,
+    "rulesText": "Sami Zayn-exclusive Finisher. Standing opponent only. Grounds opponent. If Exploder Suplex Into Turnbuckle connected earlier this Control sequence, costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "finisher": true,
+    "standingOnly": true
+  },
+  {
+    "id": "entrance-sami-zayn",
+    "name": "Worlds Apart",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "sami-zayn",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-sami-zayn",
+    "name": "Never Say Die",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "sami-zayn",
+    "rulesText": "Once per match, when Sami enters Red Health (24% HP or lower): draw 2 cards and gain +2 Adrenaline.",
+    "special": {
+      "type": "neverSayDie",
+      "hpPct": 0.24,
+      "draw": 2,
+      "adrenaline": 2
+    }
+  },
+  {
+    "id": "jacob-fatu-pop-up-samoan-drop",
+    "name": "Pop-Up Samoan Drop",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "jacob-fatu",
+    "rarity": 3,
+    "rulesText": "Jacob Fatu-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Moonsault; Jacob\u2019s next Moonsault this Control sequence costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Moonsault",
+        "amount": 2
+      }
+    ],
+    "trademark": true,
+    "standingOnly": true,
+    "searchOnConnectName": "Moonsault"
+  },
+  {
+    "id": "jacob-fatu-moonsault",
+    "name": "Moonsault",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {
+      "agility": 3
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "jacob-fatu",
+    "rarity": 4,
+    "rulesText": "Jacob Fatu-exclusive Finisher. Grounded opponent only. If Pop-Up Samoan Drop connected earlier this Control sequence, costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "finisher": true
+  },
+  {
+    "id": "jacob-fatu-tongan-death-grip",
+    "name": "Tongan Death Grip",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 8,
+    "damage": 2,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "submission",
+    "method": "strength",
+    "superstarId": "jacob-fatu",
+    "rarity": 4,
+    "rulesText": "Jacob Fatu-exclusive Submission Finisher. Standing opponent. Head Pressure 6.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "finisher": true,
+    "standingOnly": true,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 6
+    }
+  },
+  {
+    "id": "entrance-jacob-fatu",
+    "name": "Samoan Werewolf",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "jacob-fatu",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-jacob-fatu",
+    "name": "Built Different",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "jacob-fatu",
+    "rulesText": "Once per match, after Jacob takes 8 or more Damage from a single Move: gain +2 Adrenaline and draw 1 card.",
+    "special": {
+      "type": "builtDifferent",
+      "minDamage": 8,
+      "draw": 1,
+      "adrenaline": 2
+    }
+  },
+  {
+    "id": "shoulder-block",
+    "name": "Shoulder Block",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "strike",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "standingOnly": true
+  },
+  {
+    "id": "shining-wizard",
+    "name": "Shining Wizard",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounded opponent only. On connect, deal +1 Head body-part damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "double-underhook-facebuster",
+    "name": "Double Underhook Facebuster",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 1,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "standingOnly": true
+  },
+  {
+    "id": "steel-chair-to-the-back",
+    "name": "Steel Chair to the Back",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounded opponent only. On connect, deal +1 Back body-part damage. This impact damage is one-shot and cannot be maintained as a hold.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    },
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "spanish-fly",
+    "name": "Spanish Fly",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2,
+      "strength": 1
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 3,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true,
+    "standingOnly": true
+  },
+  {
+    "id": "second-rope-leg-drop",
+    "name": "2nd Rope Leg Drop",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "boosterOnly": true
+  },
+  {
+    "id": "flair-chop",
+    "name": "Flair Chop",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 3,
+    "damage": 6,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "allowedSuperstarIds": [
+      "charlotte-flair"
+    ],
+    "rarity": 3,
+    "rulesText": "Flair Family Trademark. Currently playable by Charlotte Flair. On connect, deal +1 Chest body-part damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "bodyDamage": {
+      "bodyPart": "chest",
+      "pressure": 1
+    },
+    "effects": []
   }
-,
-{
-  "id": "flapjack",
-  "name": "Flapjack",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 4,
-  "damage": 6,
-  "requirements": {
-    "strength": 1
-  },
-  "moveType": "grapple",
-  "method": "strength",
-  "superstarId": null,
-  "rarity": 1,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. Grounds opponent.",
-  "standingOnly": true,
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "side-headlock",
-  "name": "Side Headlock",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 3,
-  "damage": 2,
-  "requirements": {
-    "technical": 1
-  },
-  "moveType": "submission",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 1,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. Submission. Head pressure 3.",
-  "standingOnly": true,
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "submission": {
-    "bodyPart": "head",
-    "pressure": 3
-  },
-  "effects": []
-},
-{
-  "id": "wristlock",
-  "name": "Wristlock",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 2,
-  "damage": 1,
-  "requirements": {
-    "technical": 1
-  },
-  "moveType": "submission",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 1,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. Submission. Arm pressure 2.",
-  "standingOnly": true,
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "submission": {
-    "bodyPart": "arms",
-    "pressure": 2
-  },
-  "effects": []
-},
-{
-  "id": "catch-your-breath",
-  "name": "Catch Your Breath",
-  "kind": "action",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 3,
-  "boosterOnly": true,
-  "rulesText": "Restore 5 HP to your Superstar, up to starting HP.",
-  "effect": {
-    "type": "healSelf",
-    "amount": 5
-  }
-},
-{
-  "id": "knee-to-the-gut",
-  "name": "Knee to the Gut",
-  "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 3,
-  "damage": 4,
-  "requirements": {
-    "strike": 1
-  },
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 1,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. May also Counter a Grapple Move.",
-  "standingOnly": true,
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "counters": [
-    "grapple"
-  ],
-  "effects": []
-},
-{
-  "id": "throw-into-steel-steps",
-  "name": "Throw Into Steel Steps",
-  "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {
-    "strength": 1
-  },
-  "moveType": "grapple",
-  "method": "strength",
-  "superstarId": null,
-  "rarity": 2,
-  "boosterOnly": true,
-  "rulesText": "On connect, deal +1 Back body-part damage. This impact is not a maintainable hold.",
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "bodyDamage": {
-    "bodyPart": "back",
-    "pressure": 1
-  },
-  "effects": []
-},
-{
-  "id": "sleeper-hold",
-  "name": "Sleeper Hold",
-  "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 4,
-  "damage": 2,
-  "requirements": {
-    "technical": 2
-  },
-  "moveType": "submission",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 2,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. Submission. Head pressure 4.",
-  "standingOnly": true,
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "submission": {
-    "bodyPart": "head",
-    "pressure": 4
-  },
-  "effects": []
-},
-{
-  "id": "scissors-kick",
-  "name": "Scissors Kick",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {
-    "strike": 2
-  },
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. Grounds opponent.",
-  "standingOnly": true,
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "senton-splash",
-  "name": "Senton Splash",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {
-    "agility": 2
-  },
-  "moveType": "aerial",
-  "method": "agility",
-  "superstarId": null,
-  "rarity": 2,
-  "boosterOnly": true,
-  "rulesText": "Grounded opponent only.",
-  "groundOpponent": true,
-  "groundedOnly": true,
-  "stun": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "spinning-back-kick",
-  "name": "Spinning Back Kick",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 3,
-  "damage": 5,
-  "requirements": {
-    "strike": 1
-  },
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 1,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only.",
-  "standingOnly": true,
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "throw-into-ringpost",
-  "name": "Throw Into Ringpost",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {
-    "strength": 1
-  },
-  "moveType": "grapple",
-  "method": "strength",
-  "superstarId": null,
-  "rarity": 2,
-  "boosterOnly": true,
-  "rulesText": "On connect, deal +1 Head body-part damage. This impact is not a maintainable hold.",
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "bodyDamage": {
-    "bodyPart": "head",
-    "pressure": 1
-  },
-  "effects": []
-},
-{
-  "id": "corner-barrage",
-  "name": "Corner Barrage",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 4,
-  "damage": 6,
-  "requirements": {
-    "strike": 1
-  },
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "boosterOnly": true,
-  "rulesText": "Standing opponent only. If you connected with a Strike earlier in this Control sequence, +2 Damage.",
-  "standingOnly": true,
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "selfDamage": 0,
-  "bonusDamageIfStrikeEarlierThisControl": 2,
-  "effects": []
-}
 ];

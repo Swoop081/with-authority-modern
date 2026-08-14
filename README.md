@@ -1,13 +1,13 @@
-# WWE Legacy: Collectible Card Game — v0.11.96
+# WWE Legacy: Collectible Card Game — v0.11.98
 
-Current canonical development baseline: **v0.11.96 — Shared Move + Action Expansion Batch**.
+Current canonical development baseline: **v0.11.98 — Flair Chop + Shared Move Expansion**.
 
-This build adds **Fight Forever (RAW1-030)** as a **4★ Very Rare, booster-only Action**. It restores 10 HP to both Superstars (up to starting HP) and extends the live match turn limit by 10. Matches now carry an explicit default **50-turn limit**, with Fight Forever changing a normal 50-turn match to 60 when played. The command bar displays the live turn count/limit.
+This build carries forward v0.11.96 and adds four newly locked Survivor Series — Series 1 Superstars: **Drew McIntyre, Randy Orton, Sami Zayn, and Jacob Fatu**. Together with the already implemented **Bron Breakker**, Survivor Series — Series 1 now has five of its planned eight Superstars built and playable in development.
 
-RAW Series 1 and Money in the Bank Series 1 were tied as the smallest Season 1 subset pools before the addition; RAW was used as the tie-breaker. Fight Forever is intentionally excluded from all recommended decks and unlock packages while remaining obtainable from RAW boosters.
+Each new Superstar has a complete 55-page recommended deck with exactly 12 Momentum, a locked Entrance, Ability, Special, exclusive signature package, and canonical Survivor Series collector numbering. Randy Orton has two Finishers (RKO and Punt Kick); Jacob Fatu has both a damage Finisher (Moonsault) and a Submission Finisher (Tongan Death Grip).
 
-The canonical health bands remain **Green = 65–100% HP, Amber = 25–64% HP, Red = 0–24% HP**, and Pin Bonus remains retired.
+The canonical health bands remain **Green = 65–100% HP, Amber = 25–64% HP, Red = 0–24% HP**. Pin Bonus remains retired. Fight Forever, the v0.11.96 shared move/action expansion, the match HUD safe-area work, and all earlier locked systems remain intact.
 
-Season 1 currently contains **42 playable Superstars** across SummerSlam, Hall of Fame, Evolution, RAW, Worlds Collide, Money in the Bank, SmackDown and the Season 1 Final Boss reward package.
+Current roster count: **46 implemented Superstars** total — 41 Season 1 Superstars plus five development-only Survivor Series — Series 1 Superstars.
 
-Run `npm test`, `npm run validate`, `npm run card-ids`, and `npm run flow` for release validation. The art audit intentionally reports missing final artwork while placeholder production is in progress.
+Run `npm test`, `npm run validate`, `npm run card-ids`, `npm run flow`, and `npm run final-balance` for release validation. The art audit intentionally reports missing final artwork while production artwork is still being created.

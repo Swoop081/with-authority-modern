@@ -951,7 +951,7 @@ test("50-turn matches draw at the limit unless Fight Forever extends them",()=>{
 });
 
 
-test("v0.11.96 staged move/action expansion is fully registered and subset pools are even",()=>{
+test("v0.11.96 staged move/action expansion remains fully registered after later pool growth",()=>{
   const expected={
     'flapjack':['MITB1-030',4,6], 'side-headlock':['MITB1-031',3,2], 'wristlock':['MITB1-032',2,1], 'catch-your-breath':['MITB1-033',null,null],
     'knee-to-the-gut':['RAW1-031',3,4], 'throw-into-steel-steps':['RAW1-032',5,8], 'sleeper-hold':['RAW1-033',4,2],
@@ -963,9 +963,14 @@ test("v0.11.96 staged move/action expansion is fully registered and subset pools
     if(cost!==null)assert.equal(card.cost,cost,id);if(damage!==null)assert.equal(card.damage,damage,id);
     assert.equal(boosterEligible(card),true,id);
   }
-  const setIds=['raw-series-1','money-in-the-bank-series-1','worlds-collide-series-1','smackdown-series-1'];
-  for(const setId of setIds){
-    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.equal(pool.length,29,`${setId} gameplay pool`);assert.equal(pool.filter(boosterEligible).length,25,`${setId} booster pool`);
+  const expectedPools={
+    'raw-series-1':[30,26],
+    'money-in-the-bank-series-1':[29,25],
+    'worlds-collide-series-1':[30,26],
+    'smackdown-series-1':[30,26]
+  };
+  for(const [setId,[gameplayCount,boosterCount]] of Object.entries(expectedPools)){
+    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.equal(pool.length,gameplayCount,`${setId} gameplay pool`);assert.equal(pool.filter(boosterEligible).length,boosterCount,`${setId} booster pool`);
   }
 });
 
@@ -993,4 +998,87 @@ test("Catch Your Breath is a 3-star booster-only Action that restores 5 HP up to
   const card=allGameplayCards.find(c=>c.id==='catch-your-breath');assert.ok(card);assert.equal(card.kind,'action');assert.equal(card.rarity,3);assert.equal(card.setId,'money-in-the-bank-series-1');
   const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(3196)}),s=g.state(),p=s.players.p1;p.hand=[card];p.hp=p.maxHp-3;
   assert.equal(g.playAction('p1',card),true);assert.equal(p.hp,p.maxHp);assert.ok(s.log.some(e=>e.type==='HEALTH_RESTORED'&&e.amount===3));
+});
+
+test("Survivor Series Series 1 Drew, Randy, Sami and Jacob packages are locked, numbered and 55 pages",()=>{
+  const expected={
+    'drew-mcintyre':{hp:55,momentum:{strength:7,strike:4,technical:1},codes:['SVS1-007','SVS1-012']},
+    'randy-orton':{hp:53,momentum:{technical:5,strength:3,strike:3,agility:1},codes:['SVS1-013','SVS1-018']},
+    'sami-zayn':{hp:51,momentum:{technical:5,agility:4,strike:2,strength:1},codes:['SVS1-019','SVS1-024']},
+    'jacob-fatu':{hp:56,momentum:{strength:6,strike:3,agility:3},codes:['SVS1-025','SVS1-030']}
+  };
+  for(const [id,x] of Object.entries(expected)){
+    const star=starById.get(id); assert.ok(star,id); assert.equal(star.hp,x.hp,id); assert.deepEqual(star.starterMomentum,x.momentum,id);
+    assert.equal(decks[id].length,55,id); assert.equal(decks[id].filter(c=>c.kind==='momentum').length,12,id);
+    assert.equal(CARD_NUMBER_BY_ID[star.signatures[0]]?.cardCode,x.codes[0],id); assert.equal(CARD_NUMBER_BY_ID[star.cardId]?.cardCode,x.codes[1],id);
+  }
+  assert.equal(allGameplayCards.filter(c=>c.setId==='survivor-series-series-1').length,28);
+});
+
+test("Drew Pick Your Shot, Claymore Countdown and head-damage Claymore discount execute",()=>{
+  const drew=starById.get('drew-mcintyre'),opp=starById.get('bron-breakker'),g=new MatchEngine({p1:drew,p2:opp,decks,rng:rng(1197)}),s=g.state(),a=s.players.p1,d=s.players.p2;
+  for(const m of ['strength','strike','technical','agility'])a.momentum[m]=99;
+  const power=byName('Powerbomb'),clay=allGameplayCards.find(c=>c.id==='drew-mcintyre-claymore'),special=allGameplayCards.find(c=>c.id==='special-drew-mcintyre');
+  s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:power};g._connect(); assert.equal(a.methodDiscount.strike,1);
+  a.hand=[special];a.deck=[clay];s.phase='ACTION';s.playerInControl='p1';assert.equal(g.playSpecial('p1',special),true);assert.ok(a.hand.some(c=>c.id===clay.id));assert.ok((a.namedDiscount['Claymore']??0)>=2);
+  d.submissionDamage.head=1;const legal=moveEligibility(s,'p1',a.hand.find(c=>c.id===clay.id));assert.equal(legal.legal,true);assert.ok(legal.effectiveCost<=7,'ability/special/body damage discounts should make Claymore cheaper than printed C10');
+});
+
+test("Randy Apex Predator and Outta Nowhere make RKO a once-per-match Counter",()=>{
+  const randy=starById.get('randy-orton'),opp=starById.get('drew-mcintyre'),g=new MatchEngine({p1:opp,p2:randy,decks,rng:rng(2197)}),s=g.state(),r=s.players.p2;
+  for(const m of ['strength','strike','technical','agility'])r.momentum[m]=99;
+  const tech=byName('DDT'),rko=allGameplayCards.find(c=>c.id==='randy-orton-rko'),special=allGameplayCards.find(c=>c.id==='special-randy-orton'),incoming=byName('Punch');
+  s.playerInControl='p2';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p2',defenderId:'p1',card:tech};g._connect();assert.equal(r.nextMoveDiscount,1);
+  r.hand=[rko,special];r.specialUsed=false;s.playerInControl='p1';s.phase='COUNTER';s.proposedMove={attackerId:'p1',defenderId:'p2',card:incoming};assert.equal(g.counter('p2',rko),true);assert.equal(r.specialUsed,true);assert.equal(s.proposedMove?.card?.id,'randy-orton-rko');assert.ok(s.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='outta-nowhere-rko'));
+});
+
+test("Sami comeback package discounts the opener, chains Exploder to Helluva and fires Never Say Die",()=>{
+  const sami=starById.get('sami-zayn'),opp=starById.get('jacob-fatu'),g=new MatchEngine({p1:sami,p2:opp,decks,rng:rng(3197)}),s=g.state(),a=s.players.p1,d=s.players.p2;
+  for(const m of ['strength','strike','technical','agility'])a.momentum[m]=99;
+  a.hp=d.hp-1;const punch=byName('Punch');const first=moveEligibility(s,'p1',punch);assert.equal(first.effectiveCost,Math.max(0,punch.cost-1));
+  const exp=allGameplayCards.find(c=>c.id==='sami-zayn-exploder-turnbuckle'),hell=allGameplayCards.find(c=>c.id==='sami-zayn-helluva-kick');s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:exp};g._connect();assert.equal(a.namedDiscount['Helluva Kick'],2);assert.ok(moveEligibility(s,'p1',hell).effectiveCost<=7);
+  const special=allGameplayCards.find(c=>c.id==='special-sami-zayn');a.hand=[special];a.specialUsed=false;a.hp=Math.ceil(a.maxHp*.3);const beforeAd=a.adrenaline,beforeHand=a.hand.length;const hit={...byName('Powerbomb'),damage:8};s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p2',defenderId:'p1',card:hit};g._connect();assert.equal(a.specialUsed,true);assert.equal(a.adrenaline,beforeAd+1,'incoming Move shifts -1 Adrenaline then Never Say Die adds +2');assert.ok(a.hand.length>=beforeHand,'Never Say Die draws after consuming itself');
+});
+
+test("Jacob strength-to-agility sequencing, Built Different and both finishers execute",()=>{
+  const jacob=starById.get('jacob-fatu'),opp=starById.get('randy-orton'),g=new MatchEngine({p1:jacob,p2:opp,decks,rng:rng(4197)}),s=g.state(),a=s.players.p1,d=s.players.p2;
+  for(const m of ['strength','strike','technical','agility'])a.momentum[m]=99;
+  const samoan=byName('Samoan Drop'),pop=allGameplayCards.find(c=>c.id==='jacob-fatu-pop-up-samoan-drop'),moon=allGameplayCards.find(c=>c.id==='jacob-fatu-moonsault'),grip=allGameplayCards.find(c=>c.id==='jacob-fatu-tongan-death-grip');
+  s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:samoan};g._connect();assert.equal(a.methodDiscount.agility,1);
+  a.deck=[moon];s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:pop};g._connect();assert.ok(a.hand.some(c=>c.id===moon.id));assert.equal(a.namedDiscount['Moonsault'],2);
+  assert.equal(grip.finisher,true);assert.deepEqual(grip.submission,{bodyPart:'head',pressure:6});
+  const special=allGameplayCards.find(c=>c.id==='special-jacob-fatu');a.hand=[special];a.specialUsed=false;const before=a.adrenaline;const hit={...byName('Powerbomb'),damage:8};s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p2',defenderId:'p1',card:hit};g._connect();assert.equal(a.specialUsed,true);assert.equal(a.adrenaline,before+1,'incoming shift -1 plus Built Different +2');
+});
+
+
+test("v0.11.98 shared move batch is registered, numbered and booster-ready",()=>{
+  const expected={
+    'shoulder-block':['SVS1-031',3,4,1],
+    'shining-wizard':['SVS1-032',5,8,2],
+    'double-underhook-facebuster':['SVS1-033',5,8,2],
+    'steel-chair-to-the-back':['RAW1-034',4,7,2],
+    'spanish-fly':['WC1-034',6,10,3],
+    'second-rope-leg-drop':['SD1-034',5,8,2],
+    'flair-chop':['EVO1-061',3,6,3]
+  };
+  for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
+    const card=allGameplayCards.find(c=>c.id===id); assert.ok(card,id); assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
+    assert.equal(card.cost,cost,id); assert.equal(card.damage,damage,id); assert.equal(card.rarity,rarity,id); assert.equal(boosterEligible(card),true,id);
+  }
+  assert.equal(allGameplayCards.find(c=>c.id==='shoulder-block').groundOpponent,true);
+  assert.deepEqual(allGameplayCards.find(c=>c.id==='shining-wizard').bodyDamage,{bodyPart:'head',pressure:1});
+  assert.deepEqual(allGameplayCards.find(c=>c.id==='steel-chair-to-the-back').bodyDamage,{bodyPart:'back',pressure:1});
+  assert.equal(allGameplayCards.find(c=>c.id==='spanish-fly').groundOpponent,true);
+  assert.equal(allGameplayCards.find(c=>c.id==='second-rope-leg-drop').groundedOnly,true);
+});
+
+test("Charlotte uses Flair Chop while shared Chop remains intact and Wooo! triggers from Flair Chop",()=>{
+  const shared=allGameplayCards.find(c=>c.id==='chop'),flair=allGameplayCards.find(c=>c.id==='flair-chop'),wooo=allGameplayCards.find(c=>c.id==='special-charlotte-flair');
+  assert.ok(shared&&flair&&wooo); assert.equal(shared.superstarId,null); assert.equal(shared.cost,2); assert.equal(shared.damage,4);
+  assert.deepEqual(flair.allowedSuperstarIds,['charlotte-flair']); assert.equal(flair.trademark,true); assert.deepEqual(flair.bodyDamage,{bodyPart:'chest',pressure:1});
+  assert.equal(decks['charlotte-flair'].filter(c=>c.id==='chop').length,0); assert.equal(decks['charlotte-flair'].filter(c=>c.id==='flair-chop').length,4);
+  const charlotte=starById.get('charlotte-flair'),opp=stars.find(s=>s.id!=='charlotte-flair'); const g=new MatchEngine({p1:charlotte,p2:opp,decks,rng:rng(1198)}),st=g.state(),p=st.players.p1,d=st.players.p2;
+  p.hand=[flair,wooo]; p.momentum.strike=99; const hp=d.hp,adrenalineBefore=p.adrenaline; st.playerInControl='p1'; st.phase='RESOLVE_MOVE'; st.proposedMove={attackerId:'p1',defenderId:'p2',card:flair}; g._connect();
+  assert.equal(d.hp,hp-6); assert.equal(d.submissionDamage.chest,1); assert.equal(p.specialUsed,true); assert.equal(p.adrenaline,adrenalineBefore+3,'move connect gives +1 Adrenaline and Wooo! adds +2');
+  assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='flair-chop-wooo'));
 });

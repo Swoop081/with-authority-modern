@@ -783,10 +783,11 @@ export const superstars = {
       "momentum-technical",
       "momentum-agility",
       "punch",
-      "chop",
+      "flair-chop",
       "arm-drag"
     ],
     "signatures": [
+      "flair-chop",
       "spear",
       "charlotte-flair-natural-selection",
       "charlotte-flair-figure-eight-leglock"
@@ -833,9 +834,10 @@ export const superstars = {
       "delayedTurn5": false
     },
     "special": {
-      "type": "counterDrawAdrenaline",
+      "type": "flairChopWooo",
+      "afterName": "Flair Chop",
       "draw": 1,
-      "adrenaline": 1
+      "adrenaline": 2
     }
   },
   "kevinOwens": {
@@ -2738,6 +2740,272 @@ export const superstars = {
       "type": "fullSpeed",
       "damage": 2,
       "agilityDraw": 1
+    }
+  },
+  "drewMcintyre": {
+    "id": "drew-mcintyre",
+    "name": "Drew McIntyre",
+    "nickname": "The Scottish Warrior",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-drew-mcintyre",
+    "entranceId": "entrance-drew-mcintyre",
+    "specialId": "special-drew-mcintyre",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "punch",
+      "big-boot",
+      "clothesline"
+    ],
+    "signatures": [
+      "drew-mcintyre-glasgow-kiss",
+      "drew-mcintyre-future-shock-ddt",
+      "drew-mcintyre-claymore"
+    ],
+    "archetype": "precision-heavyweight-claymore-sequencing",
+    "hp": 55,
+    "methodLimits": {
+      "strength": null,
+      "strike": 5,
+      "technical": 2,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 7,
+      "strike": 4,
+      "technical": 1
+    },
+    "ability": {
+      "name": "Pick Your Shot",
+      "text": "Once per Control sequence, after Drew connects with a Strength Move dealing 6+ Damage, his next Strike Move costs 1 less.",
+      "trigger": {
+        "type": "drewPickYourShot",
+        "minDamage": 6,
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-drew-mcintyre",
+      "name": "Scottish Warrior",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "drew-mcintyre",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "claymoreCountdown",
+      "name": "Claymore",
+      "discount": 2
+    }
+  },
+  "randyOrton": {
+    "id": "randy-orton",
+    "name": "Randy Orton",
+    "nickname": "The Viper",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-randy-orton",
+    "entranceId": "entrance-randy-orton",
+    "specialId": "special-randy-orton",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strike",
+      "punch",
+      "snap-powerslam",
+      "side-headlock"
+    ],
+    "signatures": [
+      "randy-orton-draping-ddt",
+      "randy-orton-rko",
+      "randy-orton-punt-kick"
+    ],
+    "archetype": "technical-control-sudden-finish",
+    "hp": 53,
+    "methodLimits": {
+      "technical": null,
+      "strength": 4,
+      "strike": 4,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "technical": 5,
+      "strength": 3,
+      "strike": 3,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Apex Predator",
+      "text": "Once per Control sequence, after Randy connects with a Technical Move, his next Move this Control sequence costs 1 less.",
+      "trigger": {
+        "type": "randyApexPredator",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-randy-orton",
+      "name": "Voices",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "randy-orton",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "outtaNowhere",
+      "name": "RKO",
+      "discount": 2
+    }
+  },
+  "samiZayn": {
+    "id": "sami-zayn",
+    "name": "Sami Zayn",
+    "nickname": "The Underdog from the Underground",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-sami-zayn",
+    "entranceId": "entrance-sami-zayn",
+    "specialId": "special-sami-zayn",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "punch",
+      "dropkick",
+      "arm-drag"
+    ],
+    "signatures": [
+      "sami-zayn-exploder-turnbuckle",
+      "sami-zayn-blue-thunder-bomb",
+      "sami-zayn-helluva-kick"
+    ],
+    "archetype": "underdog-comeback-sequencer",
+    "hp": 51,
+    "methodLimits": {
+      "technical": null,
+      "agility": 5,
+      "strike": 3,
+      "strength": 2
+    },
+    "starterMomentum": {
+      "technical": 5,
+      "agility": 4,
+      "strike": 2,
+      "strength": 1
+    },
+    "ability": {
+      "name": "Underdog From the Underground",
+      "text": "While Sami has less HP than his opponent, the first Move he plays each Control sequence costs 1 less.",
+      "trigger": {
+        "type": "samiUnderdog",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-sami-zayn",
+      "name": "Worlds Apart",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "sami-zayn",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "agility": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "neverSayDie",
+      "hpPct": 0.24,
+      "draw": 2,
+      "adrenaline": 2
+    }
+  },
+  "jacobFatu": {
+    "id": "jacob-fatu",
+    "name": "Jacob Fatu",
+    "nickname": "The Samoan Werewolf",
+    "setId": "survivor-series-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "developmentOnly": true,
+    "cardId": "superstar-jacob-fatu",
+    "entranceId": "entrance-jacob-fatu",
+    "specialId": "special-jacob-fatu",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-agility",
+      "punch",
+      "superkick",
+      "samoan-drop"
+    ],
+    "signatures": [
+      "jacob-fatu-pop-up-samoan-drop",
+      "jacob-fatu-moonsault",
+      "jacob-fatu-tongan-death-grip"
+    ],
+    "archetype": "strength-to-agility-explosive-heavyweight",
+    "hp": 56,
+    "methodLimits": {
+      "strength": null,
+      "strike": 5,
+      "agility": 4,
+      "technical": 1
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "strike": 3,
+      "agility": 3
+    },
+    "ability": {
+      "name": "All Gas, No Brakes",
+      "text": "Once per Control sequence, after Jacob connects with a Strength Move dealing 6+ Damage, his next Agility Move costs 1 less.",
+      "trigger": {
+        "type": "jacobAllGas",
+        "minDamage": 6,
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-jacob-fatu",
+      "name": "Samoan Werewolf",
+      "kind": "entrance",
+      "setId": "survivor-series-series-1",
+      "rarity": 4,
+      "superstarId": "jacob-fatu",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "agility": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "builtDifferent",
+      "minDamage": 8,
+      "draw": 1,
+      "adrenaline": 2
     }
   }
 };
