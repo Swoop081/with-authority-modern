@@ -1,11 +1,11 @@
-# WWE Legacy: Collectible Card Game — v0.12.06
+# WWE Legacy: Collectible Card Game — v0.12.08
 
-Current canonical development baseline: **v0.12.06 — Deck Lab + Mobile UX Pass**.
+Current canonical development baseline: **v0.12.08 — Premium Navigation + Dashboard Pass**.
 
-This release turns **Deck Lab** into a complete owned-card deck builder with configurable Entrances, editable Lead Off 5, category recommendations, all-owned-card pickers, shaded legality feedback, an **Only Show Valid** filter, live 55-page validation and Save blocking for invalid decks.
+This release completes the latest mobile UI cleanup without changing gameplay balance. **Deck Lab** now shows every unlocked Superstar as a full collectible-style card, including generated full-card fallbacks when finished art is still pending. The **Choose Your Path** tiles now use substantially larger full Superstar cards instead of tiny portrait stamps while keeping the mode names dominant.
 
-The mobile UX pass also restores **Challenges** as a dedicated tab in the fully scrollable all-destination bottom navigation, keeps all major destinations on Home, adds actionable glow/badge states, compacts Superstar selection, enlarges show logos, moves Entrance effect callouts clear of flipped card text, themes match buttons to the active arena/show and gives Momentum cards stronger Method colour presentation.
+**Season** and **Challenges** are rebuilt into more premium icon-led dashboards with stronger hierarchy, compact progress visuals, reward/status icons, set logos, progress rings and less duplicated explanatory text. Navigation alert badges are now physically removed when their actionable count reaches zero, so red `0` badges can no longer remain visible.
 
-All previously locked gameplay content, v0.12.05 premium card presentation, v0.12.02 Card Art Studio set isolation and v0.12.01 official Survivor Series Houston branding remain intact.
+All v0.12.06/v0.12.07 Deck Lab functionality, scrollable all-tab navigation, show-coloured match controls, Momentum presentation, larger event logos, Entrance callout layout and Card Art Studio work remain intact.
 
-See `RELEASE-NOTES-v0.12.06.md` for full details.
+See `RELEASE-NOTES-v0.12.08.md` for full details.

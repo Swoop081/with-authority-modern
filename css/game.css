@@ -2893,3 +2893,170 @@ body[data-screen="match"] .hand-card-action button.primary:not(:disabled){text-s
   .deck-lab-screen{padding:5px 4px 18px}.deck-lab-roster{grid-template-columns:1fr 1fr;gap:8px}.deck-lab-star-card{min-height:250px}.deck-lab-editor-head,.deck-lab-picker-head{grid-template-columns:auto minmax(0,1fr);padding:9px}.deck-lab-editor-head .deck-lab-counter,.deck-lab-picker-head .deck-lab-counter{grid-column:1/-1;justify-self:stretch}.deck-lab-editor-head h2,.deck-lab-picker-head h2{font-size:1.35rem}.deck-lab-editor-head p,.deck-lab-picker-head p{font-size:.68rem}.deck-identity-row{grid-template-columns:1fr 1fr}.deck-identity-card{grid-template-columns:72px minmax(0,1fr);padding:8px}.deck-identity-visual{width:72px;height:102px}.deck-identity-card>strong{font-size:.76rem}.deck-identity-card>button{min-width:76px;padding:7px;font-size:.58rem}.deck-lead-off-panel{overflow:hidden}.deck-lead-off-row{gap:4px}.deck-lead-slot{min-height:120px;padding:7px 4px}.deck-lead-slot>strong{font-size:.60rem}.deck-lead-slot>small{font-size:.42rem}.deck-category-row{min-height:56px;padding:8px 9px}.deck-category-row em{font-size:.61rem}.deck-category-rec{font-size:.44rem}.deck-lab-picker-tools{grid-template-columns:1fr}.valid-only-toggle{justify-content:center}.deck-lab-picker-card{grid-template-columns:5px 44px minmax(0,1fr);gap:7px;padding-right:7px}.deck-picker-thumb{width:44px;height:54px}.deck-lab-picker-card>.primary,.deck-lab-picker-card>.deck-picker-actions{grid-column:2/-1;justify-self:stretch}.deck-lab-picker-card>.primary{width:100%}.deck-picker-actions button{flex:1}.deck-lab-picker-card.is-invalid>.primary{display:none}.deck-builder-actions{display:grid;grid-template-columns:1fr}.deck-builder-actions>*{width:100%}
 }
 .season-led-strip.has-attention,.menu-season-campaign.has-attention{position:relative!important}
+
+/* v0.12.07 — Deck Lab visual card-grid pass */
+.deck-lab-picker-screen{gap:10px}
+.deck-lab-picker-head{padding:10px 12px}
+.deck-lab-picker-head p{max-width:62ch}
+.deck-lab-picker-tools{position:sticky;top:calc(env(safe-area-inset-top,0px) + 6px);z-index:24;padding:8px;border:1px solid #2b3140;border-radius:16px;background:rgba(10,13,18,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 30px rgba(0,0,0,.24)}
+.deck-lab-card-picker.deck-lab-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+.deck-lab-card-tile{min-width:0;display:grid;grid-template-rows:auto auto auto;gap:7px;padding:8px;border:1px solid #2d3340;border-radius:17px;background:linear-gradient(165deg,#151a22 0%,#0b0e13 72%);box-shadow:0 10px 24px rgba(0,0,0,.22);overflow:hidden}
+.deck-lab-card-tile.is-valid{border-color:rgba(130,112,255,.34)}
+.deck-lab-card-tile.is-invalid{border-color:#292d36;background:linear-gradient(165deg,#101319,#090b0f 72%)}
+.deck-lab-full-card{position:relative;min-width:0;border-radius:13px;overflow:hidden;background:#090b10;box-shadow:0 8px 18px rgba(0,0,0,.34)}
+.deck-lab-full-card .ccg-card{width:100%;min-height:0}
+.deck-lab-full-card .ccg-card-face{border-radius:11px}
+.deck-lab-card-tile.is-invalid .deck-lab-full-card .ccg-card{filter:grayscale(.8) brightness(.48) saturate(.45)}
+.deck-lab-card-tile.is-invalid .deck-lab-full-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.16),rgba(5,7,11,.44));pointer-events:none}
+.deck-card-owned-chip,.deck-card-invalid-chip{position:absolute;z-index:5;top:6px;padding:4px 6px;border-radius:999px;font-size:.46rem;line-height:1;font-weight:1000;letter-spacing:.05em;box-shadow:0 2px 8px rgba(0,0,0,.35);pointer-events:none}
+.deck-card-owned-chip{right:6px;color:#fff;background:rgba(7,10,15,.82);border:1px solid rgba(255,255,255,.15)}
+.deck-card-invalid-chip{left:6px;color:#ffd0d5;background:rgba(94,22,31,.88);border:1px solid rgba(255,111,127,.34)}
+.deck-card-invalid-reason{min-height:30px;padding:6px 7px;border-radius:9px;background:rgba(114,33,44,.16);border:1px solid rgba(202,76,91,.19);color:#e7a4ad;font-size:.51rem;line-height:1.22;text-align:center;display:grid;place-items:center}
+.deck-card-change{width:100%;min-width:0!important;min-height:38px;border-radius:10px;font-size:.61rem;letter-spacing:.08em;font-weight:1000}
+.deck-card-stepper{display:grid;grid-template-columns:1fr 34px 1fr;gap:5px;align-items:center}
+.deck-card-stepper button{min-width:0!important;min-height:38px;border-radius:10px;font-size:1rem;font-weight:1000;padding:0}
+.deck-card-stepper strong{display:grid;place-items:center;height:38px;border-radius:10px;border:1px solid #333946;background:#0b0e13;color:#fff;font-size:.74rem}
+.deck-lab-card-tile button:disabled{opacity:.28;filter:saturate(.4)}
+.deck-lab-picker-ccg{pointer-events:none}
+
+@media(max-width:700px){
+  .deck-lab-picker-screen{padding-left:5px;padding-right:5px}
+  .deck-lab-picker-head{grid-template-columns:auto 1fr;gap:8px}
+  .deck-lab-picker-head>div>p{display:none}
+  .deck-lab-picker-head .deck-lab-counter{margin-top:2px}
+  .deck-lab-picker-tools{top:calc(env(safe-area-inset-top,0px) + 4px);grid-template-columns:minmax(0,1fr) auto;gap:6px;padding:6px;border-radius:13px}
+  .deck-lab-picker-tools input{min-height:40px;padding:0 10px;font-size:.68rem}
+  .valid-only-toggle{min-height:40px;padding:0 9px;font-size:.58rem;border-radius:10px}
+  .deck-lab-card-picker.deck-lab-card-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .deck-lab-card-tile{gap:5px;padding:5px;border-radius:13px}
+  .deck-lab-full-card{border-radius:10px}
+  .deck-lab-full-card .ccg-card-face{border-radius:9px}
+  .deck-card-owned-chip,.deck-card-invalid-chip{top:4px;padding:3px 4px;font-size:.39rem}
+  .deck-card-owned-chip{right:4px}.deck-card-invalid-chip{left:4px}
+  .deck-card-invalid-reason{min-height:28px;padding:4px;font-size:.43rem;line-height:1.15}
+  .deck-card-change{min-height:34px;font-size:.52rem;border-radius:8px}
+  .deck-card-stepper{grid-template-columns:1fr 26px 1fr;gap:3px}
+  .deck-card-stepper button,.deck-card-stepper strong{height:34px;min-height:34px;border-radius:8px}
+  .deck-card-stepper button{font-size:.9rem}.deck-card-stepper strong{font-size:.58rem}
+  .deck-lab-full-card .ccg-card-title{padding:5px 5px 12px}
+  .deck-lab-full-card .ccg-card-title small{font-size:.31rem}
+  .deck-lab-full-card .ccg-card-title strong{font-size:.52rem}
+  .deck-lab-full-card .ccg-card-stats>span{padding:4px}
+  .deck-lab-full-card .ccg-card-stats small{font-size:.28rem}
+  .deck-lab-full-card .ccg-card-stats b{font-size:.55rem}
+}
+
+/* v0.12.08 — Premium navigation, mode-card, Deck Lab roster, Season + Challenges refinement */
+.ui-icon{width:1.2em;height:1.2em;display:inline-block;vertical-align:-.18em;flex:0 0 auto}
+
+/* Zero-value attention badges must never survive CSS overrides. */
+.nav-attention-badge[hidden],.attention-badge[hidden]{display:none!important}
+
+/* Deck Lab roster: every owned Superstar is represented by the full collectible card, not a portrait tile. */
+.deck-lab-roster{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:start!important}
+.deck-lab-star-card{position:relative!important;display:grid!important;min-height:0!important;padding:8px!important;gap:7px!important;overflow:visible!important;background:linear-gradient(165deg,#121620,#090b10)!important;border-radius:20px!important;cursor:pointer!important;isolation:isolate}
+.deck-lab-star-card:after{display:none!important}
+.deck-lab-star-art{position:relative!important;inset:auto!important;width:100%!important;display:block!important;aspect-ratio:.68!important;border-radius:15px!important;overflow:hidden!important;background:#07090d!important;box-shadow:0 12px 28px rgba(0,0,0,.38)!important}
+.deck-lab-star-art .ccg-card{width:100%!important;height:100%!important;min-height:0!important;cursor:pointer!important;pointer-events:none!important}
+.deck-lab-star-art .ccg-card-inner,.deck-lab-star-art .ccg-card-face{height:100%!important}
+.deck-lab-star-status{position:absolute!important;left:13px!important;right:13px!important;bottom:14px!important;z-index:8!important;display:flex!important;align-items:end!important;justify-content:space-between!important;gap:7px!important;padding:34px 8px 7px!important;background:linear-gradient(180deg,transparent,rgba(4,6,10,.94) 62%)!important;border-radius:0 0 12px 12px!important;pointer-events:none}
+.deck-lab-star-status em{font-style:normal!important;font-size:.46rem!important;letter-spacing:.13em!important;color:#82eda4!important;font-weight:1000!important}
+.deck-lab-star-card.needs-work .deck-lab-star-status em{color:#f0c66c!important}
+.deck-lab-star-status strong{font-size:.72rem!important;line-height:1!important;text-align:right!important;max-width:66%!important;text-shadow:0 2px 4px #000!important}
+.deck-lab-star-card:focus-visible{outline:2px solid #aa8cff!important;outline-offset:3px!important}
+@media(max-width:700px){
+  .deck-lab-roster{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}
+  .deck-lab-star-card{padding:6px!important;border-radius:16px!important}
+  .deck-lab-star-art{border-radius:12px!important}
+  .deck-lab-star-status{left:10px!important;right:10px!important;bottom:11px!important;padding:30px 6px 5px!important}
+}
+
+/* Play mode selection: use a clearly visible full Superstar card, large enough to feel premium but never compete with the mode title. */
+.premium-mode-card{cursor:pointer!important}
+.premium-mode-card.mode-card-focus,.premium-mode-card:focus-visible{outline:2px solid var(--mode-accent)!important;outline-offset:3px!important}
+.premium-mode-card .mode-full-card-art{position:absolute!important;z-index:2!important;inset:auto 3.2% 5% auto!important;width:min(31%,230px)!important;height:auto!important;aspect-ratio:.68!important;filter:drop-shadow(0 18px 22px rgba(0,0,0,.58))!important;transform:rotate(1.2deg)!important;pointer-events:none!important}
+.premium-mode-card .mode-full-card-art .ccg-card{width:100%!important;height:100%!important;pointer-events:none!important}
+.premium-mode-card .mode-full-card-art .ccg-card-inner,.premium-mode-card .mode-full-card-art .ccg-card-face{height:100%!important}
+.premium-mode-card .mode-card-copy{width:69%!important;z-index:5!important;padding-right:4px!important}
+.premium-mode-card .mode-card-shade{z-index:3!important;background:linear-gradient(90deg,rgba(6,8,12,.99) 0%,rgba(6,8,12,.96) 49%,rgba(6,8,12,.58) 68%,rgba(6,8,12,.06) 100%)!important}
+@media(max-width:900px){
+  .premium-mode-card.single-hero-mode{min-height:310px!important}
+  .premium-mode-card .mode-full-card-art{width:min(30%,205px)!important;right:3%!important;bottom:6%!important}
+  .premium-mode-card .mode-card-copy{width:70%!important}
+}
+@media(max-width:600px){
+  .premium-mode-card.single-hero-mode{min-height:300px!important}
+  .premium-mode-card .mode-full-card-art{width:31%!important;right:2.5%!important;bottom:8%!important}
+  .premium-mode-card .mode-card-copy{width:71%!important;padding:18px!important;padding-right:2px!important}
+  .premium-mode-card .mode-card-copy p{max-width:94%!important}
+}
+
+/* Premium Season command center */
+.season-final-boss-hero .feature-copy>p{max-width:520px!important;font-size:.78rem!important;line-height:1.35!important;color:#c8cbd4!important}
+.season-hero-status{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 3px}
+.season-hero-status>span{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid rgba(190,160,255,.20);border-radius:999px;background:rgba(10,12,18,.72);font-size:.58rem;color:#dcd3ff;backdrop-filter:blur(12px)}
+.season-hero-status .ui-icon{color:#d8b75c}
+.season-hero-actions .nav-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:7px!important}
+.season-command-center{position:relative!important;overflow:hidden!important;padding:18px!important;background:radial-gradient(circle at 10% 0,rgba(133,89,255,.16),transparent 38%),linear-gradient(155deg,#121322,#090b12)!important}
+.season-command-center:before{content:"SEASON COMMAND CENTER"!important;color:#c7adff!important}
+.season-tier-summary{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+.season-tier-summary .season-stat-card{position:relative!important;display:grid!important;grid-template-columns:auto 1fr!important;grid-template-areas:"icon label" "icon value" "icon sub"!important;column-gap:10px!important;align-items:center!important;padding:13px!important;border-color:rgba(255,255,255,.10)!important;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.012))!important;box-shadow:inset 0 1px rgba(255,255,255,.04)!important}
+.season-stat-icon{grid-area:icon;width:42px;height:42px;display:grid;place-items:center;border-radius:13px;color:#d9bc64;background:linear-gradient(145deg,rgba(222,191,101,.16),rgba(112,80,202,.10));border:1px solid rgba(222,191,101,.18)}
+.season-stat-icon .ui-icon{width:22px;height:22px}
+.season-stat-card>span:not(.season-stat-icon){grid-area:label!important}.season-stat-card>b{grid-area:value!important;font-size:1.12rem!important}.season-stat-card>small{grid-area:sub!important;margin-top:2px!important}
+.season-progress-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:4px;font-size:.62rem;letter-spacing:.08em;color:#d9dbe3}.season-progress-heading span{color:#c8aa63;font-weight:900}
+.season-xp-track{height:14px!important;border:1px solid rgba(255,255,255,.07)!important;background:#070910!important;box-shadow:inset 0 2px 6px rgba(0,0,0,.5)!important}.season-xp-track i{background:linear-gradient(90deg,#7d55ff,#a55cff 45%,#e5bd59)!important;box-shadow:0 0 16px rgba(139,91,255,.45)!important}
+.season-tier{grid-template-columns:58px 42px minmax(0,1fr) auto!important;gap:10px!important;padding:12px!important;border-radius:17px!important;background:linear-gradient(145deg,#151722,#0d0f15)!important;box-shadow:0 10px 24px rgba(0,0,0,.18)!important}
+.season-tier-reward-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;color:#e2c267;border:1px solid rgba(226,194,103,.18);background:rgba(226,194,103,.07)}
+.season-tier-reward-icon .ui-icon{width:21px;height:21px}
+.season-tier.current{background:radial-gradient(circle at 12% 50%,rgba(135,90,255,.17),transparent 36%),linear-gradient(145deg,#171827,#0d0f15)!important}
+.season-final-reward .season-tier-reward-icon{color:#ff7379;background:rgba(255,71,80,.11);border-color:rgba(255,91,98,.28)}
+@media(max-width:720px){
+  .season-tier-summary{grid-template-columns:1fr 1fr!important}
+  .season-tier{grid-template-columns:48px 36px minmax(0,1fr) auto!important;padding:10px!important}
+  .season-tier-reward-icon{width:34px;height:34px}
+}
+@media(max-width:430px){
+  .season-tier-summary{grid-template-columns:1fr 1fr!important}
+  .season-stat-icon{width:34px;height:34px}.season-stat-icon .ui-icon{width:18px;height:18px}
+  .season-tier{grid-template-columns:44px 32px minmax(0,1fr)!important}.season-tier button{grid-column:1/-1!important}
+}
+
+/* Premium Challenges dashboard */
+.challenges-premium{gap:14px!important}
+.premium-challenges-hero{min-height:285px!important;overflow:hidden!important}
+.premium-challenges-hero .feature-art{opacity:.76!important}.premium-challenges-hero .feature-shade{background:linear-gradient(90deg,rgba(6,8,12,.98),rgba(6,8,12,.76) 54%,rgba(6,8,12,.14))!important}
+.premium-challenges-hero .feature-copy{max-width:64%!important}
+.challenge-hero-status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:14px;max-width:520px}
+.challenge-hero-status>span{display:grid;grid-template-columns:28px 1fr;grid-template-rows:auto auto;column-gap:7px;align-items:center;padding:9px;border:1px solid rgba(255,255,255,.11);border-radius:13px;background:rgba(9,12,17,.72);backdrop-filter:blur(12px)}
+.challenge-hero-status .ui-icon{grid-row:1/3;width:24px;height:24px;color:#60e884}.challenge-hero-status b{font-size:1.05rem}.challenge-hero-status small{font-size:.45rem;color:#8f98a6;text-transform:uppercase;letter-spacing:.08em}
+.challenge-command-panel,.premium-challenge-section{border:1px solid rgba(255,255,255,.10)!important;border-radius:20px!important;padding:14px!important;background:linear-gradient(155deg,#11151c,#090c11)!important;box-shadow:0 16px 34px rgba(0,0,0,.22)!important}
+.icon-section-title{display:grid!important;grid-template-columns:auto 1fr auto!important;align-items:center!important;gap:10px!important}.icon-section-title>div{display:grid;gap:1px}.icon-section-title h3{margin:0!important}.icon-section-title small{font-size:.55rem;color:#7f8996}.section-icon{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;color:#69e68d;background:rgba(62,219,116,.09);border:1px solid rgba(70,226,126,.15)}.section-icon.weekly{color:#8fa3ff;background:rgba(104,128,255,.09);border-color:rgba(119,143,255,.17)}.section-icon .ui-icon{width:21px;height:21px}
+.challenge-set-stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin-top:12px!important}
+.challenge-set-stat{position:relative;display:grid;grid-template-columns:66px 52px minmax(0,1fr) auto;gap:9px;align-items:center;min-height:78px;padding:10px;border:1px solid rgba(255,255,255,.08);border-radius:15px;background:linear-gradient(145deg,#151922,#0b0e13);overflow:hidden}
+.challenge-set-logo{width:66px;height:48px;display:grid;place-items:center}.challenge-mini-set-logo{max-width:100%;max-height:100%;object-fit:contain}
+.challenge-progress-ring{--p:calc(var(--set-progress) * 1%);width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#66e58e var(--p),#252b35 0);position:relative}.challenge-progress-ring:after{content:"";position:absolute;inset:5px;border-radius:50%;background:#0b0e13}.challenge-progress-ring b{position:relative;z-index:2;font-size:.62rem}
+.challenge-set-copy{min-width:0;display:grid;gap:2px}.challenge-set-copy strong{font-size:.67rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.challenge-set-copy small{font-size:.48rem;color:#808a98}
+.challenge-pack-count{display:inline-flex;align-items:center;gap:3px;color:#e4c468;font-weight:900;font-size:.60rem}.challenge-pack-count .ui-icon{width:14px;height:14px}
+.premium-challenge-card{padding:13px!important;border-radius:16px!important;background:radial-gradient(circle at 0 0,rgba(63,219,115,.07),transparent 34%),linear-gradient(155deg,#161a22,#0c0f14)!important}
+.challenge-card-head{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center}.challenge-type-icon{width:37px;height:37px;display:grid;place-items:center;border-radius:11px;background:rgba(95,230,137,.09);color:#64e68b;border:1px solid rgba(95,230,137,.13)}.challenge-type-icon .ui-icon{width:20px;height:20px}.challenge-card-head>div{display:grid;gap:1px}.challenge-card-head span{font-size:.48rem;letter-spacing:.13em;color:#7f8996;font-weight:900}.challenge-card-head h3{font-size:.88rem!important}.challenge-card-head>b{font-size:.72rem;color:#cdd3dc}
+.challenge-reward-chips{display:flex;flex-wrap:wrap;gap:6px}.challenge-reward-chips span{display:inline-flex;align-items:center;gap:4px;padding:5px 7px;border-radius:999px;background:#0a0d12;border:1px solid rgba(255,255,255,.08);font-size:.50rem;color:#b6bec9}.challenge-reward-chips .ui-icon{width:13px;height:13px;color:#dfbd62}
+.premium-challenge-card button{width:100%!important;display:flex!important;justify-content:center!important;align-items:center!important;gap:5px!important;min-height:38px!important}.premium-challenge-card button .ui-icon{width:15px;height:15px}
+.premium-milestone-row{display:grid!important;grid-template-columns:auto 1fr auto!important;align-items:center!important}.milestone-icon{width:35px;height:35px;display:grid;place-items:center;border-radius:10px;color:#ddbd66;background:rgba(221,189,102,.09);border:1px solid rgba(221,189,102,.14)}.milestone-icon .ui-icon{width:19px;height:19px}
+.premium-lifecycle-card{display:flex!important;align-items:center!important;gap:12px!important;padding:14px!important}.premium-lifecycle-card>div>span{font-size:.52rem;letter-spacing:.12em;color:#d0b15d;font-weight:900}.premium-lifecycle-card h3{font-size:.94rem;margin:2px 0!important}.premium-lifecycle-card p{font-size:.62rem;margin:0!important}
+@media(max-width:700px){
+  .premium-challenges-hero{min-height:240px!important}.premium-challenges-hero .feature-copy{max-width:78%!important}.challenge-hero-status{grid-template-columns:repeat(3,1fr)!important}
+  .challenge-set-stats{grid-template-columns:1fr!important}.challenge-set-stat{grid-template-columns:60px 48px minmax(0,1fr) auto!important;min-height:70px!important}
+  .challenge-set-logo{width:60px;height:42px}
+}
+@media(max-width:430px){
+  .premium-challenges-hero .feature-copy{max-width:88%!important}.challenge-hero-status>span{grid-template-columns:22px 1fr;padding:7px}.challenge-hero-status .ui-icon{width:20px;height:20px}
+  .challenge-set-stat{grid-template-columns:52px 42px minmax(0,1fr) auto!important;gap:6px!important;padding:8px!important}.challenge-set-logo{width:52px;height:38px}.challenge-progress-ring{width:40px;height:40px}.challenge-progress-ring b{font-size:.54rem}.challenge-set-copy strong{font-size:.60rem}.challenge-set-copy small{font-size:.43rem}
+}
+.generated-superstar-preview{position:relative;display:block;width:100%;height:100%;aspect-ratio:.68;overflow:hidden;border-radius:inherit;background:linear-gradient(155deg,#14253a,#351b3b 72%,#10131b);border:2px solid rgba(255,255,255,.38);box-shadow:inset 0 0 0 3px rgba(255,255,255,.06);color:#fff}
+.generated-superstar-preview.set-hall-of-fame-series-1{background:linear-gradient(155deg,#4b3915,#15100a 72%,#090807);border-color:#c7a552}.generated-superstar-preview.set-evolution-series-1{background:linear-gradient(155deg,#3b1350,#6d125d 66%,#150b1d);border-color:#ee4ecf}.generated-superstar-preview.set-raw-series-1{background:linear-gradient(155deg,#451015,#16090b 70%,#080709);border-color:#ef4452}.generated-superstar-preview.set-worlds-collide-series-1{background:linear-gradient(155deg,#0c3e43,#37102f 70%,#070a0d);border-color:#51ded9}.generated-superstar-preview.set-money-in-the-bank-series-1{background:linear-gradient(155deg,#154419,#14230d 70%,#080b07);border-color:#65dc48}.generated-superstar-preview.set-smackdown-series-1{background:linear-gradient(155deg,#0e3155,#102b58 66%,#080b13);border-color:#45aaf5}.generated-superstar-preview.set-survivor-series-series-1{background:linear-gradient(155deg,#102d4e,#3c241f 70%,#0a0c12);border-color:#f47b35}
+.generated-superstar-art{position:absolute;inset:0;display:block}.generated-superstar-art img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}.generated-superstar-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.08) 35%,rgba(5,7,11,.18) 58%,rgba(4,5,8,.92) 100%)}
+.generated-superstar-stars{position:absolute;left:7%;top:5.5%;display:flex;flex-direction:column;font-size:clamp(.45rem,1.8vw,.72rem);line-height:1;color:#ffd44f;text-shadow:0 0 7px rgba(255,210,64,.65);letter-spacing:-.08em;writing-mode:vertical-rl}
+.generated-superstar-logo{position:absolute;top:4%;right:5%;width:35%;height:12%;display:grid;place-items:center}.generated-superstar-logo img{max-width:100%;max-height:100%;object-fit:contain}
+.generated-superstar-preview>strong{position:absolute;left:6%;right:6%;bottom:5%;font-size:clamp(.62rem,2.5vw,1.05rem);line-height:.95;text-align:center;text-transform:uppercase;font-style:italic;font-weight:1000;text-shadow:0 2px 5px #000;white-space:normal}
+.mode-full-card-art .generated-superstar-preview{border-radius:12px}.deck-lab-star-art .generated-superstar-preview{border-radius:12px}

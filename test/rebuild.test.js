@@ -1151,7 +1151,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.06/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.08/,'Studio script cache key must match the current release');
 });
 
 
@@ -1179,7 +1179,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.06/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.08/,'Studio visible build label should match the current release');
 });
 
 
@@ -1192,7 +1192,7 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,35,900)'),'COST/DAMAGE values should be substantially larger and bold');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.06/,'Studio visible build label should match v0.12.06');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.08/,'Studio visible build label should match v0.12.06');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1271,4 +1271,59 @@ test("v0.12.06 match buttons and Momentum presentation use live show/method colo
   assert.ok(css.includes('--presentation-accent2:#e5cf58!important'),'Money in the Bank should use the arena green/gold family');
   assert.ok(css.includes('color-mix(in srgb,var(--mom) 64%'),'Momentum faces should use stronger method colour saturation');
   assert.ok(app.includes('return momentumMockupMarkup(card);'),'live Momentum cards should render from the colour-responsive UI template');
+});
+
+
+test("v0.12.07 Deck Lab category pickers use a premium three-wide full-card grid", async()=>{
+  const fs=await import('node:fs');
+  const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.match(app,/deck-lab-card-picker deck-lab-card-grid/,'Deck Lab picker should render the visual card grid');
+  assert.match(app,/collectibleCardMarkup\(card,\{extraClass:"deck-lab-picker-ccg"\}\)/,'Deck Lab picker should show complete collectible card fronts');
+  assert.match(app,/deck-card-invalid-reason/,'invalid owned cards should remain visible with a reason');
+  assert.match(css,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,'mobile Deck Lab picker should remain three cards wide');
+  assert.match(css,/deck-lab-card-tile\.is-invalid[\s\S]*filter:grayscale/,'invalid cards should be visually shaded rather than hidden');
+  assert.match(css,/deck-card-stepper/,'category cards should use compact card-count controls');
+});
+
+test("v0.12.08 Deck Lab roster uses full collectible-style Superstar cards", async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.ok(ui.includes('superstarPreviewCardMarkup(star.id,"deck-lab-roster-collectible")'));
+  assert.ok(ui.includes('generated-superstar-preview'));
+  assert.ok(css.includes('.deck-lab-star-art .generated-superstar-preview'));
+  assert.ok(css.includes('aspect-ratio:.68'));
+});
+
+test("v0.12.08 Play mode tiles use larger full Superstar cards without nested interactive buttons", async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.ok(ui.includes('class="mode-art mode-full-card-art"'));
+  assert.ok(ui.includes('<article id="play-exhibition" role="button" tabindex="0"'));
+  assert.equal(ui.includes('<button id="play-exhibition" class="play-mode-card'),false);
+  assert.ok(css.includes('.premium-mode-card .mode-full-card-art'));
+  assert.ok(css.includes('width:min(31%,230px)!important'));
+});
+
+test("v0.12.08 zero-value navigation alerts are removed instead of rendering red zero badges", async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  assert.ok(ui.includes('if (badge && count < 1) badge.remove();'));
+  assert.ok(ui.includes("return count > 0 ? `<i class=\"attention-badge\">"));
+});
+
+test("v0.12.08 Season and Challenges use icon-led premium dashboard components", async()=>{
+  const fs=await import('node:fs');
+  const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
+  const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
+  assert.ok(ui.includes('season-command-center'));
+  assert.ok(ui.includes('season-stat-icon'));
+  assert.ok(ui.includes('challenge-hero-status'));
+  assert.ok(ui.includes('challenge-progress-ring'));
+  assert.ok(ui.includes("uiIcon('bolt')"));
+  assert.ok(css.includes('.season-command-center'));
+  assert.ok(css.includes('.challenge-set-stats'));
+  assert.ok(css.includes('.premium-challenge-card'));
 });

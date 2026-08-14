@@ -1,29 +1,29 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.06";
-import { superstars } from "../data/superstars.js?v=0.12.06";
-import { decks } from "../data/decks.js?v=0.12.06";
-import { sets } from "../data/sets.js?v=0.12.06";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.06";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.06";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.06";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.06";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.06";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.06";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.06";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.06";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.06";
-import { totalMomentum } from "../engine/utils.js?v=0.12.06";
-import { healthZone } from "../engine/health.js?v=0.12.06";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.06";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.06";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.06";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.06";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.06";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.06";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.06";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.06";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.06";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.06";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.06";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.08";
+import { superstars } from "../data/superstars.js?v=0.12.08";
+import { decks } from "../data/decks.js?v=0.12.08";
+import { sets } from "../data/sets.js?v=0.12.08";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.08";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.08";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.08";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.08";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.08";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.08";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.08";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.08";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.08";
+import { totalMomentum } from "../engine/utils.js?v=0.12.08";
+import { healthZone } from "../engine/health.js?v=0.12.08";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.08";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.08";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.08";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.08";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.08";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.08";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.08";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.08";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.08";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.08";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.08";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -150,6 +150,23 @@ function setLogoMarkup(setId, className = "") {
   return `<img class="set-brand-logo ${className}" src="${src}" alt="${label}">`;
 }
 
+function uiIcon(name, className = "ui-icon") {
+  const icons = {
+    bolt: '<path d="M13 2 4 14h7l-1 8 9-13h-7z"/>',
+    calendar: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4M17 3v4M3 10h18"/>',
+    trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0V4Z"/><path d="M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v4M8 21h8M9 17h6"/>',
+    cards: '<rect x="6" y="4" width="13" height="16" rx="2"/><path d="M3 8V6a2 2 0 0 1 2-2h9M9 8h7M9 12h7M9 16h5"/>',
+    star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9z"/>',
+    xp: '<circle cx="12" cy="12" r="9"/><path d="m8 9 8 6M16 9l-8 6"/>',
+    points: '<path d="M12 3 4 7v10l8 4 8-4V7z"/><path d="m8 12 3 3 5-6"/>',
+    drop: '<path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/>',
+    gift: '<rect x="4" y="9" width="16" height="12" rx="2"/><path d="M12 9v12M3 9h18M7.5 9C5 9 4 7.5 4.8 6.2 6.2 4 9.5 7 12 9c2.5-2 5.8-5 7.2-2.8C20 7.5 19 9 16.5 9"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="m8 12 2.7 2.7L16.5 9"/>',
+    pack: '<path d="M6 4h12l2 5-2 11H6L4 9z"/><path d="M4 9h16M9 4l1 5M15 4l-1 5"/>'
+  };
+  return `<svg class="${className}" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icons[name] ?? icons.star}</svg>`;
+}
+
 const MATCH_PRESENTATION_SETS = [
   "summerslam-series-1",
   "evolution-series-1",
@@ -171,6 +188,21 @@ function entranceCollectibleFor(starId) {
   const star = superstarById[starId];
   return collectionCards.find(card => card.kind === "entrance" && card.superstarId === starId)
     ?? (star?.entranceId ? collectionById.get(star.entranceId) : null);
+}
+function superstarPreviewCardMarkup(starId, extraClass = "") {
+  const star = superstarById[starId];
+  const card = superstarCollectibleFor(starId);
+  if (!star) return "";
+  if (card && superstarCardArtFor(starId)) return collectibleCardMarkup(card,{extraClass,interactive:false});
+  const rarity = Math.max(1, Math.min(4, Number(card?.rarity ?? 4)));
+  const portrait = superstarArtwork[starId] ?? GENERIC_SUPERSTAR_PLACEHOLDER;
+  return `<span class="generated-superstar-preview ${extraClass} set-${star.setId}">
+    <span class="generated-superstar-art"><img src="${portrait}" alt="${star.name}" onerror="this.onerror=null;this.src='${GENERIC_SUPERSTAR_PLACEHOLDER}';"></span>
+    <span class="generated-superstar-shade"></span>
+    <span class="generated-superstar-stars">${Array.from({length:rarity},()=>"★").join("")}</span>
+    <span class="generated-superstar-logo">${setLogoMarkup(star.setId,"generated-set-logo")}</span>
+    <strong>${star.name}</strong>
+  </span>`;
 }
 function configuredEntranceForStar(starId) {
   const star = superstarById[starId];
@@ -236,7 +268,8 @@ function setChrome({ hideTopbar = false } = {}) {
       button.classList.toggle("has-attention", count > 0);
       let badge = button.querySelector(".nav-attention-badge");
       if (count > 0 && !badge) { badge = document.createElement("i"); badge.className = "nav-attention-badge"; button.appendChild(badge); }
-      if (badge) { badge.textContent = count > 99 ? "99+" : String(count); badge.hidden = count < 1; }
+      if (badge && count > 0) badge.textContent = count > 99 ? "99+" : String(count);
+      if (badge && count < 1) badge.remove();
     });
   }
 }
@@ -789,19 +822,27 @@ function renderSeasons() {
     const setName = reward.kind === "booster" ? (sets[reward.setId]?.name ?? reward.setId) : "";
     const rewardTitle = reward.kind === "full-deck-superstar" ? `THE ROCK · FULL DECK SUPERSTAR` : reward.kind === "universe-points" ? `${reward.amount} UNIVERSE POINTS` : `${reward.amount}× ${setName} Booster${reward.amount === 1 ? '' : 's'}`;
     const rewardSub = reward.kind === "full-deck-superstar" ? `SEASON 1 COMPLETION EXCLUSIVE · The Final Boss` : reward.kind === "universe-points" ? `STORE CURRENCY · ${tier * XP_PER_TIER} XP milestone` : `${tier * XP_PER_TIER} XP milestone`;
+    const rewardIcon = reward.kind === "full-deck-superstar" ? "star" : reward.kind === "universe-points" ? "points" : "pack";
     return `<article class="season-tier ${reached ? 'reached' : ''} ${claimed ? 'claimed' : ''} ${current ? 'current' : ''} ${reward.kind === 'full-deck-superstar' ? 'season-final-reward' : ''}">
       <div class="season-tier-number"><span>TIER</span><b>${tier}</b></div>
+      <div class="season-tier-reward-icon">${uiIcon(rewardIcon)}</div>
       <div class="season-tier-reward"><strong>${rewardTitle}</strong><small>${rewardSub}</small></div>
       ${claimed ? '<button disabled>Claimed</button>' : reached ? `<button class="primary" data-claim-season-tier="${tier}">Claim</button>` : '<button disabled>Locked</button>'}
     </article>`;
   }).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen">
-    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock","cody-rhodes","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Every match, challenge and booster moves your Legacy toward Tier 50. Reach Tier 50 to unlock The Rock — Final Boss and his complete Season 1 reward deck.</p><div class="season-hero-actions"><button id="season-challenges" class="nav-button">Challenges</button><button id="season-boosters" class="nav-button">Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
+    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock","cody-rhodes","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Earn XP. Climb 50 tiers. Unlock The Rock — Final Boss.</p><div class="season-hero-status"><span>${uiIcon("trophy")}<b>Tier ${progress.tier}</b></span><span>${uiIcon("gift")}<b>${claimable.length} ready</b></span><span>${uiIcon("xp")}<b>${progress.xp} XP</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
-    <section class="season-progress-panel">
-      <div class="season-tier-summary"><div><span>CURRENT TIER</span><b>${progress.tier}/${SEASON_TIER_COUNT}</b></div><div><span>SEASON XP</span><b>${progress.xp}/${SEASON_TIER_COUNT * XP_PER_TIER}</b></div><div><span>UNIVERSE POINTS</span><b>${profile.universePoints ?? 0} UP</b></div><div><span>NEXT DROP</span><b>${next.title}</b><small data-next-drop-countdown></small></div></div>
-      <div class="season-xp-track"><i style="width:${Math.min(100,(progress.xp/(SEASON_TIER_COUNT*XP_PER_TIER))*100)}%"></i></div>
-      <div class="season-xp-caption"><span>${progress.tier >= SEASON_TIER_COUNT ? 'Season Road complete' : `${progress.intoTier}/${XP_PER_TIER} XP toward Tier ${progress.tier + 1}`}</span><span>Win ${MATCH_XP.win} XP · Loss/Draw ${MATCH_XP.loss} XP · Daily 50 XP · Weekly 200 XP</span></div>
+    <section class="season-progress-panel season-command-center">
+      <div class="season-tier-summary">
+        <div class="season-stat-card"><span class="season-stat-icon">${uiIcon("trophy")}</span><span>CURRENT TIER</span><b>${progress.tier}/${SEASON_TIER_COUNT}</b><small>${progress.tier >= SEASON_TIER_COUNT ? 'Road complete' : `Next: Tier ${progress.tier + 1}`}</small></div>
+        <div class="season-stat-card"><span class="season-stat-icon">${uiIcon("xp")}</span><span>SEASON XP</span><b>${progress.xp.toLocaleString()}</b><small>of ${(SEASON_TIER_COUNT * XP_PER_TIER).toLocaleString()} XP</small></div>
+        <div class="season-stat-card"><span class="season-stat-icon">${uiIcon("points")}</span><span>UNIVERSE POINTS</span><b>${profile.universePoints ?? 0} UP</b><small>Store currency</small></div>
+        <div class="season-stat-card next-drop-card"><span class="season-stat-icon">${uiIcon("drop")}</span><span>NEXT DROP</span><b>${next.title}</b><small data-next-drop-countdown></small></div>
+      </div>
+      <div class="season-progress-heading"><strong>${progress.tier >= SEASON_TIER_COUNT ? 'SEASON ROAD COMPLETE' : `TIER ${progress.tier + 1} PROGRESS`}</strong><span>${progress.intoTier}/${XP_PER_TIER} XP</span></div>
+      <div class="season-xp-track"><i style="width:${progress.tier >= SEASON_TIER_COUNT ? 100 : Math.min(100,(progress.intoTier/XP_PER_TIER)*100)}%"></i></div>
+      <div class="season-xp-caption"><span>Win ${MATCH_XP.win} XP · Loss/Draw ${MATCH_XP.loss} XP</span><span>Daily 50 XP · Weekly 200 XP</span></div>
     </section>
     <section class="season-section"><div class="section-title"><h3>50-Tier Season Road</h3><span>${claimable.length ? `${claimable.length} reward${claimable.length===1?'':'s'} ready` : 'Earn XP to unlock rewards'}</span></div>${claimable.length ? '<button id="claim-all-season" class="primary season-claim-all">Claim All Available</button>' : ''}<div class="season-tier-road">${tierRoad}</div></section>
     <section class="free-pack-panel ${free.available ? 'ready' : ''}">
@@ -854,12 +895,30 @@ function renderChallenges() {
   });
   const challengeCard = (c, group) => {
     const complete = (c.progress ?? 0) >= c.target;
-    return `<article class="challenge-card ${complete ? 'complete' : ''} ${c.claimed ? 'claimed' : ''}"><span>${group}</span><h3>${c.label}</h3><div class="challenge-progress"><i style="width:${Math.min(100, ((c.progress??0)/c.target)*100)}%"></i></div><p><b>${c.progress ?? 0}/${c.target}</b> · ${c.xpReward ?? (group === 'WEEKLY' ? 200 : 50)} Season XP · ${c.reward} SummerSlam booster${c.reward===1?'':'s'}</p>${c.claimed ? '<button disabled>Claimed</button>' : complete ? `<button class="primary" data-claim-challenge="${c.id}">Claim Reward</button>` : '<button disabled>In progress</button>'}</article>`;
+    const xp = c.xpReward ?? (group === 'WEEKLY' ? 200 : 50);
+    const icon = group === 'WEEKLY' ? 'calendar' : 'bolt';
+    return `<article class="challenge-card premium-challenge-card ${complete ? 'complete' : ''} ${c.claimed ? 'claimed' : ''}">
+      <div class="challenge-card-head"><span class="challenge-type-icon">${uiIcon(icon)}</span><div><span>${group}</span><h3>${c.label}</h3></div><b>${c.progress ?? 0}/${c.target}</b></div>
+      <div class="challenge-progress"><i style="width:${Math.min(100, ((c.progress??0)/c.target)*100)}%"></i></div>
+      <div class="challenge-reward-chips"><span>${uiIcon('xp')} ${xp} XP</span><span>${uiIcon('pack')} ${c.reward} Booster${c.reward===1?'':'s'}</span></div>
+      ${c.claimed ? '<button disabled>CLAIMED</button>' : complete ? `<button class="primary" data-claim-challenge="${c.id}">${uiIcon('gift')} Claim Reward</button>` : '<button disabled>IN PROGRESS</button>'}
+    </article>`;
   };
-  const milestone = (setId, setName, m, type) => `<article class="milestone-row"><div><b>${setName} · ${type === 'foil' ? 'Foil' : 'Collection'} ${m.percent}%</b><span>Reward: ${m.reward} ${setName} booster${m.reward===1?'':'s'}</span></div><button class="primary" data-claim-milestone="${setId}:${type}:${m.percent}">Claim</button></article>`;
+  const milestone = (setId, setName, m, type) => `<article class="milestone-row premium-milestone-row"><span class="milestone-icon">${uiIcon(type === 'foil' ? 'star' : 'trophy')}</span><div><b>${type === 'foil' ? 'Foil' : 'Collection'} ${m.percent}%</b><span>${setName} · ${m.reward} booster${m.reward===1?'':'s'}</span></div><button class="primary" data-claim-milestone="${setId}:${type}:${m.percent}">Claim</button></article>`;
   const milestoneSections = setRows.map(({set,progress,state,rewards}) => `<section class="challenge-section"><div class="section-title"><h3>${set.displayName} Milestones</h3><span>${progress.ownedUnique}/${progress.total} unique · ${progress.foilUnique}/${progress.total} Foil · ${state.lifecycle.toUpperCase()}</span></div><div class="milestone-grid">${[...rewards.collection.map(m=>milestone(set.id,set.name,m,'collection')),...rewards.foil.map(m=>milestone(set.id,set.name,m,'foil'))].join('') || '<p class="collection-empty">Your next collection rewards are still in progress.</p>'}</div></section>`).join('');
-  const challengeSetStats = setRows.map(({set,progress})=>`<div class="set-stat challenge-set-stat"><b>${boosterCreditsFor(profile,set.id)} pack${boosterCreditsFor(profile,set.id)===1?'':'s'} · ${progress.percent??0}%</b><span>${set.name} collection</span></div>`).join('');
-  root.innerHTML = `<section class="challenges-screen premium-screen"><section class="feature-hero challenges-feature">${modePortraits(["becky-lynch","kevin-owens"],"feature-art")}<div class="feature-shade"></div><button id="challenge-main-menu" class="challenge-home-button">← MAIN MENU</button><div class="feature-copy">${modeLogoMarkup("challenges",true)}<h2>Challenges & Set Progress</h2><p>Complete rotating goals across Exhibition, Climb the Ladder, Championship Road and Booster Packs. Collection milestones are tracked separately for every set and reward boosters from that same set.</p></div><div class="set-stats challenge-set-stats">${challengeSetStats}</div></section>${message ? `<p class="setup-message">${message}</p>` : ''}<section class="challenge-section"><div class="section-title"><h3>Daily Challenges</h3><span>3 rotating goals</span></div><div class="challenge-grid">${challenges.daily.map(c=>challengeCard(c,'DAILY')).join('')}</div></section><section class="challenge-section"><div class="section-title"><h3>Weekly Challenges</h3><span>3 larger goals</span></div><div class="challenge-grid">${challenges.weekly.map(c=>challengeCard(c,'WEEKLY')).join('')}</div></section>${milestoneSections}<section class="set-lifecycle-card"><span>SET ROTATION FRAMEWORK</span><h3>Featured → Vaulted → Returning</h3><p>Each collection has an independent lifecycle. Vaulting one set removes it from standard boosters without affecting ownership or cross-set deck building; it can later return through event or Legacy packs.</p></section></section>`;
+  const challengeSetStats = setRows.map(({set,progress})=>{ const packs=boosterCreditsFor(profile,set.id); const pct=progress.percent??0; return `<article class="challenge-set-stat" style="--set-progress:${pct}"><div class="challenge-set-logo">${setLogoMarkup(set.id,"challenge-mini-set-logo")}</div><div class="challenge-progress-ring"><b>${pct}%</b></div><div class="challenge-set-copy"><strong>${set.name}</strong><small>${progress.ownedUnique}/${progress.total} unique · ${progress.foilUnique} foil</small></div><span class="challenge-pack-count">${uiIcon('pack')} ${packs}</span></article>`; }).join('');
+  const dailyReady = challenges.daily.filter(c=>!c.claimed && (c.progress??0)>=c.target).length;
+  const weeklyReady = challenges.weekly.filter(c=>!c.claimed && (c.progress??0)>=c.target).length;
+  const milestoneReady = setRows.reduce((n,row)=>n+row.rewards.collection.length+row.rewards.foil.length,0);
+  root.innerHTML = `<section class="challenges-screen premium-screen challenges-premium">
+    <section class="feature-hero challenges-feature premium-challenges-hero">${modePortraits(["becky-lynch"],"feature-art")}<div class="feature-shade"></div><button id="challenge-main-menu" class="challenge-home-button">← MAIN MENU</button><div class="feature-copy">${modeLogoMarkup("challenges",true)}<div class="challenge-hero-status"><span>${uiIcon('bolt')}<b>${dailyReady}</b><small>Daily ready</small></span><span>${uiIcon('calendar')}<b>${weeklyReady}</b><small>Weekly ready</small></span><span>${uiIcon('trophy')}<b>${milestoneReady}</b><small>Milestones</small></span></div></div></section>
+    ${message ? `<p class="setup-message">${message}</p>` : ''}
+    <section class="challenge-command-panel"><div class="section-title icon-section-title"><span class="section-icon">${uiIcon('cards')}</span><div><h3>Set Progress</h3><small>Collection completion and unopened reward packs</small></div></div><div class="challenge-set-stats">${challengeSetStats}</div></section>
+    <section class="challenge-section premium-challenge-section"><div class="section-title icon-section-title"><span class="section-icon daily">${uiIcon('bolt')}</span><div><h3>Daily Challenges</h3><small>Quick rotating goals</small></div><span>${dailyReady ? `${dailyReady} READY` : '3 GOALS'}</span></div><div class="challenge-grid">${challenges.daily.map(c=>challengeCard(c,'DAILY')).join('')}</div></section>
+    <section class="challenge-section premium-challenge-section"><div class="section-title icon-section-title"><span class="section-icon weekly">${uiIcon('calendar')}</span><div><h3>Weekly Challenges</h3><small>Larger goals · bigger XP</small></div><span>${weeklyReady ? `${weeklyReady} READY` : '3 GOALS'}</span></div><div class="challenge-grid">${challenges.weekly.map(c=>challengeCard(c,'WEEKLY')).join('')}</div></section>
+    ${milestoneSections}
+    <section class="set-lifecycle-card premium-lifecycle-card"><span class="milestone-icon">${uiIcon('drop')}</span><div><span>SET LIFECYCLE</span><h3>Featured → Vaulted → Returning</h3><p>Vaulting changes booster availability only. Your cards and decks remain yours.</p></div></section>
+  </section>`;
   root.querySelectorAll('[data-claim-challenge]').forEach(btn=>btn.addEventListener('click',()=>{ try { const reward=claimChallenge(profile,btn.dataset.claimChallenge); saveProfile(profile); message=`Challenge claimed: +${reward} SummerSlam booster${reward===1?'':'s'} and Season XP.`; } catch(e){ message=e.message; } renderChallenges(); }));
   root.querySelectorAll('[data-claim-milestone]').forEach(btn=>btn.addEventListener('click',()=>{ try { const [setId,type,pct]=btn.dataset.claimMilestone.split(':'); const reward=claimMilestone(profile,type,Number(pct),setId); saveProfile(profile); message=`${setCollections[setId]?.name??setId} ${type==='foil'?'Foil':'Collection'} milestone claimed: +${reward} booster${reward===1?'':'s'}.`; } catch(e){ message=e.message; } renderChallenges(); }));
   $("#challenge-main-menu")?.addEventListener("click", showMainMenu);
@@ -1141,17 +1200,21 @@ function renderMainMenu() {
 function renderPlayMenu() {
   setChrome();
   const root = $("#game");
+  const modeCard = starId => {
+    return `<div class="mode-art mode-full-card-art">${superstarPreviewCardMarkup(starId,"mode-superstar-collectible")}</div>`;
+  };
   root.innerHTML = `<section class="play-menu-screen premium-screen">
     <div class="premium-screen-title"><span>PLAY</span><h2>Choose Your Path</h2><p>Three modes. Three identities. One WWE Legacy roster.</p></div>
     <div class="play-mode-grid premium-mode-grid">
-      <button id="play-exhibition" class="play-mode-card premium-mode-card exhibition-card single-hero-mode">${modePortraits(["cody-rhodes"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("exhibition",true)}<p>Choose any Superstar you own. Your CPU opponent is randomly drawn from the other ${Math.max(0,roster.length-1)} complete roster decks.</p><b>PLAY EXHIBITION →</b></div></button>
-      <button id="play-ladder" class="play-mode-card premium-mode-card ladder-card single-hero-mode">${modePortraits(["gunther"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("ladder",true)}<p>Three lives. Clear a full branch. Survive every rung.</p><b>START THE CLIMB →</b></div></button>
-      <button id="play-championship" class="play-mode-card premium-mode-card championship-card single-hero-mode">${modePortraits(["roman-reigns"],"mode-art")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("championship",true)}<p>Opening Bout to Championship Match across a four-fight road.</p><b>CHASE THE TITLE →</b></div></button>
+      <article id="play-exhibition" role="button" tabindex="0" class="play-mode-card premium-mode-card exhibition-card single-hero-mode">${modeCard("cody-rhodes")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("exhibition",true)}<p>Choose any Superstar you own. Your CPU opponent is randomly drawn from the other ${Math.max(0,roster.length-1)} complete roster decks.</p><b>PLAY EXHIBITION →</b></div></article>
+      <article id="play-ladder" role="button" tabindex="0" class="play-mode-card premium-mode-card ladder-card single-hero-mode">${modeCard("gunther")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("ladder",true)}<p>Three lives. Clear a full branch. Survive every rung.</p><b>START THE CLIMB →</b></div></article>
+      <article id="play-championship" role="button" tabindex="0" class="play-mode-card premium-mode-card championship-card single-hero-mode">${modeCard("roman-reigns")}<div class="mode-card-shade"></div><div class="mode-card-copy">${modeLogoMarkup("championship",true)}<p>Opening Bout to Championship Match across a four-fight road.</p><b>CHASE THE TITLE →</b></div></article>
     </div>
   </section>`;
-  $("#play-exhibition")?.addEventListener("click", showSetup);
-  $("#play-ladder")?.addEventListener("click", showLadder);
-  $("#play-championship")?.addEventListener("click", showChampionship);
+  const wireModeCard = (selector, action) => { const el = $(selector); el?.addEventListener("click", action); el?.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); action(); } }); };
+  wireModeCard("#play-exhibition", showSetup);
+  wireModeCard("#play-ladder", showLadder);
+  wireModeCard("#play-championship", showChampionship);
 }
 
 function renderProfile() {
@@ -1378,7 +1441,7 @@ function cardPlayRestrictionText(card) {
   return "";
 }
 
-function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "" } = {}) {
+function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "", interactive = true } = {}) {
   // Superstar and all Card Art Studio exports are premium full-art fronts.
   // Non-Superstar cards keep their generated legacy overlays only as a fallback
   // until the corresponding custom WebP exists on disk.
@@ -1398,7 +1461,9 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
   const frontMarkup = superstarFront
     ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
     : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span><span class="ccg-card-title"><small>${typeLabel}${visualFoil ? " · FOIL" : ""}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
-  return `<button type="button" class="ccg-card ${flipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${extraClass}" ${flipAttr} aria-label="${card.name}. Tap to ${flipped ? "view artwork" : "view effects"}.">
+  const rootTag = interactive ? "button" : "span";
+  const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. Tap to ${flipped ? "view artwork" : "view effects"}."` : `aria-hidden="true"`;
+  return `<${rootTag} ${rootAttrs} class="ccg-card ${flipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${extraClass}">
     <span class="ccg-card-inner">
       <span class="ccg-card-face ccg-card-front">${frontMarkup}</span>
       <span class="ccg-card-face ccg-card-rules">
@@ -1413,7 +1478,7 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
         <span class="ccg-rules-foot"><span>${card.cardCode ?? card.setId ?? "WWE LEGACY"}</span><span class="rarity-stars">${rarityStars(card.rarity ?? 1)}</span></span>
       </span>
     </span>${footer}
-  </button>`;
+  </${rootTag}>`;
 }
 function collectionText(card) {
   if (card.kind === "superstar") return `${card.hp} HP · ${card.abilityName}: ${card.abilityText}`;
@@ -1621,13 +1686,13 @@ function renderDeckBuilder() {
       <section class="deck-lab-roster" aria-label="Unlocked Superstars">${unlocked.map(star => {
         const draft = createDeckDraft(profile, star.id);
         const check = validateDeckDraft(profile, star.id, draft, selectedEntranceId(profile, star.id));
-        return `<button type="button" class="deck-lab-star-card ${check.healthy ? 'is-valid' : 'needs-work'}" data-deck-lab-star="${star.id}">
-          <span class="deck-lab-star-art">${superstarVisualMarkup(star.id, star.name)}</span>
-          <span class="deck-lab-star-copy"><em>${check.healthy ? 'VALID DECK' : `${draft.length}/55 PAGES`}</em><strong>${star.name}</strong><small>${star.nickname}</small></span>
-        </button>`;
+        return `<article role="button" tabindex="0" class="deck-lab-star-card ${check.healthy ? 'is-valid' : 'needs-work'}" data-deck-lab-star="${star.id}">
+          <span class="deck-lab-star-art deck-lab-full-superstar-card">${superstarPreviewCardMarkup(star.id,"deck-lab-roster-collectible")}</span>
+          <span class="deck-lab-star-status"><em>${check.healthy ? 'VALID' : `${draft.length}/55`}</em><strong>${star.name}</strong></span>
+        </article>`;
       }).join("")}</section>
     </section>`;
-    root.querySelectorAll("[data-deck-lab-star]").forEach(btn => btn.addEventListener("click", () => {
+    const chooseDeckLabStar = btn => {
       deckBuilderStarId = btn.dataset.deckLabStar;
       deckDraft = createDeckDraft(profile, deckBuilderStarId);
       deckLabEntranceId = selectedEntranceId(profile, deckBuilderStarId);
@@ -1637,7 +1702,11 @@ function renderDeckBuilder() {
       deckLabStage = "editor";
       message = "";
       renderDeckBuilder();
-    }));
+    };
+    root.querySelectorAll("[data-deck-lab-star]").forEach(btn => {
+      btn.addEventListener("click", () => chooseDeckLabStar(btn));
+      btn.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); chooseDeckLabStar(btn); } });
+    });
     return;
   }
 
@@ -1681,23 +1750,21 @@ function renderDeckBuilder() {
     root.innerHTML = `<section class="deck-builder-screen deck-lab-screen premium-screen deck-lab-picker-screen">
       <header class="deck-lab-picker-head"><button id="deck-picker-back" type="button" class="ghost">← Deck</button><div><span>DECK LAB · ${star.name.toUpperCase()}</span><h2>${title}</h2><p>${subtitle}</p></div><strong class="deck-lab-counter ${deckCountClass}">${deckDraft.length}/55</strong></header>
       <div class="deck-lab-picker-tools"><input id="deck-search" type="search" placeholder="Search owned cards" value="${deckBuilderFilter.replaceAll('"','&quot;')}"><label class="valid-only-toggle"><input id="deck-valid-only" type="checkbox" ${deckLabOnlyValid ? 'checked' : ''}><span>Only Show Valid</span></label></div>
-      <section class="deck-lab-card-picker">${cards.length ? cards.map(({card, eligibility}) => {
+      <section class="deck-lab-card-picker deck-lab-card-grid">${cards.length ? cards.map(({card, eligibility}) => {
         const used = deckDraft.filter(e => (e.id ?? e) === card.id).length;
         const owned = ownedTotal(profile, card.id);
         const cap = card.kind === "momentum" ? 12 : 5;
         const canAdd = eligibility.legal && deckDraft.length < 55 && used < Math.min(cap, owned);
         const tailIndex = deckDraft.map(e => e.id ?? e).lastIndexOf(card.id);
         const canRemove = tailIndex >= 5 && pickType === "category";
-        const art = artworkFor(card);
         const action = pickType === "entrance"
-          ? `<button data-pick-entrance="${card.id}" class="primary" ${eligibility.legal ? '' : 'disabled'}>${card.id === deckLabEntranceId ? 'SELECTED' : 'USE ENTRANCE'}</button>`
+          ? `<button data-pick-entrance="${card.id}" class="deck-card-change primary" ${eligibility.legal ? '' : 'disabled'}>${card.id === deckLabEntranceId ? 'SELECTED' : 'CHANGE'}</button>`
           : pickType === "lead"
-            ? `<button data-pick-lead="${card.id}" class="primary" ${eligibility.legal ? '' : 'disabled'}>USE IN SLOT</button>`
-            : `<div class="deck-picker-actions"><button data-deck-remove-index="${tailIndex}" class="secondary" ${canRemove ? '' : 'disabled'}>−1</button><button data-add-deck="${card.id}" class="primary" ${canAdd ? '' : 'disabled'}>+1</button></div>`;
-        return `<article class="deck-lab-picker-card ${eligibility.legal ? 'is-valid' : 'is-invalid'}">
-          <span class="deck-picker-method method-${card.method ?? card.kind}"></span>
-          <div class="deck-picker-thumb">${art ? `<img src="${art}" alt="">` : `<b>${card.kind === 'momentum' ? (card.method ?? 'MO').slice(0,2).toUpperCase() : card.kind.slice(0,2).toUpperCase()}</b>`}</div>
-          <div class="deck-picker-copy"><span>${deckRole(card)} · OWNED ${owned} · IN DECK ${used}</span><strong>${card.name}</strong><small>${eligibility.legal ? (card.effectText ?? card.rulesText ?? cardRulesText(card)) : eligibility.reason}</small></div>
+            ? `<button data-pick-lead="${card.id}" class="deck-card-change primary" ${eligibility.legal ? '' : 'disabled'}>CHANGE</button>`
+            : `<div class="deck-card-stepper"><button data-deck-remove-index="${tailIndex}" class="secondary" ${canRemove ? '' : 'disabled'} aria-label="Remove one ${card.name}">−</button><strong>${used}</strong><button data-add-deck="${card.id}" class="primary" ${canAdd ? '' : 'disabled'} aria-label="Add one ${card.name}">+</button></div>`;
+        return `<article class="deck-lab-card-tile ${eligibility.legal ? 'is-valid' : 'is-invalid'}">
+          <div class="deck-lab-full-card">${collectibleCardMarkup(card,{extraClass:"deck-lab-picker-ccg"})}<span class="deck-card-owned-chip">${used}/${owned}</span>${eligibility.legal ? '' : `<span class="deck-card-invalid-chip">LOCKED</span>`}</div>
+          ${eligibility.legal ? '' : `<div class="deck-card-invalid-reason">${eligibility.reason}</div>`}
           ${action}
         </article>`;
       }).join("") : `<div class="collection-empty">No owned cards match this filter.</div>`}</section>
