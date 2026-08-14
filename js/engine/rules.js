@@ -1,4 +1,5 @@
 import { totalMomentum } from "./utils.js";
+import { GREEN_HEALTH_MIN, healthRatio } from "./health.js";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -40,7 +41,7 @@ export function canAttemptPin(state,playerId){
  const p=state.players?.[playerId],opp=state.players?.[playerId==="p1"?"p2":"p1"];
  const freshTurn=!!p&&(p.turn?.momentumPlayed??0)===0&&(p.turn?.specialPlayed??0)===0;
  const hasCoverWindow=!!state.postMove&&state.postMove.attackerId===playerId;
- const vulnerable=!!opp?.maxHp&&opp.hp/opp.maxHp<=.60;
+ const vulnerable=!!opp?.maxHp&&healthRatio(opp)<GREEN_HEALTH_MIN;
  return state.phase==="ACTION"&&state.playerInControl===playerId&&freshTurn&&hasCoverWindow&&vulnerable?{legal:true,cost:0}:{legal:false,cost:0};
 }
 export function canPlayPinEscape(state,playerId,card){ return state.phase==="PIN_RESPONSE"&&state.proposedPin?.defenderId===playerId&&!!(card?.pinEscape||card?.special?.type==='pinEscape'); }

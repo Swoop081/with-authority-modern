@@ -17,7 +17,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -39,7 +38,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -61,7 +59,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -89,7 +86,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -116,7 +112,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -143,7 +138,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -161,11 +155,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Grounds opponent; Pin Bonus +2.",
+    "rulesText": "Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -187,7 +180,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -209,7 +201,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -231,7 +222,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -253,7 +243,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 2,
     "effects": []
   },
@@ -276,7 +265,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -298,7 +286,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -320,7 +307,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -342,7 +328,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
@@ -368,7 +353,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -391,7 +375,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 3,
     "effects": []
   },
@@ -410,11 +393,10 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "cody-rhodes",
     "rarity": 3,
-    "rulesText": "Cody-exclusive Trademark. Grounds opponent; Pin Bonus +4; search Cross Rhodes.",
+    "rulesText": "Cody-exclusive Trademark. Grounds opponent; search Cross Rhodes.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -436,11 +418,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "cody-rhodes",
     "rarity": 4,
-    "rulesText": "Cody-exclusive Finisher. Grounds opponent. Pin Bonus +4.",
+    "rulesText": "Cody-exclusive Finisher. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -463,7 +444,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -485,7 +465,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -507,7 +486,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -529,7 +507,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -551,7 +528,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -573,7 +549,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -595,7 +570,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -617,7 +591,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -639,7 +612,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -661,7 +633,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -683,7 +654,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -705,7 +675,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -727,7 +696,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -749,7 +717,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -767,11 +734,10 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "roman-reigns",
     "rarity": 2,
-    "rulesText": "Distinct Roman career signature; Pin Bonus +2",
+    "rulesText": "Distinct Roman career signature.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -793,7 +759,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -815,7 +780,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -837,11 +801,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "roman-reigns",
     "rarity": 4,
-    "rulesText": "Roman exclusive Finisher; ground opponent; Stun 1",
+    "rulesText": "Roman-exclusive Finisher. Grounds opponent. Stun 1.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 2,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -864,7 +827,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -891,7 +853,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -913,7 +874,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [],
     "tacticalType": "leg-extended",
@@ -939,7 +899,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -961,7 +920,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -983,7 +941,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1005,7 +962,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1027,7 +983,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1049,7 +1004,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -1071,11 +1025,10 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Ground opponent; Pin Bonus +2.",
+    "rulesText": "Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -1093,11 +1046,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only; Pin Bonus +2.",
+    "rulesText": "Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -1119,7 +1071,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -1143,11 +1094,10 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Ground opponent; Pin Bonus +2.",
+    "rulesText": "Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -1165,11 +1115,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": "seth-rollins",
     "rarity": 2,
-    "rulesText": "Grounded opponent only; Pin Bonus +3.",
+    "rulesText": "Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "effects": []
   },
@@ -1185,11 +1134,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "seth-rollins",
     "rarity": 4,
-    "rulesText": "Seth-exclusive Finisher. Grounded opponent only. Pin Bonus +4.",
+    "rulesText": "Seth-exclusive Finisher. Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -1212,7 +1160,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1234,7 +1181,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1256,7 +1202,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1278,7 +1223,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1300,7 +1244,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -1322,11 +1265,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only; Pin Bonus +2",
+    "rulesText": "Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -1348,7 +1290,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1370,7 +1311,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -1391,11 +1331,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "cm-punk",
     "rarity": 4,
-    "rulesText": "Punk-exclusive Finisher; Stun 1. Pin Bonus +4.",
+    "rulesText": "Punk-exclusive Finisher. Grounds opponent. Stun 1.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -1418,7 +1357,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [],
     "tacticalType": "standing-above"
@@ -1441,7 +1379,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1463,7 +1400,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1485,7 +1421,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1507,7 +1442,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -1535,7 +1469,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1557,7 +1490,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1579,7 +1511,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1601,7 +1532,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
@@ -1627,7 +1557,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1649,7 +1578,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -1675,7 +1603,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -1701,7 +1628,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1723,7 +1649,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1745,7 +1670,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1767,7 +1691,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1789,7 +1712,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -1812,7 +1734,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1834,7 +1755,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1856,7 +1776,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
@@ -1877,11 +1796,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "brock-lesnar",
     "rarity": 4,
-    "rulesText": "Brock-exclusive Finisher; ground + Stun 1; Pin Bonus +4",
+    "rulesText": "Brock-exclusive Finisher. Grounds opponent. Stun 1.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -1904,7 +1822,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1926,7 +1843,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1944,11 +1860,10 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "New canonical; ground + Pin Bonus 2",
+    "rulesText": "Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "effects": []
   },
@@ -1970,7 +1885,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -1988,11 +1902,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "New canonical; grounded opponent, Pin Bonus 3",
+    "rulesText": "Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "effects": []
   },
@@ -2010,11 +1923,10 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Major KO signature; ground + Pin Bonus 3",
+    "rulesText": "Major KO signature. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "effects": []
   },
@@ -2036,7 +1948,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2052,11 +1963,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "kevin-owens",
     "rarity": 4,
-    "rulesText": "Finisher; ground opponent. Pin Bonus +4.",
+    "rulesText": "Finisher. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -2079,7 +1989,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2101,7 +2010,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2123,7 +2031,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2145,7 +2052,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -2168,7 +2074,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -2185,11 +2090,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "oba-femi",
     "rarity": 4,
-    "rulesText": "Oba-exclusive Finisher. Pin Bonus +4.",
+    "rulesText": "Oba-exclusive Finisher.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -2212,7 +2116,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2234,7 +2137,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2256,7 +2158,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2278,7 +2179,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2300,7 +2200,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2322,7 +2221,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2345,7 +2243,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -2371,7 +2268,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -2394,7 +2290,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2416,7 +2311,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2438,7 +2332,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2460,7 +2353,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -2489,7 +2381,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -2515,7 +2406,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -2538,7 +2428,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2560,7 +2449,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [],
     "countersCardIds": [
@@ -2585,7 +2473,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2607,7 +2494,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2629,7 +2515,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -2658,7 +2543,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2680,7 +2564,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -2703,7 +2586,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2725,7 +2607,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2747,7 +2628,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2769,7 +2649,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2791,7 +2670,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2813,7 +2691,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -2834,7 +2711,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -2861,7 +2737,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [],
     "tacticalType": "standing-above"
@@ -2884,7 +2759,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2906,7 +2780,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -2932,7 +2805,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -2954,7 +2826,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -2976,11 +2847,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "hulk-hogan",
     "rarity": 4,
-    "rulesText": "Hogan-exclusive Finisher. Grounded opponent only. Pin Bonus +3.",
+    "rulesText": "Hogan-exclusive Finisher. Grounded opponent only.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3004,7 +2874,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3027,7 +2896,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -3053,7 +2921,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -3075,11 +2942,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "ultimate-warrior",
     "rarity": 4,
-    "rulesText": "Warrior-exclusive Finisher. Grounded opponent only. Pin Bonus +3.",
+    "rulesText": "Warrior-exclusive Finisher. Grounded opponent only.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3102,7 +2968,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3124,7 +2989,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3146,7 +3010,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3169,7 +3032,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3191,7 +3053,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3211,7 +3072,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3234,7 +3094,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3256,7 +3115,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3278,7 +3136,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -3299,7 +3156,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3322,7 +3178,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3344,7 +3199,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3366,7 +3220,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3388,7 +3241,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3410,7 +3262,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
@@ -3431,11 +3282,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "rhea-ripley",
     "rarity": 4,
-    "rulesText": ". Pin Bonus +4.",
+    "rulesText": "Rhea Ripley-exclusive Finisher. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3458,7 +3308,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3481,7 +3330,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3503,7 +3351,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3525,7 +3372,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
@@ -3546,11 +3392,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "becky-lynch",
     "rarity": 4,
-    "rulesText": "Becky-exclusive Finisher. Grounds opponent. Pin Bonus +4.",
+    "rulesText": "Becky-exclusive Finisher. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3573,7 +3418,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3595,7 +3439,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -3612,11 +3455,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "liv-morgan",
     "rarity": 4,
-    "rulesText": ". Pin Bonus +4.",
+    "rulesText": "Liv Morgan-exclusive Finisher. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 4,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3640,7 +3482,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3662,7 +3503,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
@@ -3682,11 +3522,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "bayley",
     "rarity": 4,
-    "rulesText": "Bayley-exclusive Finisher",
+    "rulesText": "Bayley-exclusive Finisher. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3709,7 +3548,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3732,7 +3570,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3754,7 +3591,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3772,11 +3608,10 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 4,
-    "rulesText": "Shared",
+    "rulesText": "Shared Spear. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3796,11 +3631,10 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "charlotte-flair",
     "rarity": 3,
-    "rulesText": "Charlotte-exclusive Trademark",
+    "rulesText": "Charlotte Flair-exclusive Trademark.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -3818,8 +3652,8 @@ export const allGameplayCards = [
     "cost": 10,
     "damage": 4,
     "requirements": {
-    "technical": 2
-  },
+      "technical": 2
+    },
     "moveType": "submission",
     "method": null,
     "superstarId": "charlotte-flair",
@@ -3828,7 +3662,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
@@ -3855,7 +3688,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3878,7 +3710,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3900,7 +3731,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
@@ -3925,7 +3755,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -3948,7 +3777,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3970,7 +3798,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -3993,7 +3820,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -4015,7 +3841,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -4040,11 +3865,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "stephanie-vaquer",
     "rarity": 4,
-    "rulesText": "",
+    "rulesText": "Stephanie Vaquer-exclusive Finisher. Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -4068,7 +3892,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -4090,7 +3913,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -4114,11 +3936,10 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "iyo-sky",
     "rarity": 2,
-    "rulesText": "",
-    "groundOpponent": false,
+    "rulesText": "IYO SKY-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -4141,11 +3962,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "iyo-sky",
     "rarity": 4,
-    "rulesText": "",
+    "rulesText": "IYO SKY-exclusive Finisher. Grounded opponent only.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -4168,7 +3988,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -4195,7 +4014,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -4226,7 +4044,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
@@ -4249,11 +4066,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "the-rock",
     "rarity": 4,
-    "rulesText": "",
+    "rulesText": "The Rock-exclusive Finisher. Grounded opponent only.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 5,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -5200,7 +5016,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": []
   },
@@ -5218,11 +5033,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only. Pin Bonus +1. If the opponent kicks out, remain in Control and draw 1 page.",
+    "rulesText": "Grounded opponent only. If the opponent kicks out, remain in Control and draw 1 page.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 1,
     "selfDamage": 0,
     "kickoutRetainControlDraw": 1,
     "effects": []
@@ -5246,7 +5060,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "priorMoveBonusDamage": 2,
     "effects": []
@@ -5265,11 +5078,10 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 3,
-    "rulesText": "Grounded opponent only. Pin Bonus +2. If Countered, you are Stunned for 1.",
+    "rulesText": "Grounded opponent only. If Countered, you are Stunned for 1.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 2,
     "selfDamage": 0,
     "selfStunIfCountered": 1,
     "effects": []
@@ -5292,7 +5104,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "selfStunIfCountered": 1,
     "effects": [
@@ -5320,7 +5131,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "effects": [
       {
@@ -5349,7 +5159,6 @@ export const allGameplayCards = [
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": []
@@ -5366,11 +5175,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "logan-paul",
     "rarity": 4,
-    "rulesText": "Logan Paul-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +3.",
+    "rulesText": "Logan Paul-exclusive Finisher. No Method requirement. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 3,
     "selfDamage": 0,
     "finisher": true,
     "effects": []
@@ -5424,7 +5232,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
-    "pinBonus": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
@@ -5456,7 +5263,6 @@ export const allGameplayCards = [
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
-    "pinBonus": 0,
     "selfDamage": 0,
     "trademark": true,
     "priorConnectedMethodBonus": {
@@ -5477,11 +5283,10 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "sol-ruca",
     "rarity": 4,
-    "rulesText": "Sol Ruca-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +5. If Sol successfully Countered a Move earlier during this Control sequence, costs 2 less.",
+    "rulesText": "Sol Ruca-exclusive Finisher. No Method requirement. Grounds opponent. If Sol successfully Countered a Move earlier during this Control sequence, costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
-    "pinBonus": 5,
     "selfDamage": 0,
     "finisher": true,
     "discountAfterCounter": 2,
@@ -5515,1496 +5320,2246 @@ export const allGameplayCards = [
       "method": "agility"
     }
   },
+  {
+    "id": "chad-gable-chaos-theory",
+    "name": "Chaos Theory",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "chad-gable",
+    "rarity": 3,
+    "rulesText": "Chad Gable-exclusive Trademark. Grounds opponent. If the opponent kicks out, remain in Control.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "kickoutRetainControl": true,
+    "effects": []
+  },
+  {
+    "id": "chad-gable-ankle-lock",
+    "name": "Ankle Lock",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 9,
+    "damage": 4,
+    "requirements": {},
+    "moveType": "submission",
+    "method": null,
+    "superstarId": "chad-gable",
+    "rarity": 4,
+    "rulesText": "Chad Gable-exclusive Finisher. No Method requirement. Grounded opponent only. Submission, Leg Pressure 6. On connect, opponent loses 1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 6
+    },
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "entrance-chad-gable",
+    "name": "Ready, Willing and Gable",
+    "kind": "entrance",
+    "setId": "raw-series-1",
+    "rarity": 4,
+    "superstarId": "chad-gable",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-chad-gable",
+    "name": "Shoosh!",
+    "kind": "special",
+    "setId": "raw-series-1",
+    "rarity": 3,
+    "superstarId": "chad-gable",
+    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
+    "special": {
+      "type": "moveCounteredDrawDrain",
+      "draw": 1,
+      "opponentAdrenaline": -2
+    }
+  },
+  {
+    "id": "raquel-rodriguez-corkscrew-splash",
+    "name": "Corkscrew Splash",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 8,
+    "damage": 11,
+    "requirements": {
+      "strength": 2,
+      "agility": 1
+    },
+    "moveType": "aerial",
+    "method": "strength",
+    "superstarId": "raquel-rodriguez",
+    "rarity": 3,
+    "rulesText": "Raquel Rodriguez-exclusive Trademark. Grounded opponent only. If Countered, Raquel is Stunned 1.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "selfStunIfCountered": 1,
+    "trademark": true,
+    "effects": []
+  },
+  {
+    "id": "raquel-rodriguez-tejana-bomb",
+    "name": "Tejana Bomb",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 11,
+    "damage": 13,
+    "requirements": {},
+    "moveType": "powerbomb",
+    "method": null,
+    "superstarId": "raquel-rodriguez",
+    "rarity": 4,
+    "rulesText": "Raquel Rodriguez-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-raquel-rodriguez",
+    "name": "Big Mami Cool",
+    "kind": "entrance",
+    "setId": "raw-series-1",
+    "rarity": 4,
+    "superstarId": "raquel-rodriguez",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-raquel-rodriguez",
+    "name": "Judgment Day Backup",
+    "kind": "special",
+    "setId": "raw-series-1",
+    "rarity": 3,
+    "superstarId": "raquel-rodriguez",
+    "rulesText": "Once per match, when Raquel would take 8+ Damage from a Move, reduce that Damage by 1.",
+    "special": {
+      "type": "reduceIncomingBig",
+      "minDamage": 8,
+      "reduce": 1
+    }
+  },
+  {
+    "id": "tilt-a-whirl-headscissors",
+    "name": "Tilt-a-Whirl Headscissors",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "agility": 1,
+      "technical": 1
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Counters Grapple Moves. If used to successfully Counter a Grapple Move, draw 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "counters": [
+      "grapple"
+    ],
+    "drawOnCounterTypes": [
+      "grapple"
+    ],
+    "drawOnCounter": 1,
+    "effects": []
+  },
+  {
+    "id": "619",
+    "name": "619",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 6,
+    "damage": 9,
+    "requirements": {
+      "agility": 2,
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": null,
+    "allowedSuperstarIds": [
+      "rey-mysterio",
+      "dominik-mysterio"
+    ],
+    "rarity": 3,
+    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik’s Frog Splash and it costs 2 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "West Coast Pop",
+        "discount": 2,
+        "ifSuperstarIds": [
+          "rey-mysterio"
+        ]
+      },
+      {
+        "type": "search",
+        "name": "Dominik’s Frog Splash",
+        "discount": 2,
+        "ifSuperstarIds": [
+          "dominik-mysterio"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "rey-mysterio-mysterio-express",
+    "name": "Mysterio Express",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 6,
+    "damage": 8,
+    "requirements": {
+      "agility": 2,
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "agility",
+    "superstarId": "rey-mysterio",
+    "rarity": 3,
+    "rulesText": "Rey Mysterio-exclusive Trademark. Grounds opponent. Draw 1 page on connect. If the opponent kicks out, remain in Control.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "kickoutRetainControl": true,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "rey-mysterio-west-coast-pop",
+    "name": "West Coast Pop",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 9,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "rey-mysterio",
+    "rarity": 4,
+    "rulesText": "Rey Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +2 Damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageAfterNamed": {
+      "name": "619",
+      "damage": 2
+    }
+  },
+  {
+    "id": "entrance-rey-mysterio",
+    "name": "Booyaka 619",
+    "kind": "entrance",
+    "setId": "worlds-collide-series-1",
+    "rarity": 4,
+    "superstarId": "rey-mysterio",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-rey-mysterio",
+    "name": "Lucha Libre Legend",
+    "kind": "special",
+    "setId": "worlds-collide-series-1",
+    "rarity": 3,
+    "superstarId": "rey-mysterio",
+    "rulesText": "Once per match, after Rey successfully Counters an opponent's Move with an Agility counter-attack, that counter-attack deals +3 Damage and Rey retains Control after it resolves.",
+    "special": {
+      "type": "luchaLibreLegend",
+      "method": "agility",
+      "bonusDamage": 3,
+      "retainControl": true
+    }
+  },
+  {
+    "id": "drop-toe-hold",
+    "name": "Drop Toe Hold",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "low-blow",
+    "name": "Low Blow",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 4,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Stun 1. Opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "three-amigos",
+    "name": "Three Amigos",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 7,
+    "damage": 10,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 3,
+    "rulesText": "Grounds opponent. On connect, gain +2 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 2
+      }
+    ]
+  },
+  {
+    "id": "dominik-mysterio-frog-splash",
+    "name": "Dominik’s Frog Splash",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 9,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "dominik-mysterio",
+    "rarity": 4,
+    "rulesText": "Dominik Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +1 Damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageAfterNamed": {
+      "name": "619",
+      "damage": 1
+    }
+  },
+  {
+    "id": "entrance-dominik-mysterio",
+    "name": "Dirty Dom",
+    "kind": "entrance",
+    "setId": "worlds-collide-series-1",
+    "rarity": 4,
+    "superstarId": "dominik-mysterio",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strength": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-dominik-mysterio",
+    "name": "Hammer in the Boot",
+    "kind": "special",
+    "setId": "worlds-collide-series-1",
+    "rarity": 3,
+    "superstarId": "dominik-mysterio",
+    "rulesText": "Once per match, after one of Dominik’s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
+    "special": {
+      "type": "hammerInBoot",
+      "opponentAdrenaline": -2,
+      "regainControl": true
+    }
+  },
+  {
+    "id": "backstabber",
+    "name": "Backstabber",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "agility": 1,
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Counters Aerial Moves. When used as a successful Counter to an Aerial Move, +2 Damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "counters": [
+      "aerial"
+    ],
+    "counterBonusDamage": 2,
+    "effects": []
+  },
+  {
+    "id": "tope-con-hilo",
+    "name": "Tope con Hilo",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 6,
+    "damage": 9,
+    "requirements": {
+      "agility": 3
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Playable in-ring. Draw 1 page on connect. If Countered, attacker is Stunned 1.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "selfStunIfCountered": 1,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "id": "penta-the-sacrifice",
+    "name": "The Sacrifice",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "penta",
+    "rarity": 3,
+    "rulesText": "Penta-exclusive. Stun 1. Opponent loses 1 Adrenaline. On connect, search/draw Penta Driver; that searched Penta Driver costs 1 less during this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      },
+      {
+        "type": "search",
+        "name": "Penta Driver",
+        "discount": 1
+      }
+    ]
+  },
+  {
+    "id": "penta-driver",
+    "name": "Penta Driver",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "penta",
+    "rarity": 3,
+    "rulesText": "Penta-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": []
+  },
+  {
+    "id": "penta-mexican-destroyer",
+    "name": "Mexican Destroyer",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "penta",
+    "rarity": 4,
+    "rulesText": "Penta-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-penta",
+    "name": "Cero Miedo",
+    "kind": "entrance",
+    "setId": "worlds-collide-series-1",
+    "rarity": 4,
+    "superstarId": "penta",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "strength": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-penta",
+    "name": "Fearless Assault",
+    "kind": "special",
+    "setId": "worlds-collide-series-1",
+    "rarity": 3,
+    "superstarId": "penta",
+    "rulesText": "Once per match, after Penta connects with an Agility Move, his next Move this Control sequence, if it is a Strike, costs 2 less and deals +2 Damage.",
+    "special": {
+      "type": "fearlessAssault",
+      "afterMethod": "agility",
+      "nextMethod": "strike",
+      "discount": 2,
+      "bonusDamage": 2
+    }
+  },
+  {
+    "id": "el-grande-americano-jumping-headbutt",
+    "name": "Jumping Headbutt",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strike": 2,
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "el-grande-americano",
+    "rarity": 3,
+    "rulesText": "El Grande Americano-exclusive Trademark. Grounds opponent. Stun 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": []
+  },
+  {
+    "id": "el-grande-americano-loaded-mask-headbutt",
+    "name": "Loaded Mask Headbutt",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "strike",
+    "method": null,
+    "superstarId": "el-grande-americano",
+    "rarity": 4,
+    "rulesText": "El Grande Americano-exclusive Finisher. No Method requirement. Grounds opponent. Stun 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-el-grande-americano",
+    "name": "Los Americanos",
+    "kind": "entrance",
+    "setId": "worlds-collide-series-1",
+    "rarity": 4,
+    "superstarId": "el-grande-americano",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-el-grande-americano",
+    "name": "Steel Plate",
+    "kind": "special",
+    "setId": "worlds-collide-series-1",
+    "rarity": 3,
+    "superstarId": "el-grande-americano",
+    "rulesText": "Once per match, after El Grande Americano connects with Headbutt or Jumping Headbutt, search/draw Loaded Mask Headbutt. That searched Loaded Mask Headbutt costs 2 less during the current Control sequence.",
+    "special": {
+      "type": "steelPlate",
+      "afterNames": [
+        "Headbutt",
+        "Jumping Headbutt"
+      ],
+      "searchName": "Loaded Mask Headbutt",
+      "discount": 2
+    }
+  },
+  {
+    "id": "running-hip-attack",
+    "name": "Running Hip Attack",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Stun 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "uso-splash",
+    "name": "Uso Splash",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": null,
+    "allowedSuperstarIds": [
+      "jey-uso"
+    ],
+    "rarity": 4,
+    "rulesText": "Uso-family Finisher. Currently playable by Jey Uso; Jimmy Uso may share this card when added. No Method requirement. Grounded opponent only. If played immediately after Spear in the same Control sequence, +1 Damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageAfterNamed": {
+      "name": "Spear",
+      "damage": 1
+    }
+  },
+  {
+    "id": "entrance-jey-uso",
+    "name": "Main Event Jey",
+    "kind": "entrance",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 4,
+    "superstarId": "jey-uso",
+    "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-jey-uso",
+    "name": "YEET!",
+    "kind": "special",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 3,
+    "superstarId": "jey-uso",
+    "rulesText": "Once per match, after Jey connects with Spear, search/draw Uso Splash. That searched Uso Splash costs 2 less during the current Control sequence.",
+    "special": {
+      "type": "yeetTutor",
+      "afterName": "Spear",
+      "searchName": "Uso Splash",
+      "discount": 2
+    }
+  },
+  {
+    "id": "jumping-neckbreaker",
+    "name": "Jumping Neckbreaker",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 1,
+      "agility": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. If played immediately after a Strike Move in the same Control sequence, draw 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1,
+        "ifAfterMethod": "strike"
+      }
+    ]
+  },
+  {
+    "id": "burning-hammer",
+    "name": "Burning Hammer",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strength": 2,
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 3,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "la-knight-bft",
+    "name": "BFT",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "strike",
+    "method": null,
+    "superstarId": "la-knight",
+    "rarity": 4,
+    "rulesText": "LA Knight-exclusive Finisher. No Method requirement. Grounds opponent. If played immediately after Diving Elbow Drop in the same Control sequence, +1 Damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageAfterNamed": {
+      "name": "Diving Elbow Drop",
+      "damage": 1
+    }
+  },
+  {
+    "id": "entrance-la-knight",
+    "name": "Let Me Talk to Ya!",
+    "kind": "entrance",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 4,
+    "superstarId": "la-knight",
+    "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strike": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-la-knight",
+    "name": "YEAH!",
+    "kind": "special",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 3,
+    "superstarId": "la-knight",
+    "rulesText": "Once per match, after LA Knight connects with Diving Elbow Drop, search/draw BFT. That searched BFT costs 2 less during the current Control sequence.",
+    "special": {
+      "type": "yeahTutor",
+      "afterName": "Diving Elbow Drop",
+      "searchName": "BFT",
+      "discount": 2
+    }
+  },
+  {
+    "id": "double-knees",
+    "name": "Double Knees",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strike": 1,
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounded opponent only. Stun 1.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "code-red",
+    "name": "Code Red",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "agility": 1,
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "alexa-bliss-sister-abigail",
+    "name": "Sister Abigail",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "technical": 2,
+      "strike": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "alexa-bliss",
+    "rarity": 3,
+    "rulesText": "Alexa Bliss-exclusive Trademark. Grounds opponent. Stun 1. On connect, search/draw Twisted Bliss; that searched Twisted Bliss costs 1 less during the current Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Twisted Bliss",
+        "discount": 1
+      }
+    ]
+  },
+  {
+    "id": "alexa-bliss-twisted-bliss",
+    "name": "Twisted Bliss",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 9,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "alexa-bliss",
+    "rarity": 4,
+    "rulesText": "Alexa Bliss-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Sister Abigail in the same Control sequence, +2 Damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageAfterNamed": {
+      "name": "Sister Abigail",
+      "damage": 2
+    }
+  },
+  {
+    "id": "entrance-alexa-bliss",
+    "name": "The Goddess",
+    "kind": "entrance",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 4,
+    "superstarId": "alexa-bliss",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1,
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-alexa-bliss",
+    "name": "Mind Games",
+    "kind": "special",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 3,
+    "superstarId": "alexa-bliss",
+    "rulesText": "Once per match, after Alexa successfully kicks out of a Pin, draw 1 page and gain +1 Adrenaline.",
+    "special": {
+      "type": "mindGames",
+      "drawOnKickout": 1,
+      "adrenalineOnKickout": 1
+    }
+  },
+  {
+    "id": "shotgun-dropkick",
+    "name": "Shotgun Dropkick",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2,
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Stun 1. When played by Finn Bálor, on connect search/draw Coup de Grâce; that searched Coup de Grâce costs 1 less during the current Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Coup de Grâce",
+        "discount": 1,
+        "ifSuperstarIds": [
+          "finn-balor"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "finn-balor-1916",
+    "name": "1916",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "technical": 2,
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "finn-balor",
+    "rarity": 3,
+    "rulesText": "Finn Bálor-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": []
+  },
+  {
+    "id": "finn-balor-coup-de-grace",
+    "name": "Coup de Grâce",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 9,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "finn-balor",
+    "rarity": 4,
+    "rulesText": "Finn Bálor-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after Shotgun Dropkick in the same Control sequence, +1 Damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageAfterNamed": {
+      "name": "Shotgun Dropkick",
+      "damage": 1
+    }
+  },
+  {
+    "id": "entrance-finn-balor",
+    "name": "The Prince",
+    "kind": "entrance",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 4,
+    "superstarId": "finn-balor",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-finn-balor",
+    "name": "Bálor Club",
+    "kind": "special",
+    "setId": "money-in-the-bank-series-1",
+    "rarity": 3,
+    "superstarId": "finn-balor",
+    "rulesText": "Once per match, after Finn connects with Sling Blade, search/draw Shotgun Dropkick. That searched Shotgun Dropkick costs 2 less during the current Control sequence.",
+    "special": {
+      "type": "balorClubTutor",
+      "afterName": "Sling Blade",
+      "searchName": "Shotgun Dropkick",
+      "discount": 2
+    }
+  },
+  {
+    "id": "pump-kick",
+    "name": "Pump Kick",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. If the opponent was already Stunned when this Move connected, +2 Damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "bonusDamageIfOpponentStunned": 2,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "inverted-ddt",
+    "name": "Inverted DDT",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "technical": 1,
+      "strike": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Stun 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "octopus-hold",
+    "name": "Octopus Hold",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 5,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounded opponent only. Submission. Arm Pressure 5.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "arms",
+      "pressure": 5
+    },
+    "effects": []
+  },
+  {
+    "id": "danhausen-very-nice-knee-vil",
+    "name": "Very Nice, Very Knee-vil",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strike": 2,
+      "strength": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "danhausen",
+    "rarity": 3,
+    "rulesText": "Danhausen-exclusive Trademark. Grounds opponent. Stun 1.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 1,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": []
+  },
+  {
+    "id": "danhausen-triple-d",
+    "name": "Triple D",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 9,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "danhausen",
+    "rarity": 4,
+    "rulesText": "Danhausen-exclusive Finisher. No Method requirement. Grounds opponent. +1 Damage if the opponent was already Stunned when this Move connected.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "bonusDamageIfOpponentStunned": 1
+  },
+  {
+    "id": "entrance-danhausen",
+    "name": "Very Nice, Very Evil",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "danhausen",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-danhausen",
+    "name": "Jar of Teeth",
+    "kind": "special",
+    "setId": "smackdown-series-1",
+    "rarity": 3,
+    "superstarId": "danhausen",
+    "rulesText": "Once per match, after Danhausen connects with a Move that grounds the opponent, play this: opponent ditches 1 page and loses 1 Adrenaline; Danhausen draws 1 page. Continue the Control sequence normally.",
+    "special": {
+      "type": "jarOfTeeth",
+      "ditchOpponent": 1,
+      "opponentAdrenaline": -1,
+      "draw": 1
+    }
+  },
+  {
+    "id": "cutter",
+    "name": "Cutter",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "front-kick",
+    "name": "Front Kick",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 2,
+    "damage": 4,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "A fast front kick used to create space and start an athletic offensive sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "snap-suplex",
+    "name": "Snap Suplex",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "finlay-roll",
+    "name": "Finlay Roll",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "tiffany-stratton-handspring-back-elbow",
+    "name": "Handspring Back Elbow",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": "tiffany-stratton",
+    "rarity": 3,
+    "rulesText": "Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: search/draw Prettiest Moonsault Ever.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "searchOnConnectName": "Prettiest Moonsault Ever",
+    "effects": []
+  },
+  {
+    "id": "tiffany-stratton-prettiest-moonsault-ever",
+    "name": "Prettiest Moonsault Ever",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 10,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "tiffany-stratton",
+    "rarity": 4,
+    "rulesText": "Tiffany Stratton-exclusive Finisher. No Method requirement. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-tiffany-stratton",
+    "name": "It’s Tiffy Time",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "tiffany-stratton",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-tiffany-stratton",
+    "name": "Tiffany Epiphany",
+    "kind": "special",
+    "setId": "smackdown-series-1",
+    "rarity": 3,
+    "superstarId": "tiffany-stratton",
+    "rulesText": "Once per match during your Control sequence, search your deck for one Strength Move and one Agility Move. Draw the one that best fits the current position and shuffle the other back.",
+    "special": {
+      "type": "tiffanyEpiphany",
+      "methods": [
+        "strength",
+        "agility"
+      ]
+    }
+  },
+  {
+    "id": "chelsea-green-im-prettier",
+    "name": "I’m Prettier",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "chelsea-green",
+    "rarity": 3,
+    "rulesText": "Chelsea Green-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": []
+  },
+  {
+    "id": "chelsea-green-green-with-envy",
+    "name": "Green With Envy",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 9,
+    "damage": 15,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "chelsea-green",
+    "rarity": 4,
+    "rulesText": "Chelsea Green-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-chelsea-green",
+    "name": "Hot Mess",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "chelsea-green",
+    "rulesText": "Pre-Match: Begin with +2 Adrenaline. Your first Counter this match costs 1 less.",
+    "preMatchMomentum": {},
+    "preMatchAdrenaline": 2,
+    "preMatchCounterDiscount": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-chelsea-green",
+    "name": "File a Complaint",
+    "kind": "special",
+    "setId": "smackdown-series-1",
+    "rarity": 3,
+    "superstarId": "chelsea-green",
+    "rulesText": "Once per match during your Control sequence: search/draw a Counter. Your next Counter costs 1 less.",
+    "special": {
+      "type": "fileComplaint",
+      "counterDiscount": 1
+    }
+  },
+  {
+    "id": "damian-priest-south-of-heaven",
+    "name": "South of Heaven",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "damian-priest",
+    "rarity": 3,
+    "rulesText": "Damian Priest-exclusive Trademark. Grounds opponent. On Connect: your next Finisher this Control sequence costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "nextFinisherDiscountOnConnect": 2,
+    "effects": []
+  },
+  {
+    "id": "damian-priest-razors-edge",
+    "name": "Razor’s Edge",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 8,
+    "damage": 13,
+    "requirements": {
+      "strength": 3
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "damian-priest",
+    "rarity": 3,
+    "rulesText": "Damian Priest-exclusive Trademark. Grounds opponent. On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "opponentAdrenalineOnConnect": -1,
+    "effects": []
+  },
+  {
+    "id": "damian-priest-hit-the-lights",
+    "name": "Hit the Lights",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 10,
+    "damage": 16,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "damian-priest",
+    "rarity": 4,
+    "rulesText": "Damian Priest-exclusive Finisher. No Method requirement. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": []
+  },
+  {
+    "id": "entrance-damian-priest",
+    "name": "Rise of the Punisher",
+    "kind": "entrance",
+    "setId": "smackdown-series-1",
+    "rarity": 4,
+    "superstarId": "damian-priest",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-damian-priest",
+    "name": "Last Rites",
+    "kind": "special",
+    "setId": "smackdown-series-1",
+    "rarity": 3,
+    "superstarId": "damian-priest",
+    "rulesText": "Once per match during your Control sequence: search/draw a Trademark or Finisher. Your next Strength Move this Control sequence costs 1 less.",
+    "special": {
+      "type": "lastRites",
+      "strengthDiscount": 1
+    }
+  },
+  {
+    "id": "mexican-surfboard",
+    "name": "Mexican Surfboard",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 5,
+    "damage": 2,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounded opponent only. Submission + Back pressure 4.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "back",
+      "pressure": 4
+    },
+    "effects": []
+  },
+  {
+    "id": "firemans-carry",
+    "name": "Fireman’s Carry",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Shared fundamental takedown.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "leapfrog",
+    "name": "Leapfrog",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 2,
+    "damage": 0,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "counter",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "defensiveOnly": true,
+    "counters": [
+      "strike",
+      "grapple"
+    ],
+    "rulesText": "Counter a Strike or Grapple Move. On success, gain Control."
+  },
+  {
+    "id": "abdominal-stretch",
+    "name": "Abdominal Stretch",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 4,
+    "damage": 2,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Submission + Body pressure 3.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "body",
+      "pressure": 3
+    },
+    "effects": []
+  },
+  {
+    "id": "punches-in-the-corner",
+    "name": "Punches in the Corner",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "opponentAdrenalineOnConnect": -1,
+    "effects": []
+  },
+  {
+    "id": "running-clothesline",
+    "name": "Running Clothesline",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Shared running strike.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "clothesline-over-the-top-rope",
+    "name": "Clothesline Over the Top Rope",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Playable in the ring. On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "opponentAdrenalineOnConnect": -1,
+    "effects": []
+  },
+  {
+    "id": "bron-breakker-gorilla-press-powerslam",
+    "name": "Gorilla Press Powerslam",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "bron-breakker",
+    "rarity": 3,
+    "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker’s Spear.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "searchOnConnectName": "Breakker’s Spear",
+    "effects": []
+  },
+  {
+    "id": "bron-breakker-breakkers-spear",
+    "name": "Breakker’s Spear",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 10,
+    "damage": 16,
+    "requirements": {
+      "strength": 3
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "bron-breakker",
+    "rarity": 4,
+    "rulesText": "Bron Breakker-exclusive Finisher. If Bron connected with an Agility Move earlier in this Control sequence, costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "discountIfPriorAgility": 2,
+    "effects": []
+  },
+  {
+    "id": "bron-breakker-steiner-recliner",
+    "name": "Steiner Recliner",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 2,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "submission",
+    "method": "strength",
+    "superstarId": "bron-breakker",
+    "rarity": 3,
+    "rulesText": "Bron Breakker-exclusive Back Submission. Pressure 5.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "back",
+      "pressure": 5
+    },
+    "effects": []
+  },
+  {
+    "id": "entrance-bron-breakker",
+    "name": "Breakker Unleashed",
+    "kind": "entrance",
+    "setId": "survivor-series-series-1",
+    "rarity": 4,
+    "superstarId": "bron-breakker",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 0,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-bron-breakker",
+    "name": "Full Speed",
+    "kind": "special",
+    "setId": "survivor-series-series-1",
+    "rarity": 3,
+    "superstarId": "bron-breakker",
+    "rulesText": "Once per match during your Control sequence: your next connected Move this Control sequence deals +2 Damage; if it is an Agility Move, draw 1 page.",
+    "special": {
+      "type": "fullSpeed",
+      "damage": 2,
+      "agilityDraw": 1
+    }
+  },
+  {
+    "id": "penta-handstand-dropkick",
+    "name": "Penta’s Handstand Dropkick",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": "penta",
+    "rarity": 2,
+    "rulesText": "Penta-exclusive. Grounds opponent. If Penta connected with another Agility Move earlier in this Control sequence, +1 Damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "priorConnectedMethodBonus": {
+      "method": "agility",
+      "damage": 1
+    },
+    "effects": []
+  },
+  {
+    "id": "apron-german-suplex",
+    "name": "Apron German Suplex",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 1,
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Opponent loses 1 Adrenaline. Counts as German Suplex for card effects and synergies.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "opponentAdrenalineOnConnect": -1,
+    "countsAs": [
+      "German Suplex"
+    ],
+    "effects": []
+  },
+  {
+    "id": "corner-clothesline",
+    "name": "Corner Clothesline",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 2,
+    "damage": 4,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Standing opponent only. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "dropkick-to-the-back",
+    "name": "Dropkick to the Back",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Standing opponent only. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  },
+  {
+    "id": "elbow",
+    "name": "Elbow",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Standing opponent only. May also Counter a Strike Move.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "counters": [
+      "strike"
+    ],
+    "effects": []
+  },
+  {
+    "id": "running-knees-to-the-back",
+    "name": "Running Knees to the Back",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "agility": 1,
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Standing opponent only. Grounds opponent.",
+    "standingOnly": true,
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": []
+  }
+  ,
+  {
+    "id": "fight-forever",
+    "name": "Fight Forever",
+    "kind": "action",
+    "setId": "raw-series-1",
+    "rarity": 4,
+    "boosterOnly": true,
+    "rulesText": "Restore 10 HP to both Superstars, up to their starting HP. Increase this match’s turn limit by 10.",
+    "effect": {
+      "type": "fightForever",
+      "healEach": 10,
+      "turns": 10
+    }
+  }
+,
 {
-  "id": "chad-gable-chaos-theory",
-  "name": "Chaos Theory",
+  "id": "flapjack",
+  "name": "Flapjack",
   "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 7,
-  "damage": 11,
+  "setId": "money-in-the-bank-series-1",
+  "cost": 4,
+  "damage": 6,
   "requirements": {
-    "technical": 2,
     "strength": 1
   },
   "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "chad-gable",
-  "rarity": 3,
-  "rulesText": "Chad Gable-exclusive Trademark. Grounds opponent. Pin Bonus +2. If the opponent kicks out, remain in Control.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "kickoutRetainControl": true,
-  "effects": []
-},
-{
-  "id": "chad-gable-ankle-lock",
-  "name": "Ankle Lock",
-  "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 9,
-  "damage": 4,
-  "requirements": {},
-  "moveType": "submission",
-  "method": null,
-  "superstarId": "chad-gable",
-  "rarity": 4,
-  "rulesText": "Chad Gable-exclusive Finisher. No Method requirement. Grounded opponent only. Submission, Leg Pressure 6. On connect, opponent loses 1 Adrenaline.",
-  "groundOpponent": true,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "finisher": true,
-  "submission": {
-    "bodyPart": "legs",
-    "pressure": 6
-  },
-  "effects": [
-    {
-      "type": "loseOpponentAdrenaline",
-      "amount": 1
-    }
-  ]
-},
-{
-  "id": "entrance-chad-gable",
-  "name": "Ready, Willing and Gable",
-  "kind": "entrance",
-  "setId": "raw-series-1",
-  "rarity": 4,
-  "superstarId": "chad-gable",
-  "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {
-    "technical": 1,
-    "agility": 1
-  },
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-chad-gable",
-  "name": "Shoosh!",
-  "kind": "special",
-  "setId": "raw-series-1",
-  "rarity": 3,
-  "superstarId": "chad-gable",
-  "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
-  "special": {
-    "type": "moveCounteredDrawDrain",
-    "draw": 1,
-    "opponentAdrenaline": -2
-  }
-}
-,
-{
-  "id": "raquel-rodriguez-corkscrew-splash",
-  "name": "Corkscrew Splash",
-  "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 8,
-  "damage": 11,
-  "requirements": {"strength": 2, "agility": 1},
-  "moveType": "aerial",
-  "method": "strength",
-  "superstarId": "raquel-rodriguez",
-  "rarity": 3,
-  "rulesText": "Raquel Rodriguez-exclusive Trademark. Grounded opponent only. Pin Bonus +2. If Countered, Raquel is Stunned 1.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "selfStunIfCountered": 1,
-  "trademark": true,
-  "effects": []
-},
-{
-  "id": "raquel-rodriguez-tejana-bomb",
-  "name": "Tejana Bomb",
-  "kind": "move",
-  "setId": "raw-series-1",
-  "cost": 11,
-  "damage": 13,
-  "requirements": {},
-  "moveType": "powerbomb",
-  "method": null,
-  "superstarId": "raquel-rodriguez",
-  "rarity": 4,
-  "rulesText": "Raquel Rodriguez-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +3.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 3,
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-raquel-rodriguez",
-  "name": "Big Mami Cool",
-  "kind": "entrance",
-  "setId": "raw-series-1",
-  "rarity": 4,
-  "superstarId": "raquel-rodriguez",
-  "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"strength": 1, "agility": 1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-raquel-rodriguez",
-  "name": "Judgment Day Backup",
-  "kind": "special",
-  "setId": "raw-series-1",
-  "rarity": 3,
-  "superstarId": "raquel-rodriguez",
-  "rulesText": "Once per match, when Raquel would take 8+ Damage from a Move, reduce that Damage by 1.",
-  "special": {"type": "reduceIncomingBig", "minDamage": 8, "reduce": 1}
-}
-
-
-,
-{
-  "id": "tilt-a-whirl-headscissors",
-  "name": "Tilt-a-Whirl Headscissors",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 4,
-  "damage": 6,
-  "requirements": {"agility": 1, "technical": 1},
-  "moveType": "aerial",
-  "method": "agility",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. Counters Grapple Moves. If used to successfully Counter a Grapple Move, draw 1 page.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "counters": ["grapple"],
-  "drawOnCounterTypes": ["grapple"],
-  "drawOnCounter": 1,
-  "effects": []
-},
-{
-  "id": "619",
-  "name": "619",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 6,
-  "damage": 9,
-  "requirements": {"agility": 2, "strike": 1},
-  "moveType": "strike",
-  "method": "agility",
-  "superstarId": null,
-  "allowedSuperstarIds": ["rey-mysterio", "dominik-mysterio"],
-  "rarity": 3,
-  "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik’s Frog Splash and it costs 2 less this Control sequence.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": [
-    {"type":"search","name":"West Coast Pop","discount":2,"ifSuperstarIds":["rey-mysterio"]},
-    {"type":"search","name":"Dominik’s Frog Splash","discount":2,"ifSuperstarIds":["dominik-mysterio"]}
-  ]
-},
-{
-  "id": "rey-mysterio-mysterio-express",
-  "name": "Mysterio Express",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 6,
-  "damage": 8,
-  "requirements": {"agility": 2, "technical": 1},
-  "moveType": "grapple",
-  "method": "agility",
-  "superstarId": "rey-mysterio",
-  "rarity": 3,
-  "rulesText": "Rey Mysterio-exclusive Trademark. Grounds opponent. Pin Bonus +2. Draw 1 page on connect. If the opponent kicks out, remain in Control.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "kickoutRetainControl": true,
-  "effects": [{"type":"drawSelf","amount":1}]
-},
-{
-  "id": "rey-mysterio-west-coast-pop",
-  "name": "West Coast Pop",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 9,
-  "damage": 15,
-  "requirements": {},
-  "moveType": "aerial",
-  "method": null,
-  "superstarId": "rey-mysterio",
-  "rarity": 4,
-  "rulesText": "Rey Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. Pin Bonus +4; if played immediately after 619 in the same Control sequence, Pin Bonus +6 instead.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusAfterNamed": {"name":"619","pinBonus":6},
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-rey-mysterio",
-  "name": "Booyaka 619",
-  "kind": "entrance",
-  "setId": "worlds-collide-series-1",
-  "rarity": 4,
-  "superstarId": "rey-mysterio",
-  "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"agility": 1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-rey-mysterio",
-  "name": "Lucha Libre Legend",
-  "kind": "special",
-  "setId": "worlds-collide-series-1",
-  "rarity": 3,
-  "superstarId": "rey-mysterio",
-  "rulesText": "Once per match, after Rey successfully Counters an opponent's Move with an Agility counter-attack, that counter-attack deals +3 Damage and Rey retains Control after it resolves.",
-  "special": {"type":"luchaLibreLegend","method":"agility","bonusDamage":3,"retainControl":true}
-},
-{
-  "id": "drop-toe-hold",
-  "name": "Drop Toe Hold",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 3,
-  "damage": 4,
-  "requirements": {"technical": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 1,
-  "rulesText": "Grounds opponent.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": []
-}
-,
-{
-  "id": "low-blow",
-  "name": "Low Blow",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 4,
-  "damage": 5,
-  "requirements": {"strike": 1},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Stun 1. Opponent loses 1 Adrenaline.",
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": [{"type":"loseOpponentAdrenaline","amount":1}]
-},
-{
-  "id": "three-amigos",
-  "name": "Three Amigos",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 7,
-  "damage": 10,
-  "requirements": {"technical": 2, "strength": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 3,
-  "rulesText": "Grounds opponent. On connect, gain +2 Adrenaline.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": [{"type":"gainAdrenaline","amount":2}]
-},
-{
-  "id": "dominik-mysterio-frog-splash",
-  "name": "Dominik’s Frog Splash",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 9,
-  "damage": 15,
-  "requirements": {},
-  "moveType": "aerial",
-  "method": null,
-  "superstarId": "dominik-mysterio",
-  "rarity": 4,
-  "rulesText": "Dominik Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. Pin Bonus +4; if played immediately after 619 in the same Control sequence, Pin Bonus +5 instead.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusAfterNamed": {"name":"619","pinBonus":5},
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-dominik-mysterio",
-  "name": "Dirty Dom",
-  "kind": "entrance",
-  "setId": "worlds-collide-series-1",
-  "rarity": 4,
-  "superstarId": "dominik-mysterio",
-  "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"agility":1,"strength":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-dominik-mysterio",
-  "name": "Hammer in the Boot",
-  "kind": "special",
-  "setId": "worlds-collide-series-1",
-  "rarity": 3,
-  "superstarId": "dominik-mysterio",
-  "rulesText": "Once per match, after one of Dominik’s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
-  "special": {"type":"hammerInBoot","opponentAdrenaline":-2,"regainControl":true}
-}
-,
-{
-  "id": "backstabber",
-  "name": "Backstabber",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 5,
-  "damage": 7,
-  "requirements": {"agility": 1, "technical": 1},
-  "moveType": "grapple",
-  "method": "agility",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. Counters Aerial Moves. When used as a successful Counter to an Aerial Move, +2 Damage.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "counters": ["aerial"],
-  "counterBonusDamage": 2,
-  "effects": []
-},
-{
-  "id": "tope-con-hilo",
-  "name": "Tope con Hilo",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 6,
-  "damage": 9,
-  "requirements": {"agility": 3},
-  "moveType": "aerial",
-  "method": "agility",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Playable in-ring. Draw 1 page on connect. If Countered, attacker is Stunned 1.",
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "selfStunIfCountered": 1,
-  "effects": [{"type":"drawSelf","amount":1}]
-},
-{
-  "id": "penta-the-sacrifice",
-  "name": "The Sacrifice",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 5,
-  "damage": 7,
-  "requirements": {"technical": 2},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "penta",
-  "rarity": 3,
-  "rulesText": "Penta-exclusive. Stun 1. Opponent loses 1 Adrenaline. On connect, search/draw Penta Driver; that searched Penta Driver costs 1 less during this Control sequence.",
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": [{"type":"loseOpponentAdrenaline","amount":1},{"type":"search","name":"Penta Driver","discount":1}]
-},
-{
-  "id": "penta-driver",
-  "name": "Penta Driver",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 7,
-  "damage": 12,
-  "requirements": {"technical": 2, "strength": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "penta",
-  "rarity": 3,
-  "rulesText": "Penta-exclusive Trademark. Grounds opponent. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "effects": []
-},
-{
-  "id": "penta-mexican-destroyer",
-  "name": "Mexican Destroyer",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 9,
-  "damage": 16,
-  "requirements": {},
-  "moveType": "grapple",
-  "method": null,
-  "superstarId": "penta",
-  "rarity": 4,
-  "rulesText": "Penta-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +4.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 4,
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-penta",
-  "name": "Cero Miedo",
-  "kind": "entrance",
-  "setId": "worlds-collide-series-1",
-  "rarity": 4,
-  "superstarId": "penta",
-  "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"agility":1,"strength":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-penta",
-  "name": "Fearless Assault",
-  "kind": "special",
-  "setId": "worlds-collide-series-1",
-  "rarity": 3,
-  "superstarId": "penta",
-  "rulesText": "Once per match, after Penta connects with an Agility Move, his next Move this Control sequence, if it is a Strike, costs 2 less and deals +2 Damage.",
-  "special": {"type":"fearlessAssault","afterMethod":"agility","nextMethod":"strike","discount":2,"bonusDamage":2}
-}
-
-,
-{
-  "id": "el-grande-americano-jumping-headbutt",
-  "name": "Jumping Headbutt",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 7,
-  "damage": 11,
-  "requirements": {"strike": 2, "agility": 1},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": "el-grande-americano",
-  "rarity": 3,
-  "rulesText": "El Grande Americano-exclusive Trademark. Grounds opponent. Stun 1. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "effects": []
-},
-{
-  "id": "el-grande-americano-loaded-mask-headbutt",
-  "name": "Loaded Mask Headbutt",
-  "kind": "move",
-  "setId": "worlds-collide-series-1",
-  "cost": 9,
-  "damage": 16,
-  "requirements": {},
-  "moveType": "strike",
-  "method": null,
-  "superstarId": "el-grande-americano",
-  "rarity": 4,
-  "rulesText": "El Grande Americano-exclusive Finisher. No Method requirement. Grounds opponent. Stun 1. Pin Bonus +4.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 4,
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-el-grande-americano",
-  "name": "Los Americanos",
-  "kind": "entrance",
-  "setId": "worlds-collide-series-1",
-  "rarity": 4,
-  "superstarId": "el-grande-americano",
-  "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"technical": 1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-el-grande-americano",
-  "name": "Steel Plate",
-  "kind": "special",
-  "setId": "worlds-collide-series-1",
-  "rarity": 3,
-  "superstarId": "el-grande-americano",
-  "rulesText": "Once per match, after El Grande Americano connects with Headbutt or Jumping Headbutt, search/draw Loaded Mask Headbutt. That searched Loaded Mask Headbutt costs 2 less during the current Control sequence.",
-  "special": {"type":"steelPlate","afterNames":["Headbutt","Jumping Headbutt"],"searchName":"Loaded Mask Headbutt","discount":2}
-}
-
-
-,
-{
-  "id": "running-hip-attack",
-  "name": "Running Hip Attack",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {"strike": 2},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. Stun 1.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "uso-splash",
-  "name": "Uso Splash",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 9,
-  "damage": 16,
-  "requirements": {},
-  "moveType": "aerial",
-  "method": null,
-  "superstarId": null,
-  "allowedSuperstarIds": ["jey-uso"],
-  "rarity": 4,
-  "rulesText": "Uso-family Finisher. Currently playable by Jey Uso; Jimmy Uso may share this card when added. No Method requirement. Grounded opponent only. Pin Bonus +4, or +5 when played immediately after Spear in the same Control sequence.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusAfterNamed": {"name":"Spear","pinBonus":5},
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-jey-uso",
-  "name": "Main Event Jey",
-  "kind": "entrance",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 4,
-  "superstarId": "jey-uso",
-  "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"strike":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-jey-uso",
-  "name": "YEET!",
-  "kind": "special",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 3,
-  "superstarId": "jey-uso",
-  "rulesText": "Once per match, after Jey connects with Spear, search/draw Uso Splash. That searched Uso Splash costs 2 less during the current Control sequence.",
-  "special": {"type":"yeetTutor","afterName":"Spear","searchName":"Uso Splash","discount":2}
-}
-
-,
-{
-  "id": "jumping-neckbreaker",
-  "name": "Jumping Neckbreaker",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {"technical": 1, "agility": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. If played immediately after a Strike Move in the same Control sequence, draw 1 page.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": [{"type":"drawSelf","amount":1,"ifAfterMethod":"strike"}]
-},
-{
-  "id": "burning-hammer",
-  "name": "Burning Hammer",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 7,
-  "damage": 11,
-  "requirements": {"strength": 2, "technical": 1},
-  "moveType": "grapple",
   "method": "strength",
   "superstarId": null,
-  "rarity": 3,
-  "rulesText": "Grounds opponent. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "la-knight-bft",
-  "name": "BFT",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 9,
-  "damage": 16,
-  "requirements": {},
-  "moveType": "strike",
-  "method": null,
-  "superstarId": "la-knight",
-  "rarity": 4,
-  "rulesText": "LA Knight-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +4, or +5 when played immediately after Diving Elbow Drop in the same Control sequence.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusAfterNamed": {"name":"Diving Elbow Drop","pinBonus":5},
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-la-knight",
-  "name": "Let Me Talk to Ya!",
-  "kind": "entrance",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 4,
-  "superstarId": "la-knight",
-  "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"strike":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-la-knight",
-  "name": "YEAH!",
-  "kind": "special",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 3,
-  "superstarId": "la-knight",
-  "rulesText": "Once per match, after LA Knight connects with Diving Elbow Drop, search/draw BFT. That searched BFT costs 2 less during the current Control sequence.",
-  "special": {"type":"yeahTutor","afterName":"Diving Elbow Drop","searchName":"BFT","discount":2}
-}
-
-
-
-,
-{
-  "id": "double-knees",
-  "name": "Double Knees",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 4,
-  "damage": 6,
-  "requirements": {"strike": 1, "agility": 1},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounded opponent only. Stun 1.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "code-red",
-  "name": "Code Red",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 5,
-  "damage": 7,
-  "requirements": {"agility": 1, "technical": 1},
-  "moveType": "grapple",
-  "method": "agility",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "alexa-bliss-sister-abigail",
-  "name": "Sister Abigail",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 7,
-  "damage": 11,
-  "requirements": {"technical": 2, "strike": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "alexa-bliss",
-  "rarity": 3,
-  "rulesText": "Alexa Bliss-exclusive Trademark. Grounds opponent. Stun 1. Pin Bonus +2. On connect, search/draw Twisted Bliss; that searched Twisted Bliss costs 1 less during the current Control sequence.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "effects": [{"type":"search","name":"Twisted Bliss","discount":1}]
-},
-{
-  "id": "alexa-bliss-twisted-bliss",
-  "name": "Twisted Bliss",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 9,
-  "damage": 15,
-  "requirements": {},
-  "moveType": "aerial",
-  "method": null,
-  "superstarId": "alexa-bliss",
-  "rarity": 4,
-  "rulesText": "Alexa Bliss-exclusive Finisher. No Method requirement. Grounded opponent only. Pin Bonus +4, or +6 when played immediately after Sister Abigail in the same Control sequence.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusAfterNamed": {"name":"Sister Abigail","pinBonus":6},
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-alexa-bliss",
-  "name": "The Goddess",
-  "kind": "entrance",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 4,
-  "superstarId": "alexa-bliss",
-  "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"agility":1,"technical":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-alexa-bliss",
-  "name": "Mind Games",
-  "kind": "special",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 3,
-  "superstarId": "alexa-bliss",
-  "rulesText": "Once per match, when an opponent attempts a Pin against Alexa, reduce that Pin Bonus by 2. If Alexa successfully kicks out, draw 1 page and gain +1 Adrenaline.",
-  "special": {"type":"mindGames","pinBonusModifier":-2,"drawOnKickout":1,"adrenalineOnKickout":1}
-}
-
-
-
-,
-{
-  "id": "shotgun-dropkick",
-  "name": "Shotgun Dropkick",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {"strike": 2, "agility": 1},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. Stun 1. When played by Finn Bálor, on connect search/draw Coup de Grâce; that searched Coup de Grâce costs 1 less during the current Control sequence.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": [{"type":"search","name":"Coup de Grâce","discount":1,"ifSuperstarIds":["finn-balor"]}]
-},
-{
-  "id": "finn-balor-1916",
-  "name": "1916",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 7,
-  "damage": 12,
-  "requirements": {"technical": 2, "strength": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "finn-balor",
-  "rarity": 3,
-  "rulesText": "Finn Bálor-exclusive Trademark. Grounds opponent. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "effects": []
-},
-{
-  "id": "finn-balor-coup-de-grace",
-  "name": "Coup de Grâce",
-  "kind": "move",
-  "setId": "money-in-the-bank-series-1",
-  "cost": 9,
-  "damage": 16,
-  "requirements": {},
-  "moveType": "aerial",
-  "method": null,
-  "superstarId": "finn-balor",
-  "rarity": 4,
-  "rulesText": "Finn Bálor-exclusive Finisher. No Method requirement. Grounded opponent only. Pin Bonus +4, or +5 when played immediately after Shotgun Dropkick in the same Control sequence.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusAfterNamed": {"name":"Shotgun Dropkick","pinBonus":5},
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-finn-balor",
-  "name": "The Prince",
-  "kind": "entrance",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 4,
-  "superstarId": "finn-balor",
-  "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"strength":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-finn-balor",
-  "name": "Bálor Club",
-  "kind": "special",
-  "setId": "money-in-the-bank-series-1",
-  "rarity": 3,
-  "superstarId": "finn-balor",
-  "rulesText": "Once per match, after Finn connects with Sling Blade, search/draw Shotgun Dropkick. That searched Shotgun Dropkick costs 2 less during the current Control sequence.",
-  "special": {"type":"balorClubTutor","afterName":"Sling Blade","searchName":"Shotgun Dropkick","discount":2}
-}
-
-
-
-,
-{
-  "id": "pump-kick",
-  "name": "Pump Kick",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 5,
-  "damage": 8,
-  "requirements": {"strike": 2},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. If the opponent was already Stunned when this Move connected, +2 Damage.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "bonusDamageIfOpponentStunned": 2,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "inverted-ddt",
-  "name": "Inverted DDT",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 5,
-  "damage": 7,
-  "requirements": {"technical": 1, "strike": 1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounds opponent. Stun 1.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "octopus-hold",
-  "name": "Octopus Hold",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 5,
-  "damage": 5,
-  "requirements": {"technical": 2},
-  "moveType": "submission",
-  "method": "technical",
-  "superstarId": null,
-  "rarity": 2,
-  "rulesText": "Grounded opponent only. Submission. Arm Pressure 5.",
-  "groundOpponent": false,
-  "groundedOnly": true,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "submission": {"bodyPart":"arms","pressure":5},
-  "effects": []
-},
-{
-  "id": "danhausen-very-nice-knee-vil",
-  "name": "Very Nice, Very Knee-vil",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 7,
-  "damage": 11,
-  "requirements": {"strike": 2, "strength": 1},
-  "moveType": "strike",
-  "method": "strike",
-  "superstarId": "danhausen",
-  "rarity": 3,
-  "rulesText": "Danhausen-exclusive Trademark. Grounds opponent. Stun 1. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 1,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "effects": []
-},
-{
-  "id": "danhausen-triple-d",
-  "name": "Triple D",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 9,
-  "damage": 15,
-  "requirements": {},
-  "moveType": "grapple",
-  "method": null,
-  "superstarId": "danhausen",
-  "rarity": 4,
-  "rulesText": "Danhausen-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +4, increased to +5 if the opponent was already Stunned when this Move connected.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 4,
-  "pinBonusIfOpponentStunned": 5,
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-danhausen",
-  "name": "Very Nice, Very Evil",
-  "kind": "entrance",
-  "setId": "smackdown-series-1",
-  "rarity": 4,
-  "superstarId": "danhausen",
-  "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {"technical":1},
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-danhausen",
-  "name": "Jar of Teeth",
-  "kind": "special",
-  "setId": "smackdown-series-1",
-  "rarity": 3,
-  "superstarId": "danhausen",
-  "rulesText": "Once per match, after Danhausen connects with a Move that grounds the opponent, play this: opponent ditches 1 page and loses 1 Adrenaline; Danhausen draws 1 page. Continue the Control sequence normally.",
-  "special": {"type":"jarOfTeeth","ditchOpponent":1,"opponentAdrenaline":-1,"draw":1}
-},
-{
-  "id": "cutter",
-  "name": "Cutter",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 4,
-  "damage": 6,
-  "requirements": {"technical":1},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": null,
   "rarity": 1,
-  "rulesText": "Grounds opponent.",
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. Grounds opponent.",
+  "standingOnly": true,
   "groundOpponent": true,
   "groundedOnly": false,
   "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": []
-}
-
-
-,
-{
-  "id": "front-kick",
-  "name": "Front Kick",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 2,
-  "damage": 4,
-  "requirements": {
-    "agility": 1
-  },
-  "moveType": "strike",
-  "method": "agility",
-  "superstarId": null,
-  "rarity": 1,
-  "rulesText": "A fast front kick used to create space and start an athletic offensive sequence.",
-  "groundOpponent": false,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
   "selfDamage": 0,
   "effects": []
 },
 {
-  "id": "snap-suplex",
-  "name": "Snap Suplex",
+  "id": "side-headlock",
+  "name": "Side Headlock",
   "kind": "move",
-  "setId": "smackdown-series-1",
+  "setId": "money-in-the-bank-series-1",
   "cost": 3,
-  "damage": 5,
+  "damage": 2,
   "requirements": {
     "technical": 1
   },
-  "moveType": "grapple",
+  "moveType": "submission",
   "method": "technical",
   "superstarId": null,
   "rarity": 1,
-  "rulesText": "Grounds opponent.",
-  "groundOpponent": true,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. Submission. Head pressure 3.",
+  "standingOnly": true,
+  "groundOpponent": false,
   "groundedOnly": false,
   "stun": 0,
-  "pinBonus": 0,
   "selfDamage": 0,
+  "submission": {
+    "bodyPart": "head",
+    "pressure": 3
+  },
   "effects": []
 },
 {
-  "id": "finlay-roll",
-  "name": "Finlay Roll",
+  "id": "wristlock",
+  "name": "Wristlock",
   "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 5,
-  "damage": 7,
+  "setId": "money-in-the-bank-series-1",
+  "cost": 2,
+  "damage": 1,
   "requirements": {
-    "strength": 2
+    "technical": 1
+  },
+  "moveType": "submission",
+  "method": "technical",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. Submission. Arm pressure 2.",
+  "standingOnly": true,
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "submission": {
+    "bodyPart": "arms",
+    "pressure": 2
+  },
+  "effects": []
+},
+{
+  "id": "catch-your-breath",
+  "name": "Catch Your Breath",
+  "kind": "action",
+  "setId": "money-in-the-bank-series-1",
+  "rarity": 3,
+  "boosterOnly": true,
+  "rulesText": "Restore 5 HP to your Superstar, up to starting HP.",
+  "effect": {
+    "type": "healSelf",
+    "amount": 5
+  }
+},
+{
+  "id": "knee-to-the-gut",
+  "name": "Knee to the Gut",
+  "kind": "move",
+  "setId": "raw-series-1",
+  "cost": 3,
+  "damage": 4,
+  "requirements": {
+    "strike": 1
+  },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. May also Counter a Grapple Move.",
+  "standingOnly": true,
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "counters": [
+    "grapple"
+  ],
+  "effects": []
+},
+{
+  "id": "throw-into-steel-steps",
+  "name": "Throw Into Steel Steps",
+  "kind": "move",
+  "setId": "raw-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": {
+    "strength": 1
   },
   "moveType": "grapple",
   "method": "strength",
   "superstarId": null,
   "rarity": 2,
-  "rulesText": "Grounds opponent.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "effects": []
-},
-{
-  "id": "tiffany-stratton-handspring-back-elbow",
-  "name": "Handspring Back Elbow",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 5,
-  "damage": 7,
-  "requirements": {
-    "agility": 2
-  },
-  "moveType": "strike",
-  "method": "agility",
-  "superstarId": "tiffany-stratton",
-  "rarity": 3,
-  "rulesText": "Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: search/draw Prettiest Moonsault Ever.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "trademark": true,
-  "searchOnConnectName": "Prettiest Moonsault Ever",
-  "effects": []
-},
-{
-  "id": "tiffany-stratton-prettiest-moonsault-ever",
-  "name": "Prettiest Moonsault Ever",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 10,
-  "damage": 16,
-  "requirements": {},
-  "moveType": "aerial",
-  "method": "agility",
-  "superstarId": "tiffany-stratton",
-  "rarity": 4,
-  "rulesText": "Tiffany Stratton-exclusive Finisher. No Method requirement. Grounded opponent only. Pin Bonus +4.",
+  "boosterOnly": true,
+  "rulesText": "On connect, deal +1 Back body-part damage. This impact is not a maintainable hold.",
   "groundOpponent": false,
-  "groundedOnly": true,
+  "groundedOnly": false,
   "stun": 0,
-  "pinBonus": 4,
   "selfDamage": 0,
-  "finisher": true,
+  "bodyDamage": {
+    "bodyPart": "back",
+    "pressure": 1
+  },
   "effects": []
 },
 {
-  "id": "entrance-tiffany-stratton",
-  "name": "It’s Tiffy Time",
-  "kind": "entrance",
-  "setId": "smackdown-series-1",
-  "rarity": 4,
-  "superstarId": "tiffany-stratton",
-  "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
-  "preMatchMomentum": {
-    "agility": 1
-  },
-  "preMatchAdrenaline": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-tiffany-stratton",
-  "name": "Tiffany Epiphany",
-  "kind": "special",
-  "setId": "smackdown-series-1",
-  "rarity": 3,
-  "superstarId": "tiffany-stratton",
-  "rulesText": "Once per match during your Control sequence, search your deck for one Strength Move and one Agility Move. Draw the one that best fits the current position and shuffle the other back.",
-  "special": {
-    "type": "tiffanyEpiphany",
-    "methods": [
-      "strength",
-      "agility"
-    ]
-  }
-},
-{
-  "id": "chelsea-green-im-prettier",
-  "name": "I’m Prettier",
+  "id": "sleeper-hold",
+  "name": "Sleeper Hold",
   "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 7,
-  "damage": 11,
+  "setId": "raw-series-1",
+  "cost": 4,
+  "damage": 2,
   "requirements": {
     "technical": 2
   },
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "chelsea-green",
-  "rarity": 3,
-  "rulesText": "Chelsea Green-exclusive Trademark. Grounds opponent. Pin Bonus +2.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 2,
-  "selfDamage": 0,
-  "trademark": true,
-  "effects": []
-},
-{
-  "id": "chelsea-green-green-with-envy",
-  "name": "Green With Envy",
-  "kind": "move",
-  "setId": "smackdown-series-1",
-  "cost": 9,
-  "damage": 15,
-  "requirements": {},
-  "moveType": "grapple",
-  "method": "technical",
-  "superstarId": "chelsea-green",
-  "rarity": 4,
-  "rulesText": "Chelsea Green-exclusive Finisher. No Method requirement. Grounds opponent. Pin Bonus +4.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 4,
-  "selfDamage": 0,
-  "finisher": true,
-  "effects": []
-},
-{
-  "id": "entrance-chelsea-green",
-  "name": "Hot Mess",
-  "kind": "entrance",
-  "setId": "smackdown-series-1",
-  "rarity": 4,
-  "superstarId": "chelsea-green",
-  "rulesText": "Pre-Match: Begin with +2 Adrenaline. Your first Counter this match costs 1 less.",
-  "preMatchMomentum": {},
-  "preMatchAdrenaline": 2,
-  "preMatchCounterDiscount": 1,
-  "delayedTurn5": false
-},
-{
-  "id": "special-chelsea-green",
-  "name": "File a Complaint",
-  "kind": "special",
-  "setId": "smackdown-series-1",
-  "rarity": 3,
-  "superstarId": "chelsea-green",
-  "rulesText": "Once per match during your Control sequence: search/draw a Counter. Your next Counter costs 1 less.",
-  "special": {
-    "type": "fileComplaint",
-    "counterDiscount": 1
-  }
-}
-
-,
-{
-  "id":"damian-priest-south-of-heaven","name":"South of Heaven","kind":"move","setId":"smackdown-series-1",
-  "cost":7,"damage":12,"requirements":{"strength":2},"moveType":"grapple","method":"strength","superstarId":"damian-priest","rarity":3,
-  "rulesText":"Damian Priest-exclusive Trademark. Grounds opponent. Pin Bonus +2. On Connect: your next Finisher this Control sequence costs 2 less.",
-  "groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":2,"selfDamage":0,"trademark":true,"nextFinisherDiscountOnConnect":2,"effects":[]
-},
-{
-  "id":"damian-priest-razors-edge","name":"Razor’s Edge","kind":"move","setId":"smackdown-series-1",
-  "cost":8,"damage":13,"requirements":{"strength":3},"moveType":"grapple","method":"strength","superstarId":"damian-priest","rarity":3,
-  "rulesText":"Damian Priest-exclusive Trademark. Grounds opponent. On Connect: opponent loses 1 Adrenaline.",
-  "groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"trademark":true,"opponentAdrenalineOnConnect":-1,"effects":[]
-},
-{
-  "id":"damian-priest-hit-the-lights","name":"Hit the Lights","kind":"move","setId":"smackdown-series-1",
-  "cost":10,"damage":16,"requirements":{},"moveType":"grapple","method":"strength","superstarId":"damian-priest","rarity":4,
-  "rulesText":"Damian Priest-exclusive Finisher. No Method requirement. Grounded opponent only. Pin Bonus +4.",
-  "groundOpponent":false,"groundedOnly":true,"stun":0,"pinBonus":4,"selfDamage":0,"finisher":true,"effects":[]
-},
-{
-  "id":"entrance-damian-priest","name":"Rise of the Punisher","kind":"entrance","setId":"smackdown-series-1","rarity":4,"superstarId":"damian-priest",
-  "rulesText":"Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.","preMatchMomentum":{"strength":1},"preMatchAdrenaline":1,"delayedTurn5":false
-},
-{
-  "id":"special-damian-priest","name":"Last Rites","kind":"special","setId":"smackdown-series-1","rarity":3,"superstarId":"damian-priest",
-  "rulesText":"Once per match during your Control sequence: search/draw a Trademark or Finisher. Your next Strength Move this Control sequence costs 1 less.",
-  "special":{"type":"lastRites","strengthDiscount":1}
-}
-
-,
-{
-  "id":"mexican-surfboard","name":"Mexican Surfboard","kind":"move","setId":"worlds-collide-series-1",
-  "cost":5,"damage":2,"requirements":{"technical":2},"moveType":"submission","method":"technical","superstarId":null,"rarity":1,
-  "rulesText":"Grounded opponent only. Submission + Back pressure 4.","groundOpponent":true,"groundedOnly":true,"stun":0,"pinBonus":0,"selfDamage":0,
-  "submission":{"bodyPart":"back","pressure":4},"effects":[]
-},
-{
-  "id":"firemans-carry","name":"Fireman’s Carry","kind":"move","setId":"money-in-the-bank-series-1",
-  "cost":3,"damage":5,"requirements":{"strength":1},"moveType":"grapple","method":"strength","superstarId":null,"rarity":1,
-  "rulesText":"Shared fundamental takedown.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
-},
-{
-  "id":"leapfrog","name":"Leapfrog","kind":"move","setId":"money-in-the-bank-series-1",
-  "cost":2,"damage":0,"requirements":{"agility":1},"moveType":"counter","method":"agility","superstarId":null,"rarity":1,"defensiveOnly":true,
-  "counters":["strike","grapple"],"rulesText":"Counter a Strike or Grapple Move. On success, gain Control."
-},
-{
-  "id":"abdominal-stretch","name":"Abdominal Stretch","kind":"move","setId":"money-in-the-bank-series-1",
-  "cost":4,"damage":2,"requirements":{"technical":1},"moveType":"submission","method":"technical","superstarId":null,"rarity":1,
-  "rulesText":"Submission + Body pressure 3.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,
-  "submission":{"bodyPart":"body","pressure":3},"effects":[]
-},
-{
-  "id":"punches-in-the-corner","name":"Punches in the Corner","kind":"move","setId":"money-in-the-bank-series-1",
-  "cost":4,"damage":6,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
-  "rulesText":"On Connect: opponent loses 1 Adrenaline.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"opponentAdrenalineOnConnect":-1,"effects":[]
-},
-{
-  "id":"running-clothesline","name":"Running Clothesline","kind":"move","setId":"raw-series-1",
-  "cost":4,"damage":7,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
-  "rulesText":"Shared running strike.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
-},
-{
-  "id":"clothesline-over-the-top-rope","name":"Clothesline Over the Top Rope","kind":"move","setId":"raw-series-1",
-  "cost":5,"damage":7,"requirements":{"strength":1},"moveType":"grapple","method":"strength","superstarId":null,"rarity":1,
-  "rulesText":"Playable in the ring. On Connect: opponent loses 1 Adrenaline.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"opponentAdrenalineOnConnect":-1,"effects":[]
-}
-
-,
-{
-  "id": "bron-breakker-gorilla-press-powerslam",
-  "name": "Gorilla Press Powerslam",
-  "kind": "move",
-  "setId": "survivor-series-series-1",
-  "cost": 7,
-  "damage": 11,
-  "requirements": {
-    "strength": 2
-  },
-  "moveType": "grapple",
-  "method": "strength",
-  "superstarId": "bron-breakker",
-  "rarity": 3,
-  "rulesText": "Bron Breakker-exclusive Trademark. Grounds opponent. On Connect: search/draw Breakker’s Spear.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 0,
-  "selfDamage": 0,
-  "trademark": true,
-  "searchOnConnectName": "Breakker’s Spear",
-  "effects": []
-},
-{
-  "id": "bron-breakker-breakkers-spear",
-  "name": "Breakker’s Spear",
-  "kind": "move",
-  "setId": "survivor-series-series-1",
-  "cost": 10,
-  "damage": 16,
-  "requirements": {
-    "strength": 3
-  },
-  "moveType": "grapple",
-  "method": "strength",
-  "superstarId": "bron-breakker",
-  "rarity": 4,
-  "rulesText": "Bron Breakker-exclusive Finisher. Pin Bonus +4. If Bron connected with an Agility Move earlier in this Control sequence, costs 2 less.",
-  "groundOpponent": true,
-  "groundedOnly": false,
-  "stun": 0,
-  "pinBonus": 4,
-  "selfDamage": 0,
-  "finisher": true,
-  "discountIfPriorAgility": 2,
-  "effects": []
-},
-{
-  "id": "bron-breakker-steiner-recliner",
-  "name": "Steiner Recliner",
-  "kind": "move",
-  "setId": "survivor-series-series-1",
-  "cost": 7,
-  "damage": 2,
-  "requirements": {
-    "strength": 2
-  },
   "moveType": "submission",
-  "method": "strength",
-  "superstarId": "bron-breakker",
-  "rarity": 3,
-  "rulesText": "Bron Breakker-exclusive Back Submission. Pressure 5.",
+  "method": "technical",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. Submission. Head pressure 4.",
+  "standingOnly": true,
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "submission": {
+    "bodyPart": "head",
+    "pressure": 4
+  },
+  "effects": []
+},
+{
+  "id": "scissors-kick",
+  "name": "Scissors Kick",
+  "kind": "move",
+  "setId": "worlds-collide-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": {
+    "strike": 2
+  },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. Grounds opponent.",
+  "standingOnly": true,
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": []
+},
+{
+  "id": "senton-splash",
+  "name": "Senton Splash",
+  "kind": "move",
+  "setId": "worlds-collide-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": {
+    "agility": 2
+  },
+  "moveType": "aerial",
+  "method": "agility",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Grounded opponent only.",
   "groundOpponent": true,
   "groundedOnly": true,
   "stun": 0,
-  "pinBonus": 0,
   "selfDamage": 0,
-  "submission": {
-    "bodyPart": "back",
-    "pressure": 5
+  "effects": []
+},
+{
+  "id": "spinning-back-kick",
+  "name": "Spinning Back Kick",
+  "kind": "move",
+  "setId": "worlds-collide-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": {
+    "strike": 1
+  },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only.",
+  "standingOnly": true,
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": []
+},
+{
+  "id": "throw-into-ringpost",
+  "name": "Throw Into Ringpost",
+  "kind": "move",
+  "setId": "smackdown-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": {
+    "strength": 1
+  },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "On connect, deal +1 Head body-part damage. This impact is not a maintainable hold.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bodyDamage": {
+    "bodyPart": "head",
+    "pressure": 1
   },
   "effects": []
 },
 {
-  "id": "entrance-bron-breakker",
-  "name": "Breakker Unleashed",
-  "kind": "entrance",
-  "setId": "survivor-series-series-1",
-  "rarity": 4,
-  "superstarId": "bron-breakker",
-  "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
-  "preMatchMomentum": {
-    "strength": 1,
-    "agility": 1
+  "id": "corner-barrage",
+  "name": "Corner Barrage",
+  "kind": "move",
+  "setId": "smackdown-series-1",
+  "cost": 4,
+  "damage": 6,
+  "requirements": {
+    "strike": 1
   },
-  "preMatchAdrenaline": 0,
-  "delayedTurn5": false
-},
-{
-  "id": "special-bron-breakker",
-  "name": "Full Speed",
-  "kind": "special",
-  "setId": "survivor-series-series-1",
-  "rarity": 3,
-  "superstarId": "bron-breakker",
-  "rulesText": "Once per match during your Control sequence: your next connected Move this Control sequence deals +2 Damage; if it is an Agility Move, draw 1 page.",
-  "special": {
-    "type": "fullSpeed",
-    "damage": 2,
-    "agilityDraw": 1
-  }
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Standing opponent only. If you connected with a Strike earlier in this Control sequence, +2 Damage.",
+  "standingOnly": true,
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bonusDamageIfStrikeEarlierThisControl": 2,
+  "effects": []
 }
-,
-{
-  "id":"penta-handstand-dropkick","name":"Penta’s Handstand Dropkick","kind":"move","setId":"worlds-collide-series-1",
-  "cost":4,"damage":7,"requirements":{"agility":2},"moveType":"strike","method":"agility","superstarId":"penta","rarity":2,
-  "rulesText":"Penta-exclusive. Grounds opponent. If Penta connected with another Agility Move earlier in this Control sequence, +1 Damage.",
-  "groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,
-  "priorConnectedMethodBonus":{"method":"agility","damage":1},"effects":[]
-},
-{
-  "id":"apron-german-suplex","name":"Apron German Suplex","kind":"move","setId":"worlds-collide-series-1",
-  "cost":6,"damage":10,"requirements":{"strength":1,"technical":1},"moveType":"grapple","method":"strength","superstarId":null,"rarity":2,
-  "rulesText":"Grounds opponent. Opponent loses 1 Adrenaline. Counts as German Suplex for card effects and synergies.",
-  "groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"opponentAdrenalineOnConnect":-1,"countsAs":["German Suplex"],"effects":[]
-},
-{
-  "id":"corner-clothesline","name":"Corner Clothesline","kind":"move","setId":"money-in-the-bank-series-1",
-  "cost":2,"damage":4,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
-  "rulesText":"Standing opponent only. Grounds opponent.","groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
-},
-{
-  "id":"dropkick-to-the-back","name":"Dropkick to the Back","kind":"move","setId":"smackdown-series-1",
-  "cost":3,"damage":5,"requirements":{"agility":1},"moveType":"strike","method":"agility","superstarId":null,"rarity":1,
-  "rulesText":"Standing opponent only. Grounds opponent.","groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
-},
-{
-  "id":"elbow","name":"Elbow","kind":"move","setId":"smackdown-series-1",
-  "cost":2,"damage":3,"requirements":{"strike":1},"moveType":"strike","method":"strike","superstarId":null,"rarity":1,
-  "rulesText":"Standing opponent only. May also Counter a Strike Move.","groundOpponent":false,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,
-  "counters":["strike"],"effects":[]
-},
-{
-  "id":"running-knees-to-the-back","name":"Running Knees to the Back","kind":"move","setId":"smackdown-series-1",
-  "cost":4,"damage":6,"requirements":{"agility":1,"strike":1},"moveType":"strike","method":"agility","superstarId":null,"rarity":2,
-  "rulesText":"Standing opponent only. Grounds opponent.","standingOnly":true,"groundOpponent":true,"groundedOnly":false,"stun":0,"pinBonus":0,"selfDamage":0,"effects":[]
-}
-
-
 ];

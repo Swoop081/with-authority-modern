@@ -1,28 +1,29 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.91";
-import { superstars } from "../data/superstars.js?v=0.11.91";
-import { decks } from "../data/decks.js?v=0.11.91";
-import { sets } from "../data/sets.js?v=0.11.91";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.91";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.91";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.91";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.91";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.91";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.91";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.91";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.91";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.91";
-import { totalMomentum } from "../engine/utils.js?v=0.11.91";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.91";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.91";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.91";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.91";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.91";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.91";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.91";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.91";
-import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft } from "../data/deck-builder.js?v=0.11.91";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.91";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.91";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.11.96";
+import { superstars } from "../data/superstars.js?v=0.11.96";
+import { decks } from "../data/decks.js?v=0.11.96";
+import { sets } from "../data/sets.js?v=0.11.96";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.11.96";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.11.96";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.11.96";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.11.96";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.11.96";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.11.96";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.11.96";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.11.96";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.11.96";
+import { totalMomentum } from "../engine/utils.js?v=0.11.96";
+import { healthZone } from "../engine/health.js?v=0.11.96";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.11.96";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.11.96";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.11.96";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.11.96";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.11.96";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.11.96";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.11.96";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.11.96";
+import { createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, addCardToDraft, removeCardFromDraft, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft } from "../data/deck-builder.js?v=0.11.96";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.11.96";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.11.96";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1235,9 +1236,7 @@ function playerFacingRulesText(text = "") {
     .replace(/\bgrounds opponent\b/gi, "Ground your opponent")
     .replace(/\bgrounds\b/gi, "Ground your opponent")
     .replace(/\bgrounded opponent,?\s*/gi, "Requires a grounded opponent. ")
-    .replace(/\bground\s*\+\s*Pin Bonus\s*(\d+)/gi, "Ground your opponent. Pin Bonus +$1")
     .replace(/\bground\s*\+\s*Stun\s*(\d+)/gi, "Ground your opponent. Stun $1")
-    .replace(/\bPin Bonus\s*(\d+)/gi, "Pin Bonus +$1")
     .replace(/\s*;\s*/g, ". ")
     .replace(/\s{2,}/g, " ")
     .replace(/\.\s*\./g, ".")
@@ -1736,8 +1735,8 @@ function submissionHud(player) {
 }
 
 function healthClass(player) {
-  const pct = player.maxHp ? player.hp / player.maxHp : 0;
-  return pct > .60 ? "healthy" : pct > .40 ? "average" : "danger";
+  const zone = healthZone(player);
+  return zone === "green" ? "healthy" : zone === "amber" ? "average" : "danger";
 }
 
 function renderWrestlerHud(playerId) {
@@ -1810,12 +1809,8 @@ function presentationFromEvents(events) {
 }
 
 function renderMatchHud() {
-  const state = game.state();
-  const location = state.players[CPU].location === "ring" && state.players[HUMAN].location === "ring" ? "IN THE RING" : "RINGSIDE";
-  const posture = state.players[CPU].posture === "on-mat" || state.players[HUMAN].posture === "on-mat" ? "GROUNDED" : "STANDING";
   return `<section class="match-hud-shell premium-match-hud">
     <div class="match-hud-grid">${renderWrestlerHud(HUMAN)}${renderWrestlerHud(CPU)}</div>
-    <div class="compact-ring-strip"><span>${state.countOut.count ? `COUNT ${state.countOut.count}/${state.countOut.limit}` : location}</span><b>${posture}</b><small>T${state.turnNumber}</small></div>
   </section>`;
 }
 function playedCardFromEvent(event) {
@@ -1925,15 +1920,15 @@ function renderCommandBar() {
   if (state.phase === "SUBMISSION_MAINTAIN" && owner === HUMAN) prompt = `Maintain the submission or release it and keep Control.`;
   const pinCheck = state.phase === "ACTION" && owner === HUMAN ? canAttemptPin(state, HUMAN) : null;
   return `<section class="match-command ${state.phase === "MATCH_OVER" ? "match-over" : ""}">
-    <div class="command-status"><span>TURN ${state.turnNumber}</span><b>${state.phase.replaceAll("_", " ")}</b></div>
+    <div class="command-status"><span>TURN ${state.turnNumber} / ${state.turnLimit ?? 50}</span><b>${state.phase.replaceAll("_", " ")}</b></div>
     <div class="command-prompt"><strong>${prompt}</strong><small>${message}</small></div>
     <div class="command-actions">
-      ${owner === HUMAN && state.phase === "COUNTER" ? '<button id="pass-action" class="primary">Pass Counter</button>' : ""}
-      ${owner === HUMAN && state.phase === "ACTION" && pinCheck?.legal ? `<button id="attempt-pin" class="primary pin-ready">Attempt Pin</button>` : ""}
-      ${owner === HUMAN && state.phase === "ACTION" && canReturnToRing(state, HUMAN) ? '<button id="return-ring" class="primary">Return to Ring</button>' : ""}
-      ${owner === HUMAN && state.phase === "ACTION" ? '<button id="pass-action" class="secondary">Pass Control</button>' : ""}
-      ${owner === HUMAN && state.phase === "PIN_RESPONSE" ? '<button id="pass-action" class="primary">Pass to Pin Check</button>' : ""}
-      ${owner === HUMAN && state.phase === "SUBMISSION_MAINTAIN" ? '<button id="release-submission" class="primary">Release Hold</button>' : ""}
+      ${owner === HUMAN && state.phase === "COUNTER" ? '<button id="pass-action" class="primary show-command-button">Pass Counter</button>' : ""}
+      ${owner === HUMAN && state.phase === "ACTION" && pinCheck?.legal ? `<button id="attempt-pin" class="primary pin-ready show-command-button">Attempt Pin</button>` : ""}
+      ${owner === HUMAN && state.phase === "ACTION" && canReturnToRing(state, HUMAN) ? '<button id="return-ring" class="primary show-command-button">Return to Ring</button>' : ""}
+      ${owner === HUMAN && state.phase === "ACTION" ? '<button id="pass-action" class="secondary show-command-button pass-control-button">Pass Control</button>' : ""}
+      ${owner === HUMAN && state.phase === "PIN_RESPONSE" ? '<button id="pass-action" class="primary show-command-button">Pass to Pin Check</button>' : ""}
+      ${owner === HUMAN && state.phase === "SUBMISSION_MAINTAIN" ? '<button id="release-submission" class="primary show-command-button">Release Hold</button>' : ""}
       ${state.phase === "MATCH_OVER" && activeMode === "ladder" ? '<button id="ladder-hub" class="primary">Return to Ladder</button>' : ""}
       ${state.phase === "MATCH_OVER" && activeMode === "championship" ? '<button id="championship-hub" class="primary">Return to Championship Road</button>' : ""}
     </div>
@@ -1953,13 +1948,13 @@ function logText(event) {
     ENTRANCE_EFFECT: () => `${event.cardName} triggered for ${n(event.playerId)}.`,
     BELL_RANG: () => `The bell rings! ${n(event.control)} has opening Control.`,
     MATCH_STARTED: () => `${n(event.control)} starts Turn 1 in Control.`, MOMENTUM_PLAYED: () => `${n(event.playerId)} played ${event.method} Momentum.`,
-    ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, SUPPORT_PLAYED: () => `${n(event.playerId)} put ${cardNameFor(event.cardId)} into play.`, SUPPORT_REPLACED: () => `${n(event.playerId)} discarded ${cardNameFor(event.cardId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
+    ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, HEALTH_RESTORED: () => `${cardNameFor(event.cardId)} restores ${event.amount} HP to ${n(event.playerId)}.`, FIGHT_FOREVER: () => `Fight Forever restores ${event.playerHeal} HP to ${n(event.playerId)} and ${event.opponentHeal} HP to ${n(event.opponentId)}; turn limit ${event.oldTurnLimit} → ${event.newTurnLimit}.`, SUPPORT_PLAYED: () => `${n(event.playerId)} put ${cardNameFor(event.cardId)} into play.`, SUPPORT_REPLACED: () => `${n(event.playerId)} discarded ${cardNameFor(event.cardId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
     MOVE_COUNTERED: () => `${n(event.defenderId)} countered ${cardNameFor(event.incomingCardId)} with ${cardNameFor(event.counterCardId)}.`, AUTO_COUNTER: () => `${n(event.defenderId)} Auto Countered by ditching 7 pages.`,
     COUNTER_PASSED: () => `${n(event.defenderId)} passed the counter window.`, MOVE_CONNECTED: () => `${cardNameFor(event.cardId)} connected for ${event.damage} damage${event.finisher ? " (FINISHER)" : ""}.`,
     CARDS_DRAWN: () => `${n(event.playerId)} drew ${event.cardIds.length} page${event.cardIds.length === 1 ? "" : "s"}.`, CONTROL_PASSED: () => `${n(event.from)} passed Control to ${n(event.to)}.`, CONTROL_RETAINED: () => `${n(event.playerId)} connected and keeps Control.`, CRITICAL_EXHAUSTION: () => `${n(event.playerId)} is at 0 HP and cannot retain Control. Control passes to ${n(event.to)}.`,
     POST_MOVE_WINDOW: () => `${n(event.attackerId)} has a post-move finish window.`, PIN_ATTEMPTED: () => `${n(event.attackerId)} attempts pin #${event.attemptNumber}; ${event.chance}% prototype chance.`,
     PIN_ESCAPED_SPECIAL: () => `${n(event.defenderId)} used a pin-escape Special.`, PIN_CHECK: () => `Pin check: rolled ${event.roll} vs ${event.chance}%.`, KICK_OUT: () => `${n(event.defenderId)} kicks out and takes Control.`,
-    SUBMISSION_DAMAGE: () => `${event.bodyPart} submission pressure ${event.total}/${event.threshold}.`, SUBMISSION_MAINTAINED: () => `${n(event.attackerId)} maintained the hold.`, SUBMISSION_RELEASED: () => `${n(event.attackerId)} released the hold and kept Control.`,
+    BODY_PART_DAMAGE: () => `${cardNameFor(event.cardId)} deals +${event.amount} ${event.bodyPart} body-part damage (${event.total}/${event.threshold}).`, SUBMISSION_DAMAGE: () => `${event.bodyPart} submission pressure ${event.total}/${event.threshold}.`, SUBMISSION_MAINTAINED: () => `${n(event.attackerId)} maintained the hold.`, SUBMISSION_RELEASED: () => `${n(event.attackerId)} released the hold and kept Control.`,
     SUPERSTAR_ABILITY: () => `${n(event.playerId)} triggered ${event.abilityName}${event.maxUses > 1 ? ` (${event.use}/${event.maxUses})` : ""}.`, SUPERSTAR_PASSIVE: () => `${n(event.playerId)}'s ${event.abilityName} prevented the Stun.`, SENT_TO_RINGSIDE: () => `${n(event.defenderId)} was sent to ringside.`, FOLLOWED_OUTSIDE: () => `${n(event.attackerId)} followed the fight to ringside.`, RETURNED_TO_RING: () => `${n(event.playerId)} returned to the ring.`, COUNT_OUT_TICK: () => `Referee count: ${event.count}/${game.state().countOut.limit}.`, COUNT_OUT_RESET: () => `Count-out reset after both wrestlers returned to the ring.`, MATCH_ENDED: () => event.winnerId ? `${n(event.winnerId)} wins by ${event.finishType.toUpperCase()}.` : `Match ends by ${event.finishType.toUpperCase()}.`
   };
   return map[event.type]?.() ?? event.type.replaceAll("_", " ").toLowerCase();

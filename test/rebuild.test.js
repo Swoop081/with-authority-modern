@@ -6,7 +6,7 @@ import { allGameplayCards } from "../js/data/content.js";
 import { collectionCards } from "../js/data/collection.js";
 import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js";
 import { createProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js";
-import { grantBooster, openBooster, finalizePackUniversePoints } from "../js/data/boosters.js";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js";
 import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js";
 import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js";
 import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft } from "../js/data/deck-builder.js";
@@ -14,6 +14,7 @@ import { tierReward, claimSeasonTier } from "../js/data/seasons.js";
 import { MatchEngine } from "../js/engine/MatchEngine.js";
 import { moveEligibility, canPlayMomentum, canAttemptPin } from "../js/engine/rules.js";
 import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js";
+import { healthZone } from "../js/engine/health.js";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -32,7 +33,8 @@ test("reviewed decks are 55 pages with 12 Momentum and no orphan gameplay cards"
     assert.equal(starById.get(sid)?.leadOffIds.length,5,sid);
     const lead=d.slice(0,5); assert.equal(lead.filter(c=>c.kind==='momentum').length,2,`${sid} Lead Off Momentum`); assert.equal(lead.filter(c=>c.kind==='move').length,3,`${sid} Lead Off Moves`);
   }
-  assert.equal(allGameplayCards.filter(c=>c.kind!=='entrance'&&!used.has(c.id)).length,0);
+  assert.equal(allGameplayCards.filter(c=>c.kind!=='entrance'&&!c.boosterOnly&&!used.has(c.id)).length,0);
+  assert.equal(allGameplayCards.some(c=>'pinBonus' in c||'pinBonusAfterNamed' in c||'pinBonusIfOpponentStunned' in c||/Pin Bonus|Pin \+\d+/i.test(c.rulesText??'')),false,'active card pool contains no Pin Bonus mechanic');
 });
 
 test("profile, Foil replacement, Entrance ownership and boosters use rebuilt rules",()=>{
@@ -55,13 +57,13 @@ test("later locked native sequences are present whenever their set is active",()
     assert.equal(byName('Stone Cold Stunner').damage,17);
     assert.deepEqual(byName('Stone Cold Stunner').requirements,{});
     const boot=byName('Hogan’s Big Boot'); assert.equal(boot.superstarId,'hulk-hogan'); assert.equal(boot.groundOpponent,true); assert.equal(boot.effects[0].name,'Atomic Leg Drop');
-    const leg=byName('Atomic Leg Drop'); assert.equal(leg.groundedOnly,true); assert.equal(leg.pinBonus,3);
+    const leg=byName('Atomic Leg Drop'); assert.equal(leg.groundedOnly,true); assert.equal('pinBonus' in leg,false);
     const press=allGameplayCards.find(c=>c.superstarId==='ultimate-warrior'&&c.name==="Warrior's Gorilla Press Slam"); assert.equal(press.effects[0].name,'Warrior Splash'); assert.equal(press.groundOpponent,true);
-    const splash=byName('Warrior Splash'); assert.equal(splash.groundedOnly,true); assert.equal(splash.pinBonus,3);
+    const splash=byName('Warrior Splash'); assert.equal(splash.groundedOnly,true); assert.equal('pinBonus' in splash,false);
   }
   if(starById.has('the-rock')){
     assert.equal(byName('Rock Bottom').effects.find(e=>e.type==='search').discount,2);
-    assert.equal(byName("People's Elbow").pinBonus,5);
+    assert.equal('pinBonus' in byName("People's Elbow"),false);
     assert.equal(byName("People's Elbow").damage,18);
   }
 });
@@ -305,12 +307,12 @@ test("Logan Paul RAW Series 1 package is locked, playable and wired to its bespo
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='strength').length,0);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='agility').length,8);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='strike').length,4);
-  const fin=byName('Paulverizer'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,3);
+  const fin=byName('Paulverizer'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.damage,13); assert.equal('pinBonus' in fin,false);
   const tm=byName('Knockout Punch'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'logan-paul'); assert.deepEqual(tm.requirements,{strike:3});
   const standing=byName('Standing Moonsault'); assert.equal(standing.kickoutRetainControlDraw,1);
   const spring=byName('Springboard Crossbody'); assert.equal(spring.effects[0].type,'drawThenDiscardSelf'); assert.equal(spring.effects[0].ifAfterMethod,'strike');
   const asai=byName('Asai Moonsault'); assert.equal(asai.selfStunIfCountered,1); assert.equal(asai.groundedOnly,false);
-  const splash=byName('450 Splash'); assert.equal(splash.selfStunIfCountered,1); assert.equal(splash.pinBonus,2);
+  const splash=byName('450 Splash'); assert.equal(splash.selfStunIfCountered,1); assert.equal(splash.damage,11); assert.equal('pinBonus' in splash,false);
 
   const opponent=stars.find(s=>s.id!=='logan-paul');
   const g=new MatchEngine({p1:logan,p2:opponent,decks,rng:rng(1201)}),st=g.state();
@@ -356,7 +358,7 @@ test("Sol Ruca RAW Series 1 package is locked, playable and wired to counter/hig
   assert.equal(decks['sol-ruca'].filter(c=>c.id==='special-sol-ruca').length,1);
   const stf=byName('STF'); assert.deepEqual(stf.requirements,{technical:2}); assert.equal(stf.submission.pressure,4);
   const tm=byName('Avalanche X-Factor'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'sol-ruca'); assert.deepEqual(tm.priorConnectedMethodBonus,{method:'agility',damage:2});
-  const fin=byName('Sol Snatcher'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,5); assert.equal(fin.discountAfterCounter,2);
+  const fin=byName('Sol Snatcher'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal('pinBonus' in fin,false); assert.equal(fin.discountAfterCounter,2);
   const rawCodes=['RAW1-012','RAW1-013','RAW1-014','RAW1-015','RAW1-016','RAW1-017'];
   for(const code of rawCodes) assert.ok(collectionCards.some(c=>c.cardCode===code),code);
 
@@ -392,7 +394,7 @@ test("Chad Gable RAW Series 1 package is locked, playable and wired to Olympic P
   assert.equal(decks['chad-gable'].filter(c=>c.kind==='momentum'&&c.method==='technical').length,7);
   assert.equal(decks['chad-gable'].filter(c=>c.kind==='momentum'&&c.method==='strength').length,5);
   assert.equal(decks['chad-gable'].filter(c=>c.kind==='momentum'&&c.method==='agility').length,0);
-  const tm=byName('Chaos Theory'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'chad-gable'); assert.equal(tm.pinBonus,2); assert.equal(tm.kickoutRetainControl,true);
+  const tm=byName('Chaos Theory'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'chad-gable'); assert.equal('pinBonus' in tm,false); assert.equal(tm.kickoutRetainControl,true);
   const fin=byName('Ankle Lock'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.submission.pressure,6); assert.equal(fin.groundedOnly,true);
   assert.equal(CARD_NUMBER_BY_ID['chad-gable-chaos-theory']?.cardCode,'RAW1-018'); assert.equal(CARD_NUMBER_BY_ID['superstar-chad-gable']?.cardCode,'RAW1-022');
   const opp=stars.find(s=>s.id!=='chad-gable');
@@ -423,8 +425,8 @@ test("Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RA
   assert.equal(decks['raquel-rodriguez'].filter(c=>c.kind==='momentum'&&c.method==='strength').length,8);
   assert.equal(decks['raquel-rodriguez'].filter(c=>c.kind==='momentum'&&c.method==='strike').length,4);
   assert.equal(decks['raquel-rodriguez'].filter(c=>c.kind==='momentum'&&c.method==='agility').length,0);
-  const tm=byName('Corkscrew Splash'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'raquel-rodriguez'); assert.deepEqual(tm.requirements,{strength:2,agility:1}); assert.equal(tm.pinBonus,2); assert.equal(tm.selfStunIfCountered,1);
-  const fin=byName('Tejana Bomb'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,3); assert.equal(fin.damage,13);
+  const tm=byName('Corkscrew Splash'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'raquel-rodriguez'); assert.deepEqual(tm.requirements,{strength:2,agility:1}); assert.equal(tm.damage,11); assert.equal('pinBonus' in tm,false); assert.equal(tm.selfStunIfCountered,1);
+  const fin=byName('Tejana Bomb'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal('pinBonus' in fin,false); assert.equal(fin.damage,13);
   assert.equal(CARD_NUMBER_BY_ID['raquel-rodriguez-corkscrew-splash']?.cardCode,'RAW1-023'); assert.equal(CARD_NUMBER_BY_ID['superstar-raquel-rodriguez']?.cardCode,'RAW1-027');
   const opp=stars.find(s=>s.id!=='raquel-rodriguez');
   const e=new MatchEngine({p1:raquel,p2:opp,decks,rng:()=>0.99}); const st=e.state();
@@ -449,8 +451,8 @@ test("Rey Mysterio Worlds Collide Series 1 package is locked, family-gated and p
   const six=allGameplayCards.find(c=>c.id==='619'); assert.ok(six);
   assert.deepEqual(six.allowedSuperstarIds,['rey-mysterio','dominik-mysterio']);
   assert.equal(six.superstarId,null); assert.equal(six.stun,1); assert.equal(six.groundedOnly,true);
-  const pop=allGameplayCards.find(c=>c.id==='rey-mysterio-west-coast-pop'); assert.equal(pop.finisher,true); assert.deepEqual(pop.requirements,{}); assert.equal(pop.pinBonus,4); assert.deepEqual(pop.pinBonusAfterNamed,{name:'619',pinBonus:6});
-  const mex=allGameplayCards.find(c=>c.id==='rey-mysterio-mysterio-express'); assert.equal(mex.trademark,true); assert.equal(mex.kickoutRetainControl,true); assert.equal(mex.pinBonus,2);
+  const pop=allGameplayCards.find(c=>c.id==='rey-mysterio-west-coast-pop'); assert.equal(pop.finisher,true); assert.deepEqual(pop.requirements,{}); assert.equal('pinBonus' in pop,false); assert.equal(pop.damage,15); assert.deepEqual(pop.bonusDamageAfterNamed,{name:'619',damage:2});
+  const mex=allGameplayCards.find(c=>c.id==='rey-mysterio-mysterio-express'); assert.equal(mex.trademark,true); assert.equal(mex.kickoutRetainControl,true); assert.equal('pinBonus' in mex,false);
   const tilt=allGameplayCards.find(c=>c.id==='tilt-a-whirl-headscissors'); assert.ok(tilt.counters.includes('grapple')); assert.equal(tilt.drawOnCounter,1);
   assert.equal(CARD_NUMBER_BY_ID['tilt-a-whirl-headscissors']?.cardCode,'WC1-001');
   assert.equal(CARD_NUMBER_BY_ID['619']?.cardCode,'WC1-002');
@@ -466,13 +468,13 @@ test("Rey Mysterio Worlds Collide Series 1 package is locked, family-gated and p
   assert.ok(st.players.p1.hand.some(c=>c.id===pop.id),'Rey 619 searches West Coast Pop');
   const searched=st.players.p1.hand.find(c=>c.id===pop.id); g.endPostMove('p1');
   assert.equal(moveEligibility(st,'p1',searched).effectiveCost,7,'searched West Coast Pop costs 2 less');
-  st.players.p2.posture='on-mat'; assert.equal(g.declareMove('p1',searched),true); if(st.phase==='COUNTER')g.passCounter('p2'); assert.equal(st.postMove.pinBonus,6,'West Coast Pop gets Pin +6 immediately after 619');
+  st.players.p2.posture='on-mat'; const hpBeforePop=st.players.p2.hp; assert.equal(g.declareMove('p1',searched),true); if(st.phase==='COUNTER')g.passCounter('p2'); assert.equal(st.players.p2.hp,Math.max(0,hpBeforePop-17),'West Coast Pop gets +2 Damage immediately after 619');
 });
 
 test("Rey Ultimate Underdog and Lucha Libre Legend mechanics execute",()=>{
   const rey=starById.get('rey-mysterio'),opp=stars.find(s=>s.id!=='rey-mysterio');
   const g=new MatchEngine({p1:rey,p2:opp,decks,rng:()=>0.999}),s=g.state();
-  s.phase='PIN_RESPONSE';s.playerInControl='p2';s.postMove={attackerId:'p2',defenderId:'p1',cardId:null,pinBonus:0};s.proposedPin={attackerId:'p2',defenderId:'p1'};s.players.p1.deck=[byName('Dropkick'),byName('Arm Drag')];const before=s.players.p1.hand.length;assert.equal(g.passPinResponse('p1'),true);assert.equal(s.players.p1.abilityUses,1);assert.equal(s.players.p1.adrenaline,2,'Entrance + first kickout = 2 Adrenaline');assert.ok(s.players.p1.hand.length>=before+2,'kickout ability draw plus normal control draw');
+  s.phase='PIN_RESPONSE';s.playerInControl='p2';s.postMove={attackerId:'p2',defenderId:'p1',cardId:null};s.proposedPin={attackerId:'p2',defenderId:'p1'};s.players.p1.deck=[byName('Dropkick'),byName('Arm Drag')];const before=s.players.p1.hand.length;assert.equal(g.passPinResponse('p1'),true);assert.equal(s.players.p1.abilityUses,1);assert.equal(s.players.p1.adrenaline,2,'Entrance + first kickout = 2 Adrenaline');assert.ok(s.players.p1.hand.length>=before+2,'kickout ability draw plus normal control draw');
   const g2=new MatchEngine({p1:opp,p2:rey,decks,rng:rng(1603)}),q=g2.state();const incoming=byName('Bulldog'),tilt=allGameplayCards.find(c=>c.id==='tilt-a-whirl-headscissors'),special=allGameplayCards.find(c=>c.id==='special-rey-mysterio');q.phase='COUNTER';q.playerInControl='p1';q.proposedMove={attackerId:'p1',defenderId:'p2',card:incoming};q.players.p2.hand=[tilt,special];q.players.p2.deck=[byName('Dropkick')];q.players.p2.momentum.agility=10;q.players.p2.momentum.technical=10;assert.equal(g2.counter('p2',tilt),true);assert.equal(q.players.p2.specialUsed,true);assert.equal(q.proposedMove.abilityBonusDamage,3);assert.ok(q.players.p2.hand.some(c=>c.name==='Dropkick'),'Tilt-a-Whirl counter draws 1 page');
 });
 
@@ -489,7 +491,7 @@ test("Dominik Mysterio Worlds Collide package is locked and playable",()=>{
   assert.deepEqual(six.allowedSuperstarIds,['rey-mysterio','dominik-mysterio']);
   assert.ok(six.effects.some(e=>e.name==='Dominik’s Frog Splash'&&e.discount===2&&e.ifSuperstarIds?.includes('dominik-mysterio')));
   const fin=allGameplayCards.find(c=>c.id==='dominik-mysterio-frog-splash');
-  assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,15); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,4); assert.deepEqual(fin.pinBonusAfterNamed,{name:'619',pinBonus:5});
+  assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,15); assert.deepEqual(fin.requirements,{}); assert.equal('pinBonus' in fin,false); assert.deepEqual(fin.bonusDamageAfterNamed,{name:'619',damage:1});
   assert.equal(CARD_NUMBER_BY_ID['low-blow']?.cardCode,'WC1-009');
   assert.equal(CARD_NUMBER_BY_ID['three-amigos']?.cardCode,'WC1-010');
   assert.equal(CARD_NUMBER_BY_ID['dominik-mysterio-frog-splash']?.cardCode,'WC1-011');
@@ -509,7 +511,7 @@ test("Penta Worlds Collide package is locked and playable",()=>{
   assert.equal(decks.penta.filter(c=>c.id==='penta-mexican-destroyer').length,3); assert.equal(decks.penta.filter(c=>c.id==='special-penta').length,1);
   const back=allGameplayCards.find(c=>c.id==='backstabber'),tope=allGameplayCards.find(c=>c.id==='tope-con-hilo'),sac=allGameplayCards.find(c=>c.id==='penta-the-sacrifice'),driver=allGameplayCards.find(c=>c.id==='penta-driver'),fin=allGameplayCards.find(c=>c.id==='penta-mexican-destroyer'),sp=allGameplayCards.find(c=>c.id==='special-penta');
   assert.ok(back.counters.includes('aerial')); assert.equal(back.counterBonusDamage,2); assert.equal(tope.selfStunIfCountered,1);
-  assert.equal(driver.trademark,true); assert.equal(fin.finisher,true); assert.equal(fin.damage,16); assert.deepEqual(fin.requirements,{}); assert.equal(fin.pinBonus,4); assert.equal(sp.name,'Fearless Assault');
+  assert.equal(driver.trademark,true); assert.equal(fin.finisher,true); assert.equal(fin.damage,16); assert.deepEqual(fin.requirements,{}); assert.equal('pinBonus' in fin,false); assert.equal(sp.name,'Fearless Assault');
   assert.equal(CARD_NUMBER_BY_ID.backstabber.cardCode,'WC1-015'); assert.equal(CARD_NUMBER_BY_ID['superstar-penta'].cardCode,'WC1-022');
   const opp=stars.find(s=>s.id!=='penta'); const g=new MatchEngine({p1:penta,p2:opp,decks,rng:rng(1901)}),q=g.state();
   assert.equal(q.players.p1.momentum.agility,1); assert.equal(q.players.p1.momentum.strength,1); assert.equal(q.players.p1.adrenaline,1);
@@ -535,8 +537,8 @@ test("El Grande Americano completes Worlds Collide Series 1 and is fully playabl
   const jump=allGameplayCards.find(c=>c.id==='el-grande-americano-jumping-headbutt');
   const fin=allGameplayCards.find(c=>c.id==='el-grande-americano-loaded-mask-headbutt');
   const sp=allGameplayCards.find(c=>c.id==='special-el-grande-americano');
-  assert.equal(jump.trademark,true); assert.equal(jump.damage,11); assert.equal(jump.stun,1); assert.equal(jump.pinBonus,2); assert.deepEqual(jump.requirements,{strike:2,agility:1});
-  assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,16); assert.deepEqual(fin.requirements,{}); assert.equal(fin.stun,1); assert.equal(fin.pinBonus,4);
+  assert.equal(jump.trademark,true); assert.equal(jump.damage,11); assert.equal(jump.stun,1); assert.equal('pinBonus' in jump,false); assert.deepEqual(jump.requirements,{strike:2,agility:1});
+  assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,16); assert.deepEqual(fin.requirements,{}); assert.equal(fin.stun,1); assert.equal('pinBonus' in fin,false);
   assert.equal(sp.name,'Steel Plate');
   assert.equal(CARD_NUMBER_BY_ID['el-grande-americano-jumping-headbutt']?.cardCode,'WC1-023');
   assert.equal(CARD_NUMBER_BY_ID['el-grande-americano-loaded-mask-headbutt']?.cardCode,'WC1-024');
@@ -632,7 +634,7 @@ test("retained-Control kickouts advance the turn and refresh Momentum without er
   s.playerInControl='p1'; s.phase='PIN_RESPONSE';
   s.players.p1.discard=[standing]; s.players.p1.turn.momentumPlayed=1;
   s.players.p1.lastConnectedMethod='agility'; s.players.p1.lastConnectedCardName='Standing Moonsault'; s.players.p1.controlMoveCount=2;
-  s.postMove={attackerId:'p1',defenderId:'p2',cardId:standing.id,pinBonus:standing.pinBonus??0};
+  s.postMove={attackerId:'p1',defenderId:'p2',cardId:standing.id};
   s.proposedPin={attackerId:'p1',defenderId:'p2'};
   const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence;
   assert.equal(g.passPinResponse('p2'),true);
@@ -744,7 +746,7 @@ test("Money in the Bank Series 1 Jey Uso package is locked and playable",()=>{
   const jey=starById.get('jey-uso'); assert.ok(jey); assert.equal(jey.hp,52);
   assert.deepEqual(jey.starterMomentum,{strike:6,strength:4,agility:2});
   assert.equal(decks['jey-uso'].length,55); assert.equal(decks['jey-uso'].filter(c=>c.kind==='momentum').length,12);
-  const splash=byName('Uso Splash'); assert.ok(splash); assert.equal(splash.finisher,true); assert.equal(splash.damage,16); assert.deepEqual(splash.requirements,{}); assert.deepEqual(splash.allowedSuperstarIds,['jey-uso']); assert.equal(splash.pinBonusAfterNamed.name,'Spear'); assert.equal(splash.pinBonusAfterNamed.pinBonus,5);
+  const splash=byName('Uso Splash'); assert.ok(splash); assert.equal(splash.finisher,true); assert.equal(splash.damage,16); assert.deepEqual(splash.requirements,{}); assert.deepEqual(splash.allowedSuperstarIds,['jey-uso']); assert.deepEqual(splash.bonusDamageAfterNamed,{name:'Spear',damage:1});
   assert.equal(CARD_NUMBER_BY_ID['running-hip-attack'].cardCode,'MITB1-001'); assert.equal(CARD_NUMBER_BY_ID['uso-splash'].cardCode,'MITB1-002'); assert.equal(CARD_NUMBER_BY_ID['superstar-jey-uso'].cardCode,'MITB1-005');
   const opp=stars.find(x=>x.id!=='jey-uso'); const g=new MatchEngine({p1:jey,p2:opp,decks,rng:rng(1164)}),st=g.state(),p1=st.players.p1;
   // Entrance applies.
@@ -762,7 +764,7 @@ test("Money in the Bank Series 1 LA Knight package is locked and playable",()=>{
   assert.deepEqual(knight.starterMomentum,{strike:5,strength:3,technical:2,agility:2});
   assert.equal(decks['la-knight'].length,55); assert.equal(decks['la-knight'].filter(c=>c.kind==='momentum').length,12);
   const bft=byName('BFT'), jump=byName('Jumping Neckbreaker'), hammer=byName('Burning Hammer');
-  assert.ok(bft&&jump&&hammer); assert.equal(bft.finisher,true); assert.equal(bft.damage,16); assert.deepEqual(bft.requirements,{}); assert.equal(bft.superstarId,'la-knight'); assert.equal(bft.pinBonusAfterNamed.name,'Diving Elbow Drop'); assert.equal(bft.pinBonusAfterNamed.pinBonus,5);
+  assert.ok(bft&&jump&&hammer); assert.equal(bft.finisher,true); assert.equal(bft.damage,16); assert.deepEqual(bft.requirements,{}); assert.equal(bft.superstarId,'la-knight'); assert.deepEqual(bft.bonusDamageAfterNamed,{name:'Diving Elbow Drop',damage:1});
   assert.equal(CARD_NUMBER_BY_ID['jumping-neckbreaker'].cardCode,'MITB1-006'); assert.equal(CARD_NUMBER_BY_ID['la-knight-bft'].cardCode,'MITB1-008'); assert.equal(CARD_NUMBER_BY_ID['superstar-la-knight'].cardCode,'MITB1-011');
   const opp=stars.find(x=>x.id!=='la-knight'); const g=new MatchEngine({p1:knight,p2:opp,decks,rng:rng(1165)}),st=g.state(),p=st.players.p1;
   assert.equal(p.momentum.strike,1); assert.equal(p.adrenaline,1);
@@ -777,22 +779,22 @@ test("Money in the Bank Series 1 Alexa Bliss package is locked and playable",()=
   assert.deepEqual(alexa.starterMomentum,{agility:6,strike:3,technical:3});
   assert.equal(decks['alexa-bliss'].length,55); assert.equal(decks['alexa-bliss'].filter(c=>c.kind==='momentum').length,12);
   const knees=byName('Double Knees'), code=byName('Code Red'), sister=byName('Sister Abigail'), twisted=byName('Twisted Bliss');
-  assert.ok(knees&&code&&sister&&twisted); assert.equal(sister.trademark,true); assert.equal(twisted.finisher,true); assert.equal(twisted.damage,15); assert.deepEqual(twisted.requirements,{}); assert.equal(twisted.superstarId,'alexa-bliss'); assert.equal(twisted.pinBonusAfterNamed.name,'Sister Abigail'); assert.equal(twisted.pinBonusAfterNamed.pinBonus,6);
+  assert.ok(knees&&code&&sister&&twisted); assert.equal(sister.trademark,true); assert.equal(twisted.finisher,true); assert.equal(twisted.damage,15); assert.deepEqual(twisted.requirements,{}); assert.equal(twisted.superstarId,'alexa-bliss'); assert.deepEqual(twisted.bonusDamageAfterNamed,{name:'Sister Abigail',damage:2});
   assert.equal(CARD_NUMBER_BY_ID['double-knees'].cardCode,'MITB1-012'); assert.equal(CARD_NUMBER_BY_ID['alexa-bliss-twisted-bliss'].cardCode,'MITB1-015'); assert.equal(CARD_NUMBER_BY_ID['superstar-alexa-bliss'].cardCode,'MITB1-018');
   const opp=stars.find(x=>x.id!=='alexa-bliss'); const g=new MatchEngine({p1:alexa,p2:opp,decks,rng:rng(1166)}),st=g.state(),p=st.players.p1,d=st.players.p2;
   assert.equal(p.momentum.agility,1); assert.equal(p.adrenaline,1);
   // Five Feet of Fury only rewards a Move that begins while the opponent is already Stunned.
   p.adrenaline=5; d.status.stunnedTurns=1; d.stun=1; const beforeHand=p.hand.length; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:code};g._connect(); assert.equal(p.adrenaline,7); assert.ok(p.hand.length>=beforeHand+1);
-  // Sister Abigail tutors/discounts Twisted Bliss and its combo pin bonus is +6.
+  // Sister Abigail tutors/discounts Twisted Bliss; the follow-up gets +2 Damage.
   d.status.stunnedTurns=0; d.stun=0; p.deck=[twisted]; st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:sister};g._connect(); assert.ok(p.hand.some(c=>c.id==='alexa-bliss-twisted-bliss')); assert.equal(p.namedDiscount['Twisted Bliss'],1);
 });
 
-test("Alexa Bliss Mind Games reduces one Pin and rewards a successful kickout",()=>{
+test("Alexa Bliss Mind Games rewards a natural kickout without modifying pin odds",()=>{
   const alexa=starById.get('alexa-bliss'),opp=stars.find(x=>x.id!=='alexa-bliss'); const g=new MatchEngine({p1:opp,p2:alexa,decks,rng:()=>0.99}),st=g.state(),a=st.players.p1,d=st.players.p2;
   const special=allGameplayCards.find(c=>c.id==='special-alexa-bliss'); d.hand=[special]; d.adrenaline=2; const beforeHand=d.hand.length;
-  st.playerInControl='p1'; st.phase='ACTION'; d.hp=Math.floor(d.maxHp*.5); st.postMove={attackerId:'p1',defenderId:'p2',cardId:'test',pinBonus:4};
-  assert.equal(g.attemptPin('p1'),true); assert.equal(st.proposedPin.pinBonusModifier,-2); assert.equal(d.specialUsed,true);
-  assert.equal(g.passPinResponse('p2'),true); assert.equal(d.adrenaline,3); assert.ok(d.hand.length>=beforeHand); assert.equal(d.events.mindGamesPending,undefined);
+  st.playerInControl='p1'; st.phase='ACTION'; d.hp=Math.floor(d.maxHp*.5); st.postMove={attackerId:'p1',defenderId:'p2',cardId:'test'};
+  assert.equal(g.attemptPin('p1'),true); assert.equal(d.specialUsed,false);
+  assert.equal(g.passPinResponse('p2'),true); assert.equal(d.specialUsed,true); assert.equal(d.adrenaline,3); assert.ok(d.hand.length>=beforeHand); assert.equal('pinBonusModifier' in (st.proposedPin??{}),false);
 });
 
 
@@ -802,7 +804,7 @@ test("Money in the Bank Series 1 Finn Bálor package is locked and playable",()=
   assert.deepEqual(finn.starterMomentum,{agility:6,strike:4,technical:2});
   assert.equal(decks['finn-balor'].length,55); assert.equal(decks['finn-balor'].filter(c=>c.kind==='momentum').length,12);
   const shotgun=byName('Shotgun Dropkick'), move1916=byName('1916'), coup=byName('Coup de Grâce');
-  assert.ok(shotgun&&move1916&&coup); assert.equal(move1916.trademark,true); assert.equal(coup.finisher,true); assert.equal(coup.damage,16); assert.deepEqual(coup.requirements,{}); assert.equal(coup.superstarId,'finn-balor'); assert.equal(coup.pinBonusAfterNamed.name,'Shotgun Dropkick'); assert.equal(coup.pinBonusAfterNamed.pinBonus,5);
+  assert.ok(shotgun&&move1916&&coup); assert.equal(move1916.trademark,true); assert.equal(coup.finisher,true); assert.equal(coup.damage,16); assert.deepEqual(coup.requirements,{}); assert.equal(coup.superstarId,'finn-balor'); assert.deepEqual(coup.bonusDamageAfterNamed,{name:'Shotgun Dropkick',damage:1});
   assert.equal(CARD_NUMBER_BY_ID['shotgun-dropkick'].cardCode,'MITB1-019'); assert.equal(CARD_NUMBER_BY_ID['finn-balor-coup-de-grace'].cardCode,'MITB1-021'); assert.equal(CARD_NUMBER_BY_ID['superstar-finn-balor'].cardCode,'MITB1-024');
   const opp=stars.find(x=>x.id!=='finn-balor'); const g=new MatchEngine({p1:finn,p2:opp,decks,rng:rng(1167)}),st=g.state(),p=st.players.p1;
   assert.equal(p.momentum.strength,1); assert.equal(p.adrenaline,1);
@@ -825,7 +827,7 @@ test("SmackDown Series 1 Danhausen package is locked and playable",()=>{
   assert.deepEqual(dan.starterMomentum,{technical:6,strike:4,strength:2});
   assert.equal(decks.danhausen.length,55); assert.equal(decks.danhausen.filter(c=>c.kind==='momentum').length,12);
   const pump=byName('Pump Kick'), inv=byName('Inverted DDT'), oct=byName('Octopus Hold'), knee=byName('Very Nice, Very Knee-vil'), triple=byName('Triple D'), cutter=byName('Cutter');
-  assert.ok(pump&&inv&&oct&&knee&&triple&&cutter); assert.equal(knee.trademark,true); assert.equal(triple.finisher,true); assert.equal(triple.damage,15); assert.deepEqual(triple.requirements,{}); assert.equal(triple.superstarId,'danhausen'); assert.equal(triple.pinBonusIfOpponentStunned,5);
+  assert.ok(pump&&inv&&oct&&knee&&triple&&cutter); assert.equal(knee.trademark,true); assert.equal(triple.finisher,true); assert.equal(triple.damage,15); assert.deepEqual(triple.requirements,{}); assert.equal(triple.superstarId,'danhausen'); assert.equal(triple.bonusDamageIfOpponentStunned,1);
   assert.equal(CARD_NUMBER_BY_ID['pump-kick'].cardCode,'SD1-001'); assert.equal(CARD_NUMBER_BY_ID['superstar-danhausen'].cardCode,'SD1-008'); assert.equal(CARD_NUMBER_BY_ID['cutter'].cardCode,'SD1-009');
   const opp=stars.find(x=>x.id!=='danhausen'),g=new MatchEngine({p1:dan,p2:opp,decks,rng:rng(1168)}),st=g.state(),p=st.players.p1;
   assert.equal(p.momentum.technical,1); assert.equal(p.adrenaline,1);
@@ -841,8 +843,8 @@ test("Danhausen curse, Jar of Teeth and stunned finish interactions resolve",()=
   const counter=allGameplayCards.find(c=>!c.defensiveOnly&&(c.counters??[]).some(Boolean)); if(counter){a.hand.unshift(counter); const cb=d.adrenaline; if(g.counter('p1',counter)) assert.equal(d.adrenaline,Math.max(0,cb-1));}
   // Directly verify Jar post-grounding window and effect.
   const jar=allGameplayCards.find(c=>c.id==='special-danhausen'),ground=allGameplayCards.find(c=>c.id==='inverted-ddt'); a.hand=[jar]; a.specialUsed=false; a.momentum.technical=10;a.momentum.strike=10; d.hand=[allGameplayCards.find(c=>c.id==='momentum-strike')]; d.adrenaline=2; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:ground}; g._connect(); assert.equal(a.events.jarOfTeethWindow,true); const handBefore=a.hand.length; assert.equal(g.playSpecial('p1',jar),true); assert.equal(d.hand.length,0); assert.equal(d.adrenaline,0); assert.ok(a.hand.length>=handBefore);
-  // Triple D gains +5 Pin Bonus against a previously Stunned opponent.
-  const triple=allGameplayCards.find(c=>c.id==='danhausen-triple-d'); a.specialUsed=true; d.status.stunnedTurns=1;d.stun=1; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:triple}; g._connect(); assert.equal(st.postMove.pinBonus,5);
+  // Triple D gains +1 Damage against a previously Stunned opponent.
+  const triple=allGameplayCards.find(c=>c.id==='danhausen-triple-d'); a.specialUsed=true; d.status.stunnedTurns=1;d.stun=1; const hpBeforeTriple=d.hp; st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:triple}; g._connect(); assert.equal(d.hp,Math.max(0,hpBeforeTriple-16));
 });
 
 
@@ -852,7 +854,7 @@ test("SmackDown Series 1 Tiffany Stratton package is locked and playable",()=>{
   assert.deepEqual(tiffany.methodLimits,{agility:null,strength:4,technical:1,strike:1});
   assert.equal(decks['tiffany-stratton'].length,55); assert.equal(decks['tiffany-stratton'].filter(c=>c.kind==='momentum').length,12);
   const elbow=allGameplayCards.find(c=>c.id==='tiffany-stratton-handspring-back-elbow'),pme=allGameplayCards.find(c=>c.id==='tiffany-stratton-prettiest-moonsault-ever');
-  assert.ok(elbow&&pme); assert.equal(elbow.trademark,true); assert.equal(elbow.damage,7); assert.equal(pme.finisher,true); assert.equal(pme.damage,16); assert.deepEqual(pme.requirements,{}); assert.equal(pme.pinBonus,4);
+  assert.ok(elbow&&pme); assert.equal(elbow.trademark,true); assert.equal(elbow.damage,7); assert.equal(pme.finisher,true); assert.equal(pme.damage,16); assert.deepEqual(pme.requirements,{}); assert.equal('pinBonus' in pme,false);
   assert.equal(CARD_NUMBER_BY_ID['front-kick'].cardCode,'SD1-010'); assert.equal(CARD_NUMBER_BY_ID['superstar-tiffany-stratton'].cardCode,'SD1-017');
   const opp=stars.find(x=>x.id!=='tiffany-stratton'),g=new MatchEngine({p1:tiffany,p2:opp,decks,rng:rng(1177)}),st=g.state(),p=st.players.p1,d=st.players.p2;
   assert.equal(p.momentum.agility,1); assert.equal(p.adrenaline,1);
@@ -869,7 +871,7 @@ test("SmackDown Series 1 Chelsea Green package is locked and counter-control mec
   assert.deepEqual(chelsea.methodLimits,{agility:3,strength:1,strike:2,technical:null});
   assert.equal(decks['chelsea-green'].length,55); assert.equal(decks['chelsea-green'].filter(c=>c.kind==='momentum').length,12);
   const prettier=allGameplayCards.find(c=>c.id==='chelsea-green-im-prettier'),envy=allGameplayCards.find(c=>c.id==='chelsea-green-green-with-envy'),special=allGameplayCards.find(c=>c.id==='special-chelsea-green'),runningKnees=allGameplayCards.find(c=>c.id==='running-knees-to-the-back');
-  assert.ok(prettier&&envy&&special&&runningKnees); assert.equal(prettier.trademark,true); assert.equal(prettier.damage,11); assert.equal(envy.finisher,true); assert.equal(envy.damage,15); assert.deepEqual(envy.requirements,{}); assert.equal(envy.pinBonus,4);
+  assert.ok(prettier&&envy&&special&&runningKnees); assert.equal(prettier.trademark,true); assert.equal(prettier.damage,11); assert.equal(envy.finisher,true); assert.equal(envy.damage,15); assert.deepEqual(envy.requirements,{}); assert.equal('pinBonus' in envy,false);
   assert.equal(runningKnees.cost,4); assert.equal(runningKnees.damage,6); assert.equal(runningKnees.method,'agility'); assert.deepEqual(runningKnees.requirements,{agility:1,strike:1}); assert.equal(runningKnees.standingOnly,true); assert.equal(runningKnees.groundOpponent,true);
   assert.equal(decks['chelsea-green'].filter(c=>c.id==='running-knees-to-the-back').length,1); assert.deepEqual(Object.entries(decks).filter(([sid,deck])=>sid!=='chelsea-green'&&deck.some(c=>c.id==='running-knees-to-the-back')).map(([sid])=>sid),[]);
   assert.equal(CARD_NUMBER_BY_ID['chelsea-green-im-prettier'].cardCode,'SD1-018'); assert.equal(CARD_NUMBER_BY_ID['superstar-chelsea-green'].cardCode,'SD1-022'); assert.equal(CARD_NUMBER_BY_ID['running-knees-to-the-back'].cardCode,'SD1-031');
@@ -897,13 +899,98 @@ test("SmackDown Series 1 Damian Priest package is locked and punishment mechanic
   d.adrenaline=3;st.playerInControl='p1';st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:razor};g._connect();assert.ok(d.adrenaline<=1);
 });
 
-test("v0.11.83 pin curve makes Amber extremely unlikely and Red the true finishing phase",()=>{
+test("canonical health bands are Green 65%+, Amber 25-64%, Red 0-24% and pins follow them",()=>{
   const g=new MatchEngine({p1:superstars.romanReigns,p2:superstars.codyRhodes,decks,rng:()=>0.5});
-  const s=g.state(); s.playerInControl='p1'; s.phase='ACTION'; s.postMove={attackerId:'p1',defenderId:'p2',cardId:null,pinBonus:0};
+  const s=g.state(),d=s.players.p2; s.playerInControl='p1'; s.phase='ACTION'; s.postMove={attackerId:'p1',defenderId:'p2',cardId:null};
   s.players.p1.turn={momentumPlayed:0,momentumPlayLimit:1,actionPlayed:0,supportPlayed:0,specialPlayed:0};
-  s.players.p2.hp=Math.ceil(s.players.p2.maxHp*.61); assert.equal(canAttemptPin(s,'p1').legal,false,'Green HP cannot be pinned');
-  s.players.p2.hp=Math.floor(s.players.p2.maxHp*.50); assert.equal(canAttemptPin(s,'p1').legal,true,'Amber HP opens the cover window');
-  s.proposedPin={attackerId:'p1',defenderId:'p2',pinBonusModifier:0}; const amber=g._pinChance('p1'); assert.ok(amber>=1&&amber<=8,`Amber chance ${amber} must stay tiny`);
-  s.players.p2.hp=Math.floor(s.players.p2.maxHp*.35); const red=g._pinChance('p1'); assert.ok(red>amber,'Red must be materially more vulnerable than Amber');
-  s.players.p2.hp=0; s.postMove.pinBonus=5; const deepRed=g._pinChance('p1'); assert.ok(deepRed>=85&&deepRed<=95,'0 HP plus a major Pin Bonus should be extremely dangerous but still probabilistic');
+  d.maxHp=100;
+  d.hp=65; assert.equal(healthZone(d),'green'); assert.equal(canAttemptPin(s,'p1').legal,false,'65% HP is Green and cannot be pinned'); assert.equal(g._pinChance('p1'),0);
+  d.hp=64; assert.equal(healthZone(d),'amber'); assert.equal(canAttemptPin(s,'p1').legal,true,'64% HP is Amber and opens the cover window'); const highAmber=g._pinChance('p1'); assert.ok(highAmber>=1&&highAmber<=3);
+  d.hp=25; assert.equal(healthZone(d),'amber'); const lowAmber=g._pinChance('p1'); assert.ok(lowAmber>=highAmber&&lowAmber<=3);
+  d.hp=24; assert.equal(healthZone(d),'red'); const red=g._pinChance('p1'); assert.ok(red>=15&&red>lowAmber,'24% HP is Red and materially more vulnerable than Amber');
+  d.hp=0; assert.equal(healthZone(d),'red'); assert.equal(g._pinChance('p1'),90,'0 HP should be extremely dangerous without any card-based pin modifier');
+});
+
+
+test("Fight Forever is a booster-only 4-star RAW Action and is absent from all recommended decks",()=>{
+  const card=allGameplayCards.find(c=>c.id==='fight-forever');
+  assert.ok(card);
+  assert.equal(card.kind,'action');
+  assert.equal(card.rarity,4);
+  assert.equal(card.setId,'raw-series-1');
+  assert.equal(card.boosterOnly,true);
+  assert.equal(boosterEligible(card),true);
+  assert.equal(Object.values(decks).some(deck=>deck.some(c=>c.id===card.id)),false);
+  assert.equal(CARD_NUMBER_BY_ID[card.id]?.cardCode,'RAW1-030');
+});
+
+test("Fight Forever heals both Superstars by 10 up to max HP and extends the live turn limit by 10",()=>{
+  const fight=allGameplayCards.find(c=>c.id==='fight-forever');
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(1195)});
+  const s=g.state();
+  s.players.p1.hand=[fight]; s.players.p1.hp=Math.max(0,s.players.p1.maxHp-15); s.players.p2.hp=Math.max(0,s.players.p2.maxHp-6);
+  assert.equal(s.turnLimit,50);
+  assert.equal(g.playAction('p1',fight),true);
+  assert.equal(s.players.p1.hp,s.players.p1.maxHp-5);
+  assert.equal(s.players.p2.hp,s.players.p2.maxHp);
+  assert.equal(s.turnLimit,60);
+  assert.ok(s.log.some(e=>e.type==='FIGHT_FOREVER'&&e.oldTurnLimit===50&&e.newTurnLimit===60));
+});
+
+test("50-turn matches draw at the limit unless Fight Forever extends them",()=>{
+  const fight=allGameplayCards.find(c=>c.id==='fight-forever');
+  const g1=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(501)}); const s1=g1.state();
+  s1.turnNumber=50; s1.phase='ACTION'; s1.playerInControl='p1';
+  assert.equal(g1.passTurn('p1'),true);
+  assert.equal(s1.phase,'MATCH_OVER'); assert.equal(s1.winner,null); assert.equal(s1.finish?.type,'turn-limit'); assert.equal(s1.turnNumber,50);
+
+  const g2=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(601)}); const s2=g2.state();
+  s2.turnNumber=50; s2.phase='ACTION'; s2.playerInControl='p1'; s2.players.p1.hand=[fight];
+  assert.equal(g2.playAction('p1',fight),true); assert.equal(s2.turnLimit,60);
+  assert.equal(g2.passTurn('p1'),true); assert.equal(s2.phase,'ACTION'); assert.equal(s2.turnNumber,51);
+});
+
+
+test("v0.11.96 staged move/action expansion is fully registered and subset pools are even",()=>{
+  const expected={
+    'flapjack':['MITB1-030',4,6], 'side-headlock':['MITB1-031',3,2], 'wristlock':['MITB1-032',2,1], 'catch-your-breath':['MITB1-033',null,null],
+    'knee-to-the-gut':['RAW1-031',3,4], 'throw-into-steel-steps':['RAW1-032',5,8], 'sleeper-hold':['RAW1-033',4,2],
+    'scissors-kick':['WC1-031',5,8], 'senton-splash':['WC1-032',5,8], 'spinning-back-kick':['WC1-033',3,5],
+    'throw-into-ringpost':['SD1-032',5,8], 'corner-barrage':['SD1-033',4,6]
+  };
+  for(const [id,[code,cost,damage]] of Object.entries(expected)){
+    const card=allGameplayCards.find(c=>c.id===id);assert.ok(card,id);assert.equal(card.boosterOnly,true,id);assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
+    if(cost!==null)assert.equal(card.cost,cost,id);if(damage!==null)assert.equal(card.damage,damage,id);
+    assert.equal(boosterEligible(card),true,id);
+  }
+  const setIds=['raw-series-1','money-in-the-bank-series-1','worlds-collide-series-1','smackdown-series-1'];
+  for(const setId of setIds){
+    const pool=allGameplayCards.filter(c=>c.setId===setId);assert.equal(pool.length,29,`${setId} gameplay pool`);assert.equal(pool.filter(boosterEligible).length,25,`${setId} booster pool`);
+  }
+});
+
+test("new impact Moves deal one-shot body-part damage without opening a maintainable submission",()=>{
+  const ringpost=allGameplayCards.find(c=>c.id==='throw-into-ringpost'),steps=allGameplayCards.find(c=>c.id==='throw-into-steel-steps');
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(1196)}),s=g.state(),a=s.players.p1,d=s.players.p2;
+  a.momentum.strength=99;
+  s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:ringpost};g._connect();
+  assert.equal(d.submissionDamage.head,1);assert.notEqual(s.phase,'SUBMISSION_MAINTAIN');assert.equal(s.submission,null);
+  s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:steps};g._connect();
+  assert.equal(d.submissionDamage.back,1);assert.notEqual(s.phase,'SUBMISSION_MAINTAIN');
+  assert.equal(s.log.filter(e=>e.type==='BODY_PART_DAMAGE').length,2);
+});
+
+test("Corner Barrage chains from an earlier Strike and Knee to the Gut is an offensive Grapple Counter",()=>{
+  const barrage=allGameplayCards.find(c=>c.id==='corner-barrage'),knee=allGameplayCards.find(c=>c.id==='knee-to-the-gut'),punch=allGameplayCards.find(c=>c.id==='punch'),grapple=allGameplayCards.find(c=>c.kind==='move'&&c.moveType==='grapple'&&!c.defensiveOnly);
+  assert.ok(barrage&&knee&&punch&&grapple);assert.deepEqual(knee.counters,['grapple']);
+  const plain1={...stars[0],ability:{name:'Test',trigger:{}}},plain2={...stars[1],ability:{name:'Test',trigger:{}}};
+  const g=new MatchEngine({p1:plain1,p2:plain2,decks,rng:rng(2196)}),s=g.state(),a=s.players.p1,d=s.players.p2;a.momentum.strike=99;
+  a.events.strikeConnectedThisControl=true;const hp=d.hp;s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:barrage};g._connect();assert.equal(d.hp,hp-8);
+  s.phase='COUNTER';s.proposedMove={attackerId:'p2',defenderId:'p1',card:grapple};a.hand=[knee];assert.equal(g.counter('p1',knee),true);assert.equal(s.proposedMove?.card?.id,'knee-to-the-gut');
+});
+
+test("Catch Your Breath is a 3-star booster-only Action that restores 5 HP up to max",()=>{
+  const card=allGameplayCards.find(c=>c.id==='catch-your-breath');assert.ok(card);assert.equal(card.kind,'action');assert.equal(card.rarity,3);assert.equal(card.setId,'money-in-the-bank-series-1');
+  const g=new MatchEngine({p1:stars[0],p2:stars[1],decks,rng:rng(3196)}),s=g.state(),p=s.players.p1;p.hand=[card];p.hp=p.maxHp-3;
+  assert.equal(g.playAction('p1',card),true);assert.equal(p.hp,p.maxHp);assert.ok(s.log.some(e=>e.type==='HEALTH_RESTORED'&&e.amount===3));
 });

@@ -1,9 +1,10 @@
 import { moveEligibility, counterEligibility, canPlaySpecial, canPlayMomentum, canAttemptPin, submissionThreshold } from "../engine/rules.js";
+import { healthRatio, healthZone } from "../engine/health.js";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function moveScore(state,pid,card){
  const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
- let score=(card.damage??0)*2+(card.pinBonus??0);
+ let score=(card.damage??0)*2;
  if(card.finisher)score+=35;if(card.trademark)score+=8;
  if((card.damage??0)>=def.hp)score+=50;
  if(card.groundOpponent&&!groundState(def))score+=4;
@@ -35,9 +36,9 @@ export function cpuDecision(game,pid="p2"){
  if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');return c?{type:"pinEscape",card:c}:{type:"passPin"};}
  if(s.phase==="SUBMISSION_MAINTAIN"){const def=s.players[s.submission.defenderId],threshold=submissionThreshold(def);return p.hand.length&&def.submissionDamage[s.submission.bodyPart]<threshold?{type:"maintain",index:0}:{type:"release"};}
  if(s.phase==="ACTION"){
-   const def=s.players[pid==="p1"?"p2":"p1"],hpRatio=def.maxHp?def.hp/def.maxHp:0,lastPinBonus=s.postMove?.pinBonus??0;
+   const def=s.players[pid==="p1"?"p2":"p1"],hpRatio=healthRatio(def);
    const readyFinisher=p.hand.find(x=>x.kind==="move"&&x.finisher&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);
-   if(canAttemptPin(s,pid).legal&&!readyFinisher&&(hpRatio<=.40||(hpRatio<=.50&&lastPinBonus>=4)))return{type:"pin"};
+   if(canAttemptPin(s,pid).legal&&!readyFinisher&&healthZone(def)==="red")return{type:"pin"};
    const sp=p.hand.find(x=>canPlaySpecial(s,pid,x));if(sp)return{type:"special",card:sp};
    const mom=p.hand.find(x=>canPlayMomentum(s,pid,x));if(mom)return{type:"momentum",card:mom};
    let moves=p.hand.filter(x=>x.kind==="move"&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);

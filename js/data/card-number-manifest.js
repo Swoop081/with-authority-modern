@@ -2012,7 +2012,22 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
 {"id":"dropkick-to-the-back","setId":"smackdown-series-1","cardNumber":29,"cardCode":"SD1-029"},
 {"id":"elbow","setId":"smackdown-series-1","cardNumber":30,"cardCode":"SD1-030"},
 {"id":"running-knees-to-the-back","setId":"smackdown-series-1","cardNumber":31,"cardCode":"SD1-031"}
+,
+{"id":"fight-forever","setId":"raw-series-1","cardNumber":30,"cardCode":"RAW1-030"}
 
+,
+{"id":"knee-to-the-gut","setId":"raw-series-1","cardNumber":31,"cardCode":"RAW1-031"},
+{"id":"throw-into-steel-steps","setId":"raw-series-1","cardNumber":32,"cardCode":"RAW1-032"},
+{"id":"sleeper-hold","setId":"raw-series-1","cardNumber":33,"cardCode":"RAW1-033"},
+{"id":"flapjack","setId":"money-in-the-bank-series-1","cardNumber":30,"cardCode":"MITB1-030"},
+{"id":"side-headlock","setId":"money-in-the-bank-series-1","cardNumber":31,"cardCode":"MITB1-031"},
+{"id":"wristlock","setId":"money-in-the-bank-series-1","cardNumber":32,"cardCode":"MITB1-032"},
+{"id":"catch-your-breath","setId":"money-in-the-bank-series-1","cardNumber":33,"cardCode":"MITB1-033"},
+{"id":"scissors-kick","setId":"worlds-collide-series-1","cardNumber":31,"cardCode":"WC1-031"},
+{"id":"senton-splash","setId":"worlds-collide-series-1","cardNumber":32,"cardCode":"WC1-032"},
+{"id":"spinning-back-kick","setId":"worlds-collide-series-1","cardNumber":33,"cardCode":"WC1-033"},
+{"id":"throw-into-ringpost","setId":"smackdown-series-1","cardNumber":32,"cardCode":"SD1-032"},
+{"id":"corner-barrage","setId":"smackdown-series-1","cardNumber":33,"cardCode":"SD1-033"}
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));
