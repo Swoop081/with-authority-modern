@@ -1,31 +1,31 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.45";
-import { superstars } from "../data/superstars.js?v=0.12.45";
-import { decks } from "../data/decks.js?v=0.12.45";
-import { sets } from "../data/sets.js?v=0.12.45";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.45";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.45";
-import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.45";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.45";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.45";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.45";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.45";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.45";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.45";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.45";
-import { totalMomentum } from "../engine/utils.js?v=0.12.45";
-import { healthZone } from "../engine/health.js?v=0.12.45";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.45";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.45";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.45";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.45";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.45";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.45";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.45";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.45";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.45";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.45";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.45";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.45";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.46";
+import { superstars } from "../data/superstars.js?v=0.12.46";
+import { decks } from "../data/decks.js?v=0.12.46";
+import { sets } from "../data/sets.js?v=0.12.46";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.46";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.46";
+import { artworkFor, superstarArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.46";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.46";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.46";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.46";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.46";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.46";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.46";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.46";
+import { totalMomentum } from "../engine/utils.js?v=0.12.46";
+import { healthZone } from "../engine/health.js?v=0.12.46";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.46";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.46";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.46";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.46";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.46";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.46";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.46";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.46";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.46";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal } from "../data/deck-builder.js?v=0.12.46";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.46";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.46";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -41,6 +41,8 @@ let collectionView = "owned";
 let collectionRenderLimit = 48;
 let catalogueFilter = defaultCatalogueFilters();
 let cataloguePage = 1;
+let catalogueFiltersOpen = false;
+let collectionFiltersOpen = false;
 let flippedCatalogueCards = new Set();
 let lastPack = null;
 let pendingUpgrades = [];
@@ -439,6 +441,7 @@ function showChampionship() { if (!profile) { screen = "starter"; renderStarter(
 function showCollection() { showOwnedCollection(); }
 function showOwnedCollection() {
   collectionView = "owned";
+  collectionFiltersOpen = false;
   lastChromeScreen = null;
   activeCollectionSetId = "all";
   collectionFilter = { kind: "all", rarity: "all", search: "" };
@@ -447,6 +450,7 @@ function showOwnedCollection() {
 }
 function showCardCatalogue() {
   collectionView = "catalogue";
+  catalogueFiltersOpen = false;
   lastChromeScreen = null;
   catalogueFilter = defaultCatalogueFilters();
   cataloguePage = 1;
@@ -475,6 +479,11 @@ function showDeckBuilder(starId = null) {
   const unlocked = profile.unlockedSuperstars ?? [];
   if (starId && unlocked.includes(starId)) {
     deckBuilderStarId = starId;
+    deckDraft = createDeckDraft(profile, deckBuilderStarId);
+    deckLabEntranceId = selectedEntranceId(profile, deckBuilderStarId);
+    deckLabStage = "editor";
+  } else if (unlocked.length === 1) {
+    deckBuilderStarId = unlocked[0];
     deckDraft = createDeckDraft(profile, deckBuilderStarId);
     deckLabEntranceId = selectedEntranceId(profile, deckBuilderStarId);
     deckLabStage = "editor";
@@ -709,7 +718,7 @@ function renderBoosters() {
     if (championshipCount > 0) vaultBuckets.push({ setId:vaultSet.id, type:"championship", count:championshipCount, label:"CHAMPIONSHIP PACK", subtitle:"1 FOIL · 1 RARE+" });
   }
   const totalVaultPacks = vaultBuckets.reduce((sum,b)=>sum+b.count,0);
-  const vaultShelf = vaultBuckets.length ? `<section class="booster-vault-shelf" aria-label="Openable booster packs">${vaultBuckets.map((bucket,index)=>{
+  const vaultShelf = vaultBuckets.length ? `<section class="booster-vault-shelf ${vaultBuckets.length === 1 ? "single-pack" : ""}" aria-label="Openable booster packs">${vaultBuckets.map((bucket,index)=>{
     const info=setCollections[bucket.setId]??setCollection;
     const logo=setLogoMarkup(bucket.setId,"pack-set-logo") || `<span class="pack-text-logo"><b>${info.name.toUpperCase()}</b><small>SERIES 1</small></span>`;
     return `<button type="button" class="vault-pack-product pack-set-${bucket.setId}" data-open-vault-pack="${bucket.setId}:${bucket.type}" aria-label="Open ${info.displayName} ${bucket.label}">
@@ -829,8 +838,8 @@ function renderStore() {
   const starRows = stars.map(star => {
     const owned = hasSuperstar(profile, star.id);
     return `<article class="store-superstar-card shop-star-card ${owned?'owned':''}">
-      <button type="button" class="store-superstar-art" data-store-inspect-star="${star.id}">${portraitMarkup(star.id,star.name)}</button>
-      <div class="store-superstar-copy"><span>${owned?'OWNED':'SUPERSTAR UNLOCK'}</span><h3>${star.name}</h3><small>${star.nickname ?? ''}</small><p>Unlock the Superstar and Entrance. Build the recommended deck from cards you actually own.</p></div>
+      <button type="button" class="store-superstar-art store-superstar-card-art" data-store-inspect-star="${star.id}">${superstarPreviewCardMarkup(star.id,"store-shelf-collectible")}</button>
+      <div class="store-superstar-copy"><span>${owned?'OWNED':'SUPERSTAR UNLOCK'}</span><h3>${star.name}</h3><small>${star.nickname ?? ''}</small><p>Superstar + Entrance · recommended deck support.</p></div>
       <button class="${owned?'nav-button':'start-match'}" data-buy-store-star="${star.id}" ${owned||balance<STORE_SUPERSTAR_PRICE?'disabled':''}>${owned?'Owned':`${STORE_SUPERSTAR_PRICE.toLocaleString()} UP`}</button>
     </article>`;
   }).join('');
@@ -839,7 +848,7 @@ function renderStore() {
     <button id="store-refresh-strip" class="store-led-strip"><span>STORE REFRESHES IN</span><strong data-store-countdown>${formatStoreCountdown(rotation.msRemaining)}</strong><small>${setInfo?.name ?? rotation.setId} · Daily rotation</small></button>
     ${message?`<p class="setup-message">${message}</p>`:''}
     <section class="store-booster-offer card-shop-counter premium-panel"><div class="shop-pack-display"><div class="booster-pack shop-pack ${`pack-set-${rotation.setId}`}">${setLogoMarkup(rotation.setId,"pack-set-logo")}<span>${(setInfo?.name ?? "WWE LEGACY").toUpperCase()}</span><b>SERIES 1</b><small>5 CARDS · 1 GUARANTEED FOIL</small></div></div><div class="store-offer-copy"><span>FEATURED BOOSTER</span><h3>${setInfo?.displayName ?? setInfo?.name ?? rotation.setId}</h3><p>Take a sealed pack off today’s featured shelf and add it to your Booster Vault.</p><div class="store-offer-price"><b>${STORE_BOOSTER_PRICE} UP</b><button id="buy-store-booster" class="start-match" ${balance<STORE_BOOSTER_PRICE?'disabled':''}>BUY PACK</button></div></div></section>
-    <section class="store-roster-section"><div class="section-title"><div><span>SUPERSTAR SHELF</span><h3>${stars.length} Featured Superstars</h3></div><span>${STORE_SUPERSTAR_PRICE.toLocaleString()} UP each</span></div><p class="store-roster-note">Unlock a Superstar and their Entrance. Their recommended deck is assembled only from cards in your Collection; missing slots can be filled manually or with Auto Fill.</p><div class="store-superstar-shelf">${starRows}</div></section>
+    <section class="store-roster-section"><div class="section-title"><div><span>SUPERSTAR SHELF</span><h3>${stars.length} Featured Superstars</h3></div><span>${STORE_SUPERSTAR_PRICE.toLocaleString()} UP each</span></div><p class="store-roster-note">Unlock a Superstar + Entrance. Swipe the rotating shelf to browse today’s set.</p><div class="store-superstar-shelf">${starRows}</div></section>
   </section>${renderRecommendedDeckPrompt()}`;
   $("#buy-store-booster")?.addEventListener("click",()=>{ try { const result=purchaseStoreBooster(profile,rotation.setId,new Date()); saveProfile(profile); message=`${setInfo?.name ?? 'Featured'} booster purchased for ${result.price} UP. ${result.balance} UP remaining.`; } catch(e){message=e.message;} renderStore(); });
   root.querySelectorAll('[data-buy-store-star]').forEach(btn=>btn.addEventListener('click',()=>{ try { const star=superstarById[btn.dataset.buyStoreStar]; const result=purchaseStoreSuperstar(profile,btn.dataset.buyStoreStar,new Date()); saveProfile(profile); message=`${star.name} unlocked for ${result.price.toLocaleString()} UP.`; pendingDeckBuildSuperstarId=star.id; pendingDeckBuildStep="offer"; } catch(e){message=e.message;} renderStore(); }));
@@ -885,7 +894,7 @@ function renderSeasons() {
     </article>`;
   }).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen">
-    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("seasons")}${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · LIVE NOW</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Earn XP. Climb 50 tiers. Unlock The Rock — Final Boss.</p><div class="season-hero-status"><span>${uiIcon("trophy")}<b>Tier ${progress.tier}</b></span><span>${uiIcon("gift")}<b>${claimable.length} ready</b></span><span>${uiIcon("xp")}<b>${progress.xp} XP</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>SEASON ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Season 2 · Survivor Series</small></div></section>
+    <section class="feature-hero seasons-feature season-final-boss-hero">${modePortraits(["the-rock"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · 50 TIERS</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Tier 50 unlocks The Rock — Final Boss.</p><div class="season-hero-status season-hero-status-compact"><span>${uiIcon("gift")}<b>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</b></span><span>${uiIcon("trophy")}<b>${progress.tier >= SEASON_TIER_COUNT ? 'ROAD COMPLETE' : `NEXT · TIER ${progress.tier + 1}`}</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Survivor Series next</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
     <section class="free-pack-panel season-free-pack-strip ${free.available ? 'ready' : ''}">
       <div class="free-pack-icon"><span>24H</span><b>FREE</b></div><div class="free-pack-copy"><span>DAILY LOGIN BOOSTER</span><h3>${free.available ? 'Free booster ready' : 'Next free booster'}</h3><p>One Featured Season 1 booster every rolling 24 hours.</p><small data-free-pack-countdown>${free.available ? 'READY TO CLAIM' : formatCountdown(free.msRemaining)}</small></div><button id="claim-free-pack" class="start-match" ${free.available ? '' : 'disabled'}>${free.available ? 'CLAIM FREE PACK' : `READY IN ${formatCountdown(free.msRemaining)}`}</button>
@@ -1249,13 +1258,20 @@ function renderProfile() {
   const starter = superstarById[profile.starterId];
   const ladder = ladderState(profile);
   const championship = championshipRoadState(profile);
-  root.innerHTML = `<section class="profile-screen premium-screen profile-premium">
-    <section class="feature-hero profile-feature">${modePortraits([starter.id,"the-undertaker","rhea-ripley"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("profile")}<p>This career and collection are stored locally on this device.</p></div></section>
-    <div class="profile-summary-card premium-panel"><div class="profile-summary-photo">${portraitMarkup(starter.id, starter.name)}</div><div><span>ORIGINAL STARTER</span><strong>${starter.name}</strong><small>${starter.nickname}</small></div></div>
-    <div class="profile-stat-grid premium-stats"><article><span>SUPERSTARS</span><b>${profile.unlockedSuperstars.length}/${roster.length}</b></article><article><span>PACKS OPENED</span><b>${profile.packsOpened ?? 0}</b></article><article><span>LADDER CLEARS</span><b>${ladder.clears ?? 0}</b></article><article><span>CHAMPIONSHIP CLEARS</span><b>${championship.clears ?? 0}</b></article><article><span>UNIVERSE POINTS</span><b>${profile.universePoints ?? 0} UP</b></article></div>
-    <section class="legacy-settings premium-panel"><div class="section-title"><h3>Settings & Tools</h3><span>MY LEGACY</span></div><div class="profile-actions"><button id="profile-home" class="start-match">Main Menu</button><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a></div><article class="option-row danger-zone"><div><strong>Reset Progress</strong><p>Erase this device's WWE Legacy profile, collection, unlocked Superstars, Season progress and saved decks.</p></div>${optionsResetArmed ? `<div class="reset-confirm-actions"><button id="cancel-reset-progress" class="nav-button">Cancel</button><button id="confirm-reset-progress" class="start-match danger">CONFIRM RESET</button></div>` : `<button id="reset-progress" class="nav-button danger">Reset Progress</button>`}</article>${optionsResetArmed ? `<p class="reset-warning"><b>Testing reset armed.</b> This cannot be undone on this device.</p>` : ""}<div class="option-row"><div><strong>Build</strong><p>WWE Legacy: Collectible Card Game v${BUILD_VERSION}</p></div></div></section>
+  root.innerHTML = `<section class="profile-screen premium-screen profile-premium profile-command-screen">
+    <section class="feature-hero profile-feature profile-identity-hero">${modePortraits([starter.id],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("profile")}<span class="profile-career-kicker">YOUR CAREER · YOUR CARDS</span><p>${starter.name} began your WWE Legacy.</p></div><div class="profile-starter-card">${superstarPreviewCardMarkup(starter.id,"profile-starter-collectible")}</div></section>
+    <section class="profile-command-band">
+      <div class="profile-command-identity"><span>ORIGINAL STARTER</span><strong>${starter.name}</strong><small>${starter.nickname}</small></div>
+      <div class="profile-compact-stats">
+        <span><small>SUPERSTARS</small><b>${profile.unlockedSuperstars.length}/${roster.length}</b></span>
+        <span><small>PACKS</small><b>${profile.packsOpened ?? 0}</b></span>
+        <span><small>LADDER</small><b>${ladder.clears ?? 0}</b></span>
+        <span><small>TITLES</small><b>${championship.clears ?? 0}</b></span>
+        <span><small>UP</small><b>${profile.universePoints ?? 0}</b></span>
+      </div>
+    </section>
+    <section class="legacy-settings premium-panel profile-tools-panel"><div class="section-title"><h3>Career Tools</h3><span>LOCAL SAVE</span></div><div class="profile-actions"><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a></div><article class="option-row danger-zone"><div><strong>Reset Progress</strong><p>Erase this device's WWE Legacy profile, collection, unlocked Superstars, Season progress and saved decks.</p></div>${optionsResetArmed ? `<div class="reset-confirm-actions"><button id="cancel-reset-progress" class="nav-button">Cancel</button><button id="confirm-reset-progress" class="start-match danger">CONFIRM RESET</button></div>` : `<button id="reset-progress" class="nav-button danger">Reset Progress</button>`}</article>${optionsResetArmed ? `<p class="reset-warning"><b>Testing reset armed.</b> This cannot be undone on this device.</p>` : ""}<div class="option-row"><div><strong>Build</strong><p>WWE Legacy: Collectible Card Game v${BUILD_VERSION}</p></div></div></section>
   </section>`;
-  $("#profile-home")?.addEventListener("click", showMainMenu);
   $("#reset-progress")?.addEventListener("click",()=>{optionsResetArmed=true;message="Confirm the reset below to erase all local progress.";renderProfile();});
   $("#cancel-reset-progress")?.addEventListener("click",()=>{optionsResetArmed=false;message="Reset cancelled.";renderProfile();});
   $("#confirm-reset-progress")?.addEventListener("click",()=>{resetProfile();profile=null;game=null;optionsResetArmed=false;selection={p1:"cm-punk",p2:"roman-reigns"};lastMatchup={...selection};lastPack=null;pendingUpgrades=[];message="";showSplash();});
@@ -1566,16 +1582,27 @@ function renderCollection() {
     : `The live WWE Legacy card catalogue. Search and filter all ${visibleCards.length} currently available cards.`;
   const themeClass = allSets ? "theme-catalogue-all" : setVisualClass(activeCollectionSetId);
   document.body.dataset.set = activeCollectionSetId;
-  root.innerHTML = `<section class="collection-screen premium-screen ${themeClass}">
-    <section class="feature-hero collection-feature collection-all-hero">
+  root.innerHTML = `<section class="collection-screen premium-screen ${themeClass} collection-density-screen">
+    <section class="feature-hero collection-feature collection-all-hero collection-compact-hero">
       ${modePortraits(heroIds, "feature-art")}<div class="feature-shade"></div>
       <div class="feature-copy">${modeLogoMarkup("collection", true)}${setLogo}<span class="set-feature-name">${title}</span><p>${intro}</p>
         <div class="collection-view-switch"><button id="collection-owned-view" class="nav-button ${collectionView === 'owned' ? 'active' : ''}">My Collection</button><button id="collection-catalogue-view" class="nav-button ${collectionView === 'catalogue' ? 'active' : ''}">Card Catalogue</button></div>
-        <div class="mode-branch-tabs collection-set-tabs">${tabs}</div>
       </div>
-      <div class="set-stats"><div class="set-stat"><b>${collectionView === 'owned' ? ownedUniqueHere : baseCards.length}</b><span>${collectionView === 'owned' ? 'Owned here' : 'In view'}</span></div><div class="set-stat"><b>${unlocked}/${starCards.length}</b><span>Superstars</span></div><div class="set-stat"><b>${ownedUniqueAll}</b><span>Total owned</span></div><div class="set-stat"><b>${visibleCards.length}</b><span>Catalogue</span></div></div>
+      <div class="set-stats collection-hero-stats"><div class="set-stat"><b>${collectionView === 'owned' ? ownedUniqueHere : baseCards.length}</b><span>${collectionView === 'owned' ? 'Owned here' : 'In view'}</span></div><div class="set-stat"><b>${unlocked}/${starCards.length}</b><span>Superstars</span></div><div class="set-stat"><b>${ownedUniqueAll}</b><span>Total owned</span></div><div class="set-stat"><b>${visibleCards.length}</b><span>Catalogue</span></div></div>
     </section>
-    <section class="collection-tools"><span class="collection-mode-label">${eyebrow}</span><input id="collection-search" type="search" placeholder="Search name, move, ability or card code" value="${collectionFilter.search.replaceAll('"','&quot;')}"><select id="collection-kind">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select><select id="collection-rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select><select id="collection-sort" aria-label="Sort My Collection"><option value="newest" ${collectionSort === 'newest' ? 'selected' : ''}>Newest Owned</option><option value="alpha-asc" ${collectionSort === 'alpha-asc' ? 'selected' : ''}>A–Z</option><option value="alpha-desc" ${collectionSort === 'alpha-desc' ? 'selected' : ''}>Z–A</option><option value="rarity-desc" ${collectionSort === 'rarity-desc' ? 'selected' : ''}>Rarity High → Low</option><option value="rarity-asc" ${collectionSort === 'rarity-asc' ? 'selected' : ''}>Rarity Low → High</option><option value="copies-desc" ${collectionSort === 'copies-desc' ? 'selected' : ''}>Most Copies</option></select><span class="collection-count">Showing ${displayed.length} / ${visible.length} matching · ${scopedCards.length} in scope</span></section>
+    <nav class="collection-set-rail" aria-label="Collection sets">${tabs}</nav>
+    <section class="collection-tools collection-toolbar">
+      <div class="collection-toolbar-head"><span class="collection-mode-label">${eyebrow}</span><span class="collection-count">Showing ${displayed.length} / ${visible.length}</span></div>
+      <input id="collection-search" type="search" placeholder="Search cards…" value="${collectionFilter.search.replaceAll('"','&quot;')}">
+      <details id="collection-filter-drawer" class="collection-filter-drawer" ${collectionFiltersOpen ? 'open' : ''}>
+        <summary><span>FILTER & SORT</span><small>${collectionFilter.kind === 'all' ? 'All types' : collectionFilter.kind} · ${collectionFilter.rarity === 'all' ? 'All rarities' : `${collectionFilter.rarity}★`} · ${collectionSort.replaceAll('-',' ')}</small></summary>
+        <div class="collection-filter-grid">
+          <select id="collection-kind" aria-label="Card type">${kinds.map(k => `<option value="${k}" ${collectionFilter.kind === k ? 'selected' : ''}>${k === 'all' ? 'All card types' : k[0].toUpperCase()+k.slice(1)}</option>`).join('')}</select>
+          <select id="collection-rarity" aria-label="Rarity"><option value="all">All rarities</option>${[1,2,3,4].map(r => `<option value="${r}" ${collectionFilter.rarity === String(r) ? 'selected' : ''}>${rarityStars(r)} ${rarityLabels[r]}</option>`).join('')}</select>
+          <select id="collection-sort" aria-label="Sort My Collection"><option value="newest" ${collectionSort === 'newest' ? 'selected' : ''}>Newest Owned</option><option value="alpha-asc" ${collectionSort === 'alpha-asc' ? 'selected' : ''}>A–Z</option><option value="alpha-desc" ${collectionSort === 'alpha-desc' ? 'selected' : ''}>Z–A</option><option value="rarity-desc" ${collectionSort === 'rarity-desc' ? 'selected' : ''}>Rarity High → Low</option><option value="rarity-asc" ${collectionSort === 'rarity-asc' ? 'selected' : ''}>Rarity Low → High</option><option value="copies-desc" ${collectionSort === 'copies-desc' ? 'selected' : ''}>Most Copies</option></select>
+        </div>
+      </details>
+    </section>
     <section class="catalogue-grid collectible-catalogue">${displayed.length ? displayed.map(card => {
       const cardSet = setCollections[card.setId] ?? setCollection;
       return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' || card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small>${card.kind==='superstar'&&hasSuperstar(profile,card.superstarId)?`<button type="button" class="favourite-star-button ${(profile.favouriteSuperstars??[]).includes(card.superstarId)?'active':''}" data-favourite-star="${card.superstarId}">${(profile.favouriteSuperstars??[]).includes(card.superstarId)?'★ FAVOURITE':'☆ ADD FAVOURITE'}</button>`:''}</div></article>`;
@@ -1585,10 +1612,11 @@ function renderCollection() {
   root.querySelectorAll('[data-collection-set]').forEach(btn => btn.addEventListener('click', () => { activeCollectionSetId = btn.dataset.collectionSet; collectionFilter = {kind:'all',rarity:'all',search:''}; collectionRenderLimit=48; flippedCollectionCards = new Set(); renderCollection(); }));
   $("#collection-owned-view")?.addEventListener("click", showOwnedCollection);
   $("#collection-catalogue-view")?.addEventListener("click", showCardCatalogue);
+  $("#collection-filter-drawer")?.addEventListener("toggle", e => { collectionFiltersOpen = e.currentTarget.open; });
   $("#collection-search")?.addEventListener("input", e => { collectionFilter.search = e.target.value; collectionRenderLimit=48; renderCollection(); requestAnimationFrame(() => $("#collection-search")?.focus()); });
-  $("#collection-kind")?.addEventListener("change", e => { collectionFilter.kind = e.target.value; collectionRenderLimit=48; renderCollection(); });
-  $("#collection-rarity")?.addEventListener("change", e => { collectionFilter.rarity = e.target.value; collectionRenderLimit=48; renderCollection(); });
-  $("#collection-sort")?.addEventListener("change", e => { collectionSort = e.target.value; collectionRenderLimit=48; renderCollection(); });
+  $("#collection-kind")?.addEventListener("change", e => { collectionFiltersOpen = true; collectionFilter.kind = e.target.value; collectionRenderLimit=48; renderCollection(); });
+  $("#collection-rarity")?.addEventListener("change", e => { collectionFiltersOpen = true; collectionFilter.rarity = e.target.value; collectionRenderLimit=48; renderCollection(); });
+  $("#collection-sort")?.addEventListener("change", e => { collectionFiltersOpen = true; collectionSort = e.target.value; collectionRenderLimit=48; renderCollection(); });
   $("#collection-load-more")?.addEventListener("click",()=>{ collectionRenderLimit += 48; renderCollection(); });
   root.querySelectorAll('[data-favourite-star]').forEach(btn => btn.addEventListener('click', e => { e.stopPropagation(); const id=btn.dataset.favouriteStar; profile.favouriteSuperstars ??= []; profile.favouriteSuperstars = profile.favouriteSuperstars.includes(id) ? profile.favouriteSuperstars.filter(x=>x!==id) : [...profile.favouriteSuperstars,id]; saveProfile(profile); renderCollection(); }));
 }
@@ -1639,43 +1667,54 @@ function renderCardCatalogue() {
   const moveFamilyOptions = [select("all","All Move Families",catalogueFilter.moveFamily), ...options.moveFamilies.map(family => select(family, family.replaceAll("-"," ").replace(/\b\w/g,m=>m.toUpperCase()), catalogueFilter.moveFamily))].join("");
   const methodOptions = [select("all","All Methods",catalogueFilter.method), ...options.methods.map(method => select(method, method[0].toUpperCase()+method.slice(1), catalogueFilter.method))].join("");
   const pagination = `<div class="catalogue-pagination"><button class="nav-button" data-catalogue-page="prev" ${cataloguePage <= 1 ? "disabled" : ""}>← Previous</button><b>Page ${cataloguePage} / ${pageCount}</b><button class="nav-button" data-catalogue-page="next" ${cataloguePage >= pageCount ? "disabled" : ""}>Next →</button></div>`;
+  const catalogueDefaults = defaultCatalogueFilters();
+  const activeCatalogueFilters = Object.keys(catalogueDefaults).filter(key => !["search","sortBy","sortDir"].includes(key) && String(catalogueFilter[key]) !== String(catalogueDefaults[key])).length;
 
-  root.innerHTML = `<section class="catalogue-screen premium-screen theme-catalogue-all">
-    <section class="catalogue-master-hero">
-      <div><span class="eyebrow">MASTER CARD DATABASE</span><h1>CARD CATALOGUE</h1><p>Every released WWE Legacy card stays visible here. Unowned cards are greyed out; owned quantities are shown on every card.</p></div>
+  root.innerHTML = `<section class="catalogue-screen premium-screen theme-catalogue-all catalogue-density-screen">
+    <section class="catalogue-master-hero catalogue-master-hero-compact">
+      <div><span class="eyebrow">MASTER CARD DATABASE</span><h1>CARD CATALOGUE</h1><p>${visibleCards.length} released cards · owned and missing cards stay visible.</p></div>
       <div class="catalogue-master-stats"><span><b>${visibleCards.length}</b> Released</span><span><b>${ownedUnique}</b> Owned</span><span><b>${filtered.length}</b> Matching</span></div>
       <button id="catalogue-my-collection" class="nav-button catalogue-owned-link">My Collection</button>
     </section>
 
-    <details class="catalogue-super-sort" open>
-      <summary><span>SUPER SORT</span><small>Search · filter · order the full card database</small></summary>
+    <section class="catalogue-command-bar">
+      <input id="catalogue-search" type="search" placeholder="Search name, code, move, Superstar or effect…" value="${String(catalogueFilter.search).replaceAll("&","&amp;").replaceAll("\"","&quot;").replaceAll("<","&lt;")}">
+      <span>${filtered.length} MATCHING</span>
+    </section>
+
+    <details id="catalogue-filter-drawer" class="catalogue-super-sort catalogue-filter-drawer" ${catalogueFiltersOpen ? "open" : ""}>
+      <summary><span>FILTERS ${activeCatalogueFilters ? `<b>${activeCatalogueFilters}</b>` : ""}</span><small>Set · Superstar · ownership · type · rarity · sort</small></summary>
       <div class="catalogue-super-sort-body">
-        <label class="catalogue-search-wide"><span>Search everything</span><input id="catalogue-search" type="search" placeholder="Name, card code, move, Superstar, effect…" value="${String(catalogueFilter.search).replaceAll("&","&amp;").replaceAll("\"","&quot;").replaceAll("<","&lt;")}"></label>
-        <div class="catalogue-filter-grid">
+        <div class="catalogue-filter-grid catalogue-primary-filters">
           <label><span>Set</span><select data-catalogue-field="setId">${setOptions}</select></label>
           <label><span>Superstar</span><select data-catalogue-field="superstarId">${superstarOptions}</select></label>
-          <label><span>Superstar scope</span><select data-catalogue-field="superstarScope">${select("usage","Current deck + linked",catalogueFilter.superstarScope)}${select("exclusive","Exclusive only",catalogueFilter.superstarScope)}</select></label>
           <label><span>Ownership</span><select data-catalogue-field="ownership">${select("all","Owned + Unowned",catalogueFilter.ownership)}${select("owned","Owned only",catalogueFilter.ownership)}${select("unowned","Unowned only",catalogueFilter.ownership)}</select></label>
           <label><span>Card type</span><select data-catalogue-field="kind">${kinds.map(kind=>select(kind,kind === "all" ? "All Card Types" : kind[0].toUpperCase()+kind.slice(1),catalogueFilter.kind)).join("")}</select></label>
           <label><span>Rarity</span><select data-catalogue-field="rarity">${select("all","All Rarities",catalogueFilter.rarity)}${[1,2,3,4].map(r=>select(String(r),`${rarityStars(r)} ${setCollection.rarityLabels[r]}`,catalogueFilter.rarity)).join("")}</select></label>
-          <label><span>Method</span><select data-catalogue-field="method">${methodOptions}</select></label>
-          <label><span>Move type</span><select data-catalogue-field="moveType">${moveTypeOptions}</select></label>
-          <label><span>Move family</span><select data-catalogue-field="moveFamily">${moveFamilyOptions}</select></label>
-          <label><span>Move class</span><select data-catalogue-field="moveClass">${select("all","All Move Classes",catalogueFilter.moveClass)}${select("standard","Standard",catalogueFilter.moveClass)}${select("signature","Signature",catalogueFilter.moveClass)}${select("trademark","Trademark",catalogueFilter.moveClass)}${select("finisher","Finisher",catalogueFilter.moveClass)}</select></label>
         </div>
-        <div class="catalogue-number-grid">
-          <label class="catalogue-number-filter"><span>Cost</span><select data-catalogue-field="costOp">${comparatorOptions(catalogueFilter.costOp)}</select><input data-catalogue-field="costValue" type="number" min="0" max="20" inputmode="numeric" value="${catalogueFilter.costValue}"></label>
-          <label class="catalogue-number-filter"><span>Damage</span><select data-catalogue-field="damageOp">${comparatorOptions(catalogueFilter.damageOp)}</select><input data-catalogue-field="damageValue" type="number" min="0" max="30" inputmode="numeric" value="${catalogueFilter.damageValue}"></label>
-          <label><span>Strength =</span><select data-catalogue-field="strengthReq">${requirementOptions(catalogueFilter.strengthReq)}</select></label>
-          <label><span>Strike =</span><select data-catalogue-field="strikeReq">${requirementOptions(catalogueFilter.strikeReq)}</select></label>
-          <label><span>Technical =</span><select data-catalogue-field="technicalReq">${requirementOptions(catalogueFilter.technicalReq)}</select></label>
-          <label><span>Agility =</span><select data-catalogue-field="agilityReq">${requirementOptions(catalogueFilter.agilityReq)}</select></label>
-        </div>
-        <div class="catalogue-sort-row">
+        <div class="catalogue-sort-row catalogue-sort-compact">
           <label><span>Sort by</span><select data-catalogue-field="sortBy">${sortOptions.map(([value,label])=>select(value,label,catalogueFilter.sortBy)).join("")}</select></label>
           <label><span>Direction</span><select data-catalogue-field="sortDir">${select("asc","Ascending",catalogueFilter.sortDir)}${select("desc","Descending",catalogueFilter.sortDir)}</select></label>
-          <button id="catalogue-reset" class="nav-button">Reset Super Sort</button>
+          <button id="catalogue-reset" class="nav-button">Reset</button>
         </div>
+        <details class="catalogue-advanced-filters">
+          <summary>ADVANCED MOVE FILTERS</summary>
+          <div class="catalogue-filter-grid catalogue-advanced-grid">
+            <label><span>Superstar scope</span><select data-catalogue-field="superstarScope">${select("usage","Current deck + linked",catalogueFilter.superstarScope)}${select("exclusive","Exclusive only",catalogueFilter.superstarScope)}</select></label>
+            <label><span>Method</span><select data-catalogue-field="method">${methodOptions}</select></label>
+            <label><span>Move type</span><select data-catalogue-field="moveType">${moveTypeOptions}</select></label>
+            <label><span>Move family</span><select data-catalogue-field="moveFamily">${moveFamilyOptions}</select></label>
+            <label><span>Move class</span><select data-catalogue-field="moveClass">${select("all","All Move Classes",catalogueFilter.moveClass)}${select("standard","Standard",catalogueFilter.moveClass)}${select("signature","Signature",catalogueFilter.moveClass)}${select("trademark","Trademark",catalogueFilter.moveClass)}${select("finisher","Finisher",catalogueFilter.moveClass)}</select></label>
+          </div>
+          <div class="catalogue-number-grid">
+            <label class="catalogue-number-filter"><span>Cost</span><select data-catalogue-field="costOp">${comparatorOptions(catalogueFilter.costOp)}</select><input data-catalogue-field="costValue" type="number" min="0" max="20" inputmode="numeric" value="${catalogueFilter.costValue}"></label>
+            <label class="catalogue-number-filter"><span>Damage</span><select data-catalogue-field="damageOp">${comparatorOptions(catalogueFilter.damageOp)}</select><input data-catalogue-field="damageValue" type="number" min="0" max="30" inputmode="numeric" value="${catalogueFilter.damageValue}"></label>
+            <label><span>Strength =</span><select data-catalogue-field="strengthReq">${requirementOptions(catalogueFilter.strengthReq)}</select></label>
+            <label><span>Strike =</span><select data-catalogue-field="strikeReq">${requirementOptions(catalogueFilter.strikeReq)}</select></label>
+            <label><span>Technical =</span><select data-catalogue-field="technicalReq">${requirementOptions(catalogueFilter.technicalReq)}</select></label>
+            <label><span>Agility =</span><select data-catalogue-field="agilityReq">${requirementOptions(catalogueFilter.agilityReq)}</select></label>
+          </div>
+        </details>
       </div>
     </details>
 
@@ -1685,14 +1724,15 @@ function renderCardCatalogue() {
       const cardSet = setCollections[card.setId] ?? setCollection;
       const unowned = owned.total === 0;
       return `<article class="catalogue-collectible master-catalogue-card ${unowned ? 'catalogue-unowned' : 'catalogue-owned'}">${collectibleCardMarkup(card,{flipped:flippedCatalogueCards.has(card.id),flipAttr:`data-flip-catalogue="${card.id}"`})}<div class="catalogue-under-card master-catalogue-meta"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small class="catalogue-usage">${catalogueCardUsageLabel(card)}</small><strong class="catalogue-owned-count">${unowned ? "NOT OWNED" : `×${owned.total} OWNED`}</strong>${owned.foil ? `<em>${owned.normal} normal · ${owned.foil} foil</em>` : owned.normal ? `<em>${owned.normal} normal</em>` : ""}</div></article>`;
-    }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this Super Sort combination.</div>`}</section>
+    }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>
     ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
   </section>`;
 
   $("#catalogue-my-collection")?.addEventListener("click", showOwnedCollection);
-  $("#catalogue-reset")?.addEventListener("click", () => { catalogueFilter = defaultCatalogueFilters(); cataloguePage = 1; flippedCatalogueCards = new Set(); renderCardCatalogue(); });
+  $("#catalogue-filter-drawer")?.addEventListener("toggle", e => { catalogueFiltersOpen = e.currentTarget.open; });
+  $("#catalogue-reset")?.addEventListener("click", () => { catalogueFilter = defaultCatalogueFilters(); catalogueFiltersOpen = false; cataloguePage = 1; flippedCatalogueCards = new Set(); renderCardCatalogue(); });
   $("#catalogue-search")?.addEventListener("input", e => { catalogueFilter.search = e.target.value; cataloguePage = 1; renderCardCatalogue(); requestAnimationFrame(() => { const input = $("#catalogue-search"); if (input) { input.focus(); input.setSelectionRange(input.value.length,input.value.length); } }); });
-  root.querySelectorAll("[data-catalogue-field]").forEach(control => control.addEventListener("change", () => { catalogueFilter[control.dataset.catalogueField] = control.value; cataloguePage = 1; flippedCatalogueCards = new Set(); renderCardCatalogue(); }));
+  root.querySelectorAll("[data-catalogue-field]").forEach(control => control.addEventListener("change", () => { catalogueFiltersOpen = true; catalogueFilter[control.dataset.catalogueField] = control.value; cataloguePage = 1; flippedCatalogueCards = new Set(); renderCardCatalogue(); }));
   root.querySelectorAll("[data-flip-catalogue]").forEach(btn => btn.addEventListener("click", () => { const id = btn.dataset.flipCatalogue; if (flippedCatalogueCards.has(id)) flippedCatalogueCards.delete(id); else flippedCatalogueCards.add(id); renderCardCatalogue(); }));
   root.querySelectorAll("[data-catalogue-page]").forEach(btn => btn.addEventListener("click", () => {
     cataloguePage += btn.dataset.cataloguePage === "next" ? 1 : -1;
@@ -1723,6 +1763,7 @@ function renderDeckBuilder() {
         const check = validateDeckDraft(profile, star.id, draft, selectedEntranceId(profile, star.id));
         return `<article role="button" tabindex="0" class="deck-lab-star-card ${check.healthy ? 'is-valid' : 'needs-work'}" data-deck-lab-star="${star.id}">
           <span class="deck-lab-star-art deck-lab-full-superstar-card">${superstarPreviewCardMarkup(star.id,"deck-lab-roster-collectible")}</span>
+          <span class="deck-lab-star-copy"><em>${check.healthy ? 'READY' : 'NEEDS WORK'}</em><strong>${star.name}</strong><small>${draft.length}/60 · ${star.nickname ?? ''}</small><b>EDIT DECK ›</b></span>
         </article>`;
       }).join("")}</section>
     </section>`;
