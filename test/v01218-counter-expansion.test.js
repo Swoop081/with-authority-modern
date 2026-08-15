@@ -68,7 +68,7 @@ test('v0.12.18 untouched v0.12.17 60-page starter recommendation migrates but cu
   // Reconstruct only the migration behavior by using a saved recommended from the
   // prior profile format supplied by the v0.12.17 fingerprint map.
   const fresh=createProfile('cm-punk');
-  assert.equal(PROFILE_VERSION,23);
+  assert.equal(PROFILE_VERSION,25);
   // Current fresh is already new; custom current deck should remain intact through migration.
   const custom={...fresh,version:22,savedDecks:{...fresh.savedDecks,'cm-punk':fresh.savedDecks['cm-punk'].map(e=>({...e}))}};
   [custom.savedDecks['cm-punk'][5],custom.savedDecks['cm-punk'][6]]=[custom.savedDecks['cm-punk'][6],custom.savedDecks['cm-punk'][5]];

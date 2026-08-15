@@ -36,7 +36,13 @@ export function counterEligibility(state,playerId,incoming,counter){
  const fail=reason=>({ok:false,legal:false,reason}); const p=state?.players?.[playerId];
  if(state?.phase!=="COUNTER")return fail("Not a Counter window");
  if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
- const outta=!!(p?.superstar?.id==='randy-orton'&&!p.specialUsed&&p.hand?.some(c=>c.kind==='special'&&c.special?.type==='outtaNowhere')&&counter?.name==='RKO'); if(!canCounter(incoming,counter)&&!outta)return fail("Move does not Counter this Move Type"); if(counter.superstarId&&counter.superstarId!==p?.superstar?.id)return fail("Counter is exclusive to another Superstar"); if(Array.isArray(counter.allowedSuperstarIds)&&counter.allowedSuperstarIds.length&&!counter.allowedSuperstarIds.includes(p?.superstar?.id))return fail("Counter is restricted to another Superstar family");
+ const isCounterAttack=!!state?.proposedMove?.isCounterAttack;
+ if(isCounterAttack){
+  const exchangeKey=incoming?.counterExchangeKey;
+  if(!exchangeKey)return fail("This Counter ends the exchange");
+  if(counter?.counterExchangeKey!==exchangeKey)return fail(`Only another ${incoming?.name??'exchange Move'} can continue this exchange`);
+ }
+ const outta=!isCounterAttack&&!!(p?.superstar?.id==='randy-orton'&&!p.specialUsed&&p.hand?.some(c=>c.kind==='special'&&c.special?.type==='outtaNowhere')&&counter?.name==='RKO'); if(!canCounter(incoming,counter)&&!outta)return fail("Move does not Counter this Move Type"); if(counter.superstarId&&counter.superstarId!==p?.superstar?.id)return fail("Counter is exclusive to another Superstar"); if(Array.isArray(counter.allowedSuperstarIds)&&counter.allowedSuperstarIds.length&&!counter.allowedSuperstarIds.includes(p?.superstar?.id))return fail("Counter is restricted to another Superstar family");
  const counterDiscount=Math.max(0,p?.events?.nextCounterDiscount??0)+(outta?(p.superstar.special?.discount??2):0)+(p.superstar?.id==='sami-zayn'&&p.controlMoveCount===0&&p.hp<(state.players[state.proposedMove.attackerId]?.hp??0)?(p.superstar.ability?.trigger?.discount??1):0); const needed=Math.max(0,(counter.cost??0)-counterDiscount); if(totalMomentum(p)<needed)return fail(`Need ${needed} Momentum + Attitude`);
  if(!counter.finisher) for(const [m,n] of Object.entries(counter.requirements??{})){if(methodAmount(p,m)<n)return fail(`Need ${n} ${m} Momentum`);}
  const attacker=state.players[state.proposedMove.attackerId]; if(counter.groundedOnly&&!['on-mat','grounded'].includes(attacker?.posture))return fail("Opponent must be grounded");
@@ -52,6 +58,7 @@ export function autoCounterEligibility(state,playerId,incoming=state?.proposedMo
  if(state?.phase!=="COUNTER")return fail("Not a Counter window");
  if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
  if(!incoming||incoming.kind!=="move")return fail("No incoming Move");
+ if(state?.proposedMove?.isCounterAttack)return fail("Counter-attacks cannot be Auto Countered");
  if(incoming.finisher)return fail("Finishers cannot be Auto Countered");
  const cost=autoCounterCost(state,playerId);
  const handSize=p?.hand?.length??0;

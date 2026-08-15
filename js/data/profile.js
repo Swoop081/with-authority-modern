@@ -1,12 +1,12 @@
-import { decks } from "./decks.js?v=0.12.23";
-import { collectionCards } from "./collection.js?v=0.12.23";
-import { superstars } from "./superstars.js?v=0.12.23";
-import { isUnreleasedSetId } from "./release.js?v=0.12.23";
+import { decks } from "./decks.js?v=0.12.33";
+import { collectionCards } from "./collection.js?v=0.12.33";
+import { superstars } from "./superstars.js?v=0.12.33";
+import { isUnreleasedSetId } from "./release.js?v=0.12.33";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 23;
+export const PROFILE_VERSION = 25;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -162,6 +162,113 @@ export function getSavedDeck(p, id) { return p?.savedDecks?.[id] ?? []; }
 export function ensureSavedDeck(p, id) { p.savedDecks ??= {}; return p.savedDecks[id] ??= []; }
 export function setDeckAssistance(p, m) { if (DECK_ASSISTANCE_MODES.includes(m)) p.deckAssistance = m; return p; }
 
+const V01224_RECOMMENDED_FINGERPRINTS = Object.freeze({
+  "iyo-sky": "768a8df7",
+  "mankind": "b16f75b8",
+  "the-rock": "51f89c26",
+  "hulk-hogan": "4fb173fd",
+  "bayley": "7b480e2c",
+  "cm-punk": "cfa69091",
+  "paige": "ecf80682",
+  "seth-rollins": "3820d602",
+  "andre-the-giant": "b131c91a",
+  "stephanie-vaquer": "07e0a677",
+  "randy-savage": "420c6920",
+  "roman-reigns": "1c711559",
+  "charlotte-flair": "8ee120f1",
+  "kevin-owens": "3f30cf5a",
+  "kane": "322d158a",
+  "the-undertaker": "66361de6",
+  "ultimate-warrior": "f6d33bda",
+  "rhea-ripley": "8e7323eb",
+  "cody-rhodes": "f4a0ed12",
+  "oba-femi": "bdfbead2",
+  "stone-cold-steve-austin": "bb56bf38",
+  "liv-morgan": "94aa8b51",
+  "brock-lesnar": "9b205881",
+  "gunther": "0a387de7",
+  "becky-lynch": "1f0ecac1",
+  "logan-paul": "d6c4f128",
+  "sol-ruca": "192f579a",
+  "chad-gable": "40f37cd5",
+  "raquel-rodriguez": "b4cce210",
+  "rey-mysterio": "ea9431b3",
+  "dominik-mysterio": "87cc04c7",
+  "penta": "07781db6",
+  "el-grande-americano": "7a5c4768",
+  "jey-uso": "fb16fe69",
+  "la-knight": "9e2e8953",
+  "alexa-bliss": "6168d5da",
+  "finn-balor": "c89ba29d",
+  "danhausen": "e29c059e",
+  "tiffany-stratton": "842ab8ac",
+  "chelsea-green": "93f0f14c",
+  "damian-priest": "98c2fc6a",
+  "bron-breakker": "26007f5c",
+  "drew-mcintyre": "d9acb838",
+  "randy-orton": "da649882",
+  "sami-zayn": "ab6c5045",
+  "jacob-fatu": "a8dfddbd",
+  "solo-sikoa": "00b6f38e",
+  "jade-cargill": "543fcd93",
+  "nia-jax": "20fd8c70",
+  "goldberg": "a71f5b82",
+});
+
+
+const V01223_RECOMMENDED_FINGERPRINTS = Object.freeze({
+  "iyo-sky": "768a8df7",
+  "mankind": "b16f75b8",
+  "the-rock": "51f89c26",
+  "hulk-hogan": "4fb173fd",
+  "bayley": "7b480e2c",
+  "cm-punk": "cfa69091",
+  "paige": "434ba678",
+  "seth-rollins": "ea987305",
+  "andre-the-giant": "cfc0b7c3",
+  "stephanie-vaquer": "07e0a677",
+  "randy-savage": "251d76ed",
+  "roman-reigns": "1c711559",
+  "charlotte-flair": "8ee120f1",
+  "kevin-owens": "3f30cf5a",
+  "kane": "322d158a",
+  "the-undertaker": "66361de6",
+  "ultimate-warrior": "f6d33bda",
+  "rhea-ripley": "8e7323eb",
+  "cody-rhodes": "5a2dd531",
+  "oba-femi": "bdfbead2",
+  "stone-cold-steve-austin": "bb56bf38",
+  "liv-morgan": "94aa8b51",
+  "brock-lesnar": "9b205881",
+  "gunther": "832d71eb",
+  "becky-lynch": "1f0ecac1",
+  "logan-paul": "d6c4f128",
+  "sol-ruca": "192f579a",
+  "chad-gable": "40f37cd5",
+  "raquel-rodriguez": "b4cce210",
+  "rey-mysterio": "c013e338",
+  "dominik-mysterio": "87cc04c7",
+  "penta": "07781db6",
+  "el-grande-americano": "7a5c4768",
+  "jey-uso": "fb16fe69",
+  "la-knight": "9e2e8953",
+  "alexa-bliss": "6168d5da",
+  "finn-balor": "c89ba29d",
+  "danhausen": "e29c059e",
+  "tiffany-stratton": "842ab8ac",
+  "chelsea-green": "93f0f14c",
+  "damian-priest": "98c2fc6a",
+  "bron-breakker": "26007f5c",
+  "drew-mcintyre": "d9acb838",
+  "randy-orton": "5f36a09c",
+  "sami-zayn": "b1f90846",
+  "jacob-fatu": "a8dfddbd",
+  "solo-sikoa": "00b6f38e",
+  "jade-cargill": "543fcd93",
+  "nia-jax": "20fd8c70",
+  "goldberg": "a71f5b82"
+});
+
 const V01217_RECOMMENDED_FINGERPRINTS = Object.freeze({
   "iyo-sky": "e1945d01",
   "mankind": "40285002",
@@ -267,6 +374,36 @@ export function migrateProfile(old) {
     if (star?.entranceId) addOwnedCard(p, star.entranceId, { foil: true });
     if (!p.selectedEntrances[sid] && star?.entranceId) p.selectedEntrances[sid] = star.entranceId;
     let saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
+    // v0.12.25: migrate only untouched v0.12.24 recommended 60-page lists to
+    // the CPU recovery-curve package. Custom 60-page decks remain untouched.
+    if (saved?.length === 60 && sourceVersion <= 24 && V01224_RECOMMENDED_FINGERPRINTS[sid]) {
+      const savedIds = saved.map(entry => typeof entry === 'string' ? entry : entry?.id);
+      if (deckFingerprint(savedIds) === V01224_RECOMMENDED_FINGERPRINTS[sid]) {
+        const needed = new Map();
+        for (const card of decks[sid] ?? []) needed.set(card.id,(needed.get(card.id)??0)+1);
+        for (const [id, amount] of needed) {
+          const missing = Math.max(0, amount - totalOwnedCopies(p,id));
+          if (missing) addOwnedCard(p,id,{amount:missing});
+        }
+        saved = (decks[sid] ?? []).map(card => ({id:card.id,foil:false}));
+        p.savedDecks[sid] = saved;
+      }
+    }
+    // v0.12.24: migrate only untouched v0.12.23 recommended 60-page lists to
+    // the targeted roster-balance package. Custom 60-page decks remain untouched.
+    if (saved?.length === 60 && sourceVersion <= 23 && V01223_RECOMMENDED_FINGERPRINTS[sid]) {
+      const savedIds = saved.map(entry => typeof entry === 'string' ? entry : entry?.id);
+      if (deckFingerprint(savedIds) === V01223_RECOMMENDED_FINGERPRINTS[sid]) {
+        const needed = new Map();
+        for (const card of decks[sid] ?? []) needed.set(card.id,(needed.get(card.id)??0)+1);
+        for (const [id, amount] of needed) {
+          const missing = Math.max(0, amount - totalOwnedCopies(p,id));
+          if (missing) addOwnedCard(p,id,{amount:missing});
+        }
+        saved = (decks[sid] ?? []).map(card => ({id:card.id,foil:false}));
+        p.savedDecks[sid] = saved;
+      }
+    }
     // v0.12.18: untouched v0.12.17 60-page recommended lists migrate to the
     // expanded counter package; custom 60-page decks remain untouched.
     if (saved?.length === 60 && sourceVersion <= 22 && V01217_RECOMMENDED_FINGERPRINTS[sid]) {

@@ -19,7 +19,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "dropkick",
@@ -40,7 +41,11 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended",
+    "counterStates": [
+      "running-aerial"
+    ]
   },
   {
     "id": "knee-drop",
@@ -67,7 +72,8 @@ export const allGameplayCards = [
         "amount": 1
       }
     ],
-    "tacticalType": "standing-above"
+    "tacticalType": "standing-above",
+    "counterState": "leg-extended"
   },
   {
     "id": "russian-leg-sweep",
@@ -93,7 +99,8 @@ export const allGameplayCards = [
         "type": "discardOpponent",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "cody-rhodes-bionic-elbow",
@@ -119,7 +126,8 @@ export const allGameplayCards = [
         "type": "gainAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "vertical-suplex",
@@ -140,7 +148,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "diving-crossbody",
@@ -161,7 +170,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "snap-powerslam",
@@ -182,7 +192,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "bulldog",
@@ -203,7 +214,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "gourdbuster",
@@ -224,7 +236,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "suicide-dive",
@@ -245,7 +258,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 2,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "cody-rhodes-disaster-kick",
@@ -267,7 +281,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "alabama-slam",
@@ -288,7 +303,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "missile-dropkick",
@@ -309,7 +325,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "figure-four-leglock",
@@ -334,7 +351,9 @@ export const allGameplayCards = [
       "bodyPart": "legs",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "moonsault",
@@ -355,7 +374,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "superplex",
@@ -377,7 +397,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 3,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "cody-rhodes-cody-cutter",
@@ -394,7 +415,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "cody-rhodes",
     "rarity": 3,
-    "rulesText": "Cody-exclusive Trademark. Grounds opponent; search Cross Rhodes.",
+    "rulesText": "Cody-exclusive Trademark. Grounds opponent; search/draw Cross Rhodes and it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -403,9 +424,11 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "search",
-        "name": "Cross Rhodes"
+        "name": "Cross Rhodes",
+        "discount": 3
       }
-    ]
+    ],
+    "counterState": "running-aerial"
   },
   {
     "id": "cody-rhodes-cross-rhodes",
@@ -425,7 +448,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "punch",
@@ -439,12 +463,17 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared fundamental. May Counter an Arm Extended Move.",
+    "rulesText": "Shared fundamental. May Counter an Arm Extended Move. If used as a Counter, another Punch or Elbow may Counter it.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "arm-extended"
+    ],
+    "counterExchangeKey": "punch-elbow"
   },
   {
     "id": "headbutt",
@@ -463,7 +492,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "torso-trapped"
+    ],
+    "counterSubmissionTargets": [
+      "neck-head"
+    ]
   },
   {
     "id": "shoulder-tackle",
@@ -484,7 +520,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "throat-thrust",
@@ -505,7 +542,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "big-boot",
@@ -526,7 +564,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "leaping-clothesline",
@@ -547,7 +586,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "roman-reigns-corner-clotheslines",
@@ -568,7 +608,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "roman-reigns-drive-by",
@@ -589,7 +630,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "samoan-drop",
@@ -610,7 +652,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "uranage",
@@ -631,7 +674,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "spinebuster",
@@ -652,7 +696,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "powerbomb",
@@ -673,7 +718,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "exploder-suplex",
@@ -694,7 +740,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "tilt-a-whirl-slam",
@@ -715,7 +762,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "roman-reigns-ooh-ahh",
@@ -753,7 +801,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "roman-reigns-superman-punch",
@@ -780,7 +829,8 @@ export const allGameplayCards = [
         "type": "search",
         "name": "Roman's Spear"
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "roman-reigns-spear",
@@ -800,7 +850,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "running-forearm",
@@ -826,7 +877,8 @@ export const allGameplayCards = [
         "type": "gainAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "sling-blade",
@@ -847,7 +899,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "enzuigiri",
@@ -872,6 +925,10 @@ export const allGameplayCards = [
     "tacticalType": "leg-extended",
     "countersCardIds": [
       "short-arm-clothesline"
+    ],
+    "counterState": "leg-extended",
+    "counterSubmissionTargets": [
+      "legs"
     ]
   },
   {
@@ -893,7 +950,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "seth-rollins-turnbuckle-sto",
@@ -914,7 +972,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "seth-rollins-springboard-knee",
@@ -935,7 +994,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "ripcord-knee",
@@ -956,7 +1016,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "standing-shooting-star-press",
@@ -977,7 +1038,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "blockbuster",
@@ -1002,7 +1064,9 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "falcon-arrow",
@@ -1023,7 +1087,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "frog-splash",
@@ -1044,23 +1109,24 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "seth-rollins-buckle-bomb",
     "name": "Buckle Bomb",
     "kind": "move",
     "setId": "summerslam-series-1",
-    "cost": 6,
+    "cost": 5,
     "damage": 9,
     "requirements": {
-      "technical": 2
+      "technical": 1
     },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "seth-rollins",
     "rarity": 3,
-    "rulesText": "Seth-exclusive Trademark. Ground opponent; search Curb Stomp.",
+    "rulesText": "Seth Rollins-exclusive Trademark. Grounds opponent. On Connect: search/draw Curb Stomp; it costs 4 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -1069,9 +1135,11 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "search",
-        "name": "Curb Stomp"
+        "name": "Curb Stomp",
+        "discount": 4
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "pedigree",
@@ -1092,7 +1160,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "seth-rollins-phoenix-splash",
@@ -1113,7 +1182,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "seth-rollins-curb-stomp",
@@ -1133,7 +1203,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "roundhouse-kick",
@@ -1154,7 +1225,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "swinging-neckbreaker",
@@ -1175,7 +1247,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "double-underhook-backbreaker",
@@ -1196,7 +1269,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "springboard-clothesline",
@@ -1217,7 +1291,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "koji-clutch",
@@ -1242,7 +1317,9 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "diving-elbow-drop",
@@ -1263,7 +1340,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "cm-punk-corner-running-knee",
@@ -1284,7 +1362,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "cm-punk-anaconda-vise",
@@ -1310,7 +1389,9 @@ export const allGameplayCards = [
       "pressure": 5
     },
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "cm-punk-g-t-s",
@@ -1330,7 +1411,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "stomp",
@@ -1352,7 +1434,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "tacticalType": "standing-above"
+    "tacticalType": "standing-above",
+    "counterState": "leg-extended"
   },
   {
     "id": "body-slam",
@@ -1373,7 +1456,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "front-dropkick",
@@ -1394,7 +1478,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "back-suplex",
@@ -1415,7 +1500,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control"
   },
   {
     "id": "gunther-gunther-s-chop",
@@ -1442,7 +1528,8 @@ export const allGameplayCards = [
         "bodyPart": "chest",
         "amount": 2
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "german-suplex",
@@ -1463,7 +1550,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control"
   },
   {
     "id": "butterfly-suplex",
@@ -1484,7 +1572,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "gunther-burning-lariat",
@@ -1505,7 +1594,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "boston-crab",
@@ -1530,7 +1620,9 @@ export const allGameplayCards = [
       "bodyPart": "legs",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "last-symphony",
@@ -1551,17 +1643,18 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "gunther-folding-powerbomb",
     "name": "Folding Powerbomb",
     "kind": "move",
     "setId": "summerslam-series-1",
-    "cost": 7,
+    "cost": 6,
     "damage": 11,
     "requirements": {
-      "strength": 3
+      "strength": 2
     },
     "moveType": "grapple",
     "method": "strength",
@@ -1576,9 +1669,11 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "search",
-        "name": "Gojira Clutch"
+        "name": "Gojira Clutch",
+        "discount": 2
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "gunther-gojira-clutch",
@@ -1592,16 +1687,19 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "gunther",
     "rarity": 4,
-    "rulesText": "",
+    "rulesText": "Gunther-exclusive Finisher. No Method requirement. Submission, Head Pressure 5.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
-      "pressure": 4
+      "pressure": 5
     },
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head",
+    "finisher": true
   },
   {
     "id": "double-leg-takedown",
@@ -1622,7 +1720,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "knee-strike",
@@ -1643,7 +1742,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "corner-shoulder-thrusts",
@@ -1664,7 +1764,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "ground-and-pound",
@@ -1685,7 +1786,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "belly-to-belly-suplex",
@@ -1701,13 +1803,23 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared canonical",
+    "rulesText": "Shared canonical. If played by Bayley, on Connect search/draw Rose Plant; it costs 4 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Rose Plant",
+        "discount": 4,
+        "ifSuperstarIds": [
+          "bayley"
+        ]
+      }
+    ],
+    "counterState": "torso-trapped"
   },
   {
     "id": "overhead-belly-to-belly-suplex",
@@ -1728,7 +1840,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "lariat",
@@ -1749,7 +1862,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "brock-lesnar-kimura-lock",
@@ -1775,7 +1889,9 @@ export const allGameplayCards = [
       "pressure": 5
     },
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "arms"
   },
   {
     "id": "brock-lesnar-f-5",
@@ -1795,7 +1911,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "senton",
@@ -1816,7 +1933,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "cannonball",
@@ -1837,7 +1955,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "fisherman-buster",
@@ -1858,7 +1977,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "spinning-torture-rack-neckbreaker",
@@ -1879,7 +1999,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "swanton-bomb",
@@ -1900,7 +2021,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "pop-up-powerbomb",
@@ -1916,12 +2038,22 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Major KO signature. Grounds opponent.",
+    "rulesText": "Major KO signature. Grounds opponent. If played by Kevin Owens, search/draw Stunner; it costs 4 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Stunner",
+        "discount": 4,
+        "ifSuperstarIds": [
+          "kevin-owens"
+        ]
+      }
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "kevin-owens-package-piledriver",
@@ -1942,7 +2074,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "kevin-owens-stunner",
@@ -1962,7 +2095,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "reverse-elbow",
@@ -1981,7 +2115,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "rear-control"
+    ],
+    "counterSubmissionTargets": [
+      "neck-head"
+    ]
   },
   {
     "id": "running-uppercut",
@@ -2002,7 +2143,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "chokeslam",
@@ -2018,12 +2160,22 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "New canonical shared Chokeslam",
+    "rulesText": "Shared canonical Chokeslam. If played by The Undertaker, on Connect search/draw Tombstone Piledriver; it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Tombstone Piledriver",
+        "discount": 3,
+        "ifSuperstarIds": [
+          "the-undertaker"
+        ]
+      }
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "gorilla-press-slam",
@@ -2045,7 +2197,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "oba-femi-one-handed-backbreaker",
@@ -2067,7 +2220,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "oba-femi-fall-from-grace",
@@ -2087,7 +2241,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "kick-to-the-gut",
@@ -2108,7 +2263,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "back-body-drop",
@@ -2129,7 +2285,11 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated",
+    "counterStates": [
+      "running-aerial"
+    ]
   },
   {
     "id": "clothesline",
@@ -2150,7 +2310,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "stone-cold-steve-austin-pointed-elbow-drop",
@@ -2171,7 +2332,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "mounted-punches",
@@ -2192,7 +2354,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "stone-cold-steve-austin-mudhole-stomps",
@@ -2213,7 +2376,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "stone-cold-steve-austin-lou-thesz-press",
@@ -2241,7 +2405,8 @@ export const allGameplayCards = [
         "type": "search",
         "name": "Mounted Punches"
       }
-    ]
+    ],
+    "counterState": "torso-trapped"
   },
   {
     "id": "stone-cold-steve-austin-stone-cold-stunner",
@@ -2261,7 +2426,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "running-big-boot",
@@ -2282,7 +2448,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "sidewalk-slam",
@@ -2303,7 +2470,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "front-backbreaker",
@@ -2324,7 +2492,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "the-undertaker-snake-eyes",
@@ -2351,7 +2520,8 @@ export const allGameplayCards = [
         "name": "Big Boot",
         "damage": 2
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "the-undertaker-old-school",
@@ -2368,7 +2538,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "the-undertaker",
     "rarity": 3,
-    "rulesText": "Undertaker-exclusive Trademark; ground opponent; opponent ditches 1 page",
+    "rulesText": "Undertaker-exclusive Trademark; grounds opponent; opponent ditches 1 page; on Connect search/draw Chokeslam and it costs 2 less this Control sequence",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -2378,8 +2548,14 @@ export const allGameplayCards = [
       {
         "type": "discardOpponent",
         "amount": 1
+      },
+      {
+        "type": "search",
+        "name": "Chokeslam",
+        "discount": 2
       }
-    ]
+    ],
+    "counterState": "diving-aerial"
   },
   {
     "id": "tombstone-piledriver",
@@ -2399,7 +2575,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "uppercut",
@@ -2420,7 +2597,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "short-arm-clothesline",
@@ -2444,7 +2622,8 @@ export const allGameplayCards = [
     "effects": [],
     "countersCardIds": [
       "big-boot"
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "powerslam",
@@ -2465,7 +2644,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "backbreaker",
@@ -2486,7 +2666,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "kane-two-handed-choke-lift",
@@ -2513,7 +2694,8 @@ export const allGameplayCards = [
         "name": "Chokeslam From Hell",
         "damage": 1
       }
-    ]
+    ],
+    "counterState": "torso-trapped"
   },
   {
     "id": "flying-clothesline",
@@ -2535,7 +2717,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "kane-chokeslam-from-hell",
@@ -2545,19 +2728,26 @@ export const allGameplayCards = [
     "cost": 7,
     "damage": 12,
     "requirements": {
-      "strength": 3
+      "strength": 2
     },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "kane",
     "rarity": 3,
-    "rulesText": "Kane-exclusive Trademark",
+    "rulesText": "Kane-exclusive Trademark. On Connect: search/draw Tombstone Piledriver; it costs 3 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Tombstone Piledriver",
+        "discount": 3
+      }
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "forearm-smash",
@@ -2578,7 +2768,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "ddt",
@@ -2599,7 +2790,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "neckbreaker",
@@ -2620,7 +2812,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "piledriver",
@@ -2641,7 +2834,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "mankind-running-knee-to-the-corner",
@@ -2662,7 +2856,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "mankind-double-arm-ddt",
@@ -2684,7 +2879,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "mankind-mandible-claw",
@@ -2705,10 +2901,12 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
-      "pressure": 6
+      "pressure": 5
     },
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "elbow-drop",
@@ -2730,7 +2928,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "tacticalType": "standing-above"
+    "tacticalType": "standing-above",
+    "counterState": "arm-extended"
   },
   {
     "id": "atomic-drop",
@@ -2751,7 +2950,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "bearhug",
@@ -2776,7 +2976,9 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "military-press-slam",
@@ -2797,14 +2999,15 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "hogans-big-boot",
     "name": "Hogan’s Big Boot",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
-    "cost": 6,
+    "cost": 5,
     "damage": 9,
     "requirements": {
       "strike": 2
@@ -2813,7 +3016,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "hulk-hogan",
     "rarity": 2,
-    "rulesText": "Hogan-exclusive Trademark. Ground opponent. On connect: search your Playbook for Atomic Leg Drop and draw it.",
+    "rulesText": "Hogan-exclusive Trademark. Grounds opponent. On Connect: search/draw Atomic Leg Drop; it costs 4 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -2821,17 +3024,19 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "search",
-        "name": "Atomic Leg Drop"
+        "name": "Atomic Leg Drop",
+        "discount": 4
       }
     ],
-    "trademark": true
+    "trademark": true,
+    "counterState": "leg-extended"
   },
   {
     "id": "hulk-hogan-atomic-leg-drop",
     "name": "Atomic Leg Drop",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "grapple",
@@ -2844,7 +3049,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "double-axe-handle",
@@ -2861,12 +3067,29 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "",
-    "groundOpponent": false,
+    "rulesText": "If played by Randy Savage, gain +1 Adrenaline, search/draw Flying Elbow Drop, and it costs 3 less this Control sequence.",
+    "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1,
+        "ifSuperstarIds": [
+          "randy-savage"
+        ]
+      },
+      {
+        "type": "search",
+        "name": "Flying Elbow Drop",
+        "discount": 3,
+        "ifSuperstarIds": [
+          "randy-savage"
+        ]
+      }
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "ultimate-warrior-diving-shoulder-block",
@@ -2892,7 +3115,9 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "ultimate-warrior-gorilla-press-slam",
@@ -2919,7 +3144,8 @@ export const allGameplayCards = [
         "type": "search",
         "name": "Warrior Splash"
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "ultimate-warrior-warrior-splash",
@@ -2939,7 +3165,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "back-elbow",
@@ -2958,7 +3185,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "rear-control"
+    ],
+    "counterSubmissionTargets": [
+      "neck-head"
+    ]
   },
   {
     "id": "running-knee",
@@ -2979,7 +3213,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "hotshot",
@@ -3000,7 +3235,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "leaping-rope-clothesline",
@@ -3022,7 +3258,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "diving-body-press",
@@ -3043,14 +3280,15 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "randy-savage-flying-elbow-drop",
     "name": "Flying Elbow Drop",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "aerial",
@@ -3063,7 +3301,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "chop",
@@ -3084,7 +3323,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "corner-avalanche",
@@ -3105,7 +3345,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "andre-the-giant-double-underhook-suplex",
@@ -3113,7 +3354,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 5,
-    "damage": 8,
+    "damage": 14,
     "requirements": {
       "strength": 2
     },
@@ -3121,21 +3362,33 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "andre-the-giant",
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "André-exclusive Trademark. On Connect: search your Playbook for Sitdown Splash and draw it. André’s next Sitdown Splash this Control sequence costs 3 less.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Sitdown Splash",
+        "amount": 3
+      },
+      {
+        "type": "search",
+        "name": "Sitdown Splash",
+        "discount": 0
+      }
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "andre-the-giant-sitdown-splash",
     "name": "Sitdown Splash",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
-    "cost": 9,
-    "damage": 16,
+    "cost": 11,
+    "damage": 18,
     "requirements": {},
     "moveType": "aerial",
     "method": null,
@@ -3147,7 +3400,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "northern-lights-suplex",
@@ -3168,7 +3422,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "rhea-ripley-electric-chair-facebuster",
@@ -3189,7 +3444,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "rhea-ripley-reverse-alabama-slam",
@@ -3210,7 +3466,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "razor-s-edge",
@@ -3231,7 +3488,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "rhea-ripley-prism-trap",
@@ -3257,7 +3515,15 @@ export const allGameplayCards = [
       "pressure": 4
     },
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Riptide",
+        "discount": 2
+      }
+    ],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "rhea-ripley-riptide",
@@ -3277,7 +3543,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "arm-drag",
@@ -3296,7 +3563,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "counterStates": [
+      "front-control"
+    ],
+    "counterSubmissionTargets": [
+      "arms"
+    ]
   },
   {
     "id": "becky-lynch-diamond-dust",
@@ -3318,7 +3592,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "becky-lynch-diving-leg-drop",
@@ -3339,7 +3614,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "becky-lynch-dis-arm-her",
@@ -3365,7 +3641,9 @@ export const allGameplayCards = [
       "pressure": 5
     },
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "arms"
   },
   {
     "id": "becky-lynch-manhandle-slam",
@@ -3385,7 +3663,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "hurricanrana",
@@ -3406,7 +3685,11 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated",
+    "counterStates": [
+      "body-elevated"
+    ]
   },
   {
     "id": "liv-morgan-jersey-codebreaker",
@@ -3422,20 +3705,27 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "liv-morgan",
     "rarity": 3,
-    "rulesText": "Liv Morgan-exclusive Trademark. Grounds opponent. Stun 1.",
+    "rulesText": "Liv Morgan-exclusive Trademark. Grounds opponent. Stun 1. On Connect: search/draw Oblivion; it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Oblivion",
+        "discount": 3
+      }
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "liv-morgan-oblivion",
     "name": "Oblivion",
     "kind": "move",
     "setId": "evolution-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "grapple",
@@ -3448,7 +3738,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "sunset-flip-powerbomb",
@@ -3470,7 +3761,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "crossface",
@@ -3495,14 +3787,16 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "bayley-rose-plant",
     "name": "Rose Plant",
     "kind": "move",
     "setId": "evolution-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "grapple",
@@ -3515,7 +3809,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "running-knee-strike",
@@ -3536,7 +3831,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "middle-rope-stunner",
@@ -3558,7 +3854,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "fallaway-slam",
@@ -3579,7 +3876,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "spear",
@@ -3599,7 +3897,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "charlotte-flair-natural-selection",
@@ -3627,7 +3926,8 @@ export const allGameplayCards = [
         "type": "discardOpponent",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "charlotte-flair-figure-eight-leglock",
@@ -3651,7 +3951,9 @@ export const allGameplayCards = [
       "pressure": 5
     },
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "paige-rope-hung-knee-strikes",
@@ -3672,7 +3974,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "paige-paige-turner",
@@ -3694,7 +3997,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "paige-pto",
@@ -3720,7 +4024,9 @@ export const allGameplayCards = [
       "pressure": 4
     },
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "arms"
   },
   {
     "id": "paige-ram-paige",
@@ -3740,7 +4046,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "dragon-screw",
@@ -3761,7 +4068,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "counterStates": [
+      "leg-extended"
+    ],
+    "counterSubmissionTargets": [
+      "legs"
+    ]
   },
   {
     "id": "reverse-suplex",
@@ -3782,7 +4096,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control"
   },
   {
     "id": "stephanie-vaquer-svb",
@@ -3804,7 +4119,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "stephanie-vaquer-devils-kiss",
@@ -3812,7 +4128,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 6,
-    "damage": 7,
+    "damage": 9,
     "requirements": {
       "technical": 2
     },
@@ -3820,28 +4136,27 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "stephanie-vaquer",
     "rarity": 2,
-    "rulesText": "",
-    "groundOpponent": false,
+    "rulesText": "Stephanie Vaquer-exclusive Trademark. Grounds opponent. On Connect: search/draw Vaquer Inferno; it costs 3 less this Control sequence.",
+    "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
     "effects": [
       {
-        "type": "searchChoice",
-        "names": [
-          "SVB",
-          "Vaquer Inferno"
-        ]
+        "type": "search",
+        "name": "Vaquer Inferno",
+        "discount": 3
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "stephanie-vaquer-vaquer-inferno",
     "name": "Vaquer Inferno",
     "kind": "move",
     "setId": "evolution-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "grapple",
@@ -3854,7 +4169,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "meteora",
@@ -3876,7 +4192,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "double-stomp",
@@ -3902,7 +4219,8 @@ export const allGameplayCards = [
         "type": "loseOpponentAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "iyo-sky-bullet-train-attack",
@@ -3927,11 +4245,12 @@ export const allGameplayCards = [
     "trademark": true,
     "effects": [
       {
-        "type": "discountNextByName",
+        "type": "search",
         "name": "Over the Moonsault",
-        "amount": 1
+        "discount": 2
       }
-    ]
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "iyo-sky-over-the-moonsault",
@@ -3951,7 +4270,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "the-rock-final-boss-slap",
@@ -3977,7 +4297,8 @@ export const allGameplayCards = [
         "type": "loseOpponentAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "the-rock-belt-whip",
@@ -4007,7 +4328,8 @@ export const allGameplayCards = [
         "type": "loseOpponentAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "the-rock-rock-bottom",
@@ -4035,14 +4357,15 @@ export const allGameplayCards = [
         "name": "People's Elbow",
         "discount": 2
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "the-rock-people-s-elbow",
     "name": "People's Elbow",
     "kind": "move",
     "setId": "season-1-final-boss",
-    "cost": 10,
+    "cost": 11,
     "damage": 18,
     "requirements": {},
     "moveType": "strike",
@@ -4055,7 +4378,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "chain-wrestling",
@@ -4074,7 +4398,18 @@ export const allGameplayCards = [
       "grapple",
       "submission"
     ],
-    "rulesText": "Counter a Grapple or Submission Move."
+    "rulesText": "Counter a Grapple or Submission Move.",
+    "counterState": "front-control",
+    "counterStates": [
+      "front-control",
+      "rear-control"
+    ],
+    "counterSubmissionTargets": [
+      "arms",
+      "legs",
+      "back",
+      "neck-head"
+    ]
   },
   {
     "id": "sidestep",
@@ -4091,7 +4426,12 @@ export const allGameplayCards = [
       "grapple",
       "aerial"
     ],
-    "rulesText": "Counter a Running Aerial or Diving Aerial Move."
+    "rulesText": "Counter a Running Aerial or Diving Aerial Move.",
+    "counterState": "running-aerial",
+    "counterStates": [
+      "running-aerial",
+      "diving-aerial"
+    ]
   },
   {
     "id": "duck",
@@ -4107,7 +4447,12 @@ export const allGameplayCards = [
     "counters": [
       "strike"
     ],
-    "rulesText": "Counter an Arm Extended or Leg Extended Move."
+    "rulesText": "Counter an Arm Extended or Leg Extended Move.",
+    "counterState": "arm-extended",
+    "counterStates": [
+      "arm-extended",
+      "leg-extended"
+    ]
   },
   {
     "id": "no-sell",
@@ -4126,7 +4471,12 @@ export const allGameplayCards = [
       "strike",
       "grapple"
     ],
-    "rulesText": "Counter a Body Elevated or Torso Trapped Move dealing 7+ printed Damage."
+    "rulesText": "Counter a Body Elevated or Torso Trapped Move dealing 7+ printed Damage.",
+    "counterState": "torso-trapped",
+    "counterStates": [
+      "body-elevated",
+      "torso-trapped"
+    ]
   },
   {
     "id": "shoulder-up",
@@ -4466,11 +4816,11 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "hulk-hogan",
-    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
     "preMatchMomentum": {
       "strength": 1
     },
-    "preMatchAdrenaline": 1,
+    "preMatchAdrenaline": 2,
     "delayedTurn5": false
   },
   {
@@ -4494,9 +4844,10 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "randy-savage",
-    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
     "preMatchMomentum": {
-      "technical": 1
+      "technical": 1,
+      "agility": 1
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
@@ -4508,11 +4859,11 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "andre-the-giant",
-    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
     "preMatchMomentum": {
       "strength": 1
     },
-    "preMatchAdrenaline": 1,
+    "preMatchAdrenaline": 2,
     "delayedTurn5": false
   },
   {
@@ -4551,9 +4902,10 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "liv-morgan",
-    "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
     "preMatchMomentum": {
-      "agility": 1
+      "agility": 1,
+      "strike": 1
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
@@ -4650,11 +5002,11 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 3,
     "superstarId": "cody-rhodes",
-    "rulesText": "Once per match when Cody gains Control at 30% HP or less: draw 1, gain +1 Adrenaline, then search Cody Cutter or Cross Rhodes.",
+    "rulesText": "Once per match when Cody gains Control at 40% HP or less: draw 2, gain +1 Adrenaline, then search Cody Cutter or Cross Rhodes.",
     "special": {
       "type": "lowHpTutor",
-      "hpPct": 0.3,
-      "draw": 1,
+      "hpPct": 0.4,
+      "draw": 2,
       "adrenaline": 1,
       "names": [
         "Cody Cutter",
@@ -4770,10 +5122,10 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "the-undertaker",
-    "rulesText": "Once per match after Undertaker kicks out of a pin, immediately take Control and gain +1 Adrenaline.",
+    "rulesText": "Once per match after Undertaker successfully kicks out: gain +2 Adrenaline and take Control.",
     "special": {
       "type": "kickoutControlAdrenaline",
-      "amount": 1
+      "amount": 2
     }
   },
   {
@@ -4808,9 +5160,11 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 3,
     "superstarId": "hulk-hogan",
-    "rulesText": "Once per match when Hogan gains Control at 50% HP or less: clear Stun, gain +2 Adrenaline and his next Hogan’s Big Boot this Control cannot be Countered by a Move.",
+    "rulesText": "Once per match when Hogan gains Control at 50% HP or less: clear Stun, gain +3 Adrenaline, draw 2 pages, and his next Hogan’s Big Boot this Control cannot be Countered by a Move.",
     "special": {
-      "type": "hulkUp"
+      "type": "hulkUp",
+      "adrenaline": 3,
+      "draw": 2
     }
   },
   {
@@ -4886,11 +5240,12 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 3,
     "superstarId": "liv-morgan",
-    "rulesText": "Once per match after Liv successfully Counters, her next Jersey Codebreaker this Control sequence costs 2 less.",
+    "rulesText": "Once per match after Liv successfully Counters, draw 1 page; her next Jersey Codebreaker this Control sequence costs 3 less.",
     "special": {
       "type": "counterDiscountNamed",
       "name": "Jersey Codebreaker",
-      "amount": 2
+      "amount": 3,
+      "draw": 1
     }
   },
   {
@@ -4900,10 +5255,10 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 3,
     "superstarId": "bayley",
-    "rulesText": "Once per match after Bayley successfully Counters, draw 1 page and immediately take Control.",
+    "rulesText": "Once per match after Bayley successfully Counters, draw 3 pages and immediately take Control.",
     "special": {
       "type": "counterDrawControl",
-      "draw": 1
+      "draw": 3
     }
   },
   {
@@ -4928,14 +5283,16 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 3,
     "superstarId": "paige",
-    "rulesText": "Once per match after Paige successfully Counters, choose Paige Turner or PTO in hand; it costs 2 less this Control sequence.",
+    "rulesText": "Once per match after Paige successfully Counters, draw 1 page, gain +1 Adrenaline, then choose Paige Turner or PTO; the chosen Move costs 3 less this Control sequence.",
     "special": {
       "type": "counterChooseDiscount",
       "names": [
         "Paige Turner",
         "PTO"
       ],
-      "amount": 2
+      "amount": 3,
+      "draw": 1,
+      "adrenaline": 1
     }
   },
   {
@@ -4945,10 +5302,12 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 3,
     "superstarId": "stephanie-vaquer",
-    "rulesText": "Once per match after Vaquer successfully Counters, her next non-Finisher Technical Move this Control sequence cannot be Countered by a Move.",
+    "rulesText": "Once per match after Vaquer successfully Counters, draw 2 pages, gain +1 Adrenaline, and her next Technical Move this Control sequence cannot be Countered.",
     "special": {
       "type": "counterUncounterableMethod",
-      "method": "technical"
+      "method": "technical",
+      "draw": 2,
+      "adrenaline": 1
     }
   },
   {
@@ -4997,7 +5356,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "standing-moonsault",
@@ -5019,7 +5379,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "kickoutRetainControlDraw": 1,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "flipping-lariat",
@@ -5042,7 +5403,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "priorMoveBonusDamage": 2,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "450-splash",
@@ -5064,7 +5426,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "selfStunIfCountered": 1,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "asai-moonsault",
@@ -5091,7 +5454,8 @@ export const allGameplayCards = [
         "type": "discardOpponent",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "running-aerial"
   },
   {
     "id": "springboard-crossbody",
@@ -5119,15 +5483,16 @@ export const allGameplayCards = [
         "discard": 1,
         "ifAfterMethod": "strike"
       }
-    ]
+    ],
+    "counterState": "running-aerial"
   },
   {
     "id": "logan-paul-knockout-punch",
     "name": "Knockout Punch",
     "kind": "move",
     "setId": "raw-series-1",
-    "cost": 7,
-    "damage": 11,
+    "cost": 10,
+    "damage": 7,
     "requirements": {
       "strike": 3
     },
@@ -5141,15 +5506,16 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "logan-paul-paulverizer",
     "name": "Paulverizer",
     "kind": "move",
     "setId": "raw-series-1",
-    "cost": 9,
-    "damage": 13,
+    "cost": 12,
+    "damage": 12,
     "requirements": {},
     "moveType": "grapple",
     "method": null,
@@ -5161,7 +5527,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "entrance-logan-paul",
@@ -5222,7 +5589,9 @@ export const allGameplayCards = [
         "type": "loseOpponentAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "sol-ruca-avalanche-x-factor",
@@ -5249,7 +5618,8 @@ export const allGameplayCards = [
       "method": "agility",
       "damage": 2
     },
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "sol-ruca-sol-snatcher",
@@ -5270,7 +5640,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "finisher": true,
     "discountAfterCounter": 2,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "entrance-sol-ruca",
@@ -5322,7 +5693,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "trademark": true,
     "kickoutRetainControl": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "chad-gable-ankle-lock",
@@ -5336,7 +5708,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "chad-gable",
     "rarity": 4,
-    "rulesText": "Chad Gable-exclusive Finisher. No Method requirement. Grounded opponent only. Submission, Leg Pressure 6. On connect, opponent loses 1 Adrenaline.",
+    "rulesText": "Chad Gable-exclusive Finisher. No Method requirement. Grounded opponent only. Submission, Leg Pressure 5. On connect, opponent loses 1 Adrenaline.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
@@ -5344,14 +5716,16 @@ export const allGameplayCards = [
     "finisher": true,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 6
+      "pressure": 5
     },
     "effects": [
       {
         "type": "loseOpponentAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
   },
   {
     "id": "entrance-chad-gable",
@@ -5375,11 +5749,11 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 3,
     "superstarId": "chad-gable",
-    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page and the opponent loses 2 Adrenaline.",
+    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page.",
     "special": {
       "type": "moveCounteredDrawDrain",
       "draw": 1,
-      "opponentAdrenaline": -2
+      "opponentAdrenaline": 0
     }
   },
   {
@@ -5404,7 +5778,14 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "selfStunIfCountered": 1,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Tejana Bomb",
+        "discount": 2
+      }
+    ],
+    "counterState": "diving-aerial"
   },
   {
     "id": "raquel-rodriguez-tejana-bomb",
@@ -5424,7 +5805,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "entrance-raquel-rodriguez",
@@ -5482,14 +5864,18 @@ export const allGameplayCards = [
       "grapple"
     ],
     "drawOnCounter": 1,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial",
+    "counterStates": [
+      "body-elevated"
+    ]
   },
   {
     "id": "619",
     "name": "619",
     "kind": "move",
     "setId": "worlds-collide-series-1",
-    "cost": 6,
+    "cost": 7,
     "damage": 9,
     "requirements": {
       "agility": 2,
@@ -5503,7 +5889,7 @@ export const allGameplayCards = [
       "dominik-mysterio"
     ],
     "rarity": 3,
-    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 2 less this Control sequence. When Dominik connects, search/draw Dominik’s Frog Splash and it costs 2 less this Control sequence.",
+    "rulesText": "Mysterio family only (Rey Mysterio or Dominik Mysterio). Grounded opponent only. Stun 1. When Rey connects, search/draw West Coast Pop and it costs 1 less this Control sequence. When Dominik connects, search/draw Dominik’s Frog Splash and it costs 1 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 1,
@@ -5512,7 +5898,7 @@ export const allGameplayCards = [
       {
         "type": "search",
         "name": "West Coast Pop",
-        "discount": 2,
+        "discount": 1,
         "ifSuperstarIds": [
           "rey-mysterio"
         ]
@@ -5520,19 +5906,20 @@ export const allGameplayCards = [
       {
         "type": "search",
         "name": "Dominik’s Frog Splash",
-        "discount": 2,
+        "discount": 1,
         "ifSuperstarIds": [
           "dominik-mysterio"
         ]
       }
-    ]
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "rey-mysterio-mysterio-express",
     "name": "Mysterio Express",
     "kind": "move",
     "setId": "worlds-collide-series-1",
-    "cost": 6,
+    "cost": 7,
     "damage": 8,
     "requirements": {
       "agility": 2,
@@ -5542,19 +5929,15 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": "rey-mysterio",
     "rarity": 3,
-    "rulesText": "Rey Mysterio-exclusive Trademark. Grounds opponent. Draw 1 page on connect. If the opponent kicks out, remain in Control.",
+    "rulesText": "Rey Mysterio-exclusive Trademark. Grounds opponent. If the opponent kicks out, remain in Control.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
     "kickoutRetainControl": true,
-    "effects": [
-      {
-        "type": "drawSelf",
-        "amount": 1
-      }
-    ]
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "rey-mysterio-west-coast-pop",
@@ -5568,7 +5951,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "rey-mysterio",
     "rarity": 4,
-    "rulesText": "Rey Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +2 Damage.",
+    "rulesText": "Rey Mysterio-exclusive Finisher. No Method requirement. Grounded opponent only. If played immediately after 619 in the same Control sequence, +1 Damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -5577,8 +5960,9 @@ export const allGameplayCards = [
     "effects": [],
     "bonusDamageAfterNamed": {
       "name": "619",
-      "damage": 2
-    }
+      "damage": 1
+    },
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-rey-mysterio",
@@ -5601,11 +5985,11 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "rarity": 3,
     "superstarId": "rey-mysterio",
-    "rulesText": "Once per match, after Rey successfully Counters an opponent's Move with an Agility counter-attack, that counter-attack deals +3 Damage and Rey retains Control after it resolves.",
+    "rulesText": "Once per match, after Rey successfully Counters an opponent's Move with an Agility counter-attack, that counter-attack deals +2 Damage and Rey retains Control after it resolves.",
     "special": {
       "type": "luchaLibreLegend",
       "method": "agility",
-      "bonusDamage": 3,
+      "bonusDamage": 2,
       "retainControl": true
     }
   },
@@ -5626,7 +6010,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "counterStates": [
+      "leg-extended"
+    ],
+    "counterSubmissionTargets": [
+      "legs"
+    ]
   },
   {
     "id": "low-blow",
@@ -5652,7 +6043,8 @@ export const allGameplayCards = [
         "type": "loseOpponentAdrenaline",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "three-amigos",
@@ -5679,7 +6071,8 @@ export const allGameplayCards = [
         "type": "gainAdrenaline",
         "amount": 2
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "dominik-mysterio-frog-splash",
@@ -5703,7 +6096,8 @@ export const allGameplayCards = [
     "bonusDamageAfterNamed": {
       "name": "619",
       "damage": 1
-    }
+    },
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-dominik-mysterio",
@@ -5758,7 +6152,11 @@ export const allGameplayCards = [
       "aerial"
     ],
     "counterBonusDamage": 2,
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "counterStates": [
+      "diving-aerial"
+    ]
   },
   {
     "id": "tope-con-hilo",
@@ -5785,7 +6183,8 @@ export const allGameplayCards = [
         "type": "drawSelf",
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "running-aerial"
   },
   {
     "id": "penta-the-sacrifice",
@@ -5816,7 +6215,8 @@ export const allGameplayCards = [
         "name": "Penta Driver",
         "discount": 1
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "penta-driver",
@@ -5833,13 +6233,20 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "penta",
     "rarity": 3,
-    "rulesText": "Penta-exclusive Trademark. Grounds opponent.",
+    "rulesText": "Penta-exclusive Trademark. Grounds opponent. On Connect: search/draw Mexican Destroyer; it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Mexican Destroyer",
+        "discount": 3
+      }
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "penta-mexican-destroyer",
@@ -5859,7 +6266,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "entrance-penta",
@@ -5913,7 +6321,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "el-grande-americano-loaded-mask-headbutt",
@@ -5933,7 +6342,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "entrance-el-grande-americano",
@@ -5986,7 +6396,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "uso-splash",
@@ -6013,7 +6424,8 @@ export const allGameplayCards = [
     "bonusDamageAfterNamed": {
       "name": "Spear",
       "damage": 1
-    }
+    },
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-jey-uso",
@@ -6036,12 +6448,12 @@ export const allGameplayCards = [
     "setId": "money-in-the-bank-series-1",
     "rarity": 3,
     "superstarId": "jey-uso",
-    "rulesText": "Once per match, after Jey connects with Spear, search/draw Uso Splash. That searched Uso Splash costs 2 less during the current Control sequence.",
+    "rulesText": "Once per match, after Jey connects with Spear, search/draw Uso Splash. That searched Uso Splash costs 3 less during the current Control sequence.",
     "special": {
       "type": "yeetTutor",
       "afterName": "Spear",
       "searchName": "Uso Splash",
-      "discount": 2
+      "discount": 3
     }
   },
   {
@@ -6070,7 +6482,8 @@ export const allGameplayCards = [
         "amount": 1,
         "ifAfterMethod": "strike"
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "burning-hammer",
@@ -6092,14 +6505,15 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "la-knight-bft",
     "name": "BFT",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "strike",
@@ -6116,7 +6530,8 @@ export const allGameplayCards = [
     "bonusDamageAfterNamed": {
       "name": "Diving Elbow Drop",
       "damage": 1
-    }
+    },
+    "counterState": "front-control"
   },
   {
     "id": "entrance-la-knight",
@@ -6139,12 +6554,15 @@ export const allGameplayCards = [
     "setId": "money-in-the-bank-series-1",
     "rarity": 3,
     "superstarId": "la-knight",
-    "rulesText": "Once per match, after LA Knight connects with Diving Elbow Drop, search/draw BFT. That searched BFT costs 2 less during the current Control sequence.",
+    "rulesText": "Once per match after LA Knight connects with Diving Elbow Drop: search/draw BFT; it costs 4 less this Control sequence and deals +2 Damage. Draw 2 pages and gain +1 Adrenaline.",
     "special": {
       "type": "yeahTutor",
       "afterName": "Diving Elbow Drop",
       "searchName": "BFT",
-      "discount": 2
+      "discount": 4,
+      "draw": 2,
+      "adrenaline": 1,
+      "bonusDamage": 2
     }
   },
   {
@@ -6167,7 +6585,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "code-red",
@@ -6189,7 +6608,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "alexa-bliss-sister-abigail",
@@ -6206,7 +6626,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "alexa-bliss",
     "rarity": 3,
-    "rulesText": "Alexa Bliss-exclusive Trademark. Grounds opponent. Stun 1. On connect, search/draw Twisted Bliss; that searched Twisted Bliss costs 1 less during the current Control sequence.",
+    "rulesText": "Alexa Bliss-exclusive Trademark. Grounds opponent. Stun 1. On connect, search/draw Twisted Bliss; that searched Twisted Bliss costs 3 less during the current Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
@@ -6216,16 +6636,17 @@ export const allGameplayCards = [
       {
         "type": "search",
         "name": "Twisted Bliss",
-        "discount": 1
+        "discount": 3
       }
-    ]
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "alexa-bliss-twisted-bliss",
     "name": "Twisted Bliss",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 15,
     "requirements": {},
     "moveType": "aerial",
@@ -6242,7 +6663,8 @@ export const allGameplayCards = [
     "bonusDamageAfterNamed": {
       "name": "Sister Abigail",
       "damage": 2
-    }
+    },
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-alexa-bliss",
@@ -6297,12 +6719,13 @@ export const allGameplayCards = [
       {
         "type": "search",
         "name": "Coup de Grâce",
-        "discount": 1,
+        "discount": 3,
         "ifSuperstarIds": [
           "finn-balor"
         ]
       }
-    ]
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "finn-balor-1916",
@@ -6319,20 +6742,27 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "finn-balor",
     "rarity": 3,
-    "rulesText": "Finn Bálor-exclusive Trademark. Grounds opponent.",
+    "rulesText": "Finn Bálor-exclusive Trademark. Grounds opponent. On Connect: search/draw Coup de Grâce; it costs 2 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Coup de Grâce",
+        "discount": 2
+      }
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "finn-balor-coup-de-grace",
     "name": "Coup de Grâce",
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "aerial",
@@ -6349,7 +6779,8 @@ export const allGameplayCards = [
     "bonusDamageAfterNamed": {
       "name": "Shotgun Dropkick",
       "damage": 1
-    }
+    },
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-finn-balor",
@@ -6372,12 +6803,12 @@ export const allGameplayCards = [
     "setId": "money-in-the-bank-series-1",
     "rarity": 3,
     "superstarId": "finn-balor",
-    "rulesText": "Once per match, after Finn connects with Sling Blade, search/draw Shotgun Dropkick. That searched Shotgun Dropkick costs 2 less during the current Control sequence.",
+    "rulesText": "Once per match after Finn connects with Sling Blade: search/draw Shotgun Dropkick; it costs 3 less this Control sequence.",
     "special": {
       "type": "balorClubTutor",
       "afterName": "Sling Blade",
       "searchName": "Shotgun Dropkick",
-      "discount": 2
+      "discount": 3
     }
   },
   {
@@ -6394,7 +6825,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 3,
-    "rulesText": "Grounds opponent. Jade Cargill: On connect, search/draw Jaded and Jade\u2019s next Jaded this Control sequence costs 2 less.",
+    "rulesText": "Grounds opponent. Jade Cargill: On connect, search/draw Jaded and Jade’s next Jaded this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -6416,7 +6847,8 @@ export const allGameplayCards = [
           "jade-cargill"
         ]
       }
-    ]
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "inverted-ddt",
@@ -6438,7 +6870,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control"
   },
   {
     "id": "octopus-hold",
@@ -6463,7 +6896,9 @@ export const allGameplayCards = [
       "bodyPart": "arms",
       "pressure": 5
     },
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "arms"
   },
   {
     "id": "danhausen-very-nice-knee-vil",
@@ -6486,7 +6921,8 @@ export const allGameplayCards = [
     "stun": 1,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "danhausen-triple-d",
@@ -6507,7 +6943,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "bonusDamageIfOpponentStunned": 1
+    "bonusDamageIfOpponentStunned": 1,
+    "counterState": "front-control"
   },
   {
     "id": "entrance-danhausen",
@@ -6557,7 +6994,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "front-kick",
@@ -6578,7 +7016,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "snap-suplex",
@@ -6599,7 +7038,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "finlay-roll",
@@ -6620,7 +7060,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "tiffany-stratton-handspring-back-elbow",
@@ -6636,14 +7077,16 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": "tiffany-stratton",
     "rarity": 3,
-    "rulesText": "Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: search/draw Prettiest Moonsault Ever.",
+    "rulesText": "Tiffany Stratton-exclusive Trademark. Grounds opponent. On Connect: search/draw Prettiest Moonsault Ever; it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
     "searchOnConnectName": "Prettiest Moonsault Ever",
-    "effects": []
+    "searchOnConnectDiscount": 3,
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "tiffany-stratton-prettiest-moonsault-ever",
@@ -6663,7 +7106,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-tiffany-stratton",
@@ -6715,7 +7159,14 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": []
+    "effects": [
+      {
+        "type": "search",
+        "name": "Green With Envy",
+        "discount": 2
+      }
+    ],
+    "counterState": "front-control"
   },
   {
     "id": "chelsea-green-green-with-envy",
@@ -6735,7 +7186,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "entrance-chelsea-green",
@@ -6777,14 +7229,16 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "damian-priest",
     "rarity": 3,
-    "rulesText": "Damian Priest-exclusive Trademark. Grounds opponent. On Connect: your next Finisher this Control sequence costs 2 less.",
+    "rulesText": "Damian Priest-exclusive Trademark. Grounds opponent. On Connect: search/draw Hit the Lights; your next Finisher this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
     "nextFinisherDiscountOnConnect": 2,
-    "effects": []
+    "searchOnConnectName": "Hit the Lights",
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "damian-priest-razors-edge",
@@ -6807,7 +7261,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "trademark": true,
     "opponentAdrenalineOnConnect": -1,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "damian-priest-hit-the-lights",
@@ -6827,7 +7282,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "entrance-damian-priest",
@@ -6879,7 +7335,9 @@ export const allGameplayCards = [
       "bodyPart": "back",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "back"
   },
   {
     "id": "firemans-carry",
@@ -6900,7 +7358,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "leapfrog",
@@ -6918,7 +7377,11 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "counters": [],
-    "rulesText": "Counter a Running Aerial Move. On success, gain Control."
+    "rulesText": "Counter a Running Aerial Move. On success, gain Control.",
+    "counterState": "running-aerial",
+    "counterStates": [
+      "running-aerial"
+    ]
   },
   {
     "id": "abdominal-stretch",
@@ -6943,7 +7406,9 @@ export const allGameplayCards = [
       "bodyPart": "body",
       "pressure": 3
     },
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "back"
   },
   {
     "id": "punches-in-the-corner",
@@ -6965,7 +7430,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "opponentAdrenalineOnConnect": -1,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "running-clothesline",
@@ -6986,7 +7452,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "clothesline-over-the-top-rope",
@@ -7008,7 +7475,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "opponentAdrenalineOnConnect": -1,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "bron-breakker-gorilla-press-powerslam",
@@ -7031,7 +7499,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "trademark": true,
     "searchOnConnectName": "Breakker’s Spear",
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "bron-breakker-breakkers-spear",
@@ -7052,7 +7521,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "finisher": true,
     "discountIfPriorAgility": 2,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "bron-breakker-steiner-recliner",
@@ -7077,7 +7547,9 @@ export const allGameplayCards = [
       "bodyPart": "back",
       "pressure": 5
     },
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "back"
   },
   {
     "id": "entrance-bron-breakker",
@@ -7131,7 +7603,8 @@ export const allGameplayCards = [
       "method": "agility",
       "damage": 1
     },
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "apron-german-suplex",
@@ -7157,7 +7630,8 @@ export const allGameplayCards = [
     "countsAs": [
       "German Suplex"
     ],
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control"
   },
   {
     "id": "corner-clothesline",
@@ -7178,7 +7652,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "dropkick-to-the-back",
@@ -7199,7 +7674,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "elbow",
@@ -7213,7 +7689,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Standing opponent only. May Counter an Arm Extended Move.",
+    "rulesText": "Standing opponent only. May Counter an Arm Extended Move. If used as a Counter, another Elbow or Punch may Counter it.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -7221,7 +7697,12 @@ export const allGameplayCards = [
     "counters": [
       "strike"
     ],
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "arm-extended"
+    ],
+    "counterExchangeKey": "punch-elbow"
   },
   {
     "id": "running-knees-to-the-back",
@@ -7244,7 +7725,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial"
   },
   {
     "id": "fight-forever",
@@ -7281,7 +7763,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "torso-trapped"
   },
   {
     "id": "side-headlock",
@@ -7308,7 +7791,9 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 3
     },
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "wristlock",
@@ -7335,7 +7820,9 @@ export const allGameplayCards = [
       "bodyPart": "arms",
       "pressure": 2
     },
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "submissionTarget": "arms"
   },
   {
     "id": "catch-your-breath",
@@ -7372,7 +7859,11 @@ export const allGameplayCards = [
     "counters": [
       "grapple"
     ],
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended",
+    "counterStates": [
+      "torso-trapped"
+    ]
   },
   {
     "id": "throw-into-steel-steps",
@@ -7398,7 +7889,8 @@ export const allGameplayCards = [
       "bodyPart": "back",
       "pressure": 1
     },
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "sleeper-hold",
@@ -7425,7 +7917,9 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 4
     },
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "scissors-kick",
@@ -7448,7 +7942,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "senton-splash",
@@ -7470,7 +7965,8 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "spinning-back-kick",
@@ -7493,7 +7989,8 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended"
   },
   {
     "id": "throw-into-ringpost",
@@ -7519,7 +8016,8 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 1
     },
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "corner-barrage",
@@ -7543,7 +8041,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "bonusDamageIfStrikeEarlierThisControl": 2,
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "drew-mcintyre-glasgow-kiss",
@@ -7568,7 +8067,8 @@ export const allGameplayCards = [
     "bodyDamage": {
       "bodyPart": "head",
       "pressure": 1
-    }
+    },
+    "counterState": "arm-extended"
   },
   {
     "id": "drew-mcintyre-future-shock-ddt",
@@ -7585,14 +8085,16 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "drew-mcintyre",
     "rarity": 3,
-    "rulesText": "Drew McIntyre-exclusive Trademark. Grounds opponent. On Connect: search/draw Claymore.",
+    "rulesText": "Drew McIntyre-exclusive Trademark. Grounds opponent. On Connect: search/draw Claymore; it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
     "trademark": true,
-    "searchOnConnectName": "Claymore"
+    "searchOnConnectName": "Claymore",
+    "counterState": "front-control",
+    "searchOnConnectDiscount": 3
   },
   {
     "id": "drew-mcintyre-claymore",
@@ -7618,7 +8120,8 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "min": 1,
       "amount": 2
-    }
+    },
+    "counterState": "leg-extended"
   },
   {
     "id": "entrance-drew-mcintyre",
@@ -7663,7 +8166,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "randy-orton",
     "rarity": 3,
-    "rulesText": "Randy Orton-exclusive Trademark. Grounds opponent. On Connect: search/draw RKO and deal +1 Head body-part damage.",
+    "rulesText": "Randy Orton-exclusive Trademark. Grounds opponent. On Connect: search/draw RKO, it costs 3 less this Control sequence, and deal +1 Head body-part damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -7674,14 +8177,16 @@ export const allGameplayCards = [
     "bodyDamage": {
       "bodyPart": "head",
       "pressure": 1
-    }
+    },
+    "counterState": "front-control",
+    "searchOnConnectDiscount": 3
   },
   {
     "id": "randy-orton-rko",
     "name": "RKO",
     "kind": "move",
     "setId": "survivor-series-series-1",
-    "cost": 10,
+    "cost": 9,
     "damage": 17,
     "requirements": {},
     "moveType": "grapple",
@@ -7699,7 +8204,8 @@ export const allGameplayCards = [
     "discountIfMethodConnectedThisControl": {
       "method": "technical",
       "amount": 2
-    }
+    },
+    "counterState": "front-control"
   },
   {
     "id": "randy-orton-punt-kick",
@@ -7724,7 +8230,8 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 1
     },
-    "opponentAdrenalineOnConnect": -1
+    "opponentAdrenalineOnConnect": -1,
+    "counterState": "leg-extended"
   },
   {
     "id": "entrance-randy-orton",
@@ -7748,11 +8255,11 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "rarity": 3,
     "superstarId": "randy-orton",
-    "rulesText": "Once per match, when the opponent attempts a Move: Randy may play RKO from hand as a Counter. If he does, RKO costs 2 less.",
+    "rulesText": "Once per match, when the opponent attempts a Move: Randy may play RKO from hand as a Counter. If he does, RKO costs 5 less.",
     "special": {
       "type": "outtaNowhere",
       "name": "RKO",
-      "discount": 2
+      "discount": 5
     }
   },
   {
@@ -7770,26 +8277,27 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "sami-zayn",
     "rarity": 2,
-    "rulesText": "Sami Zayn-exclusive. Standing opponent only. Grounds opponent. On Connect: Sami’s next Helluva Kick this Control sequence costs 2 less.",
+    "rulesText": "Sami Zayn-exclusive setup. Grounds opponent. On Connect: search/draw Helluva Kick; it costs 4 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [
       {
-        "type": "discountNextByName",
+        "type": "search",
         "name": "Helluva Kick",
-        "amount": 2
+        "discount": 4
       }
     ],
-    "standingOnly": true
+    "standingOnly": true,
+    "counterState": "torso-trapped"
   },
   {
     "id": "sami-zayn-blue-thunder-bomb",
     "name": "Blue Thunder Bomb",
     "kind": "move",
     "setId": "survivor-series-series-1",
-    "cost": 7,
+    "cost": 6,
     "damage": 11,
     "requirements": {
       "technical": 2,
@@ -7815,14 +8323,15 @@ export const allGameplayCards = [
       }
     ],
     "trademark": true,
-    "standingOnly": true
+    "standingOnly": true,
+    "counterState": "body-elevated"
   },
   {
     "id": "sami-zayn-helluva-kick",
     "name": "Helluva Kick",
     "kind": "move",
     "setId": "survivor-series-series-1",
-    "cost": 9,
+    "cost": 8,
     "damage": 16,
     "requirements": {},
     "moveType": "strike",
@@ -7836,7 +8345,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "finisher": true,
-    "standingOnly": true
+    "standingOnly": true,
+    "counterState": "leg-extended"
   },
   {
     "id": "entrance-sami-zayn",
@@ -7860,11 +8370,11 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "rarity": 3,
     "superstarId": "sami-zayn",
-    "rulesText": "Once per match, when Sami enters Red Health (24% HP or lower): draw 2 cards and gain +2 Adrenaline.",
+    "rulesText": "Once per match when Sami falls to 40% HP or less: draw 3 pages and gain +2 Adrenaline.",
     "special": {
       "type": "neverSayDie",
-      "hpPct": 0.24,
-      "draw": 2,
+      "hpPct": 0.4,
+      "draw": 3,
       "adrenaline": 2
     }
   },
@@ -7896,7 +8406,8 @@ export const allGameplayCards = [
     ],
     "trademark": true,
     "standingOnly": true,
-    "searchOnConnectName": "Moonsault"
+    "searchOnConnectName": "Moonsault",
+    "counterState": "torso-trapped"
   },
   {
     "id": "jacob-fatu-moonsault",
@@ -7916,7 +8427,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "finisher": true
+    "finisher": true,
+    "counterState": "diving-aerial"
   },
   {
     "id": "jacob-fatu-tongan-death-grip",
@@ -7930,7 +8442,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "jacob-fatu",
     "rarity": 4,
-    "rulesText": "Jacob Fatu-exclusive Submission Finisher. Standing opponent. Head Pressure 6.",
+    "rulesText": "Jacob Fatu-exclusive Submission Finisher. Standing opponent. Head Pressure 5.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -7940,8 +8452,10 @@ export const allGameplayCards = [
     "standingOnly": true,
     "submission": {
       "bodyPart": "head",
-      "pressure": 6
-    }
+      "pressure": 5
+    },
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "entrance-jacob-fatu",
@@ -7965,12 +8479,12 @@ export const allGameplayCards = [
     "setId": "survivor-series-series-1",
     "rarity": 3,
     "superstarId": "jacob-fatu",
-    "rulesText": "Once per match, after Jacob takes 8 or more Damage from a single Move: gain +2 Adrenaline and draw 1 card.",
+    "rulesText": "Once per match, after Jacob takes 8 or more Damage from a single Move: gain +1 Adrenaline.",
     "special": {
       "type": "builtDifferent",
       "minDamage": 8,
-      "draw": 1,
-      "adrenaline": 2
+      "draw": 0,
+      "adrenaline": 1
     }
   },
   {
@@ -7987,7 +8501,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "solo-sikoa",
     "rarity": 3,
-    "rulesText": "Solo Sikoa-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Samoan Spike; Solo\u2019s next Samoan Spike this Control sequence costs 2 less.",
+    "rulesText": "Solo Sikoa-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Samoan Spike; Solo’s next Samoan Spike this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -8001,7 +8515,8 @@ export const allGameplayCards = [
         "name": "Samoan Spike",
         "amount": 2
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "solo-sikoa-samoan-spike",
@@ -8026,7 +8541,8 @@ export const allGameplayCards = [
       "bodyPart": "head",
       "pressure": 1
     },
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "entrance-solo-sikoa",
@@ -8069,14 +8585,15 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "jade-cargill",
     "rarity": 4,
-    "rulesText": "Jade Cargill-exclusive Finisher. Standing opponent only. Grounds opponent. Pump Kick can reduce this Move\u2019s cost by 2 during the same Control sequence.",
+    "rulesText": "Jade Cargill-exclusive Finisher. Standing opponent only. Grounds opponent. Pump Kick can reduce this Move’s cost by 2 during the same Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
     "standingOnly": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "entrance-jade-cargill",
@@ -8122,7 +8639,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "nia-jax",
     "rarity": 3,
-    "rulesText": "Nia Jax-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Annihilator; Nia\u2019s next Annihilator this Control sequence costs 2 less.",
+    "rulesText": "Nia Jax-exclusive Trademark. Standing opponent only. Grounds opponent. On Connect: search/draw Annihilator; Nia’s next Annihilator this Control sequence costs 2 less.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -8136,7 +8653,8 @@ export const allGameplayCards = [
         "name": "Annihilator",
         "amount": 2
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "nia-jax-annihilator",
@@ -8156,7 +8674,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial"
   },
   {
     "id": "entrance-nia-jax",
@@ -8208,7 +8727,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "boosterOnly": true,
-    "standingOnly": true
+    "standingOnly": true,
+    "counterState": "torso-trapped"
   },
   {
     "id": "shining-wizard",
@@ -8234,7 +8754,8 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "leg-extended"
   },
   {
     "id": "double-underhook-facebuster",
@@ -8258,7 +8779,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "boosterOnly": true,
-    "standingOnly": true
+    "standingOnly": true,
+    "counterState": "front-control"
   },
   {
     "id": "steel-chair-to-the-back",
@@ -8284,7 +8806,8 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "arm-extended"
   },
   {
     "id": "spanish-fly",
@@ -8308,7 +8831,8 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "boosterOnly": true,
-    "standingOnly": true
+    "standingOnly": true,
+    "counterState": "running-aerial"
   },
   {
     "id": "second-rope-leg-drop",
@@ -8330,7 +8854,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "diving-aerial"
   },
   {
     "id": "flair-chop",
@@ -8359,7 +8884,8 @@ export const allGameplayCards = [
       "bodyPart": "chest",
       "pressure": 1
     },
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended"
   },
   {
     "id": "elbow-to-back-of-head",
@@ -8386,7 +8912,8 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "arm-extended"
   },
   {
     "id": "hip-toss",
@@ -8410,7 +8937,14 @@ export const allGameplayCards = [
       "grapple"
     ],
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "front-control",
+    "counterStates": [
+      "front-control"
+    ],
+    "counterSubmissionTargets": [
+      "back"
+    ]
   },
   {
     "id": "leg-drop",
@@ -8432,7 +8966,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "leg-extended"
   },
   {
     "id": "choke-on-the-ropes",
@@ -8459,7 +8994,9 @@ export const allGameplayCards = [
       "pressure": 3
     },
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "front-control",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "chops-in-the-corner",
@@ -8486,7 +9023,8 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": [],
-    "boosterOnly": true
+    "boosterOnly": true,
+    "counterState": "arm-extended"
   },
   {
     "id": "goldberg-military-press-powerslam",
@@ -8502,7 +9040,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "goldberg",
     "rarity": 3,
-    "rulesText": "Goldberg-exclusive Trademark. Standing opponent only. Grounds opponent. On connect, gain 1 additional Streak counter (maximum 3).",
+    "rulesText": "Goldberg-exclusive Trademark. Standing opponent only. Grounds opponent. On connect, gain 1 additional Streak counter (maximum 3), then search/draw Goldberg’s Spear; it costs 2 less this Control sequence.",
     "standingOnly": true,
     "groundOpponent": true,
     "groundedOnly": false,
@@ -8514,8 +9052,14 @@ export const allGameplayCards = [
         "type": "gainStreak",
         "amount": 1,
         "max": 3
+      },
+      {
+        "type": "search",
+        "name": "Goldberg’s Spear",
+        "discount": 2
       }
-    ]
+    ],
+    "counterState": "body-elevated"
   },
   {
     "id": "goldberg-spear",
@@ -8550,14 +9094,15 @@ export const allGameplayCards = [
         "min": 2,
         "amount": 1
       }
-    ]
+    ],
+    "counterState": "torso-trapped"
   },
   {
     "id": "goldberg-jackhammer",
     "name": "Jackhammer",
     "kind": "move",
     "setId": "season-2-whos-next",
-    "cost": 11,
+    "cost": 12,
     "damage": 19,
     "requirements": {},
     "moveType": "grapple",
@@ -8571,7 +9116,8 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "effects": []
+    "effects": [],
+    "counterState": "body-elevated"
   },
   {
     "id": "entrance-goldberg",
@@ -8595,10 +9141,11 @@ export const allGameplayCards = [
     "setId": "season-2-whos-next",
     "rarity": 4,
     "superstarId": "goldberg",
-    "rulesText": "Once per match, when one of Goldberg’s Moves is Countered and he would lose Control: the Counter still resolves normally, Goldberg retains Control, keeps all Streak counters and gains +1 Adrenaline.",
+    "rulesText": "Once per match, when one of Goldberg’s Moves is Countered and he would lose Control: the Counter still resolves normally, Goldberg retains Control, keeps all Streak counters, gains +1 Adrenaline and draws 1 page.",
     "special": {
       "type": "goldberg173",
       "adrenaline": 1,
+      "draw": 1,
       "retainControl": true,
       "preserveStreak": true
     }
@@ -8617,7 +9164,11 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter a Diving Aerial Move.",
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial",
+    "counterStates": [
+      "diving-aerial"
+    ]
   },
   {
     "id": "dodge",
@@ -8633,7 +9184,14 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter an Arm Extended, Leg Extended, Running Aerial or Diving Aerial Move.",
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "arm-extended",
+      "leg-extended",
+      "running-aerial",
+      "diving-aerial"
+    ]
   },
   {
     "id": "block",
@@ -8649,7 +9207,12 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter an Arm Extended or Leg Extended Move.",
-    "effects": []
+    "effects": [],
+    "counterState": "arm-extended",
+    "counterStates": [
+      "arm-extended",
+      "leg-extended"
+    ]
   },
   {
     "id": "up-and-over",
@@ -8665,7 +9228,11 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter a Running Aerial Move.",
-    "effects": []
+    "effects": [],
+    "counterState": "running-aerial",
+    "counterStates": [
+      "running-aerial"
+    ]
   },
   {
     "id": "standing-switch",
@@ -8681,7 +9248,15 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter a Rear Control or Torso Trapped Move. Can also counter a Back-targeting Submission attempt.",
-    "effects": []
+    "effects": [],
+    "counterState": "rear-control",
+    "counterStates": [
+      "torso-trapped",
+      "rear-control"
+    ],
+    "counterSubmissionTargets": [
+      "back"
+    ]
   },
   {
     "id": "rollover-counter",
@@ -8697,7 +9272,17 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter a Body Elevated or Front Control Move. Can also counter Arm-, Leg- or Back-targeting Submission attempts.",
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "counterStates": [
+      "body-elevated",
+      "front-control"
+    ],
+    "counterSubmissionTargets": [
+      "arms",
+      "legs",
+      "back"
+    ]
   },
   {
     "id": "backflip-counter",
@@ -8713,7 +9298,12 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter a Diving Aerial or Body Elevated Move.",
-    "effects": []
+    "effects": [],
+    "counterState": "diving-aerial",
+    "counterStates": [
+      "diving-aerial",
+      "body-elevated"
+    ]
   },
   {
     "id": "catch-the-foot",
@@ -8729,7 +9319,14 @@ export const allGameplayCards = [
     "rarity": 1,
     "defensiveOnly": true,
     "rulesText": "Counter a Leg Extended Move or a Leg-targeting Submission attempt.",
-    "effects": []
+    "effects": [],
+    "counterState": "leg-extended",
+    "counterStates": [
+      "leg-extended"
+    ],
+    "counterSubmissionTargets": [
+      "legs"
+    ]
   },
   {
     "id": "arm-drag-counter",
@@ -8748,7 +9345,14 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "counterStates": [
+      "front-control"
+    ],
+    "counterSubmissionTargets": [
+      "arms"
+    ]
   },
   {
     "id": "jawbreaker",
@@ -8767,7 +9371,15 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": []
+    "effects": [],
+    "counterState": "front-control",
+    "counterStates": [
+      "front-control",
+      "rear-control"
+    ],
+    "counterSubmissionTargets": [
+      "neck-head"
+    ]
   }
 ];
 

@@ -1,0 +1,135 @@
+{
+  "matches": 2450,
+  "controlStarts": 51125,
+  "startsNoMove": 6000,
+  "startsNoMovePct": 11.7,
+  "startsUnlockableBySomeMom": 1489,
+  "badMomChoice": 0,
+  "unavoidableAfterMom": 2227,
+  "passes": 3984,
+  "momentumThenPass": 1785,
+  "momentumThenPassPerMatch": 0.73,
+  "passWithLegalMove": 0,
+  "top": [
+    {
+      "id": "chelsea-green",
+      "control": 1240,
+      "momPass": 139,
+      "badChoice": 0,
+      "passes": 206,
+      "momPassPct": 11.2
+    },
+    {
+      "id": "jacob-fatu",
+      "control": 769,
+      "momPass": 64,
+      "badChoice": 0,
+      "passes": 98,
+      "momPassPct": 8.3
+    },
+    {
+      "id": "danhausen",
+      "control": 997,
+      "momPass": 67,
+      "badChoice": 0,
+      "passes": 142,
+      "momPassPct": 6.7
+    },
+    {
+      "id": "logan-paul",
+      "control": 604,
+      "momPass": 40,
+      "badChoice": 0,
+      "passes": 60,
+      "momPassPct": 6.6
+    },
+    {
+      "id": "tiffany-stratton",
+      "control": 1104,
+      "momPass": 68,
+      "badChoice": 0,
+      "passes": 122,
+      "momPassPct": 6.2
+    },
+    {
+      "id": "jey-uso",
+      "control": 1054,
+      "momPass": 63,
+      "badChoice": 0,
+      "passes": 119,
+      "momPassPct": 6
+    },
+    {
+      "id": "kevin-owens",
+      "control": 1160,
+      "momPass": 67,
+      "badChoice": 0,
+      "passes": 155,
+      "momPassPct": 5.8
+    },
+    {
+      "id": "chad-gable",
+      "control": 819,
+      "momPass": 46,
+      "badChoice": 0,
+      "passes": 86,
+      "momPassPct": 5.6
+    },
+    {
+      "id": "randy-savage",
+      "control": 1147,
+      "momPass": 59,
+      "badChoice": 0,
+      "passes": 120,
+      "momPassPct": 5.1
+    },
+    {
+      "id": "mankind",
+      "control": 1098,
+      "momPass": 55,
+      "badChoice": 0,
+      "passes": 126,
+      "momPassPct": 5
+    },
+    {
+      "id": "the-undertaker",
+      "control": 1170,
+      "momPass": 55,
+      "badChoice": 0,
+      "passes": 139,
+      "momPassPct": 4.7
+    },
+    {
+      "id": "cody-rhodes",
+      "control": 860,
+      "momPass": 40,
+      "badChoice": 0,
+      "passes": 71,
+      "momPassPct": 4.7
+    },
+    {
+      "id": "seth-rollins",
+      "control": 822,
+      "momPass": 38,
+      "badChoice": 0,
+      "passes": 80,
+      "momPassPct": 4.6
+    },
+    {
+      "id": "gunther",
+      "control": 934,
+      "momPass": 42,
+      "badChoice": 0,
+      "passes": 84,
+      "momPassPct": 4.5
+    },
+    {
+      "id": "randy-orton",
+      "control": 887,
+      "momPass": 39,
+      "badChoice": 0,
+      "passes": 93,
+      "momPassPct": 4.4
+    }
+  ]
+}

@@ -3142,4 +3142,182 @@ for (const [sid, ids] of Object.entries(deckIds)) {
   }
 }
 
+// v0.12.24 targeted coverage/balance pass.
+// Preserve the authored 60-page identity while redistributing a few reversal slots away from
+// already over-covered states and toward the states that the deep simulation showed were
+// functionally unavailable for the weakest decks. These are swaps, not extra pages.
+const replaceOne = (sid, fromId, toId) => {
+  const ids = deckIds[sid];
+  const i = ids?.lastIndexOf(fromId) ?? -1;
+  if (i >= 0) ids[i] = toId;
+};
+
+// Seth: Running Aerial was over-covered while Body Elevated / Torso Trapped were nearly absent.
+replaceOne('seth-rollins','up-and-over','knee-to-the-gut');
+replaceOne('seth-rollins','sidestep','backflip-counter');
+
+// Gunther: as an Agility-0 powerhouse he needs dependable ungated aerial answers without
+// loading more coverage into Body Elevated / Torso Trapped.
+replaceOne('gunther','catch-the-foot','up-and-over');
+replaceOne('gunther','no-sell','knees-up');
+
+// Cody: add basic arm/leg and torso answers while keeping his technical/agility identity intact.
+replaceOne('cody-rhodes','sidestep','duck');
+replaceOne('cody-rhodes','crowd-support','knee-to-the-gut');
+
+// Paige: her arm/front coverage was already strong; use utility slots to cover the aerial/body gap.
+replaceOne('paige','game-plan','up-and-over');
+replaceOne('paige','crowd-support','backflip-counter');
+
+// Sami: redistribute one over-represented Running Aerial answer and one Front Control answer.
+replaceOne('sami-zayn','dropkick','backflip-counter');
+replaceOne('sami-zayn','arm-drag-counter','catch-the-foot');
+// His signature chain requires Strength 1, so two Strength pages avoids one single-card choke point.
+replaceOne('sami-zayn','momentum-technical','momentum-strength');
+
+// v0.12.24 second-stage tuning after targeted legality diagnostics.
+// Raise practical response density for the weakest decks without adding pages.
+replaceOne('seth-rollins','running-forearm','jawbreaker');
+replaceOne('seth-rollins','sling-blade','standing-switch');
+replaceOne('seth-rollins','superkick','backflip-counter');
+
+replaceOne('gunther','stomp','jawbreaker');
+replaceOne('gunther','gunther-gunther-s-chop','knee-to-the-gut');
+replaceOne('gunther','front-dropkick','backflip-counter');
+replaceOne('gunther','german-suplex','standing-switch');
+replaceOne('gunther','last-symphony','rollover-counter');
+
+replaceOne('cody-rhodes','cody-rhodes-dropdown-uppercut','jawbreaker');
+replaceOne('cody-rhodes','snap-powerslam','standing-switch');
+
+// Sami already has strong reversal density; trade two low-pressure holds and utility for
+// more of his authentic Exploder / Blue Thunder signature sequence.
+replaceOne('sami-zayn','wristlock','sami-zayn-blue-thunder-bomb');
+replaceOne('sami-zayn','side-headlock','sami-zayn-exploder-turnbuckle');
+replaceOne('sami-zayn','crowd-support','sami-zayn-blue-thunder-bomb');
+
+replaceOne('sami-zayn','wristlock','dodge');
+replaceOne('sami-zayn','side-headlock','jawbreaker');
+
+// v0.12.24 Orton reversal-density correction: his Outta Nowhere identity still needs
+// normal state-matched defensive options in hand.
+replaceOne('randy-orton','side-headlock','dodge');
+replaceOne('randy-orton','wristlock','standing-switch');
+replaceOne('randy-orton','short-arm-clothesline','backflip-counter');
+replaceOne('randy-orton','running-clothesline','rollover-counter');
+
+replaceOne('randy-orton','side-headlock','ddt');
+replaceOne('randy-orton','wristlock','snap-powerslam');
+
+// v0.12.24 targeted pacing/identity tuning: give Savage more authentic aerial access and slightly reduce Rey's finisher density.
+replaceOne('randy-savage','knee-drop','diving-crossbody');
+replaceOne('randy-savage','clothesline','diving-body-press');
+replaceOne('rey-mysterio','rey-mysterio-west-coast-pop','bulldog');
+
+replaceOne('andre-the-giant','bearhug','military-press-slam');
+
+
+// v0.12.25 CPU recovery-curve normalization.
+// The expanded reversal system left some recommended decks with too many response-only pages.
+// Trim only redundant generic defensive reversals, never Lead Off pages/signature/family cards,
+// and replace them with low-cost Method-free offensive counter-Moves already native to that deck.
+// This preserves the eight-state/submission coverage while giving the CPU more live offense when
+// Control returns after a long opponent sequence.
+const recoveryCounterId = id => {
+  const c=byId.get(id);
+  return !!(c?.kind==='move' && !c.defensiveOnly && !c.finisher && !c.trademark && !c.superstarId && !(c.allowedSuperstarIds?.length)
+    && (c.cost??99)<=3 && Object.values(c.requirements??{}).every(v=>(v??0)===0) && counterCapableId(id));
+};
+const localCoverage = ids => {
+  const state={},sub={};
+  for(const id of ids){const c=byId.get(id);if(c?.kind!=='move')continue;for(const x of c.counterStates??[])state[x]=(state[x]??0)+1;for(const x of c.counterSubmissionTargets??[])sub[x]=(sub[x]??0)+1;}
+  return {state,sub};
+};
+const allDeckUseCounts = () => {
+  const m=new Map(); for(const ids of Object.values(deckIds))for(const id of ids)m.set(id,(m.get(id)??0)+1); return m;
+};
+const defensiveCount = ids => ids.filter(id=>byId.get(id)?.kind==='move'&&byId.get(id)?.defensiveOnly).length;
+for(const [sid,ids] of Object.entries(deckIds)){
+  let guard=0;
+  while((ids.filter(recoveryCounterId).length<9 || defensiveCount(ids)>6) && guard++<12){
+    const localCounts=ids.reduce((m,id)=>(m.set(id,(m.get(id)??0)+1),m),new Map());
+    const globalCounts=allDeckUseCounts();
+    const cov=localCoverage(ids);
+    const candidates=[...new Set(ids.filter(recoveryCounterId))].filter(id=>{
+      const c=byId.get(id); return (localCounts.get(id)??0)<Math.min(5,c?.maxCopies??5);
+    }).sort((a,b)=>{
+      const ca=byId.get(a),cb=byId.get(b);
+      const aa=(ca.counterStates?.length??0)+(ca.counterSubmissionTargets?.length??0),bb=(cb.counterStates?.length??0)+(cb.counterSubmissionTargets?.length??0);
+      return (localCounts.get(a)??0)-(localCounts.get(b)??0) || bb-aa || (cb.damage??0)-(ca.damage??0) || (ca.cost??0)-(cb.cost??0);
+    });
+    if(!candidates.length)break;
+    const removable=ids.map((id,i)=>({id,i,c:byId.get(id)})).filter(x=>x.i>=5&&x.c?.kind==='move'&&x.c.defensiveOnly&&!x.c.superstarId&&!(x.c.allowedSuperstarIds?.length)).filter(x=>{
+      const cs=x.c.counterStates??[],ts=x.c.counterSubmissionTargets??[];
+      if(!cs.every(k=>(cov.state[k]??0)>1)||!ts.every(k=>(cov.sub[k]??0)>1))return false;
+      // Never orphan a collectible from all recommended decks.
+      if((globalCounts.get(x.id)??0)<=1)return false;
+      return true;
+    }).sort((a,b)=>{
+      const ad=(localCounts.get(a.id)??0)>1?1:0,bd=(localCounts.get(b.id)??0)>1?1:0;
+      return bd-ad || (localCounts.get(b.id)??0)-(localCounts.get(a.id)??0) || (globalCounts.get(b.id)??0)-(globalCounts.get(a.id)??0) || (b.c.cost??0)-(a.c.cost??0) || b.i-a.i;
+    });
+    if(!removable.length)break;
+    ids[removable[0].i]=candidates[0];
+  }
+}
+
+// EXPERIMENT balance correction while preserving v0.12.25 recovery offense.
+// Revert recovery substitutions for characters that overshot upward in the same-seed/deep diagnostics.
+const revertPairs={
+ 'sol-ruca':[['jawbreaker','sidestep',2],['arm-drag-counter','leapfrog',2]],
+ 'the-undertaker':[['punch','no-sell',1],['jawbreaker','no-sell',1],['jawbreaker','duck',2],['jawbreaker','standing-switch',1]],
+ 'jey-uso':[['jawbreaker','sidestep',1],['jawbreaker','duck',1]],
+ 'chad-gable':[['arm-drag','chain-wrestling',1],['arm-drag','sidestep',1],['jawbreaker','sidestep',1],['jawbreaker','standing-switch',1],['jawbreaker','rollover-counter',1],['jawbreaker','catch-the-foot',1]],
+ 'nia-jax':[['jawbreaker','standing-switch',1],['jawbreaker','block',1]],
+ 'iyo-sky':[['punch','sidestep',1],['jawbreaker','sidestep',1],['jawbreaker','duck',1],['jawbreaker','up-and-over',1]],
+ 'tiffany-stratton':[['jawbreaker','sidestep',1],['jawbreaker','chain-wrestling',2],['jawbreaker','dodge',1]],
+ 'penta':[['arm-drag','sidestep',2],['jawbreaker','duck',1],['jawbreaker','dodge',1],['jawbreaker','rollover-counter',1]],
+ 'goldberg':[['arm-drag-counter','duck',1],['jawbreaker','standing-switch',1]]
+};
+for(const [sid,pairs] of Object.entries(revertPairs))for(const [from,to,n] of pairs)for(let i=0;i<n;i++)replaceOne(sid,from,to);
+
+// Weak-side correction: keep the new low-cost offensive recovery pages, but restore selected
+// defensive coverage by taking out a redundant mid/high generic Move instead of taking recovery away.
+const addDefenseOverCurve=(sid,defId,n=1)=>{for(let z=0;z<n;z++){const ids=deckIds[sid],counts=ids.reduce((m,id)=>(m.set(id,(m.get(id)??0)+1),m),new Map());const choices=ids.map((id,i)=>({id,i,c:byId.get(id)})).filter(x=>x.i>=5&&x.c?.kind==='move'&&!x.c.defensiveOnly&&!x.c.finisher&&!x.c.trademark&&!x.c.superstarId&&!(x.c.allowedSuperstarIds?.length)&&(x.c.cost??0)>=4&&(counts.get(x.id)??0)>1).sort((a,b)=>(b.c.cost??0)-(a.c.cost??0)||(b.c.damage??0)-(a.c.damage??0)||b.i-a.i);if(!choices.length)break;ids[choices[0].i]=defId;}};
+addDefenseOverCurve('brock-lesnar','no-sell',1);addDefenseOverCurve('brock-lesnar','chain-wrestling',1);addDefenseOverCurve('brock-lesnar','standing-switch',1);
+addDefenseOverCurve('stephanie-vaquer','chain-wrestling',2);addDefenseOverCurve('stephanie-vaquer','dodge',1);
+addDefenseOverCurve('chelsea-green','chain-wrestling',2);addDefenseOverCurve('chelsea-green','sidestep',1);
+addDefenseOverCurve('mankind','duck',2);addDefenseOverCurve('mankind','chain-wrestling',1);
+addDefenseOverCurve('randy-orton','standing-switch',1);addDefenseOverCurve('randy-orton','rollover-counter',1);
+addDefenseOverCurve('la-knight','sidestep',1);addDefenseOverCurve('la-knight','dodge',1);
+addDefenseOverCurve('cody-rhodes','standing-switch',1);addDefenseOverCurve('cody-rhodes','rollover-counter',1);
+addDefenseOverCurve('paige','dodge',1);addDefenseOverCurve('paige','standing-switch',1);
+addDefenseOverCurve('kevin-owens','duck',1);addDefenseOverCurve('kevin-owens','standing-switch',1);
+addDefenseOverCurve('gunther','standing-switch',1);addDefenseOverCurve('gunther','rollover-counter',1);
+
+// EXPERIMENT weak-side stability: recover v0.12.24 defensive identity while keeping new recovery offense.
+addDefenseOverCurve('liv-morgan','duck',1);addDefenseOverCurve('liv-morgan','sidestep',1);addDefenseOverCurve('liv-morgan','dodge',1);addDefenseOverCurve('liv-morgan','rollover-counter',1);
+addDefenseOverCurve('randy-savage','duck',1);addDefenseOverCurve('randy-savage','sidestep',1);
+addDefenseOverCurve('gunther','no-sell',1);addDefenseOverCurve('gunther','dodge',1);
+addDefenseOverCurve('stephanie-vaquer','duck',1);
+addDefenseOverCurve('sami-zayn','dodge',1);
+addDefenseOverCurve('kane','no-sell',1);addDefenseOverCurve('kane','standing-switch',1);
+addDefenseOverCurve('danhausen','chain-wrestling',1);addDefenseOverCurve('danhausen','standing-switch',1);
+addDefenseOverCurve('paige','duck',1);
+addDefenseOverCurve('rhea-ripley','no-sell',1);addDefenseOverCurve('rhea-ripley','standing-switch',1);
+
+// Target the remaining CPU recovery outliers with curve swaps, not more defensive cuts.
+replaceOne('chelsea-green','ddt','elbow');replaceOne('chelsea-green','ddt','jawbreaker');
+replaceOne('jacob-fatu','swanton-bomb','punch');replaceOne('jacob-fatu','powerbomb','headbutt');
+replaceOne('logan-paul','asai-moonsault','punch');replaceOne('logan-paul','frog-splash','jawbreaker');
+replaceOne('jey-uso','running-hip-attack','punch');replaceOne('jey-uso','samoan-drop','headbutt');
+replaceOne('tiffany-stratton','swanton-bomb','jawbreaker');replaceOne('tiffany-stratton','standing-moonsault','jawbreaker');
+replaceOne('danhausen','inverted-ddt','punch');replaceOne('danhausen','northern-lights-suplex','headbutt');
+replaceOne('kevin-owens','swanton-bomb','punch');replaceOne('kevin-owens','powerbomb','jawbreaker');
+
+// Final legality/identity guards after recovery tuning.
+replaceOne('kevin-owens','jawbreaker','standing-switch');
+replaceOne('randy-savage','vertical-suplex','diving-crossbody');
+replaceOne('randy-savage','hotshot','diving-body-press');
+
 export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id)).filter(Boolean)]));

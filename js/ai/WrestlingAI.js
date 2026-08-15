@@ -1,5 +1,5 @@
 import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js";
-import { healthRatio, healthZone } from "../engine/health.js";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function incomingSubmissionWouldTap(state,pid,card){
@@ -48,13 +48,97 @@ function cpuAutoCounterSelection(state,pid,cost){
  const playableRemaining=ranked.filter(x=>!discardSet.has(x.index)&&x.playable).length;
  return playableRemaining>=2?discard.map(x=>x.index):null;
 }
+
+function cpuStateAfterMomentum(state,pid,card){
+ const base=state.players[pid];
+ const p={...base,momentum:{...base.momentum,[card.method]:(base.momentum?.[card.method]??0)+(card.amount??1)},turn:{...base.turn,momentumPlayed:(base.turn?.momentumPlayed??0)+1},momentumPlayedThisTurn:true};
+ return {...state,players:{...state.players,[pid]:p}};
+}
+function cpuLegalOffense(state,pid){
+ return state.players[pid].hand.filter(x=>x.kind==='move'&&!x.defensiveOnly&&moveEligibility(state,pid,x).legal);
+}
+function cpuMomentumScore(state,pid,card){
+ const sim=cpuStateAfterMomentum(state,pid,card),p=sim.players[pid];
+ const legal=cpuLegalOffense(sim,pid);
+ if(legal.length)return 10000+Math.max(...legal.map(x=>moveScore(sim,pid,x)));
+ // If no Move becomes legal immediately, build toward the closest offensive card in hand.
+ let best=-9999;
+ for(const move of p.hand){
+   if(move.kind!=='move'||move.defensiveOnly)continue;
+   const req=move.requirements??{};
+   let methodDeficit=0;
+   for(const [m,n] of Object.entries(req))methodDeficit+=Math.max(0,n-(p.momentum?.[m]??0));
+   const totalDeficit=Math.max(0,(move.cost??0)-((p.momentum?.strength??0)+(p.momentum?.strike??0)+(p.momentum?.technical??0)+(p.momentum?.agility??0)+(p.adrenaline??0)));
+   const score=-(methodDeficit*20+totalDeficit*4)+(move.damage??0);
+   if(score>best)best=score;
+ }
+ return best;
+}
+function cpuBestMomentum(state,pid){
+ const playable=state.players[pid].hand.filter(x=>canPlayMomentum(state,pid,x));
+ if(!playable.length)return null;
+ return playable.map((card,index)=>({card,index,score:cpuMomentumScore(state,pid,card)})).sort((a,b)=>b.score-a.score||a.index-b.index)[0].card;
+}
+function cpuStateAfterEnablingAction(state,pid,card){
+ const base=state.players[pid],ef=card.effect??{};
+ const p={...base,momentum:{...base.momentum},turn:{...base.turn,actionPlayed:(base.turn?.actionPlayed??0)+1},namedDiscount:{...base.namedDiscount}};
+ const sim={...state,players:{...state.players,[pid]:p}};
+ if(ef.type==='discountNext')p.nextMoveDiscount=(p.nextMoveDiscount??0)+(ef.amount??0);
+ if(ef.type==='gainAdrenaline'){p.adrenaline=(p.adrenaline??0)+(ef.amount??1);p.momentum.attitude=p.adrenaline;}
+ if(ef.type==='romanOohAhh'){
+   const name=ef.name??"Roman's Spear";
+   if(p.hand.some(c=>c.name===name)){p.adrenaline=(p.adrenaline??0)+(ef.adrenalineIfInHand??0);p.momentum.attitude=p.adrenaline;}
+   p.namedDiscount[name]=(p.namedDiscount[name]??0)+(ef.discount??0);
+ }
+ return sim;
+}
+function cpuPreMoveAction(state,pid){
+ const p=state.players[pid], legal=cpuLegalOffense(state,pid);
+ if(!legal.length)return null;
+ const candidates=p.hand.filter(x=>canPlayAction(state,pid,x));
+ const bestNow=Math.max(...legal.map(x=>moveScore(state,pid,x)));
+ for(const card of candidates){
+   const ef=card.effect??{};
+   if(ef.type==='buffNext'&&(ef.damage??0)>0)return card;
+   if(ef.type==='buffNextMethod'&&legal.some(m=>m.method===ef.method))return card;
+   if(ef.type==='discountNext'){
+     const sim=cpuStateAfterEnablingAction(state,pid,card), after=cpuLegalOffense(sim,pid);
+     if(after.length&&Math.max(...after.map(x=>moveScore(sim,pid,x)))>bestNow+4)return card;
+   }
+   if(ef.type==='romanOohAhh'){
+     const name=ef.name??"Roman's Spear",target=p.hand.find(x=>x.name===name)||p.deck.find(x=>x.name===name);
+     if(target){const sim=cpuStateAfterEnablingAction(state,pid,card);if(!sim.players[pid].hand.some(x=>x===target||x.id===target.id))sim.players[pid].hand=[...sim.players[pid].hand,target];if(moveEligibility(sim,pid,target).legal)return card;}
+   }
+   if(ef.type==='gainAdrenaline')return card;
+ }
+ return null;
+}
+function cpuEnablingAction(state,pid){
+ const candidates=state.players[pid].hand.filter(x=>canPlayAction(state,pid,x));
+ for(const card of candidates){
+   const ef=card.effect?.type;
+   if(!['discountNext','gainAdrenaline','romanOohAhh'].includes(ef))continue;
+   if(cpuLegalOffense(cpuStateAfterEnablingAction(state,pid,card),pid).length)return card;
+ }
+ return null;
+}
+
 function moveScore(state,pid,card){
  const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
  let score=(card.damage??0)*2;
  if(card.finisher)score+=35;if(card.trademark)score+=8;
  if((card.damage??0)>=def.hp)score+=50;
  if(card.groundOpponent&&!groundState(def))score+=4;
- if(card.searchOnConnectName)score+=8;
+ if(card.searchOnConnectName)score+=12;
+ const searchEffects=(card.effects??[]).filter(e=>e.type==='search'&&(!e.ifSuperstarIds?.length||e.ifSuperstarIds.includes(p.superstar.id)));
+ for(const e of searchEffects){
+   const target=p.hand.find(x=>x.name===e.name)||p.deck.find(x=>x.name===e.name);
+   score+=target?.finisher?20:10;
+ }
+ if((p.namedDiscount?.[card.name]??0)>0)score+=18;
+ if(card.groundedOnly&&groundState(def))score+=8;
+ const setupSpecial=p.superstar?.special;
+ if(!p.specialUsed&&setupSpecial?.searchName&&setupSpecial?.afterName===card.name)score+=28;
  // Sequence-aware heuristics: preserve locked card data; teach the CPU how to use it.
  if(p.superstar.id==='tiffany-stratton'){
    const hasPme=p.hand.some(x=>x.id==='tiffany-stratton-prettiest-moonsault-ever');
@@ -74,24 +158,159 @@ function moveScore(state,pid,card){
    if(card.method==='technical'&&(p.methodDiscount?.technical??0)>0)score+=14;
  }
  if(p.superstar.id==='damian-priest'&&card.id==='damian-priest-south-of-heaven'&&!groundState(def))score+=18;
+ // v0.12.24 targeted sequencing for the bottom balance outliers. These bonuses do not
+ // change card legality or printed values; they teach the CPU to use the existing kits coherently.
+ if(p.superstar.id==='seth-rollins'){
+   const hasCurb=p.hand.some(x=>x.id==='seth-rollins-curb-stomp');
+   if(card.id==='seth-rollins-buckle-bomb'&&(!groundState(def)||!hasCurb))score+=24;
+   if(card.id==='seth-rollins-curb-stomp'&&groundState(def))score+=12;
+ }
+ if(p.superstar.id==='gunther'){
+   if((p.abilityUses??0)<2&&card.method==='strike'&&(card.damage??0)>=5)score+=14;
+   if(card.id==='gunther-folding-powerbomb'&&!p.hand.some(x=>x.id==='gunther-gojira-clutch'))score+=18;
+   if(card.id==='gunther-gojira-clutch')score+=16;
+ }
+ if(p.superstar.id==='cody-rhodes'){
+   if(card.moveType&&!p.connectedTypes?.includes(card.moveType))score+=18;
+   if(card.id==='cody-rhodes-cody-cutter'&&!groundState(def))score+=6;
+ }
+ if(p.superstar.id==='paige'){
+   if((p.abilityUses??0)<2&&card.method==='strike'&&(card.damage??0)>=5)score+=12;
+   if(card.method==='technical'&&(p.methodDiscount?.technical??0)>0)score+=16;
+   if((p.namedDiscount?.[card.name]??0)>0)score+=18;
+ }
+ if(p.superstar.id==='sami-zayn'){
+   const hasHelluva=p.hand.some(x=>x.id==='sami-zayn-helluva-kick');
+   if(card.id==='sami-zayn-exploder-turnbuckle'&&(hasHelluva||!p.events?.samiExploderSetup))score+=24;
+   if(card.id==='sami-zayn-helluva-kick'&&(p.namedDiscount?.['Helluva Kick']??0)>0)score+=20;
+   if(card.id==='sami-zayn-blue-thunder-bomb'&&p.hp<def.hp)score+=12;
+ }
+ if(p.superstar.id==='randy-savage'){
+   const hasAgility=p.hand.some(x=>x.kind==='move'&&x.method==='agility'&&!x.defensiveOnly);
+   const hasElbow=p.hand.some(x=>x.id==='randy-savage-flying-elbow-drop');
+   if(hasElbow&&!groundState(def)&&card.groundOpponent&&!card.groundedOnly)score+=36;
+   if(card.method==='strike'&&hasAgility&&p.lastConnectedMethod!=='strike')score+=18;
+   if(card.method==='agility'&&p.lastConnectedMethod==='strike')score+=26;
+   if(card.id==='randy-savage-flying-elbow-drop'&&groundState(def))score+=36;
+ }
+ if(p.superstar.id==='andre-the-giant'){
+   const hasStrength=p.hand.some(x=>x.kind==='move'&&x.method==='strength'&&!x.defensiveOnly);
+   const hasSplash=p.hand.some(x=>x.id==='andre-the-giant-sitdown-splash');
+   if(card.method==='strike'&&hasStrength)score+=16;
+   if(card.method==='strength'&&(p.methodDiscount?.strength??0)>0)score+=20;
+   if(card.id==='andre-the-giant-double-underhook-suplex'&&hasSplash)score+=36;
+   else if(card.id==='andre-the-giant-double-underhook-suplex')score+=10;
+   if(card.id==='andre-the-giant-sitdown-splash'&&(p.namedDiscount?.['Sitdown Splash']??0)>0)score+=30;
+ }
+ if(p.superstar.id==='kane'){
+   const hasTombstone=p.hand.some(x=>x.id==='tombstone-piledriver');
+   if(card.id==='kane-chokeslam-from-hell'&&hasTombstone)score+=24;
+   if(card.id==='tombstone-piledriver'&&(p.namedDiscount?.['Tombstone Piledriver']??0)>0)score+=24;
+ }
+ if(p.superstar.id==='liv-morgan'){
+   if(card.id==='liv-morgan-jersey-codebreaker'&&!p.hand.some(x=>x.id==='liv-morgan-oblivion'))score+=24;
+   if(card.id==='liv-morgan-oblivion'&&(p.namedDiscount?.['Oblivion']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='rhea-ripley'){
+   if(card.name==='Headbutt'&&!p.specialUsed)score+=12;
+   if(card.id==='rhea-ripley-prism-trap'&&!p.hand.some(x=>x.id==='rhea-ripley-riptide'))score+=22;
+   if(card.id==='rhea-ripley-riptide'&&(p.namedDiscount?.['Riptide']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='stephanie-vaquer'){
+   if(card.id==='stephanie-vaquer-devils-kiss'&&!p.hand.some(x=>x.id==='stephanie-vaquer-vaquer-inferno'))score+=24;
+   if(card.id==='stephanie-vaquer-vaquer-inferno'&&(p.namedDiscount?.['Vaquer Inferno']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='iyo-sky'){
+   if(card.id==='iyo-sky-bullet-train-attack'&&!p.hand.some(x=>x.id==='iyo-sky-over-the-moonsault'))score+=22;
+   if(card.id==='iyo-sky-over-the-moonsault'&&(p.namedDiscount?.['Over the Moonsault']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='alexa-bliss'){
+   if(card.id==='alexa-bliss-sister-abigail'&&!p.hand.some(x=>x.id==='alexa-bliss-twisted-bliss'))score+=24;
+   if(card.id==='alexa-bliss-twisted-bliss'&&(p.namedDiscount?.['Twisted Bliss']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='la-knight'){
+   const hasElbow=p.hand.some(x=>x.name==='Diving Elbow Drop');
+   if(hasElbow&&!groundState(def)&&card.groundOpponent&&!card.groundedOnly)score+=30;
+   if(card.name==='Diving Elbow Drop'&&groundState(def)&&!p.specialUsed)score+=34;
+   if(card.id==='la-knight-bft'&&(p.namedDiscount?.['BFT']??0)>0)score+=24;
+ }
+ if(p.superstar.id==='finn-balor'){
+   if(card.id==='sling-blade'&&!p.specialUsed)score+=16;
+   if(card.id==='shotgun-dropkick'&&!p.hand.some(x=>x.id==='finn-balor-coup-de-grace'))score+=22;
+   if(card.id==='finn-balor-coup-de-grace'&&(p.namedDiscount?.['Coup de Grâce']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='kevin-owens'){
+   if(card.id==='pop-up-powerbomb'&&!p.hand.some(x=>x.id==='kevin-owens-stunner'))score+=24;
+   if(card.id==='kevin-owens-stunner'&&(p.namedDiscount?.['Stunner']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='penta'){
+   if(card.id==='penta-driver'&&!p.hand.some(x=>x.id==='penta-mexican-destroyer'))score+=22;
+   if(card.id==='penta-mexican-destroyer'&&(p.namedDiscount?.['Mexican Destroyer']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='drew-mcintyre'){
+   if(card.id==='drew-mcintyre-future-shock-ddt'&&!p.hand.some(x=>x.id==='drew-mcintyre-claymore'))score+=24;
+   if(card.id==='drew-mcintyre-claymore'&&(p.namedDiscount?.['Claymore']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='raquel-rodriguez'){
+   if(card.id==='raquel-rodriguez-corkscrew-splash'&&!p.hand.some(x=>x.id==='raquel-rodriguez-tejana-bomb'))score+=22;
+   if(card.id==='raquel-rodriguez-tejana-bomb'&&(p.namedDiscount?.['Tejana Bomb']??0)>0)score+=22;
+ }
+ if(p.superstar.id==='randy-orton'){
+   const hasFollow=p.hand.some(x=>x.id==='randy-orton-rko'||x.id==='randy-orton-punt-kick'||x.id==='randy-orton-draping-ddt');
+   if(card.method==='technical'&&hasFollow&&!p.events?.randyApexPredatorUsedThisControl)score+=18;
+   if(card.id==='randy-orton-rko'&&(p.namedDiscount?.['RKO']??0)>0)score+=20;
+   if(card.id==='randy-orton-punt-kick'&&groundState(def))score+=18;
+ }
  return score;
+}
+function cpuCounterCoverage(card){return (card?.counterStates?.length??0)+(card?.counterSubmissionTargets?.length??0)+(card?.counters?.length??0)+(card?.countersCardIds?.length??0);}
+function cpuChooseOffense(state,pid,moves){
+ const ranked=[...moves].sort((a,b)=>moveScore(state,pid,b)-moveScore(state,pid,a));
+ const top=ranked[0]; if(!top||top.finisher||top.trademark||cpuCounterCoverage(top)===0)return top;
+ const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
+ const counterPages=p.hand.filter(c=>c.kind==='move'&&cpuCounterCoverage(c)>0);
+ if(counterPages.length!==1||(top.damage??0)>=def.hp)return top;
+ const alternative=ranked.find(c=>c!==top&&cpuCounterCoverage(c)===0);
+ if(!alternative)return top;
+ return moveScore(state,pid,top)-moveScore(state,pid,alternative)<=10?alternative:top;
+}
+function cpuDiscardPreservationScore(card){
+ let score=0;if(!card)return score;if(card.kind==='special')score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=35;else if(card.kind==='action')score+=28;else if(card.kind==='support')score+=24;else if(card.kind==='momentum')score+=8;return score;
+}
+function cpuSubmissionDecision(state,pid){
+ const sub=state.submission,p=state.players[pid],def=state.players[sub.defenderId],threshold=submissionThreshold(def),pressure=Math.max(1,sub.damage??1);
+ const damageNeeded=Math.max(0,threshold-(def.submissionDamage?.[sub.bodyPart]??0));
+ const damageHolds=Math.max(1,Math.ceil(damageNeeded/pressure));
+ const eligibilityHolds=sub.priorWorked?1:Math.max(1,3-(sub.holdTurn??1));
+ const required=Math.max(damageHolds,eligibilityHolds);
+ if(required>p.hand.length)return{type:'release'};
+ let index=0,best=Infinity;for(let i=0;i<p.hand.length;i++){const v=cpuDiscardPreservationScore(p.hand[i]);if(v<best){best=v;index=i;}}
+ return{type:'maintain',index};
 }
 export function cpuDecision(game,pid="p2"){
  const s=game.state(),p=s.players[pid];if(decisionOwner(s)!==pid)return null;
  if(s.phase==="COUNTER"){const incoming=s.proposedMove.card,c=p.hand.find(x=>counterEligibility(s,pid,incoming,x).legal);if(c)return{type:"counter",card:c};const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}return{type:"passCounter"};}
- if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');return c?{type:"pinEscape",card:c}:{type:"passPin"};}
- if(s.phase==="SUBMISSION_MAINTAIN"){const def=s.players[s.submission.defenderId],threshold=submissionThreshold(def);return p.hand.length&&def.submissionDamage[s.submission.bodyPart]<threshold?{type:"maintain",index:0}:{type:"release"};}
+ if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');const chance=healthOnlyPinChance(p);return c&&chance>=20?{type:"pinEscape",card:c}:{type:"passPin"};}
+ if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length?cpuSubmissionDecision(s,pid):{type:"release"};
  if(s.phase==="ACTION"){
    const def=s.players[pid==="p1"?"p2":"p1"],hpRatio=healthRatio(def);
    const readyFinisher=p.hand.find(x=>x.kind==="move"&&x.finisher&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);
    if(canAttemptPin(s,pid).legal&&!readyFinisher&&healthZone(def)==="red")return{type:"pin"};
    const sp=p.hand.find(x=>canPlaySpecial(s,pid,x));if(sp)return{type:"special",card:sp};
-   const mom=p.hand.find(x=>canPlayMomentum(s,pid,x));if(mom)return{type:"momentum",card:mom};
-   let moves=p.hand.filter(x=>x.kind==="move"&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);
-   if(['tiffany-stratton','damian-priest','chelsea-green','bayley','becky-lynch'].includes(p.superstar.id))moves=moves.sort((a,b)=>moveScore(s,pid,b)-moveScore(s,pid,a));
-   else moves=moves.sort((a,b)=>(Number(!!b.finisher)-Number(!!a.finisher))||((b.damage??0)-(a.damage??0)));
-   if(moves[0])return{type:"move",card:moves[0]};
-   const utility=p.hand.find(x=>(x.kind==="action"&&canPlayAction(s,pid,x))||(x.kind==="support"&&(p.turn?.supportPlayed??0)<1)||(x.kind==="manager"&&!p.activeManager));if(utility)return{type:utility.kind,card:utility};
+   const movesNow=cpuLegalOffense(s,pid);
+   const setupAction=cpuPreMoveAction(s,pid);if(setupAction)return{type:"action",card:setupAction};
+   const setupSupport=p.hand.find(x=>canPlaySupport(s,pid,x)&&(!p.support||p.support.id!==x.id));
+   if(setupSupport&&movesNow.length)return{type:"support",card:setupSupport};
+   if(!movesNow.length){
+     const enabling=cpuEnablingAction(s,pid);if(enabling)return{type:"action",card:enabling};
+     const plannedMomentum=cpuBestMomentum(s,pid);if(plannedMomentum)return{type:"momentum",card:plannedMomentum};
+   } else {
+     const normalMomentum=p.hand.find(x=>canPlayMomentum(s,pid,x));if(normalMomentum)return{type:"momentum",card:normalMomentum};
+   }
+   const moves=p.hand.filter(x=>x.kind==="move"&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);
+   const chosenMove=cpuChooseOffense(s,pid,moves);
+   if(chosenMove)return{type:"move",card:chosenMove};
+   const utility=p.hand.find(x=>(x.kind==="action"&&canPlayAction(s,pid,x)&&x.effect?.type==='gainAdrenaline')||(x.kind==="support"&&canPlaySupport(s,pid,x))||(x.kind==="manager"&&canPlayManager(s,pid,x)));if(utility)return{type:utility.kind,card:utility};
    return{type:"pass"};
  }
  return null;

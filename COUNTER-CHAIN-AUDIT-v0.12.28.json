@@ -1,0 +1,25 @@
+{
+  "matches": 2450,
+  "stalls": 0,
+  "totalCounterAttacks": 5636,
+  "depth2plus": 823,
+  "matchesDepth2": 735,
+  "maxDepth": 4,
+  "nonExchangeDepth2plus": 0,
+  "depthHistogram": {
+    "1": 4813,
+    "2": 777,
+    "3": 45,
+    "4": 1
+  },
+  "topDepth2Cards": [
+    {
+      "cardId": "punch",
+      "count": 803
+    },
+    {
+      "cardId": "elbow",
+      "count": 20
+    }
+  ]
+}

@@ -45,7 +45,7 @@ test('v0.12.16 numeric Cost counts permanent Method Momentum plus current Attitu
   assert.equal(p.momentum.strike, 2);
 });
 
-test('v0.12.16 every global turn advance draws one page for both Superstars, including the defender during retained Control', () => {
+test('v0.12.33 retained-Control successful Moves replenish only the defender', () => {
   const g = new MatchEngine({ p1: stars[0], p2: stars[1], decks, rng });
   const s = g.state();
   const beforeP1Hand = s.players.p1.hand.length;
@@ -58,13 +58,13 @@ test('v0.12.16 every global turn advance draws one page for both Superstars, inc
   assert.equal(s.turnNumber, 2);
   assert.equal(s.playerInControl, 'p2');
   assert.equal(s.players.p1.hand.length, beforeP1Hand + 1, 'defender draws during opponent retained-Control turn');
-  assert.equal(s.players.p2.hand.length, beforeP2Hand + 1, 'controller also gets the normal turn draw');
+  assert.equal(s.players.p2.hand.length, beforeP2Hand, 'controller does not get an automatic replacement draw after a successful Move');
   assert.equal(s.players.p1.deck.length, beforeP1Deck - 1);
-  assert.equal(s.players.p2.deck.length, beforeP2Deck - 1);
+  assert.equal(s.players.p2.deck.length, beforeP2Deck);
 
   g._advanceTurn('p2', 'successful-move');
   assert.equal(s.players.p1.hand.length, beforeP1Hand + 2, 'repeated retained-Control turns keep drawing for defender');
-  assert.equal(s.players.p2.hand.length, beforeP2Hand + 2);
+  assert.equal(s.players.p2.hand.length, beforeP2Hand);
 });
 
 test('v0.12.16 Match Complete is deferred until successful pin spectacle finishes', () => {

@@ -10,14 +10,14 @@ const stars=Object.values(superstars);
 const fight=allGameplayCards.find(c=>c.id==='fight-forever');
 const rng=()=>0.42;
 
-test('v0.12.23 all 50 Superstars use the +10 HP baseline',()=>{
+test('v0.12.29 roster keeps the no-cap durability model after targeted rebalance',()=>{
   assert.equal(stars.length,50);
   const expected={
-    'iyo-sky':58,'mankind':62,'the-rock':68,'hulk-hogan':62,'roman-reigns':63,'cm-punk':59,
-    'cody-rhodes':61,'seth-rollins':60,'brock-lesnar':65,'kevin-owens':62,'gunther':63,'oba-femi':65
+    'iyo-sky':58,'mankind':63,'the-rock':76,'hulk-hogan':68,'roman-reigns':63,'cm-punk':59,
+    'cody-rhodes':63,'seth-rollins':64,'brock-lesnar':65,'kevin-owens':64,'gunther':63,'oba-femi':65
   };
   for(const [id,hp] of Object.entries(expected)) assert.equal(stars.find(s=>s.id===id)?.hp,hp,id);
-  assert.ok(stars.every(s=>s.hp>=56&&s.hp<=68));
+  assert.ok(stars.every(s=>s.hp>=55&&s.hp<=76));
 });
 
 test('v0.12.23 match clock is informational and never ends the match at Turn 50',()=>{

@@ -88,7 +88,7 @@ export const superstars = {
       "mankind-mandible-claw"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 63,
     "methodLimits": {
       "agility": 0,
       "strength": 2,
@@ -151,7 +151,7 @@ export const superstars = {
       "the-rock-people-s-elbow"
     ],
     "archetype": "prestige-final-boss",
-    "hp": 68,
+    "hp": 76,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -216,7 +216,7 @@ export const superstars = {
       "hulk-hogan-atomic-leg-drop"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 68,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -229,13 +229,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Hulkamania",
-      "text": "The first 2 times Hogan connects with a Strength Move dealing 5+ damage, gain +1 Adrenaline.",
+      "text": "The first 2 times Hogan connects with a Strength Move dealing 5+ damage, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "connectMethodDamage",
         "method": "strength",
         "minDamage": 5,
         "maxUses": 2,
-        "adrenaline": 1
+        "adrenaline": 1,
+        "draw": 1
       },
       "maxUses": 2
     },
@@ -246,15 +247,17 @@ export const superstars = {
       "setId": "hall-of-fame-series-1",
       "rarity": 4,
       "superstarId": "hulk-hogan",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
       "preMatchMomentum": {
         "strength": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 2,
       "delayedTurn5": false
     },
     "special": {
-      "type": "hulkUp"
+      "type": "hulkUp",
+      "adrenaline": 3,
+      "draw": 2
     }
   },
   "bayley": {
@@ -279,7 +282,7 @@ export const superstars = {
       "bayley-rose-plant"
     ],
     "archetype": "reviewed-starter",
-    "hp": 60,
+    "hp": 67,
     "methodLimits": {
       "agility": 2,
       "strength": 2,
@@ -294,12 +297,13 @@ export const superstars = {
     },
     "ability": {
       "name": "The Role Model",
-      "text": "The first 3 times Bayley connects with a Move using a different Method than the previous Move she connected with, gain +1 Adrenaline and draw 1 page.",
+      "text": "The first 3 times Bayley connects with a Move using a different Method than the previous Move she connected with, gain +2 Adrenaline, draw 1 page, and her next Move deals +3 Damage.",
       "trigger": {
         "type": "differentMethod",
         "maxUses": 3,
-        "adrenaline": 1,
-        "draw": 1
+        "adrenaline": 2,
+        "draw": 1,
+        "damage": 3
       },
       "maxUses": 3
     },
@@ -320,7 +324,7 @@ export const superstars = {
     },
     "special": {
       "type": "counterDrawControl",
-      "draw": 1
+      "draw": 3
     }
   },
   "cmPunk": {
@@ -410,7 +414,7 @@ export const superstars = {
       "paige-ram-paige"
     ],
     "archetype": "reviewed-starter",
-    "hp": 59,
+    "hp": 61,
     "methodLimits": {
       "agility": 0,
       "strength": 1,
@@ -423,12 +427,13 @@ export const superstars = {
     },
     "ability": {
       "name": "The Anti-Diva",
-      "text": "The first 2 times Paige connects with a Strike Move dealing 5+ damage, her next Technical Move during that Control sequence costs 1 less.",
+      "text": "The first 2 times Paige connects with a Strike Move dealing 5+ damage, draw 1 page and her next Technical Move during that Control sequence costs 2 less.",
       "trigger": {
         "type": "strikeDamageDiscountTechnical",
         "minDamage": 5,
         "maxUses": 2,
-        "discount": 1
+        "discount": 2,
+        "draw": 1
       },
       "maxUses": 2
     },
@@ -452,7 +457,9 @@ export const superstars = {
         "Paige Turner",
         "PTO"
       ],
-      "amount": 2
+      "amount": 3,
+      "draw": 1,
+      "adrenaline": 1
     }
   },
   "sethRollins": {
@@ -477,7 +484,7 @@ export const superstars = {
       "seth-rollins-curb-stomp"
     ],
     "archetype": "reviewed-starter",
-    "hp": 60,
+    "hp": 64,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -491,11 +498,11 @@ export const superstars = {
     },
     "ability": {
       "name": "The Architect",
-      "text": "The first 2 times Seth plays a Momentum page, his next Move this turn gets +2 Damage.",
+      "text": "The first 2 times Seth plays a Momentum page, his next Move this turn gets +3 Damage.",
       "trigger": {
         "type": "momentumBuff",
         "maxUses": 2,
-        "damage": 2
+        "damage": 3
       },
       "maxUses": 2
     },
@@ -539,7 +546,7 @@ export const superstars = {
       "andre-the-giant-sitdown-splash"
     ],
     "archetype": "reviewed-starter",
-    "hp": 66,
+    "hp": 71,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -552,13 +559,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Giant’s Reach",
-      "text": "The first time André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less.",
+      "text": "The first 3 times André connects with a Strike Move, his next Strength Move during that Control sequence costs 2 less, deals +5 Damage, and André gains +1 Adrenaline.",
       "trigger": {
         "type": "strikeDiscountStrength",
-        "maxUses": 2,
-        "discount": 1
+        "maxUses": 3,
+        "discount": 2,
+        "damage": 5,
+        "adrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-andre-the-giant",
@@ -567,11 +576,11 @@ export const superstars = {
       "setId": "hall-of-fame-series-1",
       "rarity": 4,
       "superstarId": "andre-the-giant",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
       "preMatchMomentum": {
         "strength": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 2,
       "delayedTurn5": false
     },
     "special": {
@@ -600,7 +609,7 @@ export const superstars = {
       "stephanie-vaquer-vaquer-inferno"
     ],
     "archetype": "reviewed-starter",
-    "hp": 59,
+    "hp": 65,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -614,14 +623,14 @@ export const superstars = {
     },
     "ability": {
       "name": "La Primera",
-      "text": "The first 2 times Vaquer connects with an Agility Move immediately after a Technical Move in the same Control sequence, gain +1 Adrenaline and draw 1 page.",
+      "text": "The first 3 times Vaquer connects with an Agility Move immediately after a Technical Move in the same Control sequence, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "agilityAfterTechnical",
-        "maxUses": 2,
+        "maxUses": 3,
         "adrenaline": 1,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-stephanie-vaquer",
@@ -640,7 +649,9 @@ export const superstars = {
     },
     "special": {
       "type": "counterUncounterableMethod",
-      "method": "technical"
+      "method": "technical",
+      "draw": 2,
+      "adrenaline": 1
     }
   },
   "randySavage": {
@@ -664,7 +675,7 @@ export const superstars = {
       "randy-savage-flying-elbow-drop"
     ],
     "archetype": "reviewed-starter",
-    "hp": 60,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -677,11 +688,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Macho Madness",
-      "text": "The first 2 times Savage connects with an Agility Move after a Strike Move in the same Control sequence, draw 1 page.",
+      "text": "The first 2 times Savage connects with an Agility Move after he has connected with a Strike Move earlier in the same Control sequence, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "agilityAfterStrike",
         "maxUses": 2,
-        "draw": 1
+        "draw": 1,
+        "adrenaline": 1
       },
       "maxUses": 2
     },
@@ -692,9 +704,10 @@ export const superstars = {
       "setId": "hall-of-fame-series-1",
       "rarity": 4,
       "superstarId": "randy-savage",
-      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "technical": 1
+        "technical": 1,
+        "agility": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -808,14 +821,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Genetically Superior",
-      "text": "The first 2 times Charlotte connects with a Technical Move, draw 1 page and her next Agility Move during that Control sequence costs 1 less.",
+      "text": "The first time Charlotte connects with a Technical Move, draw 1 page and her next Agility Move during that Control sequence costs 1 less.",
       "trigger": {
         "type": "technicalDiscountAgility",
-        "maxUses": 2,
+        "maxUses": 1,
         "discount": 1,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-charlotte-flair",
@@ -861,7 +874,7 @@ export const superstars = {
       "kevin-owens-stunner"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 64,
     "methodLimits": {
       "agility": 2,
       "strength": null,
@@ -875,12 +888,12 @@ export const superstars = {
     },
     "ability": {
       "name": "The Prize Fighter",
-      "text": "The first 2 times Kevin takes 6+ damage from a single Move, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first 2 times Kevin takes 6+ damage from a single Move, draw 2 pages and gain +1 Adrenaline.",
       "trigger": {
         "type": "takeDamage",
-        "minDamage": 7,
+        "minDamage": 6,
         "maxUses": 2,
-        "draw": 1,
+        "draw": 2,
         "adrenaline": 1
       },
       "maxUses": 2
@@ -926,7 +939,7 @@ export const superstars = {
       "tombstone-piledriver"
     ],
     "archetype": "reviewed-starter",
-    "hp": 64,
+    "hp": 69,
     "methodLimits": {
       "agility": 1,
       "strength": null,
@@ -939,14 +952,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Big Red Machine",
-      "text": "The first time Kane connects with a Move dealing 8+ damage, gain +1 Adrenaline.",
+      "text": "The first 2 times Kane connects with a Move dealing 8+ damage, gain +1 Adrenaline.",
       "trigger": {
         "type": "connectDamage",
         "minDamage": 8,
-        "maxUses": 1,
+        "maxUses": 2,
         "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-kane",
@@ -989,7 +1002,7 @@ export const superstars = {
       "tombstone-piledriver"
     ],
     "archetype": "reviewed-starter",
-    "hp": 64,
+    "hp": 68,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1003,11 +1016,11 @@ export const superstars = {
     },
     "ability": {
       "name": "Dead Man Walking",
-      "text": "Once per match, when a Move would reduce Undertaker to 0 HP, he remains at 1 HP and draws 1 page.",
+      "text": "Once per match, when a Move would reduce Undertaker to 0 HP, he remains at 1 HP and draws 2 pages.",
       "trigger": {
         "type": "surviveAtOne",
         "maxUses": 1,
-        "draw": 1
+        "draw": 2
       },
       "maxUses": 1
     },
@@ -1027,7 +1040,7 @@ export const superstars = {
     },
     "special": {
       "type": "kickoutControlAdrenaline",
-      "amount": 1
+      "amount": 2
     }
   },
   "ultimateWarrior": {
@@ -1113,7 +1126,7 @@ export const superstars = {
       "rhea-ripley-riptide"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 60,
     "methodLimits": {
       "agility": 2,
       "strength": null,
@@ -1179,7 +1192,7 @@ export const superstars = {
       "cody-rhodes-cross-rhodes"
     ],
     "archetype": "reviewed-starter",
-    "hp": 61,
+    "hp": 63,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -1216,8 +1229,8 @@ export const superstars = {
     },
     "special": {
       "type": "lowHpTutor",
-      "hpPct": 0.3,
-      "draw": 1,
+      "hpPct": 0.4,
+      "draw": 2,
       "adrenaline": 1,
       "names": [
         "Cody Cutter",
@@ -1312,7 +1325,7 @@ export const superstars = {
       "stone-cold-steve-austin-stone-cold-stunner"
     ],
     "archetype": "reviewed-starter",
-    "hp": 61,
+    "hp": 66,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1325,11 +1338,12 @@ export const superstars = {
     },
     "ability": {
       "name": "And That’s the Bottom Line",
-      "text": "The first 2 times one of Austin’s Moves is Countered, gain +1 Adrenaline.",
+      "text": "The first 2 times one of Austin’s Moves is Countered, gain +1 Adrenaline and draw 1 page.",
       "trigger": {
         "type": "moveCountered",
         "maxUses": 2,
-        "adrenaline": 1
+        "adrenaline": 1,
+        "draw": 1
       },
       "maxUses": 2
     },
@@ -1374,7 +1388,7 @@ export const superstars = {
       "liv-morgan-oblivion"
     ],
     "archetype": "reviewed-starter",
-    "hp": 58,
+    "hp": 67,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -1387,11 +1401,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Liv Forever",
-      "text": "The first 2 times Liv successfully Counters a Move, draw 1 page.",
+      "text": "The first 2 times Liv successfully Counters a Move, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "counterDraw",
         "maxUses": 2,
-        "draw": 1
+        "draw": 1,
+        "adrenaline": 1
       },
       "maxUses": 2
     },
@@ -1402,9 +1417,10 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "liv-morgan",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "agility": 1
+        "agility": 1,
+        "strike": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -1412,7 +1428,8 @@ export const superstars = {
     "special": {
       "type": "counterDiscountNamed",
       "name": "Jersey Codebreaker",
-      "amount": 2
+      "amount": 3,
+      "draw": 1
     }
   },
   "brockLesnar": {
@@ -1635,7 +1652,7 @@ export const superstars = {
       "logan-paul-paulverizer"
     ],
     "archetype": "strike-agility-showman",
-    "hp": 56,
+    "hp": 55,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -1648,14 +1665,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Viral Athlete",
-      "text": "The first time Logan connects with a Strike Move, gain +1 Strength Momentum. The first time each match Logan then connects with an Agility Move after a Strike Move in the same Control sequence, draw 1 page.",
+      "text": "The first time Logan connects with a Strike Move, gain +1 Strength Momentum.",
       "trigger": {
         "type": "loganViralAthlete",
         "strengthOnFirstStrike": 1,
-        "drawAfterStrikeAgility": 1,
-        "drawUses": 1
+        "drawAfterStrikeAgility": 0,
+        "drawUses": 0
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-logan-paul",
@@ -1767,7 +1784,7 @@ export const superstars = {
       "chad-gable-ankle-lock"
     ],
     "archetype": "technical-strength-olympian",
-    "hp": 60,
+    "hp": 57,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -1780,14 +1797,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Olympic Pedigree",
-      "text": "The first time Chad connects with a Technical Move, gain +1 Agility Momentum. The first 2 times each match Chad connects with a Technical Move immediately after a Strength Move in the same Control sequence, draw 1 page.",
+      "text": "The first time Chad connects with a Technical Move, gain +1 Agility Momentum. The first time each match Chad connects with a Technical Move immediately after a Strength Move in the same Control sequence, draw 1 page.",
       "trigger": {
         "type": "gableOlympicPedigree",
         "agilityOnFirstTechnical": 1,
         "drawAfterStrengthTechnical": 1,
-        "drawUses": 2
+        "drawUses": 1
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-chad-gable",
@@ -1807,7 +1824,7 @@ export const superstars = {
     "special": {
       "type": "moveCounteredDrawDrain",
       "draw": 1,
-      "opponentAdrenaline": -2
+      "opponentAdrenaline": 0
     }
   },
   "raquelRodriguez": {
@@ -1898,7 +1915,7 @@ export const superstars = {
       "rey-mysterio-west-coast-pop"
     ],
     "archetype": "agility-technical-lucha-underdog",
-    "hp": 58,
+    "hp": 57,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -1912,14 +1929,14 @@ export const superstars = {
     },
     "ability": {
       "name": "The Ultimate Underdog",
-      "text": "The first 2 times each match Rey successfully kicks out of a Pin, draw 2 pages. After the first of those kick-outs, gain +1 Adrenaline.",
+      "text": "The first time each match Rey successfully kicks out of a Pin, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "reyUltimateUnderdog",
-        "maxUses": 2,
-        "draw": 2,
+        "maxUses": 1,
+        "draw": 1,
         "firstAdrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 1
     },
     "entrance": {
       "id": "entrance-rey-mysterio",
@@ -1939,7 +1956,7 @@ export const superstars = {
     "special": {
       "type": "luchaLibreLegend",
       "method": "agility",
-      "bonusDamage": 3,
+      "bonusDamage": 2,
       "retainControl": true
     }
   },
@@ -2034,7 +2051,7 @@ export const superstars = {
       "penta-mexican-destroyer"
     ],
     "archetype": "agility-strike-technical-hybrid-lucha",
-    "hp": 60,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 1,
@@ -2176,7 +2193,7 @@ export const superstars = {
       "uso-splash"
     ],
     "archetype": "strike-strength-main-event",
-    "hp": 62,
+    "hp": 68,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -2217,7 +2234,7 @@ export const superstars = {
       "type": "yeetTutor",
       "afterName": "Spear",
       "searchName": "Uso Splash",
-      "discount": 2
+      "discount": 3
     }
   },
   "laKnight": {
@@ -2242,7 +2259,7 @@ export const superstars = {
       "la-knight-bft"
     ],
     "archetype": "crowd-powered-all-rounder",
-    "hp": 62,
+    "hp": 67,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -2288,7 +2305,10 @@ export const superstars = {
       "type": "yeahTutor",
       "afterName": "Diving Elbow Drop",
       "searchName": "BFT",
-      "discount": 2
+      "discount": 4,
+      "draw": 2,
+      "adrenaline": 1,
+      "bonusDamage": 2
     }
   },
   "alexaBliss": {
@@ -2313,7 +2333,7 @@ export const superstars = {
       "alexa-bliss-twisted-bliss"
     ],
     "archetype": "stun-setup-resource-control",
-    "hp": 58,
+    "hp": 65,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -2379,7 +2399,7 @@ export const superstars = {
       "finn-balor-coup-de-grace"
     ],
     "archetype": "relentless-control-pace",
-    "hp": 60,
+    "hp": 66,
     "methodLimits": {
       "agility": null,
       "strength": 1,
@@ -2420,7 +2440,7 @@ export const superstars = {
       "type": "balorClubTutor",
       "afterName": "Sling Blade",
       "searchName": "Shotgun Dropkick",
-      "discount": 2
+      "discount": 3
     }
   },
   "danhausen": {
@@ -2824,7 +2844,7 @@ export const superstars = {
       "momentum-strike",
       "punch",
       "snap-powerslam",
-      "side-headlock"
+      "ddt"
     ],
     "signatures": [
       "randy-orton-draping-ddt",
@@ -2832,7 +2852,7 @@ export const superstars = {
       "randy-orton-punt-kick"
     ],
     "archetype": "technical-control-sudden-finish",
-    "hp": 63,
+    "hp": 67,
     "methodLimits": {
       "technical": null,
       "strength": 4,
@@ -2847,10 +2867,10 @@ export const superstars = {
     },
     "ability": {
       "name": "Apex Predator",
-      "text": "Once per Control sequence, after Randy connects with a Technical Move, his next Move this Control sequence costs 1 less.",
+      "text": "Once per Control sequence, after Randy connects with a Technical Move, his next Move this Control sequence costs 2 less.",
       "trigger": {
         "type": "randyApexPredator",
-        "discount": 1
+        "discount": 2
       }
     },
     "entrance": {
@@ -2871,7 +2891,7 @@ export const superstars = {
     "special": {
       "type": "outtaNowhere",
       "name": "RKO",
-      "discount": 2
+      "discount": 5
     }
   },
   "samiZayn": {
@@ -2898,7 +2918,7 @@ export const superstars = {
       "sami-zayn-helluva-kick"
     ],
     "archetype": "underdog-comeback-sequencer",
-    "hp": 61,
+    "hp": 63,
     "methodLimits": {
       "technical": null,
       "agility": 5,
@@ -2913,10 +2933,11 @@ export const superstars = {
     },
     "ability": {
       "name": "Underdog From the Underground",
-      "text": "While Sami has less HP than his opponent, the first Move he plays each Control sequence costs 1 less.",
+      "text": "While Sami has less HP than his opponent, the first Move he plays each Control sequence costs 2 less and deals +4 Damage.",
       "trigger": {
         "type": "samiUnderdog",
-        "discount": 1
+        "discount": 2,
+        "damage": 4
       }
     },
     "entrance": {
@@ -2936,8 +2957,8 @@ export const superstars = {
     },
     "special": {
       "type": "neverSayDie",
-      "hpPct": 0.24,
-      "draw": 2,
+      "hpPct": 0.4,
+      "draw": 3,
       "adrenaline": 2
     }
   },
@@ -2965,7 +2986,7 @@ export const superstars = {
       "jacob-fatu-tongan-death-grip"
     ],
     "archetype": "strength-to-agility-explosive-heavyweight",
-    "hp": 66,
+    "hp": 60,
     "methodLimits": {
       "strength": null,
       "strike": 5,
@@ -3004,8 +3025,8 @@ export const superstars = {
     "special": {
       "type": "builtDifferent",
       "minDamage": 8,
-      "draw": 1,
-      "adrenaline": 2
+      "draw": 0,
+      "adrenaline": 1
     }
   },
   "soloSikoa": {
@@ -3227,7 +3248,7 @@ export const superstars = {
       "goldberg-jackhammer"
     ],
     "archetype": "prestige-streak-snowball",
-    "hp": 68,
+    "hp": 74,
     "methodLimits": {
       "strength": null,
       "strike": null,
@@ -3240,10 +3261,10 @@ export const superstars = {
     },
     "ability": {
       "name": "The Streak",
-      "text": "Whenever Goldberg connects with a Move dealing 6+ Damage, gain 1 Streak counter, maximum 3. Each Streak counter reduces the cost of Goldberg’s Trademarks and Finishers by 1 while he keeps Control. Lose all Streak counters when Goldberg loses Control.",
+      "text": "Whenever Goldberg connects with a Move dealing 5+ Damage, gain 1 Streak counter, maximum 3. Each Streak counter reduces the cost of Goldberg’s Trademarks and Finishers by 1 while he keeps Control. Lose all Streak counters when Goldberg loses Control.",
       "trigger": {
         "type": "goldbergStreak",
-        "minDamage": 6,
+        "minDamage": 5,
         "maxStreak": 3,
         "discountPerStreak": 1
       }
@@ -3266,9 +3287,9 @@ export const superstars = {
     "special": {
       "type": "goldberg173",
       "adrenaline": 1,
+      "draw": 1,
       "retainControl": true,
       "preserveStreak": true
     }
   }
-
 };

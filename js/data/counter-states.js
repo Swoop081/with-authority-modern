@@ -223,6 +223,13 @@ const counterStateLinks = Object.freeze({
   'reverse-elbow': ['rear-control'],
 });
 
+const counterExchangeKeys = Object.freeze({
+  // Counter-attacks are normally terminal. Punches and Elbows are the deliberate
+  // wrestling-style strike exchange family and may answer each other.
+  punch: 'punch-elbow',
+  elbow: 'punch-elbow',
+});
+
 const submissionCounterLinks = Object.freeze({
   // Arm-targeting holds: turn the captured arm/control back on the attacker.
   'arm-drag': ['arms'],
@@ -264,5 +271,6 @@ export function enrichCounterState(card) {
   if (card.moveType === 'submission') card.submissionTarget = normalizeSubmissionTarget(card);
   if (counterStateLinks[card.id]) card.counterStates = [...new Set([...(card.counterStates ?? []), ...counterStateLinks[card.id]])];
   if (submissionCounterLinks[card.id]) card.counterSubmissionTargets = [...new Set([...(card.counterSubmissionTargets ?? []), ...submissionCounterLinks[card.id]])];
+  if (counterExchangeKeys[card.id]) card.counterExchangeKey = counterExchangeKeys[card.id];
   return card;
 }
