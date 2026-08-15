@@ -9,12 +9,12 @@ import { MatchEngine } from '../js/engine/MatchEngine.js';
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});
 
-test('v0.12.29 tougher health-only pin curve caps normal covers at 45%',()=>{
+test('v0.12.34 health-only pin curve reaches 75% at 0 HP',()=>{
   assert.equal(healthOnlyPinChance(player(65)),0);
   assert.ok(healthOnlyPinChance(player(64))<=1);
   assert.ok(healthOnlyPinChance(player(25))<=1);
   assert.equal(healthOnlyPinChance(player(24)),5);
-  assert.equal(healthOnlyPinChance(player(0)),45);
+  assert.equal(healthOnlyPinChance(player(0)),75);
 });
 
 test('v0.12.29 elite and submission finishers retain their balance locks',()=>{

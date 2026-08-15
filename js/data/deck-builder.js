@@ -2,7 +2,7 @@ import { decks } from "./decks.js";
 import { collectionCards } from "./collection.js";
 import { superstars } from "./superstars.js";
 import { evaluateDeckHealth, deckBucket } from "./deck-health.js";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.33";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.34";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));

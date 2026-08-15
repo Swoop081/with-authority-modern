@@ -935,7 +935,7 @@ test("canonical health bands are Green 65%+, Amber 25-64%, Red 0-24% and pins fo
   d.hp=64; assert.equal(healthZone(d),'amber'); assert.equal(canAttemptPin(s,'p1').legal,true,'64% HP is Amber and opens the cover window'); const highAmber=g._pinChance('p1'); assert.ok(highAmber>=0&&highAmber<=1);
   d.hp=25; assert.equal(healthZone(d),'amber'); const lowAmber=g._pinChance('p1'); assert.ok(lowAmber>=highAmber&&lowAmber<=1);
   d.hp=24; assert.equal(healthZone(d),'red'); const red=g._pinChance('p1'); assert.ok(red>=5&&red>lowAmber,'24% HP is Red and materially more vulnerable than Amber');
-  d.hp=0; assert.equal(healthZone(d),'red'); assert.equal(g._pinChance('p1'),45,'0 HP should be extremely dangerous without any card-based pin modifier');
+  d.hp=0; assert.equal(healthZone(d),'red'); assert.equal(g._pinChance('p1'),75,'0 HP should carry the locked 75% natural pin chance');
 });
 
 
@@ -1233,7 +1233,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.33/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.34/,'Studio script cache key must match the current release');
 });
 
 
@@ -1261,7 +1261,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.33/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.34/,'Studio visible build label should match the current release');
 });
 
 
@@ -1274,7 +1274,7 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,62,1000)'),'COST/DAMAGE values should use the new dominant mobile-readable sizing');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.33/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.34/,'Studio visible build label should match the current release');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1584,13 +1584,13 @@ test("v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that
   g.maintainSubmission('p1',0); assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'submission');
 });
 
-test("v0.12.33 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
+test("v0.12.34 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
   const here=path.dirname(fileURLToPath(import.meta.url));
   const root=path.resolve(here,"..");
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.equal(version,"0.12.33");
+  assert.equal(version,"0.12.34");
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }

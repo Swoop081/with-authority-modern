@@ -44,6 +44,13 @@ test('v0.12.26 normal first-level counter windows are unchanged',()=>{
   assert.equal(autoCounterEligibility(state,'p2',incoming).legal,false,'test hand is intentionally empty');
 });
 
+test('v0.12.34 Jawbreaker cannot counter another Jawbreaker even at the first counter window',()=>{
+  const jaw=byId('jawbreaker');
+  const state=chainState(jaw,{counterAttack:false});
+  assert.equal(counterEligibility(state,'p2',jaw,jaw).legal,false);
+  assert.match(counterEligibility(state,'p2',jaw,jaw).reason,/does not Counter/i);
+});
+
 import { MatchEngine } from '../js/engine/MatchEngine.js';
 import { superstars } from '../js/data/superstars.js';
 import { decks } from '../js/data/decks.js';

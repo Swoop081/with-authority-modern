@@ -21,6 +21,8 @@ export function moveEligibility(state,playerId,card){
 const incomingTypes=incoming=>[incoming?.counterState,incoming?.tacticalType,incoming?.moveType].filter(Boolean);
 export function canCounter(incoming,counter){
  if(!incoming||counter?.kind!=="move")return false;
+ // Jawbreaker is a positional escape, not a mirror exchange: it cannot answer another Jawbreaker.
+ if(incoming.id==='jawbreaker'&&counter.id==='jawbreaker')return false;
  const direct=(counter.countersCardIds??[]).includes(incoming.id);
  const stateAware=(counter.counterStates?.length??0)>0||(counter.counterSubmissionTargets?.length??0)>0;
  // Migrated counters use the eight physical states / four submission body targets.
