@@ -1,27 +1,27 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js";
-import { decks } from "../js/data/decks.js";
-import { allGameplayCards } from "../js/data/content.js";
-import { collectionCards } from "../js/data/collection.js";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js";
-import { MatchEngine } from "../js/engine/MatchEngine.js";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js";
-import { healthZone } from "../js/engine/health.js";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js";
+import { superstars } from "../js/data/superstars.js?v=0.12.44";
+import { decks } from "../js/data/decks.js?v=0.12.44";
+import { allGameplayCards } from "../js/data/content.js?v=0.12.44";
+import { collectionCards } from "../js/data/collection.js?v=0.12.44";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.44";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.44";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.44";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.44";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.44";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.44";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.44";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.44";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.44";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.44";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.44";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.44";
+import { healthZone } from "../js/engine/health.js?v=0.12.44";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.44";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -260,7 +260,7 @@ test("A completely maxed five-card booster converts to 50 Universe Points on Pac
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.44");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -334,7 +334,7 @@ test("Logan Paul RAW Series 1 package is locked, playable and wired to its bespo
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='strength').length,0);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='agility').length,8);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='strike').length,4);
-  const fin=byName('Paulverizer'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.damage,12); assert.equal('pinBonus' in fin,false);
+  const fin=byName('Paulverizer'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.damage,13); assert.equal('pinBonus' in fin,false);
   const tm=byName('Knockout Punch'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'logan-paul'); assert.deepEqual(tm.requirements,{strike:3});
   const standing=byName('Standing Moonsault'); assert.equal(standing.kickoutRetainControlDraw,1);
   const spring=byName('Springboard Crossbody'); assert.equal(spring.effects[0].type,'drawThenDiscardSelf'); assert.equal(spring.effects[0].ifAfterMethod,'strike');
@@ -416,13 +416,13 @@ test("No Wipeout prevents self-Stun when Sol's high-risk Agility Move is Counter
 
 test("Chad Gable RAW Series 1 package is locked, playable and wired to Olympic Pedigree / Shoosh",()=>{
   const chad=starById.get('chad-gable'); assert.ok(chad);
-  assert.equal(chad.hp,57); assert.equal(chad.methodLimits.technical,null); assert.equal(chad.methodLimits.strength,4); assert.equal(chad.methodLimits.agility,2); assert.equal(chad.methodLimits.strike,0);
+  assert.equal(chad.hp,61); assert.equal(chad.methodLimits.technical,null); assert.equal(chad.methodLimits.strength,4); assert.equal(chad.methodLimits.agility,2); assert.equal(chad.methodLimits.strike,0);
   assert.equal(decks['chad-gable'].length,60);
   assert.equal(decks['chad-gable'].filter(c=>c.kind==='momentum'&&c.method==='technical').length,7);
   assert.equal(decks['chad-gable'].filter(c=>c.kind==='momentum'&&c.method==='strength').length,5);
   assert.equal(decks['chad-gable'].filter(c=>c.kind==='momentum'&&c.method==='agility').length,0);
   const tm=byName('Chaos Theory'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'chad-gable'); assert.equal('pinBonus' in tm,false); assert.equal(tm.kickoutRetainControl,true);
-  const fin=byName('Ankle Lock'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.submission.pressure,5); assert.equal(fin.groundedOnly,true);
+  const fin=byName('Ankle Lock'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.submission.pressure,6); assert.equal(fin.groundedOnly,true);
   assert.equal(CARD_NUMBER_BY_ID['chad-gable-chaos-theory']?.cardCode,'RAW1-018'); assert.equal(CARD_NUMBER_BY_ID['superstar-chad-gable']?.cardCode,'RAW1-022');
   const opp=stars.find(s=>s.id!=='chad-gable');
   const e=new MatchEngine({p1:chad,p2:opp,decks,rng:()=>0.99}); const st=e.state();
@@ -435,16 +435,16 @@ test("Chad Gable RAW Series 1 package is locked, playable and wired to Olympic P
 
 
 test("starting HP roster uses the locked durability spread",()=>{
-  const expected = {"iyo-sky":58,"mankind":63,"the-rock":76,"hulk-hogan":68,"bayley":67,"cm-punk":59,"paige":61,"seth-rollins":64,"andre-the-giant":71,"stephanie-vaquer":65,"randy-savage":62,"roman-reigns":63,"charlotte-flair":62,"kevin-owens":64,"kane":69,"the-undertaker":68,"ultimate-warrior":62,"rhea-ripley":60,"cody-rhodes":63,"oba-femi":65,"stone-cold-steve-austin":66,"liv-morgan":67,"brock-lesnar":65,"gunther":63,"becky-lynch":61,"logan-paul":55,"sol-ruca":58,"chad-gable":57,"raquel-rodriguez":62,"rey-mysterio":57,"dominik-mysterio":59,"penta":62};
+  const expected = {"iyo-sky":58,"mankind":68,"the-rock":70,"hulk-hogan":68,"bayley":67,"cm-punk":63,"paige":64,"seth-rollins":64,"andre-the-giant":66,"stephanie-vaquer":66,"randy-savage":59,"roman-reigns":63,"charlotte-flair":65,"kevin-owens":62,"kane":69,"the-undertaker":65,"ultimate-warrior":67,"rhea-ripley":63,"cody-rhodes":63,"oba-femi":62,"stone-cold-steve-austin":66,"liv-morgan":67,"brock-lesnar":67,"gunther":65,"becky-lynch":64,"logan-paul":61,"sol-ruca":58,"chad-gable":61,"raquel-rodriguez":59,"rey-mysterio":60,"dominik-mysterio":59,"penta":62};
   for (const [id,hp] of Object.entries(expected)) assert.equal(starById.get(id)?.hp,hp,`${id} starting HP`);
   const values=[...new Set(stars.map(s=>s.hp))].sort((a,b)=>a-b);
-  assert.deepEqual(values,[55,57,58,59,60,61,62,63,64,65,66,67,68,69,71,74,76]);
-  assert.equal(starById.get('the-rock').hp,Math.max(...stars.map(s=>s.hp)),'Final Boss remains the clear HP ceiling');
+  assert.deepEqual(values,[58,59,60,61,62,63,64,65,66,67,68,69,70]);
+  assert.equal(starById.get('the-rock').hp,Math.max(...stars.map(s=>s.hp)),'Final Boss remains the HP ceiling');
 });
 
 test("Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RAW decks are exactly 60 pages",()=>{
   const raquel=starById.get('raquel-rodriguez'); assert.ok(raquel);
-  assert.equal(raquel.hp,62); assert.equal(raquel.methodLimits.strength,null); assert.equal(raquel.methodLimits.strike,3); assert.equal(raquel.methodLimits.agility,1); assert.equal(raquel.methodLimits.technical,0);
+  assert.equal(raquel.hp,59); assert.equal(raquel.methodLimits.strength,null); assert.equal(raquel.methodLimits.strike,3); assert.equal(raquel.methodLimits.agility,1); assert.equal(raquel.methodLimits.technical,0);
   for(const sid of ['logan-paul','sol-ruca','chad-gable','raquel-rodriguez']){
     assert.equal(decks[sid].length,60,`${sid} must have exactly 60 pages`);
     assert.equal(decks[sid].filter(c=>c.kind==='momentum').length,12,`${sid} must have exactly 12 Momentum`);
@@ -468,7 +468,7 @@ test("Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RA
 
 test("Rey Mysterio Worlds Collide Series 1 package is locked, family-gated and playable",()=>{
   const rey=starById.get('rey-mysterio'); assert.ok(rey);
-  assert.equal(rey.hp,57);
+  assert.equal(rey.hp,60);
   assert.deepEqual(rey.methodLimits,{agility:null,strength:0,strike:2,technical:3});
   assert.deepEqual(rey.starterMomentum,{agility:8,technical:2,strike:2});
   assert.equal(decks['rey-mysterio'].length,60);
@@ -848,7 +848,7 @@ test("Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce",()
 });
 
 test("SmackDown Series 1 Danhausen package is locked and playable",()=>{
-  const dan=starById.get('danhausen'); assert.ok(dan); assert.equal(dan.hp,59);
+  const dan=starById.get('danhausen'); assert.ok(dan); assert.equal(dan.hp,66);
   assert.deepEqual(dan.starterMomentum,{technical:6,strike:4,strength:2});
   assert.equal(decks.danhausen.length,60); assert.equal(decks.danhausen.filter(c=>c.kind==='momentum').length,12);
   const pump=byName('Pump Kick'), inv=byName('Inverted DDT'), oct=byName('Octopus Hold'), knee=byName('Very Nice, Very Knee-vil'), triple=byName('Triple D'), cutter=byName('Cutter');
@@ -912,7 +912,7 @@ test("SmackDown Series 1 Chelsea Green package is locked and counter-control mec
 });
 
 test("SmackDown Series 1 Damian Priest package is locked and punishment mechanics execute",()=>{
-  const priest=starById.get('damian-priest'); assert.ok(priest); assert.equal(priest.hp,64);
+  const priest=starById.get('damian-priest'); assert.ok(priest); assert.equal(priest.hp,61);
   assert.deepEqual(priest.methodLimits,{strength:null,strike:4,agility:2,technical:1});
   assert.deepEqual(priest.starterMomentum,{strength:7,strike:4,agility:1});
   assert.equal(decks['damian-priest'].length,60); assert.equal(decks['damian-priest'].filter(c=>c.kind==='momentum').length,12);
@@ -931,11 +931,14 @@ test("canonical health bands are Green 65%+, Amber 25-64%, Red 0-24% and pins fo
   const s=g.state(),d=s.players.p2; s.playerInControl='p1'; s.phase='ACTION'; s.postMove={attackerId:'p1',defenderId:'p2',cardId:null};
   s.players.p1.turn={momentumPlayed:0,momentumPlayLimit:1,actionPlayed:0,supportPlayed:0,specialPlayed:0};
   d.maxHp=100;
-  d.hp=65; assert.equal(healthZone(d),'green'); assert.equal(canAttemptPin(s,'p1').legal,false,'65% HP is Green and cannot be pinned'); assert.equal(g._pinChance('p1'),0);
-  d.hp=64; assert.equal(healthZone(d),'amber'); assert.equal(canAttemptPin(s,'p1').legal,true,'64% HP is Amber and opens the cover window'); const highAmber=g._pinChance('p1'); assert.ok(highAmber>=0&&highAmber<=1);
-  d.hp=25; assert.equal(healthZone(d),'amber'); const lowAmber=g._pinChance('p1'); assert.ok(lowAmber>=highAmber&&lowAmber<=1);
-  d.hp=24; assert.equal(healthZone(d),'red'); const red=g._pinChance('p1'); assert.ok(red>=5&&red>lowAmber,'24% HP is Red and materially more vulnerable than Amber');
-  d.hp=0; assert.equal(healthZone(d),'red'); assert.equal(g._pinChance('p1'),75,'0 HP should carry the locked 75% natural pin chance');
+  d.hp=65; assert.equal(healthZone(d),'green'); assert.equal(canAttemptPin(s,'p1').legal,true,'any post-Move cover window may attempt the 5% flash pin'); assert.equal(g._pinChance('p1'),5);
+  d.hp=24; assert.equal(g._pinChance('p1'),5,'16+ actual HP remains a 5% flash pin');
+  d.hp=15; assert.equal(g._pinChance('p1'),20);
+  d.hp=10; assert.equal(g._pinChance('p1'),45);
+  d.hp=8; assert.equal(g._pinChance('p1'),50);
+  d.hp=5; assert.equal(g._pinChance('p1'),70);
+  d.hp=4; assert.equal(g._pinChance('p1'),75);
+  d.hp=0; assert.equal(healthZone(d),'red'); assert.equal(g._pinChance('p1'),75,'0-4 actual HP carries the locked 75% natural pin chance');
 });
 
 
@@ -995,8 +998,8 @@ test("matches continue beyond Turn 50 with no turn-limit draw",()=>{
 
 test("v0.11.96 staged move/action expansion remains fully registered after later pool growth",()=>{
   const expected={
-    'flapjack':['MITB1-030',4,6], 'side-headlock':['MITB1-031',3,2], 'wristlock':['MITB1-032',2,1], 'catch-your-breath':['MITB1-033',null,null],
-    'knee-to-the-gut':['RAW1-031',3,4], 'throw-into-steel-steps':['RAW1-032',5,8], 'sleeper-hold':['RAW1-033',4,2],
+    'flapjack':['MITB1-030',4,6], 'side-headlock':['MITB1-031',3,0], 'wristlock':['MITB1-032',2,0], 'catch-your-breath':['MITB1-033',null,null],
+    'knee-to-the-gut':['RAW1-031',3,4], 'throw-into-steel-steps':['RAW1-032',5,8], 'sleeper-hold':['RAW1-033',4,0],
     'scissors-kick':['WC1-031',5,8], 'senton-splash':['WC1-032',5,8], 'spinning-back-kick':['WC1-033',3,5],
     'throw-into-ringpost':['SD1-032',5,8], 'corner-barrage':['SD1-033',4,6]
   };
@@ -1049,9 +1052,9 @@ test("Catch Your Breath is a 3-star booster-only Action that restores 5 HP up to
 test("Survivor Series Series 1 Drew, Randy, Sami and Jacob packages are locked, numbered and 60 pages",()=>{
   const expected={
     'drew-mcintyre':{hp:65,momentum:{strength:7,strike:4,technical:1},codes:['SVS1-007','SVS1-012']},
-    'randy-orton':{hp:67,momentum:{technical:5,strength:3,strike:3,agility:1},codes:['SVS1-013','SVS1-018']},
+    'randy-orton':{hp:63,momentum:{technical:5,strength:3,strike:3,agility:1},codes:['SVS1-013','SVS1-018']},
     'sami-zayn':{hp:63,momentum:{technical:5,agility:4,strike:2,strength:1},codes:['SVS1-019','SVS1-024']},
-    'jacob-fatu':{hp:60,momentum:{strength:6,strike:3,agility:3},codes:['SVS1-025','SVS1-030']}
+    'jacob-fatu':{hp:62,momentum:{strength:6,strike:3,agility:3},codes:['SVS1-025','SVS1-030']}
   };
   for(const [id,x] of Object.entries(expected)){
     const star=starById.get(id); assert.ok(star,id); assert.equal(star.hp,x.hp,id); assert.deepEqual(star.starterMomentum,x.momentum,id);
@@ -1101,8 +1104,8 @@ test("Survivor Series Series 1 is complete with Solo Sikoa, Jade Cargill and Nia
   const setStars=stars.filter(s=>s.setId==='survivor-series-series-1');
   assert.deepEqual(setStars.map(s=>s.id).sort(),['bron-breakker','drew-mcintyre','jacob-fatu','jade-cargill','nia-jax','randy-orton','sami-zayn','solo-sikoa'].sort());
   const expected={
-    'solo-sikoa':{hp:64,momentum:{strike:6,strength:5,agility:1},card:'SVS1-040'},
-    'jade-cargill':{hp:65,momentum:{strength:6,strike:4,agility:2},card:'SVS1-044'},
+    'solo-sikoa':{hp:61,momentum:{strike:6,strength:5,agility:1},card:'SVS1-040'},
+    'jade-cargill':{hp:62,momentum:{strength:6,strike:4,agility:2},card:'SVS1-044'},
     'nia-jax':{hp:67,momentum:{strength:7,strike:4,agility:1},card:'SVS1-049'}
   };
   for(const [id,x] of Object.entries(expected)){
@@ -1179,7 +1182,7 @@ test("v0.12.01 shared fundamentals batch is registered, numbered and executes it
     'elbow-to-back-of-head':['SVS1-034',3,4,1],
     'hip-toss':['SVS1-035',2,2,1],
     'leg-drop':['MITB1-034',3,5,1],
-    'choke-on-the-ropes':['RAW1-035',3,1,1],
+    'choke-on-the-ropes':['RAW1-035',3,0,1],
     'chops-in-the-corner':['SD1-035',4,5,2]
   };
   for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
@@ -1233,7 +1236,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.34/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.44/,'Studio script cache key must match the current release');
 });
 
 
@@ -1244,7 +1247,7 @@ test("v0.12.03 Card Art Studio premium frame renders set border, rarity stars an
   assert.match(studio,/function drawRarityStars\(/);
   assert.match(studio,/for\(let i=0;i<rarity;i\+\+\)/,'rarity should determine vertical star count');
   assert.ok(studio.includes('fillText("★",x,y)'),'rarity stars should be rendered as gold stars');
-  assert.match(studio,/function drawStatTile\(/,'move cost and damage should use framed stat tiles');
+  assert.match(studio,/function drawMoveStatFigure\(/,'move cost and damage should use the current legible stat figure treatment');
   assert.ok(studio.includes('Bahnschrift Condensed'),'card-name typography should use the premium condensed display stack');
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'card metadata should use the premium semi-condensed stack');
   assert.equal(studio.includes('italic 1000'),false,'premium card names should no longer use the old heavy italic treatment');
@@ -1261,7 +1264,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.34/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.44/,'Studio visible build label should match the current release');
 });
 
 
@@ -1270,11 +1273,11 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
   const html=fs.readFileSync(new URL('../tools/card-art-studio.html',import.meta.url),'utf8');
   assert.ok(studio.includes('const x=51*s,y=62*s+i*31*s;'),'rarity stars should sit one outer-border width farther inside the card');
-  assert.ok(studio.includes('cardFont(META_STACK,14.5,850)'),'COST/DAMAGE labels should use the enlarged mobile-readable treatment');
-  assert.ok(studio.includes('cardFont(NUMBER_STACK,62,1000)'),'COST/DAMAGE values should use the new dominant mobile-readable sizing');
+  assert.ok(studio.includes('cardFont(META_STACK,17.5,950)'),'COST/DAMAGE labels should use the enlarged mobile-readable treatment');
+  assert.ok(studio.includes('cardFont(NUMBER_STACK,78,1000)'),'COST/DAMAGE values should use the current dominant mobile-readable sizing');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.34/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.44/,'Studio visible build label should match the current release');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1379,15 +1382,16 @@ test("v0.12.08 Deck Lab roster uses full collectible-style Superstar cards", asy
   assert.ok(css.includes('aspect-ratio:.68'));
 });
 
-test("v0.12.14 Play mode tiles use integrated Superstar renders without nested interactive buttons", async()=>{
+test("v0.12.40 Play mode tiles restore full Superstar cards without nested interactive buttons", async()=>{
   const fs=await import('node:fs');
   const ui=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
-  assert.ok(ui.includes('class="mode-art mode-superstar-render"'));
+  assert.ok(ui.includes('class="mode-full-card-art"'));
+  assert.ok(ui.includes('superstarPreviewCardMarkup(starId,"mode-feature-card")'));
   assert.ok(ui.includes('<article id="play-exhibition" role="button" tabindex="0"'));
   assert.equal(ui.includes('<button id="play-exhibition" class="play-mode-card'),false);
-  assert.ok(css.includes('.mode-art.mode-superstar-render'));
-  assert.ok(css.includes('width:46%'));
+  assert.ok(css.includes('.premium-mode-card .mode-full-card-art'));
+  assert.ok(css.includes('.mode-feature-card'));
 });
 
 test("v0.12.08 zero-value navigation alerts are removed instead of rendering red zero badges", async()=>{
@@ -1418,7 +1422,7 @@ test("Season 2 Goldberg reward package is locked, future-scoped and collector-nu
   assert.equal(goldberg.setId,'season-2-whos-next');
   assert.equal(goldberg.seasonExclusive,true);
   assert.equal(goldberg.developmentOnly,true);
-  assert.equal(goldberg.hp,74);
+  assert.equal(goldberg.hp,68);
   assert.deepEqual(goldberg.methodLimits,{strength:null,strike:null,agility:2,technical:1});
   assert.deepEqual(goldberg.starterMomentum,{strength:6,strike:6});
   assert.equal(SEASON_2_COMPLETION_SUPERSTAR,'goldberg');
@@ -1574,23 +1578,21 @@ test("v0.12.33 retained-Control successful Moves draw only for the defender",()=
   assert.equal(d.hand.length,defenderBefore+1,'defender replenishes during retained Control');
 });
 
-test("v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that body area was previously submitted",()=>{
+test("v0.12.41 submission tap-out is governed by persistent body-part damage versus current HP, with no artificial turn-3 gate",()=>{
   const attacker=stars[0],defender=stars[1],sub=allGameplayCards.find(c=>c.kind==='move'&&c.submission); assert.ok(sub);
   const g=new MatchEngine({p1:attacker,p2:defender,decks,rng:rng(1215)}),s=g.state(),a=s.players.p1,d=s.players.p2;
-  a.hand=[sub,byName('Punch'),byName('Headbutt'),byName('Dropkick')].filter(Boolean); for(const m of ['agility','strength','strike','technical'])a.momentum[m]=99; a.adrenaline=99; d.submissionDamage[sub.submission.bodyPart]=999;
-  s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:sub};g._connect();
-  assert.equal(s.phase,'SUBMISSION_MAINTAIN'); assert.equal(s.submission.holdTurn,1); assert.equal(s.winner,null);
-  g.maintainSubmission('p1',0); assert.equal(s.submission.holdTurn,2); assert.equal(s.winner,null);
-  g.maintainSubmission('p1',0); assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'submission');
+  a.hand=[sub,byName('Punch'),byName('Headbutt'),byName('Dropkick')].filter(Boolean); for(const m of ['agility','strength','strike','technical'])a.momentum[m]=99; a.adrenaline=99; d.hp=5; d.submissionDamage[sub.submission.bodyPart]=0;
+  s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:{...sub,damage:0,submission:{...sub.submission,pressure:5}}};g._connect();
+  assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'submission');
 });
 
-test("v0.12.34 public entrypoint is cache-coherent and boots for fresh + migrated profiles",()=>{
+test("current public module graph is cache-coherent and boots for fresh + migrated profiles",()=>{
   const here=path.dirname(fileURLToPath(import.meta.url));
   const root=path.resolve(here,"..");
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.equal(version,"0.12.34");
+  assert.match(version,/^0\.12\.\d+$/);
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }
@@ -1599,6 +1601,21 @@ test("v0.12.34 public entrypoint is cache-coherent and boots for fresh + migrate
     const text=readFileSync(path.join(root,rel),"utf8");
     const mismatches=[...text.matchAll(/[?&]v=(0\.\d+\.\d+)/g)].map(m=>m[1]).filter(v=>v!==version);
     assert.deepEqual(mismatches,[],`${rel} contains stale cache stamps`);
+  }
+  const walkJs=(dir)=>{
+    const out=[];
+    for(const ent of readdirSync(dir,{withFileTypes:true})){
+      const full=path.join(dir,ent.name);
+      if(ent.isDirectory())out.push(...walkJs(full));
+      else if(ent.isFile()&&ent.name.endsWith('.js'))out.push(full);
+    }
+    return out;
+  };
+  for(const file of walkJs(path.join(root,'js'))){
+    const text=readFileSync(file,'utf8');
+    for(const m of text.matchAll(/(?:from\s+|import\s*\(\s*)["'](\.\.?\/[^"'?]+\.js)(?:\?v=([^"']+))?["']/g)){
+      assert.equal(m[2],version,`${path.relative(root,file)} nested import ${m[1]} must be stamped ${version}`);
+    }
   }
 
   const appUrl=pathToFileURL(path.join(root,"js/ui/app.js")).href;
@@ -1627,7 +1644,7 @@ test("v0.12.24 targeted roster balance pass preserves 60-page legality while fix
   const buckle=allGameplayCards.find(c=>c.id==='seth-rollins-buckle-bomb');
   assert.equal(buckle.cost,5); assert.equal(buckle.requirements.technical,1);
   const folding=allGameplayCards.find(c=>c.id==='gunther-folding-powerbomb'),gojira=allGameplayCards.find(c=>c.id==='gunther-gojira-clutch');
-  assert.equal(folding.cost,6); assert.equal(folding.requirements.strength,2); assert.equal(gojira.cost,9); assert.equal(gojira.finisher,true); assert.equal(gojira.submission.pressure,5);
+  assert.equal(folding.cost,6); assert.equal(folding.requirements.strength,2); assert.equal(gojira.cost,9); assert.equal(gojira.finisher,true); assert.equal(gojira.submission.pressure,6);
   const sami=starById.get('sami-zayn'); assert.equal(sami.ability.trigger.discount,2); assert.equal(sami.ability.trigger.damage,4);
   assert.ok(decks['randy-savage'].filter(c=>c.kind==='move'&&c.method==='agility').length>=6,'Savage has enough aerial pages to realize Macho Madness');
   assert.equal(allGameplayCards.find(c=>c.id==='andre-the-giant-double-underhook-suplex').damage,14,'Andre Trademark is deliberately above the normal trademark band as a giant-powerhouse exception');

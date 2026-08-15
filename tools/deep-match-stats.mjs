@@ -46,8 +46,8 @@ function playableAfterAuto(state,pid,card){
 }
 function wouldTap(state,pid,card){
  if(!card?.submission)return false; const p=state.players[pid], part=card.submission.bodyPart; if(!part)return false;
- const prior=(p.submissionHistory?.[part]??0)>0; const projected=(p.submissionDamage?.[part]??0)+(card.submission.pressure??0);
- return prior&&projected>=submissionThreshold(p);
+ const projected=(p.submissionDamage?.[part]??0)+(card.submission.pressure??0);
+ return projected>=submissionThreshold(p);
 }
 
 for(let i=0;i<stars.length;i++) for(let j=i+1;j<stars.length;j++) for(let kk=0;kk<N;kk++){ const k=KSTART+kk;

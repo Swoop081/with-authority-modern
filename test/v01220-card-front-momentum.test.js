@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js';
-import { canCounter } from '../js/engine/rules.js';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.44';
+import { canCounter } from '../js/engine/rules.js?v=0.12.44';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -44,9 +44,10 @@ test('v0.12.20 Momentum cards use canonical four method colours and explicit ful
   assert.ok(studio.includes('function drawMomentumFlame('));
 });
 
-test('v0.12.20 Card Art Studio exports larger Cost and Damage tiles',()=>{
+test('Card Art Studio keeps Cost and Damage dominant and mobile-readable',()=>{
   const studio=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
-  assert.ok(studio.includes('cardFont(META_STACK,14.5,850)'));
-  assert.ok(studio.includes('cardFont(NUMBER_STACK,62,1000)'));
-  assert.ok(studio.includes('tileW=w*.205,tileH=h*.095'));
+  assert.ok(studio.includes('cardFont(META_STACK,17.5,950)'));
+  assert.ok(studio.includes('cardFont(NUMBER_STACK,78,1000)'));
+  assert.ok(studio.includes('drawMoveStatFigure(w*.155,"COST"'));
+  assert.ok(studio.includes('drawMoveStatFigure(w*.845,"DAMAGE"'));
 });

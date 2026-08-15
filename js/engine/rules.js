@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js";
-import { GREEN_HEALTH_MIN, healthRatio } from "./health.js";
+import { totalMomentum } from "./utils.js?v=0.12.44";
+import { healthRatio } from "./health.js?v=0.12.44";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -15,7 +15,7 @@ export function moveEligibility(state,playerId,card){
  const curseCost=Math.max(0,p.events?.danhausenCurseAdrenalineCost??0); if(curseCost&&p.adrenaline<curseCost)return fail(`Need ${curseCost} Adrenaline — You Are Cursed!`);
  const sequenceDiscount=(card.discountAfterCounter&&p.events?.counteredThisControl)?card.discountAfterCounter:0; const finisherDiscount=card.finisher?Math.max(0,p.events?.nextFinisherDiscount??0):0; const methodChain=card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method]?(card.discountIfMethodConnectedThisControl.amount??0):0; const bodyDiscount=card.discountIfOpponentBodyDamage&&((state.players[playerId==="p1"?"p2":"p1"]?.submissionDamage?.[card.discountIfOpponentBodyDamage.bodyPart]??0)>=(card.discountIfOpponentBodyDamage.min??1))?(card.discountIfOpponentBodyDamage.amount??0):0; const samiDiscount=p.superstar?.id==='sami-zayn'&&p.controlMoveCount===0&&p.hp<(state.players[playerId==="p1"?"p2":"p1"]?.hp??0)?(p.superstar.ability?.trigger?.discount??1):0; const streakDiscount=p.superstar?.id==='goldberg'&&(card.trademark||card.finisher)?Math.max(0,p.streakCounters??0)*(p.superstar.ability?.trigger?.discountPerStreak??1):0; const discount=finisherDiscount+(p.nextMoveDiscount??0)+(p.methodDiscount?.[card.method]??0)+(p.namedDiscount?.[card.name]??0)+sequenceDiscount+methodChain+bodyDiscount+samiDiscount+streakDiscount; const needed=Math.max(0,(card.cost??0)-discount); if(totalMomentum(p)<needed)return fail(`Need ${needed} Momentum + Attitude`);
  if(!card.finisher) for(const [m,n] of Object.entries(card.requirements??{})){if(methodAmount(p,m)<n)return fail(`Need ${n} ${m} Momentum`);}
- const opp=state.players[playerId==="p1"?"p2":"p1"]; if(card.groundedOnly&&!['on-mat','grounded'].includes(opp?.posture))return fail("Opponent must be grounded");
+ const opp=state.players[playerId==="p1"?"p2":"p1"],grounded=['on-mat','grounded'].includes(opp?.posture); if(card.groundedOnly&&!grounded)return fail("Opponent must be grounded"); if(card.moveType==='submission'&&card.standingOnly&&grounded)return fail("Opponent must be standing");
  return {ok:true,legal:true,reason:null,effectiveCost:needed};
 }
 const incomingTypes=incoming=>[incoming?.counterState,incoming?.tacticalType,incoming?.moveType].filter(Boolean);
@@ -41,13 +41,13 @@ export function counterEligibility(state,playerId,incoming,counter){
  const isCounterAttack=!!state?.proposedMove?.isCounterAttack;
  if(isCounterAttack){
   const exchangeKey=incoming?.counterExchangeKey;
-  if(!exchangeKey)return fail("This Counter ends the exchange");
+  if(exchangeKey!=='punch-elbow')return fail("This Counter ends the exchange");
   if(counter?.counterExchangeKey!==exchangeKey)return fail(`Only another ${incoming?.name??'exchange Move'} can continue this exchange`);
  }
  const outta=!isCounterAttack&&!!(p?.superstar?.id==='randy-orton'&&!p.specialUsed&&p.hand?.some(c=>c.kind==='special'&&c.special?.type==='outtaNowhere')&&counter?.name==='RKO'); if(!canCounter(incoming,counter)&&!outta)return fail("Move does not Counter this Move Type"); if(counter.superstarId&&counter.superstarId!==p?.superstar?.id)return fail("Counter is exclusive to another Superstar"); if(Array.isArray(counter.allowedSuperstarIds)&&counter.allowedSuperstarIds.length&&!counter.allowedSuperstarIds.includes(p?.superstar?.id))return fail("Counter is restricted to another Superstar family");
  const counterDiscount=Math.max(0,p?.events?.nextCounterDiscount??0)+(outta?(p.superstar.special?.discount??2):0)+(p.superstar?.id==='sami-zayn'&&p.controlMoveCount===0&&p.hp<(state.players[state.proposedMove.attackerId]?.hp??0)?(p.superstar.ability?.trigger?.discount??1):0); const needed=Math.max(0,(counter.cost??0)-counterDiscount); if(totalMomentum(p)<needed)return fail(`Need ${needed} Momentum + Attitude`);
  if(!counter.finisher) for(const [m,n] of Object.entries(counter.requirements??{})){if(methodAmount(p,m)<n)return fail(`Need ${n} ${m} Momentum`);}
- const attacker=state.players[state.proposedMove.attackerId]; if(counter.groundedOnly&&!['on-mat','grounded'].includes(attacker?.posture))return fail("Opponent must be grounded");
+ const attacker=state.players[state.proposedMove.attackerId],attackerGrounded=['on-mat','grounded'].includes(attacker?.posture); if(counter.groundedOnly&&!attackerGrounded)return fail("Opponent must be grounded"); if(counter.moveType==='submission'&&counter.standingOnly&&attackerGrounded)return fail("Opponent must be standing");
  return {ok:true,legal:true,reason:null,effectiveCost:needed,offensive:!counter.defensiveOnly,outtaNowhere:outta,outtaNowhereDiscount:outta?(p.superstar.special?.discount??2):0};
 }
 export function autoCounterCost(state,playerId){
@@ -68,12 +68,11 @@ export function autoCounterEligibility(state,playerId,incoming=state?.proposedMo
  return {ok:true,legal:true,reason:null,cost,remaining:handSize-cost,useNumber:(p?.autoCounterUses??0)+1};
 }
 export function canAttemptPin(state,playerId){
- const p=state.players?.[playerId],opp=state.players?.[playerId==="p1"?"p2":"p1"];
+ const p=state.players?.[playerId];
  const freshTurn=!!p&&(p.turn?.momentumPlayed??0)===0&&(p.turn?.specialPlayed??0)===0;
  const hasCoverWindow=!!state.postMove&&state.postMove.attackerId===playerId;
- const vulnerable=!!opp?.maxHp&&healthRatio(opp)<GREEN_HEALTH_MIN;
- return state.phase==="ACTION"&&state.playerInControl===playerId&&freshTurn&&hasCoverWindow&&vulnerable?{legal:true,cost:0}:{legal:false,cost:0};
+ return state.phase==="ACTION"&&state.playerInControl===playerId&&freshTurn&&hasCoverWindow?{legal:true,cost:0}:{legal:false,cost:0};
 }
 export function canPlayPinEscape(state,playerId,card){ return state.phase==="PIN_RESPONSE"&&state.proposedPin?.defenderId===playerId&&!!(card?.pinEscape||card?.special?.type==='pinEscape'); }
-export function submissionThreshold(player){ return Math.max(12,Math.round((player?.maxHp??50)*.28)); }
+export function submissionThreshold(player){ return Math.max(0,Math.round(player?.hp??0)); }
 export function canReturnToRing(){return false;} export function canFollowOutside(){return false;}

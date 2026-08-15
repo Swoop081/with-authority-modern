@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=0.12.34";
+import { sets } from "./sets.js?v=0.12.44";
 
 // Public launch state for v0.12.12. Future sets remain authored in the build so
 // development work is preserved, but player-facing systems must not surface

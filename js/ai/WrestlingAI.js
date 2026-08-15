@@ -1,14 +1,20 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.44";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.44";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
-function incomingSubmissionWouldTap(state,pid,card){
- if(!card?.submission)return false;
+function submissionApplicationsToTap(state,pid,card){
+ if(!card?.submission)return Infinity;
  const p=state.players?.[pid],part=card.submission.bodyPart;
- if(!p||!part)return false;
- const prior=(p.submissionHistory?.[part]??0)>0;
- const projected=(p.submissionDamage?.[part]??0)+(card.submission.pressure??0);
- return prior&&projected>=submissionThreshold(p);
+ if(!p||!part)return Infinity;
+ const hp=submissionThreshold(p),existing=Math.max(0,p.submissionDamage?.[part]??0),pressure=Math.max(1,card.submission.pressure??1);
+ if(existing>=hp)return 1;
+ return Math.max(1,Math.ceil((hp-existing)/pressure));
+}
+function incomingSubmissionWouldTap(state,pid,card){ return submissionApplicationsToTap(state,pid,card)<=1; }
+function incomingSubmissionIsCritical(state,pid,card){
+ const p=state.players?.[pid]; if(!p||!card?.submission)return false;
+ const applications=submissionApplicationsToTap(state,pid,card);
+ return applications<=2||((p.hp??0)<=15&&applications<=3);
 }
 function cpuShouldAutoCounter(state,pid,card){
  if(!card||card.finisher)return false;
@@ -16,7 +22,7 @@ function cpuShouldAutoCounter(state,pid,card){
  if(!p)return false;
  const midOrHigh=(card.cost??0)>=4;
  const lethal=(card.damage??0)>=p.hp;
- return !!card.trademark||midOrHigh||lethal||incomingSubmissionWouldTap(state,pid,card);
+ return !!card.trademark||midOrHigh||lethal||incomingSubmissionWouldTap(state,pid,card)||incomingSubmissionIsCritical(state,pid,card);
 }
 function cpuPostAutoCounterActionState(state,pid){
  const p=state.players[pid];
@@ -126,7 +132,22 @@ function cpuEnablingAction(state,pid){
 function moveScore(state,pid,card){
  const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
  let score=(card.damage??0)*2;
- if(card.finisher)score+=35;if(card.trademark)score+=8;
+ let submissionApplications=Infinity;
+ if(card.submission){
+   const part=card.submission.bodyPart,pressure=Math.max(1,card.submission.pressure??1),threshold=submissionThreshold(def),existing=Math.max(0,def.submissionDamage?.[part]??0);
+   submissionApplications=existing>=threshold?1:Math.max(1,Math.ceil((threshold-existing)/pressure));
+   // v0.12.42: a hold is body-part work, not free HP damage. Value it as setup when fresh,
+   // then sharply increase priority only as the accumulated injury approaches a real tap-out.
+   score+=pressure*3+Math.min(20,existing);
+   if(submissionApplications<=1)score+=140;
+   else if(submissionApplications===2)score+=90;
+   else if(submissionApplications===3)score+=55;
+   else if(submissionApplications===4)score+=30;
+   else if(submissionApplications===5)score+=12;
+   else if(card.finisher||card.trademark)score+=4;
+ }
+ if(card.finisher)score+=card.submission?(submissionApplications<=3?25:0):35;
+ if(card.trademark)score+=card.submission?(submissionApplications<=4?8:0):8;
  if((card.damage??0)>=def.hp)score+=50;
  if(card.groundOpponent&&!groundState(def))score+=4;
  if(card.searchOnConnectName)score+=12;
@@ -275,15 +296,18 @@ function cpuChooseOffense(state,pid,moves){
  return moveScore(state,pid,top)-moveScore(state,pid,alternative)<=10?alternative:top;
 }
 function cpuDiscardPreservationScore(card){
- let score=0;if(!card)return score;if(card.kind==='special')score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=35;else if(card.kind==='action')score+=28;else if(card.kind==='support')score+=24;else if(card.kind==='momentum')score+=8;return score;
+ let score=0;if(!card)return score;if(card.kind==='special')score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=35;else if(card.kind==='action')score+=28;else if(card.kind==='support')score+=24;else if(card.kind==='momentum')score+=8;return score;
 }
 function cpuSubmissionDecision(state,pid){
  const sub=state.submission,p=state.players[pid],def=state.players[sub.defenderId],threshold=submissionThreshold(def),pressure=Math.max(1,sub.damage??1);
  const damageNeeded=Math.max(0,threshold-(def.submissionDamage?.[sub.bodyPart]??0));
- const damageHolds=Math.max(1,Math.ceil(damageNeeded/pressure));
- const eligibilityHolds=sub.priorWorked?1:Math.max(1,3-(sub.holdTurn??1));
- const required=Math.max(damageHolds,eligibilityHolds);
- if(required>p.hand.length)return{type:'release'};
+ const holdsToTap=Math.max(0,Math.ceil(damageNeeded/pressure));
+ // If the CPU can finish the match with the pages it has, commit to the hold.
+ // Otherwise use early holds as persistent body-part setup without emptying the hand.
+ const canFinish=holdsToTap<=p.hand.length;
+ const setupTurnCap=(sub.finisher||sub.trademark)?3:2;
+ const canBankPressure=(sub.holdTurn??1)<setupTurnCap&&p.hand.length>2;
+ if(!canFinish&&!canBankPressure)return{type:'release'};
  let index=0,best=Infinity;for(let i=0;i<p.hand.length;i++){const v=cpuDiscardPreservationScore(p.hand[i]);if(v<best){best=v;index=i;}}
  return{type:'maintain',index};
 }
@@ -293,11 +317,14 @@ export function cpuDecision(game,pid="p2"){
  if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');const chance=healthOnlyPinChance(p);return c&&chance>=20?{type:"pinEscape",card:c}:{type:"passPin"};}
  if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length?cpuSubmissionDecision(s,pid):{type:"release"};
  if(s.phase==="ACTION"){
-   const def=s.players[pid==="p1"?"p2":"p1"],hpRatio=healthRatio(def);
-   const readyFinisher=p.hand.find(x=>x.kind==="move"&&x.finisher&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);
-   if(canAttemptPin(s,pid).legal&&!readyFinisher&&healthZone(def)==="red")return{type:"pin"};
-   const sp=p.hand.find(x=>canPlaySpecial(s,pid,x));if(sp)return{type:"special",card:sp};
+   const defId=pid==="p1"?"p2":"p1",def=s.players[defId],hpRatio=healthRatio(def);
    const movesNow=cpuLegalOffense(s,pid);
+   const readyFinisher=movesNow.find(x=>x.finisher);
+   const submissionThreat=movesNow.filter(x=>x.submission).map(card=>({card,applications:submissionApplicationsToTap(s,defId,card)})).sort((a,b)=>a.applications-b.applications)[0];
+   const pinChance=healthOnlyPinChance(def);
+   const submissionPreferred=!!submissionThreat&&(submissionThreat.applications<=1||(submissionThreat.applications===2&&p.hand.length>=2&&pinChance<50));
+   if(canAttemptPin(s,pid).legal&&!readyFinisher&&!submissionPreferred&&pinChance>=20)return{type:"pin"};
+   const sp=p.hand.find(x=>canPlaySpecial(s,pid,x));if(sp)return{type:"special",card:sp};
    const setupAction=cpuPreMoveAction(s,pid);if(setupAction)return{type:"action",card:setupAction};
    const setupSupport=p.hand.find(x=>canPlaySupport(s,pid,x)&&(!p.support||p.support.id!==x.id));
    if(setupSupport&&movesNow.length)return{type:"support",card:setupSupport};

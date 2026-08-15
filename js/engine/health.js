@@ -15,15 +15,18 @@ export function healthZone(player) {
 }
 
 export function healthOnlyPinChance(player) {
-  const ratio = healthRatio(player);
-  if (ratio >= GREEN_HEALTH_MIN) return 0;
-  if (ratio >= AMBER_HEALTH_MIN) {
-    const amberDepth = Math.max(0, Math.min(1, (GREEN_HEALTH_MIN - ratio) / (GREEN_HEALTH_MIN - AMBER_HEALTH_MIN)));
-    return Math.round(amberDepth * 1);
-  }
-  // Preserve the established Red-zone curve at every positive HP value.
-  // Exactly 0 HP is the critical endpoint: natural covers succeed 75% of the time.
-  if ((player?.hp??0) <= 0) return 75;
-  const redDepth = Math.max(0, Math.min(1, (RED_HEALTH_DISPLAY_MAX - ratio) / RED_HEALTH_DISPLAY_MAX));
-  return Math.max(5, Math.min(45, 5 + Math.round(redDepth * 40)));
+  const hp = Math.max(0, Math.floor(Number(player?.hp ?? 0)));
+  if (hp <= 4) return 75;
+  if (hp === 5) return 70;
+  if (hp === 6) return 60;
+  if (hp === 7) return 55;
+  if (hp === 8) return 50;
+  if (hp === 9) return 48;
+  if (hp === 10) return 45;
+  if (hp === 11) return 40;
+  if (hp === 12) return 35;
+  if (hp === 13) return 30;
+  if (hp === 14) return 25;
+  if (hp === 15) return 20;
+  return 5;
 }

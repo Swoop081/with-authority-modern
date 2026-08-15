@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js';
-import { autoCounterCost, autoCounterEligibility, counterEligibility } from '../js/engine/rules.js';
-import { cpuDecision } from '../js/ai/WrestlingAI.js';
-import { superstars } from '../js/data/superstars.js';
-import { decks } from '../js/data/decks.js';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.44';
+import { autoCounterCost, autoCounterEligibility, counterEligibility } from '../js/engine/rules.js?v=0.12.44';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.44';
+import { superstars } from '../js/data/superstars.js?v=0.12.44';
+import { decks } from '../js/data/decks.js?v=0.12.44';
 
 const stars=Object.values(superstars);
 const rng=()=>0.42;
@@ -53,7 +53,7 @@ test('v0.12.21 player-chosen Auto Counter ditches exactly the selected pages, lo
   assert.equal(s.players.p1.hand.length,3,'normal global turn draw occurs after the two-card remainder is established');
 });
 
-test('v0.12.21 CPU only spends Auto Counter on mid/high/Trademark, lethal, or immediately tapping Submissions, while Finishers require a matching Move counter',()=>{
+test('v0.12.41 CPU spends Auto Counter on mid/high/Trademark, lethal, or critically threatening Submissions, while Finishers require a matching Move counter',()=>{
   const low=counterWindow({hand:9,card:incoming({cost:3,damage:3}),defender:'p2'});
   assert.equal(cpuDecision(low.g,'p2').type,'passCounter','nonlethal low-level Move is not worth CPU Auto Counter');
 
@@ -69,6 +69,7 @@ test('v0.12.21 CPU only spends Auto Counter on mid/high/Trademark, lethal, or im
 
   const subCard=incoming({cost:2,damage:0,moveType:'submission',submissionTarget:'neck-head',submission:{bodyPart:'head',pressure:5}});
   const sub=counterWindow({hand:9,card:subCard,defender:'p2'});
+  sub.s.players.p2.hp=25;
   sub.s.players.p2.submissionHistory.head=1;
   sub.s.players.p2.submissionDamage.head=20;
   assert.equal(cpuDecision(sub.g,'p2').type,'autoCounter');

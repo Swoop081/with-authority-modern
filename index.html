@@ -7,14 +7,27 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="WWE Legacy">
-  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=0.12.34">
-  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png?v=0.12.34">
-  <link rel="manifest" href="./manifest.webmanifest?v=0.12.34">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png?v=0.12.44">
+  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon-192.png?v=0.12.44">
+  <link rel="manifest" href="./manifest.webmanifest?v=0.12.44">
   <title>WWE Legacy: Collectible Card Game</title>
-  <link rel="stylesheet" href="./css/game.css?v=0.12.34">
+  <link rel="stylesheet" href="./css/game.css?v=0.12.44">
 </head>
 <body>
   <main>
+    <header id="app-topbar" class="legacy-gamebar" aria-label="WWE Legacy status" hidden>
+      <button type="button" id="chrome-home" class="gamebar-brand" aria-label="Return Home">
+        <span class="gamebar-wwe">WWE</span><b>LEGACY</b><small>CCG</small>
+      </button>
+      <button type="button" id="chrome-season" class="gamebar-season" aria-label="Open Season">
+        <span><small>SEASON 1</small><b data-chrome-tier>TIER 0</b></span>
+        <i class="gamebar-tier-track"><em data-chrome-tier-bar></em></i>
+      </button>
+      <div class="gamebar-resources">
+        <button type="button" id="chrome-packs" aria-label="Open Booster Packs"><small>PACKS</small><b data-chrome-packs>0</b></button>
+        <span class="gamebar-up"><small>UP</small><b data-chrome-up>0</b></span>
+      </div>
+    </header>
     <div id="game" aria-live="polite"></div>
     <nav class="mobile-game-nav compact-eight-nav" id="mobile-game-nav" aria-label="Primary navigation" hidden>
       <button type="button" data-mobile-nav="menu" aria-label="Home"><span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z"/></svg></span><b>HOME</b></button>
@@ -30,6 +43,6 @@
       <button type="button" data-mobile-nav="options" aria-label="Options"><span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/></svg></span><b>OPTIONS</b></button>
     </nav>
   </main>
-  <script type="module" src="./js/ui/app.js?v=0.12.34"></script>
+  <script type="module" src="./js/ui/app.js?v=0.12.44"></script>
 </body>
 </html>

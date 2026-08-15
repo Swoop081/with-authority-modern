@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js";
+import { enrichCounterState } from "./counter-states.js?v=0.12.44";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -334,7 +334,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 6,
-    "damage": 3,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -342,7 +342,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only; Submission + Leg pressure 4.",
+    "rulesText": "Grounded opponent only. Submission. +5 persistent Leg damage per successful turn.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
@@ -1051,22 +1051,17 @@ export const allGameplayCards = [
     "requirements": {
       "agility": 2
     },
-    "moveType": "submission",
+    "moveType": "aerial",
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Ground opponent.",
+    "rulesText": "Aerial impact Move. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "submission": {
-      "bodyPart": "head",
-      "pressure": 4
-    },
     "effects": [],
-    "counterState": "diving-aerial",
-    "submissionTarget": "neck-head"
+    "counterState": "diving-aerial"
   },
   {
     "id": "falcon-arrow",
@@ -1300,7 +1295,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 6,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -1308,9 +1303,9 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Submission; Head/Arm pressure 4",
+    "rulesText": "Grounded opponent only. Submission. +4 persistent Head damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
@@ -1371,7 +1366,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 7,
-    "damage": 4,
+    "damage": 0,
     "requirements": {
       "technical": 3
     },
@@ -1379,9 +1374,9 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "cm-punk",
     "rarity": 3,
-    "rulesText": "Punk-exclusive Trademark; grounded opponent; Head submission pressure 5",
+    "rulesText": "Punk-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Head damage per successful turn. On connect, draw 1 page.",
     "groundOpponent": true,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
@@ -1389,7 +1384,12 @@ export const allGameplayCards = [
       "pressure": 5
     },
     "trademark": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
     "counterState": "front-control",
     "submissionTarget": "neck-head"
   },
@@ -1603,7 +1603,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 5,
-    "damage": 1,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -1611,9 +1611,9 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "Grounded opponent only. Submission. +4 persistent Leg damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
@@ -1681,20 +1681,20 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 9,
-    "damage": 4,
+    "damage": 0,
     "requirements": {},
     "moveType": "submission",
     "method": null,
     "superstarId": "gunther",
     "rarity": 4,
-    "rulesText": "Gunther-exclusive Finisher. No Method requirement. Submission, Head Pressure 5.",
+    "rulesText": "Gunther-exclusive Finisher. No Method requirement. Submission. +6 persistent Head damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "head",
-      "pressure": 5
+      "pressure": 6
     },
     "effects": [],
     "counterState": "rear-control",
@@ -1871,7 +1871,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 7,
-    "damage": 4,
+    "damage": 0,
     "requirements": {
       "technical": 3
     },
@@ -1879,14 +1879,14 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "brock-lesnar",
     "rarity": 3,
-    "rulesText": "Brock-exclusive Trademark; Arm submission pressure 5",
+    "rulesText": "Brock-exclusive Trademark. Grounded opponent only. Submission. +6 persistent Arm damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
-      "pressure": 5
+      "pressure": 6
     },
     "trademark": true,
     "effects": [],
@@ -2888,13 +2888,13 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 9,
-    "damage": 4,
+    "damage": 0,
     "requirements": {},
     "moveType": "submission",
     "method": null,
     "superstarId": "mankind",
     "rarity": 4,
-    "rulesText": "Mankind-exclusive Finisher; Submission",
+    "rulesText": "Mankind-exclusive Finisher. Submission. +5 persistent Head damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -2959,7 +2959,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 5,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "strength": 2
     },
@@ -2967,18 +2967,19 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "Standing opponent only. Submission. +4 persistent Chest damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
-      "bodyPart": "head",
+      "bodyPart": "chest",
       "pressure": 4
     },
     "effects": [],
     "counterState": "torso-trapped",
-    "submissionTarget": "neck-head"
+    "submissionTarget": "back",
+    "standingOnly": true
   },
   {
     "id": "military-press-slam",
@@ -3102,22 +3103,17 @@ export const allGameplayCards = [
       "strike": 1,
       "agility": 1
     },
-    "moveType": "submission",
+    "moveType": "aerial",
     "method": "strike",
     "superstarId": "ultimate-warrior",
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "Ultimate Warrior-exclusive aerial impact Move.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "submission": {
-      "bodyPart": "head",
-      "pressure": 4
-    },
     "effects": [],
-    "counterState": "diving-aerial",
-    "submissionTarget": "neck-head"
+    "counterState": "diving-aerial"
   },
   {
     "id": "ultimate-warrior-gorilla-press-slam",
@@ -3497,7 +3493,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 7,
-    "damage": 3,
+    "damage": 0,
     "requirements": {
       "strength": 2
     },
@@ -3505,14 +3501,14 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "rhea-ripley",
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "Grounded opponent only. Submission. +5 persistent Leg damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 4
+      "pressure": 5
     },
     "trademark": true,
     "effects": [
@@ -3623,7 +3619,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 7,
-    "damage": 3,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -3631,9 +3627,9 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "becky-lynch",
     "rarity": 3,
-    "rulesText": "Becky-exclusive Trademark. Arm Submission Pressure 5.",
+    "rulesText": "Becky-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Arm damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
@@ -3770,7 +3766,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 6,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -3778,9 +3774,9 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "New shared submission",
+    "rulesText": "Grounded opponent only. Submission. +4 persistent Head damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
@@ -3935,20 +3931,20 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 10,
-    "damage": 4,
+    "damage": 0,
     "requirements": {},
     "moveType": "submission",
     "method": null,
     "superstarId": "charlotte-flair",
     "rarity": 4,
-    "rulesText": "Charlotte-exclusive Finisher",
+    "rulesText": "Charlotte-exclusive Finisher. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 5
+      "pressure": 6
     },
     "finisher": true,
     "effects": [],
@@ -4006,7 +4002,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 7,
-    "damage": 3,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -4014,14 +4010,14 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "paige",
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "Paige-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Arm damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": false,
+    "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
-      "pressure": 4
+      "pressure": 5
     },
     "trademark": true,
     "effects": [],
@@ -4314,7 +4310,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "the-rock",
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "Final Boss-exclusive weapon attack. On connect, deal +1 persistent Back damage; opponent loses 1 Adrenaline and ditches 1 page.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -4329,7 +4325,12 @@ export const allGameplayCards = [
         "amount": 1
       }
     ],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    },
+    "weapon": true
   },
   {
     "id": "the-rock-rock-bottom",
@@ -5491,8 +5492,8 @@ export const allGameplayCards = [
     "name": "Knockout Punch",
     "kind": "move",
     "setId": "raw-series-1",
-    "cost": 10,
-    "damage": 7,
+    "cost": 9,
+    "damage": 8,
     "requirements": {
       "strike": 3
     },
@@ -5514,8 +5515,8 @@ export const allGameplayCards = [
     "name": "Paulverizer",
     "kind": "move",
     "setId": "raw-series-1",
-    "cost": 12,
-    "damage": 12,
+    "cost": 11,
+    "damage": 13,
     "requirements": {},
     "moveType": "grapple",
     "method": null,
@@ -5552,14 +5553,19 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 3,
     "superstarId": "logan-paul",
-    "rulesText": "Once per match, after Logan connects with a Strike Move, play this card. That Move deals +2 Damage and gains Stun 1. After it resolves, end the current Control sequence.",
+    "rulesText": "Once per match, after Logan connects with a Strike Move, play this card. That Move deals +2 Damage, gains Stun 1 and deals +1 persistent Head damage. After it resolves, end the current Control sequence.",
     "special": {
       "type": "brassKnuckles",
       "bonusDamage": 2,
       "stun": 1,
       "requireMethod": "strike",
-      "endControl": true
-    }
+      "endControl": true,
+      "bodyDamage": {
+        "bodyPart": "head",
+        "pressure": 1
+      }
+    },
+    "weapon": true
   },
   {
     "id": "stf",
@@ -5567,7 +5573,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "raw-series-1",
     "cost": 5,
-    "damage": 6,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -5575,7 +5581,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only. Submission. On connect, opponent loses 1 Adrenaline.",
+    "rulesText": "Grounded opponent only. Submission. +4 persistent Leg damage per successful turn. On connect, opponent loses 1 Adrenaline.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
@@ -5702,13 +5708,13 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "raw-series-1",
     "cost": 9,
-    "damage": 4,
+    "damage": 0,
     "requirements": {},
     "moveType": "submission",
     "method": null,
     "superstarId": "chad-gable",
     "rarity": 4,
-    "rulesText": "Chad Gable-exclusive Finisher. No Method requirement. Grounded opponent only. Submission, Leg Pressure 5. On connect, opponent loses 1 Adrenaline.",
+    "rulesText": "Chad Gable-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +6 persistent Leg damage per successful turn. On connect, opponent loses 1 Adrenaline.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
@@ -5716,7 +5722,7 @@ export const allGameplayCards = [
     "finisher": true,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 5
+      "pressure": 6
     },
     "effects": [
       {
@@ -6121,12 +6127,17 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "rarity": 3,
     "superstarId": "dominik-mysterio",
-    "rulesText": "Once per match, after one of Dominik’s Moves is successfully Countered, the opponent loses 2 Adrenaline. After that Counter resolves, Dominik regains Control.",
+    "rulesText": "Once per match, after one of Dominik’s Moves is successfully Countered, use the hidden hammer: opponent loses 2 Adrenaline and takes +1 persistent Head damage. After that Counter resolves, Dominik regains Control.",
     "special": {
       "type": "hammerInBoot",
       "opponentAdrenaline": -2,
-      "regainControl": true
-    }
+      "regainControl": true,
+      "bodyDamage": {
+        "bodyPart": "head",
+        "pressure": 1
+      }
+    },
+    "weapon": true
   },
   {
     "id": "backstabber",
@@ -6336,14 +6347,19 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "el-grande-americano",
     "rarity": 4,
-    "rulesText": "El Grande Americano-exclusive Finisher. No Method requirement. Grounds opponent. Stun 1.",
+    "rulesText": "El Grande Americano-exclusive Finisher. No Method requirement. Grounds opponent. Stun 1. The loaded mask deals +1 persistent Head damage.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
     "finisher": true,
     "effects": [],
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    },
+    "weapon": true
   },
   {
     "id": "entrance-el-grande-americano",
@@ -6375,7 +6391,8 @@ export const allGameplayCards = [
       ],
       "searchName": "Loaded Mask Headbutt",
       "discount": 2
-    }
+    },
+    "weaponSetup": true
   },
   {
     "id": "running-hip-attack",
@@ -6879,7 +6896,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 5,
-    "damage": 5,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -6887,18 +6904,19 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only. Submission. Arm Pressure 5.",
+    "rulesText": "Standing opponent only. Submission. +4 persistent Arm damage per successful turn.",
     "groundOpponent": false,
-    "groundedOnly": true,
+    "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "arms",
-      "pressure": 5
+      "pressure": 4
     },
     "effects": [],
     "counterState": "front-control",
-    "submissionTarget": "arms"
+    "submissionTarget": "arms",
+    "standingOnly": true
   },
   {
     "id": "danhausen-very-nice-knee-vil",
@@ -6915,13 +6933,19 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "danhausen",
     "rarity": 3,
-    "rulesText": "Danhausen-exclusive Trademark. Grounds opponent. Stun 1.",
+    "rulesText": "Danhausen-exclusive Trademark. Grounds opponent. Stun 1. On connect: search your Playbook for Triple D and draw it; that Triple D costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Triple D",
+        "discount": 3
+      }
+    ],
     "counterState": "leg-extended"
   },
   {
@@ -6967,13 +6991,18 @@ export const allGameplayCards = [
     "setId": "smackdown-series-1",
     "rarity": 3,
     "superstarId": "danhausen",
-    "rulesText": "Once per match, after Danhausen connects with a Move that grounds the opponent, play this: opponent ditches 1 page and loses 1 Adrenaline; Danhausen draws 1 page. Continue the Control sequence normally.",
+    "rulesText": "Once per match, after Danhausen connects with a Move that grounds the opponent, use the Jar of Teeth: opponent ditches 1 page, loses 1 Adrenaline and takes +1 persistent Head damage; Danhausen draws 1 page. Continue the Control sequence normally.",
     "special": {
       "type": "jarOfTeeth",
       "ditchOpponent": 1,
       "opponentAdrenaline": -1,
-      "draw": 1
-    }
+      "draw": 1,
+      "bodyDamage": {
+        "bodyPart": "head",
+        "pressure": 1
+      }
+    },
+    "weapon": true
   },
   {
     "id": "cutter",
@@ -7318,7 +7347,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "worlds-collide-series-1",
     "cost": 5,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -7326,7 +7355,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Grounded opponent only. Submission + Back pressure 4.",
+    "rulesText": "Grounded opponent only. Submission. +4 persistent Back damage per successful turn.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
@@ -7389,7 +7418,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 4,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "technical": 1
     },
@@ -7397,18 +7426,19 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Submission + Body pressure 3.",
+    "rulesText": "Standing opponent only. Submission. +3 persistent Chest damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
-      "bodyPart": "body",
+      "bodyPart": "chest",
       "pressure": 3
     },
     "effects": [],
     "counterState": "rear-control",
-    "submissionTarget": "back"
+    "submissionTarget": "back",
+    "standingOnly": true
   },
   {
     "id": "punches-in-the-corner",
@@ -7530,7 +7560,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "survivor-series-series-1",
     "cost": 7,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "strength": 2
     },
@@ -7538,14 +7568,14 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "bron-breakker",
     "rarity": 3,
-    "rulesText": "Bron Breakker-exclusive Back Submission. Pressure 5.",
+    "rulesText": "Bron Breakker-exclusive. Grounded opponent only. Submission. +6 persistent Back damage per successful turn.",
     "groundOpponent": true,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
     "submission": {
       "bodyPart": "back",
-      "pressure": 5
+      "pressure": 6
     },
     "effects": [],
     "counterState": "rear-control",
@@ -7772,7 +7802,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 3,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "technical": 1
     },
@@ -7781,7 +7811,7 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 1,
     "boosterOnly": true,
-    "rulesText": "Standing opponent only. Submission. Head pressure 3.",
+    "rulesText": "Standing opponent only. Submission. +3 persistent Head damage per successful turn.",
     "standingOnly": true,
     "groundOpponent": false,
     "groundedOnly": false,
@@ -7801,7 +7831,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "money-in-the-bank-series-1",
     "cost": 2,
-    "damage": 1,
+    "damage": 0,
     "requirements": {
       "technical": 1
     },
@@ -7810,7 +7840,7 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 1,
     "boosterOnly": true,
-    "rulesText": "Standing opponent only. Submission. Arm pressure 2.",
+    "rulesText": "Standing opponent only. Submission. +2 persistent Arm damage per successful turn.",
     "standingOnly": true,
     "groundOpponent": false,
     "groundedOnly": false,
@@ -7880,7 +7910,7 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "On connect, deal +1 Back body-part damage. This impact is not a maintainable hold.",
+    "rulesText": "On connect, deal +1 persistent Back damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -7890,7 +7920,8 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "weapon": true
   },
   {
     "id": "sleeper-hold",
@@ -7898,7 +7929,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "raw-series-1",
     "cost": 4,
-    "damage": 2,
+    "damage": 0,
     "requirements": {
       "technical": 2
     },
@@ -7907,7 +7938,7 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "Standing opponent only. Submission. Head pressure 4.",
+    "rulesText": "Standing opponent only. Submission. +4 persistent Head damage per successful turn.",
     "standingOnly": true,
     "groundOpponent": false,
     "groundedOnly": false,
@@ -8007,7 +8038,7 @@ export const allGameplayCards = [
     "superstarId": null,
     "rarity": 2,
     "boosterOnly": true,
-    "rulesText": "On connect, deal +1 Head body-part damage. This impact is not a maintainable hold.",
+    "rulesText": "On connect, deal +1 persistent Head damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -8017,7 +8048,8 @@ export const allGameplayCards = [
       "pressure": 1
     },
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "weapon": true
   },
   {
     "id": "corner-barrage",
@@ -8436,13 +8468,13 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "survivor-series-series-1",
     "cost": 8,
-    "damage": 2,
+    "damage": 0,
     "requirements": {},
     "moveType": "submission",
     "method": "strength",
     "superstarId": "jacob-fatu",
     "rarity": 4,
-    "rulesText": "Jacob Fatu-exclusive Submission Finisher. Standing opponent. Head Pressure 5.",
+    "rulesText": "Jacob Fatu-exclusive Submission Finisher. Standing opponent only. +5 persistent Head damage per successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -8796,7 +8828,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Grounded opponent only. On connect, deal +1 Back body-part damage. This impact damage is one-shot and cannot be maintained as a hold.",
+    "rulesText": "Grounded opponent only. On connect, deal +1 persistent Back damage.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -8807,7 +8839,8 @@ export const allGameplayCards = [
     },
     "effects": [],
     "boosterOnly": true,
-    "counterState": "arm-extended"
+    "counterState": "arm-extended",
+    "weapon": true
   },
   {
     "id": "spanish-fly",
@@ -8975,7 +9008,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "raw-series-1",
     "cost": 3,
-    "damage": 1,
+    "damage": 0,
     "requirements": {
       "strike": 1
     },
@@ -8983,7 +9016,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Standing opponent only. Submission. Head pressure 3.",
+    "rulesText": "Standing opponent only. Submission. +3 persistent Head damage per successful turn.",
     "standingOnly": true,
     "groundOpponent": false,
     "groundedOnly": false,

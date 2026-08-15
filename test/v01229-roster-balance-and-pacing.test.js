@@ -1,28 +1,30 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js';
-import { superstars } from '../js/data/superstars.js';
-import { decks } from '../js/data/decks.js';
-import { healthOnlyPinChance } from '../js/engine/health.js';
-import { MatchEngine } from '../js/engine/MatchEngine.js';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.44';
+import { superstars } from '../js/data/superstars.js?v=0.12.44';
+import { decks } from '../js/data/decks.js?v=0.12.44';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.44';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.44';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});
 
-test('v0.12.34 health-only pin curve reaches 75% at 0 HP',()=>{
-  assert.equal(healthOnlyPinChance(player(65)),0);
-  assert.ok(healthOnlyPinChance(player(64))<=1);
-  assert.ok(healthOnlyPinChance(player(25))<=1);
-  assert.equal(healthOnlyPinChance(player(24)),5);
+test('v0.12.36 health-only pin curve is keyed to actual HP left',()=>{
+  assert.equal(healthOnlyPinChance(player(65)),5);
+  assert.equal(healthOnlyPinChance(player(25)),5);
+  assert.equal(healthOnlyPinChance(player(16)),5);
+  assert.equal(healthOnlyPinChance(player(15)),20);
+  assert.equal(healthOnlyPinChance(player(8)),50);
+  assert.equal(healthOnlyPinChance(player(4)),75);
   assert.equal(healthOnlyPinChance(player(0)),75);
 });
 
 test('v0.12.29 elite and submission finishers retain their balance locks',()=>{
   const gojira=byId('gunther-gojira-clutch');
-  assert.equal(gojira.finisher,true); assert.equal(gojira.cost,9); assert.equal(gojira.damage,4);
-  assert.deepEqual(gojira.requirements,{}); assert.equal(gojira.submission.pressure,5);
-  for(const id of ['mankind-mandible-claw','chad-gable-ankle-lock','jacob-fatu-tongan-death-grip']){
-    const card=byId(id); assert.equal(card.finisher,true,id); assert.equal(card.submission.pressure,5,id);
+  assert.equal(gojira.finisher,true); assert.equal(gojira.cost,9); assert.equal(gojira.damage,0);
+  assert.deepEqual(gojira.requirements,{}); assert.equal(gojira.submission.pressure,6);
+  for(const [id,pressure] of [['mankind-mandible-claw',5],['chad-gable-ankle-lock',6],['jacob-fatu-tongan-death-grip',5]]){
+    const card=byId(id); assert.equal(card.finisher,true,id); assert.equal(card.submission.pressure,pressure,id);
   }
   assert.equal(byId('andre-the-giant-sitdown-splash').cost,11);
   assert.equal(byId('andre-the-giant-sitdown-splash').damage,18);
@@ -54,13 +56,13 @@ test('v0.12.29 signature setup chains search and discount their intended payoff'
 
 test('v0.12.29 Logan pace correction reduces his burst package without removing identity',()=>{
   const logan=superstars.loganPaul;
-  assert.equal(logan.hp,55);
-  assert.equal(logan.ability.trigger.drawUses,0);
-  assert.equal(logan.ability.maxUses,1);
-  assert.equal(byId('logan-paul-knockout-punch').cost,10);
-  assert.equal(byId('logan-paul-knockout-punch').damage,7);
-  assert.equal(byId('logan-paul-paulverizer').cost,12);
-  assert.equal(byId('logan-paul-paulverizer').damage,12);
+  assert.equal(logan.hp,61);
+  assert.equal(logan.ability.trigger.drawUses,1);
+  assert.equal(logan.ability.maxUses,2);
+  assert.equal(byId('logan-paul-knockout-punch').cost,9);
+  assert.equal(byId('logan-paul-knockout-punch').damage,8);
+  assert.equal(byId('logan-paul-paulverizer').cost,11);
+  assert.equal(byId('logan-paul-paulverizer').damage,13);
 });
 
 test('v0.12.29 exhaustion safeguard ends only repeated empty-deck pass deadlocks by decision',()=>{

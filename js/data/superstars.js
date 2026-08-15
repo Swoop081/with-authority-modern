@@ -88,7 +88,7 @@ export const superstars = {
       "mankind-mandible-claw"
     ],
     "archetype": "reviewed-starter",
-    "hp": 63,
+    "hp": 68,
     "methodLimits": {
       "agility": 0,
       "strength": 2,
@@ -101,14 +101,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Deranged Resilience",
-      "text": "The first 2 times Mankind would take 8+ damage from one Move, reduce that damage by 2.",
+      "text": "The first 3 times Mankind would take 7+ damage from one Move, reduce that damage by 3.",
       "trigger": {
         "type": "reduceIncoming",
-        "minDamage": 8,
-        "maxUses": 2,
-        "reduce": 2
+        "minDamage": 7,
+        "maxUses": 3,
+        "reduce": 3
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-mankind",
@@ -151,7 +151,7 @@ export const superstars = {
       "the-rock-people-s-elbow"
     ],
     "archetype": "prestige-final-boss",
-    "hp": 76,
+    "hp": 70,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -349,7 +349,7 @@ export const superstars = {
       "cm-punk-g-t-s"
     ],
     "archetype": "reviewed-starter",
-    "hp": 59,
+    "hp": 63,
     "methodLimits": {
       "agility": 2,
       "strength": 0,
@@ -363,15 +363,15 @@ export const superstars = {
     },
     "ability": {
       "name": "Pipe Bomb",
-      "text": "The first 2 times Punk successfully Counters a Move, gain +1 Technical Momentum, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first 3 times Punk successfully Counters a Move, gain +1 Technical Momentum, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "firstCounterMomentum",
         "method": "technical",
-        "maxUses": 2,
+        "maxUses": 3,
         "draw": 1,
         "adrenaline": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-cm-punk",
@@ -414,7 +414,7 @@ export const superstars = {
       "paige-ram-paige"
     ],
     "archetype": "reviewed-starter",
-    "hp": 61,
+    "hp": 64,
     "methodLimits": {
       "agility": 0,
       "strength": 1,
@@ -427,15 +427,15 @@ export const superstars = {
     },
     "ability": {
       "name": "The Anti-Diva",
-      "text": "The first 2 times Paige connects with a Strike Move dealing 5+ damage, draw 1 page and her next Technical Move during that Control sequence costs 2 less.",
+      "text": "The first 3 times Paige connects with a Strike Move dealing 5+ damage, draw 1 page and her next Technical Move during that Control sequence costs 2 less.",
       "trigger": {
         "type": "strikeDamageDiscountTechnical",
         "minDamage": 5,
-        "maxUses": 2,
+        "maxUses": 3,
         "discount": 2,
         "draw": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-paige",
@@ -546,7 +546,7 @@ export const superstars = {
       "andre-the-giant-sitdown-splash"
     ],
     "archetype": "reviewed-starter",
-    "hp": 71,
+    "hp": 66,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -609,7 +609,7 @@ export const superstars = {
       "stephanie-vaquer-vaquer-inferno"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 66,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -675,7 +675,7 @@ export const superstars = {
       "randy-savage-flying-elbow-drop"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 59,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -806,7 +806,7 @@ export const superstars = {
       "charlotte-flair-figure-eight-leglock"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 65,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -874,7 +874,7 @@ export const superstars = {
       "kevin-owens-stunner"
     ],
     "archetype": "reviewed-starter",
-    "hp": 64,
+    "hp": 62,
     "methodLimits": {
       "agility": 2,
       "strength": null,
@@ -1002,7 +1002,7 @@ export const superstars = {
       "tombstone-piledriver"
     ],
     "archetype": "reviewed-starter",
-    "hp": 68,
+    "hp": 65,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1065,7 +1065,7 @@ export const superstars = {
       "ultimate-warrior-warrior-splash"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 67,
     "methodLimits": {
       "agility": 1,
       "strength": null,
@@ -1078,13 +1078,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Feel the Power",
-      "text": "The first time Warrior connects with two Moves during the same Control sequence, draw 1 page.",
+      "text": "The first 2 times Warrior connects with two Moves during the same Control sequence, draw 1 page and gain +1 Adrenaline.",
       "trigger": {
         "type": "secondMoveInControl",
-        "maxUses": 1,
-        "draw": 1
+        "maxUses": 2,
+        "draw": 1,
+        "adrenaline": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-ultimate-warrior",
@@ -1126,7 +1127,7 @@ export const superstars = {
       "rhea-ripley-riptide"
     ],
     "archetype": "reviewed-starter",
-    "hp": 60,
+    "hp": 63,
     "methodLimits": {
       "agility": 2,
       "strength": null,
@@ -1261,7 +1262,7 @@ export const superstars = {
       "oba-femi-fall-from-grace"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 62,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1455,7 +1456,7 @@ export const superstars = {
       "brock-lesnar-f-5"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 67,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1522,7 +1523,7 @@ export const superstars = {
       "gunther-folding-powerbomb"
     ],
     "archetype": "reviewed-starter",
-    "hp": 63,
+    "hp": 65,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1587,7 +1588,7 @@ export const superstars = {
       "becky-lynch-manhandle-slam"
     ],
     "archetype": "reviewed-starter",
-    "hp": 61,
+    "hp": 64,
     "methodLimits": {
       "agility": 1,
       "strength": 2,
@@ -1652,7 +1653,7 @@ export const superstars = {
       "logan-paul-paulverizer"
     ],
     "archetype": "strike-agility-showman",
-    "hp": 55,
+    "hp": 61,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -1665,14 +1666,14 @@ export const superstars = {
     },
     "ability": {
       "name": "Viral Athlete",
-      "text": "The first time Logan connects with a Strike Move, gain +1 Strength Momentum.",
+      "text": "The first time Logan connects with a Strike Move, gain +1 Strength Momentum. Once per match, if he then connects with an Agility Move in the same Control sequence, draw 1 page.",
       "trigger": {
         "type": "loganViralAthlete",
         "strengthOnFirstStrike": 1,
-        "drawAfterStrikeAgility": 0,
-        "drawUses": 0
+        "drawAfterStrikeAgility": 1,
+        "drawUses": 1
       },
-      "maxUses": 1
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-logan-paul",
@@ -1784,7 +1785,7 @@ export const superstars = {
       "chad-gable-ankle-lock"
     ],
     "archetype": "technical-strength-olympian",
-    "hp": 57,
+    "hp": 61,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -1802,7 +1803,7 @@ export const superstars = {
         "type": "gableOlympicPedigree",
         "agilityOnFirstTechnical": 1,
         "drawAfterStrengthTechnical": 1,
-        "drawUses": 1
+        "drawUses": 2
       },
       "maxUses": 2
     },
@@ -1849,7 +1850,7 @@ export const superstars = {
       "raquel-rodriguez-tejana-bomb"
     ],
     "archetype": "strength-strike-powerhouse",
-    "hp": 62,
+    "hp": 59,
     "methodLimits": {
       "agility": 1,
       "strength": null,
@@ -1915,7 +1916,7 @@ export const superstars = {
       "rey-mysterio-west-coast-pop"
     ],
     "archetype": "agility-technical-lucha-underdog",
-    "hp": 57,
+    "hp": 60,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -2465,7 +2466,7 @@ export const superstars = {
       "danhausen-triple-d"
     ],
     "archetype": "curse-disruption-trickster",
-    "hp": 59,
+    "hp": 66,
     "methodLimits": {
       "agility": 0,
       "strength": 2,
@@ -2479,14 +2480,14 @@ export const superstars = {
     },
     "ability": {
       "name": "You Are Cursed!",
-      "text": "The first 2 times each match an opponent gains Control from Danhausen, their first Move during that Control sequence costs 1 additional Adrenaline. If that Move is successfully Countered, they lose 1 additional Adrenaline.",
+      "text": "The first 3 times each match an opponent gains Control from Danhausen, their first Move during that Control sequence costs 1 additional Adrenaline. If that Move is successfully Countered, they lose 1 additional Adrenaline.",
       "trigger": {
         "type": "danhausenCurseControl",
-        "maxUses": 2,
+        "maxUses": 3,
         "adrenalineCost": 1,
         "counterDrain": 1
       },
-      "maxUses": 2
+      "maxUses": 3
     },
     "entrance": {
       "id": "entrance-danhausen",
@@ -2657,7 +2658,7 @@ export const superstars = {
       "damian-priest-hit-the-lights"
     ],
     "archetype": "counter-punishment-heavy-hitter",
-    "hp": 64,
+    "hp": 61,
     "methodLimits": {
       "strength": null,
       "strike": 4,
@@ -2721,7 +2722,7 @@ export const superstars = {
       "bron-breakker-steiner-recliner"
     ],
     "archetype": "agility-to-strength-acceleration",
-    "hp": 63,
+    "hp": 65,
     "methodLimits": {
       "strength": null,
       "agility": 4,
@@ -2852,7 +2853,7 @@ export const superstars = {
       "randy-orton-punt-kick"
     ],
     "archetype": "technical-control-sudden-finish",
-    "hp": 67,
+    "hp": 63,
     "methodLimits": {
       "technical": null,
       "strength": 4,
@@ -2986,7 +2987,7 @@ export const superstars = {
       "jacob-fatu-tongan-death-grip"
     ],
     "archetype": "strength-to-agility-explosive-heavyweight",
-    "hp": 60,
+    "hp": 62,
     "methodLimits": {
       "strength": null,
       "strike": 5,
@@ -3052,7 +3053,7 @@ export const superstars = {
       "solo-sikoa-samoan-spike"
     ],
     "archetype": "strike-pressure-samoan-spike",
-    "hp": 64,
+    "hp": 61,
     "methodLimits": {
       "strike": null,
       "strength": 5,
@@ -3117,7 +3118,7 @@ export const superstars = {
       "jade-cargill-jaded"
     ],
     "archetype": "dominant-power-athlete-jaded-sequencing",
-    "hp": 65,
+    "hp": 62,
     "methodLimits": {
       "strength": null,
       "strike": 5,
@@ -3248,7 +3249,7 @@ export const superstars = {
       "goldberg-jackhammer"
     ],
     "archetype": "prestige-streak-snowball",
-    "hp": 74,
+    "hp": 68,
     "methodLimits": {
       "strength": null,
       "strike": null,

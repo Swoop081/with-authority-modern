@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js';
-import { decks } from '../js/data/decks.js';
-import { allGameplayCards } from '../js/data/content.js';
-import { MatchEngine } from '../js/engine/MatchEngine.js';
-import { cpuDecision } from '../js/ai/WrestlingAI.js';
-import { submissionThreshold } from '../js/engine/rules.js';
-import { healthOnlyPinChance } from '../js/engine/health.js';
+import { superstars } from '../js/data/superstars.js?v=0.12.44';
+import { decks } from '../js/data/decks.js?v=0.12.44';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.44';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.44';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.44';
+import { submissionThreshold } from '../js/engine/rules.js?v=0.12.44';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.44';
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -67,11 +67,11 @@ test('v0.12.31 CPU saves Pin Escape on weak covers and spends it once the cover 
   const s=game.state(),p=s.players.p2;
   s.phase='PIN_RESPONSE';s.playerInControl='p1';s.proposedPin={attackerId:'p1',defenderId:'p2'};
   p.hand=[byId.get('shoulder-up')];
-  p.hp=Math.round(p.maxHp*.20);
-  assert.ok(healthOnlyPinChance(p)<20);
+  p.hp=16;
+  assert.equal(healthOnlyPinChance(p),5);
   assert.equal(cpuDecision(game,'p2')?.type,'passPin');
-  p.hp=Math.round(p.maxHp*.14);
-  assert.ok(healthOnlyPinChance(p)>=20);
+  p.hp=15;
+  assert.equal(healthOnlyPinChance(p),20);
   const d=cpuDecision(game,'p2');
   assert.equal(d?.type,'pinEscape');
   assert.equal(d?.card?.id,'shoulder-up');

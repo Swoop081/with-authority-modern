@@ -1,9 +1,7 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.34 — Pin Finish + Jawbreaker Hotfix**.
+Current working build: **v0.12.42 — Submission + Persistent Injury Cleanup**.
 
-v0.12.34 supersedes v0.12.33 while preserving its retained-Control hand-flow model. Exactly 0 HP now has a 75% natural pin chance, while every positive-HP pin chance remains unchanged. Jawbreaker can no longer counter another Jawbreaker; Punch/Elbow remains the sole deliberate recursive counter exchange.
+v0.12.42 supersedes v0.12.41. Genuine Submission holds now deal **0 printed HP damage** and build only persistent body-part damage against the opponent’s current HP. False submission tags are removed, hold targets/positions are cleaned up, and current weapon/environment attacks add persistent injury to the appropriate body part. All v0.12.41 match-flow, v0.12.36 actual-HP pin curve and v0.12.35 counter-terminal/cache rules remain intact.
 
-All other v0.12.33 rules remain intact: defender-only draw after a connected Move retains Control, one Momentum per fresh turn, attacker +1 / defender -1 Adrenaline on connected Moves, and Entrance Adrenaline on first actual Control.
-
-See `RELEASE-NOTES-v0.12.34.md`, `PIN-COUNTER-AUDIT-v0.12.34.md`, `DEEP-MATCH-STATS-v0.12.34.json`, and the v0.12.34 validation/test audit files.
+See `RELEASE-NOTES-v0.12.42.md`, `SUBMISSION-CARD-AUDIT-v0.12.42.md` and `BODY-DAMAGE-AUDIT-v0.12.42.md`.
