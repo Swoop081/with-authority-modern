@@ -7,7 +7,7 @@ const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8')
 const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
 test('v0.12.40 restores one collectible Superstar card to each Home action tile', () => {
-  for (const id of ['roman-reigns','stone-cold-steve-austin','iyo-sky','cm-punk','becky-lynch','gunther','cody-rhodes']) {
+  for (const id of ['stone-cold-steve-austin','iyo-sky','seth-rollins','becky-lynch','gunther','cody-rhodes']) {
     assert.match(ui, new RegExp(`superstarPreviewCardMarkup\\("${id}","home-tile-card"\\)`));
   }
   assert.match(ui, /superstarPreviewCardMarkup\(starter\.id,"home-tile-card"\)/);
