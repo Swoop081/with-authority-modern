@@ -1,4 +1,4 @@
-import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js?v=0.12.59";
+import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js?v=0.12.60";
 const DAY_MS = 86400000;
 const DAILY_POOL = [
   { key: 'win-match', label: 'Win a match', metric: 'wins', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },

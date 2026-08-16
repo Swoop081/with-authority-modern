@@ -1,0 +1,8 @@
+
+> wwe-legacy-ccg@0.12.60 flow
+> node tools/flow-audit.mjs
+
+{
+  "superstars": 50,
+  "issues": []
+}

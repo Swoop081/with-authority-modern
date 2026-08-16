@@ -1,9 +1,9 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.59 — Pin Count + Run Screen Repair**.
+Current working build: **v0.12.60 — Season + Deck Lab Cleanup Pass**.
 
-v0.12.59 supersedes v0.12.58. It corrects pin-count presentation so green-health kickouts break after one, and repairs the Climb the Ladder / Championship Road mobile regressions by restoring branch-selector placement, contained run CTAs, and cleaner iPhone spacing.
+v0.12.60 supersedes v0.12.59. It enlarges The Rock on the launch Final Boss promotion, repairs the Deck Lab Superstar picker, repositions The Rock on the Season hero, reduces the Daily Login Booster to one purple state button, compacts the Season Command Center, and removes text overlays from Challenges set logos.
 
-No pin probability, match outcome, Superstar balance, deck composition, card-stat, submission, counter, Momentum, Entrance-economy, booster-economy, or Season-reward rules are changed from v0.12.58.
+No gameplay or balance rules are changed from v0.12.59.
 
-See `RELEASE-NOTES-v0.12.59.md` for the complete change list and certification.
+See `RELEASE-NOTES-v0.12.60.md` for the complete change list and certification.
