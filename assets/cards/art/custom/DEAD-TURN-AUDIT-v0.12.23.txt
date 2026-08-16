@@ -1,0 +1,140 @@
+
+> wwe-legacy-ccg@0.12.23 dead-turns
+> node tools/dead-turn-audit.mjs
+
+{
+  "matches": 2450,
+  "totalPass": 4885,
+  "passesPerMatch": 1.99,
+  "matches4": 1,
+  "pct4": 0,
+  "max": 4,
+  "top": [
+    {
+      "id": "chelsea-green",
+      "passesPerMatch": 2.63,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "danhausen",
+      "passesPerMatch": 2.03,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "kevin-owens",
+      "passesPerMatch": 1.89,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "randy-savage",
+      "passesPerMatch": 1.58,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "the-undertaker",
+      "passesPerMatch": 1.55,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "mankind",
+      "passesPerMatch": 1.49,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "jey-uso",
+      "passesPerMatch": 1.45,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "bayley",
+      "passesPerMatch": 1.4,
+      "streak4Pct": 0,
+      "max": 1
+    },
+    {
+      "id": "seth-rollins",
+      "passesPerMatch": 1.37,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "cm-punk",
+      "passesPerMatch": 1.32,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "oba-femi",
+      "passesPerMatch": 1.22,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "stephanie-vaquer",
+      "passesPerMatch": 1.17,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "stone-cold-steve-austin",
+      "passesPerMatch": 1.17,
+      "streak4Pct": 1,
+      "max": 4
+    },
+    {
+      "id": "jacob-fatu",
+      "passesPerMatch": 1.16,
+      "streak4Pct": 1,
+      "max": 4
+    },
+    {
+      "id": "rhea-ripley",
+      "passesPerMatch": 1.13,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "brock-lesnar",
+      "passesPerMatch": 1.13,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "la-knight",
+      "passesPerMatch": 1.1,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "tiffany-stratton",
+      "passesPerMatch": 1.09,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "becky-lynch",
+      "passesPerMatch": 1.06,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "gunther",
+      "passesPerMatch": 1.05,
+      "streak4Pct": 0,
+      "max": 2
+    }
+  ],
+  "cmPunk": {
+    "id": "cm-punk",
+    "passesPerMatch": 1.32,
+    "streak4Pct": 0,
+    "max": 2
+  }
+}

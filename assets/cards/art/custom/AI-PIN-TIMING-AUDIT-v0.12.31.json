@@ -1,0 +1,136 @@
+{
+  "attempts": 7788,
+  "escapes": 1138,
+  "avgEscapeChance": 36.1,
+  "lowEscape": 0,
+  "lowEscapePct": 0,
+  "bands": {
+    "0-9": {
+      "a": 849,
+      "e": 0
+    },
+    "10-19": {
+      "a": 1387,
+      "e": 0
+    },
+    "20-29": {
+      "a": 1131,
+      "e": 363
+    },
+    "30-39": {
+      "a": 877,
+      "e": 198
+    },
+    "40+": {
+      "a": 3544,
+      "e": 577
+    }
+  },
+  "top": [
+    {
+      "id": "iyo-sky",
+      "esc": 13,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 34.8
+    },
+    {
+      "id": "mankind",
+      "esc": 22,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 37.9
+    },
+    {
+      "id": "the-rock",
+      "esc": 12,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 31.8
+    },
+    {
+      "id": "hulk-hogan",
+      "esc": 19,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 34.4
+    },
+    {
+      "id": "bayley",
+      "esc": 16,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 33.3
+    },
+    {
+      "id": "cm-punk",
+      "esc": 29,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 36.4
+    },
+    {
+      "id": "paige",
+      "esc": 20,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 37.9
+    },
+    {
+      "id": "seth-rollins",
+      "esc": 19,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 38.4
+    },
+    {
+      "id": "andre-the-giant",
+      "esc": 16,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 39.5
+    },
+    {
+      "id": "stephanie-vaquer",
+      "esc": 28,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 37.9
+    },
+    {
+      "id": "randy-savage",
+      "esc": 29,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 37.7
+    },
+    {
+      "id": "roman-reigns",
+      "esc": 13,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 36
+    },
+    {
+      "id": "charlotte-flair",
+      "esc": 12,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 36.5
+    },
+    {
+      "id": "kevin-owens",
+      "esc": 36,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 34.9
+    },
+    {
+      "id": "kane",
+      "esc": 14,
+      "low": 0,
+      "lowPct": 0,
+      "avgChance": 34.5
+    }
+  ]
+}

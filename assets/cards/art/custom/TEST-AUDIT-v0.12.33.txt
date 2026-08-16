@@ -1,0 +1,998 @@
+
+> wwe-legacy-ccg@0.12.33 test
+> node --test
+
+TAP version 13
+# Subtest: v0.12.15 Tier Up uses a body-level full-screen celebration and queues every crossed tier
+ok 1 - v0.12.15 Tier Up uses a body-level full-screen celebration and queues every crossed tier
+  ---
+  duration_ms: 1.248368
+  type: 'test'
+  ...
+# Subtest: v0.12.15 match HP has one symmetric fixed-size lane per side
+ok 2 - v0.12.15 match HP has one symmetric fixed-size lane per side
+  ---
+  duration_ms: 0.697353
+  type: 'test'
+  ...
+# Subtest: v0.12.15 booster flow is sealed pack -> rip -> reveal -> summary
+ok 3 - v0.12.15 booster flow is sealed pack -> rip -> reveal -> summary
+  ---
+  duration_ms: 0.608361
+  type: 'test'
+  ...
+# Subtest: v0.12.15 removes known 0.12.14 presentation misses
+ok 4 - v0.12.15 removes known 0.12.14 presentation misses
+  ---
+  duration_ms: 0.609983
+  type: 'test'
+  ...
+# Subtest: v0.12.15 recommended decks contain no method-impossible pages
+ok 5 - v0.12.15 recommended decks contain no method-impossible pages
+  ---
+  duration_ms: 1.381817
+  type: 'test'
+  ...
+# Subtest: reviewed decks are 60 pages with 12 Momentum and no orphan gameplay cards
+ok 6 - reviewed decks are 60 pages with 12 Momentum and no orphan gameplay cards
+  ---
+  duration_ms: 3.242031
+  type: 'test'
+  ...
+# Subtest: all Finishers are globally free of Method Momentum requirements
+ok 7 - all Finishers are globally free of Method Momentum requirements
+  ---
+  duration_ms: 1.755279
+  type: 'test'
+  ...
+# Subtest: profile, Foil replacement, Entrance ownership and boosters use rebuilt rules
+ok 8 - profile, Foil replacement, Entrance ownership and boosters use rebuilt rules
+  ---
+  duration_ms: 2.556466
+  type: 'test'
+  ...
+# Subtest: later locked native sequences are present whenever their set is active
+ok 9 - later locked native sequences are present whenever their set is active
+  ---
+  duration_ms: 0.228609
+  type: 'test'
+  ...
+# Subtest: engine completes a deterministic cycle of roster matchups without stalling
+ok 10 - engine completes a deterministic cycle of roster matchups without stalling
+  ---
+  duration_ms: 86.857507
+  type: 'test'
+  ...
+# Subtest: 0 HP does not cause an automatic knockout and Critical Exhaustion passes Control
+ok 11 - 0 HP does not cause an automatic knockout and Critical Exhaustion passes Control
+  ---
+  duration_ms: 0.712075
+  type: 'test'
+  ...
+# Subtest: Momentum refreshes after a connected Move, not after Specials or utility within the same turn
+ok 12 - Momentum refreshes after a connected Move, not after Specials or utility within the same turn
+  ---
+  duration_ms: 0.828968
+  type: 'test'
+  ...
+# Subtest: offensive Counter attacks normally resolve immediately instead of recursively chaining
+ok 13 - offensive Counter attacks normally resolve immediately instead of recursively chaining
+  ---
+  duration_ms: 0.710943
+  type: 'test'
+  ...
+# Subtest: Exhibition CPU matchmaking uses every complete roster deck except the selected player and never needs a second owned Superstar
+ok 14 - Exhibition CPU matchmaking uses every complete roster deck except the selected player and never needs a second owned Superstar
+  ---
+  duration_ms: 0.604896
+  type: 'test'
+  ...
+# Subtest: Daily Store rotates SS to HOF to EVO, charges UP, blocks repurchase and grants only the Store unlock collection package
+ok 15 - Daily Store rotates SS to HOF to EVO, charges UP, blocks repurchase and grants only the Store unlock collection package
+  ---
+  duration_ms: 9.411537
+  type: 'test'
+  ...
+# Subtest: Boosters guarantee one under-cap card when possible and convert only excess copies to Universe Points at review
+ok 16 - Boosters guarantee one under-cap card when possible and convert only excess copies to Universe Points at review
+  ---
+  duration_ms: 0.570835
+  type: 'test'
+  ...
+# Subtest: Season milestone tiers mix 100/200 Universe Points into the reward road while Tier 50 stays Final Boss
+ok 17 - Season milestone tiers mix 100/200 Universe Points into the reward road while Tier 50 stays Final Boss
+  ---
+  duration_ms: 0.34407
+  type: 'test'
+  ...
+# Subtest: A completely maxed five-card booster converts to 50 Universe Points on Pack Complete
+ok 18 - A completely maxed five-card booster converts to 50 Universe Points on Pack Complete
+  ---
+  duration_ms: 0.334676
+  type: 'test'
+  ...
+# Subtest: canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card
+ok 19 - canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card
+  ---
+  duration_ms: 12.412281
+  type: 'test'
+  ...
+# Subtest: Liv Morgan uses Jersey Codebreaker as her exclusive Trademark and the superseded generic variant is absent
+ok 20 - Liv Morgan uses Jersey Codebreaker as her exclusive Trademark and the superseded generic variant is absent
+  ---
+  duration_ms: 0.296229
+  type: 'test'
+  ...
+# Subtest: Logan Paul RAW Series 1 package is locked, playable and wired to its bespoke mechanics
+ok 21 - Logan Paul RAW Series 1 package is locked, playable and wired to its bespoke mechanics
+  ---
+  duration_ms: 1.029234
+  type: 'test'
+  ...
+# Subtest: RAW aerial mechanics execute under the global failed-pin Control transfer rule and Springboard Crossbody rewards a prior Strike
+ok 22 - RAW aerial mechanics execute under the global failed-pin Control transfer rule and Springboard Crossbody rewards a prior Strike
+  ---
+  duration_ms: 1.193006
+  type: 'test'
+  ...
+# Subtest: Sol Ruca RAW Series 1 package is locked, playable and wired to counter/high-risk mechanics
+ok 23 - Sol Ruca RAW Series 1 package is locked, playable and wired to counter/high-risk mechanics
+  ---
+  duration_ms: 1.034152
+  type: 'test'
+  ...
+# Subtest: No Wipeout prevents self-Stun when Sol's high-risk Agility Move is Countered
+ok 24 - No Wipeout prevents self-Stun when Sol's high-risk Agility Move is Countered
+  ---
+  duration_ms: 0.754767
+  type: 'test'
+  ...
+# Subtest: Chad Gable RAW Series 1 package is locked, playable and wired to Olympic Pedigree / Shoosh
+ok 25 - Chad Gable RAW Series 1 package is locked, playable and wired to Olympic Pedigree / Shoosh
+  ---
+  duration_ms: 0.689621
+  type: 'test'
+  ...
+# Subtest: starting HP roster uses the locked durability spread
+ok 26 - starting HP roster uses the locked durability spread
+  ---
+  duration_ms: 0.289519
+  type: 'test'
+  ...
+# Subtest: Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RAW decks are exactly 60 pages
+ok 27 - Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RAW decks are exactly 60 pages
+  ---
+  duration_ms: 1.426433
+  type: 'test'
+  ...
+# Subtest: Rey Mysterio Worlds Collide Series 1 package is locked, family-gated and playable
+ok 28 - Rey Mysterio Worlds Collide Series 1 package is locked, family-gated and playable
+  ---
+  duration_ms: 1.475695
+  type: 'test'
+  ...
+# Subtest: Rey Ultimate Underdog and Lucha Libre Legend mechanics execute
+ok 29 - Rey Ultimate Underdog and Lucha Libre Legend mechanics execute
+  ---
+  duration_ms: 1.30971
+  type: 'test'
+  ...
+# Subtest: Dominik Mysterio Worlds Collide package is locked and playable
+ok 30 - Dominik Mysterio Worlds Collide package is locked and playable
+  ---
+  duration_ms: 0.881926
+  type: 'test'
+  ...
+# Subtest: Penta Worlds Collide package is locked and playable
+ok 31 - Penta Worlds Collide package is locked and playable
+  ---
+  duration_ms: 0.892502
+  type: 'test'
+  ...
+# Subtest: El Grande Americano completes Worlds Collide Series 1 and is fully playable
+ok 32 - El Grande Americano completes Worlds Collide Series 1 and is fully playable
+  ---
+  duration_ms: 0.808267
+  type: 'test'
+  ...
+# Subtest: Momentum is once per turn and refreshes on normal new-turn Control progression
+ok 33 - Momentum is once per turn and refreshes on normal new-turn Control progression
+  ---
+  duration_ms: 1.974344
+  type: 'test'
+  ...
+# Subtest: v0.11.63 Exhibition and match UI source contains the locked cinematic flow and removes the old opponent preview
+ok 34 - v0.11.63 Exhibition and match UI source contains the locked cinematic flow and removes the old opponent preview
+  ---
+  duration_ms: 2.179728
+  type: 'test'
+  ...
+# Subtest: turn advancement preserves Control-sequence combo memory until Control actually changes
+ok 35 - turn advancement preserves Control-sequence combo memory until Control actually changes
+  ---
+  duration_ms: 0.887334
+  type: 'test'
+  ...
+# Subtest: failed pins always transfer Control, advance the turn and draw for the new controller
+ok 36 - failed pins always transfer Control, advance the turn and draw for the new controller
+  ---
+  duration_ms: 1.083544
+  type: 'test'
+  ...
+# Subtest: queued Method/name discounts and named damage buffs survive unrelated Moves and are consumed by their matching Move
+ok 37 - queued Method/name discounts and named damage buffs survive unrelated Moves and are consumed by their matching Move
+  ---
+  duration_ms: 1.043835
+  type: 'test'
+  ...
+# Subtest: The Mat Is Sacred Action lock survives Control changes and clears only when the affected wrestler commits a Move
+ok 38 - The Mat Is Sacred Action lock survives Control changes and clears only when the affected wrestler commits a Move
+  ---
+  duration_ms: 3.912975
+  type: 'test'
+  ...
+# Subtest: counterattack return paths advance the turn and start a fresh Control sequence for the wrestler who regains Control
+ok 39 - counterattack return paths advance the turn and start a fresh Control sequence for the wrestler who regains Control
+  ---
+  duration_ms: 0.773746
+  type: 'test'
+  ...
+# Subtest: Turn 5 and Turn 6 delayed Entrances fire exactly on corrected Move-cycle turn advancement
+ok 40 - Turn 5 and Turn 6 delayed Entrances fire exactly on corrected Move-cycle turn advancement
+  ---
+  duration_ms: 1.152156
+  type: 'test'
+  ...
+# Subtest: v0.11.63 wording audit uses turn and Control sequence consistently
+ok 41 - v0.11.63 wording audit uses turn and Control sequence consistently
+  ---
+  duration_ms: 0.144624
+  type: 'test'
+  ...
+# Subtest: Seth's The Visionary opens Control after a defensive Counter without advancing the turn
+ok 42 - Seth's The Visionary opens Control after a defensive Counter without advancing the turn
+  ---
+  duration_ms: 0.728279
+  type: 'test'
+  ...
+# Subtest: Money in the Bank Series 1 Jey Uso package is locked and playable
+ok 43 - Money in the Bank Series 1 Jey Uso package is locked and playable
+  ---
+  duration_ms: 0.856528
+  type: 'test'
+  ...
+# Subtest: Money in the Bank Series 1 LA Knight package is locked and playable
+ok 44 - Money in the Bank Series 1 LA Knight package is locked and playable
+  ---
+  duration_ms: 0.699996
+  type: 'test'
+  ...
+# Subtest: Money in the Bank Series 1 Alexa Bliss package is locked and playable
+ok 45 - Money in the Bank Series 1 Alexa Bliss package is locked and playable
+  ---
+  duration_ms: 0.860975
+  type: 'test'
+  ...
+# Subtest: Alexa Bliss Mind Games rewards a natural kickout without modifying pin odds
+ok 46 - Alexa Bliss Mind Games rewards a natural kickout without modifying pin odds
+  ---
+  duration_ms: 0.669511
+  type: 'test'
+  ...
+# Subtest: Money in the Bank Series 1 Finn Bálor package is locked and playable
+ok 47 - Money in the Bank Series 1 Finn Bálor package is locked and playable
+  ---
+  duration_ms: 0.770982
+  type: 'test'
+  ...
+# Subtest: Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce
+ok 48 - Finn Bálor Bálor Club and Shotgun Dropkick chain into Coup de Grâce
+  ---
+  duration_ms: 0.855817
+  type: 'test'
+  ...
+# Subtest: SmackDown Series 1 Danhausen package is locked and playable
+ok 49 - SmackDown Series 1 Danhausen package is locked and playable
+  ---
+  duration_ms: 0.759064
+  type: 'test'
+  ...
+# Subtest: Danhausen curse, Jar of Teeth and stunned finish interactions resolve
+ok 50 - Danhausen curse, Jar of Teeth and stunned finish interactions resolve
+  ---
+  duration_ms: 1.259145
+  type: 'test'
+  ...
+# Subtest: SmackDown Series 1 Tiffany Stratton package is locked and playable
+ok 51 - SmackDown Series 1 Tiffany Stratton package is locked and playable
+  ---
+  duration_ms: 0.88408
+  type: 'test'
+  ...
+# Subtest: SmackDown Series 1 Chelsea Green package is locked and counter-control mechanics execute
+ok 52 - SmackDown Series 1 Chelsea Green package is locked and counter-control mechanics execute
+  ---
+  duration_ms: 1.161119
+  type: 'test'
+  ...
+# Subtest: SmackDown Series 1 Damian Priest package is locked and punishment mechanics execute
+ok 53 - SmackDown Series 1 Damian Priest package is locked and punishment mechanics execute
+  ---
+  duration_ms: 0.878882
+  type: 'test'
+  ...
+# Subtest: canonical health bands are Green 65%+, Amber 25-64%, Red 0-24% and pins follow them
+ok 54 - canonical health bands are Green 65%+, Amber 25-64%, Red 0-24% and pins follow them
+  ---
+  duration_ms: 0.637194
+  type: 'test'
+  ...
+# Subtest: Fight Forever is a booster-only 4-star RAW Action and is absent from all recommended decks
+ok 55 - Fight Forever is a booster-only 4-star RAW Action and is absent from all recommended decks
+  ---
+  duration_ms: 0.236911
+  type: 'test'
+  ...
+# Subtest: v0.12.33 keeps every Superstar on the no-cap tuned durability model
+ok 56 - v0.12.33 keeps every Superstar on the no-cap tuned durability model
+  ---
+  duration_ms: 0.632336
+  type: 'test'
+  ...
+# Subtest: Fight Forever is locked through Turn 10, then restores 10 HP to both Superstars without changing the clock
+ok 57 - Fight Forever is locked through Turn 10, then restores 10 HP to both Superstars without changing the clock
+  ---
+  duration_ms: 0.678354
+  type: 'test'
+  ...
+# Subtest: matches continue beyond Turn 50 with no turn-limit draw
+ok 58 - matches continue beyond Turn 50 with no turn-limit draw
+  ---
+  duration_ms: 0.689672
+  type: 'test'
+  ...
+# Subtest: v0.11.96 staged move/action expansion remains fully registered after later pool growth
+ok 59 - v0.11.96 staged move/action expansion remains fully registered after later pool growth
+  ---
+  duration_ms: 0.759395
+  type: 'test'
+  ...
+# Subtest: new impact Moves deal one-shot body-part damage without opening a maintainable submission
+ok 60 - new impact Moves deal one-shot body-part damage without opening a maintainable submission
+  ---
+  duration_ms: 0.880113
+  type: 'test'
+  ...
+# Subtest: Corner Barrage chains from an earlier Strike and Knee to the Gut is an offensive Grapple Counter
+ok 61 - Corner Barrage chains from an earlier Strike and Knee to the Gut is an offensive Grapple Counter
+  ---
+  duration_ms: 0.820005
+  type: 'test'
+  ...
+# Subtest: Catch Your Breath is a 3-star booster-only Action that restores 5 HP up to max
+ok 62 - Catch Your Breath is a 3-star booster-only Action that restores 5 HP up to max
+  ---
+  duration_ms: 0.750181
+  type: 'test'
+  ...
+# Subtest: Survivor Series Series 1 Drew, Randy, Sami and Jacob packages are locked, numbered and 60 pages
+ok 63 - Survivor Series Series 1 Drew, Randy, Sami and Jacob packages are locked, numbered and 60 pages
+  ---
+  duration_ms: 0.267476
+  type: 'test'
+  ...
+# Subtest: Drew Pick Your Shot, Claymore Countdown and head-damage Claymore discount execute
+ok 64 - Drew Pick Your Shot, Claymore Countdown and head-damage Claymore discount execute
+  ---
+  duration_ms: 0.88472
+  type: 'test'
+  ...
+# Subtest: Randy Apex Predator and Outta Nowhere make RKO a once-per-match Counter
+ok 65 - Randy Apex Predator and Outta Nowhere make RKO a once-per-match Counter
+  ---
+  duration_ms: 0.831261
+  type: 'test'
+  ...
+# Subtest: Sami comeback package discounts the opener, chains Exploder to Helluva and fires Never Say Die
+ok 66 - Sami comeback package discounts the opener, chains Exploder to Helluva and fires Never Say Die
+  ---
+  duration_ms: 0.874305
+  type: 'test'
+  ...
+# Subtest: Jacob strength-to-agility sequencing, Built Different and both finishers execute
+ok 67 - Jacob strength-to-agility sequencing, Built Different and both finishers execute
+  ---
+  duration_ms: 0.899973
+  type: 'test'
+  ...
+# Subtest: Survivor Series Series 1 is complete with Solo Sikoa, Jade Cargill and Nia Jax
+ok 68 - Survivor Series Series 1 is complete with Solo Sikoa, Jade Cargill and Nia Jax
+  ---
+  duration_ms: 0.223581
+  type: 'test'
+  ...
+# Subtest: Solo Sikoa Street Champion, Sole Survivor and Spinning Solo chain execute
+ok 69 - Solo Sikoa Street Champion, Sole Survivor and Spinning Solo chain execute
+  ---
+  duration_ms: 0.936306
+  type: 'test'
+  ...
+# Subtest: Jade Cargill uses the shared Pump Kick as her Trademark setup and Superhuman fires
+ok 70 - Jade Cargill uses the shared Pump Kick as her Trademark setup and Superhuman fires
+  ---
+  duration_ms: 0.858201
+  type: 'test'
+  ...
+# Subtest: Nia Jax Crushing Weight and Not Like Most execute with the Annihilator chain
+ok 71 - Nia Jax Crushing Weight and Not Like Most execute with the Annihilator chain
+  ---
+  duration_ms: 0.819353
+  type: 'test'
+  ...
+# Subtest: v0.11.98 shared move batch is registered, numbered and booster-ready
+ok 72 - v0.11.98 shared move batch is registered, numbered and booster-ready
+  ---
+  duration_ms: 0.463306
+  type: 'test'
+  ...
+# Subtest: Charlotte uses Flair Chop while shared Chop remains intact and Wooo! triggers from Flair Chop
+ok 73 - Charlotte uses Flair Chop while shared Chop remains intact and Wooo! triggers from Flair Chop
+  ---
+  duration_ms: 1.069694
+  type: 'test'
+  ...
+# Subtest: v0.12.01 shared fundamentals batch is registered, numbered and executes its counter/body-part rules
+ok 74 - v0.12.01 shared fundamentals batch is registered, numbered and executes its counter/body-part rules
+  ---
+  duration_ms: 1.787978
+  type: 'test'
+  ...
+# Subtest: v0.12.01 Survivor Series uses the official 2026 Houston asset and official-derived navy-orange presentation
+ok 75 - v0.12.01 Survivor Series uses the official 2026 Houston asset and official-derived navy-orange presentation
+  ---
+  duration_ms: 6.303264
+  type: 'test'
+  ...
+# Subtest: v0.11.99 Play Pile inspector uses a mobile-safe non-nested hit target and HUD headshots fill their viewport
+ok 76 - v0.11.99 Play Pile inspector uses a mobile-safe non-nested hit target and HUD headshots fill their viewport
+  ---
+  duration_ms: 1.797401
+  type: 'test'
+  ...
+# Subtest: Card Art Studio keeps every set renderer and card-selection wiring intact
+ok 77 - Card Art Studio keeps every set renderer and card-selection wiring intact
+  ---
+  duration_ms: 13.275749
+  type: 'test'
+  ...
+# Subtest: v0.12.03 Card Art Studio premium frame renders set border, rarity stars and structured footer
+ok 78 - v0.12.03 Card Art Studio premium frame renders set border, rarity stars and structured footer
+  ---
+  duration_ms: 9.661868
+  type: 'test'
+  ...
+# Subtest: v0.12.04 Card Art Studio uses premium trading-card typography
+ok 79 - v0.12.04 Card Art Studio uses premium trading-card typography
+  ---
+  duration_ms: 6.714372
+  type: 'test'
+  ...
+# Subtest: v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation
+ok 80 - v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation
+  ---
+  duration_ms: 5.705169
+  type: 'test'
+  ...
+# Subtest: v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots
+ok 81 - v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots
+  ---
+  duration_ms: 1.241549
+  type: 'test'
+  ...
+# Subtest: v0.12.06 Deck Lab recommendations are guidance rather than hard composition locks
+ok 82 - v0.12.06 Deck Lab recommendations are guidance rather than hard composition locks
+  ---
+  duration_ms: 0.973211
+  type: 'test'
+  ...
+# Subtest: v0.12.06 selected Entrances persist separately from the 60-page deck and shared Entrances are booster-ready
+ok 83 - v0.12.06 selected Entrances persist separately from the 60-page deck and shared Entrances are booster-ready
+  ---
+  duration_ms: 0.221458
+  type: 'test'
+  ...
+# Subtest: v0.12.06 scrollable navigation includes Challenges, Deck Lab and Options while Home retains their tiles
+ok 84 - v0.12.06 scrollable navigation includes Challenges, Deck Lab and Options while Home retains their tiles
+  ---
+  duration_ms: 2.927125
+  type: 'test'
+  ...
+# Subtest: v0.12.06 held mobile presentation pass compacts select, enlarges show logos and moves Entrance callouts off-card
+ok 85 - v0.12.06 held mobile presentation pass compacts select, enlarges show logos and moves Entrance callouts off-card
+  ---
+  duration_ms: 1.944419
+  type: 'test'
+  ...
+# Subtest: v0.12.06 match buttons and Momentum presentation use live show/method colours
+ok 86 - v0.12.06 match buttons and Momentum presentation use live show/method colours
+  ---
+  duration_ms: 1.399543
+  type: 'test'
+  ...
+# Subtest: v0.12.07 Deck Lab category pickers use a premium three-wide full-card grid
+ok 87 - v0.12.07 Deck Lab category pickers use a premium three-wide full-card grid
+  ---
+  duration_ms: 1.91091
+  type: 'test'
+  ...
+# Subtest: v0.12.08 Deck Lab roster uses full collectible-style Superstar cards
+ok 88 - v0.12.08 Deck Lab roster uses full collectible-style Superstar cards
+  ---
+  duration_ms: 1.318232
+  type: 'test'
+  ...
+# Subtest: v0.12.14 Play mode tiles use integrated Superstar renders without nested interactive buttons
+ok 89 - v0.12.14 Play mode tiles use integrated Superstar renders without nested interactive buttons
+  ---
+  duration_ms: 1.44498
+  type: 'test'
+  ...
+# Subtest: v0.12.08 zero-value navigation alerts are removed instead of rendering red zero badges
+ok 90 - v0.12.08 zero-value navigation alerts are removed instead of rendering red zero badges
+  ---
+  duration_ms: 0.664985
+  type: 'test'
+  ...
+# Subtest: v0.12.08 Season and Challenges use icon-led premium dashboard components
+ok 91 - v0.12.08 Season and Challenges use icon-led premium dashboard components
+  ---
+  duration_ms: 1.972521
+  type: 'test'
+  ...
+# Subtest: Season 2 Goldberg reward package is locked, future-scoped and collector-numbered
+ok 92 - Season 2 Goldberg reward package is locked, future-scoped and collector-numbered
+  ---
+  duration_ms: 0.225825
+  type: 'test'
+  ...
+# Subtest: Goldberg has a complete 60-page reward deck and Who’s Next? Entrance fires exactly
+ok 93 - Goldberg has a complete 60-page reward deck and Who’s Next? Entrance fires exactly
+  ---
+  duration_ms: 0.696361
+  type: 'test'
+  ...
+# Subtest: Goldberg The Streak builds, discounts prestige Moves, gets an extra Military Press counter and breaks on lost Control
+ok 94 - Goldberg The Streak builds, discounts prestige Moves, gets an extra Military Press counter and breaks on lost Control
+  ---
+  duration_ms: 0.835387
+  type: 'test'
+  ...
+# Subtest: Goldberg Spear chains into Jackhammer and 173–0 preserves Control and Streak through a Counter
+ok 95 - Goldberg Spear chains into Jackhammer and 173–0 preserves Control and Streak through a Counter
+  ---
+  duration_ms: 1.383729
+  type: 'test'
+  ...
+# Subtest: v0.12.12 Roman replaces Sitout Crucifix Powerbomb with Ooh Ahh!! at SS1-034
+ok 96 - v0.12.12 Roman replaces Sitout Crucifix Powerbomb with Ooh Ahh!! at SS1-034
+  ---
+  duration_ms: 0.140508
+  type: 'test'
+  ...
+# Subtest: Ooh Ahh!! costs 2, tutors Roman's Spear, discounts it, and converts an already-held Spear to Adrenaline
+ok 97 - Ooh Ahh!! costs 2, tutors Roman's Spear, discounts it, and converts an already-held Spear to Adrenaline
+  ---
+  duration_ms: 1.183492
+  type: 'test'
+  ...
+# Subtest: v0.12.12 public game exposes only the three launch series
+ok 98 - v0.12.12 public game exposes only the three launch series
+  ---
+  duration_ms: 0.578677
+  type: 'test'
+  ...
+# Subtest: v0.12.12 migration strips unreleased Superstar, card and pack state without deleting authored data
+ok 99 - v0.12.12 migration strips unreleased Superstar, card and pack state without deleting authored data
+  ---
+  duration_ms: 1.302949
+  type: 'test'
+  ...
+# Subtest: v0.12.12 roadmap does not reveal unreleased Superstar names
+ok 100 - v0.12.12 roadmap does not reveal unreleased Superstar names
+  ---
+  duration_ms: 0.117504
+  type: 'test'
+  ...
+# Subtest: v0.12.33 retained-Control successful Moves draw only for the defender
+ok 101 - v0.12.33 retained-Control successful Moves draw only for the defender
+  ---
+  duration_ms: 0.610353
+  type: 'test'
+  ...
+# Subtest: v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that body area was previously submitted
+ok 102 - v0.12.14 fresh Submissions cannot tap before submission turn 3 unless that body area was previously submitted
+  ---
+  duration_ms: 0.613618
+  type: 'test'
+  ...
+# Subtest: v0.12.33 public entrypoint is cache-coherent and boots for fresh + migrated profiles
+ok 103 - v0.12.33 public entrypoint is cache-coherent and boots for fresh + migrated profiles
+  ---
+  duration_ms: 237.095568
+  type: 'test'
+  ...
+# Subtest: v0.12.24 targeted roster balance pass preserves 60-page legality while fixing weak-package access
+ok 104 - v0.12.24 targeted roster balance pass preserves 60-page legality while fixing weak-package access
+  ---
+  duration_ms: 0.557726
+  type: 'test'
+  ...
+# Subtest: v0.12.16 numeric Cost counts permanent Method Momentum plus current Attitude without consuming either
+ok 105 - v0.12.16 numeric Cost counts permanent Method Momentum plus current Attitude without consuming either
+  ---
+  duration_ms: 2.232075
+  type: 'test'
+  ...
+# Subtest: v0.12.33 retained-Control successful Moves replenish only the defender
+ok 106 - v0.12.33 retained-Control successful Moves replenish only the defender
+  ---
+  duration_ms: 0.7767
+  type: 'test'
+  ...
+# Subtest: v0.12.16 Match Complete is deferred until successful pin spectacle finishes
+ok 107 - v0.12.16 Match Complete is deferred until successful pin spectacle finishes
+  ---
+  duration_ms: 1.101271
+  type: 'test'
+  ...
+# Subtest: v0.12.17 every Move has exactly one universal counter state and every Submission has a body-area target
+ok 108 - v0.12.17 every Move has exactly one universal counter state and every Submission has a body-area target
+  ---
+  duration_ms: 0.771502
+  type: 'test'
+  ...
+# Subtest: v0.12.17 eight-state anchor reversals work by physical state
+ok 109 - v0.12.17 eight-state anchor reversals work by physical state
+  ---
+  duration_ms: 0.280085
+  type: 'test'
+  ...
+# Subtest: v0.12.17 submission counters use both initial state and body-area response layers
+ok 110 - v0.12.17 submission counters use both initial state and body-area response layers
+  ---
+  duration_ms: 0.136532
+  type: 'test'
+  ...
+# Subtest: v0.12.17 all recommended decks are 60 pages with 12 Momentum and at least seven counter-capable pages
+ok 111 - v0.12.17 all recommended decks are 60 pages with 12 Momentum and at least seven counter-capable pages
+  ---
+  duration_ms: 0.494523
+  type: 'test'
+  ...
+# Subtest: v0.12.17 match hand ordering and pin-escape spectacle are wired in the runtime UI
+ok 112 - v0.12.17 match hand ordering and pin-escape spectacle are wired in the runtime UI
+  ---
+  duration_ms: 0.974283
+  type: 'test'
+  ...
+# Subtest: v0.12.17 migration extends untouched 55-page recommended saves without overwriting custom 55-page decks
+ok 113 - v0.12.17 migration extends untouched 55-page recommended saves without overwriting custom 55-page decks
+  ---
+  duration_ms: 2.41732
+  type: 'test'
+  ...
+# Subtest: v0.12.18 original eight anchors keep only Dropkick and Hurricanrana Method-gated
+ok 114 - v0.12.18 original eight anchors keep only Dropkick and Hurricanrana Method-gated
+  ---
+  duration_ms: 1.066138
+  type: 'test'
+  ...
+# Subtest: v0.12.18 WA-inspired generic reversal package is present and accessible
+ok 115 - v0.12.18 WA-inspired generic reversal package is present and accessible
+  ---
+  duration_ms: 0.460292
+  type: 'test'
+  ...
+# Subtest: v0.12.18 every physical state has at least four distinct reversal cards
+ok 116 - v0.12.18 every physical state has at least four distinct reversal cards
+  ---
+  duration_ms: 0.795398
+  type: 'test'
+  ...
+# Subtest: v0.12.18 every Submission body area has at least four matching counters and Jawbreaker answers neck/head
+ok 117 - v0.12.18 every Submission body area has at least four matching counters and Jawbreaker answers neck/head
+  ---
+  duration_ms: 0.296059
+  type: 'test'
+  ...
+# Subtest: v0.12.18 zero-Agility wrestlers can answer both aerial states without Agility Momentum
+ok 118 - v0.12.18 zero-Agility wrestlers can answer both aerial states without Agility Momentum
+  ---
+  duration_ms: 0.620749
+  type: 'test'
+  ...
+# Subtest: v0.12.18 every recommended deck stays 60/12, has nine counters, all eight states and all four submission areas
+ok 119 - v0.12.18 every recommended deck stays 60/12, has nine counters, all eight states and all four submission areas
+  ---
+  duration_ms: 1.443087
+  type: 'test'
+  ...
+# Subtest: v0.12.18 untouched v0.12.17 60-page starter recommendation migrates but custom order does not
+ok 120 - v0.12.18 untouched v0.12.17 60-page starter recommendation migrates but custom order does not
+  ---
+  duration_ms: 2.434706
+  type: 'test'
+  ...
+# Subtest: v0.12.19 restores the original eight as exact one-to-one state anchors
+ok 121 - v0.12.19 restores the original eight as exact one-to-one state anchors
+  ---
+  duration_ms: 1.435996
+  type: 'test'
+  ...
+# Subtest: v0.12.19 migrated counters obey physical states rather than bypassing them with legacy broad types
+ok 122 - v0.12.19 migrated counters obey physical states rather than bypassing them with legacy broad types
+  ---
+  duration_ms: 0.476506
+  type: 'test'
+  ...
+# Subtest: v0.12.19 Agility-0 Superstars have Method-accessible Running Aerial, Diving Aerial and Body Elevated answers
+ok 123 - v0.12.19 Agility-0 Superstars have Method-accessible Running Aerial, Diving Aerial and Body Elevated answers
+  ---
+  duration_ms: 0.8987
+  type: 'test'
+  ...
+# Subtest: v0.12.19 submission body areas use natural existing move counters
+ok 124 - v0.12.19 submission body areas use natural existing move counters
+  ---
+  duration_ms: 0.242339
+  type: 'test'
+  ...
+# Subtest: v0.12.19 exact named-card reversals remain supported alongside state counters
+ok 125 - v0.12.19 exact named-card reversals remain supported alongside state counters
+  ---
+  duration_ms: 0.291912
+  type: 'test'
+  ...
+# Subtest: v0.12.20 Leapfrog is an Agility-1 Running Aerial reversal without broad-type leakage
+ok 126 - v0.12.20 Leapfrog is an Agility-1 Running Aerial reversal without broad-type leakage
+  ---
+  duration_ms: 1.921495
+  type: 'test'
+  ...
+# Subtest: v0.12.20 finished Move fronts repeat Cost and Damage in large live corner tiles
+ok 127 - v0.12.20 finished Move fronts repeat Cost and Damage in large live corner tiles
+  ---
+  duration_ms: 2.484109
+  type: 'test'
+  ...
+# Subtest: v0.12.20 Momentum cards use canonical four method colours and explicit full-card flames
+ok 128 - v0.12.20 Momentum cards use canonical four method colours and explicit full-card flames
+  ---
+  duration_ms: 9.77881
+  type: 'test'
+  ...
+# Subtest: v0.12.20 Card Art Studio exports larger Cost and Damage tiles
+ok 129 - v0.12.20 Card Art Studio exports larger Cost and Damage tiles
+  ---
+  duration_ms: 5.911964
+  type: 'test'
+  ...
+# Subtest: v0.12.21 Auto Counter starts at 5, escalates by use, requires two pages left, and never applies to Finishers
+ok 130 - v0.12.21 Auto Counter starts at 5, escalates by use, requires two pages left, and never applies to Finishers
+  ---
+  duration_ms: 1.80928
+  type: 'test'
+  ...
+# Subtest: v0.12.21 player-chosen Auto Counter ditches exactly the selected pages, logs the dynamic cost, leaves two before draw, and transfers Control
+ok 131 - v0.12.21 player-chosen Auto Counter ditches exactly the selected pages, logs the dynamic cost, leaves two before draw, and transfers Control
+  ---
+  duration_ms: 2.644396
+  type: 'test'
+  ...
+# Subtest: v0.12.21 CPU only spends Auto Counter on mid/high/Trademark, lethal, or immediately tapping Submissions, while Finishers require a matching Move counter
+ok 132 - v0.12.21 CPU only spends Auto Counter on mid/high/Trademark, lethal, or immediately tapping Submissions, while Finishers require a matching Move counter
+  ---
+  duration_ms: 4.850272
+  type: 'test'
+  ...
+# Subtest: v0.12.21 match UI lets the player enter Auto Counter mode, tap exact cards to ditch, cancel, and confirm
+ok 133 - v0.12.21 match UI lets the player enter Auto Counter mode, tap exact cards to ditch, cancel, and confirm
+  ---
+  duration_ms: 0.89855
+  type: 'test'
+  ...
+# Subtest: v0.12.22 CPU Auto Counter ditches around two playable retained cards
+ok 134 - v0.12.22 CPU Auto Counter ditches around two playable retained cards
+  ---
+  duration_ms: 3.006452
+  type: 'test'
+  ...
+# Subtest: v0.12.22 CPU refuses Auto Counter when it cannot leave two playable cards
+ok 135 - v0.12.22 CPU refuses Auto Counter when it cannot leave two playable cards
+  ---
+  duration_ms: 0.766355
+  type: 'test'
+  ...
+# Subtest: v0.12.29 roster keeps the no-cap durability model after targeted rebalance
+ok 136 - v0.12.29 roster keeps the no-cap durability model after targeted rebalance
+  ---
+  duration_ms: 0.845932
+  type: 'test'
+  ...
+# Subtest: v0.12.23 match clock is informational and never ends the match at Turn 50
+ok 137 - v0.12.23 match clock is informational and never ends the match at Turn 50
+  ---
+  duration_ms: 1.508924
+  type: 'test'
+  ...
+# Subtest: v0.12.23 Fight Forever unlocks on Turn 11 and heals both Superstars by 10
+ok 138 - v0.12.23 Fight Forever unlocks on Turn 11 and heals both Superstars by 10
+  ---
+  duration_ms: 0.845943
+  type: 'test'
+  ...
+# Subtest: v0.12.25 CPU chooses the Momentum that opens offense rather than the first Momentum in hand
+ok 139 - v0.12.25 CPU chooses the Momentum that opens offense rather than the first Momentum in hand
+  ---
+  duration_ms: 2.600902
+  type: 'test'
+  ...
+# Subtest: v0.12.25 recommended decks keep a fast recovery curve without deleting defensive identity
+ok 140 - v0.12.25 recommended decks keep a fast recovery curve without deleting defensive identity
+  ---
+  duration_ms: 0.814676
+  type: 'test'
+  ...
+# Subtest: v0.12.25 CPU never deliberately passes while a legal offensive Move is already available
+ok 141 - v0.12.25 CPU never deliberately passes while a legal offensive Move is already available
+  ---
+  duration_ms: 0.767136
+  type: 'test'
+  ...
+# Subtest: v0.12.25 profile schema advances for untouched v0.12.24 recommended-deck migration
+ok 142 - v0.12.25 profile schema advances for untouched v0.12.24 recommended-deck migration
+  ---
+  duration_ms: 0.090344
+  type: 'test'
+  ...
+# Subtest: v0.12.26 Jawbreaker counter-attacks are terminal and cannot recurse
+ok 143 - v0.12.26 Jawbreaker counter-attacks are terminal and cannot recurse
+  ---
+  duration_ms: 1.207738
+  type: 'test'
+  ...
+# Subtest: v0.12.27 Punch and Elbow share one deliberate strike counter exchange
+ok 144 - v0.12.27 Punch and Elbow share one deliberate strike counter exchange
+  ---
+  duration_ms: 0.351761
+  type: 'test'
+  ...
+# Subtest: v0.12.26 normal first-level counter windows are unchanged
+ok 145 - v0.12.26 normal first-level counter windows are unchanged
+  ---
+  duration_ms: 0.265643
+  type: 'test'
+  ...
+# Subtest: v0.12.27 engine keeps Punch-Elbow exchanges open but resolves Jawbreaker counters immediately
+ok 146 - v0.12.27 engine keeps Punch-Elbow exchanges open but resolves Jawbreaker counters immediately
+  ---
+  duration_ms: 5.932805
+  type: 'test'
+  ...
+# Subtest: v0.12.28 elite 18-19 Damage Finishers carry a printed Cost premium
+ok 147 - v0.12.28 elite 18-19 Damage Finishers carry a printed Cost premium
+  ---
+  duration_ms: 1.220587
+  type: 'test'
+  ...
+# Subtest: v0.12.27 Punch and Elbow can reverse each other during a counter-attack exchange
+ok 148 - v0.12.27 Punch and Elbow can reverse each other during a counter-attack exchange
+  ---
+  duration_ms: 0.400233
+  type: 'test'
+  ...
+# Subtest: v0.12.33 Andre powerhouse package is re-anchored for defender-only retained-Control draw
+ok 149 - v0.12.33 Andre powerhouse package is re-anchored for defender-only retained-Control draw
+  ---
+  duration_ms: 0.920723
+  type: 'test'
+  ...
+# Subtest: v0.12.29 Giant's Reach reserves its damage bonus for the next Strength Move
+ok 150 - v0.12.29 Giant's Reach reserves its damage bonus for the next Strength Move
+  ---
+  duration_ms: 3.300428
+  type: 'test'
+  ...
+# Subtest: v0.12.29 tougher health-only pin curve caps normal covers at 45%
+ok 151 - v0.12.29 tougher health-only pin curve caps normal covers at 45%
+  ---
+  duration_ms: 0.693788
+  type: 'test'
+  ...
+# Subtest: v0.12.29 elite and submission finishers retain their balance locks
+ok 152 - v0.12.29 elite and submission finishers retain their balance locks
+  ---
+  duration_ms: 0.662781
+  type: 'test'
+  ...
+# Subtest: v0.12.29 signature setup chains search and discount their intended payoff
+ok 153 - v0.12.29 signature setup chains search and discount their intended payoff
+  ---
+  duration_ms: 0.242859
+  type: 'test'
+  ...
+# Subtest: v0.12.29 Logan pace correction reduces his burst package without removing identity
+ok 154 - v0.12.29 Logan pace correction reduces his burst package without removing identity
+  ---
+  duration_ms: 0.171564
+  type: 'test'
+  ...
+# Subtest: v0.12.29 exhaustion safeguard ends only repeated empty-deck pass deadlocks by decision
+ok 155 - v0.12.29 exhaustion safeguard ends only repeated empty-deck pass deadlocks by decision
+  ---
+  duration_ms: 1.737954
+  type: 'test'
+  ...
+# Subtest: v0.12.29 Bayley remembers her previous connected Method across Control sequences
+ok 156 - v0.12.29 Bayley remembers her previous connected Method across Control sequences
+  ---
+  duration_ms: 1.267146
+  type: 'test'
+  ...
+# Subtest: v0.12.31 CPU sequences useful Actions before an already-legal Move
+ok 157 - v0.12.31 CPU sequences useful Actions before an already-legal Move
+  ---
+  duration_ms: 3.1332
+  type: 'test'
+  ...
+# Subtest: v0.12.31 CPU installs Support before attacking instead of waiting until the sequence is empty
+ok 158 - v0.12.31 CPU installs Support before attacking instead of waiting until the sequence is empty
+  ---
+  duration_ms: 0.673687
+  type: 'test'
+  ...
+# Subtest: v0.12.31 CPU releases a mathematically impossible Submission instead of emptying its hand
+ok 159 - v0.12.31 CPU releases a mathematically impossible Submission instead of emptying its hand
+  ---
+  duration_ms: 0.835827
+  type: 'test'
+  ...
+# Subtest: v0.12.31 CPU commits to a winnable Submission but ditches the least valuable page
+ok 160 - v0.12.31 CPU commits to a winnable Submission but ditches the least valuable page
+  ---
+  duration_ms: 0.655641
+  type: 'test'
+  ...
+# Subtest: v0.12.31 CPU saves Pin Escape on weak covers and spends it once the cover is genuinely dangerous
+ok 161 - v0.12.31 CPU saves Pin Escape on weak covers and spends it once the cover is genuinely dangerous
+  ---
+  duration_ms: 0.687208
+  type: 'test'
+  ...
+# Subtest: v0.12.32 Entrance Momentum is preloaded but Entrance Adrenaline waits for first Control
+ok 162 - v0.12.32 Entrance Momentum is preloaded but Entrance Adrenaline waits for first Control
+  ---
+  duration_ms: 2.172467
+  type: 'test'
+  ...
+# Subtest: v0.12.33 successful-Move retained Control replenishes only the defender
+ok 163 - v0.12.33 successful-Move retained Control replenishes only the defender
+  ---
+  duration_ms: 1.793305
+  type: 'test'
+  ...
+# Subtest: v0.12.33 normal Control transfers still replenish both players and connected Moves keep +1/-1 Adrenaline
+ok 164 - v0.12.33 normal Control transfers still replenish both players and connected Moves keep +1/-1 Adrenaline
+  ---
+  duration_ms: 1.921556
+  type: 'test'
+  ...
+1..164
+# tests 164
+# suites 0
+# pass 164
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 800.415477

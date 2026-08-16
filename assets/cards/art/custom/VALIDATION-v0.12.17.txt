@@ -1,0 +1,13 @@
+WWE Legacy: Collectible Card Game — v0.12.17
+Counter-State + 60-Page Deck Expansion
+
+Automated tests: 111/111 PASS
+Rebuild validation: 50 Superstars / 50 decks / 423 gameplay cards / 0 orphans / 0 issues
+Flow audit: 50 Superstars / 0 issues
+Collector ID audit: 473 cards / 473 manifest / 0 issues
+Counter-state audit: 305 Moves categorized / 26 Submissions body-targeted / 0 issues
+Recommended decks: 50/50 at 60 pages; 12 Momentum each; minimum 7 counter-capable pages
+Economy simulation: 60 packs / 300 cards / 0 Entrance leaks / 0 foil-first failures
+Balance simulation: 2,450 matches / 0 stalls / 15.23 average turns
+Extended balance: 4,900 matches / 0 stalls / 15.38 average turns
+Dead-turn audit: 0.97 pass decisions per match / 0 of 2,450 matches with 4+ pass streak / max streak 3

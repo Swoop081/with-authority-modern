@@ -1,0 +1,910 @@
+{
+  "gameplayCards": 432,
+  "moves": 314,
+  "offensiveMoves": 301,
+  "anchors": {
+    "punch": "arm-extended",
+    "drop-toe-hold": "leg-extended",
+    "dropkick": "running-aerial",
+    "knees-up": "diving-aerial",
+    "hurricanrana": "body-elevated",
+    "headbutt": "torso-trapped",
+    "arm-drag": "front-control",
+    "back-elbow": "rear-control"
+  },
+  "stateCounts": {
+    "arm-extended": 48,
+    "leg-extended": 48,
+    "running-aerial": 19,
+    "diving-aerial": 36,
+    "body-elevated": 61,
+    "torso-trapped": 28,
+    "front-control": 60,
+    "rear-control": 14
+  },
+  "reversalByState": {
+    "arm-extended": [
+      {
+        "id": "punch",
+        "name": "Punch",
+        "requirements": {}
+      },
+      {
+        "id": "duck",
+        "name": "Duck",
+        "requirements": {}
+      },
+      {
+        "id": "elbow",
+        "name": "Elbow",
+        "requirements": {}
+      },
+      {
+        "id": "dodge",
+        "name": "Dodge",
+        "requirements": {}
+      },
+      {
+        "id": "block",
+        "name": "Block",
+        "requirements": {}
+      }
+    ],
+    "leg-extended": [
+      {
+        "id": "dragon-screw",
+        "name": "Dragon Screw",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "duck",
+        "name": "Duck",
+        "requirements": {}
+      },
+      {
+        "id": "drop-toe-hold",
+        "name": "Drop Toe Hold",
+        "requirements": {}
+      },
+      {
+        "id": "dodge",
+        "name": "Dodge",
+        "requirements": {}
+      },
+      {
+        "id": "block",
+        "name": "Block",
+        "requirements": {}
+      },
+      {
+        "id": "catch-the-foot",
+        "name": "Catch the Foot",
+        "requirements": {}
+      }
+    ],
+    "running-aerial": [
+      {
+        "id": "dropkick",
+        "name": "Dropkick",
+        "requirements": {
+          "agility": 1
+        }
+      },
+      {
+        "id": "back-body-drop",
+        "name": "Back Body Drop",
+        "requirements": {
+          "strength": 1
+        }
+      },
+      {
+        "id": "sidestep",
+        "name": "Sidestep",
+        "requirements": {}
+      },
+      {
+        "id": "leapfrog",
+        "name": "Leapfrog",
+        "requirements": {
+          "agility": 1
+        }
+      },
+      {
+        "id": "dodge",
+        "name": "Dodge",
+        "requirements": {}
+      },
+      {
+        "id": "up-and-over",
+        "name": "Up and Over",
+        "requirements": {}
+      }
+    ],
+    "diving-aerial": [
+      {
+        "id": "sidestep",
+        "name": "Sidestep",
+        "requirements": {}
+      },
+      {
+        "id": "backstabber",
+        "name": "Backstabber",
+        "requirements": {
+          "agility": 1,
+          "technical": 1
+        }
+      },
+      {
+        "id": "knees-up",
+        "name": "Knees Up",
+        "requirements": {}
+      },
+      {
+        "id": "dodge",
+        "name": "Dodge",
+        "requirements": {}
+      },
+      {
+        "id": "backflip-counter",
+        "name": "Backflip Counter",
+        "requirements": {}
+      }
+    ],
+    "body-elevated": [
+      {
+        "id": "hurricanrana",
+        "name": "Hurricanrana",
+        "requirements": {
+          "agility": 1
+        }
+      },
+      {
+        "id": "no-sell",
+        "name": "No Sell",
+        "requirements": {
+          "strength": 1
+        }
+      },
+      {
+        "id": "tilt-a-whirl-headscissors",
+        "name": "Tilt-a-Whirl Headscissors",
+        "requirements": {
+          "agility": 1,
+          "technical": 1
+        }
+      },
+      {
+        "id": "rollover-counter",
+        "name": "Rollover Counter",
+        "requirements": {}
+      },
+      {
+        "id": "backflip-counter",
+        "name": "Backflip Counter",
+        "requirements": {}
+      }
+    ],
+    "torso-trapped": [
+      {
+        "id": "headbutt",
+        "name": "Headbutt",
+        "requirements": {}
+      },
+      {
+        "id": "no-sell",
+        "name": "No Sell",
+        "requirements": {
+          "strength": 1
+        }
+      },
+      {
+        "id": "knee-to-the-gut",
+        "name": "Knee to the Gut",
+        "requirements": {}
+      },
+      {
+        "id": "standing-switch",
+        "name": "Standing Switch",
+        "requirements": {}
+      }
+    ],
+    "front-control": [
+      {
+        "id": "arm-drag",
+        "name": "Arm Drag",
+        "requirements": {}
+      },
+      {
+        "id": "chain-wrestling",
+        "name": "Chain Wrestling",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "hip-toss",
+        "name": "Hip Toss",
+        "requirements": {}
+      },
+      {
+        "id": "rollover-counter",
+        "name": "Rollover Counter",
+        "requirements": {}
+      },
+      {
+        "id": "arm-drag-counter",
+        "name": "Arm Drag Counter",
+        "requirements": {}
+      },
+      {
+        "id": "jawbreaker",
+        "name": "Jawbreaker",
+        "requirements": {}
+      }
+    ],
+    "rear-control": [
+      {
+        "id": "reverse-elbow",
+        "name": "Reverse Elbow",
+        "requirements": {}
+      },
+      {
+        "id": "back-elbow",
+        "name": "Back Elbow",
+        "requirements": {}
+      },
+      {
+        "id": "chain-wrestling",
+        "name": "Chain Wrestling",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "standing-switch",
+        "name": "Standing Switch",
+        "requirements": {}
+      },
+      {
+        "id": "jawbreaker",
+        "name": "Jawbreaker",
+        "requirements": {}
+      }
+    ]
+  },
+  "submissionTargetCounts": {
+    "arms": 5,
+    "legs": 6,
+    "back": 3,
+    "neck-head": 12
+  },
+  "reversalBySubmission": {
+    "arms": [
+      {
+        "id": "arm-drag",
+        "name": "Arm Drag",
+        "requirements": {}
+      },
+      {
+        "id": "chain-wrestling",
+        "name": "Chain Wrestling",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "rollover-counter",
+        "name": "Rollover Counter",
+        "requirements": {}
+      },
+      {
+        "id": "arm-drag-counter",
+        "name": "Arm Drag Counter",
+        "requirements": {}
+      }
+    ],
+    "legs": [
+      {
+        "id": "enzuigiri",
+        "name": "Enzuigiri",
+        "requirements": {
+          "strike": 1
+        }
+      },
+      {
+        "id": "dragon-screw",
+        "name": "Dragon Screw",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "chain-wrestling",
+        "name": "Chain Wrestling",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "drop-toe-hold",
+        "name": "Drop Toe Hold",
+        "requirements": {}
+      },
+      {
+        "id": "rollover-counter",
+        "name": "Rollover Counter",
+        "requirements": {}
+      },
+      {
+        "id": "catch-the-foot",
+        "name": "Catch the Foot",
+        "requirements": {}
+      }
+    ],
+    "back": [
+      {
+        "id": "chain-wrestling",
+        "name": "Chain Wrestling",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "hip-toss",
+        "name": "Hip Toss",
+        "requirements": {}
+      },
+      {
+        "id": "standing-switch",
+        "name": "Standing Switch",
+        "requirements": {}
+      },
+      {
+        "id": "rollover-counter",
+        "name": "Rollover Counter",
+        "requirements": {}
+      }
+    ],
+    "neck-head": [
+      {
+        "id": "headbutt",
+        "name": "Headbutt",
+        "requirements": {}
+      },
+      {
+        "id": "reverse-elbow",
+        "name": "Reverse Elbow",
+        "requirements": {}
+      },
+      {
+        "id": "back-elbow",
+        "name": "Back Elbow",
+        "requirements": {}
+      },
+      {
+        "id": "chain-wrestling",
+        "name": "Chain Wrestling",
+        "requirements": {
+          "technical": 1
+        }
+      },
+      {
+        "id": "jawbreaker",
+        "name": "Jawbreaker",
+        "requirements": {}
+      }
+    ]
+  },
+  "reversalCards": 32,
+  "decks": 50,
+  "deckCounterPages": {
+    "min": 9,
+    "max": 24,
+    "average": 16.1
+  },
+  "deckRows": [
+    {
+      "superstarId": "iyo-sky",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 18,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "mankind",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 20,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "the-rock",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 13,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "hulk-hogan",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 14,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "bayley",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 14,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "cm-punk",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 14,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "paige",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 19,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "seth-rollins",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 15,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "andre-the-giant",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 18,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "stephanie-vaquer",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 22,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "randy-savage",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "roman-reigns",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 13,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "charlotte-flair",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 15,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "kevin-owens",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "kane",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "the-undertaker",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 13,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "ultimate-warrior",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 14,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "rhea-ripley",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 18,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "cody-rhodes",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 14,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "oba-femi",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 16,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "stone-cold-steve-austin",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "liv-morgan",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 23,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "brock-lesnar",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 15,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "gunther",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 18,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "becky-lynch",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "logan-paul",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 16,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "sol-ruca",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 15,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "chad-gable",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "raquel-rodriguez",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 9,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "rey-mysterio",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 21,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "dominik-mysterio",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 20,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "penta",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 18,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "el-grande-americano",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 22,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "jey-uso",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 19,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "la-knight",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 16,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "alexa-bliss",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "finn-balor",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 19,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "danhausen",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "tiffany-stratton",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 14,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "chelsea-green",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 24,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "damian-priest",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 11,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "bron-breakker",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 16,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "drew-mcintyre",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 12,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "randy-orton",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 17,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "sami-zayn",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 19,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "jacob-fatu",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 11,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "solo-sikoa",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 13,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "jade-cargill",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 9,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "nia-jax",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 10,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    },
+    {
+      "superstarId": "goldberg",
+      "pages": 60,
+      "momentum": 12,
+      "counterPages": 12,
+      "counterStateCoverage": 8,
+      "submissionCoverage": 4,
+      "accessibleCounterStateCoverage": 8,
+      "accessibleSubmissionCoverage": 4
+    }
+  ],
+  "issues": []
+}

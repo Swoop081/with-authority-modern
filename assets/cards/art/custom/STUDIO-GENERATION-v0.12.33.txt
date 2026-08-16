@@ -1,0 +1,8 @@
+
+> wwe-legacy-ccg@0.12.33 generate-studio
+> node tools/generate-card-studio-data.mjs
+
+{
+  "cards": 482,
+  "superstars": 50
+}

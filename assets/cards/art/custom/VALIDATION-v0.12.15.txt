@@ -1,0 +1,21 @@
+WWE Legacy: Collectible Card Game — v0.12.15 Validation
+
+Corrective focus:
+- body-level full-screen Tier Up flow
+- symmetric HP HUD lanes
+- sealed -> rip -> reveal -> summary booster flow
+- structural cleanup of known v0.12.14 presentation misses
+- recommended-deck Method legality cleanup
+
+Workspace certification:
+- npm test: 102/102 pass
+- flow: 50 Superstars / 0 issues
+- rebuild validate: 50 Superstars / 50 decks / 422 gameplay cards / 0 orphans / 0 issues
+- card IDs: 472/472 / 0 issues
+- balance: 2,450 matches / 0 stalls / 21.99 avg turns / 2,156 pin / 288 submission / 6 turn-limit
+- economy (launch sets): 60 packs / 300 cards / 0 Entrance leaks / 0 foil-first failures
+- dead-turn audit: 14,689 pass decisions / 6.00 per match / 288 matches (11.8%) with 4+ consecutive-pass streak / max 15
+
+Art audit is NOT a clean certification gate in this build: 436 authored cards currently lack dedicated custom art assets according to the legacy art-audit tool. This is tracked separately from runtime/card-template fallback presentation.
+
+Final mobile visual approval remains a real-device iPhone check.

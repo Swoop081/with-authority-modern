@@ -1,0 +1,13 @@
+
+> wwe-legacy-ccg@0.12.31 balance
+> node tools/balance-sim.mjs
+
+{
+  "matches": 2450,
+  "stalls": 0,
+  "averageTurns": 25.05,
+  "finishes": {
+    "pin": 2021,
+    "submission": 429
+  }
+}

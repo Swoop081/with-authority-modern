@@ -1,0 +1,136 @@
+{
+  "matches": 2450,
+  "totalPass": 2756,
+  "passesPerMatch": 1.12,
+  "matches4": 1,
+  "pct4": 0,
+  "max": 4,
+  "top": [
+    {
+      "id": "chelsea-green",
+      "passesPerMatch": 1.76,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "kevin-owens",
+      "passesPerMatch": 1.24,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "danhausen",
+      "passesPerMatch": 1.21,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "mankind",
+      "passesPerMatch": 1.12,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "the-undertaker",
+      "passesPerMatch": 1.02,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "randy-savage",
+      "passesPerMatch": 1,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "cm-punk",
+      "passesPerMatch": 0.93,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "bayley",
+      "passesPerMatch": 0.89,
+      "streak4Pct": 0,
+      "max": 1
+    },
+    {
+      "id": "stone-cold-steve-austin",
+      "passesPerMatch": 0.87,
+      "streak4Pct": 1,
+      "max": 4
+    },
+    {
+      "id": "rhea-ripley",
+      "passesPerMatch": 0.86,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "jey-uso",
+      "passesPerMatch": 0.84,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "jacob-fatu",
+      "passesPerMatch": 0.76,
+      "streak4Pct": 1,
+      "max": 4
+    },
+    {
+      "id": "stephanie-vaquer",
+      "passesPerMatch": 0.74,
+      "streak4Pct": 0,
+      "max": 1
+    },
+    {
+      "id": "kane",
+      "passesPerMatch": 0.74,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "oba-femi",
+      "passesPerMatch": 0.67,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "becky-lynch",
+      "passesPerMatch": 0.66,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "la-knight",
+      "passesPerMatch": 0.63,
+      "streak4Pct": 0,
+      "max": 3
+    },
+    {
+      "id": "brock-lesnar",
+      "passesPerMatch": 0.6,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "el-grande-americano",
+      "passesPerMatch": 0.59,
+      "streak4Pct": 0,
+      "max": 2
+    },
+    {
+      "id": "ultimate-warrior",
+      "passesPerMatch": 0.56,
+      "streak4Pct": 0,
+      "max": 3
+    }
+  ],
+  "cmPunk": {
+    "id": "cm-punk",
+    "passesPerMatch": 0.93,
+    "streak4Pct": 0,
+    "max": 2
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "matches": 2450,
+  "stalls": 0,
+  "averageTurns": 20.9,
+  "finishes": {
+    "pin": 2120,
+    "submission": 330
+  }
+}

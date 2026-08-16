@@ -1,8 +1,7 @@
-# Custom card art
+# WWE Legacy: Collectible Card Game
 
-`tools/card-art-studio.html` exports final cropped WebP artwork here by convention.
+Current working build: **v0.12.55 — Entrance Chase + Final Boss Reward Road**.
 
-- Exact card art: `assets/cards/art/custom/<card-id>.webp`
-- Optional wrestler-wide temporary defaults: `assets/cards/art/custom/superstars/<superstar-id>.webp`
+v0.12.55 supersedes v0.12.54. This build introduces the player Entrance chase economy, shared Amazing Entrance starting card, 15-copy ownership baseline for each Momentum colour, progressive Season 1 Final Boss card rewards, and the latest launch/Home presentation fixes. CPU decks retain their native Entrances; player-native Entrances are now 4★ Very Rare booster pulls and must be manually equipped in Deck Lab.
 
-The Card Art Studio can update `js/data/card-art-overrides.js` automatically when a supported desktop browser is connected to the project folder. On browsers without project-folder writing, export the WebP and the generated manifest, then place/replace those files in the paths shown by the tool.
+See `RELEASE-NOTES-v0.12.55.md` for the complete change list and certification.

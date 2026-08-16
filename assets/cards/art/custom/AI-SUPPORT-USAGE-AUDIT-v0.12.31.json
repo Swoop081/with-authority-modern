@@ -1,0 +1,23 @@
+{
+  "Crowd Support": {
+    "playable": 2082,
+    "ignoredWithMove": 331,
+    "played": 1584,
+    "playedWithMoveAvailable": 1392,
+    "playedThenPass": 192
+  },
+  "What?": {
+    "playable": 53,
+    "ignoredWithMove": 7,
+    "played": 43,
+    "playedWithMoveAvailable": 40,
+    "playedThenPass": 3
+  },
+  "People's Championship": {
+    "playable": 51,
+    "ignoredWithMove": 11,
+    "played": 38,
+    "playedWithMoveAvailable": 38,
+    "playedThenPass": 0
+  }
+}
