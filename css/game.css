@@ -4264,3 +4264,184 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .legacy-mode-superstar{right:-20%!important;width:78%!important}
   .legacy-utility-rail button>span{width:76px!important;height:114px!important}
 }
+
+
+/* v0.12.53 — Dedicated Final Boss menu art
+   User-supplied Final Boss Rock render replaces the small legacy Rock cutout
+   on Season reward/promotion surfaces only. */
+.final-boss-rock-menu-art{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:drop-shadow(0 16px 28px rgba(0,0,0,.52))!important;
+}
+.season-ad-rock img.final-boss-rock-menu-art{
+  position:absolute!important;inset:auto!important;left:-10%!important;bottom:-12%!important;
+  width:128%!important;height:118%!important;object-fit:contain!important;object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,#000 0%,#000 72%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 72%,transparent 100%)!important;
+  transform:none!important;
+}
+.legacy-season-rock img.final-boss-rock-menu-art{
+  width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 20%,#000 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 20%,#000 100%)!important;
+}
+.final-boss-feature-art .mode-portrait.p1{inset:0!important;overflow:visible!important}
+.final-boss-feature-art img.final-boss-rock-menu-art{
+  position:absolute!important;right:-7%!important;bottom:-12%!important;
+  width:112%!important;height:122%!important;object-fit:contain!important;object-position:center bottom!important;
+}
+@media(max-width:760px){
+  .season-ad-rock img.final-boss-rock-menu-art{left:-20%!important;bottom:-10%!important;width:150%!important;height:122%!important}
+  .legacy-season-rock img.final-boss-rock-menu-art{width:108%!important;height:108%!important}
+  .final-boss-feature-art img.final-boss-rock-menu-art{right:-13%!important;bottom:-11%!important;width:122%!important;height:126%!important}
+}
+@media(max-width:430px){
+  .season-ad-rock img.final-boss-rock-menu-art{left:-27%!important;width:164%!important}
+  .final-boss-feature-art img.final-boss-rock-menu-art{right:-18%!important;width:130%!important}
+}
+
+/* v0.12.54 — Home Menu Hierarchy Pass
+   iPhone review: make global status values readable at a glance, use the app icon
+   as the Home brand mark, enlarge the starter hero, and convert Home destinations
+   to full-width game-command rows in the requested order. */
+.legacy-gamebar{
+  grid-template-columns:72px minmax(0,1fr) 118px!important;
+  gap:5px!important;
+}
+.gamebar-brand{
+  display:grid!important;
+  place-items:center!important;
+  padding:4px!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:1fr!important;
+}
+.gamebar-app-icon{
+  width:48px!important;
+  height:48px!important;
+  display:block!important;
+  object-fit:contain!important;
+  filter:drop-shadow(0 3px 7px rgba(0,0,0,.45))!important;
+}
+.gamebar-season{padding:4px 8px!important;gap:2px!important}
+.gamebar-season>span{gap:4px!important;align-items:center!important}
+.gamebar-season small{
+  font-size:1.70rem!important;
+  line-height:.86!important;
+  letter-spacing:.025em!important;
+  color:#74dcff!important;
+}
+.gamebar-season b{font-size:.67rem!important;line-height:1!important;white-space:nowrap!important}
+.gamebar-tier-track{height:7px!important}
+.gamebar-resources small{font-size:.32rem!important;letter-spacing:.09em!important}
+.gamebar-resources b{
+  font-size:2.05rem!important;
+  line-height:.78!important;
+  font-weight:1000!important;
+  letter-spacing:-.055em!important;
+}
+.gamebar-resources>button,.gamebar-resources>.gamebar-up{gap:3px!important;padding:3px 2px 5px!important}
+
+/* Home stage: Punk is now roughly twice the visual area of v0.12.53. */
+.legacy-stage-superstar{
+  right:-38%!important;
+  bottom:-18%!important;
+  width:116%!important;
+  height:158%!important;
+}
+.legacy-stage-superstar img.official-menu-superstar-photo{
+  object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 17%,#000 34%,#000 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 17%,#000 34%,#000 100%)!important;
+}
+.legacy-stage-copy{width:56%!important}
+.legacy-stage-cta{
+  grid-template-columns:1fr auto!important;
+  gap:12px!important;
+  min-width:202px!important;
+  padding:10px 13px!important;
+}
+.legacy-stage-cta b{font-size:.98rem!important;letter-spacing:.01em!important}
+
+/* Show more of the dedicated Final Boss vest/render in the live Season strip. */
+.legacy-season-rock{
+  right:-2%!important;
+  top:-18%!important;
+  width:43%!important;
+  height:145%!important;
+  opacity:.92!important;
+}
+.legacy-season-rock img.final-boss-rock-menu-art{
+  width:100%!important;
+  height:100%!important;
+  object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 13%,#000 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 13%,#000 100%)!important;
+}
+.legacy-season-copy{width:72%!important}
+
+/* One destination per line: Deck Lab → Challenges → Open Packs → Store → Collection → Legacy. */
+.legacy-command-rack.legacy-home-destinations{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:8px!important;
+}
+.legacy-home-destinations .legacy-command-tile{
+  width:100%!important;
+  min-height:96px!important;
+  border-radius:5px!important;
+}
+.legacy-home-destinations .legacy-command-copy{
+  width:64%!important;
+  min-height:96px!important;
+  padding:12px 12px 11px 17px!important;
+}
+.legacy-home-destinations .legacy-command-copy em{font-size:.48rem!important;letter-spacing:.16em!important}
+.legacy-home-destinations .legacy-command-copy strong{font-size:1.48rem!important;line-height:.9!important;margin:5px 0!important}
+.legacy-home-destinations .legacy-command-copy small{font-size:.57rem!important}
+.legacy-home-destinations .legacy-command-copy>b{margin-top:7px!important}
+.legacy-home-destinations .legacy-command-photo{
+  right:-5%!important;
+  bottom:-32%!important;
+  width:48%!important;
+  height:165%!important;
+}
+.legacy-home-destinations .legacy-command-photo img{
+  object-position:center bottom!important;
+}
+.legacy-command-tile .attention-badge{
+  left:auto!important;
+  right:10px!important;
+  top:9px!important;
+  z-index:7!important;
+}
+.command-store{--command-accent:#f2c34e}
+.command-profile{--command-accent:#ef6174}
+
+@media(max-width:600px){
+  .legacy-gamebar{grid-template-columns:70px minmax(0,1fr) 116px!important}
+  .gamebar-app-icon{width:46px!important;height:46px!important}
+  .gamebar-season small{font-size:1.55rem!important}
+  .gamebar-resources b{font-size:1.98rem!important}
+  .legacy-stage-superstar{right:-44%!important;bottom:-19%!important;width:128%!important;height:163%!important}
+  .legacy-stage-copy{width:57%!important}
+  .legacy-season-rock{right:-4%!important;top:-18%!important;width:46%!important;height:148%!important}
+  .legacy-season-copy{width:75%!important}
+  .legacy-home-destinations .legacy-command-tile{min-height:92px!important}
+  .legacy-home-destinations .legacy-command-copy{min-height:92px!important;width:64%!important;padding-left:14px!important}
+  .legacy-home-destinations .legacy-command-photo{right:-7%!important;bottom:-34%!important;width:53%!important;height:168%!important}
+}
+@media(max-width:390px){
+  .legacy-gamebar{grid-template-columns:66px minmax(0,1fr) 112px!important}
+  .gamebar-app-icon{width:44px!important;height:44px!important}
+  .gamebar-season small{font-size:1.45rem!important}
+  .gamebar-season b{font-size:.62rem!important}
+  .gamebar-resources b{font-size:1.88rem!important}
+  .legacy-stage-superstar{right:-49%!important;width:135%!important;height:166%!important}
+  .legacy-stage-copy{width:59%!important}
+  .legacy-stage-cta{min-width:184px!important}
+  .legacy-season-rock{right:-8%!important;width:50%!important}
+  .legacy-season-copy{width:78%!important}
+  .legacy-home-destinations .legacy-command-copy strong{font-size:1.35rem!important}
+  .legacy-home-destinations .legacy-command-photo{right:-10%!important;width:57%!important}
+}

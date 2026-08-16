@@ -38,7 +38,7 @@ test('v0.12.44 Home is a layered game stage rather than the old dashboard stack'
   assert.match(home, /portraitMarkup\(starter\.id,starter\.name\)/);
   assert.match(home, /legacy-stage-cta/);
   assert.match(home, /legacy-command-rack/);
-  assert.match(home, /legacy-utility-rail/);
+  assert.match(home, /legacy-home-destinations/);
   assert.doesNotMatch(home, /premium-menu-grid compact-hub-grid/);
 });
 

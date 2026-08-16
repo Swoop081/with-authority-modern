@@ -1,11 +1,12 @@
-import { assetUrl } from "../config/build.js?v=0.12.52";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.52";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.52";
+import { assetUrl } from "../config/build.js?v=0.12.54";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.54";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.54";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
 const WWE_MENU_SUPERSTAR_ROOT = "assets/art/wwe-menu-superstars";
+const FINAL_BOSS_MENU_ART = "assets/art/season-1-final-boss/the-rock-final-boss-menu.png";
 const EVOLUTION_ROOT = "assets/art/evolution-series-1";
 const TEMP_GENERIC_ART = "assets/cards/art/temp/superstar-placeholder.svg";
 
@@ -86,6 +87,11 @@ export const menuSuperstarArtwork = Object.fromEntries(
 export function menuSuperstarPhotoFor(superstarId) {
   return menuSuperstarArtwork[superstarId] ?? superstarArtwork[superstarId] ?? null;
 }
+
+// Dedicated Season 1 Final Boss presentation art supplied for reward/menu surfaces.
+// This intentionally stays separate from the 12-person general menu-render pool and
+// from Rock's collectible-card artwork.
+export const finalBossRockMenuArtwork = assetUrl(FINAL_BOSS_MENU_ART);
 // Finished Superstar collectible fronts exported by the unified Card Art Studio.
 // These are intentionally separate from wrestler portraits: move/Entrance cards
 // can continue using action/profile art while every Superstar-facing UI surface

@@ -69,7 +69,7 @@ test('v0.12.46 Catalogue exposes search and cards before a collapsed advanced fi
 });
 
 test('v0.12.46 My Legacy replaces large stat boxes with one compact career command band', () => {
-  const profile = functionSlice('renderProfile', 'renderOptions');
+  const profile = functionSlice('renderProfile', 'chooseStarter');
   assert.match(profile, /profile-command-band/);
   assert.match(profile, /profile-compact-stats/);
   assert.doesNotMatch(profile, /profile-stat-grid premium-stats/);

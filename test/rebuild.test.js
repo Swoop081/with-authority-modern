@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.12.52";
-import { decks } from "../js/data/decks.js?v=0.12.52";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.52";
-import { collectionCards } from "../js/data/collection.js?v=0.12.52";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.52";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.52";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.52";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.52";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.52";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.52";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.52";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.52";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.52";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.52";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.52";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.52";
-import { healthZone } from "../js/engine/health.js?v=0.12.52";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.52";
+import { superstars } from "../js/data/superstars.js?v=0.12.54";
+import { decks } from "../js/data/decks.js?v=0.12.54";
+import { allGameplayCards } from "../js/data/content.js?v=0.12.54";
+import { collectionCards } from "../js/data/collection.js?v=0.12.54";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.54";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.54";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.54";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.54";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.54";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.54";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.54";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.54";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.54";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.54";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.54";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.54";
+import { healthZone } from "../js/engine/health.js?v=0.12.54";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.54";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -260,7 +260,7 @@ test("A completely maxed five-card booster converts to 50 Universe Points on Pac
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.52");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.54");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -1236,7 +1236,7 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.52/,'Studio script cache key must match the current release');
+  assert.match(html,/card-art-studio\.js\?v=0\.12\.54/,'Studio script cache key must match the current release');
 });
 
 
@@ -1264,7 +1264,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.51/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.54/,'Studio visible build label should match the current release');
 });
 
 
@@ -1277,7 +1277,7 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,78,1000)'),'COST/DAMAGE values should use the current dominant mobile-readable sizing');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.51/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.54/,'Studio visible build label should match the current release');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1325,16 +1325,17 @@ test("v0.12.06 selected Entrances persist separately from the 60-page deck and s
   assert.equal(boosterEligible({id:"future-shared-entrance-test",kind:"entrance",setId:"raw-series-1",superstarId:null}),false);
 });
 
-test("v0.12.06 scrollable navigation includes Challenges, Deck Lab and Options while Home retains their tiles",async()=>{
+test("v0.12.54 scrollable navigation keeps Challenges and Deck Lab while Options is retired",async()=>{
   const fs=await import('node:fs');
   const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
-  for(const target of ['challenges','deck-builder','options']) assert.ok(html.includes(`data-mobile-nav="${target}"`),`${target} must be in the bottom nav`);
+  for(const target of ['challenges','deck-builder']) assert.ok(html.includes(`data-mobile-nav="${target}"`),`${target} must be in the bottom nav`);
+  assert.equal(html.includes('data-mobile-nav="options"'),false,'Options must be removed from bottom navigation');
   assert.ok(app.includes('showDeckBuilder()'));
   assert.ok(app.includes('id="menu-decks"'));
   assert.ok(app.includes('id="menu-challenges"'));
-  assert.ok(app.includes('id="menu-options"'));
+  assert.equal(app.includes('id="menu-options"'),false,'Options must be removed from Home');
   assert.ok(css.includes('overflow-x:auto!important'),'bottom nav must remain horizontally scrollable');
 });
 
