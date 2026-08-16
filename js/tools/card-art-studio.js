@@ -12,7 +12,7 @@ const KIND_FOLDERS={superstar:"superstars",move:"moves",entrance:"entrances",spe
 const $=s=>document.querySelector(s);
 let canvas=$("#card-canvas"),ctx=canvas.getContext("2d");
 const state={art:null,artIsProjectAsset:false,artZoom:1,artX:0,artY:0,setLogos:new Map(),pointerMap:new Map(),dragPointerId:null,dragLast:null,lastPinchDistance:null,activeLayoutKey:"card",layouts:{card:{zoom:1,x:0,y:0},headshot:{zoom:1,x:0,y:0}}};
-const BUILD_VERSION="0.12.57";
+const BUILD_VERSION="0.12.59";
 function assetUrl(path){
   const url=new URL(`../${path}`,document.location.href);
   if(url.protocol==="http:"||url.protocol==="https:") url.searchParams.set("v",BUILD_VERSION);
