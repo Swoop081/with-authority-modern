@@ -1,12 +1,14 @@
-import { decks } from "./decks.js?v=0.12.54";
-import { collectionCards } from "./collection.js?v=0.12.54";
-import { superstars } from "./superstars.js?v=0.12.54";
-import { isUnreleasedSetId } from "./release.js?v=0.12.54";
+import { decks } from "./decks.js?v=0.12.56";
+import { collectionCards } from "./collection.js?v=0.12.56";
+import { superstars } from "./superstars.js?v=0.12.56";
+import { isUnreleasedSetId } from "./release.js?v=0.12.56";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 25;
+export const PROFILE_VERSION = 27;
+export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
+export const STARTING_MOMENTUM_COPIES = 15;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
@@ -31,7 +33,7 @@ const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
 
-export const cardOwnershipCap = card => card?.kind === "momentum" ? 12 : (["superstar", "entrance", "manager"].includes(card?.kind) ? 1 : 5);
+export const cardOwnershipCap = card => card?.kind === "momentum" ? STARTING_MOMENTUM_COPIES : (["superstar", "entrance", "manager"].includes(card?.kind) ? 1 : 5);
 export function totalOwnedCopies(profile, id) {
   const o = profile?.ownedCards?.[id] ?? {};
   return (o.normal ?? 0) + (o.foil ?? 0);
@@ -91,35 +93,36 @@ export function grantSuperstarUnlockPackage(profile, sid) {
   ensureSavedRecommendedDeck(profile, sid);
   for (const c of d) addOwnedCard(profile, c.id, { amount: 1 });
   addOwnedCard(profile, `superstar-${sid}`, { foil: true });
-  if (star.entranceId) addOwnedCard(profile, star.entranceId, { foil: true });
   profile.selectedEntrances ??= {};
-  profile.selectedEntrances[sid] ??= star.entranceId;
+  if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.deckNeedsCards ??= {};
   profile.deckNeedsCards[sid] = 0;
-  return { leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id), signatures: star.signatures ?? [], rewardCards: [`superstar-${sid}`, star.entranceId].filter(Boolean), deckSize: d.length, missing: 0 };
+  return { leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id), signatures: star.signatures ?? [], rewardCards: [`superstar-${sid}`], deckSize: d.length, missing: 0 };
 }
 
-// Store Superstar unlocks deliberately do not grant all 60 owned copies. They
-// provide the identity + Entrance + Lead Off 5, while a complete recommended
-// deck remains available for immediate play and boosters continue building the
-// owned collection around it.
-export function grantStoreSuperstarUnlockPackage(profile, sid) {
+// Store Superstar unlocks deliberately do not grant all 60 owned copies or the
+// Superstar-specific Entrance. Entrances are Very Rare booster chase cards; the
+// player's shared Amazing Entrance remains equipped until changed in Deck Lab.
+export function grantSuperstarIdentityUnlockPackage(profile, sid) {
   const star = starById.get(sid), d = decks[sid] ?? [];
   if (!star || d.length !== 60) throw new Error("That Superstar deck is not available.");
   profile.unlockedSuperstars ??= [];
   if (profile.unlockedSuperstars.includes(sid)) return { alreadyOwned: true, superstarId: sid };
   profile.unlockedSuperstars.push(sid);
-  // A Superstar unlock grants identity + linked Entrance only. The recommended
-  // deck is a blueprint and is assembled later from cards actually owned.
+  // Identity-only unlocks do not grant the authored 60-card CPU deck or the
+  // Superstar-specific Entrance. The recommended deck remains a blueprint.
   addOwnedCard(profile, `superstar-${sid}`, { foil: true });
-  if (star.entranceId) addOwnedCard(profile, star.entranceId, { foil: true });
   profile.selectedEntrances ??= {};
-  profile.selectedEntrances[sid] ??= star.entranceId;
+  if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.savedDecks ??= {};
   delete profile.savedDecks[sid];
   profile.deckNeedsCards ??= {};
   profile.deckNeedsCards[sid] = 60;
-  return { alreadyOwned: false, superstarId: sid, entranceId: star.entranceId, deckSize: d.length, missing: 60 };
+  return { alreadyOwned: false, superstarId: sid, entranceId: profile.selectedEntrances?.[sid] ?? DEFAULT_PLAYER_ENTRANCE_ID, deckSize: d.length, missing: 60 };
+}
+
+export function grantStoreSuperstarUnlockPackage(profile, sid) {
+  return grantSuperstarIdentityUnlockPackage(profile, sid);
 }
 
 export function createProfile(starterId) {
@@ -151,6 +154,12 @@ export function createProfile(starterId) {
     onboarding: { complete: false, step: 0 },
     createdAt: new Date().toISOString()
   };
+  // Every new Legacy begins with a reusable baseline Entrance plus enough of
+  // every Method Momentum colour to build freely without booster dependence.
+  addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { foil: true, amount: 1 });
+  for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
+    addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES });
+  }
   grantSuperstarUnlockPackage(p, starterId);
   return p;
 }
@@ -365,14 +374,55 @@ export function migrateProfile(old) {
   p.onboarding = { complete: true, step: 0, ...(p.onboarding ?? {}) };
   p.createdAt ??= new Date().toISOString();
 
-  // Preserve identity/Entrance ownership, but never let a saved deck contain
+  // v0.12.55 Entrance economy migration: Superstar-specific Entrances were not
+  // booster-pullable in older profiles, so any such owned copies were automatic
+  // grants. Remove those grants, seed Amazing Entrance, and give every profile
+  // the new 15-copy Momentum baseline before validating saved decks.
+  if (sourceVersion < 26) {
+    for (const [id] of Object.entries(p.ownedCards)) {
+      const card = cardById.get(id);
+      if (card?.kind === "entrance" && card.superstarId) delete p.ownedCards[id];
+    }
+    addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { foil: true, amount: 1 });
+    for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
+      const missing = Math.max(0, STARTING_MOMENTUM_COPIES - totalOwnedCopies(p, id));
+      if (missing) addOwnedCard(p, id, { amount: missing });
+    }
+    p.selectedEntrances = Object.fromEntries(p.unlockedSuperstars.map(sid => [sid, DEFAULT_PLAYER_ENTRANCE_ID]));
+  }
+
+  // v0.12.55 Final Boss reward-road migration: Rock's exclusive package is now
+  // earned progressively instead of arriving as a complete deck at Tier 50.
+  // Preserve any cards an older profile already owns, and retroactively grant
+  // the milestone rewards for tiers that were already claimed.
+  if (sourceVersion < 27) {
+    const claimed = new Set(p.seasons?.["season-1"]?.claimedTiers ?? []);
+    const milestoneCards = [
+      [5, "the-rock-final-boss-slap", 1, false],
+      [10, "the-rock-rock-bottom", 3, false],
+      [15, "the-rock-belt-whip", 3, false],
+      [20, "special-the-rock", 1, false],
+      [25, "people-championship", 1, false],
+      [30, "the-rock-people-s-elbow", 2, false],
+      [40, "entrance-the-rock", 1, true]
+    ];
+    for (const [tier, id, amount, foil] of milestoneCards) {
+      if (!claimed.has(tier)) continue;
+      const missing = Math.max(0, amount - totalOwnedCopies(p, id));
+      if (missing) addOwnedCard(p, id, { amount: missing, foil });
+    }
+    if (claimed.has(50) || p.seasons?.["season-1"]?.completionRewardClaimed) {
+      grantSuperstarIdentityUnlockPackage(p, "the-rock");
+    }
+  }
+
+  // Preserve Superstar identity ownership, but never let a saved deck contain
   // more copies than the Collection actually owns. Older builds auto-installed
   // recommended 60-card lists, so migration trims those phantom copies.
   for (const sid of p.unlockedSuperstars) {
     const star = starById.get(sid);
     addOwnedCard(p, `superstar-${sid}`, { foil: true });
-    if (star?.entranceId) addOwnedCard(p, star.entranceId, { foil: true });
-    if (!p.selectedEntrances[sid] && star?.entranceId) p.selectedEntrances[sid] = star.entranceId;
+    if (!p.selectedEntrances[sid] && totalOwnedCopies(p, DEFAULT_PLAYER_ENTRANCE_ID) > 0) p.selectedEntrances[sid] = DEFAULT_PLAYER_ENTRANCE_ID;
     let saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
     // v0.12.25: migrate only untouched v0.12.24 recommended 60-page lists to
     // the CPU recovery-curve package. Custom 60-page decks remain untouched.

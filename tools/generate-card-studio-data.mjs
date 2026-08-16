@@ -40,6 +40,7 @@ const studioCards = collectionCards.map(card => ({
     ...(card.superstarId ? [card.superstarId] : []),
     ...(card.allowedSuperstarIds ?? []),
   ])),
+  universalSuperstarCard: card.id === "entrance-amazing",
   deckSuperstarIds: sortStars(usage.get(card.id) ?? new Set()),
   artKey: card.kind === "superstar" ? (card.superstarId ?? card.id.replace(/^superstar-/, "")) : card.id,
   cost: card.cost ?? null,

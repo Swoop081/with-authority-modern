@@ -1,8 +1,8 @@
-import { cardsForSet } from "./collection.js?v=0.12.54";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.54";
-import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.54";
-import { sets } from "./sets.js?v=0.12.54";
-import { isLaunchLiveSetId } from "./release.js?v=0.12.54";
+import { cardsForSet } from "./collection.js?v=0.12.56";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.56";
+import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.56";
+import { sets } from "./sets.js?v=0.12.56";
+import { isLaunchLiveSetId } from "./release.js?v=0.12.56";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -11,7 +11,7 @@ export const SUPERSTAR_PITY_PACKS = 20;
 export const DEFAULT_BOOSTER_SET_ID = "summerslam-series-1";
 
 export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) { return p?.boosterCreditsBySet?.[setId] ?? p?.boosterCredits ?? 0; }
-export function boosterEligible(card) { return !!card && isLaunchLiveSetId(card.setId) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false && (card.kind !== "entrance" || !card.superstarId); }
+export function boosterEligible(card) { return !!card && isLaunchLiveSetId(card.setId) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false; }
 export function underOwnershipCap(profile, card) { return totalOwnedCopies(profile, card.id) < cardOwnershipCap(card); }
 
 function weighted(pool, rng = Math.random) {
@@ -43,7 +43,9 @@ function buildPack(profile, rng, setId) {
 
   for (let i = 0; i < BOOSTER_SIZE; i += 1) {
     const foil = i < GUARANTEED_FOILS;
-    let slotPool = base.filter(card => foil || card.kind !== "superstar");
+    // Entrances are unique chase cards: once one is owned it immediately leaves
+    // every later slot pool, including later slots in the same pack.
+    let slotPool = base.filter(card => (foil || card.kind !== "superstar") && (card.kind !== "entrance" || underOwnershipCap(profile, card)));
     // The first slot is the guaranteed-progress slot whenever any card in the
     // active set remains below its ownership cap. Because it is also Foil, an
     // unowned Superstar can still satisfy the guarantee.
@@ -52,7 +54,8 @@ function buildPack(profile, rng, setId) {
     if (!card) continue;
     const beforeTotal = totalOwnedCopies(profile, card.id);
     const wasUnlocked = card.kind === "superstar" && profile.unlockedSuperstars?.includes(card.superstarId);
-    const result = addOwnedCard(profile, card.id, { foil, amount: 1 });
+    const pullFoil = foil || card.kind === "entrance";
+    const result = addOwnedCard(profile, card.id, { foil: pullFoil, amount: 1 });
     let superstarUnlocked = false;
     if (card.kind === "superstar" && !wasUnlocked && result.added > 0) {
       grantSuperstarUnlockPackage(profile, card.superstarId);
@@ -60,7 +63,7 @@ function buildPack(profile, rng, setId) {
     }
     pack.push({
       card,
-      foil,
+      foil: pullFoil,
       isNewCard: beforeTotal === 0 && result.added > 0,
       replacedNormal: result.replacedNormal > 0,
       superstarUnlocked,

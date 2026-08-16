@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=0.12.54';
-import { decks } from '../js/data/decks.js?v=0.12.54';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.54';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.54';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.54';
-import { PROFILE_VERSION } from '../js/data/profile.js?v=0.12.54';
+import { superstars } from '../js/data/superstars.js?v=0.12.56';
+import { decks } from '../js/data/decks.js?v=0.12.56';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.56';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.56';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.56';
+import { PROFILE_VERSION } from '../js/data/profile.js?v=0.12.56';
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -50,5 +50,5 @@ test('v0.12.25 CPU never deliberately passes while a legal offensive Move is alr
 });
 
 test('v0.12.25 profile schema advances for untouched v0.12.24 recommended-deck migration',()=>{
-  assert.equal(PROFILE_VERSION,25);
+  assert.equal(PROFILE_VERSION,27);
 });

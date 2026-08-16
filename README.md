@@ -1,7 +1,7 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.42 — Submission + Persistent Injury Cleanup**.
+Current working build: **v0.12.56 — Amazing Entrance Studio Hotfix**.
 
-v0.12.42 supersedes v0.12.41. Genuine Submission holds now deal **0 printed HP damage** and build only persistent body-part damage against the opponent’s current HP. False submission tags are removed, hold targets/positions are cleaned up, and current weapon/environment attacks add persistent injury to the appropriate body part. All v0.12.41 match-flow, v0.12.36 actual-HP pin curve and v0.12.35 counter-terminal/cache rules remain intact.
+v0.12.56 supersedes v0.12.55. This hotfix keeps all v0.12.55 gameplay/economy rules intact and fixes Card Art Studio filtering so the universal Amazing Entrance remains selectable even when a Superstar filter is active.
 
-See `RELEASE-NOTES-v0.12.42.md`, `SUBMISSION-CARD-AUDIT-v0.12.42.md` and `BODY-DAMAGE-AUDIT-v0.12.42.md`.
+See `RELEASE-NOTES-v0.12.56.md` for the complete change list and certification.

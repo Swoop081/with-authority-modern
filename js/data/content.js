@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.54";
+import { enrichCounterState } from "./counter-states.js?v=0.12.56";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -4668,6 +4668,19 @@ export const allGameplayCards = [
     "method": "agility",
     "amount": 1,
     "rulesText": "+1 permanent Agility Momentum."
+  },
+  {
+    "id": "entrance-amazing",
+    "name": "Amazing Entrance",
+    "kind": "entrance",
+    "setId": "summerslam-series-1",
+    "rarity": 4,
+    "superstarId": null,
+    "rulesText": "Pre-Match: Begin with +1 Adrenaline.",
+    "preMatchMomentum": {},
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false,
+    "boosterEligible": false
   },
   {
     "id": "entrance-cody-rhodes",

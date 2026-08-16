@@ -1,6 +1,4 @@
-import { unlockSuperstar, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.54";
-import { decks } from "./decks.js?v=0.12.54";
-import { superstars } from "./superstars.js?v=0.12.54";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.56";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -13,6 +11,22 @@ export const WEEKLY_CHALLENGE_XP = 200;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";
 export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
 export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1"];
+
+// Season 1 prestige chase: The Rock — Final Boss is assembled across the road
+// instead of being dumped into Collection as a complete deck at Tier 50.
+// Move quantities match the authored Final Boss CPU deck so each milestone
+// awards the complete usable playset of that exclusive card. Existing UP values
+// at milestone tiers are retained as bonus currency rather than being removed.
+export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
+  5:  { cardId: "the-rock-final-boss-slap", name: "Final Boss Slap", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
+  10: { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 3, rewardType: "signature", label: "SIGNATURE · TRADEMARK", bonusUniversePoints: 100 },
+  15: { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 3, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
+  20: { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "special", label: "SPECIAL", bonusUniversePoints: 100 },
+  25: { cardId: "people-championship", name: "People's Championship", amount: 1, rewardType: "support", label: "EXCLUSIVE SUPPORT", bonusUniversePoints: 200 },
+  30: { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 2, rewardType: "finisher", label: "FINISHER", bonusUniversePoints: 200 },
+  40: { cardId: "entrance-the-rock", name: "Final Boss", amount: 1, rewardType: "entrance", label: "ENTRANCE", foil: true, bonusUniversePoints: 200 },
+  50: { cardId: "superstar-the-rock", name: "The Rock — Final Boss", amount: 1, rewardType: "superstar", label: "SUPERSTAR", foil: true, superstarId: SEASON_1_COMPLETION_SUPERSTAR }
+});
 
 export const SEASON_1 = {
   id: SEASON_ID,
@@ -157,11 +171,10 @@ export function awardMatchSeasonXp(profile, result) {
 
 export function tierReward(tier) {
   const n = Math.max(1, Math.min(SEASON_TIER_COUNT, Number(tier) || 1));
-  if (n === 50) return { tier: n, kind: "full-deck-superstar", superstarId: SEASON_1_COMPLETION_SUPERSTAR, name: "The Rock", exclusive: true };
-  // Universe Points replace the old every-fifth-tier booster spikes. The
-  // discussion locked 100/200 UP as the Season values but did not assign exact
-  // tiers; this release uses clean milestone tiers: 100 UP through Tier 20,
-  // then 200 UP from Tier 25 through Tier 45.
+  const finalBoss = FINAL_BOSS_TIER_REWARDS[n];
+  if (finalBoss) return { tier: n, kind: "final-boss-card", exclusive: true, ...finalBoss };
+  // Universe Points remain on the unused five-tier milestones. Final Boss card
+  // milestones preserve their previous currency value through bonusUniversePoints.
   if (n % 5 === 0) return { tier: n, kind: "universe-points", amount: n < 25 ? 100 : 200 };
   const setId = FEATURED_SET_IDS[(n - 1) % FEATURED_SET_IDS.length];
   return { tier: n, setId, amount: 1, kind: "booster" };
@@ -177,22 +190,18 @@ export function claimSeasonTier(profile, tier) {
   if (n > current) throw new Error("Season tier not reached");
   if (state.claimedTiers.includes(n)) throw new Error("Season tier already claimed");
   const reward = tierReward(n);
-  if (reward.kind === "full-deck-superstar") {
-    // Tier 50 awards the actual complete deck, not merely an entitlement flag.
-    unlockSuperstar(profile, reward.superstarId);
-    const star = Object.values(superstars).find(s => s.id === reward.superstarId);
-    const counts = new Map();
-    for (const card of decks[reward.superstarId] ?? []) counts.set(card.id, (counts.get(card.id) ?? 0) + 1);
-    for (const [cardId, count] of counts) {
-      const owned = (profile.ownedCards?.[cardId]?.normal ?? 0) + (profile.ownedCards?.[cardId]?.foil ?? 0);
-      if (owned < count) addOwnedCard(profile, cardId, { amount: count - owned });
+  if (reward.kind === "final-boss-card") {
+    if (reward.rewardType === "superstar") {
+      // Tier 50 is now the Superstar identity only. Shared deck cards must come
+      // from the player's Collection; all Rock-exclusive cards are earned on
+      // earlier Season milestones.
+      grantSuperstarIdentityUnlockPackage(profile, reward.superstarId);
+      state.completionRewardClaimed = true;
+      state.completionSuperstarId = reward.superstarId;
+    } else {
+      addOwnedCard(profile, reward.cardId, { amount: reward.amount ?? 1, foil: !!reward.foil });
     }
-    profile.savedDecks ??= {};
-    profile.savedDecks[reward.superstarId] = (decks[reward.superstarId] ?? []).map(card => ({ id: card.id, foil: false }));
-    profile.deckNeedsCards ??= {};
-    profile.deckNeedsCards[reward.superstarId] = 0;
-    state.completionRewardClaimed = true;
-    state.completionSuperstarId = reward.superstarId;
+    if (reward.bonusUniversePoints) addUniversePoints(profile, reward.bonusUniversePoints);
   } else if (reward.kind === "universe-points") addUniversePoints(profile, reward.amount);
   else grantSetBooster(profile, reward.setId, reward.amount);
   state.claimedTiers.push(n);

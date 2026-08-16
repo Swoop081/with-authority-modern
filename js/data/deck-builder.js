@@ -1,11 +1,12 @@
-import { decks } from "./decks.js?v=0.12.54";
-import { collectionCards } from "./collection.js?v=0.12.54";
-import { superstars } from "./superstars.js?v=0.12.54";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.54";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.54";
+import { decks } from "./decks.js?v=0.12.56";
+import { collectionCards } from "./collection.js?v=0.12.56";
+import { superstars } from "./superstars.js?v=0.12.56";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.56";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.56";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
+const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 
 export const DECK_LAB_CATEGORIES = Object.freeze([
   { id: "signature", label: "Finishers & Trademarks" },
@@ -57,7 +58,7 @@ export function entranceEligibilityForSuperstar(star, card) {
   if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(star.id)) {
     return { legal: false, reason: "Entrance is not compatible with this Superstar" };
   }
-  return { legal: true, reason: card.superstarId ? "Default Superstar Entrance" : "Shared Entrance" };
+  return { legal: true, reason: card.superstarId ? "Superstar-specific Entrance" : "Shared Entrance" };
 }
 
 export function categoryForCard(card) {
@@ -155,7 +156,9 @@ export function selectedEntranceId(profile, sid) {
   const saved = profile?.selectedEntrances?.[sid];
   const card = saved ? byId.get(saved) : null;
   if (card && ownedTotal(profile, saved) > 0 && entranceEligibilityForSuperstar(star, card).legal) return saved;
-  return star?.entranceId ?? null;
+  const baseline = byId.get(DEFAULT_PLAYER_ENTRANCE_ID);
+  if (baseline && ownedTotal(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0 && entranceEligibilityForSuperstar(star, baseline).legal) return DEFAULT_PLAYER_ENTRANCE_ID;
+  return null;
 }
 export function setSelectedEntrance(profile, sid, entranceId) {
   const star = starById.get(sid), card = byId.get(entranceId);

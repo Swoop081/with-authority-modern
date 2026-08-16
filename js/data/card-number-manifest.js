@@ -2904,6 +2904,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "summerslam-series-1",
     "cardNumber": 141,
     "cardCode": "SS1-141"
+  },
+  {
+    "id": "entrance-amazing",
+    "setId": "summerslam-series-1",
+    "cardNumber": 142,
+    "cardCode": "SS1-142"
   }
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));

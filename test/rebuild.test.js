@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.12.54";
-import { decks } from "../js/data/decks.js?v=0.12.54";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.54";
-import { collectionCards } from "../js/data/collection.js?v=0.12.54";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.54";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.54";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.54";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.54";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.54";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.54";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.54";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.54";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.54";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.54";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.54";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.54";
-import { healthZone } from "../js/engine/health.js?v=0.12.54";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.54";
+import { superstars } from "../js/data/superstars.js?v=0.12.56";
+import { decks } from "../js/data/decks.js?v=0.12.56";
+import { allGameplayCards } from "../js/data/content.js?v=0.12.56";
+import { collectionCards } from "../js/data/collection.js?v=0.12.56";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.56";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.56";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.56";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.56";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.56";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.56";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.56";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.56";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.56";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.56";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.56";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.56";
+import { healthZone } from "../js/engine/health.js?v=0.12.56";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.56";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -63,12 +63,13 @@ test("profile, Foil replacement, Entrance ownership and boosters use rebuilt rul
   const p=createProfile(starter);
   for(const s of stars) unlockSuperstar(p,s.id);
   assert.equal(p.unlockedSuperstars.length,stars.length);
-  for(const s of stars) assert.equal(p.ownedCards[s.entranceId]?.foil,1,s.id);
+  assert.equal(totalOwnedCopies(p,'entrance-amazing'),1);
+  for(const s of stars) assert.equal(totalOwnedCopies(p,s.entranceId),0,`${s.id} Entrance must remain a booster chase`);
+  for(const id of ['momentum-strength','momentum-strike','momentum-technical','momentum-agility']) assert.equal(totalOwnedCopies(p,id),15,id);
   const c=collectionCards.find(x=>x.kind==='move'&&!x.superstarId); assert.ok(c);
   p.ownedCards[c.id]={normal:5,foil:0}; addOwnedCard(p,c.id,{foil:true});
   assert.deepEqual(p.ownedCards[c.id],{normal:4,foil:1});
-  grantBooster(p,1,'summerslam-series-1'); const pack=openBooster(p,'summerslam-series-1');
-  assert.ok(pack.length>0); assert.equal(pack[0].foil,true); assert.equal(pack.some(x=>x.card.kind==='entrance'),false);
+  assert.equal(boosterEligible(collectionCards.find(x=>x.id===stars.find(s=>s.setId==='summerslam-series-1').entranceId)),true);
 });
 
 test("later locked native sequences are present whenever their set is active",()=>{
@@ -192,7 +193,7 @@ test("Daily Store rotates SS to HOF to EVO, charges UP, blocks repurchase and gr
   assert.equal(hasSuperstar(p,target.id),true);
   assert.equal(p.savedDecks[target.id],undefined);
   assert.equal(totalOwnedCopies(p,`superstar-${target.id}`),1);
-  if(target.entranceId) assert.equal(totalOwnedCopies(p,target.entranceId),1);
+  if(target.entranceId) assert.equal(totalOwnedCopies(p,target.entranceId),0,'Store unlock must not grant the Superstar Entrance');
   for(const card of storeLeadOffCards(target.id)) assert.equal(totalOwnedCopies(p,card.id),leadBefore.get(card.id),`${card.id} ownership should not change`);
   const ownedDraft=buildOwnedRecommendedDraft(p,target.id);
   assert.ok(ownedDraft.length>=0&&ownedDraft.length<60);
@@ -213,7 +214,7 @@ test("Daily Store rotates SS to HOF to EVO, charges UP, blocks repurchase and gr
 test("Boosters guarantee one under-cap card when possible and convert only excess copies to Universe Points at review",()=>{
   const p=createProfile('cm-punk');
   const setId='summerslam-series-1';
-  const eligible=collectionCards.filter(c=>c.setId===setId&&c.kind!=='entrance');
+  const eligible=collectionCards.filter(c=>c.setId===setId&&boosterEligible(c));
   for(const c of eligible) p.ownedCards[c.id]={normal:0,foil:cardOwnershipCap(c)};
   const target=eligible.find(c=>c.kind==='move'); assert.ok(target);
   p.ownedCards[target.id]={normal:0,foil:cardOwnershipCap(target)-1};
@@ -232,22 +233,29 @@ test("Boosters guarantee one under-cap card when possible and convert only exces
   assert.equal(p.universePoints,40);
 });
 
-test("Season milestone tiers mix 100/200 Universe Points into the reward road while Tier 50 stays Final Boss",()=>{
+test("Season milestone road now builds The Final Boss while preserving milestone Universe Points",()=>{
   assert.equal(tierReward(1).kind,'booster');
-  assert.deepEqual(tierReward(5),{tier:5,kind:'universe-points',amount:100});
-  assert.deepEqual(tierReward(25),{tier:25,kind:'universe-points',amount:200});
-  assert.equal(tierReward(50).kind,'full-deck-superstar');
+  assert.deepEqual(tierReward(5),{tier:5,kind:'final-boss-card',exclusive:true,cardId:'the-rock-final-boss-slap',name:'Final Boss Slap',amount:1,rewardType:'exclusive-move',label:'EXCLUSIVE MOVE',bonusUniversePoints:100});
+  assert.equal(tierReward(10).cardId,'the-rock-rock-bottom');
+  assert.equal(tierReward(20).cardId,'special-the-rock');
+  assert.equal(tierReward(25).cardId,'people-championship');
+  assert.equal(tierReward(30).cardId,'the-rock-people-s-elbow');
+  assert.equal(tierReward(40).cardId,'entrance-the-rock');
+  assert.equal(tierReward(50).cardId,'superstar-the-rock');
+  assert.equal(tierReward(35).kind,'universe-points');
+  assert.equal(tierReward(35).amount,200);
   const p=createProfile('cm-punk');
   p.seasons['season-1'].xp=500;
   const reward=claimSeasonTier(p,5);
-  assert.equal(reward.amount,100);
-  assert.equal(p.universePoints,100);
+  assert.equal(reward.cardId,'the-rock-final-boss-slap');
+  assert.equal(p.ownedCards['the-rock-final-boss-slap']?.normal,1);
+  assert.equal(p.universePoints,100,'card milestone keeps the old UP value as bonus currency');
 });
 
 test("A completely maxed five-card booster converts to 50 Universe Points on Pack Complete",()=>{
   const p=createProfile('cm-punk');
   const setId='summerslam-series-1';
-  const eligible=collectionCards.filter(c=>c.setId===setId&&c.kind!=='entrance');
+  const eligible=collectionCards.filter(c=>c.setId===setId&&boosterEligible(c));
   for(const c of eligible) p.ownedCards[c.id]={normal:0,foil:cardOwnershipCap(c)};
   p.universePoints=0;
   grantBooster(p,1,setId);
@@ -260,7 +268,7 @@ test("A completely maxed five-card booster converts to 50 Universe Points on Pac
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.54");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.56");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -1236,7 +1244,8 @@ test("Card Art Studio keeps every set renderer and card-selection wiring intact"
   assert.match(studio,/\$\("#card-select"\)\.addEventListener\("change",prepareSelectedCard\)/,'changing Card must prepare the newly selected card');
   assert.match(studio,/sel\.value=cards\.some\(c=>c\.id===previous\)\?previous:cards\[0\]\.id;prepareSelectedCard\(\)/,'filter changes must select and prepare a valid card');
   assert.match(studio,/\$\("#card-summary-name"\)\.textContent=card\.name/,'selected card name must update from current card');
-  assert.match(html,/card-art-studio\.js\?v=0\.12\.54/,'Studio script cache key must match the current release');
+  const pkg=JSON.parse(fs.readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+  assert.match(html,new RegExp(`card-art-studio\\.js\\?v=${pkg.version.replaceAll('.', '\\.')}`),'Studio script cache key must match the current release');
 });
 
 
@@ -1264,7 +1273,7 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.54/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.55/,'Studio visible build label should match the current release');
 });
 
 
@@ -1277,7 +1286,7 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,78,1000)'),'COST/DAMAGE values should use the current dominant mobile-readable sizing');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.54/,'Studio visible build label should match the current release');
+  assert.match(html,/CARD ART STUDIO · v0\.12\.55/,'Studio visible build label should match the current release');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1314,14 +1323,14 @@ test("v0.12.06 Deck Lab recommendations are guidance rather than hard compositio
   assert.equal(validateDeckDraft(p,star.id,custom,selectedEntranceId(p,star.id)).healthy,true);
 });
 
-test("v0.12.06 selected Entrances persist separately from the 60-page deck and shared Entrances are booster-ready",()=>{
+test("v0.12.55 selected Entrances persist separately from the 60-page deck and Superstar Entrances are booster chase cards",()=>{
   const p=createProfile("roman-reigns");
   const defaultEntrance=selectedEntranceId(p,"roman-reigns");
-  assert.equal(defaultEntrance,starById.get("roman-reigns").entranceId);
+  assert.equal(defaultEntrance,'entrance-amazing');
   assert.equal(setSelectedEntrance(p,"roman-reigns",defaultEntrance),true);
   assert.equal(p.selectedEntrances["roman-reigns"],defaultEntrance);
   assert.equal(boosterEligible({id:"shared-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:null}),true);
-  assert.equal(boosterEligible({id:"roman-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:"roman-reigns"}),false);
+  assert.equal(boosterEligible({id:"roman-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:"roman-reigns"}),true);
   assert.equal(boosterEligible({id:"future-shared-entrance-test",kind:"entrance",setId:"raw-series-1",superstarId:null}),false);
 });
 
@@ -1531,7 +1540,7 @@ test("v0.12.12 public game exposes only the three launch series",()=>{
   const launchStars=stars.filter(star=>isLaunchLiveSetId(star.setId));
   const launchCards=collectionCards.filter(card=>isLaunchLiveSetId(card.setId));
   assert.equal(launchStars.length,24);
-  assert.equal(launchCards.length,283);
+  assert.equal(launchCards.length,284);
   assert.equal(exhibitionOpponentIds("roman-reigns").length,23);
   assert.ok(exhibitionOpponentIds("roman-reigns").every(id=>isLaunchLiveSetId(starById.get(id)?.setId)));
   for(const setId of ["raw-series-1","worlds-collide-series-1","money-in-the-bank-series-1","smackdown-series-1","survivor-series-series-1","season-2-whos-next"]){
