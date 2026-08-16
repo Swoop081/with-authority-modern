@@ -4,21 +4,22 @@ import fs from 'node:fs';
 
 const ui = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
-const pkg = JSON.parse(fs.readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
-test('v0.12.40 restores one collectible Superstar card to each Home action tile', () => {
-  for (const id of ['stone-cold-steve-austin','iyo-sky','seth-rollins','becky-lynch','gunther','cody-rhodes']) {
-    assert.match(ui, new RegExp(`superstarPreviewCardMarkup\\("${id}","home-tile-card"\\)`));
-  }
-  assert.match(ui, /superstarPreviewCardMarkup\(starter\.id,"home-tile-card"\)/);
-  assert.match(css, /\.compact-hub-grid \.tile-bg-art \.home-tile-card\{/);
-  assert.match(css, /\.compact-hub-grid \.primary-tile \.tile-bg-art \.home-tile-card\{/);
+test('v0.12.40 collectible-menu restoration is intentionally superseded by v0.12.47 menu photography', () => {
+  assert.match(ui, /const menuSuperstarPhotoMarkup =/);
+  assert.match(ui, /const portraitMarkup = menuSuperstarPhotoMarkup/);
+  assert.match(ui, /legacy-command-photo/);
+  assert.doesNotMatch(ui, /superstarPreviewCardMarkup\("stone-cold-steve-austin","home-tile-card"\)/);
+  assert.doesNotMatch(ui, /superstarPreviewCardMarkup\(starter\.id,"home-tile-card"\)/);
+  assert.match(css, /\.official-menu-superstar-photo/);
+  assert.match(css, /\.legacy-stage-card,.legacy-season-card,.legacy-mode-banner>\.mode-full-card-art,.profile-starter-card\{display:none!important\}/);
 });
 
-test('v0.12.40 Choose Your Path uses a single full Superstar card per mode', () => {
-  assert.match(ui, /const modeCard = starId => `<div class="mode-full-card-art">\$\{superstarPreviewCardMarkup\(starId,"mode-feature-card"\)\}<\/div>`;/);
-  assert.match(ui, /\$\{modeCard\("cody-rhodes"\)\}/);
-  assert.match(ui, /\$\{modeCard\("gunther"\)\}/);
-  assert.match(ui, /\$\{modeCard\("roman-reigns"\)\}/);
-  assert.match(css, /\.premium-mode-card \.mode-full-card-art \.mode-feature-card\{/);
+test('v0.12.40 mode-card restoration is intentionally superseded by full Superstar photography on Play banners', () => {
+  assert.doesNotMatch(ui, /const modeCard = starId/);
+  assert.doesNotMatch(ui, /mode-full-card-art/);
+  assert.match(ui, /portraitMarkup\("cody-rhodes","Cody Rhodes"\)/);
+  assert.match(ui, /portraitMarkup\("gunther","Gunther"\)/);
+  assert.match(ui, /portraitMarkup\("roman-reigns","Roman Reigns"\)/);
+  assert.match(css, /\.legacy-mode-superstar img\.official-menu-superstar-photo/);
 });

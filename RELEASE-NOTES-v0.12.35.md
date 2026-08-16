@@ -11,7 +11,7 @@ Supersedes v0.12.34. This is a narrow iPhone-test hotfix; no roster, card-stat, 
 - MatchEngine now has a direct terminality guard in addition to rules-layer legality, preventing a reply window from being opened accidentally.
 
 ## iPhone/Safari cache coherence
-- Every relative JavaScript module import in the browser graph now carries the current `?v=0.12.46` cache key, including nested engine/data imports.
+- Every relative JavaScript module import in the browser graph now carries the current `?v=0.12.49` cache key, including nested engine/data imports.
 - The stamping tool now enforces this automatically for static and dynamic relative `.js` imports.
 - This prevents Safari/GitHub Pages from assembling a current `app.js` with a stale nested `rules.js` or `MatchEngine.js`.
 

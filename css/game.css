@@ -3857,3 +3857,335 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .catalogue-master-hero-compact h1{font-size:1.78rem!important}.catalogue-command-bar>span{display:none}.catalogue-command-bar{grid-template-columns:1fr}.catalogue-primary-filters,.catalogue-advanced-grid{grid-template-columns:1fr 1fr!important}
   .profile-identity-hero{min-height:200px!important}.profile-starter-card{left:46%;width:72px}.profile-command-band{grid-template-columns:112px minmax(0,1fr)}.profile-command-identity strong{font-size:.84rem}.profile-command-identity small{font-size:.46rem}
 }
+
+/* v0.12.47 — official WWE.com Superstar photography for menu presentation.
+   Decorative menu surfaces use transparent wrestler renders, never cropped
+   collectible-card fronts. Collectible cards remain unchanged in card/product UI. */
+.official-menu-superstar-photo{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.feature-art .mode-portrait img.official-menu-superstar-photo{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  width:72%!important;
+  height:112%!important;
+  right:-5%!important;
+  bottom:-10%!important;
+}
+.legacy-stage-superstar{
+  right:-3%!important;
+  bottom:-7%!important;
+  width:59%!important;
+  height:116%!important;
+}
+.legacy-stage-superstar img.official-menu-superstar-photo{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 16%,#000 100%)!important;
+  filter:saturate(1) contrast(1.04) drop-shadow(0 22px 30px rgba(0,0,0,.62))!important;
+}
+.legacy-stage-card,.legacy-season-card,.legacy-mode-banner>.mode-full-card-art,.profile-starter-card{display:none!important}
+.legacy-season-rock{right:-5%!important;top:-30%!important;width:35%!important;height:162%!important;opacity:.58!important}
+.legacy-season-rock img.official-menu-superstar-photo{object-fit:contain!important;object-position:center bottom!important}
+
+.legacy-command-photo{
+  position:absolute;
+  z-index:1;
+  right:-4%;
+  bottom:-16%;
+  width:47%;
+  height:126%;
+  pointer-events:none;
+  filter:drop-shadow(0 14px 18px rgba(0,0,0,.58));
+}
+.legacy-command-photo img.official-menu-superstar-photo{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 23%,#000 100%);
+}
+.legacy-command-copy{width:70%!important}
+.legacy-command-glow{background:radial-gradient(circle at 83% 45%,color-mix(in srgb,var(--command-accent,#5acfff) 30%,transparent),transparent 43%)!important}
+
+.legacy-utility-rail button>span{
+  left:4px!important;
+  bottom:-9px!important;
+  width:52px!important;
+  height:82px!important;
+  aspect-ratio:auto!important;
+  transform:none!important;
+  filter:drop-shadow(0 7px 8px rgba(0,0,0,.55))!important;
+}
+.legacy-utility-rail button>span img.official-menu-superstar-photo{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+
+.legacy-mode-superstar{
+  right:-3%!important;
+  bottom:-12%!important;
+  width:48%!important;
+  height:126%!important;
+}
+.legacy-mode-superstar img.official-menu-superstar-photo{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 18%,#000 100%)!important;
+  filter:saturate(1.02) contrast(1.05) drop-shadow(0 18px 22px rgba(0,0,0,.58))!important;
+}
+.legacy-mode-copy{width:61%!important}
+
+.select-card-front img.official-menu-superstar-photo{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  padding:6px 8px 0!important;
+}
+.mode-run-node-portrait img.official-menu-superstar-photo{
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+
+@media(max-width:600px){
+  .legacy-stage-superstar{right:-8%!important;width:67%!important;height:113%!important}
+  .legacy-command-photo{right:-8%!important;bottom:-18%!important;width:53%!important;height:128%!important}
+  .legacy-command-copy{width:73%!important}
+  .legacy-season-rock{right:-11%!important;width:42%!important}
+  .legacy-mode-superstar{right:-8%!important;bottom:-12%!important;width:56%!important;height:126%!important}
+  .legacy-mode-copy{width:64%!important}
+  .feature-art .mode-portrait img.official-menu-superstar-photo{width:78%!important;right:-10%!important}
+}
+@media(max-width:390px){
+  .legacy-stage-superstar{right:-12%!important;width:70%!important}
+  .legacy-command-photo{right:-11%!important;width:57%!important}
+  .legacy-mode-superstar{right:-11%!important;width:59%!important}
+}
+
+/* v0.12.49 — Physical Booster Pack Pass
+   Booster products read as sealed foil wrappers rather than rounded card panels. */
+.physical-booster-pack{
+  --pack-metal:#c8cbd4;
+  --pack-dark:#090b11;
+  --pack-glint:rgba(255,255,255,.34);
+  --pack-edge:rgba(255,255,255,.24);
+  position:relative!important;
+  display:grid!important;
+  place-items:center!important;
+  width:min(252px,68vw);
+  aspect-ratio:.59!important;
+  padding:0!important;
+  gap:0!important;
+  overflow:hidden!important;
+  border:1px solid var(--pack-edge)!important;
+  border-radius:7px!important;
+  clip-path:polygon(2% 0,98% 0,100% 2%,100% 98%,98% 100%,2% 100%,0 98%,0 2%);
+  box-shadow:0 20px 44px rgba(0,0,0,.54),inset 0 0 0 1px rgba(255,255,255,.04),inset 0 0 30px rgba(255,255,255,.05)!important;
+  isolation:isolate;
+  transform-style:preserve-3d;
+}
+.physical-booster-pack:before,.physical-booster-pack:after{display:none!important}
+.physical-booster-pack .pack-wrapper-face{
+  position:absolute!important;
+  inset:8.2% 4.5%!important;
+  z-index:2;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  padding:13% 8% 12%!important;
+  overflow:hidden;
+  border-left:1px solid rgba(255,255,255,.08);
+  border-right:1px solid rgba(0,0,0,.42);
+  background:
+    linear-gradient(105deg,rgba(255,255,255,.08),transparent 17% 43%,rgba(255,255,255,.08) 50%,transparent 58% 78%,rgba(255,255,255,.05)),
+    repeating-linear-gradient(165deg,rgba(255,255,255,.018) 0 1px,transparent 1px 8px),
+    linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.15));
+  box-shadow:inset 10px 0 18px rgba(255,255,255,.025),inset -12px 0 24px rgba(0,0,0,.22);
+}
+.physical-booster-pack .pack-wrapper-face:before{
+  content:"";
+  position:absolute;
+  inset:-15% -30%;
+  z-index:-1;
+  pointer-events:none;
+  background:linear-gradient(112deg,transparent 25%,rgba(255,255,255,.03) 35%,rgba(255,255,255,.16) 47%,rgba(255,255,255,.035) 55%,transparent 68%);
+  transform:translateX(-30%) skewX(-8deg);
+  opacity:.72;
+}
+.physical-booster-pack .pack-brand-lockup{
+  width:82%!important;
+  min-height:25%!important;
+  display:grid!important;
+  place-items:center!important;
+  margin:0 0 5%!important;
+  font-size:inherit!important;
+  letter-spacing:normal!important;
+  font-weight:inherit!important;
+  filter:drop-shadow(0 4px 6px rgba(0,0,0,.45));
+}
+.physical-booster-pack .pack-brand-lockup img{
+  width:100%!important;
+  height:auto!important;
+  max-height:92px!important;
+  object-fit:contain!important;
+  border-radius:0!important;
+  mix-blend-mode:normal!important;
+}
+.physical-booster-pack .pack-set-name{
+  position:relative!important;
+  z-index:2;
+  width:100%!important;
+  font-size:clamp(.48rem,2.4vw,.66rem)!important;
+  line-height:1.08!important;
+  letter-spacing:.22em!important;
+  font-weight:900!important;
+  text-align:center!important;
+  color:#f4f5f8!important;
+  text-shadow:0 2px 5px #000;
+}
+.physical-booster-pack .pack-series-name{
+  position:relative!important;
+  z-index:2;
+  margin:1% 0 0!important;
+  font-size:clamp(1rem,5.2vw,1.45rem)!important;
+  line-height:.96!important;
+  letter-spacing:.15em!important;
+  font-weight:1000!important;
+  text-align:center!important;
+  color:#fff!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.72);
+}
+.physical-booster-pack .pack-contents-line{
+  position:relative!important;
+  z-index:2;
+  width:92%!important;
+  margin:5% 0 0!important;
+  font-size:clamp(.35rem,1.8vw,.48rem)!important;
+  line-height:1.28!important;
+  letter-spacing:.13em!important;
+  font-weight:850!important;
+  text-align:center!important;
+  color:rgba(245,247,252,.78)!important;
+}
+.physical-booster-pack .pack-crimp{
+  position:absolute!important;
+  z-index:6!important;
+  left:0!important;
+  right:0!important;
+  height:8.7%!important;
+  display:block!important;
+  margin:0!important;
+  font-size:0!important;
+  background:
+    repeating-linear-gradient(90deg,rgba(10,11,15,.58) 0 2px,rgba(255,255,255,.17) 2px 4px,rgba(0,0,0,.20) 4px 6px),
+    linear-gradient(180deg,rgba(255,255,255,.30),rgba(255,255,255,.04) 34%,rgba(0,0,0,.40) 72%,rgba(255,255,255,.10));
+  box-shadow:0 2px 7px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.28),inset 0 -1px rgba(0,0,0,.55);
+}
+.physical-booster-pack .pack-crimp-top{top:0!important}
+.physical-booster-pack .pack-crimp-bottom{bottom:0!important;transform:scaleY(-1)}
+.physical-booster-pack .pack-side-seam{
+  position:absolute!important;
+  z-index:5!important;
+  top:8.5%!important;
+  bottom:8.5%!important;
+  width:4.2%!important;
+  display:block!important;
+  margin:0!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.20),rgba(255,255,255,.035) 28%,rgba(0,0,0,.34) 70%,rgba(255,255,255,.07));
+  opacity:.75;
+}
+.physical-booster-pack .pack-side-seam-left{left:0!important}
+.physical-booster-pack .pack-side-seam-right{right:0!important;transform:scaleX(-1)}
+.physical-booster-pack .pack-tear-notch{
+  position:absolute!important;
+  z-index:8!important;
+  top:11%!important;
+  right:-1px!important;
+  width:10px!important;
+  height:17px!important;
+  display:block!important;
+  margin:0!important;
+  background:#06070b!important;
+  clip-path:polygon(100% 0,0 50%,100% 100%);
+  filter:drop-shadow(-1px 0 0 rgba(255,255,255,.22));
+}
+.physical-booster-pack .pack-foil-sheen{
+  position:absolute;
+  z-index:4;
+  inset:-25% -55%;
+  pointer-events:none;
+  background:linear-gradient(112deg,transparent 35%,rgba(255,255,255,.04) 42%,var(--pack-glint) 49%,rgba(255,255,255,.05) 54%,transparent 62%);
+  transform:translateX(-38%) skewX(-10deg);
+  opacity:.42;
+}
+.physical-booster-pack.ready .pack-foil-sheen,.sealed-pack-button .physical-booster-pack .pack-foil-sheen{animation:physicalPackSheen 3.8s ease-in-out infinite}
+@keyframes physicalPackSheen{0%,24%{transform:translateX(-45%) skewX(-10deg);opacity:.08}48%{opacity:.52}70%,100%{transform:translateX(45%) skewX(-10deg);opacity:.05}}
+
+/* The wrapper gets an explicit SummerSlam / Hall of Fame / Evolution material family. */
+.physical-booster-pack.pack-set-summerslam-series-1{
+  --pack-glint:rgba(107,219,255,.42);--pack-edge:rgba(142,200,255,.40);
+  background:radial-gradient(circle at 68% 24%,rgba(57,172,255,.30),transparent 24%),radial-gradient(circle at 28% 72%,rgba(255,91,129,.16),transparent 28%),linear-gradient(150deg,#151840 0%,#3b1b62 48%,#10182f 100%)!important;
+}
+.physical-booster-pack.pack-set-hall-of-fame-series-1{
+  --pack-glint:rgba(255,224,121,.46);--pack-edge:rgba(232,198,83,.46);
+  background:radial-gradient(circle at 68% 22%,rgba(255,215,83,.22),transparent 25%),linear-gradient(145deg,#15130b 0%,#4d3a11 48%,#111018 100%)!important;
+}
+.physical-booster-pack.pack-set-evolution-series-1{
+  --pack-glint:rgba(255,159,232,.48);--pack-edge:rgba(221,106,206,.48);
+  background:radial-gradient(circle at 70% 20%,rgba(255,117,215,.32),transparent 26%),radial-gradient(circle at 25% 72%,rgba(51,216,255,.13),transparent 25%),linear-gradient(145deg,#41133b 0%,#251230 50%,#090b12 100%)!important;
+}
+.physical-booster-pack.pack-set-survivor-series-series-1{
+  --pack-glint:rgba(255,145,75,.43);--pack-edge:rgba(255,123,43,.45);
+}
+.physical-booster-pack.pack-set-season-1-final-boss,.physical-booster-pack.pack-set-season-2-whos-next{
+  --pack-glint:rgba(255,214,91,.46);--pack-edge:rgba(230,187,68,.46);
+  background:radial-gradient(circle at 68% 20%,rgba(230,43,55,.26),transparent 28%),linear-gradient(145deg,#2b090c,#5a1119 49%,#12090b)!important;
+}
+
+/* Context sizing: same wrapper, different physical size. */
+.vault-product-pack{width:126px!important;aspect-ratio:.59!important}
+.shop-pack{width:112px!important;aspect-ratio:.59!important}
+.tier-up-reward-pack{width:84px!important;aspect-ratio:.59!important}
+.results-booster{width:74px!important;aspect-ratio:.59!important}
+.sealed-pack-button .sealed-pack{width:min(310px,66vw)!important;aspect-ratio:.59!important}
+.ripping-pack-stage .physical-booster-pack{width:min(310px,66vw)!important}
+
+/* Product shelves give the wrapper room to read as a pack, not a card inside another card. */
+.vault-pack-product{overflow:visible!important;background:radial-gradient(circle at 50% 38%,rgba(92,181,255,.07),transparent 52%),linear-gradient(180deg,#0c1018,#080a0f)!important}
+.vault-pack-product .vault-product-pack{filter:drop-shadow(0 14px 16px rgba(0,0,0,.48))!important}
+.shop-pack-display{overflow:visible!important;display:grid!important;place-items:center!important}
+.store-booster-offer .shop-pack{filter:drop-shadow(0 14px 16px rgba(0,0,0,.48))!important}
+
+/* Opening animation now tears the crimped wrapper at the real sealed edge. */
+.physical-booster-pack.is-opening .pack-tear{
+  position:absolute!important;
+  z-index:12!important;
+  top:0!important;
+  left:0!important;
+  width:100%!important;
+  height:11%!important;
+  display:block!important;
+  background:repeating-linear-gradient(90deg,rgba(5,6,10,.55) 0 2px,rgba(255,255,255,.16) 2px 4px),linear-gradient(180deg,rgba(255,255,255,.24),rgba(0,0,0,.35))!important;
+  border:0!important;
+  border-bottom:1px dashed rgba(255,255,255,.65)!important;
+  animation:physicalTearTop .68s .08s cubic-bezier(.16,.75,.26,1) forwards!important;
+}
+@keyframes physicalTearTop{0%{transform:none;opacity:1}55%{transform:translate(8%,-28%) rotate(7deg);opacity:1}100%{transform:translate(54%,-190%) rotate(24deg);opacity:0}}
+
+@media(max-width:430px){
+  .vault-product-pack{width:118px!important}
+  .shop-pack{width:104px!important}
+  .sealed-pack-button .sealed-pack,.ripping-pack-stage .physical-booster-pack{width:min(285px,64vw)!important}
+  .physical-booster-pack .pack-brand-lockup{width:84%!important}
+  .physical-booster-pack .pack-series-name{letter-spacing:.12em!important}
+}

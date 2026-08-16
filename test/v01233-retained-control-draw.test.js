@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=0.12.46';
-import { decks } from '../js/data/decks.js?v=0.12.46';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.46';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.46';
+import { superstars } from '../js/data/superstars.js?v=0.12.49';
+import { decks } from '../js/data/decks.js?v=0.12.49';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.49';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.49';
 
 const rng=()=>0.42;
 

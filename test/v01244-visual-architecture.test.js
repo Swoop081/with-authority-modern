@@ -34,7 +34,8 @@ test('v0.12.44 Home is a layered game stage rather than the old dashboard stack'
   const home = functionSlice('renderMainMenu', 'renderPlayMenu');
   assert.match(home, /legacy-home-stage/);
   assert.match(home, /legacy-stage-superstar/);
-  assert.match(home, /legacy-stage-card/);
+  assert.doesNotMatch(home, /legacy-stage-card/);
+  assert.match(home, /portraitMarkup\(starter\.id,starter\.name\)/);
   assert.match(home, /legacy-stage-cta/);
   assert.match(home, /legacy-command-rack/);
   assert.match(home, /legacy-utility-rail/);
@@ -50,13 +51,14 @@ test('v0.12.44 Home live Season event keeps countdown, exact next-tier progress 
   assert.match(css, /\.legacy-season-progress i\{[^}]*linear-gradient\(90deg,#23e678,#4dff9c,#c5ffd7\)/);
 });
 
-test('v0.12.44 Play uses three cinematic banners with wrestler layers and one collectible card per mode', () => {
+test('v0.12.44 Play keeps three cinematic banners; v0.12.47 replaces decorative cards with wrestler photography', () => {
   const play = functionSlice('renderPlayMenu', 'renderProfile');
   assert.match(play, /legacy-mode-stack/);
   assert.equal((play.match(/class="legacy-mode-banner/g) ?? []).length, 3);
-  assert.match(play, /modeCard\("cody-rhodes"\)/);
-  assert.match(play, /modeCard\("gunther"\)/);
-  assert.match(play, /modeCard\("roman-reigns"\)/);
+  assert.match(play, /portraitMarkup\("cody-rhodes","Cody Rhodes"\)/);
+  assert.match(play, /portraitMarkup\("gunther","Gunther"\)/);
+  assert.match(play, /portraitMarkup\("roman-reigns","Roman Reigns"\)/);
+  assert.doesNotMatch(play, /modeCard\(/);
   assert.match(play, /legacy-mode-superstar/);
   assert.doesNotMatch(play, /premium-screen-title/);
 });

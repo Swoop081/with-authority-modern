@@ -11,12 +11,14 @@ function functionSlice(name, nextName) {
   return ui.slice(start, end);
 }
 
-test('v0.12.45 Home hero card matches the player starter and no longer duplicates Pack count in the hero stats', () => {
+test('v0.12.45 Home hero matches the player starter and no longer duplicates Pack count in the hero stats', () => {
   const home = functionSlice('renderMainMenu', 'renderPlayMenu');
-  assert.match(home, /const heroCard = superstarPreviewCardMarkup\(starter\.id,"home-tile-card"\)/);
+  assert.match(home, /legacy-stage-superstar/);
+  assert.match(home, /portraitMarkup\(starter\.id,starter\.name\)/);
+  assert.doesNotMatch(home, /const heroCard = superstarPreviewCardMarkup/);
   assert.match(home, /<small>SEASON<\/small><b>TIER \$\{seasonProgress\.tier\}<\/b>/);
   assert.doesNotMatch(home, /<small>PACKS<\/small><b>\$\{allBoosterCredits\}<\/b>/);
-  assert.match(css, /\.legacy-stage-card\{right:35%!important;bottom:20%!important;width:16\.5%!important/);
+  assert.match(css, /\.legacy-stage-superstar img\.official-menu-superstar-photo/);
 });
 
 test('v0.12.45 Season puts the hero before a compact daily booster command strip', () => {

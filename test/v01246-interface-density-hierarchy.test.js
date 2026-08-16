@@ -11,10 +11,11 @@ function functionSlice(name, nextName) {
   return ui.slice(start, end);
 }
 
-test('v0.12.46 Play fills the available viewport and keeps the featured collectible cards fully inside each mode banner', () => {
+test('v0.12.46 Play fills the available viewport; v0.12.47 uses contained Superstar photography instead of clipped card overlays', () => {
   assert.match(css, /\.legacy-play-v3\{[\s\S]*min-height:calc\(100dvh/);
-  assert.match(css, /\.legacy-mode-banner>\.mode-full-card-art\{right:31%!important;bottom:6%!important;width:13\.5%!important/);
-  assert.doesNotMatch(css.slice(css.lastIndexOf('v0.12.46')), /mode-full-card-art\{[^}]*bottom:-/);
+  assert.match(css, /\.legacy-mode-superstar\{[\s\S]*overflow:visible!important/);
+  assert.match(css, /\.legacy-mode-superstar img\.official-menu-superstar-photo\{[\s\S]*object-fit:contain!important/);
+  assert.doesNotMatch(ui.slice(ui.indexOf('function renderPlayMenu'), ui.indexOf('function renderProfile')), /mode-full-card-art/);
 });
 
 test('v0.12.46 Deck Lab skips the redundant chooser when only one Superstar is unlocked', () => {

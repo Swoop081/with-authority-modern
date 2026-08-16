@@ -1,6 +1,6 @@
-import { cloneCard, drawPages, emptyMomentum, shuffle, totalMomentum } from "./utils.js?v=0.12.46";
-import { moveEligibility, counterEligibility, autoCounterEligibility, submissionThreshold, canPlaySpecial, canPlayAction } from "./rules.js?v=0.12.46";
-import { healthOnlyPinChance } from "./health.js?v=0.12.46";
+import { cloneCard, drawPages, emptyMomentum, shuffle, totalMomentum } from "./utils.js?v=0.12.49";
+import { moveEligibility, counterEligibility, autoCounterEligibility, submissionThreshold, canPlaySpecial, canPlayAction } from "./rules.js?v=0.12.49";
+import { healthOnlyPinChance } from "./health.js?v=0.12.49";
 const other=id=>id==="p1"?"p2":"p1";
 export class MatchEngine{
  constructor({p1,p2,decks,rng=Math.random}){this.rng=rng;this._state={phase:"PRE_MATCH",turnNumber:1,controlSequence:1,playerInControl:"p1",players:{},proposedMove:null,postMove:null,submission:null,proposedPin:null,countOut:{count:0,limit:10},log:[],winner:null,finish:null,lifecycle:"active",claimedTiers:[],consecutivePasses:0};this._setup("p1",p1,decks[p1.id]);this._setup("p2",p2,decks[p2.id]);this._preMatch();}

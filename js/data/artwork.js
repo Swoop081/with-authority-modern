@@ -1,12 +1,32 @@
-import { assetUrl } from "../config/build.js?v=0.12.46";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.46";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.46";
+import { assetUrl } from "../config/build.js?v=0.12.49";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.49";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.49";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
+const WWE_MENU_SUPERSTAR_ROOT = "assets/art/wwe-menu-superstars";
 const EVOLUTION_ROOT = "assets/art/evolution-series-1";
 const TEMP_GENERIC_ART = "assets/cards/art/temp/superstar-placeholder.svg";
+
+
+// Official WWE.com Superstar profile renders used only for menu/presentation surfaces.
+// These are kept separate from collectible card art so menus can compose clean
+// wrestler photography without awkwardly cropping a finished card front.
+const rawMenuSuperstarArtwork = {
+  "cm-punk": `${WWE_MENU_SUPERSTAR_ROOT}/cm-punk.webp`,
+  "roman-reigns": `${WWE_MENU_SUPERSTAR_ROOT}/roman-reigns.webp`,
+  "cody-rhodes": `${WWE_MENU_SUPERSTAR_ROOT}/cody-rhodes.webp`,
+  "seth-rollins": `${WWE_MENU_SUPERSTAR_ROOT}/seth-rollins.webp`,
+  "stone-cold-steve-austin": `${WWE_MENU_SUPERSTAR_ROOT}/stone-cold-steve-austin.webp`,
+  "the-undertaker": `${WWE_MENU_SUPERSTAR_ROOT}/the-undertaker.webp`,
+  "hulk-hogan": `${WWE_MENU_SUPERSTAR_ROOT}/hulk-hogan.webp`,
+  "ultimate-warrior": `${WWE_MENU_SUPERSTAR_ROOT}/ultimate-warrior.webp`,
+  "liv-morgan": `${WWE_MENU_SUPERSTAR_ROOT}/liv-morgan.webp`,
+  "rhea-ripley": `${WWE_MENU_SUPERSTAR_ROOT}/rhea-ripley.webp`,
+  "paige": `${WWE_MENU_SUPERSTAR_ROOT}/paige.webp`,
+  "becky-lynch": `${WWE_MENU_SUPERSTAR_ROOT}/becky-lynch.webp`,
+};
 
 // Superstar art is deliberately centralized. Replacing a portrait later only
 // requires changing one path here (or using superstarArtOverrides below).
@@ -58,6 +78,14 @@ const rawSuperstarArtwork = {
 export const superstarArtwork = Object.fromEntries(
   Object.entries(rawSuperstarArtwork).map(([id, path]) => [id, assetUrl(path)])
 );
+
+export const menuSuperstarArtwork = Object.fromEntries(
+  Object.entries(rawMenuSuperstarArtwork).map(([id, path]) => [id, assetUrl(path)])
+);
+
+export function menuSuperstarPhotoFor(superstarId) {
+  return menuSuperstarArtwork[superstarId] ?? superstarArtwork[superstarId] ?? null;
+}
 // Finished Superstar collectible fronts exported by the unified Card Art Studio.
 // These are intentionally separate from wrestler portraits: move/Entrance cards
 // can continue using action/profile art while every Superstar-facing UI surface
