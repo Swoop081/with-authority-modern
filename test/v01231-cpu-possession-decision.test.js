@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=0.12.63';
-import { decks } from '../js/data/decks.js?v=0.12.63';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.63';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.63';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.63';
-import { submissionThreshold } from '../js/engine/rules.js?v=0.12.63';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.63';
+import { superstars } from '../js/data/superstars.js?v=0.12.64';
+import { decks } from '../js/data/decks.js?v=0.12.64';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.64';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.64';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.64';
+import { submissionThreshold } from '../js/engine/rules.js?v=0.12.64';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.64';
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 const star=id=>Object.values(superstars).find(s=>s.id===id);

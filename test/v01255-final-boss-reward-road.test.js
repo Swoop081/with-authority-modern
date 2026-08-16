@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.12.63';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.63';
-import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.12.63';
+import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.12.64';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.64';
+import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.12.64';
 
 const milestones = [5,10,15,20,25,30,40,50];
 

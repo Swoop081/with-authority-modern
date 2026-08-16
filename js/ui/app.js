@@ -1,31 +1,31 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.63";
-import { superstars } from "../data/superstars.js?v=0.12.63";
-import { decks } from "../data/decks.js?v=0.12.63";
-import { sets } from "../data/sets.js?v=0.12.63";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.63";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.63";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.63";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.63";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.63";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.63";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.63";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.63";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.63";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.63";
-import { totalMomentum } from "../engine/utils.js?v=0.12.63";
-import { healthZone } from "../engine/health.js?v=0.12.63";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.63";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.63";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.63";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.63";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.63";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.63";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.63";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.63";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.63";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.63";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.63";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.63";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.64";
+import { superstars } from "../data/superstars.js?v=0.12.64";
+import { decks } from "../data/decks.js?v=0.12.64";
+import { sets } from "../data/sets.js?v=0.12.64";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.64";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.64";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.64";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.64";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.64";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.64";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.64";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.64";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.64";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.64";
+import { totalMomentum } from "../engine/utils.js?v=0.12.64";
+import { healthZone } from "../engine/health.js?v=0.12.64";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.64";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.64";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.64";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.64";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.64";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.64";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.64";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.64";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.64";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.64";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.64";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.64";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1487,8 +1487,11 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
   // card face. The canonical rules back sits underneath it, so a missing/private
   // WebP can never leave a blank rectangle in Collection, Catalogue, boosters or match UI.
   const superstarFront = card.kind === "superstar";
+  const momentumFront = card.kind === "momentum";
   const moveFront = card.kind === "move";
-  const finishedFront = !superstarFront && Boolean(finishedCardArtFor(card));
+  // Momentum is the one authored live-card exception to the generic back fallback.
+  // Its WWE Legacy mockup is a real canonical front, so it never depends on a private WebP.
+  const finishedFront = !superstarFront && !momentumFront && Boolean(finishedCardArtFor(card));
   const displayFlipped = Boolean(flipped);
   const visualFoil = !superstarFront && !finishedFront && (foil || card.kind === "entrance");
   const setClass = `set-${card.setId ?? "global"}`;
@@ -1503,7 +1506,9 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
   const rulesMarkup = cardRulesFaceMarkup(card, setClass, typeLabel, subtitle, ruleText);
   const frontMarkup = superstarFront
     ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
-    : `<span class="ccg-card-front-backup ccg-card-rules ${setClass}" aria-hidden="true">${rulesMarkup}</span>${finishedFront ? `<span class="ccg-card-art ccg-custom-front-overlay ${moveFront ? "ccg-move-full-art" : ""}">${finishedFrontImageMarkup(card)}</span>` : ""}`;
+    : momentumFront
+      ? `<span class="ccg-card-art ccg-momentum-authored-front">${cardArtFace(card)}</span>`
+      : `<span class="ccg-card-front-backup ccg-card-rules ${setClass}" aria-hidden="true">${rulesMarkup}</span>${finishedFront ? `<span class="ccg-card-art ccg-custom-front-overlay ${moveFront ? "ccg-move-full-art" : ""}">${finishedFrontImageMarkup(card)}</span>` : ""}`;
   const rootTag = interactive ? "button" : "span";
   const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. Tap to ${displayFlipped ? "view front" : "view card back"}."` : `aria-hidden="true"`;
   return `<${rootTag} ${rootAttrs} class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${moveFront && finishedFront ? "is-full-art-move" : ""} ${extraClass}">
