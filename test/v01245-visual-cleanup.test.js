@@ -21,13 +21,14 @@ test('v0.12.45 Home hero matches the player starter and no longer duplicates Pac
   assert.match(css, /\.legacy-stage-superstar img\.official-menu-superstar-photo/);
 });
 
-test('v0.12.45 Season puts the hero before a compact daily booster command strip', () => {
+test('v0.12.57 Season keeps the hero before a compact one-line daily booster command strip', () => {
   const seasons = functionSlice('renderSeasons', 'renderChallenges');
   assert.ok(seasons.indexOf('season-final-boss-hero') < seasons.indexOf('season-free-pack-strip'));
   assert.match(seasons, /season-free-pack-strip/);
-  assert.match(seasons, /One Featured Season 1 booster every rolling 24 hours/);
+  assert.match(seasons, /Daily Login Booster · Ready/);
+  assert.doesNotMatch(seasons, /One Featured Season 1 booster every rolling 24 hours|FREE PACK READY/);
   assert.match(css, /\.free-pack-panel\{order:0!important\}/);
-  assert.match(css, /\.season-free-pack-strip\{[\s\S]*min-height:82px!important/);
+  assert.match(css, /\.season-free-pack-strip\{[\s\S]*min-height:62px!important/);
 });
 
 test('v0.12.45 Challenges removes redundant Main Menu control and fits all three set progress plates across mobile', () => {

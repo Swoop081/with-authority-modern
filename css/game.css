@@ -4537,3 +4537,280 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .legacy-stage-stats{height:60px!important}
   .legacy-stage-copy{padding-bottom:70px!important}
 }
+
+/* v0.12.57 — Mobile Presentation + Flow Pass
+   Screenshot-driven iPhone cleanup across Splash, Home, Season, Store,
+   Catalogue, Play selection, pre-match presentation and Momentum cards. */
+
+/* 1 — Splash Final Boss: narrower right bleed and tighter copy relationship. */
+.season-one-ad .season-ad-rock{width:43%!important}
+.season-one-ad .season-ad-copy{left:39%!important;width:59%!important;padding-left:0!important}
+.season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+  left:-17%!important;width:128%!important;
+  mask-image:linear-gradient(90deg,#000 0%,#000 86%,rgba(0,0,0,.72) 92%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 86%,rgba(0,0,0,.72) 92%,transparent 100%)!important;
+}
+@media(max-width:760px){
+  .season-one-ad .season-ad-rock{width:44%!important}
+  .season-one-ad .season-ad-copy{left:38%!important;width:60%!important}
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{left:-18%!important;width:130%!important}
+}
+@media(max-width:430px){
+  .season-one-ad .season-ad-copy{left:37%!important;width:62%!important}
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{left:-19%!important;width:132%!important}
+}
+
+/* 2 — Home chrome/readability: retain the big labels without clipping PACKS. */
+.gamebar-resources small{
+  font-size:1.02rem!important;
+  line-height:.82!important;
+  letter-spacing:-.035em!important;
+  transform:scaleX(.88)!important;
+  overflow:visible!important;
+}
+.gamebar-resources>button,.gamebar-resources>.gamebar-up{overflow:visible!important;padding-inline:2px!important}
+@media(max-width:390px){.gamebar-resources small{font-size:.96rem!important;transform:scaleX(.86)!important}}
+
+/* Lower Home/feature portraits a few pixels so hair/head tops stay visible. */
+.legacy-stage-superstar img.official-menu-superstar-photo,
+.legacy-command-photo img.official-menu-superstar-photo,
+.legacy-mode-superstar img.official-menu-superstar-photo,
+.legacy-utility-rail img.official-menu-superstar-photo,
+.feature-art .mode-portrait img.official-menu-superstar-photo{
+  transform:translateY(3.5%)!important;
+}
+.legacy-season-rock img.final-boss-rock-menu-art{transform:translateY(2.5%)!important}
+
+/* 3 — Daily booster strip: one concise status line and one-line CTA. */
+.season-free-pack-strip{
+  grid-template-columns:44px minmax(0,1fr) 126px!important;
+  min-height:62px!important;
+  padding:7px 9px!important;
+  gap:9px!important;
+  align-items:center!important;
+}
+.season-free-pack-strip .free-pack-copy{display:block!important;min-width:0!important}
+.season-free-pack-strip .free-pack-copy>span,
+.season-free-pack-strip .free-pack-copy>p,
+.season-free-pack-strip .free-pack-copy>small{display:none!important}
+.season-free-pack-strip .free-pack-copy h3{
+  margin:0!important;font-size:.78rem!important;line-height:1!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+.season-free-pack-strip button{
+  width:126px!important;min-width:126px!important;min-height:38px!important;
+  padding:7px 7px!important;font-size:.52rem!important;white-space:nowrap!important;
+}
+@media(max-width:390px){
+  .season-free-pack-strip{grid-template-columns:40px minmax(0,1fr) 112px!important;gap:7px!important}
+  .season-free-pack-strip button{width:112px!important;min-width:112px!important;font-size:.48rem!important}
+  .season-free-pack-strip .free-pack-copy h3{font-size:.70rem!important}
+}
+
+/* 4 — Season Final Boss hero: move Rock farther right, away from title/copy. */
+.season-final-boss-hero .mode-portrait-stack{right:-17%!important;width:45%!important}
+.final-boss-feature-art img.final-boss-rock-menu-art{right:-20%!important;width:126%!important}
+@media(max-width:430px){
+  .season-final-boss-hero .mode-portrait-stack{right:-22%!important;width:47%!important}
+  .final-boss-feature-art img.final-boss-rock-menu-art{right:-25%!important;width:132%!important}
+}
+
+/* 6 — Season Command Center: stacked, large, readable stat rows. */
+.season-command-center{padding:14px!important;display:grid!important;gap:10px!important}
+.season-command-stats{display:grid!important;grid-template-columns:1fr!important;gap:7px!important}
+.season-command-row{
+  display:grid!important;grid-template-columns:46px minmax(0,1fr)!important;align-items:center!important;
+  gap:11px!important;min-height:72px!important;padding:10px 12px!important;
+  border:1px solid rgba(255,255,255,.10)!important;border-radius:10px!important;
+  background:linear-gradient(135deg,rgba(25,29,42,.96),rgba(10,12,18,.98))!important;
+  min-width:0!important;
+}
+.season-command-row .season-stat-icon{
+  width:42px!important;height:42px!important;border-radius:12px!important;
+  display:grid!important;place-items:center!important;
+}
+.season-command-row .season-stat-icon .ui-icon{width:23px!important;height:23px!important}
+.season-command-row>div{display:grid!important;gap:2px!important;min-width:0!important}
+.season-command-row>div>span{
+  font-size:.56rem!important;line-height:1!important;letter-spacing:.14em!important;
+  color:#aab5c8!important;font-weight:950!important;
+}
+.season-command-row>div>b{
+  font-size:1.18rem!important;line-height:1.05!important;color:#fff!important;
+  white-space:normal!important;overflow-wrap:anywhere!important;
+}
+.season-command-row>div>small{font-size:.58rem!important;line-height:1.2!important;color:#c7ae64!important}
+.season-command-row.next-drop-card{
+  grid-template-columns:46px minmax(0,1fr)!important;min-height:78px!important;
+  background:linear-gradient(135deg,rgba(55,24,31,.92),rgba(20,14,23,.98))!important;
+}
+.season-command-row.next-drop-card b{font-size:1.05rem!important}
+.season-command-row.next-drop-card small{color:#d4b767!important}
+.season-command-center .season-progress-heading{margin-top:4px!important}
+@media(min-width:720px){
+  .season-command-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .season-command-row{grid-template-columns:40px minmax(0,1fr)!important;min-height:82px!important}
+}
+
+/* 7 — Store: mobile-safe hero, booster counter and Superstar shelf. */
+.store-feature .feature-copy h2{
+  font-size:clamp(1.75rem,7vw,2.8rem)!important;line-height:.92!important;
+  letter-spacing:-.035em!important;max-width:100%!important;overflow-wrap:anywhere!important;
+}
+.store-booster-offer{
+  grid-template-columns:104px minmax(0,1fr)!important;gap:12px!important;
+  overflow:hidden!important;align-items:center!important;padding:12px!important;
+}
+.store-booster-offer .shop-pack-display{overflow:hidden!important;min-width:0!important;min-height:148px!important}
+.store-booster-offer .shop-pack{width:92px!important;transform:none!important;margin:auto!important}
+.store-booster-offer .shop-pack .pack-set-name{font-size:.34rem!important;letter-spacing:.10em!important;line-height:1.05!important}
+.store-booster-offer .shop-pack .pack-series-name{font-size:.76rem!important;letter-spacing:.10em!important}
+.store-booster-offer .shop-pack .pack-contents-line{font-size:.25rem!important;letter-spacing:.06em!important;line-height:1.12!important}
+.store-offer-copy{min-width:0!important;align-self:center!important}
+.store-offer-copy>span{font-size:.48rem!important;letter-spacing:.14em!important}
+.store-offer-copy h3{font-size:.92rem!important;line-height:1.05!important;margin:3px 0!important;overflow-wrap:anywhere!important}
+.store-offer-price{display:grid!important;grid-template-columns:auto minmax(0,1fr)!important;gap:8px!important;align-items:center!important}
+.store-offer-price>b{font-size:.80rem!important;white-space:nowrap!important}
+.store-offer-price .start-match{width:100%!important;min-width:0!important;min-height:38px!important;padding:7px!important;font-size:.58rem!important}
+
+.store-superstar-shelf{
+  display:flex!important;gap:9px!important;overflow-x:auto!important;overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;padding:3px 2px 10px!important;
+}
+.store-superstar-card.shop-star-card{
+  flex:0 0 172px!important;display:grid!important;grid-template-columns:1fr!important;
+  grid-template-rows:142px auto auto!important;gap:7px!important;min-height:0!important;
+  padding:9px!important;scroll-snap-align:start!important;overflow:hidden!important;
+}
+.store-superstar-card .store-superstar-card-art{
+  grid-column:1!important;grid-row:1!important;width:94px!important;height:138px!important;
+  justify-self:center!important;align-self:start!important;overflow:hidden!important;border-radius:7px!important;
+}
+.store-superstar-card-art .store-shelf-collectible{
+  width:94px!important;height:auto!important;max-height:138px!important;display:block!important;
+  overflow:hidden!important;border-radius:7px!important;
+}
+.store-superstar-card .store-superstar-copy{
+  grid-column:1!important;grid-row:2!important;text-align:center!important;align-self:start!important;
+  display:grid!important;gap:2px!important;min-width:0!important;
+}
+.store-superstar-card .store-superstar-copy>span{font-size:.44rem!important;letter-spacing:.10em!important}
+.store-superstar-card .store-superstar-copy h3{font-size:.78rem!important;line-height:1.05!important;white-space:normal!important}
+.store-superstar-card .store-superstar-copy small{font-size:.48rem!important;line-height:1.1!important}
+.store-superstar-card .store-superstar-copy p{display:none!important}
+.store-superstar-card>button:last-child{
+  grid-column:1!important;grid-row:3!important;width:100%!important;min-width:0!important;
+  justify-self:stretch!important;margin:0!important;min-height:34px!important;padding:6px!important;font-size:.48rem!important;
+}
+@media(max-width:430px){
+  .store-feature .feature-copy h2{font-size:1.95rem!important}
+  .store-booster-offer{grid-template-columns:94px minmax(0,1fr)!important;gap:9px!important;padding:10px!important}
+  .store-booster-offer .shop-pack{width:82px!important}
+  .store-superstar-card.shop-star-card{flex-basis:164px!important}
+}
+
+/* 8 — Finished card artwork already prints its own Cost/Damage. Never duplicate it. */
+.ccg-card.is-full-art-finished .ccg-card-title,
+.ccg-card.is-full-art-finished .ccg-card-stats,
+.ccg-card.is-full-art-move .ccg-card-title,
+.ccg-card.is-full-art-move .ccg-card-stats{display:none!important}
+
+/* 9 — Play/mode Superstar selectors show the actual collectible card front. */
+.select-card-front{display:grid!important;place-items:center!important;padding:8px!important;background:#080a0f!important}
+.select-card-front .select-favourite{z-index:8!important}
+.selection-owned-card{
+  display:grid!important;place-items:center!important;width:100%!important;height:100%!important;
+  min-width:0!important;min-height:0!important;overflow:hidden!important;
+}
+.selection-owned-card .selection-owned-superstar-card,
+.selection-owned-card .generated-superstar-preview{
+  width:auto!important;height:100%!important;max-width:100%!important;max-height:100%!important;
+  aspect-ratio:.68!important;object-fit:contain!important;pointer-events:none!important;
+}
+.selection-owned-card .ccg-card-inner,.selection-owned-card .ccg-card-face{height:100%!important}
+body[data-screen="setup"] .select-superstar-card{height:min(52svh,430px)!important}
+
+/* 10 — Television-style Main Event matchup graphic: logo, headline, cards, VS, CTA. */
+.matchup-splash{
+  justify-content:center!important;gap:8px!important;
+  padding-top:max(8px,env(safe-area-inset-top))!important;
+  padding-bottom:max(12px,env(safe-area-inset-bottom))!important;
+}
+.matchup-splash .prematch-brand{width:min(620px,92vw)!important;min-height:150px!important;margin-bottom:-8px!important}
+.matchup-splash .prematch-show-logo{height:160px!important;width:100%!important;max-width:100%!important;object-fit:contain!important}
+.matchup-splash .prematch-heading{margin-top:-8px!important;margin-bottom:6px!important}
+.matchup-splash .prematch-heading span{font-size:.72rem!important;letter-spacing:.30em!important}
+.matchup-splash .prematch-heading h2{font-size:clamp(2.4rem,10vw,4.6rem)!important;line-height:.84!important}
+.matchup-splash .prematch-versus{width:min(900px,100%)!important;gap:7px!important;align-items:center!important}
+.matchup-splash .prematch-side{gap:4px!important}
+.matchup-splash .prematch-side-label{font-size:.46rem!important;letter-spacing:.22em!important;opacity:.72!important}
+.matchup-splash .prematch-superstar-card{max-width:330px!important}
+.matchup-splash .prematch-vs{font-size:clamp(3.2rem,14vw,5.4rem)!important;line-height:.8!important}
+.matchup-splash .prematch-start{min-height:58px!important;font-size:1rem!important;margin-top:10px!important}
+@media(max-width:600px){
+  .matchup-splash .prematch-brand{width:90vw!important;min-height:132px!important}
+  .matchup-splash .prematch-show-logo{height:142px!important}
+  .matchup-splash .prematch-heading h2{font-size:2.45rem!important}
+  .matchup-splash .prematch-superstar-card{max-width:43vw!important}
+  .matchup-splash .prematch-vs{font-size:2.8rem!important}
+}
+
+/* 11 — Let the Superstar card breathe before its Entrance takes over. */
+.entrance-card-transition{transition:opacity .42s ease,transform .52s cubic-bezier(.2,.75,.2,1),filter .42s ease!important}
+.entrance-intro-screen .entrance-tap-hint,
+.entrance-intro-screen #entrance-next{
+  opacity:0!important;pointer-events:none!important;transition:opacity .22s ease!important;
+}
+.entrance-intro-screen .entrance-tap-hint.is-visible,
+.entrance-intro-screen #entrance-next.is-visible{opacity:1!important;pointer-events:auto!important}
+
+/* 12 — Momentum cards: no flames; simple, bold method-colour arena energy. */
+.ccg-card.type-momentum .ccg-card-title,
+.ccg-card.type-momentum .ccg-card-stats{display:none!important}
+.momentum-mock{
+  position:absolute!important;inset:0!important;overflow:hidden!important;
+  background:
+    radial-gradient(circle at 50% 48%,color-mix(in srgb,var(--mom) 68%,transparent) 0 3%,color-mix(in srgb,var(--mom) 28%,transparent) 22%,transparent 48%),
+    linear-gradient(148deg,color-mix(in srgb,var(--mom) 78%,#151923) 0%,color-mix(in srgb,var(--mom) 48%,#080b10) 42%,#05070b 100%)!important;
+  color:#fff!important;
+}
+.momentum-mock:before{
+  content:""!important;display:block!important;position:absolute!important;inset:-12% -22%!important;
+  background:repeating-linear-gradient(118deg,transparent 0 9%,rgba(255,255,255,.09) 9.4% 10.2%,transparent 10.6% 20%)!important;
+  transform:skewX(-11deg)!important;opacity:.68!important;filter:none!important;border-radius:0!important;
+}
+.momentum-mock:after{
+  content:""!important;position:absolute!important;inset:4%!important;border:1.5px solid rgba(255,255,255,.34)!important;
+  border-radius:4cqw!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--mom) 72%,transparent),inset 0 0 16cqw rgba(0,0,0,.22),0 0 8cqw color-mix(in srgb,var(--mom) 36%,transparent)!important;
+}
+.momentum-flames,.momentum-set-logo{display:none!important}
+.momentum-arena-lines{position:absolute!important;inset:0!important;z-index:1!important;overflow:hidden!important}
+.momentum-arena-lines i{position:absolute!important;left:-18%!important;width:136%!important;height:1.2%!important;background:rgba(255,255,255,.24)!important;box-shadow:0 0 3cqw color-mix(in srgb,var(--mom) 70%,transparent)!important;transform:rotate(-16deg)!important}
+.momentum-arena-lines i:nth-child(1){top:28%!important}.momentum-arena-lines i:nth-child(2){top:55%!important;opacity:.55!important}.momentum-arena-lines i:nth-child(3){top:76%!important;opacity:.30!important}
+.momentum-topline{
+  position:absolute!important;z-index:4!important;left:8%!important;right:8%!important;top:7%!important;
+  display:flex!important;align-items:baseline!important;justify-content:space-between!important;gap:8%!important;
+}
+.momentum-topline b{font-size:4.3cqw!important;line-height:1!important;letter-spacing:.11em!important;color:#fff!important;white-space:nowrap!important}
+.momentum-topline em{font-size:4.3cqw!important;line-height:1!important;letter-spacing:.14em!important;color:rgba(255,255,255,.82)!important;font-style:normal!important;white-space:nowrap!important}
+.momentum-method-mark{
+  position:absolute!important;z-index:3!important;left:50%!important;top:26%!important;transform:translateX(-50%)!important;
+  width:24%!important;aspect-ratio:1!important;display:grid!important;place-items:center!important;border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.28)!important;background:rgba(4,7,10,.28)!important;
+  box-shadow:0 0 7cqw color-mix(in srgb,var(--mom) 42%,transparent)!important;
+}
+.momentum-method-mark svg{width:58%!important;height:58%!important;fill:none!important;stroke:#fff!important;stroke-width:1.6!important;stroke-linecap:round!important;stroke-linejoin:round!important;opacity:.92!important}
+.momentum-value{
+  position:absolute!important;z-index:4!important;left:0!important;right:0!important;top:45%!important;
+  font-size:38cqw!important;line-height:.72!important;letter-spacing:-.08em!important;font-weight:1000!important;
+  color:#fff!important;text-align:center!important;text-shadow:0 0 8cqw color-mix(in srgb,var(--mom) 78%,transparent),0 2cqw 3cqw rgba(0,0,0,.5)!important;
+}
+.momentum-method{
+  position:absolute!important;z-index:4!important;left:7%!important;right:7%!important;bottom:9%!important;top:auto!important;
+  display:block!important;text-align:center!important;text-shadow:0 1cqw 2cqw rgba(0,0,0,.65)!important;
+}
+.momentum-method b{
+  font-size:10.8cqw!important;line-height:.9!important;letter-spacing:.10em!important;font-weight:1000!important;
+  color:#fff!important;text-transform:uppercase!important;white-space:nowrap!important;
+}
+.momentum-method small,.momentum-method:after{display:none!important;content:none!important}

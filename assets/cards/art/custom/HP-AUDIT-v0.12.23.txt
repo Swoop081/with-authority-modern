@@ -1,6 +1,0 @@
-WWE Legacy v0.12.23 — Starting HP Buff Audit
-
-Superstars updated: 50
-Rule: every Superstar receives +10 starting HP.
-Old range: 46–58
-New range: 56–68

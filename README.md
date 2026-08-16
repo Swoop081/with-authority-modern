@@ -1,7 +1,9 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.56 — Amazing Entrance Studio Hotfix**.
+Current working build: **v0.12.57 — Mobile Presentation + Flow Pass**.
 
-v0.12.56 supersedes v0.12.55. This hotfix keeps all v0.12.55 gameplay/economy rules intact and fixes Card Art Studio filtering so the universal Amazing Entrance remains selectable even when a Superstar filter is active.
+v0.12.57 supersedes v0.12.56. It packages the screenshot-driven iPhone presentation cleanup across the launch promo, Home, Season, Store, Catalogue, Play selection, pre-match presentation and Momentum cards, plus the direct-opening Daily Login Booster flow.
 
-See `RELEASE-NOTES-v0.12.56.md` for the complete change list and certification.
+No Superstar balance, deck composition, card-stat, pin, submission, counter, Momentum-mechanics, Entrance-economy or Season-reward rules are changed from v0.12.56.
+
+See `RELEASE-NOTES-v0.12.57.md` for the complete change list and certification.
