@@ -19,11 +19,11 @@ test('v0.12.60 pulls Season Final Boss Rock left from the edge', () => {
   assert.match(css, /\.season-final-boss-hero \.final-boss-feature-art\{[\s\S]*?right:-2%!important;[\s\S]*?width:42%!important/);
 });
 
-test('daily booster remains a single purple stateful button', () => {
+test('v0.12.60 daily booster is a single purple stateful button', () => {
   assert.match(app, /<section class="season-free-pack-cta/);
   assert.doesNotMatch(app, /<div class="free-pack-icon"><span>24H<\/span><b>FREE<\/b><\/div>/);
-  assert.match(app, /free\.available \? 'Claim Pack' : formatCountdown\(free\.msRemaining\)/);
-  assert.match(css, /\.season-free-pack-cta \.season-free-pack-button\{[\s\S]*?background:linear-gradient\(135deg,#7636c8,#a647df\)!important/);
+  assert.match(app, /Next Free Booster · \$\{formatCountdown\(free\.msRemaining\)\}/);
+  assert.match(css, /\.season-free-pack-button\{[\s\S]*?background:linear-gradient\(135deg,#7636c8,#a647df\)!important/);
 });
 
 test('v0.12.60 compacts Season Command Center rows', () => {

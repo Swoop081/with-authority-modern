@@ -5337,115 +5337,93 @@ body[data-screen="matchup"] #game{padding:0!important;gap:0!important}
   .challenge-set-logo{height:40px!important}
 }
 
-/* v0.12.61 — Launch Final Boss Scale Correction
-   Screenshot-driven correction: let the supplied Rock render fill the complete
-   left hero column instead of appearing as a narrow cutout. The art itself is
-   unchanged; only its launch-screen layout and scale are adjusted. */
-.season-one-ad{
-  grid-template-columns:45% 55%!important;
-}
-.season-one-ad .season-ad-rock{
-  position:relative!important;
-  width:100%!important;
-  height:100%!important;
-  min-width:0!important;
-  justify-self:stretch!important;
-  align-self:stretch!important;
-  overflow:hidden!important;
-}
-.season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
-  position:absolute!important;
-  top:-2%!important;
-  bottom:auto!important;
-  left:50%!important;
-  right:auto!important;
-  width:auto!important;
-  height:108%!important;
-  max-width:none!important;
-  object-fit:contain!important;
-  object-position:center bottom!important;
-  transform:translateX(-50%)!important;
-  mask-image:linear-gradient(90deg,#000 0%,#000 94%,rgba(0,0,0,.78) 97%,transparent 100%)!important;
-  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 94%,rgba(0,0,0,.78) 97%,transparent 100%)!important;
-}
-.season-one-ad .season-ad-copy{
-  left:auto!important;
-  width:auto!important;
-  min-width:0!important;
-  padding-left:4px!important;
-}
-@media(max-width:430px){
-  .season-one-ad{grid-template-columns:45% 55%!important}
-  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
-    top:-2%!important;
-    left:50%!important;
-    width:auto!important;
-    height:110%!important;
-    transform:translateX(-50%)!important;
-  }
-  .season-one-ad .season-ad-copy{padding-left:2px!important}
-}
 
-
-/* v0.12.62 — Daily Booster Button Pass
-   One full-width purple control only: CLAIM PACK when live, countdown only while waiting. */
-.season-free-pack-cta{
-  display:block!important;
-  width:100%!important;
-  margin:8px 0!important;
-  padding:0!important;
-  background:none!important;
-  border:0!important;
-}
-.season-free-pack-cta .season-free-pack-button{
-  display:block!important;
-  width:100%!important;
-  min-width:0!important;
-  max-width:none!important;
-  min-height:48px!important;
-  margin:0!important;
-  padding:11px 14px!important;
-  border:1px solid rgba(193,135,255,.58)!important;
-  border-radius:10px!important;
-  background:linear-gradient(135deg,#7636c8,#a647df)!important;
-  color:#fff!important;
-  font-size:.82rem!important;
-  line-height:1!important;
-  font-weight:1000!important;
-  letter-spacing:.02em!important;
-  text-align:center!important;
+/* v0.12.61 — Counter box fit + run hero placement corrections. */
+.gamebar-resources b{
+  font-size:.60rem!important;
+  line-height:.92!important;
+  letter-spacing:-.04em!important;
+  font-variant-numeric:tabular-nums!important;
   white-space:nowrap!important;
-  overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  box-shadow:0 8px 22px rgba(98,41,165,.22)!important;
 }
-.season-free-pack-cta .season-free-pack-button:disabled{
-  opacity:.72!important;
-  filter:none!important;
-  cursor:default!important;
-  box-shadow:none!important;
-}
-@media(max-width:390px){
-  .season-free-pack-cta .season-free-pack-button{font-size:.72rem!important;padding-inline:9px!important}
-}
+.gamebar-resources>button,.gamebar-resources>.gamebar-up{padding:3px 2px 4px!important}
+@media(max-width:390px){.gamebar-resources b{font-size:.56rem!important}}
 
-
-/* v0.12.63 — Card Back Fallback Pass
-   The canonical rules/details back is always present underneath an optional
-   finished front. If a private/custom WebP is absent or fails to load, the
-   art layer disappears and the original back remains visible — never blank. */
-.ccg-card-front .ccg-card-front-backup{
-  position:absolute!important;
-  inset:0!important;
-  z-index:1!important;
+body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art,
+body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art{
+  inset:-5% -1% 0 42%!important;
+  opacity:1!important;
+}
+body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo,
+body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo{
+  width:116%!important;
+  height:142%!important;
+  right:-6%!important;
+  bottom:-6%!important;
   transform:none!important;
-  -webkit-transform:none!important;
-  border:0!important;
-  border-radius:inherit!important;
-  box-shadow:none!important;
-  backface-visibility:visible!important;
-  -webkit-backface-visibility:visible!important;
 }
-.ccg-card-front .ccg-custom-front-overlay{z-index:2!important}
-.ccg-card-front .ccg-custom-front-overlay.is-missing-finished-art{display:none!important}
-.ccg-card.uses-rules-fallback .ccg-card-front-backup{display:flex!important}
+@media(max-width:600px){
+  body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art,
+  body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art{inset:-6% -2% 0 40%!important}
+  body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo,
+  body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo{
+    width:122%!important;
+    height:146%!important;
+    right:-8%!important;
+    bottom:-4%!important;
+  }
+}
+
+/* v0.12.65 — Booster economy + premium reward presentation pass. */
+
+/* Foil is a material treatment, not only a badge. This overlay sits above
+   finished custom fronts, generated fronts and Superstar fronts alike. */
+.ccg-card.is-foil .ccg-card-front{overflow:hidden!important;box-shadow:inset 0 0 0 1px rgba(219,247,255,.58),0 0 15px rgba(153,224,255,.20)!important}
+.ccg-card.is-foil .ccg-foil-overlay{
+  position:absolute!important;z-index:45!important;inset:-22%!important;display:block!important;pointer-events:none!important;
+  background:
+    linear-gradient(112deg,transparent 22%,rgba(114,210,255,.10) 34%,rgba(255,255,255,.58) 44%,rgba(255,226,131,.26) 48%,rgba(232,164,255,.30) 53%,rgba(128,231,255,.16) 59%,transparent 72%),
+    radial-gradient(circle at 18% 22%,rgba(255,255,255,.42) 0 1.2%,transparent 1.8%),
+    radial-gradient(circle at 78% 74%,rgba(205,245,255,.45) 0 1%,transparent 1.7%);
+  background-size:190% 100%,100% 100%,100% 100%!important;
+  mix-blend-mode:screen!important;opacity:.72!important;transform:translateX(-48%) rotate(4deg)!important;
+  animation:legacyFoilSurface 2.65s ease-in-out infinite!important;
+}
+.ccg-card.is-foil .ccg-card-front:after{display:block!important;content:""!important;position:absolute!important;z-index:44!important;inset:1.5%!important;border:1px solid rgba(220,248,255,.62)!important;border-radius:inherit!important;box-shadow:inset 0 0 14px rgba(196,236,255,.13),0 0 9px rgba(206,236,255,.14)!important;pointer-events:none!important}
+@keyframes legacyFoilSurface{0%{transform:translateX(-58%) rotate(4deg);filter:hue-rotate(0deg) brightness(.98)}50%{filter:hue-rotate(45deg) brightness(1.10)}100%{transform:translateX(54%) rotate(4deg);filter:hue-rotate(95deg) brightness(1)}}
+
+/* Open packs stay face up. Small live previews make the whole five-card pack
+   visible while the centre card remains the readable focus. */
+.booster-faceup-strip{display:flex!important;justify-content:center!important;align-items:center!important;gap:5px!important;width:min(390px,94vw)!important;margin:4px auto 0!important;overflow:hidden!important}
+.faceup-pack-thumb{appearance:none!important;border:1px solid rgba(255,255,255,.13)!important;background:#090b10!important;padding:2px!important;width:16.5%!important;max-width:64px!important;aspect-ratio:.68!important;border-radius:7px!important;overflow:hidden!important;opacity:.68!important;transition:transform .18s ease,opacity .18s ease,border-color .18s ease!important}
+.faceup-pack-thumb.current{opacity:1!important;transform:translateY(-3px) scale(1.04)!important;border-color:#e9c653!important;box-shadow:0 0 12px rgba(233,198,83,.22)!important}
+.faceup-pack-thumb .faceup-thumb-card{width:100%!important;height:100%!important;max-width:100%!important;pointer-events:none!important}
+.faceup-pack-thumb .ccg-card-inner,.faceup-pack-thumb .ccg-card-face{height:100%!important}
+.faceup-pack-thumb.converted{display:grid!important;place-items:center!important;background:radial-gradient(circle,#1b7fa7,#081924 72%)!important;color:#fff!important}
+.faceup-pack-thumb.converted>span{display:grid!important;place-items:center!important;font-weight:1000!important;font-size:.63rem!important;line-height:.8!important}.faceup-pack-thumb.converted b{font-size:.38rem!important;letter-spacing:.08em!important;margin-top:3px!important}
+
+/* Duplicate card -> UP: the physical card fragments inward and its slot becomes
+   the actual currency reward rather than retaining a dead duplicate card. */
+.duplicate-disintegrating{position:relative!important;animation:duplicateCardDissolve 1.05s ease-in forwards!important;transform-origin:center!important}
+.duplicate-disintegrating .ccg-card{animation:duplicateCardPixels 1.05s ease-in forwards!important}
+.duplicate-conversion-overlay{position:absolute!important;z-index:70!important;inset:0!important;display:grid!important;place-items:center!important;align-content:center!important;pointer-events:none!important;color:#e9faff!important;text-shadow:0 0 16px #61d8ff!important}
+.duplicate-conversion-overlay strong{font-size:.78rem!important;letter-spacing:.18em!important;opacity:0!important;animation:duplicateLabelIn .95s ease forwards!important}.duplicate-conversion-overlay span{font-size:.48rem!important;letter-spacing:.12em!important;margin-top:6px!important;opacity:0!important;animation:duplicateLabelIn .95s .12s ease forwards!important}
+.duplicate-conversion-overlay i{position:absolute!important;left:50%!important;top:50%!important;width:7px!important;height:7px!important;border-radius:2px!important;background:#b8efff!important;box-shadow:0 0 12px #58d6ff!important;animation:duplicateShard 1.0s ease-in forwards!important}
+.duplicate-conversion-overlay i:nth-child(1){--x:-95px;--y:-125px}.duplicate-conversion-overlay i:nth-child(2){--x:88px;--y:-84px;animation-delay:.05s!important}.duplicate-conversion-overlay i:nth-child(3){--x:-72px;--y:102px;animation-delay:.09s!important}.duplicate-conversion-overlay i:nth-child(4){--x:106px;--y:118px;animation-delay:.02s!important}.duplicate-conversion-overlay i:nth-child(5){--x:0px;--y:-152px;animation-delay:.12s!important}
+@keyframes duplicateCardPixels{0%,35%{opacity:1;filter:none;clip-path:inset(0)}70%{opacity:.65;filter:saturate(1.8) brightness(1.4);clip-path:polygon(0 0,100% 4%,96% 27%,100% 46%,91% 67%,100% 92%,70% 100%,45% 94%,22% 100%,0 88%,7% 61%,0 42%,8% 18%)}100%{opacity:0;filter:brightness(2) blur(2px);transform:scale(.72)}}
+@keyframes duplicateCardDissolve{0%,70%{filter:none}100%{filter:drop-shadow(0 0 24px rgba(91,219,255,.9))}}
+@keyframes duplicateShard{0%{opacity:0;transform:translate(var(--x),var(--y)) scale(.7) rotate(0)}35%{opacity:1}100%{opacity:0;transform:translate(0,0) scale(.2) rotate(180deg)}}
+@keyframes duplicateLabelIn{0%,30%{opacity:0;transform:scale(.92)}55%{opacity:1}100%{opacity:0;transform:scale(1.08)}}
+.up-card-replacement{width:min(330px,78vw)!important;aspect-ratio:.68!important;border-radius:18px!important;border:1px solid rgba(165,235,255,.60)!important;background:radial-gradient(circle at 50% 42%,rgba(70,210,255,.42),transparent 28%),linear-gradient(145deg,#12364b,#07141e 62%,#05090e)!important;box-shadow:0 0 38px rgba(73,201,255,.30),inset 0 0 34px rgba(74,214,255,.11)!important;color:#fff!important;display:grid!important;place-items:center!important;align-content:center!important;text-align:center!important;gap:2px!important;position:relative!important;overflow:hidden!important}
+.up-card-replacement:before{content:""!important;position:absolute!important;inset:-35%!important;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.36) 48%,rgba(96,216,255,.28) 52%,transparent 62%)!important;animation:upRewardSheen 2.2s ease-in-out infinite!important}.up-card-replacement span{font-size:.54rem!important;letter-spacing:.17em!important;font-weight:950!important;color:#a9eaff!important;z-index:2!important}.up-card-replacement strong{font-size:clamp(3.3rem,17vw,5.2rem)!important;line-height:.88!important;letter-spacing:-.07em!important;font-weight:1000!important;z-index:2!important;text-shadow:0 0 24px rgba(96,220,255,.72)!important}.up-card-replacement b{font-size:1.25rem!important;letter-spacing:.16em!important;z-index:2!important}.up-card-replacement small{font-size:.45rem!important;letter-spacing:.16em!important;color:#77b9d1!important;z-index:2!important}.summary-up-reward{width:100%!important;height:100%!important;max-width:none!important;border-radius:12px!important}.summary-up-reward strong{font-size:2rem!important}.summary-up-reward b{font-size:.72rem!important}.summary-up-reward span{font-size:.34rem!important}.reveal-up-reward{animation:upRewardMaterialize .42s cubic-bezier(.18,.86,.28,1.18) both!important}
+@keyframes upRewardSheen{0%{transform:translateX(-55%) rotate(5deg)}100%{transform:translateX(55%) rotate(5deg)}}@keyframes upRewardMaterialize{from{opacity:0;transform:scale(.72);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+.gamebar-up.up-conversion-pulse,[data-chrome-up].up-conversion-pulse{animation:upWalletPulse .62s ease both!important}@keyframes upWalletPulse{0%,100%{transform:none;filter:none}35%{transform:scale(1.12);filter:brightness(1.75);box-shadow:0 0 22px rgba(96,220,255,.72)}65%{transform:scale(1.05);filter:brightness(1.25)}}
+
+/* Hand cards use the same large inspect language as Play Pile/Superstar cards;
+   the adjacent Play button remains the only action that commits the card. */
+.hand-card-inspect-trigger{display:grid!important;place-items:center!important;cursor:zoom-in!important;min-width:0!important;outline:none!important}.hand-card-inspect-trigger:focus-visible{border-radius:10px!important;box-shadow:0 0 0 2px #72d7ff!important}.hand-card-modal{z-index:1700!important}.hand-card-modal-inner{animation:handInspectZoom .22s cubic-bezier(.18,.82,.24,1.12) both!important}.hand-modal-card{width:min(370px,86vw)!important;max-height:78dvh!important}@keyframes handInspectZoom{from{opacity:0;transform:scale(.76) translateY(22px)}to{opacity:1;transform:none}}
+
+@media(max-width:430px){
+  .booster-faceup-strip{gap:3px!important;width:96vw!important}.faceup-pack-thumb{max-width:57px!important;border-radius:6px!important}
+  .up-card-replacement{width:min(300px,76vw)!important}.up-card-replacement strong{font-size:3.65rem!important}
+}

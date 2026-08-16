@@ -21,7 +21,7 @@ export const superstars = {
       "iyo-sky-over-the-moonsault"
     ],
     "archetype": "reviewed-starter",
-    "hp": 58,
+    "hp": 57,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -88,7 +88,7 @@ export const superstars = {
       "mankind-mandible-claw"
     ],
     "archetype": "reviewed-starter",
-    "hp": 68,
+    "hp": 67,
     "methodLimits": {
       "agility": 0,
       "strength": 2,
@@ -151,7 +151,7 @@ export const superstars = {
       "the-rock-people-s-elbow"
     ],
     "archetype": "prestige-final-boss",
-    "hp": 70,
+    "hp": 67,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -216,7 +216,7 @@ export const superstars = {
       "hulk-hogan-atomic-leg-drop"
     ],
     "archetype": "reviewed-starter",
-    "hp": 68,
+    "hp": 69,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -282,7 +282,7 @@ export const superstars = {
       "bayley-rose-plant"
     ],
     "archetype": "reviewed-starter",
-    "hp": 67,
+    "hp": 63,
     "methodLimits": {
       "agility": 2,
       "strength": 2,
@@ -349,7 +349,7 @@ export const superstars = {
       "cm-punk-g-t-s"
     ],
     "archetype": "reviewed-starter",
-    "hp": 63,
+    "hp": 64,
     "methodLimits": {
       "agility": 2,
       "strength": 0,
@@ -414,7 +414,7 @@ export const superstars = {
       "paige-ram-paige"
     ],
     "archetype": "reviewed-starter",
-    "hp": 64,
+    "hp": 63,
     "methodLimits": {
       "agility": 0,
       "strength": 1,
@@ -546,7 +546,7 @@ export const superstars = {
       "andre-the-giant-sitdown-splash"
     ],
     "archetype": "reviewed-starter",
-    "hp": 66,
+    "hp": 72,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -609,7 +609,7 @@ export const superstars = {
       "stephanie-vaquer-vaquer-inferno"
     ],
     "archetype": "reviewed-starter",
-    "hp": 66,
+    "hp": 63,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -675,7 +675,7 @@ export const superstars = {
       "randy-savage-flying-elbow-drop"
     ],
     "archetype": "reviewed-starter",
-    "hp": 59,
+    "hp": 64,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -740,7 +740,7 @@ export const superstars = {
       "roman-reigns-spear"
     ],
     "archetype": "reviewed-starter",
-    "hp": 63,
+    "hp": 67,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -874,7 +874,7 @@ export const superstars = {
       "kevin-owens-stunner"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 66,
     "methodLimits": {
       "agility": 2,
       "strength": null,
@@ -1002,7 +1002,7 @@ export const superstars = {
       "tombstone-piledriver"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 68,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1065,7 +1065,7 @@ export const superstars = {
       "ultimate-warrior-warrior-splash"
     ],
     "archetype": "reviewed-starter",
-    "hp": 67,
+    "hp": 68,
     "methodLimits": {
       "agility": 1,
       "strength": null,
@@ -1127,7 +1127,7 @@ export const superstars = {
       "rhea-ripley-riptide"
     ],
     "archetype": "reviewed-starter",
-    "hp": 63,
+    "hp": 66,
     "methodLimits": {
       "agility": 2,
       "strength": null,
@@ -1193,7 +1193,7 @@ export const superstars = {
       "cody-rhodes-cross-rhodes"
     ],
     "archetype": "reviewed-starter",
-    "hp": 63,
+    "hp": 64,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -1262,7 +1262,7 @@ export const superstars = {
       "oba-femi-fall-from-grace"
     ],
     "archetype": "reviewed-starter",
-    "hp": 62,
+    "hp": 70,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1389,7 +1389,7 @@ export const superstars = {
       "liv-morgan-oblivion"
     ],
     "archetype": "reviewed-starter",
-    "hp": 67,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -1457,7 +1457,7 @@ export const superstars = {
       "brock-lesnar-f-5"
     ],
     "archetype": "reviewed-starter",
-    "hp": 67,
+    "hp": 70,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1523,7 +1523,7 @@ export const superstars = {
       "gunther-folding-powerbomb"
     ],
     "archetype": "reviewed-starter",
-    "hp": 65,
+    "hp": 68,
     "methodLimits": {
       "agility": 0,
       "strength": null,
@@ -1653,7 +1653,7 @@ export const superstars = {
       "logan-paul-paulverizer"
     ],
     "archetype": "strike-agility-showman",
-    "hp": 61,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 2,
@@ -1785,7 +1785,7 @@ export const superstars = {
       "chad-gable-ankle-lock"
     ],
     "archetype": "technical-strength-olympian",
-    "hp": 61,
+    "hp": 64,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -1850,7 +1850,7 @@ export const superstars = {
       "raquel-rodriguez-tejana-bomb"
     ],
     "archetype": "strength-strike-powerhouse",
-    "hp": 59,
+    "hp": 67,
     "methodLimits": {
       "agility": 1,
       "strength": null,
@@ -1916,7 +1916,7 @@ export const superstars = {
       "rey-mysterio-west-coast-pop"
     ],
     "archetype": "agility-technical-lucha-underdog",
-    "hp": 60,
+    "hp": 57,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -1984,7 +1984,7 @@ export const superstars = {
       "dominik-mysterio-frog-splash"
     ],
     "archetype": "agility-strike-technical-heel-lucha",
-    "hp": 59,
+    "hp": 61,
     "methodLimits": {
       "agility": null,
       "strength": 1,
@@ -2052,7 +2052,7 @@ export const superstars = {
       "penta-mexican-destroyer"
     ],
     "archetype": "agility-strike-technical-hybrid-lucha",
-    "hp": 62,
+    "hp": 65,
     "methodLimits": {
       "agility": null,
       "strength": 1,
@@ -2121,7 +2121,7 @@ export const superstars = {
       "el-grande-americano-loaded-mask-headbutt"
     ],
     "archetype": "four-method-lucha-opportunist",
-    "hp": 61,
+    "hp": 64,
     "methodLimits": {
       "agility": 3,
       "strength": 4,
@@ -2194,7 +2194,7 @@ export const superstars = {
       "uso-splash"
     ],
     "archetype": "strike-strength-main-event",
-    "hp": 68,
+    "hp": 64,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -2260,7 +2260,7 @@ export const superstars = {
       "la-knight-bft"
     ],
     "archetype": "crowd-powered-all-rounder",
-    "hp": 67,
+    "hp": 64,
     "methodLimits": {
       "agility": 2,
       "strength": 4,
@@ -2334,7 +2334,7 @@ export const superstars = {
       "alexa-bliss-twisted-bliss"
     ],
     "archetype": "stun-setup-resource-control",
-    "hp": 65,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 0,
@@ -2400,7 +2400,7 @@ export const superstars = {
       "finn-balor-coup-de-grace"
     ],
     "archetype": "relentless-control-pace",
-    "hp": 66,
+    "hp": 64,
     "methodLimits": {
       "agility": null,
       "strength": 1,
@@ -2466,7 +2466,7 @@ export const superstars = {
       "danhausen-triple-d"
     ],
     "archetype": "curse-disruption-trickster",
-    "hp": 66,
+    "hp": 61,
     "methodLimits": {
       "agility": 0,
       "strength": 2,
@@ -2532,7 +2532,7 @@ export const superstars = {
       "tiffany-stratton-prettiest-moonsault-ever"
     ],
     "archetype": "strength-to-agility-showstopper",
-    "hp": 60,
+    "hp": 62,
     "methodLimits": {
       "agility": null,
       "strength": 4,
@@ -2596,7 +2596,7 @@ export const superstars = {
       "chelsea-green-green-with-envy"
     ],
     "archetype": "counter-control-opportunist",
-    "hp": 59,
+    "hp": 61,
     "methodLimits": {
       "agility": 3,
       "strength": 1,
@@ -2658,7 +2658,7 @@ export const superstars = {
       "damian-priest-hit-the-lights"
     ],
     "archetype": "counter-punishment-heavy-hitter",
-    "hp": 61,
+    "hp": 66,
     "methodLimits": {
       "strength": null,
       "strike": 4,
@@ -2722,7 +2722,7 @@ export const superstars = {
       "bron-breakker-steiner-recliner"
     ],
     "archetype": "agility-to-strength-acceleration",
-    "hp": 65,
+    "hp": 68,
     "methodLimits": {
       "strength": null,
       "agility": 4,
@@ -2787,7 +2787,7 @@ export const superstars = {
       "drew-mcintyre-claymore"
     ],
     "archetype": "precision-heavyweight-claymore-sequencing",
-    "hp": 65,
+    "hp": 68,
     "methodLimits": {
       "strength": null,
       "strike": 5,
@@ -2853,7 +2853,7 @@ export const superstars = {
       "randy-orton-punt-kick"
     ],
     "archetype": "technical-control-sudden-finish",
-    "hp": 63,
+    "hp": 65,
     "methodLimits": {
       "technical": null,
       "strength": 4,
@@ -2919,7 +2919,7 @@ export const superstars = {
       "sami-zayn-helluva-kick"
     ],
     "archetype": "underdog-comeback-sequencer",
-    "hp": 63,
+    "hp": 64,
     "methodLimits": {
       "technical": null,
       "agility": 5,
@@ -2987,7 +2987,7 @@ export const superstars = {
       "jacob-fatu-tongan-death-grip"
     ],
     "archetype": "strength-to-agility-explosive-heavyweight",
-    "hp": 62,
+    "hp": 68,
     "methodLimits": {
       "strength": null,
       "strike": 5,
@@ -3053,7 +3053,7 @@ export const superstars = {
       "solo-sikoa-samoan-spike"
     ],
     "archetype": "strike-pressure-samoan-spike",
-    "hp": 61,
+    "hp": 66,
     "methodLimits": {
       "strike": null,
       "strength": 5,
@@ -3118,7 +3118,7 @@ export const superstars = {
       "jade-cargill-jaded"
     ],
     "archetype": "dominant-power-athlete-jaded-sequencing",
-    "hp": 62,
+    "hp": 67,
     "methodLimits": {
       "strength": null,
       "strike": 5,
@@ -3184,7 +3184,7 @@ export const superstars = {
       "nia-jax-annihilator"
     ],
     "archetype": "durable-grounded-powerhouse-annihilator",
-    "hp": 67,
+    "hp": 69,
     "methodLimits": {
       "strength": null,
       "strike": 4,
@@ -3249,7 +3249,7 @@ export const superstars = {
       "goldberg-jackhammer"
     ],
     "archetype": "prestige-streak-snowball",
-    "hp": 68,
+    "hp": 69,
     "methodLimits": {
       "strength": null,
       "strike": null,

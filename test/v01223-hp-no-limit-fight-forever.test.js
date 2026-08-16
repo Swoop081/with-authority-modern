@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=0.12.64";
-import { decks } from "../js/data/decks.js?v=0.12.64";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.64";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.64";
-import { canPlayAction } from "../js/engine/rules.js?v=0.12.64";
+import { superstars } from "../js/data/superstars.js?v=0.12.65";
+import { decks } from "../js/data/decks.js?v=0.12.65";
+import { allGameplayCards } from "../js/data/content.js?v=0.12.65";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.65";
+import { canPlayAction } from "../js/engine/rules.js?v=0.12.65";
 
 const stars=Object.values(superstars);
 const fight=allGameplayCards.find(c=>c.id==='fight-forever');
@@ -13,11 +13,11 @@ const rng=()=>0.42;
 test('v0.12.29 roster keeps the no-cap durability model after targeted rebalance',()=>{
   assert.equal(stars.length,50);
   const expected={
-    'iyo-sky':58,'mankind':68,'the-rock':70,'hulk-hogan':68,'roman-reigns':63,'cm-punk':63,
-    'cody-rhodes':63,'seth-rollins':64,'brock-lesnar':67,'kevin-owens':62,'gunther':65,'oba-femi':62
+    'iyo-sky':57,'mankind':67,'the-rock':67,'hulk-hogan':69,'roman-reigns':67,'cm-punk':64,
+    'cody-rhodes':64,'seth-rollins':64,'brock-lesnar':70,'kevin-owens':66,'gunther':68,'oba-femi':70
   };
   for(const [id,hp] of Object.entries(expected)) assert.equal(stars.find(s=>s.id===id)?.hp,hp,id);
-  assert.ok(stars.every(s=>s.hp>=58&&s.hp<=70));
+  assert.ok(stars.every(s=>s.hp>=57&&s.hp<=72));
 });
 
 test('v0.12.23 match clock is informational and never ends the match at Turn 50',()=>{

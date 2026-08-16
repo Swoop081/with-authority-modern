@@ -9,7 +9,7 @@ test("v0.12.56 Amazing Entrance is universal and visible under active Superstar 
   const cards=JSON.parse(match[1]);
   const card=cards.find(c=>c.id==="entrance-amazing");
   assert.ok(card,"Amazing Entrance must be present in Card Art Studio data");
-  assert.equal(card.cardCode,"SS1-142");
+  assert.equal(card.cardCode,"SS1-140");
   assert.equal(card.kind,"entrance");
   assert.equal(card.setId,"summerslam-series-1");
   assert.equal(card.universalSuperstarCard,true,"Amazing Entrance must be marked universal for Studio filtering");

@@ -1,5 +1,3 @@
-// WWE Legacy canonical collector numbering — v0.12.20
-// Authoritative card-code manifest. Runtime Collection/Catalogue and generated Studio data must resolve through this table.
 export const CARD_NUMBER_MANIFEST = Object.freeze([
   {
     "id": "northern-lights-suplex",
@@ -2121,183 +2119,183 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
   },
   {
     "id": "open-can",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 79,
+    "cardCode": "HOF1-079"
+  },
+  {
+    "id": "what",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 80,
+    "cardCode": "HOF1-080"
+  },
+  {
+    "id": "momentum-strength",
     "setId": "summerslam-series-1",
     "cardNumber": 106,
     "cardCode": "SS1-106"
   },
   {
-    "id": "what",
+    "id": "momentum-strike",
     "setId": "summerslam-series-1",
     "cardNumber": 107,
     "cardCode": "SS1-107"
   },
   {
-    "id": "momentum-strength",
+    "id": "momentum-technical",
     "setId": "summerslam-series-1",
     "cardNumber": 108,
     "cardCode": "SS1-108"
   },
   {
-    "id": "momentum-strike",
+    "id": "momentum-agility",
     "setId": "summerslam-series-1",
     "cardNumber": 109,
     "cardCode": "SS1-109"
   },
   {
-    "id": "momentum-technical",
+    "id": "entrance-cody-rhodes",
     "setId": "summerslam-series-1",
     "cardNumber": 110,
     "cardCode": "SS1-110"
   },
   {
-    "id": "momentum-agility",
+    "id": "entrance-roman-reigns",
     "setId": "summerslam-series-1",
     "cardNumber": 111,
     "cardCode": "SS1-111"
   },
   {
-    "id": "entrance-cody-rhodes",
+    "id": "entrance-seth-rollins",
     "setId": "summerslam-series-1",
     "cardNumber": 112,
     "cardCode": "SS1-112"
   },
   {
-    "id": "entrance-roman-reigns",
+    "id": "entrance-cm-punk",
     "setId": "summerslam-series-1",
     "cardNumber": 113,
     "cardCode": "SS1-113"
   },
   {
-    "id": "entrance-seth-rollins",
+    "id": "entrance-gunther",
     "setId": "summerslam-series-1",
     "cardNumber": 114,
     "cardCode": "SS1-114"
   },
   {
-    "id": "entrance-cm-punk",
+    "id": "entrance-brock-lesnar",
     "setId": "summerslam-series-1",
     "cardNumber": 115,
     "cardCode": "SS1-115"
   },
   {
-    "id": "entrance-gunther",
+    "id": "entrance-kevin-owens",
     "setId": "summerslam-series-1",
     "cardNumber": 116,
     "cardCode": "SS1-116"
   },
   {
-    "id": "entrance-brock-lesnar",
+    "id": "entrance-oba-femi",
     "setId": "summerslam-series-1",
     "cardNumber": 117,
     "cardCode": "SS1-117"
   },
   {
-    "id": "entrance-kevin-owens",
+    "id": "special-cody-rhodes",
     "setId": "summerslam-series-1",
     "cardNumber": 118,
     "cardCode": "SS1-118"
   },
   {
-    "id": "entrance-oba-femi",
+    "id": "special-roman-reigns",
     "setId": "summerslam-series-1",
     "cardNumber": 119,
     "cardCode": "SS1-119"
   },
   {
-    "id": "special-cody-rhodes",
+    "id": "special-seth-rollins",
     "setId": "summerslam-series-1",
     "cardNumber": 120,
     "cardCode": "SS1-120"
   },
   {
-    "id": "special-roman-reigns",
+    "id": "special-cm-punk",
     "setId": "summerslam-series-1",
     "cardNumber": 121,
     "cardCode": "SS1-121"
   },
   {
-    "id": "special-seth-rollins",
+    "id": "special-gunther",
     "setId": "summerslam-series-1",
     "cardNumber": 122,
     "cardCode": "SS1-122"
   },
   {
-    "id": "special-cm-punk",
+    "id": "special-brock-lesnar",
     "setId": "summerslam-series-1",
     "cardNumber": 123,
     "cardCode": "SS1-123"
   },
   {
-    "id": "special-gunther",
+    "id": "special-kevin-owens",
     "setId": "summerslam-series-1",
     "cardNumber": 124,
     "cardCode": "SS1-124"
   },
   {
-    "id": "special-brock-lesnar",
+    "id": "special-oba-femi",
     "setId": "summerslam-series-1",
     "cardNumber": 125,
     "cardCode": "SS1-125"
   },
   {
-    "id": "special-kevin-owens",
+    "id": "superstar-cm-punk",
     "setId": "summerslam-series-1",
     "cardNumber": 126,
     "cardCode": "SS1-126"
   },
   {
-    "id": "special-oba-femi",
+    "id": "superstar-seth-rollins",
     "setId": "summerslam-series-1",
     "cardNumber": 127,
     "cardCode": "SS1-127"
   },
   {
-    "id": "superstar-cm-punk",
+    "id": "superstar-roman-reigns",
     "setId": "summerslam-series-1",
     "cardNumber": 128,
     "cardCode": "SS1-128"
   },
   {
-    "id": "superstar-seth-rollins",
+    "id": "superstar-kevin-owens",
     "setId": "summerslam-series-1",
     "cardNumber": 129,
     "cardCode": "SS1-129"
   },
   {
-    "id": "superstar-roman-reigns",
+    "id": "superstar-cody-rhodes",
     "setId": "summerslam-series-1",
     "cardNumber": 130,
     "cardCode": "SS1-130"
   },
   {
-    "id": "superstar-kevin-owens",
+    "id": "superstar-oba-femi",
     "setId": "summerslam-series-1",
     "cardNumber": 131,
     "cardCode": "SS1-131"
   },
   {
-    "id": "superstar-cody-rhodes",
+    "id": "superstar-brock-lesnar",
     "setId": "summerslam-series-1",
     "cardNumber": 132,
     "cardCode": "SS1-132"
   },
   {
-    "id": "superstar-oba-femi",
+    "id": "superstar-gunther",
     "setId": "summerslam-series-1",
     "cardNumber": 133,
     "cardCode": "SS1-133"
-  },
-  {
-    "id": "superstar-brock-lesnar",
-    "setId": "summerslam-series-1",
-    "cardNumber": 134,
-    "cardCode": "SS1-134"
-  },
-  {
-    "id": "superstar-gunther",
-    "setId": "summerslam-series-1",
-    "cardNumber": 135,
-    "cardCode": "SS1-135"
   },
   {
     "id": "bron-breakker-gorilla-press-powerslam",
@@ -2836,26 +2834,26 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
   {
     "id": "knees-up",
     "setId": "summerslam-series-1",
-    "cardNumber": 136,
-    "cardCode": "SS1-136"
+    "cardNumber": 134,
+    "cardCode": "SS1-134"
   },
   {
     "id": "dodge",
     "setId": "summerslam-series-1",
-    "cardNumber": 137,
-    "cardCode": "SS1-137"
+    "cardNumber": 135,
+    "cardCode": "SS1-135"
   },
   {
     "id": "block",
     "setId": "summerslam-series-1",
-    "cardNumber": 138,
-    "cardCode": "SS1-138"
+    "cardNumber": 136,
+    "cardCode": "SS1-136"
   },
   {
     "id": "up-and-over",
     "setId": "summerslam-series-1",
-    "cardNumber": 139,
-    "cardCode": "SS1-139"
+    "cardNumber": 137,
+    "cardCode": "SS1-137"
   },
   {
     "id": "standing-switch",
@@ -2892,25 +2890,26 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "evolution-series-1",
     "cardNumber": 64,
     "cardCode": "EVO1-064"
-  }
-  ,{
+  },
+  {
     "id": "brock-lesnar-brocks-german",
     "setId": "summerslam-series-1",
-    "cardNumber": 140,
-    "cardCode": "SS1-140"
+    "cardNumber": 138,
+    "cardCode": "SS1-138"
   },
   {
     "id": "special-brock-lesnar-paul-heyman",
     "setId": "summerslam-series-1",
-    "cardNumber": 141,
-    "cardCode": "SS1-141"
+    "cardNumber": 139,
+    "cardCode": "SS1-139"
   },
   {
     "id": "entrance-amazing",
     "setId": "summerslam-series-1",
-    "cardNumber": 142,
-    "cardCode": "SS1-142"
+    "cardNumber": 140,
+    "cardCode": "SS1-140"
   }
 ]);
+
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

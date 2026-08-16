@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.12.64';
-import { cardsForSet } from '../js/data/collection.js?v=0.12.64';
-import { superstars } from '../js/data/superstars.js?v=0.12.64';
-import { decks } from '../js/data/decks.js?v=0.12.64';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.64';
-import { claimSeasonTier } from '../js/data/seasons.js?v=0.12.64';
-import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.64';
-import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=0.12.64';
-import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=0.12.64';
+import { collectionCards } from '../js/data/collection.js?v=0.12.65';
+import { cardsForSet } from '../js/data/collection.js?v=0.12.65';
+import { superstars } from '../js/data/superstars.js?v=0.12.65';
+import { decks } from '../js/data/decks.js?v=0.12.65';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.65';
+import { claimSeasonTier } from '../js/data/seasons.js?v=0.12.65';
+import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.65';
+import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=0.12.65';
+import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=0.12.65';
 
 const momentumIds=['momentum-strength','momentum-strike','momentum-technical','momentum-agility'];
 const byId=new Map(collectionCards.map(card=>[card.id,card]));
@@ -59,10 +59,14 @@ test('v0.12.55 Superstar Entrances are Very Rare pulls in their live set and can
   assert.equal(totalOwnedCopies(p,target.id),0);
 
   const base=cardsForSet(target.setId).filter(boosterEligible);
-  const firstSlotPool=base.filter(card=>underOwnershipCap(p,card));
-  const q=rngForCard(firstSlotPool,target.id);
+  const firstSlotPool=base.filter(card=>card.kind!=="superstar"&&underOwnershipCap(p,card));
+  const vrPool=firstSlotPool.filter(card=>card.rarity===4);
+  const targetIndex=vrPool.findIndex(card=>card.id===target.id);
+  assert.ok(targetIndex>=0);
+  const pick=(targetIndex+.5)/vrPool.length;
+  const sequence=[.99,.99,pick,.10,.40,.20,.50,.30,.60,.40,.70]; // no Superstar chase; first ordinary slot is Very Rare target
   let calls=0;
-  const firstRng=()=>calls++===0?q:0.5;
+  const firstRng=()=>sequence[calls++]??.42;
   grantBooster(p,1,target.setId);
   const first=openBooster(p,firstRng,target.setId);
   assert.equal(first[0].card.id,target.id);
@@ -71,7 +75,7 @@ test('v0.12.55 Superstar Entrances are Very Rare pulls in their live set and can
   assert.equal(first.filter(pull=>pull.card.id===target.id).length,1,'Entrance cannot repeat later in the same pack');
 
   grantBooster(p,1,target.setId);
-  const second=openBooster(p,()=>q,target.setId);
+  const second=openBooster(p,()=>.99,target.setId);
   assert.equal(second.some(pull=>pull.card.id===target.id),false,'owned Entrance must be removed from every later pack pool');
 });
 

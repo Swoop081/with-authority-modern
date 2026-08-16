@@ -24,9 +24,9 @@ test("v0.12.57 keeps PACKS readable and lowers Home wrestler renders", () => {
   assert.match(css, /official-menu-superstar-photo\{[\s\S]*transform:translateY\(3\.5%\)!important/);
 });
 
-test("Daily Login Booster control opens the standard pack flow immediately", () => {
+test("v0.12.57 Daily Login Booster uses one-line status and opens immediately", () => {
   const season = between(app, "function renderSeasons()", "function renderChallenges()");
-  assert.match(season, /season-free-pack-button/);
+  assert.match(season, /data-free-pack-copy/);
   assert.doesNotMatch(season, /FREE PACK READY/);
   assert.doesNotMatch(season, /waiting in Boosters/i);
   assert.match(season, /boosterReturnScreen = "seasons";/);
@@ -52,7 +52,7 @@ test("v0.12.57 Store separates pack, copy, CTA, and Superstar card areas on mobi
 
 test("v0.12.57 finished card fronts do not duplicate printed Cost and Damage", () => {
   const cards = between(app, "function collectibleCardMarkup", "function collectionText");
-  assert.match(cards, /finishedFront \? `<span class="ccg-card-art ccg-custom-front-overlay \${moveFront \? "ccg-move-full-art" : ""}">\${finishedFrontImageMarkup\(card\)}<\/span>`/);
+  assert.match(cards, /: finishedFront\s*\n\s*\? `<span class="ccg-card-art \${moveFront \? "ccg-move-full-art" : ""}">\${cardArtFace\(card\)}<\/span>`/);
   assert.doesNotMatch(cards, /finishedFront\s*\n\s*\? `<span[^`]*ccg-card-stats/);
   assert.match(css, /\.ccg-card\.is-full-art-finished \.ccg-card-stats[\s\S]*display:none!important/);
 });

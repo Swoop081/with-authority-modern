@@ -1,31 +1,31 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.64";
-import { superstars } from "../data/superstars.js?v=0.12.64";
-import { decks } from "../data/decks.js?v=0.12.64";
-import { sets } from "../data/sets.js?v=0.12.64";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.64";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.64";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.64";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.64";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.64";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.64";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.64";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.64";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.64";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.64";
-import { totalMomentum } from "../engine/utils.js?v=0.12.64";
-import { healthZone } from "../engine/health.js?v=0.12.64";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.64";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.64";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.64";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.64";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.64";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.64";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.64";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.64";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.64";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.64";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.64";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.64";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.65";
+import { superstars } from "../data/superstars.js?v=0.12.65";
+import { decks } from "../data/decks.js?v=0.12.65";
+import { sets } from "../data/sets.js?v=0.12.65";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.65";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.65";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.65";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.65";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.65";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.65";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.65";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.65";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.65";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.65";
+import { totalMomentum } from "../engine/utils.js?v=0.12.65";
+import { healthZone } from "../engine/health.js?v=0.12.65";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.65";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.65";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.65";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.65";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.65";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.65";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.65";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.65";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.65";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.65";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.65";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.65";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -74,6 +74,8 @@ let flippedCollectionCards = new Set();
 let playPileFlipped = false;
 let playPileCardKey = null;
 let boosterRulesFlipped = new Set();
+let convertedPackCards = new Set();
+let duplicateConversionTimer = null;
 let lastChromeScreen = null;
 let exhibitionConfirmed = { p1: false, p2: true };
 let selectDetailKeys = new Set();
@@ -86,6 +88,8 @@ let entranceRevealTimer = null;
 let boosterReturnScreen = null;
 let superstarOverlayId = null;
 let superstarOverlayFlipped = false;
+let handOverlayCard = null;
+let handOverlayFlipped = false;
 let pendingDeckBuildSuperstarId = null;
 let pendingDeckBuildStep = null;
 let pendingTierUps = [];
@@ -557,11 +561,30 @@ function processPack(kind = "standard") {
     currentPackType = kind;
     lastPack = kind === "ladder" ? openLadderCompletionPack(profile, Math.random, activeBoosterSetId) : kind === "championship" ? openChampionshipPack(profile, Math.random, activeBoosterSetId) : openBooster(profile, Math.random, activeBoosterSetId);
     if (lastPack?.[0]?.card?.setId) activeBoosterSetId = lastPack[0].card.setId;
-    pendingUpgrades = []; revealedPackCards = new Set(); boosterRulesFlipped = new Set(); boosterFocusIndex = 0; packFinalized = false; packStage = "sealed";
+    pendingUpgrades = []; revealedPackCards = new Set(); boosterRulesFlipped = new Set(); convertedPackCards = new Set(); boosterFocusIndex = 0; packFinalized = false; packStage = "sealed";
     const setName = setCollections[activeBoosterSetId]?.displayName ?? activeBoosterSetId;
     message = `${setName} pack ready. Tap the pack to rip it open.`;
     saveProfile(profile); renderBoosters();
   } catch (error) { message = error.message; renderBoosters(); }
+}
+
+function scheduleFocusedDuplicateConversion() {
+  if (duplicateConversionTimer) { clearTimeout(duplicateConversionTimer); duplicateConversionTimer = null; }
+  if (packStage !== "reveal" || !lastPack?.[boosterFocusIndex]) return;
+  const index = boosterFocusIndex, pull = lastPack[index];
+  if (!pull.universePointsValue || pull.universePointsCredited || convertedPackCards.has(index)) return;
+  duplicateConversionTimer = setTimeout(() => {
+    duplicateConversionTimer = null;
+    if (packStage !== "reveal" || lastPack?.[index] !== pull) return;
+    finalizePackUniversePoints(profile, [pull]);
+    convertedPackCards.add(index);
+    saveProfile(profile);
+    const up = document.querySelector('[data-chrome-up]');
+    if (up) up.textContent = Number(profile.universePoints ?? 0).toLocaleString();
+    up?.classList.add('up-conversion-pulse');
+    renderBoosters();
+    setTimeout(() => document.querySelector('[data-chrome-up]')?.classList.remove('up-conversion-pulse'), 650);
+  }, 1050);
 }
 
 function ripOpenPack() {
@@ -571,9 +594,13 @@ function ripOpenPack() {
   renderBoosters();
   setTimeout(() => {
     if (screen !== "boosters" || packStage !== "opening") return;
+    // Once the wrapper is open, the whole pack is face up. Browsing cards never
+    // returns the next pull to a generic card back.
+    revealedPackCards = new Set(lastPack.map((_, index) => index));
     packStage = "reveal";
-    message = "Reveal all five cards.";
+    message = "Pack open — all five cards are face up.";
     renderBoosters();
+    scheduleFocusedDuplicateConversion();
   }, 720);
 }
 
@@ -623,10 +650,14 @@ function revealPackCard(index) {
 
 function nextBoosterCard() {
   if (!lastPack?.length || !revealedPackCards.has(boosterFocusIndex)) return;
+  const current = lastPack[boosterFocusIndex];
+  // Let the duplicate visibly dissolve into its UP reward before advancing.
+  if (current?.universePointsValue && !current.universePointsCredited) return;
   if (boosterFocusIndex < lastPack.length - 1) {
     boosterFocusIndex += 1;
     boosterRulesFlipped.delete(boosterFocusIndex);
     renderBoosters();
+    scheduleFocusedDuplicateConversion();
   } else {
     preparePackSummary();
   }
@@ -650,7 +681,7 @@ function declineUpgrade(index) {
 function finishPackFlow() {
   const returnScreen = boosterReturnScreen;
   boosterReturnScreen = null;
-  lastPack=null; revealedPackCards=new Set(); boosterRulesFlipped=new Set(); boosterFocusIndex=0; pendingUpgrades=[]; packStage="idle"; currentPackType="standard"; message="";
+  lastPack=null; revealedPackCards=new Set(); boosterRulesFlipped=new Set(); convertedPackCards=new Set(); boosterFocusIndex=0; pendingUpgrades=[]; packStage="idle"; currentPackType="standard"; message="";
   document.body.classList.remove("booster-modal-open");
   if (returnScreen === "seasons") { screen = "seasons"; renderSeasons(); } else { screen = "boosters"; renderBoosters(); }
   requestAnimationFrame(()=>window.scrollTo(0,0));
@@ -673,10 +704,11 @@ function renderBoosters() {
   if (mobileNav) mobileNav.hidden=packInProgress;
 
   const rarityName = pull => (setCollections[pull?.card?.setId]?.rarityLabels ?? setInfo.rarityLabels)?.[pull?.card?.rarity ?? 1] ?? "Common";
+  const upRewardTile = (p, extraClass="") => `<div class="up-card-replacement ${extraClass}" aria-label="Duplicate converted to ${p.universePointsValue} Universe Points"><span>DUPLICATE CONVERTED</span><strong>+${p.universePointsValue}</strong><b>UP</b><small>UNIVERSE POINTS</small></div>`;
   const summaryCard = (p,index,slotClass="") => `
-    <article class="pack-summary-card actual-card-summary ${slotClass} rarity-${p.card.rarity} ${p.foil?'is-foil':''}">
-      <div class="pack-summary-actual-card">${collectibleCardMarkup(p.card,{flipped:boosterRulesFlipped.has(index),foil:p.foil,extraClass:"pack-summary-ccg",flipAttr:`data-booster-inspect="${index}"`})}</div>
-      <div class="pack-summary-badges"><span class="summary-rarity-badge">${rarityName(p)}</span>${p.foil?'<span class="foil-summary-symbol">FOIL</span>':''}${p.isNewCard?'<span class="new-card-symbol">NEW</span>':''}${p.superstarUnlocked?'<span class="unlock-symbol">SUPERSTAR</span>':''}${p.universePointsValue?`<span class="up-conversion-badge">+${p.universePointsValue} UP</span>`:''}</div>
+    <article class="pack-summary-card actual-card-summary ${slotClass} rarity-${p.card.rarity} ${p.foil?'is-foil':''} ${p.universePointsValue?'is-up-converted':''}">
+      <div class="pack-summary-actual-card">${p.universePointsValue ? upRewardTile(p,"summary-up-reward") : collectibleCardMarkup(p.card,{flipped:boosterRulesFlipped.has(index),foil:p.foil,extraClass:"pack-summary-ccg",flipAttr:`data-booster-inspect="${index}"`})}</div>
+      <div class="pack-summary-badges">${p.universePointsValue ? `<span class="up-conversion-badge">+${p.universePointsValue} UP</span>` : `<span class="summary-rarity-badge">${rarityName(p)}</span>${p.foil?'<span class="foil-summary-symbol">FOIL</span>':''}${p.isNewCard?'<span class="new-card-symbol">NEW</span>':''}${p.superstarUnlocked?'<span class="unlock-symbol">SUPERSTAR</span>':''}`}</div>
     </article>`;
   const premiumScore = p => (Number(p?.card?.rarity) || 1) * 100 + (p?.foil ? 10 : 0) + (p?.card?.kind === "superstar" ? 2 : 0);
   const featuredPullIndex = pulls.length ? pulls.reduce((best, _p, i) => premiumScore(pulls[i]) > premiumScore(pulls[best]) ? i : best, 0) : -1;
@@ -692,19 +724,24 @@ function renderBoosters() {
   } else if (packStage === "opening") {
     packArea=`<section class="pack-opening-stage ripping-pack-stage"><div class="pack-rip-flash"></div>${physicalBoosterPackMarkup({setId:activeBoosterSetId,title:packTitle,series:currentPackType === "standard" ? "SERIES 1" : packTitle,subtitle:packSubtitle,extraClass:"is-opening",opening:true})}<strong class="pack-rip-callout">RIP!</strong></section>`;
   } else if (packStage === "reveal" && pulls.length) {
-    const p=pulls[boosterFocusIndex], revealed=revealedPackCards.has(boosterFocusIndex), owned=profile.ownedCards?.[p.card.id]??{normal:0,foil:0};
-    const cardMarkup = !revealed
-      ? `<button type="button" class="booster-flip-card single-pack-card is-facedown is-current rarity-${p.card.rarity} ${p.foil?'is-foil':''}" data-reveal-card="${boosterFocusIndex}" aria-label="Card ${boosterFocusIndex+1} of ${pulls.length}, tap to reveal"><span class="flip-card-face card-back ${packSetClass}">${brand}<b>${packTitle}</b><small>${packSubtitle}</small>${p.foil?'<i class="foil-sweep"></i>':''}</span></button>`
-      : `<div class="booster-flip-card single-pack-card is-revealed is-current rarity-${p.card.rarity} ${p.foil?'is-foil':''}">
+    const p=pulls[boosterFocusIndex];
+    const converted=convertedPackCards.has(boosterFocusIndex) || p.universePointsCredited;
+    const converting=Boolean(p.universePointsValue && !converted);
+    const cardMarkup = converted
+      ? upRewardTile(p,"reveal-up-reward")
+      : `<div class="booster-flip-card single-pack-card is-revealed is-current rarity-${p.card.rarity} ${p.foil?'is-foil':''} ${converting?'duplicate-disintegrating':''}">
           ${collectibleCardMarkup(p.card,{flipped:false,foil:p.foil,extraClass:"booster-ccg",flipAttr:`data-booster-inspect="${boosterFocusIndex}"`})}
+          ${converting?`<div class="duplicate-conversion-overlay" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><strong>DUPLICATE</strong><span>CONVERTING TO UP</span></div>`:''}
         </div>`;
-    const dots=pulls.map((_,i)=>`<i class="${i===boosterFocusIndex?'current':''} ${revealedPackCards.has(i)?'revealed':''}"></i>`).join("");
-    packArea=`<section class="single-card-reveal-stage rarity-stage-${p.card.rarity} ${revealed ? 'card-is-revealed' : 'card-is-facedown'} ${p.foil ? 'foil-stage' : ''}">
+    const dots=pulls.map((_,i)=>`<i class="${i===boosterFocusIndex?'current':''} revealed ${pulls[i]?.universePointsValue?'converted':''}"></i>`).join("");
+    const faceupStrip=pulls.map((pull,i)=>`<button type="button" class="faceup-pack-thumb ${i===boosterFocusIndex?'current':''} ${pull.universePointsValue&&pull.universePointsCredited?'converted':''}" data-faceup-pack-index="${i}" aria-label="View card ${i+1}">${pull.universePointsValue&&pull.universePointsCredited?`<span>+${pull.universePointsValue}<b>UP</b></span>`:collectibleCardMarkup(pull.card,{flipped:false,foil:pull.foil,interactive:false,extraClass:"faceup-thumb-card"})}</button>`).join("");
+    packArea=`<section class="single-card-reveal-stage rarity-stage-${p.card.rarity} card-is-revealed ${p.foil ? 'foil-stage' : ''} ${converting?'duplicate-conversion-stage':''} ${converted?'up-reward-stage':''}">
       <div class="booster-reveal-atmosphere" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="booster-card-progress"><span>CARD ${boosterFocusIndex+1} OF ${pulls.length}</span><div>${dots}</div></div>
       <div class="single-card-slot"><div class="booster-card-halo">${cardMarkup}</div></div>
-      <div class="booster-reveal-meta">${revealed?`<strong class="booster-reveal-rarity rarity-${p.card.rarity}">${rarityName(p).toUpperCase()}</strong><span class="booster-reveal-flags">${p.foil?'<b>FOIL</b>':''}${p.isNewCard?'<b class="is-new">NEW</b>':''}${p.superstarUnlocked?'<b>SUPERSTAR UNLOCK</b>':''}</span>`:'<strong>TAP CARD TO REVEAL</strong>'}</div>
-      <p class="reveal-progress">${revealed ? (boosterFocusIndex===pulls.length-1?'TAP CARD · PACK SUMMARY':'TAP CARD · NEXT REVEAL') : 'THE CARD WILL FLIP INTO YOUR COLLECTION'}</p>
+      <div class="booster-reveal-meta">${converted?`<strong class="booster-reveal-rarity up-rarity">+${p.universePointsValue} UP</strong><span class="booster-reveal-flags"><b>DUPLICATE CONVERTED</b></span>`:`<strong class="booster-reveal-rarity rarity-${p.card.rarity}">${rarityName(p).toUpperCase()}</strong><span class="booster-reveal-flags">${p.foil?'<b>FOIL</b>':''}${p.isNewCard?'<b class="is-new">NEW</b>':''}${p.superstarUnlocked?'<b>SUPERSTAR UNLOCK</b>':''}${converting?'<b>CONVERTING</b>':''}</span>`}</div>
+      <div class="booster-faceup-strip" aria-label="All five face-up pack cards">${faceupStrip}</div>
+      <p class="reveal-progress">${converting?'DUPLICATE · CONVERTING TO UNIVERSE POINTS':boosterFocusIndex===pulls.length-1?'TAP CARD · PACK SUMMARY':'TAP CARD · NEXT CARD'}</p>
     </section>`;
   } else if (packStage === "summary" && pulls.length) {
     const newCount=pulls.filter(p=>p.isNewCard).length;
@@ -786,8 +823,9 @@ function renderBoosters() {
   $("#deck-assistance")?.addEventListener("change",e=>{setDeckAssistance(profile,e.target.value);saveProfile(profile);message=`Deck Assistance set to ${e.target.options[e.target.selectedIndex].text}.`;renderBoosters();});
   $("#rip-pack")?.addEventListener("click", ripOpenPack);
   root.querySelectorAll('[data-reveal-card]').forEach(btn=>btn.addEventListener('click',()=>revealPackCard(Number(btn.dataset.revealCard))));
+  root.querySelectorAll('[data-faceup-pack-index]').forEach(btn=>btn.addEventListener('click',()=>{ const index=Number(btn.dataset.faceupPackIndex); if(index===boosterFocusIndex)return; const current=lastPack?.[boosterFocusIndex]; if(current?.universePointsValue&&!current.universePointsCredited)return; boosterFocusIndex=index; renderBoosters(); scheduleFocusedDuplicateConversion(); }));
   root.querySelectorAll('[data-booster-inspect]').forEach(btn=>btn.addEventListener('click',()=>{if(packStage==="reveal"){nextBoosterCard();return;}const i=Number(btn.dataset.boosterInspect);if(boosterRulesFlipped.has(i))boosterRulesFlipped.delete(i);else boosterRulesFlipped.add(i);renderBoosters();}));
-  $("#open-another-pack")?.addEventListener("click",()=>{const kind=currentPackType; lastPack=null; revealedPackCards=new Set(); boosterRulesFlipped=new Set(); boosterFocusIndex=0; pendingUpgrades=[]; packStage="idle"; message=""; processPack(kind);});
+  $("#open-another-pack")?.addEventListener("click",()=>{const kind=currentPackType; lastPack=null; revealedPackCards=new Set(); boosterRulesFlipped=new Set(); convertedPackCards=new Set(); boosterFocusIndex=0; pendingUpgrades=[]; packStage="idle"; message=""; processPack(kind);});
   $("#review-pack-upgrades")?.addEventListener("click", beginPackUpgradeReview);
   $("#review-pack-upgrades-top")?.addEventListener("click", beginPackUpgradeReview);
   $("#finish-pack-top")?.addEventListener("click", finishPackFlow);
@@ -813,11 +851,12 @@ function refreshSeasonClocks() {
   const remaining = seasonTimeRemaining(new Date());
   document.querySelectorAll('[data-season-countdown]').forEach(el => { el.textContent = remaining.ended ? 'Season complete' : formatCountdown(remaining.ms); });
   const free = freePackStatus(profile, new Date());
+  document.querySelectorAll('[data-free-pack-copy]').forEach(el => { el.textContent = free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`; });
   const next = nextRoadmapNode(new Date());
   const nextMs = Math.max(0, new Date(next.date).getTime() - Date.now());
   document.querySelectorAll('[data-next-drop-countdown]').forEach(el => { el.textContent = nextMs <= 0 ? 'LIVE' : formatCountdown(nextMs); });
   const claim = document.querySelector('#claim-free-pack');
-  if (claim) { claim.disabled = !free.available; claim.textContent = free.available ? 'Claim Pack' : formatCountdown(free.msRemaining); }
+  if (claim) { claim.disabled = !free.available; claim.textContent = free.available ? 'Claim Free Booster' : `Next · ${formatCountdown(free.msRemaining)}`; }
   const store = storeRotation(new Date());
   document.querySelectorAll('[data-store-countdown]').forEach(el => { el.textContent = formatStoreCountdown(store.msRemaining); });
   const storeScreen = document.querySelector('[data-store-set]');
@@ -928,8 +967,9 @@ function renderSeasons() {
   root.innerHTML = `<section class="seasons-screen premium-screen">
     <section class="feature-hero seasons-feature season-final-boss-hero">${`<div class="mode-portrait-stack feature-art final-boss-feature-art"><div class="mode-portrait p1">${finalBossRockMarkup()}</div></div>`}<div class="feature-shade"></div><div class="feature-copy">${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · 50 TIERS</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Tier 50 unlocks The Rock — Final Boss.</p><div class="season-hero-status season-hero-status-compact"><span>${uiIcon("gift")}<b>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</b></span><span>${uiIcon("trophy")}<b>${progress.tier >= SEASON_TIER_COUNT ? 'ROAD COMPLETE' : `NEXT · TIER ${progress.tier + 1}`}</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Survivor Series next</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
-    <section class="season-free-pack-cta ${free.available ? 'ready' : 'waiting'}">
-      <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'}>${free.available ? 'Claim Pack' : formatCountdown(free.msRemaining)}</button>
+    <section class="season-free-pack-cta season-free-pack-strip ${free.available ? 'ready' : 'waiting'}">
+      <span class="sr-only" data-free-pack-copy>${free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`}</span>
+      <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'}>${free.available ? 'Claim Free Booster' : `Next Free Booster · ${formatCountdown(free.msRemaining)}`}</button>
     </section>
     <section class="season-progress-panel season-command-center">
       <div class="season-command-stats">
@@ -1422,14 +1462,6 @@ function momentumMockupMarkup(card) {
   </span>`;
 }
 
-function finishedFrontImageMarkup(card) {
-  const finished = finishedCardArtFor(card);
-  if (!finished) return "";
-  const legacyFinished = legacyFinishedCardArtFor(card);
-  const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
-  return `<img loading="lazy" decoding="async" class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" data-legacy-finished-art="${legacyCandidate}" onerror="if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';this.closest('.ccg-card-art')?.classList.add('is-missing-finished-art');this.closest('.ccg-card')?.classList.remove('is-full-art-finished','is-full-art-move');this.closest('.ccg-card')?.classList.add('uses-rules-fallback');">`;
-}
-
 function cardArtFace(card) {
   const star = card.superstarId ? superstarById[card.superstarId] : null;
   if (card.kind === "superstar" && card.superstarId) {
@@ -1441,8 +1473,12 @@ function cardArtFace(card) {
     return momentumMockupMarkup(card);
   }
   const art = artworkFor(card);
-  const finishedImage = finishedFrontImageMarkup(card);
-  if (finishedImage) return finishedImage;
+  const finished = finishedCardArtFor(card);
+  const legacyFinished = legacyFinishedCardArtFor(card);
+  if (finished) {
+    const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
+    return `<img loading="lazy" decoding="async" class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" data-legacy-finished-art="${legacyCandidate}" onerror="if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';const c=this.closest('.ccg-card');c?.classList.remove('is-full-art-finished','is-full-art-move');c?.classList.add('uses-rules-fallback','is-flipped');">`;
+  }
   const fallback = card.name;
   return art
     ? `<img loading="lazy" decoding="async" src="${art}" alt="${card.name}">`
@@ -1465,8 +1501,39 @@ function cardPlayRestrictionText(card) {
   return "";
 }
 
-function cardRulesFaceMarkup(card, setClass, typeLabel, subtitle, ruleText) {
-  return `${setLogoMarkup(card.setId,"ccg-rules-set-logo")}
+function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "", interactive = true } = {}) {
+  // Superstar and all Card Art Studio exports are premium full-art fronts.
+  // Non-Superstar cards keep their generated legacy overlays only as a fallback
+  // until the corresponding custom WebP exists on disk.
+  const superstarFront = card.kind === "superstar";
+  const moveFront = card.kind === "move";
+  const finishedFront = !superstarFront && Boolean(finishedCardArtFor(card));
+  // Until a custom front is exported, default the card to its rules/details face.
+  // Momentum is a purpose-built live card face and Superstar cards have dedicated fronts.
+  const missingCustomFront = !superstarFront && card.kind !== "momentum" && !finishedFront;
+  const displayFlipped = missingCustomFront ? true : Boolean(flipped);
+  const visualFoil = Boolean(foil || card.kind === "entrance");
+  const setClass = `set-${card.setId ?? "global"}`;
+  const typeClass = `type-${card.kind}`;
+  const finisherClass = card.finisher ? "is-finisher" : card.trademark ? "is-trademark" : card.signature ? "is-signature" : "";
+  const foilClass = visualFoil ? "is-foil" : "";
+  const ruleText = cardRulesText(card);
+  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind.toUpperCase();
+  const subtitle = card.kind === "move"
+    ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
+    : (card.subtitle ?? typeLabel);
+  const frontMarkup = superstarFront
+    ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
+    : finishedFront
+      ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span>`
+      : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span><span class="ccg-card-title"><small>${typeLabel}${visualFoil ? " · FOIL" : ""}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
+  const rootTag = interactive ? "button" : "span";
+  const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. ${missingCustomFront ? "Card details shown because custom front artwork is not installed." : `Tap to ${displayFlipped ? "view artwork" : "view effects"}.`}"` : `aria-hidden="true"`;
+  return `<${rootTag} ${rootAttrs} class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${missingCustomFront ? "uses-rules-fallback" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${moveFront && finishedFront ? "is-full-art-move" : ""} ${extraClass}">
+    <span class="ccg-card-inner">
+      <span class="ccg-card-face ccg-card-front">${frontMarkup}${visualFoil ? `<span class="ccg-foil-overlay" aria-hidden="true"></span>` : ""}</span>
+      <span class="ccg-card-face ccg-card-rules ${setClass}">
+        ${setLogoMarkup(card.setId,"ccg-rules-set-logo")}
         <span class="ccg-rules-head"><small>${typeLabel}</small><strong>${card.name}</strong><em>${subtitle}</em></span>
         ${card.kind === "move" ? `<span class="ccg-rules-statline"><span><small>COST</small><b>${card.cost ?? 0}</b></span><span><small>DAMAGE</small><b>${card.damage ?? 0}</b></span></span>` : ""}
         <span class="ccg-rules-body"><b class="ccg-effect-label">${card.kind === "move" ? "EFFECT" : card.kind === "superstar" ? "SUPERSTAR ABILITY" : card.kind === "entrance" ? "ENTRANCE EFFECT" : "RULES"}</b><span>${ruleText}</span></span>
@@ -1479,42 +1546,8 @@ function cardRulesFaceMarkup(card, setClass, typeLabel, subtitle, ruleText) {
         ${card.kind === "move" && card.counterSubmissionTargets?.length ? `<span class="ccg-rules-requirements"><b>SUBMISSION REVERSAL</b> ${card.counterSubmissionTargets.map(t=>SUBMISSION_TARGET_LABELS[t] ?? t).join(", ")}</span>` : ""}
         ${card.kind === "move" && card.counterMethods?.length ? `<span class="ccg-rules-requirements"><b>COUNTERS</b> Any ${card.counterMethods.map(m=>m[0].toUpperCase()+m.slice(1)).join(" / ")} Move</span>` : ""}
         ${cardPlayRestrictionText(card)}
-        <span class="ccg-rules-foot"><span>${card.cardCode ?? card.setId ?? "WWE LEGACY"}</span><span class="rarity-stars">${rarityStars(card.rarity ?? 1)}</span></span>`;
-}
-
-function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "", interactive = true } = {}) {
-  // A finished Card Art Studio image is an optional overlay, never the structural
-  // card face. The canonical rules back sits underneath it, so a missing/private
-  // WebP can never leave a blank rectangle in Collection, Catalogue, boosters or match UI.
-  const superstarFront = card.kind === "superstar";
-  const momentumFront = card.kind === "momentum";
-  const moveFront = card.kind === "move";
-  // Momentum is the one authored live-card exception to the generic back fallback.
-  // Its WWE Legacy mockup is a real canonical front, so it never depends on a private WebP.
-  const finishedFront = !superstarFront && !momentumFront && Boolean(finishedCardArtFor(card));
-  const displayFlipped = Boolean(flipped);
-  const visualFoil = !superstarFront && !finishedFront && (foil || card.kind === "entrance");
-  const setClass = `set-${card.setId ?? "global"}`;
-  const typeClass = `type-${card.kind}`;
-  const finisherClass = card.finisher ? "is-finisher" : card.trademark ? "is-trademark" : card.signature ? "is-signature" : "";
-  const foilClass = visualFoil ? "is-foil" : "";
-  const ruleText = cardRulesText(card);
-  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind.toUpperCase();
-  const subtitle = card.kind === "move"
-    ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
-    : (card.subtitle ?? typeLabel);
-  const rulesMarkup = cardRulesFaceMarkup(card, setClass, typeLabel, subtitle, ruleText);
-  const frontMarkup = superstarFront
-    ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
-    : momentumFront
-      ? `<span class="ccg-card-art ccg-momentum-authored-front">${cardArtFace(card)}</span>`
-      : `<span class="ccg-card-front-backup ccg-card-rules ${setClass}" aria-hidden="true">${rulesMarkup}</span>${finishedFront ? `<span class="ccg-card-art ccg-custom-front-overlay ${moveFront ? "ccg-move-full-art" : ""}">${finishedFrontImageMarkup(card)}</span>` : ""}`;
-  const rootTag = interactive ? "button" : "span";
-  const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. Tap to ${displayFlipped ? "view front" : "view card back"}."` : `aria-hidden="true"`;
-  return `<${rootTag} ${rootAttrs} class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${moveFront && finishedFront ? "is-full-art-move" : ""} ${extraClass}">
-    <span class="ccg-card-inner">
-      <span class="ccg-card-face ccg-card-front">${frontMarkup}</span>
-      <span class="ccg-card-face ccg-card-rules ${setClass}">${rulesMarkup}</span>
+        <span class="ccg-rules-foot"><span>${card.cardCode ?? card.setId ?? "WWE LEGACY"}</span><span class="rarity-stars">${rarityStars(card.rarity ?? 1)}</span></span>
+      </span>
     </span>${footer}
   </${rootTag}>`;
 }
@@ -1602,7 +1635,7 @@ function renderCollection() {
     </section>
     <section class="catalogue-grid collectible-catalogue">${displayed.length ? displayed.map(card => {
       const cardSet = setCollections[card.setId] ?? setCollection;
-      return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : ownedCount(profile,card.id,'normal') ? 'NORMAL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small>${card.kind==='superstar'&&hasSuperstar(profile,card.superstarId)?`<button type="button" class="favourite-star-button ${(profile.favouriteSuperstars??[]).includes(card.superstarId)?'active':''}" data-favourite-star="${card.superstarId}">${(profile.favouriteSuperstars??[]).includes(card.superstarId)?'★ FAVOURITE':'☆ ADD FAVOURITE'}</button>`:''}</div></article>`;
+      return `<article class="catalogue-collectible ${card.kind === 'superstar' && !hasSuperstar(profile, card.superstarId) ? 'collection-locked' : ''}">${collectibleCardMarkup(card,{flipped:flippedCollectionCards.has(card.id),foil:ownedCount(profile,card.id,'foil')>0,flipAttr:`data-flip-collection="${card.id}"`})}<div class="catalogue-under-card"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small>${card.kind === 'superstar' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : '—'}` : card.kind === 'entrance' ? `Owned ${ownedCount(profile,card.id,'foil') ? 'FOIL' : ownedCount(profile,card.id,'normal') ? 'NORMAL' : '—'}` : `Owned ${ownedCount(profile,card.id,'normal')} · Foil ${ownedCount(profile,card.id,'foil')}`}</small>${card.kind==='superstar'&&hasSuperstar(profile,card.superstarId)?`<button type="button" class="favourite-star-button ${(profile.favouriteSuperstars??[]).includes(card.superstarId)?'active':''}" data-favourite-star="${card.superstarId}">${(profile.favouriteSuperstars??[]).includes(card.superstarId)?'★ FAVOURITE':'☆ ADD FAVOURITE'}</button>`:''}</div></article>`;
     }).join('') : `<div class="collection-empty">${collectionView === 'owned' ? 'No owned cards match these filters.' : 'No cards match these filters.'}</div>`}</section>${hasMoreCollection?`<div class="collection-load-more"><button id="collection-load-more" class="nav-button">Show ${Math.min(48,visible.length-displayed.length)} More Cards</button><small>${displayed.length} of ${visible.length} matching cards rendered</small></div>`:''}
   </section>`;
   root.querySelectorAll('[data-flip-collection]').forEach(btn => btn.addEventListener('click', () => { const id = btn.dataset.flipCollection; if (flippedCollectionCards.has(id)) flippedCollectionCards.delete(id); else flippedCollectionCards.add(id); renderCollection(); }));
@@ -1720,7 +1753,7 @@ function renderCardCatalogue() {
       const owned = ownershipFor(card);
       const cardSet = setCollections[card.setId] ?? setCollection;
       const unowned = owned.total === 0;
-      return `<article class="catalogue-collectible master-catalogue-card ${unowned ? 'catalogue-unowned' : 'catalogue-owned'}">${collectibleCardMarkup(card,{flipped:flippedCatalogueCards.has(card.id),flipAttr:`data-flip-catalogue="${card.id}"`})}<div class="catalogue-under-card master-catalogue-meta"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small class="catalogue-usage">${catalogueCardUsageLabel(card)}</small><strong class="catalogue-owned-count">${unowned ? "NOT OWNED" : `×${owned.total} OWNED`}</strong>${owned.foil ? `<em>${owned.normal} normal · ${owned.foil} foil</em>` : owned.normal ? `<em>${owned.normal} normal</em>` : ""}</div></article>`;
+      return `<article class="catalogue-collectible master-catalogue-card ${unowned ? 'catalogue-unowned' : 'catalogue-owned'}">${collectibleCardMarkup(card,{flipped:flippedCatalogueCards.has(card.id),foil:owned.foil>0,flipAttr:`data-flip-catalogue="${card.id}"`})}<div class="catalogue-under-card master-catalogue-meta"><span>${card.cardCode}</span><b>${cardSet.rarityLabels[card.rarity]}</b><small class="catalogue-usage">${catalogueCardUsageLabel(card)}</small><strong class="catalogue-owned-count">${unowned ? "NOT OWNED" : `×${owned.total} OWNED`}</strong>${owned.foil ? `<em>${owned.normal} normal · ${owned.foil} foil</em>` : owned.normal ? `<em>${owned.normal} normal</em>` : ""}</div></article>`;
     }).join("") : `<div class="collection-empty catalogue-empty">No released cards match this filter combination.</div>`}</section>
     ${filtered.length ? `<div class="catalogue-pagination catalogue-pagination-bottom">${pagination}</div>` : ""}
   </section>`;
@@ -2113,6 +2146,11 @@ function renderPlayPileOverlay() {
   return `<div class="superstar-card-modal play-pile-card-modal" data-play-pile-modal-backdrop="1"><div class="superstar-card-modal-inner play-pile-card-modal-inner">${collectibleCardMarkup(playPileOverlayCard,{flipped:playPileOverlayFlipped,extraClass:"hud-superstar-modal-card play-pile-modal-card",flipAttr:'data-flip-play-pile-modal="1"'})}<small>Tap card to ${playPileOverlayFlipped ? "show front" : "flip"} · Tap outside to close</small></div></div>`;
 }
 
+function renderHandOverlay() {
+  if (!handOverlayCard) return "";
+  return `<div class="superstar-card-modal hand-card-modal" data-hand-card-modal-backdrop="1"><div class="superstar-card-modal-inner hand-card-modal-inner">${collectibleCardMarkup(handOverlayCard,{flipped:handOverlayFlipped,extraClass:"hud-superstar-modal-card hand-modal-card",flipAttr:'data-flip-hand-modal="1"'})}<small>Tap card to ${handOverlayFlipped ? "show front" : "flip"} · Tap outside to close</small></div></div>`;
+}
+
 function renderMatchSpectacle() {
   if (!matchSpectacle) return "";
   const card = matchSpectacle.cardId ? collectionCards.find(c => c.id === matchSpectacle.cardId) : null;
@@ -2246,15 +2284,13 @@ function renderHumanHand() {
   const autoEligibility = state.phase === "COUNTER" ? autoCounterEligibility(state, HUMAN, state.proposedMove?.card) : null;
   const cards = entries.map(({card,index,legal}) => {
     const reason = legal ? (state.phase === "COUNTER" ? "COUNTER" : state.phase === "PIN_RESPONSE" ? "ESCAPE" : "PLAY") : cardReason(HUMAN, card);
-    const flipKey = `${index}:${card.id}`;
-    const flipped = !autoCounterSelecting && flippedHandCards.has(flipKey);
     const autoSelected = autoCounterSelecting && autoCounterSelection.has(index);
     if (autoCounterSelecting) return `<article class="hand-card-slot horizontal-hand-card auto-counter-ditch-card ${autoSelected ? "is-auto-selected" : ""}" data-auto-ditch-index="${index}" data-original-hand-index="${index}">
       ${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:`hand-ccg auto-ditch ${autoSelected ? "selected" : ""}`})}
       <div class="hand-card-action auto-counter-card-action"><span>${autoSelected ? "SELECTED TO DITCH" : "TAP CARD TO DITCH"}</span><button type="button" data-auto-ditch-index="${index}" class="${autoSelected ? "primary" : "secondary"}">${autoSelected ? "Selected" : "Select"}</button></div>
     </article>`;
     return `<article class="hand-card-slot horizontal-hand-card ${legal ? "is-playable" : "is-locked"}" data-original-hand-index="${index}">
-      ${collectibleCardMarkup(card,{flipped,extraClass:`hand-ccg ${legal ? "playable" : "locked"}`,flipAttr:`data-flip-hand="${flipKey}"`})}
+      <div class="hand-card-inspect-trigger" data-open-hand-card="${index}" role="button" tabindex="0" aria-label="Inspect ${card.name}">${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:`hand-ccg ${legal ? "playable" : "locked"}`})}</div>
       <div class="hand-card-action"><span>${reason || "Not playable now"}</span><button type="button" data-play-hand="${index}" class="${legal ? "primary" : "secondary"}" ${legal ? "" : "disabled"}>${state.phase === "COUNTER" ? "Counter" : state.phase === "PIN_RESPONSE" ? "Escape" : "Play"}</button></div>
     </article>`;
   }).join("");
@@ -2466,9 +2502,13 @@ function render() {
     return;
   }
   document.body.dataset.matchTheme = matchPresentationSetId ?? "summerslam-series-1";
-  root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)} ${(!profile?.onboarding || profile.onboarding.complete)?"":"has-onboarding"}">${onboardingMarkup()}${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderHumanHand()}${renderMatchLog()}</section>${renderSuperstarOverlay()}${renderPlayPileOverlay()}${renderMatchSpectacle()}`;
+  root.innerHTML = `<section class="match-experience ${presentationThemeClass(matchPresentationSetId)} ${(!profile?.onboarding || profile.onboarding.complete)?"":"has-onboarding"}">${onboardingMarkup()}${renderMatchHud()}${renderPlayPile()}${renderCommandBar()}${renderSubmissionChooser()}${renderHumanHand()}${renderMatchLog()}</section>${renderSuperstarOverlay()}${renderPlayPileOverlay()}${renderHandOverlay()}${renderMatchSpectacle()}`;
   $("#skip-onboarding")?.addEventListener("click",()=>{ profile.onboarding={complete:true,step:0}; saveProfile(profile); render(); });
-  root.querySelectorAll("[data-flip-hand]").forEach(btn => btn.addEventListener("click", () => { const key = btn.dataset.flipHand; if (flippedHandCards.has(key)) flippedHandCards.delete(key); else flippedHandCards.add(key); render(); }));
+  const openHandCard = (trigger, event) => { event?.stopPropagation?.(); const index=Number(trigger.dataset.openHandCard); handOverlayCard=game.state().players[HUMAN].hand[index] ?? null; handOverlayFlipped=false; render(); };
+  root.querySelectorAll("[data-open-hand-card]").forEach(trigger => {
+    trigger.addEventListener("click", event => openHandCard(trigger, event));
+    trigger.addEventListener("keydown", event => { if(event.key!=="Enter"&&event.key!==" ") return; event.preventDefault(); openHandCard(trigger,event); });
+  });
   root.querySelectorAll("[data-play-hand]").forEach(btn => btn.addEventListener("click", () => playCard(HUMAN, Number(btn.dataset.playHand))));
   root.querySelectorAll("[data-auto-ditch-index]").forEach(el => el.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); toggleAutoCounterCard(Number(el.dataset.autoDitchIndex)); }));
   const openPlayPileCard = (trigger, event) => { event?.stopPropagation?.(); playPileOverlayCard = collectionById.get(trigger.dataset.openPlayPile) ?? null; playPileOverlayFlipped = false; render(); };
@@ -2478,6 +2518,8 @@ function render() {
   });
   root.querySelectorAll("[data-flip-play-pile-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); playPileOverlayFlipped = !playPileOverlayFlipped; render(); }));
   root.querySelectorAll("[data-play-pile-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if (event.target !== backdrop) return; playPileOverlayCard = null; playPileOverlayFlipped = false; render(); }));
+  root.querySelectorAll("[data-flip-hand-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); handOverlayFlipped=!handOverlayFlipped; render(); }));
+  root.querySelectorAll("[data-hand-card-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if(event.target!==backdrop)return; handOverlayCard=null; handOverlayFlipped=false; render(); }));
   root.querySelectorAll("[data-open-superstar]").forEach(btn => btn.addEventListener("click", () => { superstarOverlayId = btn.dataset.openSuperstar; superstarOverlayFlipped = false; render(); }));
   root.querySelectorAll("[data-flip-superstar-modal]").forEach(btn => btn.addEventListener("click", event => { event.stopPropagation(); superstarOverlayFlipped = !superstarOverlayFlipped; render(); }));
   root.querySelectorAll("[data-superstar-modal-backdrop]").forEach(backdrop => backdrop.addEventListener("click", event => { if (event.target !== backdrop) return; superstarOverlayId = null; superstarOverlayFlipped = false; render(); }));

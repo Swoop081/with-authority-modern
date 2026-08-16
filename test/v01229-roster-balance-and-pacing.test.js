@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.64';
-import { superstars } from '../js/data/superstars.js?v=0.12.64';
-import { decks } from '../js/data/decks.js?v=0.12.64';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.64';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.64';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.65';
+import { superstars } from '../js/data/superstars.js?v=0.12.65';
+import { decks } from '../js/data/decks.js?v=0.12.65';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.65';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.65';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});
@@ -56,7 +56,7 @@ test('v0.12.29 signature setup chains search and discount their intended payoff'
 
 test('v0.12.29 Logan pace correction reduces his burst package without removing identity',()=>{
   const logan=superstars.loganPaul;
-  assert.equal(logan.hp,61);
+  assert.equal(logan.hp,62);
   assert.equal(logan.ability.trigger.drawUses,1);
   assert.equal(logan.ability.maxUses,2);
   assert.equal(byId('logan-paul-knockout-punch').cost,9);

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.64";
+import { enrichCounterState } from "./counter-states.js?v=0.12.65";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -788,7 +788,7 @@ export const allGameplayCards = [
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 7,
-    "damage": 3,
+    "damage": 0,
     "requirements": {
       "strength": 3
     },
@@ -796,13 +796,18 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "roman-reigns",
     "rarity": 2,
-    "rulesText": "Roman exclusive; strong Head submission",
+    "rulesText": "Roman exclusive; strong Head submission. On connect, lock in a persistent Head hold for +3 damage each successful turn.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 3
+    },
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "submissionTarget": "neck-head"
   },
   {
     "id": "roman-reigns-superman-punch",
@@ -4568,7 +4573,7 @@ export const allGameplayCards = [
     "id": "open-can",
     "name": "Open Up a Can of Whoop-Ass",
     "kind": "action",
-    "setId": "summerslam-series-1",
+    "setId": "hall-of-fame-series-1",
     "rarity": 1,
     "superstarId": "stone-cold-steve-austin",
     "rulesText": "Austin’s next Strike Move gets +2 damage.",
@@ -4582,7 +4587,7 @@ export const allGameplayCards = [
     "id": "what",
     "name": "What?",
     "kind": "support",
-    "setId": "summerslam-series-1",
+    "setId": "hall-of-fame-series-1",
     "rarity": 1,
     "superstarId": "stone-cold-steve-austin",
     "rulesText": "Once per match after the opponent plays an Action, they lose 1 Adrenaline.",
