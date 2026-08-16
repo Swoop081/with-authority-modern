@@ -14,7 +14,7 @@ test('v0.12.37 move fronts use unboxed heavyweight Cost/Damage figures', () => {
 });
 
 test('v0.12.37 move requirement and type line are enlarged for thumbnail legibility', () => {
-  assert.match(studio, /fittedMetaFont\(reqText,w\*\.49,26,18\)/);
-  assert.match(studio, /cardFont\(META_STACK,18,950\)/);
+  assert.match(studio, /fittedMetaFont\(req,w\*\.49,26,18\)/);
+  assert.match(studio, /cardFont\(META_STACK,req\?18:21,950\)/);
   assert.match(studio, /MOVE • \$\{moveType\}/);
 });

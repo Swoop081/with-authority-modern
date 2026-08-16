@@ -4189,3 +4189,78 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
   .physical-booster-pack .pack-brand-lockup{width:84%!important}
   .physical-booster-pack .pack-series-name{letter-spacing:.12em!important}
 }
+
+/* v0.12.50 — Menu Superstar Scale Pass
+   Superstar photography is the dominant visual on menu/hero surfaces. */
+.feature-art .mode-portrait img.official-menu-superstar-photo{
+  width:90%!important;
+  height:126%!important;
+  right:-13%!important;
+  bottom:-18%!important;
+}
+.legacy-stage-superstar{
+  right:-11%!important;
+  bottom:-10%!important;
+  width:76%!important;
+  height:132%!important;
+}
+.legacy-season-rock{
+  right:-12%!important;
+  top:-42%!important;
+  width:50%!important;
+  height:188%!important;
+  opacity:.68!important;
+}
+.legacy-command-photo{
+  right:-10%!important;
+  bottom:-24%!important;
+  width:62%!important;
+  height:148%!important;
+}
+.legacy-command-copy{width:68%!important}
+.legacy-utility-rail button>span{
+  left:-1px!important;
+  bottom:-14px!important;
+  width:66px!important;
+  height:102px!important;
+}
+.legacy-mode-superstar{
+  right:-12%!important;
+  bottom:-18%!important;
+  width:66%!important;
+  height:148%!important;
+}
+.legacy-mode-copy{width:59%!important}
+.select-card-front img.official-menu-superstar-photo{
+  width:112%!important;
+  height:112%!important;
+  max-width:none!important;
+  padding:0!important;
+  transform:translate(-5%,2%) scale(1.05)!important;
+  transform-origin:center bottom!important;
+}
+.mode-run-node-portrait img.official-menu-superstar-photo{
+  width:118%!important;
+  height:118%!important;
+  max-width:none!important;
+  transform:translateY(5%)!important;
+}
+
+@media(max-width:600px){
+  .feature-art .mode-portrait img.official-menu-superstar-photo{width:99%!important;height:132%!important;right:-17%!important;bottom:-20%!important}
+  .legacy-stage-superstar{right:-17%!important;bottom:-11%!important;width:86%!important;height:132%!important}
+  .legacy-season-rock{right:-18%!important;top:-46%!important;width:58%!important;height:194%!important}
+  .legacy-command-photo{right:-15%!important;bottom:-27%!important;width:70%!important;height:154%!important}
+  .legacy-command-copy{width:66%!important}
+  .legacy-utility-rail button>span{left:-4px!important;bottom:-17px!important;width:72px!important;height:110px!important}
+  .legacy-mode-superstar{right:-17%!important;bottom:-20%!important;width:74%!important;height:154%!important}
+  .legacy-mode-copy{width:58%!important}
+}
+@media(max-width:390px){
+  .feature-art .mode-portrait img.official-menu-superstar-photo{width:103%!important;right:-20%!important}
+  .legacy-stage-superstar{right:-20%!important;width:90%!important}
+  .legacy-command-photo{right:-18%!important;width:74%!important}
+  .legacy-season-rock{right:-21%!important;width:62%!important}
+  .legacy-mode-superstar{right:-20%!important;width:78%!important}
+  .legacy-utility-rail button>span{width:76px!important;height:114px!important}
+}
