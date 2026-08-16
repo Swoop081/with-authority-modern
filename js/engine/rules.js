@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.12.51";
-import { healthRatio } from "./health.js?v=0.12.51";
+import { totalMomentum } from "./utils.js?v=0.12.52";
+import { healthRatio } from "./health.js?v=0.12.52";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -8,7 +8,7 @@ export function canPlayEntrance(){ return false; }
 export function canPlayAction(state,playerId,card){ const p=state.players[playerId]; const cost=Math.max(0,card?.cost??0); const afterTurn=Math.max(0,Number(card?.playableAfterTurn??0)); return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="action"&&(p?.turn?.actionPlayed??0)<1&&!p?.actionLocked&&totalMomentum(p)>=cost&&(state.turnNumber??1)>afterTurn; }
 export function canPlaySupport(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="support"&&(p?.turn?.supportPlayed??0)<1; }
 export function canPlayManager(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="manager"&&!p?.activeManager; }
-export function canPlaySpecial(state,playerId,card){ const p=state.players[playerId]; if(!p||p.specialUsed||card?.kind!=="special")return false; if(state.phase!=="ACTION"||state.playerInControl!==playerId)return false; if(card?.special?.type==="brassKnuckles")return !!p.events?.brassKnucklesWindow; if(card?.special?.type==="jarOfTeeth")return !!p.events?.jarOfTeethWindow; if(["tiffanyEpiphany","fileComplaint","lastRites","fullSpeed","claymoreCountdown"].includes(card?.special?.type))return true; return false; }
+export function canPlaySpecial(state,playerId,card){ const p=state.players[playerId]; if(!p||card?.kind!=="special")return false; if((p.usedSpecialIds??[]).includes(card.id))return false; if(state.phase!=="ACTION"||state.playerInControl!==playerId)return false; if(card?.special?.type==="brassKnuckles")return !!p.events?.brassKnucklesWindow; if(card?.special?.type==="jarOfTeeth")return !!p.events?.jarOfTeethWindow; if(card?.special?.type==="paulHeyman")return !!p.events?.brocksGermanConnectedThisControl; if(["tiffanyEpiphany","fileComplaint","lastRites","fullSpeed","claymoreCountdown"].includes(card?.special?.type))return true; return false; }
 export function moveEligibility(state,playerId,card){
  const p=state.players[playerId]; const fail=reason=>({ok:false,legal:false,reason});
  if(state.phase!=="ACTION")return fail("Not an Action window"); if(state.playerInControl!==playerId)return fail("Not in Control"); if(card?.kind!=="move"||card.defensiveOnly)return fail("Not an offensive Move"); if(card.superstarId&&card.superstarId!==p?.superstar?.id)return fail("Move is exclusive to another Superstar"); if(Array.isArray(card.allowedSuperstarIds)&&card.allowedSuperstarIds.length&&!card.allowedSuperstarIds.includes(p?.superstar?.id))return fail("Move is restricted to another Superstar family");

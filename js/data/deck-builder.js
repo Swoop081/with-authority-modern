@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.12.51";
-import { collectionCards } from "./collection.js?v=0.12.51";
-import { superstars } from "./superstars.js?v=0.12.51";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.51";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.51";
+import { decks } from "./decks.js?v=0.12.52";
+import { collectionCards } from "./collection.js?v=0.12.52";
+import { superstars } from "./superstars.js?v=0.12.52";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.52";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.52";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -20,6 +20,10 @@ export function leadOffIds(sid) { return (decks[sid] ?? []).slice(0, 5).map(c =>
 export function recommendedDeckDraft(sid) { return (decks[sid] ?? []).map(c => ({ id: c.id, foil: false })); }
 export function materializeDraft(d = []) { return d.map(e => byId.get(e.id ?? e)).filter(Boolean); }
 export function usedCount(d, id) { return d.filter(e => (e.id ?? e) === id).length; }
+export function usedCopyFamilyCount(d, card) {
+  if (!card?.copyFamily) return usedCount(d, card?.id);
+  return d.reduce((n, e) => { const c = byId.get(e.id ?? e); return n + (c?.copyFamily === card.copyFamily ? 1 : 0); }, 0);
+}
 export function ownedTotal(p, id) { const o = p?.ownedCards?.[id] ?? {}; return (o.normal ?? 0) + (o.foil ?? 0); }
 
 export function cardEligibilityForSuperstar(star, card) {
@@ -112,7 +116,9 @@ export function canAddCard(profile, sid, draft, id) {
   if (!card || !legalForSuperstar(star, card) || draft.length >= 60) return false;
   const defaultCap = card.kind === "momentum" ? 12 : 5;
   const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
-  return usedCount(draft, id) < Math.min(cap, ownedTotal(profile, id));
+  const ownRoom = usedCount(draft, id) < Math.min(cap, ownedTotal(profile, id));
+  const familyRoom = !card.copyFamily || usedCopyFamilyCount(draft, card) < 5;
+  return ownRoom && familyRoom;
 }
 export function addCardToDraft(profile, sid, draft, id) {
   if (!canAddCard(profile, sid, draft, id)) return draft;
@@ -129,9 +135,10 @@ export function replaceLeadOffSlot(profile, sid, draft, slot, id) {
   if (oldId === id) return draft;
   const cap = card.kind === "momentum" ? 12 : 5;
   const current = usedCount(draft, id);
+  const familyCurrent = usedCopyFamilyCount(draft, card);
   const owned = ownedTotal(profile, id);
   const out = draft.map(e => ({ ...(typeof e === "string" ? { id: e, foil: false } : e) }));
-  if (current < Math.min(cap, owned)) {
+  if (current < Math.min(cap, owned) && (!card.copyFamily || familyCurrent < 5)) {
     out[index] = { id, foil: false };
     return out;
   }
@@ -224,6 +231,7 @@ export function autoFillOwnedDraft(profile, sid, draft = []) {
       const defaultCap = card.kind === "momentum" ? 12 : 5;
       const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
       if (usedCount(out, card.id) >= Math.min(cap, ownedTotal(profile, card.id))) continue;
+      if (card.copyFamily && usedCopyFamilyCount(out, card) >= 5) continue;
       out.push({ id: card.id, foil: false }); added = true;
       if (out.length >= target) break;
     }

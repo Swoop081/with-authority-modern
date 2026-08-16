@@ -2893,6 +2893,18 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardNumber": 64,
     "cardCode": "EVO1-064"
   }
+  ,{
+    "id": "brock-lesnar-brocks-german",
+    "setId": "summerslam-series-1",
+    "cardNumber": 140,
+    "cardCode": "SS1-140"
+  },
+  {
+    "id": "special-brock-lesnar-paul-heyman",
+    "setId": "summerslam-series-1",
+    "cardNumber": 141,
+    "cardCode": "SS1-141"
+  }
 ]);
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
 export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));

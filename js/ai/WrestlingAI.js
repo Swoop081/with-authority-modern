@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.51";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.51";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.52";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.52";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -159,7 +159,7 @@ function moveScore(state,pid,card){
  if((p.namedDiscount?.[card.name]??0)>0)score+=18;
  if(card.groundedOnly&&groundState(def))score+=8;
  const setupSpecial=p.superstar?.special;
- if(!p.specialUsed&&setupSpecial?.searchName&&setupSpecial?.afterName===card.name)score+=28;
+ if(setupSpecial?.searchName&&setupSpecial?.afterName===card.name&&!(p.usedSpecialIds??[]).includes(p.hand.find(x=>x.special===setupSpecial)?.id))score+=28;
  // Sequence-aware heuristics: preserve locked card data; teach the CPU how to use it.
  if(p.superstar.id==='tiffany-stratton'){
    const hasPme=p.hand.some(x=>x.id==='tiffany-stratton-prettiest-moonsault-ever');

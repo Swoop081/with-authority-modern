@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.12.51";
+import { allGameplayCards } from "./content.js?v=0.12.52";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -1380,15 +1380,14 @@ export const deckIds={
     "corner-shoulder-thrusts",
     "ground-and-pound",
     "ground-and-pound",
-    "ground-and-pound",
     "belly-to-belly-suplex",
     "belly-to-belly-suplex",
     "belly-to-belly-suplex",
-    "belly-to-belly-suplex",
-    "german-suplex",
-    "german-suplex",
-    "german-suplex",
-    "german-suplex",
+    "brock-lesnar-brocks-german",
+    "brock-lesnar-brocks-german",
+    "brock-lesnar-brocks-german",
+    "brock-lesnar-brocks-german",
+    "brock-lesnar-brocks-german",
     "overhead-belly-to-belly-suplex",
     "overhead-belly-to-belly-suplex",
     "overhead-belly-to-belly-suplex",
@@ -1414,6 +1413,7 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-brock-lesnar",
+    "special-brock-lesnar-paul-heyman",
     "no-sell",
     "chain-wrestling",
     "shoulder-up",

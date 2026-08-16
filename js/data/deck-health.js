@@ -41,8 +41,12 @@ export function deckComposition(cards = []) {
 
 export function evaluateDeckHealth(cards = []) {
   const countsById = new Map();
+  const familyCounts = new Map();
   const violations = [];
-  for (const card of cards) countsById.set(card.id, (countsById.get(card.id) ?? 0) + 1);
+  for (const card of cards) {
+    countsById.set(card.id, (countsById.get(card.id) ?? 0) + 1);
+    if (card?.copyFamily) familyCounts.set(card.copyFamily, (familyCounts.get(card.copyFamily) ?? 0) + 1);
+  }
 
   if (cards.length !== RECOMMENDED_DECK_SHAPE.size) {
     violations.push(`Deck must contain ${RECOMMENDED_DECK_SHAPE.size} pages (${cards.length}/${RECOMMENDED_DECK_SHAPE.size}).`);
@@ -52,6 +56,10 @@ export function evaluateDeckHealth(cards = []) {
     const defaultCap = card?.kind === "momentum" ? RECOMMENDED_DECK_SHAPE.momentumCopyCap : RECOMMENDED_DECK_SHAPE.copyCap;
     const cap = Math.min(defaultCap, Number.isFinite(card?.maxCopies) ? card.maxCopies : defaultCap);
     if (count > cap) violations.push(`${card?.name ?? id} exceeds copy cap (${count}/${cap}).`);
+  }
+
+  for (const [family, count] of familyCounts) {
+    if (count > RECOMMENDED_DECK_SHAPE.copyCap) violations.push(`${family === "german-suplex" ? "German Suplex family" : family} exceeds combined copy cap (${count}/${RECOMMENDED_DECK_SHAPE.copyCap}).`);
   }
 
   const comp = deckComposition(cards);

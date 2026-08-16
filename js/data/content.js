@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.51";
+import { enrichCounterState } from "./counter-states.js?v=0.12.52";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1545,11 +1545,40 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
+    "copyFamily": "german-suplex",
     "rulesText": "",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
+    "effects": [],
+    "counterState": "rear-control"
+  },
+  {
+    "id": "brock-lesnar-brocks-german",
+    "name": "Brock’s German",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "brock-lesnar",
+    "rarity": 3,
+    "rulesText": "Brock-exclusive. On connect, draw 1 Brock’s German from your Playbook if one remains. Counts as German Suplex for card effects. German Suplex and Brock’s German share a combined 5-copy deck limit.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "searchOnConnectName": "Brock’s German",
+    "countsAs": [
+      "German Suplex"
+    ],
+    "copyFamily": "german-suplex",
+    "maxCopies": 5,
     "effects": [],
     "counterState": "rear-control"
   },
@@ -5077,6 +5106,21 @@ export const allGameplayCards = [
       "minDamage": 10,
       "reduce": 5,
       "methodMomentum": "strength"
+    }
+  },
+  {
+    "id": "special-brock-lesnar-paul-heyman",
+    "name": "My Name Is Paul Heyman",
+    "kind": "special",
+    "setId": "summerslam-series-1",
+    "rarity": 3,
+    "superstarId": "brock-lesnar",
+    "rulesText": "Once per match, after Brock connects with Brock’s German during this Control sequence: search your Playbook for F-5 if it is not already in your hand. Brock’s next F-5 this Control costs 2 less.",
+    "special": {
+      "type": "paulHeyman",
+      "afterName": "Brock’s German",
+      "searchName": "F-5",
+      "discount": 2
     }
   },
   {

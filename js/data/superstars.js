@@ -1451,6 +1451,7 @@ export const superstars = {
       "shoulder-tackle"
     ],
     "signatures": [
+      "brock-lesnar-brocks-german",
       "belly-to-belly-suplex",
       "brock-lesnar-kimura-lock",
       "brock-lesnar-f-5"
@@ -1470,12 +1471,11 @@ export const superstars = {
     },
     "ability": {
       "name": "Suplex City",
-      "text": "The first 2 times Brock connects with German Suplex, search your Playbook for another German Suplex and gain +2 Adrenaline.",
+      "text": "The first 2 times Brock connects with a Move that counts as German Suplex, gain +2 Adrenaline.",
       "trigger": {
         "type": "connectNamed",
         "name": "German Suplex",
         "maxUses": 2,
-        "drawNamed": true,
         "adrenaline": 2
       },
       "maxUses": 2
