@@ -1,0 +1,30 @@
+
+> wwe-legacy-ccg@0.12.63 art
+> node tools/art-audit.mjs
+
+{
+  "cards": 485,
+  "missing": 449,
+  "missingIds": [
+    "goldberg-military-press-powerslam",
+    "goldberg-spear",
+    "goldberg-jackhammer",
+    "entrance-goldberg",
+    "special-goldberg",
+    "superstar-goldberg",
+    "bron-breakker-gorilla-press-powerslam",
+    "bron-breakker-breakkers-spear",
+    "bron-breakker-steiner-recliner",
+    "entrance-bron-breakker",
+    "special-bron-breakker",
+    "superstar-bron-breakker",
+    "drew-mcintyre-glasgow-kiss",
+    "drew-mcintyre-future-shock-ddt",
+    "drew-mcintyre-claymore",
+    "entrance-drew-mcintyre",
+    "special-drew-mcintyre",
+    "superstar-drew-mcintyre",
+    "randy-orton-draping-ddt",
+    "randy-orton-rko"
+  ]
+}

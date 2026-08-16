@@ -1,0 +1,61 @@
+
+> wwe-legacy-ccg@0.12.62 card-ids
+> node tools/card-id-audit.mjs
+
+{
+  "cards": 485,
+  "manifest": 485,
+  "sets": {
+    "evolution-series-1": {
+      "count": 64,
+      "first": 1,
+      "last": 64
+    },
+    "hall-of-fame-series-1": {
+      "count": 78,
+      "first": 1,
+      "last": 78
+    },
+    "money-in-the-bank-series-1": {
+      "count": 34,
+      "first": 1,
+      "last": 34
+    },
+    "raw-series-1": {
+      "count": 35,
+      "first": 1,
+      "last": 35
+    },
+    "season-1-final-boss": {
+      "count": 8,
+      "first": 1,
+      "last": 8
+    },
+    "smackdown-series-1": {
+      "count": 35,
+      "first": 1,
+      "last": 35
+    },
+    "summerslam-series-1": {
+      "count": 142,
+      "first": 1,
+      "last": 142
+    },
+    "survivor-series-series-1": {
+      "count": 49,
+      "first": 1,
+      "last": 49
+    },
+    "worlds-collide-series-1": {
+      "count": 34,
+      "first": 1,
+      "last": 34
+    },
+    "season-2-whos-next": {
+      "count": 6,
+      "first": 1,
+      "last": 6
+    }
+  },
+  "issues": []
+}

@@ -5336,3 +5336,116 @@ body[data-screen="matchup"] #game{padding:0!important;gap:0!important}
   .challenge-set-stat{grid-template-rows:42px auto auto!important;min-height:88px!important}
   .challenge-set-logo{height:40px!important}
 }
+
+/* v0.12.61 — Launch Final Boss Scale Correction
+   Screenshot-driven correction: let the supplied Rock render fill the complete
+   left hero column instead of appearing as a narrow cutout. The art itself is
+   unchanged; only its launch-screen layout and scale are adjusted. */
+.season-one-ad{
+  grid-template-columns:45% 55%!important;
+}
+.season-one-ad .season-ad-rock{
+  position:relative!important;
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  justify-self:stretch!important;
+  align-self:stretch!important;
+  overflow:hidden!important;
+}
+.season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+  position:absolute!important;
+  top:-2%!important;
+  bottom:auto!important;
+  left:50%!important;
+  right:auto!important;
+  width:auto!important;
+  height:108%!important;
+  max-width:none!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  transform:translateX(-50%)!important;
+  mask-image:linear-gradient(90deg,#000 0%,#000 94%,rgba(0,0,0,.78) 97%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 94%,rgba(0,0,0,.78) 97%,transparent 100%)!important;
+}
+.season-one-ad .season-ad-copy{
+  left:auto!important;
+  width:auto!important;
+  min-width:0!important;
+  padding-left:4px!important;
+}
+@media(max-width:430px){
+  .season-one-ad{grid-template-columns:45% 55%!important}
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+    top:-2%!important;
+    left:50%!important;
+    width:auto!important;
+    height:110%!important;
+    transform:translateX(-50%)!important;
+  }
+  .season-one-ad .season-ad-copy{padding-left:2px!important}
+}
+
+
+/* v0.12.62 — Daily Booster Button Pass
+   One full-width purple control only: CLAIM PACK when live, countdown only while waiting. */
+.season-free-pack-cta{
+  display:block!important;
+  width:100%!important;
+  margin:8px 0!important;
+  padding:0!important;
+  background:none!important;
+  border:0!important;
+}
+.season-free-pack-cta .season-free-pack-button{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:48px!important;
+  margin:0!important;
+  padding:11px 14px!important;
+  border:1px solid rgba(193,135,255,.58)!important;
+  border-radius:10px!important;
+  background:linear-gradient(135deg,#7636c8,#a647df)!important;
+  color:#fff!important;
+  font-size:.82rem!important;
+  line-height:1!important;
+  font-weight:1000!important;
+  letter-spacing:.02em!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  box-shadow:0 8px 22px rgba(98,41,165,.22)!important;
+}
+.season-free-pack-cta .season-free-pack-button:disabled{
+  opacity:.72!important;
+  filter:none!important;
+  cursor:default!important;
+  box-shadow:none!important;
+}
+@media(max-width:390px){
+  .season-free-pack-cta .season-free-pack-button{font-size:.72rem!important;padding-inline:9px!important}
+}
+
+
+/* v0.12.63 — Card Back Fallback Pass
+   The canonical rules/details back is always present underneath an optional
+   finished front. If a private/custom WebP is absent or fails to load, the
+   art layer disappears and the original back remains visible — never blank. */
+.ccg-card-front .ccg-card-front-backup{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  transform:none!important;
+  -webkit-transform:none!important;
+  border:0!important;
+  border-radius:inherit!important;
+  box-shadow:none!important;
+  backface-visibility:visible!important;
+  -webkit-backface-visibility:visible!important;
+}
+.ccg-card-front .ccg-custom-front-overlay{z-index:2!important}
+.ccg-card-front .ccg-custom-front-overlay.is-missing-finished-art{display:none!important}
+.ccg-card.uses-rules-fallback .ccg-card-front-backup{display:flex!important}

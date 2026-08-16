@@ -37,9 +37,9 @@ test('v0.12.58 Match Rewards uses a readable Series 1 pack wrapper', () => {
   assert.match(css, /\.results-booster\{[\s\S]*width:102px!important/);
 });
 
-test('v0.12.58 unfinished cards default to their rules face', () => {
-  assert.match(app, /const missingCustomFront = !superstarFront && card\.kind !== "momentum" && !finishedFront/);
-  assert.match(app, /const displayFlipped = missingCustomFront \? true : Boolean\(flipped\)/);
+test('unfinished cards retain a rules-face fallback under optional custom fronts', () => {
+  assert.match(app, /ccg-card-front-backup/);
+  assert.match(app, /is-missing-finished-art/);
   assert.match(app, /uses-rules-fallback/);
 });
 

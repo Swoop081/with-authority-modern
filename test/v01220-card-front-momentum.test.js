@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.60';
-import { canCounter } from '../js/engine/rules.js?v=0.12.60';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.63';
+import { canCounter } from '../js/engine/rules.js?v=0.12.63';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -23,7 +23,7 @@ test('v0.12.57 finished Move fronts trust the printed Card Art Studio Cost and D
   const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
   assert.ok(app.includes('moveFront && finishedFront ? "is-full-art-move"'));
-  assert.match(app,/: finishedFront\s*\n\s*\? `<span class="ccg-card-art/);
+  assert.match(app,/finishedFront \? `<span class="ccg-card-art ccg-custom-front-overlay/);
   assert.match(css,/\.ccg-card\.is-full-art-finished \.ccg-card-stats[\s\S]*display:none!important/);
   assert.match(app,/ccg-rules-statline/,'Cost and Damage remain available on the rules back');
 });

@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.60';
-import { canAttemptPin } from '../js/engine/rules.js?v=0.12.60';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.60';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.63';
+import { canAttemptPin } from '../js/engine/rules.js?v=0.12.63';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.63';
 
 const P=(hp)=>({hp,maxHp:76,hand:[],turn:{momentumPlayed:0,specialPlayed:0},momentum:{strength:0,strike:0,technical:0,agility:0},adrenaline:0,events:{},superstar:{id:'x'}});
 

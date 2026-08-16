@@ -1,31 +1,31 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.60";
-import { superstars } from "../data/superstars.js?v=0.12.60";
-import { decks } from "../data/decks.js?v=0.12.60";
-import { sets } from "../data/sets.js?v=0.12.60";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.60";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.60";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.60";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.60";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.60";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.60";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.60";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.60";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.60";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.60";
-import { totalMomentum } from "../engine/utils.js?v=0.12.60";
-import { healthZone } from "../engine/health.js?v=0.12.60";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.60";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.60";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.60";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.60";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.60";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.60";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.60";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.60";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.60";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.60";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.60";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.60";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.63";
+import { superstars } from "../data/superstars.js?v=0.12.63";
+import { decks } from "../data/decks.js?v=0.12.63";
+import { sets } from "../data/sets.js?v=0.12.63";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.63";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.63";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.63";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.63";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.63";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.63";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.63";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.63";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.63";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.63";
+import { totalMomentum } from "../engine/utils.js?v=0.12.63";
+import { healthZone } from "../engine/health.js?v=0.12.63";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.63";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.63";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.63";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.63";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.63";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.63";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.63";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.63";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.63";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.63";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.63";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.63";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -813,12 +813,11 @@ function refreshSeasonClocks() {
   const remaining = seasonTimeRemaining(new Date());
   document.querySelectorAll('[data-season-countdown]').forEach(el => { el.textContent = remaining.ended ? 'Season complete' : formatCountdown(remaining.ms); });
   const free = freePackStatus(profile, new Date());
-  document.querySelectorAll('[data-free-pack-copy]').forEach(el => { el.textContent = free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`; });
   const next = nextRoadmapNode(new Date());
   const nextMs = Math.max(0, new Date(next.date).getTime() - Date.now());
   document.querySelectorAll('[data-next-drop-countdown]').forEach(el => { el.textContent = nextMs <= 0 ? 'LIVE' : formatCountdown(nextMs); });
   const claim = document.querySelector('#claim-free-pack');
-  if (claim) { claim.disabled = !free.available; claim.textContent = free.available ? 'Claim Free Booster' : `Next · ${formatCountdown(free.msRemaining)}`; }
+  if (claim) { claim.disabled = !free.available; claim.textContent = free.available ? 'Claim Pack' : formatCountdown(free.msRemaining); }
   const store = storeRotation(new Date());
   document.querySelectorAll('[data-store-countdown]').forEach(el => { el.textContent = formatStoreCountdown(store.msRemaining); });
   const storeScreen = document.querySelector('[data-store-set]');
@@ -929,9 +928,8 @@ function renderSeasons() {
   root.innerHTML = `<section class="seasons-screen premium-screen">
     <section class="feature-hero seasons-feature season-final-boss-hero">${`<div class="mode-portrait-stack feature-art final-boss-feature-art"><div class="mode-portrait p1">${finalBossRockMarkup()}</div></div>`}<div class="feature-shade"></div><div class="feature-copy">${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · 50 TIERS</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Tier 50 unlocks The Rock — Final Boss.</p><div class="season-hero-status season-hero-status-compact"><span>${uiIcon("gift")}<b>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</b></span><span>${uiIcon("trophy")}<b>${progress.tier >= SEASON_TIER_COUNT ? 'ROAD COMPLETE' : `NEXT · TIER ${progress.tier + 1}`}</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Survivor Series next</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
-    <section class="season-free-pack-cta season-free-pack-strip ${free.available ? 'ready' : 'waiting'}">
-      <span class="sr-only" data-free-pack-copy>${free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`}</span>
-      <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'}>${free.available ? 'Claim Free Booster' : `Next Free Booster · ${formatCountdown(free.msRemaining)}`}</button>
+    <section class="season-free-pack-cta ${free.available ? 'ready' : 'waiting'}">
+      <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'}>${free.available ? 'Claim Pack' : formatCountdown(free.msRemaining)}</button>
     </section>
     <section class="season-progress-panel season-command-center">
       <div class="season-command-stats">
@@ -1424,6 +1422,14 @@ function momentumMockupMarkup(card) {
   </span>`;
 }
 
+function finishedFrontImageMarkup(card) {
+  const finished = finishedCardArtFor(card);
+  if (!finished) return "";
+  const legacyFinished = legacyFinishedCardArtFor(card);
+  const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
+  return `<img loading="lazy" decoding="async" class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" data-legacy-finished-art="${legacyCandidate}" onerror="if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';this.closest('.ccg-card-art')?.classList.add('is-missing-finished-art');this.closest('.ccg-card')?.classList.remove('is-full-art-finished','is-full-art-move');this.closest('.ccg-card')?.classList.add('uses-rules-fallback');">`;
+}
+
 function cardArtFace(card) {
   const star = card.superstarId ? superstarById[card.superstarId] : null;
   if (card.kind === "superstar" && card.superstarId) {
@@ -1435,12 +1441,8 @@ function cardArtFace(card) {
     return momentumMockupMarkup(card);
   }
   const art = artworkFor(card);
-  const finished = finishedCardArtFor(card);
-  const legacyFinished = legacyFinishedCardArtFor(card);
-  if (finished) {
-    const legacyCandidate = legacyFinished && legacyFinished !== finished ? legacyFinished : "";
-    return `<img loading="lazy" decoding="async" class="ccg-finished-card-art-image" src="${finished}" alt="${card.name}" data-finished-card-art="${card.id}" data-legacy-finished-art="${legacyCandidate}" onerror="if(!this.dataset.legacyFinishedTried&&this.dataset.legacyFinishedArt){this.dataset.legacyFinishedTried='1';this.src=this.dataset.legacyFinishedArt;return;}this.onerror=null;this.style.display='none';this.closest('.ccg-card')?.classList.remove('is-full-art-finished','is-full-art-move');">`;
-  }
+  const finishedImage = finishedFrontImageMarkup(card);
+  if (finishedImage) return finishedImage;
   const fallback = card.name;
   return art
     ? `<img loading="lazy" decoding="async" src="${art}" alt="${card.name}">`
@@ -1463,39 +1465,8 @@ function cardPlayRestrictionText(card) {
   return "";
 }
 
-function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "", interactive = true } = {}) {
-  // Superstar and all Card Art Studio exports are premium full-art fronts.
-  // Non-Superstar cards keep their generated legacy overlays only as a fallback
-  // until the corresponding custom WebP exists on disk.
-  const superstarFront = card.kind === "superstar";
-  const moveFront = card.kind === "move";
-  const finishedFront = !superstarFront && Boolean(finishedCardArtFor(card));
-  // Until a custom front is exported, default the card to its rules/details face.
-  // Momentum is a purpose-built live card face and Superstar cards have dedicated fronts.
-  const missingCustomFront = !superstarFront && card.kind !== "momentum" && !finishedFront;
-  const displayFlipped = missingCustomFront ? true : Boolean(flipped);
-  const visualFoil = !superstarFront && !finishedFront && (foil || card.kind === "entrance");
-  const setClass = `set-${card.setId ?? "global"}`;
-  const typeClass = `type-${card.kind}`;
-  const finisherClass = card.finisher ? "is-finisher" : card.trademark ? "is-trademark" : card.signature ? "is-signature" : "";
-  const foilClass = visualFoil ? "is-foil" : "";
-  const ruleText = cardRulesText(card);
-  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind.toUpperCase();
-  const subtitle = card.kind === "move"
-    ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
-    : (card.subtitle ?? typeLabel);
-  const frontMarkup = superstarFront
-    ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
-    : finishedFront
-      ? `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span>`
-      : `<span class="ccg-card-art ${moveFront ? "ccg-move-full-art" : ""}">${cardArtFace(card)}</span><span class="ccg-card-title"><small>${typeLabel}${visualFoil ? " · FOIL" : ""}</small><strong>${card.name}</strong></span><span class="ccg-card-stats">${cardFrontBottom(card)}</span>`;
-  const rootTag = interactive ? "button" : "span";
-  const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. ${missingCustomFront ? "Card details shown because custom front artwork is not installed." : `Tap to ${displayFlipped ? "view artwork" : "view effects"}.`}"` : `aria-hidden="true"`;
-  return `<${rootTag} ${rootAttrs} class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${missingCustomFront ? "uses-rules-fallback" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${moveFront && finishedFront ? "is-full-art-move" : ""} ${extraClass}">
-    <span class="ccg-card-inner">
-      <span class="ccg-card-face ccg-card-front">${frontMarkup}</span>
-      <span class="ccg-card-face ccg-card-rules ${setClass}">
-        ${setLogoMarkup(card.setId,"ccg-rules-set-logo")}
+function cardRulesFaceMarkup(card, setClass, typeLabel, subtitle, ruleText) {
+  return `${setLogoMarkup(card.setId,"ccg-rules-set-logo")}
         <span class="ccg-rules-head"><small>${typeLabel}</small><strong>${card.name}</strong><em>${subtitle}</em></span>
         ${card.kind === "move" ? `<span class="ccg-rules-statline"><span><small>COST</small><b>${card.cost ?? 0}</b></span><span><small>DAMAGE</small><b>${card.damage ?? 0}</b></span></span>` : ""}
         <span class="ccg-rules-body"><b class="ccg-effect-label">${card.kind === "move" ? "EFFECT" : card.kind === "superstar" ? "SUPERSTAR ABILITY" : card.kind === "entrance" ? "ENTRANCE EFFECT" : "RULES"}</b><span>${ruleText}</span></span>
@@ -1508,8 +1479,37 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
         ${card.kind === "move" && card.counterSubmissionTargets?.length ? `<span class="ccg-rules-requirements"><b>SUBMISSION REVERSAL</b> ${card.counterSubmissionTargets.map(t=>SUBMISSION_TARGET_LABELS[t] ?? t).join(", ")}</span>` : ""}
         ${card.kind === "move" && card.counterMethods?.length ? `<span class="ccg-rules-requirements"><b>COUNTERS</b> Any ${card.counterMethods.map(m=>m[0].toUpperCase()+m.slice(1)).join(" / ")} Move</span>` : ""}
         ${cardPlayRestrictionText(card)}
-        <span class="ccg-rules-foot"><span>${card.cardCode ?? card.setId ?? "WWE LEGACY"}</span><span class="rarity-stars">${rarityStars(card.rarity ?? 1)}</span></span>
-      </span>
+        <span class="ccg-rules-foot"><span>${card.cardCode ?? card.setId ?? "WWE LEGACY"}</span><span class="rarity-stars">${rarityStars(card.rarity ?? 1)}</span></span>`;
+}
+
+function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass = "", footer = "", flipAttr = "", interactive = true } = {}) {
+  // A finished Card Art Studio image is an optional overlay, never the structural
+  // card face. The canonical rules back sits underneath it, so a missing/private
+  // WebP can never leave a blank rectangle in Collection, Catalogue, boosters or match UI.
+  const superstarFront = card.kind === "superstar";
+  const moveFront = card.kind === "move";
+  const finishedFront = !superstarFront && Boolean(finishedCardArtFor(card));
+  const displayFlipped = Boolean(flipped);
+  const visualFoil = !superstarFront && !finishedFront && (foil || card.kind === "entrance");
+  const setClass = `set-${card.setId ?? "global"}`;
+  const typeClass = `type-${card.kind}`;
+  const finisherClass = card.finisher ? "is-finisher" : card.trademark ? "is-trademark" : card.signature ? "is-signature" : "";
+  const foilClass = visualFoil ? "is-foil" : "";
+  const ruleText = cardRulesText(card);
+  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind.toUpperCase();
+  const subtitle = card.kind === "move"
+    ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
+    : (card.subtitle ?? typeLabel);
+  const rulesMarkup = cardRulesFaceMarkup(card, setClass, typeLabel, subtitle, ruleText);
+  const frontMarkup = superstarFront
+    ? `<span class="ccg-card-art ccg-superstar-full-art">${cardArtFace(card)}</span>`
+    : `<span class="ccg-card-front-backup ccg-card-rules ${setClass}" aria-hidden="true">${rulesMarkup}</span>${finishedFront ? `<span class="ccg-card-art ccg-custom-front-overlay ${moveFront ? "ccg-move-full-art" : ""}">${finishedFrontImageMarkup(card)}</span>` : ""}`;
+  const rootTag = interactive ? "button" : "span";
+  const rootAttrs = interactive ? `type="button" ${flipAttr} aria-label="${card.name}. Tap to ${displayFlipped ? "view front" : "view card back"}."` : `aria-hidden="true"`;
+  return `<${rootTag} ${rootAttrs} class="ccg-card ${displayFlipped ? "is-flipped" : ""} ${setClass} ${typeClass} ${finisherClass} ${foilClass} ${superstarFront ? "is-full-art-superstar" : ""} ${finishedFront ? "is-full-art-finished" : ""} ${moveFront && finishedFront ? "is-full-art-move" : ""} ${extraClass}">
+    <span class="ccg-card-inner">
+      <span class="ccg-card-face ccg-card-front">${frontMarkup}</span>
+      <span class="ccg-card-face ccg-card-rules ${setClass}">${rulesMarkup}</span>
     </span>${footer}
   </${rootTag}>`;
 }
