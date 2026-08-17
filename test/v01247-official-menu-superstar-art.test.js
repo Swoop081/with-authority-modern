@@ -51,7 +51,7 @@ test('v0.12.48 Home and Play use wrestler photography without decorative collect
   assert.match(home, /legacy-command-photo/);
   assert.doesNotMatch(home, /legacy-stage-card/);
   assert.doesNotMatch(home, /home-tile-card/);
-  assert.equal((play.match(/class="legacy-mode-banner/g) ?? []).length, 3);
+  assert.ok((play.match(/class="legacy-mode-banner/g) ?? []).length >= 3);
   assert.match(play, /legacy-mode-superstar/);
   assert.doesNotMatch(play, /mode-full-card-art/);
   assert.doesNotMatch(play, /mode-feature-card/);

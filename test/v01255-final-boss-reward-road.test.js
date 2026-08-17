@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.12.75';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.75';
-import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.12.75';
+import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.12.78';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.78';
+import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.12.78';
 
 const milestones = [5,10,15,20,25,30,40,50];
 
 test('v0.12.55 Final Boss prestige cards are distributed across the 50-tier road',()=>{
-  assert.equal(PROFILE_VERSION,27);
+  assert.equal(PROFILE_VERSION,28);
   assert.deepEqual(milestones.map(t=>[t,tierReward(t).cardId]),[
-    [5,'the-rock-final-boss-slap'],
+    [5,'the-rock-lay-the-smack-down'],
     [10,'the-rock-rock-bottom'],
     [15,'the-rock-belt-whip'],
     [20,'special-the-rock'],
@@ -48,7 +48,7 @@ test('v0.12.55 profile migration backfills already-claimed Final Boss milestones
   p.seasons['season-1'].claimedTiers=[5,10,20,30,40];
   for(const reward of Object.values(FINAL_BOSS_TIER_REWARDS)) delete p.ownedCards[reward.cardId];
   const migrated=migrateProfile(p);
-  assert.equal(totalOwnedCopies(migrated,'the-rock-final-boss-slap'),1);
+  assert.equal(totalOwnedCopies(migrated,'the-rock-lay-the-smack-down'),1);
   assert.equal(totalOwnedCopies(migrated,'the-rock-rock-bottom'),3);
   assert.equal(totalOwnedCopies(migrated,'special-the-rock'),1);
   assert.equal(totalOwnedCopies(migrated,'the-rock-people-s-elbow'),2);

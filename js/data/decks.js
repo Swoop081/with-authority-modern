@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.12.75";
+import { allGameplayCards } from "./content.js?v=0.12.78";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -91,9 +91,9 @@ export const deckIds={
     "backbreaker",
     "piledriver",
     "piledriver",
-    "mankind-running-knee-to-the-corner",
-    "mankind-running-knee-to-the-corner",
-    "mankind-running-knee-to-the-corner",
+    "mankind-cactus-elbow",
+    "mankind-cactus-elbow",
+    "mankind-cactus-elbow",
     "mankind-double-arm-ddt",
     "mankind-double-arm-ddt",
     "mankind-double-arm-ddt",
@@ -135,9 +135,9 @@ export const deckIds={
     "punch",
     "punch",
     "punch",
-    "the-rock-final-boss-slap",
-    "the-rock-final-boss-slap",
-    "the-rock-final-boss-slap",
+    "the-rock-lay-the-smack-down",
+    "the-rock-lay-the-smack-down",
+    "the-rock-lay-the-smack-down",
     "clothesline",
     "clothesline",
     "body-slam",
@@ -185,7 +185,7 @@ export const deckIds={
     "body-slam",
     "clothesline",
     "clothesline",
-    "the-rock-final-boss-slap"
+    "the-rock-lay-the-smack-down"
   ],
   "hulk-hogan": [
     "momentum-strength",

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.75";
+import { enrichCounterState } from "./counter-states.js?v=0.12.78";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -2862,8 +2862,8 @@ export const allGameplayCards = [
     "counterState": "body-elevated"
   },
   {
-    "id": "mankind-running-knee-to-the-corner",
-    "name": "Running Knee to the Corner",
+    "id": "mankind-cactus-elbow",
+    "name": "Cactus Elbow",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 5,
@@ -2881,7 +2881,7 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "leg-extended"
+    "counterState": "diving-aerial"
   },
   {
     "id": "mankind-double-arm-ddt",
@@ -4294,8 +4294,8 @@ export const allGameplayCards = [
     "counterState": "diving-aerial"
   },
   {
-    "id": "the-rock-final-boss-slap",
-    "name": "Final Boss Slap",
+    "id": "the-rock-lay-the-smack-down",
+    "name": "Lay The Smack Down",
     "kind": "move",
     "setId": "season-1-final-boss",
     "cost": 4,

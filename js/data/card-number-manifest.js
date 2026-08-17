@@ -516,7 +516,7 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "HOF1-025"
   },
   {
-    "id": "mankind-running-knee-to-the-corner",
+    "id": "mankind-cactus-elbow",
     "setId": "hall-of-fame-series-1",
     "cardNumber": 26,
     "cardCode": "HOF1-026"
@@ -1230,7 +1230,7 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "RAW1-035"
   },
   {
-    "id": "the-rock-final-boss-slap",
+    "id": "the-rock-lay-the-smack-down",
     "setId": "season-1-final-boss",
     "cardNumber": 1,
     "cardCode": "S1FB-001"

@@ -1,4 +1,4 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.75";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.78";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -18,7 +18,7 @@ export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1",
 // awards the complete usable playset of that exclusive card. Existing UP values
 // at milestone tiers are retained as bonus currency rather than being removed.
 export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
-  5:  { cardId: "the-rock-final-boss-slap", name: "Final Boss Slap", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
+  5:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
   10: { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 3, rewardType: "signature", label: "SIGNATURE · TRADEMARK", bonusUniversePoints: 100 },
   15: { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 3, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
   20: { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "special", label: "SPECIAL", bonusUniversePoints: 100 },

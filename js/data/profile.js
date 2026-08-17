@@ -1,12 +1,13 @@
-import { decks } from "./decks.js?v=0.12.75";
-import { collectionCards } from "./collection.js?v=0.12.75";
-import { superstars } from "./superstars.js?v=0.12.75";
-import { isUnreleasedSetId } from "./release.js?v=0.12.75";
+import { decks } from "./decks.js?v=0.12.78";
+import { collectionCards } from "./collection.js?v=0.12.78";
+import { superstars } from "./superstars.js?v=0.12.78";
+import { isUnreleasedSetId } from "./release.js?v=0.12.78";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.12.78";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 27;
+export const PROFILE_VERSION = 28;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 15;
 
@@ -146,6 +147,8 @@ export function createProfile(starterId) {
     packsSinceSuperstarUnlockBySet: blankSetCounters(),
     ladder: { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, completionPackCreditsBySet: blankSetCounters(), firstClearSuperstarPending: false },
     championshipRoad: { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [] },
+    weeklyLiveEvents: { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [] },
+    career: null,
     challenges: {},
     seasons: { "season-1": defaultSeasonState() },
     setProgress: defaultSetProgress(),
@@ -161,6 +164,7 @@ export function createProfile(starterId) {
     addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES });
   }
   grantSuperstarUnlockPackage(p, starterId);
+  ensureCareerState(p);
   return p;
 }
 
@@ -348,6 +352,41 @@ export function migrateProfile(old) {
   p.favouriteSuperstars = (p.favouriteSuperstars ?? []).filter(id => p.unlockedSuperstars.includes(id));
   p.ownedCards ??= {};
   p.savedDecks ??= {};
+  // v0.12.76 Mankind card replacement: HOF1-026 is now Cactus Elbow.
+  // Preserve any collected normal/foil copies and rewrite saved deck entries
+  // from the retired Running Knee to the Corner id to the replacement id.
+  const legacyMankindKneeId = "mankind-running-knee-to-the-corner";
+  const cactusElbowId = "mankind-cactus-elbow";
+  const legacyMankindKnee = p.ownedCards[legacyMankindKneeId];
+  if (legacyMankindKnee) {
+    if (legacyMankindKnee.normal) addOwnedCard(p, cactusElbowId, { amount: legacyMankindKnee.normal });
+    if (legacyMankindKnee.foil) addOwnedCard(p, cactusElbowId, { foil: true, amount: legacyMankindKnee.foil });
+    delete p.ownedCards[legacyMankindKneeId];
+  }
+  for (const [sid, saved] of Object.entries(p.savedDecks)) {
+    if (!Array.isArray(saved)) continue;
+    p.savedDecks[sid] = saved.map(entry => {
+      if (typeof entry === "string") return entry === legacyMankindKneeId ? cactusElbowId : entry;
+      return entry?.id === legacyMankindKneeId ? { ...entry, id: cactusElbowId } : entry;
+    });
+  }
+  // v0.12.78 Final Boss card replacement: S1FB-001 is now Lay The Smack Down.
+  // Preserve normal/Foil ownership and rewrite any saved deck references.
+  const legacyFinalBossSlapId = "the-rock-final-boss-slap";
+  const layTheSmackDownId = "the-rock-lay-the-smack-down";
+  const legacyFinalBossSlap = p.ownedCards[legacyFinalBossSlapId];
+  if (legacyFinalBossSlap) {
+    if (legacyFinalBossSlap.normal) addOwnedCard(p, layTheSmackDownId, { amount: legacyFinalBossSlap.normal });
+    if (legacyFinalBossSlap.foil) addOwnedCard(p, layTheSmackDownId, { foil: true, amount: legacyFinalBossSlap.foil });
+    delete p.ownedCards[legacyFinalBossSlapId];
+  }
+  for (const [sid, saved] of Object.entries(p.savedDecks)) {
+    if (!Array.isArray(saved)) continue;
+    p.savedDecks[sid] = saved.map(entry => {
+      if (typeof entry === "string") return entry === legacyFinalBossSlapId ? layTheSmackDownId : entry;
+      return entry?.id === legacyFinalBossSlapId ? { ...entry, id: layTheSmackDownId } : entry;
+    });
+  }
   p.selectedEntrances ??= {};
   p.deckNeedsCards ??= {};
   p.deckAssistance = DECK_ASSISTANCE_MODES.includes(p.deckAssistance) ? p.deckAssistance : "ask";
@@ -362,6 +401,9 @@ export function migrateProfile(old) {
   p.championshipRoad = { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [], ...(p.championshipRoad ?? {}) };
   p.championshipRoad.championshipPackCreditsBySet = { ...blankSetCounters(), ...(p.championshipRoad.championshipPackCreditsBySet ?? {}) };
   p.championshipRoad.completedBy ??= [];
+  p.weeklyLiveEvents = { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [], ...(p.weeklyLiveEvents ?? {}) };
+  p.weeklyLiveEvents.completedWeeks ??= [];
+  ensureCareerState(p);
   p.challenges ??= {};
   p.seasons ??= {};
   p.seasons["season-1"] = { ...defaultSeasonState(), ...(p.seasons["season-1"] ?? {}) };
@@ -398,7 +440,7 @@ export function migrateProfile(old) {
   if (sourceVersion < 27) {
     const claimed = new Set(p.seasons?.["season-1"]?.claimedTiers ?? []);
     const milestoneCards = [
-      [5, "the-rock-final-boss-slap", 1, false],
+      [5, "the-rock-lay-the-smack-down", 1, false],
       [10, "the-rock-rock-bottom", 3, false],
       [15, "the-rock-belt-whip", 3, false],
       [20, "special-the-rock", 1, false],
@@ -521,6 +563,7 @@ export function migrateProfile(old) {
   for (const setId of Object.keys(p.ladder?.completionPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.ladder.completionPackCreditsBySet[setId] = 0;
   for (const setId of Object.keys(p.championshipRoad?.championshipPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.championshipRoad.championshipPackCreditsBySet[setId] = 0;
   p.pendingUnlockCelebrations = (p.pendingUnlockCelebrations ?? []).filter(event => releasedStarIds.has(event?.superstarId));
+  refreshCareerAchievements(p);
   return p;
 }
 
