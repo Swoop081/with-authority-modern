@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.71";
+import { enrichCounterState } from "./counter-states.js?v=0.12.72";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -3447,7 +3447,7 @@ export const allGameplayCards = [
   },
   {
     "id": "rhea-ripley-electric-chair-facebuster",
-    "name": "Electric Chair Facebuster",
+    "name": "Electric Chair Drop",
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 5,

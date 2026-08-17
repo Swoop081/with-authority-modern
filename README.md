@@ -1,13 +1,13 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.71 — Bayley Signature Pass**.
+Current working build: **v0.12.72 — UI Copy + Reward Control Hotfix**.
 
-v0.12.71 builds on v0.12.70 and gives Bayley two named 3★ Rare signature cards while preserving the shared generic moves for the rest of the roster.
+v0.12.72 builds on v0.12.71 with a focused presentation/copy repair pass:
 
-- **Bayley’s Diving Elbow** — EVO1-065, C7 / D12 / Agility 2 / Rare. Grounded opponent only; on Connect, draw 1 page.
-- **Bayley-to-Belly** — EVO1-066, C5 / D8 / Strength 2 / Rare. Grounds the opponent; on Connect, search/draw Rose Plant and discount it by 4 for the current Control sequence.
-- Bayley’s 60-page recommended deck replaces all three copies of shared Diving Elbow Drop and all three copies of shared Belly-to-Belly Suplex with the named Bayley versions.
-- The shared generic cards remain available to all other eligible Superstars; obsolete Bayley-only text has been removed from the generic Belly-to-Belly Suplex.
-- Existing gameplay, economy, Season, pack-opening, HP and package-hygiene rules remain unchanged.
+- **Electric Chair Drop** replaces the old displayed name Electric Chair Facebuster without changing the card ID or gameplay.
+- The Season Daily Login Booster is one full-width purple control: **CLAIM FREE BOOSTER** when ready or **NEXT FREE BOOSTER IN …** during cooldown.
+- Climb the Ladder uses **Level** terminology everywhere player-facing; internal `run.rung` save fields remain unchanged for profile compatibility.
+- Special Ladder and Championship reward-pack wrappers use the short face title **REWARD** while their detailed reward labels remain visible below the pack tile.
+- All v0.12.71 Bayley signature cards and all earlier gameplay, economy, HP, booster, foil, Season and package-hygiene rules remain unchanged.
 
-See `RELEASE-NOTES-v0.12.71.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.12.72.md` and `BUILD-CERTIFICATION.md`.

@@ -18,10 +18,11 @@ function between(source, start, end) {
 test('v0.12.70 Daily Login Booster is one contained purple reward row', () => {
   const season = between(app, 'function renderSeasons()', 'function renderChallenges()');
   assert.match(season, /<button id="claim-free-pack" class="season-free-pack-button"/);
-  assert.match(season, /class="season-free-pack-copy" data-free-pack-copy/);
+  assert.doesNotMatch(season, /season-free-pack-copy|data-free-pack-copy/);
   assert.match(season, /data-free-pack-action/);
-  assert.doesNotMatch(season, /class="sr-only" data-free-pack-copy/);
-  assert.match(css, /\.season-free-pack-button\{[\s\S]*grid-template-columns:minmax\(0,1fr\) auto!important/);
+  assert.match(season, /CLAIM FREE BOOSTER/);
+  assert.match(season, /NEXT FREE BOOSTER IN \$\{formatCountdown\(free\.msRemaining\)\}/);
+  assert.match(css, /\.season-free-pack-button\{[\s\S]*width:100%!important;[\s\S]*justify-content:center!important/);
   assert.match(app, /Daily 25 XP · Weekly 100 XP/);
 });
 
@@ -35,9 +36,9 @@ test('v0.12.70 live pack reveal has no five-card thumbnail strip', () => {
 });
 
 test('v0.12.70 adds Tornado DDT as SS1-141 with supplied art and head damage', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.12.71');
-  const { CARD_NUMBER_BY_ID } = await import('../js/data/card-number-manifest.js?v=0.12.71');
-  const { deckIds } = await import('../js/data/decks.js?v=0.12.71');
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.12.72');
+  const { CARD_NUMBER_BY_ID } = await import('../js/data/card-number-manifest.js?v=0.12.72');
+  const { deckIds } = await import('../js/data/decks.js?v=0.12.72');
   const card = allGameplayCards.find(c => c.id === 'tornado-ddt');
   assert.ok(card);
   assert.equal(card.name, 'Tornado DDT');

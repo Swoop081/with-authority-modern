@@ -1,31 +1,31 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.71";
-import { superstars } from "../data/superstars.js?v=0.12.71";
-import { decks } from "../data/decks.js?v=0.12.71";
-import { sets } from "../data/sets.js?v=0.12.71";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.71";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.71";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.71";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.71";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.71";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.71";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.71";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.71";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.71";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.71";
-import { totalMomentum } from "../engine/utils.js?v=0.12.71";
-import { healthZone } from "../engine/health.js?v=0.12.71";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.71";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.71";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.71";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.71";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.71";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.71";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.71";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.71";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.71";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.71";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.71";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.71";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.72";
+import { superstars } from "../data/superstars.js?v=0.12.72";
+import { decks } from "../data/decks.js?v=0.12.72";
+import { sets } from "../data/sets.js?v=0.12.72";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.72";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.72";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.72";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.12.72";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.72";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.72";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.72";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.72";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.72";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.72";
+import { totalMomentum } from "../engine/utils.js?v=0.12.72";
+import { healthZone } from "../engine/health.js?v=0.12.72";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.72";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.72";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.72";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.72";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.72";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.72";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.72";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.72";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.72";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.72";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.72";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.72";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -695,6 +695,7 @@ function renderBoosters() {
   const ladder=ladderState(profile), road=championshipRoadState(profile);
   const ladderPacks=ladder.completionPackCreditsBySet?.[activeBoosterSetId]??0, championshipPacks=road.championshipPackCreditsBySet?.[activeBoosterSetId]??0;
   const packTitle=currentPackType==="ladder"?"CLIMB THE LADDER":currentPackType==="championship"?"CHAMPIONSHIP ROAD":setInfo.name.toUpperCase();
+  const packWrapperTitle=currentPackType==="standard"?"SERIES 1":"REWARD";
   const packSubtitle=currentPackType==="ladder"?"COMPLETION PACK · 1 FOIL · 1 VERY RARE+":currentPackType==="championship"?"CHAMPIONSHIP PACK · 1 FOIL · 1 RARE+":"SERIES 1 · 5 CARDS · 1 GUARANTEED FOIL";
   const brand=setLogoMarkup(activeBoosterSetId,"pack-set-logo") || `<span class="pack-text-logo"><b>${setInfo.name.toUpperCase()}</b><small>SERIES 1</small></span>`;
   const packSetClass=`pack-set-${activeBoosterSetId}`;
@@ -720,9 +721,9 @@ function renderBoosters() {
 
   let packArea = "";
   if (packStage === "sealed") {
-    packArea=`<section class="pack-opening-stage sealed-pack-stage"><button type="button" id="rip-pack" class="sealed-pack-button" aria-label="Rip open ${setInfo.displayName} pack">${physicalBoosterPackMarkup({setId:activeBoosterSetId,title:packTitle,series:currentPackType === "standard" ? "SERIES 1" : packTitle,subtitle:packSubtitle,extraClass:"sealed-pack"})}<strong>TAP TO RIP</strong><small>Open the pack and reveal all five cards</small></button></section>`;
+    packArea=`<section class="pack-opening-stage sealed-pack-stage"><button type="button" id="rip-pack" class="sealed-pack-button" aria-label="Rip open ${setInfo.displayName} pack">${physicalBoosterPackMarkup({setId:activeBoosterSetId,title:packTitle,series:packWrapperTitle,subtitle:packSubtitle,extraClass:"sealed-pack"})}<strong>TAP TO RIP</strong><small>Open the pack and reveal all five cards</small></button></section>`;
   } else if (packStage === "opening") {
-    packArea=`<section class="pack-opening-stage ripping-pack-stage"><div class="pack-rip-flash"></div>${physicalBoosterPackMarkup({setId:activeBoosterSetId,title:packTitle,series:currentPackType === "standard" ? "SERIES 1" : packTitle,subtitle:packSubtitle,extraClass:"is-opening",opening:true})}<strong class="pack-rip-callout">RIP!</strong></section>`;
+    packArea=`<section class="pack-opening-stage ripping-pack-stage"><div class="pack-rip-flash"></div>${physicalBoosterPackMarkup({setId:activeBoosterSetId,title:packTitle,series:packWrapperTitle,subtitle:packSubtitle,extraClass:"is-opening",opening:true})}<strong class="pack-rip-callout">RIP!</strong></section>`;
   } else if (packStage === "reveal" && pulls.length) {
     const p=pulls[boosterFocusIndex];
     const converted=convertedPackCards.has(boosterFocusIndex) || p.universePointsCredited;
@@ -790,7 +791,7 @@ function renderBoosters() {
     const logo=setLogoMarkup(bucket.setId,"pack-set-logo") || `<span class="pack-text-logo"><b>${info.name.toUpperCase()}</b><small>SERIES 1</small></span>`;
     return `<button type="button" class="vault-pack-product pack-set-${bucket.setId}" data-open-vault-pack="${bucket.setId}:${bucket.type}" aria-label="Open ${info.displayName} ${bucket.label}">
       <span class="vault-pack-quantity">×${bucket.count}</span>
-      ${physicalBoosterPackMarkup({setId:bucket.setId,title:info.name,series:bucket.type==='standard'?'SERIES 1':bucket.label,subtitle:bucket.subtitle,extraClass:"vault-product-pack"})}
+      ${physicalBoosterPackMarkup({setId:bucket.setId,title:info.name,series:bucket.type==='standard'?'SERIES 1':'REWARD',subtitle:bucket.subtitle,extraClass:"vault-product-pack"})}
       <strong>${info.displayName}</strong><em>${bucket.label}</em><small>TAP PACK TO OPEN</small>
     </button>`;
   }).join('')}</section>` : `<section class="booster-empty-stage"><div class="booster-empty-state"><span>VAULT EMPTY</span><h3>No unopened packs right now</h3><p>Earn packs through Season rewards, Challenges, Climb the Ladder, Championship Road or the Store.</p><button id="booster-empty-home" class="nav-button">Back to Main Menu</button></div></section>`;
@@ -848,17 +849,14 @@ function refreshSeasonClocks() {
   const remaining = seasonTimeRemaining(new Date());
   document.querySelectorAll('[data-season-countdown]').forEach(el => { el.textContent = remaining.ended ? 'Season complete' : formatCountdown(remaining.ms); });
   const free = freePackStatus(profile, new Date());
-  document.querySelectorAll('[data-free-pack-copy]').forEach(el => { el.textContent = free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`; });
   const next = nextRoadmapNode(new Date());
   const nextMs = Math.max(0, new Date(next.date).getTime() - Date.now());
   document.querySelectorAll('[data-next-drop-countdown]').forEach(el => { el.textContent = nextMs <= 0 ? 'LIVE' : formatCountdown(nextMs); });
   const claim = document.querySelector('#claim-free-pack');
   if (claim) {
     claim.disabled = !free.available;
-    const copy = claim.querySelector('[data-free-pack-copy]');
     const action = claim.querySelector('[data-free-pack-action]');
-    if (copy) copy.textContent = free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`;
-    if (action) action.textContent = free.available ? 'Claim Free Booster' : `Next Free Booster · ${formatCountdown(free.msRemaining)}`;
+    if (action) action.textContent = free.available ? 'CLAIM FREE BOOSTER' : `NEXT FREE BOOSTER IN ${formatCountdown(free.msRemaining)}`;
   }
   const store = storeRotation(new Date());
   document.querySelectorAll('[data-store-countdown]').forEach(el => { el.textContent = formatStoreCountdown(store.msRemaining); });
@@ -971,9 +969,8 @@ function renderSeasons() {
     <section class="feature-hero seasons-feature season-final-boss-hero">${`<div class="mode-portrait-stack feature-art final-boss-feature-art"><div class="mode-portrait p1">${finalBossRockMarkup()}</div></div>`}<div class="feature-shade"></div><div class="feature-copy">${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · 50 TIERS</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Tier 50 unlocks The Rock — Final Boss.</p><div class="season-hero-status season-hero-status-compact"><span>${uiIcon("gift")}<b>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</b></span><span>${uiIcon("trophy")}<b>${progress.tier >= SEASON_TIER_COUNT ? 'ROAD COMPLETE' : `NEXT · TIER ${progress.tier + 1}`}</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Survivor Series next</small></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
     <section class="season-free-pack-cta season-free-pack-strip ${free.available ? 'ready' : 'waiting'}">
-      <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'}>
-        <span class="season-free-pack-copy" data-free-pack-copy>${free.available ? 'Daily Login Booster · Ready' : `Daily Login Booster · ${formatCountdown(free.msRemaining)}`}</span>
-        <strong data-free-pack-action>${free.available ? 'Claim Free Booster' : `Next Free Booster · ${formatCountdown(free.msRemaining)}`}</strong>
+      <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'} aria-label="${free.available ? 'Claim free booster' : `Next free booster in ${formatCountdown(free.msRemaining)}`}">
+        <strong data-free-pack-action>${free.available ? 'CLAIM FREE BOOSTER' : `NEXT FREE BOOSTER IN ${formatCountdown(free.msRemaining)}`}</strong>
       </button>
     </section>
     <section class="season-progress-panel season-command-center">
@@ -1104,9 +1101,9 @@ function renderLadder() {
   const tabs=Object.values(LADDER_BRANCHES).map(b=>`<button class="branch-chip ${b.id===ladderBranchId?'active':''}" data-ladder-branch="${b.id}" ${active?'disabled':''}>${b.label.replace(' — Series 1','')}</button>`).join('');
   const lives=run?.lives??LADDER_LIVES;
   const ladderRows=active?run.opponents.map((id,index)=>{const star=superstarById[id],state=index<run.rung?'cleared':index===run.rung?'current':'upcoming';return `<div class="ladder-rung mode-run-node ${state}"><span class="mode-run-index">${index+1}</span><div class="ladder-portrait mode-run-node-portrait">${portraitMarkup(id,star.name)}</div><div class="mode-run-node-copy"><b>${star.name}</b><small>${state==='cleared'?'Defeated':state==='current'?'Next':'Waiting'}</small></div></div>`}).join(''):'';
-  const statusText=run?.status==='cleared'?`${branch.label} cleared!`:active?`Rung ${run.rung+1} of ${run.opponents.length} · ${superstarById[currentLadderOpponent(profile)]?.name}`:`Defeat every ${branch.label} opponent consecutively.`;
+  const statusText=run?.status==='cleared'?`${branch.label} cleared!`:active?`Level ${run.rung+1} of ${run.opponents.length} · ${superstarById[currentLadderOpponent(profile)]?.name}`:`Defeat every ${branch.label} opponent consecutively.`;
   const statusMarkup=`<div class="mode-run-status ${message?'has-message':''}"><span>${message||statusText}</span></div>`;
-  const commandMarkup=active?`<section class="mode-run-command ladder-run-command"><div class="mode-run-command-copy"><span>NEXT RUNG · ${run.rung+1}/${run.opponents.length}</span><strong>${superstarById[currentLadderOpponent(profile)]?.name}</strong><small>${superstarById[run.superstarId].name} · ${branch.label} · ${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)} lives</small></div><button id="continue-ladder" class="start-match mode-run-primary">Fight Rung ${run.rung+1}</button></section>`:`<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name??'Choose your Superstar'}</h3></div><small>Tap a card for details</small></div>${selectionCarouselMarkup(unlocked,chosenId,'ladder-select')}<button id="start-ladder" class="start-match mode-run-primary">Start ${branch.label.replace(' — Series 1','')} Run</button></section>`;
+  const commandMarkup=active?`<section class="mode-run-command ladder-run-command"><div class="mode-run-command-copy"><span>NEXT LEVEL · ${run.rung+1}/${run.opponents.length}</span><strong>${superstarById[currentLadderOpponent(profile)]?.name}</strong><small>${superstarById[run.superstarId].name} · ${branch.label} · ${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)} lives</small></div><button id="continue-ladder" class="start-match mode-run-primary">Fight Level ${run.rung+1}</button></section>`:`<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name??'Choose your Superstar'}</h3></div><small>Tap a card for details</small></div>${selectionCarouselMarkup(unlocked,chosenId,'ladder-select')}<button id="start-ladder" class="start-match mode-run-primary">Start ${branch.label.replace(' — Series 1','')} Run</button></section>`;
   root.innerHTML=`<section class="ladder-screen premium-screen compact-mode-run premium-run-screen ${active?'is-active-run':'is-run-setup'}"><section class="feature-hero ladder-feature single-feature-hero mode-run-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy mode-run-hero-copy">${modeLogoMarkup("ladder",true)}<p>Three lives · ${totalRungs} opponents · survive the run.</p></div><div class="horizontal-branch-selector mode-run-branch-selector">${tabs}</div><div class="ladder-summary mode-run-summary"><div><b>${ladder.clearsByBranch?.[branch.id]??0}</b><span>Clears</span></div><div><b>${ladder.bestRungByBranch?.[branch.id]??0}/${totalRungs}</b><span>Best</span></div><div><b>${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)}</b><span>Lives</span></div><div><b>${ladder.completionPackCreditsBySet?.[branch.setId]??0}</b><span>Packs</span></div></div></section>${statusMarkup}${commandMarkup}${ladderRows?`<section class="ladder-stack mode-run-progress ladder-progress-grid" aria-label="Ladder progress">${ladderRows}</section>`:''}${run&&run.status!=='active'?`<button id="new-ladder" class="start-match mode-run-primary">Start Another Run</button>`:''}</section>`;
   root.querySelectorAll('[data-ladder-branch]').forEach(btn=>btn.addEventListener('click',()=>{ladderBranchId=btn.dataset.ladderBranch;message='';renderLadder();}));
   wireSelectionCarousel('ladder-select', id=>{selection.p1=id;renderLadder();});
@@ -2417,9 +2414,9 @@ function handleCompletedMatch() {
   if (result === "win") grantBooster(profile, 1, ladderRewardSetId);
   const outcome = recordLadderMatch(profile, result);
   const run = ladderState(profile).activeRun;
-  if (outcome.status === "advance") message = `Rung cleared! +1 booster. ${run.lives} lives remain. Return to Climb the Ladder for rung ${run.rung + 1}.`;
-  else if (outcome.status === "retry" && result === "loss") message = `Defeat. One life lost — ${run.lives} remaining. Return to Climb the Ladder to retry this rung.`;
-  else if (outcome.status === "failed") message = `Run ended. All three lives are gone — start again from rung 1.`;
+  if (outcome.status === "advance") message = `Level cleared! +1 booster. ${run.lives} lives remain. Return to Climb the Ladder for level ${run.rung + 1}.`;
+  else if (outcome.status === "retry" && result === "loss") message = `Defeat. One life lost — ${run.lives} remaining. Return to Climb the Ladder to retry this level.`;
+  else if (outcome.status === "failed") message = `Run ended. All three lives are gone — start again from level 1.`;
   else if (outcome.status === "cleared") message = `CLIMB THE LADDER CLEARED! +1 booster for the final win and a Completion Pack has been awarded.`;
   message += seasonXpText;
   saveProfile(profile);

@@ -25,7 +25,8 @@ test('v0.12.57 Season keeps the hero before a compact one-line daily booster com
   const seasons = functionSlice('renderSeasons', 'renderChallenges');
   assert.ok(seasons.indexOf('season-final-boss-hero') < seasons.indexOf('season-free-pack-strip'));
   assert.match(seasons, /season-free-pack-strip/);
-  assert.match(seasons, /Daily Login Booster · Ready/);
+  assert.match(seasons, /CLAIM FREE BOOSTER/);
+  assert.match(seasons, /NEXT FREE BOOSTER IN/);
   assert.doesNotMatch(seasons, /One Featured Season 1 booster every rolling 24 hours|FREE PACK READY/);
   assert.match(css, /\.free-pack-panel\{order:0!important\}/);
   assert.match(css, /\.season-free-pack-strip\{[\s\S]*min-height:62px!important/);

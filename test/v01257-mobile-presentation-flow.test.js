@@ -26,7 +26,9 @@ test("v0.12.57 keeps PACKS readable and lowers Home wrestler renders", () => {
 
 test("v0.12.57 Daily Login Booster uses one-line status and opens immediately", () => {
   const season = between(app, "function renderSeasons()", "function renderChallenges()");
-  assert.match(season, /data-free-pack-copy/);
+  assert.match(season, /data-free-pack-action/);
+  assert.match(season, /CLAIM FREE BOOSTER/);
+  assert.match(season, /NEXT FREE BOOSTER IN/);
   assert.doesNotMatch(season, /FREE PACK READY/);
   assert.doesNotMatch(season, /waiting in Boosters/i);
   assert.match(season, /boosterReturnScreen = "seasons";/);
