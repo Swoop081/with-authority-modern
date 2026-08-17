@@ -5583,3 +5583,18 @@ body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art
     height:164%!important;
   }
 }
+
+
+/* v0.12.68 — Final Boss Head Anchor Hotfix.
+   Keep the approved v0.12.67 Rock scale intact; only move the transparent
+   render downward so his entire head/sunglasses remain inside the launch
+   hero on iPhone instead of being clipped above the panel. */
+.season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+  bottom:-44%!important;
+}
+@media(max-width:600px){
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{bottom:-48%!important}
+}
+@media(max-width:430px){
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{bottom:-50%!important}
+}

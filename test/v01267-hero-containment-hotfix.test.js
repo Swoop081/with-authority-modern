@@ -8,7 +8,6 @@ const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"))
 const css = fs.readFileSync(path.join(root, "css/game.css"), "utf8");
 
 test("v0.12.67 stamps the hero containment repair", () => {
-  assert.equal(pkg.version, "0.12.67");
   assert.match(css, /v0\.12\.67 — Hero Anchor & Containment Repair/);
 });
 

@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.67';
-import { decks } from '../js/data/decks.js?v=0.12.67';
-import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.12.67';
-import { canCounter, counterEligibility } from '../js/engine/rules.js?v=0.12.67';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.67';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.68';
+import { decks } from '../js/data/decks.js?v=0.12.68';
+import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.12.68';
+import { canCounter, counterEligibility } from '../js/engine/rules.js?v=0.12.68';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.68';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const counterCapable=c=>c?.kind==='move'&&((c.counters?.length??0)||(c.counterStates?.length??0)||(c.counterSubmissionTargets?.length??0)||(c.countersCardIds?.length??0));
