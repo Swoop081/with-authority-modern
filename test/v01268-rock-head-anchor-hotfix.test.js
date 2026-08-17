@@ -7,8 +7,8 @@ const root = path.resolve(import.meta.dirname, "..");
 const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
 const css = fs.readFileSync(path.join(root, "css/game.css"), "utf8");
 
-test("v0.12.68 stamps the Final Boss head-anchor hotfix", () => {
-  assert.equal(pkg.version, "0.12.68");
+test("v0.12.68 Final Boss head-anchor hotfix remains documented in history", () => {
+  assert.ok(Number(pkg.version.split(".").at(-1)) >= 68);
   assert.match(css, /v0\.12\.68 — Final Boss Head Anchor Hotfix/);
 });
 

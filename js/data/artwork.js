@@ -1,13 +1,11 @@
-import { assetUrl } from "../config/build.js?v=0.12.68";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.68";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.68";
+import { assetUrl } from "../config/build.js?v=0.12.69";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.69";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.69";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
-const TEMP_SUPERSTAR_ROOT = "assets/cards/art/superstars";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
 const WWE_MENU_SUPERSTAR_ROOT = "assets/art/wwe-menu-superstars";
 const FINAL_BOSS_MENU_ART = "assets/art/season-1-final-boss/the-rock-final-boss-menu.png";
-const EVOLUTION_ROOT = "assets/art/evolution-series-1";
 const TEMP_GENERIC_ART = "assets/cards/art/temp/superstar-placeholder.svg";
 
 

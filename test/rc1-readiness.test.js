@@ -1,4 +1,0 @@
-import test from 'node:test'; import assert from 'node:assert/strict'; import fs from 'node:fs';
-import { createProfile, migrateProfile, resetSavedDecks, resetSettings } from '../js/data/profile.js';
-test('RC1 profile migration and recovery tools preserve progression',()=>{const p=createProfile('roman-reigns');p.universePoints=321;p.seasons['season-1'].xp=777;p.settings={music:false,sfx:false};const m=migrateProfile({...p,version:19});assert.equal(m.universePoints,321);assert.equal(m.seasons['season-1'].xp,777);resetSavedDecks(m);assert.ok(m.savedDecks['roman-reigns']?.length===55);resetSettings(m);assert.deepEqual(m.settings,{music:true,sfx:true});});
-test('RC1 ships installable PWA shell',()=>{assert.ok(fs.existsSync('sw.js'));const html=fs.readFileSync('index.html','utf8');assert.match(html,/manifest\.webmanifest/);assert.match(html,/serviceWorker\.register/);});

@@ -1,1 +1,0 @@
-import {superstars} from "../js/data/superstars.js"; for(const id of ["cody-rhodes","cm-punk","roman-reigns","seth-rollins","oba-femi","brock-lesnar","kevin-owens","gunther"]){const s=Object.values(superstars).find(x=>x.id===id);console.log(id,s.hp)}
