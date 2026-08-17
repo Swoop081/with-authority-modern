@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.93';
-import { submissionThreshold } from '../js/engine/rules.js?v=0.12.93';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.93';
-import { superstars } from '../js/data/superstars.js?v=0.12.93';
-import { decks } from '../js/data/decks.js?v=0.12.93';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.97';
+import { submissionThreshold } from '../js/engine/rules.js?v=0.12.97';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.97';
+import { superstars } from '../js/data/superstars.js?v=0.12.97';
+import { decks } from '../js/data/decks.js?v=0.12.97';
 
 const rng=()=>0.42;
 const stars=Object.values(superstars);
@@ -26,9 +26,11 @@ test('v0.12.41 body-part damage persists after release and a later hold taps whe
   const s=game.state(),a=s.players.p1,d=s.players.p2,sub=hold({trademark:true});
   d.hp=50; a.hand=[filler(1),filler(2),filler(3),filler(4)];
   s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:sub};game._connect();
-  assert.equal(d.submissionDamage.head,5);assert.equal(s.phase,'SUBMISSION_MAINTAIN');
-  game.maintainSubmission('p1',0);game.maintainSubmission('p1',0);
+  assert.equal(d.submissionDamage.head,5);assert.equal(s.phase,'SUBMISSION_RESPONSE');
+  assert.equal(game.passSubmissionResponse('p2'),true);game.maintainSubmission('p1',0);
+  assert.equal(s.phase,'SUBMISSION_RESPONSE');assert.equal(game.passSubmissionResponse('p2'),true);game.maintainSubmission('p1',0);
   assert.equal(d.submissionDamage.head,15);
+  assert.equal(s.phase,'SUBMISSION_RESPONSE');assert.equal(game.passSubmissionResponse('p2'),true);
   game.releaseSubmission('p1');assert.equal(d.submissionDamage.head,15,'release never heals worked body-part damage');
   d.hp=20;a.hand=[filler(5)];s.playerInControl='p1';s.phase='RESOLVE_MOVE';s.proposedMove={attackerId:'p1',defenderId:'p2',card:sub};game._connect();
   assert.equal(d.submissionDamage.head,20);assert.equal(s.phase,'MATCH_OVER');assert.equal(s.finish.type,'submission');

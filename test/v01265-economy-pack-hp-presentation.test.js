@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.12.93';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.12.93';
-import { createProfile } from '../js/data/profile.js?v=0.12.93';
-import { cardsForSet } from '../js/data/collection.js?v=0.12.93';
-import { superstars } from '../js/data/superstars.js?v=0.12.93';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.12.97';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.12.97';
+import { createProfile } from '../js/data/profile.js?v=0.12.97';
+import { cardsForSet } from '../js/data/collection.js?v=0.12.97';
+import { superstars } from '../js/data/superstars.js?v=0.12.97';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};

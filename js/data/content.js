@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.93";
+import { enrichCounterState } from "./counter-states.js?v=0.12.97";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -2060,21 +2060,19 @@ export const allGameplayCards = [
     },
     "moveType": "grapple",
     "method": "strength",
-    "superstarId": null,
-    "rarity": 2,
-    "rulesText": "Major KO signature. Grounds opponent. If played by Kevin Owens, search/draw Stunner; it costs 4 less this Control sequence.",
+    "superstarId": "kevin-owens",
+    "rarity": 3,
+    "rulesText": "Kevin Owens-exclusive Trademark. Ground your opponent. On connect, search/draw Stunner; it costs 4 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
+    "trademark": true,
     "effects": [
       {
         "type": "search",
         "name": "Stunner",
-        "discount": 4,
-        "ifSuperstarIds": [
-          "kevin-owens"
-        ]
+        "discount": 4
       }
     ],
     "counterState": "body-elevated"

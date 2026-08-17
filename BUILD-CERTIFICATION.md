@@ -1,14 +1,17 @@
-# WWE Legacy v0.12.93 — Build Certification
+# WWE Legacy v0.12.97 — Build Certification
 
-- Regression tests: **378/378 pass**
+- Regression tests: **386/386 pass**
 - Validation: **50 Superstars / 50 decks / 438 gameplay cards / 0 orphans / 0 issues**
 - Flow audit: **50 Superstars / 0 issues**
 - Card-ID audit: **488/488 / 0 issues**
 - Counter-state audit: **438 gameplay cards / 318 Moves / 0 issues**
 - Economy smoke audit: **60 packs / 300 cards / 0 duplicate Entrance pulls / 0 foil-first failures**
+
+- Live Events hub: **Daily + 3 Day + Weekly concurrent towers**, plus 24-hour birthday events when active
+- Store Superstar price: **2,500 UP**
 - Art audit: **488 collector cards / 451 unfinished custom fronts** (known presentation backlog; fallback presentation remains active)
 
-## v0.12.93 — Foil Preference + Premium Duplicate Value
+## v0.12.97 — Multi-Tower Live Events + Store Economy Pass
 
 - Normal and Foil copies now use identical runtime gameplay values. Foil is presentation / collector treatment only; it does not alter Damage, Cost, requirements or effects.
 - Deck Assistance no longer ranks Normal → Foil as a gameplay upgrade or presents `+1 Damage` Foil language. Recommended-build restoration remains functional and fully validated.

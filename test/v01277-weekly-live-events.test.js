@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.12.93";
-import { superstars } from "../js/data/superstars.js?v=0.12.93";
-import { decks } from "../js/data/decks.js?v=0.12.93";
-import { isLaunchLiveSetId } from "../js/data/release.js?v=0.12.93";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.93";
+import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.12.97";
+import { superstars } from "../js/data/superstars.js?v=0.12.97";
+import { decks } from "../js/data/decks.js?v=0.12.97";
+import { isLaunchLiveSetId } from "../js/data/release.js?v=0.12.97";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.97";
 
 const roster = Object.values(superstars).filter(star => !star.developmentOnly && isLaunchLiveSetId(star.setId));
 const rosterIds = roster.map(star => star.id);
@@ -90,5 +90,5 @@ test("v0.12.81 Play menu still exposes Live Events and pack reveals can continue
   assert.match(play, /legacy-mode-banner/);
   assert.match(play, /play-live-event/);
   assert.match(app, /data-booster-next=/);
-  assert.match(app, /grantBooster\(profile, LIVE_EVENT_CLEAR_BOOSTERS, rewardSetId\)/);
+  assert.match(app, /grantBooster\(profile, tower\.clearBoosters, rewardSetId\)/);
 });

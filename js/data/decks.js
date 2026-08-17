@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.12.93";
+import { allGameplayCards } from "./content.js?v=0.12.97";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -1207,8 +1207,8 @@ export const deckIds={
     "oba-femi-one-handed-backbreaker",
     "oba-femi-one-handed-backbreaker",
     "powerbomb",
-    "pop-up-powerbomb",
-    "pop-up-powerbomb",
+    "powerbomb",
+    "powerbomb",
     "oba-femi-fall-from-grace",
     "oba-femi-fall-from-grace",
     "momentum-strength",

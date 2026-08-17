@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=0.12.93';
-import { decks } from '../js/data/decks.js?v=0.12.93';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.93';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.93';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.93';
-import { submissionThreshold } from '../js/engine/rules.js?v=0.12.93';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.93';
+import { superstars } from '../js/data/superstars.js?v=0.12.97';
+import { decks } from '../js/data/decks.js?v=0.12.97';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.97';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.97';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.97';
+import { submissionThreshold } from '../js/engine/rules.js?v=0.12.97';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.97';
 
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -75,4 +75,27 @@ test('v0.12.31 CPU saves Pin Escape on weak covers and spends it once the cover 
   const d=cpuDecision(game,'p2');
   assert.equal(d?.type,'pinEscape');
   assert.equal(d?.card?.id,'shoulder-up');
+});
+
+test('v0.12.94 CPU cannot burn an entire hand through one fresh Submission application',()=>{
+  const {game,s,p}=actionState('rhea-ripley');
+  const defender=s.players.p1;
+  defender.hp=33;
+  defender.submissionDamage.legs=5; // initial Prism Trap-style application has already landed
+  p.hand=Array.from({length:10},(_,i)=>({id:`hold-filler-${i}`,name:`Filler ${i}`,kind:'momentum',method:'strength',amount:1}));
+  s.phase='SUBMISSION_MAINTAIN';
+  s.submission={attackerId:'p2',defenderId:'p1',cardId:'test-prism-trap',bodyPart:'legs',damage:5,holdTurn:1,trademark:true};
+  let maintains=0;
+  while(maintains<10){
+    if(s.phase==='SUBMISSION_RESPONSE') { assert.equal(game.passSubmissionResponse('p1'),true); continue; }
+    if(s.phase!=='SUBMISSION_MAINTAIN') break;
+    const d=cpuDecision(game,'p2');
+    if(d?.type==='maintain') { game.maintainSubmission('p2',d.index); maintains++; continue; }
+    assert.equal(d?.type,'release');
+    game.releaseSubmission('p2');
+    break;
+  }
+  assert.equal(maintains,2,'Trademark hold gets at most two maintenance ticks after the initial application');
+  assert.equal(defender.submissionDamage.legs,15,'fresh 5-pressure Trademark hold tops out at 15 damage in one application');
+  assert.notEqual(s.phase,'MATCH_OVER','33 HP cannot be erased by a single fresh CPU submission application');
 });

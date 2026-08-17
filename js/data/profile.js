@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.12.93";
-import { collectionCards } from "./collection.js?v=0.12.93";
-import { superstars } from "./superstars.js?v=0.12.93";
-import { isUnreleasedSetId } from "./release.js?v=0.12.93";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.12.93";
+import { decks } from "./decks.js?v=0.12.97";
+import { collectionCards } from "./collection.js?v=0.12.97";
+import { superstars } from "./superstars.js?v=0.12.97";
+import { isUnreleasedSetId } from "./release.js?v=0.12.97";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.12.97";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -148,6 +148,7 @@ export function createProfile(starterId) {
     ladder: { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, completionPackCreditsBySet: blankSetCounters(), firstClearSuperstarPending: false },
     championshipRoad: { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [] },
     weeklyLiveEvents: { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [] },
+    liveEventTowers: { states: {}, totalClears: 0, completedKeys: [] },
     career: null,
     challenges: {},
     seasons: { "season-1": defaultSeasonState() },
@@ -403,6 +404,9 @@ export function migrateProfile(old) {
   p.championshipRoad.completedBy ??= [];
   p.weeklyLiveEvents = { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [], ...(p.weeklyLiveEvents ?? {}) };
   p.weeklyLiveEvents.completedWeeks ??= [];
+  p.liveEventTowers = { states: {}, totalClears: p.weeklyLiveEvents.totalClears ?? 0, completedKeys: [], ...(p.liveEventTowers ?? {}) };
+  p.liveEventTowers.states ??= {};
+  p.liveEventTowers.completedKeys ??= [];
   ensureCareerState(p);
   p.challenges ??= {};
   p.seasons ??= {};

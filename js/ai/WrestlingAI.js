@@ -1,6 +1,6 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.93";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.93";
-export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.97";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.97";
+export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
  if(!card?.submission)return Infinity;
@@ -302,12 +302,17 @@ function cpuSubmissionDecision(state,pid){
  const sub=state.submission,p=state.players[pid],def=state.players[sub.defenderId],threshold=submissionThreshold(def),pressure=Math.max(1,sub.damage??1);
  const damageNeeded=Math.max(0,threshold-(def.submissionDamage?.[sub.bodyPart]??0));
  const holdsToTap=Math.max(0,Math.ceil(damageNeeded/pressure));
- // If the CPU can finish the match with the pages it has, commit to the hold.
- // Otherwise use early holds as persistent body-part setup without emptying the hand.
- const canFinish=holdsToTap<=p.hand.length;
+ // A single CPU application may only work the hold for the authored cadence:
+ // normal holds = 2 total pressure ticks; Trademark/Finisher holds = 3 total ticks.
+ // Persistent damage can make a later application dangerous, but the CPU may never
+ // burn an entire hand in one synchronous decision burst to manufacture an instant tap.
+ const holdTurn=Math.max(1,sub.holdTurn??1);
  const setupTurnCap=(sub.finisher||sub.trademark)?3:2;
- const canBankPressure=(sub.holdTurn??1)<setupTurnCap&&p.hand.length>2;
- if(!canFinish&&!canBankPressure)return{type:'release'};
+ const remainingTicks=Math.max(0,setupTurnCap-holdTurn);
+ if(remainingTicks<=0)return{type:'release'};
+ const canFinishWithinCap=holdsToTap<=remainingTicks&&holdsToTap<=p.hand.length;
+ const canBankPressure=p.hand.length>2;
+ if(!canFinishWithinCap&&!canBankPressure)return{type:'release'};
  let index=0,best=Infinity;for(let i=0;i<p.hand.length;i++){const v=cpuDiscardPreservationScore(p.hand[i]);if(v<best){best=v;index=i;}}
  return{type:'maintain',index};
 }
@@ -315,6 +320,7 @@ export function cpuDecision(game,pid="p2"){
  const s=game.state(),p=s.players[pid];if(decisionOwner(s)!==pid)return null;
  if(s.phase==="COUNTER"){const incoming=s.proposedMove.card,c=p.hand.find(x=>counterEligibility(s,pid,incoming,x).legal);if(c)return{type:"counter",card:c};const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}return{type:"passCounter"};}
  if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');const chance=healthOnlyPinChance(p);return c&&chance>=20?{type:"pinEscape",card:c}:{type:"passPin"};}
+ if(s.phase==="SUBMISSION_RESPONSE")return{type:"passSubmissionResponse"};
  if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length?cpuSubmissionDecision(s,pid):{type:"release"};
  if(s.phase==="ACTION"){
    const defId=pid==="p1"?"p2":"p1",def=s.players[defId],hpRatio=healthRatio(def);
@@ -342,4 +348,4 @@ export function cpuDecision(game,pid="p2"){
  }
  return null;
 }
-export function executeCpuDecision(game,d,pid="p2"){if(!d)return false;if(d.type==="counter")return game.counter(pid,d.card);if(d.type==="autoCounter")return game.autoCounter(pid,d.indices);if(d.type==="passCounter")return game.passCounter(pid);if(d.type==="pinEscape")return game.playPinEscape(pid,d.card);if(d.type==="passPin")return game.passPinResponse(pid);if(d.type==="maintain")return game.maintainSubmission(pid,d.index);if(d.type==="release")return game.releaseSubmission(pid);if(d.type==="pin")return game.attemptPin(pid);if(d.type==="endPost")return game.endPostMove(pid);if(d.type==="momentum")return game.playMomentum(pid,d.card);if(d.type==="move")return game.declareMove(pid,d.card);if(d.type==="action")return game.playAction(pid,d.card);if(d.type==="support")return game.playSupport(pid,d.card);if(d.type==="manager")return game.playManager(pid,d.card);if(d.type==="special")return game.playSpecial(pid,d.card);if(d.type==="pass")return game.passTurn(pid);return false;}
+export function executeCpuDecision(game,d,pid="p2"){if(!d)return false;if(d.type==="counter")return game.counter(pid,d.card);if(d.type==="autoCounter")return game.autoCounter(pid,d.indices);if(d.type==="passCounter")return game.passCounter(pid);if(d.type==="pinEscape")return game.playPinEscape(pid,d.card);if(d.type==="passPin")return game.passPinResponse(pid);if(d.type==="passSubmissionResponse")return game.passSubmissionResponse(pid);if(d.type==="maintain")return game.maintainSubmission(pid,d.index);if(d.type==="release")return game.releaseSubmission(pid);if(d.type==="pin")return game.attemptPin(pid);if(d.type==="endPost")return game.endPostMove(pid);if(d.type==="momentum")return game.playMomentum(pid,d.card);if(d.type==="move")return game.declareMove(pid,d.card);if(d.type==="action")return game.playAction(pid,d.card);if(d.type==="support")return game.playSupport(pid,d.card);if(d.type==="manager")return game.playManager(pid,d.card);if(d.type==="special")return game.playSpecial(pid,d.card);if(d.type==="pass")return game.passTurn(pid);return false;}

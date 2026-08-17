@@ -109,7 +109,8 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     id: "submissions", group: "FINISH", title: "Submissions & Body Damage",
     summary: "Submission pressure is persistent and the tap threshold is the defender's current HP.",
     items: [
-      ["Applying a hold", "A connected Submission adds its pressure to the targeted body part and opens the maintain / release decision."],
+      ["Applying a hold", "A connected Submission adds its first pressure tick to the targeted body part. If that tick does not already meet the tap threshold, the defender receives a visible response window before any further pressure can resolve."],
+      ["Defender response", "When you are trapped in a CPU Submission, the match pauses on an In the Hold response. Press Pass · Continue Hold to resolve the next pressure step. If the CPU maintains again, you receive another response window before another tick."],
       ["Tap threshold", "The defender taps whenever accumulated damage on the targeted body part is greater than or equal to the defender's current HP at a Submission damage tick."],
       ["Maintaining", "Maintaining a Submission ditches 1 page from the attacker's hand and adds the hold's pressure again."],
       ["Releasing", "The attacker may release instead of maintaining. The existing body-part damage stays in place and the attacker normally retains Control."],
@@ -161,8 +162,10 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     summary: "The same core match engine powers Exhibition, Live Events, Ladder and Championship Road.",
     items: [
       ["Exhibition", "Choose an owned Superstar and play a standard one-off match against an eligible CPU opponent."],
-      ["Live Events", "A five-match daily tower. Monday uses RAW branding, Wednesday NXT and Saturday SmackDown; the other days use original WWE Legacy event identities. One Superstar is locked for that day's run."],
-      ["Live Event progress", "A loss retries the same stage without erasing completed stages. Each win awards 50 UP; clearing all 5 awards 250 UP total plus the day's completion booster once."],
+      ["Live Events", "Live Events is a rotating tower hub. A Daily Tower resets every local day, a 3 Day Tower rotates every three days, and a Weekly Tower rotates each Monday. Limited 24-hour birthday towers can appear on a Superstar's real birthday."],
+      ["Daily brand schedule", "The Daily Tower uses RAW branding on Monday, NXT on Wednesday and SmackDown on Saturday; Tuesday, Thursday, Friday and Sunday use original WWE Legacy event identities."],
+      ["Tower timers", "Every Live Event card shows the exact time remaining. Progress belongs to that tower only and expires when its timer ends."],
+      ["Live Event progress", "Each tower contains 5 escalating matches. A loss retries the same stage without erasing completed stages. The Daily Tower awards 50 UP per win; longer rotating towers use their shown reward rate and completion pack."],
       ["Climb the Ladder", "Choose an era / branch and survive its route with 3 lives. Current Era, Hall of Fame and Evolution routes contain 8 levels; Golden Era and Attitude Era routes contain 4. A loss costs a life; clearing the route awards a completion pack."],
       ["Championship Road", "A four-match route: Opening Bout, Momentum Match, No. 1 Contender and Championship Match. Losses retry the current stage. Clearing the road awards a Championship pack and records the title clear."],
       ["Career records", "Completed matches feed My Legacy's overall W/L, W/L by unlocked Superstar and W/L by mode."]
