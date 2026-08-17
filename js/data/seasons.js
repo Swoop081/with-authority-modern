@@ -1,4 +1,5 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.83";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.87";
+import { isUnreleasedSetId } from "./release.js?v=0.12.87";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -195,11 +196,17 @@ const SEASON_1_PACK_SET_IDS = Object.freeze([
 ]);
 
 function seasonPackPoolForTier(tier) {
-  if (tier <= 20) return SEASON_1_PACK_SET_IDS.slice(0, 3);
-  if (tier <= 35) return SEASON_1_PACK_SET_IDS.slice(0, 4);
-  if (tier <= 50) return SEASON_1_PACK_SET_IDS.slice(0, 5);
-  if (tier <= 65) return SEASON_1_PACK_SET_IDS.slice(0, 6);
-  return SEASON_1_PACK_SET_IDS;
+  const authored = tier <= 20
+    ? SEASON_1_PACK_SET_IDS.slice(0, 3)
+    : tier <= 35
+      ? SEASON_1_PACK_SET_IDS.slice(0, 4)
+      : tier <= 50
+        ? SEASON_1_PACK_SET_IDS.slice(0, 5)
+        : tier <= 65
+          ? SEASON_1_PACK_SET_IDS.slice(0, 6)
+          : SEASON_1_PACK_SET_IDS;
+  const released = authored.filter(setId => !isUnreleasedSetId(setId));
+  return released.length ? released : SEASON_1_PACK_SET_IDS.slice(0, 3);
 }
 
 export function tierReward(tier) {

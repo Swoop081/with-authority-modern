@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.83";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.83";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.87";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.87";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){

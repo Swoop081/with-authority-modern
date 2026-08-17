@@ -1,12 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.12.83';
+import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.12.87';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.12.87';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
 
-test('v0.12.83 Season 1 expands to 100 tiers with Foil Rock at Tier 100',()=>{
+test('v0.12.84 Season 1 expands to 100 tiers with Foil Rock at Tier 100',()=>{
   assert.equal(SEASON_TIER_COUNT,100);
   assert.equal(MAX_SEASON_XP,10000);
   assert.equal(tierReward(100).cardId,'superstar-the-rock');
@@ -15,7 +16,7 @@ test('v0.12.83 Season 1 expands to 100 tiers with Foil Rock at Tier 100',()=>{
   assert.match(app,/TIER 100 · THE FINAL BOSS/);
 });
 
-test('v0.12.83 repeatable Rock rewards are five single-copy milestones each',()=>{
+test('v0.12.84 repeatable Rock rewards are five single-copy milestones each',()=>{
   for (const id of ['the-rock-lay-the-smack-down','the-rock-belt-whip','the-rock-rock-bottom','the-rock-people-s-elbow']) {
     const rewards=Object.values(FINAL_BOSS_TIER_REWARDS).filter(r=>r.cardId===id);
     assert.equal(rewards.length,5,id);
@@ -25,20 +26,14 @@ test('v0.12.83 repeatable Rock rewards are five single-copy milestones each',()=
   assert.equal(tierReward(50).cardId,'the-rock-rock-bottom');
 });
 
-test('v0.12.83 Season 1 interleaves UP and multiple series booster rewards',()=>{
+test('v0.12.84 Season 1 interleaves UP and only currently released booster rewards',()=>{
   const rewards=Array.from({length:99},(_,i)=>tierReward(i+1));
   const sets=new Set(rewards.filter(r=>r.kind==='booster').map(r=>r.setId));
   assert.ok(rewards.some(r=>r.kind==='universe-points'));
-  assert.ok(sets.has('summerslam-series-1'));
-  assert.ok(sets.has('hall-of-fame-series-1'));
-  assert.ok(sets.has('evolution-series-1'));
-  assert.ok(sets.has('raw-series-1'));
-  assert.ok(sets.has('worlds-collide-series-1'));
-  assert.ok(sets.has('money-in-the-bank-series-1'));
-  assert.ok(sets.has('smackdown-series-1'));
+  assert.deepEqual([...sets].sort(), [...LAUNCH_LIVE_SET_IDS].sort());
 });
 
-test('v0.12.83 Climb the Ladder uses one featured fight panel and premium 2x4 progress grid',()=>{
+test('v0.12.84 Climb the Ladder uses one featured fight panel and premium 2x4 progress grid',()=>{
   const ladder=app.slice(app.indexOf('function renderLadder()'),app.indexOf('function beginChampionshipRoad()'));
   assert.match(ladder,/redesigned-ladder-command/);
   assert.match(ladder,/ladder-bottom-shell/);

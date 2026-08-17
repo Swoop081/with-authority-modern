@@ -1,4 +1,4 @@
-# WWE Legacy v0.12.83 — Build Certification
+# WWE Legacy v0.12.87 — Build Certification
 
 - Regression tests: **361/361 pass**
 - Validation: **50 Superstars / 50 decks / 438 gameplay cards / 0 orphans / 0 issues**
@@ -7,9 +7,9 @@
 - Counter-state audit: **438 gameplay cards / 318 Moves / 0 issues**
 - Economy smoke audit: **60 packs / 300 cards / 0 duplicate Entrance pulls / 0 foil-first failures**
 - Art audit: **451 unfinished custom fronts** (known artwork backlog; fallback presentation remains active)
-- v0.12.83 dedicated regression coverage: **4 tests** covering the 100-tier Season 1 road and Tier 100 Foil Final Boss reward, five single-copy milestones for each repeatable Rock Move, mixed Season 1 pack/UP reward spacing, and the premium Climb the Ladder lower-half redesign.
+- v0.12.87 dedicated regression coverage: **4 tests** covering the 100-tier Season 1 road and Tier 100 Foil Final Boss reward, five single-copy milestones for each repeatable Rock Move, mixed Season 1 pack/UP reward spacing, and the premium Climb the Ladder lower-half redesign.
 
-## v0.12.83 — Ladder Redesign + 100-Tier Final Boss Road
+## v0.12.87 — Ladder Redesign + 100-Tier Final Boss Road
 
 - Climb the Ladder now uses one premium current-level action panel and a cleaner 2×4 opponent progression grid with explicit Defeated / Next / Waiting states.
 - Season 1 expands to **100 tiers / 10,000 XP** while preserving the existing 100 XP per tier and all existing profile XP/claimed-tier progress.

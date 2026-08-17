@@ -1,33 +1,33 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.83";
-import { superstars } from "../data/superstars.js?v=0.12.83";
-import { decks } from "../data/decks.js?v=0.12.83";
-import { sets } from "../data/sets.js?v=0.12.83";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.83";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.83";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.83";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.12.83";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.83";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.83";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.83";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.83";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.83";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.83";
-import { totalMomentum } from "../engine/utils.js?v=0.12.83";
-import { healthZone } from "../engine/health.js?v=0.12.83";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.83";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.83";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.83";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.83";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, currentWeeklyLiveEventStage, recordWeeklyLiveEventMatch } from "../data/live-events.js?v=0.12.83";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.83";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.12.83";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.83";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.83";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.83";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.83";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.83";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.83";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.83";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.87";
+import { superstars } from "../data/superstars.js?v=0.12.87";
+import { decks } from "../data/decks.js?v=0.12.87";
+import { sets } from "../data/sets.js?v=0.12.87";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.87";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.87";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.87";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.12.87";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.87";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.87";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.87";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.87";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.87";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.87";
+import { totalMomentum } from "../engine/utils.js?v=0.12.87";
+import { healthZone } from "../engine/health.js?v=0.12.87";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.87";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.87";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.87";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.87";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, currentWeeklyLiveEventStage, recordWeeklyLiveEventMatch } from "../data/live-events.js?v=0.12.87";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.87";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.12.87";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.87";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.87";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.87";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.87";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.87";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.87";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.87";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -392,9 +392,10 @@ function renderMatchupSplash() {
   const { p1Star, p2Star, brandSetId, eventMeta } = pendingMatch;
   const p1Card = superstarCollectibleFor(p1Star.id);
   const p2Card = superstarCollectibleFor(p2Star.id);
+  const prematchEyebrow = eventMeta ? ((eventMeta.logoMode && eventMeta.logoMode !== "legacy") ? "LIVE EVENT" : eventMeta.eventName.toUpperCase()) : "TONIGHT’S";
   root.innerHTML = `<section class="prematch-screen matchup-splash ${presentationThemeClass(brandSetId)}">
     <div class="prematch-brand">${setLogoMarkup(brandSetId, "prematch-show-logo")}</div>
-    <div class="prematch-heading ${eventMeta ? "has-live-event-meta" : ""}"><span>${eventMeta ? eventMeta.eventName.toUpperCase() : "TONIGHT’S"}</span><h2>${eventMeta ? `MATCH ${eventMeta.stageIndex + 1} OF ${LIVE_EVENT_LENGTH}` : "MAIN EVENT"}</h2></div>
+    <div class="prematch-heading ${eventMeta ? "has-live-event-meta" : ""}"><span>${prematchEyebrow}</span><h2>${eventMeta ? `MATCH ${eventMeta.stageIndex + 1} OF ${LIVE_EVENT_LENGTH}` : "MAIN EVENT"}</h2></div>
     ${eventMeta ? `<div class="prematch-live-event-rule"><span>${eventMeta.stageLabel}</span><strong>${eventMeta.ruleName}</strong><small>${eventMeta.ruleText}</small></div>` : ""}
     <div class="prematch-versus">
       <article class="prematch-side player-side"><span class="prematch-side-label">YOU</span><div class="prematch-superstar-card">${p1Card ? collectibleCardMarkup(p1Card,{extraClass:"matchup-superstar-card"}) : superstarVisualMarkup(p1Star.id,p1Star.name)}</div></article>
@@ -1122,7 +1123,8 @@ function startCurrentWeeklyLiveEventMatch() {
       stageLabel: stage.label,
       ruleName: stage.ruleName,
       ruleText: stage.ruleText,
-      rewardSetId: rotation.event.rewardSetId
+      rewardSetId: rotation.event.rewardSetId,
+      logoMode: rotation.event.logoMode
     }
   });
 }
@@ -1147,46 +1149,91 @@ function renderLiveEvents() {
   const rewardSet = sets[event.rewardSetId];
   const earnedUp = Math.min(run?.stage ?? 0, LIVE_EVENT_LENGTH) * LIVE_EVENT_WIN_UP;
   const totalUp = LIVE_EVENT_LENGTH * LIVE_EVENT_WIN_UP;
-  const status = cleared
-    ? `${event.name} cleared. A new Live Event arrives tomorrow.`
-    : active
-      ? `Match ${run.stage + 1} of ${LIVE_EVENT_LENGTH} · ${superstarById[currentWeeklyLiveEventOpponent(profile, now)]?.name ?? "Next opponent"}`
-      : `Choose one owned Superstar and clear all ${LIVE_EVENT_LENGTH} matches before tomorrow's reset.`;
-  const statusMarkup = `<div class="mode-run-status live-event-status ${message ? "has-message" : ""}"><span>${message || status}</span></div>`;
-  const routeRows = run ? run.opponents.map((id, index) => {
-    const star = superstarById[id];
-    const state = index < run.stage ? "cleared" : (active && index === run.stage ? "current" : "upcoming");
-    const eventStage = liveEventStage(event, index);
-    const stateLabel = state === "cleared" ? "Cleared" : state === "current" ? "Current" : index === LIVE_EVENT_LENGTH - 1 ? "Reward" : "Locked";
-    return `<div class="ladder-rung mode-run-node live-event-stage-node ${state}"><span class="mode-run-index">${index + 1}</span><div class="ladder-portrait mode-run-node-portrait">${portraitMarkup(id, star?.name ?? id)}</div><div class="mode-run-node-copy"><b>${eventStage.label}</b><small>${star?.name ?? id}</small><em>${stateLabel}</em></div></div>`;
-  }).join("") : Array.from({ length: LIVE_EVENT_LENGTH }, (_, index) => {
-    const eventStage = liveEventStage(event, index);
-    return `<div class="ladder-rung mode-run-node live-event-stage-node setup"><span class="mode-run-index">${index + 1}</span><div class="mode-run-node-copy"><b>${eventStage.label}</b><small>${eventStage.ruleName}</small><em>${index === LIVE_EVENT_LENGTH - 1 ? "Reward" : "Waiting"}</em></div></div>`;
-  }).join("");
+  const isShowBranded = !!(event.logoMode && event.logoMode !== "legacy");
+  const heroTitle = isShowBranded ? "Today's Five-Match Tower" : event.name;
+  const heroKicker = isShowBranded ? "DAILY LIVE EVENT" : event.kicker;
+  const heroDescription = event.description;
+  const messageMarkup = message ? `<div class="live-event-message-banner"><span>${message}</span></div>` : "";
   const stageNumber = active ? run.stage + 1 : 1;
   const focusOpponentId = active ? currentWeeklyLiveEventOpponent(profile, now) : event.heroId;
   const focusOpponent = superstarById[focusOpponentId];
   const focusStage = active ? stage : liveEventStage(event, stageNumber - 1);
   const heroCta = active ? `Fight Match ${stageNumber}` : "Start Live Event";
-  const heroCopy = active
-    ? `<span>MATCH ${stageNumber} OF ${LIVE_EVENT_LENGTH} · ${focusStage.label}</span><strong>${focusOpponent?.name ?? "Opponent"}</strong><small>${focusStage.ruleName} · ${focusStage.ruleText}</small>`
-    : `<span>TODAY'S FEATURED TOWER</span><strong>${event.name}</strong><small>${event.description}</small>`;
-  const commandMarkup = active
-    ? `<section class="mode-run-command live-event-run-command redesigned-live-event-command"><div class="mode-run-command-copy">${heroCopy}</div><button id="continue-live-event" class="start-match mode-run-primary">${heroCta}</button></section>`
-    : cleared
-      ? `<section class="live-event-complete-panel"><span>DAILY EVENT COMPLETE</span><h3>${event.name}</h3><p>${chosenStar?.name ?? "Your Superstar"} cleared all ${LIVE_EVENT_LENGTH} matches.</p><div><b>+${totalUp} UP</b><b>+${LIVE_EVENT_CLEAR_BOOSTERS} ${rewardSet?.displayName ?? "Reward"} Booster</b></div><small>Next event in <strong data-live-event-countdown>${formatCountdown(rotation.msRemaining)}</strong></small></section>`
-      : `<section class="ladder-picker horizontal-selector mode-run-picker live-event-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? "Choose your Superstar"}</h3></div><small>Locked for today's tower</small></div>${selectionCarouselMarkup(unlocked, chosenId, "live-event-select")}<button id="start-live-event" class="start-match mode-run-primary">${heroCta}</button></section>`;
-  root.innerHTML = `<section class="ladder-screen live-event-screen premium-screen compact-mode-run premium-run-screen redesigned-live-events ${active ? "is-active-run" : "is-run-setup"} event-${event.id}">
-    <section class="feature-hero live-event-feature single-feature-hero mode-run-hero">${modePortraits([event.heroId], "feature-art")}
-      <div class="feature-shade"></div>
-      <div class="feature-copy mode-run-hero-copy">${liveEventBrandMarkup(event)}<span class="live-event-kicker">${event.kicker}</span><h3>${event.name}</h3><p>${event.description}</p></div>
-      <div class="live-event-reset-chip"><span>RESETS IN</span><b data-live-event-countdown>${formatCountdown(rotation.msRemaining)}</b></div>
-      <div class="ladder-summary mode-run-summary live-event-summary"><div><b>${Math.min(run?.stage ?? 0, LIVE_EVENT_LENGTH)}/${LIVE_EVENT_LENGTH}</b><span>Today</span></div><div><b>${earnedUp}/${totalUp}</b><span>UP Earned</span></div><div><b>${live.totalClears ?? 0}</b><span>Career Clears</span></div><div><b>${LIVE_EVENT_CLEAR_BOOSTERS}</b><span>${rewardSet?.displayName ?? "Reward"} Pack</span></div></div>
+  const routeRows = run ? run.opponents.map((id, index) => {
+    const star = superstarById[id];
+    const state = index < run.stage ? "cleared" : (active && index === run.stage ? "current" : "upcoming");
+    const eventStage = liveEventStage(event, index);
+    const stateLabel = state === "cleared" ? "Defeated" : state === "current" ? "Current" : index === LIVE_EVENT_LENGTH - 1 ? "Reward" : "Locked";
+    return `<article class="live-event-route-card ${state}">
+      <div class="live-event-route-top"><span class="live-event-route-index">${index + 1}</span><em>${stateLabel}</em></div>
+      <div class="live-event-route-body">
+        <div class="live-event-route-copy"><strong>${eventStage.label}</strong><small>${star?.name ?? id}</small><span>${state === "current" ? eventStage.ruleName : stateLabel}</span></div>
+        <div class="live-event-route-portrait">${portraitMarkup(id, star?.name ?? id)}</div>
+      </div>
+    </article>`;
+  }).join("") : Array.from({ length: LIVE_EVENT_LENGTH }, (_, index) => {
+    const eventStage = liveEventStage(event, index);
+    return `<article class="live-event-route-card setup">
+      <div class="live-event-route-top"><span class="live-event-route-index">${index + 1}</span><em>${index === LIVE_EVENT_LENGTH - 1 ? "Reward" : "Waiting"}</em></div>
+      <div class="live-event-route-body no-portrait"><div class="live-event-route-copy"><strong>${eventStage.label}</strong><small>${eventStage.ruleName}</small><span>${index === LIVE_EVENT_LENGTH - 1 ? "Reward Match" : "Preview"}</span></div></div>
+    </article>`;
+  }).join("");
+  const activeCommandMarkup = `<section class="live-event-feature-panel">
+      <div class="live-event-feature-copy">
+        <span class="live-event-stage-pill">MATCH ${stageNumber} OF ${LIVE_EVENT_LENGTH}</span>
+        <strong>${focusOpponent?.name ?? "Opponent"}</strong>
+        <small>${focusStage.label} · ${focusStage.ruleName}</small>
+        <p>${focusStage.ruleText}</p>
+      </div>
+      <button id="continue-live-event" class="start-match live-event-primary-cta">${heroCta}</button>
+    </section>`;
+  const setupCommandMarkup = `<section class="live-event-feature-panel setup-panel">
+      <div class="live-event-feature-copy">
+        <span class="live-event-stage-pill">CHOOSE YOUR SUPERSTAR</span>
+        <strong>${chosenStar?.name ?? "Choose your Superstar"}</strong>
+        <small>Locked for today's tower</small>
+        <p>Clear all ${LIVE_EVENT_LENGTH} matches before tomorrow's reset to earn +${totalUp} UP and a ${rewardSet?.displayName ?? "Reward"} booster.</p>
+      </div>
+      <button id="start-live-event" class="start-match live-event-primary-cta">${heroCta}</button>
     </section>
-    ${statusMarkup}
-    <section class="live-event-bottom-shell">
+    <section class="live-event-select-panel">
+      <div class="live-event-select-head"><span>OWNED SUPERSTARS</span><small>Tap a Superstar to choose them for this run.</small></div>
+      ${selectionCarouselMarkup(unlocked, chosenId, "live-event-select")}
+    </section>`;
+  const clearedMarkup = `<section class="live-event-feature-panel cleared-panel">
+      <div class="live-event-feature-copy">
+        <span class="live-event-stage-pill">DAILY EVENT COMPLETE</span>
+        <strong>${event.name}</strong>
+        <small>${chosenStar?.name ?? "Your Superstar"} cleared all ${LIVE_EVENT_LENGTH} matches.</small>
+        <p>You earned +${totalUp} UP and ${LIVE_EVENT_CLEAR_BOOSTERS} ${rewardSet?.displayName ?? "Reward"} booster.</p>
+      </div>
+      <div class="live-event-complete-meta"><b>+${totalUp} UP</b><b>+${LIVE_EVENT_CLEAR_BOOSTERS} BOOSTER</b><small>NEXT EVENT IN <strong data-live-event-countdown>${formatCountdown(rotation.msRemaining)}</strong></small></div>
+    </section>`;
+  const commandMarkup = active ? activeCommandMarkup : (cleared ? clearedMarkup : setupCommandMarkup);
+  root.innerHTML = `<section class="live-event-screen-refined event-${event.id} ${isShowBranded ? `brand-${event.logoMode}` : 'brand-legacy'} ${active ? 'is-active-run' : ''} ${cleared ? 'is-cleared-run' : ''}">
+    <section class="live-event-hero-panel">
+      <div class="live-event-hero-copy-block">
+        <div class="live-event-brand-wrap">${liveEventBrandMarkup(event)}</div>
+        <span class="live-event-hero-kicker">${heroKicker}</span>
+        <h2>${heroTitle}</h2>
+        <p>${heroDescription}</p>
+        <div class="live-event-reset-chip refined-reset-chip"><span>RESETS IN</span><b data-live-event-countdown>${formatCountdown(rotation.msRemaining)}</b></div>
+      </div>
+      <div class="live-event-hero-art">${superstarRenderMarkup(event.heroId, superstarById[event.heroId]?.name ?? event.heroId)}</div>
+      <div class="live-event-summary-grid">
+        <article><b>${Math.min(run?.stage ?? 0, LIVE_EVENT_LENGTH)}/${LIVE_EVENT_LENGTH}</b><span>Today</span></article>
+        <article><b>${earnedUp}/${totalUp}</b><span>UP Earned</span></article>
+        <article><b>${live.totalClears ?? 0}</b><span>Career Clears</span></article>
+        <article><b>${LIVE_EVENT_CLEAR_BOOSTERS}</b><span>${rewardSet?.displayName ?? "Reward"} Pack</span></article>
+      </div>
+    </section>
+    ${messageMarkup}
+    <section class="live-event-content-stack">
       ${commandMarkup}
-      <section class="ladder-stack mode-run-progress live-event-progress-grid live-event-progress-rail" aria-label="Live Event progress">${routeRows}</section>
+      <section class="live-event-progress-section">
+        <div class="live-event-progress-head"><span>EVENT ROUTE</span><strong>${active ? `Current Opponent · ${focusOpponent?.name ?? 'Opponent'}` : 'Tower Preview'}</strong></div>
+        <div class="live-event-route-strip" aria-label="Live Event progress">${routeRows}</div>
+      </section>
     </section>
   </section>`;
   wireSelectionCarousel("live-event-select", id => { selection.p1 = id; renderLiveEvents(); });

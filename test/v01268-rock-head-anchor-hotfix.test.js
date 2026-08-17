@@ -14,7 +14,9 @@ test("v0.12.68 Final Boss head-anchor hotfix remains documented in history", () 
 
 test("launch Rock keeps v0.12.67 scale and shifts down on iPhone", () => {
   const prior = css.slice(css.lastIndexOf("/* v0.12.67 — Hero Anchor & Containment Repair."), css.lastIndexOf("/* v0.12.68 — Final Boss Head Anchor Hotfix."));
-  const hotfix = css.slice(css.lastIndexOf("/* v0.12.68 — Final Boss Head Anchor Hotfix."));
+  const hotfixStart = css.lastIndexOf("/* v0.12.68 — Final Boss Head Anchor Hotfix.");
+  const nextBlock = css.indexOf("/*", hotfixStart + 4);
+  const hotfix = css.slice(hotfixStart, nextBlock > hotfixStart ? nextBlock : undefined);
   assert.match(prior, /@media\(max-width:430px\)[\s\S]*width:196%!important;[\s\S]*height:164%!important/);
   assert.match(hotfix, /@media\(max-width:430px\)[\s\S]*bottom:-50%!important/);
   assert.doesNotMatch(hotfix, /\n\s*width\s*:/);
