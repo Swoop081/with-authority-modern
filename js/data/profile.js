@@ -1,7 +1,7 @@
-import { decks } from "./decks.js?v=0.12.74";
-import { collectionCards } from "./collection.js?v=0.12.74";
-import { superstars } from "./superstars.js?v=0.12.74";
-import { isUnreleasedSetId } from "./release.js?v=0.12.74";
+import { decks } from "./decks.js?v=0.12.75";
+import { collectionCards } from "./collection.js?v=0.12.75";
+import { superstars } from "./superstars.js?v=0.12.75";
+import { isUnreleasedSetId } from "./release.js?v=0.12.75";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];

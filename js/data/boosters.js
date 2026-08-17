@@ -1,11 +1,12 @@
-import { cardsForSet } from "./collection.js?v=0.12.74";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.74";
-import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.74";
-import { sets } from "./sets.js?v=0.12.74";
-import { isLaunchLiveSetId } from "./release.js?v=0.12.74";
+import { cardsForSet } from "./collection.js?v=0.12.75";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.75";
+import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.75";
+import { sets } from "./sets.js?v=0.12.75";
+import { isLaunchLiveSetId } from "./release.js?v=0.12.75";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
+export const MAX_VERY_RARE_PULLS = 1;
 export const RARITY_WEIGHTS = { 1: .5, 2: .3, 3: .15, 4: .05 };
 export const SUPERSTAR_PITY_PACKS = 50;
 export const SUPERSTAR_CHASE_CHANCE = .05;
@@ -81,6 +82,10 @@ function buildPack(profile, rng, setId) {
   const underCapNormal = normalBase.filter(card => underOwnershipCap(profile, card));
   const pack = [];
   let superstarAdded = false;
+  // A five-card pack may contain at most one 4★ Very Rare. The Superstar
+  // chase counts toward this ceiling so a chase Superstar cannot stack with
+  // additional Very Rare Finishers, Specials or Entrances in the same pack.
+  let veryRarePulls = superstarCard?.rarity === 4 ? 1 : 0;
 
   for (let i = 0; i < BOOSTER_SIZE; i += 1) {
     const guaranteedFoil = i < GUARANTEED_FOILS;
@@ -95,7 +100,9 @@ function buildPack(profile, rng, setId) {
       // but roll rarity first and only then choose uniformly inside that bucket.
       let slotPool = normalBase.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
       if (i === 0 && underCapNormal.length) slotPool = underCapNormal.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
+      if (veryRarePulls >= MAX_VERY_RARE_PULLS) slotPool = slotPool.filter(c => Number(c.rarity) !== 4);
       card = rarityFirstPick(slotPool, rng);
+      if (card?.rarity === 4) veryRarePulls += 1;
       if (card?.kind === "entrance") pullFoil = true;
     }
 
