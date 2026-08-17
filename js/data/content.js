@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.70";
+import { enrichCounterState } from "./counter-states.js?v=0.12.71";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1837,22 +1837,12 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared canonical. If played by Bayley, on Connect search/draw Rose Plant; it costs 4 less this Control sequence.",
+    "rulesText": "Shared canonical.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "trademark": true,
-    "effects": [
-      {
-        "type": "search",
-        "name": "Rose Plant",
-        "discount": 4,
-        "ifSuperstarIds": [
-          "bayley"
-        ]
-      }
-    ],
+    "effects": [],
     "counterState": "torso-trapped"
   },
   {
@@ -9501,6 +9491,61 @@ export const allGameplayCards = [
     "counterSubmissionTargets": [
       "neck-head"
     ]
+  },
+  {
+    "id": "bayley-diving-elbow",
+    "name": "Bayley’s Diving Elbow",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "bayley",
+    "rarity": 3,
+    "rulesText": "Bayley-exclusive. Grounded opponent only. On Connect, draw 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "bayley-to-belly",
+    "name": "Bayley-to-Belly",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "bayley",
+    "rarity": 3,
+    "rulesText": "Bayley-exclusive. Ground opponent. On Connect, search/draw Rose Plant; it costs 4 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Rose Plant",
+        "discount": 4
+      }
+    ],
+    "counterState": "torso-trapped"
   }
 ];
 

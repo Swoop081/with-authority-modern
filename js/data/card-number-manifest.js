@@ -2914,6 +2914,18 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "summerslam-series-1",
     "cardNumber": 141,
     "cardCode": "SS1-141"
+  },
+  {
+    "id": "bayley-diving-elbow",
+    "setId": "evolution-series-1",
+    "cardNumber": 65,
+    "cardCode": "EVO1-065"
+  },
+  {
+    "id": "bayley-to-belly",
+    "setId": "evolution-series-1",
+    "cardNumber": 66,
+    "cardCode": "EVO1-066"
   }
 ]);
 

@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.12.70";
+import { allGameplayCards } from "./content.js?v=0.12.71";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -271,16 +271,16 @@ export const deckIds={
     "ddt",
     "neckbreaker",
     "neckbreaker",
-    "belly-to-belly-suplex",
-    "belly-to-belly-suplex",
-    "belly-to-belly-suplex",
+    "bayley-to-belly",
+    "bayley-to-belly",
+    "bayley-to-belly",
     "sunset-flip-powerbomb",
     "sunset-flip-powerbomb",
     "crossface",
     "crossface",
-    "diving-elbow-drop",
-    "diving-elbow-drop",
-    "diving-elbow-drop",
+    "bayley-diving-elbow",
+    "bayley-diving-elbow",
+    "bayley-diving-elbow",
     "bayley-rose-plant",
     "bayley-rose-plant",
     "bayley-rose-plant",

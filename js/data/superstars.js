@@ -278,7 +278,8 @@ export const superstars = {
       "arm-drag"
     ],
     "signatures": [
-      "belly-to-belly-suplex",
+      "bayley-to-belly",
+      "bayley-diving-elbow",
       "bayley-rose-plant"
     ],
     "archetype": "reviewed-starter",
