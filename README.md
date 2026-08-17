@@ -1,15 +1,13 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.78 — Career Record + Achievements + Lay The Smack Down**.
+Current working build: **v0.12.80 — Tombstone Lock + Deck Lab Momentum Hotfix**.
 
-v0.12.78 builds on v0.12.77 and expands My Legacy into the permanent career record:
+v0.12.80 builds on v0.12.79 with two targeted corrections:
 
-- Overall **Win/Loss** tracking for every completed match.
-- **W/L by unlocked Superstar** and **W/L by game mode**.
-- Win percentages and persistent finish-type history for achievement logic.
-- **14 launch achievements** covering career wins, roster breadth, pin/submission victories and mode clears.
-- Existing profiles start exact match tracking at v0.12.78; older W/L is not guessed. Existing recorded Ladder, Championship and Live Event clears are preserved.
-- Final Boss **S1FB-001** is now **Lay The Smack Down**, replacing Final Boss Slap while retaining its Rare Strike gameplay values and collector slot. Existing copies migrate automatically.
-- All v0.12.77 Weekly Live Events, v0.12.76 Cactus Elbow, v0.12.75 booster collation, v0.12.74 rarity policy, v0.12.73 Deck Lab inspection and earlier locked gameplay rules remain in force.
+- **Tombstone Piledriver** is now playable only by **The Undertaker and Kane**. Its Very Rare Finisher identity, Cost 10 / Damage 17 values, effects, collector slot and artwork are unchanged.
+- Deck Lab Momentum editing can now reduce a Method all the way to **0 copies**, including when its remaining Momentum page is currently in Lead Off 5.
+- Removing Lead Off Momentum promotes the next deck page into the opening five, after which the normal Deck Validity checker continues to govern whether the final deck can be saved.
+- This supports custom Momentum distributions such as CM Punk at **0 Agility / 6 Strike / 6 Technical** without forcing that distribution onto the authored recommended deck.
+- All v0.12.79 Deck Lab inspect scaling, v0.12.78 career records/achievements, v0.12.77 Weekly Live Events, v0.12.75 booster collation and earlier locked gameplay rules remain in force.
 
-See `RELEASE-NOTES-v0.12.78.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.12.80.md` and `BUILD-CERTIFICATION.md`.

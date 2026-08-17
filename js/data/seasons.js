@@ -1,8 +1,8 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.78";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.12.83";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
-export const SEASON_TIER_COUNT = 50;
+export const SEASON_TIER_COUNT = 100;
 export const XP_PER_TIER = 100;
 export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
 export const MATCH_XP = { win: 15, loss: 3 };
@@ -13,19 +13,34 @@ export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
 export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1"];
 
 // Season 1 prestige chase: The Rock — Final Boss is assembled across the road
-// instead of being dumped into Collection as a complete deck at Tier 50.
-// Move quantities match the authored Final Boss CPU deck so each milestone
-// awards the complete usable playset of that exclusive card. Existing UP values
-// at milestone tiers are retained as bonus currency rather than being removed.
+// across a 100-tier road. Repeatable Rock cards are earned one copy at a time
+// up to the normal five-copy collection cap; his one-off Support, Special and
+// Entrance are spaced between them. Tier 100 is the Foil Superstar identity.
 export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
-  5:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
-  10: { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 3, rewardType: "signature", label: "SIGNATURE · TRADEMARK", bonusUniversePoints: 100 },
-  15: { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 3, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE", bonusUniversePoints: 100 },
-  20: { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "special", label: "SPECIAL", bonusUniversePoints: 100 },
-  25: { cardId: "people-championship", name: "People's Championship", amount: 1, rewardType: "support", label: "EXCLUSIVE SUPPORT", bonusUniversePoints: 200 },
-  30: { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 2, rewardType: "finisher", label: "FINISHER", bonusUniversePoints: 200 },
-  40: { cardId: "entrance-the-rock", name: "Final Boss", amount: 1, rewardType: "entrance", label: "ENTRANCE", foil: true, bonusUniversePoints: 200 },
-  50: { cardId: "superstar-the-rock", name: "The Rock — Final Boss", amount: 1, rewardType: "superstar", label: "SUPERSTAR", foil: true, superstarId: SEASON_1_COMPLETION_SUPERSTAR }
+  5:   { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  10:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  15:  { cardId: "people-championship", name: "People's Championship", amount: 1, rewardType: "support", label: "EXCLUSIVE SUPPORT" },
+  20:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  25:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  30:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  35:  { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "special", label: "SPECIAL" },
+  40:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  45:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  50:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  55:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  60:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  65:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  70:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  75:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  80:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  82:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  85:  { cardId: "entrance-the-rock", name: "Final Boss", amount: 1, rewardType: "entrance", label: "ENTRANCE", foil: true },
+  88:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  90:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  92:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  94:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  98:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  100: { cardId: "superstar-the-rock", name: "The Rock — Final Boss", amount: 1, rewardType: "superstar", label: "FOIL SUPERSTAR", foil: true, superstarId: SEASON_1_COMPLETION_SUPERSTAR }
 });
 
 export const SEASON_1 = {
@@ -169,14 +184,36 @@ export function awardMatchSeasonXp(profile, result) {
   return awardSeasonXp(profile, amount, "match");
 }
 
+const SEASON_1_PACK_SET_IDS = Object.freeze([
+  "summerslam-series-1",
+  "hall-of-fame-series-1",
+  "evolution-series-1",
+  "raw-series-1",
+  "worlds-collide-series-1",
+  "money-in-the-bank-series-1",
+  "smackdown-series-1"
+]);
+
+function seasonPackPoolForTier(tier) {
+  if (tier <= 20) return SEASON_1_PACK_SET_IDS.slice(0, 3);
+  if (tier <= 35) return SEASON_1_PACK_SET_IDS.slice(0, 4);
+  if (tier <= 50) return SEASON_1_PACK_SET_IDS.slice(0, 5);
+  if (tier <= 65) return SEASON_1_PACK_SET_IDS.slice(0, 6);
+  return SEASON_1_PACK_SET_IDS;
+}
+
 export function tierReward(tier) {
   const n = Math.max(1, Math.min(SEASON_TIER_COUNT, Number(tier) || 1));
   const finalBoss = FINAL_BOSS_TIER_REWARDS[n];
   if (finalBoss) return { tier: n, kind: "final-boss-card", exclusive: true, ...finalBoss };
-  // Universe Points remain on the unused five-tier milestones. Final Boss card
-  // milestones preserve their previous currency value through bonusUniversePoints.
-  if (n % 5 === 0) return { tier: n, kind: "universe-points", amount: n < 25 ? 100 : 200 };
-  const setId = FEATURED_SET_IDS[(n - 1) % FEATURED_SET_IDS.length];
+  // Currency breaks up the pack cadence so the 100-tier road never feels like
+  // ninety-nine booster buttons. Later tiers pay more UP as the chase intensifies.
+  if (n % 4 === 0) {
+    const amount = n < 25 ? 100 : n < 50 ? 150 : n < 75 ? 200 : 250;
+    return { tier: n, kind: "universe-points", amount };
+  }
+  const pool = seasonPackPoolForTier(n);
+  const setId = pool[(n - 1) % pool.length];
   return { tier: n, setId, amount: 1, kind: "booster" };
 }
 function grantSetBooster(profile, setId, amount = 1) {
@@ -192,9 +229,9 @@ export function claimSeasonTier(profile, tier) {
   const reward = tierReward(n);
   if (reward.kind === "final-boss-card") {
     if (reward.rewardType === "superstar") {
-      // Tier 50 is now the Superstar identity only. Shared deck cards must come
-      // from the player's Collection; all Rock-exclusive cards are earned on
-      // earlier Season milestones.
+      // Tier 100 is the Foil Superstar identity only. Shared deck cards must come
+      // from the player's Collection; all Rock-exclusive cards are earned one
+      // at a time across the preceding Season milestones.
       grantSuperstarIdentityUnlockPackage(profile, reward.superstarId);
       state.completionRewardClaimed = true;
       state.completionSuperstarId = reward.superstarId;

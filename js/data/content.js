@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.78";
+import { enrichCounterState } from "./counter-states.js?v=0.12.83";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -2592,8 +2592,12 @@ export const allGameplayCards = [
     "moveType": "grapple",
     "method": null,
     "superstarId": null,
+    "allowedSuperstarIds": [
+      "the-undertaker",
+      "kane"
+    ],
     "rarity": 4,
-    "rulesText": "Shared Finisher; ground opponent; Stun 1",
+    "rulesText": "The Undertaker / Kane Finisher; ground opponent; Stun 1",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,

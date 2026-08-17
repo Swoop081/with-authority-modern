@@ -1,27 +1,25 @@
-# WWE Legacy v0.12.78 — Build Certification
+# WWE Legacy v0.12.83 — Build Certification
 
-- Regression tests: **348/348 pass**
+- Regression tests: **361/361 pass**
 - Validation: **50 Superstars / 50 decks / 438 gameplay cards / 0 orphans / 0 issues**
 - Flow audit: **50 Superstars / 0 issues**
 - Card-ID audit: **488/488 / 0 issues**
 - Counter-state audit: **438 gameplay cards / 318 Moves / 0 issues**
 - Economy smoke audit: **60 packs / 300 cards / 0 duplicate Entrance pulls / 0 foil-first failures**
 - Art audit: **451 unfinished custom fronts** (known artwork backlog; fallback presentation remains active)
-- v0.12.78 regression coverage: **5 dedicated tests** covering career W/L persistence, per-Superstar/mode/finish records, achievement unlocks and migration, Final Boss card replacement, collector identity, ownership migration and My Legacy integration.
+- v0.12.83 dedicated regression coverage: **4 tests** covering the 100-tier Season 1 road and Tier 100 Foil Final Boss reward, five single-copy milestones for each repeatable Rock Move, mixed Season 1 pack/UP reward spacing, and the premium Climb the Ladder lower-half redesign.
 
-## v0.12.78 — Career Record + Achievements + Lay The Smack Down
+## v0.12.83 — Ladder Redesign + 100-Tier Final Boss Road
 
-- **My Legacy is now the permanent career record.** Every completed match records a player Win or Loss exactly once.
-- Career history includes **overall W/L**, **W/L for every unlocked Superstar**, and **W/L by game mode**: Exhibition, Weekly Live Event, Climb the Ladder and Championship Road.
-- My Legacy displays win percentage for the overall, mode and Superstar records.
-- Finish-type results are retained internally so achievements can distinguish pinfall and submission wins.
-- Existing profiles do **not** receive fabricated historical W/L totals. Exact match tracking begins at v0.12.78 because older builds did not store every match result.
-- Existing concrete mode-clear counters are preserved and can unlock their matching achievements during migration.
-- Adds **14 persistent achievements**: First Bell, Winner's Circle, Ten Victories, Main Eventer, Living Legend, Century Club, All-Terrain Superstar, Locker Room Leader, Roster General, Pinfall Specialist, Submission Specialist, Ladder Conqueror, Championship Gold and Live Event Headliner.
-- Season 1 Final Boss **S1FB-001 Final Boss Slap** is retired and replaced by **Lay The Smack Down**.
-- Lay The Smack Down remains a Rock-exclusive **Rare (3★) Strike Move**, **Cost 4 / Damage 7 / requires 2 Strike**, with **Arm Extended** Counter State and the existing **opponent loses 1 Adrenaline** effect.
-- Collector slot **S1FB-001** is preserved. Existing normal/Foil ownership and saved-deck references migrate to `the-rock-lay-the-smack-down`.
-- Tier 5 of the Season 1 Final Boss Reward Road now awards Lay The Smack Down, and The Rock's authored deck contains the replacement rather than the retired card.
-- No other card costs, damage, effects, rarities, ownership caps, Superstar HP, game-mode rewards, booster odds, pin rules, submission rules or counter rules changed.
+- Climb the Ladder now uses one premium current-level action panel and a cleaner 2×4 opponent progression grid with explicit Defeated / Next / Waiting states.
+- Season 1 expands to **100 tiers / 10,000 XP** while preserving the existing 100 XP per tier and all existing profile XP/claimed-tier progress.
+- The Final Boss reward road now awards repeatable Rock-exclusive Moves one card at a time up to five copies each.
+- **Rock Bottom** is awarded at Tiers **20, 40, 50, 70 and 90**.
+- **Lay The Smack Down** is awarded at Tiers **5, 25, 55, 75 and 88**.
+- **Belt Whip** is awarded at Tiers **10, 45, 65, 82 and 92**.
+- **People’s Elbow** is awarded at Tiers **30, 60, 80, 94 and 98**.
+- People’s Championship is Tier 15, Bloodline Rules is Tier 35, the Foil Final Boss Entrance is Tier 85, and **Tier 100 awards the Foil The Rock — Final Boss Superstar card**.
+- Remaining tiers interleave scaling Universe Points and set-specific boosters. Pack variety broadens through SummerSlam, Hall of Fame, Evolution, RAW, Worlds Collide, Money in the Bank and SmackDown Series 1 as the road progresses.
+- No Rock gameplay values, card IDs, rarities, collector numbering, booster odds, Superstar HP, match rules, career records or achievement requirements changed.
 
-The package is built through the clean allowlist staging process introduced in v0.12.69.
+The package continues to use the clean allowlist packaging rules introduced in v0.12.69.

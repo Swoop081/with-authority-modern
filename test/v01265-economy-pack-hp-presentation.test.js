@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.12.78';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.12.78';
-import { createProfile } from '../js/data/profile.js?v=0.12.78';
-import { cardsForSet } from '../js/data/collection.js?v=0.12.78';
-import { superstars } from '../js/data/superstars.js?v=0.12.78';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.12.83';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.12.83';
+import { createProfile } from '../js/data/profile.js?v=0.12.83';
+import { cardsForSet } from '../js/data/collection.js?v=0.12.83';
+import { superstars } from '../js/data/superstars.js?v=0.12.83';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};
@@ -87,7 +87,7 @@ test('v0.12.65 pack presentation stays face up, converts duplicates, shows true 
   assert.match(app,/finalizePackUniversePoints\(profile, \[pull\]\)/,'UP is credited at the conversion moment');
   assert.match(css,/@keyframes duplicateCardPixels/);
   assert.match(css,/\.ccg-card\.is-foil \.ccg-foil-overlay/,'Foil overlay must sit on the actual card surface');
-  assert.match(app,/const visualFoil = Boolean\(foil \|\| card\.kind === "entrance"\)/,'finished fronts and Superstar pulls may render foil');
+  assert.match(app,/const visualFoil = Boolean\(foil \|\| card\.foil \|\| card\.kind === "entrance"\)/,'finished fronts, saved-deck Foils and Superstar pulls may render foil');
   assert.match(app,/data-open-hand-card/);
   assert.match(app,/renderHandOverlay\(\)/);
   assert.match(css,/@keyframes handInspectZoom/);

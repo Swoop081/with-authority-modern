@@ -16,7 +16,7 @@ test('v0.12.39 consolidated Season hero shows countdown, next-tier XP and Final 
   assert.match(app, /season-home-countdown/);
   assert.match(app, /XP TO NEXT TIER/);
   assert.match(app, /season-home-progress/);
-  assert.match(app, /TIER 50 · THE FINAL BOSS/);
+  assert.match(app, /TIER 100 · THE FINAL BOSS/);
   assert.match(app, /seasonProgress\.intoTier} \/ \$\{seasonProgress\.needed} XP/);
 });
 

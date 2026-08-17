@@ -2,87 +2,104 @@ export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 50;
 export const LIVE_EVENT_CLEAR_BOOSTERS = 1;
 
-// Weekly rotation begins Monday 17 August 2026. The active event changes at
-// local-device midnight each Monday so the countdown and rollover feel natural
-// to the player regardless of timezone.
-const ROTATION_EPOCH = { year: 2026, month: 7, day: 17 }; // JS month is zero-based.
-const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-
-export const WEEKLY_LIVE_EVENTS = Object.freeze([
-  {
+// v0.12.81 — Daily Live Events. The active event changes at local-device
+// midnight every day so RAW / NXT / SmackDown can own their broadcast days
+// while the remaining days use original WWE Legacy event identities.
+export const DAILY_LIVE_EVENTS = Object.freeze({
+  1: {
+    id: "raw-live",
+    dayLabel: "MONDAY",
+    name: "RAW",
+    kicker: "MONDAY NIGHT · RED BRAND LIVE",
+    description: "Five escalating fights under the bright lights of Monday Night RAW.",
+    method: "strike",
+    heroId: "cm-punk",
+    rewardSetId: "raw-series-1",
+    logoMode: "raw",
+    opponentPool: ["seth-rollins", "gunther", "kevin-owens", "cody-rhodes", "roman-reigns", "cm-punk", "brock-lesnar", "bayley"]
+  },
+  2: {
     id: "powerhouse-collision",
+    dayLabel: "TUESDAY",
     name: "Powerhouse Collision",
     kicker: "STRENGTH TAKES CENTRE STAGE",
     description: "Five escalating fights against WWE's heavy hitters.",
     method: "strength",
     heroId: "brock-lesnar",
     rewardSetId: "summerslam-series-1",
+    logoMode: "legacy",
     opponentPool: ["andre-the-giant", "hulk-hogan", "roman-reigns", "kevin-owens", "kane", "the-undertaker", "ultimate-warrior", "rhea-ripley", "oba-femi", "brock-lesnar", "gunther"]
   },
-  {
-    id: "strike-zone",
-    name: "Strike Zone",
-    kicker: "HANDS UP · CHIN DOWN",
-    description: "A weekly tower built around WWE's hardest strikers.",
-    method: "strike",
-    heroId: "mankind",
-    rewardSetId: "hall-of-fame-series-1",
-    opponentPool: ["mankind", "bayley", "cm-punk", "paige", "seth-rollins", "randy-savage", "stephanie-vaquer", "stone-cold-steve-austin", "gunther", "becky-lynch"]
+  3: {
+    id: "nxt-rising",
+    dayLabel: "WEDNESDAY",
+    name: "NXT",
+    kicker: "WEDNESDAY NIGHT · NEXT UP",
+    description: "A five-match showcase built around tomorrow's standouts and breakout threats.",
+    method: "agility",
+    heroId: "oba-femi",
+    rewardSetId: "summerslam-series-1",
+    logoMode: "nxt",
+    opponentPool: ["oba-femi", "stephanie-vaquer", "chelsea-green", "damian-priest", "tiffany-stratton", "finn-balor", "bron-breakker", "paige", "liv-morgan", "seth-rollins"]
   },
-  {
+  4: {
     id: "technical-showcase",
+    dayLabel: "THURSDAY",
     name: "Technical Showcase",
     kicker: "OUTWRESTLE THE BEST",
     description: "Five matches where ring IQ matters as much as damage.",
     method: "technical",
     heroId: "cm-punk",
-    rewardSetId: "summerslam-series-1",
+    rewardSetId: "hall-of-fame-series-1",
+    logoMode: "legacy",
     opponentPool: ["cm-punk", "bayley", "paige", "stephanie-vaquer", "charlotte-flair", "cody-rhodes", "liv-morgan", "gunther", "becky-lynch", "randy-savage"]
   },
-  {
-    id: "high-flyers",
-    name: "High Flyers",
-    kicker: "TAKE THE FIGHT ABOVE THE ROPES",
-    description: "Speed and Agility headline this week's five-match card.",
-    method: "agility",
-    heroId: "iyo-sky",
-    rewardSetId: "evolution-series-1",
-    opponentPool: ["iyo-sky", "seth-rollins", "randy-savage", "stephanie-vaquer", "charlotte-flair", "cody-rhodes", "liv-morgan", "kevin-owens", "rhea-ripley", "bayley"]
-  },
-  {
-    id: "hall-of-fame-legends",
-    name: "Hall of Fame Legends",
-    kicker: "SURVIVE FIVE GENERATIONS OF GREATNESS",
-    description: "A legends-only tower drawn from Hall of Fame Series 1.",
-    method: "strength",
-    heroId: "the-undertaker",
+  5: {
+    id: "strike-zone",
+    dayLabel: "FRIDAY",
+    name: "Strike Zone",
+    kicker: "HANDS UP · CHIN DOWN",
+    description: "A daily tower built around WWE's hardest strikers.",
+    method: "strike",
+    heroId: "mankind",
     rewardSetId: "hall-of-fame-series-1",
-    opponentPool: ["mankind", "hulk-hogan", "andre-the-giant", "randy-savage", "kane", "the-undertaker", "ultimate-warrior", "stone-cold-steve-austin"]
+    logoMode: "legacy",
+    opponentPool: ["mankind", "bayley", "cm-punk", "paige", "seth-rollins", "randy-savage", "stephanie-vaquer", "stone-cold-steve-austin", "gunther", "becky-lynch"]
   },
-  {
+  6: {
+    id: "smackdown-showcase",
+    dayLabel: "SATURDAY",
+    name: "SmackDown",
+    kicker: "SATURDAY NIGHT · BLUE BRAND",
+    description: "Five escalating fights from the world of SmackDown.",
+    method: "strength",
+    heroId: "roman-reigns",
+    rewardSetId: "smackdown-series-1",
+    logoMode: "smackdown",
+    opponentPool: ["roman-reigns", "cody-rhodes", "la-knight", "randy-orton", "charlotte-flair", "solo-sikoa", "kevin-owens", "the-rock"]
+  },
+  0: {
     id: "evolution-night",
+    dayLabel: "SUNDAY",
     name: "Evolution Night",
     kicker: "THE WOMEN'S DIVISION TAKES OVER",
     description: "Five fights through Evolution Series 1 competition.",
     method: "technical",
     heroId: "rhea-ripley",
     rewardSetId: "evolution-series-1",
+    logoMode: "legacy",
     opponentPool: ["iyo-sky", "bayley", "paige", "stephanie-vaquer", "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch"]
   }
-]);
+});
+
+export const WEEKLY_LIVE_EVENTS = Object.freeze(Object.values(DAILY_LIVE_EVENTS));
 
 const METHOD_LABELS = Object.freeze({ strength: "Strength", strike: "Strike", technical: "Technical", agility: "Agility" });
 
-function localMonday(now = new Date()) {
+function localDayStart(now = new Date()) {
   const d = now instanceof Date ? new Date(now.getTime()) : new Date(now);
   d.setHours(0, 0, 0, 0);
-  const daysSinceMonday = (d.getDay() + 6) % 7;
-  d.setDate(d.getDate() - daysSinceMonday);
   return d;
-}
-
-function localDateSerial(d) {
-  return Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
 }
 
 function dateKey(d) {
@@ -93,19 +110,17 @@ function dateKey(d) {
 }
 
 export function liveEventRotation(now = new Date()) {
-  const monday = localMonday(now);
-  const epochSerial = Date.UTC(ROTATION_EPOCH.year, ROTATION_EPOCH.month, ROTATION_EPOCH.day);
-  const weekIndex = Math.floor((localDateSerial(monday) - epochSerial) / WEEK_MS);
-  const eventIndex = ((weekIndex % WEEKLY_LIVE_EVENTS.length) + WEEKLY_LIVE_EVENTS.length) % WEEKLY_LIVE_EVENTS.length;
-  const nextAt = new Date(monday.getTime());
-  nextAt.setDate(nextAt.getDate() + 7);
-  const event = WEEKLY_LIVE_EVENTS[eventIndex];
+  const start = localDayStart(now);
+  const event = DAILY_LIVE_EVENTS[start.getDay()] ?? DAILY_LIVE_EVENTS[1];
+  const nextAt = new Date(start.getTime());
+  nextAt.setDate(nextAt.getDate() + 1);
+  const dayKey = dateKey(start);
   return {
-    weekKey: dateKey(monday),
-    weekIndex,
-    eventIndex,
+    weekKey: dayKey,
+    dayKey,
+    dayIndex: start.getDay(),
     event,
-    startsAt: monday,
+    startsAt: start,
     nextAt,
     msRemaining: Math.max(0, nextAt.getTime() - (now instanceof Date ? now.getTime() : new Date(now).getTime()))
   };
@@ -168,13 +183,13 @@ export function liveEventStage(event, stageIndex) {
 
 export function startWeeklyLiveEvent(profile, superstarId, eligibleOpponentIds, rng = Math.random, now = new Date()) {
   const { state, rotation } = ensure(profile, now);
-  if (state.clearedThisWeek) throw new Error("This week's Live Event is already complete.");
+  if (state.clearedThisWeek) throw new Error("Today's Live Event is already complete.");
   if (state.activeRun?.status === "active") return state.activeRun;
   const eligible = new Set(eligibleOpponentIds ?? []);
   const themed = rotation.event.opponentPool.filter(id => eligible.has(id) && id !== superstarId);
   const fallback = (eligibleOpponentIds ?? []).filter(id => id !== superstarId && !themed.includes(id));
   const opponents = [...shuffle(themed, rng), ...shuffle(fallback, rng)].slice(0, LIVE_EVENT_LENGTH);
-  if (opponents.length !== LIVE_EVENT_LENGTH) throw new Error("Not enough eligible opponents for this Weekly Live Event.");
+  if (opponents.length !== LIVE_EVENT_LENGTH) throw new Error("Not enough eligible opponents for this Live Event.");
   state.activeRun = {
     weekKey: rotation.weekKey,
     eventId: rotation.event.id,
@@ -203,9 +218,9 @@ export function currentWeeklyLiveEventStage(profile, now = new Date()) {
 export function recordWeeklyLiveEventMatch(profile, result, now = new Date()) {
   const { state, rotation } = ensure(profile, now);
   const run = state.activeRun;
-  if (!run || run.status !== "active") throw new Error("No active Weekly Live Event run");
+  if (!run || run.status !== "active") throw new Error("No active Live Event run");
   if (result === "loss") return { status: "retry", run, stage: liveEventStage(rotation.event, run.stage) };
-  if (result !== "win") throw new Error("Invalid Weekly Live Event result");
+  if (result !== "win") throw new Error("Invalid Live Event result");
   run.stage += 1;
   state.bestStage = Math.max(state.bestStage ?? 0, run.stage);
   if (run.stage >= LIVE_EVENT_LENGTH) {

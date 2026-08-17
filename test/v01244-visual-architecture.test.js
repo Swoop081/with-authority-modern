@@ -47,7 +47,7 @@ test('v0.12.44 Home live Season event keeps countdown, exact next-tier progress 
   assert.match(home, /legacy-season-event/);
   assert.match(home, /season-home-countdown/);
   assert.match(home, /XP TO NEXT TIER/);
-  assert.match(home, /TIER 50 · THE FINAL BOSS/);
+  assert.match(home, /TIER 100 · THE FINAL BOSS/);
   assert.match(css, /\.legacy-season-progress i\{[^}]*linear-gradient\(90deg,#23e678,#4dff9c,#c5ffd7\)/);
 });
 

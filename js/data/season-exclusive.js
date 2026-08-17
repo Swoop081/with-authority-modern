@@ -7,7 +7,7 @@ export const seasonExclusiveSuperstars = {
     name: "The Rock",
     nickname: "The Final Boss",
     seasonId: "season-1",
-    unlock: "tier-50-completion",
+    unlock: "tier-100-completion",
     postSeasonAvailability: "store-in-game-currency",
     boosterEligible: false,
     fullDeckReward: true
@@ -18,7 +18,7 @@ export const seasonExclusiveSuperstars = {
     nickname: "Who’s Next?",
     persona: "WCW undefeated-streak era",
     seasonId: "season-2",
-    unlock: "tier-50-completion",
+    unlock: "tier-100-completion",
     postSeasonAvailability: "store-in-game-currency",
     boosterEligible: false,
     fullDeckReward: true

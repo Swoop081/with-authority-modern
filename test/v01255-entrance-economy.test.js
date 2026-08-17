@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.12.78';
-import { cardsForSet } from '../js/data/collection.js?v=0.12.78';
-import { superstars } from '../js/data/superstars.js?v=0.12.78';
-import { decks } from '../js/data/decks.js?v=0.12.78';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.78';
-import { claimSeasonTier } from '../js/data/seasons.js?v=0.12.78';
-import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.78';
-import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=0.12.78';
-import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=0.12.78';
+import { collectionCards } from '../js/data/collection.js?v=0.12.83';
+import { cardsForSet } from '../js/data/collection.js?v=0.12.83';
+import { superstars } from '../js/data/superstars.js?v=0.12.83';
+import { decks } from '../js/data/decks.js?v=0.12.83';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.83';
+import { claimSeasonTier } from '../js/data/seasons.js?v=0.12.83';
+import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.83';
+import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=0.12.83';
+import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=0.12.83';
 
 const momentumIds=['momentum-strength','momentum-strike','momentum-technical','momentum-agility'];
 const byId=new Map(collectionCards.map(card=>[card.id,card]));
@@ -129,15 +129,15 @@ test('v0.12.55 Amazing Entrance does not leak Roman native Entrance triggers',()
   assert.equal(state.log.some(event=>event.type==='ENTRANCE_DELAYED'&&event.playerId==='p1'),false,'Amazing Entrance must not trigger Roman Turn 6 Adrenaline');
 });
 
-test('v0.12.55 Final Boss Entrance is the Tier 40 prestige reward and remains manually equipped',()=>{
+test('v0.12.83 Final Boss Entrance is the Tier 85 prestige reward and remains manually equipped',()=>{
   const p=createProfile('roman-reigns');
-  p.seasons['season-1'].xp=4000;
-  claimSeasonTier(p,40);
+  p.seasons['season-1'].xp=8500;
+  claimSeasonTier(p,85);
   assert.equal(totalOwnedCopies(p,'entrance-the-rock'),1);
   assert.equal(p.ownedCards['entrance-the-rock']?.foil,1);
-  assert.equal(p.unlockedSuperstars.includes('the-rock'),false,'Tier 40 does not unlock the Superstar early');
-  p.seasons['season-1'].xp=5000;
-  claimSeasonTier(p,50);
+  assert.equal(p.unlockedSuperstars.includes('the-rock'),false,'Tier 85 does not unlock the Superstar early');
+  p.seasons['season-1'].xp=10000;
+  claimSeasonTier(p,100);
   assert.ok(p.unlockedSuperstars.includes('the-rock'));
   assert.equal(selectedEntranceId(p,'the-rock'),'entrance-amazing','native reward Entrance is owned but not auto-equipped');
 });

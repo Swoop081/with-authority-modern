@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=0.12.78";
-import { collectionCards } from "./collection.js?v=0.12.78";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.12.78";
+import { superstars } from "./superstars.js?v=0.12.83";
+import { collectionCards } from "./collection.js?v=0.12.83";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.12.83";
 
 export const STORE_SET_ROTATION = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1"];
 export const STORE_BOOSTER_PRICE = 300;

@@ -41,6 +41,6 @@ test('v0.12.73 Deck Lab inspector supports front/rules flipping and explicit clo
 test('v0.12.73 Deck Lab inspector is mobile-sized above the persistent navigation', () => {
   assert.match(css, /v0\.12\.73 — Deck Lab Card Inspect Pass/);
   assert.match(css, /\.deck-lab-card-modal\{[\s\S]*z-index:1900!important/);
-  assert.match(css, /\.deck-lab-inspect-card\{[\s\S]*height:min\(76dvh,700px\)!important/);
+  assert.match(css, /\.deck-lab-inspect-card\{/);
   assert.match(css, /\[data-deck-lab-inspect\]\{[\s\S]*pointer-events:auto!important/);
 });

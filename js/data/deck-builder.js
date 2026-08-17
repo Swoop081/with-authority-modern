@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.12.78";
-import { collectionCards } from "./collection.js?v=0.12.78";
-import { superstars } from "./superstars.js?v=0.12.78";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.78";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.78";
+import { decks } from "./decks.js?v=0.12.83";
+import { collectionCards } from "./collection.js?v=0.12.83";
+import { superstars } from "./superstars.js?v=0.12.83";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.83";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.83";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -19,7 +19,7 @@ export const DECK_LAB_CATEGORIES = Object.freeze([
 
 export function leadOffIds(sid) { return (decks[sid] ?? []).slice(0, 5).map(c => c.id); }
 export function recommendedDeckDraft(sid) { return (decks[sid] ?? []).map(c => ({ id: c.id, foil: false })); }
-export function materializeDraft(d = []) { return d.map(e => byId.get(e.id ?? e)).filter(Boolean); }
+export function materializeDraft(d = []) { return d.map(e => { const entry = typeof e === "string" ? { id: e, foil: false } : e; const card = byId.get(entry?.id); return card ? (entry?.foil ? { ...card, foil: true } : card) : null; }).filter(Boolean); }
 export function usedCount(d, id) { return d.filter(e => (e.id ?? e) === id).length; }
 export function usedCopyFamilyCount(d, card) {
   if (!card?.copyFamily) return usedCount(d, card?.id);
