@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.12.87";
-import { superstars } from "./superstars.js?v=0.12.87";
-import { sets } from "./sets.js?v=0.12.87";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.87";
-import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.12.87";
+import { decks } from "./decks.js?v=0.12.89";
+import { superstars } from "./superstars.js?v=0.12.89";
+import { sets } from "./sets.js?v=0.12.89";
+import { isPlayerReleasedSetId } from "./release.js?v=0.12.89";
+import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.12.89";
 
 export const CATALOGUE_PAGE_SIZE = 48;
 export const CATALOGUE_NUMERIC_OPERATORS = ["any", "eq", "lte", "gte"];

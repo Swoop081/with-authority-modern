@@ -9,5 +9,5 @@ test('v0.12.85 Live Event prematch uses a neutral eyebrow on branded show days a
   assert.match(app, /const prematchEyebrow = eventMeta \? \(\(eventMeta\.logoMode && eventMeta\.logoMode !== "legacy"\) \? "LIVE EVENT" : eventMeta\.eventName\.toUpperCase\(\)\) : "TONIGHT’S";/);
   assert.match(app, /logoMode: rotation\.event\.logoMode/);
   assert.match(css, /\.prematch-screen \.prematch-heading\.has-live-event-meta\{top:auto!important;display:grid!important;justify-items:center!important;gap:6px!important;margin:8px 0 2px!important\}/);
-  assert.match(css, /\.prematch-screen \.prematch-live-event-rule\{margin:10px auto 10px!important\}/);
+  assert.match(css, /\.prematch-screen \.prematch-live-event-rule\{margin:0 auto 2px!important\}/);
 });

@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.12.87";
-import { healthRatio } from "./health.js?v=0.12.87";
+import { totalMomentum } from "./utils.js?v=0.12.89";
+import { healthRatio, healthZone } from "./health.js?v=0.12.89";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -69,9 +69,13 @@ export function autoCounterEligibility(state,playerId,incoming=state?.proposedMo
 }
 export function canAttemptPin(state,playerId){
  const p=state.players?.[playerId];
+ const defenderId=playerId==="p1"?"p2":"p1";
+ const defender=state.players?.[defenderId];
  const freshTurn=!!p&&(p.turn?.momentumPlayed??0)===0&&(p.turn?.specialPlayed??0)===0;
  const hasCoverWindow=!!state.postMove&&state.postMove.attackerId===playerId;
- return state.phase==="ACTION"&&state.playerInControl===playerId&&freshTurn&&hasCoverWindow?{legal:true,cost:0}:{legal:false,cost:0};
+ if(state.phase!=="ACTION"||state.playerInControl!==playerId||!freshTurn||!hasCoverWindow)return {legal:false,cost:0,reason:"No pin window"};
+ if(!defender||healthZone(defender)==="green")return {legal:false,cost:0,reason:"Opponent must be in Amber or Red health"};
+ return {legal:true,cost:0,reason:null};
 }
 export function canPlayPinEscape(state,playerId,card){ return state.phase==="PIN_RESPONSE"&&state.proposedPin?.defenderId===playerId&&!!(card?.pinEscape||card?.special?.type==='pinEscape'); }
 export function submissionThreshold(player){ return Math.max(0,Math.round(player?.hp??0)); }

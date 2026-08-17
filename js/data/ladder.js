@@ -1,5 +1,5 @@
-import { unlockSuperstar } from "./profile.js?v=0.12.87";
-import { superstars } from "./superstars.js?v=0.12.87";
+import { unlockSuperstar } from "./profile.js?v=0.12.89";
+import { superstars } from "./superstars.js?v=0.12.89";
 
 export const LADDER_LIVES = 3;
 export const LADDER_SET_ID = "summerslam-series-1";

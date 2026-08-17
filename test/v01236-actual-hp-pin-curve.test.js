@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.87';
-import { canAttemptPin } from '../js/engine/rules.js?v=0.12.87';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.87';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.12.89';
+import { canAttemptPin } from '../js/engine/rules.js?v=0.12.89';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.12.89';
 
 const P=(hp)=>({hp,maxHp:76,hand:[],turn:{momentumPlayed:0,specialPlayed:0},momentum:{strength:0,strike:0,technical:0,agility:0},adrenaline:0,events:{},superstar:{id:'x'}});
 
@@ -11,10 +11,13 @@ test('v0.12.36 natural pin chance uses actual HP left',()=>{
   for(const [hp,chance] of expected) assert.equal(healthOnlyPinChance(P(hp)),chance,`${hp} HP`);
 });
 
-test('v0.12.36 a connected Move opens a 5% flash-pin window even above 15 HP',()=>{
-  const state={phase:'ACTION',playerInControl:'p1',postMove:{attackerId:'p1'},players:{p1:P(63),p2:P(65)}};
-  assert.equal(canAttemptPin(state,'p1').legal,true);
-  assert.equal(healthOnlyPinChance(state.players.p2),5);
+test('v0.12.88 pins are gated to Amber/Red health before the actual-HP table is used',()=>{
+  const green={phase:'ACTION',playerInControl:'p1',postMove:{attackerId:'p1'},players:{p1:P(63),p2:P(65)}};
+  assert.equal(canAttemptPin(green,'p1').legal,false);
+  assert.equal(healthOnlyPinChance(green.players.p2),5,'Green still maps to 5% internally but cannot open a pin attempt');
+  const amber={phase:'ACTION',playerInControl:'p1',postMove:{attackerId:'p1'},players:{p1:P(63),p2:P(40)}};
+  assert.equal(canAttemptPin(amber,'p1').legal,true);
+  assert.equal(healthOnlyPinChance(amber.players.p2),5);
 });
 
 test('v0.12.36 CPU normal covers begin at the 20% actual-HP tier, not the 5% flash tier',()=>{
