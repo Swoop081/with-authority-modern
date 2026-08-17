@@ -1,13 +1,15 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.12.72 — UI Copy + Reward Control Hotfix**.
+Current working build: **v0.12.74 — Exclusive Rarity Pass**.
 
-v0.12.72 builds on v0.12.71 with a focused presentation/copy repair pass:
+v0.12.74 builds on v0.12.73 with a project-wide rarity rule for Superstar-specific collectible cards:
 
-- **Electric Chair Drop** replaces the old displayed name Electric Chair Facebuster without changing the card ID or gameplay.
-- The Season Daily Login Booster is one full-width purple control: **CLAIM FREE BOOSTER** when ready or **NEXT FREE BOOSTER IN …** during cooldown.
-- Climb the Ladder uses **Level** terminology everywhere player-facing; internal `run.rung` save fields remain unchanged for profile compatibility.
-- Special Ladder and Championship reward-pack wrappers use the short face title **REWARD** while their detailed reward labels remain visible below the pack tile.
-- All v0.12.71 Bayley signature cards and all earlier gameplay, economy, HP, booster, foil, Season and package-hygiene rules remain unchanged.
+- A card restricted to one wrestler must be **Rare (3★)** or **Very Rare (4★)**; wrestler-exclusive Common/Uncommon cards are no longer allowed.
+- Exclusive **Trademarks** use **Rare (3★)** as the standard tier.
+- **Finishers** use **Very Rare (4★)**.
+- Wrestler **Specials** use **Very Rare (4★)**.
+- Generic/shared cards retain their authored rarity unless separately changed.
+- No move cost, damage, rules text, deck composition, ownership cap, HP, set or card-ID changes are made by this pass.
+- All v0.12.73 Deck Lab inspection behavior and all earlier gameplay/presentation rules remain in force.
 
-See `RELEASE-NOTES-v0.12.72.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.12.74.md` and `BUILD-CERTIFICATION.md`.

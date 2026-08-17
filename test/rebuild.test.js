@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.12.72";
-import { decks } from "../js/data/decks.js?v=0.12.72";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.72";
-import { collectionCards } from "../js/data/collection.js?v=0.12.72";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.72";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.72";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.72";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.72";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.72";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.72";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.72";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.72";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.72";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.72";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.72";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.72";
-import { healthZone } from "../js/engine/health.js?v=0.12.72";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.72";
+import { superstars } from "../js/data/superstars.js?v=0.12.74";
+import { decks } from "../js/data/decks.js?v=0.12.74";
+import { allGameplayCards } from "../js/data/content.js?v=0.12.74";
+import { collectionCards } from "../js/data/collection.js?v=0.12.74";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.74";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.74";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.74";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.74";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.74";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.74";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.74";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.74";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.74";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.74";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.74";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.74";
+import { healthZone } from "../js/engine/health.js?v=0.12.74";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.74";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -268,7 +268,7 @@ test("A completely maxed five-card booster converts to 50 Universe Points on Pac
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.72");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.74");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -1375,7 +1375,7 @@ test("v0.12.07 Deck Lab category pickers use a premium three-wide full-card grid
   const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
   const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
   assert.match(app,/deck-lab-card-picker deck-lab-card-grid/,'Deck Lab picker should render the visual card grid');
-  assert.match(app,/collectibleCardMarkup\(card,\{extraClass:"deck-lab-picker-ccg"\}\)/,'Deck Lab picker should show complete collectible card fronts');
+  assert.match(app,/extraClass:"deck-lab-picker-ccg"/,'Deck Lab picker should show complete collectible card fronts');
   assert.match(app,/deck-card-invalid-reason/,'invalid owned cards should remain visible with a reason');
   assert.match(css,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/,'mobile Deck Lab picker should remain three cards wide');
   assert.match(css,/deck-lab-card-tile\.is-invalid[\s\S]*filter:grayscale/,'invalid cards should be visually shaded rather than hidden');
@@ -1521,7 +1521,7 @@ test("v0.12.12 Roman replaces Sitout Crucifix Powerbomb with Ooh Ahh!! at SS1-03
   const deck=decks['roman-reigns'],ooh=allGameplayCards.find(c=>c.id==='roman-reigns-ooh-ahh');
   assert.ok(ooh);assert.equal(allGameplayCards.some(c=>c.id==='roman-reigns-sitout-crucifix-powerbomb'),false);
   assert.equal(deck.filter(c=>c.id==='roman-reigns-ooh-ahh').length,1);assert.equal(deck.filter(c=>c.id==='headbutt').length,2);assert.equal(deck.length,60);
-  assert.equal(ooh.kind,'action');assert.equal(ooh.cost,2);assert.equal(ooh.rarity,2);assert.equal(ooh.superstarId,'roman-reigns');assert.equal(ooh.maxCopies,1);
+  assert.equal(ooh.kind,'action');assert.equal(ooh.cost,2);assert.equal(ooh.rarity,3);assert.equal(ooh.superstarId,'roman-reigns');assert.equal(ooh.maxCopies,1);
   assert.equal(CARD_NUMBER_BY_ID['roman-reigns-ooh-ahh']?.cardCode,'SS1-034');assert.equal(CARD_NUMBER_BY_ID['roman-reigns-sitout-crucifix-powerbomb'],undefined);
 });
 

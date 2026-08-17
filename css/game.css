@@ -5618,3 +5618,16 @@ body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art
 @media(max-width:430px){
   .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{bottom:-50%!important}
 }
+
+/* v0.12.73 — Deck Lab Card Inspect Pass.
+   Every actual card face in the Deck Lab is now a zoom target. The modal uses
+   the same front/rules interaction language as in-match hand and play-pile inspection. */
+.deck-lab-screen [data-deck-lab-inspect]{cursor:zoom-in!important;touch-action:manipulation;pointer-events:auto!important}
+.deck-lab-screen [data-deck-lab-inspect]:focus-visible{outline:2px solid #72d7ff!important;outline-offset:2px!important}
+.deck-lab-card-modal{z-index:1900!important;background:rgba(0,0,0,.84)!important;backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important}
+.deck-lab-card-modal-inner{position:relative!important;width:min(430px,94vw)!important;height:min(84dvh,760px)!important;max-width:94vw!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;animation:deckLabInspectZoom .2s cubic-bezier(.18,.82,.24,1.12) both!important}
+.deck-lab-inspect-card{height:min(76dvh,700px)!important;width:auto!important;max-width:88vw!important;aspect-ratio:680/1000!important;filter:drop-shadow(0 26px 54px rgba(0,0,0,.78))!important;cursor:pointer!important}
+.deck-lab-card-modal-inner>small{font-size:.56rem!important;color:#c1c7d1!important;text-align:center!important;letter-spacing:.02em!important}
+.deck-lab-card-modal-close{position:absolute!important;z-index:5!important;top:2px!important;right:0!important;width:38px!important;height:38px!important;border-radius:999px!important;border:1px solid rgba(255,255,255,.22)!important;background:rgba(8,11,16,.88)!important;color:#fff!important;font-size:1.45rem!important;line-height:1!important;display:grid!important;place-items:center!important;padding:0!important;box-shadow:0 8px 20px rgba(0,0,0,.35)!important}
+@keyframes deckLabInspectZoom{from{opacity:0;transform:scale(.78) translateY(18px)}to{opacity:1;transform:none}}
+@media(max-width:430px){.deck-lab-card-modal-inner{height:min(82dvh,700px)!important}.deck-lab-inspect-card{height:min(73dvh,640px)!important;max-width:86vw!important}.deck-lab-card-modal-close{right:4px!important}}
