@@ -5427,3 +5427,76 @@ body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art
   .booster-faceup-strip{gap:3px!important;width:96vw!important}.faceup-pack-thumb{max-width:57px!important;border-radius:6px!important}
   .up-card-replacement{width:min(300px,76vw)!important}.up-card-replacement strong{font-size:3.65rem!important}
 }
+
+/* v0.12.66 — Hero Render Regression Hotfix.
+   Restore the launch Final Boss to the previously approved dominant left-side
+   treatment and make the premium run header Superstar photography read at
+   roughly twice the previous visual scale on iPhone. */
+.season-one-ad .season-ad-rock{
+  overflow:visible!important;
+  z-index:2!important;
+}
+.season-one-ad .season-ad-copy{
+  position:relative!important;
+  z-index:4!important;
+}
+.season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+  top:auto!important;
+  right:auto!important;
+  left:-62%!important;
+  bottom:-16%!important;
+  width:300%!important;
+  height:172%!important;
+  object-fit:cover!important;
+  object-position:43% 9%!important;
+  transform:none!important;
+  transform-origin:left bottom!important;
+  mask-image:linear-gradient(90deg,#000 0%,#000 70%,rgba(0,0,0,.86) 80%,rgba(0,0,0,.42) 90%,transparent 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 70%,rgba(0,0,0,.86) 80%,rgba(0,0,0,.42) 90%,transparent 100%)!important;
+}
+body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art,
+body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art{
+  inset:-7% -2% 0 38%!important;
+  overflow:hidden!important;
+}
+body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo,
+body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo{
+  width:122%!important;
+  height:146%!important;
+  right:-8%!important;
+  bottom:-4%!important;
+  transform:scale(1.92)!important;
+  transform-origin:82% 100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+@media(max-width:600px){
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+    left:-68%!important;
+    bottom:-18%!important;
+    width:316%!important;
+    height:178%!important;
+    object-position:44% 8%!important;
+  }
+  body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art,
+  body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art{
+    inset:-8% -3% 0 36%!important;
+  }
+  body[data-screen="ladder"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo,
+  body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art .mode-portrait img.official-menu-superstar-photo{
+    width:124%!important;
+    height:150%!important;
+    right:-9%!important;
+    bottom:-4%!important;
+    transform:scale(1.96)!important;
+    transform-origin:82% 100%!important;
+  }
+}
+@media(max-width:430px){
+  .season-one-ad .season-ad-rock img.final-boss-rock-menu-art{
+    left:-72%!important;
+    bottom:-20%!important;
+    width:326%!important;
+    height:182%!important;
+  }
+}
