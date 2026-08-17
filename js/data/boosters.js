@@ -1,8 +1,8 @@
-import { cardsForSet } from "./collection.js?v=0.12.89";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.89";
-import { DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.89";
-import { sets } from "./sets.js?v=0.12.89";
-import { isLaunchLiveSetId } from "./release.js?v=0.12.89";
+import { cardsForSet } from "./collection.js?v=0.12.93";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.93";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.93";
+import { sets } from "./sets.js?v=0.12.93";
+import { isLaunchLiveSetId } from "./release.js?v=0.12.93";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -12,7 +12,14 @@ export const SUPERSTAR_PITY_PACKS = 50;
 export const SUPERSTAR_CHASE_CHANCE = .05;
 export const DEFAULT_BOOSTER_SET_ID = "summerslam-series-1";
 
-export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) { return p?.boosterCreditsBySet?.[setId] ?? p?.boosterCredits ?? 0; }
+export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) {
+  const bySet = p?.boosterCreditsBySet?.[setId];
+  if (bySet != null) return Math.max(0, Number(bySet) || 0);
+  // `boosterCredits` is the legacy mirror for SummerSlam Series 1 only. It must
+  // never leak into another set that happens not to have an explicit bucket.
+  if (setId === DEFAULT_BOOSTER_SET_ID) return Math.max(0, Number(p?.boosterCredits) || 0);
+  return 0;
+}
 export function boosterEligible(card) { return !!card && isLaunchLiveSetId(card.setId) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false; }
 export function underOwnershipCap(profile, card) { return totalOwnedCopies(profile, card.id) < cardOwnershipCap(card); }
 
@@ -125,7 +132,8 @@ function buildPack(profile, rng, setId) {
       replacedNormal: result.replacedNormal > 0,
       superstarUnlocked,
       overflowCopies: result.overflowed,
-      universePointsValue: result.overflowed * DUPLICATE_UNIVERSE_POINTS,
+      duplicateUnitValue: pullFoil ? FOIL_DUPLICATE_UNIVERSE_POINTS : DUPLICATE_UNIVERSE_POINTS,
+      universePointsValue: result.overflowed * (pullFoil ? FOIL_DUPLICATE_UNIVERSE_POINTS : DUPLICATE_UNIVERSE_POINTS),
       universePointsCredited: false,
       ownershipBefore: beforeTotal,
       ownershipCap: result.cap

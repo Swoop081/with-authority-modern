@@ -1,33 +1,34 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.89";
-import { superstars } from "../data/superstars.js?v=0.12.89";
-import { decks } from "../data/decks.js?v=0.12.89";
-import { sets } from "../data/sets.js?v=0.12.89";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.89";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.89";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.89";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.12.89";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.89";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.89";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.89";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.89";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.89";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.89";
-import { totalMomentum } from "../engine/utils.js?v=0.12.89";
-import { healthZone } from "../engine/health.js?v=0.12.89";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.89";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.89";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.89";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.89";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, currentWeeklyLiveEventStage, recordWeeklyLiveEventMatch } from "../data/live-events.js?v=0.12.89";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.89";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.12.89";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.89";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.89";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.89";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.89";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.89";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.89";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.89";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.12.93";
+import { superstars } from "../data/superstars.js?v=0.12.93";
+import { decks } from "../data/decks.js?v=0.12.93";
+import { sets } from "../data/sets.js?v=0.12.93";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.12.93";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.12.93";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor } from "../data/artwork.js?v=0.12.93";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.12.93";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.12.93";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.12.93";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.12.93";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.12.93";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.12.93";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.12.93";
+import { totalMomentum } from "../engine/utils.js?v=0.12.93";
+import { healthZone } from "../engine/health.js?v=0.12.93";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.12.93";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.12.93";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.12.93";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.12.93";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, currentWeeklyLiveEventStage, recordWeeklyLiveEventMatch } from "../data/live-events.js?v=0.12.93";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.12.93";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.12.93";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.12.93";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.12.93";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.12.93";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.12.93";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.12.93";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.12.93";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.12.93";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.12.93";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -280,9 +281,21 @@ function entranceEffectCallouts(star) {
   return callouts;
 }
 
+function openablePackCount(p) {
+  if (!p) return 0;
+  const ladder = ladderState(p);
+  const road = championshipRoadState(p);
+  return LAUNCH_LIVE_SET_IDS.reduce((sum, setId) => {
+    const standard = boosterCreditsFor(p, setId);
+    const ladderRewards = Math.max(0, Number(ladder.completionPackCreditsBySet?.[setId]) || 0);
+    const championshipRewards = Math.max(0, Number(road.championshipPackCreditsBySet?.[setId]) || 0);
+    return sum + standard + ladderRewards + championshipRewards;
+  }, 0);
+}
+
 function attentionState() {
   if (!profile) return { boosters: 0, challenges: 0, seasons: 0 };
-  const boosters = Object.values(profile.boosterCreditsBySet ?? {}).reduce((sum, value) => sum + (Number(value) || 0), 0);
+  const boosters = openablePackCount(profile);
   const challengeData = challengeState(profile);
   const challenges = [...(challengeData.daily ?? []), ...(challengeData.weekly ?? [])].filter(c => !c.claimed && (c.progress ?? 0) >= c.target).length;
   const reached = seasonTier(profile);
@@ -307,7 +320,7 @@ function setChrome({ hideTopbar = false } = {}) {
     bar.setAttribute("aria-hidden", showBar ? "false" : "true");
     if (showBar) {
       const progress = seasonLevelProgress(profile);
-      const packCount = Object.values(profile.boosterCreditsBySet ?? {}).reduce((sum, value) => sum + (Number(value) || 0), 0);
+      const packCount = openablePackCount(profile);
       const tierLabel = progress.tier >= SEASON_TIER_COUNT ? `TIER ${SEASON_TIER_COUNT}` : `TIER ${Math.max(0, progress.tier)}`;
       const tierNode = bar.querySelector("[data-chrome-tier]");
       const tierBar = bar.querySelector("[data-chrome-tier-bar]");
@@ -324,9 +337,9 @@ function setChrome({ hideTopbar = false } = {}) {
 
   const mobileNav = document.querySelector("#mobile-game-nav");
   if (mobileNav) {
-    const navScreens = new Set(["menu", "play-menu", "setup", "ladder", "championship", "collection", "catalogue", "boosters", "store", "challenges", "seasons", "deck-builder", "profile", "options"]);
+    const navScreens = new Set(["menu", "play-menu", "setup", "ladder", "championship", "collection", "catalogue", "boosters", "store", "challenges", "seasons", "deck-builder", "profile", "rules", "options"]);
     mobileNav.hidden = !profile || !navScreens.has(screen);
-    const activeTarget = screen === "setup" || screen === "ladder" || screen === "championship" ? "play-menu" : screen === "deck-builder" ? "deck-builder" : screen === "catalogue" ? "catalogue" : screen === "collection" ? "collection" : screen;
+    const activeTarget = screen === "setup" || screen === "ladder" || screen === "championship" ? "play-menu" : screen === "deck-builder" ? "deck-builder" : screen === "catalogue" ? "catalogue" : screen === "collection" ? "collection" : screen === "rules" ? "profile" : screen;
     const notices = attentionState();
     mobileNav.querySelectorAll("[data-mobile-nav]").forEach(button => {
       button.classList.toggle("is-active", button.dataset.mobileNav === activeTarget);
@@ -354,6 +367,10 @@ function showPlayMenu() {
 function showProfile() {
   if (!profile) { screen = "starter"; renderStarter(); return; }
   screen = "profile"; message = ""; renderProfile();
+}
+function showRules() {
+  if (!profile) { screen = "starter"; renderStarter(); return; }
+  screen = "rules"; message = ""; renderRules();
 }
 
 function startMatch(p1Id = selection.p1, p2Id = selection.p2, { mode = "exhibition", modifier = null, eventMeta = null } = {}) {
@@ -719,7 +736,7 @@ function renderBoosters() {
   if (mobileNav) mobileNav.hidden=packInProgress;
 
   const rarityName = pull => (setCollections[pull?.card?.setId]?.rarityLabels ?? setInfo.rarityLabels)?.[pull?.card?.rarity ?? 1] ?? "Common";
-  const upRewardTile = (p, extraClass="", actionAttr="") => `<button type="button" class="up-card-replacement ${extraClass}" ${actionAttr} aria-label="Duplicate converted to ${p.universePointsValue} Universe Points"><span>DUPLICATE CONVERTED</span><strong>+${p.universePointsValue}</strong><b>UP</b><small>UNIVERSE POINTS</small></button>`;
+  const upRewardTile = (p, extraClass="", actionAttr="") => `<button type="button" class="up-card-replacement ${extraClass}" ${actionAttr} aria-label="${p.foil ? "Foil duplicate" : "Duplicate"} converted to ${p.universePointsValue} Universe Points"><span>${p.foil ? "FOIL DUPLICATE" : "DUPLICATE CONVERTED"}</span><strong>+${p.universePointsValue}</strong><b>UP</b><small>UNIVERSE POINTS</small></button>`;
   const summaryCard = (p,index,slotClass="") => `
     <article class="pack-summary-card actual-card-summary ${slotClass} rarity-${p.card.rarity} ${p.foil?'is-foil':''} ${p.universePointsValue?'is-up-converted':''}">
       <div class="pack-summary-actual-card">${p.universePointsValue ? upRewardTile(p,"summary-up-reward",`data-booster-inspect="${index}"`) : collectibleCardMarkup(p.card,{flipped:boosterRulesFlipped.has(index),foil:p.foil,extraClass:"pack-summary-ccg",flipAttr:`data-booster-inspect="${index}"`})}</div>
@@ -760,7 +777,7 @@ function renderBoosters() {
     const newCount=pulls.filter(p=>p.isNewCard).length;
     const convertedPulls=pulls.filter(p=>p.universePointsValue>0);
     const convertedUp=convertedPulls.reduce((sum,p)=>sum+(p.universePointsValue||0),0);
-    const conversionRows=convertedPulls.map(p=>`<div class="up-conversion-row"><span><b>${p.card.name}</b> ×${p.ownershipBefore+1} → MAX ×${p.ownershipCap}</span><strong>+${p.universePointsValue} UP</strong></div>`).join('');
+    const conversionRows=convertedPulls.map(p=>`<div class="up-conversion-row"><span><b>${p.foil ? "Foil " : ""}${p.card.name}</b> ×${p.ownershipBefore+1} → MAX ×${p.ownershipCap}</span><strong>+${p.universePointsValue} UP</strong></div>`).join('');
     const moreCurrentPacks = currentPackType === "ladder" ? (ladder.completionPackCreditsBySet?.[activeBoosterSetId] ?? 0) : currentPackType === "championship" ? (road.championshipPackCreditsBySet?.[activeBoosterSetId] ?? 0) : boosterCreditsFor(profile, activeBoosterSetId);
     const canOpenAnotherPack = boosterReturnScreen !== "seasons" && moreCurrentPacks > 0;
     const packReturnLabel = boosterReturnScreen === "seasons" ? "RETURN TO SEASON" : "RETURN TO OPEN PACKS";
@@ -780,11 +797,11 @@ function renderBoosters() {
     </section>
     <section class="upgrade-panel booster-modal-upgrades">
       <div class="section-title"><div><span>DECK ASSISTANCE</span><h3>${pendingUpgrades.length ? `${pendingUpgrades.length} upgrade${pendingUpgrades.length===1?'':'s'} found` : appliedPackUpgrades.length ? `${appliedPackUpgrades.length} upgrade${appliedPackUpgrades.length===1?'':'s'} applied` : 'No safe upgrades found'}</h3></div><span>${profile.deckAssistance==='auto'?'Auto-upgrade':manual?'Manual mode · suggestions only':'Choose what to change'}</span></div>
-      ${appliedPackUpgrades.length ? `<div class="applied-upgrade-list">${appliedPackUpgrades.map(u=>`<article class="upgrade-row applied-upgrade-row"><div class="upgrade-pull-thumb">${cardArtFace(u.pull.card)}</div><div><b>${superstarById[u.superstarId]?.name}</b><span><strong>APPLIED</strong> · ADD ${u.addName} · REMOVE ${u.removeName}</span><small>${u.reason}</small></div></article>`).join('')}</div>` : ''}
+      ${appliedPackUpgrades.length ? `<div class="applied-upgrade-list">${appliedPackUpgrades.map(u=>`<article class="upgrade-row applied-upgrade-row"><div class="upgrade-pull-thumb">${cardArtFace(u.pull.card)}</div><div><b>${superstarById[u.superstarId]?.name}</b><span><strong>APPLIED</strong> · ${u.type==='foil-preference'?`USE ${u.addName}`:`ADD ${u.addName} · REMOVE ${u.removeName}`}</span><small>${u.reason}</small></div></article>`).join('')}</div>` : ''}
       ${pendingUpgrades.length ? pendingUpgrades.map((u,i)=>`<article class="upgrade-row">
         <div class="upgrade-pull-thumb">${cardArtFace(u.pull.card)}</div>
-        <div><b>${superstarById[u.superstarId]?.name}</b><span><strong>${u.type === 'foil' ? 'FOIL UPGRADE' : 'RECOMMENDED BUILD'}</strong> · ADD ${u.addName} · REMOVE ${u.removeName}</span><small>${u.reason}</small></div>
-        ${manual?'':`<div><button data-accept-upgrade="${i}" class="primary">Upgrade Deck</button><button data-decline-upgrade="${i}" class="secondary">Keep As-Is</button></div>`}
+        <div><b>${superstarById[u.superstarId]?.name}</b><span><strong>${u.type==='foil-preference'?'FOIL PREFERENCE':'RECOMMENDED BUILD'}</strong> · ${u.type==='foil-preference'?`USE ${u.addName}`:`ADD ${u.addName} · REMOVE ${u.removeName}`}</span><small>${u.reason}</small></div>
+        ${manual?'':`<div><button data-accept-upgrade="${i}" class="primary">${u.type==='foil-preference'?'Use Foil':'Upgrade Deck'}</button><button data-decline-upgrade="${i}" class="secondary">Keep As-Is</button></div>`}
       </article>`).join('') : appliedPackUpgrades.length ? '' : `<div class="no-upgrades-found"><b>Your collection still grew.</b><span>None of these five cards creates a safe automatic improvement to an unlocked Superstar deck right now.</span></div>`}
       <button id="finish-pack-review" class="start-match">${boosterReturnScreen === "seasons" ? "Finish Pack & Return to Season" : "Finish Pack & Return to Open Packs"}</button>
     </section>`;
@@ -1424,7 +1441,7 @@ function renderMainMenu() {
   setChrome();
   const root = $("#game");
   const starter = superstarById[profile.starterId];
-  const allBoosterCredits = Object.values(profile.boosterCreditsBySet ?? {}).reduce((sum, value) => sum + (Number(value) || 0), 0);
+  const allBoosterCredits = openablePackCount(profile);
   const seasonProgress = seasonLevelProgress(profile);
   const seasonRemaining = seasonTimeRemaining(new Date());
   const visibleCards = playerFacingCollectionCards();
@@ -1513,6 +1530,36 @@ function renderPlayMenu() {
   wireModeCard("#play-championship", showChampionship);
 }
 
+function renderRules() {
+  setChrome();
+  const root = $("#game");
+  const nav = GAME_RULE_SECTIONS.map(section => `<button type="button" class="rules-nav-chip" data-rule-jump="${section.id}"><span>${section.group}</span><strong>${section.title}</strong></button>`).join("");
+  const pinTable = `<div class="rules-reference-table pin-reference-table">${PIN_CHANCE_TABLE.map(([hp,chance]) => `<span>${hp}</span><b>${chance}</b>`).join("")}</div>`;
+  const liveSchedule = `<div class="rules-reference-table live-schedule-table">${LIVE_EVENT_WEEK.map(([day,event]) => `<span>${day}</span><b>${event}</b>`).join("")}</div>`;
+  const sections = GAME_RULE_SECTIONS.map((section,index) => `<details class="rulebook-section" id="rule-${section.id}" ${index < 2 ? "open" : ""}>
+    <summary><span>${section.group}</span><div><strong>${section.title}</strong><small>${section.summary}</small></div><i>+</i></summary>
+    <div class="rulebook-section-body">
+      ${section.items.map(([title,body]) => `<article class="rulebook-rule"><strong>${title}</strong><p>${body}</p></article>`).join("")}
+      ${section.id === "pins" ? `<section class="rules-inline-reference"><div><span>PIN CHANCE</span><strong>Actual HP table</strong></div>${pinTable}</section>` : ""}
+      ${section.id === "modes" ? `<section class="rules-inline-reference"><div><span>LIVE EVENTS</span><strong>Daily brand schedule</strong></div>${liveSchedule}</section>` : ""}
+    </div>
+  </details>`).join("");
+  root.innerHTML = `<section class="rules-screen premium-screen">
+    <section class="rules-hero">
+      <div class="rules-hero-copy"><span>MY LEGACY · OFFICIAL RULEBOOK</span><h2>Rules & How to Play</h2><p>The live WWE Legacy rules in one place. Card text can create explicit exceptions, but Foils never change gameplay values.</p></div>
+      <div class="rules-hero-stats"><span><b>60</b><small>DECK PAGES</small></span><span><b>5</b><small>LEAD OFF</small></span><span><b>4</b><small>METHODS</small></span><span><b>8</b><small>COUNTER STATES</small></span></div>
+    </section>
+    <section class="rules-jump-panel"><div class="section-title"><div><h3>Rulebook Menu</h3><small>Jump to a system, then expand any section for the full rule.</small></div><button id="rules-back" class="nav-button">Back to My Legacy</button></div><div class="rules-nav-grid">${nav}</div></section>
+    <section class="rulebook-stack">${sections}</section>
+    <section class="rules-footer-note"><strong>Rule precedence</strong><p>The Rulebook defines the general system. An authored Superstar, Entrance, Special or card effect may explicitly override a general rule for that interaction.</p></section>
+  </section>`;
+  $("#rules-back")?.addEventListener("click", showProfile);
+  root.querySelectorAll("[data-rule-jump]").forEach(button => button.addEventListener("click", () => {
+    const target = document.querySelector(`#rule-${button.dataset.ruleJump}`);
+    if (target) { target.open = true; target.scrollIntoView({ behavior: "smooth", block: "start" }); }
+  }));
+}
+
 function careerWinPercentage(record) {
   const wins = Number(record?.wins ?? 0), losses = Number(record?.losses ?? 0), matches = wins + losses;
   return matches ? `${Math.round((wins / matches) * 100)}%` : "—";
@@ -1551,11 +1598,13 @@ function renderProfile() {
         <span><small>ACHIEVEMENTS</small><b>${earnedAchievements}/${achievements.length}</b></span>
       </div>
     </section>
+    <section class="profile-rulebook-callout"><div><span>OFFICIAL RULEBOOK</span><strong>Rules & How to Play</strong><p>Match flow, Momentum, Counters, Pins, Submissions, Deck Lab, Foils, boosters, modes, Season progression and more.</p></div><button id="open-rulebook" class="start-match">OPEN RULEBOOK</button></section>
     <section class="premium-panel career-record-panel"><div class="section-title"><div><h3>Mode Records</h3><small>Every completed match is recorded by mode</small></div><span>${totalMatches} MATCHES</span></div><div class="career-mode-records">${modeRecords}</div></section>
     <section class="premium-panel career-record-panel"><div class="section-title"><div><h3>Superstar Records</h3><small>Wins and losses with every unlocked Superstar</small></div><span>${profile.unlockedSuperstars.length} UNLOCKED</span></div><div class="career-superstar-records">${superstarRecords}</div></section>
     <section class="premium-panel career-achievements-panel"><div class="section-title"><div><h3>Achievements</h3><small>Career milestones and mode accomplishments</small></div><span>${earnedAchievements}/${achievements.length} EARNED</span></div><div class="career-achievement-grid">${achievementCards}</div></section>
     <section class="legacy-settings premium-panel profile-tools-panel"><div class="section-title"><h3>Career Tools</h3><span>LOCAL SAVE</span></div><p class="career-tracking-note">Match record tracking began with WWE Legacy v${career.trackingSinceBuild ?? "0.12.78"}. Earlier wins and losses are not estimated.</p><div class="profile-actions"><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a></div><article class="option-row danger-zone"><div><strong>Reset Progress</strong><p>Erase this device's WWE Legacy profile, collection, unlocked Superstars, Season progress, career record, achievements and saved decks.</p></div>${optionsResetArmed ? `<div class="reset-confirm-actions"><button id="cancel-reset-progress" class="nav-button">Cancel</button><button id="confirm-reset-progress" class="start-match danger">CONFIRM RESET</button></div>` : `<button id="reset-progress" class="nav-button danger">Reset Progress</button>`}</article>${optionsResetArmed ? `<p class="reset-warning"><b>Testing reset armed.</b> This cannot be undone on this device.</p>` : ""}<div class="option-row"><div><strong>Build</strong><p>WWE Legacy: Collectible Card Game v${BUILD_VERSION}</p></div></div></section>
   </section>`;
+  $("#open-rulebook")?.addEventListener("click", showRules);
   $("#reset-progress")?.addEventListener("click",()=>{optionsResetArmed=true;message="Confirm the reset below to erase all local progress.";renderProfile();});
   $("#cancel-reset-progress")?.addEventListener("click",()=>{optionsResetArmed=false;message="Reset cancelled.";renderProfile();});
   $("#confirm-reset-progress")?.addEventListener("click",()=>{resetProfile();profile=null;game=null;optionsResetArmed=false;selection={p1:"cm-punk",p2:"roman-reigns"};lastMatchup={...selection};lastPack=null;pendingUpgrades=[];message="";showSplash();});
@@ -2867,6 +2916,6 @@ document.querySelector("#chrome-home")?.addEventListener("click", showMainMenu);
 document.querySelector("#chrome-season")?.addEventListener("click", showSeasons);
 document.querySelector("#chrome-packs")?.addEventListener("click", showBoosters);
 
-if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "boosters") renderBoosters(); else if (screen === "store") renderStore(); else if (screen === "catalogue") renderCardCatalogue(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "live-events") renderLiveEvents(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
+if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "rules") renderRules(); else if (screen === "boosters") renderBoosters(); else if (screen === "store") renderStore(); else if (screen === "catalogue") renderCardCatalogue(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "live-events") renderLiveEvents(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
 
 setInterval(refreshSeasonClocks, 1000);

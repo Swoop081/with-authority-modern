@@ -1,44 +1,41 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, addOwnedCard } from "../js/data/profile.js?v=0.12.89";
-import { decks } from "../js/data/decks.js?v=0.12.89";
-import { collectionCards } from "../js/data/collection.js?v=0.12.89";
-import { superstars } from "../js/data/superstars.js?v=0.12.89";
-import { validateDeckDraft, selectedEntranceId, cardEligibilityForSuperstar } from "../js/data/deck-builder.js?v=0.12.89";
-import { findPackUpgrades, applyUpgrade, buildPlayableDeck } from "../js/data/deck-assistant.js?v=0.12.89";
+import { createProfile, addOwnedCard } from "../js/data/profile.js?v=0.12.93";
+import { decks } from "../js/data/decks.js?v=0.12.93";
+import { collectionCards } from "../js/data/collection.js?v=0.12.93";
+import { superstars } from "../js/data/superstars.js?v=0.12.93";
+import { validateDeckDraft, selectedEntranceId } from "../js/data/deck-builder.js?v=0.12.93";
+import { findPackUpgrades, applyUpgrade, buildPlayableDeck } from "../js/data/deck-assistant.js?v=0.12.93";
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 
-test("v0.12.82 Deck Assistance finds a real Foil replacement in an unlocked saved deck", () => {
+test("v0.12.92 Deck Assistance does not treat a Foil-only pull as a gameplay upgrade", () => {
   const profile = createProfile("cm-punk");
   const card = decks["cm-punk"].find(c => c.kind === "move" && (c.damage ?? 0) > 0);
   const before = { ...(profile.ownedCards[card.id] ?? {}) };
   const result = addOwnedCard(profile, card.id, { foil: true });
   const pull = { card, foil: true, ownershipBefore: (before.normal ?? 0) + (before.foil ?? 0), replacedNormal: result.replacedNormal > 0, universePointsValue: 0 };
   const upgrades = findPackUpgrades(profile, [pull]);
-  const upgrade = upgrades.find(u => u.type === "foil" && u.superstarId === "cm-punk" && u.cardId === card.id);
-  assert.ok(upgrade, `expected Foil recommendation for ${card.name}`);
-  assert.match(upgrade.reason, /\+1 Damage/);
+  assert.equal(upgrades.some(u => u.type === "foil"), false);
 });
 
-test("v0.12.82 applying a Foil recommendation updates the saved deck and live deck damage", () => {
+test("v0.12.92 Foil deck copies keep the exact authored Damage and Cost", () => {
   const profile = createProfile("cm-punk");
   const card = decks["cm-punk"].find(c => c.kind === "move" && (c.damage ?? 0) > 0);
-  const beforeOwned = (profile.ownedCards[card.id]?.normal ?? 0) + (profile.ownedCards[card.id]?.foil ?? 0);
   addOwnedCard(profile, card.id, { foil: true });
-  const upgrade = findPackUpgrades(profile, [{ card, foil: true, ownershipBefore: beforeOwned, universePointsValue: 0 }]).find(u => u.type === "foil" && u.superstarId === "cm-punk");
-  assert.ok(upgrade);
-  assert.equal(applyUpgrade(profile, upgrade), true);
-  assert.ok(profile.savedDecks["cm-punk"].some(e => e.id === card.id && e.foil));
+  const index = profile.savedDecks["cm-punk"].findIndex(e => e.id === card.id && !e.foil);
+  assert.ok(index >= 0);
+  profile.savedDecks["cm-punk"][index] = { id: card.id, foil: true };
   const live = buildPlayableDeck(profile, "cm-punk").find(c => c.id === card.id && c.foil);
   assert.ok(live);
-  assert.equal(live.damage, card.damage + 1);
+  assert.equal(live.damage, card.damage);
+  assert.equal(live.cost, card.cost);
 });
 
 test("v0.12.82 ownership-gated recommended-build restoration swaps filler for the newly available authored copy", () => {
   const profile = createProfile("cm-punk");
-  const sid = "cm-punk", star = superstars[sid], rec = decks[sid];
+  const sid = "cm-punk", rec = decks[sid];
   const recCounts = new Map();
   for (const card of rec) recCounts.set(card.id, (recCounts.get(card.id) ?? 0) + 1);
   const target = [...recCounts.entries()].map(([id,count])=>({card:byId.get(id),count})).find(x => x.count >= 2 && x.card?.kind === "move");
@@ -65,11 +62,13 @@ test("v0.12.82 ownership-gated recommended-build restoration swaps filler for th
   assert.equal(profile.savedDecks[sid].filter(e=>e.id===filler.card.id).length, filler.count);
 });
 
-test("v0.12.82 Manual Deck Assistance preserves suggestions and presents explicit ADD / REMOVE changes", () => {
+test("v0.12.92 Manual Deck Assistance preserves real suggestions without Foil damage language", () => {
   const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   const assistant = fs.readFileSync(new URL("../js/data/deck-assistant.js", import.meta.url), "utf8");
   assert.doesNotMatch(assistant, /findPackUpgrades\(\)\{return \[\]\}/);
   assert.doesNotMatch(assistant, /applyUpgrade\(\)\{return false\}/);
+  assert.doesNotMatch(assistant, /\+1 Damage/);
+  assert.doesNotMatch(app, /FOIL UPGRADE/);
   assert.match(app, /Manual mode will not change the deck/);
   assert.match(app, /ADD \$\{u\.addName\} · REMOVE \$\{u\.removeName\}/);
 });

@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.12.89";
-import { decks } from "../js/data/decks.js?v=0.12.89";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.89";
-import { collectionCards } from "../js/data/collection.js?v=0.12.89";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.89";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.89";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.89";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.89";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.89";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.89";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.89";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.89";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.89";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.89";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.89";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.89";
-import { healthZone } from "../js/engine/health.js?v=0.12.89";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.89";
+import { superstars } from "../js/data/superstars.js?v=0.12.93";
+import { decks } from "../js/data/decks.js?v=0.12.93";
+import { allGameplayCards } from "../js/data/content.js?v=0.12.93";
+import { collectionCards } from "../js/data/collection.js?v=0.12.93";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.93";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.93";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.93";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.93";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.93";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.93";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.93";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.93";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.93";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.93";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.93";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.93";
+import { healthZone } from "../js/engine/health.js?v=0.12.93";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.93";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -252,7 +252,7 @@ test("Season milestone road now builds The Final Boss across 100 tiers",()=>{
   assert.equal(p.ownedCards['the-rock-lay-the-smack-down']?.normal,1);
 });
 
-test("A completely maxed five-card booster converts to 50 Universe Points on Pack Complete",()=>{
+test("A completely maxed five-card booster values the guaranteed Foil duplicate above Normal duplicates",()=>{
   const p=createProfile('cm-punk');
   const setId='summerslam-series-1';
   const eligible=collectionCards.filter(c=>c.setId===setId&&boosterEligible(c));
@@ -261,14 +261,17 @@ test("A completely maxed five-card booster converts to 50 Universe Points on Pac
   grantBooster(p,1,setId);
   const pack=openBooster(p,()=>0.42,setId);
   assert.equal(pack.length,5);
-  assert.equal(pack.reduce((n,pull)=>n+pull.universePointsValue,0),50);
-  assert.equal(finalizePackUniversePoints(p,pack),50);
-  assert.equal(p.universePoints,50);
+  assert.equal(pack[0].foil,true);
+  assert.equal(pack[0].universePointsValue,20);
+  assert.equal(pack.slice(1).every(pull=>pull.universePointsValue===10),true);
+  assert.equal(pack.reduce((n,pull)=>n+pull.universePointsValue,0),60);
+  assert.equal(finalizePackUniversePoints(p,pack),60);
+  assert.equal(p.universePoints,60);
 });
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.89");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.93");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);

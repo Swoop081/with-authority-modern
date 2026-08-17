@@ -1,7 +1,7 @@
-import { decks } from "./decks.js?v=0.12.89";
-import { collectionCards } from "./collection.js?v=0.12.89";
-import { superstars } from "./superstars.js?v=0.12.89";
-import { validateDeckDraft, selectedEntranceId } from "./deck-builder.js?v=0.12.89";
+import { decks } from "./decks.js?v=0.12.93";
+import { collectionCards } from "./collection.js?v=0.12.93";
+import { superstars } from "./superstars.js?v=0.12.93";
+import { validateDeckDraft, selectedEntranceId } from "./deck-builder.js?v=0.12.93";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -10,12 +10,35 @@ const countId = (draft, id) => draft.reduce((n,e)=>n + (normalizedEntry(e).id ==
 const countFoil = (draft, id) => draft.reduce((n,e)=>{const x=normalizedEntry(e);return n+(x.id===id&&x.foil?1:0);},0);
 const ownedFoil = (profile,id) => Math.max(0, Number(profile?.ownedCards?.[id]?.foil) || 0);
 
+function hasUnusedOwnedFoil(profile, draft, id) {
+  return countFoil(draft, id) < ownedFoil(profile, id);
+}
+
+function canPreferFoil(profile, draft, id) {
+  return countId(draft, id) > countFoil(draft, id) && hasUnusedOwnedFoil(profile, draft, id);
+}
+
+function preferOwnedFoils(profile, draft) {
+  const out = draft.map(normalizedEntry);
+  const used = new Map();
+  for (let i = 0; i < out.length; i += 1) {
+    const entry = out[i];
+    const owned = ownedFoil(profile, entry.id);
+    const currentUsed = used.get(entry.id) ?? 0;
+    if (currentUsed < owned) {
+      entry.foil = true;
+      used.set(entry.id, currentUsed + 1);
+    } else entry.foil = false;
+  }
+  return out;
+}
+
 function playableCard(card, foil = false) {
   if (!card) return null;
-  if (!foil) return card;
-  // Foil is a real deck finish: connected damage is +1. Keep the original
-  // collector card immutable and mark the runtime copy for presentation.
-  return card.kind === "move" ? { ...card, foil: true, damage: Math.max(0, Number(card.damage) || 0) + 1, baseDamage: Number(card.damage) || 0 } : { ...card, foil: true };
+  // Foil is a presentation / collector finish only. Runtime gameplay values
+  // stay identical to the authored Normal card so printed card numbers remain
+  // authoritative everywhere in WWE Legacy.
+  return foil ? { ...card, foil: true } : card;
 }
 
 export function buildPlayableDeck(profile, sid) {
@@ -41,7 +64,7 @@ function recommendedCounts(sid) {
   return counts;
 }
 
-function findSafeBlueprintReplacement(profile, sid, draft, addId, addFoil = false) {
+function findSafeBlueprintReplacement(profile, sid, draft, addId) {
   const recommended = recommendedCounts(sid);
   const desired = recommended.get(addId) ?? 0;
   if (!desired || countId(draft, addId) >= desired) return null;
@@ -57,7 +80,7 @@ function findSafeBlueprintReplacement(profile, sid, draft, addId, addFoil = fals
   candidates.sort((a,b)=>Number(a.lead)-Number(b.lead) || b.index-a.index);
   for (const candidate of candidates) {
     const next = draft.map(normalizedEntry);
-    next[candidate.index] = { id: addId, foil: !!addFoil };
+    next[candidate.index] = { id: addId, foil: hasUnusedOwnedFoil(profile, next, addId) };
     if (validateDeckDraft(profile, sid, next, selectedEntranceId(profile,sid)).healthy) return { ...candidate, next };
   }
   return null;
@@ -80,32 +103,33 @@ export function findPackUpgrades(profile, pack = []) {
       let draft = working.get(sid);
       if (!draft) continue;
 
-      // 1. Guaranteed-safe finish improvement: a newly available Foil replaces
-      // one normal copy already in this saved deck. It changes no deck counts.
-      if (pull.foil && card.kind === "move" && countId(draft, card.id) > countFoil(draft, card.id) && countFoil(draft, card.id) < ownedFoil(profile, card.id)) {
-        const index = draft.findIndex(e => e.id === card.id && !e.foil);
-        if (index >= 0) {
-          const next = draft.map(normalizedEntry);
-          next[index] = { id: card.id, foil: true };
-          if (validateDeckDraft(profile, sid, next, selectedEntranceId(profile,sid)).healthy) {
-            upgrades.push({ type:"foil", superstarId:sid, pull, cardId:card.id, reason:`Replace a normal ${card.name} with your new Foil copy (+1 Damage).`, addName:`Foil ${card.name}`, removeName:`Normal ${card.name}` });
-            draft = next; working.set(sid, next);
-          }
-        }
-      }
+      // Foils remain cosmetic only, but Deck Assistance prefers an owned Foil
+      // copy whenever it is choosing which finish to place into a saved deck.
+      let blueprintAdded = false;
 
-      // 2. Ownership-gated blueprint restoration. Only fire when this exact pack
+      // Ownership-gated blueprint restoration. Only fire when this exact pack
       // increased access to a copy the authored recommended deck wants, and swap
       // out a card currently used above its authored recommended count.
       const recCount = recommendedCounts(sid).get(card.id) ?? 0;
       const beforeOwned = Math.max(0, Number(pull.ownershipBefore) || 0);
       if (recCount > beforeOwned && countId(draft, card.id) < Math.min(recCount, beforeOwned + 1)) {
-        const swap = findSafeBlueprintReplacement(profile, sid, draft, card.id, !!pull.foil && countFoil(draft, card.id) < ownedFoil(profile, card.id));
+        const swap = findSafeBlueprintReplacement(profile, sid, draft, card.id);
         if (swap) {
           const removed = byId.get(swap.removeId);
-          upgrades.push({ type:"blueprint", superstarId:sid, pull, cardId:card.id, removeId:swap.removeId, reason:`Restores a newly-owned copy from ${starById.get(sid)?.name ?? "this Superstar"}'s recommended build while keeping the deck valid.`, addName:`${pull.foil ? "Foil " : ""}${card.name}`, removeName:removed?.name ?? swap.removeId });
-          draft = swap.next; working.set(sid, swap.next);
+          const addedAsFoil = !!swap.next[swap.index]?.foil;
+          upgrades.push({ type:"blueprint", superstarId:sid, pull, cardId:card.id, removeId:swap.removeId, reason:`Restores a newly-owned copy from ${starById.get(sid)?.name ?? "this Superstar"}'s recommended build while keeping the deck valid.${addedAsFoil ? " Uses your owned Foil copy for presentation." : ""}`, addName:`${addedAsFoil ? "Foil " : ""}${card.name}`, removeName:removed?.name ?? swap.removeId });
+          draft = swap.next; working.set(sid, swap.next); blueprintAdded = true;
         }
+      }
+
+      // A Foil finish is not stronger, but if this pack card is already used as
+      // Normal and the player owns an unused Foil copy, offer the cosmetic swap.
+      if (!blueprintAdded && canPreferFoil(profile, draft, card.id)) {
+        upgrades.push({ type:"foil-preference", superstarId:sid, pull, cardId:card.id, reason:"Uses your owned Foil copy for presentation. Normal and Foil gameplay values are identical.", addName:`Foil ${card.name}`, removeName:`Normal ${card.name}` });
+        const cosmetic = draft.map(normalizedEntry);
+        const index = cosmetic.findIndex(entry => entry.id === card.id && !entry.foil);
+        if (index >= 0) cosmetic[index] = { id: card.id, foil: true };
+        draft = cosmetic; working.set(sid, cosmetic);
       }
     }
   }
@@ -118,12 +142,7 @@ export function applyUpgrade(profile, upgrade) {
   const saved = profile?.savedDecks?.[sid];
   if (!Array.isArray(saved) || saved.length !== 60) return false;
   const draft = saved.map(normalizedEntry);
-  if (upgrade.type === "foil") {
-    if (countFoil(draft, upgrade.cardId) >= ownedFoil(profile, upgrade.cardId)) return false;
-    const index = draft.findIndex(e => e.id === upgrade.cardId && !e.foil);
-    if (index < 0) return false;
-    draft[index] = { id: upgrade.cardId, foil: true };
-  } else if (upgrade.type === "blueprint") {
+  if (upgrade.type === "blueprint") {
     const recommended = recommendedCounts(sid);
     const desired = recommended.get(upgrade.cardId) ?? 0;
     if (!desired || countId(draft, upgrade.cardId) >= desired) return false;
@@ -133,12 +152,17 @@ export function applyUpgrade(profile, upgrade) {
     let next = null;
     for (const index of indices) {
       const candidate = draft.map(normalizedEntry);
-      const useFoil = !!upgrade.pull?.foil && countFoil(candidate, upgrade.cardId) < ownedFoil(profile, upgrade.cardId);
+      const useFoil = hasUnusedOwnedFoil(profile, candidate, upgrade.cardId);
       candidate[index] = { id: upgrade.cardId, foil: useFoil };
-      if (validateDeckDraft(profile, sid, candidate, selectedEntranceId(profile,sid)).healthy) { next = candidate; break; }
+      const preferred = preferOwnedFoils(profile, candidate);
+      if (validateDeckDraft(profile, sid, preferred, selectedEntranceId(profile,sid)).healthy) { next = preferred; break; }
     }
     if (!next) return false;
     draft.splice(0, draft.length, ...next);
+  } else if (upgrade.type === "foil-preference") {
+    const index = draft.findIndex(entry => entry.id === upgrade.cardId && !entry.foil);
+    if (index < 0 || !canPreferFoil(profile, draft, upgrade.cardId)) return false;
+    draft[index] = { id: upgrade.cardId, foil: true };
   } else return false;
   if (!validateDeckDraft(profile, sid, draft, selectedEntranceId(profile,sid)).healthy) return false;
   profile.savedDecks[sid] = draft;
