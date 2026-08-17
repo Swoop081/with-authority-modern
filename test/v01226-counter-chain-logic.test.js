@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.69';
-import { counterEligibility, autoCounterEligibility } from '../js/engine/rules.js?v=0.12.69';
+import { allGameplayCards } from '../js/data/content.js?v=0.12.70';
+import { counterEligibility, autoCounterEligibility } from '../js/engine/rules.js?v=0.12.70';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(star='test')=>({
@@ -51,9 +51,9 @@ test('v0.12.34 Jawbreaker cannot counter another Jawbreaker even at the first co
   assert.match(counterEligibility(state,'p2',jaw,jaw).reason,/does not Counter/i);
 });
 
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.69';
-import { superstars } from '../js/data/superstars.js?v=0.12.69';
-import { decks } from '../js/data/decks.js?v=0.12.69';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.12.70';
+import { superstars } from '../js/data/superstars.js?v=0.12.70';
+import { decks } from '../js/data/decks.js?v=0.12.70';
 
 const stars=Object.values(superstars);
 const maxResources=p=>{for(const m of ['strength','strike','technical','agility'])p.momentum[m]=20;p.adrenaline=20;p.momentum.attitude=20;};

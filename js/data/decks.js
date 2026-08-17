@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.12.69";
+import { allGameplayCards } from "./content.js?v=0.12.70";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -332,7 +332,7 @@ export const deckIds={
     "double-underhook-backbreaker",
     "bulldog",
     "bulldog",
-    "bulldog",
+    "tornado-ddt",
     "springboard-clothesline",
     "springboard-clothesline",
     "springboard-clothesline",
@@ -444,7 +444,7 @@ export const deckIds={
     "dropkick",
     "running-forearm",
     "sling-blade",
-    "sling-blade",
+    "tornado-ddt",
     "enzuigiri",
     "enzuigiri",
     "superkick",
@@ -1174,7 +1174,7 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "duck",
-    "hurricanrana",
+    "tornado-ddt",
     "headbutt",
     "dropkick",
     "cody-rhodes-dropdown-uppercut"
@@ -3319,5 +3319,10 @@ replaceOne('kevin-owens','swanton-bomb','punch');replaceOne('kevin-owens','power
 replaceOne('kevin-owens','jawbreaker','standing-switch');
 replaceOne('randy-savage','vertical-suplex','diving-crossbody');
 replaceOne('randy-savage','hotshot','diving-body-press');
+
+// v0.12.70: authored shared Tornado DDT belongs in agile SummerSlam identities after all legacy tuning passes.
+if(!deckIds['cody-rhodes'].includes('tornado-ddt')) replaceOne('cody-rhodes','knee-to-the-gut','tornado-ddt');
+if(!deckIds['seth-rollins'].includes('tornado-ddt')) replaceOne('seth-rollins','knee-to-the-gut','tornado-ddt');
+if(!deckIds['cm-punk'].includes('tornado-ddt')) replaceOne('cm-punk','knee-to-the-gut','tornado-ddt');
 
 export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id)).filter(Boolean)]));

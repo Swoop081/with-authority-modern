@@ -5251,34 +5251,30 @@ body[data-screen="matchup"] #game{padding:0!important;gap:0!important}
   .final-boss-feature-art img.final-boss-rock-menu-art{right:0!important;width:118%!important;height:108%!important}
 }
 
-/* Daily booster: one purple stateful row only. */
+/* Daily booster: one contained purple stateful reward row. */
 .season-free-pack-cta{display:block!important;margin:8px 0!important;padding:0!important;background:none!important;border:0!important}
 .season-free-pack-button{
   width:100%!important;
-  min-height:48px!important;
+  min-height:58px!important;
   margin:0!important;
-  padding:11px 14px!important;
-  border:1px solid rgba(193,135,255,.58)!important;
+  padding:9px 12px!important;
+  border:1px solid rgba(210,164,255,.64)!important;
   border-radius:10px!important;
   background:linear-gradient(135deg,#7636c8,#a647df)!important;
   color:#fff!important;
-  font-size:.82rem!important;
-  line-height:1!important;
-  font-weight:1000!important;
-  letter-spacing:.02em!important;
-  text-align:center!important;
-  white-space:nowrap!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:12px!important;
+  text-align:left!important;
+  box-shadow:0 8px 22px rgba(98,41,165,.24),inset 0 1px 0 rgba(255,255,255,.13)!important;
   overflow:hidden!important;
-  text-overflow:ellipsis!important;
-  box-shadow:0 8px 22px rgba(98,41,165,.22)!important;
 }
-.season-free-pack-button:disabled{
-  opacity:.58!important;
-  filter:saturate(.62)!important;
-  cursor:default!important;
-  box-shadow:none!important;
-}
-@media(max-width:390px){.season-free-pack-button{font-size:.72rem!important;padding-inline:9px!important}}
+.season-free-pack-copy{min-width:0!important;font-size:.78rem!important;font-weight:900!important;letter-spacing:.015em!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.season-free-pack-button>[data-free-pack-action]{display:block!important;padding:9px 11px!important;border-radius:7px!important;background:rgba(255,255,255,.13)!important;border:1px solid rgba(255,255,255,.18)!important;font-size:.69rem!important;line-height:1!important;font-weight:1000!important;letter-spacing:.02em!important;white-space:nowrap!important;text-align:center!important}
+.season-free-pack-button:disabled{opacity:.58!important;filter:saturate(.62)!important;cursor:default!important;box-shadow:none!important}
+.season-free-pack-button:disabled>[data-free-pack-action]{background:rgba(0,0,0,.18)!important}
+@media(max-width:390px){.season-free-pack-button{grid-template-columns:minmax(0,1fr) 112px!important;gap:7px!important;padding:8px!important}.season-free-pack-copy{font-size:.66rem!important}.season-free-pack-button>[data-free-pack-action]{font-size:.56rem!important;padding:8px 5px!important}}
 
 /* Season Command Center: compact, readable rows with no dead vertical space. */
 .season-command-center{padding:10px!important;display:grid!important;gap:7px!important}
@@ -5394,13 +5390,7 @@ body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art
 
 /* Open packs stay face up. Small live previews make the whole five-card pack
    visible while the centre card remains the readable focus. */
-.booster-faceup-strip{display:flex!important;justify-content:center!important;align-items:center!important;gap:5px!important;width:min(390px,94vw)!important;margin:4px auto 0!important;overflow:hidden!important}
-.faceup-pack-thumb{appearance:none!important;border:1px solid rgba(255,255,255,.13)!important;background:#090b10!important;padding:2px!important;width:16.5%!important;max-width:64px!important;aspect-ratio:.68!important;border-radius:7px!important;overflow:hidden!important;opacity:.68!important;transition:transform .18s ease,opacity .18s ease,border-color .18s ease!important}
-.faceup-pack-thumb.current{opacity:1!important;transform:translateY(-3px) scale(1.04)!important;border-color:#e9c653!important;box-shadow:0 0 12px rgba(233,198,83,.22)!important}
-.faceup-pack-thumb .faceup-thumb-card{width:100%!important;height:100%!important;max-width:100%!important;pointer-events:none!important}
-.faceup-pack-thumb .ccg-card-inner,.faceup-pack-thumb .ccg-card-face{height:100%!important}
-.faceup-pack-thumb.converted{display:grid!important;place-items:center!important;background:radial-gradient(circle,#1b7fa7,#081924 72%)!important;color:#fff!important}
-.faceup-pack-thumb.converted>span{display:grid!important;place-items:center!important;font-weight:1000!important;font-size:.63rem!important;line-height:.8!important}.faceup-pack-thumb.converted b{font-size:.38rem!important;letter-spacing:.08em!important;margin-top:3px!important}
+
 
 /* Duplicate card -> UP: the physical card fragments inward and its slot becomes
    the actual currency reward rather than retaining a dead duplicate card. */
@@ -5424,7 +5414,6 @@ body[data-screen="championship"] .premium-run-screen .mode-run-hero .feature-art
 .hand-card-inspect-trigger{display:grid!important;place-items:center!important;cursor:zoom-in!important;min-width:0!important;outline:none!important}.hand-card-inspect-trigger:focus-visible{border-radius:10px!important;box-shadow:0 0 0 2px #72d7ff!important}.hand-card-modal{z-index:1700!important}.hand-card-modal-inner{animation:handInspectZoom .22s cubic-bezier(.18,.82,.24,1.12) both!important}.hand-modal-card{width:min(370px,86vw)!important;max-height:78dvh!important}@keyframes handInspectZoom{from{opacity:0;transform:scale(.76) translateY(22px)}to{opacity:1;transform:none}}
 
 @media(max-width:430px){
-  .booster-faceup-strip{gap:3px!important;width:96vw!important}.faceup-pack-thumb{max-width:57px!important;border-radius:6px!important}
   .up-card-replacement{width:min(300px,76vw)!important}.up-card-replacement strong{font-size:3.65rem!important}
 }
 

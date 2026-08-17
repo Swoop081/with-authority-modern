@@ -2908,6 +2908,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "summerslam-series-1",
     "cardNumber": 140,
     "cardCode": "SS1-140"
+  },
+  {
+    "id": "tornado-ddt",
+    "setId": "summerslam-series-1",
+    "cardNumber": 141,
+    "cardCode": "SS1-141"
   }
 ]);
 

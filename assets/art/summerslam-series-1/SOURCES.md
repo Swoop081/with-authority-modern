@@ -23,3 +23,4 @@ The locally stored WebP is used only as private-project pack branding/reference 
 ## Official transparent set logo
 - WWE-hosted SummerSlam 2026 transparent PNG: https://www.wwe.com/f/styles/medium/public/2026/06/IMG_0391.png
 - Used locally as `summerslam-2026-logo.png` for card templates and set branding UI.
+- `moves/tornado-ddt.jpeg` — user-supplied Tornado DDT action photograph, added v0.12.70.

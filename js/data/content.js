@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.69";
+import { enrichCounterState } from "./counter-states.js?v=0.12.70";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -9328,6 +9328,32 @@ export const allGameplayCards = [
     "counterStates": [
       "running-aerial"
     ]
+  },
+  {
+    "id": "tornado-ddt",
+    "name": "Tornado DDT",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "grapple",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "rulesText": "Grounds opponent. Deals +1 persistent Head damage.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control",
+    "bodyDamage": {
+      "bodyPart": "head",
+      "pressure": 1
+    }
   },
   {
     "id": "standing-switch",

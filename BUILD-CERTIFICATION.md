@@ -1,13 +1,17 @@
 # WWE Legacy — Current Build Certification
 
-Version: **v0.12.69 — Package Hygiene Pass**
+Version: **v0.12.70 — Season Pack + Tornado DDT Pass**
 
-- Tests: **311 / 311 pass**
-- Validation: **50 Superstars / 50 decks / 435 gameplay cards / 0 orphans / 0 issues**
+- Tests: **314 / 314 pass**
+- Validation: **50 Superstars / 50 decks / 436 gameplay cards / 0 orphans / 0 issues**
 - Flow audit: **50 Superstars / 0 issues**
-- Card-ID audit: **485 cards / 485 manifest entries / 0 issues**
-- Live asset-reference regression: **pass**
-- Package hygiene regression: **pass**
-- Art audit: **449 known unfinished custom fronts** (existing backlog; no new missing live presentation asset introduced by this pass)
+- Card-ID audit: **486 cards / 486 manifest entries / 0 issues**
+- Balance simulation: **2,450 matches / 0 stalls / 25.68 average turns / 2,213 pin finishes / 237 submission finishes**
+- Art audit: **449 known unfinished custom fronts** (existing backlog; Tornado DDT is installed with authored user-supplied raw art and does not increase the backlog)
+- Package hygiene: **v0.12.69 clean allowlist retained**
 
-Packaging-only release: gameplay, balance, card data, economy, progression, booster rules, and presentation are unchanged from v0.12.68.
+Certified changes:
+- Daily Login Booster row containment repair.
+- Live pack reveal five-card thumbnail strip removal.
+- Tornado DDT (SS1-141) added and integrated into Cody Rhodes, Seth Rollins and CM Punk recommended decks.
+- Season caption corrected to the live Daily 25 XP / Weekly 100 XP values.

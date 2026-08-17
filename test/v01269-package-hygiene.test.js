@@ -5,6 +5,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
+const currentReleaseNotes = `RELEASE-NOTES-v${packageJson.version}.md`;
 
 const deadAssets = [
   "assets/cards/art/superstars",
@@ -25,7 +27,7 @@ test("v0.12.69 clean root ships no historical audit debris", () => {
     /^(TEST|FLOW|CARD-ID|ART|VALIDATION|BALANCE|COUNTER|DEAD-TURN|FINAL-BALANCE|ECONOMY|AI|HP|STUDIO|DEEP-MATCH|MOMENTUM|POSSESSION|CPU)-/i.test(name)
   );
   assert.deepEqual(debris, []);
-  const oldNotes = names.filter((name) => /^RELEASE-NOTES-v/i.test(name) && name !== "RELEASE-NOTES-v0.12.69.md");
+  const oldNotes = names.filter((name) => /^RELEASE-NOTES-v/i.test(name) && name !== currentReleaseNotes);
   assert.deepEqual(oldNotes, []);
 });
 
@@ -47,9 +49,8 @@ test("v0.12.69 live presentation assets remain installed", () => {
 });
 
 test("v0.12.69 clean packager is wired into package.json", () => {
-  const pkg = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8"));
-  assert.equal(pkg.version, "0.12.69");
-  assert.equal(pkg.scripts["package-clean"], "node tools/package-clean.mjs");
+  assert.match(packageJson.version, /^0\.12\.\d+$/);
+  assert.equal(packageJson.scripts["package-clean"], "node tools/package-clean.mjs");
   assert.equal(fs.existsSync(path.join(root, "tools/package-clean.mjs")), true);
 });
 
