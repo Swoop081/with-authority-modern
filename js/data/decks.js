@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.13.2";
+import { allGameplayCards } from "./content.js?v=0.13.9";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -1650,8 +1650,8 @@ export const deckIds={
     "asai-moonsault",
     "springboard-crossbody",
     "springboard-crossbody",
-    "spear",
-    "spear",
+    "sol-ruca-springboard-splash",
+    "sol-ruca-springboard-splash",
     "stf",
     "stf",
     "stf",
@@ -1713,8 +1713,8 @@ export const deckIds={
     "powerbomb",
     "dropkick",
     "dropkick",
-    "moonsault",
-    "moonsault",
+    "chad-gable-moonsault",
+    "chad-gable-moonsault",
     "chain-wrestling",
     "abdominal-stretch",
     "jawbreaker",
@@ -1775,8 +1775,8 @@ export const deckIds={
     "chokeslam",
     "body-slam",
     "uranage",
-    "big-boot",
-    "big-boot",
+    "raquel-rodriguez-big-boot",
+    "raquel-rodriguez-big-boot",
     "clothesline",
     "jawbreaker",
     "lariat",

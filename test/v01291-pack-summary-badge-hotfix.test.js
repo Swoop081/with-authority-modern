@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { boosterCreditsFor } from '../js/data/boosters.js?v=0.13.2';
+import { boosterCreditsFor } from '../js/data/boosters.js?v=0.13.9';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -15,7 +15,7 @@ test('v0.12.91 legacy SummerSlam booster mirror cannot leak into other set bucke
 
 test('v0.12.91 Packs attention and chrome counts use only currently openable live-set credits',()=>{
   assert.match(app, /function openablePackCount\(p\)/);
-  assert.match(app, /return LAUNCH_LIVE_SET_IDS\.reduce/);
+  assert.match(app, /return CURRENT_PLAYER_SET_IDS\.reduce/);
   assert.match(app, /const boosters = openablePackCount\(profile\);/);
   assert.match(app, /const packCount = openablePackCount\(profile\);/);
   assert.match(app, /const allBoosterCredits = openablePackCount\(profile\);/);

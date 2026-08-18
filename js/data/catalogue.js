@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.2";
-import { superstars } from "./superstars.js?v=0.13.2";
-import { sets } from "./sets.js?v=0.13.2";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.2";
-import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.13.2";
+import { decks } from "./decks.js?v=0.13.9";
+import { superstars } from "./superstars.js?v=0.13.9";
+import { sets } from "./sets.js?v=0.13.9";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.9";
+import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.13.9";
 
 export const CATALOGUE_PAGE_SIZE = 48;
 export const CATALOGUE_NUMERIC_OPERATORS = ["any", "eq", "lte", "gte"];
@@ -150,10 +150,10 @@ function compareCards(a, b, sortBy, ownershipFor) {
   return (setRank[a.setId] ?? 999) - (setRank[b.setId] ?? 999) || number(a.cardNumber, b.cardNumber) || String(a.name).localeCompare(String(b.name));
 }
 
-export function filterAndSortCatalogue(cards, filters = defaultCatalogueFilters(), ownershipFor = () => ({ total: 0 })) {
+export function filterAndSortCatalogue(cards, filters = defaultCatalogueFilters(), ownershipFor = () => ({ total: 0 }), now = new Date()) {
   const query = String(filters.search ?? "").trim().toLowerCase();
   const out = cards.filter(card => {
-    if (!isPlayerReleasedSetId(card?.setId)) return false;
+    if (!isPlayerReleasedSetId(card?.setId, now)) return false;
     if (filters.setId && filters.setId !== "all" && card.setId !== filters.setId) return false;
     if (filters.kind && filters.kind !== "all" && card.kind !== filters.kind) return false;
     if (filters.rarity && filters.rarity !== "all" && String(card.rarity) !== String(filters.rarity)) return false;

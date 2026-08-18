@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.13.2";
-import { decks } from "../js/data/decks.js?v=0.13.2";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.2";
-import { collectionCards } from "../js/data/collection.js?v=0.13.2";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.2";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.2";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.2";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.2";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.2";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.2";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.2";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.2";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.2";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.2";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.2";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.2";
-import { healthZone } from "../js/engine/health.js?v=0.13.2";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.2";
+import { superstars } from "../js/data/superstars.js?v=0.13.9";
+import { decks } from "../js/data/decks.js?v=0.13.9";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.9";
+import { collectionCards } from "../js/data/collection.js?v=0.13.9";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.9";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.9";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.9";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.9";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.9";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.9";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.9";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.9";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.9";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.9";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.9";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.9";
+import { healthZone } from "../js/engine/health.js?v=0.13.9";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.9";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -271,7 +271,7 @@ test("A completely maxed five-card booster values the guaranteed Foil duplicate 
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.2");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.9");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -339,14 +339,14 @@ test("Liv Morgan uses Jersey Codebreaker as her exclusive Trademark and the supe
 test("Logan Paul RAW Series 1 package is locked, playable and wired to its bespoke mechanics",()=>{
   const logan=starById.get('logan-paul'); assert.ok(logan);
   assert.deepEqual(logan.starterMomentum,{agility:8,strike:4});
-  assert.deepEqual(logan.entrance.preMatchMomentum,{agility:1});
+  assert.deepEqual(logan.entrance.preMatchMomentum,{agility:1,strength:1});
   assert.equal(logan.entrance.preMatchAdrenaline,1);
   assert.equal(decks['logan-paul'].length,60);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='strength').length,0);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='agility').length,8);
   assert.equal(decks['logan-paul'].filter(c=>c.kind==='momentum'&&c.method==='strike').length,4);
   const fin=byName('Paulverizer'); assert.equal(fin.finisher,true); assert.deepEqual(fin.requirements,{}); assert.equal(fin.damage,13); assert.equal('pinBonus' in fin,false);
-  const tm=byName('Knockout Punch'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'logan-paul'); assert.deepEqual(tm.requirements,{strike:3});
+  const tm=byName('One Lucky Punch'); assert.equal(tm.trademark,true); assert.equal(tm.superstarId,'logan-paul'); assert.deepEqual(tm.requirements,{strike:2}); assert.equal(tm.cost,6); assert.equal(tm.damage,9);
   const standing=byName('Standing Moonsault'); assert.equal(standing.kickoutRetainControlDraw,1);
   const spring=byName('Springboard Crossbody'); assert.equal(spring.effects[0].type,'drawThenDiscardSelf'); assert.equal(spring.effects[0].ifAfterMethod,'strike');
   const asai=byName('Asai Moonsault'); assert.equal(asai.selfStunIfCountered,1); assert.equal(asai.groundedOnly,false);
@@ -354,16 +354,16 @@ test("Logan Paul RAW Series 1 package is locked, playable and wired to its bespo
 
   const opponent=stars.find(s=>s.id!=='logan-paul');
   const g=new MatchEngine({p1:logan,p2:opponent,decks,rng:rng(1201)}),st=g.state();
-  assert.equal(st.players.p1.momentum.agility,1); assert.equal(st.players.p1.momentum.strength,0); assert.equal(st.players.p1.adrenaline,1);
+  assert.equal(st.players.p1.momentum.agility,1); assert.equal(st.players.p1.momentum.strength,1); assert.equal(st.players.p1.adrenaline,1);
   const punch=byName('Punch'); st.players.p1.hand=[punch, allGameplayCards.find(c=>c.id==='special-logan-paul')]; st.players.p1.momentum.strike=5; st.players.p1.momentum.agility=5;
   st.phase='ACTION'; st.playerInControl='p1';
   assert.equal(g.declareMove('p1',punch),true); if(st.phase==='COUNTER') g.passCounter('p2');
-  assert.equal(st.players.p1.momentum.strength,1,'first connected Strike supplies Strength Momentum');
+  assert.equal(st.players.p1.momentum.strength,2,'first connected Strike adds Viral Athlete Strength to the Entrance Strength');
   const special=st.players.p1.hand.find(c=>c.id==='special-logan-paul'); assert.ok(special); const hp=st.players.p2.hp;
   assert.equal(g.playSpecial('p1',special),true); assert.equal(st.players.p2.hp,Math.max(0,hp-2)); assert.equal(st.playerInControl,'p2');
 });
 
-test("RAW aerial mechanics execute under the global failed-pin Control transfer rule and Springboard Crossbody rewards a prior Strike",()=>{
+test("RAW aerial mechanics honor Standing Moonsault’s printed kickout exception and Springboard Crossbody rewards a prior Strike",()=>{
   const standing=byName('Standing Moonsault'), spring=byName('Springboard Crossbody'), punch=byName('Punch');
   const logan=starById.get('logan-paul'), opp=stars.find(s=>s.id!=='logan-paul');
   const g=new MatchEngine({p1:logan,p2:opp,decks,rng:()=>0.999}), s=g.state();
@@ -371,7 +371,7 @@ test("RAW aerial mechanics execute under the global failed-pin Control transfer 
   s.proposedPin={attackerId:'p1',defenderId:'p2'}; s.players.p1.discard.push(standing);
   const handBefore=s.players.p1.hand.length;
   assert.equal(g.passPinResponse('p2'),true);
-  assert.equal(s.playerInControl,'p2'); assert.equal(s.phase,'ACTION'); assert.equal(s.players.p1.hand.length,handBefore+1,'global turn advance draws for the non-controller too'); assert.ok(s.players.p2.hand.length>=1);
+  assert.equal(s.playerInControl,'p1'); assert.equal(s.phase,'ACTION'); assert.equal(s.players.p1.hand.length,handBefore+2,'turn advance plus Standing Moonsault’s printed extra draw'); assert.ok(s.players.p2.hand.length>=1);
 
   const neutral=starById.get('alexa-bliss');
   const g2=new MatchEngine({p1:neutral,p2:opp,decks,rng:rng(1302)}), q=g2.state();
@@ -446,7 +446,7 @@ test("Chad Gable RAW Series 1 package is locked, playable and wired to Olympic P
 
 
 test("starting HP roster uses the locked durability spread",()=>{
-  const expected = {"iyo-sky":57,"mankind":67,"the-rock":67,"hulk-hogan":69,"bayley":63,"cm-punk":64,"paige":64,"seth-rollins":64,"andre-the-giant":72,"stephanie-vaquer":63,"randy-savage":64,"roman-reigns":67,"charlotte-flair":65,"kevin-owens":66,"kane":69,"the-undertaker":68,"ultimate-warrior":68,"rhea-ripley":66,"cody-rhodes":64,"oba-femi":68,"stone-cold-steve-austin":66,"liv-morgan":64,"brock-lesnar":70,"gunther":68,"becky-lynch":64,"logan-paul":62,"sol-ruca":58,"chad-gable":64,"raquel-rodriguez":67,"rey-mysterio":57,"dominik-mysterio":61,"penta":65,"el-grande-americano":64,"jey-uso":64,"la-knight":64,"alexa-bliss":62,"finn-balor":64,"danhausen":61,"tiffany-stratton":62,"chelsea-green":61,"damian-priest":66,"bron-breakker":68,"drew-mcintyre":68,"randy-orton":65,"sami-zayn":64,"jacob-fatu":68,"solo-sikoa":66,"jade-cargill":67,"nia-jax":69,"goldberg":69};
+  const expected = {"iyo-sky":57,"mankind":67,"the-rock":67,"hulk-hogan":69,"bayley":63,"cm-punk":64,"paige":64,"seth-rollins":64,"andre-the-giant":72,"stephanie-vaquer":63,"randy-savage":64,"roman-reigns":67,"charlotte-flair":65,"kevin-owens":66,"kane":69,"the-undertaker":68,"ultimate-warrior":68,"rhea-ripley":66,"cody-rhodes":64,"oba-femi":68,"stone-cold-steve-austin":66,"liv-morgan":64,"brock-lesnar":70,"gunther":68,"becky-lynch":64,"logan-paul":62,"sol-ruca":58,"chad-gable":64,"raquel-rodriguez":65,"rey-mysterio":57,"dominik-mysterio":61,"penta":65,"el-grande-americano":64,"jey-uso":64,"la-knight":64,"alexa-bliss":62,"finn-balor":64,"danhausen":61,"tiffany-stratton":62,"chelsea-green":61,"damian-priest":66,"bron-breakker":68,"drew-mcintyre":68,"randy-orton":65,"sami-zayn":64,"jacob-fatu":68,"solo-sikoa":66,"jade-cargill":67,"nia-jax":69,"goldberg":69};
   for (const [id,hp] of Object.entries(expected)) assert.equal(starById.get(id)?.hp,hp,`${id} starting HP`);
   const values=[...new Set(stars.map(s=>s.hp))].sort((a,b)=>a-b);
   assert.deepEqual(values,[57,58,61,62,63,64,65,66,67,68,69,70,72]);
@@ -455,7 +455,7 @@ test("starting HP roster uses the locked durability spread",()=>{
 
 test("Raquel Rodriguez RAW Series 1 package is locked, playable, and all four RAW decks are exactly 60 pages",()=>{
   const raquel=starById.get('raquel-rodriguez'); assert.ok(raquel);
-  assert.equal(raquel.hp,67); assert.equal(raquel.methodLimits.strength,null); assert.equal(raquel.methodLimits.strike,3); assert.equal(raquel.methodLimits.agility,1); assert.equal(raquel.methodLimits.technical,0);
+  assert.equal(raquel.hp,65); assert.equal(raquel.methodLimits.strength,null); assert.equal(raquel.methodLimits.strike,3); assert.equal(raquel.methodLimits.agility,1); assert.equal(raquel.methodLimits.technical,0);
   for(const sid of ['logan-paul','sol-ruca','chad-gable','raquel-rodriguez']){
     assert.equal(decks[sid].length,60,`${sid} must have exactly 60 pages`);
     assert.equal(decks[sid].filter(c=>c.kind==='momentum').length,12,`${sid} must have exactly 12 Momentum`);
@@ -665,13 +665,13 @@ test("turn advancement preserves Control-sequence combo memory until Control act
   assert.deepEqual(p.namedDamageBuff,{});
 });
 
-test("failed pins always transfer Control, advance the turn and draw for the new controller",()=>{
+test("failed pins normally transfer Control unless the connected Move prints a kickout exception",()=>{
   const sol=starById.get('sol-ruca'), opp=stars.find(x=>x.id!=='sol-ruca');
   const g=new MatchEngine({p1:sol,p2:opp,decks,rng:()=>0.99}),s=g.state();
-  const standing=byName('Standing Moonsault');
+  const ordinary=byName('Powerbomb');
   s.playerInControl='p1'; s.phase='PIN_RESPONSE';
-  s.players.p1.discard=[standing]; s.players.p1.turn.momentumPlayed=1;
-  s.postMove={attackerId:'p1',defenderId:'p2',cardId:standing.id};
+  s.players.p1.discard=[ordinary]; s.players.p1.turn.momentumPlayed=1;
+  s.postMove={attackerId:'p1',defenderId:'p2',cardId:ordinary.id};
   s.proposedPin={attackerId:'p1',defenderId:'p2'};
   const beforeTurn=s.turnNumber,beforeSeq=s.controlSequence,beforeHand=s.players.p2.hand.length;
   assert.equal(g.passPinResponse('p2'),true);
@@ -1137,7 +1137,7 @@ test("Solo Sikoa Street Champion, Sole Survivor and Spinning Solo chain execute"
   d.adrenaline=5;d.momentum.attitude=5;const kick=byName('Superkick'),before=d.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:kick};g._connect();assert.equal(d.adrenaline,before-2,'normal connect drains 1 and Street Champion drains an additional 1');
   const afterFirst=d.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:byName('Running Clothesline')};g._connect();assert.equal(d.adrenaline,Math.max(0,afterFirst-1),'Street Champion fires only once per Control sequence');
   const spin=allGameplayCards.find(c=>c.id==='solo-sikoa-spinning-solo'),spike=allGameplayCards.find(c=>c.id==='solo-sikoa-samoan-spike');a.deck=[spike];st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:spin};g._connect();assert.ok(a.hand.some(c=>c.id===spike.id));assert.equal(a.namedDiscount['Samoan Spike'],2);
-  const special=allGameplayCards.find(c=>c.id==='special-solo-sikoa');a.hand=[special];a.deck=[byName('Punch'),byName('Headbutt')];a.specialUsed=false;st.phase='ACTION';st.playerInControl='p1';assert.equal(g.passTurn('p1'),true);assert.equal(a.specialUsed,true);assert.equal(a.hand.length,2);assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='sole-survivor'));
+  const special=allGameplayCards.find(c=>c.id==='special-solo-sikoa');a.hand=[special];a.deck=[byName('Punch'),byName('Headbutt')];a.specialUsed=false;st.phase='ACTION';st.playerInControl='p1';assert.equal(g.passTurn('p1'),true);assert.equal(a.specialUsed,true);assert.equal(a.hand.length,3,'the third draw comes from the recycled used-page pile after the two-card Playbook is exhausted');assert.ok(st.log.some(e=>e.type==='PLAYBOOK_RECYCLED'&&e.playerId==='p1'));assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='sole-survivor'));
 });
 
 test("Jade Cargill uses the shared Pump Kick as her Trademark setup and Superhuman fires",()=>{

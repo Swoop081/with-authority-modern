@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.2';
-import { superstars } from '../js/data/superstars.js?v=0.13.2';
-import { decks } from '../js/data/decks.js?v=0.13.2';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.2';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.9';
+import { superstars } from '../js/data/superstars.js?v=0.13.9';
+import { decks } from '../js/data/decks.js?v=0.13.9';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.9';
 
 const stars=Object.values(superstars);
 const star=id=>stars.find(s=>s.id===id);
@@ -13,7 +13,7 @@ test('v0.12.43 roster durability locks preserve prestige hierarchy and balanced 
   const hp={
     'andre-the-giant':72,'brock-lesnar':70,'oba-femi':68,'hulk-hogan':69,'goldberg':69,'kane':69,'nia-jax':69,
     'gunther':68,'bron-breakker':68,'drew-mcintyre':68,'jacob-fatu':68,'the-undertaker':68,'ultimate-warrior':68,
-    'roman-reigns':67,'the-rock':67,'raquel-rodriguez':67,'jade-cargill':67,'mankind':67,
+    'roman-reigns':67,'the-rock':67,'raquel-rodriguez':65,'jade-cargill':67,'mankind':67,
     'stone-cold-steve-austin':66,'kevin-owens':66,'rhea-ripley':66,'damian-priest':66,'solo-sikoa':66,
     'randy-orton':65,'charlotte-flair':65,'penta':65,'cody-rhodes':64,'seth-rollins':64,'cm-punk':64,
     'sami-zayn':64,'finn-balor':64,'la-knight':64,'jey-uso':64,'becky-lynch':64,'chad-gable':64,
@@ -51,7 +51,7 @@ test('v0.12.43 identity engines keep refined card-flow and signature setup tunin
   assert.equal(warrior.ability.trigger.maxUses,2); assert.equal(warrior.ability.trigger.draw,1); assert.equal(warrior.ability.trigger.adrenaline,1);
   const logan=star('logan-paul');
   assert.equal(logan.ability.trigger.drawAfterStrikeAgility,1); assert.equal(logan.ability.trigger.drawUses,1); assert.equal(logan.ability.maxUses,2);
-  assert.deepEqual([card('logan-paul-knockout-punch').cost,card('logan-paul-knockout-punch').damage],[9,8]);
+  assert.deepEqual([card('logan-paul-knockout-punch').cost,card('logan-paul-knockout-punch').damage],[6,9]);
   assert.deepEqual([card('logan-paul-paulverizer').cost,card('logan-paul-paulverizer').damage],[11,13]);
   assert.equal(star('danhausen').ability.trigger.maxUses,3);
   const knee=card('danhausen-very-nice-knee-vil');

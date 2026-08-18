@@ -1,4 +1,5 @@
-import { isUnreleasedSetId } from "./release.js?v=0.13.2";
+import { isUnreleasedSetId } from "./release.js?v=0.13.9";
+import { superstars } from "./superstars.js?v=0.13.9";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 50;
@@ -10,8 +11,8 @@ const LIVE_REWARD_FALLBACKS = Object.freeze([
   "evolution-series-1"
 ]);
 
-function releasedRewardSet(setId, fallbackIndex = 0) {
-  if (setId && !isUnreleasedSetId(setId)) return setId;
+function releasedRewardSet(setId, fallbackIndex = 0, now = new Date()) {
+  if (setId && !isUnreleasedSetId(setId, now)) return setId;
   return LIVE_REWARD_FALLBACKS[Math.max(0, Math.min(LIVE_REWARD_FALLBACKS.length - 1, fallbackIndex))];
 }
 
@@ -302,7 +303,7 @@ export function liveEventRotation(now = new Date()) {
   const source = DAILY_LIVE_EVENTS[start.getDay()] ?? DAILY_LIVE_EVENTS[1];
   const nextAt = new Date(start.getTime());
   nextAt.setDate(nextAt.getDate() + 1);
-  const event = cloneEvent(source, releasedRewardSet(source.rewardSetId, start.getDay() % LIVE_REWARD_FALLBACKS.length));
+  const event = cloneEvent(source, releasedRewardSet(source.rewardSetId, start.getDay() % LIVE_REWARD_FALLBACKS.length, now));
   const dayKey = dateKey(start);
   return {
     weekKey: dayKey,
@@ -338,7 +339,7 @@ function threeDayTower(now) {
   startsAt.setDate(startsAt.getDate() + slot * 3);
   const nextAt = new Date(startsAt.getTime());
   nextAt.setDate(nextAt.getDate() + 3);
-  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length));
+  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now));
   return towerDescriptor({ key: `three-day:${slot}:${event.id}`, event, startsAt, nextAt, cadence: "three-day", cadenceLabel: "3 DAY TOWER", winUp: 25, clearBoosters: 1 });
 }
 function weeklyTower(now) {
@@ -348,17 +349,21 @@ function weeklyTower(now) {
   const template = WEEKLY_TOWERS[slot % WEEKLY_TOWERS.length];
   const nextAt = new Date(startsAt.getTime());
   nextAt.setDate(nextAt.getDate() + 7);
-  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length));
+  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now));
   return towerDescriptor({ key: `weekly:${dateKey(startsAt)}:${event.id}`, event, startsAt, nextAt, cadence: "weekly", cadenceLabel: "WEEKLY TOWER", winUp: 25, clearBoosters: 1 });
 }
 function birthdayTowers(now) {
   const start = localDayStart(now);
   const month = start.getMonth() + 1;
   const day = start.getDate();
-  return BIRTHDAY_TOWERS.filter(template => template.month === month && template.day === day).map(template => {
+  return BIRTHDAY_TOWERS.filter(template => {
+    if (template.month !== month || template.day !== day) return false;
+    const star = superstars[template.heroId] ?? Object.values(superstars).find(item => item.id === template.heroId);
+    return !!star && !isUnreleasedSetId(star.setId, now);
+  }).map(template => {
     const nextAt = new Date(start.getTime());
     nextAt.setDate(nextAt.getDate() + 1);
-    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, 0));
+    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, 0, now));
     return towerDescriptor({ key: `birthday:${dateKey(start)}:${event.id}`, event, startsAt: start, nextAt, cadence: "birthday", cadenceLabel: "24 HOURS ONLY", winUp: 50, clearBoosters: 1 });
   });
 }

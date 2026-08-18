@@ -1708,9 +1708,10 @@ export const superstars = {
       "setId": "raw-series-1",
       "rarity": 4,
       "superstarId": "logan-paul",
-      "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline. Logan’s first connected Strike supplies +1 Strength Momentum through Viral Athlete.",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strength Momentum and +1 Adrenaline.",
       "preMatchMomentum": {
-        "agility": 1
+        "agility": 1,
+        "strength": 1
       },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
@@ -1741,6 +1742,7 @@ export const superstars = {
       "diving-crossbody"
     ],
     "signatures": [
+      "sol-ruca-springboard-splash",
       "sol-ruca-avalanche-x-factor",
       "sol-ruca-sol-snatcher"
     ],
@@ -1807,6 +1809,7 @@ export const superstars = {
       "back-suplex"
     ],
     "signatures": [
+      "chad-gable-moonsault",
       "chad-gable-chaos-theory",
       "chad-gable-ankle-lock"
     ],
@@ -1850,8 +1853,8 @@ export const superstars = {
     },
     "special": {
       "type": "moveCounteredDrawDrain",
-      "draw": 1,
-      "opponentAdrenaline": 0
+      "draw": 2,
+      "opponentAdrenaline": -1
     }
   },
   "raquelRodriguez": {
@@ -1872,11 +1875,12 @@ export const superstars = {
       "big-boot"
     ],
     "signatures": [
+      "raquel-rodriguez-big-boot",
       "raquel-rodriguez-corkscrew-splash",
       "raquel-rodriguez-tejana-bomb"
     ],
     "archetype": "strength-strike-powerhouse",
-    "hp": 67,
+    "hp": 65,
     "methodLimits": {
       "agility": 1,
       "strength": null,

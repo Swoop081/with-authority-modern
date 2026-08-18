@@ -15,7 +15,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     id: "match-basics", group: "MATCH", title: "Winning & Match Basics",
     summary: "Control the match, damage your opponent and finish by pinfall or submission.",
     items: [
-      ["The objective", "Win the match by successful pinfall or by forcing a submission. A referee decision is used only for the special empty-deck exhaustion loop."],
+      ["The objective", "Win the match by successful pinfall or by forcing a submission. There is no referee-decision finish for Playbook exhaustion."],
       ["Superstar HP", "Every Superstar has printed maximum HP. Damage reduces current HP but does not change printed maximum HP."],
       ["Health zones", "Green is 65% or more of maximum HP. Amber is 25%–64%. Red is below 25%. These zones matter for pin legality and presentation."],
       ["Card text", "Specific card, Superstar, Entrance and Action text can create exceptions. When an authored card explicitly overrides a general rule, that card text wins for that interaction."]
@@ -28,8 +28,9 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Lead Off 5", "Each match begins with the authored or saved Lead Off 5. There is no normal Turn 1 draw."],
       ["Control", "The Superstar in Control may play legal cards, make Moves, pass, and use available post-Move options."],
       ["Keeping Control", "A connected non-Submission Move normally keeps Control. After it connects, the defender draws 1 page; the attacker does not receive an automatic replacement draw."],
+      ["Recycling the Playbook", "Played Moves and normal reusable Actions go to your recycle pile. When your Playbook empties and you need to draw or search, shuffle that recycle pile to create a new Playbook. Pages explicitly ditched, one-use cards and committed Momentum do not recycle."],
       ["Losing Control", "Control normally changes on a pass, a successful Counter, or a failed pin / kick out. Some Superstar or Action effects can explicitly retain or regain Control."],
-      ["Unlimited match clock", "Matches do not end because a turn limit expires. If both decks are empty and the game reaches 8 consecutive passes, a referee decision ends the loop using remaining health as the deciding factor."]
+      ["Unlimited match clock", "Matches do not end because a turn limit or an empty Playbook is reached. When a draw or search needs a page and your Playbook is empty, shuffle your recyclable used pages to form a new Playbook. If you have no recyclable pages, that draw or search simply finds nothing."]
     ]
   },
   {

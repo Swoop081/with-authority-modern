@@ -1230,6 +1230,24 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "RAW1-035"
   },
   {
+    "id": "sol-ruca-springboard-splash",
+    "setId": "raw-series-1",
+    "cardNumber": 36,
+    "cardCode": "RAW1-036"
+  },
+  {
+    "id": "chad-gable-moonsault",
+    "setId": "raw-series-1",
+    "cardNumber": 37,
+    "cardCode": "RAW1-037"
+  },
+  {
+    "id": "raquel-rodriguez-big-boot",
+    "setId": "raw-series-1",
+    "cardNumber": 38,
+    "cardCode": "RAW1-038"
+  },
+  {
     "id": "the-rock-lay-the-smack-down",
     "setId": "season-1-final-boss",
     "cardNumber": 1,

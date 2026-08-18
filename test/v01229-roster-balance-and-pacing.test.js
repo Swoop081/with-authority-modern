@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.2';
-import { superstars } from '../js/data/superstars.js?v=0.13.2';
-import { decks } from '../js/data/decks.js?v=0.13.2';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.2';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.2';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.9';
+import { superstars } from '../js/data/superstars.js?v=0.13.9';
+import { decks } from '../js/data/decks.js?v=0.13.9';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.9';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.9';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});
@@ -59,21 +59,22 @@ test('v0.12.29 Logan pace correction reduces his burst package without removing 
   assert.equal(logan.hp,62);
   assert.equal(logan.ability.trigger.drawUses,1);
   assert.equal(logan.ability.maxUses,2);
-  assert.equal(byId('logan-paul-knockout-punch').cost,9);
-  assert.equal(byId('logan-paul-knockout-punch').damage,8);
+  assert.equal(byId('logan-paul-knockout-punch').cost,6);
+  assert.equal(byId('logan-paul-knockout-punch').damage,9);
   assert.equal(byId('logan-paul-paulverizer').cost,11);
   assert.equal(byId('logan-paul-paulverizer').damage,13);
 });
 
-test('v0.12.29 exhaustion safeguard ends only repeated empty-deck pass deadlocks by decision',()=>{
+test('v0.12.29 exhaustion decision is superseded by the Playbook recycle rule',()=>{
   const g=new MatchEngine({p1:superstars.cmPunk,p2:superstars.codyRhodes,decks,rng:()=>0.75});
   const s=g.state();
   s.players.p1.deck=[]; s.players.p2.deck=[]; s.players.p1.hand=[]; s.players.p2.hand=[];
-  s.players.p1.hp=Math.floor(s.players.p1.maxHp*.55); s.players.p2.hp=Math.floor(s.players.p2.maxHp*.35);
+  s.players.p1.discard=[]; s.players.p2.discard=[];
   s.phase='ACTION'; s.playerInControl='p1'; s.consecutivePasses=0;
-  for(let i=0;i<8 && s.phase!=='MATCH_OVER';i++) assert.equal(g.passTurn(s.playerInControl),true);
-  assert.equal(s.phase,'MATCH_OVER'); assert.equal(s.finish.type,'decision'); assert.equal(s.winner,'p1');
-  assert.ok(s.log.some(e=>e.type==='EXHAUSTION_DECISION'));
+  for(let i=0;i<8;i++) assert.equal(g.passTurn(s.playerInControl),true);
+  assert.notEqual(s.phase,'MATCH_OVER');
+  assert.equal(s.winner,null);
+  assert.ok(!s.log.some(e=>e.type==='EXHAUSTION_DECISION'));
 });
 
 test('v0.12.29 Bayley remembers her previous connected Method across Control sequences',()=>{

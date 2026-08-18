@@ -1,8 +1,8 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.2";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.2";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.2";
-import { sets } from "./sets.js?v=0.13.2";
-import { isLaunchLiveSetId } from "./release.js?v=0.13.2";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.9";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.9";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.9";
+import { sets } from "./sets.js?v=0.13.9";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.9";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -20,7 +20,7 @@ export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) {
   if (setId === DEFAULT_BOOSTER_SET_ID) return Math.max(0, Number(p?.boosterCredits) || 0);
   return 0;
 }
-export function boosterEligible(card) { return !!card && isLaunchLiveSetId(card.setId) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false; }
+export function boosterEligible(card, now = new Date()) { return !!card && isPlayerReleasedSetId(card.setId, now) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false; }
 export function underOwnershipCap(profile, card) { return totalOwnedCopies(profile, card.id) < cardOwnershipCap(card); }
 
 function availableRarityWeights(pool) {
@@ -72,12 +72,12 @@ export function grantBooster(p, n = 1, setId = DEFAULT_BOOSTER_SET_ID) {
   return p.boosterCreditsBySet[setId];
 }
 
-function buildPack(profile, rng, setId) {
+function buildPack(profile, rng, setId, now = new Date()) {
   // Universal booster cards retain one collector identity but may appear in
   // any currently released set booster. This lets shared rules staples such
   // as Once Too Often remain collectible without cloning them across sets.
   const universal = collectionCards.filter(card => card.universalBooster === true && card.setId !== setId);
-  const base = [...cardsForSet(setId), ...universal].filter(boosterEligible);
+  const base = [...cardsForSet(setId), ...universal].filter(card => boosterEligible(card, now));
   if (!base.length) throw new Error("No active cards for this set");
 
   // Superstar cards are a separate pack-level chase. They never distort the
@@ -154,10 +154,10 @@ function recordOpenedPack(p, setId) {
   p.packsOpenedBySet[setId] = (p.packsOpenedBySet[setId] ?? 0) + 1;
 }
 
-export function openBooster(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId) {
+export function openBooster(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, now = new Date()) {
   const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
   if (boosterCreditsFor(p, setId) < 1) throw new Error("No booster available for this set.");
-  const pack = buildPack(p, rng, setId);
+  const pack = buildPack(p, rng, setId, now);
   p.boosterCreditsBySet ??= {};
   p.boosterCreditsBySet[setId] = Math.max(0, (p.boosterCreditsBySet[setId] ?? 0) - 1);
   if (setId === DEFAULT_BOOSTER_SET_ID) p.boosterCredits = p.boosterCreditsBySet[setId];
@@ -165,21 +165,21 @@ export function openBooster(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId) 
   return pack;
 }
 
-export function openLadderCompletionPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId) {
+export function openLadderCompletionPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, now = new Date()) {
   const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
   const pool = p?.ladder?.completionPackCreditsBySet ?? {};
   if ((pool[setId] ?? 0) < 1) throw new Error("No Climb the Ladder Completion Pack available for this set.");
-  const pack = buildPack(p, rng, setId);
+  const pack = buildPack(p, rng, setId, now);
   pool[setId] = Math.max(0, (pool[setId] ?? 0) - 1);
   recordOpenedPack(p, setId);
   return pack;
 }
 
-export function openChampionshipPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId) {
+export function openChampionshipPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, now = new Date()) {
   const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
   const pool = p?.championshipRoad?.championshipPackCreditsBySet ?? {};
   if ((pool[setId] ?? 0) < 1) throw new Error("No Championship Pack available for this set.");
-  const pack = buildPack(p, rng, setId);
+  const pack = buildPack(p, rng, setId, now);
   pool[setId] = Math.max(0, (pool[setId] ?? 0) - 1);
   recordOpenedPack(p, setId);
   return pack;

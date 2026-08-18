@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.2";
-import { superstars } from "../js/data/superstars.js?v=0.13.2";
-import { decks } from "../js/data/decks.js?v=0.13.2";
-import { evaluateDeckHealth } from "../js/data/deck-health.js?v=0.13.2";
-import { canPlaySpecial, moveEligibility } from "../js/engine/rules.js?v=0.13.2";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.2";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.9";
+import { superstars } from "../js/data/superstars.js?v=0.13.9";
+import { decks } from "../js/data/decks.js?v=0.13.9";
+import { evaluateDeckHealth } from "../js/data/deck-health.js?v=0.13.9";
+import { canPlaySpecial, moveEligibility } from "../js/engine/rules.js?v=0.13.9";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.9";
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const byName=name=>allGameplayCards.find(c=>c.name===name);
@@ -42,8 +42,9 @@ test("v0.12.52 every connected Brock's German draws the next copy and Suplex Cit
     assert.equal(g.declareMove('p1',card),true);
     if(s.phase==='COUNTER') assert.equal(g.passCounter('p2'),true);
   }
-  assert.equal(p.deck.filter(c=>c.id===german.id).length,0);
-  assert.equal(p.hand.filter(c=>c.id===german.id).length,0);
+  assert.equal(p.deck.filter(c=>c.id===german.id).length,1,'used Germans recycle once the Playbook empties');
+  assert.equal(p.hand.filter(c=>c.id===german.id).length,1,'the third connect can tutor a recycled German');
+  assert.ok(s.log.some(e=>e.type==='PLAYBOOK_RECYCLED'&&e.playerId==='p1'));
   assert.equal(p.abilityUses,2,'Suplex City fires on the first two alias connects');
   assert.equal(p.adrenaline,7,'three normal connect gains plus two +2 Suplex City gains');
   assert.equal(d.hp,Math.max(0,d.maxHp-24));

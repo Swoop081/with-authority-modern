@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.2";
-import { collectionCards } from "./collection.js?v=0.13.2";
-import { superstars } from "./superstars.js?v=0.13.2";
-import { isUnreleasedSetId } from "./release.js?v=0.13.2";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.2";
+import { decks } from "./decks.js?v=0.13.9";
+import { collectionCards } from "./collection.js?v=0.13.9";
+import { superstars } from "./superstars.js?v=0.13.9";
+import { isUnreleasedSetId } from "./release.js?v=0.13.9";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.9";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];

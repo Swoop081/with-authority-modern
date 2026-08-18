@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.2';
-import { deckIds, decks } from '../js/data/decks.js?v=0.13.2';
-import { superstars } from '../js/data/superstars.js?v=0.13.2';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.2';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.2';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.2';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.9';
+import { deckIds, decks } from '../js/data/decks.js?v=0.13.9';
+import { superstars } from '../js/data/superstars.js?v=0.13.9';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.9';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.9';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.9';
 
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 const once=allGameplayCards.find(c=>c.id==='once-too-often');
@@ -50,7 +50,8 @@ test('v0.13.2 Once Too Often only answers a Move after that exact card has conne
   assert.equal(s.players.p1.hp,afterFirst,'repeated Move never connects');
   assert.equal(s.playerInControl,'p1');
   assert.equal(s.phase,'ACTION');
-  assert.ok(s.players.p1.discard.some(c=>c.id==='once-too-often'));
+  assert.ok(s.players.p1.outOfPlay.some(c=>c.id==='once-too-often'));
+  assert.ok(!s.players.p1.discard.some(c=>c.id==='once-too-often'));
   assert.ok(s.players.p2.discard.filter(c=>c.id===repeated.id).length>=2);
   assert.ok(s.log.some(e=>e.type==='ONCE_TOO_OFTEN'&&e.incomingCardId===repeated.id));
 });

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.2";
+import { enrichCounterState } from "./counter-states.js?v=0.13.9";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -354,7 +354,7 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "submission": {
       "bodyPart": "legs",
-      "pressure": 4
+      "pressure": 5
     },
     "effects": [],
     "counterState": "leg-extended",
@@ -1484,7 +1484,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "",
+    "rulesText": "Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -1550,7 +1550,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "gunther",
     "rarity": 3,
-    "rulesText": "",
+    "rulesText": "Gunther-exclusive. On Connect: deal +2 persistent Chest damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -1560,11 +1560,6 @@ export const allGameplayCards = [
         "type": "bodyPressure",
         "bodyPart": "chest",
         "amount": 2
-      },
-      {
-        "type": "discountNextByName",
-        "name": "Last Symphony",
-        "amount": 1
       }
     ],
     "counterState": "arm-extended"
@@ -1729,7 +1724,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "gunther",
     "rarity": 3,
-    "rulesText": "",
+    "rulesText": "Gunther-exclusive Trademark. On Connect: search/draw Gojira Clutch; it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -2217,7 +2212,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "Shared canonical Chokeslam. If played by The Undertaker, on Connect search/draw Tombstone Piledriver; it costs 3 less this Control sequence.",
+    "rulesText": "Shared canonical Chokeslam. Grounds opponent. If played by The Undertaker, on Connect search/draw Tombstone Piledriver; it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -2362,7 +2357,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared canonical",
+    "rulesText": "Shared canonical. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -2483,7 +2478,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "stone-cold-steve-austin",
     "rarity": 4,
-    "rulesText": "Austin-exclusive Finisher. If Austin connected with Kick to the Gut as his immediately previous Move, this cannot be Countered.",
+    "rulesText": "Austin-exclusive Finisher. Grounds opponent. Stun 1. If Austin connected with Kick to the Gut as his immediately previous Move, this cannot be Countered.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 1,
@@ -2572,7 +2567,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "the-undertaker",
     "rarity": 3,
-    "rulesText": "Undertaker-exclusive Trademark. On Connect: Undertaker’s next Running Big Boot this Control sequence gets +2 Damage.",
+    "rulesText": "Undertaker-exclusive Trademark. On Connect: Undertaker’s Running Big Boot gets +2 Damage this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -2707,7 +2702,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Shared canonical",
+    "rulesText": "Shared canonical. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -2751,7 +2746,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "kane",
     "rarity": 3,
-    "rulesText": "Kane-exclusive",
+    "rulesText": "Kane-exclusive. On Connect: Chokeslam From Hell gets +1 Damage this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -3165,7 +3160,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "If played by Randy Savage, gain +1 Adrenaline, search/draw Flying Elbow Drop, and it costs 3 less this Control sequence.",
+    "rulesText": "Grounds opponent. If played by Randy Savage, gain +1 Adrenaline, search/draw Flying Elbow Drop, and it costs 3 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -3598,7 +3593,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "rhea-ripley",
     "rarity": 3,
-    "rulesText": "Grounded opponent only. Submission. +5 persistent Leg damage per successful turn.",
+    "rulesText": "Rhea Ripley-exclusive Trademark. Grounded opponent only. Submission. +5 persistent Leg damage per successful turn. On Connect: search/draw Riptide; it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -4135,7 +4130,7 @@ export const allGameplayCards = [
     "method": null,
     "superstarId": "paige",
     "rarity": 4,
-    "rulesText": "",
+    "rulesText": "Paige-exclusive Finisher. No Method requirement. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -4304,7 +4299,7 @@ export const allGameplayCards = [
     "method": "agility",
     "superstarId": null,
     "rarity": 2,
-    "rulesText": "",
+    "rulesText": "On Connect: opponent loses 1 Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -4332,7 +4327,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "iyo-sky",
     "rarity": 3,
-    "rulesText": "IYO SKY-exclusive Trademark. Grounds opponent.",
+    "rulesText": "IYO SKY-exclusive Trademark. Grounds opponent. On Connect: search/draw Over the Moonsault; it costs 2 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -4382,7 +4377,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "the-rock",
     "rarity": 3,
-    "rulesText": "",
+    "rulesText": "The Rock-exclusive. On Connect: opponent loses 1 Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -4445,7 +4440,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "the-rock",
     "rarity": 3,
-    "rulesText": "",
+    "rulesText": "The Rock-exclusive Trademark. Grounds opponent. On Connect: search/draw People's Elbow; it costs 2 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -4901,9 +4896,10 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "kane",
-    "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
     "preMatchMomentum": {
-      "agility": 1
+      "agility": 1,
+      "technical": 1
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
@@ -5618,25 +5614,31 @@ export const allGameplayCards = [
   },
   {
     "id": "logan-paul-knockout-punch",
-    "name": "Knockout Punch",
+    "name": "One Lucky Punch",
     "kind": "move",
     "setId": "raw-series-1",
-    "cost": 9,
-    "damage": 8,
+    "cost": 6,
+    "damage": 9,
     "requirements": {
-      "strike": 3
+      "strike": 2
     },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "logan-paul",
     "rarity": 3,
-    "rulesText": "Logan Paul-exclusive Trademark. Stun 1.",
+    "rulesText": "Logan Paul-exclusive Trademark. Stun 1. On Connect, search/draw Paulverizer; it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Paulverizer",
+        "discount": 2
+      }
+    ],
     "counterState": "arm-extended"
   },
   {
@@ -5884,11 +5886,11 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 4,
     "superstarId": "chad-gable",
-    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 1 page.",
+    "rulesText": "Once per match, after one of Chad’s Moves is successfully Countered, draw 2 pages and your opponent loses 1 Adrenaline.",
     "special": {
       "type": "moveCounteredDrawDrain",
-      "draw": 1,
-      "opponentAdrenaline": 0
+      "draw": 2,
+      "opponentAdrenaline": -1
     }
   },
   {
@@ -5906,7 +5908,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "raquel-rodriguez",
     "rarity": 3,
-    "rulesText": "Raquel Rodriguez-exclusive Trademark. Grounded opponent only. If Countered, Raquel is Stunned 1.",
+    "rulesText": "Raquel Rodriguez-exclusive Trademark. Grounded opponent only. If Countered, Raquel is Stunned 1. On Connect: search/draw Tejana Bomb; it costs 1 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
@@ -5917,7 +5919,7 @@ export const allGameplayCards = [
       {
         "type": "search",
         "name": "Tejana Bomb",
-        "discount": 2
+        "discount": 1
       }
     ],
     "counterState": "diving-aerial"
@@ -5950,12 +5952,12 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "rarity": 4,
     "superstarId": "raquel-rodriguez",
-    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
     "preMatchMomentum": {
       "strength": 1,
       "agility": 1
     },
-    "preMatchAdrenaline": 1,
+    "preMatchAdrenaline": 0,
     "delayedTurn5": false
   },
   {
@@ -5971,6 +5973,92 @@ export const allGameplayCards = [
       "minDamage": 8,
       "reduce": 1
     }
+  },
+  {
+    "id": "sol-ruca-springboard-splash",
+    "name": "Sol’s Springboard Splash",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "sol-ruca",
+    "rarity": 3,
+    "rulesText": "Sol Ruca-exclusive Trademark. Grounds opponent. If Sol successfully Countered a Move earlier this Control sequence, draw 1 page.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1,
+        "ifCounteredThisControl": true
+      }
+    ],
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "chad-gable-moonsault",
+    "name": "Gable’s Moonsault",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "chad-gable",
+    "rarity": 3,
+    "rulesText": "Chad Gable-exclusive Trademark. Grounded opponent only. On Connect, search/draw Chaos Theory; it costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Chaos Theory",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "raquel-rodriguez-big-boot",
+    "name": "Raquel’s Big Boot",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 5,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "grapple",
+    "method": "strike",
+    "superstarId": "raquel-rodriguez",
+    "rarity": 3,
+    "rulesText": "Raquel Rodriguez-exclusive Trademark. Grounds opponent. On Connect, opponent loses 1 Adrenaline.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended"
   },
   {
     "id": "tilt-a-whirl-headscissors",
@@ -9528,7 +9616,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Counter a Front Control Move or an Arm-targeting Submission attempt. If used as a Counter, this becomes a counter-attack.",
+    "rulesText": "Counter a Front Control Move or an Arm-targeting Submission attempt. If used as a Counter, this becomes a counter-attack and grounds the opponent on Connect.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -9717,7 +9805,7 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "kane",
     "rarity": 3,
-    "rulesText": "Kane-exclusive Trademark. On Connect: search/draw Chokeslam From Hell; it costs 1 less this Control sequence.",
+    "rulesText": "Kane-exclusive Trademark. Grounds opponent. On Connect: search/draw Chokeslam From Hell; it costs 1 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -10022,7 +10110,8 @@ export const allGameplayCards = [
     "rarity": 2,
     "universalBooster": true,
     "defensiveOnly": true,
-    "rulesText": "Reactive Action. When your opponent plays a Move they have already connected with earlier this match, play this in the Counter window. Reverse that repeated Move and gain Control.",
+    "oneUse": true,
+    "rulesText": "Reactive one-use Action. When your opponent plays a Move they have already connected with earlier this match, play this in the Counter window. Reverse that repeated Move and gain Control. This copy stays out of play after use.",
     "effect": {
       "type": "onceTooOften"
     }

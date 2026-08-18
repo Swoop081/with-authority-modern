@@ -1,8 +1,14 @@
-import { superstars } from "./superstars.js?v=0.13.2";
-import { collectionCards } from "./collection.js?v=0.13.2";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.13.2";
+import { superstars } from "./superstars.js?v=0.13.9";
+import { collectionCards } from "./collection.js?v=0.13.9";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.13.9";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.9";
 
-export const STORE_SET_ROTATION = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1"];
+export const STORE_SET_ROTATION = [
+  "summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1",
+  "raw-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1",
+  "smackdown-series-1", "survivor-series-series-1"
+];
+export function releasedStoreSetIds(now = new Date()) { return STORE_SET_ROTATION.filter(setId => isPlayerReleasedSetId(setId, now)); }
 export const STORE_BOOSTER_PRICE = 300;
 export const STORE_SUPERSTAR_PRICE = 2500;
 export const DUPLICATE_UNIVERSE_POINTS = 10;
@@ -17,13 +23,15 @@ export function storeRotation(now = new Date()) {
   const nowMs = now instanceof Date ? now.getTime() : Number(now);
   const elapsed = Math.max(0, nowMs - STORE_EPOCH_MS);
   const slot = Math.floor(elapsed / STORE_REFRESH_MS);
-  const setId = STORE_SET_ROTATION[slot % STORE_SET_ROTATION.length];
+  const available = releasedStoreSetIds(now);
+  const setId = available[slot % available.length] ?? STORE_SET_ROTATION[0];
   const nextAt = new Date(STORE_EPOCH_MS + (slot + 1) * STORE_REFRESH_MS);
   return { slot, setId, nextAt, msRemaining: Math.max(0, nextAt.getTime() - nowMs) };
 }
 
-export function storeSuperstars(setId) {
-  return roster.filter(star => star.setId === setId);
+export function storeSuperstars(setId, now = new Date()) {
+  if (!isPlayerReleasedSetId(setId, now)) return [];
+  return roster.filter(star => star.setId === setId && !star.developmentOnly);
 }
 
 export function storeLeadOffCards(starId) {

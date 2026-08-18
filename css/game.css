@@ -6201,3 +6201,85 @@ body[data-screen="live-events"] .premium-run-screen{--mode-accent:#54df92;--mode
 }
 .ccg-card.is-layered-front .ccg-live-front-move .ccg-live-type.has-requirement{top:92.2%;font-size:2.65cqw}
 .ccg-card.is-layered-front .ccg-live-front-utility .ccg-live-type{top:92.5%;font-size:2.35cqw}
+
+/* v0.13.5 — Save backup + restore. */
+.save-backup-panel{margin:10px 0 12px;padding:13px;border:1px solid rgba(93,214,132,.28);background:linear-gradient(145deg,rgba(20,47,31,.72),rgba(8,13,11,.94));border-radius:8px;display:grid;gap:11px}
+.save-backup-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start}.save-backup-head>div{display:grid;gap:4px}.save-backup-head span,.save-import-confirm span{font-size:.46rem;letter-spacing:.14em;font-weight:1000;color:#6ee79a}.save-backup-head strong{font-size:1rem}.save-backup-head p{margin:0;color:#a7b3aa;font-size:.62rem;line-height:1.45;max-width:650px}.save-backup-head em{font-style:normal;font-size:.5rem;color:#91a099;text-align:right}.save-backup-actions{display:flex;gap:7px;flex-wrap:wrap}.save-backup-actions button{min-height:38px}.save-rollback-button{border-color:rgba(241,198,101,.35)!important}.save-import-confirm{padding:10px;border:1px solid rgba(241,198,101,.3);background:rgba(23,20,10,.7);display:grid;gap:5px;border-radius:6px}.save-import-confirm strong{font-size:.8rem}.save-import-confirm p{font-size:.58rem;color:#a7a7a7;line-height:1.45;margin:0}.save-import-confirm>div{display:flex;gap:7px;margin-top:4px}.save-import-confirm>div>*{flex:1}.save-backup-note{font-size:.52rem;color:#77837c;line-height:1.4}
+@media(max-width:620px){.save-backup-head{grid-template-columns:1fr}.save-backup-head em{text-align:left}.save-backup-actions{display:grid;grid-template-columns:1fr}.save-backup-actions button{width:100%}.save-import-confirm>div{display:grid;grid-template-columns:1fr}}
+
+
+/* v0.13.9 — iPhone Season CTA + Live Event detail containment hotfix.
+   Keep the accepted layouts; only correct controls/art that can exceed the viewport. */
+.season-free-pack-cta.season-free-pack-strip{
+  display:block!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  grid-template-columns:none!important;
+}
+.season-free-pack-cta.season-free-pack-strip .season-free-pack-button{
+  display:flex!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  min-height:58px!important;
+  padding-inline:12px!important;
+  box-sizing:border-box!important;
+}
+.season-free-pack-cta.season-free-pack-strip .season-free-pack-button>[data-free-pack-action]{
+  width:100%!important;
+  min-width:0!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  font-size:clamp(.68rem,3.4vw,.82rem)!important;
+  line-height:1!important;
+}
+
+.live-tower-detail,.live-tower-detail *{box-sizing:border-box;min-width:0}
+.live-tower-detail-body,.live-tower-player,.live-tower-player-copy{width:100%;max-width:100%}
+.live-tower-player-copy .start-match,
+.live-tower-command .start-match{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  justify-self:stretch!important;
+}
+.live-tower-detail-hero{max-width:100%;overflow:hidden}
+.live-tower-detail-art{right:0!important;max-width:42%;overflow:hidden}
+.live-tower-detail-art .official-menu-superstar-photo{
+  width:100%!important;
+  max-width:100%!important;
+  height:150%!important;
+  max-height:150%!important;
+  right:0!important;
+  bottom:-3%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+}
+.live-tower-detail.event-powerhouse-collision .live-tower-detail-art{
+  right:0!important;
+  max-width:42%!important;
+}
+.live-tower-detail.event-powerhouse-collision .live-tower-detail-art .official-menu-superstar-photo{
+  height:165%!important;
+  max-height:165%!important;
+  right:0!important;
+  bottom:-5%!important;
+}
+@media(max-width:600px){
+  .season-free-pack-cta.season-free-pack-strip{margin-inline:0!important}
+  .live-tower-player{grid-template-columns:minmax(112px,34%) minmax(0,1fr)!important;gap:12px!important}
+  .live-tower-player-card{width:100%;max-width:140px}
+  .live-tower-selected-card{width:100%!important;max-width:140px!important}
+  .live-tower-detail-art{width:39%!important;height:72%!important;right:0!important;bottom:62px!important}
+  .live-tower-detail-art .official-menu-superstar-photo{height:145%!important;max-height:145%!important;bottom:-2%!important}
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art{width:40%!important;height:76%!important;right:0!important;bottom:62px!important}
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art .official-menu-superstar-photo{height:160%!important;max-height:160%!important;bottom:-4%!important}
+}
+@media(max-width:390px){
+  .live-tower-player{grid-template-columns:minmax(104px,33%) minmax(0,1fr)!important;gap:10px!important}
+  .live-tower-player-card,.live-tower-selected-card{max-width:124px!important}
+  .live-tower-detail-art{width:37%!important}
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art{width:39%!important}
+}

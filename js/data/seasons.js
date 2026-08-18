@@ -1,5 +1,5 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.2";
-import { isUnreleasedSetId } from "./release.js?v=0.13.2";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.9";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.9";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -11,7 +11,7 @@ export const DAILY_CHALLENGE_XP = 25;
 export const WEEKLY_CHALLENGE_XP = 100;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";
 export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
-export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1"];
+export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1", "raw-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1", "smackdown-series-1"];
 
 // Season 1 prestige chase: The Rock — Final Boss is assembled across the road
 // across a 100-tier road. Repeatable Rock cards are earned one copy at a time
@@ -195,7 +195,7 @@ const SEASON_1_PACK_SET_IDS = Object.freeze([
   "smackdown-series-1"
 ]);
 
-function seasonPackPoolForTier(tier) {
+function seasonPackPoolForTier(tier, now = new Date()) {
   const authored = tier <= 20
     ? SEASON_1_PACK_SET_IDS.slice(0, 3)
     : tier <= 35
@@ -205,11 +205,11 @@ function seasonPackPoolForTier(tier) {
         : tier <= 65
           ? SEASON_1_PACK_SET_IDS.slice(0, 6)
           : SEASON_1_PACK_SET_IDS;
-  const released = authored.filter(setId => !isUnreleasedSetId(setId));
+  const released = authored.filter(setId => !isUnreleasedSetId(setId, now));
   return released.length ? released : SEASON_1_PACK_SET_IDS.slice(0, 3);
 }
 
-export function tierReward(tier) {
+export function tierReward(tier, now = new Date()) {
   const n = Math.max(1, Math.min(SEASON_TIER_COUNT, Number(tier) || 1));
   const finalBoss = FINAL_BOSS_TIER_REWARDS[n];
   if (finalBoss) return { tier: n, kind: "final-boss-card", exclusive: true, ...finalBoss };
@@ -219,7 +219,7 @@ export function tierReward(tier) {
     const amount = n < 25 ? 100 : n < 50 ? 150 : n < 75 ? 200 : 250;
     return { tier: n, kind: "universe-points", amount };
   }
-  const pool = seasonPackPoolForTier(n);
+  const pool = seasonPackPoolForTier(n, now);
   const setId = pool[(n - 1) % pool.length];
   return { tier: n, setId, amount: 1, kind: "booster" };
 }
@@ -228,12 +228,12 @@ function grantSetBooster(profile, setId, amount = 1) {
   profile.boosterCreditsBySet[setId] = (profile.boosterCreditsBySet[setId] ?? 0) + amount;
   if (setId === "summerslam-series-1") profile.boosterCredits = profile.boosterCreditsBySet[setId];
 }
-export function claimSeasonTier(profile, tier) {
+export function claimSeasonTier(profile, tier, now = new Date()) {
   const state = ensure(profile), current = seasonTier(profile), n = Number(tier);
   if (!Number.isInteger(n) || n < 1 || n > SEASON_TIER_COUNT) throw new Error("Invalid Season tier");
   if (n > current) throw new Error("Season tier not reached");
   if (state.claimedTiers.includes(n)) throw new Error("Season tier already claimed");
-  const reward = tierReward(n);
+  const reward = tierReward(n, now);
   if (reward.kind === "final-boss-card") {
     if (reward.rewardType === "superstar") {
       // Tier 100 is the Foil Superstar identity only. Shared deck cards must come
@@ -252,11 +252,11 @@ export function claimSeasonTier(profile, tier) {
   state.claimedTiers.sort((a,b) => a-b);
   return reward;
 }
-export function claimAllSeasonTiers(profile) {
+export function claimAllSeasonTiers(profile, now = new Date()) {
   const current = seasonTier(profile), rewards = [];
   for (let tier = 1; tier <= current; tier += 1) {
     if (ensure(profile).claimedTiers.includes(tier)) continue;
-    rewards.push(claimSeasonTier(profile, tier));
+    rewards.push(claimSeasonTier(profile, tier, now));
   }
   return rewards;
 }
@@ -273,8 +273,9 @@ export function freePackStatus(profile, now = new Date()) {
 export function claimFreeSeasonBooster(profile, rng = Math.random, now = new Date()) {
   const status = freePackStatus(profile, now);
   if (!status.available) throw new Error("Your next free booster is still counting down.");
-  const activeSets = FEATURED_SET_IDS.filter(setId => (profile.setProgress?.[setId]?.lifecycle ?? "featured") === "featured");
-  const pool = activeSets.length ? activeSets : FEATURED_SET_IDS;
+  const releasedSets = FEATURED_SET_IDS.filter(setId => isPlayerReleasedSetId(setId, now));
+  const activeSets = releasedSets.filter(setId => (profile.setProgress?.[setId]?.lifecycle ?? "featured") === "featured");
+  const pool = activeSets.length ? activeSets : releasedSets;
   const index = Math.min(pool.length - 1, Math.floor(rng() * pool.length));
   const setId = pool[index];
   grantSetBooster(profile, setId, 1);
