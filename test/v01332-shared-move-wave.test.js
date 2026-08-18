@@ -1,18 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.32';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.32';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.33';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.33';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 
-test('v0.13.32 RAW shared additions are locked to Leg Lariat and Double Foot Stomp',()=>{
-  const lariat=card('leg-lariat'), stomp=card('double-foot-stomp');
+test('v0.13.32 RAW Leg Lariat remains locked; the later RAW Double Foot Stomp duplicate is superseded by v0.13.33',()=>{
+  const lariat=card('leg-lariat');
   assert.deepEqual({set:lariat.setId,cost:lariat.cost,damage:lariat.damage,rarity:lariat.rarity,method:lariat.method,req:lariat.requirements.strike,counter:lariat.counterState,ground:lariat.groundOpponent,boosterOnly:lariat.boosterOnly},
     {set:'raw-series-1',cost:4,damage:7,rarity:2,method:'strike',req:2,counter:'running-aerial',ground:true,boosterOnly:true});
-  assert.deepEqual({set:stomp.setId,cost:stomp.cost,damage:stomp.damage,rarity:stomp.rarity,method:stomp.method,req:stomp.requirements.agility,counter:stomp.counterState,groundedOnly:stomp.groundedOnly,boosterOnly:stomp.boosterOnly},
-    {set:'raw-series-1',cost:3,damage:5,rarity:1,method:'agility',req:1,counter:'diving-aerial',groundedOnly:true,boosterOnly:true});
   assert.equal(CARD_NUMBER_BY_ID[lariat.id].cardCode,'RAW1-040');
-  assert.equal(CARD_NUMBER_BY_ID[stomp.id].cardCode,'RAW1-041');
 });
 
 test('v0.13.32 Worlds Collide and SmackDown shared additions keep their approved limb/submission roles',()=>{

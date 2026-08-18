@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.32';
-import { superstars } from '../js/data/superstars.js?v=0.13.32';
-import { decks } from '../js/data/decks.js?v=0.13.32';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.32';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.32';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.33';
+import { superstars } from '../js/data/superstars.js?v=0.13.33';
+import { decks } from '../js/data/decks.js?v=0.13.33';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.33';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.33';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});
@@ -41,7 +41,7 @@ test('v0.12.29 signature setup chains search and discount their intended payoff'
     ['stephanie-vaquer-devils-kiss','Vaquer Inferno',3],
     ['cody-rhodes-cody-cutter','Cross Rhodes',3],
     ['pop-up-powerbomb','Stunner',4],
-    ['double-axe-handle','Flying Elbow Drop',3],
+    ['randy-savage-machos-double-axe-handle','Flying Elbow Drop',3],
     ['shotgun-dropkick','Coup de Grâce',3],
     ['sami-zayn-exploder-turnbuckle','Helluva Kick',4],
     ['seth-rollins-buckle-bomb','Curb Stomp',4],

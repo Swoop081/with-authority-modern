@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.13.32";
+import { allGameplayCards } from "./content.js?v=0.13.33";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -523,11 +523,11 @@ export const deckIds={
     "elbow-drop",
     "big-boot",
     "big-boot",
-    "bearhug",
-    "bearhug",
+    "andre-the-giant-bear-hug",
+    "andre-the-giant-bear-hug",
     "military-press-slam",
-    "corner-avalanche",
-    "corner-avalanche",
+    "andre-the-giant-choke",
+    "andre-the-giant-choke",
     "corner-avalanche",
     "andre-the-giant-double-underhook-suplex",
     "andre-the-giant-double-underhook-suplex",
@@ -646,9 +646,9 @@ export const deckIds={
     "neckbreaker",
     "hotshot",
     "diving-body-press",
-    "double-axe-handle",
-    "double-axe-handle",
-    "double-axe-handle",
+    "randy-savage-machos-double-axe-handle",
+    "randy-savage-machos-double-axe-handle",
+    "randy-savage-machos-double-axe-handle",
     "double-axe-handle",
     "leaping-rope-clothesline",
     "leaping-rope-clothesline",

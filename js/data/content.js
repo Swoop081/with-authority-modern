@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.32";
+import { enrichCounterState } from "./counter-states.js?v=0.13.33";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -3184,28 +3184,12 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": null,
     "rarity": 1,
-    "rulesText": "Grounds opponent. If played by Randy Savage, gain +1 Adrenaline, search/draw Flying Elbow Drop, and it costs 3 less this Control sequence.",
+    "rulesText": "Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [
-      {
-        "type": "gainAdrenaline",
-        "amount": 1,
-        "ifSuperstarIds": [
-          "randy-savage"
-        ]
-      },
-      {
-        "type": "search",
-        "name": "Flying Elbow Drop",
-        "discount": 3,
-        "ifSuperstarIds": [
-          "randy-savage"
-        ]
-      }
-    ],
+    "effects": [],
     "counterState": "arm-extended"
   },
   {
@@ -4311,7 +4295,7 @@ export const allGameplayCards = [
   },
   {
     "id": "double-stomp",
-    "name": "Double Stomp",
+    "name": "Double Foot Stomp",
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 5,
@@ -10334,29 +10318,6 @@ export const allGameplayCards = [
     "counterState": "running-aerial"
   },
   {
-    "id": "double-foot-stomp",
-    "name": "Double Foot Stomp",
-    "kind": "move",
-    "setId": "raw-series-1",
-    "cost": 3,
-    "damage": 5,
-    "requirements": {
-      "agility": 1
-    },
-    "moveType": "aerial",
-    "method": "agility",
-    "superstarId": null,
-    "rarity": 1,
-    "boosterOnly": true,
-    "rulesText": "Shared. Grounded opponent only.",
-    "groundOpponent": false,
-    "groundedOnly": true,
-    "stun": 0,
-    "selfDamage": 0,
-    "effects": [],
-    "counterState": "diving-aerial"
-  },
-  {
     "id": "stomp-to-the-arm",
     "name": "Stomp to the Arm",
     "kind": "move",
@@ -10508,6 +10469,147 @@ export const allGameplayCards = [
     "counterState": "leg-extended"
   },
 
+  {
+    "id": "wheelbarrow-suplex",
+    "name": "Wheelbarrow Suplex",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "andre-the-giant-choke",
+    "name": "André’s Choke",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "andre-the-giant",
+    "rarity": 3,
+    "rulesText": "André-exclusive Trademark. On Connect: opponent loses 1 Adrenaline, then search/draw André’s Bear Hug.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      },
+      {
+        "type": "search",
+        "name": "André’s Bear Hug",
+        "discount": 0
+      }
+    ],
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "andre-the-giant-bear-hug",
+    "name": "André’s Bear Hug",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 7,
+    "damage": 0,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "submission",
+    "method": "strength",
+    "superstarId": "andre-the-giant",
+    "rarity": 3,
+    "rulesText": "André-exclusive Trademark. Standing opponent only. Submission. +6 persistent Chest damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "submission": {
+      "bodyPart": "chest",
+      "pressure": 6
+    },
+    "effects": [],
+    "counterState": "torso-trapped",
+    "submissionTarget": "back",
+    "standingOnly": true
+  },
+  {
+    "id": "test-of-strength",
+    "name": "Test of Strength",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control"
+  },
+  {
+    "id": "randy-savage-machos-double-axe-handle",
+    "name": "Macho’s Double Axe Handle",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 5,
+    "damage": 9,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "randy-savage",
+    "rarity": 3,
+    "rulesText": "Savage-exclusive Trademark. Grounds opponent. On Connect: gain +1 Adrenaline, then search/draw Flying Elbow Drop; it costs 3 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      },
+      {
+        "type": "search",
+        "name": "Flying Elbow Drop",
+        "discount": 3
+      }
+    ],
+    "counterState": "diving-aerial"
+  },
 
 ];
 

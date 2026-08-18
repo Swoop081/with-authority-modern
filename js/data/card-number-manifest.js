@@ -3115,12 +3115,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "RAW1-040"
   },
   {
-    "id": "double-foot-stomp",
-    "setId": "raw-series-1",
-    "cardNumber": 41,
-    "cardCode": "RAW1-041"
-  },
-  {
     "id": "stomp-to-the-arm",
     "setId": "worlds-collide-series-1",
     "cardNumber": 35,
@@ -3155,6 +3149,36 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "survivor-series-series-1",
     "cardNumber": 52,
     "cardCode": "SVS1-052"
+  },
+  {
+    "id": "andre-the-giant-choke",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 90,
+    "cardCode": "HOF1-090"
+  },
+  {
+    "id": "andre-the-giant-bear-hug",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 91,
+    "cardCode": "HOF1-091"
+  },
+  {
+    "id": "test-of-strength",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 92,
+    "cardCode": "HOF1-092"
+  },
+  {
+    "id": "randy-savage-machos-double-axe-handle",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 93,
+    "cardCode": "HOF1-093"
+  },
+  {
+    "id": "wheelbarrow-suplex",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 53,
+    "cardCode": "SVS1-053"
   }
 
 ]);
