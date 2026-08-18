@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.26';
-import { canAttemptPin } from '../js/engine/rules.js?v=0.13.26';
-import { superstars } from '../js/data/superstars.js?v=0.13.26';
-import { decks } from '../js/data/decks.js?v=0.13.26';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.27';
+import { canAttemptPin } from '../js/engine/rules.js?v=0.13.27';
+import { superstars } from '../js/data/superstars.js?v=0.13.27';
+import { decks } from '../js/data/decks.js?v=0.13.27';
 
 function openCoverWindow(engine, attackerId='p1') {
   const state = engine.state();

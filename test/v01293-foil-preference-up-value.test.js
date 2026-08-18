@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.26';
-import { decks } from '../js/data/decks.js?v=0.13.26';
-import { collectionCards } from '../js/data/collection.js?v=0.13.26';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.26';
-import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.26';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.26';
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from '../js/data/store.js?v=0.13.26';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.27';
+import { decks } from '../js/data/decks.js?v=0.13.27';
+import { collectionCards } from '../js/data/collection.js?v=0.13.27';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.27';
+import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.27';
+import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.27';
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from '../js/data/store.js?v=0.13.27';
 
 const byId = new Map(collectionCards.map(card=>[card.id,card]));
 

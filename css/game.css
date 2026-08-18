@@ -6805,3 +6805,191 @@ body[data-screen="seasons"] .season-end-countdown strong{white-space:nowrap!impo
   body[data-screen="seasons"] .season-road-reward button{grid-column:auto!important;justify-self:end!important;min-height:28px!important;padding:4px 7px!important;font-size:.38rem!important;white-space:nowrap!important}
   body[data-screen="seasons"] .season-release-road{padding:7px!important}
 }
+
+/* v0.13.27 — iPhone presentation completion + global primary CTA language. */
+
+/* The Championship Road FIGHT MATCH treatment is now the canonical primary CTA.
+   Primary buttons keep each screen's accent colour, but share the same size,
+   rounded silhouette, bold display weight, contrast and depth everywhere. */
+.start-match,.primary{
+  min-height:52px;
+  padding:12px 18px!important;
+  border-radius:16px!important;
+  border:1px solid color-mix(in srgb,var(--mode-accent,#e83d48) 76%,white 12%)!important;
+  background:linear-gradient(180deg,
+    color-mix(in srgb,var(--mode-accent,#e83d48) 91%,white 9%),
+    color-mix(in srgb,var(--mode-accent,#e83d48) 82%,black 18%))!important;
+  color:#fff!important;
+  box-shadow:0 10px 24px color-mix(in srgb,var(--mode-accent,#e83d48) 27%,transparent),inset 0 1px 0 rgba(255,255,255,.18)!important;
+  font-size:.76rem!important;
+  line-height:1.05!important;
+  font-weight:1000!important;
+  letter-spacing:.035em!important;
+  text-transform:uppercase!important;
+  text-align:center!important;
+}
+.start-match:hover,.primary:hover{filter:brightness(1.08) saturate(1.08)}
+.start-match:disabled,.primary:disabled{filter:saturate(.34) brightness(.68)!important;box-shadow:none!important;opacity:.62!important}
+
+/* Keep compact inline controls secondary; anything that advances/claims/buys uses
+   the stronger primary silhouette above. */
+.premium-challenge-card>button.primary,.premium-milestone-row>button.primary,
+.store-superstar-card>.start-match,.store-offer-price>.start-match{
+  min-height:48px!important;
+}
+
+/* Season 1 gets a brighter, richer purple identity instead of muted charcoal. */
+body[data-screen="seasons"]{
+  --mode-accent:#a94cff;
+  --mode-accent-2:#49e6ff;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(171,70,255,.34),transparent 34%),
+    radial-gradient(circle at 88% 24%,rgba(58,220,255,.18),transparent 31%),
+    linear-gradient(180deg,#12091f 0%,#100821 44%,#090812 100%)!important;
+}
+body[data-screen="seasons"] .season-road-redesign{
+  background:linear-gradient(180deg,rgba(63,23,112,.18),rgba(28,13,64,.08) 55%,transparent)!important;
+}
+body[data-screen="seasons"] .season-road-hero{
+  border-color:rgba(189,90,255,.68)!important;
+  background:
+    radial-gradient(circle at 79% 34%,rgba(75,229,255,.29),transparent 26%),
+    radial-gradient(circle at 28% 92%,rgba(185,74,255,.45),transparent 47%),
+    linear-gradient(135deg,#29104d,#100b24 62%,#250914)!important;
+  box-shadow:0 14px 36px rgba(86,24,151,.28),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+body[data-screen="seasons"] .season-road-hero-copy>span{color:#e0baff!important}
+body[data-screen="seasons"] .season-road-hero h1 em{color:#55e5ff!important;text-shadow:0 0 20px rgba(78,222,255,.24)!important}
+body[data-screen="seasons"] .season-end-countdown{
+  border-color:rgba(203,126,255,.55)!important;
+  background:linear-gradient(145deg,rgba(75,27,127,.75),rgba(15,11,31,.88))!important;
+  box-shadow:0 0 20px rgba(153,67,235,.14)!important;
+}
+body[data-screen="seasons"] .season-road-command>div{
+  border-color:rgba(183,91,255,.28)!important;
+  background:linear-gradient(145deg,rgba(52,25,88,.93),rgba(13,10,25,.96))!important;
+}
+body[data-screen="seasons"] .season-road-command small{color:#c697ff!important}
+body[data-screen="seasons"] .season-free-pack-button{
+  min-height:54px!important;
+  border-color:#c87cff!important;
+  background:linear-gradient(180deg,#b85cff,#7432d3)!important;
+  box-shadow:0 12px 28px rgba(139,61,224,.33),inset 0 1px 0 rgba(255,255,255,.18)!important;
+}
+body[data-screen="seasons"] .season-road-toolbar{
+  border-radius:13px;
+  padding:8px 9px!important;
+  background:linear-gradient(90deg,rgba(132,55,218,.20),rgba(51,214,255,.07),transparent)!important;
+}
+body[data-screen="seasons"] .season-road-toolbar span{color:#f4e8ff!important;font-size:.78rem!important}
+body[data-screen="seasons"] .season-claim-all{
+  min-height:48px!important;
+  padding:10px 14px!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,#bb59ff,#7634d8)!important;
+  border-color:#ca86ff!important;
+}
+body[data-screen="seasons"] .season-reward-road{
+  border-radius:19px;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(167,72,245,.13),transparent 31%),
+    radial-gradient(circle at 83% 61%,rgba(70,211,255,.07),transparent 32%),
+    rgba(22,10,49,.38)!important;
+}
+body[data-screen="seasons"] .season-road-spine{
+  background:linear-gradient(#bf5cff,#6f5cff 34%,#45dcff 65%,#f6c54d)!important;
+  box-shadow:0 0 16px rgba(173,78,255,.48)!important;
+}
+body[data-screen="seasons"] .season-road-node{
+  border-color:rgba(168,86,245,.24)!important;
+  background:linear-gradient(145deg,rgba(42,22,72,.95),rgba(10,9,20,.97))!important;
+}
+body[data-screen="seasons"] .season-road-node.reached{
+  border-color:rgba(173,81,250,.52)!important;
+  background:linear-gradient(145deg,rgba(71,30,119,.96),rgba(15,10,30,.98))!important;
+}
+body[data-screen="seasons"] .season-road-node.claimed{
+  border-color:rgba(74,223,142,.45)!important;
+  background:linear-gradient(145deg,rgba(34,70,64,.62),rgba(15,10,30,.96))!important;
+}
+body[data-screen="seasons"] .season-road-node.current{
+  border-color:#d081ff!important;
+  box-shadow:0 0 0 2px rgba(202,115,255,.22),0 0 28px rgba(172,75,244,.34)!important;
+  background:linear-gradient(145deg,rgba(100,43,160,.98),rgba(26,13,55,.98))!important;
+}
+body[data-screen="seasons"] .season-road-tier{
+  background:linear-gradient(145deg,#7439bd,#c36cff)!important;
+  box-shadow:0 0 13px rgba(181,88,255,.28)!important;
+}
+body[data-screen="seasons"] .season-road-reward strong{font-weight:1000!important;letter-spacing:.015em!important}
+body[data-screen="seasons"] .season-road-reward button{
+  min-height:44px!important;
+  padding:8px 13px!important;
+  border-radius:13px!important;
+  font-size:.54rem!important;
+}
+
+/* Final Boss unlock nodes use reward-specific colour identities so major Rock
+   milestones are instantly distinguishable from ordinary Season rewards. */
+body[data-screen="seasons"] .season-road-node.final-boss-node{opacity:1!important}
+body[data-screen="seasons"] .season-road-node.final-boss-exclusive-move{
+  border-color:rgba(255,142,65,.72)!important;
+  background:radial-gradient(circle at 88% 36%,rgba(255,113,45,.22),transparent 42%),linear-gradient(145deg,#3a1a13,#130c18)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-exclusive-move .season-road-tier{background:linear-gradient(145deg,#e7672d,#ffb155)!important;color:#120806!important}
+body[data-screen="seasons"] .season-road-node.final-boss-support{
+  border-color:rgba(69,220,255,.72)!important;
+  background:radial-gradient(circle at 88% 36%,rgba(50,203,255,.21),transparent 42%),linear-gradient(145deg,#0f2f43,#100d1d)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-support .season-road-tier{background:linear-gradient(145deg,#1fa9d3,#70ecff)!important;color:#061016!important}
+body[data-screen="seasons"] .season-road-node.final-boss-signature{
+  border-color:rgba(246,198,76,.78)!important;
+  background:radial-gradient(circle at 88% 36%,rgba(246,198,76,.20),transparent 42%),linear-gradient(145deg,#382a0f,#120e18)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-signature .season-road-tier{background:linear-gradient(145deg,#bd861e,#ffe06e)!important;color:#100b02!important}
+body[data-screen="seasons"] .season-road-node.final-boss-finisher{
+  border-color:rgba(255,72,89,.78)!important;
+  background:radial-gradient(circle at 88% 36%,rgba(255,61,79,.23),transparent 42%),linear-gradient(145deg,#431019,#140b18)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-finisher .season-road-tier{background:linear-gradient(145deg,#d52b3e,#ff6f78)!important;color:#fff!important}
+body[data-screen="seasons"] .season-road-node.final-boss-action{
+  border-color:rgba(191,95,255,.82)!important;
+  background:radial-gradient(circle at 88% 36%,rgba(181,72,255,.25),transparent 42%),linear-gradient(145deg,#34134a,#120b19)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-action .season-road-tier{background:linear-gradient(145deg,#7d36c2,#cf73ff)!important;color:#fff!important}
+body[data-screen="seasons"] .season-road-node.final-boss-entrance{
+  border-color:rgba(89,122,255,.82)!important;
+  background:radial-gradient(circle at 88% 36%,rgba(77,113,255,.25),transparent 42%),linear-gradient(145deg,#142356,#100b1c)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-entrance .season-road-tier{background:linear-gradient(145deg,#3856d5,#7f9cff)!important;color:#fff!important}
+body[data-screen="seasons"] .season-road-node.final-boss-superstar{
+  border-color:#ffe07a!important;
+  background:radial-gradient(circle at 85% 30%,rgba(255,218,105,.30),transparent 45%),radial-gradient(circle at 15% 80%,rgba(181,76,255,.22),transparent 40%),linear-gradient(145deg,#3d2c0b,#1a1028)!important;
+  box-shadow:0 0 0 2px rgba(255,215,99,.13),0 0 34px rgba(238,190,63,.23)!important;
+}
+body[data-screen="seasons"] .season-road-node.final-boss-superstar .season-road-tier{background:linear-gradient(145deg,#d69f27,#fff09a)!important;color:#100b02!important;box-shadow:0 0 18px rgba(255,214,91,.42)!important}
+
+@media(max-width:600px){
+  .start-match,.primary{min-height:50px;padding:11px 14px!important;border-radius:15px!important;font-size:.70rem!important}
+  body[data-screen="seasons"] .season-road-redesign{gap:8px!important}
+  body[data-screen="seasons"] .season-road-hero{min-height:158px!important}
+  body[data-screen="seasons"] .season-road-hero-copy{min-height:158px!important}
+  body[data-screen="seasons"] .season-road-command>div{padding:7px!important}
+  body[data-screen="seasons"] .season-road-toolbar{padding:7px 6px!important}
+  body[data-screen="seasons"] .season-claim-all{min-height:46px!important;font-size:.54rem!important}
+  body[data-screen="seasons"] .season-reward-road{gap:6px!important;padding:6px 0 16px!important}
+  body[data-screen="seasons"] .season-road-node,
+  body[data-screen="seasons"] .season-road-node.road-left,
+  body[data-screen="seasons"] .season-road-node.road-right{
+    min-height:64px!important;
+    padding:7px 9px!important;
+    border-radius:14px!important;
+  }
+  body[data-screen="seasons"] .season-road-node.major{min-height:72px!important}
+  body[data-screen="seasons"] .season-road-tier{width:42px!important;height:42px!important}
+  body[data-screen="seasons"] .season-road-reward{grid-template-columns:27px minmax(0,1fr) auto!important;gap:6px!important}
+  body[data-screen="seasons"] .season-road-icon{width:27px!important;height:27px!important}
+  body[data-screen="seasons"] .season-road-reward strong{font-size:.60rem!important}
+  body[data-screen="seasons"] .season-road-reward small{font-size:.34rem!important}
+  body[data-screen="seasons"] .season-road-reward button{min-height:42px!important;padding:7px 10px!important;font-size:.48rem!important}
+}

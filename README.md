@@ -1,10 +1,14 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.26 — Season Road iPhone Geometry Hotfix**.
+Current working build: **v0.13.27 — iPhone Presentation Completion + Global CTA Pass**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Events, Money in the Bank, King of the Ring and Championship Road.
 
 ## Current build
+- **Primary action buttons now use one canonical visual language** based on Championship Road’s FIGHT MATCH CTA: large rounded touch targets, bold high-contrast display text, saturated mode colour and stronger depth. Secondary/navigation controls remain quieter.
+- **Season 1 is brighter and more graphic.** Richer purple/cyan lighting now carries through the hero, countdown, command band and reward road; Claim/Claim All/Free Booster controls use the stronger CTA style.
+- **Final Boss reward tiers are colour-coded by reward identity** so The Rock milestones stand apart from ordinary purple tiers: orange exclusive Moves, cyan Support, gold Trademarks/signatures, red Finishers, purple Actions, blue Entrance and premium gold for the Tier 100 Superstar.
+- The v0.13.26 full-width iPhone Season timeline and vertical-only current-tier focus remain intact, with slightly larger reward nodes/CTAs but no return of the Safari horizontal-scroll regression.
 - **Season Road iPhone geometry is hotfixed.** Safari no longer uses `scrollIntoView()` on alternating half-width tier nodes, which could horizontally shift the entire Season screen and make the hero/countdown appear clipped while every other tier looked missing. Current-tier focus is now vertical-only and explicitly resets horizontal scroll to zero.
 - On iPhone, the 100-tier reward road now renders as a **compact full-width timeline** with the spine anchored safely inside the viewport, all tiers visible in sequence, smaller vertical spacing, a shorter Final Boss hero, compact command stats, and a contained countdown/free-booster strip.
 - External iPhone testing identified a Brock Action reliability/feedback issue. **The Advocate’s Plan**, **The Beast Incarnate**, and **Eat. Sleep. Conquer. Repeat.** now have explicit, tested runtime behavior. Eat. Sleep. Conquer. Repeat. now correctly lets the player choose the page to ditch after drawing instead of automatically discarding the drawn page. Beast Incarnate visibly auto-triggers against a 10+ damage Move, and Advocate’s Plan clearly unlocks after Brock’s German and applies its F-5 search/-2 Cost effect.
@@ -29,4 +33,4 @@ A mobile-first WWE collectible card game prototype with 60-page Superstar decks,
 
 Season 1 release schedule remains: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
 
-See `RELEASE-NOTES-v0.13.26.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.27.md` and `BUILD-CERTIFICATION.md`.

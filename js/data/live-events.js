@@ -1,5 +1,5 @@
-import { isUnreleasedSetId } from "./release.js?v=0.13.26";
-import { superstars } from "./superstars.js?v=0.13.26";
+import { isUnreleasedSetId } from "./release.js?v=0.13.27";
+import { superstars } from "./superstars.js?v=0.13.27";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 50;
