@@ -1,4 +1,4 @@
-import { isUnreleasedSetId } from "./release.js?v=0.12.97";
+import { isUnreleasedSetId } from "./release.js?v=0.13.2";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 50;
@@ -198,7 +198,7 @@ export const WEEKLY_TOWERS = Object.freeze([
   }
 ]);
 
-// v0.12.97 — 24-hour Birthday Bash towers for the currently released launch roster only.
+// v0.12.98 — 24-hour Birthday Bash towers for the currently released launch roster only.
 // Future authored Superstars are deliberately omitted until their sets are promoted live.
 export const RELEASED_BIRTHDAY_ROSTER_IDS = Object.freeze([
   "iyo-sky", "mankind", "hulk-hogan", "bayley", "cm-punk", "paige",

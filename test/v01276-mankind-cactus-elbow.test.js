@@ -1,16 +1,16 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.97";
-import { decks } from "../js/data/decks.js?v=0.12.97";
-import { migrateProfile } from "../js/data/profile.js?v=0.12.97";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.2";
+import { decks } from "../js/data/decks.js?v=0.13.2";
+import { migrateProfile } from "../js/data/profile.js?v=0.13.2";
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 
-test("v0.12.76 replaces Mankind's Running Knee to the Corner with Cactus Elbow in HOF1-026", () => {
+test("v0.12.76 replaces Mankind's Running Knee to the Corner with the HOF1-026 Mankind elbow card", () => {
   const elbow = byId("mankind-cactus-elbow");
   assert.ok(elbow);
-  assert.equal(elbow.name, "Cactus Elbow");
+  assert.equal(elbow.name, "Mankind’s Elbow Drop");
   assert.equal(elbow.superstarId, "mankind");
   assert.equal(elbow.rarity, 3);
   assert.equal(elbow.cost, 5);
@@ -20,7 +20,7 @@ test("v0.12.76 replaces Mankind's Running Knee to the Corner with Cactus Elbow i
   assert.equal(byId("mankind-running-knee-to-the-corner"), undefined);
 });
 
-test("v0.12.76 Mankind authored deck carries three Cactus Elbows and no retired knees", () => {
+test("v0.12.76 Mankind authored deck carries three Mankind’s Elbow Drops and no retired knees", () => {
   const ids = decks.mankind.map(card => card.id);
   assert.equal(ids.filter(id => id === "mankind-cactus-elbow").length, 3);
   assert.equal(ids.includes("mankind-running-knee-to-the-corner"), false);

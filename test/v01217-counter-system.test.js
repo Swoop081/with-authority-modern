@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.12.97';
-import { decks } from '../js/data/decks.js?v=0.12.97';
-import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.12.97';
-import { canCounter } from '../js/engine/rules.js?v=0.12.97';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.97';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.2';
+import { decks } from '../js/data/decks.js?v=0.13.2';
+import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.13.2';
+import { canCounter } from '../js/engine/rules.js?v=0.13.2';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.2';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -66,7 +66,7 @@ test('v0.12.17 all recommended decks are 60 pages with 12 Momentum and at least 
 
 test('v0.12.17 match hand ordering and pin-escape spectacle are wired in the runtime UI',()=>{
   const src=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
-  assert.match(src,/Actions\/Specials · playable Moves by highest damage/);
+  assert.match(src,/Actions · playable Moves by highest damage/);
   assert.match(src,/damageRank = -\(Number\(card\.damage\) \|\| 0\)/);
   assert.match(src,/PIN_ESCAPED_SPECIAL/);
   assert.match(src,/SHOULDER UP!/);

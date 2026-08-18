@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.12.97";
-import { collectionCards } from "./collection.js?v=0.12.97";
-import { superstars } from "./superstars.js?v=0.12.97";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.12.97";
-import { isPlayerReleasedSetId } from "./release.js?v=0.12.97";
+import { decks } from "./decks.js?v=0.13.2";
+import { collectionCards } from "./collection.js?v=0.13.2";
+import { superstars } from "./superstars.js?v=0.13.2";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.2";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.2";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -13,7 +13,7 @@ export const DECK_LAB_CATEGORIES = Object.freeze([
   { id: "high", label: "High-Level Moves" },
   { id: "mid", label: "Mid-Level Moves" },
   { id: "low", label: "Low-Level Moves" },
-  { id: "utility", label: "Actions / Specials" },
+  { id: "utility", label: "Actions" },
   { id: "momentum", label: "Momentum" }
 ]);
 

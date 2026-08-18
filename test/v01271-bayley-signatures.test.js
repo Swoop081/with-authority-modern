@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.97";
-import { decks } from "../js/data/decks.js?v=0.12.97";
-import { superstars } from "../js/data/superstars.js?v=0.12.97";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.97";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.97";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.2";
+import { decks } from "../js/data/decks.js?v=0.13.2";
+import { superstars } from "../js/data/superstars.js?v=0.13.2";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.2";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.2";
 
 const byId = id => allGameplayCards.find(c => c.id === id);
 
@@ -38,7 +38,7 @@ test("v0.12.71 Bayley deck replaces both generic moves without changing deck siz
   assert.equal(ids.filter(id => id === "bayley-to-belly").length, 3);
   assert.equal(ids.filter(id => id === "diving-elbow-drop").length, 0);
   assert.equal(ids.filter(id => id === "belly-to-belly-suplex").length, 0);
-  assert.deepEqual(superstars.bayley.signatures, ["bayley-to-belly", "bayley-diving-elbow", "bayley-rose-plant"]);
+  assert.deepEqual(superstars.bayley.signatures, ["bayley-to-belly", "bayley-diving-elbow", "bayley-rose-plant", "bayley-ding-dong-hello"]);
 });
 
 test("v0.12.71 shared versions remain generic for other Superstars", () => {

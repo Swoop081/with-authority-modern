@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.12.97";
+import { allGameplayCards } from "./content.js?v=0.13.2";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -51,17 +51,17 @@ export const deckIds={
     "momentum-technical",
     "special-iyo-sky",
     "sidestep",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "game-plan",
     "fire-up",
     "crowd-support",
-    "sidestep",
-    "running-forearm",
-    "running-forearm",
-    "diving-crossbody",
-    "diving-crossbody",
-    "diving-crossbody"
+    "up-and-over",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "duck",
+    "sidestep"
   ],
   "mankind": [
     "momentum-strike",
@@ -77,8 +77,8 @@ export const deckIds={
     "stomp",
     "forearm-smash",
     "forearm-smash",
-    "clothesline",
-    "clothesline",
+    "mankind-clothesline",
+    "mankind-clothesline",
     "body-slam",
     "body-slam",
     "knee-drop",
@@ -86,11 +86,11 @@ export const deckIds={
     "ddt",
     "ddt",
     "neckbreaker",
-    "neckbreaker",
+    "chain-wrestling",
     "backbreaker",
-    "backbreaker",
+    "duck",
     "piledriver",
-    "piledriver",
+    "duck",
     "mankind-cactus-elbow",
     "mankind-cactus-elbow",
     "mankind-cactus-elbow",
@@ -111,19 +111,19 @@ export const deckIds={
     "momentum-strike",
     "special-mankind",
     "no-sell",
-    "duck",
+    "headbutt",
     "chain-wrestling",
     "shoulder-up",
-    "fire-up",
+    "mankind-have-a-nice-day",
     "crowd-support",
-    "no-sell",
-    "duck",
-    "chain-wrestling",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "stomp",
-    "stomp"
+    "jawbreaker",
+    "jawbreaker",
+    "jawbreaker",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "the-rock": [
     "momentum-strength",
@@ -175,17 +175,17 @@ export const deckIds={
     "momentum-strike",
     "special-the-rock",
     "no-sell",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "fire-up",
     "crowd-support",
     "people-championship",
-    "no-sell",
-    "body-slam",
-    "body-slam",
-    "clothesline",
-    "clothesline",
-    "the-rock-lay-the-smack-down"
+    "jawbreaker",
+    "dodge",
+    "jawbreaker",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "hulk-hogan": [
     "momentum-strength",
@@ -237,17 +237,17 @@ export const deckIds={
     "momentum-strike",
     "special-hulk-hogan",
     "no-sell",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
-    "fire-up",
+    "hulk-hogan-whatcha-gonna-do",
     "crowd-support",
-    "no-sell",
-    "duck",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "shoulder-tackle",
-    "shoulder-tackle"
+    "jawbreaker",
+    "jawbreaker",
+    "dodge",
+    "punch",
+    "rollover-counter",
+    "jawbreaker",
+    "jawbreaker"
   ],
   "bayley": [
     "momentum-technical",
@@ -298,18 +298,18 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-bayley",
-    "chain-wrestling",
-    "duck",
+    "arm-drag",
+    "jawbreaker",
     "sidestep",
     "shoulder-up",
-    "game-plan",
+    "bayley-ding-dong-hello",
     "fire-up",
     "crowd-support",
-    "running-forearm",
-    "running-forearm",
-    "stomp",
-    "stomp",
-    "stomp"
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "cm-punk": [
     "momentum-strike",
@@ -359,19 +359,19 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-cm-punk",
-    "chain-wrestling",
-    "duck",
+    "punch",
+    "jawbreaker",
     "shoulder-up",
-    "sidestep",
+    "arm-drag-counter",
     "game-plan",
     "fire-up",
-    "chain-wrestling",
-    "duck",
-    "running-forearm",
-    "running-forearm",
-    "running-forearm",
-    "diving-crossbody",
-    "diving-crossbody"
+    "arm-drag-counter",
+    "jawbreaker",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "paige": [
     "momentum-technical",
@@ -389,19 +389,19 @@ export const deckIds={
     "knee-strike",
     "knee-strike",
     "knee-strike",
+    "paige-superkick",
     "short-arm-clothesline",
     "short-arm-clothesline",
-    "short-arm-clothesline",
-    "superkick",
-    "superkick",
-    "superkick",
+    "paige-superkick",
+    "duck",
+    "standing-switch",
     "ddt",
     "neckbreaker",
     "neckbreaker",
     "vertical-suplex",
     "vertical-suplex",
     "fallaway-slam",
-    "fallaway-slam",
+    "dodge",
     "paige-rope-hung-knee-strikes",
     "paige-rope-hung-knee-strikes",
     "paige-paige-turner",
@@ -424,16 +424,16 @@ export const deckIds={
     "momentum-technical",
     "special-paige",
     "chain-wrestling",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
-    "game-plan",
+    "up-and-over",
     "fire-up",
-    "crowd-support",
-    "running-forearm",
-    "running-forearm",
-    "stomp",
-    "stomp",
-    "stomp"
+    "backflip-counter",
+    "punch",
+    "headbutt",
+    "jawbreaker",
+    "jawbreaker",
+    "block"
   ],
   "seth-rollins": [
     "momentum-agility",
@@ -442,13 +442,13 @@ export const deckIds={
     "running-forearm",
     "sling-blade",
     "dropkick",
-    "running-forearm",
-    "sling-blade",
+    "jawbreaker",
+    "jawbreaker",
     "tornado-ddt",
     "enzuigiri",
     "enzuigiri",
     "superkick",
-    "superkick",
+    "jawbreaker",
     "seth-rollins-turnbuckle-sto",
     "seth-rollins-turnbuckle-sto",
     "seth-rollins-springboard-knee",
@@ -484,28 +484,28 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-seth-rollins",
-    "sidestep",
-    "duck",
+    "knee-to-the-gut",
+    "knee-to-the-gut",
     "shoulder-up",
     "game-plan",
     "fire-up",
     "crowd-support",
-    "sidestep",
-    "chain-wrestling",
-    "running-forearm",
-    "running-forearm",
-    "running-forearm",
-    "sling-blade"
+    "jawbreaker",
+    "dodge",
+    "knee-to-the-gut",
+    "rollover-counter",
+    "jawbreaker",
+    "knee-to-the-gut"
   ],
   "andre-the-giant": [
     "momentum-strength",
     "momentum-strike",
-    "headbutt",
+    "andre-the-giant-headbutt",
     "chop",
     "body-slam",
     "punch",
     "punch",
-    "headbutt",
+    "andre-the-giant-headbutt",
     "headbutt",
     "headbutt",
     "chop",
@@ -525,7 +525,7 @@ export const deckIds={
     "big-boot",
     "bearhug",
     "bearhug",
-    "bearhug",
+    "military-press-slam",
     "corner-avalanche",
     "corner-avalanche",
     "corner-avalanche",
@@ -551,19 +551,19 @@ export const deckIds={
     "shoulder-up",
     "manager-bobby-heenan",
     "fire-up",
-    "no-sell",
-    "duck",
-    "chop",
-    "shoulder-tackle",
-    "shoulder-tackle",
-    "shoulder-tackle",
-    "stomp"
+    "jawbreaker",
+    "jawbreaker",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "backflip-counter"
   ],
   "stephanie-vaquer": [
     "momentum-technical",
     "momentum-agility",
     "punch",
-    "dragon-screw",
+    "stephanie-vaquer-dragon-screw",
     "dropkick",
     "punch",
     "running-forearm",
@@ -572,23 +572,23 @@ export const deckIds={
     "knee-strike",
     "knee-strike",
     "superkick",
-    "superkick",
-    "superkick",
+    "dodge",
+    "chain-wrestling",
     "dropkick",
     "arm-drag",
     "arm-drag",
     "ddt",
     "ddt",
-    "dragon-screw",
-    "dragon-screw",
+    "stephanie-vaquer-dragon-screw",
+    "stephanie-vaquer-dragon-screw",
     "neckbreaker",
     "neckbreaker",
     "neckbreaker",
     "diving-crossbody",
     "diving-crossbody",
-    "diving-crossbody",
+    "duck",
     "reverse-suplex",
-    "reverse-suplex",
+    "chain-wrestling",
     "stephanie-vaquer-svb",
     "stephanie-vaquer-svb",
     "stephanie-vaquer-svb",
@@ -608,18 +608,18 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-stephanie-vaquer",
-    "chain-wrestling",
+    "punch",
     "sidestep",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "game-plan",
     "fire-up",
-    "chain-wrestling",
-    "running-forearm",
-    "running-forearm",
-    "running-forearm",
-    "knee-strike",
-    "knee-strike"
+    "jawbreaker",
+    "arm-drag",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "randy-savage": [
     "momentum-strike",
@@ -631,9 +631,9 @@ export const deckIds={
     "punch",
     "back-elbow",
     "back-elbow",
-    "knee-drop",
+    "diving-crossbody",
     "clothesline",
-    "clothesline",
+    "diving-body-press",
     "elbow-drop",
     "elbow-drop",
     "running-knee",
@@ -641,19 +641,19 @@ export const deckIds={
     "diving-crossbody",
     "diving-crossbody",
     "vertical-suplex",
-    "vertical-suplex",
+    "diving-crossbody",
     "neckbreaker",
     "neckbreaker",
     "hotshot",
-    "hotshot",
+    "diving-body-press",
     "double-axe-handle",
     "double-axe-handle",
     "double-axe-handle",
     "double-axe-handle",
     "leaping-rope-clothesline",
     "leaping-rope-clothesline",
-    "diving-body-press",
-    "diving-body-press",
+    "sidestep",
+    "duck",
     "randy-savage-flying-elbow-drop",
     "randy-savage-flying-elbow-drop",
     "momentum-agility",
@@ -671,17 +671,17 @@ export const deckIds={
     "sidestep",
     "shoulder-up",
     "manager-miss-elizabeth",
-    "fire-up",
+    "randy-savage-cream-of-the-crop",
     "crowd-support",
-    "duck",
-    "sidestep",
+    "jawbreaker",
+    "jawbreaker",
     "shoulder-up",
     "manager-miss-elizabeth",
-    "clothesline",
-    "clothesline",
-    "clothesline",
-    "elbow-drop",
-    "elbow-drop"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "catch-the-foot"
   ],
   "roman-reigns": [
     "momentum-strength",
@@ -732,18 +732,18 @@ export const deckIds={
     "momentum-strike",
     "momentum-strike",
     "special-roman-reigns",
-    "duck",
+    "jawbreaker",
     "no-sell",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "duck",
-    "no-sell",
-    "shoulder-tackle",
-    "shoulder-tackle",
-    "shoulder-tackle",
-    "throat-thrust",
-    "throat-thrust"
+    "jawbreaker",
+    "arm-drag-counter",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "charlotte-flair": [
     "momentum-technical",
@@ -772,9 +772,9 @@ export const deckIds={
     "diving-crossbody",
     "figure-four-leglock",
     "figure-four-leglock",
-    "spear",
-    "spear",
-    "spear",
+    "charlotte-flair-spear",
+    "charlotte-flair-spear",
+    "charlotte-flair-spear",
     "moonsault",
     "moonsault",
     "moonsault",
@@ -794,18 +794,18 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-charlotte-flair",
-    "chain-wrestling",
-    "duck",
+    "punch",
+    "arm-drag",
     "sidestep",
     "shoulder-up",
     "game-plan",
     "fire-up",
-    "chain-wrestling",
-    "big-boot",
-    "big-boot",
-    "ddt",
-    "ddt",
-    "ddt"
+    "jawbreaker",
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "kevin-owens": [
     "momentum-strike",
@@ -831,11 +831,11 @@ export const deckIds={
     "spinning-torture-rack-neckbreaker",
     "spinning-torture-rack-neckbreaker",
     "powerbomb",
-    "powerbomb",
+    "jawbreaker",
     "frog-splash",
-    "frog-splash",
-    "swanton-bomb",
-    "swanton-bomb",
+    "standing-switch",
+    "punch",
+    "duck",
     "pop-up-powerbomb",
     "pop-up-powerbomb",
     "pop-up-powerbomb",
@@ -855,19 +855,19 @@ export const deckIds={
     "momentum-strike",
     "special-kevin-owens",
     "no-sell",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "fire-up",
     "crowd-support",
     "sidestep",
-    "no-sell",
-    "duck",
+    "jawbreaker",
+    "jawbreaker",
     "shoulder-up",
-    "running-forearm",
-    "running-forearm",
-    "senton",
-    "senton",
-    "senton"
+    "punch",
+    "jawbreaker",
+    "rollover-counter",
+    "standing-switch",
+    "block"
   ],
   "kane": [
     "momentum-strength",
@@ -885,7 +885,7 @@ export const deckIds={
     "stomp",
     "body-slam",
     "body-slam",
-    "short-arm-clothesline",
+    "kane-flying-clothesline",
     "short-arm-clothesline",
     "short-arm-clothesline",
     "big-boot",
@@ -900,8 +900,8 @@ export const deckIds={
     "kane-two-handed-choke-lift",
     "kane-two-handed-choke-lift",
     "flying-clothesline",
-    "flying-clothesline",
-    "flying-clothesline",
+    "standing-switch",
+    "no-sell",
     "kane-chokeslam-from-hell",
     "kane-chokeslam-from-hell",
     "kane-chokeslam-from-hell",
@@ -919,17 +919,17 @@ export const deckIds={
     "momentum-strike",
     "special-kane",
     "no-sell",
-    "duck",
+    "punch",
     "shoulder-up",
     "sidestep",
     "fire-up",
     "crowd-support",
-    "no-sell",
-    "stomp",
-    "stomp",
-    "stomp",
-    "throat-thrust",
-    "throat-thrust"
+    "jawbreaker",
+    "jawbreaker",
+    "jawbreaker",
+    "rollover-counter",
+    "jawbreaker",
+    "catch-the-foot"
   ],
   "the-undertaker": [
     "momentum-strength",
@@ -949,8 +949,8 @@ export const deckIds={
     "russian-leg-sweep",
     "russian-leg-sweep",
     "running-big-boot",
-    "running-big-boot",
-    "running-big-boot",
+    "the-undertaker-running-big-boot",
+    "the-undertaker-running-big-boot",
     "sidewalk-slam",
     "sidewalk-slam",
     "leaping-clothesline",
@@ -980,33 +980,33 @@ export const deckIds={
     "momentum-technical",
     "special-the-undertaker",
     "no-sell",
-    "no-sell",
-    "duck",
+    "jawbreaker",
+    "standing-switch",
     "duck",
     "shoulder-up",
     "manager-paul-bearer",
     "fire-up",
+    "duck",
+    "dodge",
     "no-sell",
-    "stomp",
-    "stomp",
-    "stomp",
-    "throat-thrust",
-    "throat-thrust"
+    "rollover-counter",
+    "no-sell",
+    "backflip-counter"
   ],
   "ultimate-warrior": [
     "momentum-strength",
     "momentum-strike",
     "punch",
     "shoulder-tackle",
-    "clothesline",
+    "ultimate-warrior-clothesline",
     "punch",
     "punch",
     "stomp",
     "stomp",
     "shoulder-tackle",
     "shoulder-tackle",
-    "clothesline",
-    "clothesline",
+    "ultimate-warrior-clothesline",
+    "ultimate-warrior-clothesline",
     "body-slam",
     "body-slam",
     "body-slam",
@@ -1043,17 +1043,17 @@ export const deckIds={
     "momentum-strike",
     "special-ultimate-warrior",
     "no-sell",
-    "duck",
+    "arm-drag-counter",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "no-sell",
-    "duck",
-    "shoulder-tackle",
-    "shoulder-tackle",
-    "stomp",
-    "stomp",
-    "stomp"
+    "arm-drag-counter",
+    "jawbreaker",
+    "dodge",
+    "jawbreaker",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "rhea-ripley": [
     "momentum-strength",
@@ -1086,8 +1086,8 @@ export const deckIds={
     "rhea-ripley-reverse-alabama-slam",
     "rhea-ripley-reverse-alabama-slam",
     "razor-s-edge",
-    "razor-s-edge",
-    "razor-s-edge",
+    "standing-switch",
+    "no-sell",
     "rhea-ripley-prism-trap",
     "rhea-ripley-prism-trap",
     "rhea-ripley-prism-trap",
@@ -1108,14 +1108,14 @@ export const deckIds={
     "duck",
     "sidestep",
     "shoulder-up",
-    "fire-up",
+    "rhea-ripley-mamis-always-on-top",
     "crowd-support",
-    "no-sell",
-    "stomp",
-    "stomp",
-    "stomp",
-    "body-slam",
-    "body-slam"
+    "jawbreaker",
+    "jawbreaker",
+    "punch",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "cody-rhodes": [
     "momentum-technical",
@@ -1124,7 +1124,7 @@ export const deckIds={
     "dropkick",
     "snap-powerslam",
     "cody-rhodes-dropdown-uppercut",
-    "cody-rhodes-dropdown-uppercut",
+    "jawbreaker",
     "dropkick",
     "knee-drop",
     "knee-drop",
@@ -1135,7 +1135,7 @@ export const deckIds={
     "diving-crossbody",
     "diving-crossbody",
     "snap-powerslam",
-    "snap-powerslam",
+    "jawbreaker",
     "bulldog",
     "bulldog",
     "gourdbuster",
@@ -1144,8 +1144,8 @@ export const deckIds={
     "cody-rhodes-disaster-kick",
     "cody-rhodes-disaster-kick",
     "alabama-slam",
-    "alabama-slam",
-    "alabama-slam",
+    "rollover-counter",
+    "standing-switch",
     "missile-dropkick",
     "figure-four-leglock",
     "moonsault",
@@ -1167,17 +1167,17 @@ export const deckIds={
     "momentum-technical",
     "special-cody-rhodes",
     "chain-wrestling",
-    "sidestep",
+    "duck",
     "shoulder-up",
-    "game-plan",
+    "cody-rhodes-what-do-you-want-to-talk-about",
     "got-all-of-it",
     "fire-up",
-    "crowd-support",
-    "duck",
+    "knee-to-the-gut",
+    "knee-to-the-gut",
     "tornado-ddt",
-    "headbutt",
-    "dropkick",
-    "cody-rhodes-dropdown-uppercut"
+    "jawbreaker",
+    "jawbreaker",
+    "backflip-counter"
   ],
   "oba-femi": [
     "momentum-strength",
@@ -1190,7 +1190,7 @@ export const deckIds={
     "shoulder-tackle",
     "shoulder-tackle",
     "reverse-elbow",
-    "reverse-elbow",
+    "oba-femi-running-elbow",
     "body-slam",
     "body-slam",
     "running-uppercut",
@@ -1228,18 +1228,18 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "no-sell",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "no-sell",
-    "duck",
+    "arm-drag-counter",
+    "jawbreaker",
     "shoulder-up",
-    "shoulder-tackle",
-    "shoulder-tackle",
-    "body-slam",
-    "body-slam",
-    "running-uppercut"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "stone-cold-steve-austin": [
     "momentum-strike",
@@ -1289,19 +1289,19 @@ export const deckIds={
     "momentum-strike",
     "special-stone-cold-steve-austin",
     "duck",
-    "duck",
+    "jawbreaker",
     "no-sell",
-    "no-sell",
+    "headbutt",
     "open-can",
     "what",
-    "fire-up",
+    "stone-cold-give-me-a-hell-yeah",
     "crowd-support",
-    "duck",
-    "kick-to-the-gut",
-    "kick-to-the-gut",
-    "body-slam",
-    "body-slam",
-    "body-slam"
+    "jawbreaker",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "backflip-counter"
   ],
   "liv-morgan": [
     "momentum-agility",
@@ -1329,9 +1329,9 @@ export const deckIds={
     "clothesline",
     "clothesline",
     "diving-crossbody",
-    "diving-crossbody",
+    "sidestep",
     "missile-dropkick",
-    "missile-dropkick",
+    "duck",
     "liv-morgan-jersey-codebreaker",
     "liv-morgan-jersey-codebreaker",
     "liv-morgan-jersey-codebreaker",
@@ -1355,15 +1355,15 @@ export const deckIds={
     "game-plan",
     "fire-up",
     "crowd-support",
-    "duck",
-    "sidestep",
+    "arm-drag-counter",
+    "jawbreaker",
     "shoulder-up",
     "game-plan",
-    "running-forearm",
-    "running-forearm",
-    "stomp",
-    "stomp",
-    "stomp"
+    "arm-drag-counter",
+    "standing-switch",
+    "jawbreaker",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "brock-lesnar": [
     "momentum-strength",
@@ -1390,13 +1390,13 @@ export const deckIds={
     "brock-lesnar-brocks-german",
     "overhead-belly-to-belly-suplex",
     "overhead-belly-to-belly-suplex",
-    "overhead-belly-to-belly-suplex",
+    "standing-switch",
     "lariat",
-    "lariat",
+    "chain-wrestling",
     "spinebuster",
     "spinebuster",
     "powerbomb",
-    "powerbomb",
+    "no-sell",
     "brock-lesnar-kimura-lock",
     "brock-lesnar-kimura-lock",
     "brock-lesnar-kimura-lock",
@@ -1417,15 +1417,15 @@ export const deckIds={
     "no-sell",
     "chain-wrestling",
     "shoulder-up",
-    "duck",
-    "fire-up",
-    "no-sell",
-    "chain-wrestling",
-    "back-body-drop",
-    "double-leg-takedown",
-    "double-leg-takedown",
-    "double-leg-takedown",
-    "shoulder-tackle"
+    "punch",
+    "brock-lesnar-eat-sleep-conquer-repeat",
+    "jawbreaker",
+    "jawbreaker",
+    "dodge",
+    "jawbreaker",
+    "punch",
+    "jawbreaker",
+    "jawbreaker"
   ],
   "gunther": [
     "momentum-strike",
@@ -1433,7 +1433,7 @@ export const deckIds={
     "stomp",
     "gunther-gunther-s-chop",
     "body-slam",
-    "stomp",
+    "jawbreaker",
     "knee-drop",
     "knee-drop",
     "body-slam",
@@ -1441,25 +1441,25 @@ export const deckIds={
     "big-boot",
     "front-dropkick",
     "front-dropkick",
-    "front-dropkick",
+    "backflip-counter",
     "back-suplex",
     "back-suplex",
     "gunther-gunther-s-chop",
     "gunther-gunther-s-chop",
-    "gunther-gunther-s-chop",
+    "knee-to-the-gut",
     "german-suplex",
-    "german-suplex",
-    "german-suplex",
+    "no-sell",
+    "knee-to-the-gut",
     "butterfly-suplex",
-    "butterfly-suplex",
+    "rollover-counter",
     "gunther-burning-lariat",
     "gunther-burning-lariat",
     "boston-crab",
-    "boston-crab",
+    "dodge",
     "powerbomb",
-    "powerbomb",
+    "standing-switch",
     "last-symphony",
-    "last-symphony",
+    "knee-to-the-gut",
     "gunther-folding-powerbomb",
     "gunther-folding-powerbomb",
     "gunther-folding-powerbomb",
@@ -1476,18 +1476,18 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "special-gunther",
-    "no-sell",
+    "jawbreaker",
     "chain-wrestling",
     "shoulder-up",
     "duck",
     "fire-up",
     "crowd-support",
-    "no-sell",
-    "back-body-drop",
-    "back-body-drop",
-    "back-body-drop",
-    "back-body-drop",
-    "stomp"
+    "knees-up",
+    "jawbreaker",
+    "jawbreaker",
+    "knee-to-the-gut",
+    "jawbreaker",
+    "up-and-over"
   ],
   "becky-lynch": [
     "momentum-strike",
@@ -1512,9 +1512,9 @@ export const deckIds={
     "neckbreaker",
     "vertical-suplex",
     "vertical-suplex",
-    "exploder-suplex",
-    "exploder-suplex",
-    "exploder-suplex",
+    "becky-lynch-bexploder",
+    "becky-lynch-bexploder",
+    "becky-lynch-bexploder",
     "becky-lynch-diamond-dust",
     "becky-lynch-diamond-dust",
     "becky-lynch-diving-leg-drop",
@@ -1543,13 +1543,13 @@ export const deckIds={
     "game-plan",
     "fire-up",
     "crowd-support",
-    "chain-wrestling",
-    "duck",
-    "running-forearm",
-    "running-forearm",
-    "stomp",
-    "stomp",
-    "stomp"
+    "jawbreaker",
+    "jawbreaker",
+    "arm-drag",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "up-and-over"
   ],
   "logan-paul": [
     "momentum-agility",
@@ -1590,28 +1590,28 @@ export const deckIds={
     "450-splash",
     "running-forearm",
     "asai-moonsault",
-    "asai-moonsault",
+    "punch",
     "springboard-crossbody",
     "springboard-crossbody",
     "logan-paul-knockout-punch",
     "logan-paul-knockout-punch",
     "dropkick",
     "logan-paul-paulverizer",
-    "frog-splash",
+    "jawbreaker",
     "diving-crossbody",
     "special-logan-paul",
     "sidestep",
-    "sidestep",
+    "jawbreaker",
     "duck",
-    "duck",
+    "arm-drag-counter",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "running-forearm",
-    "running-forearm",
-    "diving-crossbody",
-    "diving-crossbody",
-    "running-clothesline"
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "sol-ruca": [
     "momentum-agility",
@@ -1662,18 +1662,18 @@ export const deckIds={
     "sol-ruca-sol-snatcher",
     "sol-ruca-sol-snatcher",
     "special-sol-ruca",
+    "jawbreaker",
     "sidestep",
-    "sidestep",
-    "leapfrog",
+    "arm-drag-counter",
     "leapfrog",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "diving-crossbody",
-    "diving-crossbody",
-    "diving-crossbody",
-    "standing-moonsault",
-    "standing-moonsault"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "sidestep",
+    "leapfrog"
   ],
   "chad-gable": [
     "momentum-technical",
@@ -1717,7 +1717,7 @@ export const deckIds={
     "moonsault",
     "chain-wrestling",
     "abdominal-stretch",
-    "chain-wrestling",
+    "jawbreaker",
     "chad-gable-chaos-theory",
     "chad-gable-chaos-theory",
     "chad-gable-chaos-theory",
@@ -1726,16 +1726,16 @@ export const deckIds={
     "chad-gable-ankle-lock",
     "special-chad-gable",
     "sidestep",
-    "sidestep",
+    "catch-the-foot",
     "no-sell",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "double-leg-takedown",
-    "double-leg-takedown",
-    "abdominal-stretch",
-    "abdominal-stretch",
-    "abdominal-stretch"
+    "dodge",
+    "rollover-counter",
+    "chain-wrestling",
+    "standing-switch",
+    "sidestep"
   ],
   "raquel-rodriguez": [
     "momentum-strength",
@@ -1778,9 +1778,9 @@ export const deckIds={
     "big-boot",
     "big-boot",
     "clothesline",
-    "clothesline",
+    "jawbreaker",
     "lariat",
-    "lariat",
+    "punch",
     "raquel-rodriguez-corkscrew-splash",
     "raquel-rodriguez-corkscrew-splash",
     "raquel-rodriguez-corkscrew-splash",
@@ -1789,15 +1789,15 @@ export const deckIds={
     "raquel-rodriguez-tejana-bomb",
     "special-raquel-rodriguez",
     "sidestep",
-    "duck",
+    "punch",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "back-elbow",
-    "no-sell",
-    "back-body-drop",
-    "back-body-drop",
-    "back-body-drop"
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "catch-the-foot"
   ],
   "rey-mysterio": [
     "momentum-agility",
@@ -1845,21 +1845,21 @@ export const deckIds={
     "rey-mysterio-mysterio-express",
     "rey-mysterio-west-coast-pop",
     "rey-mysterio-west-coast-pop",
-    "rey-mysterio-west-coast-pop",
-    "sidestep",
-    "sidestep",
+    "bulldog",
+    "drop-toe-hold",
+    "jawbreaker",
     "duck",
-    "duck",
+    "drop-toe-hold",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
     "special-rey-mysterio",
-    "diving-crossbody",
-    "diving-crossbody",
-    "diving-crossbody",
-    "mexican-surfboard",
-    "mexican-surfboard"
+    "arm-drag",
+    "standing-switch",
+    "jawbreaker",
+    "jawbreaker",
+    "backflip-counter"
   ],
   "dominik-mysterio": [
     "momentum-agility",
@@ -1910,18 +1910,18 @@ export const deckIds={
     "dominik-mysterio-frog-splash",
     "special-dominik-mysterio",
     "sidestep",
-    "sidestep",
+    "arm-drag-counter",
     "duck",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "low-blow",
-    "low-blow",
-    "back-suplex",
-    "back-suplex",
-    "back-suplex"
+    "dodge",
+    "standing-switch",
+    "jawbreaker",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "penta": [
     "momentum-agility",
@@ -1970,20 +1970,20 @@ export const deckIds={
     "penta-mexican-destroyer",
     "penta-mexican-destroyer",
     "penta-mexican-destroyer",
-    "sidestep",
+    "jawbreaker",
     "sidestep",
     "duck",
-    "duck",
+    "rollover-counter",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
     "special-penta",
-    "chop",
-    "chop",
-    "chop",
-    "sling-blade",
-    "sling-blade"
+    "sidestep",
+    "standing-switch",
+    "dodge",
+    "duck",
+    "catch-the-foot"
   ],
   "el-grande-americano": [
     "momentum-technical",
@@ -2036,16 +2036,16 @@ export const deckIds={
     "sidestep",
     "sidestep",
     "duck",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "low-blow",
-    "low-blow",
-    "low-blow",
-    "back-suplex",
-    "back-suplex"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "jey-uso": [
     "momentum-strike",
@@ -2074,7 +2074,7 @@ export const deckIds={
     "spear",
     "spear",
     "samoan-drop",
-    "samoan-drop",
+    "headbutt",
     "running-uppercut",
     "running-uppercut",
     "running-uppercut",
@@ -2088,7 +2088,7 @@ export const deckIds={
     "forearm-smash",
     "running-hip-attack",
     "running-hip-attack",
-    "running-hip-attack",
+    "punch",
     "suicide-dive",
     "suicide-dive",
     "uso-splash",
@@ -2096,18 +2096,18 @@ export const deckIds={
     "uso-splash",
     "special-jey-uso",
     "sidestep",
-    "sidestep",
+    "jawbreaker",
     "duck",
     "duck",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "clothesline",
-    "clothesline"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "sidestep",
+    "backflip-counter"
   ],
   "la-knight": [
     "momentum-strike",
@@ -2150,26 +2150,26 @@ export const deckIds={
     "diving-elbow-drop",
     "diving-elbow-drop",
     "superplex",
-    "superplex",
+    "sidestep",
     "burning-hammer",
-    "burning-hammer",
+    "dodge",
     "la-knight-bft",
     "la-knight-bft",
     "la-knight-bft",
     "special-la-knight",
     "sidestep",
-    "sidestep",
+    "jawbreaker",
     "duck",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "corner-clothesline",
-    "corner-clothesline",
-    "corner-clothesline",
-    "corner-clothesline",
-    "shoulder-tackle"
+    "back-elbow",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "catch-the-foot"
   ],
   "alexa-bliss": [
     "momentum-agility",
@@ -2220,18 +2220,18 @@ export const deckIds={
     "alexa-bliss-twisted-bliss",
     "special-alexa-bliss",
     "sidestep",
-    "sidestep",
-    "duck",
-    "duck",
+    "jawbreaker",
+    "jawbreaker",
+    "jawbreaker",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "dropkick-to-the-back",
-    "dropkick-to-the-back"
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "catch-the-foot"
   ],
   "finn-balor": [
     "momentum-agility",
@@ -2282,18 +2282,18 @@ export const deckIds={
     "finn-balor-coup-de-grace",
     "special-finn-balor",
     "sidestep",
-    "leapfrog",
+    "arm-drag-counter",
     "duck",
-    "duck",
+    "jawbreaker",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "running-forearm",
-    "running-forearm"
+    "jawbreaker",
+    "standing-switch",
+    "arm-drag-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "danhausen": [
     "momentum-technical",
@@ -2320,15 +2320,15 @@ export const deckIds={
     "ddt",
     "ddt",
     "inverted-ddt",
-    "inverted-ddt",
-    "inverted-ddt",
+    "punch",
+    "standing-switch",
     "cutter",
     "cutter",
     "northern-lights-suplex",
     "northern-lights-suplex",
-    "northern-lights-suplex",
+    "headbutt",
     "german-suplex",
-    "german-suplex",
+    "chain-wrestling",
     "belly-to-belly-suplex",
     "belly-to-belly-suplex",
     "headbutt",
@@ -2344,18 +2344,18 @@ export const deckIds={
     "danhausen-triple-d",
     "special-danhausen",
     "chain-wrestling",
-    "chain-wrestling",
-    "duck",
-    "duck",
+    "jawbreaker",
+    "punch",
+    "jawbreaker",
     "shoulder-up",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "low-blow",
-    "low-blow",
-    "low-blow",
-    "low-blow",
-    "big-boot"
+    "dodge",
+    "headbutt",
+    "rollover-counter",
+    "jawbreaker",
+    "block"
   ],
   "tiffany-stratton": [
     "momentum-agility",
@@ -2383,7 +2383,7 @@ export const deckIds={
     "body-slam",
     "standing-moonsault",
     "standing-moonsault",
-    "standing-moonsault",
+    "jawbreaker",
     "double-stomp",
     "double-stomp",
     "double-stomp",
@@ -2395,7 +2395,7 @@ export const deckIds={
     "finlay-roll",
     "swanton-bomb",
     "swanton-bomb",
-    "swanton-bomb",
+    "jawbreaker",
     "tiffany-stratton-handspring-back-elbow",
     "tiffany-stratton-handspring-back-elbow",
     "tiffany-stratton-handspring-back-elbow",
@@ -2404,8 +2404,8 @@ export const deckIds={
     "tiffany-stratton-prettiest-moonsault-ever",
     "special-tiffany-stratton",
     "sidestep",
-    "sidestep",
-    "chain-wrestling",
+    "jawbreaker",
+    "dodge",
     "chain-wrestling",
     "shoulder-up",
     "shoulder-up",
@@ -2413,11 +2413,11 @@ export const deckIds={
     "crowd-support",
     "tiffany-stratton-handspring-back-elbow",
     "diving-crossbody",
-    "no-sell",
-    "front-kick",
-    "front-kick",
-    "front-kick",
-    "knees-up"
+    "chain-wrestling",
+    "standing-switch",
+    "rollover-counter",
+    "sidestep",
+    "block"
   ],
   "chelsea-green": [
     "momentum-technical",
@@ -2435,19 +2435,19 @@ export const deckIds={
     "momentum-agility",
     "momentum-strike",
     "momentum-strike",
-    "chain-wrestling",
-    "chain-wrestling",
-    "chain-wrestling",
-    "sidestep",
-    "sidestep",
+    "elbow",
+    "elbow",
+    "jawbreaker",
+    "jawbreaker",
+    "arm-drag-counter",
     "duck",
-    "duck",
+    "arm-drag-counter",
     "tilt-a-whirl-headscissors",
     "tilt-a-whirl-headscissors",
     "russian-leg-sweep",
     "russian-leg-sweep",
-    "ddt",
-    "ddt",
+    "jawbreaker",
+    "elbow",
     "dropkick",
     "running-knees-to-the-back",
     "elbow",
@@ -2457,9 +2457,9 @@ export const deckIds={
     "diving-crossbody",
     "diving-crossbody",
     "missile-dropkick",
-    "missile-dropkick",
+    "chain-wrestling",
     "superkick",
-    "superkick",
+    "sidestep",
     "russian-leg-sweep",
     "russian-leg-sweep",
     "chelsea-green-im-prettier",
@@ -2474,12 +2474,12 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "backstabber",
-    "backstabber",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "forearm-smash",
-    "russian-leg-sweep"
+    "chain-wrestling",
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "damian-priest": [
     "momentum-strength",
@@ -2537,11 +2537,11 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "no-sell",
-    "back-body-drop",
-    "back-body-drop",
-    "back-body-drop",
-    "front-kick"
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "back-elbow"
   ],
   "bron-breakker": [
     "momentum-strength",
@@ -2584,7 +2584,7 @@ export const deckIds={
     "firemans-carry",
     "firemans-carry",
     "leapfrog",
-    "leapfrog",
+    "jawbreaker",
     "bron-breakker-gorilla-press-powerslam",
     "bron-breakker-gorilla-press-powerslam",
     "bron-breakker-gorilla-press-powerslam",
@@ -2599,11 +2599,11 @@ export const deckIds={
     "crowd-support",
     "body-slam",
     "body-slam",
-    "body-slam",
-    "body-slam",
-    "body-slam",
-    "firemans-carry",
-    "firemans-carry"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "jawbreaker"
   ],
   "drew-mcintyre": [
     "momentum-strength",
@@ -2661,18 +2661,18 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "back-elbow",
-    "chain-wrestling",
-    "body-slam",
-    "body-slam",
-    "body-slam",
-    "clothesline"
+    "dodge",
+    "jawbreaker",
+    "rollover-counter",
+    "jawbreaker",
+    "back-elbow"
   ],
   "randy-orton": [
     "momentum-technical",
     "momentum-strike",
     "punch",
     "snap-powerslam",
-    "side-headlock",
+    "ddt",
     "momentum-technical",
     "momentum-technical",
     "momentum-technical",
@@ -2689,7 +2689,7 @@ export const deckIds={
     "clothesline",
     "clothesline",
     "short-arm-clothesline",
-    "short-arm-clothesline",
+    "backflip-counter",
     "snap-powerslam",
     "snap-powerslam",
     "backbreaker",
@@ -2699,11 +2699,11 @@ export const deckIds={
     "ddt",
     "knee-to-the-gut",
     "knee-to-the-gut",
-    "side-headlock",
-    "wristlock",
-    "wristlock",
+    "dodge",
+    "rollover-counter",
+    "standing-switch",
     "superplex",
-    "superplex",
+    "standing-switch",
     "body-slam",
     "powerslam",
     "randy-orton-draping-ddt",
@@ -2720,14 +2720,14 @@ export const deckIds={
     "fire-up",
     "crowd-support",
     "running-clothesline",
-    "running-clothesline",
+    "rollover-counter",
     "front-kick",
     "elbow",
-    "chain-wrestling",
-    "sidestep",
-    "wristlock",
-    "wristlock",
-    "wristlock"
+    "jawbreaker",
+    "elbow",
+    "jawbreaker",
+    "jawbreaker",
+    "block"
   ],
   "sami-zayn": [
     "momentum-technical",
@@ -2738,7 +2738,7 @@ export const deckIds={
     "momentum-technical",
     "momentum-technical",
     "momentum-technical",
-    "momentum-technical",
+    "momentum-strength",
     "momentum-agility",
     "momentum-agility",
     "momentum-agility",
@@ -2747,22 +2747,22 @@ export const deckIds={
     "momentum-strength",
     "punch",
     "dropkick",
-    "dropkick",
+    "backflip-counter",
     "arm-drag",
     "spinning-back-kick",
     "spinning-back-kick",
     "knee-to-the-gut",
     "knee-to-the-gut",
-    "side-headlock",
-    "side-headlock",
-    "wristlock",
-    "wristlock",
+    "jawbreaker",
+    "sami-zayn-exploder-turnbuckle",
+    "dodge",
+    "sami-zayn-blue-thunder-bomb",
     "ddt",
     "ddt",
     "snap-suplex",
     "snap-suplex",
     "suicide-dive",
-    "suicide-dive",
+    "dodge",
     "clothesline",
     "clothesline",
     "superkick",
@@ -2784,12 +2784,12 @@ export const deckIds={
     "special-sami-zayn",
     "shoulder-up",
     "fire-up",
-    "crowd-support",
-    "wristlock",
-    "wristlock",
-    "wristlock",
-    "side-headlock",
-    "side-headlock"
+    "sami-zayn-blue-thunder-bomb",
+    "jawbreaker",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "catch-the-foot"
   ],
   "jacob-fatu": [
     "momentum-strength",
@@ -2821,13 +2821,13 @@ export const deckIds={
     "samoan-drop",
     "samoan-drop",
     "powerbomb",
-    "powerbomb",
+    "headbutt",
     "senton",
     "senton",
     "senton-splash",
     "senton-splash",
     "swanton-bomb",
-    "swanton-bomb",
+    "punch",
     "spear",
     "spear",
     "throw-into-ringpost",
@@ -2847,11 +2847,11 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "back-elbow",
-    "sidestep",
-    "hurricanrana",
-    "duck",
-    "body-slam"
+    "dodge",
+    "jawbreaker",
+    "rollover-counter",
+    "jawbreaker",
+    "arm-drag-counter"
   ],
   "solo-sikoa": [
     "momentum-strike",
@@ -2909,11 +2909,11 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "stomp",
-    "stomp",
-    "stomp",
-    "stomp",
-    "shoulder-block"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "backflip-counter"
   ],
   "jade-cargill": [
     "momentum-strength",
@@ -2959,7 +2959,7 @@ export const deckIds={
     "running-knee",
     "running-knee",
     "running-knee",
-    "running-knee",
+    "hip-toss",
     "steel-chair-to-the-back",
     "pump-kick",
     "pump-kick",
@@ -2971,11 +2971,11 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "back-elbow",
-    "no-sell",
-    "sidestep",
-    "duck",
-    "back-body-drop"
+    "dodge",
+    "standing-switch",
+    "rollover-counter",
+    "jawbreaker",
+    "jawbreaker"
   ],
   "nia-jax": [
     "momentum-strength",
@@ -3033,11 +3033,11 @@ export const deckIds={
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "back-elbow",
-    "sidestep",
-    "hurricanrana",
-    "choke-on-the-ropes",
-    "choke-on-the-ropes"
+    "dodge",
+    "jawbreaker",
+    "rollover-counter",
+    "block",
+    "standing-switch"
   ],
   "goldberg": [
     "momentum-strength",
@@ -3091,238 +3091,35 @@ export const deckIds={
     "goldberg-jackhammer",
     "special-goldberg",
     "no-sell",
-    "duck",
+    "arm-drag-counter",
     "shoulder-up",
     "fire-up",
     "crowd-support",
-    "back-elbow",
-    "shoulder-block",
-    "shoulder-block",
-    "body-slam",
-    "body-slam"
+    "dodge",
+    "jawbreaker",
+    "rollover-counter",
+    "standing-switch",
+    "duck"
   ]
 };
 
-// v0.12.18 counter-access normalization.
-// The original 55-page core remains intact wherever possible; the five v0.12.17 extension slots
-// become a dependable reversal package, then low-value duplicate generic Moves are swapped only
-// when needed to reach the minimum counter density.
-const counterCapableId = id => {
-  const card = byId.get(id);
-  return !!(card?.kind === 'move' && ((card.counters?.length ?? 0) || (card.counterStates?.length ?? 0) || (card.counterSubmissionTargets?.length ?? 0) || (card.countersCardIds?.length ?? 0)));
-};
-const identityCounterChoices = ['block','up-and-over','backflip-counter','catch-the-foot','arm-drag-counter'];
-const extraCounterChoices = ['duck','punch','knees-up','headbutt','arm-drag','back-elbow','sidestep','elbow','reverse-elbow','knee-to-the-gut','hip-toss','drop-toe-hold','block','up-and-over','backflip-counter','catch-the-foot','arm-drag-counter'];
-const hashSid = sid => [...sid].reduce((n,ch)=>((n*33)+ch.charCodeAt(0))>>>0,5381);
-for (const [sid, ids] of Object.entries(deckIds)) {
-  const identity = identityCounterChoices[hashSid(sid) % identityCounterChoices.length];
-  ids.splice(-5, 5, 'dodge', 'standing-switch', 'rollover-counter', 'jawbreaker', identity);
-
-  const countCounterPages = () => ids.filter(counterCapableId).length;
-  const counts = () => ids.reduce((m,id)=>(m.set(id,(m.get(id)??0)+1),m),new Map());
-  let cursor = hashSid(sid) % extraCounterChoices.length;
-  let guard = 0;
-  while (countCounterPages() < 9 && guard++ < 40) {
-    const usedCounts = counts();
-    let candidate = null;
-    for (let step=0; step<extraCounterChoices.length; step+=1) {
-      const id = extraCounterChoices[(cursor+step)%extraCounterChoices.length];
-      if ((usedCounts.get(id)??0) < 2) { candidate=id; cursor=(cursor+step+1)%extraCounterChoices.length; break; }
-    }
-    if (!candidate) break;
-    let replaceIndex = -1;
-    for (let i=54; i>=5; i-=1) {
-      const id=ids[i], card=byId.get(id);
-      if (!card || card.kind!=='move' || card.superstarId || card.finisher || card.trademark || counterCapableId(id)) continue;
-      if ((usedCounts.get(id)??0) <= 1) continue;
-      replaceIndex=i; break;
-    }
-    if (replaceIndex < 0) break;
-    ids[replaceIndex]=candidate;
+// v0.13.2 — Every authored 60-page deck starts with exactly one copy of the
+// universal reactive Action Once Too Often. It replaces a low-priority shared
+// utility page outside Lead Off 5; players may later collect and run up to the
+// normal five-copy cap in Deck Lab.
+export const ONCE_TOO_OFTEN_ID = "once-too-often";
+const onceTooOftenReplacementPriority = ["crowd-support", "fire-up", "game-plan", "got-all-of-it", "punch"];
+for (const ids of Object.values(deckIds)) {
+  if (!Array.isArray(ids) || ids.includes(ONCE_TOO_OFTEN_ID)) continue;
+  let replaceAt = -1;
+  for (const id of onceTooOftenReplacementPriority) {
+    const i = ids.lastIndexOf(id);
+    if (i >= 5) { replaceAt = i; break; }
   }
-}
-
-// v0.12.24 targeted coverage/balance pass.
-// Preserve the authored 60-page identity while redistributing a few reversal slots away from
-// already over-covered states and toward the states that the deep simulation showed were
-// functionally unavailable for the weakest decks. These are swaps, not extra pages.
-const replaceOne = (sid, fromId, toId) => {
-  const ids = deckIds[sid];
-  const i = ids?.lastIndexOf(fromId) ?? -1;
-  if (i >= 0) ids[i] = toId;
-};
-
-// Seth: Running Aerial was over-covered while Body Elevated / Torso Trapped were nearly absent.
-replaceOne('seth-rollins','up-and-over','knee-to-the-gut');
-replaceOne('seth-rollins','sidestep','backflip-counter');
-
-// Gunther: as an Agility-0 powerhouse he needs dependable ungated aerial answers without
-// loading more coverage into Body Elevated / Torso Trapped.
-replaceOne('gunther','catch-the-foot','up-and-over');
-replaceOne('gunther','no-sell','knees-up');
-
-// Cody: add basic arm/leg and torso answers while keeping his technical/agility identity intact.
-replaceOne('cody-rhodes','sidestep','duck');
-replaceOne('cody-rhodes','crowd-support','knee-to-the-gut');
-
-// Paige: her arm/front coverage was already strong; use utility slots to cover the aerial/body gap.
-replaceOne('paige','game-plan','up-and-over');
-replaceOne('paige','crowd-support','backflip-counter');
-
-// Sami: redistribute one over-represented Running Aerial answer and one Front Control answer.
-replaceOne('sami-zayn','dropkick','backflip-counter');
-replaceOne('sami-zayn','arm-drag-counter','catch-the-foot');
-// His signature chain requires Strength 1, so two Strength pages avoids one single-card choke point.
-replaceOne('sami-zayn','momentum-technical','momentum-strength');
-
-// v0.12.24 second-stage tuning after targeted legality diagnostics.
-// Raise practical response density for the weakest decks without adding pages.
-replaceOne('seth-rollins','running-forearm','jawbreaker');
-replaceOne('seth-rollins','sling-blade','standing-switch');
-replaceOne('seth-rollins','superkick','backflip-counter');
-
-replaceOne('gunther','stomp','jawbreaker');
-replaceOne('gunther','gunther-gunther-s-chop','knee-to-the-gut');
-replaceOne('gunther','front-dropkick','backflip-counter');
-replaceOne('gunther','german-suplex','standing-switch');
-replaceOne('gunther','last-symphony','rollover-counter');
-
-replaceOne('cody-rhodes','cody-rhodes-dropdown-uppercut','jawbreaker');
-replaceOne('cody-rhodes','snap-powerslam','standing-switch');
-
-// Sami already has strong reversal density; trade two low-pressure holds and utility for
-// more of his authentic Exploder / Blue Thunder signature sequence.
-replaceOne('sami-zayn','wristlock','sami-zayn-blue-thunder-bomb');
-replaceOne('sami-zayn','side-headlock','sami-zayn-exploder-turnbuckle');
-replaceOne('sami-zayn','crowd-support','sami-zayn-blue-thunder-bomb');
-
-replaceOne('sami-zayn','wristlock','dodge');
-replaceOne('sami-zayn','side-headlock','jawbreaker');
-
-// v0.12.24 Orton reversal-density correction: his Outta Nowhere identity still needs
-// normal state-matched defensive options in hand.
-replaceOne('randy-orton','side-headlock','dodge');
-replaceOne('randy-orton','wristlock','standing-switch');
-replaceOne('randy-orton','short-arm-clothesline','backflip-counter');
-replaceOne('randy-orton','running-clothesline','rollover-counter');
-
-replaceOne('randy-orton','side-headlock','ddt');
-replaceOne('randy-orton','wristlock','snap-powerslam');
-
-// v0.12.24 targeted pacing/identity tuning: give Savage more authentic aerial access and slightly reduce Rey's finisher density.
-replaceOne('randy-savage','knee-drop','diving-crossbody');
-replaceOne('randy-savage','clothesline','diving-body-press');
-replaceOne('rey-mysterio','rey-mysterio-west-coast-pop','bulldog');
-
-replaceOne('andre-the-giant','bearhug','military-press-slam');
-
-
-// v0.12.25 CPU recovery-curve normalization.
-// The expanded reversal system left some recommended decks with too many response-only pages.
-// Trim only redundant generic defensive reversals, never Lead Off pages/signature/family cards,
-// and replace them with low-cost Method-free offensive counter-Moves already native to that deck.
-// This preserves the eight-state/submission coverage while giving the CPU more live offense when
-// Control returns after a long opponent sequence.
-const recoveryCounterId = id => {
-  const c=byId.get(id);
-  return !!(c?.kind==='move' && !c.defensiveOnly && !c.finisher && !c.trademark && !c.superstarId && !(c.allowedSuperstarIds?.length)
-    && (c.cost??99)<=3 && Object.values(c.requirements??{}).every(v=>(v??0)===0) && counterCapableId(id));
-};
-const localCoverage = ids => {
-  const state={},sub={};
-  for(const id of ids){const c=byId.get(id);if(c?.kind!=='move')continue;for(const x of c.counterStates??[])state[x]=(state[x]??0)+1;for(const x of c.counterSubmissionTargets??[])sub[x]=(sub[x]??0)+1;}
-  return {state,sub};
-};
-const allDeckUseCounts = () => {
-  const m=new Map(); for(const ids of Object.values(deckIds))for(const id of ids)m.set(id,(m.get(id)??0)+1); return m;
-};
-const defensiveCount = ids => ids.filter(id=>byId.get(id)?.kind==='move'&&byId.get(id)?.defensiveOnly).length;
-for(const [sid,ids] of Object.entries(deckIds)){
-  let guard=0;
-  while((ids.filter(recoveryCounterId).length<9 || defensiveCount(ids)>6) && guard++<12){
-    const localCounts=ids.reduce((m,id)=>(m.set(id,(m.get(id)??0)+1),m),new Map());
-    const globalCounts=allDeckUseCounts();
-    const cov=localCoverage(ids);
-    const candidates=[...new Set(ids.filter(recoveryCounterId))].filter(id=>{
-      const c=byId.get(id); return (localCounts.get(id)??0)<Math.min(5,c?.maxCopies??5);
-    }).sort((a,b)=>{
-      const ca=byId.get(a),cb=byId.get(b);
-      const aa=(ca.counterStates?.length??0)+(ca.counterSubmissionTargets?.length??0),bb=(cb.counterStates?.length??0)+(cb.counterSubmissionTargets?.length??0);
-      return (localCounts.get(a)??0)-(localCounts.get(b)??0) || bb-aa || (cb.damage??0)-(ca.damage??0) || (ca.cost??0)-(cb.cost??0);
-    });
-    if(!candidates.length)break;
-    const removable=ids.map((id,i)=>({id,i,c:byId.get(id)})).filter(x=>x.i>=5&&x.c?.kind==='move'&&x.c.defensiveOnly&&!x.c.superstarId&&!(x.c.allowedSuperstarIds?.length)).filter(x=>{
-      const cs=x.c.counterStates??[],ts=x.c.counterSubmissionTargets??[];
-      if(!cs.every(k=>(cov.state[k]??0)>1)||!ts.every(k=>(cov.sub[k]??0)>1))return false;
-      // Never orphan a collectible from all recommended decks.
-      if((globalCounts.get(x.id)??0)<=1)return false;
-      return true;
-    }).sort((a,b)=>{
-      const ad=(localCounts.get(a.id)??0)>1?1:0,bd=(localCounts.get(b.id)??0)>1?1:0;
-      return bd-ad || (localCounts.get(b.id)??0)-(localCounts.get(a.id)??0) || (globalCounts.get(b.id)??0)-(globalCounts.get(a.id)??0) || (b.c.cost??0)-(a.c.cost??0) || b.i-a.i;
-    });
-    if(!removable.length)break;
-    ids[removable[0].i]=candidates[0];
+  if (replaceAt < 5) {
+    replaceAt = ids.findIndex((id, i) => i >= 5 && id !== "momentum-strength" && id !== "momentum-strike" && id !== "momentum-technical" && id !== "momentum-agility");
   }
+  if (replaceAt >= 5) ids[replaceAt] = ONCE_TOO_OFTEN_ID;
 }
-
-// EXPERIMENT balance correction while preserving v0.12.25 recovery offense.
-// Revert recovery substitutions for characters that overshot upward in the same-seed/deep diagnostics.
-const revertPairs={
- 'sol-ruca':[['jawbreaker','sidestep',2],['arm-drag-counter','leapfrog',2]],
- 'the-undertaker':[['punch','no-sell',1],['jawbreaker','no-sell',1],['jawbreaker','duck',2],['jawbreaker','standing-switch',1]],
- 'jey-uso':[['jawbreaker','sidestep',1],['jawbreaker','duck',1]],
- 'chad-gable':[['arm-drag','chain-wrestling',1],['arm-drag','sidestep',1],['jawbreaker','sidestep',1],['jawbreaker','standing-switch',1],['jawbreaker','rollover-counter',1],['jawbreaker','catch-the-foot',1]],
- 'nia-jax':[['jawbreaker','standing-switch',1],['jawbreaker','block',1]],
- 'iyo-sky':[['punch','sidestep',1],['jawbreaker','sidestep',1],['jawbreaker','duck',1],['jawbreaker','up-and-over',1]],
- 'tiffany-stratton':[['jawbreaker','sidestep',1],['jawbreaker','chain-wrestling',2],['jawbreaker','dodge',1]],
- 'penta':[['arm-drag','sidestep',2],['jawbreaker','duck',1],['jawbreaker','dodge',1],['jawbreaker','rollover-counter',1]],
- 'goldberg':[['arm-drag-counter','duck',1],['jawbreaker','standing-switch',1]]
-};
-for(const [sid,pairs] of Object.entries(revertPairs))for(const [from,to,n] of pairs)for(let i=0;i<n;i++)replaceOne(sid,from,to);
-
-// Weak-side correction: keep the new low-cost offensive recovery pages, but restore selected
-// defensive coverage by taking out a redundant mid/high generic Move instead of taking recovery away.
-const addDefenseOverCurve=(sid,defId,n=1)=>{for(let z=0;z<n;z++){const ids=deckIds[sid],counts=ids.reduce((m,id)=>(m.set(id,(m.get(id)??0)+1),m),new Map());const choices=ids.map((id,i)=>({id,i,c:byId.get(id)})).filter(x=>x.i>=5&&x.c?.kind==='move'&&!x.c.defensiveOnly&&!x.c.finisher&&!x.c.trademark&&!x.c.superstarId&&!(x.c.allowedSuperstarIds?.length)&&(x.c.cost??0)>=4&&(counts.get(x.id)??0)>1).sort((a,b)=>(b.c.cost??0)-(a.c.cost??0)||(b.c.damage??0)-(a.c.damage??0)||b.i-a.i);if(!choices.length)break;ids[choices[0].i]=defId;}};
-addDefenseOverCurve('brock-lesnar','no-sell',1);addDefenseOverCurve('brock-lesnar','chain-wrestling',1);addDefenseOverCurve('brock-lesnar','standing-switch',1);
-addDefenseOverCurve('stephanie-vaquer','chain-wrestling',2);addDefenseOverCurve('stephanie-vaquer','dodge',1);
-addDefenseOverCurve('chelsea-green','chain-wrestling',2);addDefenseOverCurve('chelsea-green','sidestep',1);
-addDefenseOverCurve('mankind','duck',2);addDefenseOverCurve('mankind','chain-wrestling',1);
-addDefenseOverCurve('randy-orton','standing-switch',1);addDefenseOverCurve('randy-orton','rollover-counter',1);
-addDefenseOverCurve('la-knight','sidestep',1);addDefenseOverCurve('la-knight','dodge',1);
-addDefenseOverCurve('cody-rhodes','standing-switch',1);addDefenseOverCurve('cody-rhodes','rollover-counter',1);
-addDefenseOverCurve('paige','dodge',1);addDefenseOverCurve('paige','standing-switch',1);
-addDefenseOverCurve('kevin-owens','duck',1);addDefenseOverCurve('kevin-owens','standing-switch',1);
-addDefenseOverCurve('gunther','standing-switch',1);addDefenseOverCurve('gunther','rollover-counter',1);
-
-// EXPERIMENT weak-side stability: recover v0.12.24 defensive identity while keeping new recovery offense.
-addDefenseOverCurve('liv-morgan','duck',1);addDefenseOverCurve('liv-morgan','sidestep',1);addDefenseOverCurve('liv-morgan','dodge',1);addDefenseOverCurve('liv-morgan','rollover-counter',1);
-addDefenseOverCurve('randy-savage','duck',1);addDefenseOverCurve('randy-savage','sidestep',1);
-addDefenseOverCurve('gunther','no-sell',1);addDefenseOverCurve('gunther','dodge',1);
-addDefenseOverCurve('stephanie-vaquer','duck',1);
-addDefenseOverCurve('sami-zayn','dodge',1);
-addDefenseOverCurve('kane','no-sell',1);addDefenseOverCurve('kane','standing-switch',1);
-addDefenseOverCurve('danhausen','chain-wrestling',1);addDefenseOverCurve('danhausen','standing-switch',1);
-addDefenseOverCurve('paige','duck',1);
-addDefenseOverCurve('rhea-ripley','no-sell',1);addDefenseOverCurve('rhea-ripley','standing-switch',1);
-
-// Target the remaining CPU recovery outliers with curve swaps, not more defensive cuts.
-replaceOne('chelsea-green','ddt','elbow');replaceOne('chelsea-green','ddt','jawbreaker');
-replaceOne('jacob-fatu','swanton-bomb','punch');replaceOne('jacob-fatu','powerbomb','headbutt');
-replaceOne('logan-paul','asai-moonsault','punch');replaceOne('logan-paul','frog-splash','jawbreaker');
-replaceOne('jey-uso','running-hip-attack','punch');replaceOne('jey-uso','samoan-drop','headbutt');
-replaceOne('tiffany-stratton','swanton-bomb','jawbreaker');replaceOne('tiffany-stratton','standing-moonsault','jawbreaker');
-replaceOne('danhausen','inverted-ddt','punch');replaceOne('danhausen','northern-lights-suplex','headbutt');
-replaceOne('kevin-owens','swanton-bomb','punch');replaceOne('kevin-owens','powerbomb','jawbreaker');
-
-// Final legality/identity guards after recovery tuning.
-replaceOne('kevin-owens','jawbreaker','standing-switch');
-replaceOne('randy-savage','vertical-suplex','diving-crossbody');
-replaceOne('randy-savage','hotshot','diving-body-press');
-
-// v0.12.70: authored shared Tornado DDT belongs in agile SummerSlam identities after all legacy tuning passes.
-if(!deckIds['cody-rhodes'].includes('tornado-ddt')) replaceOne('cody-rhodes','knee-to-the-gut','tornado-ddt');
-if(!deckIds['seth-rollins'].includes('tornado-ddt')) replaceOne('seth-rollins','knee-to-the-gut','tornado-ddt');
-if(!deckIds['cm-punk'].includes('tornado-ddt')) replaceOne('cm-punk','knee-to-the-gut','tornado-ddt');
 
 export const decks=Object.fromEntries(Object.entries(deckIds).map(([sid,ids])=>[sid,ids.map(id=>byId.get(id)).filter(Boolean)]));

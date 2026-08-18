@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.12.97";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.12.97";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.2";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.2";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -318,7 +318,7 @@ function cpuSubmissionDecision(state,pid){
 }
 export function cpuDecision(game,pid="p2"){
  const s=game.state(),p=s.players[pid];if(decisionOwner(s)!==pid)return null;
- if(s.phase==="COUNTER"){const incoming=s.proposedMove.card,c=p.hand.find(x=>counterEligibility(s,pid,incoming,x).legal);if(c)return{type:"counter",card:c};const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}return{type:"passCounter"};}
+ if(s.phase==="COUNTER"){const incoming=s.proposedMove.card,normal=p.hand.find(x=>x.kind==="move"&&counterEligibility(s,pid,incoming,x).legal);if(normal)return{type:"counter",card:normal};const repeat=p.hand.find(x=>x.kind==="action"&&x.effect?.type==="onceTooOften"&&counterEligibility(s,pid,incoming,x).legal);if(repeat&&(incoming.finisher||(incoming.damage??0)>=8||(incoming.damage??0)>=p.hp))return{type:"counter",card:repeat};const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}if(repeat)return{type:"counter",card:repeat};return{type:"passCounter"};}
  if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');const chance=healthOnlyPinChance(p);return c&&chance>=20?{type:"pinEscape",card:c}:{type:"passPin"};}
  if(s.phase==="SUBMISSION_RESPONSE")return{type:"passSubmissionResponse"};
  if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length?cpuSubmissionDecision(s,pid):{type:"release"};

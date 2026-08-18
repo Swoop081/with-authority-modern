@@ -28,3 +28,9 @@
 
 /* v0.12.01 — Survivor Series identity */
 .key.survivor{border-color:#ff7b2b;color:#fff;background:linear-gradient(135deg,#06162f 0%,#0b2344 58%,#ff6b1b 100%)}
+
+/* v0.13.1 — Layered Card Front v1 workflow */
+.front-workflow{display:grid;gap:9px;border:1px solid rgba(225,189,97,.34);border-radius:12px;padding:10px;background:linear-gradient(145deg,rgba(225,189,97,.07),rgba(255,255,255,.015))}
+.front-workflow.is-disabled{opacity:.45;pointer-events:none}
+.layered-note{margin:0;color:#aaa9a0;font-size:.61rem;line-height:1.42}
+.layered-note b{color:var(--gold);letter-spacing:.05em}

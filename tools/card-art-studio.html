@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08080b">
   <title>WWE Legacy — Card Art Studio</title>
-  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.12.97">
+  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.13.2">
 </head>
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>COLLECTIBLE CARD GAME</small></a>
-    <span class="studio-build">CARD ART STUDIO · v0.12.55</span>
+    <span class="studio-build">CARD ART STUDIO · v0.13.2</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
       <div class="eyebrow">SEASON 1 CARD DATABASE + FUTURE SET TEMPLATES</div>
       <h1>Card Art Studio</h1>
-      <p>Every active Season 1 collectible uses the same collector code as Collection, Catalogue and boosters. Select a card, position artwork, then export its finished front.</p>
+      <p>Design the complete card exactly as it appears in game. Layered v1 can export only the reusable art plate while WWE Legacy supplies live names, stats, requirements, type and rarity. Existing finished fronts remain untouched.</p>
     </section>
     <section class="studio-layout">
       <div class="studio-controls">
@@ -100,10 +100,25 @@
         </section>
 
         <section class="control-group">
-          <div class="group-heading"><span>4</span><div><b>Export</b><small>Finished files install into the game’s custom art folders.</small></div></div>
+          <div class="group-heading"><span>4</span><div><b>Export</b><small>Layered v1 keeps mutable card data out of the saved artwork. Legacy Flat remains available for existing workflow.</small></div></div>
           <label>Export target
-            <select id="export-target"><option value="card">Finished Card Front</option><option value="headshot">HUD Headshot · Superstar cards only</option></select>
+            <select id="export-target"><option value="card">Card Front</option><option value="headshot">HUD Headshot · Superstar cards only</option></select>
           </label>
+          <div id="front-workflow" class="front-workflow">
+            <label>Card front format
+              <select id="front-format">
+                <option value="layered" selected>Layered v1 · Recommended</option>
+                <option value="flat">Legacy Flat · Existing workflow</option>
+              </select>
+            </label>
+            <label>Preview
+              <select id="preview-mode">
+                <option value="final" selected>Final Card · Live data visible</option>
+                <option value="plate">Art Plate · Saved image only</option>
+              </select>
+            </label>
+            <p class="layered-note"><b>SAFE MIGRATION:</b> Existing finished fronts stay flat. A live overlay is used only after a clean Layered v1 plate is installed and that specific card is explicitly registered.</p>
+          </div>
           <label>Output size
             <select id="output-size">
               <option value="680x1000">680 × 1000</option>
@@ -133,7 +148,7 @@
       </aside>
     </section>
   </main>
-  <script src="../js/tools/card-art-studio-data.js?v=0.12.97"></script>
-  <script src="../js/tools/card-art-studio.js?v=0.12.97"></script>
+  <script src="../js/tools/card-art-studio-data.js?v=0.13.2"></script>
+  <script src="../js/tools/card-art-studio.js?v=0.13.2"></script>
 </body>
 </html>

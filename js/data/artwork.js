@@ -1,6 +1,7 @@
-import { assetUrl } from "../config/build.js?v=0.12.97";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.12.97";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.12.97";
+import { usesLayeredFront } from "./card-fronts.js?v=0.13.2";
+import { assetUrl } from "../config/build.js?v=0.13.2";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.2";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.2";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
@@ -123,6 +124,17 @@ const finishedFrontFolders = {
   support: "supports",
   momentum: "momentum",
 };
+
+export function layeredCardArtFor(card) {
+  if (!card || card.kind === "momentum" || !usesLayeredFront(card)) return null;
+  if (card.kind === "superstar") {
+    const key = card.superstarId ?? card.id?.replace(/^superstar-/, "");
+    return key ? assetUrl(`assets/cards/art/layered/superstars/${key}.webp`) : null;
+  }
+  const folder = finishedFrontFolders[card.kind];
+  const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
+  return folder && key ? assetUrl(`assets/cards/art/layered/${folder}/${key}.webp`) : null;
+}
 
 export function finishedCardArtFor(card) {
   if (!card) return null;

@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.12.97",
+  "version": "0.13.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,6 +16,7 @@
     "final-balance": "node tools/final-season1-sim.mjs",
     "dead-turns": "node tools/dead-turn-audit.mjs",
     "counter-states": "node tools/counter-state-audit.mjs",
-    "package-clean": "node tools/package-clean.mjs"
+    "package-clean": "node tools/package-clean.mjs",
+    "launch-balance": "node tools/launch-roster-balance-sim.mjs"
   }
 }

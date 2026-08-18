@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.12.97";
+import { enrichCounterState } from "./counter-states.js?v=0.13.2";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -192,7 +192,12 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
     "counterState": "torso-trapped"
   },
   {
@@ -603,13 +608,19 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "roman-reigns",
     "rarity": 3,
-    "rulesText": "Roman exclusive; gain +1 Adrenaline",
+    "rulesText": "Roman-exclusive Trademark. On Connect: gain +1 Adrenaline.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
-    "counterState": "arm-extended"
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "arm-extended",
+    "trademark": true
   },
   {
     "id": "roman-reigns-drive-by",
@@ -904,7 +915,12 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -1247,7 +1263,12 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
+    "effects": [
+      {
+        "type": "drawSelf",
+        "amount": 1
+      }
+    ],
     "counterState": "front-control"
   },
   {
@@ -1357,13 +1378,20 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "cm-punk",
     "rarity": 3,
-    "rulesText": "Punk-exclusive signature; Stun 1; search Bulldog",
+    "rulesText": "Punk-exclusive Trademark. Stun 1. On Connect: search/draw Bulldog.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 1,
     "selfDamage": 0,
-    "effects": [],
-    "counterState": "leg-extended"
+    "effects": [
+      {
+        "type": "search",
+        "name": "Bulldog",
+        "discount": 0
+      }
+    ],
+    "counterState": "leg-extended",
+    "trademark": true
   },
   {
     "id": "cm-punk-anaconda-vise",
@@ -1532,6 +1560,11 @@ export const allGameplayCards = [
         "type": "bodyPressure",
         "bodyPart": "chest",
         "amount": 2
+      },
+      {
+        "type": "discountNextByName",
+        "name": "Last Symphony",
+        "amount": 1
       }
     ],
     "counterState": "arm-extended"
@@ -1670,15 +1703,17 @@ export const allGameplayCards = [
     },
     "moveType": "grapple",
     "method": "strength",
-    "superstarId": null,
-    "rarity": 2,
-    "rulesText": "",
+    "superstarId": "gunther",
+    "rarity": 3,
+    "rulesText": "Gunther-exclusive Trademark. If Gunther's Chop connected earlier this Control sequence, Last Symphony costs 1 less.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "trademark": true,
+    "discountIfNamedConnectedThisControl": { "name": "Gunther's Chop", "amount": 1 }
   },
   {
     "id": "gunther-folding-powerbomb",
@@ -2393,13 +2428,19 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "stone-cold-steve-austin",
     "rarity": 3,
-    "rulesText": "Austin-exclusive; grounded opponent; opponent loses 1 Adrenaline",
+    "rulesText": "Austin-exclusive Trademark. Ground opponent. On Connect: opponent loses 1 Adrenaline.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [],
-    "counterState": "leg-extended"
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "leg-extended",
+    "trademark": true
   },
   {
     "id": "stone-cold-steve-austin-lou-thesz-press",
@@ -2531,7 +2572,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "the-undertaker",
     "rarity": 3,
-    "rulesText": "Undertaker-exclusive; next Running Big Boot this Control gets +2 Damage",
+    "rulesText": "Undertaker-exclusive Trademark. On Connect: Undertaker’s next Running Big Boot this Control sequence gets +2 Damage.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -2539,11 +2580,12 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "buffNextByName",
-        "name": "Big Boot",
+        "name": "Undertaker’s Running Big Boot",
         "damage": 2
       }
     ],
-    "counterState": "body-elevated"
+    "counterState": "body-elevated",
+    "trademark": true
   },
   {
     "id": "the-undertaker-old-school",
@@ -2865,7 +2907,7 @@ export const allGameplayCards = [
   },
   {
     "id": "mankind-cactus-elbow",
-    "name": "Cactus Elbow",
+    "name": "Mankind’s Elbow Drop",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 5,
@@ -2877,13 +2919,42 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "mankind",
     "rarity": 3,
-    "rulesText": "Mankind-exclusive",
+    "rulesText": "Mankind-exclusive. Diving Elbow Drop.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
     "counterState": "diving-aerial"
+  },
+  {
+    "id": "mankind-clothesline",
+    "name": "Mankind’s Clothesline",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "mankind",
+    "rarity": 3,
+    "rulesText": "Mankind-exclusive Trademark. Grounds opponent. On Connect: search/draw Mankind’s Elbow Drop; it costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Mankind’s Elbow Drop",
+        "discount": 1
+      }
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "mankind-double-arm-ddt",
@@ -3937,7 +4008,7 @@ export const allGameplayCards = [
     "method": "technical",
     "superstarId": "charlotte-flair",
     "rarity": 3,
-    "rulesText": "Charlotte Flair-exclusive Trademark.",
+    "rulesText": "Charlotte-exclusive Trademark. On Connect: search/draw Figure-Eight Leglock; it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
@@ -3945,8 +4016,9 @@ export const allGameplayCards = [
     "trademark": true,
     "effects": [
       {
-        "type": "discardOpponent",
-        "amount": 1
+        "type": "search",
+        "name": "Figure-Eight Leglock",
+        "discount": 2
       }
     ],
     "counterState": "front-control"
@@ -3956,7 +4028,7 @@ export const allGameplayCards = [
     "name": "Figure-Eight Leglock",
     "kind": "move",
     "setId": "evolution-series-1",
-    "cost": 10,
+    "cost": 9,
     "damage": 0,
     "requirements": {},
     "moveType": "submission",
@@ -4014,13 +4086,14 @@ export const allGameplayCards = [
     "method": "strike",
     "superstarId": "paige",
     "rarity": 3,
-    "rulesText": "",
+    "rulesText": "Paige-exclusive Trademark.",
     "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
     "effects": [],
-    "counterState": "front-control"
+    "counterState": "front-control",
+    "trademark": true
   },
   {
     "id": "paige-pto",
@@ -4899,11 +4972,11 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "andre-the-giant",
-    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
     "preMatchMomentum": {
       "strength": 1
     },
-    "preMatchAdrenaline": 2,
+    "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
   {
@@ -4957,9 +5030,10 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "bayley",
-    "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
     "preMatchMomentum": {
-      "technical": 1
+      "technical": 1,
+      "strength": 1
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
@@ -5027,12 +5101,12 @@ export const allGameplayCards = [
     "setId": "season-1-final-boss",
     "rarity": 4,
     "superstarId": "the-rock",
-    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +2 Adrenaline.",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
     "preMatchMomentum": {
       "strength": 1,
       "strike": 1
     },
-    "preMatchAdrenaline": 2,
+    "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
   {
@@ -5177,10 +5251,10 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "the-undertaker",
-    "rulesText": "Once per match after Undertaker successfully kicks out: gain +2 Adrenaline and take Control.",
+    "rulesText": "Once per match after Undertaker successfully kicks out: gain +1 Adrenaline and take Control.",
     "special": {
       "type": "kickoutControlAdrenaline",
-      "amount": 2
+      "amount": 1
     }
   },
   {
@@ -5295,12 +5369,13 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "liv-morgan",
-    "rulesText": "Once per match after Liv successfully Counters, draw 1 page; her next Jersey Codebreaker this Control sequence costs 3 less.",
+    "rulesText": "Once per match after Liv successfully Counters, draw 1 page and gain +1 Adrenaline; her next Jersey Codebreaker this Control sequence costs 3 less.",
     "special": {
       "type": "counterDiscountNamed",
       "name": "Jersey Codebreaker",
       "amount": 3,
-      "draw": 1
+      "draw": 1,
+      "adrenaline": 1
     }
   },
   {
@@ -9548,7 +9623,411 @@ export const allGameplayCards = [
       }
     ],
     "counterState": "torso-trapped"
-  }
+  },
+  {
+    "id": "mankind-have-a-nice-day",
+    "name": "Have a Nice Day!",
+    "kind": "action",
+    "setId": "hall-of-fame-series-1",
+    "cost": 0,
+    "superstarId": "mankind",
+    "rarity": 3,
+    "rulesText": "Mankind-exclusive Action. Play while Mankind is at 50% HP or less. Draw 2 pages, then ditch 1.",
+    "playCondition": {
+      "selfHpAtOrBelowPct": 0.5
+    },
+    "effect": {
+      "type": "drawThenDiscardSelf",
+      "draw": 2,
+      "discard": 1
+    }
+  },
+  {
+    "id": "hulk-hogan-whatcha-gonna-do",
+    "name": "Whatcha Gonna Do?",
+    "kind": "action",
+    "setId": "hall-of-fame-series-1",
+    "cost": 0,
+    "superstarId": "hulk-hogan",
+    "rarity": 3,
+    "rulesText": "Hogan-exclusive Action. Play while Hogan is at 50% HP or less. Look at the top 5 pages of your Playbook; take a Hogan Move into hand and put the rest on the bottom.",
+    "playCondition": {
+      "selfHpAtOrBelowPct": 0.5
+    },
+    "effect": {
+      "type": "topDeckTutor",
+      "look": 5,
+      "superstarMove": true
+    }
+  },
+  {
+    "id": "andre-the-giant-headbutt",
+    "name": "André’s Headbutt",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "andre-the-giant",
+    "rarity": 3,
+    "rulesText": "André-exclusive Trademark. On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "randy-savage-cream-of-the-crop",
+    "name": "Cream of the Crop",
+    "kind": "action",
+    "setId": "hall-of-fame-series-1",
+    "cost": 0,
+    "superstarId": "randy-savage",
+    "rarity": 3,
+    "rulesText": "Savage-exclusive Action. Look at the top 5 pages of your Playbook; take an Agility Move into hand and put the rest on the bottom.",
+    "effect": {
+      "type": "topDeckTutor",
+      "look": 5,
+      "method": "agility"
+    }
+  },
+  {
+    "id": "kane-flying-clothesline",
+    "name": "Kane’s Flying Clothesline",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "aerial",
+    "method": "strike",
+    "superstarId": "kane",
+    "rarity": 3,
+    "rulesText": "Kane-exclusive Trademark. On Connect: search/draw Chokeslam From Hell; it costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Chokeslam From Hell",
+        "discount": 1
+      }
+    ],
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "the-undertaker-running-big-boot",
+    "name": "Undertaker’s Running Big Boot",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "the-undertaker",
+    "rarity": 3,
+    "rulesText": "Undertaker-exclusive Trademark. Ground opponent. Snake Eyes can give this Move +2 Damage this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "ultimate-warrior-clothesline",
+    "name": "Warrior’s Clothesline",
+    "kind": "move",
+    "setId": "hall-of-fame-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "ultimate-warrior",
+    "rarity": 3,
+    "rulesText": "Warrior-exclusive Trademark. Ground opponent. On Connect: Warrior's Gorilla Press Slam costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Warrior's Gorilla Press Slam",
+        "amount": 1
+      }
+    ],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "stone-cold-give-me-a-hell-yeah",
+    "name": "Give Me a Hell Yeah!",
+    "kind": "action",
+    "setId": "hall-of-fame-series-1",
+    "cost": 0,
+    "superstarId": "stone-cold-steve-austin",
+    "rarity": 3,
+    "rulesText": "Austin-exclusive Action. Play after Austin connected with a Strike Move this Control sequence. Draw 1 page, then ditch 1.",
+    "playCondition": {
+      "afterConnectedMethod": "strike"
+    },
+    "effect": {
+      "type": "drawThenDiscardSelf",
+      "draw": 1,
+      "discard": 1
+    }
+  },
+  {
+    "id": "bayley-ding-dong-hello",
+    "name": "Ding Dong! Hello!",
+    "kind": "action",
+    "setId": "evolution-series-1",
+    "cost": 0,
+    "superstarId": "bayley",
+    "rarity": 3,
+    "rulesText": "Bayley-exclusive Action. Search/draw Bayley-to-Belly or Bayley’s Diving Elbow; the chosen Move costs 1 less this Control sequence.",
+    "effect": {
+      "type": "searchChoice",
+      "names": [
+        "Bayley-to-Belly",
+        "Bayley’s Diving Elbow"
+      ],
+      "discount": 1
+    }
+  },
+  {
+    "id": "paige-superkick",
+    "name": "Paige’s Superkick",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "paige",
+    "rarity": 3,
+    "rulesText": "Paige-exclusive Trademark. Ground opponent. On Connect: Paige Turner costs 2 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Paige Turner",
+        "amount": 2
+      }
+    ],
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "stephanie-vaquer-dragon-screw",
+    "name": "Stephanie’s Dragon Screw",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "stephanie-vaquer",
+    "rarity": 3,
+    "rulesText": "Vaquer-exclusive Trademark. On Connect: her next Technical Move costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "discountNextMethod",
+        "method": "technical",
+        "amount": 1
+      }
+    ],
+    "counterState": "front-control"
+  },
+  {
+    "id": "charlotte-flair-spear",
+    "name": "Charlotte’s Spear",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "charlotte-flair",
+    "rarity": 3,
+    "rulesText": "Charlotte-exclusive Trademark. Ground opponent. On Connect: search/draw Natural Selection; it costs 2 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Natural Selection",
+        "discount": 2
+      }
+    ],
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "rhea-ripley-mamis-always-on-top",
+    "name": "Mami’s Always on Top",
+    "kind": "action",
+    "setId": "evolution-series-1",
+    "cost": 0,
+    "superstarId": "rhea-ripley",
+    "rarity": 3,
+    "rulesText": "Rhea-exclusive Action. Play while the opponent is grounded. Search/draw Electric Chair Drop or Prism Trap.",
+    "playCondition": {
+      "opponentGrounded": true
+    },
+    "effect": {
+      "type": "searchChoice",
+      "names": [
+        "Prism Trap",
+        "Electric Chair Drop"
+      ],
+      "discount": 0
+    }
+  },
+  {
+    "id": "becky-lynch-bexploder",
+    "name": "Bexploder",
+    "kind": "move",
+    "setId": "evolution-series-1",
+    "cost": 5,
+    "damage": 9,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "becky-lynch",
+    "rarity": 3,
+    "rulesText": "Becky-exclusive Trademark. Ground opponent. On Connect: search/draw Dis-arm-her; it costs 2 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Dis-arm-her",
+        "discount": 2
+      }
+    ],
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "cody-rhodes-what-do-you-want-to-talk-about",
+    "name": "What Do You Want to Talk About?",
+    "kind": "action",
+    "setId": "summerslam-series-1",
+    "cost": 0,
+    "superstarId": "cody-rhodes",
+    "rarity": 3,
+    "rulesText": "Cody-exclusive Action. Look at the top 4 pages of your Playbook; take a Cody-exclusive card into hand and put the rest on the bottom.",
+    "effect": {
+      "type": "topDeckTutor",
+      "look": 4,
+      "exclusiveSuperstar": true
+    }
+  },
+  {
+    "id": "oba-femi-running-elbow",
+    "name": "Oba’s Running Elbow",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "oba-femi",
+    "rarity": 3,
+    "rulesText": "Oba Femi-exclusive Trademark. A crushing running elbow.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "brock-lesnar-eat-sleep-conquer-repeat",
+    "name": "Eat. Sleep. Conquer. Repeat.",
+    "kind": "action",
+    "setId": "summerslam-series-1",
+    "cost": 0,
+    "superstarId": "brock-lesnar",
+    "rarity": 3,
+    "rulesText": "Brock-exclusive Action. Play after Brock’s German connected this Control sequence. Draw 1 page, then ditch 1.",
+    "playCondition": {
+      "afterConnectedCard": "Brock’s German"
+    },
+    "effect": {
+      "type": "drawThenDiscardSelf",
+      "draw": 1,
+      "discard": 1
+    }
+  },
+  {
+    "id": "once-too-often",
+    "name": "Once Too Often",
+    "kind": "action",
+    "setId": "summerslam-series-1",
+    "cost": 0,
+    "rarity": 2,
+    "universalBooster": true,
+    "defensiveOnly": true,
+    "rulesText": "Reactive Action. When your opponent plays a Move they have already connected with earlier this match, play this in the Counter window. Reverse that repeated Move and gain Control.",
+    "effect": {
+      "type": "onceTooOften"
+    }
+  },
+
 ];
 
 allGameplayCards.forEach(enrichCounterState);

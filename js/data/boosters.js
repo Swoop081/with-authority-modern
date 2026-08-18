@@ -1,8 +1,8 @@
-import { cardsForSet } from "./collection.js?v=0.12.97";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.12.97";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.12.97";
-import { sets } from "./sets.js?v=0.12.97";
-import { isLaunchLiveSetId } from "./release.js?v=0.12.97";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.2";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.2";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.2";
+import { sets } from "./sets.js?v=0.13.2";
+import { isLaunchLiveSetId } from "./release.js?v=0.13.2";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -73,7 +73,11 @@ export function grantBooster(p, n = 1, setId = DEFAULT_BOOSTER_SET_ID) {
 }
 
 function buildPack(profile, rng, setId) {
-  const base = cardsForSet(setId).filter(boosterEligible);
+  // Universal booster cards retain one collector identity but may appear in
+  // any currently released set booster. This lets shared rules staples such
+  // as Once Too Often remain collectible without cloning them across sets.
+  const universal = collectionCards.filter(card => card.universalBooster === true && card.setId !== setId);
+  const base = [...cardsForSet(setId), ...universal].filter(boosterEligible);
   if (!base.length) throw new Error("No active cards for this set");
 
   // Superstar cards are a separate pack-level chase. They never distort the

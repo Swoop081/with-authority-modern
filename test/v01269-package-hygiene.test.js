@@ -49,7 +49,7 @@ test("v0.12.69 live presentation assets remain installed", () => {
 });
 
 test("v0.12.69 clean packager is wired into package.json", () => {
-  assert.match(packageJson.version, /^0\.12\.\d+$/);
+  assert.match(packageJson.version, /^0\.\d+\.\d+$/);
   assert.equal(packageJson.scripts["package-clean"], "node tools/package-clean.mjs");
   assert.equal(fs.existsSync(path.join(root, "tools/package-clean.mjs")), true);
 });

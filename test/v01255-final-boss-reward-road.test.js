@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS, SEASON_TIER_COUNT } from '../js/data/seasons.js?v=0.12.97';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.12.97';
-import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.12.97';
+import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS, SEASON_TIER_COUNT } from '../js/data/seasons.js?v=0.13.2';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.2';
+import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.13.2';
 
 const milestones = Object.keys(FINAL_BOSS_TIER_REWARDS).map(Number).sort((a,b)=>a-b);
 
 test('v0.12.83 Final Boss prestige chase spans the 100-tier road one card at a time',()=>{
-  assert.equal(PROFILE_VERSION,28);
+  assert.equal(PROFILE_VERSION,29);
   assert.equal(SEASON_TIER_COUNT,100);
   assert.equal(tierReward(40).cardId,'the-rock-rock-bottom');
   assert.equal(tierReward(50).cardId,'the-rock-rock-bottom');

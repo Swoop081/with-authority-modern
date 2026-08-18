@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.12.97";
-import { decks } from "../js/data/decks.js?v=0.12.97";
-import { allGameplayCards } from "../js/data/content.js?v=0.12.97";
-import { collectionCards } from "../js/data/collection.js?v=0.12.97";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.12.97";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.12.97";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.12.97";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.12.97";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.12.97";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.12.97";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.12.97";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.12.97";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.12.97";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.12.97";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.12.97";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.12.97";
-import { healthZone } from "../js/engine/health.js?v=0.12.97";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.12.97";
+import { superstars } from "../js/data/superstars.js?v=0.13.2";
+import { decks } from "../js/data/decks.js?v=0.13.2";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.2";
+import { collectionCards } from "../js/data/collection.js?v=0.13.2";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.2";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.2";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.2";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.2";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.2";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.2";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.2";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.2";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.2";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.2";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.2";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.2";
+import { healthZone } from "../js/engine/health.js?v=0.13.2";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.2";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -271,7 +271,7 @@ test("A completely maxed five-card booster values the guaranteed Foil duplicate 
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.12.97");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.2");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -446,7 +446,7 @@ test("Chad Gable RAW Series 1 package is locked, playable and wired to Olympic P
 
 
 test("starting HP roster uses the locked durability spread",()=>{
-  const expected = {"iyo-sky":57,"mankind":67,"the-rock":67,"hulk-hogan":69,"bayley":63,"cm-punk":64,"paige":63,"seth-rollins":64,"andre-the-giant":72,"stephanie-vaquer":63,"randy-savage":64,"roman-reigns":67,"charlotte-flair":65,"kevin-owens":66,"kane":69,"the-undertaker":68,"ultimate-warrior":68,"rhea-ripley":66,"cody-rhodes":64,"oba-femi":70,"stone-cold-steve-austin":66,"liv-morgan":62,"brock-lesnar":70,"gunther":68,"becky-lynch":64,"logan-paul":62,"sol-ruca":58,"chad-gable":64,"raquel-rodriguez":67,"rey-mysterio":57,"dominik-mysterio":61,"penta":65,"el-grande-americano":64,"jey-uso":64,"la-knight":64,"alexa-bliss":62,"finn-balor":64,"danhausen":61,"tiffany-stratton":62,"chelsea-green":61,"damian-priest":66,"bron-breakker":68,"drew-mcintyre":68,"randy-orton":65,"sami-zayn":64,"jacob-fatu":68,"solo-sikoa":66,"jade-cargill":67,"nia-jax":69,"goldberg":69};
+  const expected = {"iyo-sky":57,"mankind":67,"the-rock":67,"hulk-hogan":69,"bayley":63,"cm-punk":64,"paige":64,"seth-rollins":64,"andre-the-giant":72,"stephanie-vaquer":63,"randy-savage":64,"roman-reigns":67,"charlotte-flair":65,"kevin-owens":66,"kane":69,"the-undertaker":68,"ultimate-warrior":68,"rhea-ripley":66,"cody-rhodes":64,"oba-femi":68,"stone-cold-steve-austin":66,"liv-morgan":64,"brock-lesnar":70,"gunther":68,"becky-lynch":64,"logan-paul":62,"sol-ruca":58,"chad-gable":64,"raquel-rodriguez":67,"rey-mysterio":57,"dominik-mysterio":61,"penta":65,"el-grande-americano":64,"jey-uso":64,"la-knight":64,"alexa-bliss":62,"finn-balor":64,"danhausen":61,"tiffany-stratton":62,"chelsea-green":61,"damian-priest":66,"bron-breakker":68,"drew-mcintyre":68,"randy-orton":65,"sami-zayn":64,"jacob-fatu":68,"solo-sikoa":66,"jade-cargill":67,"nia-jax":69,"goldberg":69};
   for (const [id,hp] of Object.entries(expected)) assert.equal(starById.get(id)?.hp,hp,`${id} starting HP`);
   const values=[...new Set(stars.map(s=>s.hp))].sort((a,b)=>a-b);
   assert.deepEqual(values,[57,58,61,62,63,64,65,66,67,68,69,70,72]);
@@ -1277,7 +1277,8 @@ test("v0.12.04 Card Art Studio uses premium trading-card typography", async()=>{
   assert.ok(studio.includes('Bahnschrift SemiCondensed'),'metadata should use the semi-condensed information stack');
   assert.ok(studio.includes('DIN Alternate'),'COST/DAMAGE values should use the condensed number stack');
   assert.equal(studio.includes('italic 1000'),false,'old exaggerated heavy italic name typography must remain retired');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.55/,'Studio visible build label should match the current release');
+  const pkg=JSON.parse(fs.readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+  assert.match(html,new RegExp(`CARD ART STUDIO · v${pkg.version.replaceAll('.', '\\.')}`),'Studio visible build label should match the current release');
 });
 
 
@@ -1290,7 +1291,8 @@ test("v0.12.06 Card Art Studio keeps the v0.12.05 spacing/stat presentation", as
   assert.ok(studio.includes('cardFont(NUMBER_STACK,78,1000)'),'COST/DAMAGE values should use the current dominant mobile-readable sizing');
   assert.equal(studio.includes('ctx.fillText(card.cardCode||"WWE LEGACY",w*.085,h*.958)'),false,'bottom-left white collector microtext should be removed from the card face');
   assert.equal(studio.includes('ctx.fillText("WWE LEGACY • COLLECTIBLE CARD GAME",w*.915,h*.958)'),false,'bottom-right white footer microtext should be removed from the card face');
-  assert.match(html,/CARD ART STUDIO · v0\.12\.55/,'Studio visible build label should match the current release');
+  const pkg=JSON.parse(fs.readFileSync(new URL('../package.json',import.meta.url),'utf8'));
+  assert.match(html,new RegExp(`CARD ART STUDIO · v${pkg.version.replaceAll('.', '\\.')}`),'Studio visible build label should match the current release');
 });
 
 test("v0.12.06 Deck Lab supports owned-category browsing, legality reasons and editable Lead Off slots",()=>{
@@ -1544,7 +1546,7 @@ test("v0.12.12 public game exposes only the three launch series",()=>{
   const launchStars=stars.filter(star=>isLaunchLiveSetId(star.setId));
   const launchCards=collectionCards.filter(card=>isLaunchLiveSetId(card.setId));
   assert.equal(launchStars.length,24);
-  assert.equal(launchCards.length,287);
+  assert.equal(launchCards.length,306);
   assert.equal(exhibitionOpponentIds("roman-reigns").length,23);
   assert.ok(exhibitionOpponentIds("roman-reigns").every(id=>isLaunchLiveSetId(starById.get(id)?.setId)));
   for(const setId of ["raw-series-1","worlds-collide-series-1","money-in-the-bank-series-1","smackdown-series-1","survivor-series-series-1","season-2-whos-next"]){
@@ -1607,7 +1609,7 @@ test("current public module graph is cache-coherent and boots for fresh + migrat
   const pkg=JSON.parse(readFileSync(path.join(root,"package.json"),"utf8"));
   const version=pkg.version;
   const index=readFileSync(path.join(root,"index.html"),"utf8");
-  assert.match(version,/^0\.12\.\d+$/);
+  assert.match(version,/^0\.\d+\.\d+$/);
   for(const asset of ["css/game.css","js/ui/app.js","manifest.webmanifest"]){
     assert.ok(index.includes(`${asset}?v=${version}`),`${asset} entrypoint stamp must match ${version}`);
   }

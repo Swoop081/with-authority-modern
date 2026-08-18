@@ -18,7 +18,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["The objective", "Win the match by successful pinfall or by forcing a submission. A referee decision is used only for the special empty-deck exhaustion loop."],
       ["Superstar HP", "Every Superstar has printed maximum HP. Damage reduces current HP but does not change printed maximum HP."],
       ["Health zones", "Green is 65% or more of maximum HP. Amber is 25%–64%. Red is below 25%. These zones matter for pin legality and presentation."],
-      ["Card text", "Specific card, Superstar, Entrance and Special text can create exceptions. When an authored card explicitly overrides a general rule, that card text wins for that interaction."]
+      ["Card text", "Specific card, Superstar, Entrance and Action text can create exceptions. When an authored card explicitly overrides a general rule, that card text wins for that interaction."]
     ]
   },
   {
@@ -28,7 +28,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Lead Off 5", "Each match begins with the authored or saved Lead Off 5. There is no normal Turn 1 draw."],
       ["Control", "The Superstar in Control may play legal cards, make Moves, pass, and use available post-Move options."],
       ["Keeping Control", "A connected non-Submission Move normally keeps Control. After it connects, the defender draws 1 page; the attacker does not receive an automatic replacement draw."],
-      ["Losing Control", "Control normally changes on a pass, a successful Counter, or a failed pin / kick out. Some Superstar or Special effects can explicitly retain or regain Control."],
+      ["Losing Control", "Control normally changes on a pass, a successful Counter, or a failed pin / kick out. Some Superstar or Action effects can explicitly retain or regain Control."],
       ["Unlimited match clock", "Matches do not end because a turn limit expires. If both decks are empty and the game reaches 8 consecutive passes, a referee decision ends the loop using remaining health as the deciding factor."]
     ]
   },
@@ -51,10 +51,9 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     items: [
       ["Moves", "Moves are the main offensive and defensive wrestling cards. They can be Strikes, Grapples, Aerials, Counters, Submissions, Trademarks or Finishers and may carry grounding, stun, search or other effects."],
       ["Momentum", "Momentum pages add +1 of their printed Method and are discarded after being played; the Momentum they granted remains for the match."],
-      ["Actions", "Actions are utility cards played during your Action window. The normal limit is 1 Action per turn."],
+      ["Actions", "Actions are utility and character cards. You may include multiple different Actions in a deck. Normal Actions use your Action window and the normal limit is 1 per turn; reactive or one-use Actions instead follow the specific timing printed on the card."],
       ["Supports", "Supports use their authored effect and the normal limit is 1 Support per turn."],
       ["Managers", "A Manager occupies the active Manager slot and follows the timing and effect printed on that card."],
-      ["Specials", "Specials are one-use effects with authored timing windows. Some can be played freely during Control; others only appear when their specific trigger is active."],
       ["Entrances", "Entrances sit outside the 60-page deck. Your selected Entrance resolves automatically at its authored pre-match or first-Control timing; Entrances are not played from the hand."],
       ["Superstar cards", "The Superstar identity card defines HP, Method Limits, ability and associated deck identity. It is not one of the 60 deck pages."]
     ]
@@ -79,6 +78,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Counter-attacks", "An offensive Counter becomes a counter-attack. Counter-attacks are terminal by default and resolve without opening another generic Counter window."],
       ["Punch / Elbow exchange", "Punch and Elbow are the explicit exchange family that may answer each other and continue the exchange when legal."],
       ["Mirror locks", "Jawbreaker cannot answer Jawbreaker, and Arm Drag Counter does not recursively counter itself in the same exchange."],
+      ["Once Too Often", "Once Too Often is a reactive Action. If the opponent plays the exact same Move card they already connected with earlier in this match, you may play Once Too Often during that Counter window to reverse the repeat and gain Control. It can answer a repeated Finisher, but not a counter-attack."],
       ["Auto Counter", "Auto Counter is the fallback when you do not use a matching reversal. Its discard Cost is 5 pages the first time, then 6, 7, 8 and so on. You must still have at least 2 pages left in hand afterward."],
       ["Auto Counter limits", "Auto Counter cannot answer a Finisher or a counter-attack. The CPU prefers a real matching Counter and only considers Auto Counter in its authored decision rules."]
     ]
@@ -89,7 +89,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     items: [
       ["Damage", "Connected Moves reduce current HP by their resolved Damage, to a minimum of 0."],
       ["Grounding", "Cards that ground the opponent put them on the mat. Grounded status matters for many Finishers, Aerials and Submissions."],
-      ["Stun", "Stun is an authored temporary state used by certain Moves and Specials. Stun duration and any prevention or bonus interactions follow the relevant card text."],
+      ["Stun", "Stun is an authored temporary state used by certain Moves and Actions. Stun duration and any prevention or bonus interactions follow the relevant card text."],
       ["Body-part damage", "Some attacks mark persistent damage to Head, Arms, Legs, Back or Chest. Submission pressure on that body part adds to the same persistent total."],
       ["Persistent injury", "Body-part damage remains after a Submission is released. Later holds can continue working the same damaged area."]
     ]
@@ -98,7 +98,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     id: "pins", group: "FINISH", title: "Pins & Kick Outs",
     summary: "Pins are only legal against an opponent already in Amber or Red health.",
     items: [
-      ["Pin window", "A pin attempt is available after you connected a Move and retained Control, before playing Momentum or a Special in that fresh post-Move Action window."],
+      ["Pin window", "A pin attempt is available after you connected a Move and retained Control, before playing Momentum or an Action in that fresh post-Move Action window."],
       ["Health gate", "Green-health opponents cannot be pinned. The defender must be in Amber or Red before the pin chance table is consulted."],
       ["Referee count", "A legal cover uses the referee count presentation. The defender may use a legal Pin Escape card when available."],
       ["Failed pin", "If the pin does not succeed, the defender kicks out and gains Control."],
@@ -128,7 +128,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Ownership", "You can only save copies you actually own. Normal and Foil copies both count toward ownership of that card."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
-      ["Recommended decks", "Authored decks are blueprints, not free cards. Deck Lab builds around what you own and lets you restructure a legal 60-page deck freely."]
+      ["Recommended decks", "Authored decks are blueprints, not free cards. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap. Deck Lab builds around what you own and lets you restructure a legal 60-page deck freely."]
     ]
   },
   {
@@ -136,7 +136,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     summary: "Rarity controls collectibility; Foils are presentation variants only.",
     items: [
       ["Rarity", "1★ Common, 2★ Uncommon, 3★ Rare and 4★ Very Rare."],
-      ["Exclusive rarity policy", "Cards exclusive to one wrestler must be Rare or Very Rare. Wrestler-exclusive Trademarks are generally Rare; Finishers and wrestler Specials are Very Rare."],
+      ["Exclusive rarity policy", "Cards exclusive to one wrestler must be Rare or Very Rare. Wrestler-exclusive Trademarks are generally Rare; Finishers and wrestler one-use/reactive Actions are Very Rare."],
       ["Ownership caps", "Momentum can be owned up to the project Momentum cap; most playable cards cap at 5 copies; Superstar, Entrance and Manager identities cap at 1."],
       ["Foils", "Foil cards are cosmetic / collector variants only. A Foil and Normal copy have identical Cost, Damage, requirements, effects and match strength."],
       ["Foil deck use", "Choosing a Foil copy in Deck Lab changes presentation only. It never grants hidden Damage, Cost reduction, Momentum or any other gameplay bonus."],
@@ -154,6 +154,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Superstar chase", "Eligible Superstar identities use a separate 5% pack-level chase with a 50-pack pity for an available Superstar in that set."],
       ["Duplicate conversion", "Copies that exceed that card's ownership cap convert to Universe Points instead of increasing ownership. Excess Normal copies convert for 10 UP; excess Foil copies convert for 20 UP."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
+      ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],
       ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build when a newly-owned card makes that possible. When it chooses a card finish, it prefers an owned Foil copy for presentation; Foil remains gameplay-identical to Normal."]
     ]
   },

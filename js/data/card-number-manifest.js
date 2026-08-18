@@ -2916,6 +2916,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "SS1-141"
   },
   {
+    "id": "mankind-clothesline",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 81,
+    "cardCode": "HOF1-081"
+  },
+  {
     "id": "bayley-diving-elbow",
     "setId": "evolution-series-1",
     "cardNumber": 65,
@@ -2926,6 +2932,114 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "evolution-series-1",
     "cardNumber": 66,
     "cardCode": "EVO1-066"
+  },
+  {
+    "id": "mankind-have-a-nice-day",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 82,
+    "cardCode": "HOF1-082"
+  },
+  {
+    "id": "hulk-hogan-whatcha-gonna-do",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 83,
+    "cardCode": "HOF1-083"
+  },
+  {
+    "id": "andre-the-giant-headbutt",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 84,
+    "cardCode": "HOF1-084"
+  },
+  {
+    "id": "randy-savage-cream-of-the-crop",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 85,
+    "cardCode": "HOF1-085"
+  },
+  {
+    "id": "kane-flying-clothesline",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 86,
+    "cardCode": "HOF1-086"
+  },
+  {
+    "id": "the-undertaker-running-big-boot",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 87,
+    "cardCode": "HOF1-087"
+  },
+  {
+    "id": "ultimate-warrior-clothesline",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 88,
+    "cardCode": "HOF1-088"
+  },
+  {
+    "id": "stone-cold-give-me-a-hell-yeah",
+    "setId": "hall-of-fame-series-1",
+    "cardNumber": 89,
+    "cardCode": "HOF1-089"
+  },
+  {
+    "id": "bayley-ding-dong-hello",
+    "setId": "evolution-series-1",
+    "cardNumber": 67,
+    "cardCode": "EVO1-067"
+  },
+  {
+    "id": "paige-superkick",
+    "setId": "evolution-series-1",
+    "cardNumber": 68,
+    "cardCode": "EVO1-068"
+  },
+  {
+    "id": "stephanie-vaquer-dragon-screw",
+    "setId": "evolution-series-1",
+    "cardNumber": 69,
+    "cardCode": "EVO1-069"
+  },
+  {
+    "id": "charlotte-flair-spear",
+    "setId": "evolution-series-1",
+    "cardNumber": 70,
+    "cardCode": "EVO1-070"
+  },
+  {
+    "id": "rhea-ripley-mamis-always-on-top",
+    "setId": "evolution-series-1",
+    "cardNumber": 71,
+    "cardCode": "EVO1-071"
+  },
+  {
+    "id": "becky-lynch-bexploder",
+    "setId": "evolution-series-1",
+    "cardNumber": 72,
+    "cardCode": "EVO1-072"
+  },
+  {
+    "id": "cody-rhodes-what-do-you-want-to-talk-about",
+    "setId": "summerslam-series-1",
+    "cardNumber": 142,
+    "cardCode": "SS1-142"
+  },
+  {
+    "id": "oba-femi-running-elbow",
+    "setId": "summerslam-series-1",
+    "cardNumber": 143,
+    "cardCode": "SS1-143"
+  },
+  {
+    "id": "brock-lesnar-eat-sleep-conquer-repeat",
+    "setId": "summerslam-series-1",
+    "cardNumber": 144,
+    "cardCode": "SS1-144"
+  },
+  {
+    "id": "once-too-often",
+    "setId": "summerslam-series-1",
+    "cardNumber": 145,
+    "cardCode": "SS1-145"
   }
 ]);
 

@@ -1,13 +1,13 @@
-import { decks } from "./decks.js?v=0.12.97";
-import { collectionCards } from "./collection.js?v=0.12.97";
-import { superstars } from "./superstars.js?v=0.12.97";
-import { isUnreleasedSetId } from "./release.js?v=0.12.97";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.12.97";
+import { decks } from "./decks.js?v=0.13.2";
+import { collectionCards } from "./collection.js?v=0.13.2";
+import { superstars } from "./superstars.js?v=0.13.2";
+import { isUnreleasedSetId } from "./release.js?v=0.13.2";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.2";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 28;
+export const PROFILE_VERSION = 29;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 15;
 
@@ -78,6 +78,7 @@ export function spendUniversePoints(profile, amount) {
   return profile.universePoints;
 }
 
+
 function ensureSavedRecommendedDeck(profile, sid) {
   const d = decks[sid] ?? [];
   if (d.length !== 60) return false;
@@ -86,25 +87,44 @@ function ensureSavedRecommendedDeck(profile, sid) {
   return true;
 }
 
-export function grantSuperstarUnlockPackage(profile, sid) {
+function queueSuperstarUnlockCelebration(profile, sid) {
+  profile.pendingUnlockCelebrations ??= [];
+  if (profile.pendingUnlockCelebrations.some(event => event?.superstarId === sid)) return false;
+  profile.pendingUnlockCelebrations.push({
+    superstarId: sid,
+    cardIds: [`superstar-${sid}`],
+    deckReady: (profile.deckNeedsCards?.[sid] ?? 60) === 0,
+    createdAt: new Date().toISOString()
+  });
+  return true;
+}
+
+export function grantSuperstarUnlockPackage(profile, sid, { celebrate = true } = {}) {
   const star = starById.get(sid), d = decks[sid] ?? [];
   if (!star || d.length !== 60) return { leadOff: [], signatures: [], rewardCards: [], deckSize: d.length, missing: 60 - d.length };
   profile.unlockedSuperstars ??= [];
-  if (!profile.unlockedSuperstars.includes(sid)) profile.unlockedSuperstars.push(sid);
+  const newlyUnlocked = !profile.unlockedSuperstars.includes(sid);
+  if (newlyUnlocked) profile.unlockedSuperstars.push(sid);
   ensureSavedRecommendedDeck(profile, sid);
-  for (const c of d) addOwnedCard(profile, c.id, { amount: 1 });
+  for (const c of d) {
+    // Once Too Often is a universal starter staple: the first authored deck
+    // grants one copy, but further copies are intended to come from boosters.
+    if (c.id === "once-too-often" && totalOwnedCopies(profile, c.id) >= 1) continue;
+    addOwnedCard(profile, c.id, { amount: 1 });
+  }
   addOwnedCard(profile, `superstar-${sid}`, { foil: true });
   profile.selectedEntrances ??= {};
   if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.deckNeedsCards ??= {};
   profile.deckNeedsCards[sid] = 0;
+  if (newlyUnlocked && celebrate) queueSuperstarUnlockCelebration(profile, sid);
   return { leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id), signatures: star.signatures ?? [], rewardCards: [`superstar-${sid}`], deckSize: d.length, missing: 0 };
 }
 
 // Store Superstar unlocks deliberately do not grant all 60 owned copies or the
 // Superstar-specific Entrance. Entrances are Very Rare booster chase cards; the
 // player's shared Amazing Entrance remains equipped until changed in Deck Lab.
-export function grantSuperstarIdentityUnlockPackage(profile, sid) {
+export function grantSuperstarIdentityUnlockPackage(profile, sid, { celebrate = true } = {}) {
   const star = starById.get(sid), d = decks[sid] ?? [];
   if (!star || d.length !== 60) throw new Error("That Superstar deck is not available.");
   profile.unlockedSuperstars ??= [];
@@ -119,11 +139,12 @@ export function grantSuperstarIdentityUnlockPackage(profile, sid) {
   delete profile.savedDecks[sid];
   profile.deckNeedsCards ??= {};
   profile.deckNeedsCards[sid] = 60;
+  if (celebrate) queueSuperstarUnlockCelebration(profile, sid);
   return { alreadyOwned: false, superstarId: sid, entranceId: profile.selectedEntrances?.[sid] ?? DEFAULT_PLAYER_ENTRANCE_ID, deckSize: d.length, missing: 60 };
 }
 
-export function grantStoreSuperstarUnlockPackage(profile, sid) {
-  return grantSuperstarIdentityUnlockPackage(profile, sid);
+export function grantStoreSuperstarUnlockPackage(profile, sid, options = {}) {
+  return grantSuperstarIdentityUnlockPackage(profile, sid, options);
 }
 
 export function createProfile(starterId) {
@@ -164,13 +185,13 @@ export function createProfile(starterId) {
   for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
     addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES });
   }
-  grantSuperstarUnlockPackage(p, starterId);
+  grantSuperstarUnlockPackage(p, starterId, { celebrate: false });
   ensureCareerState(p);
   return p;
 }
 
 export function hasSuperstar(p, id) { return !!p?.unlockedSuperstars?.includes(id); }
-export function unlockSuperstar(p, id) { grantSuperstarUnlockPackage(p, id); return p; }
+export function unlockSuperstar(p, id, options = {}) { grantSuperstarUnlockPackage(p, id, options); return p; }
 export function ownedCount(p, id, finish = "normal") { return p?.ownedCards?.[id]?.[finish] ?? 0; }
 export function getSavedDeck(p, id) { return p?.savedDecks?.[id] ?? []; }
 export function ensureSavedDeck(p, id) { p.savedDecks ??= {}; return p.savedDecks[id] ??= []; }
@@ -342,6 +363,30 @@ const deckFingerprint = ids => {
   return h.toString(16).padStart(8,'0');
 };
 
+const ONCE_TOO_OFTEN_ID = "once-too-often";
+const ONCE_TOO_OFTEN_REPLACEMENT_PRIORITY = ["crowd-support", "fire-up", "game-plan", "got-all-of-it", "punch"];
+function migrateOnceTooOftenIntoSavedDeck(saved = []) {
+  if (!Array.isArray(saved) || saved.length !== 60) return saved;
+  const idOf = entry => typeof entry === "string" ? entry : entry?.id;
+  if (saved.some(entry => idOf(entry) === ONCE_TOO_OFTEN_ID)) return saved;
+  let replaceAt = -1;
+  for (const id of ONCE_TOO_OFTEN_REPLACEMENT_PRIORITY) {
+    for (let i = saved.length - 1; i >= 5; i -= 1) { if (idOf(saved[i]) === id) { replaceAt = i; break; } }
+    if (replaceAt >= 5) break;
+  }
+  if (replaceAt < 5) {
+    for (let i = saved.length - 1; i >= 5; i -= 1) {
+      const card = cardById.get(idOf(saved[i]));
+      if (!card || card.kind === "momentum" || card.finisher || card.trademark || card.superstarId) continue;
+      replaceAt = i; break;
+    }
+  }
+  if (replaceAt < 5) return saved;
+  const out = saved.map(entry => typeof entry === "string" ? { id: entry, foil: false } : { ...entry });
+  out[replaceAt] = { id: ONCE_TOO_OFTEN_ID, foil: false };
+  return out;
+}
+
 export function migrateProfile(old) {
   const sourceVersion = Number(old?.version) || 0;
   if (!old?.starterId || !STARTER_CHOICES.includes(old.starterId) || !decks[old.starterId]) return null;
@@ -353,22 +398,22 @@ export function migrateProfile(old) {
   p.favouriteSuperstars = (p.favouriteSuperstars ?? []).filter(id => p.unlockedSuperstars.includes(id));
   p.ownedCards ??= {};
   p.savedDecks ??= {};
-  // v0.12.76 Mankind card replacement: HOF1-026 is now Cactus Elbow.
+  // v0.12.76 Mankind card replacement: HOF1-026 is now Mankind’s Elbow Drop (renamed in v0.12.99; collector ID preserved).
   // Preserve any collected normal/foil copies and rewrite saved deck entries
   // from the retired Running Knee to the Corner id to the replacement id.
   const legacyMankindKneeId = "mankind-running-knee-to-the-corner";
-  const cactusElbowId = "mankind-cactus-elbow";
+  const mankindElbowDropId = "mankind-cactus-elbow";
   const legacyMankindKnee = p.ownedCards[legacyMankindKneeId];
   if (legacyMankindKnee) {
-    if (legacyMankindKnee.normal) addOwnedCard(p, cactusElbowId, { amount: legacyMankindKnee.normal });
-    if (legacyMankindKnee.foil) addOwnedCard(p, cactusElbowId, { foil: true, amount: legacyMankindKnee.foil });
+    if (legacyMankindKnee.normal) addOwnedCard(p, mankindElbowDropId, { amount: legacyMankindKnee.normal });
+    if (legacyMankindKnee.foil) addOwnedCard(p, mankindElbowDropId, { foil: true, amount: legacyMankindKnee.foil });
     delete p.ownedCards[legacyMankindKneeId];
   }
   for (const [sid, saved] of Object.entries(p.savedDecks)) {
     if (!Array.isArray(saved)) continue;
     p.savedDecks[sid] = saved.map(entry => {
-      if (typeof entry === "string") return entry === legacyMankindKneeId ? cactusElbowId : entry;
-      return entry?.id === legacyMankindKneeId ? { ...entry, id: cactusElbowId } : entry;
+      if (typeof entry === "string") return entry === legacyMankindKneeId ? mankindElbowDropId : entry;
+      return entry?.id === legacyMankindKneeId ? { ...entry, id: mankindElbowDropId } : entry;
     });
   }
   // v0.12.78 Final Boss card replacement: S1FB-001 is now Lay The Smack Down.
@@ -420,6 +465,11 @@ export function migrateProfile(old) {
   p.onboarding = { complete: true, step: 0, ...(p.onboarding ?? {}) };
   p.createdAt ??= new Date().toISOString();
 
+  // v0.13.2 profiles receive the first universal anti-repeat copy now; the
+  // deck swap itself runs later, after all historical recommended-deck
+  // fingerprint migrations have had a chance to recognize their old layouts.
+  if (sourceVersion < 29 && totalOwnedCopies(p, ONCE_TOO_OFTEN_ID) < 1) addOwnedCard(p, ONCE_TOO_OFTEN_ID, { amount: 1 });
+
   // v0.12.55 Entrance economy migration: Superstar-specific Entrances were not
   // booster-pullable in older profiles, so any such owned copies were automatic
   // grants. Remove those grants, seed Amazing Entrance, and give every profile
@@ -458,7 +508,7 @@ export function migrateProfile(old) {
       if (missing) addOwnedCard(p, id, { amount: missing, foil });
     }
     if (claimed.has(50) || p.seasons?.["season-1"]?.completionRewardClaimed) {
-      grantSuperstarIdentityUnlockPackage(p, "the-rock");
+      grantSuperstarIdentityUnlockPackage(p, "the-rock", { celebrate: false });
     }
   }
 
@@ -528,6 +578,14 @@ export function migrateProfile(old) {
           saved.push({ id: card.id, foil: false });
         }
       }
+    }
+    // v0.13.2: after historical recommended-deck migrations, safely place one
+    // Once Too Often into every complete existing 60-page saved deck. Lead Off
+    // 5, Momentum, Finishers, Trademarks and Superstar-exclusive pages are
+    // protected by the replacement selector. Players remain free to remove it.
+    if (sourceVersion < 29 && saved?.length === 60) {
+      saved = migrateOnceTooOftenIntoSavedDeck(saved);
+      p.savedDecks[sid] = saved;
     }
     if (saved) {
       const used = new Map();
