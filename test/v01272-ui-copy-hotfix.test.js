@@ -16,7 +16,7 @@ function between(source, start, end) {
 }
 
 test('v0.12.72 renames Electric Chair Facebuster to Electric Chair Drop without changing identity', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.33');
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.34');
   const card = allGameplayCards.find(c => c.id === 'rhea-ripley-electric-chair-facebuster');
   assert.ok(card);
   assert.equal(card.name, 'Electric Chair Drop');
@@ -50,9 +50,9 @@ test('v0.13.24 Money in the Bank uses Level wording everywhere player-facing', (
   assert.match(app, /start again from level 1/);
 });
 
-test('v0.12.72 special reward pack wrapper says only REWARD', () => {
+test('v0.13.34 Super Pack wrapper is explicitly identified while standard packs remain Series 1', () => {
   const boosters = between(app, 'function renderBoosters()', 'function formatCountdown');
-  assert.match(boosters, /const packWrapperTitle=currentPackType===\"standard\"\?\"SERIES 1\":\"REWARD\"/);
-  assert.match(boosters, /series:bucket\.type==='standard'\?'SERIES 1':'REWARD'/);
-  assert.match(boosters, /label:\"MONEY IN THE BANK\"/); // descriptive tile copy remains outside wrapper
+  assert.match(boosters, /const packWrapperTitle=currentPackType===\"standard\"\?\"SERIES 1\":\"SUPER PACK\"/);
+  assert.match(boosters, /series:bucket\.type==='standard'\?'SERIES 1':'SUPER PACK'/);
+  assert.match(boosters, /label:"SUPER PACK"/); // generic mode-clear reward is now explicit in the Vault
 });

@@ -1,4 +1,4 @@
-import { unlockSuperstar } from "./profile.js?v=0.13.33";
+import { unlockSuperstar } from "./profile.js?v=0.13.34";
 
 export const LADDER_LIVES = 3;
 export const LADDER_LENGTH = 8;
@@ -62,14 +62,13 @@ export function recordLadderMatch(profile, result, now = new Date()) {
     run.status = "cleared";
     ladder.dailyCleared = true;
     ladder.clears = (ladder.clears ?? 0) + 1;
-    ladder.completionPackCredits = (ladder.completionPackCredits ?? 0) + 1;
-    ladder.completionPackCreditsBySet[run.setId] = (ladder.completionPackCreditsBySet[run.setId] ?? 0) + 1;
-    ladder.completionPackQueue.push(run.setId);
+    profile.superPackCreditsBySet ??= {};
+    profile.superPackCreditsBySet[run.setId] = (profile.superPackCreditsBySet[run.setId] ?? 0) + 1;
     if (ladder.clears === 1) {
       ladder.firstClearSuperstarPending = true;
       ladder.firstClearSuperstarPendingBySet[run.setId] = true;
     }
-    return { status: "cleared", run, completionPackAwarded: true };
+    return { status: "cleared", run, completionPackAwarded: false, superPackAwarded: true };
   }
   return { status: "advance", run };
 }

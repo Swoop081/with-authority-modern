@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.33';
-import { decks } from '../js/data/decks.js?v=0.13.33';
-import { collectionCards } from '../js/data/collection.js?v=0.13.33';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.33';
-import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.33';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.33';
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from '../js/data/store.js?v=0.13.33';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.34';
+import { decks } from '../js/data/decks.js?v=0.13.34';
+import { collectionCards } from '../js/data/collection.js?v=0.13.34';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.34';
+import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.34';
+import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.34';
+import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.34';
 
 const byId = new Map(collectionCards.map(card=>[card.id,card]));
 
@@ -51,9 +51,9 @@ test('v0.12.93 blueprint restoration uses an already-owned Foil even when the ne
   assert.ok(profile.savedDecks[sid].some(e=>e.id===target.card.id&&e.foil));
 });
 
-test('v0.12.93 a maxed Foil duplicate converts for more UP than a maxed Normal duplicate',()=>{
-  assert.equal(DUPLICATE_UNIVERSE_POINTS,10);
-  assert.equal(FOIL_DUPLICATE_UNIVERSE_POINTS,20);
+test('v0.13.34 maxed duplicates convert for 1/2/3/4 UP by rarity and Foil uses the same value',()=>{
+  assert.deepEqual(DUPLICATE_UP_BY_RARITY,{1:1,2:2,3:3,4:4});
+  for (const rarity of [1,2,3,4]) assert.equal(duplicateUniversePointsFor(rarity),rarity);
   const p=createProfile('cm-punk');
   const setId='summerslam-series-1';
   const eligible=collectionCards.filter(c=>c.setId===setId&&boosterEligible(c));
@@ -61,6 +61,5 @@ test('v0.12.93 a maxed Foil duplicate converts for more UP than a maxed Normal d
   grantBooster(p,1,setId);
   const pack=openBooster(p,()=>0.42,setId);
   assert.equal(pack[0].foil,true);
-  assert.equal(pack[0].universePointsValue,FOIL_DUPLICATE_UNIVERSE_POINTS);
-  assert.ok(pack.slice(1).every(pull=>!pull.foil&&pull.universePointsValue===DUPLICATE_UNIVERSE_POINTS));
+  assert.ok(pack.every(pull=>pull.universePointsValue===duplicateUniversePointsFor(pull.card)));
 });

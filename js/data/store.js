@@ -1,7 +1,7 @@
-import { superstars } from "./superstars.js?v=0.13.33";
-import { collectionCards } from "./collection.js?v=0.13.33";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.13.33";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.33";
+import { superstars } from "./superstars.js?v=0.13.34";
+import { collectionCards } from "./collection.js?v=0.13.34";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.13.34";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.34";
 
 export const STORE_SET_ROTATION = [
   "summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1",
@@ -11,8 +11,15 @@ export const STORE_SET_ROTATION = [
 export function releasedStoreSetIds(now = new Date()) { return STORE_SET_ROTATION.filter(setId => isPlayerReleasedSetId(setId, now)); }
 export const STORE_BOOSTER_PRICE = 300;
 export const STORE_SUPERSTAR_PRICE = 2500;
-export const DUPLICATE_UNIVERSE_POINTS = 10;
-export const FOIL_DUPLICATE_UNIVERSE_POINTS = 20;
+export const DUPLICATE_UP_BY_RARITY = Object.freeze({ 1: 1, 2: 2, 3: 3, 4: 4 });
+export function duplicateUniversePointsFor(cardOrRarity) {
+  const rarity = typeof cardOrRarity === "object" ? Number(cardOrRarity?.rarity) : Number(cardOrRarity);
+  return DUPLICATE_UP_BY_RARITY[rarity] ?? 1;
+}
+// Compatibility aliases now represent the 1★ floor only; actual overflow value
+// is rarity-scaled through duplicateUniversePointsFor(). Foils use the same rate.
+export const DUPLICATE_UNIVERSE_POINTS = 1;
+export const FOIL_DUPLICATE_UNIVERSE_POINTS = 1;
 export const STORE_REFRESH_MS = 24 * 60 * 60 * 1000;
 export const STORE_EPOCH_MS = Date.UTC(2026, 7, 13, 0, 0, 0);
 

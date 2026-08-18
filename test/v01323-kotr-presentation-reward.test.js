@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.33';
-import { superstars } from '../js/data/superstars.js?v=0.13.33';
-import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.33';
+import { createProfile } from '../js/data/profile.js?v=0.13.34';
+import { superstars } from '../js/data/superstars.js?v=0.13.34';
+import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.34';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
@@ -37,6 +37,7 @@ test('v0.13.23 KOTR offers all three packs when exactly three released sets are 
   assert.equal(run.coronationSeen, true);
   assert.equal(claimKingOfTheRingReward(p, 'hall-of-fame-series-1'), 'hall-of-fame-series-1');
   assert.equal(run.rewardClaimedSetId, 'hall-of-fame-series-1');
+  assert.equal(p.superPackCreditsBySet['hall-of-fame-series-1'], 1);
   assert.throws(() => claimKingOfTheRingReward(p, 'evolution-series-1'), /already claimed/);
 });
 
@@ -72,7 +73,7 @@ test('v0.13.23 KOTR UI includes live bracket, coronation, reigning King and choo
   assert.match(app, /CHOOSE YOUR/);
   assert.match(app, /data-kotr-reward-set/);
   assert.match(app, /REIGNING KING/);
-  assert.match(app, /Choose one booster/);
+  assert.match(app, /Choose one boosted-odds Super Pack/);
   assert.match(css, /kotr-coronation-screen/);
   assert.match(css, /kotr-reward-grid/);
   assert.match(css, /kotr-career-king/);

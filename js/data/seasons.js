@@ -1,12 +1,12 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.33";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.33";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.34";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.34";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
 export const SEASON_TIER_COUNT = 100;
 export const XP_PER_TIER = 100;
 export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
-export const MATCH_XP = { win: 15, loss: 3 };
+export const MATCH_XP = { win: 15, loss: 0 };
 export const DAILY_CHALLENGE_XP = 25;
 export const WEEKLY_CHALLENGE_XP = 100;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";

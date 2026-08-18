@@ -1,5 +1,5 @@
-import { isUnreleasedSetId } from "./release.js?v=0.13.33";
-import { superstars } from "./superstars.js?v=0.13.33";
+import { isUnreleasedSetId } from "./release.js?v=0.13.34";
+import { superstars } from "./superstars.js?v=0.13.34";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 50;
@@ -493,7 +493,10 @@ export function recordLiveEventTowerMatch(profile, towerKey, result, now = new D
     aggregate.totalClears = (aggregate.totalClears ?? 0) + 1;
     if (!aggregate.completedKeys.includes(tower.key)) aggregate.completedKeys.push(tower.key);
     profile.weeklyLiveEvents.totalClears = aggregate.totalClears;
-    return { status: "cleared", run, tower, event: tower.event };
+    const superPackSetId = run.rewardSetId ?? tower.event.rewardSetId;
+    profile.superPackCreditsBySet ??= {};
+    profile.superPackCreditsBySet[superPackSetId] = (profile.superPackCreditsBySet[superPackSetId] ?? 0) + 1;
+    return { status: "cleared", run, tower, event: tower.event, superPackAwarded: true, superPackSetId };
   }
   return { status: "advance", run, tower, stage: liveEventStage(tower.event, run.stage) };
 }

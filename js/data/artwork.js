@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.13.33";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.33";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.33";
+import { assetUrl } from "../config/build.js?v=0.13.34";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.34";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.34";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";

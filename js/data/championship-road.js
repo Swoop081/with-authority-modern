@@ -1,4 +1,4 @@
-import { superstars } from "./superstars.js?v=0.13.33";
+import { superstars } from "./superstars.js?v=0.13.34";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 24;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";
@@ -119,10 +119,10 @@ export function recordChampionshipMatch(profile, result) {
     if (firstWithSuperstar) state.completedBy.push(run.superstarId);
     const idx = difficultyIndex(run.difficultyId), next = CHAMPIONSHIP_DIFFICULTY_ORDER[idx + 1];
     if (next && !state.unlockedDifficulties.includes(next)) state.unlockedDifficulties.push(next);
-    state.championshipPackCredits = (state.championshipPackCredits ?? 0) + 1;
-    state.championshipPackCreditsBySet[CHAMPIONSHIP_SET_ID] = (state.championshipPackCreditsBySet[CHAMPIONSHIP_SET_ID] ?? 0) + 1;
-    state.championshipPackQueue.push(CHAMPIONSHIP_SET_ID);
-    return { status: "cleared", run, championshipPackAwarded: true, firstWithSuperstar, unlockedDifficulty: next ?? null, sectionCleared: completedSection };
+    const superPackSetId = completedSection?.setId ?? CHAMPIONSHIP_SET_ID;
+    profile.superPackCreditsBySet ??= {};
+    profile.superPackCreditsBySet[superPackSetId] = (profile.superPackCreditsBySet[superPackSetId] ?? 0) + 1;
+    return { status: "cleared", run, championshipPackAwarded: false, superPackAwarded: true, superPackSetId, firstWithSuperstar, unlockedDifficulty: next ?? null, sectionCleared: completedSection };
   }
   return { status: "advance", run, sectionCleared: completedSection };
 }

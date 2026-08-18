@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.33';
-import { superstars } from '../js/data/superstars.js?v=0.13.33';
-import { decks } from '../js/data/decks.js?v=0.13.33';
-import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.33';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.33';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.33';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.33';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.33';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.34';
+import { superstars } from '../js/data/superstars.js?v=0.13.34';
+import { decks } from '../js/data/decks.js?v=0.13.34';
+import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.34';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.34';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.34';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.34';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.34';
 
 const stars = Object.values(superstars);
 const star = id => stars.find(s => s.id === id);

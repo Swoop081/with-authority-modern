@@ -1,13 +1,16 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.33";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.33";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.33";
-import { sets } from "./sets.js?v=0.13.33";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.33";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.34";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.34";
+import { duplicateUniversePointsFor } from "./store.js?v=0.13.34";
+import { sets } from "./sets.js?v=0.13.34";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.34";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
 export const MAX_VERY_RARE_PULLS = 1;
-export const RARITY_WEIGHTS = { 1: .5, 2: .3, 3: .15, 4: .05 };
+export const RARITY_WEIGHTS = Object.freeze({ 1: .5, 2: .3, 3: .15, 4: .05 });
+export const SUPER_PACK_RARITY_WEIGHTS = Object.freeze({ 1: .25, 2: .40, 3: .27, 4: .08 });
+export const SUPER_PACK_GUARANTEED_MIN_RARITY = 3;
+export const SUPER_PACK_MAX_VERY_RARE_PULLS = 2;
 export const SUPERSTAR_PITY_PACKS = 100;
 export const SUPERSTAR_CHASE_CHANCE = .02;
 export const DEFAULT_BOOSTER_SET_ID = "summerslam-series-1";
@@ -20,17 +23,20 @@ export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) {
   if (setId === DEFAULT_BOOSTER_SET_ID) return Math.max(0, Number(p?.boosterCredits) || 0);
   return 0;
 }
+export function superPackCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) {
+  return Math.max(0, Number(p?.superPackCreditsBySet?.[setId]) || 0);
+}
 export function boosterEligible(card, now = new Date()) { return !!card && isPlayerReleasedSetId(card.setId, now) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false; }
 export function underOwnershipCap(profile, card) { return totalOwnedCopies(profile, card.id) < cardOwnershipCap(card); }
 
-function availableRarityWeights(pool) {
+function availableRarityWeights(pool, rarityWeights = RARITY_WEIGHTS) {
   const rarities = [...new Set(pool.map(card => Number(card.rarity) || 1))].sort((a,b)=>a-b);
-  return rarities.map(rarity => [rarity, RARITY_WEIGHTS[rarity] ?? .01]);
+  return rarities.map(rarity => [rarity, rarityWeights[rarity] ?? .01]);
 }
 
-function rollRarity(pool, rng = Math.random) {
+function rollRarity(pool, rng = Math.random, rarityWeights = RARITY_WEIGHTS) {
   if (!pool.length) return null;
-  const weights = availableRarityWeights(pool);
+  const weights = availableRarityWeights(pool, rarityWeights);
   const total = weights.reduce((sum, [,weight]) => sum + weight, 0);
   let roll = rng() * total;
   for (const [rarity, weight] of weights) {
@@ -40,9 +46,9 @@ function rollRarity(pool, rng = Math.random) {
   return weights.at(-1)?.[0] ?? null;
 }
 
-function rarityFirstPick(pool, rng = Math.random) {
+function rarityFirstPick(pool, rng = Math.random, rarityWeights = RARITY_WEIGHTS) {
   if (!pool.length) return null;
-  const rarity = rollRarity(pool, rng);
+  const rarity = rollRarity(pool, rng, rarityWeights);
   const bucket = pool.filter(card => (Number(card.rarity) || 1) === rarity);
   if (!bucket.length) return null;
   return bucket[Math.min(bucket.length - 1, Math.floor(rng() * bucket.length))];
@@ -72,8 +78,21 @@ export function grantBooster(p, n = 1, setId = DEFAULT_BOOSTER_SET_ID) {
   if (setId === DEFAULT_BOOSTER_SET_ID) p.boosterCredits = p.boosterCreditsBySet[setId];
   return p.boosterCreditsBySet[setId];
 }
+export function grantVictoryBooster(p, result, setId = DEFAULT_BOOSTER_SET_ID) {
+  if (result !== "win") return 0;
+  grantBooster(p, 1, setId);
+  return 1;
+}
+export function grantSuperPack(p, n = 1, setId = DEFAULT_BOOSTER_SET_ID) {
+  p.superPackCreditsBySet ??= {};
+  p.superPackCreditsBySet[setId] = (p.superPackCreditsBySet[setId] ?? 0) + Math.max(0, Number(n) || 0);
+  return p.superPackCreditsBySet[setId];
+}
 
-function buildPack(profile, rng, setId, now = new Date()) {
+function buildPack(profile, rng, setId, now = new Date(), options = {}) {
+  const rarityWeights = options.rarityWeights ?? RARITY_WEIGHTS;
+  const guaranteedMinRarity = Math.max(1, Number(options.guaranteedMinRarity) || 1);
+  const maxVeryRarePulls = Math.max(1, Number(options.maxVeryRarePulls) || MAX_VERY_RARE_PULLS);
   // Universal booster cards retain one collector identity but may appear in
   // any currently released set booster. This lets shared rules staples such
   // as Once Too Often remain collectible without cloning them across sets.
@@ -100,9 +119,8 @@ function buildPack(profile, rng, setId, now = new Date()) {
   const pack = [];
   let superstarAdded = false;
   let pendingSuperstarUnlockId = null;
-  // A five-card pack may contain at most one 4★ Very Rare. The Superstar
-  // chase counts toward this ceiling so a chase Superstar cannot stack with
-  // additional Very Rare Finishers, Actions or Entrances in the same pack.
+  // Standard packs allow at most one 4★ Very Rare; Super Packs allow up to
+  // two. A chase Superstar counts toward the active pack's Very Rare ceiling.
   let veryRarePulls = superstarCard?.rarity === 4 ? 1 : 0;
 
   for (let i = 0; i < BOOSTER_SIZE; i += 1) {
@@ -118,8 +136,13 @@ function buildPack(profile, rng, setId, now = new Date()) {
       // but roll rarity first and only then choose uniformly inside that bucket.
       let slotPool = normalBase.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
       if (i === 0 && underCapNormal.length) slotPool = underCapNormal.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
-      if (veryRarePulls >= MAX_VERY_RARE_PULLS) slotPool = slotPool.filter(c => Number(c.rarity) !== 4);
-      card = rarityFirstPick(slotPool, rng);
+      if (i === 0 && guaranteedMinRarity > 1) {
+        const guaranteedProgress = slotPool.filter(c => (Number(c.rarity) || 1) >= guaranteedMinRarity);
+        const guaranteedAny = normalBase.filter(c => (c.kind !== "entrance" || underOwnershipCap(profile, c)) && (Number(c.rarity) || 1) >= guaranteedMinRarity);
+        slotPool = guaranteedProgress.length ? guaranteedProgress : guaranteedAny;
+      }
+      if (veryRarePulls >= maxVeryRarePulls) slotPool = slotPool.filter(c => Number(c.rarity) !== 4);
+      card = rarityFirstPick(slotPool, rng, rarityWeights);
       if (card?.rarity === 4) veryRarePulls += 1;
       if (card?.kind === "entrance") pullFoil = true;
     }
@@ -146,8 +169,8 @@ function buildPack(profile, rng, setId, now = new Date()) {
       replacedNormal: result.replacedNormal > 0,
       superstarUnlocked,
       overflowCopies: result.overflowed,
-      duplicateUnitValue: pullFoil ? FOIL_DUPLICATE_UNIVERSE_POINTS : DUPLICATE_UNIVERSE_POINTS,
-      universePointsValue: result.overflowed * (pullFoil ? FOIL_DUPLICATE_UNIVERSE_POINTS : DUPLICATE_UNIVERSE_POINTS),
+      duplicateUnitValue: duplicateUniversePointsFor(card),
+      universePointsValue: result.overflowed * duplicateUniversePointsFor(card),
       universePointsCredited: false,
       ownershipBefore: beforeTotal,
       ownershipCap: result.cap
@@ -176,11 +199,20 @@ export function openBooster(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, 
   return pack;
 }
 
+export function openSuperPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, now = new Date()) {
+  const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
+  if (superPackCreditsFor(p, setId) < 1) throw new Error("No Super Pack available for this set.");
+  const pack = buildPack(p, rng, setId, now, { rarityWeights: SUPER_PACK_RARITY_WEIGHTS, guaranteedMinRarity: SUPER_PACK_GUARANTEED_MIN_RARITY, maxVeryRarePulls: SUPER_PACK_MAX_VERY_RARE_PULLS });
+  p.superPackCreditsBySet[setId] = Math.max(0, (p.superPackCreditsBySet[setId] ?? 0) - 1);
+  recordOpenedPack(p, setId);
+  return pack;
+}
+
 export function openLadderCompletionPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, now = new Date()) {
   const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
   const pool = p?.ladder?.completionPackCreditsBySet ?? {};
   if ((pool[setId] ?? 0) < 1) throw new Error("No Money in the Bank Completion Pack available for this set.");
-  const pack = buildPack(p, rng, setId, now);
+  const pack = buildPack(p, rng, setId, now, { rarityWeights: SUPER_PACK_RARITY_WEIGHTS, guaranteedMinRarity: SUPER_PACK_GUARANTEED_MIN_RARITY, maxVeryRarePulls: SUPER_PACK_MAX_VERY_RARE_PULLS });
   pool[setId] = Math.max(0, (pool[setId] ?? 0) - 1);
   recordOpenedPack(p, setId);
   return pack;
@@ -190,7 +222,7 @@ export function openChampionshipPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, may
   const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
   const pool = p?.championshipRoad?.championshipPackCreditsBySet ?? {};
   if ((pool[setId] ?? 0) < 1) throw new Error("No Championship Pack available for this set.");
-  const pack = buildPack(p, rng, setId, now);
+  const pack = buildPack(p, rng, setId, now, { rarityWeights: SUPER_PACK_RARITY_WEIGHTS, guaranteedMinRarity: SUPER_PACK_GUARANTEED_MIN_RARITY, maxVeryRarePulls: SUPER_PACK_MAX_VERY_RARE_PULLS });
   pool[setId] = Math.max(0, (pool[setId] ?? 0) - 1);
   recordOpenedPack(p, setId);
   return pack;

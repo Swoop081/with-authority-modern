@@ -7136,3 +7136,7 @@ body[data-screen="store"] .hud-superstar-modal-card{width:100%!important;max-wid
   .champ-road-superstar-card{width:52px!important;max-width:52px!important}
   .champ-road-result-star{font-size:1.75rem!important}
 }
+
+/* v0.13.34 — Super Pack reward treatment */
+.physical-booster-pack.is-super-pack { filter:saturate(1.18) contrast(1.05); }
+.vault-pack-product .physical-booster-pack.is-super-pack + strong { font-weight:900; }

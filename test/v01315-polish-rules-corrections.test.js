@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.33";
-import { canPlayAction, counterEligibility } from "../js/engine/rules.js?v=0.13.33";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.34";
+import { canPlayAction, counterEligibility } from "../js/engine/rules.js?v=0.13.34";
 
 const player=id=>({superstar:{id},momentum:{strength:10,strike:10,technical:10,agility:10,attitude:10},adrenaline:10,events:{},turn:{actionPlayed:0},posture:"standing",hand:[],specialUsed:false,controlMoveCount:0});
 

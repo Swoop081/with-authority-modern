@@ -150,10 +150,11 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     items: [
       ["Pack size", "A standard booster contains 5 pulls."],
       ["Rarity weights", "Ordinary slots roll from the current available pool using 50% Common, 30% Uncommon, 15% Rare and 5% Very Rare weighting until a Very Rare has been hit."],
-      ["Very Rare ceiling", "A five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot."],
+      ["Very Rare ceiling", "A standard five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot. Super Packs are the explicit exception and can contain up to 2 Very Rares."],
       ["Guaranteed Foil", "The first pull is Foil. Entrances are also presented as Foil. Foil status does not change gameplay strength."],
+      ["Super Packs", "Clearing a full mode or tournament awards a five-card Super Pack. It guarantees a Foil Rare-or-better first pull and uses boosted 25% Common, 40% Uncommon, 27% Rare and 8% Very Rare weighting, with up to 2 Very Rares."],
       ["Superstar chase", "Eligible Superstar identities use a separate 2% pack-level chase with a 100-pack hard pity for an available unowned Superstar in that set."],
-      ["Duplicate conversion", "Copies that exceed that card's ownership cap convert to Universe Points instead of increasing ownership. Excess Normal copies convert for 10 UP; excess Foil copies convert for 20 UP."],
+      ["Duplicate conversion", "Copies that exceed that card's ownership cap convert to Universe Points instead of increasing ownership. Overflow value is rarity-based: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP. Foil overflow uses the same rarity value."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
       ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],
       ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build when a newly-owned card makes that possible. When it chooses a card finish, it prefers an owned Foil copy for presentation; Foil remains gameplay-identical to Normal."]
@@ -167,8 +168,8 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Live Events", "Live Events is a rotating tower hub. A Daily Tower resets every local day, a 3 Day Tower rotates every three days, and a Weekly Tower rotates each Monday. Limited 24-hour birthday towers can appear on a Superstar's real birthday."],
       ["Daily brand schedule", "The Daily Tower uses RAW branding on Monday, NXT on Wednesday and SmackDown on Saturday; Tuesday, Thursday, Friday and Sunday use original WWE Legacy event identities."],
       ["Tower timers", "Every Live Event card shows the exact time remaining. Progress belongs to that tower only and expires when its timer ends."],
-      ["Live Event progress", "Each tower contains 5 escalating matches. A loss retries the same stage without erasing completed stages. The Daily Tower awards 50 UP per win; longer rotating towers use their shown reward rate and completion pack."],
-      ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you. Winning the Final crowns your Superstar King of the Ring, then offers three different released-set boosters; choose exactly one. When more than three sets are live, the three offered sets are selected randomly for that tournament."],
+      ["Match rewards", "Every match victory in every mode awards 1 booster. A loss awards no match reward. Clearing a full mode or tournament awards an additional Super Pack with boosted rarity odds and at least one Rare-or-better card."],
+      ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you. Each victory awards a normal booster. Winning the Final crowns your Superstar King of the Ring, then offers three different released-set Super Packs; choose exactly one."],
       ["Money in the Bank", "Money in the Bank lives inside Live Events as a daily 8-opponent tower. You have 3 lives for the run. A loss costs one life; losing all 3 restarts the tower from Level 1 against the same daily field. Clearing all 8 levels awards the daily completion reward, and a fresh random tower arrives at local midnight."],
       ["Championship Road", "A continuous 24-match Season 1 road split into six four-match themed regions. Win to unlock the next numbered matchup; a loss retries the current node. Championship Road begins on Easy, where opponents start at -5 HP. Completing the full road unlocks Normal (standard HP), then Hard (+5 opponent HP), then Hardcore (+10 opponent HP), creating 96 campaign matchups in total. The player Superstar receives no HP modifier."],
       ["Career records", "Completed matches feed My Legacy's overall W/L, W/L by unlocked Superstar and W/L by mode."]
@@ -179,7 +180,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     summary: "Matches, challenges and rewards feed the 100-tier Season 1 road.",
     items: [
       ["Season 1", "Season 1 contains 100 tiers at 100 XP per tier, for 10,000 XP total. Tier 100 awards the Foil The Rock — Final Boss Superstar identity."],
-      ["Match XP", "A match win awards 15 Season XP and a loss awards 3 Season XP."],
+      ["Match XP", "A match win awards 15 Season XP and a loss awards 0 Season XP."],
       ["Daily challenges", "Three Daily Challenges rotate each local day. Each completed Daily Challenge awards its shown booster reward plus 25 Season XP."],
       ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards its shown booster reward plus 100 Season XP."],
       ["Daily free booster", "The Season page provides one free booster on a 24-hour timer. Claiming it opens the booster immediately."],

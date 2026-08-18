@@ -1,13 +1,13 @@
-import { decks } from "./decks.js?v=0.13.33";
-import { collectionCards } from "./collection.js?v=0.13.33";
-import { superstars } from "./superstars.js?v=0.13.33";
-import { isUnreleasedSetId } from "./release.js?v=0.13.33";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.33";
+import { decks } from "./decks.js?v=0.13.34";
+import { collectionCards } from "./collection.js?v=0.13.34";
+import { superstars } from "./superstars.js?v=0.13.34";
+import { isUnreleasedSetId } from "./release.js?v=0.13.34";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.34";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 30;
+export const PROFILE_VERSION = 31;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 15;
 
@@ -228,6 +228,7 @@ export function createProfile(starterId) {
     deckAssistance: "ask",
     boosterCredits: 0,
     boosterCreditsBySet: blankSetCounters(),
+    superPackCreditsBySet: blankSetCounters(),
     packsOpened: 0,
     packsOpenedBySet: blankSetCounters(),
     packsSinceSuperstarUnlock: 0,
@@ -505,6 +506,7 @@ export function migrateProfile(old) {
   p.deckAssistance = DECK_ASSISTANCE_MODES.includes(p.deckAssistance) ? p.deckAssistance : "ask";
   p.boosterCredits = Math.max(0, Number(p.boosterCredits) || 0);
   p.boosterCreditsBySet = { ...blankSetCounters(), ...(p.boosterCreditsBySet ?? {}) };
+  p.superPackCreditsBySet = { ...blankSetCounters(), ...(p.superPackCreditsBySet ?? {}) };
   p.packsOpened = Math.max(0, Number(p.packsOpened) || 0);
   p.packsOpenedBySet = { ...blankSetCounters(), ...(p.packsOpenedBySet ?? {}) };
   p.packsSinceSuperstarUnlock = Math.max(0, Number(p.packsSinceSuperstarUnlock) || 0);
@@ -515,6 +517,18 @@ export function migrateProfile(old) {
   p.championshipRoad = { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [], ...(p.championshipRoad ?? {}) };
   p.championshipRoad.championshipPackCreditsBySet = { ...blankSetCounters(), ...(p.championshipRoad.championshipPackCreditsBySet ?? {}) };
   p.championshipRoad.completedBy ??= [];
+  if (sourceVersion < 31) {
+    for (const setId of Object.keys(blankSetCounters())) {
+      const legacyModePacks = (Number(p.ladder.completionPackCreditsBySet?.[setId]) || 0) + (Number(p.championshipRoad.championshipPackCreditsBySet?.[setId]) || 0);
+      if (legacyModePacks > 0) p.superPackCreditsBySet[setId] = (p.superPackCreditsBySet[setId] ?? 0) + legacyModePacks;
+    }
+    p.ladder.completionPackCredits = 0;
+    p.ladder.completionPackCreditsBySet = blankSetCounters();
+    p.ladder.completionPackQueue = [];
+    p.championshipRoad.championshipPackCredits = 0;
+    p.championshipRoad.championshipPackCreditsBySet = blankSetCounters();
+    p.championshipRoad.championshipPackQueue = [];
+  }
   p.weeklyLiveEvents = { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [], ...(p.weeklyLiveEvents ?? {}) };
   p.weeklyLiveEvents.completedWeeks ??= [];
   p.liveEventTowers = { states: {}, totalClears: p.weeklyLiveEvents.totalClears ?? 0, completedKeys: [], ...(p.liveEventTowers ?? {}) };

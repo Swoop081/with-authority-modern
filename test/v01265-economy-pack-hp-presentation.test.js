@@ -1,18 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.13.33';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.13.33';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.33';
-import { cardsForSet } from '../js/data/collection.js?v=0.13.33';
-import { superstars } from '../js/data/superstars.js?v=0.13.33';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.13.34';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.13.34';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.34';
+import { cardsForSet } from '../js/data/collection.js?v=0.13.34';
+import { superstars } from '../js/data/superstars.js?v=0.13.34';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};
 
 test('v0.12.65 Season XP progression is slowed while tiers remain 100 XP',()=>{
   assert.equal(XP_PER_TIER,100);
-  assert.deepEqual(MATCH_XP,{win:15,loss:3});
+  assert.deepEqual(MATCH_XP,{win:15,loss:0});
   assert.equal(DAILY_CHALLENGE_XP,25);
   assert.equal(WEEKLY_CHALLENGE_XP,100);
 });

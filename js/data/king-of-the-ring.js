@@ -105,6 +105,8 @@ export function claimKingOfTheRingReward(profile, setId) {
   if (run.rewardClaimedSetId) throw new Error("King of the Ring reward already claimed");
   if (!Array.isArray(run.rewardChoices) || !run.rewardChoices.includes(setId)) throw new Error("Choose one of the offered King of the Ring boosters");
   run.rewardClaimedSetId = setId;
+  profile.superPackCreditsBySet ??= {};
+  profile.superPackCreditsBySet[setId] = (profile.superPackCreditsBySet[setId] ?? 0) + 1;
   return setId;
 }
 

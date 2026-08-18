@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.33';
-import { superstars } from '../js/data/superstars.js?v=0.13.33';
-import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=0.13.33';
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=0.13.33';
-import { CAREER_MODES } from '../js/data/career.js?v=0.13.33';
+import { createProfile } from '../js/data/profile.js?v=0.13.34';
+import { superstars } from '../js/data/superstars.js?v=0.13.34';
+import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=0.13.34';
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=0.13.34';
+import { CAREER_MODES } from '../js/data/career.js?v=0.13.34';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const fixedRng = () => 0.314159;
@@ -32,7 +32,8 @@ test('v0.13.24 Money in the Bank uses one fixed 8-opponent tower, three lives an
   assert.deepEqual(retry.opponents, opponents, 'restarts use the same daily field');
   winDailyLadder(p, day1);
   assert.equal(p.ladder.dailyCleared, true);
-  assert.equal(p.ladder.completionPackCreditsBySet['summerslam-series-1'], 1);
+  assert.equal(p.ladder.completionPackCreditsBySet['summerslam-series-1'], 0);
+  assert.equal(p.superPackCreditsBySet['summerslam-series-1'], 1);
   assert.throws(() => startLadderRun(p, 'cm-punk', ids, fixedRng, 'daily', day1), /already complete/);
   const fresh = ladderState(p, day2);
   assert.equal(fresh.dailyCleared, false);
