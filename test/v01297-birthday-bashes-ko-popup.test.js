@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=0.13.24';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.24';
-import { decks } from '../js/data/decks.js?v=0.13.24';
-import { superstars } from '../js/data/superstars.js?v=0.13.24';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.24';
-import { createProfile } from '../js/data/profile.js?v=0.13.24';
+import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=0.13.26';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.26';
+import { decks } from '../js/data/decks.js?v=0.13.26';
+import { superstars } from '../js/data/superstars.js?v=0.13.26';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.26';
+import { createProfile } from '../js/data/profile.js?v=0.13.26';
 
 const released = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id).sort();
 const byId = id => allGameplayCards.find(c=>c.id===id);

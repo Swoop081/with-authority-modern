@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.13.24",
+  "version": "0.13.26",
   "private": true,
   "type": "module",
   "scripts": {

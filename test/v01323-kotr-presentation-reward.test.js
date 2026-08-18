@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.24';
-import { superstars } from '../js/data/superstars.js?v=0.13.24';
-import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.24';
+import { createProfile } from '../js/data/profile.js?v=0.13.26';
+import { superstars } from '../js/data/superstars.js?v=0.13.26';
+import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.26';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');

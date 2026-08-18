@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.24';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.24';
-import { superstars } from '../js/data/superstars.js?v=0.13.24';
-import { decks } from '../js/data/decks.js?v=0.13.24';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.24';
-import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=0.13.24';
-import { evaluateDeckHealth } from '../js/data/deck-health.js?v=0.13.24';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.26';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.26';
+import { superstars } from '../js/data/superstars.js?v=0.13.26';
+import { decks } from '../js/data/decks.js?v=0.13.26';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.26';
+import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=0.13.26';
+import { evaluateDeckHealth } from '../js/data/deck-health.js?v=0.13.26';
 
 const cards = new Map(allGameplayCards.map(c => [c.id, c]));
 const stars = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -157,7 +157,8 @@ test('v0.13.20 player-facing taxonomy has one Action card type for normal and tr
   const content = fs.readFileSync(new URL('../js/data/content.js', import.meta.url), 'utf8');
   const rules = fs.readFileSync(new URL('../js/data/game-rules.js', import.meta.url), 'utf8');
   assert.doesNotMatch(content, /"kind": "special"/);
-  assert.match(app, /\? "PLAY ACTION" : "Action trigger not available"/);
+  assert.match(app, /PLAY ACTION/);
+  assert.match(app, /Action trigger not available/);
   assert.doesNotMatch(app, /Actions\/Specials|PLAY SPECIAL|kind === "special"/);
   assert.match(builder, /\{ id: "utility", label: "Actions" \}/);
   assert.doesNotMatch(rules, /\["Specials"/);

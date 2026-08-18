@@ -1,36 +1,36 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.24";
-import { superstars } from "../data/superstars.js?v=0.13.24";
-import { decks } from "../data/decks.js?v=0.13.24";
-import { sets } from "../data/sets.js?v=0.13.24";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.24";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.24";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.24";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.24";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.24";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.24";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.24";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.24";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.24";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.24";
-import { totalMomentum } from "../engine/utils.js?v=0.13.24";
-import { healthZone } from "../engine/health.js?v=0.13.24";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.24";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.24";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.24";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.24";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.24";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.24";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.24";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.24";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.24";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.24";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.24";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.24";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.24";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.24";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.24";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.24";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.24";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.26";
+import { superstars } from "../data/superstars.js?v=0.13.26";
+import { decks } from "../data/decks.js?v=0.13.26";
+import { sets } from "../data/sets.js?v=0.13.26";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.26";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.26";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.26";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.26";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.26";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.26";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.26";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.26";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.26";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.26";
+import { totalMomentum } from "../engine/utils.js?v=0.13.26";
+import { healthZone } from "../engine/health.js?v=0.13.26";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.26";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.26";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.26";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.26";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.26";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.26";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.26";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.26";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.26";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.26";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.26";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.26";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.26";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.26";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.26";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.26";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.26";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1091,7 +1091,15 @@ function renderSeasons() {
   $("#claim-all-season")?.addEventListener("click",()=>{try{const rewards=claimAllSeasonTiers(profile);saveProfile(profile);message=`${rewards.length} Season reward${rewards.length===1?'':'s'} claimed.`;}catch(e){message=e.message;}if(profile.pendingUnlockCelebrations?.length&&beginUnlockCelebration("seasons"))return;renderSeasons();});
   refreshSeasonClocks();
   const currentTier=Math.max(1,Math.min(SEASON_TIER_COUNT,progress.tier));
-  setTimeout(()=>document.getElementById(`season-tier-${currentTier}`)?.scrollIntoView({block:'center',behavior:'instant'}),80);
+  setTimeout(()=>{
+    const target=document.getElementById(`season-tier-${currentTier}`);
+    if(!target)return;
+    const chromeHeight=document.querySelector('.legacy-gamebar')?.getBoundingClientRect().height??0;
+    const rect=target.getBoundingClientRect();
+    const focusLine=Math.max(chromeHeight+12,Math.min(window.innerHeight*.58,460));
+    const top=Math.max(0,window.scrollY+rect.top-focusLine);
+    window.scrollTo({top,left:0,behavior:'auto'});
+  },120);
 }
 
 function renderChallenges() {
@@ -2518,6 +2526,7 @@ function cardMeta(card) {
 function cardLegal(playerId, card) {
   const state = game.state();
   if (playerId !== HUMAN) return false;
+  if (state.pendingActionDiscard?.playerId === playerId) return false;
   if (state.phase === "ACTION") {
     if (card.kind === "momentum") return canPlayMomentum(state, playerId, card);
     if (card.kind === "entrance") return canPlayEntrance(state, playerId, card);
@@ -2537,10 +2546,19 @@ function cardReason(playerId, card) {
   if (playerId === CPU) return "CPU controlled";
   if (state.phase === "MATCH_OVER") return "Match over";
   if (state.playerInControl !== playerId && state.phase === "ACTION") return "Not in Control";
+  if (state.pendingActionDiscard?.playerId === playerId) return "Choose a page to ditch first";
   if (card.kind === "momentum") return (state.players[playerId].turn?.momentumPlayed ?? 0) >= (state.players[playerId].turn?.momentumPlayLimit ?? 1) ? "Momentum already played this turn — connect a Move or begin a new turn to refresh it" : "";
   if (card.kind === "entrance") return "Entrance resolves automatically pre-match";
   if (state.phase === "COUNTER" && card.kind === "action" && card.effect?.type === "onceTooOften") return counterEligibility(state, playerId, state.proposedMove?.card, card).reason ?? "Reverse repeated Move and gain Control";
-  if (card.kind === "action" && card.special) return canPlaySpecial(state, playerId, card) ? "PLAY ACTION" : "Action trigger not available";
+  if (card.kind === "action" && card.special) {
+    if (canPlaySpecial(state, playerId, card)) {
+      if (card.special?.type === "paulHeyman") return "PLAY ACTION · FIND F-5 · -2 COST";
+      return "PLAY ACTION";
+    }
+    if (card.special?.type === "reduceIncomingBig") return `REACTIVE · AUTO-TRIGGERS VS ${card.special.minDamage ?? 10}+ DAMAGE`;
+    if (card.special?.type === "paulHeyman") return `Connect with ${card.special.afterName ?? "Brock’s German"} first`;
+    return "Action trigger not available";
+  }
   if (card.kind === "action" && card.pinEscape) return state.phase === "PIN_RESPONSE" ? "Escape pin" : "Pin-response Action only";
   if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} Momentum + Attitude` : ""; }
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
@@ -2573,16 +2591,18 @@ function playCard(playerId, index) {
   if (!card || playerId !== HUMAN) return;
   const logBefore = state.log.length;
   try {
-    if (state.phase === "COUNTER") game.counter(playerId, card);
-    else if (state.phase === "PIN_RESPONSE") game.playPinEscape(playerId, card);
-    else if (card.kind === "momentum") game.playMomentum(playerId, card);
-    else if (card.kind === "entrance") game.playEntrance(playerId, card);
-    else if (card.kind === "action" && card.special) game.playSpecial(playerId, card);
-    else if (card.kind === "action") game.playAction(playerId, card);
-    else if (card.kind === "support") game.playSupport(playerId, card);
-    else if (card.kind === "manager") game.playManager(playerId, card);
-    else game.declareMove(playerId, card);
-    message = `${nameFor(playerId)} played ${card.name}.`;
+    let played = false;
+    if (state.phase === "COUNTER") played = game.counter(playerId, card);
+    else if (state.phase === "PIN_RESPONSE") played = game.playPinEscape(playerId, card);
+    else if (card.kind === "momentum") played = game.playMomentum(playerId, card);
+    else if (card.kind === "entrance") played = game.playEntrance(playerId, card);
+    else if (card.kind === "action" && card.special) played = game.playSpecial(playerId, card);
+    else if (card.kind === "action") played = game.playAction(playerId, card);
+    else if (card.kind === "support") played = game.playSupport(playerId, card);
+    else if (card.kind === "manager") played = game.playManager(playerId, card);
+    else played = game.declareMove(playerId, card);
+    if (!played) { message = `${card.name} cannot be played in this window.`; render(); return; }
+    message = game.state().pendingActionDiscard?.playerId === playerId ? `${card.name}: choose ${game.state().pendingActionDiscard.count} page to ditch.` : `${nameFor(playerId)} played ${card.name}.`;
   } catch (error) { message = error.message; }
   afterHumanAction(game.state().log.slice(logBefore));
 }
@@ -2751,6 +2771,8 @@ function presentationFromEvents(events) {
   const kicked = !!kickoutEvent;
   const kickoutDefenderId = pinEscape?.defenderId ?? kickoutEvent?.defenderId ?? null;
   const greenHealthKickout = !!kickoutDefenderId && healthZone(game?.state()?.players?.[kickoutDefenderId]) === "green";
+  const beastTrigger = [...events].reverse().find(e => e.type === "SPECIAL_EFFECT" && e.effect === "reduce-incoming-big" && e.cardId === "special-brock-lesnar");
+  if (beastTrigger) return [{text:"THE BEAST INCARNATE",kind:"pin-escape",duration:1250,cardId:beastTrigger.cardId,detail:`Incoming damage reduced by ${beastTrigger.reducedBy ?? 5}. +1 Strength Momentum.`}];
   if (pinEscape) return greenHealthKickout
     ? [{text:"1!",kind:"pin",duration:560},{text:"SHOULDER UP!",kind:"pin-escape",duration:1450,cardId:pinEscape.cardId,detail:"Pin-escape Action activated — the count is broken."}]
     : [{text:"1!",kind:"pin",duration:520},{text:"2!!",kind:"pin",duration:620},{text:"SHOULDER UP!",kind:"pin-escape",duration:1450,cardId:pinEscape.cardId,detail:"Pin-escape Action activated — the three-count is broken."}];
@@ -2838,6 +2860,7 @@ function renderHumanHand() {
   const state = game.state(), p = state.players[HUMAN];
   const active = decisionOwner(state) === HUMAN && state.phase !== "MATCH_OVER";
   const momentumAvailable = (p.turn?.momentumPlayed ?? 0) < (p.turn?.momentumPlayLimit ?? 1);
+  const actionDiscard = state.pendingActionDiscard?.playerId === HUMAN ? state.pendingActionDiscard : null;
 
   const entries = p.hand.map((card, index) => {
     const legal = active && cardLegal(HUMAN, card);
@@ -2858,6 +2881,10 @@ function renderHumanHand() {
   const cards = entries.map(({card,index,legal}) => {
     const reason = legal ? (state.phase === "COUNTER" ? "COUNTER" : state.phase === "PIN_RESPONSE" ? "ESCAPE" : "PLAY") : cardReason(HUMAN, card);
     const autoSelected = autoCounterSelecting && autoCounterSelection.has(index);
+    if (actionDiscard) return `<article class="hand-card-slot horizontal-hand-card auto-counter-ditch-card" data-action-ditch-index="${index}" data-original-hand-index="${index}">
+      ${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:"hand-ccg auto-ditch"})}
+      <div class="hand-card-action auto-counter-card-action"><span>CHOOSE PAGE TO DITCH</span><button type="button" data-action-ditch-index="${index}" class="primary">Ditch</button></div>
+    </article>`;
     if (autoCounterSelecting) return `<article class="hand-card-slot horizontal-hand-card auto-counter-ditch-card ${autoSelected ? "is-auto-selected" : ""}" data-auto-ditch-index="${index}" data-original-hand-index="${index}">
       ${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:`hand-ccg auto-ditch ${autoSelected ? "selected" : ""}`})}
       <div class="hand-card-action auto-counter-card-action"><span>${autoSelected ? "SELECTED TO DITCH" : "TAP CARD TO DITCH"}</span><button type="button" data-auto-ditch-index="${index}" class="${autoSelected ? "primary" : "secondary"}">${autoSelected ? "Selected" : "Select"}</button></div>
@@ -2868,7 +2895,7 @@ function renderHumanHand() {
     </article>`;
   }).join("");
 
-  const sortHint = autoCounterSelecting ? `AUTO COUNTER · Select ${autoCounterSelection.size}/${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)} pages to ditch` : state.phase === "COUNTER" ? "Valid Counters first" : state.phase === "PIN_RESPONSE" ? "Pin escapes first" : momentumAvailable ? "Playable Momentum · Actions · Moves by highest damage" : "Actions · playable Moves by highest damage";
+  const sortHint = actionDiscard ? `${cardNameFor(actionDiscard.cardId)} · Choose ${actionDiscard.count} page${actionDiscard.count===1?"":"s"} to ditch` : autoCounterSelecting ? `AUTO COUNTER · Select ${autoCounterSelection.size}/${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)} pages to ditch` : state.phase === "COUNTER" ? "Valid Counters first" : state.phase === "PIN_RESPONSE" ? "Pin escapes first" : momentumAvailable ? "Playable Momentum · Actions · Moves by highest damage" : "Actions · playable Moves by highest damage";
   return `<section class="player-hand-panel compact-hand-panel">
     <div class="player-hand-head"><div><span>YOUR HAND</span><h3>${p.superstar.name}</h3></div><div class="deck-counts"><b>${p.hand.length}</b> hand · <b>${p.deck.length}</b> playbook · <b>${p.discard.length}</b> recycle · <b>${p.outOfPlay?.length??0}</b> out</div></div>
     <p class="hand-instruction">${sortHint} · Swipe horizontally to browse.</p>
@@ -2878,7 +2905,8 @@ function renderHumanHand() {
 
 function renderCommandBar() {
   const state = game.state(), owner = decisionOwner(state);
-  let prompt = state.phase === "MATCH_OVER" ? (state.winner ? `${nameFor(state.winner)} wins by ${state.finish.type.toUpperCase()}!` : `Match ends by ${state.finish.type.toUpperCase()}!`) : owner === CPU ? `${nameFor(CPU)} is thinking…` : `Your turn — choose a page or action.`;
+  const actionDiscard = state.pendingActionDiscard?.playerId === HUMAN ? state.pendingActionDiscard : null;
+  let prompt = state.phase === "MATCH_OVER" ? (state.winner ? `${nameFor(state.winner)} wins by ${state.finish.type.toUpperCase()}!` : `Match ends by ${state.finish.type.toUpperCase()}!`) : owner === CPU ? `${nameFor(CPU)} is thinking…` : actionDiscard ? `${cardNameFor(actionDiscard.cardId)} — choose ${actionDiscard.count} page${actionDiscard.count===1?"":"s"} to ditch.` : `Your turn — choose a page or action.`;
   const autoEligibility = state.phase === "COUNTER" && owner === HUMAN ? autoCounterEligibility(state, HUMAN, state.proposedMove?.card) : null;
   if (state.phase === "COUNTER" && owner === HUMAN) prompt = autoCounterSelecting ? `AUTO COUNTER — select ${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)} pages to ditch.` : `Counter ${state.proposedMove.card.name}${autoEligibility?.legal ? ", Auto Counter," : ""} or pass.`;
   if (state.phase === "PIN_RESPONSE" && owner === HUMAN) prompt = `You are being pinned — escape or pass to the pin check.`;
@@ -2896,9 +2924,9 @@ function renderCommandBar() {
       ${owner === HUMAN && state.phase === "COUNTER" && !autoCounterSelecting ? '<button id="pass-action" class="primary show-command-button">PASS</button>' : ""}
       ${owner === HUMAN && state.phase === "COUNTER" && autoCounterSelecting ? '<button id="cancel-auto-counter" class="secondary show-command-button">CANCEL</button>' : ""}
       ${owner === HUMAN && state.phase === "COUNTER" && autoCounterSelecting ? `<button id="confirm-auto-counter" class="primary show-command-button" ${autoCounterSelection.size === (autoEligibility?.cost ?? -1) ? "" : "disabled"}>CONFIRM · DITCH ${autoCounterSelection.size}/${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)}</button>` : ""}
-      ${owner === HUMAN && state.phase === "ACTION" && pinCheck?.legal ? `<button id="attempt-pin" class="primary pin-ready show-command-button single-context-action">PIN</button>` : ""}
-      ${owner === HUMAN && state.phase === "ACTION" && !pinCheck?.legal && canReturnToRing(state, HUMAN) ? '<button id="return-ring" class="primary show-command-button single-context-action">RETURN TO RING</button>' : ""}
-      ${owner === HUMAN && state.phase === "ACTION" && !pinCheck?.legal && !canReturnToRing(state, HUMAN) ? '<button id="pass-action" class="secondary show-command-button pass-control-button single-context-action">PASS</button>' : ""}
+      ${owner === HUMAN && state.phase === "ACTION" && !actionDiscard && pinCheck?.legal ? `<button id="attempt-pin" class="primary pin-ready show-command-button single-context-action">PIN</button>` : ""}
+      ${owner === HUMAN && state.phase === "ACTION" && !actionDiscard && !pinCheck?.legal && canReturnToRing(state, HUMAN) ? '<button id="return-ring" class="primary show-command-button single-context-action">RETURN TO RING</button>' : ""}
+      ${owner === HUMAN && state.phase === "ACTION" && !actionDiscard && !pinCheck?.legal && !canReturnToRing(state, HUMAN) ? '<button id="pass-action" class="secondary show-command-button pass-control-button single-context-action">PASS</button>' : ""}
       ${owner === HUMAN && state.phase === "PIN_RESPONSE" ? '<button id="pass-action" class="primary show-command-button single-context-action">PASS</button>' : ""}
       ${owner === HUMAN && state.phase === "SUBMISSION_RESPONSE" ? '<button id="pass-action" class="primary submission-response-pass show-command-button single-context-action">PASS · CONTINUE HOLD</button>' : ""}
       ${owner === HUMAN && state.phase === "SUBMISSION_MAINTAIN" ? '<button id="release-submission" class="primary show-command-button">Release Hold</button>' : ""}
@@ -2926,7 +2954,7 @@ function logText(event) {
     ENTRANCE_PLAYED: () => `${n(event.playerId)} played Entrance ${event.cardId}.`, ACTION_PLAYED: () => `${n(event.playerId)} played ${cardNameFor(event.cardId)}.`, HEALTH_RESTORED: () => `${cardNameFor(event.cardId)} restores ${event.amount} HP to ${n(event.playerId)}.`, FIGHT_FOREVER: () => `Fight Forever restores ${event.playerHeal} HP to ${n(event.playerId)} and ${event.opponentHeal} HP to ${n(event.opponentId)}.`, SUPPORT_PLAYED: () => `${n(event.playerId)} put ${cardNameFor(event.cardId)} into play.`, SUPPORT_REPLACED: () => `${n(event.playerId)} discarded ${cardNameFor(event.cardId)}.`, MANAGER_PLAYED: () => `${n(event.playerId)} brought ${event.managerName} to ringside.`, MANAGER_ABILITY: () => `${event.managerName} assisted ${n(event.playerId)}.`, MOVE_DECLARED: () => `${n(event.playerId)} declared ${cardNameFor(event.cardId)}.`,
     MOVE_COUNTERED: () => `${n(event.defenderId)} countered ${cardNameFor(event.incomingCardId)} with ${cardNameFor(event.counterCardId)}.`, AUTO_COUNTER: () => `${n(event.defenderId)} Auto Countered ${cardNameFor(event.incomingCardId)} by ditching ${event.cost} pages (use ${event.useNumber}); ${event.remaining} pages remained.`,
     COUNTER_PASSED: () => `${n(event.defenderId)} passed the counter window.`, MOVE_CONNECTED: () => `${cardNameFor(event.cardId)} connected for ${event.damage} damage${event.finisher ? " (FINISHER)" : ""}.`,
-    CARDS_DRAWN: () => `${n(event.playerId)} drew ${event.cardIds.length} page${event.cardIds.length === 1 ? "" : "s"}.`, CONTROL_PASSED: () => `${n(event.from)} passed Control to ${n(event.to)}.`, CONTROL_RETAINED: () => `${n(event.playerId)} connected and keeps Control.`, CRITICAL_EXHAUSTION: () => `${n(event.playerId)} is at 0 HP and cannot retain Control. Control passes to ${n(event.to)}.`,
+    CARDS_DRAWN: () => `${n(event.playerId)} drew ${event.cardIds.length} page${event.cardIds.length === 1 ? "" : "s"}.`, ACTION_DISCARD_RESOLVED: () => `${n(event.playerId)} ditched ${cardNameFor(event.cardId)} for ${cardNameFor(event.sourceCardId)}.`, SPECIAL_PLAYED: () => `${n(event.playerId)} triggered ${cardNameFor(event.cardId)}.`, SPECIAL_EFFECT: () => event.effect === "reduce-incoming-big" ? `${cardNameFor(event.cardId)} reduced the incoming Move by ${event.reducedBy ?? 0}.` : event.effect === "paul-heyman" ? `${cardNameFor(event.cardId)} found/armed F-5 with a -${event.discount ?? 0} Cost discount.` : `${cardNameFor(event.cardId)} resolved.`, CONTROL_PASSED: () => `${n(event.from)} passed Control to ${n(event.to)}.`, CONTROL_RETAINED: () => `${n(event.playerId)} connected and keeps Control.`, CRITICAL_EXHAUSTION: () => `${n(event.playerId)} is at 0 HP and cannot retain Control. Control passes to ${n(event.to)}.`,
     POST_MOVE_WINDOW: () => `${n(event.attackerId)} has a post-move finish window.`, PIN_ATTEMPTED: () => `${n(event.attackerId)} attempts pin #${event.attemptNumber}; ${event.chance}% prototype chance.`,
     PIN_ESCAPED_SPECIAL: () => `${n(event.defenderId)} used a pin-escape Action.`, PIN_CHECK: () => `Pin check: rolled ${event.roll} vs ${event.chance}%.`, KICK_OUT: () => `${n(event.defenderId)} kicks out and takes Control.`,
     BODY_PART_DAMAGE: () => `${cardNameFor(event.cardId)} deals +${event.amount} ${event.bodyPart} body-part damage (${event.total}/${event.threshold} current HP).`, SUBMISSION_DAMAGE: () => `${event.bodyPart} submission damage ${event.total}/${event.threshold} current HP.`, SUBMISSION_RESPONSE_READY: () => `${n(event.defenderId)} is trapped in ${cardNameFor(event.cardId)} and must respond before more pressure is applied.`, SUBMISSION_RESPONSE_PASSED: () => `${n(event.defenderId)} continues fighting the hold.`, SUBMISSION_MAINTAINED: () => `${n(event.attackerId)} maintained the hold.`, SUBMISSION_RELEASED: () => `${n(event.attackerId)} released the hold; body-part damage remains.`,
@@ -3182,6 +3210,7 @@ function render() {
   });
   root.querySelectorAll("[data-play-hand]").forEach(btn => btn.addEventListener("click", () => playCard(HUMAN, Number(btn.dataset.playHand))));
   root.querySelectorAll("[data-auto-ditch-index]").forEach(el => el.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); toggleAutoCounterCard(Number(el.dataset.autoDitchIndex)); }));
+  root.querySelectorAll("[data-action-ditch-index]").forEach(el => el.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const index=Number(el.dataset.actionDitchIndex); const before=game.state().log.length; if(game.resolveActionDiscard(HUMAN,index)){message=game.state().pendingActionDiscard ? `Choose ${game.state().pendingActionDiscard.count} more page to ditch.` : "Action resolved — continue your Control sequence."; afterHumanAction(game.state().log.slice(before));} }));
   const openPlayPileCard = (trigger, event) => { event?.stopPropagation?.(); playPileOverlayCard = collectionById.get(trigger.dataset.openPlayPile) ?? null; playPileOverlayFlipped = false; render(); };
   root.querySelectorAll("[data-open-play-pile]").forEach(trigger => {
     trigger.addEventListener("click", event => openPlayPileCard(trigger, event));

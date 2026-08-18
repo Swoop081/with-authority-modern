@@ -1,10 +1,13 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.24 — iPhone Interface + Championship Road Campaign Pass**.
+Current working build: **v0.13.26 — Season Road iPhone Geometry Hotfix**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Events, Money in the Bank, King of the Ring and Championship Road.
 
 ## Current build
+- **Season Road iPhone geometry is hotfixed.** Safari no longer uses `scrollIntoView()` on alternating half-width tier nodes, which could horizontally shift the entire Season screen and make the hero/countdown appear clipped while every other tier looked missing. Current-tier focus is now vertical-only and explicitly resets horizontal scroll to zero.
+- On iPhone, the 100-tier reward road now renders as a **compact full-width timeline** with the spine anchored safely inside the viewport, all tiers visible in sequence, smaller vertical spacing, a shorter Final Boss hero, compact command stats, and a contained countdown/free-booster strip.
+- External iPhone testing identified a Brock Action reliability/feedback issue. **The Advocate’s Plan**, **The Beast Incarnate**, and **Eat. Sleep. Conquer. Repeat.** now have explicit, tested runtime behavior. Eat. Sleep. Conquer. Repeat. now correctly lets the player choose the page to ditch after drawing instead of automatically discarding the drawn page. Beast Incarnate visibly auto-triggers against a 10+ damage Move, and Advocate’s Plan clearly unlocks after Brock’s German and applies its F-5 search/-2 Cost effect.
 - **Championship Road** is now a continuous, graphic-heavy **24-match Season 1 campaign map** instead of four small era tabs. The road is divided into six four-match themes: Golden Era, SummerSlam Part I, Evolution Part I, Attitude Era, SummerSlam Part II and Evolution Part II.
 - Championship Road now owns the four-step difficulty progression: **Easy → Normal → Hard → Hardcore**. Easy opponents begin at **-5 HP**, Normal uses printed HP, Hard begins at **+5 HP**, and Hardcore begins at **+10 HP**. The player Superstar's HP is unchanged. The full campaign therefore contains **96 match clears** across all four difficulties.
 - Higher Championship Road difficulties unlock only after completing the entire 24-match road on the previous difficulty. Each difficulty tracks its own completion and best-stage progress.
@@ -26,4 +29,4 @@ A mobile-first WWE collectible card game prototype with 60-page Superstar decks,
 
 Season 1 release schedule remains: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
 
-See `RELEASE-NOTES-v0.13.24.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.26.md` and `BUILD-CERTIFICATION.md`.

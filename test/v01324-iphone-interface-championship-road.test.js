@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.24';
+import { createProfile } from '../js/data/profile.js?v=0.13.26';
 import {
   CHAMPIONSHIP_ROAD_LENGTH,
   CHAMPIONSHIP_ROAD_OPPONENTS,
@@ -12,7 +12,7 @@ import {
   championshipRoadState,
   startChampionshipRoad,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.13.24';
+} from '../js/data/championship-road.js?v=0.13.26';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -110,7 +110,7 @@ test('v0.13.24 Season Road is a visual 100-tier track, countdown and current-tie
   assert.match(app, /data-season-end-countdown/);
   assert.match(app, /100-TIER REWARD ROAD/);
   assert.match(app, /const currentTier=Math\.max\(1,Math\.min\(SEASON_TIER_COUNT,progress\.tier\)\)/);
-  assert.match(app, /scrollIntoView\(\{block:'center',behavior:'instant'\}\)/);
+  assert.match(app, /window\.scrollTo\(\{top,left:0,behavior:'auto'\}\)/);
   assert.match(css, /\.season-road-spine/);
   assert.match(css, /\.season-road-node\.major/);
 });

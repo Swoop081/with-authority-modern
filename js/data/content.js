@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.24";
+import { enrichCounterState } from "./counter-states.js?v=0.13.26";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -5181,7 +5181,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "brock-lesnar",
-    "rulesText": "Once per match when Brock would take 10+ damage from a single Move: reduce it by 5 and gain +1 Strength Momentum.",
+    "rulesText": "Reactive Action — once per match, automatically when Brock would take 10+ damage from a single Move: reduce it by 5 and gain +1 Strength Momentum.",
     "special": {
       "type": "reduceIncomingBig",
       "minDamage": 10,
@@ -5196,7 +5196,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "brock-lesnar",
-    "rulesText": "Once per match, after Brock connects with Brock’s German during this Control sequence: search your Playbook for F-5 if it is not already in your hand. Brock’s next F-5 this Control costs 2 less.",
+    "rulesText": "Once per match. Play after Brock connects with Brock’s German during this Control sequence. Search your Playbook for F-5 if it is not already in your hand; either way, Brock’s next F-5 this Control costs 2 less.",
     "special": {
       "type": "paulHeyman",
       "afterName": "Brock’s German",
@@ -10092,7 +10092,7 @@ export const allGameplayCards = [
     "cost": 0,
     "superstarId": "brock-lesnar",
     "rarity": 3,
-    "rulesText": "Brock-exclusive Action. Play after Brock’s German connected this Control sequence. Draw 1 page, then ditch 1.",
+    "rulesText": "Brock-exclusive Action. Play after Brock’s German connected this Control sequence. Draw 1 page, then choose 1 page from your hand to ditch.",
     "playCondition": {
       "afterConnectedCard": "Brock’s German"
     },
