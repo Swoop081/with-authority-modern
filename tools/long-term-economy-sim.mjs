@@ -6,7 +6,7 @@ import { STORE_SET_ROTATION, STORE_SUPERSTAR_PRICE, storeRotation, storeSupersta
 import { collectionCards } from '../js/data/collection.js';
 
 const DAY=86400000;
-// v0.13.34 victory-pack economy model. Future Season 1 subsets enter the
+// v0.13.36 victory-pack economy model. Future Season 1 subsets enter the
 // live economy automatically on their canonical release dates via the same
 // release helpers used by player-facing systems.
 const START=new Date(2026,7,18,12,0,0);
@@ -56,7 +56,8 @@ function simulate(kind,seed){
     let prob=tower.cadence==='daily'?cfg.dailyClear:tower.cadence==='three-day'?cfg.threeDay:tower.cadence==='weekly'?cfg.weekly:cfg.birthday;
     // For non-daily towers, defer the decision until an active day but only mark seen after decision.
     if(r()<prob){
-      for(let m=0;m<5;m++){p.universePoints+=tower.winUp; stats.liveUp+=tower.winUp; stats.totalUpEarned+=tower.winUp; awardMatchSeasonXp(p,'win'); grantVictoryBooster(p,'win',tower.event.rewardSetId);}
+      for(let m=0;m<5;m++){p.universePoints+=tower.winUp; stats.liveUp+=tower.winUp; stats.totalUpEarned+=tower.winUp; awardMatchSeasonXp(p,'win'); if(m<4) grantVictoryBooster(p,'win',tower.event.rewardSetId);}
+      // The fifth win completes the tower: Super Pack only, no extra normal victory booster.
       grantSuperPack(p,1,tower.event.rewardSetId);
     }
     seenTowerKeys.add(tower.key);

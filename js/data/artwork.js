@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.13.34";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.34";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.34";
+import { assetUrl } from "../config/build.js?v=0.13.36";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.36";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.36";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
@@ -115,6 +115,7 @@ export function superstarHeadshotFor(superstarId) {
 // Each type gets a predictable folder, so installing an exported WebP never
 // requires a manifest edit. Missing finished fronts fall back to legacy art.
 const finishedFrontFolders = {
+  superstar: "superstars",
   move: "moves",
   entrance: "entrances",
   manager: "managers",
@@ -124,11 +125,11 @@ const finishedFrontFolders = {
 };
 
 export function layeredCardArtFor(card) {
-  // Layered fronts are now automatic: every supported non-Superstar collectible
-  // gets a canonical Layered v1 candidate URL. The renderer tries this plate
-  // first and falls back to the existing flat/custom front if the file is not
-  // installed. No per-card registry is required.
-  if (!card || card.kind === "momentum" || card.kind === "superstar") return null;
+  // Layered fronts are automatic for every collectible type except Method
+  // Momentum, whose authored live front remains the explicit presentation
+  // exception. The renderer tries the layered plate first and falls back to
+  // the existing flat/custom/generated treatment when it is not installed.
+  if (!card || card.kind === "momentum") return null;
   const folder = finishedFrontFolders[card.kind];
   const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
   return folder && key ? assetUrl(`assets/cards/art/layered/${folder}/${key}.webp`) : null;
@@ -146,7 +147,11 @@ export function finishedCardArtFor(card) {
 // Keep that location as a secondary candidate so any art already installed there
 // continues to work while the Studio uses stable collector-code filenames.
 export function legacyFinishedCardArtFor(card) {
-  if (!card || card.kind === "superstar") return null;
+  if (!card) return null;
+  // Superstar presentation historically fell back to the standard Superstar
+  // artwork rather than a rules-only face. Keep that behavior after layered
+  // Superstar fronts become eligible.
+  if (card.kind === "superstar") return card.superstarId ? (superstarArtwork[card.superstarId] ?? null) : null;
   const folder = finishedFrontFolders[card.kind];
   return folder && card.id ? assetUrl(`assets/cards/art/custom/${folder}/${card.id}.webp`) : null;
 }

@@ -3179,6 +3179,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "survivor-series-series-1",
     "cardNumber": 53,
     "cardCode": "SVS1-053"
+  },
+  {
+    "id": "hangman-armbar",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 54,
+    "cardCode": "SVS1-054"
   }
 
 ]);

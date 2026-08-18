@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.13.34";
-import { superstars } from "../js/data/superstars.js?v=0.13.34";
-import { decks } from "../js/data/decks.js?v=0.13.34";
-import { isLaunchLiveSetId } from "../js/data/release.js?v=0.13.34";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.34";
+import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.13.36";
+import { superstars } from "../js/data/superstars.js?v=0.13.36";
+import { decks } from "../js/data/decks.js?v=0.13.36";
+import { isLaunchLiveSetId } from "../js/data/release.js?v=0.13.36";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.36";
 
 const roster = Object.values(superstars).filter(star => !star.developmentOnly && isLaunchLiveSetId(star.setId));
 const rosterIds = roster.map(star => star.id);
@@ -63,7 +63,7 @@ test("v0.12.81 tower stages still escalate from standard rules to a final Moment
   assert.equal(liveEventStage(event, 3).modifier.startingHpLoss.p1, 4);
   assert.equal(liveEventStage(event, 4).modifier.startingMomentum.p2.strength, 1);
   assert.equal(liveEventStage(event, 4).modifier.startingAdrenaline.p2, 1);
-  assert.equal(LIVE_EVENT_WIN_UP * LIVE_EVENT_LENGTH, 250);
+  assert.equal(LIVE_EVENT_WIN_UP * LIVE_EVENT_LENGTH, 0);
   assert.equal(LIVE_EVENT_CLEAR_BOOSTERS, 1);
 });
 

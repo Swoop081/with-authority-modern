@@ -1,8 +1,8 @@
-import { isUnreleasedSetId } from "./release.js?v=0.13.34";
-import { superstars } from "./superstars.js?v=0.13.34";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.36";
+import { superstars } from "./superstars.js?v=0.13.36";
 
 export const LIVE_EVENT_LENGTH = 5;
-export const LIVE_EVENT_WIN_UP = 50;
+export const LIVE_EVENT_WIN_UP = 0;
 export const LIVE_EVENT_CLEAR_BOOSTERS = 1;
 
 const LIVE_REWARD_FALLBACKS = Object.freeze([
@@ -277,8 +277,14 @@ function dateKey(d) {
   const day = String(d.getDate()).padStart(2, "0");
   return `${y}-${m}-${day}`;
 }
-function cloneEvent(template, rewardSetId) {
-  return { ...template, rewardSetId };
+function superstarRecord(id) {
+  return superstars[id] ?? Object.values(superstars).find(star => star.id === id) ?? null;
+}
+export function releasedLiveEventOpponentIds(event, profile = null, now = new Date()) {
+  return [...new Set(event?.opponentPool ?? [])].filter(id => isPlayerVisibleSuperstar(superstarRecord(id), profile, now));
+}
+function cloneEvent(template, rewardSetId, now = new Date()) {
+  return { ...template, rewardSetId, opponentPool: releasedLiveEventOpponentIds(template, null, now) };
 }
 function towerDescriptor({ key, event, startsAt, nextAt, cadence, cadenceLabel, winUp, clearBoosters = 1 }) {
   return {
@@ -303,7 +309,7 @@ export function liveEventRotation(now = new Date()) {
   const source = DAILY_LIVE_EVENTS[start.getDay()] ?? DAILY_LIVE_EVENTS[1];
   const nextAt = new Date(start.getTime());
   nextAt.setDate(nextAt.getDate() + 1);
-  const event = cloneEvent(source, releasedRewardSet(source.rewardSetId, start.getDay() % LIVE_REWARD_FALLBACKS.length, now));
+  const event = cloneEvent(source, releasedRewardSet(source.rewardSetId, start.getDay() % LIVE_REWARD_FALLBACKS.length, now), now);
   const dayKey = dateKey(start);
   return {
     weekKey: dayKey,
@@ -339,8 +345,8 @@ function threeDayTower(now) {
   startsAt.setDate(startsAt.getDate() + slot * 3);
   const nextAt = new Date(startsAt.getTime());
   nextAt.setDate(nextAt.getDate() + 3);
-  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now));
-  return towerDescriptor({ key: `three-day:${slot}:${event.id}`, event, startsAt, nextAt, cadence: "three-day", cadenceLabel: "3 DAY TOWER", winUp: 25, clearBoosters: 1 });
+  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now), now);
+  return towerDescriptor({ key: `three-day:${slot}:${event.id}`, event, startsAt, nextAt, cadence: "three-day", cadenceLabel: "3 DAY TOWER", winUp: 0, clearBoosters: 1 });
 }
 function weeklyTower(now) {
   const startsAt = localMondayStart(now);
@@ -349,8 +355,8 @@ function weeklyTower(now) {
   const template = WEEKLY_TOWERS[slot % WEEKLY_TOWERS.length];
   const nextAt = new Date(startsAt.getTime());
   nextAt.setDate(nextAt.getDate() + 7);
-  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now));
-  return towerDescriptor({ key: `weekly:${dateKey(startsAt)}:${event.id}`, event, startsAt, nextAt, cadence: "weekly", cadenceLabel: "WEEKLY TOWER", winUp: 25, clearBoosters: 1 });
+  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now), now);
+  return towerDescriptor({ key: `weekly:${dateKey(startsAt)}:${event.id}`, event, startsAt, nextAt, cadence: "weekly", cadenceLabel: "WEEKLY TOWER", winUp: 0, clearBoosters: 1 });
 }
 function birthdayTowers(now) {
   const start = localDayStart(now);
@@ -363,8 +369,8 @@ function birthdayTowers(now) {
   }).map(template => {
     const nextAt = new Date(start.getTime());
     nextAt.setDate(nextAt.getDate() + 1);
-    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, 0, now));
-    return towerDescriptor({ key: `birthday:${dateKey(start)}:${event.id}`, event, startsAt: start, nextAt, cadence: "birthday", cadenceLabel: "24 HOURS ONLY", winUp: 50, clearBoosters: 1 });
+    const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, 0, now), now);
+    return towerDescriptor({ key: `birthday:${dateKey(start)}:${event.id}`, event, startsAt: start, nextAt, cadence: "birthday", cadenceLabel: "24 HOURS ONLY", winUp: 0, clearBoosters: 1 });
   });
 }
 
@@ -414,10 +420,34 @@ function shuffle(values, rng = Math.random) {
   return out;
 }
 
+function repairLiveEventRunReleaseGate(profile, tower, state, now = new Date()) {
+  const run = state?.activeRun;
+  if (!run || run.status !== "active") return;
+  const released = Object.values(superstars).filter(star => isPlayerVisibleSuperstar(star, profile, now)).map(star => star.id);
+  const releasedSet = new Set(released);
+  const used = new Set([run.superstarId]);
+  const themed = releasedLiveEventOpponentIds(tower.event, profile, now);
+  const fallback = [...themed, ...released].filter(id => id !== run.superstarId);
+  run.opponents = (run.opponents ?? []).map(id => {
+    if (releasedSet.has(id) && id !== run.superstarId && !used.has(id)) { used.add(id); return id; }
+    const replacement = fallback.find(candidate => !used.has(candidate));
+    if (replacement) used.add(replacement);
+    return replacement ?? id;
+  }).slice(0, LIVE_EVENT_LENGTH);
+  while (run.opponents.length < LIVE_EVENT_LENGTH) {
+    const replacement = fallback.find(candidate => !used.has(candidate));
+    if (!replacement) break;
+    used.add(replacement);
+    run.opponents.push(replacement);
+  }
+}
+
 export function liveEventTowerState(profile, towerKey, now = new Date()) {
   const tower = liveEventTowerByKey(towerKey, now);
   if (!tower) return null;
-  return { tower, state: stateForTower(profile, tower, now), aggregate: ensureTowerStore(profile, now) };
+  const state = stateForTower(profile, tower, now);
+  repairLiveEventRunReleaseGate(profile, tower, state, now);
+  return { tower, state, aggregate: ensureTowerStore(profile, now) };
 }
 
 export function liveEventStage(event, stageIndex) {

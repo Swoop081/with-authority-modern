@@ -7140,3 +7140,60 @@ body[data-screen="store"] .hud-superstar-modal-card{width:100%!important;max-wid
 /* v0.13.34 — Super Pack reward treatment */
 .physical-booster-pack.is-super-pack { filter:saturate(1.18) contrast(1.05); }
 .vault-pack-product .physical-booster-pack.is-super-pack + strong { font-weight:900; }
+
+/* v0.13.35 — Live Events + interaction polish pass. */
+/* Any two sibling actions use the same compact split treatment. */
+.two-button-row{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;align-items:stretch!important}
+.two-button-row>button,.two-button-row>a{width:100%!important;min-width:0!important;margin:0!important}
+
+/* Packs: carry the orange/white header language into the vault counters. */
+body[data-screen="boosters"] .booster-vault-stats>.set-stat{position:relative;overflow:hidden;background:linear-gradient(155deg,#11141b,#080a0e)!important;border-color:rgba(255,255,255,.10)!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--pack-stat-accent,#ff7a35);box-shadow:0 0 16px color-mix(in srgb,var(--pack-stat-accent,#ff7a35) 52%,transparent)}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(odd){--pack-stat-accent:#ff7a35;background:radial-gradient(circle at 12% 15%,rgba(255,122,53,.13),transparent 45%),linear-gradient(155deg,#15130f,#080a0e)!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(even){--pack-stat-accent:#f3f5f7;background:radial-gradient(circle at 12% 15%,rgba(255,255,255,.08),transparent 45%),linear-gradient(155deg,#14161a,#080a0e)!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(odd) span{color:#ff9a61!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(even) span{color:#dfe4e9!important}
+
+/* Live Events hub: match the Play-screen selectable hero-card density. */
+.live-events-hub .live-tower-hub-grid{gap:9px!important}
+.live-events-hub .live-tower-hub-card.compact-live-choice{min-height:174px!important;padding:14px 16px!important;border-radius:16px!important}
+.live-events-hub .compact-live-choice .live-tower-hub-copy{width:64%!important;min-height:146px!important;gap:4px!important;align-content:center!important}
+.live-events-hub .compact-live-choice .live-tower-cadence{font-size:.43rem!important;letter-spacing:.16em!important}
+.live-events-hub .compact-live-choice .live-event-split-title{font-size:clamp(1.55rem,6vw,2.45rem)!important;line-height:.82!important;margin:1px 0 2px!important}
+.live-events-hub .compact-live-choice .live-choice-summary{display:block;color:#8e98a5;font-size:.48rem!important;line-height:1.2;letter-spacing:.08em;font-weight:900;text-transform:uppercase}
+.live-events-hub .compact-live-choice .live-tower-enter{margin-top:8px!important;padding:9px 12px!important;font-size:.48rem!important}
+.live-events-hub .compact-live-choice .live-tower-timer{position:absolute;left:16px;bottom:12px;margin:0!important;padding:4px 7px!important}
+.live-events-hub .compact-live-choice .live-tower-hub-art{right:-2%!important;bottom:-19%!important;width:42%!important;height:137%!important}
+.live-events-hub .compact-live-choice .mitb-briefcase{font-size:7rem!important;right:4%!important;bottom:7%!important;opacity:.11!important}
+@media(max-width:600px){
+  .live-events-hub .live-tower-hub-card.compact-live-choice{min-height:158px!important;padding:12px 13px!important}
+  .live-events-hub .compact-live-choice .live-tower-hub-copy{min-height:134px!important;width:67%!important}
+  .live-events-hub .compact-live-choice .live-tower-hub-art{right:-8%!important;width:48%!important;height:142%!important}
+  .live-events-hub .compact-live-choice .live-tower-timer{left:13px!important;bottom:9px!important}
+}
+
+/* Daily/rotating tower detail: top information first, no decorative wrestler. */
+.live-tower-detail .compact-live-detail-hero{display:block!important;min-height:0!important;padding:14px 15px!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-copy{width:100%!important;max-width:none!important;display:grid!important;gap:4px!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-copy h2{margin:1px 0!important;font-size:clamp(1.7rem,6vw,2.45rem)!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-copy p{margin:1px 0 5px!important;max-width:62ch!important;font-size:.64rem!important;line-height:1.32!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats{display:grid!important;grid-template-columns:1.15fr 1fr 1fr!important;gap:6px!important;margin-top:6px!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats article{min-height:55px!important;padding:7px 9px!important;border-radius:12px!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats strong{font-size:1rem!important}
+.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats span{font-size:.35rem!important}
+@media(max-width:430px){.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats{grid-template-columns:repeat(3,minmax(0,1fr))!important}.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats article{padding:6px!important}.live-tower-detail .compact-live-detail-hero .live-tower-detail-stats strong{font-size:.82rem!important}}
+
+/* Entrance reveal: turn the formerly empty upper region into a full event hero. */
+body[data-screen="entrance-intro"] .entrance-intro-screen{grid-template-rows:minmax(27svh,31svh) minmax(0,1fr) auto 54px!important;gap:8px!important;padding-top:max(10px,env(safe-area-inset-top))!important}
+body[data-screen="entrance-intro"] .entrance-hero-band{position:relative;width:100%;min-height:27svh;display:grid;align-content:start;justify-items:center;gap:2px;padding:18px 16px 20px;overflow:hidden;background:radial-gradient(ellipse at 50% 6%,rgba(67,182,245,.20),transparent 48%),linear-gradient(180deg,rgba(13,40,61,.45),rgba(6,10,17,.02));border-bottom:1px solid rgba(79,188,245,.12)}
+body[data-screen="entrance-intro"] .entrance-hero-band::after{content:"";position:absolute;left:-12%;right:-12%;bottom:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(69,190,251,.45),transparent);transform:rotate(8deg);box-shadow:0 0 18px rgba(56,174,236,.18)}
+body[data-screen="entrance-intro"] .entrance-hero-band .prematch-brand{position:relative;z-index:2;margin-top:2px!important}
+body[data-screen="entrance-intro"] .entrance-hero-band .entrance-intro-heading{position:relative;z-index:2;margin-top:1px!important}
+body[data-screen="entrance-intro"] .entrance-hero-band .entrance-crowd-chants{position:absolute!important;inset:42% 4% 5%!important;z-index:1!important}
+body[data-screen="entrance-intro"] .entrance-stage{grid-row:2!important;align-self:center!important}
+body[data-screen="entrance-intro"] .entrance-tap-hint{grid-row:3!important}
+body[data-screen="entrance-intro"] #entrance-next{grid-row:4!important}
+@media(max-width:430px){body[data-screen="entrance-intro"] .entrance-intro-screen{grid-template-rows:minmax(29svh,32svh) minmax(0,1fr) auto 50px!important}body[data-screen="entrance-intro"] .entrance-hero-band{min-height:29svh;padding-top:14px!important}}
+
+/* Pack summary cards now open the standard Deck Lab-scale inspector. */
+.booster-card-inspect-modal .deck-lab-inspect-card{height:min(60svh,580px)!important;max-height:60svh!important}

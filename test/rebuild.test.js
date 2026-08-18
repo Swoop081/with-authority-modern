@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.13.34";
-import { decks } from "../js/data/decks.js?v=0.13.34";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.34";
-import { collectionCards } from "../js/data/collection.js?v=0.13.34";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.34";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.34";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.34";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.34";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.34";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.34";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.34";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.34";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.34";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.34";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.34";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.34";
-import { healthZone } from "../js/engine/health.js?v=0.13.34";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.34";
+import { superstars } from "../js/data/superstars.js?v=0.13.36";
+import { decks } from "../js/data/decks.js?v=0.13.36";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.36";
+import { collectionCards } from "../js/data/collection.js?v=0.13.36";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.36";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.36";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.36";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.36";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.36";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.36";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.36";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.36";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.36";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.36";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.36";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.36";
+import { healthZone } from "../js/engine/health.js?v=0.13.36";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.36";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -267,7 +267,7 @@ test("A completely maxed five-card booster converts every overflow duplicate at 
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.34");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.36");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -1133,7 +1133,7 @@ test("Solo Sikoa Street Champion, Sole Survivor and Spinning Solo chain execute"
   d.adrenaline=5;d.momentum.attitude=5;const kick=byName('Superkick'),before=d.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:kick};g._connect();assert.equal(d.adrenaline,before-2,'normal connect drains 1 and Street Champion drains an additional 1');
   const afterFirst=d.adrenaline;st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:byName('Running Clothesline')};g._connect();assert.equal(d.adrenaline,Math.max(0,afterFirst-1),'Street Champion fires only once per Control sequence');
   const spin=allGameplayCards.find(c=>c.id==='solo-sikoa-spinning-solo'),spike=allGameplayCards.find(c=>c.id==='solo-sikoa-samoan-spike');a.deck=[spike];st.phase='RESOLVE_MOVE';st.proposedMove={attackerId:'p1',defenderId:'p2',card:spin};g._connect();assert.ok(a.hand.some(c=>c.id===spike.id));assert.equal(a.namedDiscount['Samoan Spike'],2);
-  const special=allGameplayCards.find(c=>c.id==='special-solo-sikoa');a.hand=[special];a.deck=[byName('Punch'),byName('Headbutt')];a.specialUsed=false;st.phase='ACTION';st.playerInControl='p1';assert.equal(g.passTurn('p1'),true);assert.equal(a.specialUsed,true);assert.equal(a.hand.length,3,'the third draw comes from the recycled used-page pile after the two-card Playbook is exhausted');assert.ok(st.log.some(e=>e.type==='PLAYBOOK_RECYCLED'&&e.playerId==='p1'));assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='sole-survivor'));
+  const special=allGameplayCards.find(c=>c.id==='special-solo-sikoa');a.hand=[special];a.deck=[byName('Punch'),byName('Headbutt')];a.specialUsed=false;st.phase='ACTION';st.playerInControl='p1';assert.equal(g.passTurn('p1'),true);assert.equal(st.phase,'TRIGGER_RESPONSE');assert.equal(st.pendingTriggeredSpecial?.specialType,'soleSurvivor');assert.equal(a.specialUsed,false,'trigger is not consumed before the player chooses');assert.equal(g.resolveTriggeredSpecial('p1',true),true);assert.equal(a.specialUsed,true);assert.equal(a.hand.length,3,'the third draw comes from the recycled used-page pile after the two-card Playbook is exhausted');assert.ok(st.log.some(e=>e.type==='PLAYBOOK_RECYCLED'&&e.playerId==='p1'));assert.ok(st.log.some(e=>e.type==='SPECIAL_EFFECT'&&e.effect==='sole-survivor'));
 });
 
 test("Jade Cargill uses the shared Pump Kick as her Trademark setup and Superhuman fires",()=>{

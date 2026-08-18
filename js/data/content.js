@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.34";
+import { enrichCounterState } from "./counter-states.js?v=0.13.36";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -5139,7 +5139,7 @@ export const allGameplayCards = [
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "roman-reigns",
-    "rulesText": "Once per match immediately after Roman loses Control: regain Control.",
+    "rulesText": "Once per match after Roman loses Control: you may play this to regain Control.",
     "special": {
       "type": "regainAfterLoseControl"
     }
@@ -10491,6 +10491,35 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "body-elevated"
+  },
+  {
+    "id": "hangman-armbar",
+    "name": "Hangman Armbar",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 3,
+    "damage": 0,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Standing opponent only. Submission. +3 persistent Arm damage per successful turn.",
+    "standingOnly": true,
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "arms",
+      "pressure": 3
+    },
+    "effects": [],
+    "counterState": "arm-extended",
+    "submissionTarget": "arms"
   },
   {
     "id": "andre-the-giant-choke",

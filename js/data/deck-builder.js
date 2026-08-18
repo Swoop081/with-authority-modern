@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.34";
-import { collectionCards } from "./collection.js?v=0.13.34";
-import { superstars } from "./superstars.js?v=0.13.34";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.34";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.34";
+import { decks } from "./decks.js?v=0.13.36";
+import { collectionCards } from "./collection.js?v=0.13.36";
+import { superstars } from "./superstars.js?v=0.13.36";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.36";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.36";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -206,7 +206,7 @@ export function validateDeckDraft(profile, sid, draft, entranceId = selectedEntr
 }
 
 export function normalizeDeckFinishes(_p, _s, entries = []) { return entries; }
-export function optimizeDeck(profile, sid) { return buildBestOwnedRecommendedDraft(profile, sid); }
+export function optimizeDeck(profile, sid) { return enforceOwnedDraft(profile, sid, buildBestOwnedRecommendedDraft(profile, sid)); }
 
 // Recommended decks are blueprints, not free cards. Build only copies the
 // player actually owns, preserving authored order and Lead Off order.
@@ -216,13 +216,31 @@ export function buildOwnedRecommendedDraft(profile, sid) {
     const id = entry.id ?? entry, count = used.get(id) ?? 0, owned = ownedTotal(profile, id);
     if (count < owned) { out.push({ id, foil: false }); used.set(id, count + 1); }
   }
-  return out;
+  return enforceOwnedDraft(profile, sid, out);
 }
 
 
 function maxDeckCopies(card) {
   const defaultCap = card?.kind === "momentum" ? 12 : 5;
   return Math.min(defaultCap, Number.isFinite(card?.maxCopies) ? card.maxCopies : defaultCap);
+}
+
+// Hard inventory guard for player-facing automatic deck builders. Even if an
+// authored blueprint or legacy saved deck references unavailable pages, an
+// automatic rebuild may only emit copies that physically exist in Collection.
+export function enforceOwnedDraft(profile, sid, draft = []) {
+  const star = starById.get(sid);
+  if (!star) return [];
+  const out = [];
+  for (const raw of draft) {
+    const id = raw?.id ?? raw, card = byId.get(id);
+    if (!card || !legalForSuperstar(star, card)) continue;
+    const ownedCap = Math.min(maxDeckCopies(card), ownedTotal(profile, id));
+    if (usedCount(out, id) >= ownedCap) continue;
+    if (card.copyFamily && usedCopyFamilyCount(out, card) >= 5) continue;
+    out.push({ id, foil: false });
+  }
+  return preferOwnedDraftFoils(profile, out);
 }
 
 function canUseOwnedCandidate(profile, draft, card) {
@@ -293,7 +311,7 @@ export function buildBestOwnedRecommendedDraft(profile, sid) {
     const replacement = choose(false) ?? choose(true);
     if (replacement) out.push({ id: replacement.id, foil: false });
   }
-  return preferOwnedDraftFoils(profile, out);
+  return enforceOwnedDraft(profile, sid, out);
 }
 
 export function recommendedDeckMissingCount(sid, draft = []) {

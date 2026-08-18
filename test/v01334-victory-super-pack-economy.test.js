@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.34';
-import { collectionCards } from '../js/data/collection.js?v=0.13.34';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.34';
-import { boosterEligible, boosterCreditsFor, superPackCreditsFor, grantVictoryBooster, grantSuperPack, openBooster, openSuperPack, SUPER_PACK_RARITY_WEIGHTS, SUPER_PACK_GUARANTEED_MIN_RARITY, SUPER_PACK_MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=0.13.34';
-import { duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.34';
-import { superstars } from '../js/data/superstars.js?v=0.13.34';
-import { startLadderRun, recordLadderMatch, LADDER_LENGTH } from '../js/data/ladder.js?v=0.13.34';
-import { startChampionshipRoad, recordChampionshipMatch, CHAMPIONSHIP_ROAD_LENGTH } from '../js/data/championship-road.js?v=0.13.34';
-import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.34';
-import { startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.34';
+import { createProfile } from '../js/data/profile.js?v=0.13.36';
+import { collectionCards } from '../js/data/collection.js?v=0.13.36';
+import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.36';
+import { boosterEligible, boosterCreditsFor, superPackCreditsFor, grantVictoryBooster, grantSuperPack, openBooster, openSuperPack, SUPER_PACK_RARITY_WEIGHTS, SUPER_PACK_GUARANTEED_MIN_RARITY, SUPER_PACK_MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=0.13.36';
+import { duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.36';
+import { superstars } from '../js/data/superstars.js?v=0.13.36';
+import { startLadderRun, recordLadderMatch, LADDER_LENGTH } from '../js/data/ladder.js?v=0.13.36';
+import { startChampionshipRoad, recordChampionshipMatch, CHAMPIONSHIP_ROAD_LENGTH } from '../js/data/championship-road.js?v=0.13.36';
+import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.36';
+import { startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.36';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const ids = Object.values(superstars).filter(s=>!s.developmentOnly).map(s=>s.id);
@@ -81,8 +81,8 @@ test('v0.13.34 full mode clears each deposit one Super Pack',()=>{
   assert.equal(superPackCreditsFor(kotrProfile,'hall-of-fame-series-1'),1);
 });
 
-test('v0.13.34 UI routes all wins through the universal victory booster and clearly shows no reward on defeat',()=>{
-  assert.match(app,/const victoryPackAwarded = grantVictoryBooster\(profile, result, victorySetId\)/);
+test('v0.13.34 universal victory booster path remains available while later completion rules may suppress it',()=>{
+  assert.match(app,/grantVictoryBooster\(profile, result, victorySetId\)/);
   assert.match(app,/NO REWARD/);
   assert.match(app,/SUPER PACK/);
   assert.match(app,/BOOSTED ODDS · 1 RARE\+/);

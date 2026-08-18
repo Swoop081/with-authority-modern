@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.34';
-import { canCounter } from '../js/engine/rules.js?v=0.13.34';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.36';
+import { canCounter } from '../js/engine/rules.js?v=0.13.36';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
