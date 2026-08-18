@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { superstars } from "../js/data/superstars.js?v=0.13.11";
-import { decks } from "../js/data/decks.js?v=0.13.11";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.11";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.11";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.11";
+import { superstars } from "../js/data/superstars.js?v=0.13.12";
+import { decks } from "../js/data/decks.js?v=0.13.12";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.12";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.12";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.12";
 
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 const prism=allGameplayCards.find(c=>c.id==="rhea-ripley-prism-trap");

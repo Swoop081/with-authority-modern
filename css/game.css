@@ -6394,3 +6394,20 @@ body[data-screen="live-events"] .premium-run-screen{--mode-accent:#54df92;--mode
   .premium-hub-heading h1{font-size:2rem}
   .premium-hub-heading p{font-size:.54rem}
 }
+
+
+/* v0.13.12 — Home hub destination titles inherit the premium split-heading language. */
+.legacy-home-destinations .legacy-command-title{
+  display:block;
+  color:#f7f8fb;
+  font-style:italic;
+  font-weight:1000;
+  text-transform:uppercase;
+  letter-spacing:-.045em!important;
+}
+.legacy-home-destinations .legacy-command-title span{color:#f7f8fb}
+.legacy-home-destinations .legacy-command-title b{
+  color:var(--command-accent,#55d7ff);
+  font:inherit;
+  font-weight:1000;
+}

@@ -21,6 +21,6 @@ test('v0.13.11 primary hubs share the canonical split-heading system', () => {
 });
 
 test('v0.13.11 single-word Home destinations adopt MY naming', () => {
-  assert.match(app, /<strong>MY CHALLENGES<\/strong>/);
-  assert.match(app, /<strong>MY STORE<\/strong>/);
+  assert.ok(app.includes('homeHubSplitTitle(\"MY\", \"CHALLENGES\")'));
+  assert.ok(app.includes('homeHubSplitTitle(\"MY\", \"STORE\")'));
 });

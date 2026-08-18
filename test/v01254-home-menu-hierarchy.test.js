@@ -37,8 +37,8 @@ test('v0.12.54 Home uses Final Boss Rock and full-width destinations in requeste
     assert.ok(pos > last, `${id} should follow the requested Home order`);
     last = pos;
   }
-  assert.match(home, /<strong>OPEN PACKS<\/strong>/);
-  assert.match(home, /<strong>MY STORE<\/strong>/);
+  assert.ok(home.includes('homeHubSplitTitle(\"OPEN\", \"PACKS\")'));
+  assert.ok(home.includes('homeHubSplitTitle(\"MY\", \"STORE\")'));
   assert.doesNotMatch(home, /CARD SHOP|BOOSTER VAULT/);
   assert.match(css, /\.legacy-command-rack\.legacy-home-destinations\{[\s\S]*grid-template-columns:minmax\(0,1fr\)!important/);
 });
