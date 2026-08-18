@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.19';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.19';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.22';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.22';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=()=>({superstar:{id:'test'},momentum:{strength:10,strike:10,technical:10,agility:10,attitude:10},adrenaline:10,hand:[],specialUsed:false,controlMoveCount:0,events:{},posture:'standing'});

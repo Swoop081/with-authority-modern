@@ -41,7 +41,7 @@ function playableAfterAuto(state,pid,card){
  if(card?.kind==='action')return canPlayAction(sim,pid,card);
  if(card?.kind==='support')return canPlaySupport(sim,pid,card);
  if(card?.kind==='manager')return canPlayManager(sim,pid,card);
- if(card?.kind==='special')return canPlaySpecial(sim,pid,card);
+ if(card?.kind==='action'&&card?.special)return canPlaySpecial(sim,pid,card);
  return false;
 }
 function wouldTap(state,pid,card){

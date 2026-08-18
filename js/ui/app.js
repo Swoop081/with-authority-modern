@@ -1,35 +1,36 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.19";
-import { superstars } from "../data/superstars.js?v=0.13.19";
-import { decks } from "../data/decks.js?v=0.13.19";
-import { sets } from "../data/sets.js?v=0.13.19";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.19";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.19";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.19";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.19";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.19";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.19";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.19";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.19";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.19";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.19";
-import { totalMomentum } from "../engine/utils.js?v=0.13.19";
-import { healthZone } from "../engine/health.js?v=0.13.19";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.19";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.19";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.19";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.19";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.19";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.19";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.19";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.19";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.19";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.19";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.19";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.19";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.19";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.19";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.19";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.19";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.22";
+import { superstars } from "../data/superstars.js?v=0.13.22";
+import { decks } from "../data/decks.js?v=0.13.22";
+import { sets } from "../data/sets.js?v=0.13.22";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.22";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.22";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.22";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.22";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.22";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.22";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.22";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.22";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.22";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.22";
+import { totalMomentum } from "../engine/utils.js?v=0.13.22";
+import { healthZone } from "../engine/health.js?v=0.13.22";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.22";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.22";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.22";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.22";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.22";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.22";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.22";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.22";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.22";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.22";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.22";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.22";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.22";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.22";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.22";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.22";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.22";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -74,7 +75,6 @@ let unlockCelebrationIndex = 0;
 let unlockCelebrationReturnScreen = null;
 let optionsResetArmed = false;
 let pendingSaveImport = null;
-let ladderBranchId = "modern";
 let championshipBranchId = "modern";
 let liveEventNow = null;
 let selectedLiveEventKey = null;
@@ -343,9 +343,9 @@ function setChrome({ hideTopbar = false } = {}) {
 
   const mobileNav = document.querySelector("#mobile-game-nav");
   if (mobileNav) {
-    const navScreens = new Set(["menu", "play-menu", "setup", "ladder", "championship", "collection", "catalogue", "boosters", "store", "challenges", "seasons", "deck-builder", "profile", "rules", "options"]);
+    const navScreens = new Set(["menu", "play-menu", "setup", "king-of-the-ring", "ladder", "championship", "collection", "catalogue", "boosters", "store", "challenges", "seasons", "deck-builder", "profile", "rules", "options"]);
     mobileNav.hidden = !profile || !navScreens.has(screen);
-    const activeTarget = screen === "setup" || screen === "ladder" || screen === "championship" ? "play-menu" : screen === "deck-builder" ? "deck-builder" : screen === "catalogue" ? "catalogue" : screen === "collection" ? "collection" : screen === "rules" ? "profile" : screen;
+    const activeTarget = screen === "setup" || screen === "king-of-the-ring" || screen === "championship" ? "play-menu" : screen === "ladder" ? "challenges" : screen === "deck-builder" ? "deck-builder" : screen === "catalogue" ? "catalogue" : screen === "collection" ? "collection" : screen === "rules" ? "profile" : screen;
     const notices = attentionState();
     mobileNav.querySelectorAll("[data-mobile-nav]").forEach(button => {
       button.classList.toggle("is-active", button.dataset.mobileNav === activeTarget);
@@ -485,7 +485,7 @@ function renderEntranceIntro() {
   });
 }
 
-function restartMatch() { if (activeMode === "live-event") { startCurrentLiveEventMatch(activeLiveEventTowerKey); return; } startMatch(lastMatchup.p1, lastMatchup.p2, { mode: activeMode }); }
+function restartMatch() { if (activeMode === "live-event") { startCurrentLiveEventMatch(activeLiveEventTowerKey); return; } if (activeMode === "king-of-the-ring") { startCurrentKingOfTheRingMatch(); return; } if (activeMode === "ladder") { startCurrentLadderMatch(); return; } startMatch(lastMatchup.p1, lastMatchup.p2, { mode: activeMode }); }
 function showSetup() {
   if (!profile) { screen = "starter"; renderStarter(); return; }
   activeMode = "exhibition";
@@ -500,6 +500,7 @@ function showSetup() {
   selection.p2 = null;
   renderSetup();
 }
+function showKingOfTheRing() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "king-of-the-ring"; message = ""; setChrome(); renderKingOfTheRing(); }
 function showLadder() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "ladder"; message = ""; setChrome(); renderLadder(); }
 function showChampionship() { if (!profile) { screen = "starter"; renderStarter(); return; } screen = "championship"; message = ""; setChrome(); renderChampionship(); }
 function showLiveEvents() { if (!profile) { screen = "starter"; renderStarter(); return; } selectedLiveEventKey = null; screen = "live-events"; message = ""; setChrome(); renderLiveEvents(); }
@@ -1183,11 +1184,13 @@ function renderChallenges() {
     <section class="feature-hero challenges-feature premium-challenges-hero">${modePortraits(["becky-lynch"],"feature-art")}<div class="feature-shade"></div><div class="feature-copy">${modeLogoMarkup("challenges",true)}<div class="challenge-hero-status"><span>${uiIcon('bolt')}<b>${dailyReady}</b><small>Daily ready</small></span><span>${uiIcon('calendar')}<b>${weeklyReady}</b><small>Weekly ready</small></span><span>${uiIcon('trophy')}<b>${milestoneReady}</b><small>Milestones</small></span></div></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
     <section class="challenge-command-panel"><div class="section-title icon-section-title"><span class="section-icon">${uiIcon('cards')}</span><div><h3>Set Progress</h3><small>Collection completion and unopened reward packs</small></div></div><div class="challenge-set-stats">${challengeSetStats}</div></section>
+    <section class="challenge-section ladder-challenge-section"><div class="section-title icon-section-title"><span class="section-icon daily">${uiIcon('trophy')}</span><div><h3>Climb the Ladder</h3><small>Daily 8-Superstar tower · three lives · resets at local midnight</small></div><span>${ladderState(profile,new Date()).dailyCleared ? 'COMPLETE' : ladderState(profile,new Date()).activeRun?.status==='active' ? `LEVEL ${ladderState(profile,new Date()).activeRun.rung+1}/8` : 'LIVE'}</span></div><div class="ladder-challenge-card"><div><span>DAILY TOWER</span><strong>${ladderState(profile,new Date()).dailyCleared ? 'Today’s ladder cleared' : 'Eight random Superstars are waiting'}</strong><small>${ladderState(profile,new Date()).dailyCleared ? 'A new tower arrives tomorrow.' : 'Lose three times and restart from Level 1. Clear all eight for the completion reward.'}</small></div><button id="open-daily-ladder" class="primary">${ladderState(profile,new Date()).dailyCleared ? 'VIEW LADDER' : ladderState(profile,new Date()).activeRun?.status==='active' ? 'CONTINUE LADDER' : 'ENTER LADDER'}</button></div></section>
     <section class="challenge-section premium-challenge-section"><div class="section-title icon-section-title"><span class="section-icon daily">${uiIcon('bolt')}</span><div><h3>Daily Challenges</h3><small>Quick rotating goals</small></div><span>${dailyReady ? `${dailyReady} READY` : '3 GOALS'}</span></div><div class="challenge-grid">${challenges.daily.map(c=>challengeCard(c,'DAILY')).join('')}</div></section>
     <section class="challenge-section premium-challenge-section"><div class="section-title icon-section-title"><span class="section-icon weekly">${uiIcon('calendar')}</span><div><h3>Weekly Challenges</h3><small>Larger goals · bigger XP</small></div><span>${weeklyReady ? `${weeklyReady} READY` : '3 GOALS'}</span></div><div class="challenge-grid">${challenges.weekly.map(c=>challengeCard(c,'WEEKLY')).join('')}</div></section>
     ${milestoneSections}
     
   </section>`;
+  $('#open-daily-ladder')?.addEventListener('click', showLadder);
   root.querySelectorAll('[data-claim-challenge]').forEach(btn=>btn.addEventListener('click',()=>{ try { const xpBefore=seasonState(profile).xp; const tierBefore=seasonTier(profile); const reward=claimChallenge(profile,btn.dataset.claimChallenge); const xpAfter=seasonState(profile).xp; const tierAfter=seasonTier(profile); queueTierUps(tierBefore,tierAfter,xpBefore,xpAfter); saveProfile(profile); message=`Challenge claimed: +${reward} SummerSlam booster${reward===1?'':'s'} and Season XP.`; } catch(e){ message=e.message; } renderChallenges(); showTierUpCelebration(); }));
   root.querySelectorAll('[data-claim-milestone]').forEach(btn=>btn.addEventListener('click',()=>{ try { const [setId,type,pct]=btn.dataset.claimMilestone.split(':'); const reward=claimMilestone(profile,type,Number(pct),setId); saveProfile(profile); message=`${setCollections[setId]?.name??setId} ${type==='foil'?'Foil':'Collection'} milestone claimed: +${reward} booster${reward===1?'':'s'}.`; } catch(e){ message=e.message; } renderChallenges(); }));
 }
@@ -1339,45 +1342,82 @@ function renderLiveEvents() {
 function beginLadderRun() {
   const starId = selection.p1;
   if (!hasSuperstar(profile, starId)) { message = "Choose an unlocked Superstar."; renderLadder(); return; }
-  const branch = LADDER_BRANCHES[ladderBranchId] ?? LADDER_BRANCHES.modern;
-  const opponents = rosterForBranch(branch).map(s => s.id);
-  startLadderRun(profile, starId, opponents, Math.random, branch.id);
-  saveProfile(profile);
-  startCurrentLadderMatch();
+  try {
+    startLadderRun(profile, starId, roster.map(s => s.id), Math.random, "daily", new Date());
+    saveProfile(profile);
+    startCurrentLadderMatch();
+  } catch (error) { message = error.message; renderLadder(); }
 }
 
 function startCurrentLadderMatch() {
-  const run = ladderState(profile).activeRun;
-  const opponentId = currentLadderOpponent(profile);
+  const run = ladderState(profile, new Date()).activeRun;
+  const opponentId = currentLadderOpponent(profile, new Date());
   if (!run || run.status !== "active" || !opponentId) { showLadder(); return; }
   startMatch(run.superstarId, opponentId, { mode: "ladder" });
 }
 
 function renderLadder() {
   setChrome();
-  const root=$("#game"), ladder=ladderState(profile), run=ladder.activeRun, active=run?.status==='active';
-  const branch=LADDER_BRANCHES[ladderBranchId]??Object.values(LADDER_BRANCHES)[0];
-  const totalRungs=rosterForBranch(branch).length;
-  const unlocked=orderedUnlockedSuperstars();
-  const chosenId=active?run.superstarId:(unlocked.some(s=>s.id===selection.p1)?selection.p1:unlocked[0]?.id); if(chosenId) selection.p1=chosenId;
-  const chosenStar=superstarById[chosenId];
-  const tabs=Object.values(LADDER_BRANCHES).map(b=>`<button class="branch-chip ${b.id===ladderBranchId?'active':''}" data-ladder-branch="${b.id}" ${active?'disabled':''}>${b.label.replace(' — Series 1','')}</button>`).join('');
-  const lives=run?.lives??LADDER_LIVES;
-  const ladderRows=active?run.opponents.map((id,index)=>{
-    const star=superstarById[id],state=index<run.rung?'cleared':index===run.rung?'current':'upcoming';
-    const stateLabel=state==='cleared'?'Defeated':state==='current'?'Next':'Waiting';
-    return `<div class="ladder-rung mode-run-node redesigned-ladder-node ${state}"><span class="mode-run-index">${index+1}</span><div class="ladder-portrait mode-run-node-portrait">${portraitMarkup(id,star.name)}</div><div class="mode-run-node-copy"><b>${star.name}</b><small>Level ${index+1}</small><em>${stateLabel}</em></div></div>`;
-  }).join(''):'';
-  const statusText=run?.status==='cleared'?`${branch.label} cleared!`:active?`Level ${run.rung+1} of ${run.opponents.length} · ${superstarById[currentLadderOpponent(profile)]?.name}`:`Defeat every ${branch.label} opponent consecutively.`;
-  const statusMarkup=`<div class="mode-run-status ${message?'has-message':''}"><span>${message||statusText}</span></div>`;
-  const commandMarkup=active
-    ? `<section class="mode-run-command ladder-run-command redesigned-ladder-command"><div class="mode-run-command-copy"><span>NEXT LEVEL · ${run.rung+1}/${run.opponents.length}</span><strong>${superstarById[currentLadderOpponent(profile)]?.name}</strong><small>${superstarById[run.superstarId].name} · ${branch.label} · ${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)} lives</small></div><button id="continue-ladder" class="start-match mode-run-primary">Fight Level ${run.rung+1}</button></section>`
-    : `<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name??'Choose your Superstar'}</h3></div><small>Tap a card for details</small></div>${selectionCarouselMarkup(unlocked,chosenId,'ladder-select')}<button id="start-ladder" class="start-match mode-run-primary">Start ${branch.label.replace(' — Series 1','')} Run</button></section>`;
-  const activeStatus = message ? statusMarkup : '';
-  root.innerHTML=`<section class="ladder-screen premium-screen compact-mode-run premium-run-screen redesigned-ladder-screen ${active?'is-active-run':'is-run-setup'}"><section class="feature-hero ladder-feature single-feature-hero mode-run-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy mode-run-hero-copy">${modeLogoMarkup("ladder",true)}<p>Three lives · ${totalRungs} opponents · survive the run.</p></div><div class="horizontal-branch-selector mode-run-branch-selector">${tabs}</div><div class="ladder-summary mode-run-summary"><div><b>${ladder.clearsByBranch?.[branch.id]??0}</b><span>Clears</span></div><div><b>${ladder.bestRungByBranch?.[branch.id]??0}/${totalRungs}</b><span>Best</span></div><div><b>${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)}</b><span>Lives</span></div><div><b>${ladder.completionPackCreditsBySet?.[branch.setId]??0}</b><span>Packs</span></div></div></section>${active?activeStatus:statusMarkup}<section class="ladder-bottom-shell">${commandMarkup}${ladderRows?`<section class="ladder-stack mode-run-progress ladder-progress-grid redesigned-ladder-progress" aria-label="Ladder progress">${ladderRows}</section>`:''}</section>${run&&run.status!=='active'?`<button id="new-ladder" class="start-match mode-run-primary">Start Another Run</button>`:''}</section>`;
-  root.querySelectorAll('[data-ladder-branch]').forEach(btn=>btn.addEventListener('click',()=>{ladderBranchId=btn.dataset.ladderBranch;message='';renderLadder();}));
-  wireSelectionCarousel('ladder-select', id=>{selection.p1=id;renderLadder();});
-  $("#start-ladder")?.addEventListener("click",beginLadderRun); $("#continue-ladder")?.addEventListener("click",startCurrentLadderMatch); $("#new-ladder")?.addEventListener("click",()=>{ladder.activeRun=null;saveProfile(profile);renderLadder();});
+  const root = $("#game"), ladder = ladderState(profile, new Date()), run = ladder.activeRun, active = run?.status === "active";
+  const unlocked = orderedUnlockedSuperstars();
+  const chosenId = active ? run.superstarId : (unlocked.some(s => s.id === selection.p1) ? selection.p1 : unlocked[0]?.id);
+  if (chosenId) selection.p1 = chosenId;
+  const chosenStar = superstarById[chosenId];
+  const lives = run?.lives ?? LADDER_LIVES;
+  const ladderRows = (run?.opponents ?? ladder.dailyOpponents ?? []).map((id,index) => {
+    const star = superstarById[id], state = run ? (index < run.rung ? "cleared" : index === run.rung && active ? "current" : "upcoming") : "upcoming";
+    const stateLabel = state === "cleared" ? "Defeated" : state === "current" ? "Next" : "Waiting";
+    return `<div class="ladder-rung mode-run-node redesigned-ladder-node ${state}"><span class="mode-run-index">${index+1}</span><div class="ladder-portrait mode-run-node-portrait">${portraitMarkup(id,star?.name ?? id)}</div><div class="mode-run-node-copy"><b>${star?.name ?? id}</b><small>Level ${index+1}</small><em>${stateLabel}</em></div></div>`;
+  }).join("");
+  const statusText = ladder.dailyCleared ? "Today's Ladder is complete. A new 8-Superstar tower arrives at local midnight." : run?.status === "failed" ? "All three lives are gone. Restart today's tower from Level 1." : active ? `Level ${run.rung+1} of ${LADDER_LENGTH} · ${superstarById[currentLadderOpponent(profile)]?.name}` : "Eight random Superstars · three lives · one daily completion reward.";
+  const statusMarkup = `<div class="mode-run-status ${message?'has-message':''}"><span>${message || statusText}</span></div>`;
+  const commandMarkup = ladder.dailyCleared
+    ? `<section class="mode-run-command ladder-run-command redesigned-ladder-command complete"><div class="mode-run-command-copy"><span>DAILY CHALLENGE COMPLETE</span><strong>Climb the Ladder Cleared</strong><small>Return tomorrow for eight new random opponents.</small></div><button id="ladder-back-challenges" class="nav-button">Back to Challenges</button></section>`
+    : active
+      ? `<section class="mode-run-command ladder-run-command redesigned-ladder-command"><div class="mode-run-command-copy"><span>NEXT LEVEL · ${run.rung+1}/${LADDER_LENGTH}</span><strong>${superstarById[currentLadderOpponent(profile)]?.name}</strong><small>${superstarById[run.superstarId].name} · ${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)} lives</small></div><button id="continue-ladder" class="start-match mode-run-primary">Fight Level ${run.rung+1}</button></section>`
+      : `<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? 'Choose your Superstar'}</h3></div><small>Today's opponents lock on your first run</small></div>${selectionCarouselMarkup(unlocked,chosenId,'ladder-select')}<button id="start-ladder" class="start-match mode-run-primary">${run?.status === 'failed' ? 'Restart at Level 1' : 'Start Daily Ladder'}</button></section>`;
+  root.innerHTML = `<section class="ladder-screen premium-screen compact-mode-run premium-run-screen redesigned-ladder-screen ${active?'is-active-run':'is-run-setup'}"><section class="feature-hero ladder-feature single-feature-hero mode-run-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy mode-run-hero-copy">${modeLogoMarkup("ladder",true)}<p>Eight random opponents · three lives · resets every day.</p></div><div class="ladder-summary mode-run-summary"><div><b>${ladder.clears ?? 0}</b><span>Career Clears</span></div><div><b>${ladder.bestRung ?? 0}/${LADDER_LENGTH}</b><span>Best</span></div><div><b>${'●'.repeat(lives)}${'○'.repeat(LADDER_LIVES-lives)}</b><span>Lives</span></div><div><b>${ladder.dailyCleared ? 'DONE' : 'LIVE'}</b><span>Today</span></div></div></section>${statusMarkup}<section class="ladder-bottom-shell">${commandMarkup}${ladderRows ? `<section class="ladder-stack mode-run-progress ladder-progress-grid redesigned-ladder-progress" aria-label="Today's Ladder progress">${ladderRows}</section>` : ''}</section>${run?.status==='failed' ? `<button id="new-ladder" class="start-match mode-run-primary">Restart Today's Tower</button>` : ''}</section>`;
+  wireSelectionCarousel('ladder-select', id=>{ selection.p1=id; renderLadder(); });
+  $("#start-ladder")?.addEventListener("click", beginLadderRun);
+  $("#continue-ladder")?.addEventListener("click", startCurrentLadderMatch);
+  $("#new-ladder")?.addEventListener("click", ()=>{ ladder.activeRun=null; saveProfile(profile); renderLadder(); });
+  $("#ladder-back-challenges")?.addEventListener("click", showChallenges);
+}
+
+function beginKingOfTheRing() {
+  const starId = selection.p1;
+  if (!hasSuperstar(profile, starId)) { message = "Choose an unlocked Superstar."; renderKingOfTheRing(); return; }
+  try {
+    startKingOfTheRing(profile, starId, roster.map(s => s.id), Math.random);
+    saveProfile(profile);
+    startCurrentKingOfTheRingMatch();
+  } catch (error) { message = error.message; renderKingOfTheRing(); }
+}
+function startCurrentKingOfTheRingMatch() {
+  const run = kingOfTheRingState(profile).activeRun;
+  const opponentId = currentKingOfTheRingOpponent(profile);
+  if (!run || run.status !== "active" || !opponentId) { showKingOfTheRing(); return; }
+  startMatch(run.superstarId, opponentId, { mode: "king-of-the-ring" });
+}
+function renderKingOfTheRing() {
+  setChrome();
+  const root = $("#game"), state = kingOfTheRingState(profile), run = state.activeRun, active = run?.status === "active";
+  const unlocked = orderedUnlockedSuperstars();
+  const chosenId = active ? run.superstarId : (unlocked.some(s => s.id === selection.p1) ? selection.p1 : unlocked[0]?.id);
+  if (chosenId) selection.p1 = chosenId;
+  const chosenStar = superstarById[chosenId];
+  const field = run?.field ?? [];
+  const qfPairs = field.length === 8 ? [[field[0],field[1]],[field[2],field[3]],[field[4],field[5]],[field[6],field[7]]] : [];
+  const pairMarkup = (pair,index) => `<article class="kotr-match-card ${index===0?'player-match':''}"><span>QF ${index+1}</span><b>${superstarById[pair[0]]?.name ?? pair[0]}</b><i>VS</i><b>${superstarById[pair[1]]?.name ?? pair[1]}</b></article>`;
+  const semiOpponent = run && run.stage >= 1 ? superstarById[run.opponents[1]]?.name : "TBD";
+  const finalOpponent = run && run.stage >= 2 ? superstarById[run.opponents[2]]?.name : "TBD";
+  const bracket = run ? `<section class="kotr-bracket" aria-label="King of the Ring bracket"><div class="kotr-round"><h3>Quarterfinals</h3>${qfPairs.map(pairMarkup).join('')}</div><div class="kotr-round kotr-later-round"><h3>Semifinal</h3><article class="kotr-match-card player-match"><span>YOUR PATH</span><b>${chosenStar?.name}</b><i>VS</i><b>${semiOpponent}</b></article><article class="kotr-match-card"><span>OTHER SEMIFINAL</span><b>${run.stage >= 2 ? superstarById[run.cpuFinalist]?.name ?? 'TBD' : 'TBD'}</b></article></div><div class="kotr-round kotr-later-round"><h3>Final</h3><article class="kotr-match-card final"><span>THE CROWN</span><b>${chosenStar?.name}</b><i>VS</i><b>${finalOpponent}</b></article></div></section>` : '';
+  const statusText = run?.status === "cleared" ? `${chosenStar?.name} is King of the Ring!` : run?.status === "eliminated" ? "Tournament over. One loss means elimination — enter a new bracket." : active ? `${KING_OF_THE_RING_ROUNDS[run.stage]} · ${superstarById[currentKingOfTheRingOpponent(profile)]?.name}` : "Eight Superstars enter. Win three straight matches. One loss ends the tournament.";
+  const command = active ? `<section class="mode-run-command kotr-run-command"><div class="mode-run-command-copy"><span>${KING_OF_THE_RING_ROUNDS[run.stage].toUpperCase()} · ${run.stage+1}/3</span><strong>${superstarById[currentKingOfTheRingOpponent(profile)]?.name}</strong><small>${chosenStar?.name} · one loss = eliminated</small></div><button id="continue-kotr" class="start-match mode-run-primary">Fight ${KING_OF_THE_RING_ROUNDS[run.stage]}</button></section>` : `<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? 'Choose your Superstar'}</h3></div><small>Seven opponents are drawn randomly</small></div>${selectionCarouselMarkup(unlocked,chosenId,'kotr-select')}<button id="start-kotr" class="start-match mode-run-primary">${run ? 'Enter New Tournament' : 'Enter King of the Ring'}</button></section>`;
+  root.innerHTML = `<section class="ladder-screen kotr-screen premium-screen compact-mode-run premium-run-screen ${active?'is-active-run':'is-run-setup'}"><section class="feature-hero kotr-feature single-feature-hero mode-run-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy mode-run-hero-copy">${modeLogoMarkup("king-of-the-ring",true)}<p>8-person single elimination · quarterfinal · semifinal · final.</p></div><div class="ladder-summary mode-run-summary"><div><b>${state.clears ?? 0}</b><span>Crowns</span></div><div><b>${state.bestRound ?? 0}/3</b><span>Best Run</span></div><div><b>1</b><span>Life</span></div><div><b>8</b><span>Field</span></div></div></section><div class="mode-run-status ${message?'has-message':''}"><span>${message || statusText}</span></div>${command}${bracket}</section>`;
+  wireSelectionCarousel('kotr-select', id=>{ selection.p1=id; renderKingOfTheRing(); });
+  $("#start-kotr")?.addEventListener("click", ()=>{ if (run) resetKingOfTheRing(profile); beginKingOfTheRing(); });
+  $("#continue-kotr")?.addEventListener("click", startCurrentKingOfTheRingMatch);
 }
 
 
@@ -1418,7 +1458,8 @@ function legacyLogoMarkup(compact = false, showVersion = false) {
 function modeLogoMarkup(mode, compact = false) {
   const modes = {
     exhibition: { kicker: "ONE NIGHT · ONE MATCH", top: "EXHIBITION", bottom: "SHOWCASE" },
-    ladder: { kicker: "SURVIVE THE RUN", top: "CLIMB THE", bottom: "LADDER" },
+    ladder: { kicker: "DAILY · THREE LIVES", top: "CLIMB THE", bottom: "LADDER" },
+    "king-of-the-ring": { kicker: "8 SUPERSTARS · ONE CROWN", top: "KING OF THE", bottom: "RING" },
     championship: { kicker: "FOUR FIGHTS · ONE TITLE", top: "CHAMPIONSHIP", bottom: "ROAD" },
     "live-event": { kicker: "NEW EVENT EVERY DAY", top: "LIVE", bottom: "EVENTS" },
     seasons: { kicker: "LIVE CONTENT", top: "LEGACY", bottom: "SEASONS" },
@@ -1602,14 +1643,14 @@ function renderPlayMenu() {
     <div class="legacy-mode-stack">
       <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup(dailyTower?.event.heroId ?? "brock-lesnar", superstarById[dailyTower?.event.heroId]?.name ?? "Live Events")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · RESETS DAILY</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
       <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · RANDOM CPU FROM ${Math.max(0,roster.length-1)} RIVALS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
-      <article id="play-ladder" role="button" tabindex="0" class="legacy-mode-banner mode-ladder"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("gunther","Gunther")}</span><span class="legacy-mode-copy"><em>THREE LIVES · EIGHT RUNGS</em>${modeLogoMarkup("ladder",true)}<small>CHOOSE A BRANCH · SURVIVE THE RUN</small><b>CLIMB THE LADDER<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>
+      <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("gunther","Gunther")}</span><span class="legacy-mode-copy"><em>8 SUPERSTARS · SINGLE ELIMINATION</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>ENTER THE TOURNAMENT<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>
       <article id="play-championship" role="button" tabindex="0" class="legacy-mode-banner mode-championship"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="legacy-mode-copy"><em>FOUR FIGHTS · ONE TITLE</em>${modeLogoMarkup("championship",true)}<small>OPENING BOUT → CHAMPIONSHIP MATCH</small><b>CHASE THE TITLE<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">04</span></article>
     </div>
   </section>`;
   const wireModeCard = (selector, action) => { const el = $(selector); el?.addEventListener("click", action); el?.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); action(); } }); };
   wireModeCard("#play-live-event", showLiveEvents);
   wireModeCard("#play-exhibition", showSetup);
-  wireModeCard("#play-ladder", showLadder);
+  wireModeCard("#play-kotr", showKingOfTheRing);
   wireModeCard("#play-championship", showChampionship);
 }
 
@@ -1835,7 +1876,6 @@ function cardRulesText(card) {
   if (card.kind === "move" && card.rulesText) return playerFacingRulesText(card.rulesText);
   if (card.kind === "superstar") { const star=superstarById[card.superstarId]; const a=star?.ability; return playerFacingRulesText(`${a?.name ?? card.abilityName ?? "Superstar Ability"}: ${a?.text ?? card.abilityText ?? "Ability details pending."}`); }
   if (card.kind === "entrance") { const star=superstarById[card.superstarId]; return playerFacingRulesText(card.rulesText ?? star?.entrance?.rulesText ?? "Entrance effect pending."); }
-  if (card.kind === "special") { const star=superstarById[card.superstarId]; return playerFacingRulesText(card.abilityText ?? card.effectText ?? card.rulesText ?? star?.special?.text ?? "Action effect is resolved by the Superstar package."); }
   if (card.kind === "momentum") return `Gain ${card.amount ?? 1} permanent ${(card.method ?? "Momentum")[0].toUpperCase() + (card.method ?? "momentum").slice(1)} Momentum. Momentum is not spent when a Move is played.`;
   if (["action", "support", "manager"].includes(card.kind)) return playerFacingRulesText(card.abilityText ?? card.effectText ?? card.rulesText ?? card.kind);
   return collectionText(card);
@@ -1845,7 +1885,7 @@ function cardFrontBottom(card) {
   if (card.kind === "move") return `<span><small>COST</small><b>${card.cost ?? 0}</b></span><span><small>DAMAGE</small><b>${card.damage ?? 0}</b></span>`;
   if (card.kind === "superstar") return `<span><small>HP</small><b>${card.hp ?? superstarById[card.superstarId]?.hp ?? "—"}</b></span><span><small>STARS</small><b class="rarity-stars">${rarityStars(card.rarity ?? 4)}</b></span>`;
   if (card.kind === "momentum") return `<span><small>METHOD</small><b>${(card.method ?? "MO").slice(0,2).toUpperCase()}</b></span><span><small>GAIN</small><b>+${card.amount ?? 1}</b></span>`;
-  return `<span><small>TYPE</small><b>${card.kind === "special" ? "ACTION" : card.kind.toUpperCase()}</b></span><span><small>STARS</small><b class="rarity-stars">${rarityStars(card.rarity ?? 1)}</b></span>`;
+  return `<span><small>TYPE</small><b>${card.kind.toUpperCase()}</b></span><span><small>STARS</small><b class="rarity-stars">${rarityStars(card.rarity ?? 1)}</b></span>`;
 }
 
 const MOMENTUM_FRONT_META = {
@@ -1880,7 +1920,7 @@ function layeredFrontOverlayMarkup(card) {
   const rarity = rarityStars(card.rarity ?? 1).split("").join("<br>");
   const nameLength = String(card.name ?? "").length;
   const nameClass = nameLength > 30 ? "is-name-xl" : nameLength > 22 ? "is-name-long" : "";
-  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind === "special" ? "ACTION" : String(card.kind ?? "CARD").toUpperCase();
+  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : String(card.kind ?? "CARD").toUpperCase();
   if (card.kind === "move") {
     const req = layeredFrontRequirementText(card);
     const moveType = String(card.moveType || card.method || "move").toUpperCase();
@@ -1964,7 +2004,7 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
   const finisherClass = card.finisher ? "is-finisher" : card.trademark ? "is-trademark" : card.signature ? "is-signature" : "";
   const foilClass = visualFoil ? "is-foil" : "";
   const ruleText = cardRulesText(card);
-  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind === "special" ? "ACTION" : card.kind.toUpperCase();
+  const typeLabel = card.finisher ? "FINISHER" : card.trademark ? "TRADEMARK" : card.signature ? "SIGNATURE" : card.kind.toUpperCase();
   const subtitle = card.kind === "move"
     ? [card.method ? card.method.toUpperCase() : "", card.moveType ? (MOVE_TYPE_LABELS[card.moveType] ?? card.moveType).toUpperCase() : ""].filter(Boolean).join(" · ")
     : (card.subtitle ?? typeLabel);
@@ -2002,7 +2042,7 @@ function collectibleCardMarkup(card, { flipped = false, foil = false, extraClass
 function collectionText(card) {
   if (card.kind === "superstar") return `${card.hp} HP · ${card.abilityName}: ${card.abilityText}`;
   if (card.kind === "momentum") return `Gain 1 permanent ${card.method[0].toUpperCase() + card.method.slice(1)} Momentum. Move costs never spend Momentum.`;
-  if (["entrance", "special", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
+  if (["entrance", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
   const req = Object.entries(card.finisher ? {} : (card.requirements ?? {})).map(([m,n]) => `${n} ${m}`).join(", ");
   const stateReq = [card.requiresPosture ? `opponent ${card.requiresPosture}` : "", card.requiresLocation ? card.requiresLocation : ""].filter(Boolean).join(" · ");
   const method = card.method ? `Method ${card.method[0].toUpperCase() + card.method.slice(1)}` : "";
@@ -2039,7 +2079,7 @@ function renderCollection() {
     return (acquisitionOrder.get(b.id) ?? -1) - (acquisitionOrder.get(a.id) ?? -1) || a.name.localeCompare(b.name);
   });
   const visible = sortOwnedCards(scopedCards.filter(card => {
-    if (collectionFilter.kind !== "all" && !(collectionFilter.kind === "action" ? ["action","special"].includes(card.kind) : card.kind === collectionFilter.kind)) return false;
+    if (collectionFilter.kind !== "all" && card.kind !== collectionFilter.kind) return false;
     if (collectionFilter.rarity !== "all" && String(card.rarity) !== collectionFilter.rarity) return false;
     if (query && !`${card.name} ${card.subtitle ?? ""} ${card.kind} ${card.cardCode ?? ""} ${sets[card.setId]?.displayName ?? ""} ${collectionText(card)}`.toLowerCase().includes(query)) return false;
     return true;
@@ -2226,7 +2266,7 @@ function renderCardCatalogue() {
 function deckRole(card) {
   if (!card) return "Unknown";
   if (card.kind === "move") return card.finisher ? "Finisher" : card.trademark ? "Trademark" : (card.defensiveOnly || card.moveType === "counter") ? "Counter" : card.counters?.length ? "Move / Counter" : `Move · Cost ${card.cost ?? 0}`;
-  return card.kind === "special" ? "Action" : card.kind[0].toUpperCase() + card.kind.slice(1);
+  return card.kind[0].toUpperCase() + card.kind.slice(1);
 }
 
 function deckLabCardHasFront(card) {
@@ -2446,7 +2486,7 @@ function renderDeckBuilder() {
 
 function cardMeta(card) {
   if (card.kind === "momentum") return `${card.method.toUpperCase()} +${card.amount ?? 1}`;
-  if (["entrance", "special", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
+  if (["entrance", "action", "support", "manager"].includes(card.kind)) return card.abilityText ?? card.kind;
   const req = Object.entries(card.finisher ? {} : (card.requirements ?? {})).map(([m, n]) => `${n} ${m}`).join(" · ");
   const position = [
     card.requiresPosture ? `Foe: ${card.requiresPosture}` : "",
@@ -2470,12 +2510,12 @@ function cardLegal(playerId, card) {
   if (state.phase === "ACTION") {
     if (card.kind === "momentum") return canPlayMomentum(state, playerId, card);
     if (card.kind === "entrance") return canPlayEntrance(state, playerId, card);
+    if (card.kind === "action" && card.special) return canPlaySpecial(state, playerId, card);
     if (card.kind === "action") return canPlayAction(state, playerId, card);
     if (card.kind === "support") return canPlaySupport(state, playerId, card);
     if (card.kind === "manager") return canPlayManager(state, playerId, card);
     if (card.kind === "move") return moveEligibility(state, playerId, card).legal;
   }
-  if (state.phase === "POST_MOVE" && card.kind === "special") return canPlaySpecial(state, playerId, card);
   if (state.phase === "COUNTER" && state.proposedMove?.defenderId === playerId) return counterEligibility(state, playerId, state.proposedMove.card, card).legal;
   if (state.phase === "PIN_RESPONSE") return canPlayPinEscape(state, playerId, card);
   return false;
@@ -2489,10 +2529,11 @@ function cardReason(playerId, card) {
   if (card.kind === "momentum") return (state.players[playerId].turn?.momentumPlayed ?? 0) >= (state.players[playerId].turn?.momentumPlayLimit ?? 1) ? "Momentum already played this turn — connect a Move or begin a new turn to refresh it" : "";
   if (card.kind === "entrance") return "Entrance resolves automatically pre-match";
   if (state.phase === "COUNTER" && card.kind === "action" && card.effect?.type === "onceTooOften") return counterEligibility(state, playerId, state.proposedMove?.card, card).reason ?? "Reverse repeated Move and gain Control";
+  if (card.kind === "action" && card.special) return canPlaySpecial(state, playerId, card) ? "PLAY ACTION" : "Action trigger not available";
+  if (card.kind === "action" && card.pinEscape) return state.phase === "PIN_RESPONSE" ? "Escape pin" : "Pin-response Action only";
   if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} Momentum + Attitude` : ""; }
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
   if (card.kind === "manager") { const p = state.players[playerId]; if (p.activeManager) return "Manager already active"; if (card.superstarId && card.superstarId !== p.superstar?.id) return "Manager not compatible with this Superstar"; if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(p.superstar?.id)) return "Manager not compatible with this Superstar"; return ""; }
-  if (card.kind === "special") return canPlaySpecial(state, playerId, card) ? "PLAY ACTION" : "Action trigger not available";
   if (card.kind === "move" && state.phase === "ACTION") return moveEligibility(state, playerId, card).reason ?? "";
   if (state.phase === "COUNTER") return counterEligibility(state, playerId, state.proposedMove.card, card).reason ?? "Counter";
   if (state.phase === "PIN_RESPONSE") return canPlayPinEscape(state, playerId, card) ? "Escape pin" : "Not a pin response";
@@ -2525,10 +2566,10 @@ function playCard(playerId, index) {
     else if (state.phase === "PIN_RESPONSE") game.playPinEscape(playerId, card);
     else if (card.kind === "momentum") game.playMomentum(playerId, card);
     else if (card.kind === "entrance") game.playEntrance(playerId, card);
+    else if (card.kind === "action" && card.special) game.playSpecial(playerId, card);
     else if (card.kind === "action") game.playAction(playerId, card);
     else if (card.kind === "support") game.playSupport(playerId, card);
     else if (card.kind === "manager") game.playManager(playerId, card);
-    else if (card.kind === "special") game.playSpecial(playerId, card);
     else game.declareMove(playerId, card);
     message = `${nameFor(playerId)} played ${card.name}.`;
   } catch (error) { message = error.message; }
@@ -2675,7 +2716,7 @@ function renderMatchSpectacle() {
   const spectacleCopy = matchSpectacle.kind === "submission-lock"
     ? "SUBMISSION<br>LOCKED IN"
     : matchSpectacle.text;
-  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${spectacleCopy}</div>${card ? `<div class="pin-escape-card-showcase">${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:"pin-escape-special-card"})}<small>${matchSpectacle.detail ?? "This Action stopped the three-count."}</small></div>` : ""}</div>`;
+  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${spectacleCopy}</div>${card ? `<div class="pin-escape-card-showcase">${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:"pin-escape-action-card"})}<small>${matchSpectacle.detail ?? "This Action stopped the three-count."}</small></div>` : ""}</div>`;
 }
 
 function spectacleSequence(steps, done) {
@@ -2851,12 +2892,13 @@ function renderCommandBar() {
       ${owner === HUMAN && state.phase === "SUBMISSION_RESPONSE" ? '<button id="pass-action" class="primary submission-response-pass show-command-button single-context-action">PASS · CONTINUE HOLD</button>' : ""}
       ${owner === HUMAN && state.phase === "SUBMISSION_MAINTAIN" ? '<button id="release-submission" class="primary show-command-button">Release Hold</button>' : ""}
       ${state.phase === "MATCH_OVER" && activeMode === "ladder" ? '<button id="ladder-hub" class="primary">Return to Ladder</button>' : ""}
+      ${state.phase === "MATCH_OVER" && activeMode === "king-of-the-ring" ? '<button id="kotr-hub" class="primary">Return to King of the Ring</button>' : ""}
       ${state.phase === "MATCH_OVER" && activeMode === "championship" ? '<button id="championship-hub" class="primary">Return to Championship Road</button>' : ""}
       ${state.phase === "MATCH_OVER" && activeMode === "live-event" ? '<button id="live-event-hub" class="primary">Return to Live Event</button>' : ""}
     </div>
     <details class="match-menu"><summary>Match Menu</summary><div>
-      ${!(state.phase === "MATCH_OVER" && (activeMode === "ladder" || activeMode === "championship" || activeMode === "live-event")) ? '<button id="reset-match" class="ghost">Restart</button>' : ""}
-      <button id="change-matchup" class="ghost">${activeMode === "ladder" ? "Ladder Hub" : activeMode === "championship" ? "Championship Hub" : activeMode === "live-event" ? "Live Event Hub" : "Change Matchup"}</button>
+      ${!(state.phase === "MATCH_OVER" && (activeMode === "ladder" || activeMode === "king-of-the-ring" || activeMode === "championship" || activeMode === "live-event")) ? '<button id="reset-match" class="ghost">Restart</button>' : ""}
+      <button id="change-matchup" class="ghost">${activeMode === "ladder" ? "Challenges" : activeMode === "king-of-the-ring" ? "King of the Ring Hub" : activeMode === "championship" ? "Championship Hub" : activeMode === "live-event" ? "Live Event Hub" : "Change Matchup"}</button>
       <button id="browse-main-menu" class="ghost">Main Menu</button><button id="browse-collection" class="ghost">Collection</button><button id="browse-boosters" class="ghost">Boosters (${profile.boosterCredits ?? 0})</button><button id="browse-challenges" class="ghost">Challenges</button><button id="browse-decks" class="ghost">Deck Builder</button>
     </div></details>
   </section>`;
@@ -2912,6 +2954,20 @@ function handleCompletedMatch() {
   queueTierUps(seasonXpReward.tierBefore, seasonXpReward.tierAfter, seasonXpReward.before, seasonXpReward.after);
   const seasonXpText = seasonXpReward.awarded ? ` +${seasonXpReward.awarded} Season XP.` : "";
 
+  if (activeMode === "king-of-the-ring") {
+    const runBefore = kingOfTheRingState(profile).activeRun;
+    const rewardSetId = isPlayerReleasedSetId(state.players[HUMAN].superstar.setId) ? state.players[HUMAN].superstar.setId : "summerslam-series-1";
+    const outcome = recordKingOfTheRingMatch(profile, result);
+    const run = kingOfTheRingState(profile).activeRun;
+    if (outcome.status === "advance") message = `${KING_OF_THE_RING_ROUNDS[run.stage - 1]} won! One step closer to the crown. Next: ${KING_OF_THE_RING_ROUNDS[run.stage]}.`;
+    else if (outcome.status === "eliminated") message = `Eliminated from King of the Ring. One loss ends the tournament — enter a new bracket.`;
+    else if (outcome.status === "cleared") { grantBooster(profile, 1, rewardSetId); message = `KING OF THE RING! ${state.players[HUMAN].superstar.name} won three straight matches and earned +1 ${sets[rewardSetId]?.displayName ?? rewardSetId} booster.`; }
+    message += seasonXpText;
+    refreshCareerAchievements(profile);
+    saveProfile(profile);
+    return;
+  }
+
   if (activeMode === "championship") {
     const runBefore = championshipRoadState(profile).activeRun;
     const rewardSetId = runBefore?.setId ?? "summerslam-series-1";
@@ -2962,7 +3018,7 @@ function handleCompletedMatch() {
 
   if (activeMode !== "ladder") {
     if (state.winner === HUMAN) {
-      const rewardSetId = state.players[HUMAN].superstar.setId ?? "summerslam-series-1";
+      const rewardSetId = isPlayerReleasedSetId(state.players[HUMAN].superstar.setId) ? state.players[HUMAN].superstar.setId : "summerslam-series-1";
       grantBooster(profile, 1, rewardSetId);
       message += ` Victory reward: +1 ${sets[rewardSetId]?.displayName ?? rewardSetId} booster.`;
     }
@@ -2972,15 +3028,12 @@ function handleCompletedMatch() {
     return;
   }
 
-  const ladderRunBefore = ladderState(profile).activeRun;
-  const ladderRewardSetId = ladderRunBefore?.setId ?? "summerslam-series-1";
-  if (result === "win") grantBooster(profile, 1, ladderRewardSetId);
-  const outcome = recordLadderMatch(profile, result);
+  const outcome = recordLadderMatch(profile, result, new Date());
   const run = ladderState(profile).activeRun;
-  if (outcome.status === "advance") message = `Level cleared! +1 booster. ${run.lives} lives remain. Return to Climb the Ladder for level ${run.rung + 1}.`;
+  if (outcome.status === "advance") message = `Level cleared! ${run.lives} lives remain. Return to Climb the Ladder for Level ${run.rung + 1}.`;
   else if (outcome.status === "retry" && result === "loss") message = `Defeat. One life lost — ${run.lives} remaining. Return to Climb the Ladder to retry this level.`;
   else if (outcome.status === "failed") message = `Run ended. All three lives are gone — start again from level 1.`;
-  else if (outcome.status === "cleared") message = `CLIMB THE LADDER CLEARED! +1 booster for the final win and a Completion Pack has been awarded.`;
+  else if (outcome.status === "cleared") message = `CLIMB THE LADDER CLEARED! Today’s 8-Superstar tower is complete and a Completion Pack has been awarded.`;
   message += seasonXpText;
   refreshCareerAchievements(profile);
   saveProfile(profile);
@@ -3043,16 +3096,30 @@ function renderMatchResults() {
   const finish = (state.finish?.type ?? "match").replaceAll("_", " ").toUpperCase();
   const humanStar = state.players[HUMAN].superstar;
   const isLiveEvent = activeMode === "live-event";
+  const isKingOfTheRing = activeMode === "king-of-the-ring";
+  const isLadder = activeMode === "ladder";
   const liveEntry = isLiveEvent && activeLiveEventTowerKey ? liveEventTowerState(profile, activeLiveEventTowerKey, new Date()) : null;
   const liveTower = liveEntry?.tower ?? null;
   const liveRun = liveEntry?.state?.activeRun ?? null;
-  const rewardSetId = isLiveEvent ? (liveRun?.rewardSetId ?? liveTower?.event.rewardSetId ?? "summerslam-series-1") : (humanStar.setId ?? "summerslam-series-1");
+  const rewardSetId = isLiveEvent ? (liveRun?.rewardSetId ?? liveTower?.event.rewardSetId ?? "summerslam-series-1") : (isPlayerReleasedSetId(humanStar.setId) ? humanStar.setId : "summerslam-series-1");
   const rewardName = sets[rewardSetId]?.displayName ?? rewardSetId;
   const liveFinalClear = isLiveEvent && humanWon && liveEntry?.state?.cleared && liveRun?.status === "cleared";
   let rewardLine = humanWon ? `1 × ${rewardName} Booster` : "Match progression recorded";
   let rewardMarkup = humanWon ? `<div class="results-pack-reward">${physicalBoosterPackMarkup({setId:rewardSetId,title:sets[rewardSetId]?.name ?? "WWE LEGACY",series:"SERIES 1",subtitle:"MATCH REWARD",extraClass:"results-booster"})}<strong>${rewardLine}</strong></div>` : `<strong>${rewardLine}</strong>`;
   let showRewardButton = humanWon;
-  if (isLiveEvent) {
+  if (isKingOfTheRing) {
+    const kotrRun = kingOfTheRingState(profile).activeRun;
+    const tournamentWon = humanWon && kotrRun?.status === "cleared";
+    rewardLine = tournamentWon ? `1 × ${rewardName} Booster · Tournament Champion` : humanWon ? `${KING_OF_THE_RING_ROUNDS[Math.max(0,(kotrRun?.stage ?? 1)-1)]} cleared · no round reward` : "Eliminated · enter a new tournament";
+    rewardMarkup = tournamentWon ? `<div class="results-pack-reward">${physicalBoosterPackMarkup({setId:rewardSetId,title:sets[rewardSetId]?.name ?? "WWE LEGACY",series:"SERIES 1",subtitle:"KING OF THE RING WINNER",extraClass:"results-booster"})}<strong>${rewardLine}</strong></div>` : `<strong>${rewardLine}</strong>`;
+    showRewardButton = tournamentWon;
+  } else if (isLadder) {
+    const ladderRun = ladderState(profile,new Date()).activeRun;
+    const ladderCleared = humanWon && ladderRun?.status === "cleared";
+    rewardLine = ladderCleared ? "Ladder Completion Pack awarded" : humanWon ? `Level ${ladderRun?.rung ?? 0}/${LADDER_LENGTH} cleared · no level reward` : `${ladderRun?.lives ?? 0} lives remaining`;
+    rewardMarkup = ladderCleared ? `<div class="results-pack-reward">${physicalBoosterPackMarkup({setId:"summerslam-series-1",title:"REWARD",series:"CLIMB THE LADDER",subtitle:"COMPLETION PACK",extraClass:"results-booster"})}<strong>${rewardLine}</strong></div>` : `<strong>${rewardLine}</strong>`;
+    showRewardButton = ladderCleared;
+  } else if (isLiveEvent) {
     if (humanWon && liveFinalClear) {
       rewardLine = `+${liveTower?.winUp ?? LIVE_EVENT_WIN_UP} UP · ${liveTower?.clearBoosters ?? 1} × ${rewardName} Booster`;
       rewardMarkup = `<div class="results-pack-reward">${physicalBoosterPackMarkup({setId:rewardSetId,title:"REWARD",series:liveTower?.cadenceLabel ?? "LIVE EVENT",subtitle:"COMPLETION PACK",extraClass:"results-booster"})}<strong>${rewardLine}</strong></div>`;
@@ -3067,7 +3134,7 @@ function renderMatchResults() {
       showRewardButton = false;
     }
   }
-  const continueLabel = activeMode === "ladder" ? "RETURN TO LADDER" : activeMode === "championship" ? "CHAMPIONSHIP ROAD" : isLiveEvent ? "RETURN TO TOWER" : "CONTINUE";
+  const continueLabel = activeMode === "ladder" ? "RETURN TO CHALLENGES" : activeMode === "king-of-the-ring" ? "KING OF THE RING" : activeMode === "championship" ? "CHAMPIONSHIP ROAD" : isLiveEvent ? "RETURN TO TOWER" : "CONTINUE";
   return `<section class="match-results-screen ${humanWon ? "victory" : "defeat"}"><div class="results-aura"></div><span class="results-kicker">${isLiveEvent ? (liveTower?.cadenceLabel ?? "LIVE EVENT") : "MATCH COMPLETE"}</span><h1>${humanWon ? "VICTORY" : "DEFEAT"}</h1><div class="results-star results-winning-card">${(()=>{const sid=state.winner?state.players[state.winner].superstar.id:humanStar.id;const c=superstarCollectibleFor(sid);return c?collectibleCardMarkup(c,{extraClass:"results-superstar-card"}):portraitMarkup(sid,winnerName);})()}</div><h2>${winnerName}</h2>${state.winner ? `<p>def. ${nameFor(loserId)} · ${finish} · TURN ${state.turnNumber}</p>` : `<p>${finish} · TURN ${state.turnNumber}</p>`}<section class="results-rewards"><span>MATCH REWARDS</span>${rewardMarkup}<small>${message}</small></section><div class="results-actions">${showRewardButton ? `<button id="results-reward" class="start-match">VIEW REWARDS</button>` : ""}<button id="results-continue" class="nav-button ${activeMode === "championship" ? "championship-result-cta" : ""}">${continueLabel}</button>${activeMode === "exhibition" ? '<button id="results-rematch" class="nav-button">REMATCH</button>' : ""}</div></section>`;
 }
 
@@ -3087,7 +3154,7 @@ function render() {
     root.innerHTML = renderMatchResults();
     showTierUpCelebration();
     $("#results-reward")?.addEventListener("click", showBoosters);
-    $("#results-continue")?.addEventListener("click", activeMode === "ladder" ? showLadder : activeMode === "championship" ? showChampionship : activeMode === "live-event" ? (() => activeLiveEventTowerKey ? showLiveEventTower(activeLiveEventTowerKey) : showLiveEvents()) : showMainMenu);
+    $("#results-continue")?.addEventListener("click", activeMode === "ladder" ? showLadder : activeMode === "king-of-the-ring" ? showKingOfTheRing : activeMode === "championship" ? showChampionship : activeMode === "live-event" ? (() => activeLiveEventTowerKey ? showLiveEventTower(activeLiveEventTowerKey) : showLiveEvents()) : showMainMenu);
     $("#results-rematch")?.addEventListener("click", restartMatch);
     return;
   }
@@ -3116,7 +3183,7 @@ function render() {
   $("#pass-action")?.addEventListener("click", passAction); $("#attempt-pin")?.addEventListener("click", attemptPin);
   $("#auto-counter-action")?.addEventListener("click", beginAutoCounter); $("#cancel-auto-counter")?.addEventListener("click", cancelAutoCounter); $("#confirm-auto-counter")?.addEventListener("click", confirmAutoCounter);
   $("#return-ring")?.addEventListener("click", returnToRing); $("#follow-outside")?.addEventListener("click", followOutside);
-  $("#reset-match")?.addEventListener("click", restartMatch); $("#change-matchup")?.addEventListener("click", activeMode === "ladder" ? showLadder : activeMode === "championship" ? showChampionship : activeMode === "live-event" ? (() => activeLiveEventTowerKey ? showLiveEventTower(activeLiveEventTowerKey) : showLiveEvents()) : showSetup); $("#browse-main-menu")?.addEventListener("click", showMainMenu); $("#ladder-hub")?.addEventListener("click", showLadder); $("#championship-hub")?.addEventListener("click", showChampionship); $("#live-event-hub")?.addEventListener("click", showLiveEvents); $("#browse-collection")?.addEventListener("click", showCollection); $("#browse-boosters")?.addEventListener("click", showBoosters); $("#browse-challenges")?.addEventListener("click", showChallenges); $("#browse-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1)); $("#release-submission")?.addEventListener("click", releaseSubmission);
+  $("#reset-match")?.addEventListener("click", restartMatch); $("#change-matchup")?.addEventListener("click", activeMode === "ladder" ? showLadder : activeMode === "king-of-the-ring" ? showKingOfTheRing : activeMode === "championship" ? showChampionship : activeMode === "live-event" ? (() => activeLiveEventTowerKey ? showLiveEventTower(activeLiveEventTowerKey) : showLiveEvents()) : showSetup); $("#browse-main-menu")?.addEventListener("click", showMainMenu); $("#ladder-hub")?.addEventListener("click", showLadder); $("#kotr-hub")?.addEventListener("click", showKingOfTheRing); $("#championship-hub")?.addEventListener("click", showChampionship); $("#live-event-hub")?.addEventListener("click", showLiveEvents); $("#browse-collection")?.addEventListener("click", showCollection); $("#browse-boosters")?.addEventListener("click", showBoosters); $("#browse-challenges")?.addEventListener("click", showChallenges); $("#browse-decks")?.addEventListener("click", () => showDeckBuilder(selection.p1)); $("#release-submission")?.addEventListener("click", releaseSubmission);
   root.querySelectorAll("[data-ditch]").forEach(btn => btn.addEventListener("click", () => maintainSubmission(Number(btn.dataset.ditch))));
 }
 
@@ -3138,6 +3205,6 @@ document.querySelector("#chrome-home")?.addEventListener("click", showMainMenu);
 document.querySelector("#chrome-season")?.addEventListener("click", showSeasons);
 document.querySelector("#chrome-packs")?.addEventListener("click", showBoosters);
 
-if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "rules") renderRules(); else if (screen === "boosters") renderBoosters(); else if (screen === "store") renderStore(); else if (screen === "catalogue") renderCardCatalogue(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "live-events") renderLiveEvents(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
+if (screen === "splash") renderSplash(); else if (screen === "starter") renderStarter(); else if (screen === "menu") renderMainMenu(); else if (screen === "play-menu") renderPlayMenu(); else if (screen === "profile") renderProfile(); else if (screen === "rules") renderRules(); else if (screen === "boosters") renderBoosters(); else if (screen === "store") renderStore(); else if (screen === "catalogue") renderCardCatalogue(); else if (screen === "king-of-the-ring") renderKingOfTheRing(); else if (screen === "ladder") renderLadder(); else if (screen === "championship") renderChampionship(); else if (screen === "live-events") renderLiveEvents(); else if (screen === "challenges") renderChallenges(); else if (screen === "seasons") renderSeasons(); else if (screen === "deck-builder") renderDeckBuilder(); else renderSetup();
 
 setInterval(refreshSeasonClocks, 1000);

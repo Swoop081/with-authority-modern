@@ -1,5 +1,5 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.19";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.19";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.22";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.22";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -15,7 +15,7 @@ export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1",
 
 // Season 1 prestige chase: The Rock — Final Boss is assembled across the road
 // across a 100-tier road. Repeatable Rock cards are earned one copy at a time
-// up to the normal five-copy collection cap; his one-off Support, Special and
+// up to the normal five-copy collection cap; his one-off Support, Action and
 // Entrance are spaced between them. Tier 100 is the Foil Superstar identity.
 export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
   5:   { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
@@ -24,7 +24,7 @@ export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
   20:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
   25:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
   30:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  35:  { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "special", label: "SPECIAL" },
+  35:  { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "action", label: "ACTION" },
   40:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
   45:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
   50:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },

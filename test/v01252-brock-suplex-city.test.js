@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.19";
-import { superstars } from "../js/data/superstars.js?v=0.13.19";
-import { decks } from "../js/data/decks.js?v=0.13.19";
-import { evaluateDeckHealth } from "../js/data/deck-health.js?v=0.13.19";
-import { canPlaySpecial, moveEligibility } from "../js/engine/rules.js?v=0.13.19";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.19";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.22";
+import { superstars } from "../js/data/superstars.js?v=0.13.22";
+import { decks } from "../js/data/decks.js?v=0.13.22";
+import { evaluateDeckHealth } from "../js/data/deck-health.js?v=0.13.22";
+import { canPlaySpecial, moveEligibility } from "../js/engine/rules.js?v=0.13.22";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.22";
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const byName=name=>allGameplayCards.find(c=>c.name===name);
@@ -64,7 +64,7 @@ test("v0.12.52 My Name Is Paul Heyman tutors/discounts F-5 and does not consume 
   assert.equal(p.namedDiscount['F-5'],2);
   assert.equal(moveEligibility(s,'p1',p.hand.find(c=>c.id===f5.id)).effectiveCost,8);
   assert.ok(p.usedSpecialIds.includes(heyman.id));
-  assert.equal(p.specialUsed,true,'legacy coarse flag still records that a Special was used');
+  assert.equal(p.specialUsed,true,'legacy coarse flag still records that a triggered Action was used');
 
   const hp=p.hp, incoming={...byName('Powerbomb'),damage:10};
   s.phase='RESOLVE_MOVE'; s.playerInControl='p2'; s.proposedMove={attackerId:'p2',defenderId:'p1',card:incoming};

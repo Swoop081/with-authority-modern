@@ -1,8 +1,8 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.19";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.19";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.19";
-import { sets } from "./sets.js?v=0.13.19";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.19";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.22";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.22";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.22";
+import { sets } from "./sets.js?v=0.13.22";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.22";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -48,16 +48,17 @@ function rarityFirstPick(pool, rng = Math.random) {
   return bucket[Math.min(bucket.length - 1, Math.floor(rng() * bucket.length))];
 }
 
-function superstarPity(profile, setId) {
-  profile.packsSinceSuperstarUnlockBySet ??= {};
-  return Math.max(0, Number(profile.packsSinceSuperstarUnlockBySet[setId]) || 0);
+function superstarPity(profile) {
+  return Math.max(0, Number(profile.packsSinceSuperstarUnlock) || 0);
 }
 
-function recordSuperstarChase(profile, setId, hadAvailableSuperstar, hit) {
-  profile.packsSinceSuperstarUnlockBySet ??= {};
-  if (!hadAvailableSuperstar) profile.packsSinceSuperstarUnlockBySet[setId] = 0;
-  else profile.packsSinceSuperstarUnlockBySet[setId] = hit ? 0 : Math.min(SUPERSTAR_PITY_PACKS - 1, superstarPity(profile, setId) + 1);
-  profile.packsSinceSuperstarUnlock = hit ? 0 : Math.max(0, Number(profile.packsSinceSuperstarUnlock) || 0) + 1;
+function recordSuperstarChase(profile, hit) {
+  // One global pity track spans every eligible booster set. A Superstar hit
+  // clears the consecutive-miss count; the next opened pack begins the new
+  // cycle at Pack 1. If pity is armed while the current set is complete, the
+  // miss count keeps climbing so the guarantee remains armed for the next pack
+  // belonging to a set that still has an unowned Superstar.
+  profile.packsSinceSuperstarUnlock = hit ? 0 : superstarPity(profile) + 1;
 }
 
 function normalizeArgs(rngOrSetId, maybeSetId) {
@@ -81,10 +82,15 @@ function buildPack(profile, rng, setId, now = new Date()) {
   if (!base.length) throw new Error("No active cards for this set");
 
   // Superstar cards are a separate pack-level chase. They never distort the
-  // normal Common/Uncommon/Rare/Very Rare slot distribution.
+  // normal Common/Uncommon/Rare/Very Rare slot distribution. Natural chase is
+  // 2% on every pack whose set still has an unowned Superstar. Pity is global:
+  // after 100 consecutive packs without a Superstar, the next pack from a set
+  // with an unowned Superstar guarantees one. Complete-set packs do not consume
+  // or reset the armed guarantee; they simply advance the global miss count.
   const unownedSuperstars = base.filter(card => card.kind === "superstar" && underOwnershipCap(profile, card));
-  const pityBefore = superstarPity(profile, setId);
-  const superstarHit = unownedSuperstars.length > 0 && (pityBefore >= SUPERSTAR_PITY_PACKS - 1 || rng() < SUPERSTAR_CHASE_CHANCE);
+  const pityBefore = superstarPity(profile);
+  const pityArmed = pityBefore >= SUPERSTAR_PITY_PACKS;
+  const superstarHit = unownedSuperstars.length > 0 && (pityArmed || rng() < SUPERSTAR_CHASE_CHANCE);
   const superstarCard = superstarHit
     ? unownedSuperstars[Math.min(unownedSuperstars.length - 1, Math.floor(rng() * unownedSuperstars.length))]
     : null;
@@ -96,7 +102,7 @@ function buildPack(profile, rng, setId, now = new Date()) {
   let pendingSuperstarUnlockId = null;
   // A five-card pack may contain at most one 4★ Very Rare. The Superstar
   // chase counts toward this ceiling so a chase Superstar cannot stack with
-  // additional Very Rare Finishers, Specials or Entrances in the same pack.
+  // additional Very Rare Finishers, Actions or Entrances in the same pack.
   let veryRarePulls = superstarCard?.rarity === 4 ? 1 : 0;
 
   for (let i = 0; i < BOOSTER_SIZE; i += 1) {
@@ -149,7 +155,7 @@ function buildPack(profile, rng, setId, now = new Date()) {
   }
 
   if (pendingSuperstarUnlockId) grantSuperstarUnlockPackage(profile, pendingSuperstarUnlockId);
-  recordSuperstarChase(profile, setId, unownedSuperstars.length > 0, superstarAdded);
+  recordSuperstarChase(profile, superstarAdded);
   return pack;
 }
 

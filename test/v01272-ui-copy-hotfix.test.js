@@ -16,7 +16,7 @@ function between(source, start, end) {
 }
 
 test('v0.12.72 renames Electric Chair Facebuster to Electric Chair Drop without changing identity', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.19');
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.22');
   const card = allGameplayCards.find(c => c.id === 'rhea-ripley-electric-chair-facebuster');
   assert.ok(card);
   assert.equal(card.name, 'Electric Chair Drop');
@@ -44,7 +44,8 @@ test('v0.12.72 Climb the Ladder uses Level wording everywhere player-facing', ()
   assert.doesNotMatch(challenges, /Clear a Climb the Ladder rung/);
   assert.match(challenges, /Clear 4 Ladder levels/);
   assert.doesNotMatch(challenges, /Ladder rungs/);
-  assert.match(app, /Level cleared! \+1 booster/);
+  assert.match(app, /Level cleared! \${run\.lives} lives remain/);
+  assert.doesNotMatch(app, /Level cleared! \+1 booster/);
   assert.match(app, /retry this level/);
   assert.match(app, /start again from level 1/);
 });

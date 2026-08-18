@@ -2,15 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   createProfile, grantSuperstarUnlockPackage, addOwnedCard, totalOwnedCopies, migrateProfile
-} from '../js/data/profile.js?v=0.13.19';
-import { decks } from '../js/data/decks.js?v=0.13.19';
-import { superstars } from '../js/data/superstars.js?v=0.13.19';
-import { collectionCards } from '../js/data/collection.js?v=0.13.19';
+} from '../js/data/profile.js?v=0.13.22';
+import { decks } from '../js/data/decks.js?v=0.13.22';
+import { superstars } from '../js/data/superstars.js?v=0.13.22';
+import { collectionCards } from '../js/data/collection.js?v=0.13.22';
 import {
   buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedDeckDraft, selectedEntranceId
-} from '../js/data/deck-builder.js?v=0.13.19';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.19';
-import { SUPERSTAR_CHASE_CHANCE, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=0.13.19';
+} from '../js/data/deck-builder.js?v=0.13.22';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.22';
+import { SUPERSTAR_CHASE_CHANCE, SUPERSTAR_PITY_PACKS } from '../js/data/boosters.js?v=0.13.22';
 
 const sid = 'kevin-owens';
 const idCount = (draft,id) => draft.filter(entry => (entry.id ?? entry) === id).length;
@@ -44,7 +44,7 @@ test('v0.13.19 secondary Superstar unlock grants only one Finisher, one Trademar
   assert.equal(totalOwnedCopies(profile,'kevin-owens-stunner'),1,'one KO Finisher is granted');
   assert.equal(totalOwnedCopies(profile,'pop-up-powerbomb'),1,'one KO Trademark is granted');
   assert.equal(totalOwnedCopies(profile,'kevin-owens-package-piledriver'),0,'other exclusive signature remains collectible');
-  assert.equal(totalOwnedCopies(profile,'special-kevin-owens'),0,'Special is not silently treated as an Action grant');
+  assert.equal(totalOwnedCopies(profile,'special-kevin-owens'),1,'Welcome to the KO Show is now Kevin Owens’ single granted Action');
   assert.equal(totalOwnedCopies(profile,'entrance-kevin-owens'),0,'Superstar Entrance remains collectible');
   assert.equal(profile.savedDecks[sid],undefined,'secondary unlock does not manufacture a 60-page deck');
   assert.equal(selectedEntranceId(profile,sid),'entrance-amazing');
@@ -138,7 +138,7 @@ test('v0.13.19 migration never claws back v0.13.18 cards or a complete saved dec
   assert.equal(migrated.savedDecks[sid].length,60);
 });
 
-test('v0.13.19 Superstar chase is 2 percent with a 100-pack hard pity', () => {
+test('v0.13.21 Superstar chase remains 2 percent with a 100-pack global hard pity', () => {
   assert.equal(SUPERSTAR_CHASE_CHANCE,.02);
   assert.equal(SUPERSTAR_PITY_PACKS,100);
 });

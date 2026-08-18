@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.19';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.19';
-import { superstars } from '../js/data/superstars.js?v=0.13.19';
-import { decks } from '../js/data/decks.js?v=0.13.19';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.19';
-import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=0.13.19';
-import { evaluateDeckHealth } from '../js/data/deck-health.js?v=0.13.19';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.22';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.22';
+import { superstars } from '../js/data/superstars.js?v=0.13.22';
+import { decks } from '../js/data/decks.js?v=0.13.22';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.22';
+import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=0.13.22';
+import { evaluateDeckHealth } from '../js/data/deck-health.js?v=0.13.22';
 
 const cards = new Map(allGameplayCards.map(c => [c.id, c]));
 const stars = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -151,13 +151,14 @@ test('v0.13.0 every authored roster deck remains a legal 60-page deck after sign
   }
 });
 
-test('v0.13.0 player-facing taxonomy presents legacy timed Specials as Actions', () => {
+test('v0.13.20 player-facing taxonomy has one Action card type for normal and triggered Actions', () => {
   const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
   const builder = fs.readFileSync(new URL('../js/data/deck-builder.js', import.meta.url), 'utf8');
+  const content = fs.readFileSync(new URL('../js/data/content.js', import.meta.url), 'utf8');
   const rules = fs.readFileSync(new URL('../js/data/game-rules.js', import.meta.url), 'utf8');
-  assert.match(app, /card\.kind === "special" \? "ACTION"/);
+  assert.doesNotMatch(content, /"kind": "special"/);
   assert.match(app, /\? "PLAY ACTION" : "Action trigger not available"/);
-  assert.doesNotMatch(app, /Actions\/Specials|PLAY SPECIAL/);
+  assert.doesNotMatch(app, /Actions\/Specials|PLAY SPECIAL|kind === "special"/);
   assert.match(builder, /\{ id: "utility", label: "Actions" \}/);
   assert.doesNotMatch(rules, /\["Specials"/);
   assert.match(rules, /reactive or one-use Actions/);

@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.19';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.19';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.19';
-import { superstars } from '../js/data/superstars.js?v=0.13.19';
-import { decks } from '../js/data/decks.js?v=0.13.19';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.22';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.22';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.22';
+import { superstars } from '../js/data/superstars.js?v=0.13.22';
+import { decks } from '../js/data/decks.js?v=0.13.22';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const rng=()=>0.42;
@@ -63,7 +63,7 @@ test('v0.12.42 current weapon and environment attacks carry persistent body-part
   }
 });
 
-test('v0.12.42 weapon Special body damage is applied persistently at runtime',()=>{
+test('v0.12.42 weapon Action body damage is applied persistently at runtime',()=>{
   const logan=superstars['logan-paul']??stars.find(x=>x.id==='logan-paul');
   const opp=stars.find(x=>x.id!==logan.id);
   const game=new MatchEngine({p1:logan,p2:opp,decks,rng});const s=game.state(),p=s.players.p1,d=s.players.p2;

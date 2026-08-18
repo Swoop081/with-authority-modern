@@ -1,22 +1,24 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.19 — Superstar Unlock Progression + Chase Rate Pass**.
+Current working build: **v0.13.22 — King of the Ring + Daily Ladder Challenge Pass**.
 
-A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Event towers, Ladder and Championship Road.
+A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Event towers, King of the Ring, the Daily Ladder Challenge and Championship Road.
 
 ## Current build
-- One canonical release calendar now controls player availability across Packs, Store, Catalogue, Exhibition matchmaking, Season booster rewards, Live Event rewards and Superstar visibility.
-- Launch sets remain live from install. Future authored sets unlock automatically at local midnight on their configured release date.
-- Season 1 schedule: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)** and **SmackDown — Series 1 (31 Oct 2026)**.
-- Survivor Series — Series 1 is also calendar-gated for **28 Nov 2026**; Season-exclusive Goldberg remains separately gated.
-- RAW remains available to internal certification before September 5 while staying hidden from players until its release day.
-- Daily Store rotation expands only with sets that are actually released. Unreleased sets can never become the active Store set.
-- Monday RAW and Saturday SmackDown Live Event rewards automatically switch to their branded subset only after that subset releases; before release they use a live fallback pack.
-- The 90-day economy simulator now follows the real release calendar rather than holding the launch pool static.
-- Economy values remain locked at **2,500 UP per Store Superstar**, **300 UP per Store booster**, **10 UP excess Normal**, and **20 UP excess Foil**.
+- **King of the Ring** replaces standalone Climb the Ladder on the Play screen: an 8-Superstar single-elimination bracket with Quarterfinal, Semifinal and Final; one loss eliminates the run and winning the tournament awards one standard booster.
+- **Climb the Ladder** now lives in Challenges as a daily 8-opponent tower with 3 lives. Losing all 3 restarts the run at Level 1 against the same daily field; local midnight generates a fresh field.
+- Daily Ladder awards its existing completion reward only for clearing all 8 levels, not per level, and can be completed once per day. Old standalone Ladder active runs retire on upgrade while historical clears and already-earned rewards remain intact.
+- **Special is retired as a collectible card type.** All 52 former Special cards are now Actions while keeping their exact existing reaction/trigger timing and once-per-match mechanics.
+- The live gameplay pool contains **69 Actions and 0 Special-kind cards**. Legacy `special-*` card IDs remain intact for save/collector compatibility.
+- Deck Lab, Recommended Build, Optimize Owned, Deck Assistance, Collection/Catalogue and Card Art Studio now use one canonical **Actions** category.
+- Secondary Superstar unlocks remain lean: Superstar identity + at most one authored Finisher, one Trademark and one Action; no shared filler or manufactured 60-page deck is granted.
+- Deck Lab builds toward each authored recommendation using only cards already owned and recommends missing authored upgrades as they are collected.
+- Superstar chase remains **2% per eligible pack** with **one global 100-miss pity track across all packs**. After 100 misses, pity stays armed until a pack from a set with an unowned Superstar is opened; that set supplies the guaranteed Superstar.
+- The first chosen Superstar remains the onboarding exception and receives the complete authored 60-page deck.
 - My Legacy Save & Backup remains one stable `WWE-Legacy-Save.json` file with validation, import confirmation and one-step rollback.
-- Secondary Superstar unlocks are now lean: Superstar identity + at most one authored Finisher, one Trademark and one Action; no shared filler or manufactured 60-page deck is granted.
-- Deck Lab builds toward each authored recommendation using only cards already owned and continues recommending missing authored upgrades as they are collected.
-- Superstar chase is now **2% per eligible pack** with a **100-pack per-set hard pity** while an unowned Superstar remains.
+- One canonical release calendar controls player availability across Packs, Store, Catalogue, Exhibition matchmaking, Season booster rewards, Live Event rewards and Superstar visibility.
+- Season 1 schedule: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
+- RAW remains available to internal certification before release while staying hidden from players until its configured release day.
+- Economy values remain locked at **2,500 UP per Store Superstar**, **300 UP per Store booster**, **10 UP excess Normal**, and **20 UP excess Foil**.
 
-See `RELEASE-NOTES-v0.13.19.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.22.md` and `BUILD-CERTIFICATION.md`.

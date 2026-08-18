@@ -42,7 +42,6 @@ This is the original workflow: the saved WebP is the full finished card front. C
 - Superstars: `assets/cards/art/custom/superstars/<superstar-id>.webp`
 - Moves: `assets/cards/art/custom/moves/<card-id>.webp`
 - Entrances: `assets/cards/art/custom/entrances/<card-id>.webp`
-- Specials: `assets/cards/art/custom/specials/<card-id>.webp`
 - Managers: `assets/cards/art/custom/managers/<card-id>.webp`
 - Actions: `assets/cards/art/custom/actions/<card-id>.webp`
 - Supports: `assets/cards/art/custom/supports/<card-id>.webp`

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.19";
+import { enrichCounterState } from "./counter-states.js?v=0.13.22";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -4577,7 +4577,7 @@ export const allGameplayCards = [
   {
     "id": "shoulder-up",
     "name": "Shoulder Up",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 1,
     "pinEscape": true,
@@ -5109,7 +5109,7 @@ export const allGameplayCards = [
   {
     "id": "special-cody-rhodes",
     "name": "Finish the Story",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "cody-rhodes",
@@ -5128,7 +5128,7 @@ export const allGameplayCards = [
   {
     "id": "special-roman-reigns",
     "name": "Tribal Chief",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "roman-reigns",
@@ -5140,7 +5140,7 @@ export const allGameplayCards = [
   {
     "id": "special-seth-rollins",
     "name": "The Visionary",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "seth-rollins",
@@ -5152,7 +5152,7 @@ export const allGameplayCards = [
   {
     "id": "special-cm-punk",
     "name": "Best in the World",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "cm-punk",
@@ -5164,7 +5164,7 @@ export const allGameplayCards = [
   {
     "id": "special-gunther",
     "name": "The Mat Is Sacred",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "gunther",
@@ -5177,7 +5177,7 @@ export const allGameplayCards = [
   {
     "id": "special-brock-lesnar",
     "name": "The Beast Incarnate",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "brock-lesnar",
@@ -5192,7 +5192,7 @@ export const allGameplayCards = [
   {
     "id": "special-brock-lesnar-paul-heyman",
     "name": "The Advocate’s Plan",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "brock-lesnar",
@@ -5207,7 +5207,7 @@ export const allGameplayCards = [
   {
     "id": "special-kevin-owens",
     "name": "Welcome to the KO Show",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "kevin-owens",
@@ -5219,7 +5219,7 @@ export const allGameplayCards = [
   {
     "id": "special-oba-femi",
     "name": "The Destroyer",
-    "kind": "special",
+    "kind": "action",
     "setId": "summerslam-series-1",
     "rarity": 4,
     "superstarId": "oba-femi",
@@ -5231,7 +5231,7 @@ export const allGameplayCards = [
   {
     "id": "special-stone-cold-steve-austin",
     "name": "Austin 3:16",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "stone-cold-steve-austin",
@@ -5244,7 +5244,7 @@ export const allGameplayCards = [
   {
     "id": "special-the-undertaker",
     "name": "The Deadman Rises",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "the-undertaker",
@@ -5257,7 +5257,7 @@ export const allGameplayCards = [
   {
     "id": "special-kane",
     "name": "Rise From the Flames",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "kane",
@@ -5270,7 +5270,7 @@ export const allGameplayCards = [
   {
     "id": "special-mankind",
     "name": "Mr. Socko",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "mankind",
@@ -5282,7 +5282,7 @@ export const allGameplayCards = [
   {
     "id": "special-hulk-hogan",
     "name": "Hulk Up",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "hulk-hogan",
@@ -5296,7 +5296,7 @@ export const allGameplayCards = [
   {
     "id": "special-ultimate-warrior",
     "name": "Shake the Ropes",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "ultimate-warrior",
@@ -5308,7 +5308,7 @@ export const allGameplayCards = [
   {
     "id": "special-randy-savage",
     "name": "Oh Yeah!",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "randy-savage",
@@ -5322,7 +5322,7 @@ export const allGameplayCards = [
   {
     "id": "special-andre-the-giant",
     "name": "Nobody Slams André",
-    "kind": "special",
+    "kind": "action",
     "setId": "hall-of-fame-series-1",
     "rarity": 4,
     "superstarId": "andre-the-giant",
@@ -5334,7 +5334,7 @@ export const allGameplayCards = [
   {
     "id": "special-rhea-ripley",
     "name": "Brutality",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "rhea-ripley",
@@ -5348,7 +5348,7 @@ export const allGameplayCards = [
   {
     "id": "special-becky-lynch",
     "name": "Tap or Snap",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "becky-lynch",
@@ -5362,7 +5362,7 @@ export const allGameplayCards = [
   {
     "id": "special-liv-morgan",
     "name": "Revenge Tour",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "liv-morgan",
@@ -5378,7 +5378,7 @@ export const allGameplayCards = [
   {
     "id": "special-bayley",
     "name": "Veteran Instincts",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "bayley",
@@ -5391,7 +5391,7 @@ export const allGameplayCards = [
   {
     "id": "special-charlotte-flair",
     "name": "Wooo!",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "charlotte-flair",
@@ -5406,7 +5406,7 @@ export const allGameplayCards = [
   {
     "id": "special-paige",
     "name": "This Is My House",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "paige",
@@ -5425,7 +5425,7 @@ export const allGameplayCards = [
   {
     "id": "special-stephanie-vaquer",
     "name": "Sin Piedad",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "stephanie-vaquer",
@@ -5440,7 +5440,7 @@ export const allGameplayCards = [
   {
     "id": "special-iyo-sky",
     "name": "Take Flight",
-    "kind": "special",
+    "kind": "action",
     "setId": "evolution-series-1",
     "rarity": 4,
     "superstarId": "iyo-sky",
@@ -5453,7 +5453,7 @@ export const allGameplayCards = [
   {
     "id": "special-the-rock",
     "name": "Bloodline Rules",
-    "kind": "special",
+    "kind": "action",
     "setId": "season-1-final-boss",
     "rarity": 4,
     "superstarId": "the-rock",
@@ -5681,7 +5681,7 @@ export const allGameplayCards = [
   {
     "id": "special-logan-paul",
     "name": "Brass Knuckles",
-    "kind": "special",
+    "kind": "action",
     "setId": "raw-series-1",
     "rarity": 4,
     "superstarId": "logan-paul",
@@ -5798,7 +5798,7 @@ export const allGameplayCards = [
   {
     "id": "special-sol-ruca",
     "name": "No Wipeout",
-    "kind": "special",
+    "kind": "action",
     "setId": "raw-series-1",
     "rarity": 4,
     "superstarId": "sol-ruca",
@@ -5883,7 +5883,7 @@ export const allGameplayCards = [
   {
     "id": "special-chad-gable",
     "name": "Shoosh!",
-    "kind": "special",
+    "kind": "action",
     "setId": "raw-series-1",
     "rarity": 4,
     "superstarId": "chad-gable",
@@ -5964,7 +5964,7 @@ export const allGameplayCards = [
   {
     "id": "special-raquel-rodriguez",
     "name": "Judgment Day Backup",
-    "kind": "special",
+    "kind": "action",
     "setId": "raw-series-1",
     "rarity": 4,
     "superstarId": "raquel-rodriguez",
@@ -6205,7 +6205,7 @@ export const allGameplayCards = [
   {
     "id": "special-rey-mysterio",
     "name": "Lucha Libre Legend",
-    "kind": "special",
+    "kind": "action",
     "setId": "worlds-collide-series-1",
     "rarity": 4,
     "superstarId": "rey-mysterio",
@@ -6341,7 +6341,7 @@ export const allGameplayCards = [
   {
     "id": "special-dominik-mysterio",
     "name": "Hammer in the Boot",
-    "kind": "special",
+    "kind": "action",
     "setId": "worlds-collide-series-1",
     "rarity": 4,
     "superstarId": "dominik-mysterio",
@@ -6516,7 +6516,7 @@ export const allGameplayCards = [
   {
     "id": "special-penta",
     "name": "Fearless Assault",
-    "kind": "special",
+    "kind": "action",
     "setId": "worlds-collide-series-1",
     "rarity": 4,
     "superstarId": "penta",
@@ -6596,7 +6596,7 @@ export const allGameplayCards = [
   {
     "id": "special-el-grande-americano",
     "name": "Steel Plate",
-    "kind": "special",
+    "kind": "action",
     "setId": "worlds-collide-series-1",
     "rarity": 4,
     "superstarId": "el-grande-americano",
@@ -6679,7 +6679,7 @@ export const allGameplayCards = [
   {
     "id": "special-jey-uso",
     "name": "YEET!",
-    "kind": "special",
+    "kind": "action",
     "setId": "money-in-the-bank-series-1",
     "rarity": 4,
     "superstarId": "jey-uso",
@@ -6785,7 +6785,7 @@ export const allGameplayCards = [
   {
     "id": "special-la-knight",
     "name": "YEAH!",
-    "kind": "special",
+    "kind": "action",
     "setId": "money-in-the-bank-series-1",
     "rarity": 4,
     "superstarId": "la-knight",
@@ -6919,7 +6919,7 @@ export const allGameplayCards = [
   {
     "id": "special-alexa-bliss",
     "name": "Mind Games",
-    "kind": "special",
+    "kind": "action",
     "setId": "money-in-the-bank-series-1",
     "rarity": 4,
     "superstarId": "alexa-bliss",
@@ -7034,7 +7034,7 @@ export const allGameplayCards = [
   {
     "id": "special-finn-balor",
     "name": "Bálor Club",
-    "kind": "special",
+    "kind": "action",
     "setId": "money-in-the-bank-series-1",
     "rarity": 4,
     "superstarId": "finn-balor",
@@ -7205,7 +7205,7 @@ export const allGameplayCards = [
   {
     "id": "special-danhausen",
     "name": "Jar of Teeth",
-    "kind": "special",
+    "kind": "action",
     "setId": "smackdown-series-1",
     "rarity": 4,
     "superstarId": "danhausen",
@@ -7373,7 +7373,7 @@ export const allGameplayCards = [
   {
     "id": "special-tiffany-stratton",
     "name": "Tiffany Epiphany",
-    "kind": "special",
+    "kind": "action",
     "setId": "smackdown-series-1",
     "rarity": 4,
     "superstarId": "tiffany-stratton",
@@ -7452,7 +7452,7 @@ export const allGameplayCards = [
   {
     "id": "special-chelsea-green",
     "name": "File a Complaint",
-    "kind": "special",
+    "kind": "action",
     "setId": "smackdown-series-1",
     "rarity": 4,
     "superstarId": "chelsea-green",
@@ -7549,7 +7549,7 @@ export const allGameplayCards = [
   {
     "id": "special-damian-priest",
     "name": "Last Rites",
-    "kind": "special",
+    "kind": "action",
     "setId": "smackdown-series-1",
     "rarity": 4,
     "superstarId": "damian-priest",
@@ -7817,7 +7817,7 @@ export const allGameplayCards = [
   {
     "id": "special-bron-breakker",
     "name": "Full Speed",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "bron-breakker",
@@ -8391,7 +8391,7 @@ export const allGameplayCards = [
   {
     "id": "special-drew-mcintyre",
     "name": "Claymore Countdown",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "drew-mcintyre",
@@ -8501,7 +8501,7 @@ export const allGameplayCards = [
   {
     "id": "special-randy-orton",
     "name": "Outta Nowhere",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "randy-orton",
@@ -8616,7 +8616,7 @@ export const allGameplayCards = [
   {
     "id": "special-sami-zayn",
     "name": "Never Say Die",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "sami-zayn",
@@ -8725,7 +8725,7 @@ export const allGameplayCards = [
   {
     "id": "special-jacob-fatu",
     "name": "Built Different",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "jacob-fatu",
@@ -8812,7 +8812,7 @@ export const allGameplayCards = [
   {
     "id": "special-solo-sikoa",
     "name": "Sole Survivor",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "solo-sikoa",
@@ -8863,7 +8863,7 @@ export const allGameplayCards = [
   {
     "id": "special-jade-cargill",
     "name": "Superhuman",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "jade-cargill",
@@ -8944,7 +8944,7 @@ export const allGameplayCards = [
   {
     "id": "special-nia-jax",
     "name": "Not Like Most",
-    "kind": "special",
+    "kind": "action",
     "setId": "survivor-series-series-1",
     "rarity": 4,
     "superstarId": "nia-jax",
@@ -9388,7 +9388,7 @@ export const allGameplayCards = [
   {
     "id": "special-goldberg",
     "name": "173–0",
-    "kind": "special",
+    "kind": "action",
     "setId": "season-2-whos-next",
     "rarity": 4,
     "superstarId": "goldberg",

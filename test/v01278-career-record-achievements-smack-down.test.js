@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, migrateProfile } from "../js/data/profile.js?v=0.13.19";
-import { CAREER_ACHIEVEMENTS, recordCareerMatch, refreshCareerAchievements } from "../js/data/career.js?v=0.13.19";
-import { collectionCards } from "../js/data/collection.js?v=0.13.19";
-import { decks } from "../js/data/decks.js?v=0.13.19";
-import { tierReward } from "../js/data/seasons.js?v=0.13.19";
+import { createProfile, migrateProfile } from "../js/data/profile.js?v=0.13.22";
+import { CAREER_ACHIEVEMENTS, recordCareerMatch, refreshCareerAchievements } from "../js/data/career.js?v=0.13.22";
+import { collectionCards } from "../js/data/collection.js?v=0.13.22";
+import { decks } from "../js/data/decks.js?v=0.13.22";
+import { tierReward } from "../js/data/seasons.js?v=0.13.22";
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 
@@ -23,7 +23,7 @@ test("v0.12.78 records total, Superstar, mode and finish W/L without mixing oppo
 
 test("v0.12.78 launches a persistent achievement set and unlocks career/mode milestones from real state", () => {
   const p = createProfile("roman-reigns");
-  assert.equal(CAREER_ACHIEVEMENTS.length, 14);
+  assert.equal(CAREER_ACHIEVEMENTS.length, 15);
   recordCareerMatch(p, { result: "win", superstarId: "roman-reigns", mode: "exhibition", finishType: "pin" });
   assert.ok(p.career.achievements["first-bell"]);
   assert.ok(p.career.achievements["winners-circle"]);

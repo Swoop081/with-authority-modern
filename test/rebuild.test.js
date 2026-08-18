@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.13.19";
-import { decks } from "../js/data/decks.js?v=0.13.19";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.19";
-import { collectionCards } from "../js/data/collection.js?v=0.13.19";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.19";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.19";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.19";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.19";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.19";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.19";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.19";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.19";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.19";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.19";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.19";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.19";
-import { healthZone } from "../js/engine/health.js?v=0.13.19";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.19";
+import { superstars } from "../js/data/superstars.js?v=0.13.22";
+import { decks } from "../js/data/decks.js?v=0.13.22";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.22";
+import { collectionCards } from "../js/data/collection.js?v=0.13.22";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.22";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.22";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.22";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.22";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.22";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.22";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.22";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.22";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.22";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.22";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.22";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.22";
+import { healthZone } from "../js/engine/health.js?v=0.13.22";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.22";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -114,7 +114,7 @@ test("0 HP does not cause an automatic knockout and Critical Exhaustion passes C
 
 
 
-test("Momentum refreshes after a connected Move, not after Specials or utility within the same turn",()=>{
+test("Momentum refreshes after a connected Move, not after triggered Actions or utility within the same turn",()=>{
   const p1=starById.get('roman-reigns') ?? stars[0], p2=starById.get('andre-the-giant') ?? stars[1];
   const g=new MatchEngine({p1,p2,decks,rng:rng(1162)}), s=g.state(), p=s.players.p1;
   const momentumA=allGameplayCards.find(c=>c.kind==='momentum'&&c.method==='strike');
@@ -129,11 +129,11 @@ test("Momentum refreshes after a connected Move, not after Specials or utility w
   assert.equal(g.playMomentum('p1',momentumA),true);
   assert.equal(canPlayMomentum(s,'p1',momentumB),false,'second Momentum cannot be played before a Move');
 
-  // Specials/utility do not create a fresh Momentum window.
-  const testSpecial={id:'test-special',name:'Test Special',kind:'special',special:{type:'test-special'}};
+  // Triggered Actions/utility do not create a fresh Momentum window.
+  const testSpecial={id:'test-special',name:'Test Triggered Action',kind:'action',special:{type:'test-special'}};
   p.hand.push(testSpecial);
   assert.ok(g._consumeSpecial('p1','test-special'));
-  assert.equal(canPlayMomentum(s,'p1',momentumB),false,'Special must not refresh Momentum');
+  assert.equal(canPlayMomentum(s,'p1',momentumB),false,'Triggered Action must not refresh Momentum');
   p.specialUsed=false;
 
   assert.equal(g.declareMove('p1',move),true);
@@ -268,7 +268,7 @@ test("A completely maxed five-card booster values the guaranteed Foil duplicate 
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.19");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.22");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);

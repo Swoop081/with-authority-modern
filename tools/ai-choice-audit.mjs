@@ -4,7 +4,7 @@ import { MatchEngine } from '../js/engine/MatchEngine.js';
 import { decisionOwner,cpuDecision,executeCpuDecision } from '../js/ai/WrestlingAI.js';
 import { counterEligibility } from '../js/engine/rules.js';
 function rng(seed){let x=seed>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};}
-function val(c){ if(!c)return 0; let v=0; if(c.kind==='special')v+=140; if(c.pinEscape||c.special?.type==='pinEscape')v+=120; if(c.finisher)v+=110; if(c.trademark)v+=55; if(c.kind==='move')v+=(c.damage??0)*3+(c.cost??0); if(c.kind==='momentum')v+=8; if(c.kind==='action')v+=25; if(c.kind==='support')v+=22; if(c.kind==='manager')v+=30; if(c.defensiveOnly)v-=25; const cov=(c.counterStates?.length??0)+(c.counterSubmissionTargets?.length??0)+(c.counters?.length??0)+(c.countersCardIds?.length??0); v+=cov*3; return v; }
+function val(c){ if(!c)return 0; let v=0; if(c.special)v+=140; if(c.pinEscape||c.special?.type==='pinEscape')v+=120; if(c.finisher)v+=110; if(c.trademark)v+=55; if(c.kind==='move')v+=(c.damage??0)*3+(c.cost??0); if(c.kind==='momentum')v+=8; if(c.kind==='action')v+=25; if(c.kind==='support')v+=22; if(c.kind==='manager')v+=30; if(c.defensiveOnly)v-=25; const cov=(c.counterStates?.length??0)+(c.counterSubmissionTargets?.length??0)+(c.counters?.length??0)+(c.countersCardIds?.length??0); v+=cov*3; return v; }
 const stars=Object.values(superstars);
 let counterWindows=0, multiLegal=0, chosenOffensiveWhenDefensive=0, chosenFinisherAvoidable=0, chosenTrademarkAvoidable=0, chosenValueGap=0;
 let subMaintains=0, subBadDitches=0, subFinisherDitches=0, subTrademarkDitches=0, subSpecialDitches=0;
@@ -35,7 +35,7 @@ for(let i=0;i<stars.length;i++)for(let j=0;j<stars.length;j++)if(i!==j){
     if(chosen && lowest && val(chosen)>=val(lowest)+30){subBadDitches++;byStar[p.superstar.id].subBad++}
     if(chosen?.finisher)subFinisherDitches++;
     if(chosen?.trademark)subTrademarkDitches++;
-    if(chosen?.kind==='special')subSpecialDitches++;
+    if(chosen?.special)subSpecialDitches++;
   }
   if(s.phase==='ACTION' && d.type==='move'){
     offensiveMovesPlayed++;

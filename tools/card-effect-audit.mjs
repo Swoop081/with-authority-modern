@@ -142,7 +142,7 @@ for (const card of cards) {
   if (card.special?.type) {
     checked.add(card.id);
     if (!handledSpecialTypes.has(card.special.type)) problem(card, "UNHANDLED_SPECIAL", card.special.type);
-    if (!rules) problem(card, "SPECIAL_TEXT", "Special/Action rules text is empty");
+    if (!rules) problem(card, "SPECIAL_TEXT", "Triggered Action rules text is empty");
   }
 }
 

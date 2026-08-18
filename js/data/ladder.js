@@ -1,56 +1,78 @@
-import { unlockSuperstar } from "./profile.js?v=0.13.19";
-import { superstars } from "./superstars.js?v=0.13.19";
+import { unlockSuperstar } from "./profile.js?v=0.13.22";
 
 export const LADDER_LIVES = 3;
+export const LADDER_LENGTH = 8;
 export const LADDER_SET_ID = "summerslam-series-1";
-export const LADDER_BRANCHES = {
-  modern: { id: "modern", label: "Current Era", setId: "summerslam-series-1", era: null, length: 8 },
-  "golden-era": { id: "golden-era", label: "Golden Era", setId: "hall-of-fame-series-1", era: "golden-era", length: 4 },
-  "attitude-era": { id: "attitude-era", label: "Attitude Era", setId: "hall-of-fame-series-1", era: "attitude-era", length: 4 },
-  "hall-of-fame": { id: "hall-of-fame", label: "Hall of Fame — Series 1", setId: "hall-of-fame-series-1", era: null, length: 8 },
-  evolution: { id: "evolution", label: "Evolution — Series 1", setId: "evolution-series-1", era: null, length: 8 }
-};
+// Retained for old-save/source compatibility only. The player-facing Ladder is now one daily challenge tower.
+export const LADDER_BRANCHES = Object.freeze({ daily: { id: "daily", label: "Daily Challenge", setId: LADDER_SET_ID, length: LADDER_LENGTH } });
 
-function ensure(profile) {
+function localDayKey(now = new Date()) {
+  const d = now instanceof Date ? now : new Date(now);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function ensure(profile, now = new Date()) {
   profile.ladder ??= { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, firstClearSuperstarPending: false };
-  profile.ladder.clearsByBranch ??= {};
-  profile.ladder.bestRungByBranch ??= {};
-  profile.ladder.completionPackCreditsBySet ??= {};
-  profile.ladder.completionPackQueue ??= [];
-  profile.ladder.firstClearSuperstarPendingBySet ??= {};
-  return profile.ladder;
+  const ladder = profile.ladder;
+  ladder.completionPackCreditsBySet ??= {};
+  ladder.completionPackQueue ??= [];
+  ladder.firstClearSuperstarPendingBySet ??= {};
+  const today = localDayKey(now);
+  if (!ladder.dailyKey) {
+    ladder.dailyKey = today;
+    ladder.dailyOpponents = [];
+    ladder.dailyCleared = false;
+    if (ladder.activeRun && !ladder.activeRun.dailyKey) ladder.activeRun = null;
+  }
+  ladder.dailyOpponents ??= [];
+  ladder.dailyCleared ??= false;
+  if (ladder.dailyKey !== today) {
+    ladder.dailyKey = today;
+    ladder.dailyOpponents = [];
+    ladder.dailyCleared = false;
+    ladder.activeRun = null;
+  }
+  return ladder;
 }
 function shuffle(values, rng = Math.random) {
   const out = [...values];
   for (let i = out.length - 1; i > 0; i -= 1) { const j = Math.floor(rng() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
   return out;
 }
-export function ladderState(profile) { return ensure(profile); }
-export function startLadderRun(profile, superstarId, opponentIds, rng = Math.random, branchId = "modern") {
-  const ladder = ensure(profile), branch = LADDER_BRANCHES[branchId] ?? LADDER_BRANCHES.modern;
-  const starById = Object.fromEntries(Object.values(superstars).map(s => [s.id, s]));
-  const eligible = opponentIds.filter(id => starById[id]?.setId === branch.setId && (!branch.era || starById[id]?.era === branch.era));
-  ladder.activeRun = { superstarId, branchId: branch.id, setId: branch.setId, opponents: shuffle(eligible, rng), rung: 0, lives: LADDER_LIVES, status: "active", startedAt: new Date().toISOString() };
+export function ladderState(profile, now = new Date()) { return ensure(profile, now); }
+export function startLadderRun(profile, superstarId, opponentIds, rng = Math.random, _branchId = "daily", now = new Date()) {
+  const ladder = ensure(profile, now);
+  if (ladder.dailyCleared) throw new Error("Today's Climb the Ladder challenge is already complete");
+  if (!Array.isArray(ladder.dailyOpponents) || ladder.dailyOpponents.length !== LADDER_LENGTH) {
+    const eligible = [...new Set(opponentIds)].filter(id => id && id !== superstarId);
+    if (eligible.length < LADDER_LENGTH) throw new Error("Not enough eligible Superstars for today's Ladder");
+    ladder.dailyOpponents = shuffle(eligible, rng).slice(0, LADDER_LENGTH);
+  }
+  ladder.activeRun = { superstarId, branchId: "daily", setId: LADDER_SET_ID, opponents: [...ladder.dailyOpponents], rung: 0, lives: LADDER_LIVES, status: "active", dailyKey: ladder.dailyKey, startedAt: new Date().toISOString() };
   return ladder.activeRun;
 }
-export function currentLadderOpponent(profile) { const run = ensure(profile).activeRun; return !run || run.status !== "active" ? null : run.opponents[run.rung] ?? null; }
-export function recordLadderMatch(profile, result) {
-  const ladder = ensure(profile), run = ladder.activeRun;
-  if (!run || run.status !== "active") throw new Error("No active Climb the Ladder run");
+export function currentLadderOpponent(profile, now = new Date()) { const run = ensure(profile, now).activeRun; return !run || run.status !== "active" ? null : run.opponents[run.rung] ?? null; }
+export function recordLadderMatch(profile, result, now = new Date()) {
+  const ladder = ensure(profile, now), run = ladder.activeRun;
+  if (!run || run.status !== "active") throw new Error("No active Climb the Ladder challenge");
   if (result === "loss") { run.lives -= 1; if (run.lives <= 0) { run.status = "failed"; return { status: "failed", run }; } return { status: "retry", run }; }
   if (result !== "win") throw new Error("Invalid ladder result");
-  run.rung += 1; ladder.bestRung = Math.max(ladder.bestRung ?? 0, run.rung); ladder.bestRungByBranch[run.branchId] = Math.max(ladder.bestRungByBranch[run.branchId] ?? 0, run.rung);
+  run.rung += 1;
+  ladder.bestRung = Math.max(ladder.bestRung ?? 0, run.rung);
   if (run.rung >= run.opponents.length) {
-    run.status = "cleared"; ladder.clears = (ladder.clears ?? 0) + 1; ladder.clearsByBranch[run.branchId] = (ladder.clearsByBranch[run.branchId] ?? 0) + 1;
+    run.status = "cleared";
+    ladder.dailyCleared = true;
+    ladder.clears = (ladder.clears ?? 0) + 1;
     ladder.completionPackCredits = (ladder.completionPackCredits ?? 0) + 1;
     ladder.completionPackCreditsBySet[run.setId] = (ladder.completionPackCreditsBySet[run.setId] ?? 0) + 1;
     ladder.completionPackQueue.push(run.setId);
-    if (ladder.clearsByBranch[run.branchId] === 1) ladder.firstClearSuperstarPendingBySet[run.setId] = true;
-    if (run.setId === "summerslam-series-1" && ladder.clears === 1) ladder.firstClearSuperstarPending = true;
+    if (ladder.clears === 1) {
+      ladder.firstClearSuperstarPending = true;
+      ladder.firstClearSuperstarPendingBySet[run.setId] = true;
+    }
     return { status: "cleared", run, completionPackAwarded: true };
   }
   return { status: "advance", run };
 }
-export function abandonLadderRun(profile) { ensure(profile).activeRun = null; return ensure(profile); }
-export function consumeFirstClearSuperstarGuarantee(profile, setId = "summerslam-series-1") { const ladder = ensure(profile); ladder.firstClearSuperstarPendingBySet[setId] = false; if (setId === "summerslam-series-1") ladder.firstClearSuperstarPending = false; }
-export function grantGuaranteedSuperstar(profile, superstarId, setId = "summerslam-series-1") { unlockSuperstar(profile, superstarId); consumeFirstClearSuperstarGuarantee(profile,setId); return superstarId; }
+export function abandonLadderRun(profile, now = new Date()) { ensure(profile, now).activeRun = null; return ensure(profile, now); }
+export function consumeFirstClearSuperstarGuarantee(profile, setId = LADDER_SET_ID) { const ladder = ensure(profile); ladder.firstClearSuperstarPendingBySet[setId] = false; if (setId === LADDER_SET_ID) ladder.firstClearSuperstarPending = false; }
+export function grantGuaranteedSuperstar(profile, superstarId, setId = LADDER_SET_ID) { unlockSuperstar(profile, superstarId); consumeFirstClearSuperstarGuarantee(profile,setId); return superstarId; }

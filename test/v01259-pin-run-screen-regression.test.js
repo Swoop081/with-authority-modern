@@ -15,8 +15,10 @@ test('green-health pin-escape presentation also breaks after one', () => {
   assert.match(app, /if \(pinEscape\) return greenHealthKickout[\s\S]*?\{text:"1!"[\s\S]*?\{text:"SHOULDER UP!"/);
 });
 
-test('ladder and championship branch selectors are siblings of hero copy', () => {
-  assert.match(app, /modeLogoMarkup\("ladder",true\)\}<p>Three lives[^<]*<\/p><\/div><div class="horizontal-branch-selector mode-run-branch-selector">/);
+test('daily Ladder retires branch selection while Championship Road keeps its authored branch selector', () => {
+  const ladder = app.slice(app.indexOf('function renderLadder()'), app.indexOf('function beginKingOfTheRing()'));
+  assert.match(ladder, /Eight random opponents · three lives · resets every day/);
+  assert.doesNotMatch(ladder, /data-ladder-branch|horizontal-branch-selector/);
   assert.match(app, /modeLogoMarkup\("championship",true\)\}<p>Four fights[^<]*<\/p><\/div><div class="horizontal-branch-selector mode-run-branch-selector">/);
 });
 

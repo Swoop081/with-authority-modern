@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.19";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.19";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.22";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.22";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -32,18 +32,18 @@ function cpuPlayableAfterAutoCounter(state,pid,card){
  const sim=cpuPostAutoCounterActionState(state,pid);
  if(card?.kind==='move')return !card.defensiveOnly&&moveEligibility(sim,pid,card).legal;
  if(card?.kind==='momentum')return canPlayMomentum(sim,pid,card);
+ if(card?.kind==='action'&&card?.special)return canPlaySpecial(sim,pid,card);
  if(card?.kind==='action')return canPlayAction(sim,pid,card);
  if(card?.kind==='support')return canPlaySupport(sim,pid,card);
  if(card?.kind==='manager')return canPlayManager(sim,pid,card);
- if(card?.kind==='special')return canPlaySpecial(sim,pid,card);
- return false;
+  return false;
 }
 function cpuAutoCounterSelection(state,pid,cost){
  const p=state.players[pid];
  const ranked=p.hand.map((card,index)=>{
    const playable=cpuPlayableAfterAutoCounter(state,pid,card);
    let score=playable?10000:0;
-   if(card.kind==='special')score+=100;if(card.finisher)score+=90;if(card.trademark)score+=60;
+   if(card.special)score+=100;if(card.finisher)score+=90;if(card.trademark)score+=60;
    if(card.kind==='move'){score+=(card.damage??0)*2+(card.cost??0);if((card.counterStates?.length??0)||(card.counterSubmissionTargets?.length??0)||(card.counters?.length??0)||(card.countersCardIds?.length??0))score+=25;}
    else if(card.kind==='momentum')score+=20;else score+=18;
    return {card,index,score,playable};
@@ -357,7 +357,7 @@ function cpuChooseOffense(state,pid,moves){
  return moveScore(state,pid,top)-moveScore(state,pid,alternative)<=10?alternative:top;
 }
 function cpuDiscardPreservationScore(card){
- let score=0;if(!card)return score;if(card.kind==='special')score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.effect?.type==='onceTooOften')score+=105;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=75;else if(card.kind==='action')score+=card.oneUse?65:42;else if(card.kind==='support')score+=34;else if(card.kind==='momentum')score+=8;return score;
+ let score=0;if(!card)return score;if(card.special)score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.effect?.type==='onceTooOften')score+=105;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=75;else if(card.kind==='action')score+=card.oneUse?65:42;else if(card.kind==='support')score+=34;else if(card.kind==='momentum')score+=8;return score;
 }
 function cpuRepeatThreat(state,pid,incoming){
  const p=state.players[pid];let score=0;if(incoming.finisher)score+=80;if(incoming.trademark)score+=28;if(incoming.submission){if(incomingSubmissionWouldTap(state,pid,incoming))score+=90;else if(incomingSubmissionIsCritical(state,pid,incoming))score+=55;}const damage=Math.max(0,incoming.damage??0);score+=damage>=12?35:damage>=8?22:damage>=6?10:0;if(damage>=p.hp)score+=80;if(p.hp<=Math.ceil(p.maxHp*.3))score+=12;return score;

@@ -1,5 +1,5 @@
-import { BUILD_VERSION } from "../config/build.js?v=0.13.19";
-import { PROFILE_VERSION, migrateProfile } from "./profile.js?v=0.13.19";
+import { BUILD_VERSION } from "../config/build.js?v=0.13.22";
+import { PROFILE_VERSION, migrateProfile } from "./profile.js?v=0.13.22";
 
 export const SAVE_FORMAT = "wwe-legacy-save";
 export const SAVE_FORMAT_VERSION = 1;

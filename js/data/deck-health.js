@@ -8,7 +8,7 @@ export const RECOMMENDED_DECK_SHAPE = Object.freeze({
 export function deckBucket(card) {
   if (!card) return "other";
   if (card.kind === "momentum") return "momentum";
-  if (["action", "special", "support", "manager"].includes(card.kind)) return "utility";
+  if (["action", "support", "manager"].includes(card.kind)) return "utility";
   if (card.kind !== "move") return "other";
   if (card.finisher || card.trademark) return "signature";
   const cost = Number(card.cost ?? 0);

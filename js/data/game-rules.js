@@ -161,14 +161,15 @@ export const GAME_RULE_SECTIONS = Object.freeze([
   },
   {
     id: "modes", group: "PLAY", title: "Game Modes",
-    summary: "The same core match engine powers Exhibition, Live Events, Ladder and Championship Road.",
+    summary: "The same core match engine powers Exhibition, Live Events, King of the Ring, the Daily Ladder challenge and Championship Road.",
     items: [
       ["Exhibition", "Choose an owned Superstar and play a standard one-off match against an eligible CPU opponent."],
       ["Live Events", "Live Events is a rotating tower hub. A Daily Tower resets every local day, a 3 Day Tower rotates every three days, and a Weekly Tower rotates each Monday. Limited 24-hour birthday towers can appear on a Superstar's real birthday."],
       ["Daily brand schedule", "The Daily Tower uses RAW branding on Monday, NXT on Wednesday and SmackDown on Saturday; Tuesday, Thursday, Friday and Sunday use original WWE Legacy event identities."],
       ["Tower timers", "Every Live Event card shows the exact time remaining. Progress belongs to that tower only and expires when its timer ends."],
       ["Live Event progress", "Each tower contains 5 escalating matches. A loss retries the same stage without erasing completed stages. The Daily Tower awards 50 UP per win; longer rotating towers use their shown reward rate and completion pack."],
-      ["Climb the Ladder", "Choose an era / branch and survive its route with 3 lives. Current Era, Hall of Fame and Evolution routes contain 8 levels; Golden Era and Attitude Era routes contain 4. A loss costs a life; clearing the route awards a completion pack."],
+      ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you and ends that bracket; winning the Final awards one standard booster."],
+      ["Climb the Ladder", "Climb the Ladder now lives inside Challenges as a daily 8-opponent tower. You have 3 lives for the run. A loss costs one life; losing all 3 restarts the tower from Level 1. Clearing all 8 levels awards the daily completion reward, and a fresh random tower arrives at local midnight."],
       ["Championship Road", "A four-match route: Opening Bout, Momentum Match, No. 1 Contender and Championship Match. Losses retry the current stage. Clearing the road awards a Championship pack and records the title clear."],
       ["Career records", "Completed matches feed My Legacy's overall W/L, W/L by unlocked Superstar and W/L by mode."]
     ]
@@ -192,7 +193,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     items: [
       ["Overall record", "My Legacy stores total wins and losses from the career-record tracking build onward."],
       ["Superstar record", "Every unlocked Superstar has their own W/L record."],
-      ["Mode record", "Exhibition, Live Event, Climb the Ladder and Championship Road each keep their own W/L totals."],
+      ["Mode record", "Exhibition, Live Event, King of the Ring, Climb the Ladder Challenge and Championship Road each keep their own W/L totals."],
       ["Achievements", "Achievements are persistent career milestones for wins, modes, finish methods and roster use. Previously stored clear counters can legitimately satisfy matching achievements."],
       ["Local profile", "Progress, collection, decks, Season state, records and achievements are stored in the local WWE Legacy profile on this device / browser."],
       ["Reset Progress", "Reset Progress in My Legacy permanently clears the local profile when confirmed."]
@@ -210,7 +211,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Counter State", "The physical state an incoming Move exposes for reversal matching."],
       ["UP", "Universe Points, the store currency also earned from duplicate overflow and selected game rewards."],
       ["Foil", "A collector / visual variant with no gameplay advantage."],
-      ["REWARD pack", "A special completion-pack wrapper used for Ladder / Championship-style completion rewards; its underlying set still determines the cards inside."]
+      ["REWARD pack", "A special completion-pack wrapper used for Ladder and Championship-style completion rewards; its underlying set still determines the cards inside."]
     ]
   }
 ]);
