@@ -6148,11 +6148,12 @@ body[data-screen="live-events"] .premium-run-screen{--mode-accent:#54df92;--mode
 @media(max-width:390px){.superstar-unlock-stage{padding:14px 12px}.superstar-unlock-headline{font-size:2.8rem}.superstar-unlock-card{width:min(46vw,178px)}.superstar-unlock-card-shell{min-height:235px}.superstar-unlock-primary,.superstar-unlock-secondary{min-height:52px}}
 @media(prefers-reduced-motion:reduce){.superstar-unlock-showcase:before,.superstar-unlock-showcase:after,.superstar-unlock-stage,.superstar-unlock-card,.superstar-unlock-copy>*,.superstar-unlock-actions,.superstar-unlock-footnote,.superstar-unlock-effects span,.superstar-unlock-halo{animation:none!important}}
 
-/* v0.13.1 — Layered Card Front v1 ---------------------------------------
-   Existing finished fronts remain flat and never receive these overlays.
-   This layer is activated only for card ids explicitly registered in
-   js/data/card-fronts.js after a clean Layered v1 art plate is installed. */
+/* v0.13.31 — Automatic Layered Card Front priority ----------------------
+   Supported cards always try their canonical Layered v1 plate first. If the
+   file is absent, the renderer automatically falls back to the existing flat
+   front. Live overlay data remains hidden until the layered plate loads. */
 .ccg-card.is-layered-front .ccg-card-front{container-type:inline-size;}
+.ccg-card.is-layered-front:not(.has-layered-asset) .ccg-live-front-data{visibility:hidden!important;}
 .ccg-card.is-layered-front .ccg-card-art:after{display:none!important;}
 .ccg-card.is-layered-front .ccg-live-front-data{
   --lf-name:#fff;--lf-accent:#e4bf62;

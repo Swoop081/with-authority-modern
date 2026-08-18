@@ -3101,6 +3101,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "money-in-the-bank-series-1",
     "cardNumber": 37,
     "cardCode": "MITB1-037"
+  },
+  {
+    "id": "biel-toss",
+    "setId": "summerslam-series-1",
+    "cardNumber": 148,
+    "cardCode": "SS1-148"
   }
 
 ]);

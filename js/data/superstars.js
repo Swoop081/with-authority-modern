@@ -1273,7 +1273,7 @@ export const superstars = {
       "momentum-strike",
       "punch",
       "shoulder-tackle",
-      "body-slam"
+      "biel-toss"
     ],
     "signatures": [
       "gorilla-press-slam",

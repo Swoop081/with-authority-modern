@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.30";
+import { enrichCounterState } from "./counter-states.js?v=0.13.31";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1492,6 +1492,28 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "torso-trapped"
+  },
+  {
+    "id": "biel-toss",
+    "name": "Biel Toss",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "rulesText": "Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control"
   },
   {
     "id": "front-dropkick",

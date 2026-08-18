@@ -1,7 +1,6 @@
-import { usesLayeredFront } from "./card-fronts.js?v=0.13.30";
-import { assetUrl } from "../config/build.js?v=0.13.30";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.30";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.30";
+import { assetUrl } from "../config/build.js?v=0.13.31";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.31";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.31";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
@@ -125,11 +124,11 @@ const finishedFrontFolders = {
 };
 
 export function layeredCardArtFor(card) {
-  if (!card || card.kind === "momentum" || !usesLayeredFront(card)) return null;
-  if (card.kind === "superstar") {
-    const key = card.superstarId ?? card.id?.replace(/^superstar-/, "");
-    return key ? assetUrl(`assets/cards/art/layered/superstars/${key}.webp`) : null;
-  }
+  // Layered fronts are now automatic: every supported non-Superstar collectible
+  // gets a canonical Layered v1 candidate URL. The renderer tries this plate
+  // first and falls back to the existing flat/custom front if the file is not
+  // installed. No per-card registry is required.
+  if (!card || card.kind === "momentum" || card.kind === "superstar") return null;
   const folder = finishedFrontFolders[card.kind];
   const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
   return folder && key ? assetUrl(`assets/cards/art/layered/${folder}/${key}.webp`) : null;

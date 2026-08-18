@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.13.30";
+import { allGameplayCards } from "./content.js?v=0.13.31";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -1184,14 +1184,14 @@ export const deckIds={
     "momentum-strike",
     "punch",
     "shoulder-tackle",
-    "body-slam",
+    "biel-toss",
     "punch",
     "punch",
     "shoulder-tackle",
     "shoulder-tackle",
     "reverse-elbow",
     "oba-femi-running-elbow",
-    "body-slam",
+    "biel-toss",
     "body-slam",
     "running-uppercut",
     "running-uppercut",

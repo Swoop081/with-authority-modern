@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08080b">
   <title>WWE Legacy — Card Art Studio</title>
-  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.13.30">
+  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.13.31">
 </head>
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>COLLECTIBLE CARD GAME</small></a>
-    <span class="studio-build">CARD ART STUDIO · v0.13.30</span>
+    <span class="studio-build">CARD ART STUDIO · v0.13.31</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
       <div class="eyebrow">SEASON 1 CARD DATABASE + FUTURE SET TEMPLATES</div>
       <h1>Card Art Studio</h1>
-      <p>Design the complete card exactly as it appears in game. Layered v1 can export only the reusable art plate while WWE Legacy supplies live names, stats, requirements, type and rarity. Existing finished fronts remain untouched.</p>
+      <p>Design the complete card exactly as it appears in game. Layered v1 can export only the reusable art plate while WWE Legacy supplies live names, stats, requirements, type and rarity. When a Layered v1 plate is installed, the game uses it automatically and otherwise falls back to the existing finished front.</p>
     </section>
     <section class="studio-layout">
       <div class="studio-controls">
@@ -116,7 +116,7 @@
                 <option value="plate">Art Plate · Saved image only</option>
               </select>
             </label>
-            <p class="layered-note"><b>SAFE MIGRATION:</b> Existing finished fronts stay flat. A live overlay is used only after a clean Layered v1 plate is installed and that specific card is explicitly registered.</p>
+            <p class="layered-note"><b>AUTOMATIC FALLBACK:</b> Install the clean Layered v1 plate at its suggested path and WWE Legacy will use it automatically. If the plate is missing, the existing flat/custom front remains the fallback.</p>
           </div>
           <label>Output size
             <select id="output-size">
@@ -147,7 +147,7 @@
       </aside>
     </section>
   </main>
-  <script src="../js/tools/card-art-studio-data.js?v=0.13.30"></script>
-  <script src="../js/tools/card-art-studio.js?v=0.13.30"></script>
+  <script src="../js/tools/card-art-studio-data.js?v=0.13.31"></script>
+  <script src="../js/tools/card-art-studio.js?v=0.13.31"></script>
 </body>
 </html>

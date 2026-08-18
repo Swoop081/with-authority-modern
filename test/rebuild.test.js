@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.13.30";
-import { decks } from "../js/data/decks.js?v=0.13.30";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.30";
-import { collectionCards } from "../js/data/collection.js?v=0.13.30";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.30";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.30";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.30";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.30";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.30";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.30";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.30";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.30";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.30";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.30";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.30";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.30";
-import { healthZone } from "../js/engine/health.js?v=0.13.30";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.30";
+import { superstars } from "../js/data/superstars.js?v=0.13.31";
+import { decks } from "../js/data/decks.js?v=0.13.31";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.31";
+import { collectionCards } from "../js/data/collection.js?v=0.13.31";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.31";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.31";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.31";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.31";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.31";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.31";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.31";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.31";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.31";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.31";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.31";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.31";
+import { healthZone } from "../js/engine/health.js?v=0.13.31";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.31";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -268,7 +268,7 @@ test("A completely maxed five-card booster values the guaranteed Foil duplicate 
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.30");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.31");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -1543,7 +1543,7 @@ test("v0.12.12 public game exposes only the three launch series",()=>{
   const launchStars=stars.filter(star=>isLaunchLiveSetId(star.setId));
   const launchCards=collectionCards.filter(card=>isLaunchLiveSetId(card.setId));
   assert.equal(launchStars.length,24);
-  assert.equal(launchCards.length,308);
+  assert.equal(launchCards.length,309);
   assert.equal(exhibitionOpponentIds("roman-reigns").length,23);
   assert.ok(exhibitionOpponentIds("roman-reigns").every(id=>isLaunchLiveSetId(starById.get(id)?.setId)));
   for(const setId of ["raw-series-1","worlds-collide-series-1","money-in-the-bank-series-1","smackdown-series-1","survivor-series-series-1","season-2-whos-next"]){
