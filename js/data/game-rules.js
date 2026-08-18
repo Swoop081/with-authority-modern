@@ -129,7 +129,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Ownership", "You can only save copies you actually own. Normal and Foil copies both count toward ownership of that card."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
-      ["Recommended decks", "Your first Superstar receives the complete authored starter deck. Later Superstar unlocks receive a legal 60-page starter built from one copy of their exclusive identity cards plus shared Common/Uncommon replacements. The authored 60-page list remains the recommended build: Deck Lab compares your current deck against it, suggests replacements for missing cards, and recommends newly collected Finishers, Trademarks, Actions and the Superstar-specific Entrance as you acquire them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
+      ["Recommended decks", "Your first Superstar receives the complete authored 60-page onboarding deck. Later Superstar unlocks grant only the Superstar identity plus at most one authored Finisher, one Trademark and one Action; they do not grant a complete deck, shared filler, or the Superstar-specific Entrance. Deck Lab compares your Collection against the authored 60-page recommended build, uses owned recommended cards first, fills gaps only with legal shared cards you already own, and recommends missing authored cards and the Superstar-specific Entrance as you collect them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
     ]
   },
   {
@@ -152,7 +152,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Rarity weights", "Ordinary slots roll from the current available pool using 50% Common, 30% Uncommon, 15% Rare and 5% Very Rare weighting until a Very Rare has been hit."],
       ["Very Rare ceiling", "A five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot."],
       ["Guaranteed Foil", "The first pull is Foil. Entrances are also presented as Foil. Foil status does not change gameplay strength."],
-      ["Superstar chase", "Eligible Superstar identities use a separate 5% pack-level chase with a 50-pack pity for an available Superstar in that set."],
+      ["Superstar chase", "Eligible Superstar identities use a separate 2% pack-level chase with a 100-pack hard pity for an available unowned Superstar in that set."],
       ["Duplicate conversion", "Copies that exceed that card's ownership cap convert to Universe Points instead of increasing ownership. Excess Normal copies convert for 10 UP; excess Foil copies convert for 20 UP."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
       ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],

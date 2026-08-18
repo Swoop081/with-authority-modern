@@ -1,6 +1,6 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.18 — Superstar Starter Deck + Recommended Build Assistance**.
+Current working build: **v0.13.19 — Superstar Unlock Progression + Chase Rate Pass**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Event towers, Ladder and Championship Road.
 
@@ -15,5 +15,8 @@ A mobile-first WWE collectible card game prototype with 60-page Superstar decks,
 - The 90-day economy simulator now follows the real release calendar rather than holding the launch pool static.
 - Economy values remain locked at **2,500 UP per Store Superstar**, **300 UP per Store booster**, **10 UP excess Normal**, and **20 UP excess Foil**.
 - My Legacy Save & Backup remains one stable `WWE-Legacy-Save.json` file with validation, import confirmation and one-step rollback.
+- Secondary Superstar unlocks are now lean: Superstar identity + at most one authored Finisher, one Trademark and one Action; no shared filler or manufactured 60-page deck is granted.
+- Deck Lab builds toward each authored recommendation using only cards already owned and continues recommending missing authored upgrades as they are collected.
+- Superstar chase is now **2% per eligible pack** with a **100-pack per-set hard pity** while an unowned Superstar remains.
 
-See `RELEASE-NOTES-v0.13.18.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.19.md` and `BUILD-CERTIFICATION.md`.

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.18";
+import { enrichCounterState } from "./counter-states.js?v=0.13.19";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",

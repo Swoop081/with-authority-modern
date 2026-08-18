@@ -1,15 +1,15 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.18";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.18";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.18";
-import { sets } from "./sets.js?v=0.13.18";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.18";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.19";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.19";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.19";
+import { sets } from "./sets.js?v=0.13.19";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.19";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
 export const MAX_VERY_RARE_PULLS = 1;
 export const RARITY_WEIGHTS = { 1: .5, 2: .3, 3: .15, 4: .05 };
-export const SUPERSTAR_PITY_PACKS = 50;
-export const SUPERSTAR_CHASE_CHANCE = .05;
+export const SUPERSTAR_PITY_PACKS = 100;
+export const SUPERSTAR_CHASE_CHANCE = .02;
 export const DEFAULT_BOOSTER_SET_ID = "summerslam-series-1";
 
 export function boosterCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) {

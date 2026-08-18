@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.18";
-import { collectionCards } from "./collection.js?v=0.13.18";
-import { superstars } from "./superstars.js?v=0.13.18";
-import { isUnreleasedSetId } from "./release.js?v=0.13.18";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.18";
+import { decks } from "./decks.js?v=0.13.19";
+import { collectionCards } from "./collection.js?v=0.13.19";
+import { superstars } from "./superstars.js?v=0.13.19";
+import { isUnreleasedSetId } from "./release.js?v=0.13.19";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.19";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -87,143 +87,7 @@ function ensureSavedRecommendedDeck(profile, sid) {
   return true;
 }
 
-const idOfDeckEntry = entry => typeof entry === "string" ? entry : entry?.id;
-const starterCardCap = card => {
-  const defaultCap = card?.kind === "momentum" ? 12 : 5;
-  return Math.min(defaultCap, Number.isFinite(card?.maxCopies) ? card.maxCopies : defaultCap);
-};
 const starterExclusiveTo = (card, sid) => card?.superstarId === sid || (Array.isArray(card?.allowedSuperstarIds) && card.allowedSuperstarIds.length === 1 && card.allowedSuperstarIds[0] === sid);
-const starterSharedFiller = card => !!card && !card.superstarId && !(Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length) && Number(card.rarity ?? 1) <= 2 && !["superstar","entrance","manager"].includes(card.kind);
-
-function recommendedMissingCountForDraft(sid, draft = []) {
-  const recommended = new Map();
-  const current = new Map();
-  for (const card of decks[sid] ?? []) recommended.set(card.id, (recommended.get(card.id) ?? 0) + 1);
-  for (const entry of draft) {
-    const id = idOfDeckEntry(entry);
-    if (id) current.set(id, (current.get(id) ?? 0) + 1);
-  }
-  let missing = 0;
-  for (const [id, wanted] of recommended) missing += Math.max(0, wanted - (current.get(id) ?? 0));
-  return missing;
-}
-
-function preferStarterFoils(profile, draft = []) {
-  const usedFoils = new Map();
-  return draft.map(entry => {
-    const id = idOfDeckEntry(entry);
-    const available = Math.max(0, Number(profile?.ownedCards?.[id]?.foil) || 0);
-    const used = usedFoils.get(id) ?? 0;
-    const foil = used < available;
-    if (foil) usedFoils.set(id, used + 1);
-    return { id, foil };
-  });
-}
-
-function canStarterAppend(draft, card) {
-  if (!card) return false;
-  const count = draft.reduce((n, entry) => n + (idOfDeckEntry(entry) === card.id ? 1 : 0), 0);
-  if (count >= starterCardCap(card)) return false;
-  if (card.copyFamily) {
-    const familyCount = draft.reduce((n, entry) => n + (cardById.get(idOfDeckEntry(entry))?.copyFamily === card.copyFamily ? 1 : 0), 0);
-    if (familyCount >= 5) return false;
-  }
-  return true;
-}
-
-function buildSecondaryStarterDeck(profile, sid, { grantIdentityCopies = true } = {}) {
-  const d = decks[sid] ?? [];
-  if (d.length !== 60) return { draft: [], giftedIds: [], missingRecommended: 60 };
-  const giftedIds = [];
-  const gift = (id, amount = 1) => {
-    const before = totalOwnedCopies(profile, id);
-    const result = addOwnedCard(profile, id, { amount });
-    if (result.added > 0 && before === 0) giftedIds.push(id);
-    return result;
-  };
-
-  // A secondary Superstar unlock establishes identity without completing the
-  // authored chase deck: grant exactly one copy of each Superstar-exclusive
-  // page in the recommended build, plus the universal anti-repeat staple.
-  const seenExclusive = new Set();
-  for (const card of d) {
-    if (!starterExclusiveTo(card, sid) || seenExclusive.has(card.id)) continue;
-    seenExclusive.add(card.id);
-    if (grantIdentityCopies) gift(card.id, 1);
-  }
-  if (d.some(card => card.id === "once-too-often") && totalOwnedCopies(profile, "once-too-often") < 1) gift("once-too-often", 1);
-
-  // Seed one copy of each shared Common/Uncommon identity used by the authored
-  // blueprint. Extra copies are still chase/filler territory, but the starter
-  // is recognisably built from that Superstar's actual recommended card pool.
-  const seenSharedStarter = new Set();
-  for (const card of d) {
-    if (!starterSharedFiller(card) || seenSharedStarter.has(card.id)) continue;
-    seenSharedStarter.add(card.id);
-    if (totalOwnedCopies(profile, card.id) < 1) gift(card.id, 1);
-  }
-
-  // Keep the authored Lead Off intact. These pages are deliberately low-level
-  // opening tools/Momentum and are part of making every unlocked Superstar
-  // immediately playable rather than a loaner deck.
-  const leadNeed = new Map();
-  for (const card of d.slice(0, 5)) leadNeed.set(card.id, (leadNeed.get(card.id) ?? 0) + 1);
-  for (const [id, amount] of leadNeed) {
-    const missing = Math.max(0, amount - totalOwnedCopies(profile, id));
-    if (missing) gift(id, missing);
-  }
-
-  // First use every recommended copy the Collection already owns. This means a
-  // player who pulled KO cards before unlocking Kevin immediately gets a better
-  // starter than a player who has never seen those cards.
-  const used = new Map();
-  const draft = [];
-  for (const card of d) {
-    const n = used.get(card.id) ?? 0;
-    if (n < totalOwnedCopies(profile, card.id)) {
-      draft.push({ id: card.id, foil: false });
-      used.set(card.id, n + 1);
-    }
-  }
-
-  // Missing Rare/Very Rare/signature copies are replaced with extra shared
-  // Common/Uncommon pages already appropriate to this authored deck. Grant only
-  // the filler copy required to keep the starter at a legal 60 pages.
-  const fillerCandidates = [];
-  const fillerSeen = new Set();
-  for (const card of d.slice(5)) {
-    if (!starterSharedFiller(card) || fillerSeen.has(card.id)) continue;
-    fillerSeen.add(card.id);
-    fillerCandidates.push(card);
-  }
-  // Momentum is always owned at the global baseline and is a safe final fallback.
-  for (const card of d) {
-    if (card.kind !== "momentum" || fillerSeen.has(card.id)) continue;
-    fillerSeen.add(card.id);
-    fillerCandidates.push(card);
-  }
-
-  let guard = 0;
-  while (draft.length < 60 && guard++ < 600) {
-    let added = false;
-    for (const card of fillerCandidates) {
-      if (!canStarterAppend(draft, card)) continue;
-      const usedCopies = draft.reduce((n, entry) => n + (idOfDeckEntry(entry) === card.id ? 1 : 0), 0);
-      if (usedCopies >= totalOwnedCopies(profile, card.id)) gift(card.id, 1);
-      if (usedCopies >= totalOwnedCopies(profile, card.id)) continue;
-      draft.push({ id: card.id, foil: false });
-      added = true;
-      if (draft.length >= 60) break;
-    }
-    if (!added) break;
-  }
-
-  return {
-    draft: preferStarterFoils(profile, draft),
-    giftedIds: [...new Set(giftedIds)],
-    missingRecommended: recommendedMissingCountForDraft(sid, draft)
-  };
-}
 
 function queueSuperstarUnlockCelebration(profile, sid) {
   profile.pendingUnlockCelebrations ??= [];
@@ -261,9 +125,43 @@ function grantInitialStarterPackage(profile, sid, { celebrate = true } = {}) {
   return { leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id), signatures: star.signatures ?? [], rewardCards: [`superstar-${sid}`], deckSize: d.length, missing: 0 };
 }
 
-// Every later normal Superstar unlock gets a real, owned, legal starter deck:
-// one copy of each exclusive identity page plus shared Common/Uncommon filler.
-// The full authored 60-page list remains the recommended chase blueprint.
+// Every later normal Superstar unlock is deliberately lean. The unlock grants
+// the Superstar identity plus at most one authored Finisher, one authored
+// Trademark and one authored Action from the recommended blueprint. It does
+// not manufacture a 60-page deck or gift shared filler: Deck Lab builds toward
+// the recommendation strictly from cards the player actually owns.
+function secondaryUnlockIdentityIds(sid) {
+  const seen = new Set();
+  const authored = (decks[sid] ?? []).filter(card => {
+    if (!starterExclusiveTo(card, sid) || seen.has(card.id)) return false;
+    seen.add(card.id);
+    return true;
+  });
+  const firstId = predicate => authored.find(predicate)?.id ?? null;
+  return [...new Set([
+    firstId(card => card.finisher === true),
+    firstId(card => card.trademark === true),
+    firstId(card => card.kind === "action")
+  ].filter(Boolean))];
+}
+
+function recommendedOwnedMissingCount(profile, sid) {
+  const wanted = new Map();
+  for (const card of decks[sid] ?? []) wanted.set(card.id, (wanted.get(card.id) ?? 0) + 1);
+  let matched = 0;
+  for (const [id, amount] of wanted) matched += Math.min(amount, totalOwnedCopies(profile, id));
+  return Math.max(0, (decks[sid] ?? []).length - matched);
+}
+
+function grantSecondaryUnlockIdentityCards(profile, sid) {
+  const granted = [];
+  for (const id of secondaryUnlockIdentityIds(sid)) {
+    const result = addOwnedCard(profile, id, { amount: 1 });
+    if (result.added > 0) granted.push(id);
+  }
+  return granted;
+}
+
 export function grantSuperstarUnlockPackage(profile, sid, { celebrate = true } = {}) {
   const star = starById.get(sid), d = decks[sid] ?? [];
   if (!star || d.length !== 60) return { leadOff: [], signatures: [], rewardCards: [], deckSize: d.length, missing: 60 - d.length };
@@ -276,25 +174,19 @@ export function grantSuperstarUnlockPackage(profile, sid, { celebrate = true } =
   profile.savedDecks ??= {};
   profile.deckNeedsCards ??= {};
 
-  let starter = null;
-  if (newlyUnlocked || !Array.isArray(profile.savedDecks[sid]) || profile.savedDecks[sid].length !== 60) {
-    const legacyIdentityOnly = !newlyUnlocked && (Number(profile.deckNeedsCards?.[sid]) || 0) >= 60;
-    starter = buildSecondaryStarterDeck(profile, sid, { grantIdentityCopies: newlyUnlocked || legacyIdentityOnly });
-    if (starter.draft.length === 60) profile.savedDecks[sid] = starter.draft;
-    profile.deckNeedsCards[sid] = starter.missingRecommended;
-  } else {
-    profile.deckNeedsCards[sid] = recommendedMissingCountForDraft(sid, profile.savedDecks[sid]);
-  }
+  const grantedIds = newlyUnlocked ? grantSecondaryUnlockIdentityCards(profile, sid) : [];
+  profile.deckNeedsCards[sid] = recommendedOwnedMissingCount(profile, sid);
+
   if (newlyUnlocked && celebrate) queueSuperstarUnlockCelebration(profile, sid);
   return {
     alreadyOwned: !newlyUnlocked,
     superstarId: sid,
     entranceId: profile.selectedEntrances?.[sid] ?? DEFAULT_PLAYER_ENTRANCE_ID,
     leadOff: star.leadOffIds ?? d.slice(0, 5).map(c => c.id),
-    signatures: star.signatures ?? [],
-    rewardCards: [`superstar-${sid}`, ...(starter?.giftedIds ?? [])],
-    deckSize: profile.savedDecks?.[sid]?.length ?? 0,
-    missing: profile.deckNeedsCards[sid] ?? 60
+    signatures: grantedIds,
+    rewardCards: [`superstar-${sid}`, ...grantedIds],
+    deckSize: Array.isArray(profile.savedDecks?.[sid]) ? profile.savedDecks[sid].length : 0,
+    missing: profile.deckNeedsCards[sid]
   };
 }
 
@@ -800,16 +692,16 @@ export function migrateProfile(old) {
   for (const setId of Object.keys(p.championshipRoad?.championshipPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.championshipRoad.championshipPackCreditsBySet[setId] = 0;
   p.pendingUnlockCelebrations = (p.pendingUnlockCelebrations ?? []).filter(event => releasedStarIds.has(event?.superstarId));
 
-  // v0.13.18: profiles that previously bought an identity-only Store unlock may
-  // have no playable 60-page deck. Give those specific incomplete legacy
-  // unlocks the new secondary starter package, but never claw back or rewrite a
-  // complete deck/collection that was legitimately granted by an older build.
+  // v0.13.19: legacy identity-only secondary unlocks receive only the lean
+  // Finisher / Trademark / Action identity grant. Never gift shared filler and
+  // never overwrite or claw back an existing deck/Collection.
   if (sourceVersion < 30) {
     for (const sid of p.unlockedSuperstars) {
       if (sid === p.starterId || starById.get(sid)?.setId === "season-1-final-boss") continue;
       const saved = p.savedDecks?.[sid];
       if ((Number(p.deckNeedsCards?.[sid]) || 0) >= 60 && (!Array.isArray(saved) || saved.length !== 60)) {
-        grantSuperstarUnlockPackage(p, sid, { celebrate: false });
+        grantSecondaryUnlockIdentityCards(p, sid);
+        p.deckNeedsCards[sid] = recommendedOwnedMissingCount(p, sid);
       }
     }
   }

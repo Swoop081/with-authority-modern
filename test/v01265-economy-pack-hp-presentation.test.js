@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.13.18';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.13.18';
-import { createProfile } from '../js/data/profile.js?v=0.13.18';
-import { cardsForSet } from '../js/data/collection.js?v=0.13.18';
-import { superstars } from '../js/data/superstars.js?v=0.13.18';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.13.19';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.13.19';
+import { createProfile } from '../js/data/profile.js?v=0.13.19';
+import { cardsForSet } from '../js/data/collection.js?v=0.13.19';
+import { superstars } from '../js/data/superstars.js?v=0.13.19';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};
@@ -28,22 +28,22 @@ test('v0.12.65 ordinary booster slots roll rarity first at 50/30/15/5',()=>{
   assert.equal(pack.some(pull=>pull.card.kind==='superstar'),false,'ordinary rarity slots exclude Superstar cards');
 });
 
-test('v0.12.65 Superstar chase is 5 percent with a 50-pack per-set pity',()=>{
-  assert.equal(SUPERSTAR_CHASE_CHANCE,.05);
-  assert.equal(SUPERSTAR_PITY_PACKS,50);
+test('v0.13.19 Superstar chase is 2 percent with a 100-pack per-set hard pity',()=>{
+  assert.equal(SUPERSTAR_CHASE_CHANCE,.02);
+  assert.equal(SUPERSTAR_PITY_PACKS,100);
 
   const natural=createProfile('roman-reigns');
   grantBooster(natural,1,setId);
-  const naturalPack=openBooster(natural,sequenceRng([.049,.20]),setId);
+  const naturalPack=openBooster(natural,sequenceRng([.019,.20]),setId);
   assert.equal(naturalPack[0].card.kind,'superstar');
   assert.equal(naturalPack[0].foil,true);
   assert.equal(natural.packsSinceSuperstarUnlockBySet[setId],0);
 
   const pity=createProfile('roman-reigns');
-  pity.packsSinceSuperstarUnlockBySet[setId]=49;
+  pity.packsSinceSuperstarUnlockBySet[setId]=99;
   grantBooster(pity,1,setId);
   const pityPack=openBooster(pity,()=>.42,setId);
-  assert.equal(pityPack[0].card.kind,'superstar','pack 50 guarantees an unowned Superstar when one remains');
+  assert.equal(pityPack[0].card.kind,'superstar','pack 100 guarantees an unowned Superstar when one remains');
   assert.equal(pityPack[0].foil,true);
   assert.equal(pity.packsSinceSuperstarUnlockBySet[setId],0);
 });
