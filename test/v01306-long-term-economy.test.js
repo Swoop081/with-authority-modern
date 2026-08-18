@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { STORE_SUPERSTAR_PRICE, DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from '../js/data/store.js?v=0.13.12';
+import { STORE_SUPERSTAR_PRICE, DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from '../js/data/store.js?v=0.13.18';
 
 test('v0.13.6 long-term economy certification keeps economy values locked while the simulator can follow the release calendar',()=>{
   assert.equal(STORE_SUPERSTAR_PRICE,2500);

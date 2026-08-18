@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.12";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.12";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.18";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.18";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -98,33 +98,94 @@ function cpuStateAfterEnablingAction(state,pid,card){
  }
  return sim;
 }
-function cpuPreMoveAction(state,pid){
- const p=state.players[pid], legal=cpuLegalOffense(state,pid);
- if(!legal.length)return null;
- const candidates=p.hand.filter(x=>canPlayAction(state,pid,x));
- const bestNow=Math.max(...legal.map(x=>moveScore(state,pid,x)));
- for(const card of candidates){
-   const ef=card.effect??{};
-   if(ef.type==='buffNext'&&(ef.damage??0)>0)return card;
-   if(ef.type==='buffNextMethod'&&legal.some(m=>m.method===ef.method))return card;
-   if(ef.type==='discountNext'){
-     const sim=cpuStateAfterEnablingAction(state,pid,card), after=cpuLegalOffense(sim,pid);
-     if(after.length&&Math.max(...after.map(x=>moveScore(sim,pid,x)))>bestNow+4)return card;
-   }
-   if(ef.type==='romanOohAhh'){
-     const name=ef.name??"Roman's Spear",target=p.hand.find(x=>x.name===name)||p.deck.find(x=>x.name===name);
-     if(target){const sim=cpuStateAfterEnablingAction(state,pid,card);if(!sim.players[pid].hand.some(x=>x===target||x.id===target.id))sim.players[pid].hand=[...sim.players[pid].hand,target];if(moveEligibility(sim,pid,target).legal)return card;}
-   }
-   if(ef.type==='gainAdrenaline')return card;
+function cpuActionSearchTarget(state,pid,card){
+ const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'],ef=card.effect??{};
+ if(ef.type==='searchChoice'){
+   const grounded=groundState(def),names=ef.names??[];
+   const candidates=names.map(name=>p.deck.find(x=>x.name===name)).filter(Boolean);
+   return candidates.find(x=>(grounded?!x.standingOnly:!x.groundedOnly))??candidates[0]??null;
+ }
+ if(ef.type==='romanOohAhh'){
+   const name=ef.name??"Roman's Spear";
+   return p.hand.find(x=>x.name===name)||p.deck.find(x=>x.name===name)||null;
  }
  return null;
 }
-function cpuEnablingAction(state,pid){
- const candidates=state.players[pid].hand.filter(x=>canPlayAction(state,pid,x));
- for(const card of candidates){
-   const ef=card.effect?.type;
-   if(!['discountNext','gainAdrenaline','romanOohAhh'].includes(ef))continue;
-   if(cpuLegalOffense(cpuStateAfterEnablingAction(state,pid,card),pid).length)return card;
+function cpuTopDeckTutorMatch(card,c,pid,state){
+ const ef=card.effect??{},p=state.players[pid];
+ return (!ef.method||(c.kind==='move'&&c.method===ef.method))&&(!ef.superstarMove||(c.kind==='move'&&c.superstarId===p.superstar.id))&&(!ef.exclusiveSuperstar||(c.superstarId===p.superstar.id||(Array.isArray(c.allowedSuperstarIds)&&c.allowedSuperstarIds.includes(p.superstar.id))));
+}
+function cpuActionPriority(state,pid,card){
+ if(!canPlayAction(state,pid,card))return -Infinity;
+ const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'],ef=card.effect??{},legal=cpuLegalOffense(state,pid);
+ const bestNow=legal.length?Math.max(...legal.map(x=>moveScore(state,pid,x))):-Infinity;
+ if(ef.type==='buffNext'&&(ef.damage??0)>0){
+   if(!legal.length)return -Infinity;
+   const lethal=legal.some(m=>(m.damage??0)+(ef.damage??0)>=def.hp);
+   return 72+(ef.damage??0)*5+(lethal?35:0);
+ }
+ if(ef.type==='buffNextMethod'){
+   const matching=legal.filter(m=>m.method===ef.method);
+   if(!matching.length)return -Infinity;
+   const lethal=matching.some(m=>(m.damage??0)+(ef.damage??0)>=def.hp);
+   return 68+(ef.damage??0)*5+(lethal?35:0);
+ }
+ if(ef.type==='discountNext'||ef.type==='gainAdrenaline'){
+   const sim=cpuStateAfterEnablingAction(state,pid,card),after=cpuLegalOffense(sim,pid);
+   if(!after.length)return ef.type==='gainAdrenaline'&&p.adrenaline<4?22:-Infinity;
+   const bestAfter=Math.max(...after.map(x=>moveScore(sim,pid,x)));
+   const newlyLegal=after.some(x=>!legal.includes(x));
+   return 38+(newlyLegal?30:0)+(Number.isFinite(bestNow)?Math.max(0,bestAfter-bestNow):20)+(ef.type==='gainAdrenaline'&&p.adrenaline<3?8:0);
+ }
+ if(ef.type==='romanOohAhh'){
+   const target=cpuActionSearchTarget(state,pid,card);if(!target)return -Infinity;
+   const sim=cpuStateAfterEnablingAction(state,pid,card);if(!sim.players[pid].hand.some(x=>x.id===target.id))sim.players[pid].hand=[...sim.players[pid].hand,target];
+   return 70+(moveEligibility(sim,pid,target).legal?35:0)+(target.finisher?20:0);
+ }
+ if(ef.type==='searchChoice'){
+   const target=cpuActionSearchTarget(state,pid,card);if(!target)return -Infinity;
+   const already=p.hand.some(x=>x.id===target.id),base=target.finisher?65:target.trademark?54:42;
+   const baseP=state.players[pid],simP={...baseP,hand:[...baseP.hand,target],namedDiscount:{...baseP.namedDiscount}};
+   if(ef.discount)simP.namedDiscount[target.name]=(simP.namedDiscount[target.name]??0)+ef.discount;
+   const sim={...state,players:{...state.players,[pid]:simP}},targetLegal=moveEligibility(sim,pid,target).legal;
+   if(!legal.length&&!targetLegal)return -Infinity;
+   return base+(ef.discount??0)*9+(!legal.length?28:0)+(targetLegal?14:0)-(already?30:0);
+ }
+ if(ef.type==='topDeckTutor'){
+   const matches=p.deck.filter(c=>cpuTopDeckTutorMatch(card,c,pid,state)).length;if(!matches||!p.deck.length)return -Infinity;
+   const look=Math.max(1,ef.look??4),hitChance=Math.min(1,(matches/p.deck.length)*look);
+   const need=!legal.length?34:(bestNow<45?20:8);
+   return need+Math.round(hitChance*40)+(p.hand.length<=4?10:0);
+ }
+ if(ef.type==='drawThenDiscardSelf'){
+   const net=(ef.draw??1)-(ef.discard??1);
+   if(net<=0)return -Infinity;
+   return 34+net*18+(p.hand.length<=4?12:0)+(!legal.length?16:0);
+ }
+ if(ef.type==='paulHeymanPromo')return 48+(!legal.length?20:0)+(p.hand.length<=4?12:0);
+ return -Infinity;
+}
+function cpuBestAction(state,pid,minScore=1){
+ const ranked=state.players[pid].hand.filter(x=>canPlayAction(state,pid,x)).map((card,index)=>({card,index,score:cpuActionPriority(state,pid,card)})).filter(x=>x.score>=minScore).sort((a,b)=>b.score-a.score||a.index-b.index);
+ return ranked[0]?.card??null;
+}
+function cpuPreMoveAction(state,pid){return cpuBestAction(state,pid,35);}
+function cpuEnablingAction(state,pid){return cpuBestAction(state,pid,18);}
+function cpuManagerChoice(state,pid){
+ const p=state.players[pid];
+ return p.hand.filter(x=>canPlayManager(state,pid,x)).sort((a,b)=>Number(b.effect?.type==='paulHeymanManager')-Number(a.effect?.type==='paulHeymanManager'))[0]??null;
+}
+function cpuSpecialChoice(state,pid,movesNow=[]){
+ const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
+ const specials=p.hand.filter(x=>canPlaySpecial(state,pid,x));
+ for(const card of specials){
+   const type=card.special?.type;
+   if(type==='brassKnuckles'){
+     const late=def.hp<=Math.max(15,Math.ceil(def.maxHp*.3));
+     if(late||!movesNow.length)return card;
+     continue;
+   }
+   return card;
  }
  return null;
 }
@@ -150,13 +211,13 @@ function moveScore(state,pid,card){
  if(card.trademark)score+=card.submission?(submissionApplications<=4?8:0):8;
  if((card.damage??0)>=def.hp)score+=50;
  if(card.groundOpponent&&!groundState(def))score+=4;
- if(card.searchOnConnectName)score+=12;
+ if(card.searchOnConnectName){const target=p.hand.find(x=>x.name===card.searchOnConnectName)||p.deck.find(x=>x.name===card.searchOnConnectName);score+=12+(target?.finisher?24:target?.trademark?14:6)+(card.searchOnConnectDiscount??0)*5;}
  const searchEffects=(card.effects??[]).filter(e=>e.type==='search'&&(!e.ifSuperstarIds?.length||e.ifSuperstarIds.includes(p.superstar.id)));
  for(const e of searchEffects){
    const target=p.hand.find(x=>x.name===e.name)||p.deck.find(x=>x.name===e.name);
    score+=target?.finisher?20:10;
  }
- if((p.namedDiscount?.[card.name]??0)>0)score+=18;
+ if((p.namedDiscount?.[card.name]??0)>0)score+=18;if(card.discountIfNamedConnectedThisControl&&p.events?.connectedCardNamesThisControl?.[card.discountIfNamedConnectedThisControl.name])score+=18+(card.discountIfNamedConnectedThisControl.amount??0)*5;if(card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method])score+=16+(card.discountIfMethodConnectedThisControl.amount??0)*5;
  if(card.groundedOnly&&groundState(def))score+=8;
  const setupSpecial=p.superstar?.special;
  if(setupSpecial?.searchName&&setupSpecial?.afterName===card.name&&!(p.usedSpecialIds??[]).includes(p.hand.find(x=>x.special===setupSpecial)?.id))score+=28;
@@ -198,7 +259,7 @@ function moveScore(state,pid,card){
  if(p.superstar.id==='paige'){
    if((p.abilityUses??0)<2&&card.method==='strike'&&(card.damage??0)>=5)score+=12;
    if(card.method==='technical'&&(p.methodDiscount?.technical??0)>0)score+=16;
-   if((p.namedDiscount?.[card.name]??0)>0)score+=18;
+   if((p.namedDiscount?.[card.name]??0)>0)score+=18;if(card.discountIfNamedConnectedThisControl&&p.events?.connectedCardNamesThisControl?.[card.discountIfNamedConnectedThisControl.name])score+=18+(card.discountIfNamedConnectedThisControl.amount??0)*5;if(card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method])score+=16+(card.discountIfMethodConnectedThisControl.amount??0)*5;
  }
  if(p.superstar.id==='sami-zayn'){
    const hasHelluva=p.hand.some(x=>x.id==='sami-zayn-helluva-kick');
@@ -296,8 +357,12 @@ function cpuChooseOffense(state,pid,moves){
  return moveScore(state,pid,top)-moveScore(state,pid,alternative)<=10?alternative:top;
 }
 function cpuDiscardPreservationScore(card){
- let score=0;if(!card)return score;if(card.kind==='special')score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=35;else if(card.kind==='action')score+=28;else if(card.kind==='support')score+=24;else if(card.kind==='momentum')score+=8;return score;
+ let score=0;if(!card)return score;if(card.kind==='special')score+=140;if(card.pinEscape||card.special?.type==='pinEscape')score+=120;if(card.effect?.type==='onceTooOften')score+=105;if(card.finisher)score+=110;if(card.trademark)score+=60;if(card.kind==='move'){score+=(card.damage??0)*3+(card.cost??0);if(card.submission)score+=Math.max(0,card.submission.pressure??0)*8;const coverage=(card.counterStates?.length??0)+(card.counterSubmissionTargets?.length??0)+(card.counters?.length??0)+(card.countersCardIds?.length??0);score+=coverage*4;if(card.defensiveOnly)score-=20;}else if(card.kind==='manager')score+=75;else if(card.kind==='action')score+=card.oneUse?65:42;else if(card.kind==='support')score+=34;else if(card.kind==='momentum')score+=8;return score;
 }
+function cpuRepeatThreat(state,pid,incoming){
+ const p=state.players[pid];let score=0;if(incoming.finisher)score+=80;if(incoming.trademark)score+=28;if(incoming.submission){if(incomingSubmissionWouldTap(state,pid,incoming))score+=90;else if(incomingSubmissionIsCritical(state,pid,incoming))score+=55;}const damage=Math.max(0,incoming.damage??0);score+=damage>=12?35:damage>=8?22:damage>=6?10:0;if(damage>=p.hp)score+=80;if(p.hp<=Math.ceil(p.maxHp*.3))score+=12;return score;
+}
+function cpuLastConnectedMove(state,pid){const id=state.postMove?.attackerId===pid?state.postMove?.cardId:null;if(!id)return null;const p=state.players[pid];return [...(p.discard??[]),...(p.outOfPlay??[])].reverse().find(c=>c.id===id)??null;}
 function cpuSubmissionDecision(state,pid){
  const sub=state.submission,p=state.players[pid],def=state.players[sub.defenderId],threshold=submissionThreshold(def),pressure=Math.max(1,sub.damage??1);
  const damageNeeded=Math.max(0,threshold-(def.submissionDamage?.[sub.bodyPart]??0));
@@ -318,19 +383,40 @@ function cpuSubmissionDecision(state,pid){
 }
 export function cpuDecision(game,pid="p2"){
  const s=game.state(),p=s.players[pid];if(decisionOwner(s)!==pid)return null;
- if(s.phase==="COUNTER"){const incoming=s.proposedMove.card,normal=p.hand.find(x=>x.kind==="move"&&counterEligibility(s,pid,incoming,x).legal);if(normal)return{type:"counter",card:normal};const repeat=p.hand.find(x=>x.kind==="action"&&x.effect?.type==="onceTooOften"&&counterEligibility(s,pid,incoming,x).legal);if(repeat&&(incoming.finisher||(incoming.damage??0)>=8||(incoming.damage??0)>=p.hp))return{type:"counter",card:repeat};const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}if(repeat)return{type:"counter",card:repeat};return{type:"passCounter"};}
- if(s.phase==="PIN_RESPONSE"){const c=p.hand.find(x=>x.pinEscape||x.special?.type==='pinEscape');const chance=healthOnlyPinChance(p);return c&&chance>=20?{type:"pinEscape",card:c}:{type:"passPin"};}
+ if(s.phase==="COUNTER"){
+   const incoming=s.proposedMove.card;
+   const legalNormal=p.hand.filter(x=>x.kind==="move"&&counterEligibility(s,pid,incoming,x).legal);
+   if(legalNormal.length){
+     const nonFinisher=legalNormal.filter(x=>!x.finisher),pool=nonFinisher.length?nonFinisher:legalNormal;
+     const chosen=[...pool].sort((a,b)=>{const av=cpuDiscardPreservationScore(a)-(a.defensiveOnly?18:Math.min(22,(a.damage??0)*2)),bv=cpuDiscardPreservationScore(b)-(b.defensiveOnly?18:Math.min(22,(b.damage??0)*2));return av-bv;})[0];
+     return{type:"counter",card:chosen};
+   }
+   const repeats=p.hand.filter(x=>x.kind==="action"&&x.effect?.type==="onceTooOften"&&counterEligibility(s,pid,incoming,x).legal),repeat=repeats[0],repeatThreat=repeat?cpuRepeatThreat(s,pid,incoming):0;
+   if(repeat&&(repeatThreat>=45||(repeats.length>=2&&repeatThreat>=25)))return{type:"counter",card:repeat};
+   if(repeat&&repeatThreat<20)return{type:"passCounter"};
+   const auto=autoCounterEligibility(s,pid,incoming);if(auto.legal&&cpuShouldAutoCounter(s,pid,incoming)){const indices=cpuAutoCounterSelection(s,pid,auto.cost);if(indices)return{type:"autoCounter",indices};}
+   if(repeat&&repeatThreat>=25)return{type:"counter",card:repeat};
+   return{type:"passCounter"};
+ }
+ if(s.phase==="PIN_RESPONSE"){
+   const escapes=p.hand.filter(x=>x.pinEscape||x.special?.type==='pinEscape'),c=escapes[0],chance=healthOnlyPinChance(p);
+   const useEscape=!!c&&chance>=20;
+   return useEscape?{type:"pinEscape",card:c}:{type:"passPin"};
+ }
  if(s.phase==="SUBMISSION_RESPONSE")return{type:"passSubmissionResponse"};
  if(s.phase==="SUBMISSION_MAINTAIN")return p.hand.length?cpuSubmissionDecision(s,pid):{type:"release"};
  if(s.phase==="ACTION"){
-   const defId=pid==="p1"?"p2":"p1",def=s.players[defId],hpRatio=healthRatio(def);
-   const movesNow=cpuLegalOffense(s,pid);
+   const defId=pid==="p1"?"p2":"p1",def=s.players[defId];
+   const movesNow=cpuLegalOffense(s,pid),lastMove=cpuLastConnectedMove(s,pid);
    const readyFinisher=movesNow.find(x=>x.finisher);
    const submissionThreat=movesNow.filter(x=>x.submission).map(card=>({card,applications:submissionApplicationsToTap(s,defId,card)})).sort((a,b)=>a.applications-b.applications)[0];
    const pinChance=healthOnlyPinChance(def);
    const submissionPreferred=!!submissionThreat&&(submissionThreat.applications<=1||(submissionThreat.applications===2&&p.hand.length>=2&&pinChance<50));
-   if(canAttemptPin(s,pid).legal&&!readyFinisher&&!submissionPreferred&&pinChance>=20)return{type:"pin"};
-   const sp=p.hand.find(x=>canPlaySpecial(s,pid,x));if(sp)return{type:"special",card:sp};
+   const pinLegal=canAttemptPin(s,pid).legal;
+   const pinThreshold=20;
+   if(pinLegal&&!submissionPreferred&&pinChance>=pinThreshold&&(!readyFinisher||lastMove?.finisher))return{type:"pin"};
+   const manager=cpuManagerChoice(s,pid);if(manager)return{type:"manager",card:manager};
+   const sp=cpuSpecialChoice(s,pid,movesNow);if(sp)return{type:"special",card:sp};
    const setupAction=cpuPreMoveAction(s,pid);if(setupAction)return{type:"action",card:setupAction};
    const setupSupport=p.hand.find(x=>canPlaySupport(s,pid,x)&&(!p.support||p.support.id!==x.id));
    if(setupSupport&&movesNow.length)return{type:"support",card:setupSupport};
@@ -338,12 +424,14 @@ export function cpuDecision(game,pid="p2"){
      const enabling=cpuEnablingAction(s,pid);if(enabling)return{type:"action",card:enabling};
      const plannedMomentum=cpuBestMomentum(s,pid);if(plannedMomentum)return{type:"momentum",card:plannedMomentum};
    } else {
-     const normalMomentum=p.hand.find(x=>canPlayMomentum(s,pid,x));if(normalMomentum)return{type:"momentum",card:normalMomentum};
+     const normalMomentum=cpuBestMomentum(s,pid);if(normalMomentum)return{type:"momentum",card:normalMomentum};
    }
    const moves=p.hand.filter(x=>x.kind==="move"&&!x.defensiveOnly&&moveEligibility(s,pid,x).legal);
    const chosenMove=cpuChooseOffense(s,pid,moves);
    if(chosenMove)return{type:"move",card:chosenMove};
-   const utility=p.hand.find(x=>(x.kind==="action"&&canPlayAction(s,pid,x)&&x.effect?.type==='gainAdrenaline')||(x.kind==="support"&&canPlaySupport(s,pid,x))||(x.kind==="manager"&&canPlayManager(s,pid,x)));if(utility)return{type:utility.kind,card:utility};
+   const utilityManager=cpuManagerChoice(s,pid);if(utilityManager)return{type:"manager",card:utilityManager};
+   const utilityAction=cpuBestAction(s,pid,18);if(utilityAction)return{type:"action",card:utilityAction};
+   const utilitySupport=p.hand.find(x=>canPlaySupport(s,pid,x));if(utilitySupport)return{type:"support",card:utilitySupport};
    return{type:"pass"};
  }
  return null;

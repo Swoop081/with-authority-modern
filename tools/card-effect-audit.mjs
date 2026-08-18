@@ -19,7 +19,7 @@ const handledMoveEffects = new Set([
 const handledUtilityEffects = new Set([
   "discountNext", "buffNext", "gainAdrenaline", "healSelf", "buffNextMethod", "romanOohAhh",
   "fightForever", "drawThenDiscardSelf", "topDeckTutor", "searchChoice", "onceTooOften",
-  "crowdSupport", "peopleChampionship", "what"
+  "crowdSupport", "peopleChampionship", "what", "paulHeymanManager", "paulHeymanPromo"
 ]);
 const handledSpecialTypes = new Set([
   "brassKnuckles", "cancelOpponentUtility", "counterChooseDiscount", "counterDiscountMethod", "counterDiscountNamed",

@@ -1,13 +1,13 @@
-import { totalMomentum } from "./utils.js?v=0.13.12";
-import { healthRatio, healthZone } from "./health.js?v=0.13.12";
+import { totalMomentum } from "./utils.js?v=0.13.18";
+import { healthRatio, healthZone } from "./health.js?v=0.13.18";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
 export function canPlayMomentum(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="momentum"&&(p?.turn?.momentumPlayed??0)<(p?.turn?.momentumPlayLimit??1); }
 export function canPlayEntrance(){ return false; }
-export function canPlayAction(state,playerId,card){ const p=state.players[playerId],opp=state.players[playerId==="p1"?"p2":"p1"]; const cost=Math.max(0,card?.cost??0); const afterTurn=Math.max(0,Number(card?.playableAfterTurn??0)); const cond=card?.playCondition??{}; const grounded=["on-mat","grounded"].includes(opp?.posture); if(cond.selfHpAtOrBelowPct!=null&&p?.hp>p?.maxHp*cond.selfHpAtOrBelowPct)return false; if(cond.opponentGrounded&&!grounded)return false; if(cond.afterConnectedMethod&&!p?.events?.connectedMethodsThisControl?.[cond.afterConnectedMethod])return false; if(cond.afterConnectedCard&&!p?.events?.connectedCardNamesThisControl?.[cond.afterConnectedCard])return false; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="action"&&(p?.turn?.actionPlayed??0)<1&&!p?.actionLocked&&totalMomentum(p)>=cost&&(state.turnNumber??1)>afterTurn; }
+export function canPlayAction(state,playerId,card){ const p=state.players[playerId],opp=state.players[playerId==="p1"?"p2":"p1"]; if(card?.defensiveOnly||card?.effect?.type==="onceTooOften")return false; const cost=Math.max(0,card?.cost??0); const afterTurn=Math.max(0,Number(card?.playableAfterTurn??0)); const cond=card?.playCondition??{}; const grounded=["on-mat","grounded"].includes(opp?.posture); if(cond.selfHpAtOrBelowPct!=null&&p?.hp>p?.maxHp*cond.selfHpAtOrBelowPct)return false; if(cond.opponentGrounded&&!grounded)return false; if(cond.afterConnectedMethod&&!p?.events?.connectedMethodsThisControl?.[cond.afterConnectedMethod])return false; if(cond.afterConnectedCard&&!p?.events?.connectedCardNamesThisControl?.[cond.afterConnectedCard])return false; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="action"&&(p?.turn?.actionPlayed??0)<1&&!p?.actionLocked&&totalMomentum(p)>=cost&&(state.turnNumber??1)>afterTurn; }
 export function canPlaySupport(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="support"&&(p?.turn?.supportPlayed??0)<1; }
-export function canPlayManager(state,playerId,card){ const p=state.players[playerId]; return state.phase==="ACTION"&&state.playerInControl===playerId&&card?.kind==="manager"&&!p?.activeManager; }
+export function canPlayManager(state,playerId,card){ const p=state.players[playerId]; if(!p||card?.kind!=="manager"||state.phase!=="ACTION"||state.playerInControl!==playerId||p.activeManager)return false; if(card.superstarId&&card.superstarId!==p.superstar?.id)return false; if(Array.isArray(card.allowedSuperstarIds)&&card.allowedSuperstarIds.length&&!card.allowedSuperstarIds.includes(p.superstar?.id))return false; return true; }
 export function canPlaySpecial(state,playerId,card){ const p=state.players[playerId]; if(!p||card?.kind!=="special")return false; if((p.usedSpecialIds??[]).includes(card.id))return false; if(state.phase!=="ACTION"||state.playerInControl!==playerId)return false; if(card?.special?.type==="brassKnuckles")return !!p.events?.brassKnucklesWindow; if(card?.special?.type==="jarOfTeeth")return !!p.events?.jarOfTeethWindow; if(card?.special?.type==="paulHeyman")return !!p.events?.brocksGermanConnectedThisControl; if(["tiffanyEpiphany","fileComplaint","lastRites","fullSpeed","claymoreCountdown"].includes(card?.special?.type))return true; return false; }
 export function moveEligibility(state,playerId,card){
  const p=state.players[playerId]; const fail=reason=>({ok:false,legal:false,reason});
@@ -35,7 +35,7 @@ const incomingTypes=incoming=>[incoming?.counterState,incoming?.tacticalType,inc
 export function canCounter(incoming,counter){
  if(!incoming||counter?.kind!=="move")return false;
  // Jawbreaker is a positional escape, not a mirror exchange: it cannot answer another Jawbreaker.
- if(incoming.id==='jawbreaker'&&counter.id==='jawbreaker')return false;
+ if((incoming.id==='jawbreaker'||incoming.name==='Jawbreaker')&&(counter.id==='jawbreaker'||counter.name==='Jawbreaker'))return false;
  const direct=(counter.countersCardIds??[]).includes(incoming.id);
  const stateAware=(counter.counterStates?.length??0)>0||(counter.counterSubmissionTargets?.length??0)>0;
  // Migrated counters use the eight physical states / four submission body targets.

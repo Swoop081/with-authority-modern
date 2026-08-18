@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.12";
-import { collectionCards } from "./collection.js?v=0.13.12";
-import { superstars } from "./superstars.js?v=0.13.12";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.12";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.12";
+import { decks } from "./decks.js?v=0.13.18";
+import { collectionCards } from "./collection.js?v=0.13.18";
+import { superstars } from "./superstars.js?v=0.13.18";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.18";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.18";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -206,7 +206,7 @@ export function validateDeckDraft(profile, sid, draft, entranceId = selectedEntr
 }
 
 export function normalizeDeckFinishes(_p, _s, entries = []) { return entries; }
-export function optimizeDeck(profile, sid) { return autoFillOwnedDraft(profile, sid, buildOwnedRecommendedDraft(profile, sid)); }
+export function optimizeDeck(profile, sid) { return buildBestOwnedRecommendedDraft(profile, sid); }
 
 // Recommended decks are blueprints, not free cards. Build only copies the
 // player actually owns, preserving authored order and Lead Off order.
@@ -217,6 +217,155 @@ export function buildOwnedRecommendedDraft(profile, sid) {
     if (count < owned) { out.push({ id, foil: false }); used.set(id, count + 1); }
   }
   return out;
+}
+
+
+function maxDeckCopies(card) {
+  const defaultCap = card?.kind === "momentum" ? 12 : 5;
+  return Math.min(defaultCap, Number.isFinite(card?.maxCopies) ? card.maxCopies : defaultCap);
+}
+
+function canUseOwnedCandidate(profile, draft, card) {
+  if (!card || usedCount(draft, card.id) >= Math.min(maxDeckCopies(card), ownedTotal(profile, card.id))) return false;
+  return !card.copyFamily || usedCopyFamilyCount(draft, card) < 5;
+}
+
+function replacementScore(target, candidate, inLeadOff = false) {
+  if (!candidate) return -Infinity;
+  if (inLeadOff && !["move","momentum"].includes(candidate.kind)) return -Infinity;
+  let score = 0;
+  const targetBucket = categoryForCard(target), candidateBucket = categoryForCard(candidate);
+  if (targetBucket === candidateBucket) score += 120;
+  if (target?.kind === candidate.kind) score += 45;
+  if (target?.method && target.method === candidate.method) score += 30;
+  if (target?.moveType && target.moveType === candidate.moveType) score += 18;
+  if (!!target?.finisher === !!candidate.finisher) score += 12;
+  if (!!target?.trademark === !!candidate.trademark) score += 10;
+  if (Number.isFinite(target?.cost) && Number.isFinite(candidate.cost)) score -= Math.abs(target.cost - candidate.cost) * 3;
+  score += Math.min(4, Number(candidate.rarity ?? 1)) * 2;
+  return score;
+}
+
+function preferOwnedDraftFoils(profile, draft = []) {
+  const usedFoils = new Map();
+  return draft.map(raw => {
+    const entry = typeof raw === "string" ? { id: raw, foil: false } : { ...raw };
+    const ownedFoils = Math.max(0, Number(profile?.ownedCards?.[entry.id]?.foil) || 0);
+    const used = usedFoils.get(entry.id) ?? 0;
+    entry.foil = used < ownedFoils;
+    if (entry.foil) usedFoils.set(entry.id, used + 1);
+    return entry;
+  });
+}
+
+// Build as close to the authored 60-page blueprint as the Collection permits,
+// then fill every unavailable recommended slot with the best legal owned
+// substitute. This is the canonical player-facing "build what I can" routine.
+export function buildBestOwnedRecommendedDraft(profile, sid) {
+  const star = starById.get(sid), wantedCards = decks[sid] ?? [];
+  if (!star || wantedCards.length !== 60) return [];
+  const candidates = eligibleOwnedCards(profile, sid);
+  const out = [];
+  const remainingNeed = new Map();
+  for (const card of wantedCards) remainingNeed.set(card.id, (remainingNeed.get(card.id) ?? 0) + 1);
+
+  for (let index = 0; index < wantedCards.length; index += 1) {
+    const target = wantedCards[index];
+    remainingNeed.set(target.id, Math.max(0, (remainingNeed.get(target.id) ?? 0) - 1));
+    if (canUseOwnedCandidate(profile, out, target)) {
+      out.push({ id: target.id, foil: false });
+      continue;
+    }
+
+    const inLeadOff = index < 5;
+    const choose = allowReserved => candidates
+      .filter(card => {
+        if (!canUseOwnedCandidate(profile, out, card)) return false;
+        if (inLeadOff && !["move","momentum"].includes(card.kind)) return false;
+        if (!allowReserved) {
+          const availableAfterUse = ownedTotal(profile, card.id) - usedCount(out, card.id) - 1;
+          if (availableAfterUse < (remainingNeed.get(card.id) ?? 0)) return false;
+        }
+        return true;
+      })
+      .sort((a,b) => replacementScore(target,b,inLeadOff) - replacementScore(target,a,inLeadOff) || a.name.localeCompare(b.name))[0];
+
+    const replacement = choose(false) ?? choose(true);
+    if (replacement) out.push({ id: replacement.id, foil: false });
+  }
+  return preferOwnedDraftFoils(profile, out);
+}
+
+export function recommendedDeckMissingCount(sid, draft = []) {
+  const recommended = new Map(), current = new Map();
+  for (const card of decks[sid] ?? []) recommended.set(card.id, (recommended.get(card.id) ?? 0) + 1);
+  for (const raw of draft) {
+    const id = raw?.id ?? raw;
+    if (id) current.set(id, (current.get(id) ?? 0) + 1);
+  }
+  let missing = 0;
+  for (const [id, wanted] of recommended) missing += Math.max(0, wanted - (current.get(id) ?? 0));
+  return missing;
+}
+
+export function recommendedEntranceId(profile, sid) {
+  const star = starById.get(sid);
+  if (!star) return selectedEntranceId(profile, sid);
+  const authored = star.entranceId ? byId.get(star.entranceId) : null;
+  if (authored && ownedTotal(profile, authored.id) > 0 && entranceEligibilityForSuperstar(star, authored).legal) return authored.id;
+  return selectedEntranceId(profile, sid);
+}
+
+export function recommendedDeckComparison(profile, sid, draft = [], entranceId = selectedEntranceId(profile, sid)) {
+  const recommended = new Map(), current = new Map();
+  for (const card of decks[sid] ?? []) recommended.set(card.id, (recommended.get(card.id) ?? 0) + 1);
+  for (const raw of draft) {
+    const id = raw?.id ?? raw;
+    if (id) current.set(id, (current.get(id) ?? 0) + 1);
+  }
+  const missingRows = [];
+  const extras = [];
+  let matched = 0;
+  for (const [id, wanted] of recommended) {
+    const have = current.get(id) ?? 0;
+    matched += Math.min(wanted, have);
+    const count = Math.max(0, wanted - have);
+    if (!count) continue;
+    const ownedReady = Math.min(count, Math.max(0, ownedTotal(profile, id) - have));
+    missingRows.push({ id, card: byId.get(id), count, ownedReady, toCollect: count - ownedReady });
+  }
+  for (const [id, have] of current) {
+    const excess = Math.max(0, have - (recommended.get(id) ?? 0));
+    if (excess) extras.push({ id, card: byId.get(id), count: excess });
+  }
+
+  const extraPool = extras.map(row => ({ ...row }));
+  const replacements = [];
+  for (const row of missingRows) {
+    let remaining = row.count;
+    while (remaining-- > 0) {
+      const targetBucket = categoryForCard(row.card);
+      let index = extraPool.findIndex(extra => extra.count > 0 && categoryForCard(extra.card) === targetBucket);
+      if (index < 0) index = extraPool.findIndex(extra => extra.count > 0);
+      if (index < 0) break;
+      const extra = extraPool[index];
+      extra.count -= 1;
+      const existing = replacements.find(x => x.targetId === row.id && x.replacementId === extra.id && x.ownedReady === (row.ownedReady > 0));
+      if (existing) existing.count += 1;
+      else replacements.push({ targetId: row.id, target: row.card, replacementId: extra.id, replacement: extra.card, count: 1, ownedReady: row.ownedReady > 0 });
+    }
+  }
+  const authoredEntrance = starById.get(sid)?.entranceId ?? null;
+  const entranceReady = !!authoredEntrance && authoredEntrance !== entranceId && ownedTotal(profile, authoredEntrance) > 0 && entranceEligibilityForSuperstar(starById.get(sid), byId.get(authoredEntrance)).legal;
+  return {
+    matched,
+    missing: Math.max(0, 60 - matched),
+    coverage: Math.round((matched / Math.max(1, (decks[sid] ?? []).length)) * 100),
+    missingRows,
+    replacements,
+    authoredEntranceId: authoredEntrance,
+    entranceUpgradeReady: entranceReady
+  };
 }
 
 export function autoFillOwnedDraft(profile, sid, draft = []) {

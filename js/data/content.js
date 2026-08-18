@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.12";
+import { enrichCounterState } from "./counter-states.js?v=0.13.18";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1169,13 +1169,14 @@ export const allGameplayCards = [
     },
     "moveType": "grapple",
     "method": "technical",
-    "superstarId": null,
-    "rarity": 2,
-    "rulesText": "Grounds opponent.",
+    "superstarId": "seth-rollins",
+    "rarity": 3,
+    "rulesText": "Seth Rollins-exclusive Trademark. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
+    "trademark": true,
     "effects": [],
     "counterState": "front-control"
   },
@@ -5190,7 +5191,7 @@ export const allGameplayCards = [
   },
   {
     "id": "special-brock-lesnar-paul-heyman",
-    "name": "My Name Is Paul Heyman",
+    "name": "The Advocate’s Plan",
     "kind": "special",
     "setId": "summerslam-series-1",
     "rarity": 4,
@@ -10114,6 +10115,39 @@ export const allGameplayCards = [
     "rulesText": "Reactive one-use Action. When your opponent plays a Move they have already connected with earlier this match, play this in the Counter window. Reverse that repeated Move and gain Control. This copy stays out of play after use.",
     "effect": {
       "type": "onceTooOften"
+    }
+  },
+  {
+    "id": "manager-paul-heyman",
+    "name": "Paul Heyman",
+    "kind": "manager",
+    "setId": "raw-series-1",
+    "rarity": 4,
+    "boosterOnly": true,
+    "allowedSuperstarIds": [
+      "brock-lesnar",
+      "roman-reigns"
+    ],
+    "rulesText": "Brock Lesnar or Roman Reigns only. When Paul Heyman enters play, search/draw 1 non-Finisher Superstar-exclusive Move. Once per match, after one of your Superstar-exclusive Moves is successfully Countered, draw 1 page.",
+    "effect": {
+      "type": "paulHeymanManager",
+      "counteredExclusiveDraw": 1
+    }
+  },
+  {
+    "id": "my-name-is-paul-heyman",
+    "name": "My Name Is Paul Heyman",
+    "kind": "action",
+    "setId": "survivor-series-series-1",
+    "cost": 2,
+    "rarity": 3,
+    "boosterOnly": true,
+    "oneUse": true,
+    "rulesText": "One-use Action. Look at the top 5 pages of your Playbook. Put 1 Move or Action from among them into your hand and put the rest on the bottom. If the card taken is Superstar-exclusive to your Superstar, gain +1 Adrenaline.",
+    "effect": {
+      "type": "paulHeymanPromo",
+      "look": 5,
+      "exclusiveAdrenaline": 1
     }
   },
 

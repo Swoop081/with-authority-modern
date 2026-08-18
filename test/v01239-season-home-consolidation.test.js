@@ -12,8 +12,9 @@ test('v0.12.39 Home uses one Season destination instead of duplicate countdown a
   assert.match(app, /\$\("#menu-season-overview"\)\?\.addEventListener\("click", showSeasons\)/);
 });
 
-test('v0.12.39 consolidated Season hero shows countdown, next-tier XP and Final Boss destination', () => {
-  assert.match(app, /season-home-countdown/);
+test('v0.12.39 consolidated Season hero shows premium title, next-tier XP and Final Boss destination', () => {
+  assert.match(app, /season-home-title/);
+  assert.doesNotMatch(app, /data-season-countdown/);
   assert.match(app, /XP TO NEXT TIER/);
   assert.match(app, /season-home-progress/);
   assert.match(app, /TIER 100 · THE FINAL BOSS/);

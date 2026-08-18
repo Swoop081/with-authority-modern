@@ -1,6 +1,6 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.9 — Season + Live Event Viewport Containment Hotfix**.
+Current working build: **v0.13.18 — Superstar Starter Deck + Recommended Build Assistance**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Event towers, Ladder and Championship Road.
 
@@ -16,4 +16,4 @@ A mobile-first WWE collectible card game prototype with 60-page Superstar decks,
 - Economy values remain locked at **2,500 UP per Store Superstar**, **300 UP per Store booster**, **10 UP excess Normal**, and **20 UP excess Foil**.
 - My Legacy Save & Backup remains one stable `WWE-Legacy-Save.json` file with validation, import confirmation and one-step rollback.
 
-See `RELEASE-NOTES-v0.13.9.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.18.md` and `BUILD-CERTIFICATION.md`.

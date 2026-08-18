@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=0.13.12";
+import { sets } from "./sets.js?v=0.13.18";
 
 // v0.13.7 — one canonical player release calendar. Launch sets are live from
 // install; authored future sets become player-live at local midnight on their

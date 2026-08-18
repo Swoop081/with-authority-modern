@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=0.13.12';
-import { decks } from '../js/data/decks.js?v=0.13.12';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.12';
+import { superstars } from '../js/data/superstars.js?v=0.13.18';
+import { decks } from '../js/data/decks.js?v=0.13.18';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.18';
 
 test('v0.12.32 Entrance Momentum is preloaded but Entrance Adrenaline waits for first Control',()=>{
   const g=new MatchEngine({p1:superstars.andreTheGiant,p2:superstars.theRock,decks,rng:()=>0.5});

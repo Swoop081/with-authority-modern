@@ -129,7 +129,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Ownership", "You can only save copies you actually own. Normal and Foil copies both count toward ownership of that card."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
-      ["Recommended decks", "Authored decks are blueprints, not free cards. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap. Deck Lab builds around what you own and lets you restructure a legal 60-page deck freely."]
+      ["Recommended decks", "Your first Superstar receives the complete authored starter deck. Later Superstar unlocks receive a legal 60-page starter built from one copy of their exclusive identity cards plus shared Common/Uncommon replacements. The authored 60-page list remains the recommended build: Deck Lab compares your current deck against it, suggests replacements for missing cards, and recommends newly collected Finishers, Trademarks, Actions and the Superstar-specific Entrance as you acquire them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
     ]
   },
   {

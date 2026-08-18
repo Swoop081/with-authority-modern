@@ -1,7 +1,7 @@
-import { decks } from "./decks.js?v=0.13.12";
-import { collectionCards } from "./collection.js?v=0.13.12";
-import { superstars } from "./superstars.js?v=0.13.12";
-import { validateDeckDraft, selectedEntranceId } from "./deck-builder.js?v=0.13.12";
+import { decks } from "./decks.js?v=0.13.18";
+import { collectionCards } from "./collection.js?v=0.13.18";
+import { superstars } from "./superstars.js?v=0.13.18";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.18";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -98,7 +98,29 @@ export function findPackUpgrades(profile, pack = []) {
 
   for (const pull of pack) {
     const card = pull?.card;
-    if (!card || ["superstar","entrance"].includes(card.kind) || pull.universePointsValue) continue;
+    if (!card || pull.universePointsValue) continue;
+
+    // A pulled Superstar-specific Entrance is the authored recommendation over
+    // the shared Amazing Entrance. Surface it immediately for the matching
+    // unlocked Superstar; Auto mode can equip it without touching the 60 pages.
+    if (card.kind === "entrance") {
+      for (const sid of unlocked) {
+        const star = starById.get(sid);
+        if (!star || star.entranceId !== card.id || selectedEntranceId(profile, sid) === card.id) continue;
+        if (!entranceEligibilityForSuperstar(star, card).legal) continue;
+        upgrades.push({
+          type: "entrance",
+          superstarId: sid,
+          pull,
+          cardId: card.id,
+          reason: `${card.name} is ${star.name}'s authored Entrance and is recommended over the shared Amazing Entrance.`,
+          addName: card.name,
+          removeName: byId.get(selectedEntranceId(profile, sid))?.name ?? "Current Entrance"
+        });
+      }
+      continue;
+    }
+    if (card.kind === "superstar") continue;
     for (const sid of unlocked) {
       let draft = working.get(sid);
       if (!draft) continue;
@@ -139,6 +161,9 @@ export function findPackUpgrades(profile, pack = []) {
 export function applyUpgrade(profile, upgrade) {
   if (!profile || !upgrade?.superstarId) return false;
   const sid = upgrade.superstarId;
+  if (upgrade.type === "entrance") {
+    return setSelectedEntrance(profile, sid, upgrade.cardId);
+  }
   const saved = profile?.savedDecks?.[sid];
   if (!Array.isArray(saved) || saved.length !== 60) return false;
   const draft = saved.map(normalizedEntry);
@@ -167,6 +192,6 @@ export function applyUpgrade(profile, upgrade) {
   if (!validateDeckDraft(profile, sid, draft, selectedEntranceId(profile,sid)).healthy) return false;
   profile.savedDecks[sid] = draft;
   profile.deckNeedsCards ??= {};
-  profile.deckNeedsCards[sid] = 0;
+  profile.deckNeedsCards[sid] = recommendedDeckMissingCount(sid, draft);
   return true;
 }

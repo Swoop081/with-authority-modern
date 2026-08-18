@@ -1248,6 +1248,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "RAW1-038"
   },
   {
+    "id": "manager-paul-heyman",
+    "setId": "raw-series-1",
+    "cardNumber": 39,
+    "cardCode": "RAW1-039"
+  },
+  {
     "id": "the-rock-lay-the-smack-down",
     "setId": "season-1-final-boss",
     "cardNumber": 1,
@@ -2608,6 +2614,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "survivor-series-series-1",
     "cardNumber": 49,
     "cardCode": "SVS1-049"
+  },
+  {
+    "id": "my-name-is-paul-heyman",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 50,
+    "cardCode": "SVS1-050"
   },
   {
     "id": "tilt-a-whirl-headscissors",

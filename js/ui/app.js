@@ -1,35 +1,35 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.12";
-import { superstars } from "../data/superstars.js?v=0.13.12";
-import { decks } from "../data/decks.js?v=0.13.12";
-import { sets } from "../data/sets.js?v=0.13.12";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.12";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.12";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.12";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.12";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.12";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.12";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.12";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.12";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.12";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.12";
-import { totalMomentum } from "../engine/utils.js?v=0.13.12";
-import { healthZone } from "../engine/health.js?v=0.13.12";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.12";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.12";
-import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.12";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.12";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.12";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.12";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.12";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.12";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.12";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.12";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.12";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.12";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.12";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.12";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.12";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.12";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.18";
+import { superstars } from "../data/superstars.js?v=0.13.18";
+import { decks } from "../data/decks.js?v=0.13.18";
+import { sets } from "../data/sets.js?v=0.13.18";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.18";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.18";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.18";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.18";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.18";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.18";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.18";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.18";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.18";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.18";
+import { totalMomentum } from "../engine/utils.js?v=0.13.18";
+import { healthZone } from "../engine/health.js?v=0.13.18";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.18";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.18";
+import { LADDER_LIVES, LADDER_BRANCHES, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.18";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.18";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.18";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.18";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.18";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.18";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.18";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.18";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.18";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.18";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.18";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.18";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.18";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.18";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -590,13 +590,14 @@ function renderUnlockCelebration() {
   if (!star || !card) { finishUnlockCelebration(false); return; }
   const set = sets[star.setId];
   const rarity = Math.max(1, Math.min(4, Number(card.rarity ?? 4)));
-  const deckNeeds = Math.max(0, Number(profile?.deckNeedsCards?.[event.superstarId] ?? (event.deckReady ? 0 : 60)) || 0);
-  const deckReady = deckNeeds === 0;
+  const savedUnlockDeck = profile?.savedDecks?.[event.superstarId];
+  const deckReady = Array.isArray(savedUnlockDeck) && savedUnlockDeck.length === 60;
+  const deckNeeds = Math.max(0, Number(profile?.deckNeedsCards?.[event.superstarId] ?? event.recommendedMissing ?? (deckReady ? 0 : 60)) || 0);
   const unlockCopy = deckReady
-    ? `${star.nickname ? `${star.nickname} joins your WWE Legacy roster.` : `${star.name} joins your WWE Legacy roster.`} Their recommended 60-page deck is ready right now.`
-    : `${star.nickname ? `${star.nickname} joins your WWE Legacy roster.` : `${star.name} joins your WWE Legacy roster.`} Open Deck Lab to build the remaining ${deckNeeds} pages from your Collection.`;
-  const deckStatus = deckReady ? 'READY TO PLAY' : `${deckNeeds} PAGES TO BUILD`;
-  const footnote = deckReady ? 'Superstar unlocked permanently · Recommended deck installed · Open Deck Lab to tune it' : 'Superstar unlocked permanently · Open Deck Lab for the fastest path to a complete legal deck';
+    ? `${star.nickname ? `${star.nickname} joins your WWE Legacy roster.` : `${star.name} joins your WWE Legacy roster.`} A legal 60-page starter deck is ready now.${deckNeeds ? ` Deck Lab is tracking ${deckNeeds} recommended upgrade slot${deckNeeds===1?'':'s'} as your Collection grows.` : ' You already own the complete recommended build.'}`
+    : `${star.nickname ? `${star.nickname} joins your WWE Legacy roster.` : `${star.name} joins your WWE Legacy roster.`} Open Deck Lab to finish a playable deck from your Collection.`;
+  const deckStatus = deckReady ? 'READY TO PLAY' : `${Math.max(0,60-(savedUnlockDeck?.length ?? 0))} PAGES TO BUILD`;
+  const footnote = deckReady ? 'Superstar unlocked permanently · Starter deck installed · Recommended Build tracking active' : 'Superstar unlocked permanently · Open Deck Lab for the fastest path to a complete legal deck';
   root.innerHTML = `<section class="superstar-unlock-showcase set-${star.setId}">
     <div class="superstar-unlock-effects" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
     <div class="superstar-unlock-watermark" aria-hidden="true">UNLOCKED</div>
@@ -866,11 +867,11 @@ function renderBoosters() {
     </section>
     <section class="upgrade-panel booster-modal-upgrades">
       <div class="section-title"><div><span>DECK ASSISTANCE</span><h3>${pendingUpgrades.length ? `${pendingUpgrades.length} upgrade${pendingUpgrades.length===1?'':'s'} found` : appliedPackUpgrades.length ? `${appliedPackUpgrades.length} upgrade${appliedPackUpgrades.length===1?'':'s'} applied` : 'No safe upgrades found'}</h3></div><span>${profile.deckAssistance==='auto'?'Auto-upgrade':manual?'Manual mode · suggestions only':'Choose what to change'}</span></div>
-      ${appliedPackUpgrades.length ? `<div class="applied-upgrade-list">${appliedPackUpgrades.map(u=>`<article class="upgrade-row applied-upgrade-row"><div class="upgrade-pull-thumb">${cardArtFace(u.pull.card)}</div><div><b>${superstarById[u.superstarId]?.name}</b><span><strong>APPLIED</strong> · ${u.type==='foil-preference'?`USE ${u.addName}`:`ADD ${u.addName} · REMOVE ${u.removeName}`}</span><small>${u.reason}</small></div></article>`).join('')}</div>` : ''}
+      ${appliedPackUpgrades.length ? `<div class="applied-upgrade-list">${appliedPackUpgrades.map(u=>`<article class="upgrade-row applied-upgrade-row"><div class="upgrade-pull-thumb">${cardArtFace(u.pull.card)}</div><div><b>${superstarById[u.superstarId]?.name}</b><span><strong>APPLIED</strong> · ${u.type==='foil-preference'?`USE ${u.addName}`:u.type==='entrance'?`EQUIP ${u.addName} · REPLACE ${u.removeName}`:`ADD ${u.addName} · REMOVE ${u.removeName}`}</span><small>${u.reason}</small></div></article>`).join('')}</div>` : ''}
       ${pendingUpgrades.length ? pendingUpgrades.map((u,i)=>`<article class="upgrade-row">
         <div class="upgrade-pull-thumb">${cardArtFace(u.pull.card)}</div>
-        <div><b>${superstarById[u.superstarId]?.name}</b><span><strong>${u.type==='foil-preference'?'FOIL PREFERENCE':'RECOMMENDED BUILD'}</strong> · ${u.type==='foil-preference'?`USE ${u.addName}`:`ADD ${u.addName} · REMOVE ${u.removeName}`}</span><small>${u.reason}</small></div>
-        ${manual?'':`<div><button data-accept-upgrade="${i}" class="primary">${u.type==='foil-preference'?'Use Foil':'Upgrade Deck'}</button><button data-decline-upgrade="${i}" class="secondary">Keep As-Is</button></div>`}
+        <div><b>${superstarById[u.superstarId]?.name}</b><span><strong>${u.type==='foil-preference'?'FOIL PREFERENCE':u.type==='entrance'?'ENTRANCE UPGRADE':'RECOMMENDED BUILD'}</strong> · ${u.type==='foil-preference'?`USE ${u.addName}`:u.type==='entrance'?`EQUIP ${u.addName} · REPLACE ${u.removeName}`:`ADD ${u.addName} · REMOVE ${u.removeName}`}</span><small>${u.reason}</small></div>
+        ${manual?'':`<div><button data-accept-upgrade="${i}" class="primary">${u.type==='foil-preference'?'Use Foil':u.type==='entrance'?'Equip Entrance':'Upgrade Deck'}</button><button data-decline-upgrade="${i}" class="secondary">Keep As-Is</button></div>`}
       </article>`).join('') : appliedPackUpgrades.length ? '' : `<div class="no-upgrades-found"><b>Your collection still grew.</b><span>None of these five cards creates a safe automatic improvement to an unlocked Superstar deck right now.</span></div>`}
       <button id="finish-pack-review" class="start-match">${boosterReturnScreen === "seasons" ? "Finish Pack & Return to Season" : "Finish Pack & Return to Open Packs"}</button>
     </section>`;
@@ -949,8 +950,6 @@ function formatCountdown(ms) {
 
 function refreshSeasonClocks() {
   if (!profile) return;
-  const remaining = seasonTimeRemaining(new Date());
-  document.querySelectorAll('[data-season-countdown]').forEach(el => { el.textContent = remaining.ended ? 'Season complete' : formatCountdown(remaining.ms); });
   const free = freePackStatus(profile, new Date());
   const next = nextRoadmapNode(new Date());
   const nextMs = Math.max(0, new Date(next.date).getTime() - Date.now());
@@ -1050,7 +1049,6 @@ function renderSeasons() {
   const root = $("#game");
   const state = seasonState(profile);
   const progress = seasonLevelProgress(profile);
-  const remaining = seasonTimeRemaining(new Date());
   const free = freePackStatus(profile, new Date());
   const next = nextRoadmapNode(new Date());
   const claimable = Array.from({length: progress.tier}, (_,i)=>i+1).filter(t => !state.claimedTiers.includes(t));
@@ -1084,7 +1082,7 @@ function renderSeasons() {
     </article>`;
   }).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen">
-    <section class="feature-hero seasons-feature season-final-boss-hero">${`<div class="mode-portrait-stack feature-art final-boss-feature-art"><div class="mode-portrait p1">${finalBossRockMarkup()}</div></div>`}<div class="feature-shade"></div><div class="feature-copy">${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · 100 TIERS</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Tier 100 unlocks the Foil The Rock — Final Boss Superstar card.</p><div class="season-hero-status season-hero-status-compact"><span>${uiIcon("gift")}<b>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</b></span><span>${uiIcon("trophy")}<b>${progress.tier >= SEASON_TIER_COUNT ? 'ROAD COMPLETE' : `NEXT · TIER ${progress.tier + 1}`}</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div><div class="season-countdown-card"><span>ENDS · 28 NOV 2026</span><b data-season-countdown>${remaining.ended ? 'Season complete' : formatCountdown(remaining.ms)}</b><small>Survivor Series next</small></div></section>
+    <section class="feature-hero seasons-feature season-final-boss-hero">${`<div class="mode-portrait-stack feature-art final-boss-feature-art"><div class="mode-portrait p1">${finalBossRockMarkup()}</div></div>`}<div class="feature-shade"></div><div class="feature-copy">${setLogoMarkup("season-1-final-boss","feature-set-logo rewards-set-logo")}<span class="season-live-label">SEASON 1 · 100 TIERS</span><h2>THE ROAD TO THE FINAL BOSS</h2><p>Tier 100 unlocks the Foil The Rock — Final Boss Superstar card.</p><div class="season-hero-status season-hero-status-compact"><span>${uiIcon("gift")}<b>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</b></span><span>${uiIcon("trophy")}<b>${progress.tier >= SEASON_TIER_COUNT ? 'ROAD COMPLETE' : `NEXT · TIER ${progress.tier + 1}`}</b></span></div><div class="season-hero-actions"><button id="season-challenges" class="nav-button">${uiIcon("check")} Challenges</button><button id="season-boosters" class="nav-button">${uiIcon("pack")} Boosters</button></div></div></section>
     ${message ? `<p class="setup-message">${message}</p>` : ''}
     <section class="season-free-pack-cta season-free-pack-strip ${free.available ? 'ready' : 'waiting'}">
       <button id="claim-free-pack" class="season-free-pack-button" ${free.available ? '' : 'disabled'} aria-label="${free.available ? 'Claim free booster' : `Next free booster in ${formatCountdown(free.msRemaining)}`}">
@@ -1529,7 +1527,6 @@ function renderMainMenu() {
   const starter = superstarById[profile.starterId];
   const allBoosterCredits = openablePackCount(profile);
   const seasonProgress = seasonLevelProgress(profile);
-  const seasonRemaining = seasonTimeRemaining(new Date());
   const visibleCards = playerFacingCollectionCards();
   const ownedUnique = visibleCards.filter(card => ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil") > 0).length;
   const ownedCopies = visibleCards.reduce((sum, card) => sum + ownedCount(profile, card.id, "normal") + ownedCount(profile, card.id, "foil"), 0);
@@ -1562,8 +1559,8 @@ function renderMainMenu() {
     <button id="menu-season-overview" class="legacy-season-event ${attentionClass("seasons")}" aria-label="Open Season 1 hub">${attentionBadge("seasons")}
       <span class="legacy-season-rock">${finalBossRockMarkup()}</span>
       <span class="legacy-season-copy">
-        <em><i></i> SEASON ONE LIVE</em>
-        <strong class="season-home-countdown" data-season-countdown>${seasonRemaining.ended ? 'SEASON COMPLETE' : formatCountdown(seasonRemaining.ms)}</strong>
+        <em><i></i> THE ROAD TO THE FINAL BOSS</em>
+        <strong class="season-home-title"><span>SEASON</span> <b>ONE</b></strong>
         <span><b>${tierProgressLabel}</b><small>${tierProgressDetail}</small></span>
         <span class="legacy-season-progress season-home-progress"><i style="width:${seasonProgress.percent}%"></i></span>
         <small class="legacy-season-foot">${seasonProgress.intoTier} / ${seasonProgress.needed} XP · TIER 100 · THE FINAL BOSS</small>
@@ -2318,6 +2315,8 @@ function renderDeckBuilder() {
   const health = validateDeckDraft(profile, deckBuilderStarId, deckDraft, deckLabEntranceId);
   const currentCounts = currentCategoryCounts(deckDraft);
   const recommendedCounts = recommendedCategoryCounts(deckBuilderStarId);
+  const recommendedPlan = recommendedDeckComparison(profile, deckBuilderStarId, deckDraft, deckLabEntranceId);
+  const recommendedEntrance = recommendedPlan.authoredEntranceId ? collectionById.get(recommendedPlan.authoredEntranceId) : null;
   const lead = deckDraft.slice(0, 5).map((entry, index) => ({ entry, index, card: collectionById.get(entry.id ?? entry) }));
   const deckCountClass = health.healthy ? "valid" : deckDraft.length === 60 ? "invalid" : "incomplete";
 
@@ -2405,6 +2404,13 @@ function renderDeckBuilder() {
       <article class="deck-identity-card entrance-slot"><span>ENTRANCE</span><div class="deck-identity-visual">${entranceCard ? collectibleCardMarkup(entranceCard,{extraClass:"deck-lab-identity-card",flipAttr:`data-deck-lab-inspect="${entranceCard.id}"`}) : '<div class="portrait-placeholder">Entrance</div>'}</div><strong>${entranceCard?.name ?? star.entrance?.name ?? 'Entrance'}</strong><button id="change-entrance" type="button" class="nav-button">Change</button></article>
     </section>
 
+    <section class="deck-recommended-plan">
+      <div class="deck-recommended-head"><div><span>RECOMMENDED BUILD</span><h3>${recommendedPlan.matched}/60 MATCHED</h3><p>${recommendedPlan.missing ? `${recommendedPlan.missing} authored slot${recommendedPlan.missing===1?'':'s'} still use Collection replacements.` : 'Complete authored build achieved.'}</p></div><strong>${recommendedPlan.coverage}%</strong></div>
+      <div class="deck-recommended-meter"><span style="width:${recommendedPlan.coverage}%"></span></div>
+      ${recommendedPlan.entranceUpgradeReady && recommendedEntrance ? `<article class="deck-recommended-entrance"><div><em>ENTRANCE UPGRADE READY</em><b>${recommendedEntrance.name}</b><small>Recommended over ${entranceCard?.name ?? 'your current Entrance'} for ${star.name}.</small></div><button id="use-recommended-entrance" class="primary">USE ENTRANCE</button></article>` : ''}
+      ${recommendedPlan.missingRows.length ? `<div class="deck-recommended-gaps">${recommendedPlan.missingRows.slice(0,6).map(row=>{const replacement=recommendedPlan.replacements.find(item=>item.targetId===row.id);return `<article><div><b>${row.card?.name ?? row.id}${row.count>1?` ×${row.count}`:''}</b><span>${row.ownedReady ? `${row.ownedReady} OWNED UPGRADE${row.ownedReady===1?'':'S'} READY` : `${row.toCollect} TO COLLECT`}</span></div><small>${replacement?.replacement ? `${replacement.replacement.name}${replacement.count>1?` ×${replacement.count}`:''} is filling ${replacement.count===1?'this slot':'these slots'} meanwhile.` : 'Deck Lab will suggest the closest legal owned replacement.'}</small></article>`;}).join('')}</div>` : ''}
+    </section>
+
     <section class="deck-lead-off-panel"><div class="section-title"><h3>Lead Off 5</h3><span>Opening hand</span></div><div class="deck-lead-off-row">${lead.map(({card,index}) => `<article class="deck-lead-slot visual-lead-slot"><span class="lead-slot-label">LEAD ${index+1}</span>${card ? collectibleCardMarkup(card,{extraClass:"deck-lead-card",flipAttr:`data-deck-lab-inspect="${card.id}"`}) : '<span class="lead-empty">EMPTY</span>'}<button type="button" data-change-lead="${index}">Change</button></article>`).join("")}</div></section>
 
     <section class="deck-category-list deck-category-carousels"><div class="section-title"><h3>Deck Sections</h3><span>Swipe each section to browse your deck</span></div>${DECK_LAB_CATEGORIES.map(category => {
@@ -2413,21 +2419,24 @@ function renderDeckBuilder() {
       return `<section class="deck-category-carousel"><header><div><em>${category.label.toUpperCase()}</em><span>${current} IN DECK · RECOMMENDED ${recommended}</span></div><button type="button" data-deck-category="${category.id}">EDIT</button></header><div class="deck-category-card-row">${categoryCards.length ? categoryCards.map((card,index) => `<article class="deck-category-card"><span class="deck-category-card-number">${index+1}</span>${collectibleCardMarkup(card,{extraClass:"deck-category-ccg",flipAttr:`data-deck-lab-inspect="${card.id}"`})}</article>`).join("") : '<span class="deck-category-empty">No cards in this section yet.</span>'}</div></section>`;
     }).join("")}</section>
 
-    <section class="deck-validity-panel"><div class="section-title"><h3>Deck Validity</h3><span class="${health.healthy ? 'valid' : 'invalid'}">${health.healthy ? 'VALID' : 'CHECK REQUIRED'}</span></div>${violations}<div class="deck-builder-actions"><button id="optimize-deck" class="nav-button">Auto Fill Owned</button><button id="reset-recommended" class="nav-button">Reset to Owned Recommended</button><button id="save-deck" class="start-match" ${health.healthy ? '' : 'disabled'}>Save Deck</button></div></section>
+    <section class="deck-validity-panel"><div class="section-title"><h3>Deck Validity</h3><span class="${health.healthy ? 'valid' : 'invalid'}">${health.healthy ? 'VALID' : 'CHECK REQUIRED'}</span></div>${violations}<div class="deck-builder-actions"><button id="optimize-deck" class="nav-button">Optimize Owned</button><button id="reset-recommended" class="nav-button">Build Toward Recommended</button><button id="save-deck" class="start-match" ${health.healthy ? '' : 'disabled'}>Save Deck</button></div></section>
   </section>${renderDeckLabInspectOverlay()}`;
 
   bindDeckLabInspect(root);
   $("#deck-lab-roster-back")?.addEventListener("click", () => { deckLabStage = "roster"; deckLabPicker = null; deckDraft = null; deckLabEntranceId = null; deckLabInspectCardId = null; deckLabInspectFlipped = false; message = ""; renderDeckBuilder(); });
   $("#change-entrance")?.addEventListener("click", () => { deckLabPicker = { type: "entrance" }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); });
+  $("#use-recommended-entrance")?.addEventListener("click", () => { const id = recommendedEntranceId(profile, deckBuilderStarId); if (id) { deckLabEntranceId = id; message = `${collectionById.get(id)?.name ?? 'Entrance'} selected as the recommended Entrance. Save the deck to keep it.`; } renderDeckBuilder(); });
   root.querySelectorAll("[data-change-lead]").forEach(btn => btn.addEventListener("click", () => { deckLabPicker = { type: "lead", slot: Number(btn.dataset.changeLead) }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); }));
   root.querySelectorAll("[data-deck-category]").forEach(btn => btn.addEventListener("click", () => { deckLabPicker = { type: "category", category: btn.dataset.deckCategory }; deckLabOnlyValid = false; deckBuilderFilter = ""; renderDeckBuilder(); }));
-  $("#optimize-deck")?.addEventListener("click", () => { deckDraft = autoFillOwnedDraft(profile, deckBuilderStarId, deckDraft.slice(0,5)); message = deckDraft.length === 60 ? "Auto Fill completed the deck using legal owned cards." : `Auto Fill used every legal owned card available. ${60-deckDraft.length} slots remain.`; renderDeckBuilder(); });
-  $("#reset-recommended")?.addEventListener("click", () => { deckDraft = buildOwnedRecommendedDraft(profile, deckBuilderStarId); deckLabEntranceId = selectedEntranceId(profile, deckBuilderStarId); message = `Owned recommended cards restored. ${Math.max(0,60-deckDraft.length)} slots remain.`; renderDeckBuilder(); });
+  $("#optimize-deck")?.addEventListener("click", () => { deckDraft = optimizeDeck(profile, deckBuilderStarId); message = deckDraft.length === 60 ? "Deck rebuilt from your Collection, prioritising the recommended build and legal replacements." : `Every legal owned option was used. ${60-deckDraft.length} slots remain.`; renderDeckBuilder(); });
+  $("#reset-recommended")?.addEventListener("click", () => { deckDraft = buildBestOwnedRecommendedDraft(profile, deckBuilderStarId); deckLabEntranceId = recommendedEntranceId(profile, deckBuilderStarId); message = `Best owned version built: ${60-recommendedDeckMissingCount(deckBuilderStarId,deckDraft)}/60 recommended slots matched.`; renderDeckBuilder(); });
   $("#save-deck")?.addEventListener("click", () => {
     const check = validateDeckDraft(profile, deckBuilderStarId, deckDraft, deckLabEntranceId);
     if (!check.healthy) { message = "Deck is not valid yet. Review the checker below."; renderDeckBuilder(); return; }
     profile.savedDecks ??= {};
     profile.savedDecks[deckBuilderStarId] = deckDraft.map(entry => ({ ...entry }));
+    profile.deckNeedsCards ??= {};
+    profile.deckNeedsCards[deckBuilderStarId] = recommendedDeckMissingCount(deckBuilderStarId, deckDraft);
     if (!setSelectedEntrance(profile, deckBuilderStarId, deckLabEntranceId)) { message = "Selected Entrance is not legal or owned."; renderDeckBuilder(); return; }
     saveProfile(profile);
     message = `${star.name}'s deck and Entrance saved.`;
@@ -2482,7 +2491,7 @@ function cardReason(playerId, card) {
   if (state.phase === "COUNTER" && card.kind === "action" && card.effect?.type === "onceTooOften") return counterEligibility(state, playerId, state.proposedMove?.card, card).reason ?? "Reverse repeated Move and gain Control";
   if (card.kind === "action") { const p=state.players[playerId]; if (p.turn.actionPlayed >= 1) return "Action already played this turn"; if (p.actionLocked) return "Actions are currently locked"; const need=Math.max(0,card.cost??0),have=effectiveTotalMomentum(state,playerId); return have<need ? `Need ${need} Momentum + Attitude` : ""; }
   if (card.kind === "support") return state.players[playerId].turn.supportPlayed >= 1 ? "Support already played this turn" : "";
-  if (card.kind === "manager") return state.players[playerId].activeManager ? "Manager already active" : "";
+  if (card.kind === "manager") { const p = state.players[playerId]; if (p.activeManager) return "Manager already active"; if (card.superstarId && card.superstarId !== p.superstar?.id) return "Manager not compatible with this Superstar"; if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(p.superstar?.id)) return "Manager not compatible with this Superstar"; return ""; }
   if (card.kind === "special") return canPlaySpecial(state, playerId, card) ? "PLAY ACTION" : "Action trigger not available";
   if (card.kind === "move" && state.phase === "ACTION") return moveEligibility(state, playerId, card).reason ?? "";
   if (state.phase === "COUNTER") return counterEligibility(state, playerId, state.proposedMove.card, card).reason ?? "Counter";
@@ -2663,7 +2672,10 @@ function renderHandOverlay() {
 function renderMatchSpectacle() {
   if (!matchSpectacle) return "";
   const card = matchSpectacle.cardId ? collectionCards.find(c => c.id === matchSpectacle.cardId) : null;
-  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${matchSpectacle.text}</div>${card ? `<div class="pin-escape-card-showcase">${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:"pin-escape-special-card"})}<small>${matchSpectacle.detail ?? "This Action stopped the three-count."}</small></div>` : ""}</div>`;
+  const spectacleCopy = matchSpectacle.kind === "submission-lock"
+    ? "SUBMISSION<br>LOCKED IN"
+    : matchSpectacle.text;
+  return `<div class="match-spectacle ${matchSpectacle.kind ?? "pin"}" aria-live="assertive"><div class="match-spectacle-copy">${spectacleCopy}</div>${card ? `<div class="pin-escape-card-showcase">${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:"pin-escape-special-card"})}<small>${matchSpectacle.detail ?? "This Action stopped the three-count."}</small></div>` : ""}</div>`;
 }
 
 function spectacleSequence(steps, done) {
@@ -2690,7 +2702,7 @@ function presentationFromEvents(events) {
   if (pinEscape) return greenHealthKickout
     ? [{text:"1!",kind:"pin",duration:560},{text:"SHOULDER UP!",kind:"pin-escape",duration:1450,cardId:pinEscape.cardId,detail:"Pin-escape Action activated — the count is broken."}]
     : [{text:"1!",kind:"pin",duration:520},{text:"2!!",kind:"pin",duration:620},{text:"SHOULDER UP!",kind:"pin-escape",duration:1450,cardId:pinEscape.cardId,detail:"Pin-escape Action activated — the three-count is broken."}];
-  if (ended?.finishType === "submission") return [{text:"SUBMISSION LOCKED IN",kind:"submission",duration:800},{text:"TAP OUT!",kind:"submission",duration:1150}];
+  if (ended?.finishType === "submission") return [{text:"SUBMISSION LOCKED IN",kind:"submission-lock",duration:800},{text:"TAP OUT!",kind:"submission",duration:1150}];
   if (ended?.finishType === "i-quit" || ended?.finishType === "i quit") return [{text:"I QUIT!",kind:"submission",duration:1150}];
   if (pinCheck || ended?.finishType === "pin") {
     const success = ended?.finishType === "pin";
@@ -3056,7 +3068,7 @@ function renderMatchResults() {
     }
   }
   const continueLabel = activeMode === "ladder" ? "RETURN TO LADDER" : activeMode === "championship" ? "CHAMPIONSHIP ROAD" : isLiveEvent ? "RETURN TO TOWER" : "CONTINUE";
-  return `<section class="match-results-screen ${humanWon ? "victory" : "defeat"}"><div class="results-aura"></div><span class="results-kicker">${isLiveEvent ? (liveTower?.cadenceLabel ?? "LIVE EVENT") : "MATCH COMPLETE"}</span><h1>${humanWon ? "VICTORY" : "DEFEAT"}</h1><div class="results-star results-winning-card">${(()=>{const sid=state.winner?state.players[state.winner].superstar.id:humanStar.id;const c=superstarCollectibleFor(sid);return c?collectibleCardMarkup(c,{extraClass:"results-superstar-card"}):portraitMarkup(sid,winnerName);})()}</div><h2>${winnerName}</h2>${state.winner ? `<p>def. ${nameFor(loserId)} · ${finish} · TURN ${state.turnNumber}</p>` : `<p>${finish} · TURN ${state.turnNumber}</p>`}<section class="results-rewards"><span>MATCH REWARDS</span>${rewardMarkup}<small>${message}</small></section><div class="results-actions">${showRewardButton ? `<button id="results-reward" class="start-match">VIEW REWARDS</button>` : ""}<button id="results-continue" class="nav-button">${continueLabel}</button>${activeMode === "exhibition" ? '<button id="results-rematch" class="nav-button">REMATCH</button>' : ""}</div></section>`;
+  return `<section class="match-results-screen ${humanWon ? "victory" : "defeat"}"><div class="results-aura"></div><span class="results-kicker">${isLiveEvent ? (liveTower?.cadenceLabel ?? "LIVE EVENT") : "MATCH COMPLETE"}</span><h1>${humanWon ? "VICTORY" : "DEFEAT"}</h1><div class="results-star results-winning-card">${(()=>{const sid=state.winner?state.players[state.winner].superstar.id:humanStar.id;const c=superstarCollectibleFor(sid);return c?collectibleCardMarkup(c,{extraClass:"results-superstar-card"}):portraitMarkup(sid,winnerName);})()}</div><h2>${winnerName}</h2>${state.winner ? `<p>def. ${nameFor(loserId)} · ${finish} · TURN ${state.turnNumber}</p>` : `<p>${finish} · TURN ${state.turnNumber}</p>`}<section class="results-rewards"><span>MATCH REWARDS</span>${rewardMarkup}<small>${message}</small></section><div class="results-actions">${showRewardButton ? `<button id="results-reward" class="start-match">VIEW REWARDS</button>` : ""}<button id="results-continue" class="nav-button ${activeMode === "championship" ? "championship-result-cta" : ""}">${continueLabel}</button>${activeMode === "exhibition" ? '<button id="results-rematch" class="nav-button">REMATCH</button>' : ""}</div></section>`;
 }
 
 function render() {

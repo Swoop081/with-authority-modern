@@ -1,8 +1,8 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.12";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.12";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.12";
-import { sets } from "./sets.js?v=0.13.12";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.12";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.18";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.18";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.18";
+import { sets } from "./sets.js?v=0.13.18";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.18";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -93,6 +93,7 @@ function buildPack(profile, rng, setId, now = new Date()) {
   const underCapNormal = normalBase.filter(card => underOwnershipCap(profile, card));
   const pack = [];
   let superstarAdded = false;
+  let pendingSuperstarUnlockId = null;
   // A five-card pack may contain at most one 4★ Very Rare. The Superstar
   // chase counts toward this ceiling so a chase Superstar cannot stack with
   // additional Very Rare Finishers, Specials or Entrances in the same pack.
@@ -125,7 +126,10 @@ function buildPack(profile, rng, setId, now = new Date()) {
     if (card.kind === "superstar" && result.added > 0) {
       superstarAdded = true;
       if (!wasUnlocked) {
-        grantSuperstarUnlockPackage(profile, card.superstarId);
+        // Defer the starter-package grant until all five pack cards have been
+        // selected/owned. Otherwise the Superstar unlock itself can seed cards
+        // that are still waiting to be rolled later in this same booster.
+        pendingSuperstarUnlockId = card.superstarId;
         superstarUnlocked = true;
       }
     }
@@ -144,6 +148,7 @@ function buildPack(profile, rng, setId, now = new Date()) {
     });
   }
 
+  if (pendingSuperstarUnlockId) grantSuperstarUnlockPackage(profile, pendingSuperstarUnlockId);
   recordSuperstarChase(profile, setId, unownedSuperstars.length > 0, superstarAdded);
   return pack;
 }

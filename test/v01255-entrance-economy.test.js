@@ -1,14 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.13.12';
-import { cardsForSet } from '../js/data/collection.js?v=0.13.12';
-import { superstars } from '../js/data/superstars.js?v=0.13.12';
-import { decks } from '../js/data/decks.js?v=0.13.12';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.12';
-import { claimSeasonTier } from '../js/data/seasons.js?v=0.13.12';
-import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.12';
-import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=0.13.12';
-import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=0.13.12';
+import { collectionCards } from '../js/data/collection.js?v=0.13.18';
+import { cardsForSet } from '../js/data/collection.js?v=0.13.18';
+import { superstars } from '../js/data/superstars.js?v=0.13.18';
+import { decks } from '../js/data/decks.js?v=0.13.18';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.18';
+import { claimSeasonTier } from '../js/data/seasons.js?v=0.13.18';
+import { createProfile, migrateProfile, grantStoreSuperstarUnlockPackage, totalOwnedCopies, cardOwnershipCap, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.18';
+import { selectedEntranceId, setSelectedEntrance, validateDeckDraft, recommendedDeckDraft } from '../js/data/deck-builder.js?v=0.13.18';
+import { boosterEligible, underOwnershipCap, grantBooster, openBooster, RARITY_WEIGHTS } from '../js/data/boosters.js?v=0.13.18';
 
 const momentumIds=['momentum-strength','momentum-strike','momentum-technical','momentum-agility'];
 const byId=new Map(collectionCards.map(card=>[card.id,card]));
@@ -26,7 +26,7 @@ function rngForCard(pool,id){
 
 test('v0.12.55 new Legacy starts with Amazing Entrance and 15 of every Momentum colour',()=>{
   const p=createProfile('roman-reigns');
-  assert.equal(PROFILE_VERSION,29);
+  assert.equal(PROFILE_VERSION,30);
   assert.equal(selectedEntranceId(p,'roman-reigns'),'entrance-amazing');
   assert.equal(totalOwnedCopies(p,'entrance-amazing'),1);
   assert.equal(p.ownedCards['entrance-amazing']?.normal,0);
