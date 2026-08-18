@@ -6283,3 +6283,114 @@ body[data-screen="live-events"] .premium-run-screen{--mode-accent:#54df92;--mode
   .live-tower-detail-art{width:37%!important}
   .live-tower-detail.event-powerhouse-collision .live-tower-detail-art{width:39%!important}
 }
+
+/* v0.13.10 — Powerhouse Collision hero art scale pass.
+   Brock intentionally fills the open right-hand hero stage on phone layouts.
+   The art remains clipped by the hero and never changes the accepted copy/stats layout. */
+@media(max-width:600px){
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art{
+    top:14px!important;
+    right:0!important;
+    bottom:62px!important;
+    width:58%!important;
+    max-width:58%!important;
+    height:auto!important;
+    overflow:hidden!important;
+    align-items:flex-end!important;
+    justify-content:flex-end!important;
+  }
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art .official-menu-superstar-photo{
+    width:160%!important;
+    max-width:none!important;
+    height:auto!important;
+    max-height:none!important;
+    flex:0 0 auto!important;
+    transform:translateX(14%)!important;
+    object-fit:contain!important;
+    object-position:center bottom!important;
+  }
+}
+@media(max-width:390px){
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art{
+    width:59%!important;
+    max-width:59%!important;
+  }
+  .live-tower-detail.event-powerhouse-collision .live-tower-detail-art .official-menu-superstar-photo{
+    width:164%!important;
+    transform:translateX(15%)!important;
+  }
+}
+
+/* v0.13.11 — canonical premium hub heading language. */
+.premium-hub-heading{
+  --hub-accent:#55d7ff;
+  display:grid;
+  gap:2px;
+  min-width:0;
+  padding:8px 13px 7px;
+  border-left:4px solid var(--hub-accent);
+  background:linear-gradient(90deg,color-mix(in srgb,var(--hub-accent) 8%,transparent),transparent 58%);
+  position:relative;
+  overflow:hidden;
+}
+.premium-hub-heading:after{
+  content:"";
+  position:absolute;
+  left:13px;
+  right:13px;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,var(--hub-accent),transparent 72%);
+  opacity:.72;
+}
+.premium-hub-kicker{
+  color:var(--hub-accent);
+  font-size:.54rem;
+  line-height:1;
+  letter-spacing:.22em;
+  font-weight:1000;
+  text-transform:uppercase;
+}
+.premium-hub-heading h1{
+  margin:5px 0 2px;
+  font-size:clamp(2.25rem,7.2vw,4.1rem);
+  line-height:.82;
+  letter-spacing:-.055em;
+  font-style:italic;
+  font-weight:1000;
+  text-transform:uppercase;
+  white-space:normal;
+}
+.premium-hub-heading h1 span{color:#f7f8fb}
+.premium-hub-heading h1 b{color:var(--hub-accent);font-weight:1000}
+.premium-hub-heading p{
+  margin:2px 0 0;
+  color:#8994a3;
+  font-size:.66rem;
+  line-height:1.25;
+  letter-spacing:.025em;
+}
+.hub-deck-lab{--hub-accent:#958aff}
+.hub-challenges{--hub-accent:#59e38b}
+.hub-packs{--hub-accent:#ff9e52}
+.hub-store{--hub-accent:#f4c84d}
+.hub-collection,.hub-catalogue{--hub-accent:#59d5ff}
+.hub-legacy{--hub-accent:#ef6577}
+
+/* The destination heading owns hierarchy; keep existing feature panels as content, not competing page titles. */
+.premium-hub-heading + .feature-hero,
+.premium-hub-heading + .collection-hero,
+.premium-hub-heading + .catalogue-master-hero,
+.premium-hub-heading + .rules-hero{margin-top:0!important}
+
+@media(max-width:700px){
+  .premium-hub-heading{padding:7px 10px 7px;border-left-width:4px}
+  .premium-hub-heading:after{left:10px;right:10px}
+  .premium-hub-kicker{font-size:.48rem;letter-spacing:.2em}
+  .premium-hub-heading h1{font-size:clamp(2.05rem,9vw,3.25rem);line-height:.82;margin-top:5px}
+  .premium-hub-heading p{font-size:.58rem}
+}
+@media(max-width:390px){
+  .premium-hub-heading h1{font-size:2rem}
+  .premium-hub-heading p{font-size:.54rem}
+}

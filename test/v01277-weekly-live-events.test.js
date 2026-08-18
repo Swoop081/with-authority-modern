@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.13.9";
-import { superstars } from "../js/data/superstars.js?v=0.13.9";
-import { decks } from "../js/data/decks.js?v=0.13.9";
-import { isLaunchLiveSetId } from "../js/data/release.js?v=0.13.9";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.9";
+import { WEEKLY_LIVE_EVENTS, LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, liveEventRotation, liveEventStage, weeklyLiveEventState, startWeeklyLiveEvent, currentWeeklyLiveEventOpponent, recordWeeklyLiveEventMatch } from "../js/data/live-events.js?v=0.13.11";
+import { superstars } from "../js/data/superstars.js?v=0.13.11";
+import { decks } from "../js/data/decks.js?v=0.13.11";
+import { isLaunchLiveSetId } from "../js/data/release.js?v=0.13.11";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.11";
 
 const roster = Object.values(superstars).filter(star => !star.developmentOnly && isLaunchLiveSetId(star.setId));
 const rosterIds = roster.map(star => star.id);

@@ -1,7 +1,7 @@
-import { decks } from "./decks.js?v=0.13.9";
-import { collectionCards } from "./collection.js?v=0.13.9";
-import { superstars } from "./superstars.js?v=0.13.9";
-import { validateDeckDraft, selectedEntranceId } from "./deck-builder.js?v=0.13.9";
+import { decks } from "./decks.js?v=0.13.11";
+import { collectionCards } from "./collection.js?v=0.13.11";
+import { superstars } from "./superstars.js?v=0.13.11";
+import { validateDeckDraft, selectedEntranceId } from "./deck-builder.js?v=0.13.11";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));

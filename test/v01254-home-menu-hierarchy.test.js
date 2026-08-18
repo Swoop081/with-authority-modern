@@ -38,7 +38,7 @@ test('v0.12.54 Home uses Final Boss Rock and full-width destinations in requeste
     last = pos;
   }
   assert.match(home, /<strong>OPEN PACKS<\/strong>/);
-  assert.match(home, /<strong>STORE<\/strong>/);
+  assert.match(home, /<strong>MY STORE<\/strong>/);
   assert.doesNotMatch(home, /CARD SHOP|BOOSTER VAULT/);
   assert.match(css, /\.legacy-command-rack\.legacy-home-destinations\{[\s\S]*grid-template-columns:minmax\(0,1fr\)!important/);
 });

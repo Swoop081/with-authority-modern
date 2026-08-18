@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.13.9";
-import { healthRatio, healthZone } from "./health.js?v=0.13.9";
+import { totalMomentum } from "./utils.js?v=0.13.11";
+import { healthRatio, healthZone } from "./health.js?v=0.13.11";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
