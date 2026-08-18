@@ -3606,7 +3606,7 @@ body[data-screen="menu"]:before,body[data-screen="play-menu"]:before{
 .gamebar-tier-track{display:block;height:7px;padding:1px;border:1px solid rgba(255,255,255,.13);background:#030508;overflow:hidden;transform:skew(-12deg)}.gamebar-tier-track em{display:block;height:100%;width:0;background:linear-gradient(90deg,#2fdc7b,#84ffaf);box-shadow:0 0 8px rgba(58,255,143,.58);transition:width .25s ease}
 .gamebar-resources{display:grid;grid-template-columns:1fr 1fr;gap:4px;min-width:0}.gamebar-resources>button,.gamebar-resources>.gamebar-up{position:relative;display:grid;place-items:center;align-content:center;gap:1px;padding:4px 5px;clip-path:polygon(7px 0,100% 0,100% 100%,0 100%,0 7px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .gamebar-resources small{font-size:.31rem;letter-spacing:.1em;color:#8894a5;font-weight:1000}.gamebar-resources b{font-size:.72rem;line-height:1;color:#f1f5fa}.gamebar-resources #chrome-packs.has-attention,.legacy-gamebar.has-pack-reward #chrome-packs{color:#ffe06a}.legacy-gamebar.has-season-reward .gamebar-season{box-shadow:inset 0 0 0 1px rgba(87,255,151,.32),0 0 14px rgba(49,255,133,.10)}
-body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="starter"]):not([data-screen="unlock-celebration"]) main{padding-top:calc(var(--legacy-chrome-h) + env(safe-area-inset-top) + 8px)!important}
+body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="starter"]):not([data-screen="unlock-celebration"]):not([data-screen="entrance-intro"]) main{padding-top:calc(var(--legacy-chrome-h) + env(safe-area-inset-top) + 8px)!important}
 #game{position:relative}
 
 /* Home: one layered arena stage, one live event banner, then compact command plates. */
@@ -6992,4 +6992,146 @@ body[data-screen="seasons"] .season-road-node.final-boss-superstar .season-road-
   body[data-screen="seasons"] .season-road-reward strong{font-size:.60rem!important}
   body[data-screen="seasons"] .season-road-reward small{font-size:.34rem!important}
   body[data-screen="seasons"] .season-road-reward button{min-height:42px!important;padding:7px 10px!important;font-size:.48rem!important}
+}
+
+
+/* v0.13.29 — iPhone visual follow-up pass. */
+
+/* Home Season tile now mirrors the preferred full Season hero typography. */
+.legacy-season-event .season-home-title{
+  font-size:clamp(1.72rem,7.7vw,2.5rem)!important;
+  line-height:.78!important;
+  letter-spacing:-.065em!important;
+  font-style:italic!important;
+  font-weight:1000!important;
+  transform:scaleX(1.035);
+  transform-origin:left center;
+}
+@media(max-width:390px){.legacy-season-event .season-home-title{font-size:1.58rem!important}}
+
+/* Money in the Bank is a first-class Live Event: match Play-card typography/scale. */
+.money-in-bank-live-card .live-event-split-title.title-mitb{display:grid!important;gap:0!important;margin:7px 0 8px!important;line-height:.76!important}
+.money-in-bank-live-card .live-event-split-title.title-mitb span{
+  font-size:clamp(1.85rem,7.6vw,3rem)!important;
+  line-height:.80!important;
+  letter-spacing:-.06em!important;
+}
+.money-in-bank-live-card .live-event-split-title.title-mitb b{
+  font-size:clamp(2.65rem,10.5vw,4.4rem)!important;
+  line-height:.72!important;
+  letter-spacing:-.035em!important;
+  color:#efc24f!important;
+  text-shadow:0 3px 0 rgba(98,67,10,.65)!important;
+}
+.money-in-bank-live-card .live-tower-cadence{font-size:.56rem!important;letter-spacing:.17em!important}
+.money-in-bank-live-card .live-tower-hub-copy>p{max-width:34ch!important;font-size:.72rem!important;line-height:1.34!important}
+.money-in-bank-live-card .live-tower-enter{min-height:54px!important;display:flex!important;align-items:center!important;width:max-content!important;max-width:100%!important;padding:12px 18px!important;border-radius:15px!important;font-size:.67rem!important;letter-spacing:.08em!important}
+
+/* Money in the Bank run: no redundant Superstar hero; actual Superstar cards form a horizontal road. */
+body[data-screen="ladder"] .mitb-run-hero{min-height:205px!important;padding:15px 16px 66px!important}
+body[data-screen="ladder"] .mitb-run-hero .mode-run-hero-copy{width:100%!important;max-width:100%!important;padding-right:0!important}
+body[data-screen="ladder"] .mitb-run-hero .feature-shade{background:radial-gradient(circle at 82% 18%,rgba(239,194,79,.17),transparent 34%),linear-gradient(145deg,rgba(24,20,10,.95),rgba(8,10,14,.98))!important}
+body[data-screen="ladder"] .mitb-run-hero .mode-logo.compact span{font-size:1.7rem!important;line-height:.78!important}
+body[data-screen="ladder"] .mitb-run-hero .mode-logo.compact strong{font-size:2.75rem!important;line-height:.72!important}
+.mitb-opponent-carousel{
+  display:grid!important;
+  grid-auto-flow:column!important;
+  grid-auto-columns:132px!important;
+  grid-template-columns:none!important;
+  gap:10px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  scroll-padding-inline:calc(50% - 66px)!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior-x:contain!important;
+  padding:10px calc(50% - 66px) 12px!important;
+  scrollbar-width:none!important;
+  border-radius:18px!important;
+}
+.mitb-opponent-carousel::-webkit-scrollbar{display:none!important}
+.redesigned-ladder-screen .mitb-opponent-node{
+  width:132px!important;
+  min-width:132px!important;
+  min-height:244px!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  grid-template-rows:auto 184px auto!important;
+  gap:5px!important;
+  padding:7px!important;
+  border-radius:14px!important;
+  scroll-snap-align:center!important;
+  align-content:start!important;
+}
+.redesigned-ladder-screen .mitb-opponent-node .mode-run-index{position:absolute!important;z-index:5;top:6px;left:6px;width:27px!important;height:27px!important;font-size:.58rem!important;box-shadow:0 3px 10px rgba(0,0,0,.45)!important}
+.mitb-opponent-card-wrap{height:184px!important;display:grid!important;place-items:center!important;overflow:visible!important}
+.mitb-opponent-card{width:112px!important;max-width:112px!important;height:auto!important;filter:drop-shadow(0 9px 12px rgba(0,0,0,.45))}
+.redesigned-ladder-screen .mitb-opponent-node .mode-run-node-copy{display:grid!important;grid-template-columns:1fr!important;gap:1px!important;text-align:center!important;grid-column:auto!important}
+.redesigned-ladder-screen .mitb-opponent-node .mode-run-node-copy b{font-size:.54rem!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.redesigned-ladder-screen .mitb-opponent-node .mode-run-node-copy small{display:block!important;font-size:.38rem!important}
+.redesigned-ladder-screen .mitb-opponent-node .mode-run-node-copy em{font-size:.32rem!important}
+.redesigned-ladder-screen .mitb-opponent-node.current{transform:translateY(-2px);border-color:#efc24f!important;box-shadow:0 0 0 2px rgba(239,194,79,.17),0 12px 28px rgba(218,168,44,.18)!important}
+.redesigned-ladder-screen .mitb-opponent-node.upcoming{opacity:.62!important}
+.redesigned-ladder-screen .mitb-opponent-node.cleared{opacity:.82!important}
+
+/* KOTR: content-first header, much larger title, robust post-crown buttons. */
+body[data-screen="king-of-the-ring"] .kotr-no-portrait-hero{min-height:218px!important;padding:16px 16px 66px!important}
+body[data-screen="king-of-the-ring"] .kotr-no-portrait-hero .mode-run-hero-copy{width:100%!important;max-width:100%!important;padding-right:0!important}
+body[data-screen="king-of-the-ring"] .kotr-no-portrait-hero .feature-shade{background:radial-gradient(circle at 85% 18%,rgba(167,123,228,.14),transparent 34%),linear-gradient(145deg,rgba(28,18,36,.96),rgba(9,8,13,.99))!important}
+body[data-screen="king-of-the-ring"] .kotr-screen .mode-run-hero .mode-logo.compact span{font-size:1.78rem!important;line-height:.78!important;letter-spacing:-.06em!important}
+body[data-screen="king-of-the-ring"] .kotr-screen .mode-run-hero .mode-logo.compact strong{font-size:3rem!important;line-height:.70!important;letter-spacing:-.015em!important}
+body[data-screen="king-of-the-ring"] .reigning-king-hero .mode-run-hero-copy h2{font-size:1.5rem!important;margin-top:2px!important}
+.kotr-post-crown-actions{display:grid!important;grid-template-columns:1fr!important;gap:9px!important;margin:12px 0!important}
+.kotr-post-crown-actions button{width:100%!important;min-width:0!important;white-space:nowrap!important;word-break:normal!important;writing-mode:horizontal-tb!important}
+.kotr-open-packs{background:linear-gradient(180deg,#8c59c7,#5d378f)!important;border-color:#ad78e6!important;color:#fff!important}
+
+/* Entrance presentation: never reserve hidden legacy chrome and fit the full presentation in one iPhone viewport. */
+body[data-screen="entrance-intro"] main{padding:0!important}
+@media(max-width:600px){
+  body[data-screen="entrance-intro"] .entrance-intro-screen{
+    min-height:100svh!important;
+    height:100svh!important;
+    grid-template-rows:50px auto 34px minmax(0,1fr) auto 50px!important;
+    padding:max(3px,env(safe-area-inset-top)) 10px max(5px,env(safe-area-inset-bottom))!important;
+    gap:2px!important;
+    align-content:stretch!important;
+  }
+  body[data-screen="entrance-intro"] .entrance-intro-screen .prematch-brand{width:58vw!important;min-height:50px!important;height:50px!important}
+  body[data-screen="entrance-intro"] .entrance-intro-screen .prematch-show-logo{height:50px!important}
+  body[data-screen="entrance-intro"] .entrance-intro-heading h2{font-size:clamp(1.28rem,6.2vw,1.8rem)!important;line-height:.9!important}
+  body[data-screen="entrance-intro"] .entrance-intro-heading span{font-size:.50rem!important}
+  body[data-screen="entrance-intro"] .entrance-crowd-chants{min-height:34px!important;height:34px!important;gap:3px!important}
+  body[data-screen="entrance-intro"] .entrance-crowd-chants .entrance-callout{padding:5px 8px!important;font-size:.53rem!important}
+  body[data-screen="entrance-intro"] .entrance-stage{height:100%!important;min-height:0!important;max-height:none!important}
+  body[data-screen="entrance-intro"] .entrance-card-transition{width:min(50vw,246px)!important;max-height:min(45svh,390px)!important}
+  body[data-screen="entrance-intro"] .entrance-tap-hint{font-size:.58rem!important;margin:0!important}
+  body[data-screen="entrance-intro"] #entrance-next{min-height:48px!important;height:48px!important;margin:0!important}
+}
+
+/* Store Superstar cards are inspection targets; purchase remains a separate explicit control. */
+.store-superstar-card-art{cursor:pointer!important;appearance:none!important;border:0!important;background:transparent!important}
+.store-superstar-card-art:focus-visible{outline:2px solid #f3ca54!important;outline-offset:3px!important}
+body[data-screen="store"] .superstar-card-modal-inner{width:min(60vw,320px)!important}
+body[data-screen="store"] .hud-superstar-modal-card{width:100%!important;max-width:none!important}
+
+/* Catalogue utility button gets a dedicated row/space instead of covering the title. */
+.catalogue-compact-redesign .catalogue-quickbar{position:static!important}
+.catalogue-compact-redesign .catalogue-owned-link{position:static!important;top:auto!important;right:auto!important;grid-column:auto!important;justify-self:end!important;align-self:center!important;white-space:nowrap!important}
+@media(max-width:600px){
+  .catalogue-compact-redesign .catalogue-quickbar{grid-template-columns:1fr!important;gap:7px!important}
+  .catalogue-compact-redesign .catalogue-owned-link{width:100%!important;justify-self:stretch!important;min-height:44px!important}
+}
+
+/* Championship Road nodes use the real Superstar card; progression stars are deliberately bold. */
+.champ-road-node>button{grid-template-columns:50px 70px minmax(0,1fr) 34px!important;min-height:104px!important;gap:8px!important}
+.champ-road-star{height:92px!important;overflow:visible!important;display:grid!important;place-items:center!important}
+.champ-road-superstar-card{width:58px!important;max-width:58px!important;height:auto!important;filter:drop-shadow(0 7px 9px rgba(0,0,0,.48))}
+.champ-road-result-star{font-style:normal!important;font-size:2rem!important;line-height:1!important;color:#efc24f!important;text-shadow:0 0 12px rgba(239,194,79,.22)!important}
+.champ-road-node.cleared .champ-road-result-star{font-size:1.45rem!important;color:#61df94!important}
+@media(max-width:600px){
+  .champ-road-node{width:86%!important}
+  .champ-road-node>button{grid-template-columns:44px 62px minmax(0,1fr) 30px!important;min-height:94px!important;padding:7px!important;gap:6px!important}
+  .champ-road-star{height:80px!important}
+  .champ-road-superstar-card{width:52px!important;max-width:52px!important}
+  .champ-road-result-star{font-size:1.75rem!important}
 }

@@ -14,6 +14,9 @@ function walk(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
     next=next.replace(/(import\s*\(\s*["\'](?:\.\.?\/)[^"\'?]+\.js)(?:\?v=0\.\d+\.\d+)?(["\']\s*\))/g,`$1?v=${version}$2`);
   }
   next=next.replace(/(BUILD_VERSION\s*=\s*["'])0\.\d+\.\d+(["'])/g,`$1${version}$2`);
+  next=next.replace(/(currentBuild\s*=\s*["'])0\.\d+\.\d+(["'])/g,`$1${version}$2`);
+  next=next.replace(/(CARD ART STUDIO · v)0\.\d+\.\d+/g,`$1${version}`);
+  if(entry.name==="build.json") next=next.replace(/("version"\s*:\s*")0\.\d+\.\d+("\s*)/,`$1${version}$2`);
   if(next!==s){fs.writeFileSync(full,next);changed++;}
 }}
 walk(root);

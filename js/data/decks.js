@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.13.27";
+import { allGameplayCards } from "./content.js?v=0.13.30";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -812,7 +812,6 @@ export const deckIds={
     "momentum-strength",
     "punch",
     "running-forearm",
-    "senton",
     "punch",
     "punch",
     "running-forearm",
@@ -826,19 +825,20 @@ export const deckIds={
     "cannonball",
     "lariat",
     "lariat",
-    "fisherman-buster",
-    "fisherman-buster",
     "spinning-torture-rack-neckbreaker",
     "spinning-torture-rack-neckbreaker",
     "powerbomb",
     "jawbreaker",
-    "frog-splash",
     "standing-switch",
     "punch",
     "duck",
     "pop-up-powerbomb",
     "pop-up-powerbomb",
     "pop-up-powerbomb",
+    "kevin-owens-avalanche-fishermans-buster",
+    "kevin-owens-avalanche-fishermans-buster",
+    "kevin-owens-swanton-bomb",
+    "kevin-owens-swanton-bomb",
     "kevin-owens-package-piledriver",
     "kevin-owens-package-piledriver",
     "kevin-owens-stunner",

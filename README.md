@@ -1,36 +1,22 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.27 — iPhone Presentation Completion + Global CTA Pass**.
+Current working build: **v0.13.30 — Kevin Owens Trademarks + MITB Shared Moves Pass**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Events, Money in the Bank, King of the Ring and Championship Road.
 
 ## Current build
-- **Primary action buttons now use one canonical visual language** based on Championship Road’s FIGHT MATCH CTA: large rounded touch targets, bold high-contrast display text, saturated mode colour and stronger depth. Secondary/navigation controls remain quieter.
-- **Season 1 is brighter and more graphic.** Richer purple/cyan lighting now carries through the hero, countdown, command band and reward road; Claim/Claim All/Free Booster controls use the stronger CTA style.
-- **Final Boss reward tiers are colour-coded by reward identity** so The Rock milestones stand apart from ordinary purple tiers: orange exclusive Moves, cyan Support, gold Trademarks/signatures, red Finishers, purple Actions, blue Entrance and premium gold for the Tier 100 Superstar.
-- The v0.13.26 full-width iPhone Season timeline and vertical-only current-tier focus remain intact, with slightly larger reward nodes/CTAs but no return of the Safari horizontal-scroll regression.
-- **Season Road iPhone geometry is hotfixed.** Safari no longer uses `scrollIntoView()` on alternating half-width tier nodes, which could horizontally shift the entire Season screen and make the hero/countdown appear clipped while every other tier looked missing. Current-tier focus is now vertical-only and explicitly resets horizontal scroll to zero.
-- On iPhone, the 100-tier reward road now renders as a **compact full-width timeline** with the spine anchored safely inside the viewport, all tiers visible in sequence, smaller vertical spacing, a shorter Final Boss hero, compact command stats, and a contained countdown/free-booster strip.
-- External iPhone testing identified a Brock Action reliability/feedback issue. **The Advocate’s Plan**, **The Beast Incarnate**, and **Eat. Sleep. Conquer. Repeat.** now have explicit, tested runtime behavior. Eat. Sleep. Conquer. Repeat. now correctly lets the player choose the page to ditch after drawing instead of automatically discarding the drawn page. Beast Incarnate visibly auto-triggers against a 10+ damage Move, and Advocate’s Plan clearly unlocks after Brock’s German and applies its F-5 search/-2 Cost effect.
-- **Championship Road** is now a continuous, graphic-heavy **24-match Season 1 campaign map** instead of four small era tabs. The road is divided into six four-match themes: Golden Era, SummerSlam Part I, Evolution Part I, Attitude Era, SummerSlam Part II and Evolution Part II.
-- Championship Road now owns the four-step difficulty progression: **Easy → Normal → Hard → Hardcore**. Easy opponents begin at **-5 HP**, Normal uses printed HP, Hard begins at **+5 HP**, and Hardcore begins at **+10 HP**. The player Superstar's HP is unchanged. The full campaign therefore contains **96 match clears** across all four difficulties.
-- Higher Championship Road difficulties unlock only after completing the entire 24-match road on the previous difficulty. Each difficulty tracks its own completion and best-stage progress.
-- To prevent the expanded 96-match campaign becoming a pack farm, Championship Road standard boosters are awarded at the **end of each four-match themed region**, not after every individual win. A complete 24-match road still awards the existing Championship Pack, and the first full Road clear with a Superstar retains its existing first-clear bonus.
-- **Money in the Bank** is the player-facing name of the former daily Ladder challenge and now lives in **Live Events**, not My Challenges. Its rules are unchanged: 8 fixed daily opponents, 3 lives, losing all 3 restarts at Level 1 against the same daily field, local midnight refreshes the field, and one completion reward is awarded.
-- **King of the Ring** retains its 8-Superstar single-elimination rules, coronation and choose-1-of-3 booster reward. Its tournament display is now a true Superstar-card bracket: Quarterfinals use a horizontal 8-person bracket, Semifinals contract to four Superstars on one screen, and the Final contracts to the last two.
-- The **Season 1 Road** is now a colourful graphic 100-tier progression track with large reward nodes, prominent Final Boss milestones, a Season-end countdown, and automatic focus on the player's current tier when the screen opens.
-- **My Challenges** is now a compact content-first hub with no Superstar hero and no Money in the Bank block. Daily, Weekly and Set Milestone sections use stronger category/set colour and reward presentation.
-- **Live Events** now includes Money in the Bank and uses the approved split-title typography for tower names, including Powerhouse Collision, Submission Specialists and Legends Collide.
-- **Exhibition** selection removes the redundant header Superstar render and oversized selector frames, enlarges the Exhibition Showcase branding and keeps the owned Superstar cards as the focus.
-- **Packs**, **My Collection**, **Card Catalogue** and **My Legacy** remove redundant hero renders/repeated headings and use tighter iPhone-first spacing so useful content appears sooner.
-- **Store** removes the featured Superstar hero, presents Featured Superstars as a two-column vertical grid, applies the approved display typography to major sections, and gives **UP prices a bright gold currency treatment**. Store prices remain unchanged at 300 UP per booster and 2,500 UP per Superstar.
-- The Home Season tile and global **PACKS / UP** header typography have been tightened to match the approved WWE Legacy display system while preserving clear numeric values beneath the labels.
-- **Special remains retired as a collectible card type**: all 52 former Specials are Actions while preserving their original reaction/trigger timing. The gameplay pool contains 69 Actions and 0 Special-kind cards.
-- Secondary Superstar unlocks remain lean: Superstar identity + at most one authored Finisher, one Trademark and one Action; no shared filler, manufactured 60-page deck or Superstar-specific Entrance is auto-granted.
-- Superstar chase remains **2% per eligible pack** with one global **100-miss pity** track. Completed-set packs cannot consume armed pity, allowing it to remain banked for the first eligible pack of a later set.
-- The expanded Achievements / Achievement Points / Career Score proposal remains **on hold** and is not part of this build.
-- Profile schema remains **30** and existing save/export/import compatibility is preserved.
+- Kevin Owens gains two new authored 3★ Rare Trademarks: **Avalanche Fisherman’s Buster** (C9/D14, Strike-history discount) and **KO’s Swanton Bomb** (C7/D11, +2 Damage after a prior Strength Move).
+- KO’s recommended deck uses two copies of each new Trademark while **Pop-Up Powerbomb remains the single Trademark granted by the lean later-Superstar unlock package**.
+- Money in the Bank — Series 1 gains three future shared cards: **Trash Can to the Back** (Uncommon Weapon), **Chair to the Gut** (Uncommon Weapon/Grapple setup) and **Splash** (plain Common shared Move).
+- Stable new collector slots are SS1-146 / SS1-147 and MITB1-035 through MITB1-037.
+- All v0.13.29 iPhone presentation improvements remain intact.
+- Pinned web-app update reliability remains active through `build.json`, no-store checks, same-origin cache-busted update navigation, active-match deferral and My Legacy update controls.
+- Superstar chase remains **2% natural with one global 100-miss pity**. Completed-set packs cannot consume an armed pity.
+- Secondary Superstar unlocks remain lean: Superstar + at most 1 Finisher / 1 Trademark / 1 Action; no shared filler, manufactured 60-page deck or Superstar-specific Entrance auto-grant.
+- Special remains retired as a collectible type: **69 Actions / 0 Special-kind gameplay cards**.
+- Expanded Achievements / Achievement Points / Career Score remains on hold and unimplemented.
+- Profile schema remains **30**.
 
 Season 1 release schedule remains: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
 
-See `RELEASE-NOTES-v0.13.27.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.30.md` and `BUILD-CERTIFICATION.md`.

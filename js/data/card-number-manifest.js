@@ -3071,6 +3071,38 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardNumber": 145,
     "cardCode": "SS1-145"
   }
+
+  ,{
+    "id": "kevin-owens-avalanche-fishermans-buster",
+    "setId": "summerslam-series-1",
+    "cardNumber": 146,
+    "cardCode": "SS1-146"
+  },
+  {
+    "id": "kevin-owens-swanton-bomb",
+    "setId": "summerslam-series-1",
+    "cardNumber": 147,
+    "cardCode": "SS1-147"
+  },
+  {
+    "id": "trash-can-to-the-back",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 35,
+    "cardCode": "MITB1-035"
+  },
+  {
+    "id": "chair-to-the-gut",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 36,
+    "cardCode": "MITB1-036"
+  },
+  {
+    "id": "splash",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 37,
+    "cardCode": "MITB1-037"
+  }
+
 ]);
 
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));

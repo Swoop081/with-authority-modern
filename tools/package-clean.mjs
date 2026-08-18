@@ -13,6 +13,7 @@ const out = requested
 const rootFiles = [
   ".nojekyll",
   "index.html",
+  "build.json",
   "manifest.webmanifest",
   "package.json",
   "README.md",

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.27";
+import { enrichCounterState } from "./counter-states.js?v=0.13.30";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -2016,6 +2016,7 @@ export const allGameplayCards = [
   {
     "id": "fisherman-buster",
     "name": "Fisherman Buster",
+    "boosterOnly": true,
     "kind": "move",
     "setId": "summerslam-series-1",
     "cost": 5,
@@ -10150,6 +10151,143 @@ export const allGameplayCards = [
       "exclusiveAdrenaline": 1
     }
   },
+
+  {
+    "id": "kevin-owens-avalanche-fishermans-buster",
+    "name": "Avalanche Fisherman’s Buster",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 9,
+    "damage": 14,
+    "requirements": {
+      "strength": 3
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "kevin-owens",
+    "rarity": 3,
+    "rulesText": "Kevin Owens-exclusive Trademark. Grounds opponent. If Kevin connected with a Strike earlier this Control sequence, this costs 2 less.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "discountIfMethodConnectedThisControl": {
+      "method": "strike",
+      "amount": 2
+    },
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "kevin-owens-swanton-bomb",
+    "name": "KO’s Swanton Bomb",
+    "kind": "move",
+    "setId": "summerslam-series-1",
+    "cost": 7,
+    "damage": 11,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "kevin-owens",
+    "rarity": 3,
+    "rulesText": "Kevin Owens-exclusive Trademark. Grounded opponent only. If a Strength Move connected earlier this Control sequence, this deals +2 Damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "bonusDamageIfMethodConnectedThisControl": {
+      "method": "strength",
+      "damage": 2
+    },
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "trash-can-to-the-back",
+    "name": "Trash Can to the Back",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "weapon": true,
+    "rulesText": "Shared Weapon. On connect, deal +1 persistent Back damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    },
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "chair-to-the-gut",
+    "name": "Chair to the Gut",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 4,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "weapon": true,
+    "rulesText": "Shared Weapon. On connect, your next Grapple this Control sequence costs 1 less.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextMoveType",
+        "moveType": "grapple",
+        "amount": 1
+      }
+    ],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "splash",
+    "name": "Splash",
+    "kind": "move",
+    "setId": "money-in-the-bank-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "aerial",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "running-aerial"
+  },
+
 
 ];
 

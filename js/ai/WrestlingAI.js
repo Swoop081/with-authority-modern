@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.27";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.27";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.30";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.30";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -217,7 +217,7 @@ function moveScore(state,pid,card){
    const target=p.hand.find(x=>x.name===e.name)||p.deck.find(x=>x.name===e.name);
    score+=target?.finisher?20:10;
  }
- if((p.namedDiscount?.[card.name]??0)>0)score+=18;if(card.discountIfNamedConnectedThisControl&&p.events?.connectedCardNamesThisControl?.[card.discountIfNamedConnectedThisControl.name])score+=18+(card.discountIfNamedConnectedThisControl.amount??0)*5;if(card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method])score+=16+(card.discountIfMethodConnectedThisControl.amount??0)*5;
+ if((p.namedDiscount?.[card.name]??0)>0)score+=18;if(card.discountIfNamedConnectedThisControl&&p.events?.connectedCardNamesThisControl?.[card.discountIfNamedConnectedThisControl.name])score+=18+(card.discountIfNamedConnectedThisControl.amount??0)*5;if(card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method])score+=16+(card.discountIfMethodConnectedThisControl.amount??0)*5;if(card.bonusDamageIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.bonusDamageIfMethodConnectedThisControl.method])score+=(card.bonusDamageIfMethodConnectedThisControl.damage??0)*4;for(const e of card.effects??[]){if(e.type==='discountNextMoveType'&&p.hand.some(x=>x.kind==='move'&&x.moveType===e.moveType&&x.id!==card.id))score+=8+(e.amount??1)*4;}
  if(card.groundedOnly&&groundState(def))score+=8;
  const setupSpecial=p.superstar?.special;
  if(setupSpecial?.searchName&&setupSpecial?.afterName===card.name&&!(p.usedSpecialIds??[]).includes(p.hand.find(x=>x.special===setupSpecial)?.id))score+=28;
@@ -259,7 +259,7 @@ function moveScore(state,pid,card){
  if(p.superstar.id==='paige'){
    if((p.abilityUses??0)<2&&card.method==='strike'&&(card.damage??0)>=5)score+=12;
    if(card.method==='technical'&&(p.methodDiscount?.technical??0)>0)score+=16;
-   if((p.namedDiscount?.[card.name]??0)>0)score+=18;if(card.discountIfNamedConnectedThisControl&&p.events?.connectedCardNamesThisControl?.[card.discountIfNamedConnectedThisControl.name])score+=18+(card.discountIfNamedConnectedThisControl.amount??0)*5;if(card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method])score+=16+(card.discountIfMethodConnectedThisControl.amount??0)*5;
+   if((p.namedDiscount?.[card.name]??0)>0)score+=18;if(card.discountIfNamedConnectedThisControl&&p.events?.connectedCardNamesThisControl?.[card.discountIfNamedConnectedThisControl.name])score+=18+(card.discountIfNamedConnectedThisControl.amount??0)*5;if(card.discountIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.discountIfMethodConnectedThisControl.method])score+=16+(card.discountIfMethodConnectedThisControl.amount??0)*5;if(card.bonusDamageIfMethodConnectedThisControl&&p.events?.connectedMethodsThisControl?.[card.bonusDamageIfMethodConnectedThisControl.method])score+=(card.bonusDamageIfMethodConnectedThisControl.damage??0)*4;for(const e of card.effects??[]){if(e.type==='discountNextMoveType'&&p.hand.some(x=>x.kind==='move'&&x.moveType===e.moveType&&x.id!==card.id))score+=8+(e.amount??1)*4;}
  }
  if(p.superstar.id==='sami-zayn'){
    const hasHelluva=p.hand.some(x=>x.id==='sami-zayn-helluva-kick');
