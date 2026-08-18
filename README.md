@@ -1,6 +1,6 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.36 — Super Pack Flow + Deck Ownership Hotfix**.
+Current working build: **v0.13.37 — Hub + Selector Consistency Pass**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Events, Money in the Bank, King of the Ring and Championship Road.
 
@@ -14,7 +14,12 @@ A mobile-first WWE collectible card game prototype with 60-page Superstar decks,
 - **Hangman Armbar — SVS1-054** remains the latest gameplay addition: shared 1★ Common, C3/D0, Technical 1, standing-only Arm Submission, Arm Extended, +3 persistent Arm damage per successful turn.
 - Rotating Live Events remain release-gated, universal layered-card lookup remains active, counter/reversal Play Pile duplication remains fixed, Pack Complete cards retain the ~60% inspector, and optional triggered cards such as Tribal Chief retain the Use/Decline flow from v0.13.35.
 - Profile schema remains **31**.
+- Live Events hub cards are denser and information-led: Superstar renders are removed, event titles are larger, and CTA/timer controls are split left/right without overlap.
+- Superstar selection now uses one shared horizontal carousel across Exhibition, Deck Lab and other character-pick surfaces. First tap selects; a second tap on the selected Superstar flips to details.
+- The Home Season tile now follows the same headline typography/spacing system as Deck Lab and My Challenges.
+- The Season screen keeps Season context plus the Free Booster claim/countdown sticky while the 100-tier road auto-focuses and scrolls beneath it.
+- Recently themed stat tiles now use full alternating theme/white fills rather than black panels with colored accents. The King of the Ring hero is tightened to remove the unused vertical gap above its stat row.
 
 Season 1 release schedule remains: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
 
-See `RELEASE-NOTES-v0.13.36.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.37.md` and `BUILD-CERTIFICATION.md`.

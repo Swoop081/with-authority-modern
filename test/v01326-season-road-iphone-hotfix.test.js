@@ -7,7 +7,7 @@ const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
 
 test('v0.13.26 Season focus is vertical-only and explicitly resets horizontal scroll',()=>{
   assert.doesNotMatch(app,/season-tier-\$\{currentTier\}`\)\?\.scrollIntoView/);
-  assert.match(app,/const focusLine=Math\.max\(chromeHeight\+12,Math\.min\(window\.innerHeight\*\.58,460\)\)/);
+  assert.match(app,/window\.scrollY\+rect\.top-\(chromeHeight\+118\)/);
   assert.match(app,/window\.scrollTo\(\{top,left:0,behavior:'auto'\}\)/);
 });
 

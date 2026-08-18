@@ -61,7 +61,8 @@ test('v0.12.48 preserves collectible cards where the UI is representing an actua
   const store = functionSlice('renderStore', 'renderSeasons');
   assert.match(store, /superstarPreviewCardMarkup\(star\.id,"store-shelf-collectible"\)/);
   assert.match(ui, /collectibleCardMarkup/);
-  assert.match(ui, /deck-lab-roster-collectible/);
+  assert.match(ui, /selectionCarouselMarkup\(unlocked,deckBuilderStarId,'deck-lab-select'\)/);
+  assert.match(ui, /selection-owned-superstar-card/);
 });
 
 

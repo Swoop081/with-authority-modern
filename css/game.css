@@ -7197,3 +7197,232 @@ body[data-screen="entrance-intro"] #entrance-next{grid-row:4!important}
 
 /* Pack summary cards now open the standard Deck Lab-scale inspector. */
 .booster-card-inspect-modal .deck-lab-inspect-card{height:min(60svh,580px)!important;max-height:60svh!important}
+
+/* v0.13.37 — Selection + hub density consistency pass. */
+
+/* Live Events hub: information-only selectable plates. Character renders are deliberately absent.
+   The CTA and timing metadata share a footer row so they can never collide. */
+.live-events-hub .live-tower-hub-card.compact-live-choice{
+  min-height:156px!important;
+  padding:13px 15px!important;
+}
+.live-events-hub .compact-live-choice .live-tower-hub-copy{
+  position:relative!important;
+  z-index:3!important;
+  width:100%!important;
+  min-height:128px!important;
+  display:grid!important;
+  grid-template-rows:auto auto auto 1fr!important;
+  align-content:start!important;
+  gap:3px!important;
+  padding-right:0!important;
+}
+.live-events-hub .compact-live-choice .live-event-split-title{
+  font-size:clamp(1.95rem,7.2vw,3.05rem)!important;
+  line-height:.78!important;
+  margin:2px 0 3px!important;
+  max-width:88%!important;
+}
+.live-events-hub .money-in-bank-live-card .live-event-split-title.title-mitb{
+  margin:2px 0 3px!important;
+}
+.live-events-hub .money-in-bank-live-card .live-event-split-title.title-mitb span{
+  font-size:clamp(2.05rem,7.6vw,3.15rem)!important;
+}
+.live-events-hub .money-in-bank-live-card .live-event-split-title.title-mitb b{
+  font-size:clamp(2.4rem,8.7vw,3.65rem)!important;
+}
+.live-events-hub .compact-live-choice .live-choice-summary{font-size:.49rem!important}
+.live-events-hub .live-tower-hub-footer{
+  align-self:end!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:10px!important;
+  align-items:end!important;
+  min-width:0!important;
+  margin-top:7px!important;
+}
+.live-events-hub .compact-live-choice .live-tower-enter{
+  position:static!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  min-width:0!important;
+  width:max-content!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:9px 11px!important;
+  line-height:1.05!important;
+  white-space:normal!important;
+}
+.live-events-hub .compact-live-choice .live-tower-timer{
+  position:static!important;
+  justify-self:end!important;
+  margin:0!important;
+  padding:5px 8px!important;
+  white-space:nowrap!important;
+  text-align:right!important;
+}
+.live-events-hub .compact-live-choice .live-tower-hub-art{display:none!important}
+.live-events-hub .compact-live-choice .mitb-briefcase{right:3%!important;bottom:18%!important;opacity:.07!important}
+@media(max-width:430px){
+  .live-events-hub .live-tower-hub-card.compact-live-choice{min-height:148px!important;padding:11px 12px!important}
+  .live-events-hub .compact-live-choice .live-tower-hub-copy{min-height:124px!important}
+  .live-events-hub .compact-live-choice .live-event-split-title{font-size:clamp(1.85rem,8vw,2.7rem)!important;max-width:100%!important}
+  .live-events-hub .live-tower-hub-footer{gap:6px!important}
+  .live-events-hub .compact-live-choice .live-tower-enter{padding:8px 9px!important;font-size:.45rem!important}
+  .live-events-hub .compact-live-choice .live-tower-timer{padding:4px 6px!important}
+}
+
+/* Home Season card uses the exact display rhythm of Deck Lab / My Challenges destination titles. */
+.legacy-season-event .season-home-title{
+  display:block!important;
+  margin:5px 0!important;
+  font-size:1.48rem!important;
+  line-height:.9!important;
+  letter-spacing:-.045em!important;
+  font-style:italic!important;
+  font-weight:1000!important;
+  text-transform:uppercase!important;
+  transform:none!important;
+  color:#f7f8fb!important;
+}
+.legacy-season-event .season-home-title>span{color:#f7f8fb!important}
+.legacy-season-event .season-home-title>b{color:#55e4ff!important;font:inherit!important;font-weight:1000!important}
+.legacy-season-copy>em{font-size:.46rem!important;letter-spacing:.14em!important}
+@media(max-width:600px){.legacy-season-event .season-home-title{font-size:1.35rem!important}}
+@media(max-width:390px){.legacy-season-event .season-home-title{font-size:1.28rem!important}}
+
+/* One Superstar-selection component everywhere: Deck Lab and Live Event setup now use the
+   same horizontal collectible-card carousel as Exhibition / MITB / KOTR / Championship Road. */
+.deck-lab-roster-selector,.live-tower-selector-panel{
+  padding:12px!important;
+  border:1px solid rgba(255,255,255,.11)!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#11141c,#080a10)!important;
+  overflow:hidden!important;
+}
+.deck-lab-roster-selector .selector-title,.live-tower-selector-panel .mode-run-picker-head{margin-bottom:3px!important}
+.deck-lab-roster-selector .selector-title small{display:block;margin-top:2px;color:#8f98a6;font-size:.52rem}
+.deck-lab-roster-selector .superstar-select-carousel,.live-tower-selector-panel .superstar-select-carousel{gap:8px!important;padding:4px 1px 7px!important;margin:0!important}
+.deck-lab-roster-selector .select-superstar-card,.live-tower-selector-panel .select-superstar-card{flex-basis:clamp(210px,58vw,270px)!important}
+.live-tower-selector-panel{display:grid!important;gap:6px!important}
+.live-tower-selector-panel .live-tower-selector-note{margin:0!important;color:#929ba8!important;font-size:.58rem!important;line-height:1.3!important}
+.live-tower-selector-panel .select-confirm{margin-top:2px!important}
+@media(max-width:600px){
+  .deck-lab-roster-selector,.live-tower-selector-panel{padding:10px!important}
+  .deck-lab-roster-selector .select-superstar-card,.live-tower-selector-panel .select-superstar-card{flex-basis:68vw!important;height:410px!important}
+}
+
+/* Season context + free booster remain accessible while the road auto-focuses the current tier.
+   Once the page scrolls, the large hero collapses into a compact sticky Season control bar. */
+body[data-screen="seasons"] .season-sticky-shell{
+  position:sticky!important;
+  z-index:80!important;
+  top:calc(var(--legacy-chrome-h) + env(safe-area-inset-top) + 3px)!important;
+  display:grid!important;
+  gap:7px!important;
+  padding:0 0 7px!important;
+  background:linear-gradient(180deg,rgba(17,8,34,.995) 0%,rgba(17,8,34,.985) 84%,rgba(17,8,34,.90) 100%)!important;
+  box-shadow:0 12px 22px rgba(8,4,17,.18)!important;
+}
+body[data-screen="seasons"] .season-compact-meta{display:none!important}
+body[data-screen="seasons"] .season-sticky-shell.is-compact{gap:5px!important;padding-bottom:5px!important}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-hero{
+  min-height:72px!important;
+  height:72px!important;
+  border-radius:12px!important;
+}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-hero-copy{
+  min-height:72px!important;
+  width:100%!important;
+  padding:8px 12px!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  grid-template-rows:auto auto!important;
+  align-items:center!important;
+  column-gap:10px!important;
+}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-hero-copy>span,
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-hero-copy>p,
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-end-countdown,
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-rock,
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-command{display:none!important}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-road-hero h1{
+  grid-column:1!important;
+  grid-row:1/3!important;
+  align-self:center!important;
+  margin:0!important;
+  font-size:1.65rem!important;
+  line-height:.82!important;
+  white-space:nowrap!important;
+}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-compact-meta{
+  grid-column:2!important;
+  grid-row:1/3!important;
+  display:grid!important;
+  justify-items:end!important;
+  gap:1px!important;
+}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-compact-meta b{font-size:.72rem!important;color:#fff!important}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-compact-meta small{font-size:.34rem!important;letter-spacing:.08em!important;color:#c99cff!important;white-space:nowrap!important}
+body[data-screen="seasons"] .season-sticky-shell.is-compact .season-free-pack-button{min-height:43px!important;height:43px!important;padding:7px 12px!important;font-size:.62rem!important}
+
+/* Full-fill stat tiles: the page theme owns the tile instead of a black panel with a tiny accent. */
+body[data-screen="boosters"] .booster-vault-stats>.set-stat::before{display:none!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(odd){background:#ff7a35!important;border-color:#ff9a62!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(even){background:#f4f6f8!important;border-color:#fff!important}
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(odd) b,
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(odd) span,
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(even) b,
+body[data-screen="boosters"] .booster-vault-stats>.set-stat:nth-child(even) span{color:#101217!important}
+
+body[data-screen="ladder"] .mode-run-summary>div:nth-child(odd),
+body[data-screen="king-of-the-ring"] .mode-run-summary>div:nth-child(odd){background:#e3b94f!important;border-color:#f6d778!important}
+body[data-screen="ladder"] .mode-run-summary>div:nth-child(even),
+body[data-screen="king-of-the-ring"] .mode-run-summary>div:nth-child(even){background:#f5f6f8!important;border-color:#fff!important}
+body[data-screen="ladder"] .mode-run-summary>div b,body[data-screen="ladder"] .mode-run-summary>div span,
+body[data-screen="king-of-the-ring"] .mode-run-summary>div b,body[data-screen="king-of-the-ring"] .mode-run-summary>div span{color:#111319!important}
+
+body[data-screen="championship"] .mode-run-summary>div:nth-child(odd){background:#e43c49!important;border-color:#ff6975!important}
+body[data-screen="championship"] .mode-run-summary>div:nth-child(odd) b,body[data-screen="championship"] .mode-run-summary>div:nth-child(odd) span{color:#fff!important}
+body[data-screen="championship"] .mode-run-summary>div:nth-child(even){background:#f5f6f8!important;border-color:#fff!important}
+body[data-screen="championship"] .mode-run-summary>div:nth-child(even) b,body[data-screen="championship"] .mode-run-summary>div:nth-child(even) span{color:#111319!important}
+
+body[data-screen="live-events"] .live-tower-detail-stats>article:nth-child(odd){background:#54df92!important;border-color:#8af0b7!important}
+body[data-screen="live-events"] .live-tower-detail-stats>article:nth-child(even){background:#f5f6f8!important;border-color:#fff!important}
+body[data-screen="live-events"] .live-tower-detail-stats>article b,body[data-screen="live-events"] .live-tower-detail-stats>article span{color:#0c1511!important}
+
+body[data-screen="seasons"] .season-road-command>div:nth-child(odd){background:#9a4bea!important;border-color:#c077ff!important}
+body[data-screen="seasons"] .season-road-command>div:nth-child(odd) small,body[data-screen="seasons"] .season-road-command>div:nth-child(odd) strong,body[data-screen="seasons"] .season-road-command>div:nth-child(odd) span{color:#fff!important}
+body[data-screen="seasons"] .season-road-command>div:nth-child(even){background:#f5f6f8!important;border-color:#fff!important}
+body[data-screen="seasons"] .season-road-command>div:nth-child(even) small,body[data-screen="seasons"] .season-road-command>div:nth-child(even) strong,body[data-screen="seasons"] .season-road-command>div:nth-child(even) span{color:#111319!important}
+
+/* KOTR has no hero portrait, so its summary participates in normal document flow instead of
+   reserving an empty portrait-height stage. */
+body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero{
+  min-height:0!important;
+  height:auto!important;
+  padding:14px!important;
+  display:grid!important;
+  gap:10px!important;
+}
+body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero .mode-run-hero-copy{
+  position:relative!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding:0!important;
+  margin:0!important;
+}
+body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero .mode-run-summary{
+  position:static!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:100%!important;
+  margin:0!important;
+}
+body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero .mode-run-hero-copy>p{max-width:none!important;margin-top:4px!important}
+@media(max-width:600px){
+  body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero{min-height:0!important;height:auto!important;padding:12px!important;gap:8px!important}
+}
