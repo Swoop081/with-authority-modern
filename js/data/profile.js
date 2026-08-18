@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.22";
-import { collectionCards } from "./collection.js?v=0.13.22";
-import { superstars } from "./superstars.js?v=0.13.22";
-import { isUnreleasedSetId } from "./release.js?v=0.13.22";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.22";
+import { decks } from "./decks.js?v=0.13.23";
+import { collectionCards } from "./collection.js?v=0.13.23";
+import { superstars } from "./superstars.js?v=0.13.23";
+import { isUnreleasedSetId } from "./release.js?v=0.13.23";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.23";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -233,7 +233,7 @@ export function createProfile(starterId) {
     packsSinceSuperstarUnlock: 0,
     packsSinceSuperstarUnlockBySet: blankSetCounters(),
     ladder: { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, completionPackCreditsBySet: blankSetCounters(), firstClearSuperstarPending: false },
-    kingOfTheRing: { activeRun: null, clears: 0, bestRound: 0 },
+    kingOfTheRing: { activeRun: null, clears: 0, bestRound: 0, reigningKingId: null, reigningKingAt: null },
     championshipRoad: { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [] },
     weeklyLiveEvents: { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [] },
     liveEventTowers: { states: {}, totalClears: 0, completedKeys: [] },
@@ -511,7 +511,7 @@ export function migrateProfile(old) {
   p.packsSinceSuperstarUnlockBySet = { ...blankSetCounters(), ...(p.packsSinceSuperstarUnlockBySet ?? {}) };
   p.ladder = { activeRun: null, clears: 0, bestRung: 0, completionPackCredits: 0, completionPackCreditsBySet: blankSetCounters(), firstClearSuperstarPending: false, ...(p.ladder ?? {}) };
   p.ladder.completionPackCreditsBySet = { ...blankSetCounters(), ...(p.ladder.completionPackCreditsBySet ?? {}) };
-  p.kingOfTheRing = { activeRun: null, clears: 0, bestRound: 0, ...(p.kingOfTheRing ?? {}) };
+  p.kingOfTheRing = { activeRun: null, clears: 0, bestRound: 0, reigningKingId: null, reigningKingAt: null, ...(p.kingOfTheRing ?? {}) };
   p.championshipRoad = { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [], ...(p.championshipRoad ?? {}) };
   p.championshipRoad.championshipPackCreditsBySet = { ...blankSetCounters(), ...(p.championshipRoad.championshipPackCreditsBySet ?? {}) };
   p.championshipRoad.completedBy ??= [];

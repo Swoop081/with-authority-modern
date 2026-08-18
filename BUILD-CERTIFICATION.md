@@ -1,8 +1,8 @@
-# WWE Legacy v0.13.22 — Build Certification
+# WWE Legacy v0.13.23 — Build Certification
 
-**King of the Ring + Daily Ladder Challenge Pass**
+**King of the Ring Presentation + Coronation Pass**
 
-- **467/467 regression tests pass.**
+- **472/472 regression tests pass.**
 - Validation: **50 Superstars / 50 decks / 462 gameplay cards / 0 orphans / 0 issues**.
 - Flow audit: **50 Superstars / 0 issues**.
 - Card-ID audit: **512/512 / 0 issues**.
@@ -13,20 +13,21 @@
 - Dead-turn audit: **2,450 matches / 4.39 passes per match / maximum consecutive pass streak 4**.
 - Active hidden pre-release scope remains **currently released content + RAW Series 1 only**.
 
-## v0.13.22 certification focus
-- Top-level standalone Climb the Ladder is retired from Play and replaced by **King of the Ring**.
-- King of the Ring creates an **8-Superstar** bracket: player + 7 unique random opponents.
-- The player's path is Quarterfinal → Semifinal → Final; **one loss eliminates the run**.
-- Only winning the full King of the Ring tournament awards its **one standard booster**; rounds cannot be farmed for boosters.
-- Climb the Ladder is now a **daily Challenges tower** with **8 opponents and 3 lives**.
-- The daily opponent field is stable for the local day; losing all 3 lives restarts at Level 1 against that same field.
-- Local-midnight rollover resets the Ladder and creates a fresh daily field.
-- Ladder completion reward is granted only after all 8 levels and at most once per daily clear; individual levels do not award boosters.
-- Legacy standalone Ladder active-run state is retired safely while historical clears and previously awarded packs remain preserved.
-- Career records distinguish **King of the Ring**, **Climb the Ladder Challenge**, Exhibition, Live Events and Championship Road.
-- A dedicated King of the Ring achievement is included.
+## v0.13.23 certification focus
+- King of the Ring retains its **8-Superstar / Quarterfinal → Semifinal → Final / one-loss-elimination** rules.
+- The bracket now persists through the run and visibly marks advancing CPU/player winners.
+- The Final receives dedicated **KING OF THE RING FINAL** presentation.
+- A tournament victory now flows through **match result → coronation → Claim the Crown → choose-one reward**.
+- The champion becomes the persistent **Reigning King**, surfaced on the KOTR Play tile and in a compact My Legacy KOTR history panel.
+- KOTR still awards exactly **one standard booster total** and never awards boosters per round.
+- With exactly three released collectible sets, all three set boosters are offered to the champion.
+- With four or more released collectible sets, **three unique released sets are randomly selected** for that tournament.
+- Reward options persist in save state and cannot be rerolled by leaving/reopening the screen.
+- Only one offered pack can be claimed; the selected booster is added to the normal booster vault.
+- Cleared v0.13.22 KOTR runs are migration-protected so their already-paid automatic reward cannot become a second choose-one reward after upgrade.
 - Profile schema remains **30**.
+- Daily Ladder, Championship Road, Live Events and Exhibition gameplay are unchanged.
 - Superstar chase remains **2% natural** with one global **100-miss pity** counter; armed pity can remain banked across completed sets.
 - Action taxonomy remains **69 Actions / 0 Special-kind collectible cards**.
 - Secondary Superstar unlocks remain capped at **1 Finisher / 1 Trademark / 1 Action**, with no manufactured secondary deck or Superstar-specific Entrance grant.
-- No gameplay/card balance, HP, Method limits, economy values, release dates, artwork assets or authored deck blueprints changed.
+- No gameplay/card balance, HP, Method limits, Store/economy values, release dates, artwork assets or authored recommended deck blueprints changed.

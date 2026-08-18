@@ -1,36 +1,36 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.22";
-import { superstars } from "../data/superstars.js?v=0.13.22";
-import { decks } from "../data/decks.js?v=0.13.22";
-import { sets } from "../data/sets.js?v=0.13.22";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.22";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.22";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.22";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.22";
-import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.22";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.22";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.22";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.22";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.22";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.22";
-import { totalMomentum } from "../engine/utils.js?v=0.13.22";
-import { healthZone } from "../engine/health.js?v=0.13.22";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.22";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.22";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.22";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.22";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.22";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.22";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.22";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.22";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.22";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.22";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.22";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.22";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.22";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.22";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.22";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.22";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.22";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.23";
+import { superstars } from "../data/superstars.js?v=0.13.23";
+import { decks } from "../data/decks.js?v=0.13.23";
+import { sets } from "../data/sets.js?v=0.13.23";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.23";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.23";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.23";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount, addUniversePoints } from "../data/profile.js?v=0.13.23";
+import { openBooster, openLadderCompletionPack, openChampionshipPack, grantBooster, boosterCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.23";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.23";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.23";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.23";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.23";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.23";
+import { totalMomentum } from "../engine/utils.js?v=0.13.23";
+import { healthZone } from "../engine/health.js?v=0.13.23";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.23";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.23";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.23";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.23";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_BRANCHES, championshipRoadState, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.23";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.23";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.23";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.23";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.23";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.23";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.23";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.23";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.23";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.23";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.23";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.23";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.23";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1403,23 +1403,74 @@ function renderKingOfTheRing() {
   setChrome();
   const root = $("#game"), state = kingOfTheRingState(profile), run = state.activeRun, active = run?.status === "active";
   const unlocked = orderedUnlockedSuperstars();
-  const chosenId = active ? run.superstarId : (unlocked.some(s => s.id === selection.p1) ? selection.p1 : unlocked[0]?.id);
+  const chosenId = active || run?.status === "cleared" ? run.superstarId : (unlocked.some(s => s.id === selection.p1) ? selection.p1 : unlocked[0]?.id);
   if (chosenId) selection.p1 = chosenId;
   const chosenStar = superstarById[chosenId];
+  const name = id => superstarById[id]?.name ?? id ?? "TBD";
   const field = run?.field ?? [];
   const qfPairs = field.length === 8 ? [[field[0],field[1]],[field[2],field[3]],[field[4],field[5]],[field[6],field[7]]] : [];
-  const pairMarkup = (pair,index) => `<article class="kotr-match-card ${index===0?'player-match':''}"><span>QF ${index+1}</span><b>${superstarById[pair[0]]?.name ?? pair[0]}</b><i>VS</i><b>${superstarById[pair[1]]?.name ?? pair[1]}</b></article>`;
-  const semiOpponent = run && run.stage >= 1 ? superstarById[run.opponents[1]]?.name : "TBD";
-  const finalOpponent = run && run.stage >= 2 ? superstarById[run.opponents[2]]?.name : "TBD";
-  const bracket = run ? `<section class="kotr-bracket" aria-label="King of the Ring bracket"><div class="kotr-round"><h3>Quarterfinals</h3>${qfPairs.map(pairMarkup).join('')}</div><div class="kotr-round kotr-later-round"><h3>Semifinal</h3><article class="kotr-match-card player-match"><span>YOUR PATH</span><b>${chosenStar?.name}</b><i>VS</i><b>${semiOpponent}</b></article><article class="kotr-match-card"><span>OTHER SEMIFINAL</span><b>${run.stage >= 2 ? superstarById[run.cpuFinalist]?.name ?? 'TBD' : 'TBD'}</b></article></div><div class="kotr-round kotr-later-round"><h3>Final</h3><article class="kotr-match-card final"><span>THE CROWN</span><b>${chosenStar?.name}</b><i>VS</i><b>${finalOpponent}</b></article></div></section>` : '';
-  const statusText = run?.status === "cleared" ? `${chosenStar?.name} is King of the Ring!` : run?.status === "eliminated" ? "Tournament over. One loss means elimination — enter a new bracket." : active ? `${KING_OF_THE_RING_ROUNDS[run.stage]} · ${superstarById[currentKingOfTheRingOpponent(profile)]?.name}` : "Eight Superstars enter. Win three straight matches. One loss ends the tournament.";
-  const command = active ? `<section class="mode-run-command kotr-run-command"><div class="mode-run-command-copy"><span>${KING_OF_THE_RING_ROUNDS[run.stage].toUpperCase()} · ${run.stage+1}/3</span><strong>${superstarById[currentKingOfTheRingOpponent(profile)]?.name}</strong><small>${chosenStar?.name} · one loss = eliminated</small></div><button id="continue-kotr" class="start-match mode-run-primary">Fight ${KING_OF_THE_RING_ROUNDS[run.stage]}</button></section>` : `<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? 'Choose your Superstar'}</h3></div><small>Seven opponents are drawn randomly</small></div>${selectionCarouselMarkup(unlocked,chosenId,'kotr-select')}<button id="start-kotr" class="start-match mode-run-primary">${run ? 'Enter New Tournament' : 'Enter King of the Ring'}</button></section>`;
+  const playerAdvancedQf = !!run && (run.stage >= 1 || run.status === "cleared");
+  const playerAdvancedSemi = !!run && (run.stage >= 2 || run.status === "cleared");
+  const playerWonFinal = run?.status === "cleared";
+  const qfWinners = run ? [playerAdvancedQf ? run.superstarId : null, ...(run.cpuQuarterWinners ?? [])] : [];
+  const pairMarkup = (pair,index) => {
+    const winner = qfWinners[index] ?? null;
+    const current = active && run.stage === 0 && index === 0;
+    return `<article class="kotr-match-card ${index===0?'player-match':''} ${current?'current':''} ${winner?'resolved':''}"><span>QF ${index+1}</span><b class="${winner===pair[0]?'winner':''}">${name(pair[0])}${winner===pair[0]?'<em>ADVANCES</em>':''}</b><i>VS</i><b class="${winner===pair[1]?'winner':''}">${name(pair[1])}${winner===pair[1]?'<em>ADVANCES</em>':''}</b></article>`;
+  };
+  const semiPlayerOpponent = run?.opponents?.[1] ?? null;
+  const cpuSemiA = run?.cpuQuarterWinners?.[1] ?? null;
+  const cpuSemiB = run?.cpuQuarterWinners?.[2] ?? null;
+  const finalOpponentId = run?.opponents?.[2] ?? null;
+  const bracket = run ? `<section class="kotr-bracket kotr-bracket-live" aria-label="King of the Ring bracket">
+    <div class="kotr-round"><h3>Quarterfinals</h3>${qfPairs.map(pairMarkup).join('')}</div>
+    <div class="kotr-round kotr-later-round"><h3>Semifinals</h3>
+      <article class="kotr-match-card player-match ${active&&run.stage===1?'current':''} ${playerAdvancedSemi?'resolved':''}"><span>SEMIFINAL 1</span><b class="${playerAdvancedSemi?'winner':''}">${name(run.superstarId)}${playerAdvancedSemi?'<em>ADVANCES</em>':''}</b><i>VS</i><b>${playerAdvancedQf?name(semiPlayerOpponent):'TBD'}</b></article>
+      <article class="kotr-match-card resolved"><span>SEMIFINAL 2</span><b class="${run.cpuFinalist===cpuSemiA?'winner':''}">${name(cpuSemiA)}${run.cpuFinalist===cpuSemiA?'<em>ADVANCES</em>':''}</b><i>VS</i><b class="${run.cpuFinalist===cpuSemiB?'winner':''}">${name(cpuSemiB)}${run.cpuFinalist===cpuSemiB?'<em>ADVANCES</em>':''}</b></article>
+    </div>
+    <div class="kotr-round kotr-later-round kotr-final-round"><h3>Final</h3>
+      <article class="kotr-match-card final ${active&&run.stage===2?'current':''} ${playerWonFinal?'resolved crown-winner':''}"><span>KING OF THE RING FINAL</span><b class="${playerWonFinal?'winner':''}">${name(run.superstarId)}${playerWonFinal?'<em>KING</em>':''}</b><i>VS</i><b>${playerAdvancedSemi?name(finalOpponentId):'TBD'}</b></article>
+    </div>
+  </section>` : '';
+
+  if (run?.status === "cleared" && !run.coronationSeen && !run.rewardClaimedSetId) {
+    root.innerHTML = `<section class="kotr-coronation-screen premium-screen"><div class="kotr-coronation-aura"></div><span class="kotr-coronation-kicker">KING OF THE RING · TOURNAMENT CHAMPION</span><div class="kotr-crown" aria-hidden="true">♛</div><div class="kotr-coronation-card-wrap">${superstarPreviewCardMarkup(run.superstarId,"kotr-coronation-card")}</div><h1>${name(run.superstarId)}</h1><h2>IS YOUR KING</h2><p>Three victories. One crown. ${name(run.superstarId)} stands alone as King of the Ring.</p>${bracket}<button id="claim-kotr-crown" class="start-match kotr-crown-button">CLAIM THE CROWN</button></section>`;
+    $("#claim-kotr-crown")?.addEventListener("click",()=>{ markKingOfTheRingCoronationSeen(profile); saveProfile(profile); renderKingOfTheRing(); });
+    return;
+  }
+
+  if (run?.status === "cleared" && run.coronationSeen && !run.rewardClaimedSetId) {
+    const choices = Array.isArray(run.rewardChoices) ? run.rewardChoices : prepareKingOfTheRingReward(profile, playerReleasedCollectibleSetIds(new Date()), Math.random);
+    saveProfile(profile);
+    const choiceMarkup = choices.map(setId => `<button type="button" class="kotr-reward-choice" data-kotr-reward-set="${setId}">${physicalBoosterPackMarkup({setId,title:sets[setId]?.name ?? "WWE LEGACY",series:"SERIES 1",subtitle:"KING OF THE RING REWARD",extraClass:"kotr-choice-pack"})}<strong>${sets[setId]?.displayName ?? sets[setId]?.name ?? setId}</strong><small>CHOOSE THIS BOOSTER</small></button>`).join('');
+    root.innerHTML = `<section class="kotr-reward-screen premium-screen"><header class="premium-hub-heading hub-kotr"><span class="premium-hub-kicker">CROWN CLAIMED</span><h1><span>CHOOSE YOUR</span> <b>REWARD</b></h1><p>Choose one booster. The other two return to the vault.</p></header><section class="kotr-reward-king"><span>REIGNING KING</span><strong>${name(run.superstarId)}</strong><small>${state.clears} career crown${state.clears===1?'':'s'}</small></section><div class="kotr-reward-grid">${choiceMarkup}</div></section>`;
+    root.querySelectorAll('[data-kotr-reward-set]').forEach(btn=>btn.addEventListener('click',()=>{
+      try {
+        const setId = claimKingOfTheRingReward(profile, btn.dataset.kotrRewardSet);
+        grantBooster(profile, 1, setId);
+        saveProfile(profile);
+        message = `${sets[setId]?.displayName ?? sets[setId]?.name ?? setId} booster claimed. ${name(run.superstarId)} remains the reigning King of the Ring.`;
+        renderKingOfTheRing();
+      } catch (error) { message = error.message; renderKingOfTheRing(); }
+    }));
+    return;
+  }
+
+  if (run?.status === "cleared" && run.rewardClaimedSetId) {
+    const claimedSet = run.rewardClaimedSetId === "legacy-auto-reward" ? null : run.rewardClaimedSetId;
+    root.innerHTML = `<section class="ladder-screen kotr-screen premium-screen compact-mode-run premium-run-screen is-run-setup"><section class="feature-hero kotr-feature single-feature-hero mode-run-hero reigning-king-hero">${modePortraits([run.superstarId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy mode-run-hero-copy">${modeLogoMarkup("king-of-the-ring",true)}<span class="kotr-reigning-label">♛ REIGNING KING</span><h2>${name(run.superstarId)}</h2><p>${claimedSet ? `${sets[claimedSet]?.displayName ?? sets[claimedSet]?.name ?? claimedSet} booster claimed.` : 'Tournament reward already claimed.'}</p></div><div class="ladder-summary mode-run-summary"><div><b>${state.clears}</b><span>Crowns</span></div><div><b>3/3</b><span>Winning Run</span></div><div><b>♛</b><span>Reigning</span></div><div><b>8</b><span>Field</span></div></div></section>${message?`<div class="mode-run-status has-message"><span>${message}</span></div>`:''}${bracket}<section class="kotr-post-crown-actions"><button id="kotr-open-packs" class="nav-button">OPEN PACKS</button><button id="start-kotr" class="start-match">ENTER NEW TOURNAMENT</button></section></section>`;
+    $("#kotr-open-packs")?.addEventListener("click", showBoosters);
+    $("#start-kotr")?.addEventListener("click",()=>{ resetKingOfTheRing(profile); beginKingOfTheRing(); });
+    return;
+  }
+
+  const statusText = run?.status === "eliminated" ? "Tournament over. One loss means elimination — enter a new bracket." : active ? `${KING_OF_THE_RING_ROUNDS[run.stage]} · ${name(currentKingOfTheRingOpponent(profile))}` : "Eight Superstars enter. Win three straight matches. One loss ends the tournament.";
+  const command = active ? `<section class="mode-run-command kotr-run-command ${run.stage===2?'kotr-final-command':''}"><div class="mode-run-command-copy"><span>${KING_OF_THE_RING_ROUNDS[run.stage].toUpperCase()} · ${run.stage+1}/3</span><strong>${name(currentKingOfTheRingOpponent(profile))}</strong><small>${run.stage===2?'THE CROWN IS ON THE LINE':`${chosenStar?.name} · one loss = eliminated`}</small></div><button id="continue-kotr" class="start-match mode-run-primary">${run.stage===2?'FIGHT FOR THE CROWN':`Fight ${KING_OF_THE_RING_ROUNDS[run.stage]}`}</button></section>` : `<section class="ladder-picker horizontal-selector mode-run-picker"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? 'Choose your Superstar'}</h3></div><small>Seven opponents are drawn randomly</small></div>${selectionCarouselMarkup(unlocked,chosenId,'kotr-select')}<button id="start-kotr" class="start-match mode-run-primary">${run ? 'Enter New Tournament' : 'Enter King of the Ring'}</button></section>`;
   root.innerHTML = `<section class="ladder-screen kotr-screen premium-screen compact-mode-run premium-run-screen ${active?'is-active-run':'is-run-setup'}"><section class="feature-hero kotr-feature single-feature-hero mode-run-hero">${modePortraits([chosenId],"feature-art")}<div class="feature-shade"></div><div class="feature-copy mode-run-hero-copy">${modeLogoMarkup("king-of-the-ring",true)}<p>8-person single elimination · quarterfinal · semifinal · final.</p></div><div class="ladder-summary mode-run-summary"><div><b>${state.clears ?? 0}</b><span>Crowns</span></div><div><b>${state.bestRound ?? 0}/3</b><span>Best Run</span></div><div><b>1</b><span>Life</span></div><div><b>8</b><span>Field</span></div></div></section><div class="mode-run-status ${message?'has-message':''}"><span>${message || statusText}</span></div>${command}${bracket}</section>`;
   wireSelectionCarousel('kotr-select', id=>{ selection.p1=id; renderKingOfTheRing(); });
   $("#start-kotr")?.addEventListener("click", ()=>{ if (run) resetKingOfTheRing(profile); beginKingOfTheRing(); });
   $("#continue-kotr")?.addEventListener("click", startCurrentKingOfTheRingMatch);
 }
-
 
 function beginChampionshipRoad() {
   const starId=selection.p1;
@@ -1638,12 +1689,16 @@ function renderPlayMenu() {
   const dailyTower = towers.find(tower => tower.cadence === "daily") ?? towers[0];
   const dailyState = dailyTower ? liveEventTowerState(profile, dailyTower.key, now)?.state : null;
   const liveLabel = dailyState?.cleared ? "COMPLETE" : dailyState?.activeRun?.status === "active" ? `MATCH ${dailyState.activeRun.stage + 1}/${LIVE_EVENT_LENGTH}` : "LIVE NOW";
+  const kotrHub = kingOfTheRingState(profile);
+  const reigningKingId = kotrHub.reigningKingId && superstarById[kotrHub.reigningKingId] ? kotrHub.reigningKingId : null;
+  const reigningKingName = reigningKingId ? superstarById[reigningKingId].name : null;
+  const kotrDefaultPortrait = portraitMarkup("gunther","Gunther");
   root.innerHTML = `<section class="play-menu-screen premium-screen legacy-play-v3">
     <header class="legacy-play-heading"><span>PLAY</span><h2>CHOOSE YOUR PATH</h2><p>Four ways to build your WWE Legacy.</p></header>
     <div class="legacy-mode-stack">
       <article id="play-live-event" role="button" tabindex="0" class="legacy-mode-banner mode-live-event"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup(dailyTower?.event.heroId ?? "brock-lesnar", superstarById[dailyTower?.event.heroId]?.name ?? "Live Events")}</span><span class="legacy-mode-copy"><em>DAILY TOWER · ${liveLabel}</em>${modeLogoMarkup("live-event",true)}<small>${dailyTower?.event.name.toUpperCase() ?? "TODAY'S TOWER"} · ${LIVE_EVENT_LENGTH} FIGHTS · RESETS DAILY</small><b>ENTER LIVE EVENTS<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">01</span></article>
       <article id="play-exhibition" role="button" tabindex="0" class="legacy-mode-banner mode-exhibition"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("cody-rhodes","Cody Rhodes")}</span><span class="legacy-mode-copy"><em>ONE NIGHT · ONE MATCH</em>${modeLogoMarkup("exhibition",true)}<small>OWNED SUPERSTAR · RANDOM CPU FROM ${Math.max(0,roster.length-1)} RIVALS</small><b>PLAY EXHIBITION<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">02</span></article>
-      <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("gunther","Gunther")}</span><span class="legacy-mode-copy"><em>8 SUPERSTARS · SINGLE ELIMINATION</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>ENTER THE TOURNAMENT<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>
+      <article id="play-kotr" role="button" tabindex="0" class="legacy-mode-banner mode-kotr ${reigningKingId?'has-reigning-king':''}"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${reigningKingId ? portraitMarkup(reigningKingId,reigningKingName) : kotrDefaultPortrait}</span><span class="legacy-mode-copy"><em>${reigningKingName ? `♛ REIGNING KING · ${reigningKingName.toUpperCase()}` : '8 SUPERSTARS · SINGLE ELIMINATION'}</em>${modeLogoMarkup("king-of-the-ring",true)}<small>QUARTERFINAL → SEMIFINAL → FINAL · ONE LOSS AND YOU'RE OUT</small><b>${reigningKingName?'RETURN TO THE THRONE':'ENTER THE TOURNAMENT'}<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">03</span></article>
       <article id="play-championship" role="button" tabindex="0" class="legacy-mode-banner mode-championship"><span class="legacy-mode-beams" aria-hidden="true"></span><span class="legacy-mode-superstar">${portraitMarkup("roman-reigns","Roman Reigns")}</span><span class="legacy-mode-copy"><em>FOUR FIGHTS · ONE TITLE</em>${modeLogoMarkup("championship",true)}<small>OPENING BOUT → CHAMPIONSHIP MATCH</small><b>CHASE THE TITLE<i>›</i></b></span><span class="legacy-mode-number" aria-hidden="true">04</span></article>
     </div>
   </section>`;
@@ -1696,6 +1751,7 @@ function renderProfile() {
   const root = $("#game");
   const starter = superstarById[profile.starterId];
   const ladder = ladderState(profile);
+  const kotr = kingOfTheRingState(profile);
   const championship = championshipRoadState(profile);
   const liveEvents = weeklyLiveEventState(profile, new Date());
   const career = careerRecord(profile);
@@ -1727,6 +1783,7 @@ function renderProfile() {
     </section>
     <section class="profile-rulebook-callout"><div><span>OFFICIAL RULEBOOK</span><strong>Rules & How to Play</strong><p>Match flow, Momentum, Counters, Pins, Submissions, Deck Lab, Foils, boosters, modes, Season progression and more.</p></div><button id="open-rulebook" class="start-match">OPEN RULEBOOK</button></section>
     <section class="premium-panel career-record-panel"><div class="section-title"><div><h3>Mode Records</h3><small>Every completed match is recorded by mode</small></div><span>${totalMatches} MATCHES</span></div><div class="career-mode-records">${modeRecords}</div></section>
+    <section class="premium-panel kotr-career-panel"><div class="section-title"><div><h3>King of the Ring</h3><small>Tournament history</small></div><span>${kotr.clears ?? 0} CROWN${(kotr.clears ?? 0)===1?'':'S'}</span></div>${kotr.reigningKingId && superstarById[kotr.reigningKingId] ? `<div class="kotr-career-king"><span class="kotr-career-portrait">${portraitMarkup(kotr.reigningKingId,superstarById[kotr.reigningKingId].name)}</span><div><small>♛ REIGNING KING</small><strong>${superstarById[kotr.reigningKingId].name}</strong><span>${kotr.reigningKingAt ? `Crowned ${new Date(kotr.reigningKingAt).toLocaleDateString()}` : 'Tournament champion'}</span></div><b>${kotr.clears ?? 0}<small>CAREER CROWNS</small></b></div>` : `<div class="kotr-career-empty"><span>♛</span><div><strong>No King crowned yet</strong><small>Win three straight matches in King of the Ring.</small></div></div>`}</section>
     <section class="premium-panel career-record-panel"><div class="section-title"><div><h3>Superstar Records</h3><small>Wins and losses with every unlocked Superstar</small></div><span>${profile.unlockedSuperstars.length} UNLOCKED</span></div><div class="career-superstar-records">${superstarRecords}</div></section>
     <section class="premium-panel career-achievements-panel"><div class="section-title"><div><h3>Achievements</h3><small>Career milestones and mode accomplishments</small></div><span>${earnedAchievements}/${achievements.length} EARNED</span></div><div class="career-achievement-grid">${achievementCards}</div></section>
     <section class="legacy-settings premium-panel profile-tools-panel"><div class="section-title"><h3>Career Tools</h3><span>LOCAL SAVE</span></div><p class="career-tracking-note">Match record tracking began with WWE Legacy v${career.trackingSinceBuild ?? "0.12.78"}. Earlier wins and losses are not estimated.</p><div class="profile-actions"><a class="nav-button profile-tool-link" href="./tools/card-art-studio.html">Card Art Studio</a></div>
@@ -2955,13 +3012,14 @@ function handleCompletedMatch() {
   const seasonXpText = seasonXpReward.awarded ? ` +${seasonXpReward.awarded} Season XP.` : "";
 
   if (activeMode === "king-of-the-ring") {
-    const runBefore = kingOfTheRingState(profile).activeRun;
-    const rewardSetId = isPlayerReleasedSetId(state.players[HUMAN].superstar.setId) ? state.players[HUMAN].superstar.setId : "summerslam-series-1";
     const outcome = recordKingOfTheRingMatch(profile, result);
     const run = kingOfTheRingState(profile).activeRun;
     if (outcome.status === "advance") message = `${KING_OF_THE_RING_ROUNDS[run.stage - 1]} won! One step closer to the crown. Next: ${KING_OF_THE_RING_ROUNDS[run.stage]}.`;
     else if (outcome.status === "eliminated") message = `Eliminated from King of the Ring. One loss ends the tournament — enter a new bracket.`;
-    else if (outcome.status === "cleared") { grantBooster(profile, 1, rewardSetId); message = `KING OF THE RING! ${state.players[HUMAN].superstar.name} won three straight matches and earned +1 ${sets[rewardSetId]?.displayName ?? rewardSetId} booster.`; }
+    else if (outcome.status === "cleared") {
+      prepareKingOfTheRingReward(profile, playerReleasedCollectibleSetIds(new Date()), Math.random);
+      message = `KING OF THE RING! ${state.players[HUMAN].superstar.name} won three straight matches. The coronation and choose-one booster reward await.`;
+    }
     message += seasonXpText;
     refreshCareerAchievements(profile);
     saveProfile(profile);
@@ -3110,9 +3168,9 @@ function renderMatchResults() {
   if (isKingOfTheRing) {
     const kotrRun = kingOfTheRingState(profile).activeRun;
     const tournamentWon = humanWon && kotrRun?.status === "cleared";
-    rewardLine = tournamentWon ? `1 × ${rewardName} Booster · Tournament Champion` : humanWon ? `${KING_OF_THE_RING_ROUNDS[Math.max(0,(kotrRun?.stage ?? 1)-1)]} cleared · no round reward` : "Eliminated · enter a new tournament";
-    rewardMarkup = tournamentWon ? `<div class="results-pack-reward">${physicalBoosterPackMarkup({setId:rewardSetId,title:sets[rewardSetId]?.name ?? "WWE LEGACY",series:"SERIES 1",subtitle:"KING OF THE RING WINNER",extraClass:"results-booster"})}<strong>${rewardLine}</strong></div>` : `<strong>${rewardLine}</strong>`;
-    showRewardButton = tournamentWon;
+    rewardLine = tournamentWon ? `Crown secured · choose 1 of 3 released-set boosters after the coronation` : humanWon ? `${KING_OF_THE_RING_ROUNDS[Math.max(0,(kotrRun?.stage ?? 1)-1)]} cleared · no round reward` : "Eliminated · enter a new tournament";
+    rewardMarkup = tournamentWon ? `<div class="results-crown-reward"><span>♛</span><strong>${rewardLine}</strong><small>THE KING OF THE RING CORONATION IS NEXT</small></div>` : `<strong>${rewardLine}</strong>`;
+    showRewardButton = false;
   } else if (isLadder) {
     const ladderRun = ladderState(profile,new Date()).activeRun;
     const ladderCleared = humanWon && ladderRun?.status === "cleared";
@@ -3134,7 +3192,7 @@ function renderMatchResults() {
       showRewardButton = false;
     }
   }
-  const continueLabel = activeMode === "ladder" ? "RETURN TO CHALLENGES" : activeMode === "king-of-the-ring" ? "KING OF THE RING" : activeMode === "championship" ? "CHAMPIONSHIP ROAD" : isLiveEvent ? "RETURN TO TOWER" : "CONTINUE";
+  const continueLabel = activeMode === "ladder" ? "RETURN TO CHALLENGES" : activeMode === "king-of-the-ring" ? ((humanWon && kingOfTheRingState(profile).activeRun?.status === "cleared") ? "CORONATION" : "KING OF THE RING") : activeMode === "championship" ? "CHAMPIONSHIP ROAD" : isLiveEvent ? "RETURN TO TOWER" : "CONTINUE";
   return `<section class="match-results-screen ${humanWon ? "victory" : "defeat"}"><div class="results-aura"></div><span class="results-kicker">${isLiveEvent ? (liveTower?.cadenceLabel ?? "LIVE EVENT") : "MATCH COMPLETE"}</span><h1>${humanWon ? "VICTORY" : "DEFEAT"}</h1><div class="results-star results-winning-card">${(()=>{const sid=state.winner?state.players[state.winner].superstar.id:humanStar.id;const c=superstarCollectibleFor(sid);return c?collectibleCardMarkup(c,{extraClass:"results-superstar-card"}):portraitMarkup(sid,winnerName);})()}</div><h2>${winnerName}</h2>${state.winner ? `<p>def. ${nameFor(loserId)} · ${finish} · TURN ${state.turnNumber}</p>` : `<p>${finish} · TURN ${state.turnNumber}</p>`}<section class="results-rewards"><span>MATCH REWARDS</span>${rewardMarkup}<small>${message}</small></section><div class="results-actions">${showRewardButton ? `<button id="results-reward" class="start-match">VIEW REWARDS</button>` : ""}<button id="results-continue" class="nav-button ${activeMode === "championship" ? "championship-result-cta" : ""}">${continueLabel}</button>${activeMode === "exhibition" ? '<button id="results-rematch" class="nav-button">REMATCH</button>' : ""}</div></section>`;
 }
 

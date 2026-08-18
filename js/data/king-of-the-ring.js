@@ -1,10 +1,22 @@
 export const KING_OF_THE_RING_FIELD_SIZE = 8;
 export const KING_OF_THE_RING_ROUNDS = Object.freeze(["Quarterfinal", "Semifinal", "Final"]);
+export const KING_OF_THE_RING_REWARD_CHOICES = 3;
 
 function ensure(profile) {
-  profile.kingOfTheRing ??= { activeRun: null, clears: 0, bestRound: 0 };
+  profile.kingOfTheRing ??= { activeRun: null, clears: 0, bestRound: 0, reigningKingId: null, reigningKingAt: null };
   profile.kingOfTheRing.clears = Math.max(0, Number(profile.kingOfTheRing.clears) || 0);
   profile.kingOfTheRing.bestRound = Math.max(0, Number(profile.kingOfTheRing.bestRound) || 0);
+  profile.kingOfTheRing.reigningKingId ??= null;
+  profile.kingOfTheRing.reigningKingAt ??= null;
+  const run = profile.kingOfTheRing.activeRun;
+  // v0.13.23 compatibility: a cleared v0.13.22 run already paid its old automatic
+  // booster reward. Mark that historical reward resolved so upgrading cannot
+  // create a second reward choice for the same tournament.
+  if (run?.status === "cleared" && !("rewardChoices" in run) && run.rewardClaimedSetId == null) {
+    run.rewardChoices = [];
+    run.rewardClaimedSetId = "legacy-auto-reward";
+    run.coronationSeen = true;
+  }
   return profile.kingOfTheRing;
 }
 function shuffle(values, rng = Math.random) {
@@ -37,6 +49,9 @@ export function startKingOfTheRing(profile, superstarId, opponentIds, rng = Math
     stage: 0,
     status: "active",
     startedAt: new Date().toISOString(),
+    coronationSeen: false,
+    rewardChoices: null,
+    rewardClaimedSetId: null,
   };
   return state.activeRun;
 }
@@ -56,9 +71,41 @@ export function recordKingOfTheRingMatch(profile, result) {
   if (run.stage >= KING_OF_THE_RING_ROUNDS.length) {
     run.status = "cleared";
     state.clears += 1;
+    state.reigningKingId = run.superstarId;
+    state.reigningKingAt = new Date().toISOString();
     return { status: "cleared", run };
   }
   return { status: "advance", run };
+}
+
+export function prepareKingOfTheRingReward(profile, releasedSetIds, rng = Math.random) {
+  const run = ensure(profile).activeRun;
+  if (!run || run.status !== "cleared") throw new Error("King of the Ring has not been won");
+  if (Array.isArray(run.rewardChoices)) return run.rewardChoices;
+  const pool = [...new Set(releasedSetIds)].filter(Boolean);
+  if (!pool.length) throw new Error("No released booster sets are available");
+  run.rewardChoices = pool.length <= KING_OF_THE_RING_REWARD_CHOICES
+    ? [...pool]
+    : shuffle(pool, rng).slice(0, KING_OF_THE_RING_REWARD_CHOICES);
+  run.rewardClaimedSetId = null;
+  run.coronationSeen = false;
+  return run.rewardChoices;
+}
+
+export function markKingOfTheRingCoronationSeen(profile) {
+  const run = ensure(profile).activeRun;
+  if (!run || run.status !== "cleared") throw new Error("No King of the Ring coronation is available");
+  run.coronationSeen = true;
+  return run;
+}
+
+export function claimKingOfTheRingReward(profile, setId) {
+  const run = ensure(profile).activeRun;
+  if (!run || run.status !== "cleared") throw new Error("King of the Ring has not been won");
+  if (run.rewardClaimedSetId) throw new Error("King of the Ring reward already claimed");
+  if (!Array.isArray(run.rewardChoices) || !run.rewardChoices.includes(setId)) throw new Error("Choose one of the offered King of the Ring boosters");
+  run.rewardClaimedSetId = setId;
+  return setId;
 }
 
 export function resetKingOfTheRing(profile) { ensure(profile).activeRun = null; return ensure(profile); }
