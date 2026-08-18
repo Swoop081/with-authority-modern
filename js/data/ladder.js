@@ -1,4 +1,4 @@
-import { unlockSuperstar } from "./profile.js?v=0.13.31";
+import { unlockSuperstar } from "./profile.js?v=0.13.32";
 
 export const LADDER_LIVES = 3;
 export const LADDER_LENGTH = 8;

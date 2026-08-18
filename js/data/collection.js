@@ -1,7 +1,7 @@
-import { superstars } from "./superstars.js?v=0.13.31";
-import { sets } from "./sets.js?v=0.13.31";
-import { allGameplayCards } from "./content.js?v=0.13.31";
-import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=0.13.31";
+import { superstars } from "./superstars.js?v=0.13.32";
+import { sets } from "./sets.js?v=0.13.32";
+import { allGameplayCards } from "./content.js?v=0.13.32";
+import { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "./card-number-manifest.js?v=0.13.32";
 
 const rarityLabels = { 1: "Common", 2: "Uncommon", 3: "Rare", 4: "Very Rare" };
 const orderedStars = Object.values(superstars);

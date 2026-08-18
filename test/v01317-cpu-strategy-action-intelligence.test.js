@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { superstars } from '../js/data/superstars.js?v=0.13.31';
-import { decks } from '../js/data/decks.js?v=0.13.31';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.31';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.31';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.31';
+import { superstars } from '../js/data/superstars.js?v=0.13.32';
+import { decks } from '../js/data/decks.js?v=0.13.32';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.32';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.32';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.32';
 const card=id=>allGameplayCards.find(c=>c.id===id); const star=id=>Object.values(superstars).find(s=>s.id===id); const rng=()=>.99;
 function ready(cpu='bayley',opp='cm-punk'){const g=new MatchEngine({p1:star(opp),p2:star(cpu),decks,rng});const s=g.state(),p=s.players.p2;s.phase='ACTION';s.playerInControl='p2';s.proposedMove=null;s.postMove=null;p.turn={momentumPlayed:0,momentumPlayLimit:1,actionPlayed:0,supportPlayed:0,specialPlayed:0};p.momentum={strength:4,strike:4,technical:4,agility:4,attitude:5};p.adrenaline=5;return{g,s,p};}
 test('v0.13.17 CPU uses a signature tutor Action when it creates a live follow-up',()=>{const{g,p}=ready('bayley');p.hand=[card('bayley-ding-dong-hello'),card('punch')];p.deck=[card('bayley-to-belly'),card('dropkick')];const d=cpuDecision(g,'p2');assert.equal(d?.type,'action');assert.equal(d?.card?.id,'bayley-ding-dong-hello');});

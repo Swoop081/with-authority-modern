@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.31";
+import { enrichCounterState } from "./counter-states.js?v=0.13.32";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -10308,6 +10308,204 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "running-aerial"
+  },
+
+  {
+    "id": "leg-lariat",
+    "name": "Leg Lariat",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "double-foot-stomp",
+    "name": "Double Foot Stomp",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "stomp-to-the-arm",
+    "name": "Stomp to the Arm",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only. On connect, deal +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    },
+    "effects": [],
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "top-rope-splash",
+    "name": "Top Rope Splash",
+    "kind": "move",
+    "setId": "worlds-collide-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "kick-to-the-back",
+    "name": "Kick to the Back",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 2,
+    "damage": 4,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "rear-control"
+  },
+  {
+    "id": "reverse-chin-lock",
+    "name": "Reverse Chin Lock",
+    "kind": "move",
+    "setId": "smackdown-series-1",
+    "cost": 3,
+    "damage": 0,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only. Submission. +3 persistent Head damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 3
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
+  },
+  {
+    "id": "death-valley-driver",
+    "name": "Death Valley Driver",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 7,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 3,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "leg-kick",
+    "name": "Leg Kick",
+    "kind": "move",
+    "setId": "survivor-series-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. On connect, deal +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    },
+    "effects": [],
+    "counterState": "leg-extended"
   },
 
 

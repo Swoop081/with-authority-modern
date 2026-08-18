@@ -3107,6 +3107,54 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "summerslam-series-1",
     "cardNumber": 148,
     "cardCode": "SS1-148"
+  },
+  {
+    "id": "leg-lariat",
+    "setId": "raw-series-1",
+    "cardNumber": 40,
+    "cardCode": "RAW1-040"
+  },
+  {
+    "id": "double-foot-stomp",
+    "setId": "raw-series-1",
+    "cardNumber": 41,
+    "cardCode": "RAW1-041"
+  },
+  {
+    "id": "stomp-to-the-arm",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 35,
+    "cardCode": "WC1-035"
+  },
+  {
+    "id": "top-rope-splash",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 36,
+    "cardCode": "WC1-036"
+  },
+  {
+    "id": "kick-to-the-back",
+    "setId": "smackdown-series-1",
+    "cardNumber": 36,
+    "cardCode": "SD1-036"
+  },
+  {
+    "id": "reverse-chin-lock",
+    "setId": "smackdown-series-1",
+    "cardNumber": 37,
+    "cardCode": "SD1-037"
+  },
+  {
+    "id": "death-valley-driver",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 51,
+    "cardCode": "SVS1-051"
+  },
+  {
+    "id": "leg-kick",
+    "setId": "survivor-series-series-1",
+    "cardNumber": 52,
+    "cardCode": "SVS1-052"
   }
 
 ]);
