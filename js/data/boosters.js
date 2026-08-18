@@ -1,8 +1,8 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.23";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.23";
-import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.23";
-import { sets } from "./sets.js?v=0.13.23";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.23";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.24";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.24";
+import { DUPLICATE_UNIVERSE_POINTS, FOIL_DUPLICATE_UNIVERSE_POINTS } from "./store.js?v=0.13.24";
+import { sets } from "./sets.js?v=0.13.24";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.24";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -179,7 +179,7 @@ export function openBooster(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, 
 export function openLadderCompletionPack(p, rngOrSetId = DEFAULT_BOOSTER_SET_ID, maybeSetId, now = new Date()) {
   const { rng, setId } = normalizeArgs(rngOrSetId, maybeSetId);
   const pool = p?.ladder?.completionPackCreditsBySet ?? {};
-  if ((pool[setId] ?? 0) < 1) throw new Error("No Climb the Ladder Completion Pack available for this set.");
+  if ((pool[setId] ?? 0) < 1) throw new Error("No Money in the Bank Completion Pack available for this set.");
   const pack = buildPack(p, rng, setId, now);
   pool[setId] = Math.max(0, (pool[setId] ?? 0) - 1);
   recordOpenedPack(p, setId);

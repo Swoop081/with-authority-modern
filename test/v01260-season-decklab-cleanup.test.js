@@ -33,5 +33,6 @@ test('v0.12.60 compacts Season Command Center rows', () => {
 
 test('v0.12.60 removes set-name text over Challenges logos', () => {
   assert.doesNotMatch(app, /challenge-set-copy"><strong>\$\{set\.name\}<\/strong>/);
-  assert.match(app, /challenge-set-copy"><small>\$\{progress\.ownedUnique\}/);
+  assert.match(app, /challenge-set-copy"><b>\$\{Math\.round/);
+  assert.match(app, /challenge-mini-set-logo/);
 });

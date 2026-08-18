@@ -12,7 +12,7 @@ test("v0.12.53 uses the dedicated uploaded Final Boss Rock render on all Final B
   assert.equal((app.match(/finalBossRockMarkup\(\)/g)||[]).length,3);
   assert.match(app,/season-ad-rock.*finalBossRockMarkup/s);
   assert.match(app,/legacy-season-rock.*finalBossRockMarkup/s);
-  assert.match(app,/final-boss-feature-art.*finalBossRockMarkup/s);
+  assert.match(app,/season-road-rock.*finalBossRockMarkup/s);
   assert.match(css,/\.final-boss-rock-menu-art/);
 });
 

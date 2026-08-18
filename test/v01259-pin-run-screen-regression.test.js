@@ -15,11 +15,13 @@ test('green-health pin-escape presentation also breaks after one', () => {
   assert.match(app, /if \(pinEscape\) return greenHealthKickout[\s\S]*?\{text:"1!"[\s\S]*?\{text:"SHOULDER UP!"/);
 });
 
-test('daily Ladder retires branch selection while Championship Road keeps its authored branch selector', () => {
+test('Money in the Bank has no branch selector and Championship Road uses sequential difficulty tabs', () => {
   const ladder = app.slice(app.indexOf('function renderLadder()'), app.indexOf('function beginKingOfTheRing()'));
   assert.match(ladder, /Eight random opponents · three lives · resets every day/);
   assert.doesNotMatch(ladder, /data-ladder-branch|horizontal-branch-selector/);
-  assert.match(app, /modeLogoMarkup\("championship",true\)\}<p>Four fights[^<]*<\/p><\/div><div class="horizontal-branch-selector mode-run-branch-selector">/);
+  assert.match(app, /champ-difficulty-rail/);
+  assert.match(app, /data-champ-difficulty/);
+  assert.match(app, /24 matches · four difficulties/);
 });
 
 test('run-screen primary buttons cannot inherit the global oversized min-width', () => {

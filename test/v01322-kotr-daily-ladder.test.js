@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.23';
-import { superstars } from '../js/data/superstars.js?v=0.13.23';
-import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=0.13.23';
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=0.13.23';
-import { CAREER_MODES } from '../js/data/career.js?v=0.13.23';
+import { createProfile } from '../js/data/profile.js?v=0.13.24';
+import { superstars } from '../js/data/superstars.js?v=0.13.24';
+import { LADDER_LENGTH, LADDER_LIVES, ladderState, startLadderRun, recordLadderMatch } from '../js/data/ladder.js?v=0.13.24';
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=0.13.24';
+import { CAREER_MODES } from '../js/data/career.js?v=0.13.24';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const fixedRng = () => 0.314159;
@@ -15,7 +15,7 @@ function winDailyLadder(profile, now) {
   for (let i = 0; i < LADDER_LENGTH; i += 1) recordLadderMatch(profile, 'win', now);
 }
 
-test('v0.13.22 Daily Climb the Ladder uses one fixed 8-opponent tower, three lives and a local-day reset', () => {
+test('v0.13.24 Money in the Bank uses one fixed 8-opponent tower, three lives and a local-day reset', () => {
   const p = createProfile('cm-punk');
   const day1 = new Date(2026, 7, 18, 12, 0, 0);
   const day2 = new Date(2026, 7, 19, 0, 1, 0);
@@ -64,12 +64,13 @@ test('v0.13.22 King of the Ring is an 8-person, three-round single-elimination t
   assert.equal(kingOfTheRingState(p).clears, 1);
 });
 
-test('v0.13.22 Play retires standalone Ladder for KOTR and Challenges owns the Daily Ladder entry', () => {
+test('v0.13.24 Play keeps KOTR while Money in the Bank lives only in Live Events', () => {
   assert.match(app, /id="play-kotr"/);
   assert.match(app, /modeLogoMarkup\("king-of-the-ring",true\)/);
   assert.doesNotMatch(app, /id="play-ladder"/);
-  assert.match(app, /id="open-daily-ladder"/);
-  assert.match(app, /Daily 8-Superstar tower · three lives · resets at local midnight/);
+  assert.match(app, /id="open-money-in-bank"/);
+  const challenges = app.slice(app.indexOf('function renderChallenges()'), app.indexOf('function beginLiveEventTower()'));
+  assert.doesNotMatch(challenges, /open-money-in-bank|Climb the Ladder/);
   assert.ok(CAREER_MODES.some(mode => mode.id === 'king-of-the-ring'));
-  assert.ok(CAREER_MODES.some(mode => mode.id === 'ladder' && /Challenge/.test(mode.label)));
+  assert.ok(CAREER_MODES.some(mode => mode.id === 'ladder' && /Money in the Bank/.test(mode.label)));
 });

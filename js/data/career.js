@@ -4,7 +4,7 @@ export const CAREER_TRACKING_BUILD = "0.12.78";
 export const CAREER_MODES = Object.freeze([
   { id: "exhibition", label: "Exhibition" },
   { id: "live-event", label: "Live Event" },
-  { id: "ladder", label: "Climb the Ladder Challenge" },
+  { id: "ladder", label: "Money in the Bank" },
   { id: "king-of-the-ring", label: "King of the Ring" },
   { id: "championship", label: "Championship Road" },
 ]);
@@ -44,7 +44,7 @@ export const CAREER_ACHIEVEMENTS = Object.freeze([
   { id: "roster-general", name: "Roster General", description: "Record a win with 10 different Superstars.", test: ({ bySuperstar }) => Object.values(bySuperstar).filter(r => (r?.wins ?? 0) > 0).length >= 10 },
   { id: "pinfall-specialist", name: "Pinfall Specialist", description: "Win 10 matches by pinfall.", test: ({ byFinish }) => (byFinish.pin?.wins ?? 0) >= 10 },
   { id: "submission-specialist", name: "Submission Specialist", description: "Win 5 matches by submission.", test: ({ byFinish }) => (byFinish.submission?.wins ?? 0) >= 5 },
-  { id: "ladder-conqueror", name: "Ladder Conqueror", description: "Clear the Daily Climb the Ladder challenge.", test: ({ profile }) => (profile?.ladder?.clears ?? 0) >= 1 },
+  { id: "ladder-conqueror", name: "Money in the Bank Winner", description: "Clear the Daily Money in the Bank.", test: ({ profile }) => (profile?.ladder?.clears ?? 0) >= 1 },
   { id: "king-of-the-ring", name: "King of the Ring", description: "Win an 8-Superstar King of the Ring tournament.", test: ({ profile }) => (profile?.kingOfTheRing?.clears ?? 0) >= 1 },
   { id: "championship-gold", name: "Championship Gold", description: "Clear Championship Road.", test: ({ profile }) => (profile?.championshipRoad?.clears ?? 0) >= 1 },
   { id: "live-event-headliner", name: "Live Event Headliner", description: "Clear a Daily Live Event.", test: ({ profile }) => (profile?.weeklyLiveEvents?.totalClears ?? 0) >= 1 },

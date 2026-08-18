@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.23';
-import { superstars } from '../js/data/superstars.js?v=0.13.23';
-import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.23';
+import { createProfile } from '../js/data/profile.js?v=0.13.24';
+import { superstars } from '../js/data/superstars.js?v=0.13.24';
+import { kingOfTheRingState, startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.24';
 
 const ids = Object.values(superstars).filter(s => !s.developmentOnly).map(s => s.id);
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
@@ -64,12 +64,15 @@ test('v0.13.23 legacy cleared KOTR run cannot receive a duplicate choose-one rew
 });
 
 test('v0.13.23 KOTR UI includes live bracket, coronation, reigning King and choose-one reward presentation', () => {
-  assert.match(app, /KING OF THE RING FINAL/);
+  assert.match(app, /kotr-visual-bracket/);
+  assert.match(app, /quarterfinal-view/);
+  assert.match(app, /semifinal-view/);
+  assert.match(app, /final-view/);
   assert.match(app, /CLAIM THE CROWN/);
   assert.match(app, /CHOOSE YOUR/);
   assert.match(app, /data-kotr-reward-set/);
   assert.match(app, /REIGNING KING/);
-  assert.match(app, /Crown secured · choose 1 of 3 released-set boosters/);
+  assert.match(app, /Choose one booster/);
   assert.match(css, /kotr-coronation-screen/);
   assert.match(css, /kotr-reward-grid/);
   assert.match(css, /kotr-career-king/);

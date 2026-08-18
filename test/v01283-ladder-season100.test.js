@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.23';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.23';
+import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.24';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.24';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -12,8 +12,9 @@ test('v0.12.84 Season 1 expands to 100 tiers with Foil Rock at Tier 100',()=>{
   assert.equal(MAX_SEASON_XP,10000);
   assert.equal(tierReward(100).cardId,'superstar-the-rock');
   assert.equal(tierReward(100).foil,true);
-  assert.match(app,/SEASON 1 · 100 TIERS/);
-  assert.match(app,/TIER 100 · THE FINAL BOSS/);
+  assert.match(app,/100-TIER REWARD ROAD/);
+  assert.match(app,/SEASON ONE/);
+  assert.match(app,/THE ROAD TO THE FINAL BOSS/);
 });
 
 test('v0.12.84 repeatable Rock rewards are five single-copy milestones each',()=>{

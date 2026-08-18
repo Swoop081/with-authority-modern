@@ -1,4 +1,4 @@
-import { unlockSuperstar } from "./profile.js?v=0.13.23";
+import { unlockSuperstar } from "./profile.js?v=0.13.24";
 
 export const LADDER_LIVES = 3;
 export const LADDER_LENGTH = 8;
@@ -41,7 +41,7 @@ function shuffle(values, rng = Math.random) {
 export function ladderState(profile, now = new Date()) { return ensure(profile, now); }
 export function startLadderRun(profile, superstarId, opponentIds, rng = Math.random, _branchId = "daily", now = new Date()) {
   const ladder = ensure(profile, now);
-  if (ladder.dailyCleared) throw new Error("Today's Climb the Ladder challenge is already complete");
+  if (ladder.dailyCleared) throw new Error("Today's Money in the Bank is already complete");
   if (!Array.isArray(ladder.dailyOpponents) || ladder.dailyOpponents.length !== LADDER_LENGTH) {
     const eligible = [...new Set(opponentIds)].filter(id => id && id !== superstarId);
     if (eligible.length < LADDER_LENGTH) throw new Error("Not enough eligible Superstars for today's Ladder");
@@ -53,7 +53,7 @@ export function startLadderRun(profile, superstarId, opponentIds, rng = Math.ran
 export function currentLadderOpponent(profile, now = new Date()) { const run = ensure(profile, now).activeRun; return !run || run.status !== "active" ? null : run.opponents[run.rung] ?? null; }
 export function recordLadderMatch(profile, result, now = new Date()) {
   const ladder = ensure(profile, now), run = ladder.activeRun;
-  if (!run || run.status !== "active") throw new Error("No active Climb the Ladder challenge");
+  if (!run || run.status !== "active") throw new Error("No active Money in the Bank");
   if (result === "loss") { run.lives -= 1; if (run.lives <= 0) { run.status = "failed"; return { status: "failed", run }; } return { status: "retry", run }; }
   if (result !== "win") throw new Error("Invalid ladder result");
   run.rung += 1;

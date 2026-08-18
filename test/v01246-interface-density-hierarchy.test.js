@@ -24,13 +24,15 @@ test('v0.12.46 Deck Lab skips the redundant chooser when only one Superstar is u
   assert.match(show, /deckLabStage = "editor"/);
 });
 
-test('v0.12.46 Season hero removes chrome-duplicate tier and XP chips and exposes command center sooner', () => {
+test('v0.13.24 Season hero feeds directly into the graphic 100-tier reward road', () => {
   const seasons = functionSlice('renderSeasons', 'renderChallenges');
-  assert.match(seasons, /season-hero-status-compact/);
+  assert.match(seasons, /season-road-hero/);
+  assert.match(seasons, /season-road-command/);
   assert.match(seasons, /NEXT · TIER/);
-  assert.doesNotMatch(seasons, /<b>Tier \$\{progress\.tier\}<\/b>/);
-  assert.match(css, /\.season-final-boss-hero\{min-height:218px!important/);
-  assert.match(css, /\.season-free-pack-strip\{min-height:56px!important/);
+  assert.match(seasons, /season-reward-road/);
+  assert.match(seasons, /data-season-end-countdown/);
+  assert.match(css, /\.season-road-hero\{/);
+  assert.match(css, /\.season-reward-road\{/);
 });
 
 test('v0.12.46 Challenge goals are compact horizontal command rows', () => {

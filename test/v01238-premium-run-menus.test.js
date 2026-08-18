@@ -13,11 +13,13 @@ test('v0.12.38 Climb the Ladder uses compact command and 4x2 progress presentati
   assert.match(css, /\.premium-run-screen \.select-superstar-card\{[\s\S]*height:184px!important/);
 });
 
-test('v0.12.38 Championship Road uses one compact fight command and 4-stage rail', () => {
-  assert.match(app, /mode-run-command championship-run-command/);
-  assert.match(app, /championship-progress-grid/);
-  assert.match(css, /\.premium-run-screen \.championship-progress-grid\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)!important\}/);
-  assert.match(css, /body\[data-screen="championship"\] \.premium-run-screen \.mode-run-branch-selector\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)!important\}/);
+test('v0.13.24 Championship Road supersedes the old 4-stage rail with the 24-match difficulty map', () => {
+  assert.match(app, /champ-road-command/);
+  assert.match(app, /champ-road-map/);
+  assert.match(app, /CHAMPIONSHIP_ROAD_LENGTH/);
+  assert.match(app, /champ-difficulty-rail/);
+  assert.match(css, /\.champ-road-map\{/);
+  assert.match(css, /\.champ-difficulty-rail\{/);
 });
 
 test('v0.12.38 mobile run screens are deliberately bounded for one-screen iPhone presentation', () => {

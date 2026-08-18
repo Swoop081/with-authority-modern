@@ -31,17 +31,18 @@ test("v0.12.57 Daily Login Booster uses one-line status and opens immediately", 
   assert.match(season, /NEXT FREE BOOSTER IN/);
   assert.doesNotMatch(season, /FREE PACK READY/);
   assert.doesNotMatch(season, /waiting in Boosters/i);
-  assert.match(season, /boosterReturnScreen = "seasons";/);
+  assert.match(season, /boosterReturnScreen\s*=\s*"seasons";/);
   assert.match(season, /processPack\("standard"\)/);
   assert.match(app, /returnScreen === "seasons"[\s\S]*renderSeasons\(\)/);
 });
 
-test("v0.12.57 Season Command Center uses readable stacked rows", () => {
+test("v0.13.24 Season command summary remains readable above the reward road", () => {
   const season = between(app, "function renderSeasons()", "function renderChallenges()");
-  assert.equal((season.match(/class="season-command-row"/g) || []).length, 3);
-  assert.match(season, /season-command-row next-drop-card/);
-  assert.match(css, /\.season-command-stats\{display:grid!important;grid-template-columns:1fr!important/);
-  assert.match(css, /\.season-command-row>div>b\{[\s\S]*font-size:1\.18rem!important/);
+  assert.match(season, /season-road-command/);
+  assert.match(season, /CURRENT TIER/);
+  assert.match(season, /REWARDS READY/);
+  assert.match(season, /UNIVERSE POINTS/);
+  assert.match(css, /\.season-road-command\{/);
 });
 
 test("v0.12.57 Store separates pack, copy, CTA, and Superstar card areas on mobile", () => {

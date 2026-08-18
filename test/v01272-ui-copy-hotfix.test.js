@@ -16,7 +16,7 @@ function between(source, start, end) {
 }
 
 test('v0.12.72 renames Electric Chair Facebuster to Electric Chair Drop without changing identity', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.23');
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.24');
   const card = allGameplayCards.find(c => c.id === 'rhea-ripley-electric-chair-facebuster');
   assert.ok(card);
   assert.equal(card.name, 'Electric Chair Drop');
@@ -34,16 +34,16 @@ test('v0.12.72 Daily Login Booster is one full-width purple state control', () =
   assert.match(css, /\.season-free-pack-button\{[\s\S]*justify-content:center!important/);
 });
 
-test('v0.12.72 Climb the Ladder uses Level wording everywhere player-facing', () => {
+test('v0.13.24 Money in the Bank uses Level wording everywhere player-facing', () => {
   const ladder = between(app, 'function renderLadder()', 'function renderChampionship()');
   assert.match(ladder, /Level \$\{run\.rung\+1\} of/);
   assert.match(ladder, /NEXT LEVEL/);
   assert.match(ladder, /Fight Level/);
   assert.doesNotMatch(ladder, />NEXT RUNG|Fight Rung|`Rung /);
-  assert.match(challenges, /Clear a Climb the Ladder level/);
-  assert.doesNotMatch(challenges, /Clear a Climb the Ladder rung/);
-  assert.match(challenges, /Clear 4 Ladder levels/);
-  assert.doesNotMatch(challenges, /Ladder rungs/);
+  assert.match(challenges, /Clear a Money in the Bank level/);
+  assert.doesNotMatch(challenges, /Clear a Money in the Bank rung/);
+  assert.match(challenges, /Clear 4 Money in the Bank levels/);
+  assert.doesNotMatch(challenges, /Money in the Bank rungs/);
   assert.match(app, /Level cleared! \${run\.lives} lives remain/);
   assert.doesNotMatch(app, /Level cleared! \+1 booster/);
   assert.match(app, /retry this level/);
@@ -54,5 +54,5 @@ test('v0.12.72 special reward pack wrapper says only REWARD', () => {
   const boosters = between(app, 'function renderBoosters()', 'function formatCountdown');
   assert.match(boosters, /const packWrapperTitle=currentPackType===\"standard\"\?\"SERIES 1\":\"REWARD\"/);
   assert.match(boosters, /series:bucket\.type==='standard'\?'SERIES 1':'REWARD'/);
-  assert.match(boosters, /label:\"LADDER COMPLETION\"/); // descriptive tile copy remains outside wrapper
+  assert.match(boosters, /label:\"MONEY IN THE BANK\"/); // descriptive tile copy remains outside wrapper
 });
