@@ -1,38 +1,38 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.48";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.13.48";
-import { superstars } from "../data/superstars.js?v=0.13.48";
-import { decks } from "../data/decks.js?v=0.13.48";
-import { sets } from "../data/sets.js?v=0.13.48";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.48";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.48";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.48";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.13.48";
-import { openBooster, openSuperPack, openLadderCompletionPack, openChampionshipPack, grantBooster, grantVictoryBooster, boosterCreditsFor, superPackCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.48";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.48";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.48";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.48";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.48";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.48";
-import { totalMomentum } from "../engine/utils.js?v=0.13.48";
-import { healthZone } from "../engine/health.js?v=0.13.48";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.48";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.48";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.13.48";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.48";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.48";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.48";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.48";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.48";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.48";
-import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.48";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.48";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.48";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.48";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.48";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.48";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.48";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.48";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.48";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.50";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.13.50";
+import { superstars } from "../data/superstars.js?v=0.13.50";
+import { decks } from "../data/decks.js?v=0.13.50";
+import { sets } from "../data/sets.js?v=0.13.50";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.50";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.50";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.50";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.13.50";
+import { openBooster, openSuperPack, openLadderCompletionPack, openChampionshipPack, grantBooster, grantVictoryBooster, boosterCreditsFor, superPackCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.50";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.50";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.50";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.50";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.50";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.50";
+import { totalMomentum } from "../engine/utils.js?v=0.13.50";
+import { healthZone } from "../engine/health.js?v=0.13.50";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.50";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.50";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.13.50";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.50";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.50";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.50";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.50";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.50";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.50";
+import { setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.50";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.50";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.50";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.50";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.50";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.50";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.50";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.50";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.50";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -1102,6 +1102,12 @@ function renderStore() {
 
 function renderSeasons() {
   setChrome();
+  // iOS Safari can retain a stale document scroll offset across fixed-layout screen swaps.
+  // The Season screen is viewport-fixed, but clearing the document origin also prevents that
+  // stale offset from reappearing when leaving/re-entering the tab.
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+  if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
   const root = $("#game");
   const state = seasonState(profile);
   const progress = seasonLevelProgress(profile);
@@ -1126,15 +1132,19 @@ function renderSeasons() {
   }).join('');
   const roadmap = SEASON_1.roadmap.map((node,index)=>{const status=roadmapNodeStatus(node,new Date());return `<article class="season-release-chip ${status}"><span>${node.dateLabel}</span><b>${node.title}</b><small>${node.kicker}</small></article>`;}).join('');
   root.innerHTML = `<section class="seasons-screen premium-screen season-road-redesign">
-    <section class="season-sticky-shell">
-      <header class="season-road-hero"><div class="season-road-hero-copy"><span>WWE LEGACY · SEASON 1</span><h1><b>SEASON</b> <em>ONE</em></h1><p>THE ROAD TO THE FINAL BOSS</p><div class="season-compact-meta"><b>TIER ${progress.tier}</b><small>${claimable.length} REWARD${claimable.length===1?'':'S'} READY</small></div><div class="season-end-countdown"><small>SEASON ENDS IN</small><strong data-season-end-countdown>${seasonCountdown}</strong></div></div><div class="season-road-rock">${finalBossRockMarkup()}</div></header>
+    <section class="season-anchor-shell">
+      <header class="season-road-hero"><div class="season-road-hero-copy"><span>WWE LEGACY · SEASON 1</span><h1><b>SEASON</b> <em>ONE</em></h1><p>THE ROAD TO THE FINAL BOSS</p><div class="season-end-countdown"><small>SEASON ENDS IN</small><strong data-season-end-countdown>${seasonCountdown}</strong></div></div><div class="season-road-rock">${finalBossRockMarkup()}</div></header>
       <section class="season-road-command"><div><small>CURRENT TIER</small><strong>${progress.tier} / ${SEASON_TIER_COUNT}</strong><span>${progress.xp.toLocaleString()} / ${(SEASON_TIER_COUNT*XP_PER_TIER).toLocaleString()} XP</span></div><div><small>REWARDS READY</small><strong>${claimable.length}</strong><span>${progress.tier>=SEASON_TIER_COUNT?'ROAD COMPLETE':`NEXT · TIER ${progress.tier+1}`}</span></div><div><small>UNIVERSE POINTS</small><strong>${(profile.universePoints??0).toLocaleString()}</strong><span>UP</span></div></section>
       ${message ? `<p class="setup-message">${message}</p>` : ''}
       <section class="season-free-pack-cta season-free-pack-strip ${free.available ? 'ready' : 'waiting'}"><button id="claim-free-pack" class="season-free-pack-button" ${free.available?'':'disabled'}><strong data-free-pack-action>${free.available?'CLAIM FREE BOOSTER':`NEXT FREE BOOSTER IN ${formatCountdown(free.msRemaining)}`}</strong></button></section>
     </section>
-    <section class="season-road-toolbar"><div><span>100-TIER REWARD ROAD</span><small>Auto-focused on your current tier</small></div>${claimable.length?'<button id="claim-all-season" class="primary season-claim-all">CLAIM ALL READY</button>':''}</section>
-    <section class="season-reward-road" aria-label="100 Tier Season Road"><span class="season-road-spine" aria-hidden="true"></span>${tierRoad}</section>
-    <section class="season-release-road"><div class="season-road-toolbar"><div><span>SEASON 1 RELEASES</span><small>Live and upcoming sets</small></div><b>NEXT · ${next.title}</b></div><div class="season-release-strip">${roadmap}</div></section>
+    <section class="season-road-viewport">
+      <div class="season-road-scroll" data-season-road-scroll>
+        <section class="season-road-toolbar"><div><span>100-TIER REWARD ROAD</span><small>Scroll the tiers · current tier auto-focused</small></div>${claimable.length?'<button id="claim-all-season" class="primary season-claim-all">CLAIM ALL READY</button>':''}</section>
+        <section class="season-reward-road" aria-label="100 Tier Season Road"><span class="season-road-spine" aria-hidden="true"></span>${tierRoad}</section>
+        <section class="season-release-road"><div class="season-road-toolbar"><div><span>SEASON 1 RELEASES</span><small>Live and upcoming sets</small></div><b>NEXT · ${next.title}</b></div><div class="season-release-strip">${roadmap}</div></section>
+      </div>
+    </section>
   </section>`;
   $("#claim-free-pack")?.addEventListener("click", () => {
     try { const reward=claimFreeSeasonBooster(profile,Math.random,new Date());saveProfile(profile);activeBoosterSetId=reward.setId;boosterReturnScreen="seasons";screen="boosters";message="";processPack("standard"); }
@@ -1148,20 +1158,20 @@ function renderSeasons() {
   }));
   $("#claim-all-season")?.addEventListener("click",()=>{try{const rewards=claimAllSeasonTiers(profile);saveProfile(profile);message=`${rewards.length} Season reward${rewards.length===1?'':'s'} claimed.`;}catch(e){message=e.message;}if(profile.pendingUnlockCelebrations?.length&&beginUnlockCelebration("seasons"))return;renderSeasons();});
   refreshSeasonClocks();
-  const stickyShell = root.querySelector('.season-sticky-shell');
-  if (seasonStickyScrollHandler) window.removeEventListener('scroll', seasonStickyScrollHandler);
-  seasonStickyScrollHandler = () => stickyShell?.classList.toggle('is-compact', window.scrollY > 96);
-  window.addEventListener('scroll', seasonStickyScrollHandler, { passive: true });
-  seasonStickyScrollHandler();
+  if (seasonStickyScrollHandler) {
+    window.removeEventListener('scroll', seasonStickyScrollHandler);
+    seasonStickyScrollHandler = null;
+  }
   const currentTier=Math.max(1,Math.min(SEASON_TIER_COUNT,progress.tier));
   setTimeout(()=>{
+    const scroller=root.querySelector('[data-season-road-scroll]');
     const target=document.getElementById(`season-tier-${currentTier}`);
-    if(!target)return;
-    const chromeHeight=document.querySelector('.legacy-gamebar')?.getBoundingClientRect().height??0;
-    const rect=target.getBoundingClientRect();
-    const top=Math.max(0,window.scrollY+rect.top-(chromeHeight+118));
-    window.scrollTo({top,left:0,behavior:'auto'});
-    requestAnimationFrame(seasonStickyScrollHandler);
+    if(!scroller||!target)return;
+    const scrollerRect=scroller.getBoundingClientRect();
+    const targetRect=target.getBoundingClientRect();
+    const targetTop=scroller.scrollTop+(targetRect.top-scrollerRect.top);
+    const focusOffset=Math.max(12,Math.min(72,scroller.clientHeight*.18));
+    scroller.scrollTo({top:Math.max(0,targetTop-focusOffset),left:0,behavior:'auto'});
   },120);
 }
 

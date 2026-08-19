@@ -5,10 +5,13 @@ import fs from 'node:fs';
 const app=fs.readFileSync(new URL('../js/ui/app.js',import.meta.url),'utf8');
 const css=fs.readFileSync(new URL('../css/game.css',import.meta.url),'utf8');
 
-test('v0.13.26 Season focus is vertical-only and explicitly resets horizontal scroll',()=>{
+test('v0.13.26 Season focus stays vertical-only after the v0.13.49 internal-scroll supersession',()=>{
   assert.doesNotMatch(app,/season-tier-\$\{currentTier\}`\)\?\.scrollIntoView/);
-  assert.match(app,/window\.scrollY\+rect\.top-\(chromeHeight\+118\)/);
-  assert.match(app,/window\.scrollTo\(\{top,left:0,behavior:'auto'\}\)/);
+  assert.match(app,/data-season-road-scroll/);
+  assert.match(app,/scroller\.scrollTo\(\{top:Math\.max\(0,targetTop-focusOffset\),left:0,behavior:'auto'\}\)/);
+  const start=app.indexOf('function renderSeasons()'),end=app.indexOf('function renderChallenges',start);
+  const season=app.slice(start,end);
+  assert.doesNotMatch(season,/window\.scrollTo/);
 });
 
 test('v0.13.26 Season Road is horizontally contained on iPhone',()=>{

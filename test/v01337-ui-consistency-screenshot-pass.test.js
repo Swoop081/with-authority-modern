@@ -39,16 +39,14 @@ test('v0.13.37 Home Season typography matches the destination-title rhythm', () 
   assert.match(css, /\.legacy-home-destinations \.legacy-command-title\{[\s\S]*letter-spacing:-\.045em!important/);
 });
 
-test('v0.13.37 Season header and free booster use a compact sticky shell while current tier remains auto-focused', () => {
+test('v0.13.37 Season current-tier focus remains supported after the v0.13.49 anchored-header supersession', () => {
   const season = slice('function renderSeasons()', 'function renderChallenges');
-  assert.match(season, /season-sticky-shell/);
-  assert.match(season, /season-compact-meta/);
+  assert.match(season, /season-anchor-shell/);
   assert.match(season, /season-free-pack-cta/);
-  assert.match(season, /seasonStickyScrollHandler/);
-  assert.match(season, /window\.scrollTo\(\{top,left:0,behavior:'auto'\}\)/);
-  assert.match(css, /body\[data-screen="seasons"\] \.season-sticky-shell\{[\s\S]*position:sticky!important/);
-  assert.match(css, /\.season-sticky-shell\.is-compact \.season-road-hero\{[\s\S]*height:72px!important/);
-  assert.match(css, /\.season-sticky-shell\.is-compact \.season-free-pack-button\{[\s\S]*height:43px!important/);
+  assert.match(season, /data-season-road-scroll/);
+  assert.match(season, /scroller\.scrollTo\(\{top:Math\.max\(0,targetTop-focusOffset\),left:0,behavior:'auto'\}\)/);
+  assert.doesNotMatch(season, /classList\.toggle\('is-compact'/);
+  assert.doesNotMatch(season, /window\.scrollTo/);
 });
 
 test('v0.13.37 themed stat tiles use full fills rather than black accent-only panels', () => {
