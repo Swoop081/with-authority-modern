@@ -1662,6 +1662,7 @@ export const superstars = {
     "name": "Logan Paul",
     "nickname": "The Maverick",
     "setId": "raw-series-1",
+    "factionTags": ["vision"],
     "era": null,
     "seasonExclusive": false,
     "cardId": "superstar-logan-paul",
@@ -2733,6 +2734,7 @@ export const superstars = {
     "name": "Bron Breakker",
     "nickname": "The Dog-Faced Gremlin",
     "setId": "survivor-series-series-1",
+    "factionTags": ["vision"],
     "era": null,
     "seasonExclusive": false,
     "developmentOnly": true,
@@ -3322,5 +3324,537 @@ export const superstars = {
       "retainControl": true,
       "preserveStreak": true
     }
+  },
+  "joeHendry": {
+    "id": "joe-hendry",
+    "name": "Joe Hendry",
+    "nickname": "The Crowd Believes",
+    "setId": "raw-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-joe-hendry",
+    "entranceId": "entrance-joe-hendry",
+    "specialId": "special-joe-hendry",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-technical",
+      "test-of-strength",
+      "double-leg-takedown",
+      "body-slam"
+    ],
+    "signatures": [
+      "joe-hendry-freak-of-nature",
+      "joe-hendry-hendry-slam",
+      "joe-hendry-hendry-lock",
+      "joe-hendry-standing-ovation"
+    ],
+    "archetype": "strength-technical-showman",
+    "hp": 63,
+    "methodLimits": {
+      "strength": null,
+      "technical": 4,
+      "strike": 2,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 7,
+      "technical": 4,
+      "strike": 1
+    },
+    "ability": {
+      "name": "The Crowd Believes",
+      "text": "Once per Control sequence, after Joe connects with a shared Move, his next Joe Hendry-exclusive Move costs 1 less this Control sequence.",
+      "trigger": {
+        "type": "joeCrowdBelieves",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-joe-hendry",
+      "name": "Say His Name",
+      "kind": "entrance",
+      "setId": "raw-series-1",
+      "rarity": 4,
+      "superstarId": "joe-hendry",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "joeBelieve",
+      "discount": 1
+    }
+  },
+  "roxannePerez": {
+    "id": "roxanne-perez",
+    "name": "Roxanne Perez",
+    "nickname": "The Prodigy",
+    "setId": "raw-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-roxanne-perez",
+    "entranceId": "entrance-roxanne-perez",
+    "specialId": "special-roxanne-perez",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-technical",
+      "dropkick",
+      "arm-drag",
+      "russian-leg-sweep"
+    ],
+    "signatures": [
+      "roxanne-perez-russian-leg-sweep",
+      "roxanne-perez-meteora",
+      "roxanne-perez-rok-lock",
+      "roxanne-perez-pop-rox"
+    ],
+    "archetype": "agility-technical-prodigy",
+    "hp": 57,
+    "methodLimits": {
+      "agility": null,
+      "technical": 4,
+      "strike": 3,
+      "strength": 0
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "technical": 4,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Prodigy Instinct",
+      "text": "The first 2 times each match Roxanne connects with an Agility Move immediately after a Technical Move in the same Control sequence, draw 1 page and gain +1 Adrenaline.",
+      "trigger": {
+        "type": "agilityAfterTechnical",
+        "maxUses": 2,
+        "draw": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-roxanne-perez",
+      "name": "All Fall Down",
+      "kind": "entrance",
+      "setId": "raw-series-1",
+      "rarity": 4,
+      "superstarId": "roxanne-perez",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "roxanneProdigy",
+      "maxCost": 4,
+      "methods": ["agility", "technical"],
+      "discount": 1
+    }
   }
+  ,
+  "austinTheory": {
+    "id": "austin-theory",
+    "name": "Austin Theory",
+    "nickname": "The Future Is Now",
+    "setId": "raw-series-1",
+    "factionTags": ["vision"],
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-austin-theory",
+    "entranceId": "entrance-austin-theory",
+    "specialId": "special-austin-theory",
+    "leadOffIds": [
+      "momentum-strike",
+      "momentum-strength",
+      "dropkick",
+      "firemans-carry",
+      "superkick"
+    ],
+    "signatures": [
+      "austin-theory-ataxia",
+      "austin-theory-rolling-thunder-blockbuster",
+      "austin-theory-patella-brainbuster",
+      "austin-theory-a-town-down"
+    ],
+    "archetype": "strike-grapple-future-now",
+    "hp": 61,
+    "methodLimits": {
+      "strike": null,
+      "strength": 4,
+      "agility": 3,
+      "technical": 2
+    },
+    "starterMomentum": {
+      "strike": 6,
+      "strength": 2,
+      "agility": 2,
+      "technical": 2
+    },
+    "ability": {
+      "name": "The Future Is Now",
+      "text": "Once per Control sequence, after Theory connects with a Strike Move, his next Grapple Move costs 1 less this Control sequence.",
+      "trigger": {
+        "type": "theoryFutureIsNow",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-austin-theory",
+      "name": "This Is Me",
+      "kind": "entrance",
+      "setId": "raw-series-1",
+      "rarity": 4,
+      "superstarId": "austin-theory",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strike": 1,
+        "strength": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "austinTheoryAllDay",
+      "drawOnConnect": 1
+    }
+  }  ,
+  "montezFord": {
+    "id": "montez-ford",
+    "name": "Montez Ford",
+    "nickname": "The Street Profits",
+    "setId": "raw-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-montez-ford",
+    "entranceId": "entrance-montez-ford",
+    "specialId": "special-angelo-dawkins",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "running-forearm",
+      "hurricanrana"
+    ],
+    "signatures": [
+      "montez-ford-spinebuster",
+      "montez-ford-blockbuster",
+      "montez-ford-450-splash",
+      "montez-ford-from-the-heavens"
+    ],
+    "archetype": "agility-strike-take-flight",
+    "hp": 60,
+    "methodLimits": {
+      "agility": null,
+      "strike": 4,
+      "strength": 3,
+      "technical": 2
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 3,
+      "strength": 2,
+      "technical": 1
+    },
+    "ability": {
+      "name": "Take Flight",
+      "text": "Once per Control sequence, after Montez connects with a non-Aerial Move, his next Aerial Move costs 1 less this Control sequence.",
+      "trigger": {
+        "type": "montezTakeFlight",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-montez-ford",
+      "name": "We Want The Smoke",
+      "kind": "entrance",
+      "setId": "raw-series-1",
+      "rarity": 4,
+      "superstarId": "montez-ford",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "angeloDawkinsRunIn",
+      "linkedCardId": "linked-street-profits-revelation"
+    }
+  }  ,
+  "lolaVice": {
+    "id": "lola-vice",
+    "name": "Lola Vice",
+    "nickname": "The Latina Heat",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-lola-vice",
+    "entranceId": "entrance-lola-vice",
+    "specialId": "special-lola-vice",
+    "leadOffIds": [
+      "momentum-strike",
+      "momentum-technical",
+      "punch",
+      "leg-kick",
+      "spinning-back-kick"
+    ],
+    "signatures": [
+      "lola-vice-running-hip-attack",
+      "lola-vice-spinning-heel-kick",
+      "lola-vice-triangle-choke",
+      "lola-vice-305"
+    ],
+    "archetype": "strike-technical-mma-counter-striker",
+    "hp": 59,
+    "methodLimits": {
+      "strike": null,
+      "technical": 4,
+      "agility": 2,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "strike": 7,
+      "technical": 4,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Counter Striker",
+      "text": "Once per Control sequence, after Lola successfully Counters an opponent’s Move, her next Strike Move costs 1 less and deals +1 Damage this Control sequence.",
+      "trigger": {
+        "type": "lolaCounterStriker",
+        "discount": 1,
+        "damage": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-lola-vice",
+      "name": "Te Lo Rompo",
+      "kind": "entrance",
+      "setId": "worlds-collide-series-1",
+      "rarity": 4,
+      "superstarId": "lola-vice",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strike": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "lolaFistsDontLie",
+      "opponentAdrenaline": -2,
+      "drawIfZero": 1
+    }
+  }
+  ,
+  "dragonLee": {
+    "id": "dragon-lee",
+    "name": "Dragon Lee",
+    "nickname": "The Boy Wonder",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-dragon-lee",
+    "entranceId": "entrance-dragon-lee",
+    "specialId": "special-dragon-lee",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-technical",
+      "hurricanrana",
+      "tilt-a-whirl-headscissors",
+      "arm-drag"
+    ],
+    "signatures": [
+      "dragon-lee-operation-dragon",
+      "dragon-lee-incinerator",
+      "dragon-lee-double-foot-stomp",
+      "dragon-lee-dragon-driver"
+    ],
+    "archetype": "agility-technical-hybrid",
+    "hp": 58,
+    "methodLimits": {
+      "agility": null,
+      "technical": 4,
+      "strike": 3,
+      "strength": 2
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "technical": 3,
+      "strike": 2,
+      "strength": 1
+    },
+    "ability": {
+      "name": "Hybrid Athlete",
+      "text": "Once per Control sequence, after Dragon Lee connects with an Aerial Move, his next Technical Move costs 1 less this Control sequence; or after he connects with a Technical Move, his next Aerial Move costs 1 less this Control sequence. Only the first qualifying transition triggers each Control sequence.",
+      "trigger": {
+        "type": "dragonHybridAthlete",
+        "discount": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-dragon-lee",
+      "name": "Control the Empire",
+      "kind": "entrance",
+      "setId": "worlds-collide-series-1",
+      "rarity": 4,
+      "superstarId": "dragon-lee",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "agility": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 5,
+      "methods": ["agility", "technical"],
+      "discount": 1
+    }
+  }
+
+  ,
+  "hijoDelVikingo": {
+    "id": "hijo-del-vikingo",
+    "name": "Hijo del Vikingo",
+    "nickname": "El Hijo del Vikingo",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-hijo-del-vikingo",
+    "entranceId": "entrance-hijo-del-vikingo",
+    "specialId": "special-hijo-del-vikingo",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-technical",
+      "springboard-crossbody",
+      "hurricanrana",
+      "dropkick"
+    ],
+    "signatures": [
+      "vikingo-mexican-destroyer",
+      "vikingo-twisting-450-splash",
+      "vikingo-top-rope-poison-rana",
+      "vikingo-el-cuerno-del-vikingo"
+    ],
+    "archetype": "agility-aerial-specialist",
+    "hp": 57,
+    "methodLimits": {
+      "agility": null,
+      "technical": 3,
+      "strike": 2,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "agility": 8,
+      "technical": 2,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Jinete del Aire",
+      "text": "Once per Control sequence, after Vikingo connects with a Running Aerial Move, his next Diving Aerial Move costs 2 less this Control sequence.",
+      "trigger": {
+        "type": "vikingoJineteDelAire",
+        "discount": 2
+      }
+    },
+    "entrance": {
+      "id": "entrance-hijo-del-vikingo",
+      "name": "Alas de Oro",
+      "kind": "entrance",
+      "setId": "worlds-collide-series-1",
+      "rarity": 4,
+      "superstarId": "hijo-del-vikingo",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {"agility": 1, "technical": 1},
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "vikingoElOjoProtection",
+      "adrenaline": 1,
+      "draw": 1
+    }
+  }
+
+
+  ,
+  "mrIguana": {
+    "id": "mr-iguana",
+    "name": "Mr. Iguana",
+    "nickname": "Mr. Iguana",
+    "setId": "worlds-collide-series-1",
+    "era": null,
+    "seasonExclusive": false,
+    "cardId": "superstar-mr-iguana",
+    "entranceId": "entrance-mr-iguana",
+    "specialId": "special-mr-iguana",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-technical",
+      "hurricanrana",
+      "arm-drag",
+      "dropkick"
+    ],
+    "signatures": [
+      "mr-iguana-iguanarana",
+      "mr-iguana-pongase-verde",
+      "mr-iguana-muta-lock",
+      "mr-iguana-chalino-driver"
+    ],
+    "archetype": "agility-technical-trickster",
+    "hp": 58,
+    "methodLimits": {
+      "agility": null,
+      "technical": 4,
+      "strike": 2,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "agility": 7,
+      "technical": 3,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Play Dead",
+      "text": "Once per match, after an opponent connects with a Move that grounds Mr. Iguana, you may draw 1 page and gain +1 Adrenaline.",
+      "trigger": {
+        "type": "iguanaPlayDead",
+        "maxUses": 1,
+        "draw": 1,
+        "adrenaline": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-mr-iguana",
+      "name": "Verde Desde 1988",
+      "kind": "entrance",
+      "setId": "worlds-collide-series-1",
+      "rarity": 4,
+      "superstarId": "mr-iguana",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {"agility": 1, "technical": 1},
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "iguanaLaYesca",
+      "discount": 1,
+      "opponentAdrenaline": -1
+    }
+  }
+
+
 };

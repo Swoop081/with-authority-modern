@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.37';
-import { superstars } from '../js/data/superstars.js?v=0.13.37';
-import { decks } from '../js/data/decks.js?v=0.13.37';
-import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.37';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.37';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.37';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.37';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.37';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.45';
+import { superstars } from '../js/data/superstars.js?v=0.13.45';
+import { decks } from '../js/data/decks.js?v=0.13.45';
+import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.45';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.45';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.45';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.45';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.45';
 
 const stars = Object.values(superstars);
 const star = id => stars.find(s => s.id === id);
@@ -15,16 +15,17 @@ const card = id => allGameplayCards.find(c => c.id === id);
 const byName = name => allGameplayCards.find(c => c.name === name);
 
 test('v0.13.3 RAW Series 1 is in internal certification scope but remains completely unreleased player-facing', () => {
-  assert.deepEqual([...PRE_RELEASE_TEST_SET_IDS], ['raw-series-1']);
+  assert.deepEqual([...PRE_RELEASE_TEST_SET_IDS], ['raw-series-1','worlds-collide-series-1']);
   assert.equal(isInternalTestSetId('raw-series-1'), true);
+  assert.equal(isInternalTestSetId('worlds-collide-series-1'), true);
   assert.equal(isPlayerReleasedSetId('raw-series-1'), false);
   assert.equal(isUnreleasedSetId('raw-series-1'), true);
   const rawStars = stars.filter(s => s.setId === 'raw-series-1');
-  assert.deepEqual(rawStars.map(s => s.id).sort(), ['chad-gable','logan-paul','raquel-rodriguez','sol-ruca']);
-  assert.equal(rawStars.length, 4);
+  assert.deepEqual(rawStars.map(s => s.id).sort(), ['austin-theory','chad-gable','joe-hendry','logan-paul','montez-ford','raquel-rodriguez','roxanne-perez','sol-ruca']);
+  assert.equal(rawStars.length, 8);
   for (const s of rawStars) assert.equal(isPlayerVisibleSuperstar(s, { unlockedSuperstars: [s.id] }), false, `${s.id} must remain hidden even if stale profile data says unlocked`);
   const rawCards = allGameplayCards.filter(c => c.setId === 'raw-series-1');
-  assert.equal(rawCards.length, 36);
+  assert.equal(rawCards.length, 62);
   assert.equal(boosterEligible(rawCards.find(c => c.kind === 'move')), false);
   const visibleCatalogue = filterAndSortCatalogue(allGameplayCards, defaultCatalogueFilters());
   assert.equal(visibleCatalogue.some(c => c.setId === 'raw-series-1'), false);

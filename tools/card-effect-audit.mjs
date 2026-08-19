@@ -19,26 +19,28 @@ const handledMoveEffects = new Set([
 const handledUtilityEffects = new Set([
   "discountNext", "buffNext", "gainAdrenaline", "healSelf", "buffNextMethod", "romanOohAhh",
   "fightForever", "drawThenDiscardSelf", "topDeckTutor", "searchChoice", "onceTooOften",
-  "crowdSupport", "peopleChampionship", "what", "paulHeymanManager", "paulHeymanPromo"
+  "crowdSupport", "peopleChampionship", "what", "paulHeymanManager", "paulHeymanPromo", "visionManager"
 ]);
 const handledSpecialTypes = new Set([
   "brassKnuckles", "cancelOpponentUtility", "counterChooseDiscount", "counterDiscountMethod", "counterDiscountNamed",
   "counterDrainActionLock", "counterDrawControl", "counterKeepSequence", "counterTutorStrike", "counterUncounterableMethod",
   "flairChopWooo", "headbuttDiscount", "hulkUp", "ignoreStun", "kickoutControlAdrenaline", "lowHpTutor",
   "moveCounteredDrawDrain", "nextStrengthUncounterable", "noWipeout", "nobodySlams", "paulHeyman", "pinEscape",
-  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko"
+  "austinTheoryAllDay", "angeloDawkinsRunIn", "luchaLibreLegend", "hammerInBoot", "fearlessAssault", "steelPlate", "lolaFistsDontLie",
+  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca"
 ]);
 const handledAbilityTypes = new Set([
   "agilityAfterStrike", "agilityAfterTechnical", "agilityRequirement", "codyUndeniable", "connectDamage",
   "connectMethodCost", "connectMethodDamage", "connectNamed", "counterDraw", "differentMethod", "firstCounterMomentum",
   "gableOlympicPedigree", "loganViralAthlete", "momentumBuff", "moveCountered", "raquelUnmatchedPower", "reduceIncoming",
   "secondMoveInControl", "solDaredevil", "strengthReqDrain", "strikeDamageDiscountTechnical", "strikeDiscountStrength",
-  "strikeDiscountTechnical", "surviveAtOne", "takeDamage", "technicalDiscountAgility"
+  "strikeDiscountTechnical", "surviveAtOne", "takeDamage", "technicalDiscountAgility", "joeCrowdBelieves", "theoryFutureIsNow", "montezTakeFlight",
+  "reyUltimateUnderdog", "dominikNuclearHeat", "pentaZeroFearZeroMercy", "lolaCounterStriker", "dragonHybridAthlete", "vikingoJineteDelAire", "iguanaPlayDead"
 ]);
 const engineBackedTopLevelFields = [
   "bodyDamage", "discountAfterCounter", "discountIfNamedConnectedThisControl", "kickoutRetainControl",
   "kickoutRetainControlDraw", "opponentAdrenalineOnConnect", "playCondition", "playableAfterTurn",
-  "priorConnectedMethodBonus", "priorMoveBonusDamage", "searchOnConnectName", "selfStunIfCountered"
+  "priorConnectedMethodBonus", "priorMoveBonusDamage", "searchOnConnectName", "selfStunIfCountered", "counterAdrenalineOnConnect"
 ];
 
 function normalize(value) {

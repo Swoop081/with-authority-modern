@@ -5,7 +5,7 @@ import { MatchEngine } from "../js/engine/MatchEngine.js";
 import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js";
 
 const stars = Object.values(superstars).filter(star => isInternalTestSetId(star.setId));
-if (stars.length !== 29) throw new Error(`Expected 29 released + RAW test Superstars, found ${stars.length}`);
+if (stars.length !== 41) throw new Error(`Expected 41 released + RAW + Worlds Collide test Superstars, found ${stars.length}`);
 function seededRng(seed){let x=seed>>>0;return()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296;};}
 const stats=Object.fromEntries(stars.map(s=>[s.id,{id:s.id,name:s.name,setId:s.setId,wins:0,losses:0,turns:0}]));
 const finishes={};let matches=0,stalls=0,totalTurns=0;

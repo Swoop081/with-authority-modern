@@ -1,12 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, addOwnedCard } from "../js/data/profile.js?v=0.13.37";
-import { decks } from "../js/data/decks.js?v=0.13.37";
-import { collectionCards } from "../js/data/collection.js?v=0.13.37";
-import { superstars } from "../js/data/superstars.js?v=0.13.37";
-import { validateDeckDraft, selectedEntranceId } from "../js/data/deck-builder.js?v=0.13.37";
-import { findPackUpgrades, applyUpgrade, buildPlayableDeck } from "../js/data/deck-assistant.js?v=0.13.37";
+import { createProfile, addOwnedCard } from "../js/data/profile.js?v=0.13.45";
+import { decks } from "../js/data/decks.js?v=0.13.45";
+import { collectionCards } from "../js/data/collection.js?v=0.13.45";
+import { superstars } from "../js/data/superstars.js?v=0.13.45";
+import { validateDeckDraft, selectedEntranceId } from "../js/data/deck-builder.js?v=0.13.45";
+import { findPackUpgrades, applyUpgrade, buildPlayableDeck } from "../js/data/deck-assistant.js?v=0.13.45";
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 

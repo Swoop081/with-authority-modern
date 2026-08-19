@@ -1,25 +1,29 @@
-# WWE Legacy v0.13.37 — Build Certification
+# WWE Legacy v0.13.45 — Build Certification
 
-**Hub + Selector Consistency Pass**
+**Worlds Collide Mr. Iguana Completion Pass**
 
-- **549/549 regression tests pass.**
-- Validation: **50 Superstars / 50 decks / 481 gameplay cards / 0 orphans / 0 issues**.
-- Flow audit: **50 Superstars / 0 issues**.
-- Card-ID audit: **531/531 / 0 issues**.
-- Counter-state audit: **481 gameplay cards / 350 Moves / 0 issues**.
-- Card-effect audit: **29 test Superstars / 332 gameplay cards / 196 effect-bearing cards / 0 issues**.
+- **586/586 regression tests pass.**
+- Validation: **58 Superstars / 58 decks / 533 gameplay cards / 0 orphans / 0 issues**.
+- Flow audit: **58 Superstars / 0 issues**.
+- Card-ID audit: **591/591 / 0 issues**; Evolution Series 1 is gap-free through **EVO1-074** and Worlds Collide Series 1 through **WC1-064**.
+- Counter-state audit: **533 gameplay cards / 0 issues**; Mr. Iguana: **60 pages / 12 Momentum / full 8 Counter States / 4 Submission targets**.
+- Card-effect audit: **41 test Superstars / 416 gameplay cards / 259 effect-bearing cards / 0 issues**.
 - Economy smoke: **60 packs / 300 cards / 0 duplicate Entrance pulls / 0 foil-first failures**.
 - Released-roster soak: **25 released Superstars / 6,000 matches / 0 stalls / 27.09 average turns / 5,476 pins / 524 submissions**.
-- Released + RAW pre-release soak: **29 test Superstars / 8,120 matches / 0 stalls / 26.58 average turns / 7,413 pins / 707 submissions**.
-- Full authored-roster soak: **50 Superstars / 4,900 matches / 0 stalls / 26.05 average turns / 4,639 pins / 261 submissions**.
-- Dead-turn audit: **2,450 matches / 4.38 passes per match / maximum consecutive pass streak 4**.
-- Custom-front artwork audit: **531 collector cards / 493 missing custom fronts**; missing authored fronts continue to use the canonical fallback presentation.
+- Released + RAW + Worlds Collide pre-release soak: **41 test Superstars / 16,400 matches / 0 stalls / 25.38 average turns / 15,150 pins / 1,250 submissions**. Mr. Iguana: **395-405 / 49.4% / 23.2 average turns**.
+- Full authored-roster soak: **58 Superstars / 6,612 matches / 0 stalls / 25.37 average turns / 6,265 pins / 347 submissions**. Mr. Iguana: **105-123 / 46.1% / 23.0 average turns**.
+- Dead-turn audit: **3,306 matches / 4.16 passes per match / maximum consecutive pass streak 4**.
+- Custom-front artwork audit: **591 collector cards / 553 missing custom fronts**; newly authored Mr. Iguana cards use canonical fallback presentation until artwork is installed.
 - Profile schema remains **31**.
 
-## v0.13.37 certification focus
-- Live Events selection cards remain usable at iPhone widths with no Superstar-art/timer/CTA overlap.
-- Shared Superstar selection obeys select-first / flip-second interaction across Exhibition-style selectors and new Deck Lab / Live Event integrations.
-- Season current-tier auto-focus coexists with a persistent compact Season + Free Booster sticky control area.
-- Theme stat tiles use full background fills with readable contrast.
-- King of the Ring hero shrinks to content height and no longer preserves unused portrait space.
-- No unrelated gameplay, content or economy changes are included.
+## v0.13.45 certification focus
+- Mr. Iguana completes the planned eight-Superstar Worlds Collide Series 1 roster.
+- Mr. Iguana's authored deck is exactly 60 pages / 12 Momentum and uses only existing shared cards outside his exclusive package.
+- **Play Dead** uses the global optional triggered Use / Decline flow and does not consume on decline.
+- **La Yesca** searches only Mr. Iguana-exclusive Trademarks, applies the approved -1 Cost to the searched Trademark for the current Control sequence, and removes 1 opponent Adrenaline.
+- **Iguanarana** is legal as a Body Elevated Counter and grants +1 Adrenaline only when it connects as a counter-attack.
+- **Póngase Verde** correctly searches and discounts Chalino Driver by 1.
+- **Spanish Fly** now requires Agility 2 only, preserving its C6/D10 / Running Aerial / grounding identity.
+- Hijo del Vikingo's authored deck restores Spanish Fly x2 and remains method-accessible under his approved Momentum profile.
+- Internal pre-release certification remains released + RAW + Worlds Collide while player-facing release gates remain unchanged.
+- No reward-economy, booster-odds, UI, profile-schema or release-calendar changes are included.

@@ -1,21 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.37';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.37';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.37';
-import { superstars } from '../js/data/superstars.js?v=0.13.37';
-import { decks } from '../js/data/decks.js?v=0.13.37';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.45';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.45';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.45';
+import { superstars } from '../js/data/superstars.js?v=0.13.45';
+import { decks } from '../js/data/decks.js?v=0.13.45';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const rng=()=>0.42;
 const stars=Object.values(superstars);
 const genuineIds=[
-  'figure-four-leglock','koji-clutch','cm-punk-anaconda-vise','boston-crab','gunther-gojira-clutch','brock-lesnar-kimura-lock','mankind-mandible-claw','bearhug','rhea-ripley-prism-trap','becky-lynch-dis-arm-her','crossface','charlotte-flair-figure-eight-leglock','paige-pto','stf','chad-gable-ankle-lock','octopus-hold','mexican-surfboard','abdominal-stretch','bron-breakker-steiner-recliner','side-headlock','wristlock','sleeper-hold','jacob-fatu-tongan-death-grip','choke-on-the-ropes','reverse-chin-lock','andre-the-giant-bear-hug','hangman-armbar'
+  'figure-four-leglock','koji-clutch','cm-punk-anaconda-vise','boston-crab','gunther-gojira-clutch','brock-lesnar-kimura-lock','mankind-mandible-claw','bearhug','rhea-ripley-prism-trap','becky-lynch-dis-arm-her','crossface','charlotte-flair-figure-eight-leglock','paige-pto','stf','chad-gable-ankle-lock','octopus-hold','mexican-surfboard','abdominal-stretch','bron-breakker-steiner-recliner','side-headlock','wristlock','sleeper-hold','jacob-fatu-tongan-death-grip','choke-on-the-ropes','reverse-chin-lock','andre-the-giant-bear-hug','hangman-armbar','joe-hendry-hendry-lock','roxanne-perez-rok-lock','triangle-choke','lola-vice-triangle-choke','mr-iguana-muta-lock'
 ];
 
 test('v0.12.42 genuine submission holds deal zero printed HP damage and only persistent body-part damage',()=>{
   const subs=allGameplayCards.filter(c=>c.moveType==='submission');
-  assert.equal(subs.length,27);
+  assert.equal(subs.length,32);
   assert.deepEqual(new Set(subs.map(c=>c.id)),new Set(genuineIds));
   for(const c of subs){
     assert.equal(c.damage,0,c.id);

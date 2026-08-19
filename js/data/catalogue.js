@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.37";
-import { superstars } from "./superstars.js?v=0.13.37";
-import { sets } from "./sets.js?v=0.13.37";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.37";
-import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.13.37";
+import { decks } from "./decks.js?v=0.13.45";
+import { superstars } from "./superstars.js?v=0.13.45";
+import { sets } from "./sets.js?v=0.13.45";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.45";
+import { MOVE_TYPE_LABELS } from "./move-types.js?v=0.13.45";
 
 export const CATALOGUE_PAGE_SIZE = 48;
 export const CATALOGUE_NUMERIC_OPERATORS = ["any", "eq", "lte", "gte"];
@@ -58,6 +58,7 @@ export function superstarIdsForCard(card) {
   const ids = new Set(usageByCardId.get(card?.id) ?? []);
   if (card?.superstarId) ids.add(card.superstarId);
   for (const id of card?.allowedSuperstarIds ?? []) ids.add(id);
+  for (const tag of card?.allowedFactionTags ?? []) for (const star of starList) if ((star.factionTags ?? []).includes(tag)) ids.add(star.id);
   if (card?.kind === "superstar" && card.superstarId) ids.add(card.superstarId);
   return [...ids];
 }
@@ -66,6 +67,7 @@ export function exclusiveSuperstarIdsForCard(card) {
   const ids = new Set();
   if (card?.superstarId) ids.add(card.superstarId);
   for (const id of card?.allowedSuperstarIds ?? []) ids.add(id);
+  for (const tag of card?.allowedFactionTags ?? []) for (const star of starList) if ((star.factionTags ?? []).includes(tag)) ids.add(star.id);
   if (card?.kind === "superstar" && card.superstarId) ids.add(card.superstarId);
   return [...ids];
 }

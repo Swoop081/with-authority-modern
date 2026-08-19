@@ -3185,7 +3185,150 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "survivor-series-series-1",
     "cardNumber": 54,
     "cardCode": "SVS1-054"
-  }
+  },
+  {
+    "id": "european-uppercut",
+    "setId": "raw-series-1",
+    "cardNumber": 41,
+    "cardCode": "RAW1-041"
+  },
+  {
+    "id": "joe-hendry-freak-of-nature",
+    "setId": "raw-series-1",
+    "cardNumber": 42,
+    "cardCode": "RAW1-042"
+  },
+  {
+    "id": "joe-hendry-hendry-slam",
+    "setId": "raw-series-1",
+    "cardNumber": 43,
+    "cardCode": "RAW1-043"
+  },
+  {
+    "id": "joe-hendry-hendry-lock",
+    "setId": "raw-series-1",
+    "cardNumber": 44,
+    "cardCode": "RAW1-044"
+  },
+  {
+    "id": "joe-hendry-standing-ovation",
+    "setId": "raw-series-1",
+    "cardNumber": 45,
+    "cardCode": "RAW1-045"
+  },
+  {
+    "id": "entrance-joe-hendry",
+    "setId": "raw-series-1",
+    "cardNumber": 46,
+    "cardCode": "RAW1-046"
+  },
+  {
+    "id": "special-joe-hendry",
+    "setId": "raw-series-1",
+    "cardNumber": 47,
+    "cardCode": "RAW1-047"
+  },
+  {
+    "id": "superstar-joe-hendry",
+    "setId": "raw-series-1",
+    "cardNumber": 48,
+    "cardCode": "RAW1-048"
+  },
+  {
+    "id": "roxanne-perez-russian-leg-sweep",
+    "setId": "raw-series-1",
+    "cardNumber": 49,
+    "cardCode": "RAW1-049"
+  },
+  {
+    "id": "roxanne-perez-meteora",
+    "setId": "raw-series-1",
+    "cardNumber": 50,
+    "cardCode": "RAW1-050"
+  },
+  {
+    "id": "roxanne-perez-rok-lock",
+    "setId": "raw-series-1",
+    "cardNumber": 51,
+    "cardCode": "RAW1-051"
+  },
+  {
+    "id": "roxanne-perez-pop-rox",
+    "setId": "raw-series-1",
+    "cardNumber": 52,
+    "cardCode": "RAW1-052"
+  },
+  {
+    "id": "entrance-roxanne-perez",
+    "setId": "raw-series-1",
+    "cardNumber": 53,
+    "cardCode": "RAW1-053"
+  },
+  {
+    "id": "special-roxanne-perez",
+    "setId": "raw-series-1",
+    "cardNumber": 54,
+    "cardCode": "RAW1-054"
+  },
+  {
+    "id": "superstar-roxanne-perez",
+    "setId": "raw-series-1",
+    "cardNumber": 55,
+    "cardCode": "RAW1-055"
+  }  ,
+  {"id":"austin-theory-ataxia","setId":"raw-series-1","cardNumber":56,"cardCode":"RAW1-056"},
+  {"id":"austin-theory-rolling-thunder-blockbuster","setId":"raw-series-1","cardNumber":57,"cardCode":"RAW1-057"},
+  {"id":"austin-theory-patella-brainbuster","setId":"raw-series-1","cardNumber":58,"cardCode":"RAW1-058"},
+  {"id":"austin-theory-a-town-down","setId":"raw-series-1","cardNumber":59,"cardCode":"RAW1-059"},
+  {"id":"entrance-austin-theory","setId":"raw-series-1","cardNumber":60,"cardCode":"RAW1-060"},
+  {"id":"special-austin-theory","setId":"raw-series-1","cardNumber":61,"cardCode":"RAW1-061"},
+  {"id":"manager-maxxine-dupri","setId":"raw-series-1","cardNumber":62,"cardCode":"RAW1-062"},
+  {"id":"superstar-austin-theory","setId":"raw-series-1","cardNumber":63,"cardCode":"RAW1-063"}  ,
+  {"id":"montez-ford-spinebuster","setId":"raw-series-1","cardNumber":64,"cardCode":"RAW1-064"},
+  {"id":"montez-ford-blockbuster","setId":"raw-series-1","cardNumber":65,"cardCode":"RAW1-065"},
+  {"id":"montez-ford-450-splash","setId":"raw-series-1","cardNumber":66,"cardCode":"RAW1-066"},
+  {"id":"montez-ford-from-the-heavens","setId":"raw-series-1","cardNumber":67,"cardCode":"RAW1-067"},
+  {"id":"special-angelo-dawkins","setId":"raw-series-1","cardNumber":68,"cardCode":"RAW1-068"},
+  {"id":"entrance-montez-ford","setId":"raw-series-1","cardNumber":69,"cardCode":"RAW1-069"},
+  {"id":"superstar-montez-ford","setId":"raw-series-1","cardNumber":70,"cardCode":"RAW1-070"}
+  ,
+  {"id":"spinning-heel-kick","setId":"evolution-series-1","cardNumber":73,"cardCode":"EVO1-073"},
+  {"id":"triangle-choke","setId":"evolution-series-1","cardNumber":74,"cardCode":"EVO1-074"},
+  {"id":"lola-vice-running-hip-attack","setId":"worlds-collide-series-1","cardNumber":37,"cardCode":"WC1-037"},
+  {"id":"lola-vice-spinning-heel-kick","setId":"worlds-collide-series-1","cardNumber":38,"cardCode":"WC1-038"},
+  {"id":"lola-vice-triangle-choke","setId":"worlds-collide-series-1","cardNumber":39,"cardCode":"WC1-039"},
+  {"id":"lola-vice-305","setId":"worlds-collide-series-1","cardNumber":40,"cardCode":"WC1-040"},
+  {"id":"entrance-lola-vice","setId":"worlds-collide-series-1","cardNumber":41,"cardCode":"WC1-041"},
+  {"id":"special-lola-vice","setId":"worlds-collide-series-1","cardNumber":42,"cardCode":"WC1-042"},
+  {"id":"superstar-lola-vice","setId":"worlds-collide-series-1","cardNumber":43,"cardCode":"WC1-043"}
+  ,
+  {"id":"dragon-lee-operation-dragon","setId":"worlds-collide-series-1","cardNumber":44,"cardCode":"WC1-044"},
+  {"id":"dragon-lee-incinerator","setId":"worlds-collide-series-1","cardNumber":45,"cardCode":"WC1-045"},
+  {"id":"dragon-lee-double-foot-stomp","setId":"worlds-collide-series-1","cardNumber":46,"cardCode":"WC1-046"},
+  {"id":"dragon-lee-dragon-driver","setId":"worlds-collide-series-1","cardNumber":47,"cardCode":"WC1-047"},
+  {"id":"entrance-dragon-lee","setId":"worlds-collide-series-1","cardNumber":48,"cardCode":"WC1-048"},
+  {"id":"special-dragon-lee","setId":"worlds-collide-series-1","cardNumber":49,"cardCode":"WC1-049"},
+  {"id":"superstar-dragon-lee","setId":"worlds-collide-series-1","cardNumber":50,"cardCode":"WC1-050"}
+
+  ,
+  {"id":"vikingo-mexican-destroyer","setId":"worlds-collide-series-1","cardNumber":51,"cardCode":"WC1-051"},
+  {"id":"vikingo-twisting-450-splash","setId":"worlds-collide-series-1","cardNumber":52,"cardCode":"WC1-052"},
+  {"id":"vikingo-top-rope-poison-rana","setId":"worlds-collide-series-1","cardNumber":53,"cardCode":"WC1-053"},
+  {"id":"vikingo-el-cuerno-del-vikingo","setId":"worlds-collide-series-1","cardNumber":54,"cardCode":"WC1-054"},
+  {"id":"entrance-hijo-del-vikingo","setId":"worlds-collide-series-1","cardNumber":55,"cardCode":"WC1-055"},
+  {"id":"special-hijo-del-vikingo","setId":"worlds-collide-series-1","cardNumber":56,"cardCode":"WC1-056"},
+  {"id":"superstar-hijo-del-vikingo","setId":"worlds-collide-series-1","cardNumber":57,"cardCode":"WC1-057"}
+
+
+  ,
+  {"id":"mr-iguana-iguanarana","setId":"worlds-collide-series-1","cardNumber":58,"cardCode":"WC1-058"},
+  {"id":"mr-iguana-pongase-verde","setId":"worlds-collide-series-1","cardNumber":59,"cardCode":"WC1-059"},
+  {"id":"mr-iguana-muta-lock","setId":"worlds-collide-series-1","cardNumber":60,"cardCode":"WC1-060"},
+  {"id":"mr-iguana-chalino-driver","setId":"worlds-collide-series-1","cardNumber":61,"cardCode":"WC1-061"},
+  {"id":"entrance-mr-iguana","setId":"worlds-collide-series-1","cardNumber":62,"cardCode":"WC1-062"},
+  {"id":"special-mr-iguana","setId":"worlds-collide-series-1","cardNumber":63,"cardCode":"WC1-063"},
+  {"id":"superstar-mr-iguana","setId":"worlds-collide-series-1","cardNumber":64,"cardCode":"WC1-064"}
+
 
 ]);
 

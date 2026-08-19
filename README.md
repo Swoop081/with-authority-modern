@@ -1,25 +1,28 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.37 — Hub + Selector Consistency Pass**.
+Current working build: **v0.13.45 — Worlds Collide Mr. Iguana Completion Pass**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Events, Money in the Bank, King of the Ring and Championship Road.
 
 ## Current build
-- **Normal non-final match victories award exactly 1 normal booster.** Losses award **no match reward** and **0 match Season XP**.
-- The **final victory that completes a structured mode/tournament awards only its Super Pack**. It does not also grant the normal victory booster or any direct UP. This applies to Live Event tower clears, Money in the Bank, King of the Ring and Championship Road.
-- Individual match victories and mode clears award **no direct UP**. Overflow duplicates inside opened packs remain the repeatable UP source at **1 Common / 2 Uncommon / 3 Rare / 4 Very Rare UP**, including Foil overflow.
-- Super Packs remain 5 cards with a guaranteed Foil Rare-or-better first pull, **25/40/27/8** rarity weighting and a maximum of 2 Very Rares.
-- Super Pack reveal flow now uses the same explicit final-card transition as standard boosters: tapping **Card 5 of 5** always advances to **Pack Summary**, including duplicate/UP-conversion outcomes.
-- Deck Lab `Optimize Owned` and `Build Toward Recommended` are hard-gated by actual Collection inventory. Automatic builds cannot insert or increase cards beyond owned Normal + Foil copies, and Deck Validity/Save rejects unowned or over-owned pages.
-- **Hangman Armbar — SVS1-054** remains the latest gameplay addition: shared 1★ Common, C3/D0, Technical 1, standing-only Arm Submission, Arm Extended, +3 persistent Arm damage per successful turn.
-- Rotating Live Events remain release-gated, universal layered-card lookup remains active, counter/reversal Play Pile duplication remains fixed, Pack Complete cards retain the ~60% inspector, and optional triggered cards such as Tribal Chief retain the Use/Decline flow from v0.13.35.
+- **Worlds Collide — Series 1 expands from 7 to its planned 8 authored Superstars** with Mr. Iguana, completing the intended eight-Superstar future release structure.
+- **Iguanarana — WC1-058** — Mr. Iguana-exclusive 3★ Rare Trademark; C5/D8; Agility 2; Grapple / Body Elevated; grounds opponent; may Counter Body Elevated; if played as a Counter and it Connects, gain +1 Adrenaline.
+- **Póngase Verde — WC1-059** — Mr. Iguana-exclusive 3★ Rare Trademark; C6/D10; Technical 2; Grapple / Rear Control; grounds opponent; on Connect search/draw Chalino Driver and give it -1 Cost this Control sequence.
+- **Muta Lock — WC1-060** — Mr. Iguana-exclusive 3★ Rare Trademark Submission; C6/D0; Technical 2; grounded opponent only; Rear Control; +5 persistent Back damage per successful turn.
+- **Chalino Driver — WC1-061** — Mr. Iguana-exclusive 4★ Very Rare Finisher; C10/D16; no Method requirement; Grapple / Body Elevated; grounds opponent.
+- **Verde Desde 1988 — WC1-062** — Mr. Iguana 4★ Very Rare Entrance; +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline through normal Entrance timing.
+- **La Yesca — WC1-063** — Mr. Iguana 4★ Very Rare Special Action; once per match during Control, search/draw one Mr. Iguana-exclusive Trademark, give it -1 Cost this Control sequence, and opponent loses 1 Adrenaline.
+- **Mr. Iguana — WC1-064** — HP 58; Agility Unlimited / Technical 4 / Strike 2 / Strength 1; ability **Play Dead** offers an optional once-per-match draw 1 / +1 Adrenaline response after an opponent connects with a Move that grounds him.
+- Mr. Iguana's authored 60-page / 12-Momentum deck uses only existing shared cards outside his exclusive package and retains full Counter-State / Submission-target coverage.
+- **Spanish Fly correction:** the existing shared 3★ Rare Spanish Fly remains C6/D10, Running Aerial and grounding, but now requires **Agility 2 only** rather than Agility 2 + Strength 1.
+- Hijo del Vikingo's authored deck restores **Spanish Fly x2**, replacing the temporary Asai Moonsault x2 substitutions from v0.13.44.
+- Worlds Collide Series 1 is now complete at **8 authored Superstars / 64 collector cards**. Evolution Series 1 remains at 74 collector cards.
+- Internal pre-release certification continues to test **released + RAW + Worlds Collide** together; player-facing release gates remain unchanged.
+- **Normal non-final match victories award exactly 1 normal booster.** Losses award no match reward and 0 match Season XP; a completing structured-mode victory awards only its Super Pack.
+- Individual match victories and mode clears award no direct UP. Overflow duplicates remain **1 Common / 2 Uncommon / 3 Rare / 4 Very Rare UP**.
 - Profile schema remains **31**.
-- Live Events hub cards are denser and information-led: Superstar renders are removed, event titles are larger, and CTA/timer controls are split left/right without overlap.
-- Superstar selection now uses one shared horizontal carousel across Exhibition, Deck Lab and other character-pick surfaces. First tap selects; a second tap on the selected Superstar flips to details.
-- The Home Season tile now follows the same headline typography/spacing system as Deck Lab and My Challenges.
-- The Season screen keeps Season context plus the Free Booster claim/countdown sticky while the 100-tier road auto-focuses and scrolls beneath it.
-- Recently themed stat tiles now use full alternating theme/white fills rather than black panels with colored accents. The King of the Ring hero is tightened to remove the unused vertical gap above its stat row.
+- All v0.13.44 gameplay, economy and UI behavior remains unchanged unless explicitly listed above.
 
 Season 1 release schedule remains: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
 
-See `RELEASE-NOTES-v0.13.37.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.45.md` and `BUILD-CERTIFICATION.md`.

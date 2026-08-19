@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.37";
-import { collectionCards } from "./collection.js?v=0.13.37";
-import { superstars } from "./superstars.js?v=0.13.37";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.37";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.37";
+import { decks } from "./decks.js?v=0.13.45";
+import { collectionCards } from "./collection.js?v=0.13.45";
+import { superstars } from "./superstars.js?v=0.13.45";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.45";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.45";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -37,6 +37,9 @@ export function cardEligibilityForSuperstar(star, card) {
   if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(star.id)) {
     return { legal: false, reason: "Family / Superstar restriction" };
   }
+  if (Array.isArray(card.allowedFactionTags) && card.allowedFactionTags.length && !(star.factionTags ?? []).some(tag => card.allowedFactionTags.includes(tag))) {
+    return { legal: false, reason: "Faction restriction" };
+  }
   for (const [method, requirement] of Object.entries(card.finisher ? {} : (card.requirements ?? {}))) {
     const limit = star.methodLimits?.[method];
     if (limit === 0) return { legal: false, reason: `${star.name} cannot use ${method[0].toUpperCase() + method.slice(1)} cards` };
@@ -57,6 +60,9 @@ export function entranceEligibilityForSuperstar(star, card) {
   }
   if (Array.isArray(card.allowedSuperstarIds) && card.allowedSuperstarIds.length && !card.allowedSuperstarIds.includes(star.id)) {
     return { legal: false, reason: "Entrance is not compatible with this Superstar" };
+  }
+  if (Array.isArray(card.allowedFactionTags) && card.allowedFactionTags.length && !(star.factionTags ?? []).some(tag => card.allowedFactionTags.includes(tag))) {
+    return { legal: false, reason: "Entrance is not compatible with this Superstar's faction" };
   }
   return { legal: true, reason: card.superstarId ? "Superstar-specific Entrance" : "Shared Entrance" };
 }

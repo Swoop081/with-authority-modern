@@ -1,19 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.13.37';
-import { superstars } from '../js/data/superstars.js?v=0.13.37';
+import { collectionCards } from '../js/data/collection.js?v=0.13.45';
+import { superstars } from '../js/data/superstars.js?v=0.13.45';
 import {
   playerReleasedCollectibleSetIds,
   isPlayerReleasedSetId,
   isPlayerVisibleSuperstar,
   setReleaseAt
-} from '../js/data/release.js?v=0.13.37';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.37';
-import { releasedStoreSetIds, storeRotation, storeSuperstars } from '../js/data/store.js?v=0.13.37';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.37';
-import { exhibitionOpponentIds } from '../js/data/matchmaking.js?v=0.13.37';
-import { tierReward } from '../js/data/seasons.js?v=0.13.37';
-import { liveEventRotation } from '../js/data/live-events.js?v=0.13.37';
+} from '../js/data/release.js?v=0.13.45';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.45';
+import { releasedStoreSetIds, storeRotation, storeSuperstars } from '../js/data/store.js?v=0.13.45';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.45';
+import { exhibitionOpponentIds } from '../js/data/matchmaking.js?v=0.13.45';
+import { tierReward } from '../js/data/seasons.js?v=0.13.45';
+import { liveEventRotation } from '../js/data/live-events.js?v=0.13.45';
 
 const at = (y,m,d,h=12) => new Date(y,m-1,d,h,0,0,0);
 const star = id => Object.values(superstars).find(s => s.id === id);
@@ -62,7 +62,7 @@ test('v0.13.7 RAW visibility, boosters, Catalogue, Store and Exhibition all obey
   assert.equal(filterAndSortCatalogue(collectionCards, defaultCatalogueFilters(), undefined, before).some(c => c.setId === 'raw-series-1'), false);
   assert.equal(filterAndSortCatalogue(collectionCards, defaultCatalogueFilters(), undefined, after).some(c => c.setId === 'raw-series-1'), true);
   assert.equal(storeSuperstars('raw-series-1', before).length, 0);
-  assert.equal(storeSuperstars('raw-series-1', after).length, 4);
+  assert.equal(storeSuperstars('raw-series-1', after).length, 8);
   assert.equal(exhibitionOpponentIds('cm-punk', before).includes('logan-paul'), false);
   assert.equal(exhibitionOpponentIds('cm-punk', after).includes('logan-paul'), true);
 });
