@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.50';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.50';
-import { superstars } from '../js/data/superstars.js?v=0.13.50';
-import { decks } from '../js/data/decks.js?v=0.13.50';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.51';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.51';
+import { superstars } from '../js/data/superstars.js?v=0.13.51';
+import { decks } from '../js/data/decks.js?v=0.13.51';
 
 const stars=Object.values(superstars);
 const rng=()=>0.42;

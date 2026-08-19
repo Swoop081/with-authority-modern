@@ -7600,3 +7600,48 @@ body[data-screen="seasons"] .season-road-scroll>.season-road-toolbar{
     bottom:calc(82px + env(safe-area-inset-bottom))!important;
   }
 }
+
+
+/* v0.13.51 — Season viewport gap-removal hotfix.
+   Root cause of the large empty bands: older global chrome rules use several :not()
+   selectors plus !important, giving them greater specificity than the v0.13.50 Season
+   main reset. The fixed Season main was therefore still receiving a SECOND top-chrome
+   padding and a SECOND bottom-nav padding inside its already-inset viewport.
+
+   The :is() selector below intentionally carries ID-level specificity via the dormant
+   #season-fixed-viewport-geometry branch while still matching body[data-screen="seasons"].
+   This cleanly outranks the legacy global !important padding rules without changing any
+   other screen. The fixed main owns the top/bottom insets; its contents use every pixel. */
+:is(#season-fixed-viewport-geometry, body[data-screen="seasons"]) main{
+  padding-top:0!important;
+  padding-right:0!important;
+  padding-bottom:0!important;
+  padding-left:0!important;
+}
+:is(#season-fixed-viewport-geometry, body[data-screen="seasons"]) #game{
+  box-sizing:border-box!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  gap:0!important;
+}
+:is(#season-fixed-viewport-geometry, body[data-screen="seasons"]) .seasons-screen.season-road-redesign{
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  gap:0!important;
+}
+:is(#season-fixed-viewport-geometry, body[data-screen="seasons"]) .season-anchor-shell{
+  margin:0!important;
+  padding:0!important;
+}
+:is(#season-fixed-viewport-geometry, body[data-screen="seasons"]) .season-road-viewport,
+:is(#season-fixed-viewport-geometry, body[data-screen="seasons"]) .season-road-scroll{
+  min-height:0!important;
+  margin:0!important;
+  padding-top:0!important;
+}

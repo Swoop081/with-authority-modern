@@ -1,6 +1,6 @@
 # WWE Legacy: Collectible Card Game
 
-Current working build: **v0.13.50 — Season Fixed Viewport Hotfix**.
+Current working build: **v0.13.51 — Season Viewport Gap Removal Hotfix**.
 
 A mobile-first WWE collectible card game prototype with 60-page Superstar decks, Method Momentum, Adrenaline, Counters, Submissions, Pins, Deck Lab, Collection, boosters, Store, Seasons, Challenges, Live Events, Money in the Bank, King of the Ring and Championship Road.
 
@@ -16,4 +16,4 @@ A mobile-first WWE collectible card game prototype with 60-page Superstar decks,
 
 Season 1 release schedule remains: **RAW — Series 1 (5 Sep 2026)**, **Worlds Collide — Series 1 (26 Sep 2026)**, **Money in the Bank — Series 1 (10 Oct 2026)**, **SmackDown — Series 1 (31 Oct 2026)** and **Survivor Series — Series 1 (28 Nov 2026)**.
 
-See `RELEASE-NOTES-v0.13.50.md` and `BUILD-CERTIFICATION.md`.
+See `RELEASE-NOTES-v0.13.51.md` and `BUILD-CERTIFICATION.md`.

@@ -1,7 +1,7 @@
-import { decks } from "./decks.js?v=0.13.50";
-import { collectionCards } from "./collection.js?v=0.13.50";
-import { superstars } from "./superstars.js?v=0.13.50";
-import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.50";
+import { decks } from "./decks.js?v=0.13.51";
+import { collectionCards } from "./collection.js?v=0.13.51";
+import { superstars } from "./superstars.js?v=0.13.51";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.51";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
