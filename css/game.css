@@ -7426,3 +7426,37 @@ body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero .mode-r
 @media(max-width:600px){
   body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero{min-height:0!important;height:auto!important;padding:12px!important;gap:8px!important}
 }
+
+
+/* v0.13.46 — Home Season Title Consistency Hotfix.
+   The Home Season destination now reuses the exact Deck Lab / destination split-title
+   component instead of approximating its font and scale. Keep Season's white + cyan palette. */
+.legacy-season-event{--command-accent:#55e4ff!important}
+.legacy-home-destinations .legacy-command-title,
+.legacy-season-event .legacy-command-title{
+  display:block!important;
+  color:#f7f8fb!important;
+  font-style:italic!important;
+  font-weight:1000!important;
+  text-transform:uppercase!important;
+  letter-spacing:-.045em!important;
+  transform:none!important;
+}
+.legacy-home-destinations .legacy-command-title span,
+.legacy-season-event .legacy-command-title span{color:#f7f8fb!important}
+.legacy-home-destinations .legacy-command-title b,
+.legacy-season-event .legacy-command-title b{
+  color:var(--command-accent,#55d7ff)!important;
+  font:inherit!important;
+  font-weight:1000!important;
+}
+.legacy-home-destinations .legacy-command-copy>.legacy-command-title,
+.legacy-season-event .legacy-season-copy>.legacy-command-title{
+  font-size:1.48rem!important;
+  line-height:.9!important;
+  margin:5px 0!important;
+}
+@media(max-width:390px){
+  .legacy-home-destinations .legacy-command-copy>.legacy-command-title,
+  .legacy-season-event .legacy-season-copy>.legacy-command-title{font-size:1.35rem!important}
+}

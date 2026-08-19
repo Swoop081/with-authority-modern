@@ -13,7 +13,7 @@ test('v0.12.39 Home uses one Season destination instead of duplicate countdown a
 });
 
 test('v0.12.39 consolidated Season hero shows premium title, next-tier XP and Final Boss destination', () => {
-  assert.match(app, /season-home-title/);
+  assert.match(app, /homeHubSplitTitle\("SEASON", "ONE"\)/);
   assert.doesNotMatch(app, /data-season-countdown/);
   assert.match(app, /XP TO NEXT TIER/);
   assert.match(app, /season-home-progress/);

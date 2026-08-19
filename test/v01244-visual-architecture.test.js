@@ -45,7 +45,7 @@ test('v0.12.44 Home is a layered game stage rather than the old dashboard stack'
 test('v0.12.44 Home live Season event keeps premium Season title, exact next-tier progress and bright green bar', () => {
   const home = functionSlice('renderMainMenu', 'renderPlayMenu');
   assert.match(home, /legacy-season-event/);
-  assert.match(home, /season-home-title/);
+  assert.match(home, /homeHubSplitTitle\("SEASON", "ONE"\)/);
   assert.doesNotMatch(home, /data-season-countdown/);
   assert.match(home, /XP TO NEXT TIER/);
   assert.match(home, /TIER 100 · THE FINAL BOSS/);

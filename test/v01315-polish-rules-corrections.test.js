@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.45";
-import { canPlayAction, counterEligibility } from "../js/engine/rules.js?v=0.13.45";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.46";
+import { canPlayAction, counterEligibility } from "../js/engine/rules.js?v=0.13.46";
 
 const player=id=>({superstar:{id},momentum:{strength:10,strike:10,technical:10,agility:10,attitude:10},adrenaline:10,events:{},turn:{actionPlayed:0},posture:"standing",hand:[],specialUsed:false,controlMoveCount:0});
 
@@ -30,7 +30,7 @@ test("v0.13.15 Season countdown is removed and Championship result CTA is colour
  const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
  const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
  const html=fs.readFileSync(new URL("../index.html",import.meta.url),"utf8");
- assert.doesNotMatch(app,/data-season-countdown/); assert.match(app,/season-home-title/);
+ assert.doesNotMatch(app,/data-season-countdown/); assert.match(app,/homeHubSplitTitle\("SEASON", "ONE"\)/);
  assert.match(html,/gamebar-season-title/); assert.match(css,/championship-result-cta/);
  assert.match(css,/body\[data-screen="championship"\].*mode-run-hero.*feature-art/s);
 });
