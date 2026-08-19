@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.55';
-import { superstars } from '../js/data/superstars.js?v=0.13.55';
-import { decks } from '../js/data/decks.js?v=0.13.55';
-import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.55';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.55';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.55';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.55';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.55';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.61';
+import { superstars } from '../js/data/superstars.js?v=0.13.61';
+import { decks } from '../js/data/decks.js?v=0.13.61';
+import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.61';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.61';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.61';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.61';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.61';
 
 const stars = Object.values(superstars);
 const star = id => stars.find(s => s.id === id);
@@ -15,7 +15,7 @@ const card = id => allGameplayCards.find(c => c.id === id);
 const byName = name => allGameplayCards.find(c => c.name === name);
 
 test('v0.13.3 RAW Series 1 is in internal certification scope but remains completely unreleased player-facing', () => {
-  assert.deepEqual([...PRE_RELEASE_TEST_SET_IDS], ['raw-series-1','worlds-collide-series-1']);
+  assert.deepEqual([...PRE_RELEASE_TEST_SET_IDS], ['raw-series-1','worlds-collide-series-1','new-generation-series-1']);
   assert.equal(isInternalTestSetId('raw-series-1'), true);
   assert.equal(isInternalTestSetId('worlds-collide-series-1'), true);
   assert.equal(isPlayerReleasedSetId('raw-series-1'), false);

@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=0.13.55";
+import { sets } from "./sets.js?v=0.13.61";
 
 // v0.13.7 — one canonical player release calendar. Launch sets are live from
 // install; authored future sets become player-live at local midnight on their
@@ -77,7 +77,8 @@ export function playerReleaseCalendar() {
 // player-released without changing this list.
 export const PRE_RELEASE_TEST_SET_IDS = Object.freeze([
   "raw-series-1",
-  "worlds-collide-series-1"
+  "worlds-collide-series-1",
+  "new-generation-series-1"
 ]);
 
 export function isInternalTestSetId(setId, now = new Date()) {

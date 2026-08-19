@@ -1,4 +1,11 @@
 export const sets = {
+  "new-generation-series-1": {
+    id: "new-generation-series-1", name: "New Generation", series: 1, type: "era-subset",
+    displayName: "New Generation — Series 1", shortCode: "NG1", lifecycleDefault: "future",
+    developmentOnly: true, eraWindow: "1993-1995",
+    plannedSuperstarIds: ["bret-hart", "shawn-michaels", "diesel", "razor-ramon"],
+    lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
+  },
   "season-2-whos-next": {
     id: "season-2-whos-next", name: "Season 2", series: 2, type: "season-exclusive",
     displayName: "Season 2 — Who’s Next?", shortCode: "S2WN", lifecycleDefault: "exclusive",

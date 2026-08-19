@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.55';
-import { collectionCards } from '../js/data/collection.js?v=0.13.55';
-import { decks } from '../js/data/decks.js?v=0.13.55';
-import { superstars } from '../js/data/superstars.js?v=0.13.55';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.55';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.55';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.55';
-import { PRE_RELEASE_TEST_SET_IDS } from '../js/data/release.js?v=0.13.55';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.61';
+import { collectionCards } from '../js/data/collection.js?v=0.13.61';
+import { decks } from '../js/data/decks.js?v=0.13.61';
+import { superstars } from '../js/data/superstars.js?v=0.13.61';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.61';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.61';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.61';
+import { PRE_RELEASE_TEST_SET_IDS } from '../js/data/release.js?v=0.13.61';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -73,7 +73,7 @@ test('v0.13.42 Lola Vice WC1 package and shared Evolution variants are locked',(
   assert.equal(CARD_IDS_BY_SET['evolution-series-1'].length,74);
   assert.equal(collectionCards.some(c=>c.id==='spinning-heel-kick'),true);
   assert.equal(collectionCards.some(c=>c.id==='triangle-choke'),true);
-  assert.deepEqual(PRE_RELEASE_TEST_SET_IDS,['raw-series-1','worlds-collide-series-1']);
+  assert.deepEqual(PRE_RELEASE_TEST_SET_IDS,['raw-series-1','worlds-collide-series-1','new-generation-series-1']);
 });
 
 test('v0.13.42 Lola authored deck is 60 pages and uses named versions rather than generic equivalents',()=>{

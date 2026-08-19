@@ -3330,6 +3330,37 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
   {"id":"superstar-mr-iguana","setId":"worlds-collide-series-1","cardNumber":64,"cardCode":"WC1-064"}
 
 
+  ,
+  {"id":"bret-hart-inverted-atomic-drop","setId":"new-generation-series-1","cardNumber":1,"cardCode":"NG1-001"},
+  {"id":"bret-hart-pendulum-backbreaker","setId":"new-generation-series-1","cardNumber":2,"cardCode":"NG1-002"},
+  {"id":"bret-hart-second-rope-elbow-drop","setId":"new-generation-series-1","cardNumber":3,"cardCode":"NG1-003"},
+  {"id":"bret-hart-sharpshooter","setId":"new-generation-series-1","cardNumber":4,"cardCode":"NG1-004"},
+  {"id":"entrance-bret-hart","setId":"new-generation-series-1","cardNumber":5,"cardCode":"NG1-005"},
+  {"id":"special-bret-hart","setId":"new-generation-series-1","cardNumber":6,"cardCode":"NG1-006"},
+  {"id":"superstar-bret-hart","setId":"new-generation-series-1","cardNumber":7,"cardCode":"NG1-007"},
+  {"id":"shawn-michaels-flying-forearm","setId":"new-generation-series-1","cardNumber":8,"cardCode":"NG1-008"},
+  {"id":"shawn-michaels-teardrop-suplex","setId":"new-generation-series-1","cardNumber":9,"cardCode":"NG1-009"},
+  {"id":"shawn-michaels-top-rope-elbow-drop","setId":"new-generation-series-1","cardNumber":10,"cardCode":"NG1-010"},
+  {"id":"shawn-michaels-sweet-chin-music","setId":"new-generation-series-1","cardNumber":11,"cardCode":"NG1-011"},
+  {"id":"entrance-shawn-michaels","setId":"new-generation-series-1","cardNumber":12,"cardCode":"NG1-012"},
+  {"id":"special-shawn-michaels","setId":"new-generation-series-1","cardNumber":13,"cardCode":"NG1-013"},
+  {"id":"superstar-shawn-michaels","setId":"new-generation-series-1","cardNumber":14,"cardCode":"NG1-014"},
+  {"id":"razor-ramon-fallaway-slam","setId":"new-generation-series-1","cardNumber":15,"cardCode":"NG1-015"},
+  {"id":"razor-ramon-running-powerslam","setId":"new-generation-series-1","cardNumber":16,"cardCode":"NG1-016"},
+  {"id":"razor-ramon-chokeslam","setId":"new-generation-series-1","cardNumber":17,"cardCode":"NG1-017"},
+  {"id":"razor-ramon-razors-edge","setId":"new-generation-series-1","cardNumber":18,"cardCode":"NG1-018"},
+  {"id":"entrance-razor-ramon","setId":"new-generation-series-1","cardNumber":19,"cardCode":"NG1-019"},
+  {"id":"special-razor-ramon","setId":"new-generation-series-1","cardNumber":20,"cardCode":"NG1-020"},
+  {"id":"superstar-razor-ramon","setId":"new-generation-series-1","cardNumber":21,"cardCode":"NG1-021"},
+  {"id":"diesel-snake-eyes","setId":"new-generation-series-1","cardNumber":22,"cardCode":"NG1-022"},
+  {"id":"diesel-big-boot","setId":"new-generation-series-1","cardNumber":23,"cardCode":"NG1-023"},
+  {"id":"diesel-sidewalk-slam","setId":"new-generation-series-1","cardNumber":24,"cardCode":"NG1-024"},
+  {"id":"diesel-jackknife-powerbomb","setId":"new-generation-series-1","cardNumber":25,"cardCode":"NG1-025"},
+  {"id":"entrance-diesel","setId":"new-generation-series-1","cardNumber":26,"cardCode":"NG1-026"},
+  {"id":"special-diesel","setId":"new-generation-series-1","cardNumber":27,"cardCode":"NG1-027"},
+  {"id":"superstar-diesel","setId":"new-generation-series-1","cardNumber":28,"cardCode":"NG1-028"}
+
+
 ]);
 
 export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));

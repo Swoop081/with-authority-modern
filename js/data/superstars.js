@@ -3857,4 +3857,203 @@ export const superstars = {
   }
 
 
+  ,
+  "bretHart": {
+    "id": "bret-hart",
+    "name": "Bret Hart",
+    "nickname": "The Hit Man",
+    "setId": "new-generation-series-1",
+    "era": "1993–1995 New Generation",
+    "developmentOnly": true,
+    "seasonExclusive": false,
+    "cardId": "superstar-bret-hart",
+    "entranceId": "entrance-bret-hart",
+    "specialId": "special-bret-hart",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strength",
+      "russian-leg-sweep",
+      "snap-suplex",
+      "european-uppercut"
+    ],
+    "signatures": [
+      "bret-hart-inverted-atomic-drop",
+      "bret-hart-pendulum-backbreaker",
+      "bret-hart-second-rope-elbow-drop",
+      "bret-hart-sharpshooter"
+    ],
+    "archetype": "technical-three-method-sequencer",
+    "hp": 64,
+    "methodLimits": {
+      "technical": null,
+      "strength": 3,
+      "strike": 3,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "strength": 3,
+      "strike": 3
+    },
+    "ability": {
+      "name": "Excellence of Execution",
+      "text": "The first 3 times each match Bret connects with a Move whose Method differs from the immediately previous Move he connected with, draw 2 pages.",
+      "trigger": {
+        "type": "differentMethod",
+        "maxUses": 3,
+        "draw": 2
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-bret-hart",
+      "name": "The Hit Man",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "bret-hart",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {"technical": 1, "strength": 1},
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "counterTutorNamed",
+      "name": "Sharpshooter",
+      "amount": 2
+    }
+  },
+  "shawnMichaels": {
+    "id": "shawn-michaels",
+    "name": "Shawn Michaels",
+    "nickname": "The Heartbreak Kid",
+    "setId": "new-generation-series-1",
+    "era": "1993–1995 New Generation",
+    "developmentOnly": true,
+    "seasonExclusive": false,
+    "cardId": "superstar-shawn-michaels",
+    "entranceId": "entrance-shawn-michaels",
+    "specialId": "special-shawn-michaels",
+    "leadOffIds": [
+      "momentum-agility",
+      "momentum-strike",
+      "dropkick",
+      "running-forearm",
+      "hurricanrana"
+    ],
+    "signatures": [
+      "shawn-michaels-flying-forearm",
+      "shawn-michaels-teardrop-suplex",
+      "shawn-michaels-top-rope-elbow-drop",
+      "shawn-michaels-sweet-chin-music"
+    ],
+    "archetype": "agility-strike-showstopper",
+    "hp": 61,
+    "methodLimits": {
+      "agility": null,
+      "strike": 4,
+      "technical": 3,
+      "strength": 1
+    },
+    "starterMomentum": {
+      "agility": 6,
+      "strike": 4,
+      "technical": 2
+    },
+    "ability": {
+      "name": "Heartbreak Kid",
+      "text": "The first 3 times each match Shawn connects with an Agility Move after connecting with a Strike Move in the same Control sequence, draw 1 page and gain +1 Adrenaline.",
+      "trigger": {
+        "type": "agilityAfterStrike",
+        "maxUses": 3,
+        "draw": 1,
+        "adrenaline": 1
+      },
+      "maxUses": 3
+    },
+    "entrance": {
+      "id": "entrance-shawn-michaels",
+      "name": "Sexy Boy",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "shawn-michaels",
+      "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {"agility": 1, "strike": 1},
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "hbkShowstopper",
+      "discount": 1
+    }
+  }
+
+
+  ,
+  "razorRamon": {
+    "id": "razor-ramon",
+    "name": "Razor Ramon",
+    "nickname": "The Bad Guy",
+    "setId": "new-generation-series-1",
+    "era": "1993–1995 New Generation",
+    "developmentOnly": true,
+    "seasonExclusive": false,
+    "cardId": "superstar-razor-ramon",
+    "entranceId": "entrance-razor-ramon",
+    "specialId": "special-razor-ramon",
+    "leadOffIds": ["momentum-strength","momentum-strike","fallaway-slam","punch","running-powerslam"],
+    "signatures": ["razor-ramon-fallaway-slam","razor-ramon-running-powerslam","razor-ramon-chokeslam","razor-ramon-razors-edge"],
+    "archetype": "strength-strike-bad-guy",
+    "hp": 64,
+    "methodLimits": {"strength": null,"strike": 4,"technical": 3,"agility": 1},
+    "starterMomentum": {"strength": 6,"strike": 4,"technical": 2},
+    "ability": {
+      "name": "Oozing Machismo",
+      "text": "Once per match, when Razor connects with a Strength Move costing 5 or more, gain +1 Adrenaline.",
+      "trigger": {"type": "connectMethodCost","method": "strength","minCost": 5,"maxUses": 1,"adrenaline": 1},
+      "maxUses": 1
+    },
+    "entrance": {
+      "id": "entrance-razor-ramon","name": "The Bad Guy","kind": "entrance","setId": "new-generation-series-1","rarity": 4,"superstarId": "razor-ramon",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {"strength": 1,"strike": 1},"preMatchAdrenaline": 1,"delayedTurn5": false
+    },
+    "special": {"type": "exclusiveTrademarkTutor","discount": 1}
+  }
+
+
+  ,
+  "diesel": {
+    "id": "diesel",
+    "name": "Diesel",
+    "nickname": "Big Daddy Cool",
+    "setId": "new-generation-series-1",
+    "era": "1993–1995 New Generation",
+    "developmentOnly": true,
+    "seasonExclusive": false,
+    "cardId": "superstar-diesel",
+    "entranceId": "entrance-diesel",
+    "specialId": "special-diesel",
+    "leadOffIds": ["momentum-strength","momentum-strike","big-boot","sidewalk-slam","punch"],
+    "signatures": ["diesel-snake-eyes","diesel-big-boot","diesel-sidewalk-slam","diesel-jackknife-powerbomb"],
+    "archetype": "strength-strike-big-daddy-cool",
+    "hp": 69,
+    "methodLimits": {"strength": null,"strike": 4,"technical": 2,"agility": 1},
+    "starterMomentum": {"strength": 7,"strike": 4,"technical": 1},
+    "ability": {
+      "name": "Big Daddy Cool",
+      "text": "Once per match, after Diesel takes 8+ Damage from a connected Move, gain +1 Adrenaline.",
+      "trigger": {"type": "takeDamage","minDamage": 8,"maxUses": 1,"adrenaline": 1},
+      "maxUses": 1
+    },
+    "entrance": {
+      "id": "entrance-diesel","name": "Diesel Power","kind": "entrance","setId": "new-generation-series-1","rarity": 4,"superstarId": "diesel",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {"strength": 1,"strike": 1},"preMatchAdrenaline": 1,"delayedTurn5": false
+    },
+    "special": {"type": "exclusiveTrademarkTutor","discount": 1}
+  }
+
+
 };

@@ -1,5 +1,5 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.55";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.55";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.61";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.61";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";

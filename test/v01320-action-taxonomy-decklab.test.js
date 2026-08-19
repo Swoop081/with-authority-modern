@@ -1,21 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.55';
-import { DECK_LAB_CATEGORIES, categoryForCard } from '../js/data/deck-builder.js?v=0.13.55';
-import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=0.13.55';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.55';
-import { canPlayAction, canPlayPinEscape } from '../js/engine/rules.js?v=0.13.55';
-import { superstars } from '../js/data/superstars.js?v=0.13.55';
-import { decks } from '../js/data/decks.js?v=0.13.55';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.61';
+import { DECK_LAB_CATEGORIES, categoryForCard } from '../js/data/deck-builder.js?v=0.13.61';
+import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=0.13.61';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.61';
+import { canPlayAction, canPlayPinEscape } from '../js/engine/rules.js?v=0.13.61';
+import { superstars } from '../js/data/superstars.js?v=0.13.61';
+import { decks } from '../js/data/decks.js?v=0.13.61';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 
 test('v0.13.20 retains the merged Action taxonomy as new Superstar Specials are added', () => {
   assert.equal(allGameplayCards.filter(card => card.kind === 'special').length, 0);
-  assert.equal(allGameplayCards.filter(card => card.kind === 'action').length, 77);
+  assert.equal(allGameplayCards.filter(card => card.kind === 'action').length, 81);
   const legacyNamed = allGameplayCards.filter(card => card.id.startsWith('special-'));
-  assert.equal(legacyNamed.length, 59);
+  assert.equal(legacyNamed.length, 63);
   assert.ok(legacyNamed.every(card => card.kind === 'action' && card.special?.type));
   assert.equal(byId.get('shoulder-up')?.kind, 'action');
 });

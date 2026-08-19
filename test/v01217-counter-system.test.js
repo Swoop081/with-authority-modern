@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.55';
-import { decks } from '../js/data/decks.js?v=0.13.55';
-import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.13.55';
-import { canCounter } from '../js/engine/rules.js?v=0.13.55';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.55';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.61';
+import { decks } from '../js/data/decks.js?v=0.13.61';
+import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.13.61';
+import { canCounter } from '../js/engine/rules.js?v=0.13.61';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.61';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -55,7 +55,7 @@ test('v0.12.17 submission counters use both initial state and body-area response
 });
 
 test('v0.12.17 all recommended decks are 60 pages with 12 Momentum and at least seven counter-capable pages',()=>{
-  assert.equal(Object.keys(decks).length,58);
+  assert.equal(Object.keys(decks).length,62);
   for(const [sid,deck] of Object.entries(decks)){
     assert.equal(deck.length,60,sid);
     assert.equal(deck.filter(c=>c.kind==='momentum').length,12,sid);

@@ -1,39 +1,39 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.55";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.13.55";
-import { superstars } from "../data/superstars.js?v=0.13.55";
-import { decks } from "../data/decks.js?v=0.13.55";
-import { sets } from "../data/sets.js?v=0.13.55";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.55";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.55";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.55";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.13.55";
-import { openBooster, openSuperPack, openLadderCompletionPack, openChampionshipPack, grantBooster, grantVictoryBooster, boosterCreditsFor, superPackCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.55";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.55";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.55";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.55";
-import { applyFoilGameplay, foilDamageBonusFor } from "../data/foil.js?v=0.13.55";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.55";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.55";
-import { totalMomentum } from "../engine/utils.js?v=0.13.55";
-import { healthZone } from "../engine/health.js?v=0.13.55";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.55";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.55";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.13.55";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.55";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.55";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.55";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.55";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.55";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.55";
-import { COLLECTION_MILESTONES, FOIL_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.55";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.55";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.55";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.55";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.55";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.55";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.55";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.55";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.55";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.61";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.13.61";
+import { superstars } from "../data/superstars.js?v=0.13.61";
+import { decks } from "../data/decks.js?v=0.13.61";
+import { sets } from "../data/sets.js?v=0.13.61";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.61";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.61";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.61";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.13.61";
+import { openBooster, openSuperPack, openLadderCompletionPack, openChampionshipPack, grantBooster, grantVictoryBooster, boosterCreditsFor, superPackCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.61";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.61";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.61";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.61";
+import { applyFoilGameplay, foilDamageBonusFor } from "../data/foil.js?v=0.13.61";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.61";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.61";
+import { totalMomentum } from "../engine/utils.js?v=0.13.61";
+import { healthZone } from "../engine/health.js?v=0.13.61";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.61";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.61";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.13.61";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.61";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.61";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.61";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.61";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.61";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.61";
+import { COLLECTION_MILESTONES, FOIL_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.61";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.61";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.61";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.61";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.61";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.61";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.61";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.61";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.61";
 
 const HUMAN = "p1";
 const CPU = "p2";
@@ -932,7 +932,7 @@ function renderBoosters() {
     const convertedUp=convertedPulls.reduce((sum,p)=>sum+(p.universePointsValue||0),0);
     packArea=`<section class="pack-summary-screen premium-pack-summary streamlined-pack-summary">
       <div class="pack-complete-hero"><span>PACK COMPLETE</span><h3>${newCount ? `${newCount} NEW CARD${newCount===1?'':'S'}` : 'COLLECTION UPDATED'}${convertedUp ? ` · +${convertedUp} UP` : ''}</h3><p>Your five pulls are below.</p></div>
-      <div class="pack-summary-grid pack-summary-pyramid">${summaryThumbs}</div>
+      <div class="pack-summary-grid pack-summary-pyramid pack-summary-compact-grid">${compactSummaryThumbs}</div>
       <div class="pack-summary-key"><span><b class="new-card-symbol">NEW</b> First time owned</span><span>Tap any card to inspect it.</span></div>
       <div class="pack-summary-actions pack-summary-next-row"><button id="pack-summary-next" class="start-match pack-theme-next">NEXT</button></div>
     </section>`;
@@ -1308,8 +1308,16 @@ function startCurrentLiveEventMatch(towerKey = selectedLiveEventKey ?? activeLiv
   });
 }
 
+const LIVE_EVENT_ACCENT_ROTATION = Object.freeze(["cyan", "magenta", "orange", "purple", "teal", "red", "blue"]);
+function liveEventAccentForTower(tower, now = new Date()) {
+  const lineup = activeLiveEventTowers(now);
+  const index = Math.max(0, lineup.findIndex(item => item.key === tower?.key));
+  return LIVE_EVENT_ACCENT_ROTATION[index % LIVE_EVENT_ACCENT_ROTATION.length];
+}
+
 function renderLiveEventHub() {
   const root = $("#game");
+  document.body.dataset.liveView = "hub";
   const now = new Date();
   const towers = activeLiveEventTowers(now);
   const splitTowerTitle = (title, accent) => {
@@ -1323,7 +1331,7 @@ function renderLiveEventHub() {
     const progress = state?.cleared ? LIVE_EVENT_LENGTH : Math.min(run?.stage ?? 0, LIVE_EVENT_LENGTH);
     const status = state?.cleared ? "COMPLETE" : run?.status === "active" ? `MATCH ${run.stage + 1}/${LIVE_EVENT_LENGTH}` : "AVAILABLE";
     const rewardSet = sets[tower.event.rewardSetId];
-    const accent = tower.event.id === 'powerhouse-collision' ? 'powerhouse' : tower.event.id === 'submission-specialists' ? 'submission' : tower.event.id === 'legends-collide' ? 'legends' : tower.cadence === 'birthday' ? 'birthday' : tower.event.method === 'strength' ? 'powerhouse' : tower.event.method === 'technical' ? 'submission' : 'daily';
+    const accent = liveEventAccentForTower(tower, now);
     return `<article class="live-tower-hub-card compact-live-choice ${accent}" data-open-live-tower="${tower.key}">
       <span class="legacy-mode-beams" aria-hidden="true"></span>
       <div class="live-tower-hub-copy">
@@ -1357,6 +1365,7 @@ function renderLiveEventHub() {
 
 function renderLiveEventTowerDetail(towerKey) {
   const root = $("#game");
+  document.body.dataset.liveView = "detail";
   const now = new Date();
   const entry = liveEventTowerState(profile, towerKey, now);
   if (!entry) { selectedLiveEventKey = null; message = "That Live Event has expired. A new tower is now available."; renderLiveEventHub(); return; }
@@ -1388,12 +1397,13 @@ function renderLiveEventTowerDetail(towerKey) {
     const stateLabel = active ? (index < run.stage ? 'DEFEATED' : index === run.stage ? 'CURRENT' : index === LIVE_EVENT_LENGTH - 1 ? 'REWARD' : 'WAITING') : (index === LIVE_EVENT_LENGTH - 1 ? 'REWARD' : 'WAITING');
     return `<article class="live-tower-route-card ${stateClass}"><div class="live-tower-route-head"><span>${index+1}</span><em>${stateLabel}</em></div><div class="live-tower-route-superstar">${superstarPreviewCardMarkup(id,"live-tower-opponent-card")}</div><div class="live-tower-route-copy"><strong>${star?.name ?? id}</strong><small>${eventStage.label}</small></div></article>`;
   }).join('');
+  const detailAccent = liveEventAccentForTower(tower, now);
   const command = active
     ? `<section class="live-tower-command"><div><span>MATCH ${stageNumber} OF ${LIVE_EVENT_LENGTH}</span><strong>${focusOpponent?.name ?? 'Opponent'}</strong><small>${focusStage.label} · ${focusStage.ruleName}</small><p>${focusStage.ruleText}</p></div><button id="continue-live-event" class="start-match">Fight Match ${stageNumber}</button></section>`
     : cleared
       ? `<section class="live-tower-command complete"><div><span>TOWER COMPLETE</span><strong>${event.name}</strong><small>${chosenStar?.name ?? 'Your Superstar'} cleared all ${LIVE_EVENT_LENGTH} matches.</small><p>${normalVictoryPackTarget} victory boosters earned · ${rewardSet?.displayName ?? 'Reward'} Super Pack awarded for the tower clear.</p></div><button id="back-live-events" class="nav-button">Back to Live Events</button></section>`
       : `<section class="live-tower-player horizontal-selector live-tower-selector-panel"><div class="mode-run-picker-head"><div><span>YOUR SUPERSTAR</span><h3>${chosenStar?.name ?? 'Choose your Superstar'}</h3></div><small>Locked for this tower once started</small></div>${selectionCarouselMarkup(unlocked,chosenId,'live-event-select')}<p class="live-tower-selector-note">Clear all ${LIVE_EVENT_LENGTH} matches before the timer expires.</p><button id="start-live-event" class="start-match select-confirm">START WITH ${(chosenStar?.name ?? 'SUPERSTAR').toUpperCase()}</button></section>`;
-  root.innerHTML = `<section class="live-tower-detail cadence-${tower.cadence} event-${event.id}">
+  root.innerHTML = `<section class="live-tower-detail cadence-${tower.cadence} accent-${detailAccent} event-${event.id} ${active?'is-active-tower':cleared?'is-cleared-tower':'is-setup-tower'}">
     <button id="live-events-back" class="live-tower-back">‹ All Live Events</button>
     <section class="live-tower-detail-hero compact-live-detail-hero">
       <div class="live-tower-detail-copy">${event.logoMode !== 'legacy' ? liveEventBrandMarkup(event) : modeLogoMarkup('live-event',true)}<span class="live-tower-detail-cadence">${tower.cadenceLabel} · ${event.dayLabel ?? 'LIMITED TIME'}</span><h2>${detailTitle}</h2><p>${event.description}</p></div>
@@ -1582,53 +1592,87 @@ function beginChampionshipRoad() {
   const starId = selection.p1;
   if (!hasSuperstar(profile, starId)) { message = "Choose an unlocked Superstar."; renderChampionship(); return; }
   try {
+    selectChampionshipRoadSuperstar(profile, starId);
     startChampionshipRoad(profile, starId, [], Math.random, championshipDifficultyId);
     saveProfile(profile);
     startCurrentChampionshipMatch();
   } catch (error) { message = error.message; renderChampionship(); }
 }
 function startCurrentChampionshipMatch() {
-  const run = championshipRoadState(profile).activeRun, opponentId = currentChampionshipOpponent(profile);
+  const state = championshipRoadState(profile);
+  const starId = state.selectedSuperstarId ?? state.activeRun?.superstarId;
+  const starRoad = starId ? championshipRoadForSuperstar(profile, starId) : null;
+  const run = starRoad?.activeRun, opponentId = currentChampionshipOpponent(profile, starId);
   if (!run || run.status !== "active" || !opponentId) { showChampionship(); return; }
   startMatch(run.superstarId, opponentId, { mode: "championship", modifier: championshipRoadDifficultyModifier(run.difficultyId) });
 }
 function renderChampionship(){
   setChrome();
-  const root = $("#game"), road = championshipRoadState(profile), run = road.activeRun, active = run?.status === 'active';
+  const root = $("#game"), road = championshipRoadState(profile);
   const unlocked = orderedUnlockedSuperstars();
-  const chosenId = active || run?.status === 'cleared' ? run.superstarId : (unlocked.some(s=>s.id===selection.p1) ? selection.p1 : unlocked[0]?.id);
-  if (chosenId) selection.p1 = chosenId;
+  const fallbackId = unlocked.some(s=>s.id===selection.p1) ? selection.p1 : unlocked[0]?.id;
+  const chosenId = unlocked.some(s=>s.id===road.selectedSuperstarId) ? road.selectedSuperstarId : fallbackId;
+  if (chosenId) { selection.p1 = chosenId; selectChampionshipRoadSuperstar(profile, chosenId); }
+  const starRoad = chosenId ? championshipRoadForSuperstar(profile, chosenId) : null;
+  const run = starRoad?.activeRun, active = run?.status === 'active';
   const chosenStar = superstarById[chosenId];
-  if (!CHAMPIONSHIP_DIFFICULTIES[championshipDifficultyId] || !championshipDifficultyUnlocked(profile, championshipDifficultyId)) championshipDifficultyId = road.selectedDifficulty && championshipDifficultyUnlocked(profile, road.selectedDifficulty) ? road.selectedDifficulty : 'easy';
+  if (!CHAMPIONSHIP_DIFFICULTIES[championshipDifficultyId] || !championshipDifficultyUnlocked(profile, championshipDifficultyId, chosenId)) championshipDifficultyId = starRoad?.selectedDifficulty && championshipDifficultyUnlocked(profile, starRoad.selectedDifficulty, chosenId) ? starRoad.selectedDifficulty : 'easy';
   const runDifficulty = run?.difficultyId ?? championshipDifficultyId;
   const difficulty = CHAMPIONSHIP_DIFFICULTIES[runDifficulty] ?? CHAMPIONSHIP_DIFFICULTIES.easy;
-  const difficultyTabs = CHAMPIONSHIP_DIFFICULTY_ORDER.map((id,index)=>{
-    const info=CHAMPIONSHIP_DIFFICULTIES[id], unlockedDifficulty=championshipDifficultyUnlocked(profile,id), selected=id===runDifficulty;
+  const difficultyTabs = CHAMPIONSHIP_DIFFICULTY_ORDER.map((id)=>{
+    const info=CHAMPIONSHIP_DIFFICULTIES[id], unlockedDifficulty=championshipDifficultyUnlocked(profile,id,chosenId), selected=id===runDifficulty;
     return `<button type="button" class="champ-difficulty ${selected?'active':''} ${unlockedDifficulty?'':'locked'}" data-champ-difficulty="${id}" ${active||!unlockedDifficulty?'disabled':''}><span>${info.label}</span><small>${info.hpModifier===0?'NORMAL HP':`${info.hpModifier>0?'+':''}${info.hpModifier} CPU HP`}</small>${!unlockedDifficulty?'<i>LOCKED</i>':''}</button>`;
   }).join('');
-  const stage = active ? run.stage : (run?.status==='cleared' ? CHAMPIONSHIP_ROAD_LENGTH : Math.min(road.bestStageByDifficulty?.[runDifficulty]??0,CHAMPIONSHIP_ROAD_LENGTH));
+  const stage = active ? run.stage : (run?.status==='cleared' ? CHAMPIONSHIP_ROAD_LENGTH : Math.min(starRoad?.bestStageByDifficulty?.[runDifficulty]??starRoad?.bestStage??0,CHAMPIONSHIP_ROAD_LENGTH));
+
+  /* v0.13.58 progress-aware replacement for selectionCarouselMarkup(unlocked,chosenId,'champ-select') */
+  const roadSwitcher = unlocked.map(star=>{
+    const career=championshipRoadForSuperstar(profile,star.id);
+    const activeRun=career.activeRun;
+    const progress=activeRun?.status==='cleared' ? CHAMPIONSHIP_ROAD_LENGTH : Math.min(activeRun?.stage ?? career.bestStage ?? 0,CHAMPIONSHIP_ROAD_LENGTH);
+    const status=activeRun?.status==='active' ? `MATCH ${Math.min(activeRun.stage+1,CHAMPIONSHIP_ROAD_LENGTH)}` : activeRun?.status==='cleared' ? 'CLEARED' : progress>0 ? 'IN PROGRESS' : 'NEW ROAD';
+    return `<button type="button" class="champ-superstar-road ${star.id===chosenId?'active':''}" data-champ-superstar="${star.id}"><strong>${star.name}</strong><span>${progress}/${CHAMPIONSHIP_ROAD_LENGTH}</span><small>${status}</small></button>`;
+  }).join('');
+
   const roadNodes = CHAMPIONSHIP_ROAD_OPPONENTS.map((id,index)=>{
     const star=superstarById[id], nodeNumber=index+1, section=championshipRoadSectionForStage(index);
     const stateClass=index<stage?'cleared':active&&index===run.stage?'current':'locked';
     const sectionStart=CHAMPIONSHIP_ROAD_SECTIONS.find(s=>s.start===nodeNumber);
     return `${sectionStart ? `<div class="champ-road-theme theme-${sectionStart.accent}"><span>${sectionStart.label}</span>${setLogoMarkup(sectionStart.setId,'champ-road-set-logo')}<small>MATCHES ${sectionStart.start}–${sectionStart.end}</small></div>` : ''}<article class="champ-road-node ${stateClass} theme-${section.accent}" data-champ-node="${nodeNumber}"><span class="champ-road-line" aria-hidden="true"></span><button type="button" ${active&&index===run.stage?'id="continue-championship"':''} ${active&&index===run.stage?'':'disabled'}><b>${nodeNumber}</b><span class="champ-road-star">${superstarPreviewCardMarkup(id,"champ-road-superstar-card")}</span><span class="champ-road-copy"><small>${stateClass==='cleared'?'DEFEATED':stateClass==='current'?'NEXT MATCH':'LOCKED'}</small><strong>${star?.name??id}</strong><em>${section.label}</em></span><i class="champ-road-result-star">${stateClass==='cleared'?'✓':'★'}</i></button></article>`;
   }).join('');
-  const nextOpponent = active ? superstarById[currentChampionshipOpponent(profile)] : null;
-  const status = run?.status==='cleared' ? `${difficulty.label} Championship Road complete.` : active ? `Match ${run.stage+1} of ${CHAMPIONSHIP_ROAD_LENGTH} · ${nextOpponent?.name ?? ''}` : `Begin the 24-match road on ${difficulty.label}.`;
-  const command = active ? `<section class="champ-road-command"><div><span>MATCH ${run.stage+1} / ${CHAMPIONSHIP_ROAD_LENGTH}</span><strong>${nextOpponent?.name??'Opponent'}</strong><small>${difficulty.label.toUpperCase()} · ${difficulty.description}</small></div><button id="championship-fight-current" class="start-match">FIGHT MATCH ${run.stage+1}</button></section>` : run?.status==='cleared' ? `<section class="champ-road-command complete"><div><span>ROAD COMPLETE</span><strong>${difficulty.label} conquered</strong><small>${road.unlockedDifficulties.includes(CHAMPIONSHIP_DIFFICULTY_ORDER[CHAMPIONSHIP_DIFFICULTY_ORDER.indexOf(runDifficulty)+1]) ? `${CHAMPIONSHIP_DIFFICULTIES[CHAMPIONSHIP_DIFFICULTY_ORDER[CHAMPIONSHIP_DIFFICULTY_ORDER.indexOf(runDifficulty)+1]]?.label ?? 'Next difficulty'} is now unlocked.` : 'Championship Road complete.'}</small></div><button id="new-championship" class="start-match">START ANOTHER ROAD</button></section>` : `<section class="champ-road-player"><div><span>YOUR SUPERSTAR</span><strong>${chosenStar?.name??'Choose your Superstar'}</strong><small>Choose your wrestler, then begin at Match 1.</small></div>${selectionCarouselMarkup(unlocked,chosenId,'champ-select')}<button id="start-championship" class="start-match">START ${difficulty.label.toUpperCase()} ROAD</button></section>`;
+  const nextOpponent = active ? superstarById[currentChampionshipOpponent(profile, chosenId)] : null;
+  const status = run?.status==='cleared' ? `${difficulty.label} Championship Road complete for ${chosenStar?.name ?? 'this Superstar'}.` : active ? `${chosenStar?.name ?? 'Superstar'} · Match ${run.stage+1} of ${CHAMPIONSHIP_ROAD_LENGTH} · ${nextOpponent?.name ?? ''}` : `${chosenStar?.name ?? 'Choose a Superstar'} · Begin or resume a separate 24-match road on ${difficulty.label}.`;
+  const command = active ? `<section class="champ-road-command"><div><span>${chosenStar?.name?.toUpperCase() ?? 'YOUR ROAD'} · MATCH ${run.stage+1} / ${CHAMPIONSHIP_ROAD_LENGTH}</span><strong>${nextOpponent?.name??'Opponent'}</strong><small>${difficulty.label.toUpperCase()} · ${difficulty.description}</small></div><button id="championship-fight-current" class="start-match">FIGHT MATCH ${run.stage+1}</button></section>` : run?.status==='cleared' ? `<section class="champ-road-command complete"><div><span>${chosenStar?.name?.toUpperCase() ?? 'ROAD'} COMPLETE</span><strong>${difficulty.label} conquered</strong><small>${starRoad?.unlockedDifficulties?.includes(CHAMPIONSHIP_DIFFICULTY_ORDER[CHAMPIONSHIP_DIFFICULTY_ORDER.indexOf(runDifficulty)+1]) ? `${CHAMPIONSHIP_DIFFICULTIES[CHAMPIONSHIP_DIFFICULTY_ORDER[CHAMPIONSHIP_DIFFICULTY_ORDER.indexOf(runDifficulty)+1]]?.label ?? 'Next difficulty'} is now unlocked for ${chosenStar?.name}.` : 'Championship Road complete.'}</small></div><button id="new-championship" class="start-match">START ANOTHER ROAD</button></section>` : `<section class="champ-road-player"><div><span>YOUR SUPERSTAR</span><strong>${chosenStar?.name??'Choose your Superstar'}</strong><small>This Superstar keeps their own 24-match progress and difficulty unlocks.</small></div><button id="start-championship" class="start-match">START ${difficulty.label.toUpperCase()} ROAD</button></section>`;
   root.innerHTML=`<section class="championship-map-screen premium-screen">
-    <header class="champ-road-header"><div>${modeLogoMarkup('championship',true)}<p>24 matches · four difficulties · one long road to the title.</p></div><div class="champ-road-progress"><b>${Math.min(stage,CHAMPIONSHIP_ROAD_LENGTH)}/${CHAMPIONSHIP_ROAD_LENGTH}</b><span>${difficulty.label}</span></div></header>
+    <header class="champ-road-header"><div>${modeLogoMarkup('championship',true)}<p>24 matches · four difficulties · a separate persistent road for every unlocked Superstar.</p></div><div class="champ-road-progress"><b>${Math.min(stage,CHAMPIONSHIP_ROAD_LENGTH)}/${CHAMPIONSHIP_ROAD_LENGTH}</b><span>${difficulty.label}</span></div></header>
+    <section class="champ-superstar-roads"><div class="champ-superstar-roads-head"><span>YOUR CHAMPIONSHIP ROADS</span><small>Switch Superstar · progress is saved separately</small></div><div class="champ-superstar-road-strip">${roadSwitcher}</div></section>
     <nav class="champ-difficulty-rail" aria-label="Championship Road difficulty">${difficultyTabs}</nav>
     ${message?`<div class="mode-run-status has-message"><span>${message}</span></div>`:`<div class="mode-run-status"><span>${status}</span></div>`}
     ${command}
     <section class="champ-road-map theme-${championshipRoadSectionForStage(Math.min(stage,CHAMPIONSHIP_ROAD_LENGTH-1)).accent}" aria-label="Championship Road map"><div class="champ-road-glow" aria-hidden="true"></div>${roadNodes}</section>
   </section>`;
-  root.querySelectorAll('[data-champ-difficulty]').forEach(btn=>btn.addEventListener('click',()=>{championshipDifficultyId=btn.dataset.champDifficulty;road.selectedDifficulty=championshipDifficultyId;saveProfile(profile);message='';renderChampionship();}));
-  wireSelectionCarousel('champ-select', id=>{selection.p1=id;renderChampionship();});
+  root.querySelectorAll('[data-champ-superstar]').forEach(btn=>btn.addEventListener('click',()=>{
+    const id=btn.dataset.champSuperstar;
+    selectChampionshipRoadSuperstar(profile,id);
+    selection.p1=id;
+    const career=championshipRoadForSuperstar(profile,id);
+    championshipDifficultyId=career.activeRun?.difficultyId ?? career.selectedDifficulty ?? 'easy';
+    saveProfile(profile); message=''; renderChampionship();
+  }));
+  root.querySelectorAll('[data-champ-difficulty]').forEach(btn=>btn.addEventListener('click',()=>{
+    championshipDifficultyId=btn.dataset.champDifficulty;
+    if (starRoad) starRoad.selectedDifficulty=championshipDifficultyId;
+    saveProfile(profile);message='';renderChampionship();
+  }));
   $("#start-championship")?.addEventListener("click",beginChampionshipRoad);
   $("#championship-fight-current")?.addEventListener("click",startCurrentChampionshipMatch);
   $("#continue-championship")?.addEventListener("click",startCurrentChampionshipMatch);
-  $("#new-championship")?.addEventListener("click",()=>{resetChampionshipRoad(profile);const idx=CHAMPIONSHIP_DIFFICULTY_ORDER.indexOf(runDifficulty);const next=CHAMPIONSHIP_DIFFICULTY_ORDER[idx+1];if(next&&championshipDifficultyUnlocked(profile,next))championshipDifficultyId=next;saveProfile(profile);renderChampionship();});
+  $("#new-championship")?.addEventListener("click",()=>{
+    resetChampionshipRoad(profile, chosenId);
+    const idx=CHAMPIONSHIP_DIFFICULTY_ORDER.indexOf(runDifficulty), next=CHAMPIONSHIP_DIFFICULTY_ORDER[idx+1];
+    if(next&&championshipDifficultyUnlocked(profile,next,chosenId))championshipDifficultyId=next;
+    saveProfile(profile);renderChampionship();
+  });
   if (active && run.stage > 1) requestAnimationFrame(()=>document.querySelector(`[data-champ-node="${run.stage+1}"]`)?.scrollIntoView({block:'center',behavior:'instant'}));
 }
 function legacyLogoMarkup(compact = false, showVersion = false) {
@@ -2673,6 +2717,12 @@ function renderDeckBuilder() {
     if (!setSelectedEntrance(profile, deckBuilderStarId, deckLabEntranceId)) { message = "Selected Entrance is not legal or owned."; renderDeckBuilder(); return; }
     saveProfile(profile);
     message = `${star.name}'s deck and Entrance saved.`;
+    deckLabStage = "roster";
+    deckLabPicker = null;
+    deckDraft = null;
+    deckLabEntranceId = null;
+    deckLabInspectCardId = null;
+    deckLabInspectFlipped = false;
     renderDeckBuilder();
   });
 }

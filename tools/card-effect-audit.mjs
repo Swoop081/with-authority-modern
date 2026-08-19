@@ -23,11 +23,11 @@ const handledUtilityEffects = new Set([
 ]);
 const handledSpecialTypes = new Set([
   "brassKnuckles", "cancelOpponentUtility", "counterChooseDiscount", "counterDiscountMethod", "counterDiscountNamed",
-  "counterDrainActionLock", "counterDrawControl", "counterKeepSequence", "counterTutorStrike", "counterUncounterableMethod",
+  "counterDrainActionLock", "counterDrawControl", "counterKeepSequence", "counterTutorNamed", "counterTutorStrike", "counterUncounterableMethod",
   "flairChopWooo", "headbuttDiscount", "hulkUp", "ignoreStun", "kickoutControlAdrenaline", "lowHpTutor",
   "moveCounteredDrawDrain", "nextStrengthUncounterable", "noWipeout", "nobodySlams", "paulHeyman", "pinEscape",
   "austinTheoryAllDay", "angeloDawkinsRunIn", "luchaLibreLegend", "hammerInBoot", "fearlessAssault", "steelPlate", "lolaFistsDontLie",
-  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca"
+  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca", "hbkShowstopper", "exclusiveTrademarkTutor"
 ]);
 const handledAbilityTypes = new Set([
   "agilityAfterStrike", "agilityAfterTechnical", "agilityRequirement", "codyUndeniable", "connectDamage",

@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.13.55";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.55";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.55";
+import { assetUrl } from "../config/build.js?v=0.13.61";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.61";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.61";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
@@ -71,6 +71,8 @@ const rawSuperstarArtwork = {
   "danhausen": TEMP_GENERIC_ART,
   "tiffany-stratton": TEMP_GENERIC_ART,
   "chelsea-green": TEMP_GENERIC_ART,
+  "bret-hart": TEMP_GENERIC_ART,
+  "shawn-michaels": TEMP_GENERIC_ART,
   ...superstarArtOverrides
 };
 
