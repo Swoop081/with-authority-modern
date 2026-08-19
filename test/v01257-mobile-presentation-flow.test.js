@@ -55,7 +55,7 @@ test("v0.12.57 Store separates pack, copy, CTA, and Superstar card areas on mobi
 
 test("v0.12.57 finished card fronts do not duplicate printed Cost and Damage", () => {
   const cards = between(app, "function collectibleCardMarkup", "function collectionText");
-  assert.match(cards, /: finishedFront\s*\n\s*\? `<span class="ccg-card-art \${moveFront \? "ccg-move-full-art" : ""}">\${cardArtFace\(card\)}<\/span>`/);
+  assert.match(cards, /: finishedFront\s*\n\s*\? `<span class="ccg-card-art \${moveFront \? "ccg-move-full-art" : ""}">\${cardArtFace\(card,\{eager:eagerArt\}\)}<\/span>`/);
   assert.doesNotMatch(cards, /finishedFront\s*\n\s*\? `<span[^`]*ccg-card-stats/);
   assert.match(css, /\.ccg-card\.is-full-art-finished \.ccg-card-stats[\s\S]*display:none!important/);
 });

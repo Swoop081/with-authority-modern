@@ -3135,6 +3135,13 @@ body[data-screen="match"] .hand-card-action button.primary:not(:disabled){text-s
 .prematch-screen .presentation-set-logo,.entrance-intro .presentation-set-logo,.prematch-screen .set-logo,.entrance-intro .set-logo{width:min(58vw,430px)!important;max-height:150px!important;margin-inline:auto!important}
 /* Remove shading overlays from collectible card faces; preserve printed text. */
 .ccg-card-front:before,.ccg-card-front:after,.ccg-card-art:before,.ccg-card-art:after{pointer-events:none}
+
+/* v0.13.47 — Safari card-art load guard.
+   Candidate card fronts can deliberately probe a layered/custom path before
+   falling back. Keep WebKit's broken-image question-mark glyph invisible
+   until a candidate has actually loaded, then reveal the real art. */
+.ccg-card-art img.ccg-load-guard{opacity:0!important}
+.ccg-card-art img.ccg-load-guard.is-art-ready{opacity:1!important;transition:opacity .08s linear}
 .ccg-card.is-full-art-finished .ccg-card-front:after,.ccg-card.is-full-art-superstar .ccg-card-front:after{display:none!important}
 /* Set-themed rule backs rather than generic black. */
 .ccg-card-rules{background:linear-gradient(155deg,#18151f,#0c0d12)!important}
@@ -3633,7 +3640,7 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
 .legacy-season-event:before{content:"";position:absolute;z-index:1;left:0;top:0;bottom:0;width:5px;background:#3cff91;box-shadow:0 0 17px #39ff8d}.legacy-season-event:after{content:"";position:absolute;z-index:2;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#3cff91,#54e9ff 58%,#db2f43)}
 .legacy-season-rock{position:absolute;z-index:0;right:-3%;top:-34%;width:31%;height:165%;opacity:.48}.legacy-season-rock img,.legacy-season-rock .portrait-placeholder{width:100%;height:100%;object-fit:contain;filter:saturate(.9) contrast(1.08);mask-image:linear-gradient(90deg,transparent,#000 35%)}
 .legacy-season-card{position:absolute;z-index:3;right:21%;top:12%;width:10%;aspect-ratio:.68;transform:rotate(4deg);filter:drop-shadow(0 10px 12px rgba(0,0,0,.58));opacity:.94}.legacy-season-card .season-target-card{width:100%!important;height:100%!important;border-radius:5px!important;display:block!important;overflow:hidden!important}
-.legacy-season-copy{position:relative;z-index:4;display:grid;align-content:center;gap:5px;width:73%;min-height:128px;padding:12px 15px 13px 18px}.legacy-season-copy>em{font-style:normal;font-size:.54rem;font-weight:1000;letter-spacing:.17em;color:#72ffab}.legacy-season-copy>em i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3cff91;box-shadow:0 0 9px #3cff91}.legacy-season-copy>strong{font:1000 clamp(1.5rem,5vw,2.3rem)/.92 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.025em;text-shadow:0 0 8px rgba(71,222,255,.45)}.legacy-season-copy>span:not(.legacy-season-progress){display:flex;gap:9px;align-items:baseline}.legacy-season-copy>span b{font-size:.62rem;letter-spacing:.04em}.legacy-season-copy>span small{font-size:.48rem;color:#6cffaa;font-weight:950;letter-spacing:.08em}.legacy-season-progress{display:block;width:100%;height:11px;padding:2px;background:#010603;border:1px solid rgba(79,255,155,.28);transform:skew(-10deg);overflow:hidden}.legacy-season-progress i{display:block;height:100%;background:linear-gradient(90deg,#23e678,#4dff9c,#c5ffd7);box-shadow:0 0 10px #3cff91}.legacy-season-foot{font-size:.43rem;letter-spacing:.09em;color:#97a8ad;font-weight:950}.legacy-season-event .attention-badge{top:8px;right:8px}
+.legacy-season-copy{position:relative;z-index:4;display:grid;align-content:center;gap:5px;width:73%;min-height:128px;padding:12px 15px 13px 18px}.legacy-season-copy>em{font-style:normal;font-size:.54rem;font-weight:1000;letter-spacing:.17em;color:#72ffab}.legacy-season-copy>em i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#3cff91;box-shadow:0 0 9px #3cff91}.legacy-season-copy>span:not(.legacy-season-progress){display:flex;gap:9px;align-items:baseline}.legacy-season-copy>span b{font-size:.62rem;letter-spacing:.04em}.legacy-season-copy>span small{font-size:.48rem;color:#6cffaa;font-weight:950;letter-spacing:.08em}.legacy-season-progress{display:block;width:100%;height:11px;padding:2px;background:#010603;border:1px solid rgba(79,255,155,.28);transform:skew(-10deg);overflow:hidden}.legacy-season-progress i{display:block;height:100%;background:linear-gradient(90deg,#23e678,#4dff9c,#c5ffd7);box-shadow:0 0 10px #3cff91}.legacy-season-foot{font-size:.43rem;letter-spacing:.09em;color:#97a8ad;font-weight:950}.legacy-season-event .attention-badge{top:8px;right:8px}
 
 .legacy-command-rack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.legacy-command-tile{position:relative;isolation:isolate;overflow:hidden;min-height:128px;border:1px solid rgba(126,160,194,.23);border-radius:5px;padding:0;color:white;text-align:left;background:linear-gradient(145deg,#111721,#05070b 78%);box-shadow:0 14px 30px rgba(0,0,0,.32)}.legacy-command-tile:before{content:"";position:absolute;z-index:2;left:0;right:0;top:0;height:4px;background:var(--command-accent,#5acfff)}.legacy-command-tile:after{content:"";position:absolute;z-index:2;inset:4px;border-left:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.05);pointer-events:none}.legacy-command-card{position:absolute;z-index:1;right:-1%;bottom:-22%;width:36%;aspect-ratio:.68;transform:rotate(3deg);filter:drop-shadow(0 13px 14px rgba(0,0,0,.65));pointer-events:none}.legacy-command-card .home-tile-card{width:100%!important;height:100%!important;border-radius:7px!important;display:block!important;overflow:hidden!important}.legacy-command-glow{position:absolute;z-index:0;inset:0;background:radial-gradient(circle at 82% 35%,color-mix(in srgb,var(--command-accent,#5acfff) 23%,transparent),transparent 38%)}.legacy-command-copy{position:relative;z-index:4;display:grid;align-content:center;width:72%;min-height:128px;padding:14px 8px 13px 14px}.legacy-command-copy em{font-style:normal;font-size:.46rem;letter-spacing:.14em;font-weight:1000;color:var(--command-accent,#5acfff)}.legacy-command-copy strong{font-size:clamp(1.18rem,3.2vw,1.65rem);line-height:.88;letter-spacing:-.025em;margin:5px 0}.legacy-command-copy small{font-size:.55rem;color:#9aa6b5;line-height:1.2}.legacy-command-copy>b{margin-top:10px;font-size:.48rem;letter-spacing:.10em;color:#fff}.legacy-command-copy>b i{font-style:normal;font-size:.9rem;color:var(--command-accent,#5acfff)}.legacy-command-tile:active{transform:translateY(1px)}.command-collection{--command-accent:#59d5ff}.command-packs{--command-accent:#ff9e52}.command-decks{--command-accent:#958aff}.command-challenges{--command-accent:#59e38b}.legacy-command-tile .attention-badge{top:8px;left:8px}
 
@@ -7460,3 +7467,32 @@ body[data-screen="king-of-the-ring"] .kotr-screen .kotr-no-portrait-hero .mode-r
   .legacy-home-destinations .legacy-command-copy>.legacy-command-title,
   .legacy-season-event .legacy-season-copy>.legacy-command-title{font-size:1.35rem!important}
 }
+
+
+/* v0.13.48 — Home Season Title True Parity Hotfix.
+   One shared title contract for Season and every Home destination. The obsolete
+   .legacy-season-copy > strong monospace rule has been removed from the cascade, so
+   SEASON ONE is now literally the same shared <strong class="legacy-command-title">
+   component and typography as DECK LAB. Only --command-accent changes word two. */
+.legacy-command-title{
+  display:block!important;
+  margin:5px 0!important;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-size:1.48rem!important;
+  line-height:.9!important;
+  letter-spacing:-.045em!important;
+  font-style:italic!important;
+  font-weight:1000!important;
+  text-transform:uppercase!important;
+  text-shadow:none!important;
+  transform:none!important;
+  color:#f7f8fb!important;
+}
+.legacy-command-title>span{color:#f7f8fb!important}
+.legacy-command-title>b{
+  color:var(--command-accent,#55d7ff)!important;
+  font:inherit!important;
+  font-weight:1000!important;
+}
+.legacy-season-event{--command-accent:#55e4ff!important}
+@media(max-width:390px){.legacy-command-title{font-size:1.35rem!important}}
