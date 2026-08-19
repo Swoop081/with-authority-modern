@@ -45,7 +45,7 @@ test('v0.13.27 keeps the full approved iPhone table integrated', () => {
 
   // Compact content-first destinations remain wired.
   for (const marker of [
-    'booster-compact-screen', 'store-superstar-grid', 'collection-quickbar',
+    'booster-compact-screen', 'store-superstar-product-list', 'collection-quickbar',
     'catalogue-quickbar', 'profile-command-band-top', 'exhibition-selector-panel',
     'challenge-overview-strip'
   ]) assert.match(app, new RegExp(marker));

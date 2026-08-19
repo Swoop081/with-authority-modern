@@ -16,7 +16,7 @@ function between(source, start, end) {
 }
 
 test('v0.12.72 renames Electric Chair Facebuster to Electric Chair Drop without changing identity', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.51');
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.55');
   const card = allGameplayCards.find(c => c.id === 'rhea-ripley-electric-chair-facebuster');
   assert.ok(card);
   assert.equal(card.name, 'Electric Chair Drop');
@@ -26,7 +26,7 @@ test('v0.12.72 renames Electric Chair Facebuster to Electric Chair Drop without 
 test('v0.12.72 Daily Login Booster is one full-width purple state control', () => {
   const season = between(app, 'function renderSeasons()', 'function renderChallenges()');
   assert.match(season, /CLAIM FREE BOOSTER/);
-  assert.match(season, /NEXT FREE BOOSTER IN \$\{formatCountdown\(free\.msRemaining\)\}/);
+  assert.match(season, /NEXT FREE BOOSTER IN \$\{formatDailyHoursMinutes\(free\.msRemaining\)\}/);
   assert.doesNotMatch(season, /season-free-pack-copy|data-free-pack-copy/);
   assert.match(css, /\.season-free-pack-cta\{[\s\S]*width:100%!important/);
   assert.match(css, /\.season-free-pack-button\{[\s\S]*display:flex!important/);
@@ -36,9 +36,9 @@ test('v0.12.72 Daily Login Booster is one full-width purple state control', () =
 
 test('v0.13.24 Money in the Bank uses Level wording everywhere player-facing', () => {
   const ladder = between(app, 'function renderLadder()', 'function renderChampionship()');
-  assert.match(ladder, /Level \$\{run\.rung\+1\} of/);
+  assert.match(ladder, /LEVEL \${run\.rung \+ 1} OF \${LADDER_LENGTH}/);
   assert.match(ladder, /NEXT LEVEL/);
-  assert.match(ladder, /Fight Level/);
+  assert.match(ladder, /FIGHT LEVEL/);
   assert.doesNotMatch(ladder, />NEXT RUNG|Fight Rung|`Rung /);
   assert.match(challenges, /Clear a Money in the Bank level/);
   assert.doesNotMatch(challenges, /Clear a Money in the Bank rung/);

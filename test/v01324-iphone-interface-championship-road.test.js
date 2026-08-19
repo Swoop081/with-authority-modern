@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.51';
+import { createProfile } from '../js/data/profile.js?v=0.13.55';
 import {
   CHAMPIONSHIP_ROAD_LENGTH,
   CHAMPIONSHIP_ROAD_OPPONENTS,
@@ -12,7 +12,7 @@ import {
   championshipRoadState,
   startChampionshipRoad,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.13.51';
+} from '../js/data/championship-road.js?v=0.13.55';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -115,12 +115,14 @@ test('v0.13.24 Season Road is a visual 100-tier track, countdown and current-tie
   assert.match(css, /\.season-road-node\.major/);
 });
 
-test('v0.13.24 Store and core library screens use the compact iPhone presentation contracts', () => {
-  assert.match(app, /store-superstar-grid/);
+test('v0.13.54 Store and core library screens use the consolidated iPhone presentation contracts', () => {
+  assert.match(app, /store-superstar-product-list/);
+  assert.match(app, /store-superstar-offer/);
   assert.match(app, /FEATURED BOOSTER/);
   assert.match(app, /FEATURED SUPERSTARS/);
-  assert.match(css, /\.store-superstar-grid\{display:grid/);
-  assert.match(css, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.doesNotMatch(app, /store-set-banner/);
+  assert.match(css, /\.store-superstar-product-list\{[\s\S]*grid-template-columns:1fr!important/);
+  assert.match(css, /\.store-superstar-product-list \.store-booster-offer\.store-superstar-offer/);
   assert.match(css, /\.store-offer-price>b/);
   assert.match(css, /#ffd968|#f4c84b|#e5b944/i);
   assert.match(app, /booster-compact-screen/);

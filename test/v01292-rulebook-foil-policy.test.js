@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from '../js/data/game-rules.js?v=0.13.51';
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from '../js/data/game-rules.js?v=0.13.55';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -24,10 +24,11 @@ test('v0.12.92 Rulebook covers the core live systems and exact pin table',()=>{
   assert.deepEqual(LIVE_EVENT_WEEK.filter(([day]) => ['Monday','Wednesday','Saturday'].includes(day)), [['Monday','RAW'],['Wednesday','NXT'],['Saturday','SmackDown']]);
 });
 
-test('v0.12.92 Foils are cosmetic-only in runtime materialization and rulebook language',()=>{
-  assert.doesNotMatch(assistant, /damage:\s*Math\.max\([^\n]+\+\s*1/);
+test('v0.13.55 Rulebook exposes the restored Foil +1 Damage chase rule',()=>{
+  assert.match(assistant, /applyFoilGameplay/);
   const collection = GAME_RULE_SECTIONS.find(section => section.id === 'collection-rarity');
   const text = collection.items.flat().join(' ');
-  assert.match(text, /identical Cost, Damage, requirements, effects and match strength/);
-  assert.match(text, /never grants hidden Damage/);
+  assert.match(text, /Foil Move with positive Damage gets \+1 Damage/);
+  assert.match(text, /up to 5 Normal plus 5 Foil/);
+  assert.match(text, /not a hidden modifier/);
 });

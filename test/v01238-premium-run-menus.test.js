@@ -5,12 +5,12 @@ import fs from 'node:fs';
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
 
-test('v0.12.38 Climb the Ladder uses compact command and 4x2 progress presentation', () => {
-  assert.match(app, /premium-run-screen/);
-  assert.match(app, /mode-run-command ladder-run-command/);
-  assert.match(app, /ladder-progress-grid/);
-  assert.match(css, /\.premium-run-screen \.ladder-progress-grid\{grid-template-columns:repeat\(4,minmax\(0,1fr\)\)!important\}/);
-  assert.match(css, /\.premium-run-screen \.select-superstar-card\{[\s\S]*height:184px!important/);
+test('v0.13.53 Money in the Bank supersedes the legacy compact ladder grid with a fresh mobile road', () => {
+  const ladder=app.slice(app.indexOf('function renderLadder()'),app.indexOf('function beginKingOfTheRing()'));
+  assert.match(ladder, /mitb-v2-command/);
+  assert.match(ladder, /mitb-v2-opponent-rail/);
+  assert.doesNotMatch(ladder, /mode-run-command ladder-run-command|ladder-progress-grid/);
+  assert.match(css, /\.mitb-v2-opponent-rail\{[\s\S]*grid-auto-columns:126px/);
 });
 
 test('v0.13.24 Championship Road supersedes the old 4-stage rail with the 24-match difficulty map', () => {

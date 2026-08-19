@@ -7,7 +7,7 @@ const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8')
 
 test('v0.13.9 daily booster CTA is one full-width single-line control',()=>{
   assert.match(app, /CLAIM FREE BOOSTER/);
-  assert.match(app, /NEXT FREE BOOSTER IN \$\{formatCountdown\(free\.msRemaining\)\}/);
+  assert.match(app, /NEXT FREE BOOSTER IN \$\{formatDailyHoursMinutes\(free\.msRemaining\)\}/);
   assert.match(css, /\.season-free-pack-cta\.season-free-pack-strip\{[\s\S]*width:100%!important;[\s\S]*grid-template-columns:none!important;/);
   assert.match(css, /\.season-free-pack-cta\.season-free-pack-strip \.season-free-pack-button\{[\s\S]*width:100%!important;[\s\S]*min-width:0!important;/);
   assert.match(css, /\.season-free-pack-cta\.season-free-pack-strip \.season-free-pack-button>\[data-free-pack-action\]\{[\s\S]*white-space:nowrap!important;/);

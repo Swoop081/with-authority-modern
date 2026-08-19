@@ -1,22 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.51';
-import { createProfile } from '../js/data/profile.js?v=0.13.51';
-import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=0.13.51';
-import { superstars } from '../js/data/superstars.js?v=0.13.51';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.51';
+import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.55';
+import { createProfile } from '../js/data/profile.js?v=0.13.55';
+import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=0.13.55';
+import { superstars } from '../js/data/superstars.js?v=0.13.55';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.55';
 
 const eligible = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id);
 
-test('v0.12.96 exposes simultaneous daily, three-day and weekly towers with independent expiry timers',()=>{
-  const towers = activeLiveEventTowers(new Date('2026-08-18T07:45:00'));
+test('v0.13.54 exposes three simultaneous 24-hour towers with no consecutive-name repeats',()=>{
+  const now = new Date('2026-08-18T07:45:00');
+  const towers = activeLiveEventTowers(now);
+  const tomorrow = activeLiveEventTowers(new Date('2026-08-19T07:45:00'));
   assert.equal(towers.length,3);
-  assert.deepEqual(towers.map(t=>t.cadence),['daily','three-day','weekly']);
+  assert.deepEqual(towers.map(t=>t.cadence),['daily','daily','daily']);
   assert.equal(towers[0].event.id,'powerhouse-collision');
-  assert.ok(towers.every(t=>t.msRemaining>0));
-  assert.ok(towers[1].msRemaining>towers[0].msRemaining);
-  assert.ok(towers[2].msRemaining>towers[1].msRemaining);
+  assert.ok(towers.every(t=>t.msRemaining>0 && t.msRemaining<=24*60*60*1000));
+  assert.equal(new Set(towers.map(t=>t.nextAt.getTime())).size,1);
+  const tomorrowNames = new Set(tomorrow.map(t=>t.event.name));
+  for (const tower of towers) assert.equal(tomorrowNames.has(tower.event.name),false,`${tower.event.name} repeated on the next day`);
 });
 
 test('v0.12.97 Brock Lesnar Birthday Bash appears on July 12 for 24 hours only',()=>{
@@ -47,7 +50,8 @@ test('v0.12.96 Play menu places Daily Tower Live Events first and labels the res
   const play = app.slice(app.indexOf('function renderPlayMenu'),app.indexOf('function renderRules'));
   assert.ok(play.indexOf('id="play-live-event"') < play.indexOf('id="play-exhibition"'));
   assert.match(play,/DAILY TOWER · \$\{liveLabel\}/);
-  assert.match(play,/RESETS DAILY/);
+  assert.match(play,/SUPER PACK ON CLEAR/);
+  assert.doesNotMatch(play,/RESETS DAILY/);
 });
 
 test('v0.12.96 Superstar store price is 2500 UP',()=>{

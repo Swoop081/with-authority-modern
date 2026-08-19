@@ -1,26 +1,26 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, addOwnedCard } from "../js/data/profile.js?v=0.13.51";
-import { decks } from "../js/data/decks.js?v=0.13.51";
-import { collectionCards } from "../js/data/collection.js?v=0.13.51";
-import { superstars } from "../js/data/superstars.js?v=0.13.51";
-import { validateDeckDraft, selectedEntranceId } from "../js/data/deck-builder.js?v=0.13.51";
-import { findPackUpgrades, applyUpgrade, buildPlayableDeck } from "../js/data/deck-assistant.js?v=0.13.51";
+import { createProfile, addOwnedCard } from "../js/data/profile.js?v=0.13.55";
+import { decks } from "../js/data/decks.js?v=0.13.55";
+import { collectionCards } from "../js/data/collection.js?v=0.13.55";
+import { superstars } from "../js/data/superstars.js?v=0.13.55";
+import { validateDeckDraft, selectedEntranceId } from "../js/data/deck-builder.js?v=0.13.55";
+import { findPackUpgrades, applyUpgrade, buildPlayableDeck } from "../js/data/deck-assistant.js?v=0.13.55";
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 
-test("v0.12.92 Deck Assistance does not treat a Foil-only pull as a gameplay upgrade", () => {
+test("v0.13.55 Deck Assistance treats an owned Foil as the preferred finish", () => {
   const profile = createProfile("cm-punk");
   const card = decks["cm-punk"].find(c => c.kind === "move" && (c.damage ?? 0) > 0);
   const before = { ...(profile.ownedCards[card.id] ?? {}) };
   const result = addOwnedCard(profile, card.id, { foil: true });
   const pull = { card, foil: true, ownershipBefore: (before.normal ?? 0) + (before.foil ?? 0), replacedNormal: result.replacedNormal > 0, universePointsValue: 0 };
   const upgrades = findPackUpgrades(profile, [pull]);
-  assert.equal(upgrades.some(u => u.type === "foil"), false);
+  assert.ok(upgrades.some(u => u.type === "foil-preference"));
 });
 
-test("v0.12.92 Foil deck copies keep the exact authored Damage and Cost", () => {
+test("v0.13.55 Foil positive-Damage Moves gain +1 Damage while Cost stays authored", () => {
   const profile = createProfile("cm-punk");
   const card = decks["cm-punk"].find(c => c.kind === "move" && (c.damage ?? 0) > 0);
   addOwnedCard(profile, card.id, { foil: true });
@@ -29,7 +29,7 @@ test("v0.12.92 Foil deck copies keep the exact authored Damage and Cost", () => 
   profile.savedDecks["cm-punk"][index] = { id: card.id, foil: true };
   const live = buildPlayableDeck(profile, "cm-punk").find(c => c.id === card.id && c.foil);
   assert.ok(live);
-  assert.equal(live.damage, card.damage);
+  assert.equal(live.damage, card.damage + 1);
   assert.equal(live.cost, card.cost);
 });
 
@@ -62,13 +62,15 @@ test("v0.12.82 ownership-gated recommended-build restoration swaps filler for th
   assert.equal(profile.savedDecks[sid].filter(e=>e.id===filler.card.id).length, filler.count);
 });
 
-test("v0.12.92 Manual Deck Assistance preserves real suggestions without Foil damage language", () => {
+test("v0.13.55 Manual Deck Assistance surfaces the real Foil chase upgrade", () => {
   const app = fs.readFileSync(new URL("../js/ui/app.js", import.meta.url), "utf8");
   const assistant = fs.readFileSync(new URL("../js/data/deck-assistant.js", import.meta.url), "utf8");
   assert.doesNotMatch(assistant, /findPackUpgrades\(\)\{return \[\]\}/);
   assert.doesNotMatch(assistant, /applyUpgrade\(\)\{return false\}/);
-  assert.doesNotMatch(assistant, /\+1 Damage/);
-  assert.doesNotMatch(app, /FOIL UPGRADE/);
+  assert.match(assistant, /\+1 Damage/);
+  assert.match(app, /FOIL UPGRADE/);
   assert.match(app, /Manual mode will not change the deck/);
-  assert.match(app, /ADD \$\{u\.addName\} · REMOVE \$\{u\.removeName\}/);
+  assert.match(app, /<small>NEW CARD<\/small>/);
+  assert.match(app, /<small>REPLACES<\/small>/);
+  assert.match(app, /upgrade-card-pair/);
 });

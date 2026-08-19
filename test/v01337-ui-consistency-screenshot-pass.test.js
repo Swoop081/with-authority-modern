@@ -11,19 +11,20 @@ function slice(start, end) {
   return app.slice(a, b);
 }
 
-test('v0.13.37 Live Events hub removes Superstar art and separates CTA from timers', () => {
+test('v0.13.54 Live Events hub removes Superstar art and per-card reset timers', () => {
   const hub = slice('function renderLiveEventHub()', 'function renderLiveEventTowerDetail');
   assert.doesNotMatch(hub, /live-tower-hub-art/);
   assert.doesNotMatch(hub, /superstarRenderMarkup\(tower\.event\.heroId/);
   assert.match(hub, /live-tower-hub-footer/);
-  assert.match(hub, /live-tower-timer/);
-  assert.match(css, /\.live-events-hub \.live-tower-hub-footer\{[\s\S]*grid-template-columns:minmax\(0,1fr\) auto!important/);
+  assert.doesNotMatch(hub, /live-tower-timer|data-live-tower-expiry/);
+  assert.match(hub, /Live Events reset daily at local midnight/);
+  assert.match(css, /\.live-events-hub \.live-tower-timer\{display:none!important\}/);
   assert.match(css, /\.live-events-hub \.compact-live-choice \.live-event-split-title\{[\s\S]*font-size:clamp\(1\.95rem,7\.2vw,3\.05rem\)!important/);
 });
 
 test('v0.13.37 Superstar selection uses one horizontal carousel and first tap selects before flip', () => {
   assert.match(app, /selectionCarouselMarkup\(unlocked,selection\.p1,'exhibition-p1'\)/);
-  assert.match(app, /selectionCarouselMarkup\(unlocked,chosenId,'ladder-select'\)/);
+  assert.match(app, /selectionCarouselMarkup\(unlocked,\s*chosenId,\s*'ladder-select'\)/);
   assert.match(app, /selectionCarouselMarkup\(unlocked,chosenId,'kotr-select'\)/);
   assert.match(app, /selectionCarouselMarkup\(unlocked,chosenId,'champ-select'\)/);
   assert.match(app, /selectionCarouselMarkup\(unlocked,chosenId,'live-event-select'\)/);

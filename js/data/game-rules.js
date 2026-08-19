@@ -68,7 +68,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Method check", "Non-Finishers must also meet every printed Method requirement. Finishers ignore generic Method requirements."],
       ["Position", "Grounded-only Moves need the opponent on the mat. Standing-only Submissions need the opponent standing. Other card text can impose additional position requirements."],
       ["Exclusivity", "A Superstar-exclusive card can only be played by its named Superstar. Cards with an allowed-Superstar family restriction are legal only for that listed family."],
-      ["Printed Damage", "The printed Damage number is the base gameplay Damage. Authored abilities and card effects may add or reduce Damage during resolution; Foil treatment never changes it."]
+      ["Printed Damage", "The Normal card Damage number is the authored baseline. A Foil Move with positive Damage displays and deals +1 Damage; authored abilities and card effects may then add or reduce Damage during resolution."]
     ]
   },
   {
@@ -127,7 +127,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Lead Off 5", "The first 5 pages are your opening hand. Lead Off may contain only Moves and Momentum, and must contain at least 1 Move and at least 1 Momentum page."],
       ["Copy caps", "Normal deck cards have a default maximum of 5 copies. Momentum cards may use up to 12 copies of the same Momentum card. A card-specific lower maxCopies value overrides those defaults."],
       ["Copy families", "Cards that share a copyFamily have a combined family cap of 5 copies."],
-      ["Ownership", "You can only save copies you actually own. Normal and Foil copies both count toward ownership of that card."],
+      ["Ownership", "You can only save copies you actually own. Standard five-copy cards may be owned as up to 5 Normal plus 5 Foil copies, while deck legality still allows at most 5 total copies of that card identity."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
       ["Recommended decks", "Your first Superstar receives the complete authored 60-page onboarding deck. Later Superstar unlocks grant only the Superstar identity plus at most one authored Finisher, one Trademark and one Action; they do not grant a complete deck, shared filler, or the Superstar-specific Entrance. Deck Lab compares your Collection against the authored 60-page recommended build, uses owned recommended cards first, fills gaps only with legal shared cards you already own, and recommends missing authored cards and the Superstar-specific Entrance as you collect them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
@@ -135,13 +135,13 @@ export const GAME_RULE_SECTIONS = Object.freeze([
   },
   {
     id: "collection-rarity", group: "COLLECTION", title: "Rarity, Ownership & Foils",
-    summary: "Rarity controls collectibility; Foils are presentation variants only.",
+    summary: "Rarity controls collectibility; Foils are premium chase finishes with a small Damage edge.",
     items: [
       ["Rarity", "1★ Common, 2★ Uncommon, 3★ Rare and 4★ Very Rare."],
       ["Exclusive rarity policy", "Cards exclusive to one wrestler must be Rare or Very Rare. Wrestler-exclusive Trademarks are generally Rare; Finishers and wrestler one-use/reactive Actions are Very Rare."],
-      ["Ownership caps", "Momentum can be owned up to the project Momentum cap; most playable cards cap at 5 copies; Superstar, Entrance and Manager identities cap at 1."],
-      ["Foils", "Foil cards are cosmetic / collector variants only. A Foil and Normal copy have identical Cost, Damage, requirements, effects and match strength."],
-      ["Foil deck use", "Choosing a Foil copy in Deck Lab changes presentation only. It never grants hidden Damage, Cost reduction, Momentum or any other gameplay bonus."],
+      ["Ownership caps", "Standard playable cards can be owned as up to 5 Normal plus 5 Foil copies. Deck construction still caps that card identity at 5 total copies. Momentum keeps its project cap; Superstar, Entrance and Manager identities cap at 1."],
+      ["Foils", "Foil is the premium chase finish. A Foil Move with positive Damage gets +1 Damage. Cost, Method requirements, Counter states and card text are otherwise unchanged. Cards with no positive Damage do not gain a Damage bonus."],
+      ["Foil deck use", "Deck Lab and Deck Assistance prefer owned Foil copies. The +1 Damage is shown on the live card plate and is part of the Foil card’s gameplay value; it is not a hidden modifier."],
       ["Collection milestones", "Foil ownership still contributes to Foil collection progress and other collector-facing milestones where shown."]
     ]
   },
@@ -152,13 +152,13 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Pack size", "A standard booster contains 5 pulls."],
       ["Rarity weights", "Ordinary slots roll from the current available pool using 50% Common, 30% Uncommon, 15% Rare and 5% Very Rare weighting until a Very Rare has been hit."],
       ["Very Rare ceiling", "A standard five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot. Super Packs are the explicit exception and can contain up to 2 Very Rares."],
-      ["Guaranteed Foil", "The first pull is Foil. Entrances are also presented as Foil. Foil status does not change gameplay strength."],
+      ["Guaranteed Foil", "The first pull is Foil. Entrances are also presented as Foil. Positive-Damage Foil Moves deal +1 Damage, making the guaranteed Foil a real gameplay chase."],
       ["Super Packs", "Clearing a full mode or tournament awards a five-card Super Pack. It guarantees a Foil Rare-or-better first pull and uses boosted 25% Common, 40% Uncommon, 27% Rare and 8% Very Rare weighting, with up to 2 Very Rares."],
       ["Superstar chase", "Eligible Superstar identities use a separate 2% pack-level chase with a 100-pack hard pity for an available unowned Superstar in that set."],
-      ["Duplicate conversion", "Copies that exceed that card's ownership cap convert to Universe Points instead of increasing ownership. Overflow value is rarity-based: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP. Foil overflow uses the same rarity value."],
+      ["Duplicate conversion", "Standard five-copy cards track Normal and Foil ownership separately: up to 5 Normal and 5 Foil. A pull converts to Universe Points only when that finish is already at its cap. Unique cards and Momentum retain their existing caps. Overflow value remains rarity-based: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
       ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],
-      ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build when a newly-owned card makes that possible. When it chooses a card finish, it prefers an owned Foil copy for presentation; Foil remains gameplay-identical to Normal."]
+      ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build when a newly-owned card makes that possible. When a Foil copy is owned, recommendations prefer that finish; positive-Damage Foil Moves are a genuine +1 Damage upgrade."]
     ]
   },
   {
@@ -166,9 +166,9 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     summary: "The same core match engine powers Exhibition, Live Events, King of the Ring, Money in the Bank and Championship Road.",
     items: [
       ["Exhibition", "Choose an owned Superstar and play a standard one-off match against an eligible CPU opponent."],
-      ["Live Events", "Live Events is a rotating tower hub. A Daily Tower resets every local day, a 3 Day Tower rotates every three days, and a Weekly Tower rotates each Monday. Limited 24-hour birthday towers can appear on a Superstar's real birthday."],
+      ["Live Events", "Live Events is a 24-hour rotating tower hub. Every standard tower refreshes together at local midnight, and the same named theme cannot return on the immediately following day. Limited 24-hour birthday towers can also appear on a Superstar's real birthday."],
       ["Daily brand schedule", "The Daily Tower uses RAW branding on Monday, NXT on Wednesday and SmackDown on Saturday; Tuesday, Thursday, Friday and Sunday use original WWE Legacy event identities."],
-      ["Tower timers", "Every Live Event card shows the exact time remaining. Progress belongs to that tower only and expires when its timer ends."],
+      ["Tower rotation", "The Live Events header communicates the shared daily reset. Individual tower cards focus on theme, progress, reward and action instead of repeating countdown timers. Progress belongs to that day's tower and expires at local midnight."],
       ["Match rewards", "Every non-final match victory awards 1 normal booster. A loss awards no match reward. The final victory that clears a full structured mode or tournament awards only its Super Pack with boosted rarity odds and at least one Rare-or-better card; it does not also award a normal victory booster or direct UP."],
       ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you. Each victory awards a normal booster. Winning the Final crowns your Superstar King of the Ring, then offers three different released-set Super Packs; choose exactly one."],
       ["Money in the Bank", "Money in the Bank lives inside Live Events as a daily 8-opponent tower. You have 3 lives for the run. A loss costs one life; losing all 3 restarts the tower from Level 1 against the same daily field. Clearing all 8 levels awards the daily completion reward, and a fresh random tower arrives at local midnight."],
@@ -212,7 +212,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Finisher", "A top-tier finishing Move. Finishers ignore generic Method requirements and wrestler-exclusive Finishers are Very Rare."],
       ["Counter State", "The physical state an incoming Move exposes for reversal matching."],
       ["UP", "Universe Points, the store currency also earned from duplicate overflow and selected game rewards."],
-      ["Foil", "A collector / visual variant with no gameplay advantage."],
+      ["Foil", "The premium chase finish. A Foil Move with positive Damage displays and deals +1 Damage; other values and rules stay the same."],
       ["REWARD pack", "A special completion-pack wrapper used for Money in the Bank and Championship-style completion rewards; its underlying set still determines the cards inside."]
     ]
   }

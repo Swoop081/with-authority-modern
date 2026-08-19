@@ -1,5 +1,5 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.51";
-import { superstars } from "./superstars.js?v=0.13.51";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.55";
+import { superstars } from "./superstars.js?v=0.13.55";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -257,8 +257,7 @@ export const WEEKLY_LIVE_EVENTS = Object.freeze(Object.values(DAILY_LIVE_EVENTS)
 
 const METHOD_LABELS = Object.freeze({ strength: "Strength", strike: "Strike", technical: "Technical", agility: "Agility" });
 const DAY_MS = 24 * 60 * 60 * 1000;
-const THREE_DAY_EPOCH = new Date(2026, 7, 17, 0, 0, 0);
-const WEEKLY_EPOCH = new Date(2026, 7, 17, 0, 0, 0);
+const ROTATION_EPOCH = new Date(2026, 7, 17, 0, 0, 0);
 
 function localDayStart(now = new Date()) {
   const d = now instanceof Date ? new Date(now.getTime()) : new Date(now);
@@ -283,10 +282,21 @@ function superstarRecord(id) {
 export function releasedLiveEventOpponentIds(event, profile = null, now = new Date()) {
   return [...new Set(event?.opponentPool ?? [])].filter(id => isPlayerVisibleSuperstar(superstarRecord(id), profile, now));
 }
-function cloneEvent(template, rewardSetId, now = new Date()) {
-  return { ...template, rewardSetId, opponentPool: releasedLiveEventOpponentIds(template, null, now) };
+function dailyCopy(template) {
+  if (!template) return template;
+  const scrub = value => String(value ?? "")
+    .replace(/three-day/gi, "daily")
+    .replace(/three days/gi, "one day")
+    .replace(/seven-day/gi, "daily")
+    .replace(/seven days/gi, "one day")
+    .replace(/weekly/gi, "daily");
+  return { ...template, kicker: scrub(template.kicker), description: scrub(template.description) };
 }
-function towerDescriptor({ key, event, startsAt, nextAt, cadence, cadenceLabel, winUp, clearBoosters = 1 }) {
+function cloneEvent(template, rewardSetId, now = new Date()) {
+  const daily = dailyCopy(template);
+  return { ...daily, rewardSetId, opponentPool: releasedLiveEventOpponentIds(daily, null, now) };
+}
+function towerDescriptor({ key, event, startsAt, nextAt, cadence = "daily", cadenceLabel = "DAILY TOWER", winUp, clearBoosters = 1 }) {
   return {
     key,
     event,
@@ -303,7 +313,16 @@ function towerDescriptor({ key, event, startsAt, nextAt, cadence, cadenceLabel, 
 function descriptorRemaining(descriptor, now = new Date()) {
   return { ...descriptor, msRemaining: Math.max(0, descriptor.nextAt.getTime() - (now instanceof Date ? now.getTime() : new Date(now).getTime())) };
 }
+function daySerial(now = new Date()) {
+  const start = localDayStart(now);
+  const epoch = localDayStart(ROTATION_EPOCH);
+  return Math.max(0, Math.floor((start.getTime() - epoch.getTime()) / DAY_MS));
+}
 
+// The lead slot keeps the branded weekday rhythm (RAW Monday, NXT Wednesday,
+// SmackDown Saturday). The other two slots rotate every local day from distinct
+// theme pools. Because each pool has multiple names and advances every day, an
+// exact event name cannot repeat on consecutive days.
 export function liveEventRotation(now = new Date()) {
   const start = localDayStart(now);
   const source = DAILY_LIVE_EVENTS[start.getDay()] ?? DAILY_LIVE_EVENTS[1];
@@ -322,41 +341,32 @@ export function liveEventRotation(now = new Date()) {
   };
 }
 
-function dailyTower(now) {
+function primaryDailyTower(now) {
   const rotation = liveEventRotation(now);
   return towerDescriptor({
-    key: `daily:${rotation.dayKey}:${rotation.event.id}`,
+    key: `daily:${rotation.dayKey}:lead:${rotation.event.id}`,
     event: rotation.event,
     startsAt: rotation.startsAt,
     nextAt: rotation.nextAt,
-    cadence: "daily",
-    cadenceLabel: "DAILY TOWER",
     winUp: LIVE_EVENT_WIN_UP,
     clearBoosters: LIVE_EVENT_CLEAR_BOOSTERS
   });
 }
-function threeDayTower(now) {
-  const startToday = localDayStart(now);
-  const epoch = localDayStart(THREE_DAY_EPOCH);
-  const elapsedDays = Math.floor((startToday.getTime() - epoch.getTime()) / DAY_MS);
-  const slot = Math.floor(Math.max(0, elapsedDays) / 3);
-  const template = THREE_DAY_TOWERS[slot % THREE_DAY_TOWERS.length];
-  const startsAt = new Date(epoch.getTime());
-  startsAt.setDate(startsAt.getDate() + slot * 3);
-  const nextAt = new Date(startsAt.getTime());
-  nextAt.setDate(nextAt.getDate() + 3);
-  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now), now);
-  return towerDescriptor({ key: `three-day:${slot}:${event.id}`, event, startsAt, nextAt, cadence: "three-day", cadenceLabel: "3 DAY TOWER", winUp: 0, clearBoosters: 1 });
-}
-function weeklyTower(now) {
-  const startsAt = localMondayStart(now);
-  const epoch = localMondayStart(WEEKLY_EPOCH);
-  const slot = Math.floor(Math.max(0, startsAt.getTime() - epoch.getTime()) / (7 * DAY_MS));
-  const template = WEEKLY_TOWERS[slot % WEEKLY_TOWERS.length];
-  const nextAt = new Date(startsAt.getTime());
-  nextAt.setDate(nextAt.getDate() + 7);
-  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, slot % LIVE_REWARD_FALLBACKS.length, now), now);
-  return towerDescriptor({ key: `weekly:${dateKey(startsAt)}:${event.id}`, event, startsAt, nextAt, cadence: "weekly", cadenceLabel: "WEEKLY TOWER", winUp: 0, clearBoosters: 1 });
+function themedDailyTower(now, slot, templates, offset = 0) {
+  const start = localDayStart(now);
+  const nextAt = new Date(start.getTime());
+  nextAt.setDate(nextAt.getDate() + 1);
+  const serial = daySerial(now);
+  const template = templates[(serial + offset) % templates.length];
+  const event = cloneEvent(template, releasedRewardSet(template.rewardSetId, (serial + offset) % LIVE_REWARD_FALLBACKS.length, now), now);
+  return towerDescriptor({
+    key: `daily:${dateKey(start)}:${slot}:${event.id}`,
+    event,
+    startsAt: start,
+    nextAt,
+    winUp: 0,
+    clearBoosters: 1
+  });
 }
 function birthdayTowers(now) {
   const start = localDayStart(now);
@@ -375,7 +385,12 @@ function birthdayTowers(now) {
 }
 
 export function activeLiveEventTowers(now = new Date()) {
-  return [dailyTower(now), threeDayTower(now), weeklyTower(now), ...birthdayTowers(now)].map(tower => descriptorRemaining(tower, now));
+  return [
+    primaryDailyTower(now),
+    themedDailyTower(now, "feature-a", THREE_DAY_TOWERS, 0),
+    themedDailyTower(now, "feature-b", WEEKLY_TOWERS, 1),
+    ...birthdayTowers(now)
+  ].map(tower => descriptorRemaining(tower, now));
 }
 export function liveEventTowerByKey(towerKey, now = new Date()) {
   return activeLiveEventTowers(now).find(tower => tower.key === towerKey) ?? null;
@@ -391,7 +406,7 @@ function ensureTowerStore(profile, now = new Date()) {
   profile.weeklyLiveEvents.totalClears = Math.max(profile.weeklyLiveEvents.totalClears ?? 0, store.totalClears ?? 0);
 
   // One-time compatibility migration for an in-progress/cleared v0.12.95 daily event.
-  const daily = dailyTower(now);
+  const daily = primaryDailyTower(now);
   const legacy = profile.weeklyLiveEvents;
   if (!store.states[daily.key] && legacy.eventId === daily.event.id && legacy.weekKey === liveEventRotation(now).weekKey && (legacy.activeRun || legacy.clearedThisWeek)) {
     store.states[daily.key] = {
@@ -533,7 +548,7 @@ export function recordLiveEventTowerMatch(profile, towerKey, result, now = new D
 
 // Compatibility wrappers retained for existing saves/tests and any older UI code.
 export function weeklyLiveEventState(profile, now = new Date()) {
-  const tower = dailyTower(now);
+  const tower = primaryDailyTower(now);
   const entry = liveEventTowerState(profile, tower.key, now);
   const state = entry.state;
   const rotation = liveEventRotation(now);
@@ -546,21 +561,21 @@ export function weeklyLiveEventState(profile, now = new Date()) {
 }
 export function currentWeeklyLiveEvent(now = new Date()) { return liveEventRotation(now).event; }
 export function startWeeklyLiveEvent(profile, superstarId, eligibleOpponentIds, rng = Math.random, now = new Date()) {
-  const tower = dailyTower(now);
+  const tower = primaryDailyTower(now);
   const run = startLiveEventTower(profile, tower.key, superstarId, eligibleOpponentIds, rng, now);
   weeklyLiveEventState(profile, now);
   return run;
 }
 export function currentWeeklyLiveEventOpponent(profile, now = new Date()) {
-  const tower = dailyTower(now);
+  const tower = primaryDailyTower(now);
   return currentLiveEventTowerOpponent(profile, tower.key, now);
 }
 export function currentWeeklyLiveEventStage(profile, now = new Date()) {
-  const tower = dailyTower(now);
+  const tower = primaryDailyTower(now);
   return currentLiveEventTowerStage(profile, tower.key, now);
 }
 export function recordWeeklyLiveEventMatch(profile, result, now = new Date()) {
-  const tower = dailyTower(now);
+  const tower = primaryDailyTower(now);
   const outcome = recordLiveEventTowerMatch(profile, tower.key, result, now);
   weeklyLiveEventState(profile, now);
   return outcome;

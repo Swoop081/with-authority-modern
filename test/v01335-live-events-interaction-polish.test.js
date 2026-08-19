@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.51';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.51';
-import { collectionCards } from '../js/data/collection.js?v=0.13.51';
-import { layeredCardArtFor } from '../js/data/artwork.js?v=0.13.51';
-import { superstars } from '../js/data/superstars.js?v=0.13.51';
-import { decks } from '../js/data/decks.js?v=0.13.51';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.13.51';
-import { LIVE_EVENT_WIN_UP, activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.51';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.51';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.13.51';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.55';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.55';
+import { collectionCards } from '../js/data/collection.js?v=0.13.55';
+import { layeredCardArtFor } from '../js/data/artwork.js?v=0.13.55';
+import { superstars } from '../js/data/superstars.js?v=0.13.55';
+import { decks } from '../js/data/decks.js?v=0.13.55';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.13.55';
+import { LIVE_EVENT_WIN_UP, activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.55';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.55';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.13.55';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));

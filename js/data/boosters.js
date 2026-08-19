@@ -1,8 +1,8 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.51";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies } from "./profile.js?v=0.13.51";
-import { duplicateUniversePointsFor } from "./store.js?v=0.13.51";
-import { sets } from "./sets.js?v=0.13.51";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.51";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.55";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underFinishOwnershipCap } from "./profile.js?v=0.13.55";
+import { duplicateUniversePointsFor } from "./store.js?v=0.13.55";
+import { sets } from "./sets.js?v=0.13.55";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.55";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;
@@ -27,7 +27,11 @@ export function superPackCreditsFor(p, setId = DEFAULT_BOOSTER_SET_ID) {
   return Math.max(0, Number(p?.superPackCreditsBySet?.[setId]) || 0);
 }
 export function boosterEligible(card, now = new Date()) { return !!card && isPlayerReleasedSetId(card.setId, now) && sets[card.setId]?.type !== "season-exclusive" && card.boosterEligible !== false; }
-export function underOwnershipCap(profile, card) { return totalOwnedCopies(profile, card.id) < cardOwnershipCap(card); }
+export function underOwnershipCap(profile, card, foil = null) {
+  if (!card) return false;
+  if (foil === true || foil === false) return underFinishOwnershipCap(profile, card, foil);
+  return underFinishOwnershipCap(profile, card, false) || underFinishOwnershipCap(profile, card, true);
+}
 
 function availableRarityWeights(pool, rarityWeights = RARITY_WEIGHTS) {
   const rarities = [...new Set(pool.map(card => Number(card.rarity) || 1))].sort((a,b)=>a-b);
@@ -106,7 +110,7 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
   // after 100 consecutive packs without a Superstar, the next pack from a set
   // with an unowned Superstar guarantees one. Complete-set packs do not consume
   // or reset the armed guarantee; they simply advance the global miss count.
-  const unownedSuperstars = base.filter(card => card.kind === "superstar" && underOwnershipCap(profile, card));
+  const unownedSuperstars = base.filter(card => card.kind === "superstar" && underOwnershipCap(profile, card, true));
   const pityBefore = superstarPity(profile);
   const pityArmed = pityBefore >= SUPERSTAR_PITY_PACKS;
   const superstarHit = unownedSuperstars.length > 0 && (pityArmed || rng() < SUPERSTAR_CHASE_CHANCE);
@@ -114,8 +118,7 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     ? unownedSuperstars[Math.min(unownedSuperstars.length - 1, Math.floor(rng() * unownedSuperstars.length))]
     : null;
 
-  const normalBase = base.filter(card => card.kind !== "superstar" && (card.kind !== "entrance" || underOwnershipCap(profile, card)));
-  const underCapNormal = normalBase.filter(card => underOwnershipCap(profile, card));
+  const normalBase = base.filter(card => card.kind !== "superstar" && (card.kind !== "entrance" || underOwnershipCap(profile, card, true)));
   const pack = [];
   let superstarAdded = false;
   let pendingSuperstarUnlockId = null;
@@ -134,11 +137,14 @@ function buildPack(profile, rng, setId, now = new Date(), options = {}) {
     } else {
       // Preserve the guaranteed-progress first ordinary slot when possible,
       // but roll rarity first and only then choose uniformly inside that bucket.
-      let slotPool = normalBase.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
-      if (i === 0 && underCapNormal.length) slotPool = underCapNormal.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c));
+      let slotPool = normalBase.filter(c => c.kind !== "entrance" || underOwnershipCap(profile, c, true));
+      if (i === 0) {
+        const progressPool = slotPool.filter(c => underOwnershipCap(profile, c, guaranteedFoil || c.kind === "entrance"));
+        if (progressPool.length) slotPool = progressPool;
+      }
       if (i === 0 && guaranteedMinRarity > 1) {
         const guaranteedProgress = slotPool.filter(c => (Number(c.rarity) || 1) >= guaranteedMinRarity);
-        const guaranteedAny = normalBase.filter(c => (c.kind !== "entrance" || underOwnershipCap(profile, c)) && (Number(c.rarity) || 1) >= guaranteedMinRarity);
+        const guaranteedAny = normalBase.filter(c => (c.kind !== "entrance" || underOwnershipCap(profile, c, true)) && (Number(c.rarity) || 1) >= guaranteedMinRarity);
         slotPool = guaranteedProgress.length ? guaranteedProgress : guaranteedAny;
       }
       if (veryRarePulls >= maxVeryRarePulls) slotPool = slotPool.filter(c => Number(c.rarity) !== 4);

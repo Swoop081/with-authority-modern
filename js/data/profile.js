@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.51";
-import { collectionCards } from "./collection.js?v=0.13.51";
-import { superstars } from "./superstars.js?v=0.13.51";
-import { isUnreleasedSetId } from "./release.js?v=0.13.51";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.51";
+import { decks } from "./decks.js?v=0.13.55";
+import { collectionCards } from "./collection.js?v=0.13.55";
+import { superstars } from "./superstars.js?v=0.13.55";
+import { isUnreleasedSetId } from "./release.js?v=0.13.55";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.55";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -39,6 +39,22 @@ export function totalOwnedCopies(profile, id) {
   const o = profile?.ownedCards?.[id] ?? {};
   return (o.normal ?? 0) + (o.foil ?? 0);
 }
+export function finishOwnedCopies(profile, id, foil = false) {
+  const o = profile?.ownedCards?.[id] ?? {};
+  return Math.max(0, Number(foil ? o.foil : o.normal) || 0);
+}
+export function hasIndependentFinishCaps(card) {
+  // Standard five-copy cards have a five-copy cap for each finish: up to
+  // 5 Normal + 5 Foil owned. Unique cards and Momentum keep their existing
+  // total ownership contracts. Deck legality still caps a card identity at 5.
+  return cardOwnershipCap(card) === 5;
+}
+export function underFinishOwnershipCap(profile, card, foil = false) {
+  if (!card) return false;
+  const cap = cardOwnershipCap(card);
+  if (hasIndependentFinishCaps(card)) return finishOwnedCopies(profile, card.id, foil) < cap;
+  return totalOwnedCopies(profile, card.id) < cap;
+}
 
 export function addOwnedCard(profile, id, { foil = false, amount = 1 } = {}) {
   profile.ownedCards ??= {};
@@ -46,6 +62,18 @@ export function addOwnedCard(profile, id, { foil = false, amount = 1 } = {}) {
   const card = cardById.get(id), o = profile.ownedCards[id], cap = cardOwnershipCap(card);
   let added = 0, replacedNormal = 0, overflowed = 0;
   for (let i = 0; i < amount; i += 1) {
+    if (hasIndependentFinishCaps(card)) {
+      const key = foil ? "foil" : "normal";
+      if ((o[key] ?? 0) >= cap) { overflowed += 1; continue; }
+      o[key] = (o[key] ?? 0) + 1;
+      added += 1;
+      continue;
+    }
+
+    // Unique cards and Momentum retain the legacy total-cap behaviour. This is
+    // important for Entrances/Superstars/Managers (max 1) and the 15-copy
+    // starter Momentum inventory. A Foil unique may still replace its Normal
+    // finish rather than creating a second unique copy.
     const total = (o.normal ?? 0) + (o.foil ?? 0);
     if (foil) {
       if ((o.foil ?? 0) >= cap) { overflowed += 1; continue; }

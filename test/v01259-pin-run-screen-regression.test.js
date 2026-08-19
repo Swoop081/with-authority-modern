@@ -17,7 +17,7 @@ test('green-health pin-escape presentation also breaks after one', () => {
 
 test('Money in the Bank has no branch selector and Championship Road uses sequential difficulty tabs', () => {
   const ladder = app.slice(app.indexOf('function renderLadder()'), app.indexOf('function beginKingOfTheRing()'));
-  assert.match(ladder, /Eight random opponents · three lives · resets every day/);
+  assert.match(ladder, /8 LEVELS · 3 LIVES · SUPER PACK ON CLEAR/);
   assert.doesNotMatch(ladder, /data-ladder-branch|horizontal-branch-selector/);
   assert.match(app, /champ-difficulty-rail/);
   assert.match(app, /data-champ-difficulty/);

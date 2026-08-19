@@ -14,10 +14,10 @@ test('v0.13.29 Home Season title inherits the preferred full Season hero weight'
 test('v0.13.29 Money in the Bank uses major-mode typography and a horizontal Superstar-card road', () => {
   assert.match(css, /\.money-in-bank-live-card \.live-event-split-title\.title-mitb span\{[\s\S]*font-size:clamp\(1\.85rem,7\.6vw,3rem\)!important/);
   assert.match(css, /\.money-in-bank-live-card \.live-event-split-title\.title-mitb b\{[\s\S]*font-size:clamp\(2\.65rem,10\.5vw,4\.4rem\)!important/);
-  assert.match(app, /superstarPreviewCardMarkup\(id,"mitb-opponent-card"\)/);
-  assert.match(app, /mitb-opponent-carousel/);
-  assert.match(app, /data-mitb-opponent-index/);
-  assert.match(app, /carousel\.scrollTo\(\{left,behavior:'instant'\}\)/);
+  assert.match(app, /superstarPreviewCardMarkup\(id,"mitb-v2-superstar-card"\)/);
+  assert.match(app, /mitb-v2-opponent-rail/);
+  assert.match(app, /data-mitb-v2-opponent-index/);
+  assert.match(app, /rail\.scrollTo\(\{ left, behavior: 'instant' \}\)/);
   assert.doesNotMatch(app.slice(app.indexOf('function renderLadder()'), app.indexOf('function beginKingOfTheRing()')), /modePortraits\(\[chosenId\],"feature-art"\)/);
 });
 

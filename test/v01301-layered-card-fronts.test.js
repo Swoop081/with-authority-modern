@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { layeredCardArtFor } from "../js/data/artwork.js?v=0.13.51";
+import { layeredCardArtFor } from "../js/data/artwork.js?v=0.13.55";
 
 const fronts = fs.readFileSync(new URL("../js/data/card-fronts.js", import.meta.url), "utf8");
 const artwork = fs.readFileSync(new URL("../js/data/artwork.js", import.meta.url), "utf8");

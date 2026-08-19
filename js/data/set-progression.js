@@ -1,12 +1,12 @@
-import { cardsForSet } from './collection.js?v=0.13.51';
-import { ownedCount } from './profile.js?v=0.13.51';
+import { cardsForSet } from './collection.js?v=0.13.55';
+import { ownedCount } from './profile.js?v=0.13.55';
 
 export const SET_LIFECYCLES = ['featured','vaulted','returning'];
 export const COLLECTION_MILESTONES = [
   { percent: 25, reward: 1 }, { percent: 50, reward: 2 }, { percent: 75, reward: 3 }, { percent: 100, reward: 5 }
 ];
 export const FOIL_MILESTONES = [
-  { percent: 10, reward: 1 }, { percent: 25, reward: 2 }, { percent: 50, reward: 3 }, { percent: 100, reward: 5 }
+  { percent: 25, reward: 1 }, { percent: 50, reward: 2 }, { percent: 75, reward: 3 }, { percent: 100, reward: 5 }
 ];
 
 function ensure(profile, setId = 'summerslam-series-1') {

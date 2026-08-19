@@ -7645,3 +7645,723 @@ body[data-screen="seasons"] .season-road-scroll>.season-road-toolbar{
   margin:0!important;
   padding-top:0!important;
 }
+
+/* v0.13.52 — iPhone Booster Vault vertical-fill pass.
+   The idle Open Packs screen now uses the full visible phone viewport instead of
+   stopping after its intrinsic content height. The pack shelf owns the flexible
+   middle region; Deck Assistance sits immediately above the counters; the
+   orange/white counter row is the final content row directly above bottom nav. */
+@media(max-width:600px) and (orientation:portrait){
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-compact-screen{
+    box-sizing:border-box!important;
+    height:calc(100svh - var(--legacy-chrome-h) - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 98px)!important;
+    min-height:0!important;
+    display:grid!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;
+    align-content:stretch!important;
+    gap:8px!important;
+    overflow:hidden!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-compact-screen>.premium-hub-heading{
+    grid-row:1!important;
+    margin:0!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-compact-screen>.setup-message{
+    position:absolute!important;
+    z-index:8!important;
+    top:76px!important;
+    left:8px!important;
+    right:8px!important;
+    margin:0!important;
+    padding:7px 9px!important;
+    font-size:.50rem!important;
+    background:rgba(8,11,16,.94)!important;
+    box-shadow:0 8px 20px rgba(0,0,0,.34)!important;
+    pointer-events:none!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-shelf{
+    grid-row:2!important;
+    align-self:stretch!important;
+    min-height:0!important;
+    height:100%!important;
+    margin:0!important;
+    padding:8px 8px 9px!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    gap:10px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-shelf.single-pack{
+    justify-content:center!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-pack-product{
+    flex:0 0 min(64vw,230px)!important;
+    width:min(64vw,230px)!important;
+    height:100%!important;
+    min-height:0!important;
+    max-height:100%!important;
+    padding:9px 8px 8px!important;
+    align-content:center!important;
+    align-self:stretch!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-shelf.single-pack .vault-pack-product{
+    flex-basis:min(76vw,280px)!important;
+    width:min(76vw,280px)!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-product-pack{
+    width:clamp(132px,20svh,188px)!important;
+    max-width:78%!important;
+    flex:none!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-pack-product>strong{
+    margin-top:2px!important;
+    font-size:.72rem!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-pack-product>em{
+    font-size:.46rem!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-pack-product>small{
+    font-size:.40rem!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-lower{
+    grid-row:3!important;
+    align-self:end!important;
+    display:flex!important;
+    flex-direction:column!important;
+    gap:7px!important;
+    margin:0!important;
+    min-height:0!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-assistance{
+    order:1!important;
+    min-height:42px!important;
+    padding:6px 9px!important;
+    margin:0!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-stats{
+    order:2!important;
+    margin:0!important;
+    gap:5px!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-stats .set-stat{
+    min-height:58px!important;
+    padding:7px!important;
+  }
+}
+
+@media(max-width:390px) and (orientation:portrait){
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-compact-screen{
+    gap:6px!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-pack-product{
+    flex-basis:min(66vw,220px)!important;
+    width:min(66vw,220px)!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-shelf.single-pack .vault-pack-product{
+    flex-basis:min(78vw,260px)!important;
+    width:min(78vw,260px)!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .vault-product-pack{
+    width:clamp(124px,19svh,172px)!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-assistance{
+    min-height:39px!important;
+    padding:5px 8px!important;
+  }
+  :is(#booster-iphone-vertical-fill, body[data-screen="boosters"]) .booster-vault-stats .set-stat{
+    min-height:54px!important;
+    padding:6px!important;
+  }
+}
+
+/* v0.13.53 — Money in the Bank ground-up iPhone rebuild.
+   Fresh MITB-only component tree. Intentionally does not reuse the legacy ladder-rung,
+   mode-run-node, redesigned-ladder-node or mitb-opponent-node geometry. */
+body[data-screen="ladder"] .mitb-v2-screen{
+  --mitb-gold:#efc24f;
+  --mitb-gold-2:#ffd86d;
+  --mitb-ink:#080a0d;
+  width:100%;
+  max-width:760px;
+  margin:0 auto;
+  padding:10px 10px calc(92px + env(safe-area-inset-bottom));
+  display:grid;
+  gap:10px;
+  background:radial-gradient(circle at 78% 6%,rgba(239,194,79,.10),transparent 25%),linear-gradient(180deg,#090b10,#05070a 72%);
+}
+body[data-screen="ladder"] .mitb-v2-hero{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(239,194,79,.42);
+  border-radius:20px;
+  padding:15px 16px 13px;
+  background:radial-gradient(circle at 92% 8%,rgba(239,194,79,.19),transparent 34%),linear-gradient(145deg,#241e0e,#0b0d12 64%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025);
+}
+body[data-screen="ladder"] .mitb-v2-hero::after{
+  content:"";
+  position:absolute;
+  right:-50px;
+  top:-62px;
+  width:235px;
+  height:235px;
+  border:1px solid rgba(239,194,79,.08);
+  transform:rotate(18deg);
+  pointer-events:none;
+}
+body[data-screen="ladder"] .mitb-v2-kicker{
+  color:#f4d36f;
+  font-size:.58rem;
+  font-weight:1000;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+body[data-screen="ladder"] .mitb-v2-hero h1{
+  margin:5px 0 3px;
+  display:grid;
+  width:max-content;
+  max-width:100%;
+  font-style:italic;
+  font-weight:1000;
+  text-transform:uppercase;
+  line-height:.74;
+  letter-spacing:-.055em;
+}
+body[data-screen="ladder"] .mitb-v2-hero h1 span{font-size:clamp(1.82rem,7.7vw,3rem);color:#f7f8fb}
+body[data-screen="ladder"] .mitb-v2-hero h1 strong{font-size:clamp(2.7rem,11vw,4.5rem);color:var(--mitb-gold);font:inherit;font-size:clamp(2.7rem,11vw,4.5rem);text-shadow:0 3px 0 rgba(87,60,10,.55)}
+body[data-screen="ladder"] .mitb-v2-hero>p{
+  margin:7px 0 0;
+  color:#9ba3af;
+  font-size:.61rem;
+  font-weight:900;
+  letter-spacing:.11em;
+}
+body[data-screen="ladder"] .mitb-v2-summary{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:6px;
+}
+body[data-screen="ladder"] .mitb-v2-summary>div{
+  min-width:0;
+  min-height:56px;
+  padding:7px 8px;
+  border:1px solid rgba(239,194,79,.26);
+  border-radius:12px;
+  background:rgba(7,8,11,.72);
+  display:grid;
+  align-content:center;
+  gap:2px;
+}
+body[data-screen="ladder"] .mitb-v2-summary span{
+  color:#9b9582;
+  font-size:.39rem;
+  font-weight:900;
+  letter-spacing:.11em;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body[data-screen="ladder"] .mitb-v2-summary b{color:#f7f8fb;font-size:1rem;line-height:1}
+body[data-screen="ladder"] .mitb-v2-summary .mitb-v2-lives{color:var(--mitb-gold);letter-spacing:.08em}
+body[data-screen="ladder"] .mitb-v2-notice{
+  padding:9px 12px;
+  border:1px solid rgba(239,194,79,.28);
+  border-radius:12px;
+  background:#13110b;
+  color:#e7e0ca;
+  font-size:.67rem;
+  line-height:1.35;
+}
+body[data-screen="ladder"] .mitb-v2-command,
+body[data-screen="ladder"] .mitb-v2-setup{
+  border:1px solid rgba(239,194,79,.34);
+  border-radius:18px;
+  background:linear-gradient(145deg,#17140d,#0b0d11 70%);
+  padding:13px;
+}
+body[data-screen="ladder"] .mitb-v2-command{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:center;
+}
+body[data-screen="ladder"] .mitb-v2-command-copy,
+body[data-screen="ladder"] .mitb-v2-command>div,
+body[data-screen="ladder"] .mitb-v2-setup-head{min-width:0}
+body[data-screen="ladder"] .mitb-v2-command span,
+body[data-screen="ladder"] .mitb-v2-setup-head span,
+body[data-screen="ladder"] .mitb-v2-road-head span{
+  display:block;
+  color:#e8c35c;
+  font-size:.51rem;
+  font-weight:1000;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+body[data-screen="ladder"] .mitb-v2-command h2,
+body[data-screen="ladder"] .mitb-v2-setup-head h2{
+  margin:3px 0 1px;
+  color:#f7f8fb;
+  font-size:1.18rem;
+  line-height:1.05;
+}
+body[data-screen="ladder"] .mitb-v2-command p,
+body[data-screen="ladder"] .mitb-v2-setup-head p{
+  margin:3px 0 0;
+  color:#9da4af;
+  font-size:.63rem;
+  line-height:1.3;
+}
+body[data-screen="ladder"] .mitb-v2-button{
+  min-height:52px;
+  padding:11px 17px;
+  border:1px solid #f5d265;
+  border-radius:15px;
+  background:linear-gradient(90deg,var(--mitb-gold),var(--mitb-gold-2));
+  color:#0b0c0e;
+  font-size:.69rem;
+  font-weight:1000;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  box-shadow:0 8px 22px rgba(214,164,39,.13);
+}
+body[data-screen="ladder"] .mitb-v2-button.secondary{background:#151419;color:#f5d56c;border-color:rgba(239,194,79,.48)}
+body[data-screen="ladder"] .mitb-v2-button.full{width:100%;margin-top:10px}
+body[data-screen="ladder"] .mitb-v2-button.restart{margin-top:0}
+body[data-screen="ladder"] .mitb-v2-setup .superstar-select-carousel{
+  margin-top:10px;
+  padding:4px 1px 7px;
+}
+body[data-screen="ladder"] .mitb-v2-road{
+  min-width:0;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  background:linear-gradient(180deg,#0e1117,#090b10);
+  padding:10px 0 11px;
+  overflow:hidden;
+}
+body[data-screen="ladder"] .mitb-v2-road-head{
+  padding:0 12px 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+body[data-screen="ladder"] .mitb-v2-road-head b{color:#f7f8fb;font-size:.61rem;letter-spacing:.05em}
+body[data-screen="ladder"] .mitb-v2-opponent-rail{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:126px;
+  gap:9px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:calc(50% - 63px);
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-x:contain;
+  padding:2px calc(50% - 63px) 6px;
+  scrollbar-width:none;
+}
+body[data-screen="ladder"] .mitb-v2-opponent-rail::-webkit-scrollbar{display:none}
+body[data-screen="ladder"] .mitb-v2-opponent{
+  position:relative;
+  width:126px;
+  min-width:126px;
+  scroll-snap-align:center;
+  display:grid;
+  grid-template-rows:auto auto;
+  gap:6px;
+  padding:7px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;
+  background:#0c0f14;
+  overflow:hidden;
+}
+body[data-screen="ladder"] .mitb-v2-opponent.current{
+  border-color:rgba(239,194,79,.9);
+  box-shadow:0 0 0 2px rgba(239,194,79,.10),0 10px 24px rgba(0,0,0,.34);
+  background:linear-gradient(180deg,#201a0d,#0d0f13 58%);
+}
+body[data-screen="ladder"] .mitb-v2-opponent.cleared{opacity:.58}
+body[data-screen="ladder"] .mitb-v2-opponent.upcoming{opacity:.82}
+body[data-screen="ladder"] .mitb-v2-level-badge{
+  position:absolute;
+  z-index:4;
+  left:6px;
+  top:6px;
+  width:27px;
+  height:27px;
+  display:grid;
+  place-items:center;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  background:#11151c;
+  color:#fff;
+  font-size:.65rem;
+  font-weight:1000;
+  box-shadow:0 3px 10px rgba(0,0,0,.4);
+}
+body[data-screen="ladder"] .mitb-v2-opponent.current .mitb-v2-level-badge{background:var(--mitb-gold);color:#111;border-color:#ffe38b}
+body[data-screen="ladder"] .mitb-v2-opponent-card{
+  min-height:176px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  border-radius:10px;
+}
+body[data-screen="ladder"] .mitb-v2-superstar-card{
+  width:108px!important;
+  max-width:108px!important;
+  height:auto!important;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.42));
+}
+body[data-screen="ladder"] .mitb-v2-opponent-copy{
+  min-width:0;
+  display:grid;
+  gap:2px;
+  text-align:center;
+  padding:0 1px 2px;
+}
+body[data-screen="ladder"] .mitb-v2-opponent-copy strong{
+  min-width:0;
+  color:#f4f5f7;
+  font-size:.61rem;
+  line-height:1.08;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body[data-screen="ladder"] .mitb-v2-opponent-copy span{
+  color:#7f8995;
+  font-size:.43rem;
+  font-weight:900;
+  letter-spacing:.1em;
+}
+body[data-screen="ladder"] .mitb-v2-opponent.current .mitb-v2-opponent-copy span{color:#efc24f}
+
+/* MITB hub CTA now uses the same compact event-button geometry as every other Live Event. */
+.live-events-hub .money-in-bank-live-card .live-tower-enter{
+  min-height:0!important;
+  padding:8px 9px!important;
+  border-radius:0!important;
+  clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)!important;
+  font-size:.45rem!important;
+}
+
+@media(max-width:600px){
+  body[data-screen="ladder"] .mitb-v2-screen{padding:8px 8px calc(86px + env(safe-area-inset-bottom));gap:8px}
+  body[data-screen="ladder"] .mitb-v2-hero{padding:12px 12px 11px;border-radius:17px}
+  body[data-screen="ladder"] .mitb-v2-hero h1 span{font-size:1.72rem}
+  body[data-screen="ladder"] .mitb-v2-hero h1 strong{font-size:2.7rem}
+  body[data-screen="ladder"] .mitb-v2-hero>p{font-size:.54rem}
+  body[data-screen="ladder"] .mitb-v2-summary{gap:5px;margin-top:10px}
+  body[data-screen="ladder"] .mitb-v2-summary>div{min-height:51px;padding:6px}
+  body[data-screen="ladder"] .mitb-v2-summary span{font-size:.34rem;letter-spacing:.08em}
+  body[data-screen="ladder"] .mitb-v2-summary b{font-size:.91rem}
+  body[data-screen="ladder"] .mitb-v2-command{grid-template-columns:1fr;gap:9px;padding:11px;border-radius:16px}
+  body[data-screen="ladder"] .mitb-v2-command .mitb-v2-button{width:100%}
+  body[data-screen="ladder"] .mitb-v2-button{min-height:48px;padding:9px 12px;font-size:.63rem}
+  body[data-screen="ladder"] .mitb-v2-road{border-radius:16px;padding-top:9px}
+  body[data-screen="ladder"] .mitb-v2-opponent-rail{grid-auto-columns:120px;scroll-padding-inline:calc(50% - 60px);padding-left:calc(50% - 60px);padding-right:calc(50% - 60px)}
+  body[data-screen="ladder"] .mitb-v2-opponent{width:120px;min-width:120px;padding:6px}
+  body[data-screen="ladder"] .mitb-v2-opponent-card{min-height:166px}
+  body[data-screen="ladder"] .mitb-v2-superstar-card{width:102px!important;max-width:102px!important}
+  body[data-screen="ladder"] .mitb-v2-opponent-copy strong{font-size:.58rem}
+  body[data-screen="ladder"] .mitb-v2-opponent-copy span{font-size:.41rem}
+}
+
+/* ========================================================================== */
+/* v0.13.54 — iPhone Screenshot Consolidation Pass                            */
+/* ========================================================================== */
+
+/* PACK SUMMARY — remove dead actions/sections, shrink the five pulls ~10%,
+   and give the single NEXT action the active pack theme instead of grey. */
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid{
+  gap:10px 12px!important;
+  padding-bottom:4px!important;
+}
+.streamlined-pack-summary .pack-summary-card.actual-card-summary{
+  width:min(36vw,149px)!important;
+  max-width:149px!important;
+}
+.streamlined-pack-summary .pack-summary-card.actual-card-summary.summary-center{
+  width:min(41.4vw,171px)!important;
+  max-width:171px!important;
+}
+.streamlined-pack-summary .pack-summary-badges{margin-top:5px!important;min-height:20px!important}
+.streamlined-pack-summary .pack-summary-key{margin-top:7px!important}
+.streamlined-pack-summary .pack-summary-next-row{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  margin-top:10px!important;
+}
+.streamlined-pack-summary .pack-theme-next,
+.focused-pack-upgrades .pack-theme-next{
+  width:min(330px,78%)!important;
+  min-height:48px!important;
+  margin-inline:auto!important;
+  color:#090b0f!important;
+  border-color:rgba(255,255,255,.28)!important;
+  box-shadow:0 10px 26px rgba(0,0,0,.26)!important;
+}
+body[data-set="hall-of-fame-series-1"] .pack-theme-next,
+.theme-hof .pack-theme-next{background:linear-gradient(90deg,#c59527,#f0d06c)!important}
+body[data-set="evolution-series-1"] .pack-theme-next,
+.theme-evolution .pack-theme-next{background:linear-gradient(90deg,#8545d8,#d85ac9)!important;color:#fff!important}
+body[data-set="survivor-series-series-1"] .pack-theme-next,
+.theme-survivor .pack-theme-next{background:linear-gradient(90deg,#d6483f,#ec8b45)!important;color:#fff!important}
+body[data-set="summerslam-series-1"] .pack-theme-next,
+.theme-summerslam .pack-theme-next{background:linear-gradient(90deg,#5b6ee8,#c04cb7)!important;color:#fff!important}
+
+/* POST-PACK DECK ASSISTANCE — only actual swaps, no second pack recap. */
+.focused-pack-upgrades{display:grid!important;gap:12px!important;padding-bottom:18px!important}
+.focused-pack-upgrades .section-title{margin-bottom:0!important}
+.pack-upgrade-swap{
+  display:grid!important;
+  gap:9px!important;
+  padding:12px!important;
+  border:1px solid rgba(92,216,255,.22)!important;
+  border-radius:15px!important;
+  background:linear-gradient(145deg,rgba(18,23,32,.98),rgba(7,9,13,.98))!important;
+}
+.pack-upgrade-swap>header{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:8px!important}
+.pack-upgrade-swap>header>div{display:grid!important;gap:2px!important}
+.pack-upgrade-swap>header span{font-size:.46rem!important;letter-spacing:.12em!important;color:#5bdcff!important;font-weight:1000!important}
+.pack-upgrade-swap>header b{font-size:.80rem!important;color:#f7f8fa!important}
+.pack-upgrade-swap>header em{font-style:normal!important;font-size:.48rem!important;font-weight:1000!important;letter-spacing:.1em!important;color:#62e39c!important}
+.pack-upgrade-swap>p{margin:0!important;font-size:.62rem!important;line-height:1.35!important;color:#9ba5b2!important}
+.upgrade-card-pair{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:6px!important;
+}
+.upgrade-card-choice{min-width:0!important;display:grid!important;justify-items:center!important;gap:5px!important;text-align:center!important}
+.upgrade-card-choice>small{font-size:.43rem!important;letter-spacing:.1em!important;font-weight:1000!important;color:#8c98a7!important}
+.upgrade-card-choice>strong{max-width:100%!important;font-size:.58rem!important;line-height:1.12!important;color:#f2f4f7!important}
+.upgrade-swap-card{width:min(29vw,128px)!important;max-width:128px!important;height:auto!important}
+.upgrade-swap-arrow{font-size:1.25rem!important;font-weight:1000!important;color:#f1c650!important;text-align:center!important}
+.upgrade-card-placeholder{width:min(29vw,128px)!important;aspect-ratio:2/3!important;display:grid!important;place-items:center!important;border:1px dashed rgba(255,255,255,.18)!important;border-radius:10px!important;color:#747f8c!important;font-size:.5rem!important}
+.upgrade-choice-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:7px!important}
+.upgrade-choice-actions button{min-height:42px!important;padding:7px 9px!important;font-size:.52rem!important;font-weight:1000!important}
+
+/* DECK LAB — one clear authored-blueprint action. */
+.deck-builder-actions.deck-builder-actions-simplified{display:grid!important;grid-template-columns:1fr!important;gap:9px!important}
+.deck-builder-actions-simplified #auto-build-deck,
+.deck-builder-actions-simplified #save-deck{width:100%!important;min-height:46px!important}
+
+/* LIVE EVENTS — cadence is communicated once in the hub header. */
+.live-events-hub .live-tower-timer{display:none!important}
+.live-events-hub .live-tower-hub-footer{justify-content:flex-start!important}
+.live-events-hub .live-tower-enter{min-width:0!important;width:auto!important}
+
+/* SEASON — smooth Free Booster card, readable countdown and reward road text. */
+body[data-screen="seasons"] .season-free-pack-cta.season-free-pack-strip{
+  border-radius:14px!important;
+  clip-path:none!important;
+  overflow:hidden!important;
+  border:1px solid rgba(190,125,255,.42)!important;
+  background:linear-gradient(180deg,#7040a0,#56307f)!important;
+}
+body[data-screen="seasons"] .season-free-pack-cta.season-free-pack-strip::before,
+body[data-screen="seasons"] .season-free-pack-cta.season-free-pack-strip::after,
+body[data-screen="seasons"] .season-free-pack-button::before,
+body[data-screen="seasons"] .season-free-pack-button::after{display:none!important}
+body[data-screen="seasons"] .season-free-pack-button{
+  border-radius:13px!important;
+  clip-path:none!important;
+  overflow:hidden!important;
+  background:linear-gradient(90deg,#6e3da2,#8049b0)!important;
+}
+
+/* CHALLENGES / SET MILESTONES — all eight roadmap rows remain visible. */
+.milestone-grid{display:grid!important;gap:8px!important}
+.premium-milestone-row{
+  display:grid!important;
+  grid-template-columns:48px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-height:82px!important;
+  padding:9px 10px!important;
+}
+.premium-milestone-row.locked{opacity:.78!important}
+.premium-milestone-row.claimed{opacity:.66!important}
+.milestone-copy{min-width:0!important;display:grid!important;grid-template-columns:1fr auto!important;align-items:center!important;gap:3px 8px!important}
+.milestone-copy>b{font-size:.80rem!important;line-height:1.05!important}
+.milestone-copy>span{font-size:.56rem!important;color:#aab2bd!important}
+.milestone-progress-track{
+  grid-column:1/-1!important;
+  height:7px!important;
+  overflow:hidden!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.08)!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+}
+.milestone-progress-track>i{display:block!important;height:100%!important;border-radius:inherit!important;background:linear-gradient(90deg,#8c58ec,#e8c454)!important}
+.milestone-copy>small{grid-column:1/-1!important;font-size:.46rem!important;color:#8f99a5!important;letter-spacing:.04em!important}
+.premium-milestone-row>button{min-width:86px!important;min-height:44px!important;padding:8px 10px!important;font-size:.59rem!important}
+.premium-milestone-row.locked>button{background:#151820!important;color:#9aa4b2!important;border-color:rgba(255,255,255,.12)!important;box-shadow:none!important}
+.premium-milestone-row.claimed>button{background:#11161a!important;color:#67d996!important;border-color:rgba(91,218,142,.2)!important;box-shadow:none!important}
+
+/* STORE — no redundant featured-set banner; one premium full-width Superstar offer per row. */
+.store-superstar-product-list{
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:12px!important;
+  overflow:visible!important;
+  padding:0!important;
+}
+.store-superstar-product-list .store-booster-offer.store-superstar-offer{
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  scroll-snap-align:none!important;
+  grid-template-columns:120px minmax(0,1fr)!important;
+  gap:12px!important;
+  padding:11px!important;
+  overflow:hidden!important;
+}
+.store-superstar-product-art{
+  min-width:0!important;
+  min-height:172px!important;
+  display:grid!important;
+  place-items:center!important;
+  overflow:hidden!important;
+}
+.store-superstar-product-art .store-superstar-art{
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+.store-superstar-product-art .store-shelf-collectible,
+.store-superstar-product-art .ccg-card{
+  width:108px!important;
+  max-width:108px!important;
+  height:auto!important;
+}
+.store-superstar-offer .store-offer-price{align-self:end!important}
+.store-superstar-offer .store-offer-price .start-match{width:100%!important}
+
+/* COLLECTION + CATALOGUE — reclaimed internal-tab space and iPhone-readable secondary copy. */
+.collection-quickbar.collection-quickbar-standalone{display:block!important}
+.collection-quickbar-standalone .collection-quick-stats{width:100%!important}
+
+@media(max-width:600px){
+  /* Pack summary */
+  .streamlined-pack-summary{padding-inline:9px!important}
+  .streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid{gap:8px 9px!important}
+  .streamlined-pack-summary .pack-summary-card.actual-card-summary{width:min(36vw,145px)!important;max-width:145px!important}
+  .streamlined-pack-summary .pack-summary-card.actual-card-summary.summary-center{width:min(41vw,166px)!important;max-width:166px!important}
+  .streamlined-pack-summary .pack-summary-badges{font-size:.48rem!important}
+  .streamlined-pack-summary .pack-theme-next{width:min(300px,78%)!important}
+
+  /* Post-pack recommendation card pairs */
+  .pack-upgrade-swap{padding:10px!important}
+  .upgrade-swap-card,.upgrade-card-placeholder{width:min(28vw,118px)!important;max-width:118px!important}
+  .pack-upgrade-swap>header b{font-size:.74rem!important}
+  .pack-upgrade-swap>p{font-size:.58rem!important}
+
+  /* Season stat tiles: same geometry, readable text. */
+  body[data-screen="seasons"] .season-road-command>div{
+    padding:6px 7px!important;
+    overflow:hidden!important;
+  }
+  body[data-screen="seasons"] .season-road-command small{
+    font-size:.40rem!important;
+    line-height:1!important;
+    letter-spacing:.075em!important;
+  }
+  body[data-screen="seasons"] .season-road-command strong{
+    font-size:.94rem!important;
+    line-height:.98!important;
+  }
+  body[data-screen="seasons"] .season-road-command span{
+    font-size:.40rem!important;
+    line-height:1.02!important;
+    letter-spacing:.02em!important;
+  }
+  body[data-screen="seasons"] .season-free-pack-button strong{
+    font-size:.68rem!important;
+    line-height:1!important;
+    letter-spacing:.035em!important;
+  }
+  body[data-screen="seasons"] .season-road-node{
+    /* preserve the existing row height; reclaim internal whitespace only */
+    padding:5px 6px!important;
+  }
+  body[data-screen="seasons"] .season-road-reward{
+    grid-template-columns:27px minmax(0,1fr) auto!important;
+    gap:5px!important;
+  }
+  body[data-screen="seasons"] .season-road-reward strong{
+    font-size:.68rem!important;
+    line-height:.96!important;
+    white-space:normal!important;
+    display:-webkit-box!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    overflow:hidden!important;
+  }
+  body[data-screen="seasons"] .season-road-reward small{
+    font-size:.43rem!important;
+    line-height:1.02!important;
+  }
+  body[data-screen="seasons"] .season-road-reward em{
+    font-size:.42rem!important;
+    line-height:1!important;
+    letter-spacing:.055em!important;
+    padding-right:2px!important;
+  }
+  body[data-screen="seasons"] .season-road-tier small{font-size:.32rem!important}
+  body[data-screen="seasons"] .season-road-tier b{font-size:.90rem!important}
+
+  /* Eight milestone roadmap rows can scroll vertically; each row itself stays compact. */
+  .set-milestone-heading{grid-template-columns:90px minmax(0,1fr)!important}
+  .premium-milestone-row{grid-template-columns:43px minmax(0,1fr) 78px!important;gap:8px!important;min-height:78px!important;padding:8px!important}
+  .premium-milestone-row b,.milestone-copy>b{font-size:.74rem!important}
+  .milestone-copy>span{font-size:.53rem!important}
+  .milestone-copy>small{font-size:.43rem!important}
+  .premium-milestone-row>button{min-width:78px!important;min-height:42px!important;padding:7px!important;font-size:.55rem!important}
+
+  /* Store Superstar offers mirror the booster geometry instead of a 2-up rail. */
+  .store-superstar-product-list .store-booster-offer.store-superstar-offer{
+    grid-template-columns:104px minmax(0,1fr)!important;
+    gap:9px!important;
+    padding:10px!important;
+  }
+  .store-superstar-product-art{min-height:154px!important}
+  .store-superstar-product-art .store-shelf-collectible,
+  .store-superstar-product-art .ccg-card{width:92px!important;max-width:92px!important}
+  .store-superstar-offer .store-offer-copy h3{font-size:1.10rem!important}
+  .store-superstar-offer .store-offer-price strong{font-size:1.0rem!important}
+
+  /* My Collection / Catalogue legibility without growing the panels. */
+  .collection-quick-stats b,.catalogue-master-stats b{font-size:.94rem!important;line-height:1!important}
+  .collection-quick-stats small,.catalogue-master-stats small{
+    font-size:.43rem!important;
+    line-height:1!important;
+    letter-spacing:.055em!important;
+  }
+  .collection-set-rail .nav-button{font-size:.62rem!important;line-height:1!important;padding-inline:9px!important}
+  .collection-toolbar-head .collection-mode-label{font-size:.70rem!important;line-height:1!important}
+  .collection-toolbar-head .collection-count{font-size:.70rem!important;line-height:1!important}
+  .collection-filter-drawer summary>span{font-size:.60rem!important}
+  .collection-filter-drawer summary>small{font-size:.52rem!important;line-height:1!important;letter-spacing:.025em!important}
+  .collection-toolbar input[type="search"]{font-size:.74rem!important}
+}
+
+@media(max-width:390px){
+  body[data-screen="seasons"] .season-road-command small{font-size:.37rem!important}
+  body[data-screen="seasons"] .season-road-command strong{font-size:.88rem!important}
+  body[data-screen="seasons"] .season-road-command span{font-size:.37rem!important}
+  body[data-screen="seasons"] .season-road-reward strong{font-size:.64rem!important}
+  body[data-screen="seasons"] .season-road-reward small{font-size:.40rem!important}
+  body[data-screen="seasons"] .season-road-reward em{font-size:.39rem!important}
+  .collection-set-rail .nav-button{font-size:.58rem!important}
+}

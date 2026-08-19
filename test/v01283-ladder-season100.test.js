@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.51';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.51';
+import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.55';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.55';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -34,12 +34,11 @@ test('v0.12.84 Season 1 interleaves UP and only currently released booster rewar
   assert.deepEqual([...sets].sort(), [...LAUNCH_LIVE_SET_IDS].sort());
 });
 
-test('v0.12.84 Climb the Ladder uses one featured fight panel and premium 2x4 progress grid',()=>{
-  const ladder=app.slice(app.indexOf('function renderLadder()'),app.indexOf('function beginChampionshipRoad()'));
-  assert.match(ladder,/redesigned-ladder-command/);
-  assert.match(ladder,/ladder-bottom-shell/);
-  assert.match(ladder,/redesigned-ladder-progress/);
-  assert.match(ladder,/redesigned-ladder-node/);
-  assert.match(css,/\.redesigned-ladder-screen \.redesigned-ladder-progress\{[\s\S]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
-  assert.match(css,/\.redesigned-ladder-screen \.redesigned-ladder-command/);
+test('v0.13.53 Money in the Bank supersedes the old featured-fight / 2x4 ladder presentation',()=>{
+  const ladder=app.slice(app.indexOf('function renderLadder()'),app.indexOf('function beginKingOfTheRing()'));
+  assert.match(ladder,/mitb-v2-command/);
+  assert.match(ladder,/mitb-v2-road/);
+  assert.match(ladder,/mitb-v2-opponent/);
+  assert.doesNotMatch(ladder,/redesigned-ladder-command|ladder-bottom-shell|redesigned-ladder-node/);
+  assert.match(css,/body\[data-screen="ladder"\] \.mitb-v2-road\{/);
 });

@@ -1,7 +1,8 @@
-import { decks } from "./decks.js?v=0.13.51";
-import { collectionCards } from "./collection.js?v=0.13.51";
-import { superstars } from "./superstars.js?v=0.13.51";
-import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.51";
+import { decks } from "./decks.js?v=0.13.55";
+import { collectionCards } from "./collection.js?v=0.13.55";
+import { superstars } from "./superstars.js?v=0.13.55";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.55";
+import { applyFoilGameplay, foilDamageBonusFor } from "./foil.js?v=0.13.55";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -35,10 +36,7 @@ function preferOwnedFoils(profile, draft) {
 
 function playableCard(card, foil = false) {
   if (!card) return null;
-  // Foil is a presentation / collector finish only. Runtime gameplay values
-  // stay identical to the authored Normal card so printed card numbers remain
-  // authoritative everywhere in WWE Legacy.
-  return foil ? { ...card, foil: true } : card;
+  return applyFoilGameplay(card, foil);
 }
 
 export function buildPlayableDeck(profile, sid) {
@@ -108,14 +106,16 @@ export function findPackUpgrades(profile, pack = []) {
         const star = starById.get(sid);
         if (!star || star.entranceId !== card.id || selectedEntranceId(profile, sid) === card.id) continue;
         if (!entranceEligibilityForSuperstar(star, card).legal) continue;
+        const currentEntranceId = selectedEntranceId(profile, sid);
         upgrades.push({
           type: "entrance",
           superstarId: sid,
           pull,
           cardId: card.id,
+          removeId: currentEntranceId,
           reason: `${card.name} is ${star.name}'s authored Entrance and is recommended over the shared Amazing Entrance.`,
           addName: card.name,
-          removeName: byId.get(selectedEntranceId(profile, sid))?.name ?? "Current Entrance"
+          removeName: byId.get(currentEntranceId)?.name ?? "Current Entrance"
         });
       }
       continue;
@@ -125,8 +125,8 @@ export function findPackUpgrades(profile, pack = []) {
       let draft = working.get(sid);
       if (!draft) continue;
 
-      // Foils remain cosmetic only, but Deck Assistance prefers an owned Foil
-      // copy whenever it is choosing which finish to place into a saved deck.
+      // Deck Assistance always prefers an owned Foil finish. Positive-Damage Moves
+      // are true chase upgrades because the Foil copy deals +1 Damage.
       let blueprintAdded = false;
 
       // Ownership-gated blueprint restoration. Only fire when this exact pack
@@ -139,15 +139,16 @@ export function findPackUpgrades(profile, pack = []) {
         if (swap) {
           const removed = byId.get(swap.removeId);
           const addedAsFoil = !!swap.next[swap.index]?.foil;
-          upgrades.push({ type:"blueprint", superstarId:sid, pull, cardId:card.id, removeId:swap.removeId, reason:`Restores a newly-owned copy from ${starById.get(sid)?.name ?? "this Superstar"}'s recommended build while keeping the deck valid.${addedAsFoil ? " Uses your owned Foil copy for presentation." : ""}`, addName:`${addedAsFoil ? "Foil " : ""}${card.name}`, removeName:removed?.name ?? swap.removeId });
+          upgrades.push({ type:"blueprint", superstarId:sid, pull, cardId:card.id, removeId:swap.removeId, reason:`Restores a newly-owned copy from ${starById.get(sid)?.name ?? "this Superstar"}'s recommended build while keeping the deck valid.${addedAsFoil ? (foilDamageBonusFor(card) ? " Uses your owned Foil copy for +1 Damage." : " Uses your owned Foil copy.") : ""}`, addName:`${addedAsFoil ? "Foil " : ""}${card.name}`, removeName:removed?.name ?? swap.removeId });
           draft = swap.next; working.set(sid, swap.next); blueprintAdded = true;
         }
       }
 
-      // A Foil finish is not stronger, but if this pack card is already used as
-      // Normal and the player owns an unused Foil copy, offer the cosmetic swap.
+      // If the deck already uses this card as Normal and the player owns an
+      // unused Foil copy, always surface the Foil as the preferred finish.
       if (!blueprintAdded && canPreferFoil(profile, draft, card.id)) {
-        upgrades.push({ type:"foil-preference", superstarId:sid, pull, cardId:card.id, reason:"Uses your owned Foil copy for presentation. Normal and Foil gameplay values are identical.", addName:`Foil ${card.name}`, removeName:`Normal ${card.name}` });
+        const damageBonus = foilDamageBonusFor(card);
+        upgrades.push({ type:"foil-preference", superstarId:sid, pull, cardId:card.id, reason:damageBonus ? `Foil ${card.name} deals +${damageBonus} Damage over the Normal copy.` : `Uses your owned Foil ${card.name} as the preferred chase finish.`, addName:`Foil ${card.name}`, removeName:`Normal ${card.name}` });
         const cosmetic = draft.map(normalizedEntry);
         const index = cosmetic.findIndex(entry => entry.id === card.id && !entry.foil);
         if (index >= 0) cosmetic[index] = { id: card.id, foil: true };

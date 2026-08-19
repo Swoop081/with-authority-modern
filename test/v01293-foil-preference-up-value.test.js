@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.51';
-import { decks } from '../js/data/decks.js?v=0.13.51';
-import { collectionCards } from '../js/data/collection.js?v=0.13.51';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.51';
-import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.51';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.51';
-import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.51';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.55';
+import { decks } from '../js/data/decks.js?v=0.13.55';
+import { collectionCards } from '../js/data/collection.js?v=0.13.55';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.55';
+import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.55';
+import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.55';
+import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.55';
 
 const byId = new Map(collectionCards.map(card=>[card.id,card]));
 
@@ -57,7 +57,7 @@ test('v0.13.34 maxed duplicates convert for 1/2/3/4 UP by rarity and Foil uses t
   const p=createProfile('cm-punk');
   const setId='summerslam-series-1';
   const eligible=collectionCards.filter(c=>c.setId===setId&&boosterEligible(c));
-  for(const c of eligible) p.ownedCards[c.id]={normal:0,foil:cardOwnershipCap(c)};
+  for(const c of eligible){ const cap=cardOwnershipCap(c); p.ownedCards[c.id]=cap===5?{normal:cap,foil:cap}:{normal:0,foil:cap}; }
   grantBooster(p,1,setId);
   const pack=openBooster(p,()=>0.42,setId);
   assert.equal(pack[0].foil,true);

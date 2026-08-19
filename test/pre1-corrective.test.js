@@ -32,7 +32,7 @@ test('v0.12.15 booster flow is sealed pack -> rip -> reveal -> summary', () => {
   assert.match(app, /TAP TO RIP/);
   assert.match(app, /booster-reveal-atmosphere/);
   assert.match(app, /booster-reveal-meta/);
-  assert.match(app, /OPEN ANOTHER PACK/);
+  assert.match(app, /id="pack-summary-next"[\s\S]*>NEXT<\/button>/);
   assert.match(css, /sealedPackFloat/);
   assert.match(css, /packRipSlam/);
   assert.match(css, /premiumCardReveal/);
@@ -47,8 +47,8 @@ test('v0.12.15 removes known 0.12.14 presentation misses', () => {
   assert.match(app, /ccg-rules-set-logo/);
 });
 
-import { superstars } from '../js/data/superstars.js?v=0.13.51';
-import { decks } from '../js/data/decks.js?v=0.13.51';
+import { superstars } from '../js/data/superstars.js?v=0.13.55';
+import { decks } from '../js/data/decks.js?v=0.13.55';
 
 function methodSupply(star) {
   const supply = { agility: 0, strength: 0, strike: 0, technical: 0 };
