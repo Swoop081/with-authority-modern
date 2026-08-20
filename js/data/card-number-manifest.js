@@ -3363,7 +3363,25 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
   {"id":"side-kick","setId":"raw-series-1","cardNumber":71,"cardCode":"RAW1-071"},
   {"id":"vertical-boston-crab","setId":"evolution-series-1","cardNumber":75,"cardCode":"EVO1-075"},
   {"id":"diving-shoulder-block","setId":"hall-of-fame-series-1","cardNumber":94,"cardCode":"HOF1-094"},
-  {"id":"springboard-roundhouse-kick","setId":"smackdown-series-1","cardNumber":38,"cardCode":"SD1-038"}
+  {"id":"springboard-roundhouse-kick","setId":"smackdown-series-1","cardNumber":38,"cardCode":"SD1-038"},
+  {"id":"snapmare","setId":"raw-series-1","cardNumber":72,"cardCode":"RAW1-072"},
+  {"id":"scoop-slam","setId":"raw-series-1","cardNumber":73,"cardCode":"RAW1-073"},
+  {"id":"chop-block","setId":"raw-series-1","cardNumber":74,"cardCode":"RAW1-074"},
+  {"id":"spinning-backfist","setId":"raw-series-1","cardNumber":75,"cardCode":"RAW1-075"},
+  {"id":"single-leg-dropkick","setId":"raw-series-1","cardNumber":76,"cardCode":"RAW1-076"},
+  {"id":"back-rake","setId":"raw-series-1","cardNumber":77,"cardCode":"RAW1-077"},
+  {"id":"arm-wrench","setId":"raw-series-1","cardNumber":78,"cardCode":"RAW1-078"},
+  {"id":"knee-lift","setId":"raw-series-1","cardNumber":79,"cardCode":"RAW1-079"},
+  {"id":"t-bone-suplex","setId":"raw-series-1","cardNumber":80,"cardCode":"RAW1-080"},
+  {"id":"gutwrench-suplex","setId":"raw-series-1","cardNumber":81,"cardCode":"RAW1-081"},
+  {"id":"michinoku-driver","setId":"raw-series-1","cardNumber":82,"cardCode":"RAW1-082"},
+  {"id":"pumphandle-slam","setId":"raw-series-1","cardNumber":83,"cardCode":"RAW1-083"},
+  {"id":"bicycle-kick","setId":"raw-series-1","cardNumber":84,"cardCode":"RAW1-084"},
+  {"id":"rolling-elbow","setId":"raw-series-1","cardNumber":85,"cardCode":"RAW1-085"},
+  {"id":"springboard-forearm","setId":"raw-series-1","cardNumber":86,"cardCode":"RAW1-086"},
+  {"id":"dragon-sleeper","setId":"raw-series-1","cardNumber":87,"cardCode":"RAW1-087"},
+  {"id":"camel-clutch","setId":"raw-series-1","cardNumber":88,"cardCode":"RAW1-088"},
+  {"id":"slingshot-suplex","setId":"raw-series-1","cardNumber":89,"cardCode":"RAW1-089"}
 
 
 ]);

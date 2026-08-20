@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.13.75";
-import { healthRatio, healthZone } from "./health.js?v=0.13.75";
+import { totalMomentum } from "./utils.js?v=0.13.77";
+import { healthRatio, healthZone } from "./health.js?v=0.13.77";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -23,7 +23,8 @@ export function onceTooOftenEligibility(state,playerId,incoming,card){
  if(state?.phase!=="COUNTER")return fail("Not a Counter window");
  if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
  if(card?.kind!=="action"||card?.effect?.type!=="onceTooOften")return fail("Not Once Too Often");
- if(!incoming||incoming.kind!=="move")return fail("No incoming Move");
+ if(!incoming||incoming.kind!=="move")return fail("Once Too Often only answers an incoming Move");
+ if(incoming.id==="once-too-often"||incoming.effect?.type==="onceTooOften")return fail("Once Too Often cannot answer another Once Too Often");
  if(state?.proposedMove?.isCounterAttack)return fail("Counter-attacks cannot be answered by Once Too Often");
  const attackerId=state?.proposedMove?.attackerId;
  const history=state?.players?.[attackerId]?.events?.connectedCardIdsMatch??{};

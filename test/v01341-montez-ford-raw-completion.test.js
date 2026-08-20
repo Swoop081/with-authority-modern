@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards, linkedGameplayCards } from '../js/data/content.js?v=0.13.75';
-import { collectionCards } from '../js/data/collection.js?v=0.13.75';
-import { decks } from '../js/data/decks.js?v=0.13.75';
-import { superstars } from '../js/data/superstars.js?v=0.13.75';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.75';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.75';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.75';
+import { allGameplayCards, linkedGameplayCards } from '../js/data/content.js?v=0.13.77';
+import { collectionCards } from '../js/data/collection.js?v=0.13.77';
+import { decks } from '../js/data/decks.js?v=0.13.77';
+import { superstars } from '../js/data/superstars.js?v=0.13.77';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.77';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.77';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.77';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const linked=id=>linkedGameplayCards.find(c=>c.id===id);
@@ -61,7 +61,7 @@ test('v0.13.41 Montez Ford completes the eight-Superstar RAW Series 1 collector 
     'superstar-montez-ford':'RAW1-070'
   };
   for(const [id,code] of Object.entries(expectedCodes)) assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
-  assert.equal(CARD_IDS_BY_SET['raw-series-1'].length,71);
+  assert.equal(CARD_IDS_BY_SET['raw-series-1'].length,89);
   assert.equal(Object.values(superstars).filter(s=>s.setId==='raw-series-1').length,8);
 });
 

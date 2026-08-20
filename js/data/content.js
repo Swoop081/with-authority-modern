@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.75";
+import { enrichCounterState } from "./counter-states.js?v=0.13.77";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -12188,6 +12188,443 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "running-aerial"
+  },
+  {
+    "id": "snapmare",
+    "name": "Snapmare",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control"
+  },
+  {
+    "id": "scoop-slam",
+    "name": "Scoop Slam",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strength": 1
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "chop-block",
+    "name": "Chop Block",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. On connect, deal +1 persistent Leg damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "legs",
+      "pressure": 1
+    },
+    "effects": [],
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "spinning-backfist",
+    "name": "Spinning Backfist",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "single-leg-dropkick",
+    "name": "Single-Leg Dropkick",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "back-rake",
+    "name": "Back Rake",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. On connect, deal +1 persistent Back damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "back",
+      "pressure": 1
+    },
+    "effects": [],
+    "counterState": "rear-control"
+  },
+  {
+    "id": "arm-wrench",
+    "name": "Arm Wrench",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 2,
+    "damage": 2,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. On connect, deal +1 persistent Arm damage.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "bodyDamage": {
+      "bodyPart": "arms",
+      "pressure": 1
+    },
+    "effects": [],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "knee-lift",
+    "name": "Knee Lift",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control"
+  },
+  {
+    "id": "t-bone-suplex",
+    "name": "T-Bone Suplex",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "gutwrench-suplex",
+    "name": "Gutwrench Suplex",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "michinoku-driver",
+    "name": "Michinoku Driver",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "pumphandle-slam",
+    "name": "Pumphandle Slam",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 5,
+    "damage": 8,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "bicycle-kick",
+    "name": "Bicycle Kick",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "leg-extended"
+  },
+  {
+    "id": "rolling-elbow",
+    "name": "Rolling Elbow",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "springboard-forearm",
+    "name": "Springboard Forearm",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "running-aerial"
+  },
+  {
+    "id": "dragon-sleeper",
+    "name": "Dragon Sleeper",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Standing opponent only. Submission. +4 persistent Head damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "standingOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 4
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
+  },
+  {
+    "id": "camel-clutch",
+    "name": "Camel Clutch",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 0,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "submission",
+    "method": "strength",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only. Submission. +3 persistent Back damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "back",
+      "pressure": 3
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "back"
+  },
+  {
+    "id": "slingshot-suplex",
+    "name": "Slingshot Suplex",
+    "kind": "move",
+    "setId": "raw-series-1",
+    "cost": 4,
+    "damage": 7,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "body-elevated"
   }
 
 

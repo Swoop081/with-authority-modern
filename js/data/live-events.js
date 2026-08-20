@@ -1,5 +1,5 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.75";
-import { superstars } from "./superstars.js?v=0.13.75";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.77";
+import { superstars } from "./superstars.js?v=0.13.77";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -151,6 +151,18 @@ export const THREE_DAY_TOWERS = Object.freeze([
     opponentPool: ["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "rhea-ripley", "roman-reigns", "gunther", "oba-femi"]
   }
 ]);
+
+export const RAW_LIVE_EVENT = Object.freeze({
+  id: "raw-live-spotlight",
+  name: "RAW LIVE",
+  kicker: "RAW SERIES 1 · LIVE NOW",
+  description: "A five-match RAW Series 1 tower with RAW boosters on every victory and a RAW Super Pack on clear.",
+  method: "strike",
+  heroId: "logan-paul",
+  rewardSetId: "raw-series-1",
+  logoMode: "raw",
+  opponentPool: ["logan-paul", "raquel-rodriguez", "sol-ruca", "chad-gable", "roxanne-perez", "austin-theory", "montez-ford", "joe-hendry"]
+});
 
 export const WEEKLY_TOWERS = Object.freeze([
   {
@@ -368,6 +380,31 @@ function themedDailyTower(now, slot, templates, offset = 0) {
     clearBoosters: 1
   });
 }
+function rawLiveTower(profile, now = new Date()) {
+  const start = localDayStart(now);
+  if (start.getDay() === 1 || isUnreleasedSetId("raw-series-1", now)) return null;
+  const key = `raw-live:${dateKey(start)}:${RAW_LIVE_EVENT.id}`;
+  const existing = profile?.liveEventTowers?.states?.[key];
+  const lastUsedAt = profile?.liveEventTowers?.rawLiveLastUsedAt ? new Date(profile.liveEventTowers.rawLiveLastUsedAt) : null;
+  const cooldownReadyAtDayStart = !lastUsedAt || Number.isNaN(lastUsedAt.getTime()) || (start.getTime() - lastUsedAt.getTime()) >= DAY_MS;
+  // Once the player starts today's RAW LIVE, keep that exact tower visible for
+  // the rest of its day even though the 24-hour cooldown immediately begins.
+  if (!existing && !cooldownReadyAtDayStart) return null;
+  const nextAt = new Date(start.getTime());
+  nextAt.setDate(nextAt.getDate() + 1);
+  const event = cloneEvent(RAW_LIVE_EVENT, "raw-series-1", now);
+  return towerDescriptor({
+    key,
+    event,
+    startsAt: start,
+    nextAt,
+    cadence: "raw-live",
+    cadenceLabel: "24 HOURS ONLY",
+    winUp: 0,
+    clearBoosters: 1
+  });
+}
+
 function birthdayTowers(now) {
   const start = localDayStart(now);
   const month = start.getMonth() + 1;
@@ -384,16 +421,18 @@ function birthdayTowers(now) {
   });
 }
 
-export function activeLiveEventTowers(now = new Date()) {
+export function activeLiveEventTowers(now = new Date(), profile = null) {
+  const rawLive = profile ? rawLiveTower(profile, now) : null;
   return [
     primaryDailyTower(now),
     themedDailyTower(now, "feature-a", THREE_DAY_TOWERS, 0),
     themedDailyTower(now, "feature-b", WEEKLY_TOWERS, 1),
+    rawLive,
     ...birthdayTowers(now)
-  ].map(tower => descriptorRemaining(tower, now));
+  ].filter(Boolean).map(tower => descriptorRemaining(tower, now));
 }
-export function liveEventTowerByKey(towerKey, now = new Date()) {
-  return activeLiveEventTowers(now).find(tower => tower.key === towerKey) ?? null;
+export function liveEventTowerByKey(towerKey, now = new Date(), profile = null) {
+  return activeLiveEventTowers(now, profile).find(tower => tower.key === towerKey) ?? null;
 }
 
 function ensureTowerStore(profile, now = new Date()) {
@@ -402,6 +441,7 @@ function ensureTowerStore(profile, now = new Date()) {
   store.states ??= {};
   store.totalClears ??= profile.weeklyLiveEvents?.totalClears ?? 0;
   store.completedKeys ??= [];
+  store.rawLiveLastUsedAt ??= null;
   profile.weeklyLiveEvents ??= { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: store.totalClears, bestStage: 0, completedWeeks: [] };
   profile.weeklyLiveEvents.totalClears = Math.max(profile.weeklyLiveEvents.totalClears ?? 0, store.totalClears ?? 0);
 
@@ -468,7 +508,7 @@ function repairLiveEventRunReleaseGate(profile, tower, state, now = new Date()) 
 }
 
 export function liveEventTowerState(profile, towerKey, now = new Date()) {
-  const tower = liveEventTowerByKey(towerKey, now);
+  const tower = liveEventTowerByKey(towerKey, now, profile);
   if (!tower) return null;
   const state = stateForTower(profile, tower, now);
   repairLiveEventRunReleaseGate(profile, tower, state, now);
@@ -506,6 +546,10 @@ export function startLiveEventTower(profile, towerKey, superstarId, eligibleOppo
   const { tower, state } = entry;
   if (state.cleared) throw new Error("This Live Event is already complete.");
   if (state.activeRun?.status === "active") return state.activeRun;
+  if (tower.event.id === RAW_LIVE_EVENT.id) {
+    const store = ensureTowerStore(profile, now);
+    store.rawLiveLastUsedAt = (now instanceof Date ? now : new Date(now)).toISOString();
+  }
   const opponents = chooseOpponents(tower, superstarId, eligibleOpponentIds, rng);
   if (opponents.length !== LIVE_EVENT_LENGTH) throw new Error("Not enough eligible opponents for this Live Event.");
   state.activeRun = {

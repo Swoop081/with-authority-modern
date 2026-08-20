@@ -8991,3 +8991,114 @@ body[data-screen="boosters"] .vault-pack-quantity{position:absolute!important;to
   .raw-splash-raquel{transform:translate(-55%,-47%) rotate(-4deg)}
   .raw-splash-logan{transform:translate(-35%,-56%) rotate(8deg)}
 }
+
+/* v0.13.76 — Live Event containment, booster badge safe area, and batch deck assistance. */
+.focused-pack-upgrades .pack-apply-all{
+  width:100%!important;
+  margin-top:10px!important;
+  min-height:58px!important;
+  background:linear-gradient(180deg,#ff8240,#f36d2f)!important;
+  border-color:#ff9b68!important;
+  color:#fff!important;
+  box-shadow:0 10px 24px rgba(243,109,47,.24)!important;
+}
+
+/* Quantity badges live fully inside the product tile and no longer straddle a clipped corner. */
+body[data-screen="boosters"] .vault-pack-product{
+  clip-path:none!important;
+  overflow:visible!important;
+}
+body[data-screen="boosters"] .vault-pack-quantity{
+  top:18px!important;
+  right:18px!important;
+  left:auto!important;
+  min-width:40px!important;
+  height:36px!important;
+  padding:0 10px!important;
+  transform:none!important;
+  overflow:visible!important;
+  contain:none!important;
+}
+@media(max-width:600px) and (orientation:portrait){
+  body[data-screen="boosters"] .booster-vault-shelf{padding-inline:12px!important;box-sizing:border-box!important}
+  body[data-screen="boosters"] .vault-pack-product{min-width:0!important;box-sizing:border-box!important}
+  body[data-screen="boosters"] .vault-pack-quantity{top:14px!important;right:14px!important;min-width:38px!important;height:34px!important;padding-inline:9px!important}
+}
+
+/* Live Event details must never terminate before the route cards. The shared detail shell
+   now owns natural vertical scrolling above the fixed nav instead of clipping descendants. */
+@media(max-width:600px) and (orientation:portrait){
+  body[data-screen="live-events"][data-live-view="detail"] main{
+    height:auto!important;
+    min-height:calc(100svh - var(--legacy-chrome-h,96px))!important;
+    max-height:none!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    padding-bottom:calc(var(--fixed-nav-h,78px) + env(safe-area-inset-bottom) + 22px)!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] #game{
+    height:auto!important;
+    min-height:100%!important;
+    overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail,
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail.is-active-tower,
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail.is-setup-tower,
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail.is-cleared-tower{
+    height:auto!important;
+    min-height:100%!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding-bottom:12px!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body,
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail.is-setup-tower .live-tower-detail-body{
+    height:auto!important;
+    min-height:0!important;
+    display:grid!important;
+    grid-template-rows:auto auto!important;
+    overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-player.live-tower-selector-panel{
+    height:auto!important;
+    min-height:330px!important;
+    overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .superstar-select-carousel{
+    height:auto!important;
+    min-height:220px!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route{
+    height:auto!important;
+    min-height:330px!important;
+    overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-strip{
+    height:auto!important;
+    min-height:270px!important;
+    overflow-x:auto!important;
+    overflow-y:visible!important;
+    align-items:start!important;
+    padding-bottom:10px!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card{
+    height:auto!important;
+    min-height:258px!important;
+    max-height:none!important;
+    overflow:visible!important;
+    grid-template-rows:auto auto auto!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-superstar{
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-superstar .ccg-card{
+    width:min(36vw,146px)!important;
+    max-width:146px!important;
+    height:auto!important;
+    max-height:none!important;
+  }
+}

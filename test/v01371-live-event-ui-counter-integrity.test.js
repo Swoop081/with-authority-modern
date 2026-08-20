@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { canCounter, counterEligibility } from '../js/engine/rules.js?v=0.13.75';
+import { canCounter, counterEligibility } from '../js/engine/rules.js?v=0.13.77';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');

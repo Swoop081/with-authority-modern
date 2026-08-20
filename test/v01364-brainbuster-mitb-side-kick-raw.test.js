@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.75";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=0.13.75";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.77";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=0.13.77";
 
 const brainbuster=allGameplayCards.find(c=>c.id==="brainbuster");
 const sideKick=allGameplayCards.find(c=>c.id==="side-kick");
@@ -33,8 +33,8 @@ test("v0.13.64 adds Side Kick as RAW1-071 shared Common",()=>{
   assert.equal(sideKick.rulesText,"Shared.");
   assert.equal(CARD_NUMBER_BY_ID["side-kick"].cardCode,"RAW1-071");
   assert.equal(CARD_NUMBER_BY_ID["side-kick"].cardNumber,71);
-  assert.equal(CARD_IDS_BY_SET["raw-series-1"].length,71);
-  assert.equal(CARD_IDS_BY_SET["raw-series-1"].at(-1),"side-kick");
+  assert.equal(CARD_IDS_BY_SET["raw-series-1"].length,89);
+  assert.equal(CARD_IDS_BY_SET["raw-series-1"][70],"side-kick");
 });
 
 test("v0.13.64 Card Studio exposes Brainbuster under MITB and Side Kick under RAW",()=>{
