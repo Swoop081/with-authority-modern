@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.65';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.65';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.65';
-import { superstars } from '../js/data/superstars.js?v=0.13.65';
-import { decks } from '../js/data/decks.js?v=0.13.65';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.70';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.70';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.70';
+import { superstars } from '../js/data/superstars.js?v=0.13.70';
+import { decks } from '../js/data/decks.js?v=0.13.70';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const rng=()=>0.42;
@@ -27,7 +27,7 @@ test('v0.12.42 genuine submission holds deal zero printed HP damage and only per
   assert.equal(byId('octopus-hold').submission.pressure,4);
 });
 
-test('v0.12.42 Blockbuster and Warrior Diving Shoulder Block are impact aerial Moves, not submissions',()=>{
+test("v0.12.42 Blockbuster and Warrior's Shoulder Block are impact aerial Moves, not submissions",()=>{
   for(const id of ['blockbuster','ultimate-warrior-diving-shoulder-block']){
     const c=byId(id);assert.equal(c.moveType,'aerial',id);assert.equal(c.submission,undefined,id);assert.equal(c.submissionTarget,undefined,id);
   }

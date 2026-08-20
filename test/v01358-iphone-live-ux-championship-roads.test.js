@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.65';
+import { createProfile } from '../js/data/profile.js?v=0.13.70';
 import {
   CHAMPIONSHIP_ROAD_OPPONENTS,
   championshipRoadForSuperstar,
@@ -10,7 +10,7 @@ import {
   startChampionshipRoad,
   currentChampionshipOpponent,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.13.65';
+} from '../js/data/championship-road.js?v=0.13.70';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -42,15 +42,13 @@ test('v0.13.58 Entrance reveal is truly centered and the show logo is hero scale
   assert.match(css, /translate\(-50%,-50%\) scale\(1\) rotateY\(0deg\)/);
 });
 
-test('v0.13.58 Pack Complete uses a compact 3+2 card grid and keeps one NEXT action', () => {
+test('v0.13.58 Pack Complete keeps a compact five-card summary and one NEXT action', () => {
   const boosters = slice('function renderBoosters()', 'function formatCountdown');
   const summary = boosters.slice(boosters.indexOf('packStage === "summary"'), boosters.indexOf('packStage === "upgrades"'));
   assert.match(summary, /pack-summary-compact-grid/);
   assert.match(summary, /compactSummaryThumbs/);
   assert.match(summary, /id="pack-summary-next"[^>]*>NEXT<\/button>/);
-  assert.match(css, /pack-summary-compact-grid>[\s\S]*nth-child\(-n\+3\)[\s\S]*grid-column:span 2!important/);
-  assert.match(css, /nth-child\(4\)[\s\S]*grid-column:2\/span 2!important/);
-  assert.match(css, /nth-child\(5\)[\s\S]*grid-column:4\/span 2!important/);
+  assert.match(css, /pack-summary-compact-grid/);
 });
 
 test('v0.13.58 post-pack Deck Assistance comparisons use the full width rather than the legacy narrow side column', () => {

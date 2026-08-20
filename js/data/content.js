@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.65";
+import { enrichCounterState } from "./counter-states.js?v=0.13.70";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -3194,7 +3194,7 @@ export const allGameplayCards = [
   },
   {
     "id": "ultimate-warrior-diving-shoulder-block",
-    "name": "Diving Shoulder Block",
+    "name": "Warrior's Shoulder Block",
     "kind": "move",
     "setId": "hall-of-fame-series-1",
     "cost": 5,
@@ -3567,7 +3567,7 @@ export const allGameplayCards = [
   },
   {
     "id": "razor-s-edge",
-    "name": "Razor's Edge",
+    "name": "Rhea’s Crucifix Powerbomb",
     "kind": "move",
     "setId": "evolution-series-1",
     "cost": 7,
@@ -7496,7 +7496,7 @@ export const allGameplayCards = [
   },
   {
     "id": "damian-priest-razors-edge",
-    "name": "Razor’s Edge",
+    "name": "Priest’s Crucifix Powerbomb",
     "kind": "move",
     "setId": "smackdown-series-1",
     "cost": 8,
