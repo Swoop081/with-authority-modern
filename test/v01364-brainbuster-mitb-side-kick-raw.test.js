@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.77";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=0.13.77";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.81";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=0.13.81";
 
 const brainbuster=allGameplayCards.find(c=>c.id==="brainbuster");
 const sideKick=allGameplayCards.find(c=>c.id==="side-kick");
@@ -14,8 +14,9 @@ test("v0.13.64 relocates Brainbuster to Money in the Bank without changing gamep
   assert.equal(CARD_NUMBER_BY_ID.brainbuster.cardNumber,38);
   assert.equal(CARD_IDS_BY_SET["money-in-the-bank-series-1"].length,38);
   assert.equal(CARD_IDS_BY_SET["money-in-the-bank-series-1"].at(-1),"brainbuster");
-  assert.equal(CARD_IDS_BY_SET["new-generation-series-1"].length,28);
-  assert.equal(CARD_IDS_BY_SET["new-generation-series-1"].at(-1),"superstar-diesel");
+  assert.deepEqual(CARD_IDS_BY_SET["new-generation-series-1"].slice(0,28).slice(-7),["diesel-snake-eyes","diesel-big-boot","diesel-sidewalk-slam","diesel-jackknife-powerbomb","entrance-diesel","special-diesel","superstar-diesel"]);
+  assert.equal(CARD_IDS_BY_SET["new-generation-series-1"].slice(0,28).includes("brainbuster"),false);
+  assert.equal(CARD_IDS_BY_SET["new-generation-series-1"].slice(0,28).at(-1),"superstar-diesel");
 });
 
 test("v0.13.64 adds Side Kick as RAW1-071 shared Common",()=>{

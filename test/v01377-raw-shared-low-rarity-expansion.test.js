@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.77';
-import { collectionCards } from '../js/data/collection.js?v=0.13.77';
-import { decks } from '../js/data/decks.js?v=0.13.77';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.77';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.77';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
+import { collectionCards } from '../js/data/collection.js?v=0.13.81';
+import { decks } from '../js/data/decks.js?v=0.13.81';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.81';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.81';
 
 const expected = [
   ['snapmare','Snapmare',72,1,2,3,'technical',{technical:1},'grapple','front-control'],
@@ -46,7 +46,9 @@ test('v0.13.77 adds RAW1-072 through RAW1-089 as the approved shared booster-onl
     assert.equal(card.counterState,counterState,id);
     assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,`RAW1-${String(num).padStart(3,'0')}`,id);
     assert.equal(boosterEligible(card),true,`${id} is live in RAW boosters`);
-    assert.equal(Object.values(decks).some(deck => deck.some(c => c.id === id)),false,`${id} stays booster-only`);
+    const inRecommended=Object.entries(decks).filter(([,deck])=>deck.some(c=>c.id===id)).map(([sid])=>sid);
+    if(id==='back-rake') assert.deepEqual(inRecommended,['doink-the-clown'],'Back Rake is the approved Doink blueprint exception while remaining booster-acquired');
+    else assert.deepEqual(inRecommended,[],`${id} stays out of authored recommended decks`);
   }
   assert.equal(CARD_IDS_BY_SET['raw-series-1'].length,89);
   assert.equal(collectionCards.filter(c=>c.setId==='raw-series-1').length,89);

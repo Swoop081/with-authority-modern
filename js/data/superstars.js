@@ -1662,7 +1662,9 @@ export const superstars = {
     "name": "Logan Paul",
     "nickname": "The Maverick",
     "setId": "raw-series-1",
-    "factionTags": ["vision"],
+    "factionTags": [
+      "vision"
+    ],
     "era": null,
     "seasonExclusive": false,
     "cardId": "superstar-logan-paul",
@@ -2734,7 +2736,9 @@ export const superstars = {
     "name": "Bron Breakker",
     "nickname": "The Dog-Faced Gremlin",
     "setId": "survivor-series-series-1",
-    "factionTags": ["vision"],
+    "factionTags": [
+      "vision"
+    ],
     "era": null,
     "seasonExclusive": false,
     "developmentOnly": true,
@@ -3454,17 +3458,21 @@ export const superstars = {
     "special": {
       "type": "roxanneProdigy",
       "maxCost": 4,
-      "methods": ["agility", "technical"],
+      "methods": [
+        "agility",
+        "technical"
+      ],
       "discount": 1
     }
-  }
-  ,
+  },
   "austinTheory": {
     "id": "austin-theory",
     "name": "Austin Theory",
     "nickname": "The Future Is Now",
     "setId": "raw-series-1",
-    "factionTags": ["vision"],
+    "factionTags": [
+      "vision"
+    ],
     "era": null,
     "seasonExclusive": false,
     "cardId": "superstar-austin-theory",
@@ -3524,7 +3532,7 @@ export const superstars = {
       "type": "austinTheoryAllDay",
       "drawOnConnect": 1
     }
-  }  ,
+  },
   "montezFord": {
     "id": "montez-ford",
     "name": "Montez Ford",
@@ -3589,7 +3597,7 @@ export const superstars = {
       "type": "angeloDawkinsRunIn",
       "linkedCardId": "linked-street-profits-revelation"
     }
-  }  ,
+  },
   "lolaVice": {
     "id": "lola-vice",
     "name": "Lola Vice",
@@ -3655,8 +3663,7 @@ export const superstars = {
       "opponentAdrenaline": -2,
       "drawIfZero": 1
     }
-  }
-  ,
+  },
   "dragonLee": {
     "id": "dragon-lee",
     "name": "Dragon Lee",
@@ -3720,12 +3727,13 @@ export const superstars = {
     "special": {
       "type": "dragonLuchaLegacy",
       "maxCost": 5,
-      "methods": ["agility", "technical"],
+      "methods": [
+        "agility",
+        "technical"
+      ],
       "discount": 1
     }
-  }
-
-  ,
+  },
   "hijoDelVikingo": {
     "id": "hijo-del-vikingo",
     "name": "Hijo del Vikingo",
@@ -3778,7 +3786,10 @@ export const superstars = {
       "rarity": 4,
       "superstarId": "hijo-del-vikingo",
       "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
-      "preMatchMomentum": {"agility": 1, "technical": 1},
+      "preMatchMomentum": {
+        "agility": 1,
+        "technical": 1
+      },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
@@ -3787,10 +3798,7 @@ export const superstars = {
       "adrenaline": 1,
       "draw": 1
     }
-  }
-
-
-  ,
+  },
   "mrIguana": {
     "id": "mr-iguana",
     "name": "Mr. Iguana",
@@ -3845,7 +3853,10 @@ export const superstars = {
       "rarity": 4,
       "superstarId": "mr-iguana",
       "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
-      "preMatchMomentum": {"agility": 1, "technical": 1},
+      "preMatchMomentum": {
+        "agility": 1,
+        "technical": 1
+      },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
@@ -3854,10 +3865,7 @@ export const superstars = {
       "discount": 1,
       "opponentAdrenaline": -1
     }
-  }
-
-
-  ,
+  },
   "bretHart": {
     "id": "bret-hart",
     "name": "Bret Hart",
@@ -3913,7 +3921,10 @@ export const superstars = {
       "rarity": 4,
       "superstarId": "bret-hart",
       "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
-      "preMatchMomentum": {"technical": 1, "strength": 1},
+      "preMatchMomentum": {
+        "technical": 1,
+        "strength": 1
+      },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
@@ -3979,7 +3990,10 @@ export const superstars = {
       "rarity": 4,
       "superstarId": "shawn-michaels",
       "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
-      "preMatchMomentum": {"agility": 1, "strike": 1},
+      "preMatchMomentum": {
+        "agility": 1,
+        "strike": 1
+      },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
@@ -3987,10 +4001,7 @@ export const superstars = {
       "type": "hbkShowstopper",
       "discount": 1
     }
-  }
-
-
-  ,
+  },
   "razorRamon": {
     "id": "razor-ramon",
     "name": "Razor Ramon",
@@ -4002,28 +4013,64 @@ export const superstars = {
     "cardId": "superstar-razor-ramon",
     "entranceId": "entrance-razor-ramon",
     "specialId": "special-razor-ramon",
-    "leadOffIds": ["momentum-strength","momentum-strike","fallaway-slam","punch","running-powerslam"],
-    "signatures": ["razor-ramon-fallaway-slam","razor-ramon-running-powerslam","razor-ramon-chokeslam","razor-ramon-razors-edge"],
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "fallaway-slam",
+      "punch",
+      "running-powerslam"
+    ],
+    "signatures": [
+      "razor-ramon-fallaway-slam",
+      "razor-ramon-running-powerslam",
+      "razor-ramon-chokeslam",
+      "razor-ramon-razors-edge"
+    ],
     "archetype": "strength-strike-bad-guy",
     "hp": 64,
-    "methodLimits": {"strength": null,"strike": 4,"technical": 3,"agility": 1},
-    "starterMomentum": {"strength": 6,"strike": 4,"technical": 2},
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "technical": 3,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "strike": 4,
+      "technical": 2
+    },
     "ability": {
       "name": "Oozing Machismo",
       "text": "Once per match, when Razor connects with a Strength Move costing 5 or more, gain +1 Adrenaline.",
-      "trigger": {"type": "connectMethodCost","method": "strength","minCost": 5,"maxUses": 1,"adrenaline": 1},
+      "trigger": {
+        "type": "connectMethodCost",
+        "method": "strength",
+        "minCost": 5,
+        "maxUses": 1,
+        "adrenaline": 1
+      },
       "maxUses": 1
     },
     "entrance": {
-      "id": "entrance-razor-ramon","name": "The Bad Guy","kind": "entrance","setId": "new-generation-series-1","rarity": 4,"superstarId": "razor-ramon",
+      "id": "entrance-razor-ramon",
+      "name": "The Bad Guy",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "razor-ramon",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
-      "preMatchMomentum": {"strength": 1,"strike": 1},"preMatchAdrenaline": 1,"delayedTurn5": false
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
     },
-    "special": {"type": "exclusiveTrademarkTutor","discount": 1}
-  }
-
-
-  ,
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    }
+  },
   "diesel": {
     "id": "diesel",
     "name": "Diesel",
@@ -4035,25 +4082,310 @@ export const superstars = {
     "cardId": "superstar-diesel",
     "entranceId": "entrance-diesel",
     "specialId": "special-diesel",
-    "leadOffIds": ["momentum-strength","momentum-strike","big-boot","sidewalk-slam","punch"],
-    "signatures": ["diesel-snake-eyes","diesel-big-boot","diesel-sidewalk-slam","diesel-jackknife-powerbomb"],
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "big-boot",
+      "sidewalk-slam",
+      "punch"
+    ],
+    "signatures": [
+      "diesel-snake-eyes",
+      "diesel-big-boot",
+      "diesel-sidewalk-slam",
+      "diesel-jackknife-powerbomb"
+    ],
     "archetype": "strength-strike-big-daddy-cool",
     "hp": 69,
-    "methodLimits": {"strength": null,"strike": 4,"technical": 2,"agility": 1},
-    "starterMomentum": {"strength": 7,"strike": 4,"technical": 1},
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "technical": 2,
+      "agility": 1
+    },
+    "starterMomentum": {
+      "strength": 7,
+      "strike": 4,
+      "technical": 1
+    },
     "ability": {
       "name": "Big Daddy Cool",
       "text": "Once per match, after Diesel takes 8+ Damage from a connected Move, gain +1 Adrenaline.",
-      "trigger": {"type": "takeDamage","minDamage": 8,"maxUses": 1,"adrenaline": 1},
+      "trigger": {
+        "type": "takeDamage",
+        "minDamage": 8,
+        "maxUses": 1,
+        "adrenaline": 1
+      },
       "maxUses": 1
     },
     "entrance": {
-      "id": "entrance-diesel","name": "Diesel Power","kind": "entrance","setId": "new-generation-series-1","rarity": 4,"superstarId": "diesel",
+      "id": "entrance-diesel",
+      "name": "Diesel Power",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "diesel",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
-      "preMatchMomentum": {"strength": 1,"strike": 1},"preMatchAdrenaline": 1,"delayedTurn5": false
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
     },
-    "special": {"type": "exclusiveTrademarkTutor","discount": 1}
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    }
+  },
+  "doinkTheClown": {
+    "id": "doink-the-clown",
+    "name": "Doink the Clown",
+    "nickname": "The Evil Clown",
+    "setId": "new-generation-series-1",
+    "era": "1993–1995 New Generation",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-doink-the-clown",
+    "entranceId": "entrance-doink-the-clown",
+    "specialId": "special-doink-the-clown",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "headlock-takeover",
+      "monkey-flip",
+      "eye-rake"
+    ],
+    "signatures": [
+      "doink-drop-toe-hold",
+      "doink-stump-puller",
+      "doink-flying-body-press",
+      "doink-whoopee-cushion"
+    ],
+    "archetype": "technical-agility-trickster",
+    "hp": 60,
+    "methodLimits": {
+      "technical": null,
+      "agility": 4,
+      "strike": 2,
+      "strength": 0
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "agility": 4,
+      "strike": 2
+    },
+    "ability": {
+      "name": "The Joke’s on You!",
+      "text": "The first 2 times each match Doink successfully Counters an opponent’s Move, draw 1 page.",
+      "trigger": {
+        "type": "counterDraw",
+        "maxUses": 2,
+        "draw": 1
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-doink-the-clown",
+      "name": "Send in the Clown",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "doink-the-clown",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "agility": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "doinkClowningAround",
+      "look": 5
+    }
+  },
+  "yokozuna": {
+    "id": "yokozuna",
+    "name": "Yokozuna",
+    "nickname": "The Great Yokozuna",
+    "setId": "new-generation-series-1",
+    "era": "1993–1996 New Generation",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-yokozuna",
+    "entranceId": "entrance-yokozuna",
+    "specialId": "special-yokozuna",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "forearm-club",
+      "running-shoulder-block",
+      "body-slam"
+    ],
+    "signatures": [
+      "yokozuna-savate-kick",
+      "yokozuna-belly-to-belly-suplex",
+      "yokozuna-running-leg-drop",
+      "yokozuna-banzai-drop"
+    ],
+    "archetype": "super-heavyweight-powerhouse",
+    "hp": 71,
+    "methodLimits": {
+      "strength": null,
+      "strike": 3,
+      "technical": 1,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "strength": 8,
+      "strike": 3,
+      "technical": 1
+    },
+    "ability": {
+      "name": "Super Heavyweight",
+      "text": "The first 2 times each match an opponent Connects with a non-Finisher Move that would ground Yokozuna, Yokozuna remains standing.",
+      "trigger": {
+        "type": "superHeavyweightGroundResist",
+        "maxUses": 2
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-yokozuna",
+      "name": "The Great Yokozuna",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "yokozuna",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "yokozunaBanzai",
+      "name": "Banzai Drop",
+      "discount": 2
+    }
+  },
+  "owenHart": {
+    "id": "owen-hart",
+    "name": "Owen Hart",
+    "nickname": "The King of Harts",
+    "setId": "new-generation-series-1",
+    "era": "1994–1997 New Generation",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-owen-hart",
+    "entranceId": "entrance-owen-hart",
+    "specialId": "special-owen-hart",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "fisherman-suplex",
+      "dropkick-to-the-knee",
+      "schoolboy-roll-up"
+    ],
+    "signatures": [
+      "owen-hart-enzuigiri",
+      "owen-hart-dragon-suplex",
+      "owen-hart-missile-dropkick",
+      "owen-hart-sharpshooter"
+    ],
+    "archetype": "technical-all-rounder-flash-pin",
+    "hp": 62,
+    "methodLimits": {
+      "technical": null,
+      "agility": 4,
+      "strike": 4,
+      "strength": 2
+    },
+    "starterMomentum": {
+      "technical": 5,
+      "agility": 3,
+      "strike": 3,
+      "strength": 1
+    },
+    "ability": {
+      "name": "King of Harts",
+      "text": "The first time each match Owen fails a Pin attempt, Owen retains Control instead of transferring Control to the opponent.",
+      "trigger": { "type": "retainControlAfterFailedPin", "maxUses": 1 },
+      "maxUses": 1
+    },
+    "entrance": {
+      "id": "entrance-owen-hart",
+      "name": "The King of Harts",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "owen-hart",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": { "technical": 1, "agility": 1 },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": { "type": "owenSlammyAwards", "look": 7, "maxChoices": 2, "maxRarity": 2 }
+  },
+  "britishBulldog": {
+    "id": "british-bulldog",
+    "name": "British Bulldog",
+    "nickname": "The British Bulldog",
+    "setId": "new-generation-series-1",
+    "era": "1992–1997 New Generation",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-british-bulldog",
+    "entranceId": "entrance-british-bulldog",
+    "specialId": "special-british-bulldog",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-technical",
+      "hammerlock-takedown",
+      "running-shoulder-block",
+      "side-suplex"
+    ],
+    "signatures": [
+      "british-bulldog-delayed-vertical-suplex",
+      "british-bulldog-crucifix",
+      "british-bulldog-military-press-slam",
+      "british-bulldog-running-powerslam"
+    ],
+    "archetype": "strength-technical-hybrid",
+    "hp": 67,
+    "methodLimits": {
+      "strength": null,
+      "technical": 4,
+      "strike": 2,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "technical": 4,
+      "strike": 1,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Power & Technique",
+      "text": "The first time each Control sequence British Bulldog Connects with a Technical Move, his next Strength Move costs 1 less that Control sequence.",
+      "trigger": { "type": "bulldogPowerAndTechnique", "discount": 1 }
+    },
+    "entrance": {
+      "id": "entrance-british-bulldog",
+      "name": "Rule Britannia",
+      "kind": "entrance",
+      "setId": "new-generation-series-1",
+      "rarity": 4,
+      "superstarId": "british-bulldog",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": { "strength": 1, "technical": 1 },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": { "type": "bulldogMadeInBritain", "methods": ["strength", "technical"], "maxRarity": 2 }
   }
-
-
 };

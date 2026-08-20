@@ -3381,8 +3381,61 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
   {"id":"springboard-forearm","setId":"raw-series-1","cardNumber":86,"cardCode":"RAW1-086"},
   {"id":"dragon-sleeper","setId":"raw-series-1","cardNumber":87,"cardCode":"RAW1-087"},
   {"id":"camel-clutch","setId":"raw-series-1","cardNumber":88,"cardCode":"RAW1-088"},
-  {"id":"slingshot-suplex","setId":"raw-series-1","cardNumber":89,"cardCode":"RAW1-089"}
+  {"id":"slingshot-suplex","setId":"raw-series-1","cardNumber":89,"cardCode":"RAW1-089"},
+  {"id":"monkey-flip","setId":"new-generation-series-1","cardNumber":29,"cardCode":"NG1-029"},
+  {"id":"headlock-takeover","setId":"new-generation-series-1","cardNumber":30,"cardCode":"NG1-030"},
+  {"id":"eye-rake","setId":"new-generation-series-1","cardNumber":31,"cardCode":"NG1-031"},
+  {"id":"hair-pull-takedown","setId":"new-generation-series-1","cardNumber":32,"cardCode":"NG1-032"},
+  {"id":"schoolboy-roll-up","setId":"new-generation-series-1","cardNumber":33,"cardCode":"NG1-033"},
+  {"id":"reverse-chinlock","setId":"new-generation-series-1","cardNumber":34,"cardCode":"NG1-034"},
+  {"id":"doink-drop-toe-hold","setId":"new-generation-series-1","cardNumber":35,"cardCode":"NG1-035"},
+  {"id":"doink-stump-puller","setId":"new-generation-series-1","cardNumber":36,"cardCode":"NG1-036"},
+  {"id":"doink-flying-body-press","setId":"new-generation-series-1","cardNumber":37,"cardCode":"NG1-037"},
+  {"id":"doink-whoopee-cushion","setId":"new-generation-series-1","cardNumber":38,"cardCode":"NG1-038"},
+  {"id":"entrance-doink-the-clown","setId":"new-generation-series-1","cardNumber":39,"cardCode":"NG1-039"},
+  {"id":"special-doink-the-clown","setId":"new-generation-series-1","cardNumber":40,"cardCode":"NG1-040"},
+  {"id":"superstar-doink-the-clown","setId":"new-generation-series-1","cardNumber":41,"cardCode":"NG1-041"}
 
+  ,{"id":"forearm-club","setId":"new-generation-series-1","cardNumber":42,"cardCode":"NG1-042"}
+  ,{"id":"running-shoulder-block","setId":"new-generation-series-1","cardNumber":43,"cardCode":"NG1-043"}
+  ,{"id":"side-suplex","setId":"new-generation-series-1","cardNumber":44,"cardCode":"NG1-044"}
+  ,{"id":"club-to-the-back","setId":"new-generation-series-1","cardNumber":45,"cardCode":"NG1-045"}
+  ,{"id":"running-body-avalanche","setId":"new-generation-series-1","cardNumber":46,"cardCode":"NG1-046"}
+  ,{"id":"nerve-hold","setId":"new-generation-series-1","cardNumber":47,"cardCode":"NG1-047"}
+  ,{"id":"yokozuna-savate-kick","setId":"new-generation-series-1","cardNumber":48,"cardCode":"NG1-048"}
+  ,{"id":"yokozuna-belly-to-belly-suplex","setId":"new-generation-series-1","cardNumber":49,"cardCode":"NG1-049"}
+  ,{"id":"yokozuna-running-leg-drop","setId":"new-generation-series-1","cardNumber":50,"cardCode":"NG1-050"}
+  ,{"id":"yokozuna-banzai-drop","setId":"new-generation-series-1","cardNumber":51,"cardCode":"NG1-051"}
+  ,{"id":"entrance-yokozuna","setId":"new-generation-series-1","cardNumber":52,"cardCode":"NG1-052"}
+  ,{"id":"special-yokozuna","setId":"new-generation-series-1","cardNumber":53,"cardCode":"NG1-053"}
+  ,{"id":"superstar-yokozuna","setId":"new-generation-series-1","cardNumber":54,"cardCode":"NG1-054"}
+
+  ,{"id":"fisherman-suplex","setId":"new-generation-series-1","cardNumber":55,"cardCode":"NG1-055"}
+  ,{"id":"wheel-kick","setId":"new-generation-series-1","cardNumber":56,"cardCode":"NG1-056"}
+  ,{"id":"gutbuster","setId":"new-generation-series-1","cardNumber":57,"cardCode":"NG1-057"}
+  ,{"id":"dropkick-to-the-knee","setId":"new-generation-series-1","cardNumber":58,"cardCode":"NG1-058"}
+  ,{"id":"bridging-german-suplex","setId":"new-generation-series-1","cardNumber":59,"cardCode":"NG1-059"}
+  ,{"id":"step-up-enzuigiri","setId":"new-generation-series-1","cardNumber":60,"cardCode":"NG1-060"}
+  ,{"id":"owen-hart-enzuigiri","setId":"new-generation-series-1","cardNumber":61,"cardCode":"NG1-061"}
+  ,{"id":"owen-hart-dragon-suplex","setId":"new-generation-series-1","cardNumber":62,"cardCode":"NG1-062"}
+  ,{"id":"owen-hart-missile-dropkick","setId":"new-generation-series-1","cardNumber":63,"cardCode":"NG1-063"}
+  ,{"id":"owen-hart-sharpshooter","setId":"new-generation-series-1","cardNumber":64,"cardCode":"NG1-064"}
+  ,{"id":"entrance-owen-hart","setId":"new-generation-series-1","cardNumber":65,"cardCode":"NG1-065"}
+  ,{"id":"special-owen-hart","setId":"new-generation-series-1","cardNumber":66,"cardCode":"NG1-066"}
+  ,{"id":"superstar-owen-hart","setId":"new-generation-series-1","cardNumber":67,"cardCode":"NG1-067"}
+  ,{"id":"standing-dropkick","setId":"new-generation-series-1","cardNumber":68,"cardCode":"NG1-068"}
+  ,{"id":"hammerlock-takedown","setId":"new-generation-series-1","cardNumber":69,"cardCode":"NG1-069"}
+  ,{"id":"running-knee-lift","setId":"new-generation-series-1","cardNumber":70,"cardCode":"NG1-070"}
+  ,{"id":"shoulder-breaker","setId":"new-generation-series-1","cardNumber":71,"cardCode":"NG1-071"}
+  ,{"id":"front-powerslam","setId":"new-generation-series-1","cardNumber":72,"cardCode":"NG1-072"}
+  ,{"id":"full-nelson","setId":"new-generation-series-1","cardNumber":73,"cardCode":"NG1-073"}
+  ,{"id":"british-bulldog-delayed-vertical-suplex","setId":"new-generation-series-1","cardNumber":74,"cardCode":"NG1-074"}
+  ,{"id":"british-bulldog-crucifix","setId":"new-generation-series-1","cardNumber":75,"cardCode":"NG1-075"}
+  ,{"id":"british-bulldog-military-press-slam","setId":"new-generation-series-1","cardNumber":76,"cardCode":"NG1-076"}
+  ,{"id":"british-bulldog-running-powerslam","setId":"new-generation-series-1","cardNumber":77,"cardCode":"NG1-077"}
+  ,{"id":"entrance-british-bulldog","setId":"new-generation-series-1","cardNumber":78,"cardCode":"NG1-078"}
+  ,{"id":"special-british-bulldog","setId":"new-generation-series-1","cardNumber":79,"cardCode":"NG1-079"}
+  ,{"id":"superstar-british-bulldog","setId":"new-generation-series-1","cardNumber":80,"cardCode":"NG1-080"}
 
 ]);
 

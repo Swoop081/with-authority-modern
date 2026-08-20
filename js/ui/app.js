@@ -1,39 +1,39 @@
-import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.77";
-import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.13.77";
-import { superstars } from "../data/superstars.js?v=0.13.77";
-import { decks } from "../data/decks.js?v=0.13.77";
-import { sets } from "../data/sets.js?v=0.13.77";
-import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.77";
-import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.77";
-import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.77";
-import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.13.77";
-import { openBooster, openSuperPack, openLadderCompletionPack, openChampionshipPack, grantBooster, grantVictoryBooster, boosterCreditsFor, superPackCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.77";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.77";
-import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.77";
-import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.77";
-import { applyFoilGameplay, foilDamageBonusFor } from "../data/foil.js?v=0.13.77";
-import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.77";
-import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.77";
-import { totalMomentum } from "../engine/utils.js?v=0.13.77";
-import { healthZone } from "../engine/health.js?v=0.13.77";
-import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.77";
-import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.77";
-import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.13.77";
-import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.77";
-import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.77";
-import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.77";
-import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.77";
-import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.77";
-import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.77";
-import { COLLECTION_MILESTONES, FOIL_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.77";
-import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.77";
-import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.77";
-import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.77";
-import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.77";
-import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.77";
-import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.77";
-import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.77";
-import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.77";
+import { assetUrl, BUILD_VERSION } from "../config/build.js?v=0.13.81";
+import { fetchLatestBuild, isNewerBuild, updateNavigationUrl } from "../config/update.js?v=0.13.81";
+import { superstars } from "../data/superstars.js?v=0.13.81";
+import { decks } from "../data/decks.js?v=0.13.81";
+import { sets } from "../data/sets.js?v=0.13.81";
+import { playerReleasedCollectibleSetIds, isPlayerReleasedSetId, isPlayerVisibleSuperstar } from "../data/release.js?v=0.13.81";
+import { collectionCards, setCollection, setCollections, cardsForSet } from "../data/collection.js?v=0.13.81";
+import { artworkFor, superstarArtwork, menuSuperstarPhotoFor, finalBossRockMenuArtwork, superstarCardArtFor, superstarHeadshotFor, finishedCardArtFor, legacyFinishedCardArtFor, layeredCardArtFor } from "../data/artwork.js?v=0.13.81";
+import { STARTER_CHOICES, createProfile, hasSuperstar, loadProfile, saveProfile, resetProfile, setDeckAssistance, ownedCount } from "../data/profile.js?v=0.13.81";
+import { openBooster, openSuperPack, openLadderCompletionPack, openChampionshipPack, grantBooster, grantVictoryBooster, boosterCreditsFor, superPackCreditsFor, finalizePackUniversePoints } from "../data/boosters.js?v=0.13.81";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeSuperstars, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../data/store.js?v=0.13.81";
+import { randomExhibitionOpponent } from "../data/matchmaking.js?v=0.13.81";
+import { buildPlayableDeck, findPackUpgrades, applyUpgrade } from "../data/deck-assistant.js?v=0.13.81";
+import { applyFoilGameplay, foilDamageBonusFor } from "../data/foil.js?v=0.13.81";
+import { MatchEngine } from "../engine/MatchEngine.js?v=0.13.81";
+import { canPlayMomentum, canPlayEntrance, canPlayAction, canPlaySupport, canPlayManager, canPlaySpecial, effectiveTotalMomentum, moveEligibility, canCounter, counterEligibility, autoCounterEligibility, autoCounterCost, canAttemptPin, canPlayPinEscape, submissionThreshold, canReturnToRing, canFollowOutside } from "../engine/rules.js?v=0.13.81";
+import { totalMomentum } from "../engine/utils.js?v=0.13.81";
+import { healthZone } from "../engine/health.js?v=0.13.81";
+import { decisionOwner } from "../ai/WrestlingAI.js?v=0.13.81";
+import { advanceCpuUntilHuman } from "./turn-driver.js?v=0.13.81";
+import { reconstructCurrentPlayPile } from "./play-pile.js?v=0.13.81";
+import { LADDER_LIVES, LADDER_LENGTH, ladderState, startLadderRun, currentLadderOpponent, recordLadderMatch } from "../data/ladder.js?v=0.13.81";
+import { KING_OF_THE_RING_ROUNDS, kingOfTheRingState, startKingOfTheRing, currentKingOfTheRingOpponent, recordKingOfTheRingMatch, prepareKingOfTheRingReward, markKingOfTheRingCoronationSeen, claimKingOfTheRingReward, resetKingOfTheRing } from "../data/king-of-the-ring.js?v=0.13.81";
+import { CHAMPIONSHIP_ROAD_LENGTH, CHAMPIONSHIP_STAGES, CHAMPIONSHIP_DIFFICULTY_ORDER, CHAMPIONSHIP_DIFFICULTIES, CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS, championshipRoadState, championshipRoadForSuperstar, selectChampionshipRoadSuperstar, championshipDifficultyUnlocked, championshipRoadDifficultyModifier, championshipRoadSectionForStage, startChampionshipRoad, currentChampionshipOpponent, recordChampionshipMatch, resetChampionshipRoad } from "../data/championship-road.js?v=0.13.81";
+import { LIVE_EVENT_LENGTH, LIVE_EVENT_WIN_UP, LIVE_EVENT_CLEAR_BOOSTERS, activeLiveEventTowers, liveEventTowerByKey, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, currentLiveEventTowerStage, recordLiveEventTowerMatch, liveEventRotation, liveEventStage, weeklyLiveEventState } from "../data/live-events.js?v=0.13.81";
+import { challengeState, claimChallenge, recordCompletedMatchChallenges } from "../data/challenges.js?v=0.13.81";
+import { CAREER_MODES, careerRecord, achievementProgress, recordCareerMatch, refreshCareerAchievements } from "../data/career.js?v=0.13.81";
+import { COLLECTION_MILESTONES, FOIL_MILESTONES, setProgressState, collectionProgress, availableMilestoneRewards, claimMilestone } from "../data/set-progression.js?v=0.13.81";
+import { MOVE_TYPE_LABELS } from "../data/move-types.js?v=0.13.81";
+import { COUNTER_STATE_LABELS, SUBMISSION_TARGET_LABELS } from "../data/counter-states.js?v=0.13.81";
+import { CATALOGUE_PAGE_SIZE, defaultCatalogueFilters, catalogueOptions, filterAndSortCatalogue, superstarIdsForCard, isSharedCard } from "../data/catalogue.js?v=0.13.81";
+import { DECK_LAB_CATEGORIES, createDeckDraft, recommendedDeckDraft, optimizeDeck, aggregateDeck, eligibleOwnedCards, allOwnedEntrances, ownedCardsForCategory, addCardToDraft, removeCardFromDraft, replaceLeadOffSlot, validateDeckDraft, materializeDraft, leadOffIds, buildOwnedRecommendedDraft, buildBestOwnedRecommendedDraft, recommendedDeckComparison, recommendedEntranceId, recommendedDeckMissingCount, autoFillOwnedDraft, recommendedCategoryCounts, currentCategoryCounts, cardEligibilityForSuperstar, entranceEligibilityForSuperstar, selectedEntranceId, setSelectedEntrance, ownedTotal, categoryForCard } from "../data/deck-builder.js?v=0.13.81";
+import { RECOMMENDED_DECK_SHAPE } from "../data/deck-health.js?v=0.13.81";
+import { SEASON_1, SEASON_TIER_COUNT, XP_PER_TIER, MATCH_XP, seasonState, seasonTier, seasonLevelProgress, seasonTimeRemaining, nextRoadmapNode, roadmapNodeStatus, awardMatchSeasonXp, tierReward, claimSeasonTier, claimAllSeasonTiers, freePackStatus, claimFreeSeasonBooster } from "../data/seasons.js?v=0.13.81";
+import { GAME_RULE_SECTIONS, PIN_CHANCE_TABLE, LIVE_EVENT_WEEK } from "../data/game-rules.js?v=0.13.81";
+import { SAVE_FILENAME, exportSaveToFiles, readSaveFile, saveImportRollback, loadImportRollback, clearImportRollback, backupMetadata } from "../data/save-backup.js?v=0.13.81";
 
 const SUPERSTAR_NAMEPLATE_PROFILES = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES ?? {};
 function superstarNameplateMarkup(card) {
@@ -2937,7 +2937,7 @@ function playCard(playerId, index) {
     else if (card.kind === "manager") played = game.playManager(playerId, card);
     else played = game.declareMove(playerId, card);
     if (!played) { message = `${card.name} cannot be played in this window.`; render(); return; }
-    message = game.state().pendingActionDiscard?.playerId === playerId ? `${card.name}: choose ${game.state().pendingActionDiscard.count} page to ditch.` : game.state().pendingTopDeckTutorChoice?.playerId === playerId ? `${card.name}: choose a Cody-exclusive card from the top ${game.state().pendingTopDeckTutorChoice.look}.` : `${nameFor(playerId)} played ${card.name}.`;
+    message = game.state().pendingActionDiscard?.playerId === playerId ? `${card.name}: choose ${game.state().pendingActionDiscard.count} page to ditch.` : game.state().pendingTopDeckTutorChoice?.playerId === playerId ? `${card.name}: choose a ${game.state().pendingTopDeckTutorChoice.choiceDescription??'Cody-exclusive card'} from the top ${game.state().pendingTopDeckTutorChoice.look}.` : `${nameFor(playerId)} played ${card.name}.`;
   } catch (error) { message = error.message; }
   afterHumanAction(game.state().log.slice(logBefore));
 }
@@ -3187,9 +3187,10 @@ function renderPlayPile() {
 function renderTopDeckTutorChoice() {
   const pending=game?.state()?.pendingTopDeckTutorChoice;
   if(!pending||pending.playerId!==HUMAN)return "";
-  const eligible=new Set(pending.eligibleIds??[]);
-  const choices=(pending.cards??[]).map(card=>`<button type="button" class="tutor-choice-card ${eligible.has(card.id)?'eligible':'ineligible'}" data-tutor-choice="${card.id}" ${eligible.has(card.id)?'':'disabled'}>${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:'tutor-choice-ccg',eagerArt:true})}<strong>${card.name}</strong><small>${eligible.has(card.id)?'TAKE INTO HAND':'NOT CODY-EXCLUSIVE'}</small></button>`).join('');
-  return `<section class="top-deck-tutor-choice"><header><span>WHAT DO YOU WANT TO TALK ABOUT?</span><h3>Choose a Cody-exclusive card</h3><p>Top ${pending.look} pages revealed. Take one eligible card; the rest go to the bottom of your Playbook.</p></header><div class="top-deck-tutor-grid">${choices}</div></section>`;
+  const eligible=new Set(pending.eligibleIds??[]),multi=(pending.maxChoices??1)>1,selected=(pending.selectedCardIds??[]).length,remaining=Math.max(0,(pending.maxChoices??1)-selected);
+  const choices=(pending.cards??[]).map(card=>`<button type="button" class="tutor-choice-card ${eligible.has(card.id)?'eligible':'ineligible'}" data-tutor-choice="${card.id}" ${eligible.has(card.id)?'':'disabled'}>${collectibleCardMarkup(card,{flipped:false,interactive:false,extraClass:'tutor-choice-ccg',eagerArt:true})}<strong>${card.name}</strong><small>${eligible.has(card.id)?'TAKE INTO HAND':(pending.ineligibleLabel??'NOT ELIGIBLE')}</small></button>`).join('');
+  const title=pending.choiceTitle??'WHAT DO YOU WANT TO TALK ABOUT?',heading=pending.choiceHeading??`Choose a ${pending.choiceDescription??'Cody-exclusive card'}`,help=pending.choiceHelp??`Top ${pending.look} pages revealed. Take one eligible card; the rest go to the bottom of your Playbook.`,done=multi&&pending.allowDone?`<button type="button" class="secondary tutor-choice-done" data-tutor-done>Done${remaining?` · ${remaining} choice${remaining===1?'':'s'} remaining`:''}</button>`:'';
+  return `<section class="top-deck-tutor-choice"><header><span>${title}</span><h3>${heading}</h3><p>${help}</p>${done}</header><div class="top-deck-tutor-grid">${choices}</div></section>`;
 }
 
 function renderHumanHand() {
@@ -3245,7 +3246,7 @@ function renderCommandBar() {
   const tutorChoice = state.pendingTopDeckTutorChoice?.playerId === HUMAN ? state.pendingTopDeckTutorChoice : null;
   const triggered = state.pendingTriggeredSpecial?.playerId === HUMAN ? state.pendingTriggeredSpecial : null;
   const triggeredCard = triggered ? collectionById.get(triggered.cardId) : null;
-  let prompt = state.phase === "MATCH_OVER" ? (state.winner ? `${nameFor(state.winner)} wins by ${state.finish.type.toUpperCase()}!` : `Match ends by ${state.finish.type.toUpperCase()}!`) : owner === CPU ? `${nameFor(CPU)} is thinking…` : tutorChoice ? `${cardNameFor(tutorChoice.cardId)} — choose one eligible card from the top ${tutorChoice.look}.` : actionDiscard ? `${cardNameFor(actionDiscard.cardId)} — choose ${actionDiscard.count} page${actionDiscard.count===1?"":"s"} to ditch.` : `Your turn — choose a page or action.`;
+  let prompt = state.phase === "MATCH_OVER" ? (state.winner ? `${nameFor(state.winner)} wins by ${state.finish.type.toUpperCase()}!` : `Match ends by ${state.finish.type.toUpperCase()}!`) : owner === CPU ? `${nameFor(CPU)} is thinking…` : tutorChoice ? `${cardNameFor(tutorChoice.cardId)} — choose ${((tutorChoice.maxChoices??1)>1)?'up to '+Math.max(0,(tutorChoice.maxChoices??1)-(tutorChoice.selectedCardIds??[]).length)+' eligible cards':'one eligible card'} from the top ${tutorChoice.look}.` : actionDiscard ? `${cardNameFor(actionDiscard.cardId)} — choose ${actionDiscard.count} page${actionDiscard.count===1?"":"s"} to ditch.` : `Your turn — choose a page or action.`;
   const autoEligibility = state.phase === "COUNTER" && owner === HUMAN ? autoCounterEligibility(state, HUMAN, state.proposedMove?.card) : null;
   if (state.phase === "TRIGGER_RESPONSE" && owner === HUMAN && triggered) prompt = `${triggeredCard?.name ?? triggered?.abilityName ?? "Triggered Action"} is available ${triggered.reason ?? "now"} — use it or decline.`;
   if (state.phase === "COUNTER" && owner === HUMAN) prompt = autoCounterSelecting ? `AUTO COUNTER — select ${autoEligibility?.cost ?? autoCounterCost(state,HUMAN)} pages to ditch.` : `Counter ${state.proposedMove.card.name}${autoEligibility?.legal ? ", Auto Counter," : ""} or pass.`;
@@ -3606,7 +3607,8 @@ function render() {
   });
   root.querySelectorAll("[data-play-hand]").forEach(btn => btn.addEventListener("click", () => playCard(HUMAN, Number(btn.dataset.playHand))));
   root.querySelectorAll("[data-auto-ditch-index]").forEach(el => el.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); toggleAutoCounterCard(Number(el.dataset.autoDitchIndex)); }));
-  root.querySelectorAll("[data-tutor-choice]").forEach(btn => btn.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const before=game.state().log.length; if(game.resolveTopDeckTutorChoice(HUMAN,btn.dataset.tutorChoice)){message=`${btn.closest('.tutor-choice-card')?.querySelector('strong')?.textContent??'Card'} added to hand. The other revealed pages went to the bottom.`;afterHumanAction(game.state().log.slice(before));} }));
+  root.querySelectorAll("[data-tutor-choice]").forEach(btn => btn.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const before=game.state().log.length,name=btn.closest('.tutor-choice-card')?.querySelector('strong')?.textContent??'Card'; if(game.resolveTopDeckTutorChoice(HUMAN,btn.dataset.tutorChoice)){const pending=game.state().pendingTopDeckTutorChoice;message=pending?`${name} added to hand. Choose another eligible card or tap Done.`:`${name} added to hand. The other revealed pages went to the bottom.`;afterHumanAction(game.state().log.slice(before));} }));
+  root.querySelectorAll("[data-tutor-done]").forEach(btn => btn.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const before=game.state().log.length; if(game.resolveTopDeckTutorChoice(HUMAN,null)){message='Choice complete. The remaining revealed pages went to the bottom.';afterHumanAction(game.state().log.slice(before));} }));
   root.querySelectorAll("[data-action-ditch-index]").forEach(el => el.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const index=Number(el.dataset.actionDitchIndex); const before=game.state().log.length; if(game.resolveActionDiscard(HUMAN,index)){message=game.state().pendingActionDiscard ? `Choose ${game.state().pendingActionDiscard.count} more page to ditch.` : "Action resolved — continue your Control sequence."; afterHumanAction(game.state().log.slice(before));} }));
   const openPlayPileCard = (trigger, event) => { event?.stopPropagation?.(); playPileOverlayCard = collectionById.get(trigger.dataset.openPlayPile) ?? null; playPileOverlayFlipped = false; render(); };
   root.querySelectorAll("[data-open-play-pile]").forEach(trigger => {

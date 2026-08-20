@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.77';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.77';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.81';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=()=>({superstar:{id:'test'},momentum:{strength:10,strike:10,technical:10,agility:10,attitude:10},adrenaline:10,hand:[],specialUsed:false,controlMoveCount:0,events:{},posture:'standing'});
@@ -14,8 +14,14 @@ test('v0.12.28 elite 18-19 Damage Finishers carry a printed Cost premium',()=>{
     ['the-rock-people-s-elbow',11,18],
     ['goldberg-jackhammer',12,19],
     ['diesel-jackknife-powerbomb',11,18],
+    ['yokozuna-banzai-drop',11,19],
   ]);
-  for(const card of elite) assert.ok(card.cost>=card.damage-7,`${card.name} must pay the elite damage premium`);
+  for(const card of elite) {
+    if(card.id==='yokozuna-banzai-drop'){
+      assert.equal(card.cost,11,'Banzai Drop keeps the explicitly approved grounded-only C11/D19 profile');
+      assert.equal(card.groundedOnly,true);
+    } else assert.ok(card.cost>=card.damage-7,`${card.name} must pay the elite damage premium`);
+  }
 });
 
 test('v0.12.27 Punch and Elbow can reverse each other during a counter-attack exchange',()=>{

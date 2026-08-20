@@ -1,1 +1,1 @@
-import { allGameplayCards } from "./content.js?v=0.13.77"; export const hallOfFameCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="hall-of-fame-series-1").map(c=>[c.id,c]));
+import { allGameplayCards } from "./content.js?v=0.13.81"; export const hallOfFameCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="hall-of-fame-series-1").map(c=>[c.id,c]));

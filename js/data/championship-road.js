@@ -1,4 +1,4 @@
-import { superstars } from "./superstars.js?v=0.13.77";
+import { superstars } from "./superstars.js?v=0.13.81";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 32;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";

@@ -27,7 +27,7 @@ const handledSpecialTypes = new Set([
   "flairChopWooo", "headbuttDiscount", "hulkUp", "ignoreStun", "kickoutControlAdrenaline", "lowHpTutor",
   "moveCounteredDrawDrain", "nextStrengthUncounterable", "noWipeout", "nobodySlams", "paulHeyman", "pinEscape",
   "austinTheoryAllDay", "angeloDawkinsRunIn", "luchaLibreLegend", "hammerInBoot", "fearlessAssault", "steelPlate", "lolaFistsDontLie",
-  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca", "hbkShowstopper", "exclusiveTrademarkTutor"
+  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca", "hbkShowstopper", "exclusiveTrademarkTutor", "doinkClowningAround", "yokozunaBanzai", "owenSlammyAwards", "bulldogMadeInBritain"
 ]);
 const handledAbilityTypes = new Set([
   "agilityAfterStrike", "agilityAfterTechnical", "agilityRequirement", "codyUndeniable", "connectDamage",
@@ -35,7 +35,7 @@ const handledAbilityTypes = new Set([
   "gableOlympicPedigree", "loganViralAthlete", "momentumBuff", "moveCountered", "raquelUnmatchedPower", "reduceIncoming",
   "secondMoveInControl", "solDaredevil", "strengthReqDrain", "strikeDamageDiscountTechnical", "strikeDiscountStrength",
   "strikeDiscountTechnical", "surviveAtOne", "takeDamage", "technicalDiscountAgility", "joeCrowdBelieves", "theoryFutureIsNow", "montezTakeFlight",
-  "reyUltimateUnderdog", "dominikNuclearHeat", "pentaZeroFearZeroMercy", "lolaCounterStriker", "dragonHybridAthlete", "vikingoJineteDelAire", "iguanaPlayDead"
+  "reyUltimateUnderdog", "dominikNuclearHeat", "pentaZeroFearZeroMercy", "lolaCounterStriker", "dragonHybridAthlete", "vikingoJineteDelAire", "iguanaPlayDead", "superHeavyweightGroundResist", "retainControlAfterFailedPin", "bulldogPowerAndTechnique"
 ]);
 const engineBackedTopLevelFields = [
   "bodyDamage", "discountAfterCounter", "discountIfNamedConnectedThisControl", "kickoutRetainControl",

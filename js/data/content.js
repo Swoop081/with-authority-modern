@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.77";
+import { enrichCounterState } from "./counter-states.js?v=0.13.81";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -1731,7 +1731,10 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "body-elevated",
     "trademark": true,
-    "discountIfNamedConnectedThisControl": { "name": "Gunther's Chop", "amount": 1 }
+    "discountIfNamedConnectedThisControl": {
+      "name": "Gunther's Chop",
+      "amount": 1
+    }
   },
   {
     "id": "gunther-folding-powerbomb",
@@ -10157,7 +10160,6 @@ export const allGameplayCards = [
       "exclusiveAdrenaline": 1
     }
   },
-
   {
     "id": "kevin-owens-avalanche-fishermans-buster",
     "name": "Avalanche Fisherman’s Buster",
@@ -10293,7 +10295,6 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "running-aerial"
   },
-
   {
     "id": "leg-lariat",
     "name": "Leg Lariat",
@@ -10468,7 +10469,6 @@ export const allGameplayCards = [
     "effects": [],
     "counterState": "leg-extended"
   },
-
   {
     "id": "wheelbarrow-suplex",
     "name": "Wheelbarrow Suplex",
@@ -10639,7 +10639,6 @@ export const allGameplayCards = [
     ],
     "counterState": "diving-aerial"
   },
-
   {
     "id": "european-uppercut",
     "name": "European Uppercut",
@@ -10930,11 +10929,13 @@ export const allGameplayCards = [
     "special": {
       "type": "roxanneProdigy",
       "maxCost": 4,
-      "methods": ["agility", "technical"],
+      "methods": [
+        "agility",
+        "technical"
+      ],
       "discount": 1
     }
   },
-
   {
     "id": "austin-theory-ataxia",
     "name": "Ataxia",
@@ -10942,7 +10943,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"strength": 2},
+    "requirements": {
+      "strength": 2
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "austin-theory",
@@ -10953,7 +10956,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "A-Town Down", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "A-Town Down",
+        "discount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -10963,7 +10972,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"agility": 2},
+    "requirements": {
+      "agility": 2
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "austin-theory",
@@ -10974,7 +10985,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "gainAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "running-aerial"
   },
   {
@@ -10984,7 +11000,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 6,
     "damage": 9,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "austin-theory",
@@ -10995,7 +11013,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "loseOpponentAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11027,7 +11050,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "austin-theory",
     "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Strength Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"strike": 1, "strength": 1},
+    "preMatchMomentum": {
+      "strike": 1,
+      "strength": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11039,7 +11065,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "austin-theory",
     "rulesText": "Once per match during your Control sequence: your next Strike Move this Control sequence cannot be Auto Countered. If it Connects, draw 1 page.",
-    "special": {"type": "austinTheoryAllDay", "drawOnConnect": 1}
+    "special": {
+      "type": "austinTheoryAllDay",
+      "drawOnConnect": 1
+    }
   },
   {
     "id": "manager-maxxine-dupri",
@@ -11047,7 +11076,9 @@ export const allGameplayCards = [
     "kind": "manager",
     "setId": "raw-series-1",
     "rarity": 3,
-    "allowedFactionTags": ["vision"],
+    "allowedFactionTags": [
+      "vision"
+    ],
     "rulesText": "The Vision members only. When Maxxine enters play, search/draw one shared Strike Move with printed Cost 4 or less. Once per match, after one of your Moves is successfully Countered, opponent loses 1 Adrenaline.",
     "effect": {
       "type": "visionManager",
@@ -11063,7 +11094,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"strength": 2},
+    "requirements": {
+      "strength": 2
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "montez-ford",
@@ -11074,7 +11107,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "gainAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "torso-trapped"
   },
   {
@@ -11084,7 +11122,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 5,
     "damage": 9,
-    "requirements": {"agility": 2},
+    "requirements": {
+      "agility": 2
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "montez-ford",
@@ -11095,7 +11135,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "drawThenDiscardSelf", "draw": 1, "discard": 1}],
+    "effects": [
+      {
+        "type": "drawThenDiscardSelf",
+        "draw": 1,
+        "discard": 1
+      }
+    ],
     "counterState": "diving-aerial"
   },
   {
@@ -11105,7 +11151,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 7,
     "damage": 12,
-    "requirements": {"agility": 3},
+    "requirements": {
+      "agility": 3
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "montez-ford",
@@ -11162,7 +11210,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "montez-ford",
     "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"agility": 1, "strike": 1},
+    "preMatchMomentum": {
+      "agility": 1,
+      "strike": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11173,7 +11224,9 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "cost": 4,
     "damage": 6,
-    "requirements": {"strike": 1},
+    "requirements": {
+      "strike": 1
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
@@ -11184,7 +11237,12 @@ export const allGameplayCards = [
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "effects": [{"type": "gainAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended"
   },
   {
@@ -11194,7 +11252,9 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "cost": 5,
     "damage": 0,
-    "requirements": {"technical": 1},
+    "requirements": {
+      "technical": 1
+    },
     "moveType": "submission",
     "method": "technical",
     "superstarId": null,
@@ -11205,7 +11265,10 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "submission": {"bodyPart": "head", "pressure": 3},
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 3
+    },
     "opponentAdrenalineOnConnect": -1,
     "effects": [],
     "counterState": "torso-trapped",
@@ -11218,7 +11281,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"strike": 2},
+    "requirements": {
+      "strike": 2
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "lola-vice",
@@ -11229,7 +11294,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "loseOpponentAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "torso-trapped"
   },
   {
@@ -11239,7 +11309,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 5,
     "damage": 9,
-    "requirements": {"strike": 2},
+    "requirements": {
+      "strike": 2
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "lola-vice",
@@ -11250,7 +11322,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "305", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "305",
+        "discount": 1
+      }
+    ],
     "counterState": "leg-extended"
   },
   {
@@ -11260,7 +11338,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 0,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "submission",
     "method": "technical",
     "superstarId": "lola-vice",
@@ -11271,7 +11351,10 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "submission": {"bodyPart": "head", "pressure": 5},
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 5
+    },
     "effects": [],
     "counterState": "torso-trapped",
     "submissionTarget": "head"
@@ -11305,7 +11388,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "lola-vice",
     "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Technical Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"strike": 1, "technical": 1},
+    "preMatchMomentum": {
+      "strike": 1,
+      "technical": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11317,9 +11403,12 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "lola-vice",
     "rulesText": "Once per match during your Control sequence: arm your next connected Strike this Control sequence. On Connect, opponent loses 2 additional Adrenaline; if they are at 0 after that loss, draw 1 page.",
-    "special": {"type": "lolaFistsDontLie", "opponentAdrenaline": -2, "drawIfZero": 1}
-  }
-  ,
+    "special": {
+      "type": "lolaFistsDontLie",
+      "opponentAdrenaline": -2,
+      "drawIfZero": 1
+    }
+  },
   {
     "id": "dragon-lee-operation-dragon",
     "name": "Operation Dragon",
@@ -11327,7 +11416,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"agility": 2},
+    "requirements": {
+      "agility": 2
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "dragon-lee",
@@ -11338,7 +11429,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "Dragon Driver", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Dragon Driver",
+        "discount": 1
+      }
+    ],
     "counterState": "running-aerial"
   },
   {
@@ -11348,7 +11445,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 5,
     "damage": 9,
-    "requirements": {"strike": 2},
+    "requirements": {
+      "strike": 2
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "dragon-lee",
@@ -11359,7 +11458,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "loseOpponentAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended"
   },
   {
@@ -11369,7 +11473,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"agility": 2},
+    "requirements": {
+      "agility": 2
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "dragon-lee",
@@ -11380,7 +11486,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "drawThenDiscardSelf", "draw": 1, "discard": 1}],
+    "effects": [
+      {
+        "type": "drawThenDiscardSelf",
+        "draw": 1,
+        "discard": 1
+      }
+    ],
     "counterState": "diving-aerial"
   },
   {
@@ -11412,7 +11524,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "dragon-lee",
     "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"agility": 1, "technical": 1},
+    "preMatchMomentum": {
+      "agility": 1,
+      "technical": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11424,10 +11539,16 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "dragon-lee",
     "rulesText": "Once per match during your Control sequence: search/draw one shared Agility or Technical Move with printed Cost 5 or less; it costs 1 less this Control sequence.",
-    "special": {"type": "dragonLuchaLegacy", "maxCost": 5, "methods": ["agility", "technical"], "discount": 1}
-  }
-
-  ,
+    "special": {
+      "type": "dragonLuchaLegacy",
+      "maxCost": 5,
+      "methods": [
+        "agility",
+        "technical"
+      ],
+      "discount": 1
+    }
+  },
   {
     "id": "vikingo-mexican-destroyer",
     "name": "Vikingo’s Mexican Destroyer",
@@ -11435,7 +11556,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "hijo-del-vikingo",
@@ -11446,7 +11569,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "gainAdrenaline", "amount": 1}],
+    "effects": [
+      {
+        "type": "gainAdrenaline",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11456,7 +11584,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 7,
     "damage": 12,
-    "requirements": {"agility": 3},
+    "requirements": {
+      "agility": 3
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "hijo-del-vikingo",
@@ -11467,7 +11597,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "El Cuerno del Vikingo", "discount": 2}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "El Cuerno del Vikingo",
+        "discount": 2
+      }
+    ],
     "counterState": "diving-aerial"
   },
   {
@@ -11477,7 +11613,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "hijo-del-vikingo",
@@ -11488,7 +11626,12 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discardOpponent", "amount": 1}],
+    "effects": [
+      {
+        "type": "discardOpponent",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11520,7 +11663,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "hijo-del-vikingo",
     "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"agility": 1, "technical": 1},
+    "preMatchMomentum": {
+      "agility": 1,
+      "technical": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11532,11 +11678,12 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "hijo-del-vikingo",
     "rulesText": "Once per match, after one of Vikingo’s Aerial Moves is successfully Countered: you may play this card. Prevent any self-Stun printed on that countered Aerial Move; gain +1 Adrenaline and draw 1 page.",
-    "special": {"type": "vikingoElOjoProtection", "adrenaline": 1, "draw": 1}
-  }
-
-
-  ,
+    "special": {
+      "type": "vikingoElOjoProtection",
+      "adrenaline": 1,
+      "draw": 1
+    }
+  },
   {
     "id": "mr-iguana-iguanarana",
     "name": "Iguanarana",
@@ -11544,7 +11691,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"agility": 2},
+    "requirements": {
+      "agility": 2
+    },
     "moveType": "grapple",
     "method": "agility",
     "superstarId": "mr-iguana",
@@ -11557,7 +11706,9 @@ export const allGameplayCards = [
     "trademark": true,
     "effects": [],
     "counterState": "body-elevated",
-    "counterStates": ["body-elevated"],
+    "counterStates": [
+      "body-elevated"
+    ],
     "counterAdrenalineOnConnect": 1
   },
   {
@@ -11567,7 +11718,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "mr-iguana",
@@ -11578,7 +11731,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "Chalino Driver", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Chalino Driver",
+        "discount": 1
+      }
+    ],
     "counterState": "rear-control"
   },
   {
@@ -11588,7 +11747,9 @@ export const allGameplayCards = [
     "setId": "worlds-collide-series-1",
     "cost": 6,
     "damage": 0,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "submission",
     "method": "technical",
     "superstarId": "mr-iguana",
@@ -11599,7 +11760,10 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "submission": {"bodyPart": "back", "pressure": 5},
+    "submission": {
+      "bodyPart": "back",
+      "pressure": 5
+    },
     "effects": [],
     "counterState": "rear-control",
     "submissionTarget": "back"
@@ -11633,7 +11797,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "mr-iguana",
     "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Technical Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"agility": 1, "technical": 1},
+    "preMatchMomentum": {
+      "agility": 1,
+      "technical": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11645,11 +11812,12 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "mr-iguana",
     "rulesText": "Once per match during Mr. Iguana’s Control sequence: search/draw one Mr. Iguana-exclusive Trademark; it costs 1 less this Control sequence. Then the opponent loses 1 Adrenaline.",
-    "special": {"type": "iguanaLaYesca", "discount": 1, "opponentAdrenaline": -1}
-  }
-
-
-  ,
+    "special": {
+      "type": "iguanaLaYesca",
+      "discount": 1,
+      "opponentAdrenaline": -1
+    }
+  },
   {
     "id": "bret-hart-inverted-atomic-drop",
     "name": "Inverted Atomic Drop",
@@ -11657,7 +11825,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 4,
     "damage": 6,
-    "requirements": {"strength": 1},
+    "requirements": {
+      "strength": 1
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "bret-hart",
@@ -11668,7 +11838,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Russian Leg Sweep", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Russian Leg Sweep",
+        "amount": 1
+      }
+    ],
     "counterState": "torso-trapped"
   },
   {
@@ -11678,7 +11854,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "bret-hart",
@@ -11689,7 +11867,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Second-Rope Elbow Drop", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Second-Rope Elbow Drop",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11699,7 +11883,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"strike": 2},
+    "requirements": {
+      "strike": 2
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "bret-hart",
@@ -11710,7 +11896,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "Sharpshooter", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Sharpshooter",
+        "discount": 1
+      }
+    ],
     "counterState": "diving-aerial"
   },
   {
@@ -11731,7 +11923,10 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "finisher": true,
-    "submission": {"bodyPart": "legs", "pressure": 6},
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 6
+    },
     "effects": [],
     "counterState": "leg-extended",
     "submissionTarget": "legs"
@@ -11744,7 +11939,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "bret-hart",
     "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"technical": 1, "strength": 1},
+    "preMatchMomentum": {
+      "technical": 1,
+      "strength": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11756,7 +11954,11 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "bret-hart",
     "rulesText": "Once per match after Bret successfully Counters a Move: search/draw Sharpshooter; it costs 2 less this Control sequence.",
-    "special": {"type": "counterTutorNamed", "name": "Sharpshooter", "amount": 2}
+    "special": {
+      "type": "counterTutorNamed",
+      "name": "Sharpshooter",
+      "amount": 2
+    }
   },
   {
     "id": "shawn-michaels-flying-forearm",
@@ -11765,7 +11967,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 4,
     "damage": 6,
-    "requirements": {"strike": 1},
+    "requirements": {
+      "strike": 1
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "shawn-michaels",
@@ -11776,7 +11980,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Teardrop Suplex", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Teardrop Suplex",
+        "amount": 1
+      }
+    ],
     "counterState": "running-aerial"
   },
   {
@@ -11786,7 +11996,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": "shawn-michaels",
@@ -11797,7 +12009,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Top-Rope Elbow Drop", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Top-Rope Elbow Drop",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11807,7 +12025,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"agility": 2},
+    "requirements": {
+      "agility": 2
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": "shawn-michaels",
@@ -11818,7 +12038,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "Sweet Chin Music", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Sweet Chin Music",
+        "discount": 1
+      }
+    ],
     "counterState": "diving-aerial"
   },
   {
@@ -11850,7 +12076,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "shawn-michaels",
     "rulesText": "Pre-Match: Begin with +1 Agility Momentum, +1 Strike Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"agility": 1, "strike": 1},
+    "preMatchMomentum": {
+      "agility": 1,
+      "strike": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11862,11 +12091,11 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "shawn-michaels",
     "rulesText": "Once per match during Shawn Michaels’ Control sequence: search/draw one Shawn Michaels-exclusive Trademark; it costs 1 less this Control sequence.",
-    "special": {"type": "hbkShowstopper", "discount": 1}
-  }
-
-
-  ,
+    "special": {
+      "type": "hbkShowstopper",
+      "discount": 1
+    }
+  },
   {
     "id": "razor-ramon-fallaway-slam",
     "name": "Razor’s Fallaway Slam",
@@ -11874,7 +12103,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 4,
     "damage": 7,
-    "requirements": {"strength": 1},
+    "requirements": {
+      "strength": 1
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "razor-ramon",
@@ -11885,7 +12116,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Razor’s Running Powerslam", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Razor’s Running Powerslam",
+        "amount": 1
+      }
+    ],
     "counterState": "torso-trapped"
   },
   {
@@ -11895,7 +12132,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 5,
     "damage": 9,
-    "requirements": {"strength": 2},
+    "requirements": {
+      "strength": 2
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "razor-ramon",
@@ -11906,7 +12145,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Razor’s Chokeslam", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Razor’s Chokeslam",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -11916,7 +12161,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"strength": 2},
+    "requirements": {
+      "strength": 2
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "razor-ramon",
@@ -11927,7 +12174,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "The Razor’s Edge", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "The Razor’s Edge",
+        "discount": 1
+      }
+    ],
     "counterState": "front-control"
   },
   {
@@ -11959,7 +12212,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "razor-ramon",
     "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"strength": 1, "strike": 1},
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -11971,11 +12227,11 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "razor-ramon",
     "rulesText": "Once per match during Razor Ramon’s Control sequence: search/draw one Razor Ramon-exclusive Trademark; it costs 1 less this Control sequence.",
-    "special": {"type": "exclusiveTrademarkTutor", "discount": 1}
-  }
-
-
-  ,
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    }
+  },
   {
     "id": "diesel-snake-eyes",
     "name": "Diesel’s Snake Eyes",
@@ -11983,7 +12239,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"strength": 1},
+    "requirements": {
+      "strength": 1
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "diesel",
@@ -11994,7 +12252,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Diesel’s Big Boot", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Diesel’s Big Boot",
+        "amount": 1
+      }
+    ],
     "counterState": "body-elevated"
   },
   {
@@ -12004,7 +12268,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 5,
     "damage": 8,
-    "requirements": {"strike": 2},
+    "requirements": {
+      "strike": 2
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": "diesel",
@@ -12015,7 +12281,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "discountNextByName", "name": "Diesel’s Sidewalk Slam", "amount": 1}],
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Diesel’s Sidewalk Slam",
+        "amount": 1
+      }
+    ],
     "counterState": "leg-extended"
   },
   {
@@ -12025,7 +12297,9 @@ export const allGameplayCards = [
     "setId": "new-generation-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"strength": 2},
+    "requirements": {
+      "strength": 2
+    },
     "moveType": "grapple",
     "method": "strength",
     "superstarId": "diesel",
@@ -12036,7 +12310,13 @@ export const allGameplayCards = [
     "stun": 0,
     "selfDamage": 0,
     "trademark": true,
-    "effects": [{"type": "search", "name": "Jackknife Powerbomb", "discount": 1}],
+    "effects": [
+      {
+        "type": "search",
+        "name": "Jackknife Powerbomb",
+        "discount": 1
+      }
+    ],
     "counterState": "torso-trapped"
   },
   {
@@ -12068,7 +12348,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "diesel",
     "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
-    "preMatchMomentum": {"strength": 1, "strike": 1},
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
   },
@@ -12080,7 +12363,10 @@ export const allGameplayCards = [
     "rarity": 4,
     "superstarId": "diesel",
     "rulesText": "Once per match during Diesel’s Control sequence: search/draw one Diesel-exclusive Trademark; it costs 1 less this Control sequence.",
-    "special": {"type": "exclusiveTrademarkTutor", "discount": 1}
+    "special": {
+      "type": "exclusiveTrademarkTutor",
+      "discount": 1
+    }
   },
   {
     "id": "brainbuster",
@@ -12089,7 +12375,9 @@ export const allGameplayCards = [
     "setId": "money-in-the-bank-series-1",
     "cost": 6,
     "damage": 10,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "grapple",
     "method": "technical",
     "superstarId": null,
@@ -12110,7 +12398,9 @@ export const allGameplayCards = [
     "setId": "raw-series-1",
     "cost": 3,
     "damage": 5,
-    "requirements": {"strike": 1},
+    "requirements": {
+      "strike": 1
+    },
     "moveType": "strike",
     "method": "strike",
     "superstarId": null,
@@ -12131,7 +12421,9 @@ export const allGameplayCards = [
     "setId": "evolution-series-1",
     "cost": 6,
     "damage": 0,
-    "requirements": {"technical": 2},
+    "requirements": {
+      "technical": 2
+    },
     "moveType": "submission",
     "method": "technical",
     "superstarId": null,
@@ -12142,7 +12434,10 @@ export const allGameplayCards = [
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "submission": {"bodyPart": "back", "pressure": 4},
+    "submission": {
+      "bodyPart": "back",
+      "pressure": 4
+    },
     "effects": [],
     "counterState": "rear-control",
     "submissionTarget": "back"
@@ -12154,7 +12449,9 @@ export const allGameplayCards = [
     "setId": "hall-of-fame-series-1",
     "cost": 4,
     "damage": 6,
-    "requirements": {"agility": 1},
+    "requirements": {
+      "agility": 1
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": null,
@@ -12175,7 +12472,10 @@ export const allGameplayCards = [
     "setId": "smackdown-series-1",
     "cost": 6,
     "damage": 9,
-    "requirements": {"agility": 2, "strike": 1},
+    "requirements": {
+      "agility": 2,
+      "strike": 1
+    },
     "moveType": "aerial",
     "method": "agility",
     "superstarId": null,
@@ -12625,8 +12925,1083 @@ export const allGameplayCards = [
     "selfDamage": 0,
     "effects": [],
     "counterState": "body-elevated"
-  }
-
+  },
+  {
+    "id": "monkey-flip",
+    "name": "Monkey Flip",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 3,
+    "damage": 5,
+    "requirements": {
+      "agility": 1
+    },
+    "moveType": "grapple",
+    "method": "agility",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control"
+  },
+  {
+    "id": "headlock-takeover",
+    "name": "Headlock Takeover",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "front-control"
+  },
+  {
+    "id": "eye-rake",
+    "name": "Eye Rake",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "strike": 1
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "hair-pull-takedown",
+    "name": "Hair-Pull Takedown",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 2,
+    "damage": 3,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 1,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "rear-control"
+  },
+  {
+    "id": "schoolboy-roll-up",
+    "name": "Schoolboy Roll-Up",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 3,
+    "damage": 4,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounds opponent. If the opponent is already in Amber or Red when this Connects, you may immediately attempt a Pin.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "schoolboyRollUp": true,
+    "effects": [],
+    "counterState": "front-control"
+  },
+  {
+    "id": "reverse-chinlock",
+    "name": "Reverse Chinlock",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 4,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": null,
+    "rarity": 2,
+    "boosterOnly": true,
+    "rulesText": "Shared. Grounded opponent only. Submission. +3 persistent Head damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "head",
+      "pressure": 3
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "neck-head"
+  },
+  {
+    "id": "doink-drop-toe-hold",
+    "name": "Doink’s Drop Toe Hold",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 4,
+    "damage": 6,
+    "requirements": {
+      "technical": 1
+    },
+    "moveType": "grapple",
+    "method": "technical",
+    "superstarId": "doink-the-clown",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Doink the Clown-exclusive Trademark. Grounds opponent. On Connect: Stump Puller costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "discountNextByName",
+        "name": "Stump Puller",
+        "amount": 1
+      }
+    ],
+    "counterState": "front-control"
+  },
+  {
+    "id": "doink-stump-puller",
+    "name": "Stump Puller",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 5,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": "doink-the-clown",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Doink the Clown-exclusive Trademark. Grounded opponent only. Submission. +4 persistent Leg damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 4
+    },
+    "effects": [],
+    "counterState": "leg-extended",
+    "submissionTarget": "legs"
+  },
+  {
+    "id": "doink-flying-body-press",
+    "name": "Doink’s Flying Body Press",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "agility": 2
+    },
+    "moveType": "aerial",
+    "method": "agility",
+    "superstarId": "doink-the-clown",
+    "rarity": 3,
+    "trademark": true,
+    "rulesText": "Doink the Clown-exclusive Trademark. Diving Aerial. Grounded opponent only. On Connect: search/draw Whoopee Cushion; it costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Whoopee Cushion",
+        "discount": 1
+      }
+    ],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "doink-whoopee-cushion",
+    "name": "Whoopee Cushion",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
+    "moveType": "aerial",
+    "method": null,
+    "superstarId": "doink-the-clown",
+    "rarity": 4,
+    "finisher": true,
+    "rulesText": "Doink the Clown-exclusive Finisher. No Method requirement. Diving Aerial. Grounded opponent only. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "counterState": "diving-aerial"
+  },
+  {
+    "id": "entrance-doink-the-clown",
+    "name": "Send in the Clown",
+    "kind": "entrance",
+    "setId": "new-generation-series-1",
+    "rarity": 4,
+    "superstarId": "doink-the-clown",
+    "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "technical": 1,
+      "agility": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-doink-the-clown",
+    "name": "Clowning Around",
+    "kind": "action",
+    "setId": "new-generation-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "superstarId": "doink-the-clown",
+    "rarity": 4,
+    "rulesText": "Once per match during Doink’s Control: look at the top 5 pages of your Playbook. Choose one Doink-exclusive Trademark or Counter and put it into your hand. Put the rest on the bottom of your Playbook.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "special": {
+      "type": "doinkClowningAround",
+      "look": 5
+    },
+    "effects": []
+  },
+{
+  "id": "forearm-club",
+  "name": "Forearm Club",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 2,
+  "damage": 3,
+  "requirements": {
+    "strike": 1
+  },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "arm-extended"
+},
+{
+  "id": "running-shoulder-block",
+  "name": "Running Shoulder Block",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": {
+    "strength": 1
+  },
+  "moveType": "strike",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Running Aerial. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "running-aerial"
+},
+{
+  "id": "side-suplex",
+  "name": "Side Suplex",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": {
+    "technical": 1
+  },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "rear-control"
+},
+{
+  "id": "club-to-the-back",
+  "name": "Club to the Back",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 2,
+  "damage": 3,
+  "requirements": {
+    "strike": 1
+  },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. On Connect: +1 persistent Back damage.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bodyDamage": {
+    "bodyPart": "back",
+    "amount": 1
+  },
+  "effects": [],
+  "counterState": "arm-extended"
+},
+{
+  "id": "running-body-avalanche",
+  "name": "Running Body Avalanche",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 4,
+  "damage": 7,
+  "requirements": {
+    "strength": 2
+  },
+  "moveType": "strike",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Shared. Running Aerial. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "running-aerial"
+},
+{
+  "id": "nerve-hold",
+  "name": "Nerve Hold",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 4,
+  "damage": 0,
+  "requirements": {
+    "strength": 2
+  },
+  "moveType": "submission",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounded opponent only. Submission. +3 persistent Arm damage per successful turn.",
+  "groundOpponent": false,
+  "groundedOnly": true,
+  "stun": 0,
+  "selfDamage": 0,
+  "submission": {
+    "bodyPart": "arms",
+    "pressure": 3
+  },
+  "effects": [],
+  "counterState": "rear-control",
+  "submissionTarget": "arms"
+},
+{
+  "id": "yokozuna-savate-kick",
+  "name": "Yokozuna’s Savate Kick",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": {
+    "strike": 2
+  },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": "yokozuna",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Yokozuna-exclusive Trademark. On Connect: Yokozuna’s next Strength Move costs 1 less this Control sequence.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [
+    {
+      "type": "discountNextMethod",
+      "method": "strength",
+      "amount": 1
+    }
+  ],
+  "counterState": "leg-extended"
+},
+{
+  "id": "yokozuna-belly-to-belly-suplex",
+  "name": "Yokozuna’s Belly-to-Belly Suplex",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 6,
+  "damage": 10,
+  "requirements": {
+    "strength": 2
+  },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": "yokozuna",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Yokozuna-exclusive Trademark. Grounds opponent. On Connect: search/draw Yokozuna’s Running Leg Drop; it costs 1 less this Control sequence.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [
+    {
+      "type": "search",
+      "name": "Yokozuna’s Running Leg Drop",
+      "discount": 1
+    }
+  ],
+  "counterState": "body-elevated"
+},
+{
+  "id": "yokozuna-running-leg-drop",
+  "name": "Yokozuna’s Running Leg Drop",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 6,
+  "damage": 10,
+  "requirements": {
+    "strength": 2
+  },
+  "moveType": "aerial",
+  "method": "strength",
+  "superstarId": "yokozuna",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Yokozuna-exclusive Trademark. Running Aerial. Grounded opponent only. On Connect: gain +1 Adrenaline.",
+  "groundOpponent": true,
+  "groundedOnly": true,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [
+    {
+      "type": "gainAdrenaline",
+      "amount": 1
+    }
+  ],
+  "counterState": "running-aerial"
+},
+{
+  "id": "yokozuna-banzai-drop",
+  "name": "Banzai Drop",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 11,
+  "damage": 19,
+  "requirements": {},
+  "moveType": "aerial",
+  "method": null,
+  "superstarId": "yokozuna",
+  "rarity": 4,
+  "finisher": true,
+  "rulesText": "Yokozuna-exclusive Finisher. No Method requirement. Diving Aerial. Grounded opponent only. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": true,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "diving-aerial"
+},
+{
+  "id": "entrance-yokozuna",
+  "name": "The Great Yokozuna",
+  "kind": "entrance",
+  "setId": "new-generation-series-1",
+  "rarity": 4,
+  "superstarId": "yokozuna",
+  "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Strike Momentum and +1 Adrenaline.",
+  "preMatchMomentum": {
+    "strength": 1,
+    "strike": 1
+  },
+  "preMatchAdrenaline": 1,
+  "delayedTurn5": false
+},
+{
+  "id": "special-yokozuna",
+  "name": "Banzai!",
+  "kind": "action",
+  "setId": "new-generation-series-1",
+  "cost": 0,
+  "damage": 0,
+  "requirements": {},
+  "moveType": null,
+  "method": null,
+  "superstarId": "yokozuna",
+  "rarity": 4,
+  "rulesText": "Once per match while the opponent is grounded: search/draw Banzai Drop; it costs 2 less this Control sequence.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "special": {
+    "type": "yokozunaBanzai",
+    "name": "Banzai Drop",
+    "discount": 2
+  },
+  "effects": []
+},
+{
+  "id": "fisherman-suplex",
+  "name": "Fisherman Suplex",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": { "technical": 1 },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "body-elevated"
+},
+{
+  "id": "wheel-kick",
+  "name": "Wheel Kick",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": { "agility": 1 },
+  "moveType": "strike",
+  "method": "agility",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "leg-extended"
+},
+{
+  "id": "gutbuster",
+  "name": "Gutbuster",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": { "strength": 1 },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. On Connect: +1 persistent Back damage.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bodyDamage": { "bodyPart": "back", "amount": 1 },
+  "effects": [],
+  "counterState": "torso-trapped"
+},
+{
+  "id": "dropkick-to-the-knee",
+  "name": "Dropkick to the Knee",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 2,
+  "damage": 3,
+  "requirements": { "agility": 1 },
+  "moveType": "strike",
+  "method": "agility",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. On Connect: +1 persistent Legs damage.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bodyDamage": { "bodyPart": "legs", "amount": 1 },
+  "effects": [],
+  "counterState": "leg-extended"
+},
+{
+  "id": "bridging-german-suplex",
+  "name": "Bridging German Suplex",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 4,
+  "damage": 7,
+  "requirements": { "technical": 2 },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent. If the opponent is already Amber or Red when this Connects, you may immediately attempt a Pin.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "rear-control"
+},
+{
+  "id": "step-up-enzuigiri",
+  "name": "Step-Up Enzuigiri",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 4,
+  "damage": 7,
+  "requirements": { "strike": 2 },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "leg-extended"
+},
+{
+  "id": "owen-hart-enzuigiri",
+  "name": "Owen’s Enzuigiri",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": { "strike": 2 },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": "owen-hart",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Owen Hart-exclusive Trademark. Grounds opponent. On Connect: Owen’s Sharpshooter costs 1 less this Control sequence.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [{ "type": "discountNextByName", "name": "Owen’s Sharpshooter", "amount": 1 }],
+  "counterState": "leg-extended"
+},
+{
+  "id": "owen-hart-dragon-suplex",
+  "name": "Owen’s Dragon Suplex",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 6,
+  "damage": 10,
+  "requirements": { "technical": 2 },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": "owen-hart",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Owen Hart-exclusive Trademark. Grounds opponent. On Connect: search/draw Owen’s Sharpshooter; it costs 1 less this Control sequence.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [{ "type": "search", "name": "Owen’s Sharpshooter", "discount": 1 }],
+  "counterState": "rear-control"
+},
+{
+  "id": "owen-hart-missile-dropkick",
+  "name": "Owen’s Missile Dropkick",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 6,
+  "damage": 10,
+  "requirements": { "agility": 2 },
+  "moveType": "aerial",
+  "method": "agility",
+  "superstarId": "owen-hart",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "Owen Hart-exclusive Trademark. Diving Aerial. Standing opponent only. Grounds opponent. On Connect: gain +1 Adrenaline.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "standingOnly": true,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [{ "type": "gainAdrenaline", "amount": 1 }],
+  "counterState": "diving-aerial"
+},
+{
+  "id": "owen-hart-sharpshooter",
+  "name": "Owen’s Sharpshooter",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 9,
+  "damage": 0,
+  "requirements": {},
+  "moveType": "submission",
+  "method": null,
+  "superstarId": "owen-hart",
+  "rarity": 4,
+  "finisher": true,
+  "rulesText": "Owen Hart-exclusive Finisher. No Method requirement. Grounded opponent only. Submission. +5 persistent Legs damage per successful maintain turn.",
+  "groundOpponent": false,
+  "groundedOnly": true,
+  "stun": 0,
+  "selfDamage": 0,
+  "submission": { "bodyPart": "legs", "pressure": 5 },
+  "effects": [],
+  "counterState": "leg-extended",
+  "submissionTarget": "legs"
+},
+{
+  "id": "entrance-owen-hart",
+  "name": "The King of Harts",
+  "kind": "entrance",
+  "setId": "new-generation-series-1",
+  "rarity": 4,
+  "superstarId": "owen-hart",
+  "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+  "preMatchMomentum": { "technical": 1, "agility": 1 },
+  "preMatchAdrenaline": 1,
+  "delayedTurn5": false
+},
+{
+  "id": "special-owen-hart",
+  "name": "Two-Time Slammy Award Winner",
+  "kind": "action",
+  "setId": "new-generation-series-1",
+  "cost": 0,
+  "damage": 0,
+  "requirements": {},
+  "moveType": null,
+  "method": null,
+  "superstarId": "owen-hart",
+  "rarity": 4,
+  "rulesText": "Once per match during Owen’s Control: look at the top 7 pages of your Playbook. Choose up to two different 1★/2★ Moves and put them into your hand. Put the rest on the bottom.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "special": { "type": "owenSlammyAwards", "look": 7, "maxChoices": 2, "maxRarity": 2 },
+  "effects": []
+},
+{
+  "id": "standing-dropkick",
+  "name": "Standing Dropkick",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": { "agility": 1 },
+  "moveType": "strike",
+  "method": "agility",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "leg-extended"
+},
+{
+  "id": "hammerlock-takedown",
+  "name": "Hammerlock Takedown",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 2,
+  "damage": 3,
+  "requirements": { "technical": 1 },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Arms damage.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bodyDamage": { "bodyPart": "arms", "amount": 1 },
+  "effects": [],
+  "counterState": "rear-control"
+},
+{
+  "id": "running-knee-lift",
+  "name": "Running Knee Lift",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": { "strike": 1 },
+  "moveType": "strike",
+  "method": "strike",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "leg-extended"
+},
+{
+  "id": "shoulder-breaker",
+  "name": "Shoulder Breaker",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 3,
+  "damage": 5,
+  "requirements": { "strength": 1 },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 1,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent. On Connect: +1 persistent Arms damage.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "bodyDamage": { "bodyPart": "arms", "amount": 1 },
+  "effects": [],
+  "counterState": "body-elevated"
+},
+{
+  "id": "front-powerslam",
+  "name": "Front Powerslam",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 4,
+  "damage": 7,
+  "requirements": { "strength": 2 },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Shared. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "body-elevated"
+},
+{
+  "id": "full-nelson",
+  "name": "Full Nelson",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 4,
+  "damage": 0,
+  "requirements": { "strength": 2 },
+  "moveType": "submission",
+  "method": "strength",
+  "superstarId": null,
+  "rarity": 2,
+  "boosterOnly": true,
+  "rulesText": "Shared. Standing opponent only. Submission. +3 persistent Arms damage per successful maintain turn.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "standingOnly": true,
+  "stun": 0,
+  "selfDamage": 0,
+  "submission": { "bodyPart": "arms", "pressure": 3 },
+  "effects": [],
+  "counterState": "rear-control",
+  "submissionTarget": "arms"
+},
+{
+  "id": "british-bulldog-delayed-vertical-suplex",
+  "name": "Bulldog’s Delayed Vertical Suplex",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 5,
+  "damage": 8,
+  "requirements": { "strength": 2 },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": "british-bulldog",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "British Bulldog-exclusive Trademark. Grounds opponent. On Connect: Bulldog’s next Technical Move costs 1 less this Control sequence.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [{ "type": "discountNextMethod", "method": "technical", "amount": 1 }],
+  "counterState": "body-elevated"
+},
+{
+  "id": "british-bulldog-crucifix",
+  "name": "Bulldog’s Crucifix",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 5,
+  "damage": 7,
+  "requirements": { "technical": 2 },
+  "moveType": "grapple",
+  "method": "technical",
+  "superstarId": "british-bulldog",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "British Bulldog-exclusive Trademark. Grounds opponent. If the opponent is already Amber or Red when this Connects, you may immediately attempt a Pin.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "front-control"
+},
+{
+  "id": "british-bulldog-military-press-slam",
+  "name": "Bulldog’s Military Press Slam",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 6,
+  "damage": 10,
+  "requirements": { "strength": 2 },
+  "moveType": "grapple",
+  "method": "strength",
+  "superstarId": "british-bulldog",
+  "rarity": 3,
+  "trademark": true,
+  "rulesText": "British Bulldog-exclusive Trademark. Grounds opponent. On Connect: search/draw Bulldog’s Running Powerslam; it costs 1 less this Control sequence.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [{ "type": "search", "name": "Bulldog’s Running Powerslam", "discount": 1 }],
+  "counterState": "body-elevated"
+},
+{
+  "id": "british-bulldog-running-powerslam",
+  "name": "Bulldog’s Running Powerslam",
+  "kind": "move",
+  "setId": "new-generation-series-1",
+  "cost": 10,
+  "damage": 17,
+  "requirements": {},
+  "moveType": "grapple",
+  "method": null,
+  "superstarId": "british-bulldog",
+  "rarity": 4,
+  "finisher": true,
+  "rulesText": "British Bulldog-exclusive Finisher. No Method requirement. Grounds opponent.",
+  "groundOpponent": true,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "effects": [],
+  "counterState": "body-elevated"
+},
+{
+  "id": "entrance-british-bulldog",
+  "name": "Rule Britannia",
+  "kind": "entrance",
+  "setId": "new-generation-series-1",
+  "rarity": 4,
+  "superstarId": "british-bulldog",
+  "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+  "preMatchMomentum": { "strength": 1, "technical": 1 },
+  "preMatchAdrenaline": 1,
+  "delayedTurn5": false
+},
+{
+  "id": "special-british-bulldog",
+  "name": "Made in Britain",
+  "kind": "action",
+  "setId": "new-generation-series-1",
+  "cost": 0,
+  "damage": 0,
+  "requirements": {},
+  "moveType": null,
+  "method": null,
+  "superstarId": "british-bulldog",
+  "rarity": 4,
+  "rulesText": "Once per match during British Bulldog’s Control: search the Playbook for one 1★/2★ Strength Move and one 1★/2★ Technical Move, reveal both and put them into your hand, then shuffle.",
+  "groundOpponent": false,
+  "groundedOnly": false,
+  "stun": 0,
+  "selfDamage": 0,
+  "special": { "type": "bulldogMadeInBritain", "methods": ["strength", "technical"], "maxRarity": 2 },
+  "effects": []
+}
 
 ];
 

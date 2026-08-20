@@ -1,49 +1,42 @@
-# WWE Legacy v0.13.77 — RAW Shared Low-Rarity Expansion Pass
+# WWE Legacy v0.13.81 — New Generation British Bulldog Completion Pass
 
 Certification date: 21 August 2026
-Package: `WWE-Legacy-v0.13.77-RAW-Shared-Low-Rarity-Expansion-Pass.zip`
+Package: `WWE-Legacy-v0.13.81-New-Generation-British-Bulldog-Completion-Pass.zip`
 
 ## Scope
-- Add the full approved 18-card RAW Series 1 shared low-rarity expansion.
-- Preserve every existing RAW collector identity and append the new block as RAW1-072 through RAW1-089.
-- Add all 18 to the live RAW booster / Catalogue / collection pool and Card Art Studio database.
-- Keep all 18 booster-only and out of authored recommended decks.
+- Preserve New Generation NG1-001 through NG1-067 exactly.
+- Add the approved shared New Generation low-rarity block at NG1-068 through NG1-073.
+- Author British Bulldog as the eighth and final planned New Generation Superstar at NG1-074 through NG1-080.
+- Add British Bulldog's approved 60-page recommended deck, 67 HP profile, Power & Technique ability, Running Powerslam chain and Made in Britain dual-search Action.
+- Regenerate Card Art Studio and nameplate data for the expanded 66-Superstar roster.
+- Complete New Generation — Series 1 as an 80-card authored collector set while retaining the 5 September 2026 release gate.
 
-## New Commons — 1★
-- RAW1-072 — Snapmare — C2/D3 — Technical 1 — Grapple — Front Control — grounds opponent.
-- RAW1-073 — Scoop Slam — C3/D5 — Strength 1 — Grapple — Body Elevated — grounds opponent.
-- RAW1-074 — Chop Block — C2/D3 — Strike 1 — Leg Extended — +1 persistent Leg damage.
-- RAW1-075 — Spinning Backfist — C3/D5 — Strike 1 — Arm Extended.
-- RAW1-076 — Single-Leg Dropkick — C3/D5 — Agility 1 — Running Aerial — grounds opponent.
-- RAW1-077 — Back Rake — C2/D3 — Strike 1 — Rear Control — +1 persistent Back damage.
-- RAW1-078 — Arm Wrench — C2/D2 — Technical 1 — Arm Extended — +1 persistent Arm damage.
-- RAW1-079 — Knee Lift — C3/D5 — Strike 1 — Front Control.
+## Shared New Generation cards
+### Commons — 1★
+- NG1-068 Standing Dropkick
+- NG1-069 Hammerlock Takedown
+- NG1-070 Running Knee Lift
+- NG1-071 Shoulder Breaker
 
-## New Uncommons — 2★
-- RAW1-080 — T-Bone Suplex — C4/D7 — Strength 2 — Grapple — Body Elevated — grounds opponent.
-- RAW1-081 — Gutwrench Suplex — C4/D7 — Strength 2 — Grapple — Torso Trapped — grounds opponent.
-- RAW1-082 — Michinoku Driver — C5/D8 — Technical 2 — Grapple — Body Elevated — grounds opponent.
-- RAW1-083 — Pumphandle Slam — C5/D8 — Strength 2 — Grapple — Torso Trapped — grounds opponent.
-- RAW1-084 — Bicycle Kick — C4/D7 — Strike 2 — Leg Extended.
-- RAW1-085 — Rolling Elbow — C4/D7 — Strike 2 — Arm Extended.
-- RAW1-086 — Springboard Forearm — C4/D7 — Agility 2 — Running Aerial — grounds opponent.
-- RAW1-087 — Dragon Sleeper — C4/D0 — Technical 2 — Submission — standing only — Rear Control — +4 persistent Head damage per successful maintain turn.
-- RAW1-088 — Camel Clutch — C4/D0 — Strength 2 — Submission — grounded only — Rear Control — +3 persistent Back damage per successful maintain turn.
-- RAW1-089 — Slingshot Suplex — C4/D7 — Technical 2 — Grapple — Body Elevated — grounds opponent.
+### Uncommons — 2★
+- NG1-072 Front Powerslam
+- NG1-073 Full Nelson
 
-## Resulting RAW Series 1 rarity distribution
-- Commons: **14**
-- Uncommons: **19**
-- Rares: **22**
-- Very Rares: **26**
-- Collector cards: **89**
+## British Bulldog collector block
+- NG1-074 Bulldog’s Delayed Vertical Suplex — 3★ Rare Trademark
+- NG1-075 Bulldog’s Crucifix — 3★ Rare Trademark
+- NG1-076 Bulldog’s Military Press Slam — 3★ Rare Trademark
+- NG1-077 Bulldog’s Running Powerslam — 4★ Very Rare Finisher
+- NG1-078 Rule Britannia — 4★ Very Rare Entrance
+- NG1-079 Made in Britain — 4★ Very Rare Action
+- NG1-080 British Bulldog — 4★ Very Rare Superstar
 
 ## Certification
-- Automated regression suite: **710 / 710 passed**
-- Validation: **62 Superstars / 62 decks / 580 gameplay cards / 0 orphans / 0 issues**
-- Collector-ID audit: **642 / 642 cards / 0 issues**
-- RAW collector sequence: **RAW1-001 through RAW1-089**, gap-free
-- Flow audit: **62 Superstars / 0 issues**
-- Card-effect audit: **0 issues**
+- Automated regression suite: **733 / 733 passed**
+- Validation: **66 Superstars / 66 decks / 628 gameplay cards / 0 orphans / 0 issues**
+- Collector-ID audit: **694 / 694 cards / 0 issues**
+- New Generation collector sequence: **NG1-001 through NG1-080**, gap-free
+- Flow audit: **66 Superstars / 0 issues**
+- Card-effect audit: **49 scoped Superstars / 509 scoped gameplay cards / 335 effect-bearing cards checked / 0 issues**
 
-All v0.13.76 systems remain intact.
+All v0.13.80 systems remain intact.
