@@ -8829,3 +8829,69 @@ body[data-screen="entrance-intro"] .entrance-intro-heading{grid-row:3!important;
   .focused-pack-upgrades .upgrade-card-choice>strong{min-height:3em!important;font-size:.60rem!important;line-height:1.18!important}
   .focused-pack-upgrades .pack-upgrade-swap>p{margin-top:2px!important}
 }
+
+/* v0.13.72 — Superstar Nameplate Identity Pass ---------------------------
+   Every Superstar uses a bold authored typographic identity. The set still
+   owns the frame language; the Superstar owns the type, colour mix and energy. */
+.superstar-signature-nameplate{
+  --ss-font:Impact,"Arial Black",sans-serif;
+  --ss-top:#fff;--ss-mid:#fff;--ss-bottom:#f0c55c;--ss-outline:#090909;
+  --ss-accent:#e5b642;--ss-glow:rgba(229,182,66,.62);
+  --ss-track:-.02em;--ss-skew:-6deg;--ss-scale:.94;--ss-size:1.05;--ss-italic:italic;
+  position:absolute;left:5.4%;right:5.4%;bottom:2.35%;height:16.8%;z-index:4;
+  display:grid;place-items:center;align-content:center;gap:.45cqw;padding:1.5cqw 3.2cqw 1.1cqw;
+  overflow:hidden;isolation:isolate;text-align:center;text-transform:uppercase;
+  clip-path:polygon(6% 0,94% 0,100% 14%,100% 100%,0 100%,0 14%);
+  background:
+    linear-gradient(180deg,rgba(20,24,33,.82),rgba(5,8,13,.96) 50%,rgba(2,4,8,.99)),
+    linear-gradient(90deg,color-mix(in srgb,var(--ss-accent) 22%,transparent),transparent 30% 70%,color-mix(in srgb,var(--ss-accent) 22%,transparent));
+  border:.42cqw solid var(--ss-accent);
+  box-shadow:inset 0 .25cqw 0 rgba(255,255,255,.26),0 0 2.1cqw color-mix(in srgb,var(--ss-glow) 58%,transparent);
+}
+.superstar-signature-nameplate:before{
+  content:"";position:absolute;z-index:-1;left:11%;right:11%;top:0;height:.55cqw;
+  background:linear-gradient(90deg,transparent,var(--ss-accent) 20% 80%,transparent);
+  box-shadow:0 0 1.4cqw var(--ss-glow);
+}
+.superstar-signature-nameplate:after{
+  content:"";position:absolute;z-index:-1;inset:0;
+  background:linear-gradient(112deg,transparent 18%,rgba(255,255,255,.12) 43%,transparent 58%);
+  opacity:.7;pointer-events:none;
+}
+.superstar-signature-name-text{
+  display:block;max-width:100%;white-space:nowrap;line-height:.82;
+  font-family:var(--ss-font);font-style:var(--ss-italic);font-weight:1000;
+  font-size:calc(8.6cqw * var(--ss-size));letter-spacing:var(--ss-track);
+  transform:skewX(var(--ss-skew)) scaleX(var(--ss-scale));transform-origin:center;
+  color:transparent;background:linear-gradient(180deg,var(--ss-top) 0%,var(--ss-mid) 48%,var(--ss-bottom) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-stroke:.58cqw var(--ss-outline);
+  paint-order:stroke fill;
+  text-shadow:0 .35cqw .35cqw rgba(0,0,0,.92),0 0 1.2cqw var(--ss-glow),0 0 2.2cqw color-mix(in srgb,var(--ss-glow) 68%,transparent);
+}
+.superstar-signature-nameplate.is-name-long .superstar-signature-name-text{font-size:calc(7.15cqw * var(--ss-size))}
+.superstar-signature-nameplate.is-name-xl .superstar-signature-name-text{font-size:calc(5.7cqw * var(--ss-size));letter-spacing:calc(var(--ss-track) - .01em)}
+.superstar-signature-nameplate>small{
+  display:block;color:var(--ss-accent);font-size:2.05cqw;line-height:1;font-weight:1000;
+  letter-spacing:.16em;text-shadow:0 .2cqw .3cqw #000,0 0 .8cqw var(--ss-glow);
+}
+.ccg-superstar-live-overlay{position:absolute;z-index:4;inset:0;pointer-events:none;container-type:inline-size}
+.ccg-superstar-live-rarity{display:none;position:absolute;left:7.5%;top:4.8%;font-size:3.55cqw;line-height:1.28;font-weight:1000;color:#f4c542;text-shadow:0 0 .7cqw rgba(255,202,55,.5),0 .25cqw .45cqw rgba(0,0,0,.95)}
+.ccg-card.has-layered-asset.type-superstar .ccg-superstar-live-rarity{display:block}
+.ccg-superstar-live-nameplate{left:5.2%;right:5.2%;bottom:2.45%;height:16.4%}
+
+/* Generated preview cards use the same authored nameplate identity rather than
+   a generic italic label. This keeps selectors and missing-front fallbacks in
+   lockstep with Card Studio and live layered Superstar fronts. */
+.generated-superstar-preview>.generated-superstar-nameplate{
+  left:4.8%;right:4.8%;bottom:2.7%;height:17.5%;border-width:1px;padding:4% 4% 3%;gap:1%;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 8px var(--ss-glow);
+}
+.generated-superstar-preview>.generated-superstar-nameplate .superstar-signature-name-text{
+  font-size:calc(8.3cqw * var(--ss-size));-webkit-text-stroke:.62cqw var(--ss-outline);text-shadow:0 1px 2px #000,0 0 5px var(--ss-glow)
+}
+.generated-superstar-preview>.generated-superstar-nameplate.is-name-long .superstar-signature-name-text{font-size:calc(6.9cqw * var(--ss-size))}
+.generated-superstar-preview>.generated-superstar-nameplate.is-name-xl .superstar-signature-name-text{font-size:calc(5.45cqw * var(--ss-size))}
+.generated-superstar-preview>.generated-superstar-nameplate>small{font-size:1.75cqw}
+.generated-superstar-preview>strong{display:none!important}
+.generated-superstar-preview{container-type:inline-size}

@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.13.71';
-import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.13.71';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.71';
-import { cardsForSet } from '../js/data/collection.js?v=0.13.71';
-import { superstars } from '../js/data/superstars.js?v=0.13.71';
+import { MATCH_XP, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP, XP_PER_TIER } from '../js/data/seasons.js?v=0.13.72';
+import { RARITY_WEIGHTS, SUPERSTAR_PITY_PACKS, SUPERSTAR_CHASE_CHANCE, boosterEligible, underOwnershipCap, grantBooster, openBooster } from '../js/data/boosters.js?v=0.13.72';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.72';
+import { cardsForSet } from '../js/data/collection.js?v=0.13.72';
+import { superstars } from '../js/data/superstars.js?v=0.13.72';
 
 const setId='summerslam-series-1';
 const sequenceRng=(values,fallback=.42)=>{let i=0;return()=>values[i++]??fallback;};

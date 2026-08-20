@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.71';
-import { DECK_LAB_CATEGORIES, categoryForCard } from '../js/data/deck-builder.js?v=0.13.71';
-import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=0.13.71';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.71';
-import { canPlayAction, canPlayPinEscape } from '../js/engine/rules.js?v=0.13.71';
-import { superstars } from '../js/data/superstars.js?v=0.13.71';
-import { decks } from '../js/data/decks.js?v=0.13.71';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.72';
+import { DECK_LAB_CATEGORIES, categoryForCard } from '../js/data/deck-builder.js?v=0.13.72';
+import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=0.13.72';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.72';
+import { canPlayAction, canPlayPinEscape } from '../js/engine/rules.js?v=0.13.72';
+import { superstars } from '../js/data/superstars.js?v=0.13.72';
+import { decks } from '../js/data/decks.js?v=0.13.72';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 

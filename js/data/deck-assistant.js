@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.71";
-import { collectionCards } from "./collection.js?v=0.13.71";
-import { superstars } from "./superstars.js?v=0.13.71";
-import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.71";
-import { applyFoilGameplay, foilDamageBonusFor } from "./foil.js?v=0.13.71";
+import { decks } from "./decks.js?v=0.13.72";
+import { collectionCards } from "./collection.js?v=0.13.72";
+import { superstars } from "./superstars.js?v=0.13.72";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.72";
+import { applyFoilGameplay, foilDamageBonusFor } from "./foil.js?v=0.13.72";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
