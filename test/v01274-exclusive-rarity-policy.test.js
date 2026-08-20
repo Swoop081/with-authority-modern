@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.61";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.65";
 
 const isSingleWrestlerExclusive = card =>
   !!card?.superstarId || (!card?.superstarId && Array.isArray(card?.allowedSuperstarIds) && card.allowedSuperstarIds.length === 1);

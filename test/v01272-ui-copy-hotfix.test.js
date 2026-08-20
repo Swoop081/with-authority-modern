@@ -16,7 +16,7 @@ function between(source, start, end) {
 }
 
 test('v0.12.72 renames Electric Chair Facebuster to Electric Chair Drop without changing identity', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.61');
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.65');
   const card = allGameplayCards.find(c => c.id === 'rhea-ripley-electric-chair-facebuster');
   assert.ok(card);
   assert.equal(card.name, 'Electric Chair Drop');

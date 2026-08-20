@@ -1,43 +1,69 @@
-# WWE Legacy v0.13.61 — Build Certification
+# WWE Legacy v0.13.65 — Build Certification
 
-**Build:** v0.13.61 — New Generation Diesel Big Daddy Cool Pass  
+**Build:** v0.13.65 — Shared Move Triple Pass  
 **Frozen:** 20 August 2026
 
 ## Automated regression
-- **657 / 657 tests pass**
-- Includes Diesel / New Generation regressions covering hidden future-set status, authored 60-page deck, exclusive rarity and elite-Finisher rules, stable NG1 collector identities, and live Big Daddy Cool / Two Dudes with Attitudes execution.
+- **668 / 668 tests pass**
+- Dedicated v0.13.65 regressions lock all three new gameplay profiles, collector identities, Card Studio placements, and the separation between the generic Diving Shoulder Block and Ultimate Warrior’s exclusive card.
 
 ## Data validation
 - **62 Superstars**
 - **62 decks**
-- **557 gameplay cards**
+- **562 gameplay cards**
 - **0 orphan cards**
 - **0 validation issues**
 
 ## Flow / collector audits
 - Flow audit: **62 Superstars / 0 issues**
-- Card-ID audit: **619 / 619 collector cards / 0 issues**
-- New Generation — Series 1: **28 cards, NG1-001 through NG1-028, gap-free**
-- Counter-State audit: **557 gameplay cards / 62 decks / 0 issues**
-  - Diesel: **12 Counter pages / 8 of 8 Counter-State coverage / 4 of 4 Submission-target coverage**
-- Card-effect audit: **45 internal-test Superstars / 440 scoped gameplay cards / 279 effect-bearing cards / 0 issues**
+- Card-ID audit: **624 / 624 collector cards / 0 issues**
+- Evolution — Series 1: **75 cards, EVO1-001 through EVO1-075, gap-free**
+- Hall of Fame — Series 1: **94 cards, HOF1-001 through HOF1-094, gap-free**
+- SmackDown — Series 1: **38 cards, SD1-001 through SD1-038, gap-free**
+- Counter-State audit: **562 gameplay cards / 62 decks / 0 issues**
+- Submission target coverage remains complete; Vertical Boston Crab is a Back-targeting submission with Rear Control counter state.
+- Card-effect audit: **45 internal-test Superstars / 443 scoped gameplay cards / 281 effect-bearing cards / 0 issues**
 
-## Simulation
+## Card certification
+### Vertical Boston Crab — EVO1-075
+- **2★ Uncommon**
+- **Cost 6 / Damage 0**
+- **Technical 2**
+- **Submission / Rear Control**
+- Grounded opponent only.
+- **+4 persistent Back damage per successful turn.**
+- Shared / booster-only; no Superstar ownership.
+
+### Diving Shoulder Block — HOF1-094
+- **1★ Common**
+- **Cost 4 / Damage 6**
+- **Agility 1**
+- **Aerial / Diving Aerial**
+- Grounds opponent.
+- Shared / booster-only; no Superstar ownership.
+- Exists independently from `ultimate-warrior-diving-shoulder-block`, which remains a 3★ Ultimate Warrior-exclusive card with its prior gameplay unchanged.
+
+### Springboard Roundhouse Kick — SD1-038
+- **3★ Rare**
+- **Cost 6 / Damage 9**
+- **Agility 2 + Strike 1**
+- **Aerial / Running Aerial**
+- Grounds opponent.
+- Shared / booster-only; no Superstar ownership.
+
+None of the three new cards is installed in an authored Superstar deck in this pass.
+
+## Simulation carry-forward
+Because the authored 62 Superstar decks are unchanged, the most recent authored-deck gameplay simulation certification carries forward unchanged:
 - Full-roster smoke balance: **3,782 matches / 0 stalls / 25.24 average turns**
-  - Pins: 3,550
-  - Submissions: 232
 - Internal/pre-release balance: **19,800 matches / 0 stalls / 25.12 average turns**
-  - Pins: 18,200
-  - Submissions: 1,600
-- Diesel cross-field row in the internal/pre-release matrix: **880 matches / 59.4% win rate / 0 stalls / 24.4 average turns**
-  - Wins: 523
-  - Losses: 357
+- Diesel internal/pre-release cross-field: **880 matches / 59.4% win rate / 0 stalls / 24.4 average turns**
 
 ## Artwork audit
-- Collector cards audited: **619**
-- Custom fronts currently missing: **579**
-- Diesel and his New Generation-exclusive cards intentionally use the normal fallback presentation until approved 1993–1995 artwork is installed.
-- Missing custom fronts continue to fall back to the canonical WWE Legacy card presentation and are not a gameplay/data validation failure.
+- Collector cards audited: **624**
+- Custom fronts currently missing: **584**
+- The three new shared cards account for the three-card increase from v0.13.64 and use canonical fallback presentation until approved custom artwork is installed.
+- Missing custom fronts remain expected and are not gameplay/data validation failures.
 
 ## Release scope
-This release completes the foundational 1993–1995 New Generation — Series 1 core four with Diesel joining Bret Hart, Shawn Michaels and Razor Ramon. New Generation remains undated, development-only and player-hidden. Existing v0.13.60 Razor Ramon content, v0.13.58 iPhone UX / Championship Roads, v0.13.57 Lead Off and shuffle integrity, v0.13.55 Foil Power Chase behavior, and all prior locked changes remain intact.
+Evolution and Hall of Fame retain their existing live-set behavior. SmackDown retains its existing future-set gating and is not made player-facing early by this pass. All v0.13.64 and earlier accepted systems remain authoritative.

@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.61';
-import { collectionCards } from '../js/data/collection.js?v=0.13.61';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.61';
-import { boosterEligible, boosterCreditsFor, superPackCreditsFor, grantVictoryBooster, grantSuperPack, openBooster, openSuperPack, SUPER_PACK_RARITY_WEIGHTS, SUPER_PACK_GUARANTEED_MIN_RARITY, SUPER_PACK_MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=0.13.61';
-import { duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.61';
-import { superstars } from '../js/data/superstars.js?v=0.13.61';
-import { startLadderRun, recordLadderMatch, LADDER_LENGTH } from '../js/data/ladder.js?v=0.13.61';
-import { startChampionshipRoad, recordChampionshipMatch, CHAMPIONSHIP_ROAD_LENGTH } from '../js/data/championship-road.js?v=0.13.61';
-import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.61';
-import { startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.61';
+import { createProfile } from '../js/data/profile.js?v=0.13.65';
+import { collectionCards } from '../js/data/collection.js?v=0.13.65';
+import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.65';
+import { boosterEligible, boosterCreditsFor, superPackCreditsFor, grantVictoryBooster, grantSuperPack, openBooster, openSuperPack, SUPER_PACK_RARITY_WEIGHTS, SUPER_PACK_GUARANTEED_MIN_RARITY, SUPER_PACK_MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=0.13.65';
+import { duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.65';
+import { superstars } from '../js/data/superstars.js?v=0.13.65';
+import { startLadderRun, recordLadderMatch, LADDER_LENGTH } from '../js/data/ladder.js?v=0.13.65';
+import { startChampionshipRoad, recordChampionshipMatch, CHAMPIONSHIP_ROAD_LENGTH } from '../js/data/championship-road.js?v=0.13.65';
+import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.65';
+import { startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.65';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const ids = Object.values(superstars).filter(s=>!s.developmentOnly).map(s=>s.id);

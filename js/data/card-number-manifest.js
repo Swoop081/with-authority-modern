@@ -3358,7 +3358,12 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
   {"id":"diesel-jackknife-powerbomb","setId":"new-generation-series-1","cardNumber":25,"cardCode":"NG1-025"},
   {"id":"entrance-diesel","setId":"new-generation-series-1","cardNumber":26,"cardCode":"NG1-026"},
   {"id":"special-diesel","setId":"new-generation-series-1","cardNumber":27,"cardCode":"NG1-027"},
-  {"id":"superstar-diesel","setId":"new-generation-series-1","cardNumber":28,"cardCode":"NG1-028"}
+  {"id":"superstar-diesel","setId":"new-generation-series-1","cardNumber":28,"cardCode":"NG1-028"},
+  {"id":"brainbuster","setId":"money-in-the-bank-series-1","cardNumber":38,"cardCode":"MITB1-038"},
+  {"id":"side-kick","setId":"raw-series-1","cardNumber":71,"cardCode":"RAW1-071"},
+  {"id":"vertical-boston-crab","setId":"evolution-series-1","cardNumber":75,"cardCode":"EVO1-075"},
+  {"id":"diving-shoulder-block","setId":"hall-of-fame-series-1","cardNumber":94,"cardCode":"HOF1-094"},
+  {"id":"springboard-roundhouse-kick","setId":"smackdown-series-1","cardNumber":38,"cardCode":"SD1-038"}
 
 
 ]);

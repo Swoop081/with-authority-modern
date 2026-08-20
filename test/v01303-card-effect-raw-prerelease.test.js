@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.61';
-import { superstars } from '../js/data/superstars.js?v=0.13.61';
-import { decks } from '../js/data/decks.js?v=0.13.61';
-import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.61';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.61';
-import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.61';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.61';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.61';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.65';
+import { superstars } from '../js/data/superstars.js?v=0.13.65';
+import { decks } from '../js/data/decks.js?v=0.13.65';
+import { PRE_RELEASE_TEST_SET_IDS, isInternalTestSetId, isPlayerReleasedSetId, isPlayerVisibleSuperstar, isUnreleasedSetId } from '../js/data/release.js?v=0.13.65';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.65';
+import { filterAndSortCatalogue, defaultCatalogueFilters } from '../js/data/catalogue.js?v=0.13.65';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.65';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.65';
 
 const stars = Object.values(superstars);
 const star = id => stars.find(s => s.id === id);
@@ -25,7 +25,7 @@ test('v0.13.3 RAW Series 1 is in internal certification scope but remains comple
   assert.equal(rawStars.length, 8);
   for (const s of rawStars) assert.equal(isPlayerVisibleSuperstar(s, { unlockedSuperstars: [s.id] }), false, `${s.id} must remain hidden even if stale profile data says unlocked`);
   const rawCards = allGameplayCards.filter(c => c.setId === 'raw-series-1');
-  assert.equal(rawCards.length, 62);
+  assert.equal(rawCards.length, 63);
   assert.equal(boosterEligible(rawCards.find(c => c.kind === 'move')), false);
   const visibleCatalogue = filterAndSortCatalogue(allGameplayCards, defaultCatalogueFilters());
   assert.equal(visibleCatalogue.some(c => c.setId === 'raw-series-1'), false);
