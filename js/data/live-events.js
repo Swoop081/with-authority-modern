@@ -1,5 +1,5 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.70";
-import { superstars } from "./superstars.js?v=0.13.70";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.71";
+import { superstars } from "./superstars.js?v=0.13.71";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -454,6 +454,16 @@ function repairLiveEventRunReleaseGate(profile, tower, state, now = new Date()) 
     if (!replacement) break;
     used.add(replacement);
     run.opponents.push(replacement);
+  }
+  const bossId = tower.event?.bossId;
+  if (tower.cadence === "birthday" && bossId && bossId !== run.superstarId && releasedSet.has(bossId)) {
+    run.opponents = run.opponents.filter(id => id !== bossId).slice(0, LIVE_EVENT_LENGTH - 1);
+    while (run.opponents.length < LIVE_EVENT_LENGTH - 1) {
+      const replacement = fallback.find(candidate => candidate !== bossId && !run.opponents.includes(candidate) && candidate !== run.superstarId);
+      if (!replacement) break;
+      run.opponents.push(replacement);
+    }
+    run.opponents.push(bossId);
   }
 }
 

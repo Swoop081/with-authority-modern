@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.70';
+import { createProfile } from '../js/data/profile.js?v=0.13.71';
 import {
   CHAMPIONSHIP_ROAD_OPPONENTS,
   championshipRoadForSuperstar,
@@ -10,7 +10,7 @@ import {
   startChampionshipRoad,
   currentChampionshipOpponent,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.13.70';
+} from '../js/data/championship-road.js?v=0.13.71';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -83,7 +83,7 @@ test('v0.13.58 Championship UI exposes per-Superstar roads and valid Save Deck r
   assert.match(championship, /YOUR CHAMPIONSHIP ROADS/);
   assert.match(championship, /data-champ-superstar/);
   assert.match(championship, /\$\{progress\}\/\$\{CHAMPIONSHIP_ROAD_LENGTH\}/);
-  assert.match(championship, /24 matches · four difficulties/);
+  assert.match(championship, /modeLogoMarkup\('championship',true\)/);
   const deck = slice('function renderDeckBuilder()', 'function cardMeta');
   assert.match(deck, /message = `\$\{star\.name\}'s deck and Entrance saved\.`/);
   assert.match(deck, /deckLabStage = "roster"/);

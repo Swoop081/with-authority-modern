@@ -1,10 +1,11 @@
-# WWE Legacy: Collectible Card Game — v0.13.70
+# WWE Legacy: Collectible Card Game — v0.13.71
 
-**Main Event Hero Positioning Pass** — frozen 20 August 2026.
+**Live Event UI + Counter Integrity Pass** — frozen 20 August 2026.
 
-- Main Event / matchup screens are full-bleed again with no empty black chrome-reservation band at the top.
-- SummerSlam and other show logos retain their established size while the hero stack sits in the upper third of the iPhone viewport.
-- `TONIGHT’S` is separated cleanly beneath the show logo and no longer crops/overlays the logo artwork.
-- All v0.13.69 Mobile Selection Continuity changes and earlier accepted systems remain intact.
+- Repairs the reported iPhone Live Event and Entrance layout regressions, including readable PLAY CTAs, unclipped Event Route opponents, birthday-boss final-match ordering, and separated Entrance logo/callout/header bands.
+- Hardens normal Counter legality so Actions/supports such as Crowd Support cannot be answered by Move Counters.
+- Removes the pin-result presentation tell before the count resolves.
+- Finishes Pack Complete hard-centering, long-card-name marquee behavior, post-pack recommendation containment, and Championship Road copy cleanup.
+- Preserves all card values, collector IDs, deck lists, economy rules and release gating from v0.13.70.
 
-See `RELEASE-NOTES-v0.13.70.md` and `BUILD-CERTIFICATION.md` for release details.
+See `RELEASE-NOTES-v0.13.71.md` and `BUILD-CERTIFICATION.md` for full details.

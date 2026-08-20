@@ -1,20 +1,28 @@
-# WWE Legacy v0.13.70 — Build Certification
+# WWE Legacy v0.13.71 — Build Certification
 
-**Build:** v0.13.70 — Main Event Hero Positioning Pass  
+**Build:** v0.13.71 — Live Event UI + Counter Integrity Pass  
 **Frozen:** 20 August 2026
 
 ## Automated regression
-- **678 / 678 tests pass** in the source tree.
-- New v0.13.70 regression verifies the matchup screen is full-bleed, excludes hidden global chrome spacing, preserves the established show-logo size, and separates the matchup heading from the logo.
-- v0.13.69 Superstar-carousel continuity, Pack Complete rarest-card centering, and Live Event CTA containment remain intact.
+- **687 / 687 tests pass** in the source tree.
+- Nine v0.13.71 regressions cover Entrance hero layering, Live Event PLAY labels, birthday-boss ordering and route containment, Action/Move Counter legality, pin-result secrecy, true Pack Complete 2/1/2 centering, overflow-name marquee behavior, post-pack comparison containment, and Championship Road copy cleanup.
+- All v0.13.70 and earlier regression coverage remains green.
 
-## Main Event / iPhone presentation certification
-- `matchup` is excluded from generic main-content padding reserved for the fixed global status chrome, eliminating the empty black band when that chrome is hidden.
-- The matchup section begins at the viewport origin and paints its presentation background through the safe-area region.
-- Show-logo size is unchanged: **112px** at the standard matchup breakpoint and **100px on phones**.
-- The hero stack uses safe-area-aware top spacing to position the show identity in the upper third rather than using a blank top band.
-- Negative spacing between the show logo and matchup heading is removed.
-- `TONIGHT’S` has a dedicated separated line beneath the show logo; `MAIN EVENT`, Superstar cards, VS and START MATCH retain their established hierarchy.
+## UI / interaction certification
+- Entrance screens reserve separate show-logo, ability/status-callout and entrance-heading bands; callouts cannot sit behind the show logo.
+- Available Live Event tiles restore readable **PLAY** copy without changing the existing event colour system; active runs retain contextual **CONTINUE** copy.
+- The shared Live Event route rail contains complete opponent previews on iPhone, including artwork, name and subtitle, without vertical clipping.
+- Birthday Live Events place the featured birthday Superstar in Match 5 / the final route position, including pre-run previews and repaired persisted runs.
+- Pack Complete uses a fixed, hard-centered **2 / 1 / 2** slot layout. Highest rarity occupies the center; ties resolve by NEW, then Foil, then original pull order.
+- Overflowing layered card names marquee only after measured overflow; fitting names remain static and the animation stays within the authored name plate.
+- Post-pack Deck Assistance comparison panels reserve stable card/caption/body-copy space so previews cannot cover text.
+- Championship Road removes the redundant persistence/difficulty explanatory prose and simplifies the selected-Superstar command panel.
+
+## Counter / pin integrity certification
+- Standard Move Counters now require the incoming card to be a **Move**. Actions/supports such as **Crowd Support** cannot be answered by a normal Move Counter such as Senton merely because a physical state matches.
+- Both the direct `canCounter` path and `counterEligibility` path enforce the incoming-Move requirement; authored explicit reactive exceptions remain separately governed by their own rules.
+- Pin-count presentation through the 1-count and 2-count obscures the underlying match UI consistently regardless of the eventual kickout result, removing the early hand-visibility tell.
+- The accepted actual-HP pin probability table is unchanged.
 
 ## Data validation
 - **62 Superstars**
@@ -32,13 +40,13 @@
 ## Artwork audit
 - Collector cards audited: **624**
 - Custom fronts currently missing: **584**
-- Missing-front count is unchanged from v0.13.69.
+- Missing-front count is unchanged from v0.13.70; canonical fallback presentation remains expected for those cards.
 
-## Simulation carry-forward
-This pass changes presentation only. Authored decks and gameplay values are unchanged, so the inherited gameplay simulation certification carries forward:
-- Full-roster smoke balance: **3,782 matches / 0 stalls / 25.24 average turns**
+## Simulation certification
+The counter-integrity hardening was rechecked against both roster simulation suites:
+- Released-roster launch balance: **6,000 matches / 0 stalls / 26.95 average turns**
 - Internal/pre-release balance: **19,800 matches / 0 stalls / 25.12 average turns**
 - Diesel internal/pre-release cross-field: **880 matches / 59.4% win rate / 0 stalls / 24.4 average turns**
 
 ## Release scope
-No gameplay, balance, deck composition, collector numbering, pack odds, economy, progression, rewards or release-gating changes are included. All v0.13.69 and earlier accepted systems remain authoritative.
+No card values, deck composition, collector numbering, pack odds, economy values, progression requirements, rewards or release dates change in this pass. The only rules-engine behavior change is stricter normal Counter eligibility for incoming Actions/supports. All v0.13.70 and earlier accepted systems remain authoritative unless explicitly superseded above.

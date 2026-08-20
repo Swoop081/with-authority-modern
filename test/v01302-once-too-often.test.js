@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.70';
-import { deckIds, decks } from '../js/data/decks.js?v=0.13.70';
-import { superstars } from '../js/data/superstars.js?v=0.13.70';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.70';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.70';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.70';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.71';
+import { deckIds, decks } from '../js/data/decks.js?v=0.13.71';
+import { superstars } from '../js/data/superstars.js?v=0.13.71';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.71';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.71';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.71';
 
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 const once=allGameplayCards.find(c=>c.id==='once-too-often');

@@ -8690,3 +8690,142 @@ body[data-screen="entrance-intro"] .entrance-stage.entrance-revealed .intro-entr
     font-size:.61rem!important;
   }
 }
+
+
+/* v0.13.71 — Live Event UI + Counter Integrity presentation pass. */
+
+/* Entrance hero owns three distinct vertical bands: show logo, callouts, then title. */
+body[data-screen="entrance-intro"] .entrance-hero-band{
+  display:grid!important;
+  grid-template-rows:auto auto auto!important;
+  align-content:start!important;
+  justify-items:center!important;
+  gap:5px!important;
+  overflow:visible!important;
+}
+body[data-screen="entrance-intro"] .entrance-hero-band .prematch-brand{grid-row:1!important;margin:0!important}
+body[data-screen="entrance-intro"] .entrance-crowd-chants{
+  grid-row:2!important;position:relative!important;inset:auto!important;z-index:5!important;
+  width:min(680px,94vw)!important;min-height:34px!important;height:auto!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;flex-wrap:wrap!important;
+  margin:0!important;padding:0 4px!important;
+}
+body[data-screen="entrance-intro"] .entrance-intro-heading{grid-row:3!important;margin:0!important;z-index:6!important}
+
+/* Available Live Event tiles use their existing accent as the button fill, with readable PLAY copy. */
+.live-events-hub .live-tower-hub-card:not(.mitb) .live-tower-enter{
+  background:var(--tower-accent)!important;
+  color:#071017!important;
+  text-shadow:none!important;
+  font-weight:1000!important;
+}
+
+/* Pack Complete is a literal two-column stack centered as a group: 2 / 1 / 2. */
+.pack-summary-compact-grid{
+  --summary-card-w:min(26.5vw,112px);
+  grid-template-columns:repeat(2,var(--summary-card-w))!important;
+  grid-template-rows:repeat(3,auto)!important;
+  justify-content:center!important;
+  justify-items:center!important;
+  column-gap:min(10vw,62px)!important;
+  row-gap:5px!important;
+  width:100%!important;
+}
+.pack-summary-compact-grid>.summary-top-left{grid-column:1!important;grid-row:1!important}
+.pack-summary-compact-grid>.summary-top-right{grid-column:2!important;grid-row:1!important}
+.pack-summary-compact-grid>.summary-center{grid-column:1/-1!important;grid-row:2!important;justify-self:center!important}
+.pack-summary-compact-grid>.summary-bottom-left{grid-column:1!important;grid-row:3!important}
+.pack-summary-compact-grid>.summary-bottom-right{grid-column:2!important;grid-row:3!important}
+.pack-summary-compact-grid .pack-summary-card.actual-card-summary,
+.pack-summary-compact-grid .pack-summary-card.actual-card-summary.summary-center{
+  width:var(--summary-card-w)!important;max-width:112px!important;margin:0!important;transform:none!important;
+}
+
+/* Long authored live-overlay names move only when measured overflow exists. */
+.ccg-card.is-layered-front .ccg-live-name{contain:layout paint;}
+.ccg-card.is-layered-front .ccg-live-name-text{display:inline-block;min-width:100%;white-space:nowrap;text-align:center;will-change:transform}
+.ccg-card.is-layered-front .ccg-live-name.is-marquee{text-align:left!important}
+.ccg-card.is-layered-front .ccg-live-name.is-marquee .ccg-live-name-text{
+  min-width:max-content!important;text-align:left!important;
+  animation:ccgNameMarquee 6.4s ease-in-out infinite;
+}
+@keyframes ccgNameMarquee{
+  0%,16%{transform:translateX(0)}
+  64%,80%{transform:translateX(var(--card-name-scroll,0px))}
+  100%{transform:translateX(0)}
+}
+@media(prefers-reduced-motion:reduce){.ccg-card.is-layered-front .ccg-live-name.is-marquee .ccg-live-name-text{animation:none!important}}
+
+/* Post-pack swaps reserve a real row for each caption/name and never let card geometry cover copy. */
+.focused-pack-upgrades .upgrade-card-pair{align-items:start!important;overflow:visible!important}
+.focused-pack-upgrades .upgrade-card-choice{
+  grid-template-rows:auto auto minmax(2.45em,auto)!important;
+  align-content:start!important;overflow:visible!important;
+}
+.focused-pack-upgrades .upgrade-card-choice>.upgrade-swap-card,
+.focused-pack-upgrades .upgrade-card-choice>.upgrade-card-placeholder{grid-row:2!important;align-self:start!important}
+.focused-pack-upgrades .upgrade-card-choice>strong{
+  grid-row:3!important;align-self:start!important;display:block!important;
+  min-height:2.45em!important;padding-top:2px!important;overflow-wrap:anywhere!important;
+}
+.focused-pack-upgrades .pack-upgrade-swap>p{position:relative!important;z-index:2!important;clear:both!important}
+
+/* Pin counts conceal the underlying hand identically until the actual result is shown. */
+.match-spectacle.pin{
+  background:rgba(0,0,0,.92)!important;
+  backdrop-filter:blur(9px) saturate(.55)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(.55)!important;
+}
+
+/* Championship Road: the controls already communicate persistence/progress; redundant prose is removed in markup. */
+.champ-road-player>div{display:grid!important;gap:3px!important;align-content:center!important;min-width:0!important}
+.champ-road-player>div>strong{display:block!important;line-height:1!important;white-space:normal!important;overflow-wrap:anywhere!important}
+
+@media(max-width:600px){
+  /* Entrance keeps the established logo scale but reserves enough height for callouts + title. */
+  body[data-screen="entrance-intro"] .entrance-intro-screen{
+    grid-template-rows:minmax(30svh,32svh) minmax(0,1fr) auto 50px!important;
+  }
+  body[data-screen="entrance-intro"] .entrance-hero-band{
+    min-height:30svh!important;padding:6px 10px 7px!important;gap:3px!important;
+  }
+  body[data-screen="entrance-intro"] .entrance-hero-band .prematch-brand{min-height:118px!important}
+  body[data-screen="entrance-intro"] .entrance-crowd-chants{min-height:31px!important;max-width:94vw!important;gap:3px!important}
+  body[data-screen="entrance-intro"] .entrance-crowd-chants .entrance-callout{padding:4px 7px!important;font-size:.50rem!important;line-height:1!important}
+  body[data-screen="entrance-intro"] .entrance-intro-heading span{font-size:.53rem!important;line-height:1!important}
+  body[data-screen="entrance-intro"] .entrance-intro-heading h2{font-size:1.42rem!important;line-height:.92!important;margin-top:2px!important}
+  body[data-screen="entrance-intro"] .entrance-card-transition{max-height:45svh!important}
+
+  /* Every Live Event route uses a compact full-card tile instead of clipping a large card. */
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route{
+    min-height:158px!important;overflow:hidden!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-strip{
+    min-height:124px!important;overflow-x:auto!important;overflow-y:hidden!important;align-items:start!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card{
+    height:auto!important;min-height:120px!important;max-height:none!important;
+    grid-template-rows:auto auto auto!important;align-content:start!important;overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-superstar{
+    min-height:0!important;height:auto!important;overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-superstar .ccg-card{
+    width:72px!important;max-width:72px!important;height:auto!important;max-height:none!important;margin-inline:auto!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-copy{
+    min-height:24px!important;align-content:start!important;overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-copy strong,
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-copy small{
+    display:block!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail.is-setup-tower .live-tower-detail-body{
+    grid-template-rows:minmax(202px,1.25fr) minmax(158px,.95fr)!important;
+  }
+
+  /* Extra reserve in post-pack comparisons for long card names and two-line body copy. */
+  .focused-pack-upgrades .upgrade-card-choice{grid-template-rows:auto auto minmax(3em,auto)!important}
+  .focused-pack-upgrades .upgrade-card-choice>strong{min-height:3em!important;font-size:.60rem!important;line-height:1.18!important}
+  .focused-pack-upgrades .pack-upgrade-swap>p{margin-top:2px!important}
+}

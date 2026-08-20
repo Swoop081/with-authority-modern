@@ -1,5 +1,5 @@
-import { totalMomentum } from "./utils.js?v=0.13.70";
-import { healthRatio, healthZone } from "./health.js?v=0.13.70";
+import { totalMomentum } from "./utils.js?v=0.13.71";
+import { healthRatio, healthZone } from "./health.js?v=0.13.71";
 const methodAmount=(p,m)=>p?.momentum?.[m]??0;
 const playerFrom=(subject,playerId)=>playerId==null&&subject?.momentum?subject:subject?.players?.[playerId];
 export function effectiveTotalMomentum(subject,playerId){ const p=playerFrom(subject,playerId); return totalMomentum(p)+(p?.temporaryDiscount??0); }
@@ -33,7 +33,7 @@ export function onceTooOftenEligibility(state,playerId,incoming,card){
 
 const incomingTypes=incoming=>[incoming?.counterState,incoming?.tacticalType,incoming?.moveType].filter(Boolean);
 export function canCounter(incoming,counter){
- if(!incoming||counter?.kind!=="move")return false;
+ if(!incoming||incoming.kind!=="move"||counter?.kind!=="move")return false;
  // Jawbreaker is a positional escape, not a mirror exchange: it cannot answer another Jawbreaker.
  if((incoming.id==='jawbreaker'||incoming.name==='Jawbreaker')&&(counter.id==='jawbreaker'||counter.name==='Jawbreaker'))return false;
  const direct=(counter.countersCardIds??[]).includes(incoming.id);
@@ -51,6 +51,7 @@ export function counterEligibility(state,playerId,incoming,counter){
  const fail=reason=>({ok:false,legal:false,reason}); const p=state?.players?.[playerId];
  if(state?.phase!=="COUNTER")return fail("Not a Counter window");
  if(state?.proposedMove?.defenderId!==playerId)return fail("Not the defending Superstar");
+ if(!incoming||incoming.kind!=="move")return fail("Only incoming Moves can be Countered");
  if(counter?.kind==="action"&&counter?.effect?.type==="onceTooOften")return onceTooOftenEligibility(state,playerId,incoming,counter);
  const isCounterAttack=!!state?.proposedMove?.isCounterAttack;
  if(isCounterAttack){

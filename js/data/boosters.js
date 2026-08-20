@@ -1,8 +1,8 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.70";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underFinishOwnershipCap } from "./profile.js?v=0.13.70";
-import { duplicateUniversePointsFor } from "./store.js?v=0.13.70";
-import { sets } from "./sets.js?v=0.13.70";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.70";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.71";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underFinishOwnershipCap } from "./profile.js?v=0.13.71";
+import { duplicateUniversePointsFor } from "./store.js?v=0.13.71";
+import { sets } from "./sets.js?v=0.13.71";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.71";
 
 export const BOOSTER_SIZE = 5;
 export const GUARANTEED_FOILS = 1;

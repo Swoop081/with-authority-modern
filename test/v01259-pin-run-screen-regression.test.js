@@ -21,7 +21,7 @@ test('Money in the Bank has no branch selector and Championship Road uses sequen
   assert.doesNotMatch(ladder, /data-ladder-branch|horizontal-branch-selector/);
   assert.match(app, /champ-difficulty-rail/);
   assert.match(app, /data-champ-difficulty/);
-  assert.match(app, /24 matches · four difficulties/);
+  assert.match(app, /24 MATCHES · FOUR DIFFICULTIES/);
 });
 
 test('run-screen primary buttons cannot inherit the global oversized min-width', () => {
