@@ -8849,7 +8849,7 @@ body[data-screen="entrance-intro"] .entrance-intro-heading{grid-row:3!important;
 }
 
 
-/* v0.13.74 — Viewport + Readability Stability Pass. */
+/* v0.13.75 — Viewport + Readability Stability Pass. */
 
 /* Tier Up: two- and three-digit tiers must never clip inside the hero number block. */
 #tier-up-layer .tier-up-number{max-width:88vw!important;overflow:visible!important;padding:2px 8px 3px!important}
@@ -8963,7 +8963,7 @@ body[data-screen="boosters"] .vault-pack-quantity{position:absolute!important;to
 .focused-pack-upgrades .pack-upgrade-swap>p{position:relative!important;z-index:3!important;margin-top:7px!important;clear:both!important}
 
 
-/* v0.13.74 — RAW Live splash rotation + Championship Road RAW expansion. */
+/* v0.13.75 — RAW Live splash rotation + Championship Road RAW expansion. */
 .raw-now-ad{
   background:radial-gradient(circle at 78% 18%,rgba(255,66,78,.24),transparent 30%),linear-gradient(135deg,rgba(80,8,15,.96),rgba(20,4,8,.94) 52%,rgba(120,12,24,.90));
 }

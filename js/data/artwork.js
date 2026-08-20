@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.13.74";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.74";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.74";
+import { assetUrl } from "../config/build.js?v=0.13.75";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.75";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.75";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
@@ -97,12 +97,22 @@ export const finalBossRockMenuArtwork = assetUrl(FINAL_BOSS_MENU_ART);
 // can continue using action/profile art while every Superstar-facing UI surface
 // can prefer the finished collectible card. Missing custom files fall back in
 // the UI to superstarArtwork without breaking the game.
+// Card Studio is the naming authority for Superstar exports. It writes both
+// finished Superstar fronts and HUD headshots using the canonical Superstar ID
+// (for example `roxanne-perez.webp`). Do not derive these paths from the older
+// portrait registry: newer/future roster members must resolve automatically.
+function canonicalSuperstarArtId(superstarId) {
+  const id = String(superstarId ?? "").trim();
+  return id || null;
+}
+
 export const superstarCardArtwork = Object.fromEntries(
   Object.keys(superstarArtwork).map(id => [id, assetUrl(`assets/cards/art/custom/superstars/${id}.webp`)])
 );
 
 export function superstarCardArtFor(superstarId) {
-  return superstarCardArtwork[superstarId] ?? null;
+  const id = canonicalSuperstarArtId(superstarId);
+  return id ? assetUrl(`assets/cards/art/custom/superstars/${id}.webp`) : null;
 }
 
 export const superstarHeadshotArtwork = Object.fromEntries(
@@ -110,7 +120,8 @@ export const superstarHeadshotArtwork = Object.fromEntries(
 );
 
 export function superstarHeadshotFor(superstarId) {
-  return superstarHeadshotArtwork[superstarId] ?? superstarArtwork[superstarId] ?? null;
+  const id = canonicalSuperstarArtId(superstarId);
+  return id ? assetUrl(`assets/cards/art/custom/headshots/${id}.webp`) : null;
 }
 
 // Finished collectible fronts exported by the unified Card Art Studio.
@@ -133,7 +144,12 @@ export function layeredCardArtFor(card) {
   // the existing flat/custom/generated treatment when it is not installed.
   if (!card || card.kind === "momentum") return null;
   const folder = finishedFrontFolders[card.kind];
-  const key = card.id ? (finishedFrontKeys[card.id] ?? card.id) : null;
+  // Superstar layered fronts intentionally use the Superstar ID because that is
+  // the filename Card Art Studio exports. Other card families retain their
+  // stable finished-front key / card-ID convention.
+  const key = card.kind === "superstar"
+    ? (canonicalSuperstarArtId(card.superstarId) ?? (String(card.id ?? "").replace(/^superstar-/, "") || null))
+    : (card.id ? (finishedFrontKeys[card.id] ?? card.id) : null);
   return folder && key ? assetUrl(`assets/cards/art/layered/${folder}/${key}.webp`) : null;
 }
 

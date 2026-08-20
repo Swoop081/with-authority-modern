@@ -1,7 +1,7 @@
 # WWE RAW branding source
 
 - Set: Raw — Series 1
-- Release date: 20 August 2026 (moved live in v0.13.74)
+- Release date: 20 August 2026 (moved live in v0.13.75)
 - Branding verified against WWE's official Raw-on-Netflix logo reveal (16 December 2024) and the current WWE Raw show page.
 - Local logo asset derived from the current WWE RAW promotional logo supplied to Gainbridge Fieldhouse for its 2 March 2026 WWE RAW event page.
 - Original promotional asset URL: https://www.gainbridgefieldhouse.com/assets/img/WWE_RAW_26_logo_GFSITE_880x586-31ca1557d8.jpg

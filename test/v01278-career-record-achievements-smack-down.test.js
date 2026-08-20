@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, migrateProfile } from "../js/data/profile.js?v=0.13.74";
-import { CAREER_ACHIEVEMENTS, recordCareerMatch, refreshCareerAchievements } from "../js/data/career.js?v=0.13.74";
-import { collectionCards } from "../js/data/collection.js?v=0.13.74";
-import { decks } from "../js/data/decks.js?v=0.13.74";
-import { tierReward } from "../js/data/seasons.js?v=0.13.74";
+import { createProfile, migrateProfile } from "../js/data/profile.js?v=0.13.75";
+import { CAREER_ACHIEVEMENTS, recordCareerMatch, refreshCareerAchievements } from "../js/data/career.js?v=0.13.75";
+import { collectionCards } from "../js/data/collection.js?v=0.13.75";
+import { decks } from "../js/data/decks.js?v=0.13.75";
+import { tierReward } from "../js/data/seasons.js?v=0.13.75";
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 
