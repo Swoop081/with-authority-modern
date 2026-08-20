@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { COLLECTION_MILESTONES, FOIL_MILESTONES } from '../js/data/set-progression.js?v=0.13.72';
-import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.72';
+import { COLLECTION_MILESTONES, FOIL_MILESTONES } from '../js/data/set-progression.js?v=0.13.74';
+import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.74';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');

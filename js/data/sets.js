@@ -2,7 +2,7 @@ export const sets = {
   "new-generation-series-1": {
     id: "new-generation-series-1", name: "New Generation", series: 1, type: "era-subset",
     displayName: "New Generation — Series 1", shortCode: "NG1", lifecycleDefault: "future",
-    developmentOnly: true, eraWindow: "1993-1995",
+    releaseDate: "2026-09-05", developmentOnly: false, eraWindow: "1993-1995",
     plannedSuperstarIds: ["bret-hart", "shawn-michaels", "diesel", "razor-ramon"],
     lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
   },
@@ -38,8 +38,8 @@ export const sets = {
   },
   "raw-series-1": {
     id: "raw-series-1", name: "Raw", series: 1, type: "brand-subset",
-    displayName: "Raw — Series 1", shortCode: "RAW1", lifecycleDefault: "future",
-    releaseDate: "2026-09-05", developmentOnly: true,
+    displayName: "Raw — Series 1", shortCode: "RAW1", lifecycleDefault: "featured",
+    releaseDate: "2026-08-20", developmentOnly: false,
     lifecycleLabels: { future: "Future", featured: "Featured", vaulted: "Vaulted", returning: "Returning" }
   },
   "season-1-final-boss": { id: "season-1-final-boss", name: "Season 1", series: 1, type: "season-exclusive", displayName: "Season 1 — Final Boss", shortCode: "S1FB", lifecycleDefault: "exclusive", lifecycleLabels: { exclusive: "Season Exclusive" } },

@@ -1,28 +1,34 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.13.72";
-import { superstars } from "../js/data/superstars.js?v=0.13.72";
-import { decks } from "../js/data/decks.js?v=0.13.72";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.72";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.72";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId, setReleaseAt } from "../js/data/release.js?v=0.13.72";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.72";
+import { sets } from "../js/data/sets.js?v=0.13.74";
+import { superstars } from "../js/data/superstars.js?v=0.13.74";
+import { decks } from "../js/data/decks.js?v=0.13.74";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.74";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.74";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId, setReleaseAt } from "../js/data/release.js?v=0.13.74";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.74";
 
 const bret = Object.values(superstars).find(s => s.id === "bret-hart");
 const byId = Object.fromEntries(allGameplayCards.map(c => [c.id,c]));
 
-test("v0.13.56 New Generation Series 1 exists as an undated hidden future container", () => {
+test("v0.13.56 New Generation Series 1 exists as an scheduled 5 September future container", () => {
   assert.equal(sets["new-generation-series-1"].displayName, "New Generation — Series 1");
   assert.equal(sets["new-generation-series-1"].eraWindow, "1993-1995");
-  assert.equal(setReleaseAt("new-generation-series-1"), null);
-  assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2035,0,1)), false);
-  assert.equal(isPlayerVisibleSuperstar(bret, {unlockedSuperstars:["bret-hart"]}, new Date(2035,0,1)), false);
+  const releaseAt = setReleaseAt("new-generation-series-1");
+  assert.ok(releaseAt instanceof Date && !Number.isNaN(releaseAt.getTime()));
+  assert.equal(releaseAt.getFullYear(), 2026);
+  assert.equal(releaseAt.getMonth(), 8);
+  assert.equal(releaseAt.getDate(), 5);
+  assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2026,8,4,12)), false);
+  assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2026,8,5,12)), true);
+  assert.equal(isPlayerVisibleSuperstar(bret, {unlockedSuperstars:["bret-hart"]}, new Date(2026,8,4,12)), false);
+  assert.equal(isPlayerVisibleSuperstar(bret, {unlockedSuperstars:["bret-hart"]}, new Date(2026,8,5,12)), true);
 });
 
 test("v0.13.56 Bret is a complete 1993-1995 New Generation Superstar with a legal authored deck", () => {
   assert.ok(bret);
   assert.equal(bret.era, "1993–1995 New Generation");
-  assert.equal(bret.developmentOnly, true);
+  assert.equal(bret.developmentOnly, false);
   assert.equal(bret.hp, 64);
   assert.deepEqual(bret.starterMomentum, {technical:6,strength:3,strike:3});
   assert.equal(bret.ability.name, "Excellence of Execution");

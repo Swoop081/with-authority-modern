@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=0.13.72";
+import { sets } from "./sets.js?v=0.13.74";
 
 // v0.13.7 — one canonical player release calendar. Launch sets are live from
 // install; authored future sets become player-live at local midnight on their
@@ -16,6 +16,7 @@ export const LIVE_SEASON_REWARD_SET_IDS = Object.freeze([
 
 export const SCHEDULED_PLAYER_SET_IDS = Object.freeze([
   "raw-series-1",
+  "new-generation-series-1",
   "worlds-collide-series-1",
   "money-in-the-bank-series-1",
   "smackdown-series-1",
@@ -72,11 +73,9 @@ export function playerReleaseCalendar() {
   }));
 }
 
-// Internal certification scope. RAW stays in the pre-release harness before
-// September 5; after that date it is naturally both internally testable and
-// player-released without changing this list.
+// Internal certification scope. Future authored subsets remain available to
+// the harness before their public release dates.
 export const PRE_RELEASE_TEST_SET_IDS = Object.freeze([
-  "raw-series-1",
   "worlds-collide-series-1",
   "new-generation-series-1"
 ]);

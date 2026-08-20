@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.72";
+import { enrichCounterState } from "./counter-states.js?v=0.13.74";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -10064,7 +10064,8 @@ export const allGameplayCards = [
     "effect": {
       "type": "topDeckTutor",
       "look": 4,
-      "exclusiveSuperstar": true
+      "exclusiveSuperstar": true,
+      "choose": true
     }
   },
   {

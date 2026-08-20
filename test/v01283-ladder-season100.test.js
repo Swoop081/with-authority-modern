@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.72';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.72';
+import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.74';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.74';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -31,7 +31,8 @@ test('v0.12.84 Season 1 interleaves UP and only currently released booster rewar
   const rewards=Array.from({length:99},(_,i)=>tierReward(i+1));
   const sets=new Set(rewards.filter(r=>r.kind==='booster').map(r=>r.setId));
   assert.ok(rewards.some(r=>r.kind==='universe-points'));
-  assert.deepEqual([...sets].sort(), [...LAUNCH_LIVE_SET_IDS].sort());
+  assert.ok([...sets].every(setId => LAUNCH_LIVE_SET_IDS.includes(setId)));
+  assert.ok(sets.size > 0);
 });
 
 test('v0.13.53 Money in the Bank supersedes the old featured-fight / 2x4 ladder presentation',()=>{

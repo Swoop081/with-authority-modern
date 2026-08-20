@@ -1,5 +1,5 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.72";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.72";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.74";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.74";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
@@ -11,7 +11,7 @@ export const DAILY_CHALLENGE_XP = 25;
 export const WEEKLY_CHALLENGE_XP = 100;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";
 export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
-export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1", "raw-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1", "smackdown-series-1"];
+export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1", "raw-series-1", "new-generation-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1", "smackdown-series-1"];
 
 // Season 1 prestige chase: The Rock — Final Boss is assembled across the road
 // across a 100-tier road. Repeatable Rock cards are earned one copy at a time
@@ -70,15 +70,26 @@ export const SEASON_1 = {
       type: "launch"
     },
     {
-      id: "raw-series-1",
-      date: "2026-09-05T00:00:00",
-      dateLabel: "05 SEP",
+      id: "raw-series-1-live",
+      date: "2026-08-20T00:00:00",
+      dateLabel: "20 AUG",
       title: "Raw — Series 1",
-      kicker: "NEW SUBSET",
-      description: "Four-Superstar RAW subset joins Season 1. Roster reveal coming closer to release.",
-      superstarCount: 4,
+      kicker: "LIVE NOW",
+      description: "Eight-Superstar RAW subset is live now and available in boosters, collection, stores and gameplay rotation.",
+      superstarCount: 8,
       type: "subset",
       setId: "raw-series-1"
+    },
+    {
+      id: "new-generation-series-1",
+      date: "2026-09-05T00:00:00",
+      dateLabel: "05 SEP",
+      title: "New Generation — Series 1",
+      kicker: "NEW SUBSET",
+      description: "Four-Superstar New Generation subset takes the 5 September release slot and joins Season 1. Roster reveal coming closer to release.",
+      superstarCount: 4,
+      type: "subset",
+      setId: "new-generation-series-1"
     },
     {
       id: "worlds-collide",
@@ -190,6 +201,7 @@ const SEASON_1_PACK_SET_IDS = Object.freeze([
   "hall-of-fame-series-1",
   "evolution-series-1",
   "raw-series-1",
+  "new-generation-series-1",
   "worlds-collide-series-1",
   "money-in-the-bank-series-1",
   "smackdown-series-1"

@@ -1,6 +1,6 @@
-import { superstars } from "./superstars.js?v=0.13.72";
+import { superstars } from "./superstars.js?v=0.13.74";
 
-export const CHAMPIONSHIP_ROAD_LENGTH = 24;
+export const CHAMPIONSHIP_ROAD_LENGTH = 32;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";
 export const WORLD_CHAMPIONS = ["cm-punk", "roman-reigns"];
 export const CHAMPIONSHIP_DIFFICULTY_ORDER = ["easy", "normal", "hard", "hardcore"];
@@ -17,7 +17,9 @@ export const CHAMPIONSHIP_ROAD_SECTIONS = Object.freeze([
   { id: "evolution-a", label: "Evolution · Part I", start: 9, end: 12, accent: "violet", setId: "evolution-series-1" },
   { id: "attitude-era", label: "Attitude Era", start: 13, end: 16, accent: "red", setId: "hall-of-fame-series-1" },
   { id: "summerslam-b", label: "SummerSlam · Part II", start: 17, end: 20, accent: "blue", setId: "summerslam-series-1" },
-  { id: "evolution-b", label: "Evolution · Part II", start: 21, end: 24, accent: "violet", setId: "evolution-series-1" }
+  { id: "evolution-b", label: "Evolution · Part II", start: 21, end: 24, accent: "violet", setId: "evolution-series-1" },
+  { id: "raw-a", label: "Raw · Part I", start: 25, end: 28, accent: "raw", setId: "raw-series-1" },
+  { id: "raw-b", label: "Raw · Part II", start: 29, end: 32, accent: "raw", setId: "raw-series-1" }
 ]);
 
 export const CHAMPIONSHIP_ROAD_OPPONENTS = Object.freeze([
@@ -26,7 +28,9 @@ export const CHAMPIONSHIP_ROAD_OPPONENTS = Object.freeze([
   "iyo-sky", "bayley", "paige", "stephanie-vaquer",
   "mankind", "kane", "the-undertaker", "stone-cold-steve-austin",
   "cody-rhodes", "oba-femi", "brock-lesnar", "gunther",
-  "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch"
+  "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch",
+  "sol-ruca", "chad-gable", "raquel-rodriguez", "logan-paul",
+  "roxanne-perez", "austin-theory", "montez-ford", "joe-hendry"
 ]);
 
 // Retained as a compatibility export for older source/tests. Championship Road

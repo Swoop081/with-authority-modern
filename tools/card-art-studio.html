@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08080b">
   <title>WWE Legacy — Card Art Studio</title>
-  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.13.72">
+  <link rel="stylesheet" href="../css/card-art-studio.css?v=0.13.74">
 </head>
 <body>
   <header class="studio-topbar">
     <a class="studio-brand" href="../index.html"><span>WWE</span><b>LEGACY</b><small>COLLECTIBLE CARD GAME</small></a>
-    <span class="studio-build">CARD ART STUDIO · v0.13.72</span>
+    <span class="studio-build">CARD ART STUDIO · v0.13.74</span>
   </header>
   <main class="studio-shell">
     <section class="studio-intro">
@@ -69,11 +69,6 @@
             <b id="card-summary-name">—</b>
             <small><em id="card-code">—</em><em id="card-summary-kind">—</em></small>
             <small id="card-summary-stats">—</small>
-          </div>
-          <div id="nameplate-identity" class="identity-preview" hidden>
-            <span>SUPERSTAR NAMEPLATE</span><b id="nameplate-style-name">—</b>
-            <span>TYPE TREATMENT</span><b id="nameplate-font-name">—</b>
-            <span>COLOUR STORY</span><b id="nameplate-colour-name">—</b>
           </div>
         </section>
 
@@ -146,6 +141,7 @@
       <aside class="preview-panel">
         <div class="preview-toolbar"><div><span>LIVE PREVIEW</span><b id="preview-card">—</b></div><small id="preview-label">WWE Legacy</small></div>
         <div class="canvas-wrap"><canvas id="card-canvas" width="680" height="1000"></canvas></div>
+        <div id="nameplate-preview" class="identity-preview" hidden><span>NAMEPLATE IDENTITY</span><b id="nameplate-style">—</b><span>TYPE</span><b id="nameplate-font">—</b></div>
         <div class="template-key">
           <div class="key summerslam">SUMMERSLAM</div><div class="key survivor">SURVIVOR SERIES</div><div class="key hof">HALL OF FAME</div><div class="key evolution">EVOLUTION</div><div class="key new-generation">NEW GENERATION</div><div class="key raw">RAW</div><div class="key worldscollide">WORLDS COLLIDE</div><div class="key smackdown">SMACKDOWN</div><div class="key rewards">REWARDS</div>
         </div>
@@ -153,7 +149,8 @@
       </aside>
     </section>
   </main>
-  <script src="../js/tools/card-art-studio-data.js?v=0.13.72"></script>
-  <script src="../js/tools/card-art-studio.js?v=0.13.72"></script>
+  <script src="../js/data/superstar-nameplates.js?v=0.13.74"></script>
+  <script src="../js/tools/card-art-studio-data.js?v=0.13.74"></script>
+  <script src="../js/tools/card-art-studio.js?v=0.13.74"></script>
 </body>
 </html>

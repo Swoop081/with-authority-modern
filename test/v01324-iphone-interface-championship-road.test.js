@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.72';
+import { createProfile } from '../js/data/profile.js?v=0.13.74';
 import {
   CHAMPIONSHIP_ROAD_LENGTH,
   CHAMPIONSHIP_ROAD_OPPONENTS,
@@ -12,7 +12,7 @@ import {
   championshipRoadState,
   startChampionshipRoad,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.13.72';
+} from '../js/data/championship-road.js?v=0.13.74';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -23,25 +23,27 @@ const EXPECTED_ROAD = [
   'iyo-sky','bayley','paige','stephanie-vaquer',
   'mankind','kane','the-undertaker','stone-cold-steve-austin',
   'cody-rhodes','oba-femi','brock-lesnar','gunther',
-  'charlotte-flair','rhea-ripley','liv-morgan','becky-lynch'
+  'charlotte-flair','rhea-ripley','liv-morgan','becky-lynch',
+  'sol-ruca','chad-gable','raquel-rodriguez','logan-paul',
+  'roxanne-perez','austin-theory','montez-ford','joe-hendry'
 ];
 
 function clearRoad(profile, difficultyId, superstarId = 'cm-punk') {
   const run = startChampionshipRoad(profile, superstarId, [], () => 0.42, difficultyId);
-  assert.equal(run.opponents.length, 24);
+  assert.equal(run.opponents.length, 32);
   let outcome = null;
   const sectionEnds = [];
-  for (let i = 1; i <= 24; i += 1) {
+  for (let i = 1; i <= 32; i += 1) {
     outcome = recordChampionshipMatch(profile, 'win');
     if (outcome.sectionCleared) sectionEnds.push(outcome.sectionCleared.end);
   }
-  assert.deepEqual(sectionEnds, [4,8,12,16,20,24]);
+  assert.deepEqual(sectionEnds, [4,8,12,16,20,24,28,32]);
   assert.equal(outcome.status, 'cleared');
   return outcome;
 }
 
-test('v0.13.24 Championship Road is the approved 24-match six-theme Season 1 campaign', () => {
-  assert.equal(CHAMPIONSHIP_ROAD_LENGTH, 24);
+test('v0.13.24 Championship Road is the approved 32-match eight-theme Season 1 campaign', () => {
+  assert.equal(CHAMPIONSHIP_ROAD_LENGTH, 32);
   assert.deepEqual(CHAMPIONSHIP_ROAD_OPPONENTS, EXPECTED_ROAD);
   assert.deepEqual(CHAMPIONSHIP_ROAD_SECTIONS.map(section => [section.start, section.end, section.label]), [
     [1,4,'Golden Era'],
@@ -49,11 +51,13 @@ test('v0.13.24 Championship Road is the approved 24-match six-theme Season 1 cam
     [9,12,'Evolution · Part I'],
     [13,16,'Attitude Era'],
     [17,20,'SummerSlam · Part II'],
-    [21,24,'Evolution · Part II']
+    [21,24,'Evolution · Part II'],
+    [25,28,'Raw · Part I'],
+    [29,32,'Raw · Part II']
   ]);
 });
 
-test('v0.13.24 Championship Road difficulty gates Easy → Normal → Hard → Hardcore across 96 matches', () => {
+test('v0.13.24 Championship Road difficulty gates Easy → Normal → Hard → Hardcore across 128 matches', () => {
   const p = createProfile('cm-punk');
   assert.deepEqual(CHAMPIONSHIP_DIFFICULTY_ORDER, ['easy','normal','hard','hardcore']);
   assert.equal(championshipDifficultyUnlocked(p, 'easy'), true);
@@ -73,7 +77,7 @@ test('v0.13.24 Championship Road difficulty gates Easy → Normal → Hard → H
   const state = championshipRoadState(p);
   assert.equal(Object.values(state.clearsByDifficulty).reduce((sum, value) => sum + value, 0), 4);
   assert.deepEqual(state.unlockedDifficulties, ['easy','normal','hard','hardcore']);
-  assert.equal(Object.values(state.bestStageByDifficulty).reduce((sum, value) => sum + value, 0), 96);
+  assert.equal(Object.values(state.bestStageByDifficulty).reduce((sum, value) => sum + value, 0), 128);
 });
 
 test('v0.13.24 Championship Road HP modifiers affect only the CPU side at the approved values', () => {

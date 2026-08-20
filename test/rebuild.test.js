@@ -4,24 +4,24 @@ import { readFileSync, readdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { superstars } from "../js/data/superstars.js?v=0.13.72";
-import { decks } from "../js/data/decks.js?v=0.13.72";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.72";
-import { collectionCards } from "../js/data/collection.js?v=0.13.72";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.72";
-import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.72";
-import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.72";
-import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.72";
-import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.72";
-import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.72";
-import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.72";
-import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.72";
-import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.72";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.72";
-import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.72";
-import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.72";
-import { healthZone } from "../js/engine/health.js?v=0.13.72";
-import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.72";
+import { superstars } from "../js/data/superstars.js?v=0.13.74";
+import { decks } from "../js/data/decks.js?v=0.13.74";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.74";
+import { collectionCards } from "../js/data/collection.js?v=0.13.74";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.74";
+import { createProfile, migrateProfile, unlockSuperstar, addOwnedCard, addUniversePoints, totalOwnedCopies, cardOwnershipCap, hasSuperstar } from "../js/data/profile.js?v=0.13.74";
+import { grantBooster, openBooster, finalizePackUniversePoints, boosterEligible } from "../js/data/boosters.js?v=0.13.74";
+import { STORE_BOOSTER_PRICE, STORE_SUPERSTAR_PRICE, storeRotation, storeLeadOffCards, purchaseStoreBooster, purchaseStoreSuperstar } from "../js/data/store.js?v=0.13.74";
+import { exhibitionOpponentIds, randomExhibitionOpponent } from "../js/data/matchmaking.js?v=0.13.74";
+import { buildOwnedRecommendedDraft, autoFillOwnedDraft, recommendedDeckDraft, cardEligibilityForSuperstar, replaceLeadOffSlot, validateDeckDraft, selectedEntranceId, setSelectedEntrance, recommendedCategoryCounts, currentCategoryCounts } from "../js/data/deck-builder.js?v=0.13.74";
+import { tierReward, claimSeasonTier, SEASON_1, SEASON_2_COMPLETION_SUPERSTAR } from "../js/data/seasons.js?v=0.13.74";
+import { seasonExclusiveSuperstars } from "../js/data/season-exclusive.js?v=0.13.74";
+import { season2GoldbergCards } from "../js/data/season2-goldberg-cards.js?v=0.13.74";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.74";
+import { moveEligibility, canPlayMomentum, canAttemptPin, canPlayAction } from "../js/engine/rules.js?v=0.13.74";
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js?v=0.13.74";
+import { healthZone } from "../js/engine/health.js?v=0.13.74";
+import { LAUNCH_LIVE_SET_IDS, isLaunchLiveSetId, isPlayerReleasedSetId, isUnreleasedSetId } from "../js/data/release.js?v=0.13.74";
 
 const stars=Object.values(superstars);
 const starById=new Map(stars.map(s=>[s.id,s]));
@@ -168,7 +168,7 @@ test("Exhibition CPU matchmaking uses every complete roster deck except the sele
   p.unlockedSuperstars=[starter];
   assert.equal(p.unlockedSuperstars.length,1);
   const pool=exhibitionOpponentIds(starter);
-  const liveStars=stars.filter(s=>isLaunchLiveSetId(s.setId));
+  const liveStars=stars.filter(s=>!s.seasonExclusive && isPlayerReleasedSetId(s.setId));
   assert.equal(pool.length,liveStars.length-1);
   assert.equal(pool.includes(starter),false);
   assert.ok(pool.every(id=>(decks[id]?.length??0)===60));
@@ -267,7 +267,7 @@ test("A completely maxed five-card booster converts every overflow duplicate at 
 
 test("canonical collector manifest is gap-free and matches Collection plus Card Art Studio for every active card", async()=>{
   const fs = await import("node:fs");
-  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.72");
+  const { CARD_NUMBER_MANIFEST, CARD_NUMBER_BY_ID } = await import("../js/data/card-number-manifest.js?v=0.13.74");
   assert.equal(CARD_NUMBER_MANIFEST.length, collectionCards.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.id)).size, CARD_NUMBER_MANIFEST.length);
   assert.equal(new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.cardCode)).size, CARD_NUMBER_MANIFEST.length);
@@ -958,7 +958,7 @@ test("Fight Forever is a booster-only 4-star RAW Action and is absent from all r
   assert.equal(card.setId,'raw-series-1');
   assert.equal(card.boosterOnly,true);
   assert.equal(card.boosterEligible!==false,true);
-  assert.equal(boosterEligible(card),false,'future RAW card is authored booster-ready but hidden until release');
+  assert.equal(boosterEligible(card),true,'RAW is now live so Fight Forever is publicly booster-eligible');
   assert.equal(Object.values(decks).some(deck=>deck.some(c=>c.id===card.id)),false);
   assert.equal(CARD_NUMBER_BY_ID[card.id]?.cardCode,'RAW1-030');
 });
@@ -1015,7 +1015,7 @@ test("v0.11.96 staged move/action expansion remains fully registered after later
     const card=allGameplayCards.find(c=>c.id===id);assert.ok(card,id);assert.equal(card.boosterOnly,true,id);assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
     if(cost!==null)assert.equal(card.cost,cost,id);if(damage!==null)assert.equal(card.damage,damage,id);
     assert.equal(card.boosterEligible!==false,true,id);
-    assert.equal(boosterEligible(card),isLaunchLiveSetId(card.setId),`${id} live booster gate`);
+    assert.equal(boosterEligible(card),isPlayerReleasedSetId(card.setId),`${id} live booster gate`);
   }
   const expectedPools={
     'raw-series-1':[30,26],
@@ -1027,7 +1027,7 @@ test("v0.11.96 staged move/action expansion remains fully registered after later
     const pool=allGameplayCards.filter(c=>c.setId===setId);assert.ok(pool.length>=gameplayCount,`${setId} gameplay pool retains at least the v0.11.96 floor`);
     const authoredPool=pool.filter(card=>card.boosterEligible!==false&&(card.kind!=='entrance'||!card.superstarId));
     assert.ok(authoredPool.length>=boosterCount,`${setId} authored booster pool retains at least the v0.11.96 floor`);
-    assert.equal(pool.filter(boosterEligible).length,0,`${setId} remains hidden from public boosters until release`);
+    assert.equal(pool.filter(boosterEligible).length>0,isLaunchLiveSetId(setId),`${setId} public booster availability tracks live release state`);
   }
 });
 
@@ -1164,7 +1164,7 @@ test("v0.11.98 shared move batch is registered, numbered and booster-ready",()=>
   };
   for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
     const card=allGameplayCards.find(c=>c.id===id); assert.ok(card,id); assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
-    assert.equal(card.cost,cost,id); assert.equal(card.damage,damage,id); assert.equal(card.rarity,rarity,id); assert.equal(card.boosterEligible!==false,true,id); assert.equal(boosterEligible(card),isLaunchLiveSetId(card.setId),`${id} live booster gate`);
+    assert.equal(card.cost,cost,id); assert.equal(card.damage,damage,id); assert.equal(card.rarity,rarity,id); assert.equal(card.boosterEligible!==false,true,id); assert.equal(boosterEligible(card),isPlayerReleasedSetId(card.setId),`${id} live booster gate`);
   }
   assert.equal(allGameplayCards.find(c=>c.id==='shoulder-block').groundOpponent,true);
   assert.deepEqual(allGameplayCards.find(c=>c.id==='shining-wizard').bodyDamage,{bodyPart:'head',pressure:1});
@@ -1195,7 +1195,7 @@ test("v0.12.01 shared fundamentals batch is registered, numbered and executes it
   };
   for(const [id,[code,cost,damage,rarity]] of Object.entries(expected)){
     const card=allGameplayCards.find(c=>c.id===id);assert.ok(card,id);assert.equal(CARD_NUMBER_BY_ID[id]?.cardCode,code,id);
-    assert.equal(card.cost,cost,id);assert.equal(card.damage,damage,id);assert.equal(card.rarity,rarity,id);assert.equal(card.boosterOnly,true,id);assert.equal(card.boosterEligible!==false,true,id);assert.equal(boosterEligible(card),isLaunchLiveSetId(card.setId),`${id} live booster gate`);
+    assert.equal(card.cost,cost,id);assert.equal(card.damage,damage,id);assert.equal(card.rarity,rarity,id);assert.equal(card.boosterOnly,true,id);assert.equal(card.boosterEligible!==false,true,id);assert.equal(boosterEligible(card),isPlayerReleasedSetId(card.setId),`${id} live booster gate`);
   }
   const elbow=allGameplayCards.find(c=>c.id==='elbow-to-back-of-head'),hip=allGameplayCards.find(c=>c.id==='hip-toss'),leg=allGameplayCards.find(c=>c.id==='leg-drop'),choke=allGameplayCards.find(c=>c.id==='choke-on-the-ropes'),chops=allGameplayCards.find(c=>c.id==='chops-in-the-corner');
   assert.deepEqual(elbow.bodyDamage,{bodyPart:'head',pressure:1});assert.deepEqual(chops.bodyDamage,{bodyPart:'chest',pressure:1});
@@ -1333,7 +1333,7 @@ test("v0.12.55 selected Entrances persist separately from the 60-page deck and S
   assert.equal(p.selectedEntrances["roman-reigns"],defaultEntrance);
   assert.equal(boosterEligible({id:"shared-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:null}),true);
   assert.equal(boosterEligible({id:"roman-entrance-test",kind:"entrance",setId:"summerslam-series-1",superstarId:"roman-reigns"}),true);
-  assert.equal(boosterEligible({id:"future-shared-entrance-test",kind:"entrance",setId:"raw-series-1",superstarId:null}),false);
+  assert.equal(boosterEligible({id:"future-shared-entrance-test",kind:"entrance",setId:"new-generation-series-1",superstarId:null}),false);
 });
 
 test("v0.12.54 scrollable navigation keeps Challenges and Deck Lab while Options is retired",async()=>{
@@ -1544,11 +1544,13 @@ test("v0.12.12 public game exposes only the three launch series",()=>{
   const launchCards=collectionCards.filter(card=>isLaunchLiveSetId(card.setId));
   assert.equal(launchStars.length,24);
   assert.equal(launchCards.length,317);
-  assert.equal(exhibitionOpponentIds("roman-reigns").length,23);
-  assert.ok(exhibitionOpponentIds("roman-reigns").every(id=>isLaunchLiveSetId(starById.get(id)?.setId)));
-  for(const setId of ["raw-series-1","worlds-collide-series-1","money-in-the-bank-series-1","smackdown-series-1","survivor-series-series-1","season-2-whos-next"]){
+  assert.equal(exhibitionOpponentIds("roman-reigns").length,31);
+  assert.ok(exhibitionOpponentIds("roman-reigns").every(id=>isPlayerReleasedSetId(starById.get(id)?.setId)));
+  assert.equal(isUnreleasedSetId("raw-series-1"),false,"raw-series-1");
+  assert.equal(collectionCards.filter(card=>card.setId==="raw-series-1").some(card=>boosterEligible(card)),true,"raw-series-1");
+  for(const setId of ["worlds-collide-series-1","money-in-the-bank-series-1","smackdown-series-1","survivor-series-series-1","season-2-whos-next"]){
     assert.equal(isUnreleasedSetId(setId),true,setId);
-    assert.equal(collectionCards.filter(card=>card.setId===setId).some(boosterEligible),false,setId);
+    assert.equal(collectionCards.filter(card=>card.setId===setId).some(card=>boosterEligible(card)),false,setId);
   }
 });
 

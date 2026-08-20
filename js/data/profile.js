@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.72";
-import { collectionCards } from "./collection.js?v=0.13.72";
-import { superstars } from "./superstars.js?v=0.13.72";
-import { isUnreleasedSetId } from "./release.js?v=0.13.72";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.72";
+import { decks } from "./decks.js?v=0.13.74";
+import { collectionCards } from "./collection.js?v=0.13.74";
+import { superstars } from "./superstars.js?v=0.13.74";
+import { isUnreleasedSetId } from "./release.js?v=0.13.74";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.74";
 
 export const PROFILE_KEY = "wa-modern-profile-v2";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -17,6 +17,7 @@ const blankSetCounters = () => ({
   "evolution-series-1": 0,
   "season-1-final-boss": 0,
   "raw-series-1": 0,
+  "new-generation-series-1": 0,
   "worlds-collide-series-1": 0,
   "money-in-the-bank-series-1": 0,
   "smackdown-series-1": 0
@@ -25,7 +26,8 @@ const defaultSetProgress = () => ({
   "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
   "hall-of-fame-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
   "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
-  "raw-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
+  "raw-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
+  "new-generation-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
   "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
   "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
   "smackdown-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] }

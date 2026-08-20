@@ -1,20 +1,20 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.13.72";
-import { superstars } from "../js/data/superstars.js?v=0.13.72";
-import { decks } from "../js/data/decks.js?v=0.13.72";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.72";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.72";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.13.72";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.72";
-import { canPlaySpecial } from "../js/engine/rules.js?v=0.13.72";
+import { sets } from "../js/data/sets.js?v=0.13.74";
+import { superstars } from "../js/data/superstars.js?v=0.13.74";
+import { decks } from "../js/data/decks.js?v=0.13.74";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.74";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.74";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.13.74";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.74";
+import { canPlaySpecial } from "../js/engine/rules.js?v=0.13.74";
 
 const razor=Object.values(superstars).find(s=>s.id==="razor-ramon");
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
 
-test("v0.13.60 Razor Ramon is an undated hidden 1993-1995 New Generation Superstar",()=>{
-  assert.equal(sets["new-generation-series-1"].eraWindow,"1993-1995"); assert.ok(razor); assert.equal(razor.nickname,"The Bad Guy"); assert.equal(razor.era,"1993–1995 New Generation"); assert.equal(razor.developmentOnly,true);
-  assert.equal(isPlayerReleasedSetId("new-generation-series-1",new Date(2035,0,1)),false); assert.equal(isPlayerVisibleSuperstar(razor,{unlockedSuperstars:["razor-ramon"]},new Date(2035,0,1)),false);
+test("v0.13.60 Razor Ramon is an scheduled 5 September 1993-1995 New Generation Superstar",()=>{
+  assert.equal(sets["new-generation-series-1"].eraWindow,"1993-1995"); assert.equal(sets["new-generation-series-1"].releaseDate,"2026-09-05"); assert.ok(razor); assert.equal(razor.nickname,"The Bad Guy"); assert.equal(razor.era,"1993–1995 New Generation"); assert.equal(razor.developmentOnly,false);
+  assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2026,8,4,12)), false); assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2026,8,5,12)), true); assert.equal(isPlayerVisibleSuperstar(razor,{unlockedSuperstars:["razor-ramon"]},new Date(2026,8,4,12)),false); assert.equal(isPlayerVisibleSuperstar(razor,{unlockedSuperstars:["razor-ramon"]},new Date(2026,8,5,12)),true);
 });
 
 test("v0.13.60 Razor has a legal 60-page Strength/Strike/Technical authored baseline",()=>{

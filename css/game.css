@@ -383,6 +383,24 @@ body[data-screen="match"] .topbar{display:none}
 .ccg-card.is-foil .ccg-card-front:before{content:"";position:absolute;z-index:3;inset:-45%;background:linear-gradient(115deg,transparent 39%,rgba(176,233,255,.12) 44%,rgba(255,255,255,.52) 49%,rgba(249,195,255,.23) 53%,transparent 59%);transform:translateX(-52%) rotate(9deg);animation:foilSweep 2.2s linear infinite;pointer-events:none}
 .ccg-card.is-foil .ccg-card-title small:after{content:" · FOIL";color:#dff8ff}
 
+
+/* v0.13.72 — Superstar Nameplate Identity system ------------------------- */
+.ccg-card{container-type:inline-size;}
+.ccg-superstar-nameplate{position:absolute;z-index:2;left:5.4%;right:5.4%;bottom:2.7%;height:15.8%;display:grid;place-content:center;justify-items:center;gap:1.4%;padding:2.2% 5% 1.8%;clip-path:polygon(5% 0,95% 0,100% 16%,100% 100%,0 100%,0 16%);background:linear-gradient(180deg,rgba(17,21,29,.90),rgba(3,5,9,.985) 72%);border-top:1px solid var(--np-edge,#fff);box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 -5px 18px rgba(0,0,0,.28);pointer-events:none;overflow:hidden;}
+.ccg-superstar-nameplate strong{display:block;max-width:100%;white-space:nowrap;text-align:center;font-family:var(--np-font,"Avenir Next Condensed",Arial,sans-serif);font-weight:var(--np-weight,900);font-style:var(--np-style,normal);font-size:clamp(8px,calc(10cqw * var(--np-font-scale,1)),27px);line-height:.92;letter-spacing:var(--np-tracking,0);transform:skewX(var(--np-skew,0deg)) scaleX(var(--np-scale-x,1));transform-origin:center;color:var(--np-top,#fff);-webkit-text-stroke:clamp(.35px,calc(.9cqw),var(--np-stroke,3px)) var(--np-stroke-color,#05070b);paint-order:stroke fill;text-shadow:0 0 var(--np-glow,6px) var(--np-glow-color,rgba(255,255,255,.34)),0 2px 3px #000;}
+.ccg-superstar-nameplate small{font-size:clamp(4px,2.6cqw,8px);font-weight:900;letter-spacing:.18em;color:var(--np-bottom,#ddd);line-height:1;}
+.ccg-card.set-summerslam-series-1{--np-top:#fff;--np-bottom:#ff9d38;--np-edge:#f6a253;--np-stroke-color:#071b36;--np-glow-color:rgba(93,210,255,.72)}
+.ccg-card.set-hall-of-fame-series-1{--np-top:#fff8cf;--np-bottom:#d0a337;--np-edge:#e5b642;--np-stroke-color:#171005;--np-glow-color:rgba(230,188,75,.62)}
+.ccg-card.set-evolution-series-1{--np-top:#fff;--np-bottom:#ff54d7;--np-edge:#ff54d7;--np-stroke-color:#351044;--np-glow-color:rgba(76,221,255,.64)}
+.ccg-card.set-raw-series-1{--np-top:#fff;--np-bottom:#c7ccd2;--np-edge:#ef2637;--np-stroke-color:#110305;--np-glow-color:rgba(238,30,48,.66)}
+.ccg-card.set-worlds-collide-series-1{--np-top:#f7fff1;--np-bottom:#73ff42;--np-edge:#62f13f;--np-stroke-color:#040504;--np-glow-color:rgba(229,182,66,.58)}
+.ccg-card.set-money-in-the-bank-series-1{--np-top:#f6fff2;--np-bottom:#74ef40;--np-edge:#74ef40;--np-stroke-color:#13051c;--np-glow-color:rgba(168,85,247,.64)}
+.ccg-card.set-smackdown-series-1{--np-top:#fff;--np-bottom:#75c8ff;--np-edge:#1597ff;--np-stroke-color:#031326;--np-glow-color:rgba(21,151,255,.70)}
+.ccg-card.set-survivor-series-series-1{--np-top:#fff;--np-bottom:#ff8a3d;--np-edge:#ff6b1b;--np-stroke-color:#041329;--np-glow-color:rgba(255,107,27,.66)}
+.ccg-card.set-new-generation-series-1{--np-top:#fff6a8;--np-bottom:#31e0d4;--np-edge:#ffdc00;--np-stroke-color:#160b36;--np-glow-color:rgba(238,59,159,.68)}
+.ccg-card.set-season-1-final-boss{--np-top:#fff4c8;--np-bottom:#ef3d4c;--np-edge:#e8bd65;--np-stroke-color:#260307;--np-glow-color:rgba(228,183,76,.62)}
+.ccg-card.set-season-2-whos-next{--np-top:#fff;--np-bottom:#dfc160;--np-edge:#dfc160;--np-stroke-color:#08090a;--np-glow-color:rgba(223,193,96,.65)}
+
 /* Match hand: front is art; flip for rules; explicit Play button commits it. */
 .collectible-hand{align-items:start}.hand-card-slot{min-width:0;display:grid;gap:5px}.hand-card-slot.is-locked{opacity:.72}.hand-card-slot.is-locked .ccg-card{filter:saturate(.75)}
 .hand-card-action{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px;align-items:center;min-width:0}.hand-card-action span{font-size:.48rem;line-height:1.1;color:#8e8e98;overflow-wrap:anywhere}.hand-card-action button{padding:6px 9px;min-width:55px;font-size:.58rem}
@@ -8830,68 +8848,146 @@ body[data-screen="entrance-intro"] .entrance-intro-heading{grid-row:3!important;
   .focused-pack-upgrades .pack-upgrade-swap>p{margin-top:2px!important}
 }
 
-/* v0.13.72 — Superstar Nameplate Identity Pass ---------------------------
-   Every Superstar uses a bold authored typographic identity. The set still
-   owns the frame language; the Superstar owns the type, colour mix and energy. */
-.superstar-signature-nameplate{
-  --ss-font:Impact,"Arial Black",sans-serif;
-  --ss-top:#fff;--ss-mid:#fff;--ss-bottom:#f0c55c;--ss-outline:#090909;
-  --ss-accent:#e5b642;--ss-glow:rgba(229,182,66,.62);
-  --ss-track:-.02em;--ss-skew:-6deg;--ss-scale:.94;--ss-size:1.05;--ss-italic:italic;
-  position:absolute;left:5.4%;right:5.4%;bottom:2.35%;height:16.8%;z-index:4;
-  display:grid;place-items:center;align-content:center;gap:.45cqw;padding:1.5cqw 3.2cqw 1.1cqw;
-  overflow:hidden;isolation:isolate;text-align:center;text-transform:uppercase;
-  clip-path:polygon(6% 0,94% 0,100% 14%,100% 100%,0 100%,0 14%);
-  background:
-    linear-gradient(180deg,rgba(20,24,33,.82),rgba(5,8,13,.96) 50%,rgba(2,4,8,.99)),
-    linear-gradient(90deg,color-mix(in srgb,var(--ss-accent) 22%,transparent),transparent 30% 70%,color-mix(in srgb,var(--ss-accent) 22%,transparent));
-  border:.42cqw solid var(--ss-accent);
-  box-shadow:inset 0 .25cqw 0 rgba(255,255,255,.26),0 0 2.1cqw color-mix(in srgb,var(--ss-glow) 58%,transparent);
-}
-.superstar-signature-nameplate:before{
-  content:"";position:absolute;z-index:-1;left:11%;right:11%;top:0;height:.55cqw;
-  background:linear-gradient(90deg,transparent,var(--ss-accent) 20% 80%,transparent);
-  box-shadow:0 0 1.4cqw var(--ss-glow);
-}
-.superstar-signature-nameplate:after{
-  content:"";position:absolute;z-index:-1;inset:0;
-  background:linear-gradient(112deg,transparent 18%,rgba(255,255,255,.12) 43%,transparent 58%);
-  opacity:.7;pointer-events:none;
-}
-.superstar-signature-name-text{
-  display:block;max-width:100%;white-space:nowrap;line-height:.82;
-  font-family:var(--ss-font);font-style:var(--ss-italic);font-weight:1000;
-  font-size:calc(8.6cqw * var(--ss-size));letter-spacing:var(--ss-track);
-  transform:skewX(var(--ss-skew)) scaleX(var(--ss-scale));transform-origin:center;
-  color:transparent;background:linear-gradient(180deg,var(--ss-top) 0%,var(--ss-mid) 48%,var(--ss-bottom) 100%);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-stroke:.58cqw var(--ss-outline);
-  paint-order:stroke fill;
-  text-shadow:0 .35cqw .35cqw rgba(0,0,0,.92),0 0 1.2cqw var(--ss-glow),0 0 2.2cqw color-mix(in srgb,var(--ss-glow) 68%,transparent);
-}
-.superstar-signature-nameplate.is-name-long .superstar-signature-name-text{font-size:calc(7.15cqw * var(--ss-size))}
-.superstar-signature-nameplate.is-name-xl .superstar-signature-name-text{font-size:calc(5.7cqw * var(--ss-size));letter-spacing:calc(var(--ss-track) - .01em)}
-.superstar-signature-nameplate>small{
-  display:block;color:var(--ss-accent);font-size:2.05cqw;line-height:1;font-weight:1000;
-  letter-spacing:.16em;text-shadow:0 .2cqw .3cqw #000,0 0 .8cqw var(--ss-glow);
-}
-.ccg-superstar-live-overlay{position:absolute;z-index:4;inset:0;pointer-events:none;container-type:inline-size}
-.ccg-superstar-live-rarity{display:none;position:absolute;left:7.5%;top:4.8%;font-size:3.55cqw;line-height:1.28;font-weight:1000;color:#f4c542;text-shadow:0 0 .7cqw rgba(255,202,55,.5),0 .25cqw .45cqw rgba(0,0,0,.95)}
-.ccg-card.has-layered-asset.type-superstar .ccg-superstar-live-rarity{display:block}
-.ccg-superstar-live-nameplate{left:5.2%;right:5.2%;bottom:2.45%;height:16.4%}
 
-/* Generated preview cards use the same authored nameplate identity rather than
-   a generic italic label. This keeps selectors and missing-front fallbacks in
-   lockstep with Card Studio and live layered Superstar fronts. */
-.generated-superstar-preview>.generated-superstar-nameplate{
-  left:4.8%;right:4.8%;bottom:2.7%;height:17.5%;border-width:1px;padding:4% 4% 3%;gap:1%;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 0 8px var(--ss-glow);
+/* v0.13.74 — Viewport + Readability Stability Pass. */
+
+/* Tier Up: two- and three-digit tiers must never clip inside the hero number block. */
+#tier-up-layer .tier-up-number{max-width:88vw!important;overflow:visible!important;padding:2px 8px 3px!important}
+#tier-up-layer .tier-up-number b{line-height:.82!important;letter-spacing:-.055em!important;padding:0 .055em .04em!important;overflow:visible!important}
+#tier-up-layer .tier-up-number.tier-digits-2 b{font-size:clamp(4.2rem,20vw,7.35rem)!important}
+#tier-up-layer .tier-up-number.tier-digits-3 b{font-size:clamp(3.65rem,17vw,6.45rem)!important}
+
+/* Refined Superstar identities: character remains in subtle spacing/slant, not novelty-font noise. */
+.ccg-superstar-nameplate strong{
+  font-family:var(--np-font,"Bahnschrift Condensed","Avenir Next Condensed","Arial Narrow",Arial,sans-serif)!important;
+  -webkit-text-stroke:clamp(.35px,.55cqw,var(--np-stroke,1.8px)) var(--np-stroke-color,#05070b)!important;
+  text-shadow:0 0 min(var(--np-glow,3px),5px) var(--np-glow-color,rgba(255,255,255,.28)),0 2px 2px #000!important;
+  letter-spacing:clamp(.015em,calc(var(--np-tracking,.35) * .018em),.055em)!important;
 }
-.generated-superstar-preview>.generated-superstar-nameplate .superstar-signature-name-text{
-  font-size:calc(8.3cqw * var(--ss-size));-webkit-text-stroke:.62cqw var(--ss-outline);text-shadow:0 1px 2px #000,0 0 5px var(--ss-glow)
+
+/* Main Event / Live Event matchup: use the full phone height instead of pinning content to the top half. */
+@media(max-width:600px) and (orientation:portrait){
+  body[data-screen="matchup"] .matchup-splash{
+    min-height:100svh!important;height:100svh!important;box-sizing:border-box!important;
+    display:grid!important;grid-template-rows:auto auto minmax(0,1fr) auto auto!important;
+    align-content:stretch!important;justify-content:stretch!important;
+    padding:max(calc(env(safe-area-inset-top) + 10px),3.2svh) 12px max(calc(env(safe-area-inset-bottom) + 14px),3svh)!important;
+    row-gap:clamp(8px,1.7svh,18px)!important;
+  }
+  body[data-screen="matchup"] .matchup-splash .prematch-brand{align-self:start!important;margin:0 auto!important}
+  body[data-screen="matchup"] .matchup-splash .prematch-heading{align-self:start!important;margin:0!important}
+  body[data-screen="matchup"] .matchup-splash .prematch-versus{align-self:center!important;min-height:0!important;margin:0!important}
+  body[data-screen="matchup"] .matchup-splash .prematch-start{align-self:end!important;margin:0!important}
+  body[data-screen="matchup"] .matchup-splash .prematch-live-event-rule-below{align-self:end!important;margin:0!important}
 }
-.generated-superstar-preview>.generated-superstar-nameplate.is-name-long .superstar-signature-name-text{font-size:calc(6.9cqw * var(--ss-size))}
-.generated-superstar-preview>.generated-superstar-nameplate.is-name-xl .superstar-signature-name-text{font-size:calc(5.45cqw * var(--ss-size))}
-.generated-superstar-preview>.generated-superstar-nameplate>small{font-size:1.75cqw}
-.generated-superstar-preview>strong{display:none!important}
-.generated-superstar-preview{container-type:inline-size}
+
+/* Live Event detail: reclaim dead lower viewport space and show complete cards instead of cropping them. */
+@media(max-width:600px) and (orientation:portrait){
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail{
+    height:100%!important;min-height:0!important;display:flex!important;flex-direction:column!important;
+    gap:6px!important;padding-bottom:4px!important;overflow:hidden!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail-body{
+    flex:1 1 auto!important;min-height:0!important;height:auto!important;display:grid!important;
+    grid-template-rows:minmax(0,1.05fr) minmax(0,.95fr)!important;gap:7px!important;overflow:hidden!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-detail.is-setup-tower .live-tower-detail-body{
+    grid-template-rows:minmax(286px,1.06fr) minmax(244px,.94fr)!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-player.live-tower-selector-panel{
+    min-height:0!important;height:100%!important;overflow:hidden!important;padding:7px 8px!important;
+    grid-template-rows:auto minmax(0,1fr) auto auto!important;gap:4px!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .superstar-select-carousel{
+    min-height:0!important;height:100%!important;align-items:center!important;overflow-x:auto!important;overflow-y:visible!important;padding:2px 1px 3px!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-superstar-card{
+    flex:0 0 min(38vw,148px)!important;width:min(38vw,148px)!important;height:auto!important;aspect-ratio:.68!important;
+    max-height:100%!important;min-height:0!important;overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-front,
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .selection-owned-card{height:100%!important;overflow:visible!important}
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-selector-panel .select-card-front img{width:100%!important;height:100%!important;object-fit:contain!important;padding:0!important}
+
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route{
+    min-height:0!important;height:100%!important;padding:8px 8px 7px!important;overflow:hidden!important;display:grid!important;grid-template-rows:auto minmax(0,1fr)!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-section-head{margin-bottom:5px!important}
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-strip{
+    min-height:0!important;height:100%!important;grid-auto-columns:min(43vw,178px)!important;gap:8px!important;
+    overflow-x:auto!important;overflow-y:visible!important;align-items:stretch!important;padding:1px 1px 3px!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-card{
+    height:100%!important;min-height:0!important;max-height:none!important;padding:7px!important;gap:4px!important;
+    grid-template-rows:auto minmax(0,1fr) auto!important;align-content:stretch!important;overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-superstar{
+    min-height:0!important;height:100%!important;display:grid!important;place-items:center!important;overflow:visible!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-superstar .ccg-card{
+    width:min(31vw,124px)!important;max-width:124px!important;height:auto!important;max-height:100%!important;margin:auto!important;
+  }
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-copy{min-height:29px!important;overflow:visible!important}
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-copy strong{font-size:.68rem!important;line-height:1.02!important}
+  body[data-screen="live-events"][data-live-view="detail"] .live-tower-route-copy small{font-size:.47rem!important;line-height:1.05!important}
+}
+
+/* Booster Vault: center physical packs in every product tile and keep the quantity badge fully inside the safe corner. */
+body[data-screen="boosters"] .vault-pack-product{position:relative!important;justify-items:center!important;text-align:center!important;padding-inline:14px!important;overflow:visible!important}
+body[data-screen="boosters"] .vault-pack-product .vault-product-pack{justify-self:center!important;margin-inline:auto!important;transform-origin:center!important}
+body[data-screen="boosters"] .vault-pack-quantity{position:absolute!important;top:10px!important;right:10px!important;left:auto!important;z-index:12!important;min-width:34px!important;max-width:calc(100% - 20px)!important;box-sizing:border-box!important;transform:none!important;white-space:nowrap!important}
+@media(max-width:600px) and (orientation:portrait){
+  body[data-screen="boosters"] .booster-empty-stage{height:100%!important;min-height:0!important;display:grid!important;place-items:center!important;padding:8px!important}
+  body[data-screen="boosters"] .booster-empty-state{width:min(94%,680px)!important;margin:auto!important;align-self:center!important}
+  body[data-screen="boosters"] .booster-vault-shelf{align-items:stretch!important}
+  body[data-screen="boosters"] .vault-pack-product{display:grid!important;grid-template-rows:minmax(0,1fr) auto auto auto!important;place-items:center!important;align-content:center!important}
+  body[data-screen="boosters"] .vault-product-pack{align-self:center!important;justify-self:center!important}
+}
+
+/* Cody's authored top-four tutor is an actual player choice, not an invisible auto-pick. */
+.top-deck-tutor-choice{margin:0 10px 12px;padding:12px;border:1px solid rgba(255,122,53,.48);border-radius:18px;background:linear-gradient(155deg,#17131a,#090b10);display:grid;gap:10px}
+.top-deck-tutor-choice header{display:grid;gap:3px}.top-deck-tutor-choice header span{font-size:.48rem;letter-spacing:.14em;color:#ff8660;font-weight:1000}.top-deck-tutor-choice header h3{margin:0;font-size:1.05rem}.top-deck-tutor-choice header p{margin:0;color:#aeb7c2;font-size:.62rem;line-height:1.25}
+.top-deck-tutor-grid{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(120px,148px);gap:8px;overflow-x:auto;padding:2px 1px 5px}
+.tutor-choice-card{appearance:none;border:1px solid rgba(255,255,255,.10);border-radius:13px;background:#0c1016;padding:6px;display:grid;gap:5px;justify-items:center;color:#fff}.tutor-choice-card.eligible{border-color:#ff7a35;box-shadow:0 0 0 1px rgba(255,122,53,.25) inset}.tutor-choice-card.ineligible{opacity:.48}.tutor-choice-card .tutor-choice-ccg{width:100%!important}.tutor-choice-card strong{font-size:.58rem;line-height:1.05}.tutor-choice-card small{font-size:.38rem;letter-spacing:.08em;color:#ff9b72;font-weight:1000}
+
+/* Pack Complete: fixed centerline geometry; badge/content width cannot push a slot sideways. */
+.pack-summary-compact-grid{--summary-card-w:min(27vw,114px);--summary-gap:min(11vw,66px);display:grid!important;grid-template-columns:repeat(2,var(--summary-card-w))!important;justify-content:center!important;justify-items:center!important;column-gap:var(--summary-gap)!important;width:100%!important;margin-inline:auto!important}
+.pack-summary-compact-grid>.pack-summary-card{justify-self:center!important;min-width:0!important}
+.pack-summary-compact-grid>.summary-center{grid-column:1/-1!important;justify-self:center!important;transform:none!important}
+
+/* Upgrade recommendations: cards never own the caption/body text rows. */
+.focused-pack-upgrades .upgrade-card-pair{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important;align-items:start!important;overflow:visible!important}
+.focused-pack-upgrades .upgrade-card-choice{min-width:0!important;display:grid!important;grid-template-rows:auto minmax(0,auto) minmax(2.8em,auto)!important;justify-items:center!important;overflow:visible!important}
+.focused-pack-upgrades .upgrade-card-choice .upgrade-swap-card,.focused-pack-upgrades .upgrade-card-choice .upgrade-card-placeholder{max-width:100%!important;align-self:start!important}
+.focused-pack-upgrades .upgrade-card-choice>strong{position:relative!important;z-index:2!important;width:100%!important;max-width:100%!important;margin:2px 0 0!important;padding:0 2px!important;white-space:normal!important;overflow-wrap:anywhere!important;text-align:center!important}
+.focused-pack-upgrades .pack-upgrade-swap>p{position:relative!important;z-index:3!important;margin-top:7px!important;clear:both!important}
+
+
+/* v0.13.74 — RAW Live splash rotation + Championship Road RAW expansion. */
+.raw-now-ad{
+  background:radial-gradient(circle at 78% 18%,rgba(255,66,78,.24),transparent 30%),linear-gradient(135deg,rgba(80,8,15,.96),rgba(20,4,8,.94) 52%,rgba(120,12,24,.90));
+}
+.raw-now-ad:before{background:linear-gradient(90deg,rgba(255,255,255,.20),rgba(255,99,114,.08),transparent)}
+.raw-now-ad:after{background:radial-gradient(circle at 85% 15%,rgba(255,255,255,.16),transparent 42%)}
+.raw-splash-stack{display:grid;place-items:center;padding:10px 0 10px 10px}
+.raw-splash-cards{position:relative;width:100%;height:100%;min-height:230px}
+.raw-splash-card{position:absolute;left:50%;top:50%;transform-origin:center center}
+.raw-splash-card .generated-superstar-preview,.raw-splash-card .collectible-card{width:156px!important;max-width:none!important;box-shadow:0 16px 30px rgba(0,0,0,.34)}
+.raw-splash-sol{transform:translate(-66%,-41%) rotate(-14deg);z-index:1}
+.raw-splash-raquel{transform:translate(-53%,-49%) rotate(-4deg);z-index:2}
+.raw-splash-logan{transform:translate(-37%,-57%) rotate(8deg);z-index:3}
+.raw-now-copy{gap:7px!important}
+.raw-now-brand{display:flex;align-items:center;min-height:34px}
+.raw-now-logo{width:min(180px,84%)!important;height:auto!important;object-fit:contain}
+.raw-now-watermark{letter-spacing:.22em!important}
+.theme-raw .champ-road-line,.champ-road-node.theme-raw .champ-road-line{background:linear-gradient(180deg,#ff4d5b,#7e141f)!important}
+.theme-raw button{border-color:rgba(255,88,102,.55)!important;box-shadow:0 0 0 1px rgba(255,74,92,.18) inset}
+.theme-raw .champ-road-result-star{color:#ff8e99!important}
+.champ-road-theme.theme-raw{background:linear-gradient(135deg,rgba(108,12,22,.88),rgba(28,8,12,.96))!important;border-color:rgba(255,92,105,.45)!important}
+@media(max-width:600px){
+  .raw-splash-cards{min-height:205px}
+  .raw-splash-card .generated-superstar-preview,.raw-splash-card .collectible-card{width:124px!important}
+  .raw-splash-sol{transform:translate(-72%,-38%) rotate(-14deg)}
+  .raw-splash-raquel{transform:translate(-55%,-47%) rotate(-4deg)}
+  .raw-splash-logan{transform:translate(-35%,-56%) rotate(8deg)}
+}

@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.72";
-import { decks } from "../js/data/decks.js?v=0.13.72";
-import { superstars } from "../js/data/superstars.js?v=0.13.72";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.72";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.72";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.74";
+import { decks } from "../js/data/decks.js?v=0.13.74";
+import { superstars } from "../js/data/superstars.js?v=0.13.74";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.13.74";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.74";
 
 const byId = id => allGameplayCards.find(c => c.id === id);
 
