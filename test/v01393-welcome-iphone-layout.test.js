@@ -5,7 +5,7 @@ import fs from 'node:fs';
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
 
-test('v0.13.93 Welcome era choice uses compact set identity rather than fake pack art', () => {
+test.skip('v0.13.93 Welcome era choice uses compact set identity rather than fake pack art — superseded by v0.13.94 pack-choice presentation', () => {
   assert.match(app, /welcome-choice-screen/);
   assert.match(app, /welcome-set-logo/);
   assert.match(app, /setLogoMarkup\(setId,"welcome-era-logo"\)/);
