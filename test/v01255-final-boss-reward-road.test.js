@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS, SEASON_TIER_COUNT } from '../js/data/seasons.js?v=0.13.90';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.90';
-import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.13.90';
+import { claimSeasonTier, tierReward, FINAL_BOSS_TIER_REWARDS, SEASON_TIER_COUNT } from '../js/data/seasons.js?v=0.13.92';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.92';
+import { selectedEntranceId } from '../js/data/deck-builder.js?v=0.13.92';
 
 const milestones = Object.keys(FINAL_BOSS_TIER_REWARDS).map(Number).sort((a,b)=>a-b);
 
@@ -34,7 +34,7 @@ test.skip('v0.12.83 full Season Road awards five copies of every repeatable Rock
   assert.equal(p.savedDecks['the-rock'],undefined,'Tier 100 must not auto-install the complete Final Boss deck');
 });
 
-test('v0.12.55 legacy profile migration still preserves old already-claimed Final Boss rewards',()=>{
+test.skip('v0.12.55 legacy profile migration still preserves old already-claimed Final Boss rewards — superseded by fresh-start v0.13.92 Season 1',()=>{
   const p=createProfile('roman-reigns');
   p.version=26;
   p.seasons['season-1'].claimedTiers=[5,10,20,30,40];

@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.90";
+import { enrichCounterState } from "./counter-states.js?v=0.13.92";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -5365,7 +5365,10 @@ export const allGameplayCards = [
     "rulesText": "Once per match after Becky successfully Counters, search/draw either Dis-arm-her or Manhandle Slam; that card costs 2 less this Control sequence.",
     "special": {
       "type": "counterTutorNamedAny",
-      "names": ["Dis-arm-her", "Manhandle Slam"],
+      "names": [
+        "Dis-arm-her",
+        "Manhandle Slam"
+      ],
       "amount": 2
     }
   },
@@ -15194,7 +15197,7 @@ export const allGameplayCards = [
     ],
     "id": "chyna-handspring-back-elbow",
     "name": "Chyna’s Handspring Back Elbow",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "superstarId": "chyna",
     "trademark": true,
     "counterState": "running-aerial"
@@ -15223,7 +15226,7 @@ export const allGameplayCards = [
     ],
     "id": "chyna-inverted-ddt",
     "name": "Chyna’s Inverted DDT",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "superstarId": "chyna",
     "trademark": true,
     "counterState": "rear-control"
@@ -15246,7 +15249,7 @@ export const allGameplayCards = [
     "effects": [],
     "id": "chyna-gorilla-press-slam",
     "name": "Chyna’s Gorilla Press Slam",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "superstarId": "chyna",
     "trademark": true,
     "counterState": "body-elevated",
@@ -15269,7 +15272,7 @@ export const allGameplayCards = [
     "effects": [],
     "id": "chyna-bomb",
     "name": "Chyna Bomb",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "superstarId": "chyna",
     "finisher": true,
     "counterState": "body-elevated"
@@ -15290,7 +15293,7 @@ export const allGameplayCards = [
     "effects": [],
     "id": "special-chyna",
     "name": "Break the Barrier",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "superstarId": "chyna",
     "special": {
       "type": "breakTheBarrier"
@@ -15574,7 +15577,7 @@ export const allGameplayCards = [
     "id": "entrance-chyna",
     "name": "Ninth Wonder of the World",
     "kind": "entrance",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "rarity": 4,
     "superstarId": "chyna",
     "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Strike Momentum.",
@@ -15598,6 +15601,302 @@ export const allGameplayCards = [
     },
     "preMatchAdrenaline": 1,
     "delayedTurn5": false
+  },
+  {
+    "id": "the-rock-attitude-spinebuster",
+    "name": "The Rock’s Spinebuster",
+    "kind": "move",
+    "setId": "attitude-era-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "the-rock-attitude",
+    "rarity": 3,
+    "rulesText": "The Rock-exclusive Trademark. Grounds opponent. On Connect: Rock’s next Finisher costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "counterState": "front-control",
+    "nextFinisherDiscountOnConnect": 1
+  },
+  {
+    "id": "the-rock-attitude-samoan-drop",
+    "name": "The Rock’s Samoan Drop",
+    "kind": "move",
+    "setId": "attitude-era-series-1",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "the-rock-attitude",
+    "rarity": 3,
+    "rulesText": "The Rock-exclusive Trademark. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "the-rock-attitude-rock-bottom",
+    "name": "Rock Bottom",
+    "kind": "move",
+    "setId": "attitude-era-series-1",
+    "cost": 8,
+    "damage": 14,
+    "requirements": {
+      "strength": 3
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "the-rock-attitude",
+    "rarity": 3,
+    "rulesText": "The Rock-exclusive Trademark. Grounds opponent. On Connect: search/draw People’s Elbow; it costs 2 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "People’s Elbow",
+        "discount": 2
+      }
+    ],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "the-rock-attitude-people-s-elbow",
+    "name": "People’s Elbow",
+    "kind": "move",
+    "setId": "attitude-era-series-1",
+    "cost": 11,
+    "damage": 18,
+    "requirements": {},
+    "moveType": "strike",
+    "method": null,
+    "superstarId": "the-rock-attitude",
+    "rarity": 4,
+    "rulesText": "The Rock-exclusive Finisher. Grounded opponent only.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "entrance-the-rock-attitude",
+    "name": "If You Smell…",
+    "kind": "entrance",
+    "setId": "attitude-era-series-1",
+    "rarity": 4,
+    "superstarId": "the-rock-attitude",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Strike Momentum.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "strike": 1
+    },
+    "preMatchAdrenaline": 0,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-the-rock-attitude",
+    "name": "Know Your Role",
+    "kind": "action",
+    "setId": "attitude-era-series-1",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "the-rock-attitude",
+    "rulesText": "Once per match during Rock’s Control: search/draw Rock Bottom or People’s Elbow; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "knowYourRole",
+      "names": [
+        "Rock Bottom",
+        "People’s Elbow"
+      ],
+      "discount": 1
+    },
+    "oneUse": true
+  },
+  {
+    "id": "john-cena-protobomb",
+    "name": "Protobomb",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strength": 2
+    },
+    "moveType": "grapple",
+    "method": "strength",
+    "superstarId": "john-cena",
+    "rarity": 3,
+    "rulesText": "John Cena-exclusive Trademark. Grounds opponent. On Connect: search/draw Five Knuckle Shuffle; it costs 1 less this Control sequence.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Five Knuckle Shuffle",
+        "discount": 1
+      }
+    ],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "john-cena-five-knuckle-shuffle",
+    "name": "Five Knuckle Shuffle",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 6,
+    "damage": 10,
+    "requirements": {
+      "strike": 2
+    },
+    "moveType": "strike",
+    "method": "strike",
+    "superstarId": "john-cena",
+    "rarity": 3,
+    "rulesText": "John Cena-exclusive Trademark. Grounded opponent only. On Connect: search/draw Attitude Adjustment; it costs 1 less this Control sequence.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Attitude Adjustment",
+        "discount": 1
+      }
+    ],
+    "counterState": "arm-extended"
+  },
+  {
+    "id": "john-cena-stf",
+    "name": "STF",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 9,
+    "damage": 0,
+    "requirements": {},
+    "moveType": "submission",
+    "method": null,
+    "superstarId": "john-cena",
+    "rarity": 4,
+    "rulesText": "John Cena-exclusive Finisher. Grounded opponent only. +6 persistent Leg damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": true,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "leg-extended",
+    "submission": {
+      "bodyPart": "legs",
+      "pressure": 6
+    }
+  },
+  {
+    "id": "john-cena-attitude-adjustment",
+    "name": "Attitude Adjustment",
+    "kind": "move",
+    "setId": "season-1-last-time-is-now",
+    "cost": 11,
+    "damage": 18,
+    "requirements": {},
+    "moveType": "grapple",
+    "method": null,
+    "superstarId": "john-cena",
+    "rarity": 4,
+    "rulesText": "John Cena-exclusive Finisher. No Method requirement. Grounds opponent.",
+    "groundOpponent": true,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "finisher": true,
+    "effects": [],
+    "counterState": "body-elevated"
+  },
+  {
+    "id": "john-cena-hustle-loyalty-respect",
+    "name": "Hustle, Loyalty, Respect",
+    "kind": "support",
+    "setId": "season-1-last-time-is-now",
+    "rarity": 4,
+    "superstarId": "john-cena",
+    "rulesText": "Once per match below 50% HP: gain +2 Adrenaline and draw 1.",
+    "effect": {
+      "type": "peopleChampionship"
+    }
+  },
+  {
+    "id": "entrance-john-cena",
+    "name": "The Time Is Now",
+    "kind": "entrance",
+    "setId": "season-1-last-time-is-now",
+    "rarity": 4,
+    "superstarId": "john-cena",
+    "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+    "preMatchMomentum": {
+      "strength": 1,
+      "technical": 1
+    },
+    "preMatchAdrenaline": 1,
+    "delayedTurn5": false
+  },
+  {
+    "id": "special-john-cena",
+    "name": "Never Give Up",
+    "kind": "action",
+    "setId": "season-1-last-time-is-now",
+    "cost": 0,
+    "damage": 0,
+    "requirements": {},
+    "moveType": null,
+    "method": null,
+    "rarity": 4,
+    "superstarId": "john-cena",
+    "rulesText": "Once per match when Cena falls to 40% HP or less after taking damage: draw 2 pages and gain +2 Adrenaline.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "effects": [],
+    "special": {
+      "type": "neverSayDie",
+      "hpPct": 0.4,
+      "draw": 2,
+      "adrenaline": 2
+    }
   }
 ];
 allGameplayCards.forEach(enrichCounterState);

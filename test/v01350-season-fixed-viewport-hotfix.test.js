@@ -26,8 +26,8 @@ test('v0.13.50 frozen Season chrome is outside the only vertical scroller', () =
   assert.match(frozen, /season-road-hero/);
   assert.match(frozen, /season-road-command/);
   assert.match(frozen, /season-free-pack-cta season-free-pack-strip/);
-  assert.doesNotMatch(frozen, /100-TIER REWARD ROAD/);
-  assert.match(season.slice(scroller), /100-TIER REWARD ROAD[\s\S]*season-reward-road/);
+  assert.doesNotMatch(frozen, /50-TIER REWARD ROAD/);
+  assert.match(season.slice(scroller), /50-TIER REWARD ROAD[\s\S]*season-reward-road/);
 });
 
 test('v0.13.50 entering/rerendering Season clears stale Safari document scroll offsets', () => {

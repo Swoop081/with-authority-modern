@@ -1,20 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=0.13.90';
-import { superstars } from '../js/data/superstars.js?v=0.13.90';
-import { decks } from '../js/data/decks.js?v=0.13.90';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
-import { collectionCards } from '../js/data/collection.js?v=0.13.90';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.90';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.90';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.90';
-await import('../js/data/superstar-nameplates.js?v=0.13.90');
+import { sets } from '../js/data/sets.js?v=0.13.92';
+import { superstars } from '../js/data/superstars.js?v=0.13.92';
+import { decks } from '../js/data/decks.js?v=0.13.92';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.92';
+import { collectionCards } from '../js/data/collection.js?v=0.13.92';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.92';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.92';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.92';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.92';
+await import('../js/data/superstar-nameplates.js?v=0.13.92');
 
 const G='golden-era-series-1', A='attitude-era-series-1', H='hall-of-fame-series-1';
 const golden=['hulk-hogan','andre-the-giant','randy-savage','ultimate-warrior','rowdy-roddy-piper','ted-dibiase','jake-roberts','mr-perfect'];
-const attitude=['stone-cold-steve-austin','the-undertaker','kane','mankind','triple-h','chris-jericho','chyna','kurt-angle'];
+const attitude=['stone-cold-steve-austin','the-undertaker','kane','mankind','triple-h','chris-jericho','the-rock-attitude','kurt-angle'];
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
 
 test('v0.13.82 retires Hall of Fame and creates complete eight-Superstar Golden and Attitude sets',()=>{
@@ -47,7 +47,7 @@ test('v0.13.82 new era Superstars have locked 60-page decks and 12 Momentum',()=
     'mr-perfect':{technical:7,strike:3,agility:2},
     'triple-h':{technical:6,strength:4,strike:2},
     'chris-jericho':{technical:6,agility:4,strike:2},
-    'chyna':{strength:6,strike:3,technical:2,agility:1},
+    'the-rock-attitude':{strength:5,strike:5,technical:2},
     'kurt-angle':{technical:8,strength:2,strike:1,agility:1},
   };
   for(const [id,want] of Object.entries(expected)){
@@ -99,7 +99,7 @@ test('v0.13.82 Card Studio and full-art templates expose both replacement era id
   const studio=fs.readFileSync(new URL('../tools/card-art-studio.html',import.meta.url),'utf8');
   const studioJs=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
   assert.match(studio,/golden-era-series-1/); assert.match(studio,/attitude-era-series-1/); assert.doesNotMatch(studio,/value="hall-of-fame-series-1"/);
-  assert.match(studioJs,/golden-era-wwf-logo\.svg/); assert.match(studioJs,/wwf-scratch-logo-transparent\.png/);
+  assert.match(studioJs,/wwf-classic-block-card\.svg/); assert.match(studioJs,/wwf-scratch-logo-card\.png/);
   for(const p of ['assets/templates/move/golden-era-series-1.svg','assets/templates/superstar/golden-era-series-1.svg','assets/templates/move/attitude-era-series-1.svg','assets/templates/superstar/attitude-era-series-1.svg']) assert.equal(fs.existsSync(new URL(`../${p}`,import.meta.url)),true,p);
   for(const p of ['assets/templates/move/hall-of-fame-series-1.svg','assets/templates/superstar/hall-of-fame-series-1.svg','assets/art/hall-of-fame-series-1']) assert.equal(fs.existsSync(new URL(`../${p}`,import.meta.url)),false,p);
   for(const id of [...golden,...attitude]) assert.equal(globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES[id]?.setId,golden.includes(id)?G:A,id);

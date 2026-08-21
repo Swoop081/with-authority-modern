@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.90';
-import { decks } from '../js/data/decks.js?v=0.13.90';
-import { collectionCards } from '../js/data/collection.js?v=0.13.90';
-import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.90';
-import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.90';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.90';
-import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.90';
+import { createProfile, addOwnedCard } from '../js/data/profile.js?v=0.13.92';
+import { decks } from '../js/data/decks.js?v=0.13.92';
+import { collectionCards } from '../js/data/collection.js?v=0.13.92';
+import { findPackUpgrades, applyUpgrade } from '../js/data/deck-assistant.js?v=0.13.92';
+import { grantBooster, openBooster, boosterEligible } from '../js/data/boosters.js?v=0.13.92';
+import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.92';
+import { DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.92';
 
 const byId = new Map(collectionCards.map(card=>[card.id,card]));
 

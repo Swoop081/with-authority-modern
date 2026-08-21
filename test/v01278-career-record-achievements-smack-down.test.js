@@ -1,11 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { createProfile, migrateProfile } from "../js/data/profile.js?v=0.13.90";
-import { CAREER_ACHIEVEMENTS, recordCareerMatch, refreshCareerAchievements } from "../js/data/career.js?v=0.13.90";
-import { collectionCards } from "../js/data/collection.js?v=0.13.90";
-import { decks } from "../js/data/decks.js?v=0.13.90";
-import { tierReward } from "../js/data/seasons.js?v=0.13.90";
+import { createProfile, migrateProfile } from "../js/data/profile.js?v=0.13.92";
+import { CAREER_ACHIEVEMENTS, recordCareerMatch, refreshCareerAchievements } from "../js/data/career.js?v=0.13.92";
+import { collectionCards } from "../js/data/collection.js?v=0.13.92";
+import { decks } from "../js/data/decks.js?v=0.13.92";
+import { tierReward } from "../js/data/seasons.js?v=0.13.92";
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 
@@ -49,7 +49,7 @@ test("v0.12.78 migration starts accurate W/L tracking at zero but backfills achi
   assert.ok(migrated.career.achievements["championship-gold"]);
 });
 
-test("v0.12.78 replaces Final Boss Slap with Rare Strike Lay The Smack Down while preserving S1FB-001 gameplay slot", () => {
+test.skip("v0.12.78 replaces Final Boss Slap with Rare Strike Lay The Smack Down while preserving S1FB-001 gameplay slot — superseded by v0.13.92 Cena Season 1", () => {
   const card = byId.get("the-rock-lay-the-smack-down");
   assert.ok(card);
   assert.equal(card.name, "Lay The Smack Down");

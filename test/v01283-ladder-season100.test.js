@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.90';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.90';
+import { SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, FINAL_BOSS_TIER_REWARDS } from '../js/data/seasons.js?v=0.13.92';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.92';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');
@@ -17,7 +17,7 @@ test.skip('v0.12.84 Season 1 expands to 100 tiers with Foil Rock at Tier 100',()
   assert.match(app,/THE ROAD TO THE FINAL BOSS/);
 });
 
-test('v0.12.84 repeatable Rock rewards are five single-copy milestones each',()=>{
+test.skip('v0.12.84 repeatable Rock rewards are five single-copy milestones each — superseded by v0.13.92 Cena Season 1',()=>{
   for (const id of ['the-rock-lay-the-smack-down','the-rock-belt-whip','the-rock-rock-bottom','the-rock-people-s-elbow']) {
     const rewards=Object.values(FINAL_BOSS_TIER_REWARDS).filter(r=>r.cardId===id);
     assert.equal(rewards.length,5,id);

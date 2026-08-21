@@ -1,48 +1,53 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.90";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.90";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.92";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.92";
 export const SEASON_ID = "season-1";
-export const SEASON_START = "2026-08-10T00:00:00";
-export const SEASON_END = "2026-11-28T00:00:00";
-export const SEASON_TIER_COUNT = 100;
+export const SEASON_START = "2026-08-22T00:00:00";
+export const SEASON_END = "2026-09-21T00:00:00";
+export const SEASON_TIER_COUNT = 50;
 export const XP_PER_TIER = 100;
 export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
 export const MATCH_XP = { win: 5, loss: 0 };
 export const DAILY_CHALLENGE_XP = 10;
 export const WEEKLY_CHALLENGE_XP = 25;
-export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";
+export const SEASON_1_COMPLETION_SUPERSTAR = "john-cena";
 export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
 export const FEATURED_SET_IDS = ["summerslam-series-1", "evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1"];
 
-// Season 1 prestige chase: The Rock — Final Boss is assembled across the road
-// across a 100-tier road. Repeatable Rock cards are earned one copy at a time
-// up to the normal five-copy collection cap; his one-off Support, Action and
-// Entrance are spaced between them. Tier 100 is the Ruby Superstar identity.
-export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
-  5:   { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  10:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  15:  { cardId: "people-championship", name: "People's Championship", amount: 1, rewardType: "support", label: "EXCLUSIVE SUPPORT" },
-  20:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
-  25:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  30:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  35:  { cardId: "special-the-rock", name: "Bloodline Rules", amount: 1, rewardType: "action", label: "ACTION" },
-  40:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
-  45:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  50:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
-  55:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  60:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  65:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  70:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
-  75:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  80:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  82:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  85:  { cardId: "entrance-the-rock", name: "Final Boss", amount: 1, rewardType: "entrance", label: "RUBY ENTRANCE", tier: "ruby" },
-  88:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  90:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
-  92:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  94:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  98:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  100: { cardId: "superstar-the-rock", name: "The Rock — Final Boss", amount: 1, rewardType: "superstar", label: "RUBY SUPERSTAR", tier: "ruby", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
+// Season 1 prestige chase: John Cena — The Last Time Is Now is assembled
+// across a 50-tier / 30-day road. Each Cena-exclusive Move is awarded as five
+// separate Normal copies across the road so completion leaves the player with
+// a full five-copy playset of Protobomb, Five Knuckle Shuffle, STF and
+// Attitude Adjustment. Tier 48 is the Ruby Entrance; Tier 50 is the Ruby
+// Superstar identity.
+export const SEASON_1_CHASE_TIER_REWARDS = Object.freeze({
+  2:  { cardId: "john-cena-protobomb", name: "Protobomb", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  3:  { cardId: "john-cena-five-knuckle-shuffle", name: "Five Knuckle Shuffle", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  5:  { cardId: "john-cena-stf", name: "STF", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  7:  { cardId: "john-cena-attitude-adjustment", name: "Attitude Adjustment", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  10: { cardId: "john-cena-hustle-loyalty-respect", name: "Hustle, Loyalty, Respect", amount: 1, rewardType: "support", label: "EXCLUSIVE SUPPORT" },
+  11: { cardId: "john-cena-protobomb", name: "Protobomb", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  13: { cardId: "john-cena-five-knuckle-shuffle", name: "Five Knuckle Shuffle", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  15: { cardId: "john-cena-stf", name: "STF", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  17: { cardId: "john-cena-attitude-adjustment", name: "Attitude Adjustment", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  20: { cardId: "special-john-cena", name: "Never Give Up", amount: 1, rewardType: "action", label: "ACTION" },
+  21: { cardId: "john-cena-protobomb", name: "Protobomb", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  23: { cardId: "john-cena-five-knuckle-shuffle", name: "Five Knuckle Shuffle", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  25: { cardId: "john-cena-stf", name: "STF", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  27: { cardId: "john-cena-attitude-adjustment", name: "Attitude Adjustment", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  31: { cardId: "john-cena-protobomb", name: "Protobomb", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  33: { cardId: "john-cena-five-knuckle-shuffle", name: "Five Knuckle Shuffle", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  35: { cardId: "john-cena-stf", name: "STF", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  37: { cardId: "john-cena-attitude-adjustment", name: "Attitude Adjustment", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  41: { cardId: "john-cena-protobomb", name: "Protobomb", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
+  43: { cardId: "john-cena-five-knuckle-shuffle", name: "Five Knuckle Shuffle", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
+  45: { cardId: "john-cena-stf", name: "STF", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  47: { cardId: "john-cena-attitude-adjustment", name: "Attitude Adjustment", amount: 1, rewardType: "finisher", label: "FINISHER" },
+  48: { cardId: "entrance-john-cena", name: "The Time Is Now", amount: 1, rewardType: "entrance", label: "RUBY ENTRANCE", printingTier: "ruby" },
+  50: { cardId: "superstar-john-cena", name: "John Cena — The Last Time Is Now", amount: 1, rewardType: "superstar", label: "RUBY SUPERSTAR", printingTier: "ruby", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
 });
+// Backwards-compatible export name for older internal tooling. Season 1 is no
+// longer the Final Boss road.
+export const FINAL_BOSS_TIER_REWARDS = SEASON_1_CHASE_TIER_REWARDS;
 
 export const SEASON_1 = {
   id: SEASON_ID,
@@ -137,10 +142,10 @@ function seasonPackPoolForTier(tier, now = new Date()) {
 
 export function tierReward(tier, now = new Date()) {
   const n = Math.max(1, Math.min(SEASON_TIER_COUNT, Number(tier) || 1));
-  const finalBoss = FINAL_BOSS_TIER_REWARDS[n];
-  if (finalBoss) return { tier: n, kind: "final-boss-card", exclusive: true, ...finalBoss };
-  // Currency breaks up the pack cadence so the 100-tier road never feels like
-  // ninety-nine booster buttons. Later tiers pay more UP as the chase intensifies.
+  const chase = SEASON_1_CHASE_TIER_REWARDS[n];
+  if (chase) return { tier: n, kind: "season-card", exclusive: true, ...chase };
+  // Currency breaks up the pack cadence across the 50-tier road. Later tiers
+  // pay more UP as the chase intensifies.
   if (n % 4 === 0) {
     const amount = n < 25 ? 100 : n < 50 ? 150 : n < 75 ? 200 : 250;
     return { tier: n, kind: "universe-points", amount };
@@ -160,16 +165,16 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
   if (n > current) throw new Error("Season tier not reached");
   if (state.claimedTiers.includes(n)) throw new Error("Season tier already claimed");
   const reward = tierReward(n, now);
-  if (reward.kind === "final-boss-card") {
+  if (reward.kind === "season-card") {
     if (reward.rewardType === "superstar") {
-      // Tier 100 is the Ruby Superstar identity only. Shared deck cards must come
-      // from the player's Collection; all Rock-exclusive cards are earned one
-      // at a time across the preceding Season milestones.
-      grantSuperstarIdentityUnlockPackage(profile, reward.superstarId);
+      // Tier 50 is the Ruby Superstar identity only. Shared deck cards must come
+      // from the player's Collection; Cena-exclusive cards are earned one at a
+      // time across the preceding Season milestones.
+      grantSuperstarIdentityUnlockPackage(profile, reward.superstarId, { tier: reward.printingTier ?? "normal" });
       state.completionRewardClaimed = true;
       state.completionSuperstarId = reward.superstarId;
     } else {
-      addOwnedCard(profile, reward.cardId, { amount: reward.amount ?? 1, tier: reward.tier ?? "normal" });
+      addOwnedCard(profile, reward.cardId, { amount: reward.amount ?? 1, tier: reward.printingTier ?? "normal" });
     }
     if (reward.bonusUniversePoints) addUniversePoints(profile, reward.bonusUniversePoints);
   } else if (reward.kind === "universe-points") addUniversePoints(profile, reward.amount);

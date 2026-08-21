@@ -4440,25 +4440,25 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "AE1-056"
   },
   {
-    "id": "chyna-bomb",
+    "id": "the-rock-attitude-people-s-elbow",
     "setId": "attitude-era-series-1",
     "cardNumber": 57,
     "cardCode": "AE1-057"
   },
   {
-    "id": "chyna-gorilla-press-slam",
+    "id": "the-rock-attitude-rock-bottom",
     "setId": "attitude-era-series-1",
     "cardNumber": 58,
     "cardCode": "AE1-058"
   },
   {
-    "id": "chyna-handspring-back-elbow",
+    "id": "the-rock-attitude-spinebuster",
     "setId": "attitude-era-series-1",
     "cardNumber": 59,
     "cardCode": "AE1-059"
   },
   {
-    "id": "chyna-inverted-ddt",
+    "id": "the-rock-attitude-samoan-drop",
     "setId": "attitude-era-series-1",
     "cardNumber": 60,
     "cardCode": "AE1-060"
@@ -4470,7 +4470,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "AE1-061"
   },
   {
-    "id": "entrance-chyna",
+    "id": "entrance-the-rock-attitude",
     "setId": "attitude-era-series-1",
     "cardNumber": 62,
     "cardCode": "AE1-062"
@@ -4542,7 +4542,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "AE1-073"
   },
   {
-    "id": "special-chyna",
+    "id": "special-the-rock-attitude",
     "setId": "attitude-era-series-1",
     "cardNumber": 74,
     "cardCode": "AE1-074"
@@ -4560,7 +4560,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "AE1-076"
   },
   {
-    "id": "superstar-chyna",
+    "id": "superstar-the-rock-attitude",
     "setId": "attitude-era-series-1",
     "cardNumber": 77,
     "cardCode": "AE1-077"
@@ -4600,6 +4600,96 @@ export const CARD_NUMBER_MANIFEST = [
     "setId": "attitude-era-series-1",
     "cardNumber": 83,
     "cardCode": "AE1-083"
+  },
+  {
+    "id": "chyna-bomb",
+    "setId": "parked-chyna",
+    "cardNumber": 1,
+    "cardCode": "PCH-001"
+  },
+  {
+    "id": "chyna-gorilla-press-slam",
+    "setId": "parked-chyna",
+    "cardNumber": 2,
+    "cardCode": "PCH-002"
+  },
+  {
+    "id": "chyna-handspring-back-elbow",
+    "setId": "parked-chyna",
+    "cardNumber": 3,
+    "cardCode": "PCH-003"
+  },
+  {
+    "id": "chyna-inverted-ddt",
+    "setId": "parked-chyna",
+    "cardNumber": 4,
+    "cardCode": "PCH-004"
+  },
+  {
+    "id": "entrance-chyna",
+    "setId": "parked-chyna",
+    "cardNumber": 5,
+    "cardCode": "PCH-005"
+  },
+  {
+    "id": "special-chyna",
+    "setId": "parked-chyna",
+    "cardNumber": 6,
+    "cardCode": "PCH-006"
+  },
+  {
+    "id": "superstar-chyna",
+    "setId": "parked-chyna",
+    "cardNumber": 7,
+    "cardCode": "PCH-007"
+  },
+  {
+    "id": "john-cena-protobomb",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 1,
+    "cardCode": "S1LTN-001"
+  },
+  {
+    "id": "john-cena-five-knuckle-shuffle",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 2,
+    "cardCode": "S1LTN-002"
+  },
+  {
+    "id": "john-cena-stf",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 3,
+    "cardCode": "S1LTN-003"
+  },
+  {
+    "id": "john-cena-attitude-adjustment",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 4,
+    "cardCode": "S1LTN-004"
+  },
+  {
+    "id": "john-cena-hustle-loyalty-respect",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 5,
+    "cardCode": "S1LTN-005"
+  },
+  {
+    "id": "entrance-john-cena",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 6,
+    "cardCode": "S1LTN-006"
+  },
+  {
+    "id": "special-john-cena",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 7,
+    "cardCode": "S1LTN-007"
+  },
+  {
+    "id": "superstar-john-cena",
+    "setId": "season-1-last-time-is-now",
+    "cardNumber": 8,
+    "cardCode": "S1LTN-008"
   }
 ];
 export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));

@@ -1,16 +1,29 @@
 // Season-exclusive Superstar registry. These rewards live outside normal set boosters.
-// Season 1's final boss is The Rock; Season 2's prestige chase reward is WCW-streak Goldberg.
-// Each full 60-card package is reserved for its Season completion flow and future post-season Store availability.
+// Season 1 is now the babyface John Cena — The Last Time Is Now chase.
+// The Rock — Final Boss is retained internally as a banked future reward.
 export const seasonExclusiveSuperstars = {
+  "john-cena": {
+    id: "john-cena",
+    name: "John Cena",
+    nickname: "The Last Time Is Now",
+    persona: "babyface farewell run",
+    seasonId: "season-1",
+    unlock: "tier-100-completion",
+    postSeasonAvailability: "future-decision",
+    boosterEligible: false,
+    fullDeckReward: true
+  },
   "the-rock": {
     id: "the-rock",
     name: "The Rock",
     nickname: "The Final Boss",
-    seasonId: "season-1",
-    unlock: "tier-100-completion",
-    postSeasonAvailability: "store-in-game-currency",
+    persona: "Final Boss",
+    seasonId: null,
+    unlock: "banked-future-reward",
+    postSeasonAvailability: "future-decision",
     boosterEligible: false,
-    fullDeckReward: true
+    fullDeckReward: true,
+    developmentOnly: true
   },
   "goldberg": {
     id: "goldberg",

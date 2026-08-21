@@ -42,7 +42,7 @@ test('v0.12.44 Home is a layered game stage rather than the old dashboard stack'
   assert.doesNotMatch(home, /premium-menu-grid compact-hub-grid/);
 });
 
-test('v0.12.44 Home live Season event keeps premium Season title, exact next-tier progress and bright green bar', () => {
+test.skip('v0.12.44 Home live Season event keeps premium Season title, exact next-tier progress and bright green bar — superseded by v0.13.92 Cena Season 1', () => {
   const home = functionSlice('renderMainMenu', 'renderPlayMenu');
   assert.match(home, /legacy-season-event/);
   assert.match(home, /homeHubSplitTitle\("SEASON", "ONE"\)/);

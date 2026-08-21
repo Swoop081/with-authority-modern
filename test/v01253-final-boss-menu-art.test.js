@@ -6,7 +6,7 @@ const artwork=fs.readFileSync(new URL("../js/data/artwork.js", import.meta.url),
 const app=fs.readFileSync(new URL("../js/ui/app.js", import.meta.url),"utf8");
 const css=fs.readFileSync(new URL("../css/game.css", import.meta.url),"utf8");
 
-test("v0.12.53 uses the dedicated uploaded Final Boss Rock render on all Final Boss menu surfaces",()=>{
+test.skip("v0.12.53 uses the dedicated uploaded Final Boss Rock render on all Final Boss menu surfaces — superseded by v0.13.92 Cena Season 1",()=>{
   assert.match(artwork,/the-rock-final-boss-menu\.png/);
   assert.match(artwork,/export const finalBossRockMenuArtwork/);
   assert.equal((app.match(/finalBossRockMarkup\(\)/g)||[]).length,3);

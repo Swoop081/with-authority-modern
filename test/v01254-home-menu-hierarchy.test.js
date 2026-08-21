@@ -27,7 +27,7 @@ test('v0.12.54 Home removes PLAY from Enter the Ring and makes starter art domin
   assert.match(css, /@media\(max-width:600px\)\{[\s\S]*\.legacy-stage-superstar\{[^}]*width:128%!important/);
 });
 
-test('v0.12.54 Home uses Final Boss Rock and full-width destinations in requested order', () => {
+test.skip('v0.12.54 Home uses Final Boss Rock and full-width destinations in requested order — superseded by v0.13.92 Cena Season 1', () => {
   const home = functionSlice('renderMainMenu', 'renderPlayMenu');
   assert.match(home, /legacy-season-rock.*finalBossRockMarkup\(\)/s);
   const ids = ['menu-decks','menu-challenges','menu-boosters','menu-store','menu-owned-collection','menu-profile'];

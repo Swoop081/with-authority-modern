@@ -29,7 +29,7 @@ const handledSpecialTypes = new Set([
   "moveCounteredDrawDrain", "nextStrengthUncounterable", "nextStrengthNoAutoCounter", "noWipeout", "nobodySlams", "paulHeyman", "pinEscape",
   "austinTheoryAllDay", "angeloDawkinsRunIn", "luchaLibreLegend", "hammerInBoot", "fearlessAssault", "steelPlate", "lolaFistsDontLie",
   "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca", "hbkShowstopper", "exclusiveTrademarkTutor", "doinkClowningAround", "yokozunaBanzai", "owenSlammyAwards", "bulldogMadeInBritain",
-  "pipersPit", "millionDollarChampionship", "damien", "perfectRecord", "sledgehammer", "rawIsJericho", "breakTheBarrier"
+  "pipersPit", "millionDollarChampionship", "damien", "perfectRecord", "sledgehammer", "rawIsJericho", "breakTheBarrier", "neverSayDie", "knowYourRole"
 ]);
 const handledAbilityTypes = new Set([
   "agilityAfterStrike", "agilityAfterTechnical", "agilityRequirement", "codyUndeniable", "connectDamage",

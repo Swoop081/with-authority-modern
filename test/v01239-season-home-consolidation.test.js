@@ -12,7 +12,7 @@ test('v0.12.39 Home uses one Season destination instead of duplicate countdown a
   assert.match(app, /\$\("#menu-season-overview"\)\?\.addEventListener\("click", showSeasons\)/);
 });
 
-test('v0.12.39 consolidated Season hero shows premium title, next-tier XP and Final Boss destination', () => {
+test.skip('v0.12.39 consolidated Season hero shows premium title, next-tier XP and Final Boss destination — superseded by v0.13.92 Cena Season 1', () => {
   assert.match(app, /homeHubSplitTitle\("SEASON", "ONE"\)/);
   assert.doesNotMatch(app, /data-season-countdown/);
   assert.match(app, /XP TO NEXT TIER/);

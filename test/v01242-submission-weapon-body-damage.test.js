@@ -1,21 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
-import { moveEligibility } from '../js/engine/rules.js?v=0.13.90';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
-import { superstars } from '../js/data/superstars.js?v=0.13.90';
-import { decks } from '../js/data/decks.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.92';
+import { moveEligibility } from '../js/engine/rules.js?v=0.13.92';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.92';
+import { superstars } from '../js/data/superstars.js?v=0.13.92';
+import { decks } from '../js/data/decks.js?v=0.13.92';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const rng=()=>0.42;
 const stars=Object.values(superstars);
 const genuineIds=[
-  'figure-four-leglock','koji-clutch','cm-punk-anaconda-vise','boston-crab','gunther-gojira-clutch','brock-lesnar-kimura-lock','mankind-mandible-claw','bearhug','rhea-ripley-prism-trap','becky-lynch-dis-arm-her','crossface','charlotte-flair-figure-eight-leglock','paige-pto','stf','chad-gable-ankle-lock','octopus-hold','mexican-surfboard','abdominal-stretch','bron-breakker-steiner-recliner','side-headlock','wristlock','sleeper-hold','jacob-fatu-tongan-death-grip','choke-on-the-ropes','reverse-chin-lock','andre-the-giant-bear-hug','hangman-armbar','joe-hendry-hendry-lock','roxanne-perez-rok-lock','triangle-choke','lola-vice-triangle-choke','mr-iguana-muta-lock','bret-hart-sharpshooter','vertical-boston-crab','dragon-sleeper','camel-clutch','reverse-chinlock','doink-stump-puller','nerve-hold','owen-hart-sharpshooter','full-nelson','front-facelock','rowdy-roddy-piper-sleeper-hold','ted-dibiase-million-dollar-dream','chris-jericho-walls-of-jericho','kurt-angle-ankle-lock'
+  'figure-four-leglock','koji-clutch','cm-punk-anaconda-vise','boston-crab','gunther-gojira-clutch','brock-lesnar-kimura-lock','mankind-mandible-claw','bearhug','rhea-ripley-prism-trap','becky-lynch-dis-arm-her','crossface','charlotte-flair-figure-eight-leglock','paige-pto','stf','chad-gable-ankle-lock','octopus-hold','mexican-surfboard','abdominal-stretch','bron-breakker-steiner-recliner','side-headlock','wristlock','sleeper-hold','jacob-fatu-tongan-death-grip','choke-on-the-ropes','reverse-chin-lock','andre-the-giant-bear-hug','hangman-armbar','joe-hendry-hendry-lock','roxanne-perez-rok-lock','triangle-choke','lola-vice-triangle-choke','mr-iguana-muta-lock','bret-hart-sharpshooter','vertical-boston-crab','dragon-sleeper','camel-clutch','reverse-chinlock','doink-stump-puller','nerve-hold','owen-hart-sharpshooter','full-nelson','front-facelock','rowdy-roddy-piper-sleeper-hold','ted-dibiase-million-dollar-dream','chris-jericho-walls-of-jericho','kurt-angle-ankle-lock','john-cena-stf'
 ];
 
 test('v0.12.42 genuine submission holds deal zero printed HP damage and only persistent body-part damage',()=>{
   const subs=allGameplayCards.filter(c=>c.moveType==='submission');
-  assert.equal(subs.length,46);
+  assert.equal(subs.length,47);
   assert.deepEqual(new Set(subs.map(c=>c.id)),new Set(genuineIds));
   for(const c of subs){
     assert.equal(c.damage,0,c.id);

@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { collectionCards } from '../js/data/collection.js?v=0.13.90';
-import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=0.13.90';
-import { CARD_TIERS } from '../js/data/variants.js?v=0.13.90';
+import { collectionCards } from '../js/data/collection.js?v=0.13.92';
+import { buildPlayableDeck } from '../js/data/deck-assistant.js?v=0.13.92';
+import { CARD_TIERS } from '../js/data/variants.js?v=0.13.92';
 import {
   STARTER_CHOICES,
   WELCOME_SUPERSTAR_SET_IDS,
@@ -13,8 +13,8 @@ import {
   addOwnedCard,
   ownedCount,
   cardOwnershipCap
-} from '../js/data/profile.js?v=0.13.90';
-import { superstars } from '../js/data/superstars.js?v=0.13.90';
+} from '../js/data/profile.js?v=0.13.92';
+import { superstars } from '../js/data/superstars.js?v=0.13.92';
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 

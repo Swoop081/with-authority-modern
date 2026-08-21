@@ -123,14 +123,42 @@ export const sets = {
   },
   "season-1-final-boss": {
     "id": "season-1-final-boss",
+    "name": "Future Reward",
+    "series": 1,
+    "type": "future-reward",
+    "displayName": "Future Reward — Final Boss",
+    "shortCode": "S1FB",
+    "lifecycleDefault": "future",
+    "developmentOnly": true,
+    "lifecycleLabels": {
+      "future": "Banked"
+    }
+  },
+  "season-1-last-time-is-now": {
+    "id": "season-1-last-time-is-now",
     "name": "Season 1",
     "series": 1,
     "type": "season-exclusive",
-    "displayName": "Season 1 — Final Boss",
-    "shortCode": "S1FB",
+    "displayName": "Season 1 — The Last Time Is Now",
+    "shortCode": "S1LTN",
     "lifecycleDefault": "exclusive",
+    "developmentOnly": false,
+    "season": 1,
     "lifecycleLabels": {
       "exclusive": "Season Exclusive"
+    }
+  },
+  "parked-chyna": {
+    "id": "parked-chyna",
+    "name": "Future Reward",
+    "series": 1,
+    "type": "future-reward",
+    "displayName": "Future Reward — Chyna",
+    "shortCode": "PCH",
+    "lifecycleDefault": "future",
+    "developmentOnly": true,
+    "lifecycleLabels": {
+      "future": "Banked"
     }
   },
   "summerslam-series-1": {
@@ -208,7 +236,7 @@ export const sets = {
       "mankind",
       "triple-h",
       "chris-jericho",
-      "chyna",
+      "the-rock-attitude",
       "kurt-angle"
     ],
     "lifecycleLabels": {

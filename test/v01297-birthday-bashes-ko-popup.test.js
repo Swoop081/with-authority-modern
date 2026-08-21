@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=0.13.90';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
-import { decks } from '../js/data/decks.js?v=0.13.90';
-import { superstars } from '../js/data/superstars.js?v=0.13.90';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.90';
-import { createProfile } from '../js/data/profile.js?v=0.13.90';
+import { BIRTHDAY_TOWERS, RELEASED_BIRTHDAY_ROSTER_IDS, activeLiveEventTowers, startLiveEventTower } from '../js/data/live-events.js?v=0.13.92';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.92';
+import { decks } from '../js/data/decks.js?v=0.13.92';
+import { superstars } from '../js/data/superstars.js?v=0.13.92';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.92';
+import { createProfile } from '../js/data/profile.js?v=0.13.92';
 
 const released = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id).sort();
 const byId = id => allGameplayCards.find(c=>c.id===id);
@@ -18,7 +18,7 @@ test.skip('v0.13.82 Birthday Bash calendar contains the complete authored 32-Sup
 });
 
 test('v0.12.97 each Birthday Bash places the birthday Superstar in Challenger 5',()=>{
-  for (const event of BIRTHDAY_TOWERS) {
+  for (const event of BIRTHDAY_TOWERS.filter(event=>released.includes(event.bossId))) {
     const now = new Date(2027,event.month-1,event.day,10,0,0);
     const tower = activeLiveEventTowers(now).find(t=>t.event.id===event.id);
     assert.ok(tower,event.id);

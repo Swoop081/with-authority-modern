@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
-import { decks } from '../js/data/decks.js?v=0.13.90';
-import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.13.90';
-import { canCounter, counterEligibility } from '../js/engine/rules.js?v=0.13.90';
-import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.90';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.92';
+import { decks } from '../js/data/decks.js?v=0.13.92';
+import { COUNTER_STATES, SUBMISSION_TARGETS } from '../js/data/counter-states.js?v=0.13.92';
+import { canCounter, counterEligibility } from '../js/engine/rules.js?v=0.13.92';
+import { createProfile, migrateProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.92';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const counterCapable=c=>c?.kind==='move'&&((c.counters?.length??0)||(c.counterStates?.length??0)||(c.counterSubmissionTargets?.length??0)||(c.countersCardIds?.length??0));
@@ -50,7 +50,7 @@ test('v0.12.18 zero-Agility wrestlers can answer both aerial states without Agil
 });
 
 test('v0.12.18 every recommended deck stays 60/12, has nine counters, all eight states and all four submission areas',()=>{
-  assert.equal(Object.keys(decks).length,74);
+  assert.equal(Object.keys(decks).length,76);
   for(const [sid,deck] of Object.entries(decks)){
     assert.equal(deck.length,60,sid);
     assert.equal(deck.filter(c=>c.kind==='momentum').length,12,sid);

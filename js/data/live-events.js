@@ -1,6 +1,6 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.90";
-import { superstars } from "./superstars.js?v=0.13.90";
-import { grantRandomBoosters } from "./boosters.js?v=0.13.90";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.92";
+import { superstars } from "./superstars.js?v=0.13.92";
+import { grantRandomBoosters } from "./boosters.js?v=0.13.92";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -91,7 +91,7 @@ export const DAILY_LIVE_EVENTS = Object.freeze({
     heroId: "roman-reigns",
     rewardSetId: "smackdown-series-1",
     logoMode: "smackdown",
-    opponentPool: ["roman-reigns", "cody-rhodes", "la-knight", "randy-orton", "charlotte-flair", "solo-sikoa", "kevin-owens", "the-rock"]
+    opponentPool: ["roman-reigns", "cody-rhodes", "la-knight", "randy-orton", "charlotte-flair", "solo-sikoa", "kevin-owens", "the-rock-attitude"]
   },
   0: {
     id: "evolution-night",
@@ -176,7 +176,7 @@ export const WEEKLY_TOWERS = Object.freeze([
     heroId: "the-undertaker",
     rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
-    opponentPool: ["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "andre-the-giant", "randy-savage", "mankind", "ultimate-warrior", "the-rock"]
+    opponentPool: ["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "andre-the-giant", "randy-savage", "mankind", "ultimate-warrior", "the-rock-attitude"]
   },
   {
     id: "champions-clash",

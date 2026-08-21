@@ -1,4 +1,4 @@
-import { sets } from "./sets.js?v=0.13.90";
+import { sets } from "./sets.js?v=0.13.92";
 
 // v0.13.87 — releases are build-controlled, not calendar-controlled.
 // This deliberately removes the public roadmap/automatic date unlock model so
@@ -12,7 +12,7 @@ export const LAUNCH_LIVE_SET_IDS = Object.freeze([
   "attitude-era-series-1"
 ]);
 
-export const LIVE_SEASON_REWARD_SET_IDS = Object.freeze(["season-1-final-boss"]);
+export const LIVE_SEASON_REWARD_SET_IDS = Object.freeze(["season-1-last-time-is-now"]);
 
 export const BANKED_PLAYER_SET_IDS = Object.freeze([
   "raw-series-1",

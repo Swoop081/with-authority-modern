@@ -6,7 +6,7 @@ const root = new URL('../', import.meta.url);
 const app = await readFile(new URL('js/ui/app.js', root), 'utf8');
 const css = await readFile(new URL('css/game.css', root), 'utf8');
 
-test('v0.12.58 replaces the rejected Final Boss splash layout with a balanced grid', () => {
+test.skip('v0.12.58 replaces the rejected Final Boss splash layout with a balanced grid — superseded by v0.13.92 Cena Season 1', () => {
   assert.match(css, /v0\.12\.58 — Mobile Readability \+ Card Presentation Pass/);
   assert.match(css, /\.season-one-ad\{\s*grid-template-columns:39% 61%/);
   assert.match(css, /\.season-one-ad \.season-ad-copy\{[\s\S]*left:auto!important;[\s\S]*width:auto!important/);

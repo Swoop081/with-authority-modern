@@ -137,6 +137,7 @@ export const superstars = {
     "nickname": "The Final Boss",
     "setId": "season-1-final-boss",
     "era": "final-boss",
+    "developmentOnly": true,
     "seasonExclusive": true,
     "cardId": "superstar-the-rock",
     "entranceId": "entrance-the-rock",
@@ -196,6 +197,141 @@ export const superstars = {
       "type": "retainOnCounter",
       "draw": 1,
       "opponentAdrenaline": -1
+    }
+  },
+  "theRockAttitude": {
+    "id": "the-rock-attitude",
+    "name": "The Rock",
+    "nickname": "The People’s Champion",
+    "setId": "attitude-era-series-1",
+    "era": "1998–2001 Attitude Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-the-rock-attitude",
+    "entranceId": "entrance-the-rock-attitude",
+    "specialId": "special-the-rock-attitude",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "punch",
+      "clothesline",
+      "body-slam"
+    ],
+    "signatures": [
+      "the-rock-attitude-spinebuster",
+      "the-rock-attitude-rock-bottom",
+      "the-rock-attitude-people-s-elbow"
+    ],
+    "archetype": "charismatic-power-striker",
+    "hp": 67,
+    "methodLimits": {
+      "agility": 0,
+      "strength": null,
+      "strike": null,
+      "technical": 2
+    },
+    "starterMomentum": {
+      "strength": 5,
+      "strike": 5,
+      "technical": 2
+    },
+    "ability": {
+      "name": "The People’s Champion",
+      "text": "The first 2 times Rock connects with a Strike Move costing 4+, gain +1 Adrenaline.",
+      "trigger": {
+        "type": "connectMethodCost",
+        "method": "strike",
+        "minCost": 4,
+        "maxUses": 2,
+        "adrenaline": 1
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-the-rock-attitude",
+      "name": "If You Smell…",
+      "kind": "entrance",
+      "setId": "attitude-era-series-1",
+      "rarity": 4,
+      "superstarId": "the-rock-attitude",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Strike Momentum.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 0,
+      "delayedTurn5": false
+    }
+  },
+  "johnCena": {
+    "id": "john-cena",
+    "name": "John Cena",
+    "nickname": "The Last Time Is Now",
+    "setId": "season-1-last-time-is-now",
+    "era": "The Last Time Is Now",
+    "developmentOnly": false,
+    "seasonExclusive": true,
+    "cardId": "superstar-john-cena",
+    "entranceId": "entrance-john-cena",
+    "specialId": "special-john-cena",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-technical",
+      "shoulder-tackle",
+      "body-slam",
+      "punch"
+    ],
+    "signatures": [
+      "john-cena-protobomb",
+      "john-cena-five-knuckle-shuffle",
+      "john-cena-stf",
+      "john-cena-attitude-adjustment"
+    ],
+    "archetype": "resilient-powerhouse-technician",
+    "hp": 68,
+    "methodLimits": {
+      "agility": 1,
+      "strength": null,
+      "strike": 3,
+      "technical": null
+    },
+    "starterMomentum": {
+      "strength": 5,
+      "technical": 5,
+      "strike": 2
+    },
+    "ability": {
+      "name": "The Champ Is Here",
+      "text": "The first 2 times Cena connects with a Strength Move costing 5+, gain +1 Adrenaline.",
+      "trigger": {
+        "type": "connectMethodCost",
+        "method": "strength",
+        "minCost": 5,
+        "maxUses": 2,
+        "adrenaline": 1
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-john-cena",
+      "name": "The Time Is Now",
+      "kind": "entrance",
+      "setId": "season-1-last-time-is-now",
+      "rarity": 4,
+      "superstarId": "john-cena",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "neverSayDie",
+      "hpPct": 0.4,
+      "draw": 2,
+      "adrenaline": 2
     }
   },
   "hulkHogan": {
@@ -4807,9 +4943,9 @@ export const superstars = {
     "id": "chyna",
     "name": "Chyna",
     "nickname": "The Ninth Wonder of the World",
-    "setId": "attitude-era-series-1",
+    "setId": "parked-chyna",
     "era": "1999–2001 Attitude Era",
-    "developmentOnly": false,
+    "developmentOnly": true,
     "seasonExclusive": false,
     "cardId": "superstar-chyna",
     "entranceId": "entrance-chyna",
@@ -4857,7 +4993,7 @@ export const superstars = {
       "id": "entrance-chyna",
       "name": "Ninth Wonder of the World",
       "kind": "entrance",
-      "setId": "attitude-era-series-1",
+      "setId": "parked-chyna",
       "rarity": 4,
       "superstarId": "chyna",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Strike Momentum.",

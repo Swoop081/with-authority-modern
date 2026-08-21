@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=0.13.90";
-import { collectionCards } from "./collection.js?v=0.13.90";
-import { superstars } from "./superstars.js?v=0.13.90";
-import { isUnreleasedSetId } from "./release.js?v=0.13.90";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.90";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.13.90";
+import { decks } from "./decks.js?v=0.13.92";
+import { collectionCards } from "./collection.js?v=0.13.92";
+import { superstars } from "./superstars.js?v=0.13.92";
+import { isUnreleasedSetId } from "./release.js?v=0.13.92";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.92";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.13.92";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -257,13 +257,13 @@ export function grantSuperstarUnlockPackage(profile, sid, { celebrate = true } =
 
 // Identity-only unlocks remain for special progression packages such as the
 // Season-exclusive Final Boss, whose playable cards are earned on its road.
-export function grantSuperstarIdentityUnlockPackage(profile, sid, { celebrate = true } = {}) {
+export function grantSuperstarIdentityUnlockPackage(profile, sid, { celebrate = true, tier = DEFAULT_STARTER_TIER } = {}) {
   const star = starById.get(sid), d = decks[sid] ?? [];
   if (!star || d.length !== 60) throw new Error("That Superstar deck is not available.");
   profile.unlockedSuperstars ??= [];
   if (profile.unlockedSuperstars.includes(sid)) return { alreadyOwned: true, superstarId: sid };
   profile.unlockedSuperstars.push(sid);
-  if (totalOwnedCopies(profile, `superstar-${sid}`) < 1) addOwnedCard(profile, `superstar-${sid}`, { tier: DEFAULT_STARTER_TIER });
+  if (totalOwnedCopies(profile, `superstar-${sid}`) < 1) addOwnedCard(profile, `superstar-${sid}`, { tier });
   profile.selectedEntrances ??= {};
   if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.savedDecks ??= {};
