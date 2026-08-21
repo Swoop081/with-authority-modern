@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.92";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.93";
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
-await import("../js/data/superstar-nameplates.js?v=0.13.92");
+await import("../js/data/superstar-nameplates.js?v=0.13.93");
 const profiles=globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES;
 
 test("v0.13.75 tier-up numerals scale by digit count without clipping",()=>{

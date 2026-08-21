@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.92';
-import { superstars } from '../js/data/superstars.js?v=0.13.92';
-import { decks } from '../js/data/decks.js?v=0.13.92';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.92';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.93';
+import { superstars } from '../js/data/superstars.js?v=0.13.93';
+import { decks } from '../js/data/decks.js?v=0.13.93';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.93';
 
 const stars=Object.values(superstars);
 const star=id=>stars.find(s=>s.id===id);

@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.92';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.92';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.92';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.93';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.93';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.93';
 
 const hp=(current,maxHp=100)=>({hp:current,maxHp});
 const player=id=>({superstar:{id},momentum:{strength:5,strike:5,technical:5,agility:5,attitude:10},adrenaline:10,hand:[],specialUsed:false,controlMoveCount:0,events:{},posture:'standing'});
@@ -25,9 +25,9 @@ test('v0.12.34 Jawbreaker cannot mirror-counter Jawbreaker',()=>{
   assert.equal(result.legal,false);
 });
 
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.92';
-import { superstars } from '../js/data/superstars.js?v=0.13.92';
-import { decks } from '../js/data/decks.js?v=0.13.92';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.93';
+import { superstars } from '../js/data/superstars.js?v=0.13.93';
+import { decks } from '../js/data/decks.js?v=0.13.93';
 
 test('v0.12.34 engine rejects Jawbreaker as the response to an incoming Jawbreaker',()=>{
   const jaw=allGameplayCards.find(c=>c.id==='jawbreaker');

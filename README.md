@@ -1,4 +1,13 @@
-# WWE Legacy v0.13.92 — Season One Cena + Attitude Rock
+# WWE Legacy v0.13.93 — Welcome iPhone Presentation Hotfix
+
+This build supersedes v0.13.92. It is a presentation-only onboarding hotfix: gameplay, balance, Season 1 Cena, Attitude Era Rock, the four-tier system, rewards, live-set availability and fresh-start grants are unchanged.
+
+## Welcome onboarding fixes
+
+- The five Welcome era choices use their live set branding directly; no fake booster-pack artwork is introduced because the reward is a full random Superstar, not a booster.
+- The era choice layout is compacted for iPhone so the fifth SummerSlam choice no longer sits far below oversized empty tiles.
+- The awarded Welcome Superstar now renders as a true full-size collectible-card hero instead of collapsing to a thin horizontal strip.
+- The reveal fills the iPhone viewport and anchors the Continue CTA at the bottom, eliminating the large unused black area.
 
 Current verified-development candidate built from **v0.13.90 — Era Logo Presentation Hotfix**. The abandoned v0.13.91 asset-path consolidation work is intentionally excluded.
 

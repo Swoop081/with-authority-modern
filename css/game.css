@@ -9149,3 +9149,44 @@ body[data-set="attitude-era-series-1"] .pack-theme-next,.theme-attitude .pack-th
 .tier-summary-symbol.tier-emerald{box-shadow:inset 0 0 9px rgba(40,226,113,.45)}.tier-summary-symbol.tier-sapphire{box-shadow:inset 0 0 9px rgba(54,146,255,.50)}.tier-summary-symbol.tier-ruby{box-shadow:inset 0 0 9px rgba(238,46,63,.55)}
 .tier-stage.tier-emerald .booster-card-halo{filter:drop-shadow(0 0 26px rgba(40,226,113,.42))}.tier-stage.tier-sapphire .booster-card-halo{filter:drop-shadow(0 0 26px rgba(54,146,255,.44))}.tier-stage.tier-ruby .booster-card-halo{filter:drop-shadow(0 0 30px rgba(238,46,63,.52))}
 @keyframes tierSurfaceSweep{0%{transform:translateX(-55%) rotate(4deg)}100%{transform:translateX(55%) rotate(4deg)}}
+
+/* v0.13.93 — iPhone Welcome onboarding presentation ---------------------- */
+/* Welcome rewards are not booster packs. Use the live set identity directly
+   and keep all five choices compact enough to read as one onboarding decision. */
+.welcome-choice-screen{min-height:100svh!important;gap:8px!important;padding:calc(8px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom))!important}
+.welcome-choice-screen .onboarding-brand .legacy-logo{transform:scale(.68)!important;transform-origin:top center!important;margin-bottom:-26px!important}
+.welcome-choice-screen .starter-hero h2{font-size:clamp(2rem,9vw,3rem)!important;margin:.02em 0!important}
+.welcome-choice-screen .starter-hero p{font-size:.76rem!important;line-height:1.35!important;margin:.18rem auto .35rem!important;max-width:640px}
+.welcome-set-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;max-width:760px!important;align-content:start!important}
+.welcome-set-choice{min-height:0!important;height:clamp(138px,18svh,170px)!important;padding:10px 11px!important;border-radius:16px!important;gap:3px!important;overflow:hidden!important}
+.welcome-set-choice:nth-child(5){grid-column:1/-1;height:clamp(120px,15svh,150px)!important}
+.welcome-set-logo{height:42px;display:flex;align-items:center;justify-content:flex-start;overflow:hidden;margin-bottom:1px}
+.welcome-set-logo img,.welcome-set-logo svg{display:block;max-width:118px!important;max-height:40px!important;width:auto!important;height:auto!important;object-fit:contain!important;object-position:left center!important}
+.welcome-set-choice .champion-tag{min-height:0!important;font-size:.45rem!important;line-height:1.1!important}
+.welcome-set-choice strong{font-size:clamp(.95rem,4vw,1.25rem)!important;margin-top:1px!important}
+.welcome-set-choice small{font-size:.59rem!important;line-height:1.15!important}
+.welcome-set-choice .choose-starter-cta{margin-top:auto!important;padding:8px 4px!important;font-size:.52rem!important;min-height:34px!important;display:grid!important;place-items:center!important}
+
+/* The awarded Superstar is a hero reveal. The non-interactive card is a span,
+   so explicitly make it a block and size it from the viewport instead of
+   allowing it to collapse to a nameplate-height strip. */
+.welcome-reveal-screen{height:100svh!important;min-height:100svh!important;overflow:hidden!important;display:grid!important;grid-template-rows:auto auto minmax(0,1fr) auto!important;align-content:stretch!important;gap:5px!important;padding:calc(7px + env(safe-area-inset-top)) 14px calc(10px + env(safe-area-inset-bottom))!important}
+.welcome-reveal-screen .onboarding-brand{margin:0!important;min-height:64px!important}
+.welcome-reveal-screen .onboarding-brand .legacy-logo{transform:scale(.62)!important;transform-origin:top center!important;margin-bottom:-34px!important}
+.welcome-reveal-copy h2{font-size:clamp(1.85rem,8vw,2.8rem)!important;line-height:.95!important;margin:.02em 0 .08em!important}
+.welcome-reveal-copy p{font-size:.72rem!important;line-height:1.28!important;margin:.1rem auto .15rem!important;max-width:560px!important}
+.welcome-superstar-reveal{min-height:0!important;display:grid!important;grid-template-rows:minmax(0,1fr) auto!important;place-items:center!important;align-content:stretch!important;gap:5px!important;overflow:hidden!important;width:100%!important}
+.welcome-superstar-card-wrap{min-height:0!important;width:100%!important;height:100%!important;display:grid!important;place-items:center!important;overflow:visible!important}
+.welcome-superstar-card-wrap .ccg-card{display:block!important;width:min(80vw,39svh,350px)!important;max-width:350px!important;margin:0 auto!important;flex:none!important}
+.welcome-superstar-card-wrap .generated-superstar-preview{width:min(80vw,39svh,350px)!important;max-width:350px!important;margin:0 auto!important}
+.welcome-superstar-result-copy{display:grid!important;justify-items:center!important;gap:1px!important;text-align:center!important;min-height:42px!important}
+.welcome-superstar-result-copy strong{font-size:clamp(1.25rem,5.5vw,1.75rem)!important;line-height:1!important;text-transform:uppercase!important}
+.welcome-superstar-result-copy small{font-size:.56rem!important;letter-spacing:.08em!important;color:#aaaab3!important;text-transform:uppercase!important}
+.welcome-continue-cta{width:100%!important;min-height:54px!important;margin:0!important;border-radius:15px!important;font-size:.88rem!important;letter-spacing:.05em!important}
+
+@media(max-width:390px){
+  .welcome-choice-screen{padding-left:9px!important;padding-right:9px!important}
+  .welcome-set-choice{height:clamp(132px,17svh,158px)!important;padding:9px!important}
+  .welcome-set-logo{height:36px}.welcome-set-logo img,.welcome-set-logo svg{max-height:34px!important;max-width:104px!important}
+  .welcome-superstar-card-wrap .ccg-card,.welcome-superstar-card-wrap .generated-superstar-preview{width:min(82vw,38svh,320px)!important}
+}
