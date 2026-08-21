@@ -41,3 +41,7 @@
 .key.raw{background:linear-gradient(90deg,#08090b,#ef2637)}
 .key.worldscollide{background:linear-gradient(90deg,#11180d,#62f13f,#d8202a)}
 .key.smackdown{background:linear-gradient(90deg,#071d44,#1597ff)}
+
+/* v0.13.82 — Era split Card Studio identities */
+.key.golden{border-color:#e4b63f;color:#fff4b5;background:linear-gradient(115deg,#08122b 0 44%,#b52922 44% 66%,#e4b63f 66% 100%);text-shadow:0 1px 2px #050505}
+.key.attitude{border-color:#d7dade;color:#fff;background:linear-gradient(115deg,#050506 0 60%,#303338 60% 75%,#ed2537 75% 100%);text-shadow:0 1px 2px #000}

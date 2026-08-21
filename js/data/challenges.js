@@ -1,22 +1,23 @@
-import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js?v=0.13.81";
+import { awardSeasonXp, DAILY_CHALLENGE_XP, WEEKLY_CHALLENGE_XP } from "./seasons.js?v=0.13.90";
+import { grantRandomBoosters } from "./boosters.js?v=0.13.90";
 const DAY_MS = 86400000;
 const DAILY_POOL = [
-  { key: 'win-match', label: 'Win a match', metric: 'wins', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
-  { key: 'connect-finisher', label: 'Connect with a Finisher', metric: 'finishers', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
-  { key: 'counter-moves', label: 'Counter 2 Moves', metric: 'counters', target: 2, reward: 1, xpReward: DAILY_CHALLENGE_XP },
-  { key: 'open-pack', label: 'Open a booster pack', metric: 'packs', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
-  { key: 'ladder-rung', label: 'Clear a Money in the Bank level', metric: 'ladderRungs', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
-  { key: 'championship-win', label: 'Win a Championship Road match', metric: 'championshipWins', target: 1, reward: 1, xpReward: DAILY_CHALLENGE_XP },
-  { key: 'play-matches', label: 'Complete 2 matches', metric: 'matches', target: 2, reward: 1, xpReward: DAILY_CHALLENGE_XP }
+  { key: 'win-match', label: 'Win a match', metric: 'wins', target: 1, reward: 0, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'connect-finisher', label: 'Connect with a Finisher', metric: 'finishers', target: 1, reward: 0, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'counter-moves', label: 'Counter 2 Moves', metric: 'counters', target: 2, reward: 0, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'open-pack', label: 'Open a booster pack', metric: 'packs', target: 1, reward: 0, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'ladder-rung', label: 'Clear a Money in the Bank level', metric: 'ladderRungs', target: 1, reward: 0, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'championship-win', label: 'Win a Championship Road match', metric: 'championshipWins', target: 1, reward: 0, xpReward: DAILY_CHALLENGE_XP },
+  { key: 'play-matches', label: 'Complete 2 matches', metric: 'matches', target: 2, reward: 0, xpReward: DAILY_CHALLENGE_XP }
 ];
 const WEEKLY_POOL = [
-  { key: 'weekly-wins', label: 'Win 5 matches', metric: 'wins', target: 5, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
-  { key: 'weekly-ladder', label: 'Clear 4 Money in the Bank levels', metric: 'ladderRungs', target: 4, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
-  { key: 'weekly-championship', label: 'Win 3 Championship Road matches', metric: 'championshipWins', target: 3, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
-  { key: 'weekly-packs', label: 'Open 5 booster packs', metric: 'packs', target: 5, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
-  { key: 'weekly-finishers', label: 'Connect with 5 Finishers', metric: 'finishers', target: 5, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
-  { key: 'weekly-counters', label: 'Counter 10 Moves', metric: 'counters', target: 10, reward: 2, xpReward: WEEKLY_CHALLENGE_XP },
-  { key: 'weekly-matches', label: 'Complete 10 matches', metric: 'matches', target: 10, reward: 2, xpReward: WEEKLY_CHALLENGE_XP }
+  { key: 'weekly-wins', label: 'Win 5 matches', metric: 'wins', target: 5, reward: 1, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-ladder', label: 'Clear 4 Money in the Bank levels', metric: 'ladderRungs', target: 4, reward: 1, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-championship', label: 'Win 3 Championship Road matches', metric: 'championshipWins', target: 3, reward: 1, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-packs', label: 'Open 5 booster packs', metric: 'packs', target: 5, reward: 1, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-finishers', label: 'Connect with 5 Finishers', metric: 'finishers', target: 5, reward: 1, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-counters', label: 'Counter 10 Moves', metric: 'counters', target: 10, reward: 1, xpReward: WEEKLY_CHALLENGE_XP },
+  { key: 'weekly-matches', label: 'Complete 10 matches', metric: 'matches', target: 10, reward: 1, xpReward: WEEKLY_CHALLENGE_XP }
 ];
 
 const localDayKey = (date = new Date()) => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
@@ -66,18 +67,19 @@ export function recordCompletedMatchChallenges(profile, state, humanId = 'p1', m
   if (humanFinishers) recordChallengeMetric(profile, 'finishers', humanFinishers, now);
   if (humanCounters) recordChallengeMetric(profile, 'counters', humanCounters, now);
 }
-export function claimChallenge(profile, id, now = new Date()) {
+export function claimChallenge(profile, id, now = new Date(), rng = Math.random) {
   const state = ensure(profile, now);
   const challenge = [...state.daily, ...state.weekly].find(c => c.id === id);
   if (!challenge) throw new Error('Challenge not found');
   if (challenge.claimed) throw new Error('Challenge already claimed');
   if ((challenge.progress ?? 0) < challenge.target) throw new Error('Challenge is not complete');
   challenge.claimed = true;
-  profile.boosterCredits = (profile.boosterCredits ?? 0) + challenge.reward;
-  profile.boosterCreditsBySet ??= {};
-  profile.boosterCreditsBySet["summerslam-series-1"] = profile.boosterCredits;
-  awardSeasonXp(profile, challenge.xpReward ?? (id.startsWith('weekly-') ? WEEKLY_CHALLENGE_XP : DAILY_CHALLENGE_XP), 'challenge');
-  return challenge.reward;
+  const weekly = id.startsWith('weekly-');
+  const packSetIds = weekly ? grantRandomBoosters(profile, 1, rng, now) : [];
+  const xp = challenge.xpReward ?? (weekly ? WEEKLY_CHALLENGE_XP : DAILY_CHALLENGE_XP);
+  awardSeasonXp(profile, xp, 'challenge');
+  challenge.rewardSetIds = packSetIds;
+  return { challenge, xp, packs: packSetIds.length, packSetIds };
 }
 export function nextDailyReset(now = new Date()) { const n = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); return n; }
 export function nextWeeklyReset(now = new Date()) { const d = new Date(now.getFullYear(), now.getMonth(), now.getDate()); const day=(d.getDay()+6)%7; d.setDate(d.getDate()-day+7); return d; }

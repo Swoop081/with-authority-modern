@@ -1,4 +1,5 @@
-import { unlockSuperstar } from "./profile.js?v=0.13.81";
+import { unlockSuperstar } from "./profile.js?v=0.13.90";
+import { grantRandomBoosters } from "./boosters.js?v=0.13.90";
 
 export const LADDER_LIVES = 3;
 export const LADDER_LENGTH = 8;
@@ -51,7 +52,7 @@ export function startLadderRun(profile, superstarId, opponentIds, rng = Math.ran
   return ladder.activeRun;
 }
 export function currentLadderOpponent(profile, now = new Date()) { const run = ensure(profile, now).activeRun; return !run || run.status !== "active" ? null : run.opponents[run.rung] ?? null; }
-export function recordLadderMatch(profile, result, now = new Date()) {
+export function recordLadderMatch(profile, result, now = new Date(), rng = Math.random) {
   const ladder = ensure(profile, now), run = ladder.activeRun;
   if (!run || run.status !== "active") throw new Error("No active Money in the Bank");
   if (result === "loss") { run.lives -= 1; if (run.lives <= 0) { run.status = "failed"; return { status: "failed", run }; } return { status: "retry", run }; }
@@ -62,13 +63,13 @@ export function recordLadderMatch(profile, result, now = new Date()) {
     run.status = "cleared";
     ladder.dailyCleared = true;
     ladder.clears = (ladder.clears ?? 0) + 1;
-    profile.superPackCreditsBySet ??= {};
-    profile.superPackCreditsBySet[run.setId] = (profile.superPackCreditsBySet[run.setId] ?? 0) + 1;
+    const rewardSetIds = grantRandomBoosters(profile, 2, rng, now);
+    run.rewardSetIds = rewardSetIds;
     if (ladder.clears === 1) {
       ladder.firstClearSuperstarPending = true;
       ladder.firstClearSuperstarPendingBySet[run.setId] = true;
     }
-    return { status: "cleared", run, completionPackAwarded: false, superPackAwarded: true };
+    return { status: "cleared", run, packAwarded: true, packCount: rewardSetIds.length, rewardSetIds };
   }
   return { status: "advance", run };
 }

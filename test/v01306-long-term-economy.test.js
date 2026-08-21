@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { STORE_SUPERSTAR_PRICE, DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.81';
+import { STORE_SUPERSTAR_PRICE, DUPLICATE_UP_BY_RARITY, duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.90';
 
 test('v0.13.6 long-term economy certification keeps economy values locked while the simulator can follow the release calendar',()=>{
   assert.equal(STORE_SUPERSTAR_PRICE,2500);
@@ -15,7 +15,7 @@ test('v0.13.6 long-term economy certification keeps economy values locked while 
   assert.match(sim,/regular:/);
   assert.match(sim,/heavy:/);
   assert.match(sim,/\[7,30,60,90\]/);
-  assert.match(sim,/victory-pack economy model/);
-  assert.match(sim,/grantVictoryBooster/);
-  assert.match(sim,/openSuperPack/);
+  assert.match(sim,/milestone-pack economy model/);
+  assert.match(sim,/grantRandomBoosters/);
+  assert.doesNotMatch(sim,/openSuperPack|grantSuperPack|superPack/);
 });

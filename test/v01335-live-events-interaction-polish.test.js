@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.81';
-import { collectionCards } from '../js/data/collection.js?v=0.13.81';
-import { layeredCardArtFor } from '../js/data/artwork.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.13.81';
-import { LIVE_EVENT_WIN_UP, activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.90';
+import { collectionCards } from '../js/data/collection.js?v=0.13.90';
+import { layeredCardArtFor } from '../js/data/artwork.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.13.90';
+import { LIVE_EVENT_WIN_UP, activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.13.90';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 const collectionById = new Map(collectionCards.map(card => [card.id, card]));
@@ -135,7 +135,7 @@ test('v0.13.35 Live Event detail removes decorative hero art and compresses the 
   const hero = app.slice(heroStart, heroEnd);
   assert.doesNotMatch(hero, /live-tower-detail-art/);
   assert.doesNotMatch(hero, /UP EARNED/);
-  assert.match(hero, /VICTORY PACKS/);
+  assert.match(hero, /CLEAR PACK/);
   assert.match(css, /\.compact-live-detail-hero/);
   assert.match(css, /grid-template-columns:1\.15fr 1fr 1fr/);
 });

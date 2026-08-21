@@ -1,8 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.81";
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=0.13.81";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.90";
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from "../js/data/card-number-manifest.js?v=0.13.90";
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 
@@ -33,16 +33,16 @@ test("v0.13.65 adds a generic common Diving Shoulder Block without replacing War
     requirements:generic.requirements,moveType:generic.moveType,counter:generic.counterState,
     ground:generic.groundOpponent,boosterOnly:generic.boosterOnly
   },{
-    set:"hall-of-fame-series-1",cost:4,damage:6,rarity:1,method:"agility",
+    set:"golden-era-series-1",cost:4,damage:6,rarity:1,method:"agility",
     requirements:{agility:1},moveType:"aerial",counter:"diving-aerial",ground:true,boosterOnly:true
   });
   assert.equal(generic.superstarId,null);
   assert.equal(warrior.superstarId,"ultimate-warrior");
   assert.equal(warrior.rarity,3);
   assert.notEqual(generic.id,warrior.id);
-  assert.equal(CARD_NUMBER_BY_ID[generic.id].cardCode,"HOF1-094");
-  assert.equal(CARD_IDS_BY_SET["hall-of-fame-series-1"].length,94);
-  assert.equal(CARD_IDS_BY_SET["hall-of-fame-series-1"].at(-1),generic.id);
+  assert.equal(CARD_NUMBER_BY_ID[generic.id].cardCode,"GE1-048");
+  assert.equal(CARD_IDS_BY_SET["golden-era-series-1"].length,84);
+  assert.ok(CARD_IDS_BY_SET["golden-era-series-1"].includes(generic.id));
 });
 
 test("v0.13.65 adds Springboard Roundhouse Kick as SD1-038 shared Rare",()=>{
@@ -66,6 +66,6 @@ test("v0.13.65 adds Springboard Roundhouse Kick as SD1-038 shared Rare",()=>{
 test("v0.13.65 Card Studio exposes all three new collector placements",()=>{
   const studio=fs.readFileSync(new URL("../js/tools/card-art-studio-data.js",import.meta.url),"utf8");
   assert.match(studio,/"id":"vertical-boston-crab","name":"Vertical Boston Crab","kind":"move","setId":"evolution-series-1","cardNumber":75,"cardCode":"EVO1-075"/);
-  assert.match(studio,/"id":"diving-shoulder-block","name":"Diving Shoulder Block","kind":"move","setId":"hall-of-fame-series-1","cardNumber":94,"cardCode":"HOF1-094"/);
+  assert.match(studio,/"id":"diving-shoulder-block","name":"Diving Shoulder Block","kind":"move","setId":"golden-era-series-1","cardNumber":48,"cardCode":"GE1-048"/);
   assert.match(studio,/"id":"springboard-roundhouse-kick","name":"Springboard Roundhouse Kick","kind":"move","setId":"smackdown-series-1","cardNumber":38,"cardCode":"SD1-038"/);
 });

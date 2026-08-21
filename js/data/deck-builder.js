@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=0.13.81";
-import { collectionCards } from "./collection.js?v=0.13.81";
-import { superstars } from "./superstars.js?v=0.13.81";
-import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.81";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.81";
-import { applyFoilGameplay } from "./foil.js?v=0.13.81";
+import { decks } from "./decks.js?v=0.13.90";
+import { collectionCards } from "./collection.js?v=0.13.90";
+import { superstars } from "./superstars.js?v=0.13.90";
+import { evaluateDeckHealth, deckBucket } from "./deck-health.js?v=0.13.90";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.90";
+import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, highestOwnedTier, normalizeCardTier, tierRank } from "./variants.js?v=0.13.90";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -19,17 +19,20 @@ export const DECK_LAB_CATEGORIES = Object.freeze([
 ]);
 
 export function leadOffIds(sid) { return (decks[sid] ?? []).slice(0, 5).map(c => c.id); }
-export function recommendedDeckDraft(sid) { return (decks[sid] ?? []).map(c => ({ id: c.id, foil: false })); }
-export function materializeDraft(d = []) { return d.map(e => { const entry = typeof e === "string" ? { id: e, foil: false } : e; const card = byId.get(entry?.id); return card ? applyFoilGameplay(card, !!entry?.foil) : null; }).filter(Boolean); }
+export function recommendedDeckDraft(sid) { return (decks[sid] ?? []).map(c => ({ id: c.id, tier: DEFAULT_AUTHORED_TIER })); }
+export function materializeDraft(d = []) { return d.map(e => { const entry = typeof e === "string" ? { id: e, tier: DEFAULT_AUTHORED_TIER } : e; const card = byId.get(entry?.id); return card ? applyCardTier(card, normalizeCardTier(entry?.tier, DEFAULT_AUTHORED_TIER)) : null; }).filter(Boolean); }
 export function usedCount(d, id) { return d.filter(e => (e.id ?? e) === id).length; }
 export function usedCopyFamilyCount(d, card) {
   if (!card?.copyFamily) return usedCount(d, card?.id);
   return d.reduce((n, e) => { const c = byId.get(e.id ?? e); return n + (c?.copyFamily === card.copyFamily ? 1 : 0); }, 0);
 }
-export function ownedTotal(p, id) { const o = p?.ownedCards?.[id] ?? {}; return (o.normal ?? 0) + (o.foil ?? 0); }
-export function ownedNormal(p, id) { return Math.max(0, Number(p?.ownedCards?.[id]?.normal) || 0); }
-export function ownedFoil(p, id) { return Math.max(0, Number(p?.ownedCards?.[id]?.foil) || 0); }
-function usedFinishCount(draft, id, foil) { return draft.reduce((n,e)=>{ const x=typeof e === "string" ? { id:e, foil:false } : e; return n + (x?.id===id && !!x?.foil===!!foil ? 1 : 0); },0); }
+export function ownedTotal(p, id) { const o = p?.ownedCards?.[id] ?? {}; return CARD_TIERS.reduce((sum,tier)=>sum+Math.max(0,Number(o[tier])||0),0); }
+export function ownedTier(p, id, tier) { return Math.max(0, Number(p?.ownedCards?.[id]?.[normalizeCardTier(tier)]) || 0); }
+export function ownedNormal(p, id) { return ownedTier(p,id,"normal"); }
+export function ownedEmerald(p, id) { return ownedTier(p,id,"emerald"); }
+export function ownedSapphire(p, id) { return ownedTier(p,id,"sapphire"); }
+export function ownedRuby(p, id) { return ownedTier(p,id,"ruby"); }
+function usedTierCount(draft, id, tier) { const wanted=normalizeCardTier(tier); return draft.reduce((n,e)=>{ const x=typeof e === "string" ? { id:e, tier:DEFAULT_AUTHORED_TIER } : e; return n + (x?.id===id && normalizeCardTier(x?.tier,DEFAULT_AUTHORED_TIER)===wanted ? 1 : 0); },0); }
 
 export function cardEligibilityForSuperstar(star, card) {
   if (!star || !card) return { legal: false, reason: "Card unavailable" };
@@ -113,18 +116,20 @@ export function createDeckDraft(profile, sid) {
 export function aggregateDeck(d, { tailOnly = false } = {}) {
   const arr = tailOnly ? d.slice(5) : d, map = new Map();
   for (const e of arr) {
-    const id = e.id ?? e, row = map.get(id) ?? { id, count: 0, foil: 0, indices: [] };
+    const id = e.id ?? e, row = map.get(id) ?? { id, count: 0, tiers: { normal:0, emerald:0, sapphire:0, ruby:0 }, indices: [] };
     row.count += 1;
     row.indices.push(d.indexOf(e));
-    if (e.foil) row.foil += 1;
+    const tier = normalizeCardTier(typeof e === "string" ? DEFAULT_AUTHORED_TIER : e?.tier, DEFAULT_AUTHORED_TIER);
+    row.tiers[tier] = (row.tiers[tier] ?? 0) + 1;
     map.set(id, row);
   }
-  return [...map.values()].map(row => ({ ...row, normal: row.count - row.foil, card: byId.get(row.id) }));
+  return [...map.values()].map(row => ({ ...row, normal: row.tiers.normal, emerald: row.tiers.emerald, sapphire: row.tiers.sapphire, ruby: row.tiers.ruby, card: byId.get(row.id) }));
 }
 
-function preferredOwnedFinish(profile, draft, id) {
-  if (usedFinishCount(draft,id,true) < ownedFoil(profile,id)) return true;
-  if (usedFinishCount(draft,id,false) < ownedNormal(profile,id)) return false;
+function preferredOwnedTier(profile, draft, id) {
+  for (const tier of [...CARD_TIERS].sort((a,b)=>tierRank(b)-tierRank(a))) {
+    if (usedTierCount(draft,id,tier) < ownedTier(profile,id,tier)) return tier;
+  }
   return null;
 }
 
@@ -134,15 +139,15 @@ export function canAddCard(profile, sid, draft, id) {
   const defaultCap = card.kind === "momentum" ? 12 : 5;
   const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
   const ownRoom = usedCount(draft, id) < Math.min(cap, ownedTotal(profile, id));
-  const finishRoom = preferredOwnedFinish(profile,draft,id) !== null;
+  const finishRoom = preferredOwnedTier(profile,draft,id) !== null;
   const familyRoom = !card.copyFamily || usedCopyFamilyCount(draft, card) < 5;
   return ownRoom && finishRoom && familyRoom;
 }
 export function addCardToDraft(profile, sid, draft, id) {
   if (!canAddCard(profile, sid, draft, id)) return draft;
-  const foil = preferredOwnedFinish(profile,draft,id);
-  if (foil === null) return draft;
-  return [...draft, { id, foil }];
+  const tier = preferredOwnedTier(profile,draft,id);
+  if (tier === null) return draft;
+  return [...draft, { id, tier }];
 }
 export function removeCardFromDraft(_profile, _sid, draft, index) { return draft.filter((_, i) => i !== index); }
 
@@ -157,12 +162,12 @@ export function replaceLeadOffSlot(profile, sid, draft, slot, id) {
   const current = usedCount(draft, id);
   const familyCurrent = usedCopyFamilyCount(draft, card);
   const owned = ownedTotal(profile, id);
-  const out = draft.map(e => ({ ...(typeof e === "string" ? { id: e, foil: false } : e) }));
+  const out = draft.map(e => ({ ...(typeof e === "string" ? { id: e, tier: DEFAULT_AUTHORED_TIER } : e) }));
   if (current < Math.min(cap, owned) && (!card.copyFamily || familyCurrent < 5)) {
     const withoutSlot = out.filter((_,i)=>i!==index);
-    const foil = preferredOwnedFinish(profile, withoutSlot, id);
-    if (foil === null) return draft;
-    out[index] = { id, foil };
+    const tier = preferredOwnedTier(profile, withoutSlot, id);
+    if (tier === null) return draft;
+    out[index] = { id, tier };
     return out;
   }
   const swapIndex = out.findIndex((entry, i) => i >= 5 && entry.id === id);
@@ -207,10 +212,10 @@ export function validateDeckDraft(profile, sid, draft, entranceId = selectedEntr
   for (const [id, count] of counts) {
     const owned = ownedTotal(profile, id);
     if (count > owned) violations.push(`${byId.get(id)?.name ?? id}: deck uses ${count}, Collection owns ${owned}.`);
-    const foilUsed = usedFinishCount(draft,id,true);
-    const normalUsed = usedFinishCount(draft,id,false);
-    if (foilUsed > ownedFoil(profile,id)) violations.push(`${byId.get(id)?.name ?? id}: deck uses ${foilUsed} Foil, Collection owns ${ownedFoil(profile,id)} Foil.`);
-    if (normalUsed > ownedNormal(profile,id)) violations.push(`${byId.get(id)?.name ?? id}: deck uses ${normalUsed} Normal, Collection owns ${ownedNormal(profile,id)} Normal.`);
+    for (const tier of CARD_TIERS) {
+      const usedTier = usedTierCount(draft,id,tier), owned = ownedTier(profile,id,tier);
+      if (usedTier > owned) violations.push(`${byId.get(id)?.name ?? id}: deck uses ${usedTier} ${tier[0].toUpperCase()+tier.slice(1)}, Collection owns ${owned}.`);
+    }
   }
 
   const lead = cards.slice(0, 5);
@@ -231,7 +236,7 @@ export function validateDeckDraft(profile, sid, draft, entranceId = selectedEntr
   return { ...base, healthy: unique.length === 0, score: Math.max(0, 100 - unique.length * 12), violations: unique };
 }
 
-export function normalizeDeckFinishes(profile, _sid, entries = []) { return preferOwnedDraftFoils(profile, entries.map(e => typeof e === "string" ? { id:e, foil:false } : { ...e })); }
+export function normalizeDeckFinishes(profile, _sid, entries = []) { return preferOwnedDraftTiers(profile, entries.map(e => typeof e === "string" ? { id:e, tier:DEFAULT_AUTHORED_TIER } : { ...e })); }
 export function optimizeDeck(profile, sid) { return enforceOwnedDraft(profile, sid, buildBestOwnedRecommendedDraft(profile, sid)); }
 
 // Recommended decks are blueprints, not free cards. Build only copies the
@@ -240,7 +245,7 @@ export function buildOwnedRecommendedDraft(profile, sid) {
   const wanted = recommendedDeckDraft(sid), used = new Map(), out = [];
   for (const entry of wanted) {
     const id = entry.id ?? entry, count = used.get(id) ?? 0, owned = ownedTotal(profile, id);
-    if (count < owned) { out.push({ id, foil: false }); used.set(id, count + 1); }
+    if (count < owned) { out.push({ id, tier: "normal" }); used.set(id, count + 1); }
   }
   return enforceOwnedDraft(profile, sid, out);
 }
@@ -264,9 +269,9 @@ export function enforceOwnedDraft(profile, sid, draft = []) {
     const ownedCap = Math.min(maxDeckCopies(card), ownedTotal(profile, id));
     if (usedCount(out, id) >= ownedCap) continue;
     if (card.copyFamily && usedCopyFamilyCount(out, card) >= 5) continue;
-    out.push({ id, foil: false });
+    out.push({ id, tier: "normal" });
   }
-  return preferOwnedDraftFoils(profile, out);
+  return preferOwnedDraftTiers(profile, out);
 }
 
 function canUseOwnedCandidate(profile, draft, card) {
@@ -290,14 +295,18 @@ function replacementScore(target, candidate, inLeadOff = false) {
   return score;
 }
 
-function preferOwnedDraftFoils(profile, draft = []) {
-  const usedFoils = new Map();
+function preferOwnedDraftTiers(profile, draft = []) {
+  const usedByIdTier = new Map();
   return draft.map(raw => {
-    const entry = typeof raw === "string" ? { id: raw, foil: false } : { ...raw };
-    const ownedFoils = Math.max(0, Number(profile?.ownedCards?.[entry.id]?.foil) || 0);
-    const used = usedFoils.get(entry.id) ?? 0;
-    entry.foil = used < ownedFoils;
-    if (entry.foil) usedFoils.set(entry.id, used + 1);
+    const entry = typeof raw === "string" ? { id: raw, tier: DEFAULT_AUTHORED_TIER } : { ...raw };
+    const owned = profile?.ownedCards?.[entry.id] ?? {};
+    let selected = null;
+    for (const tier of [...CARD_TIERS].sort((a,b)=>tierRank(b)-tierRank(a))) {
+      const key = `${entry.id}:${tier}`, used = usedByIdTier.get(key) ?? 0;
+      if (used < (Number(owned[tier]) || 0)) { selected = tier; usedByIdTier.set(key, used + 1); break; }
+    }
+    entry.tier = selected ?? normalizeCardTier(entry.tier, DEFAULT_AUTHORED_TIER);
+    delete entry.foil;
     return entry;
   });
 }
@@ -317,7 +326,7 @@ export function buildBestOwnedRecommendedDraft(profile, sid) {
     const target = wantedCards[index];
     remainingNeed.set(target.id, Math.max(0, (remainingNeed.get(target.id) ?? 0) - 1));
     if (canUseOwnedCandidate(profile, out, target)) {
-      out.push({ id: target.id, foil: false });
+      out.push({ id: target.id, tier: "normal" });
       continue;
     }
 
@@ -335,7 +344,7 @@ export function buildBestOwnedRecommendedDraft(profile, sid) {
       .sort((a,b) => replacementScore(target,b,inLeadOff) - replacementScore(target,a,inLeadOff) || a.name.localeCompare(b.name))[0];
 
     const replacement = choose(false) ?? choose(true);
-    if (replacement) out.push({ id: replacement.id, foil: false });
+    if (replacement) out.push({ id: replacement.id, tier: "normal" });
   }
   return enforceOwnedDraft(profile, sid, out);
 }
@@ -414,7 +423,7 @@ export function recommendedDeckComparison(profile, sid, draft = [], entranceId =
 
 export function autoFillOwnedDraft(profile, sid, draft = []) {
   const star = starById.get(sid); if (!star) return [...draft];
-  const out = [...draft.map(e => typeof e === "string" ? { id: e, foil: false } : { ...e })];
+  const out = [...draft.map(e => typeof e === "string" ? { id: e, tier: DEFAULT_AUTHORED_TIER } : { ...e })];
   const target = (decks[sid] ?? []).length || 60;
   const candidates = eligibleOwnedCards(profile, sid).sort((a, b) => {
     const ar = a.rarity ?? 0, br = b.rarity ?? 0; if (br !== ar) return br - ar;
@@ -428,7 +437,7 @@ export function autoFillOwnedDraft(profile, sid, draft = []) {
       const cap = Math.min(defaultCap, Number.isFinite(card.maxCopies) ? card.maxCopies : defaultCap);
       if (usedCount(out, card.id) >= Math.min(cap, ownedTotal(profile, card.id))) continue;
       if (card.copyFamily && usedCopyFamilyCount(out, card) >= 5) continue;
-      out.push({ id: card.id, foil: false }); added = true;
+      out.push({ id: card.id, tier: "normal" }); added = true;
       if (out.length >= target) break;
     }
     if (!added) break;

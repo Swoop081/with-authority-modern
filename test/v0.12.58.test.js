@@ -33,7 +33,7 @@ test('v0.12.58 Main Event matchup fills the viewport and starts at the top', () 
 });
 
 test('v0.12.58 Match Rewards uses a readable Series 1 pack wrapper', () => {
-  assert.match(app, /series:"SERIES 1",subtitle:"VICTORY BOOSTER",extraClass:"results-booster"/);
+  assert.match(app, /series:"SERIES 1",subtitle,extraClass:"results-booster"/);
   assert.match(css, /\.results-booster\{[\s\S]*width:102px!important/);
 });
 

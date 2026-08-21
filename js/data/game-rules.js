@@ -68,7 +68,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Method check", "Non-Finishers must also meet every printed Method requirement. Finishers ignore generic Method requirements."],
       ["Position", "Grounded-only Moves need the opponent on the mat. Standing-only Submissions need the opponent standing. Other card text can impose additional position requirements."],
       ["Exclusivity", "A Superstar-exclusive card can only be played by its named Superstar. Cards with an allowed-Superstar family restriction are legal only for that listed family."],
-      ["Printed Damage", "The Normal card Damage number is the authored baseline. A Foil Move with positive Damage displays and deals +1 Damage; authored abilities and card effects may then add or reduce Damage during resolution."]
+      ["Printed Damage", "Sapphire is the authored Damage baseline. Normal is −2 Damage, Emerald is −1, Sapphire is authored Damage, and Ruby is +1. Submission pressure uses the same tier ladder. Cost and authored secondary effects do not change by tier."]
     ]
   },
   {
@@ -127,22 +127,22 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Lead Off 5", "The first 5 pages are your opening hand. Lead Off may contain only Moves and Momentum, and must contain at least 1 Move and at least 1 Momentum page."],
       ["Copy caps", "Normal deck cards have a default maximum of 5 copies. Momentum cards may use up to 12 copies of the same Momentum card. A card-specific lower maxCopies value overrides those defaults."],
       ["Copy families", "Cards that share a copyFamily have a combined family cap of 5 copies."],
-      ["Ownership", "You can only save copies you actually own. Standard five-copy cards may be owned as up to 5 Normal plus 5 Foil copies, while deck legality still allows at most 5 total copies of that card identity."],
+      ["Ownership", "You can only save copies you actually own. Standard five-copy cards track Normal, Emerald, Sapphire and Ruby separately, while deck legality still allows at most 5 total copies of that card identity."],
       ["Superstar legality", "Deck Lab enforces Superstar-exclusive cards, allowed-Superstar families, Method Limits and any card-specific restrictions."],
       ["Entrance", "A legal deck also needs one owned compatible Entrance selected outside the 60 pages."],
       ["Recommended decks", "Your first Superstar receives the complete authored 60-page onboarding deck. Later Superstar unlocks grant only the Superstar identity plus at most one authored Finisher, one Trademark and one Action; they do not grant a complete deck, shared filler, or the Superstar-specific Entrance. Deck Lab compares your Collection against the authored 60-page recommended build, uses owned recommended cards first, fills gaps only with legal shared cards you already own, and recommends missing authored cards and the Superstar-specific Entrance as you collect them. Every authored deck starts with 1 Once Too Often; players may collect additional copies and run up to the normal 5-copy cap."]
     ]
   },
   {
-    id: "collection-rarity", group: "COLLECTION", title: "Rarity, Ownership & Foils",
-    summary: "Rarity controls collectibility; Foils are premium chase finishes with a small Damage edge.",
+    id: "collection-rarity", group: "COLLECTION", title: "Rarity, Ownership & Card Tiers",
+    summary: "Card rarity stays intrinsic; Normal, Emerald, Sapphire and Ruby are separate pull tiers with progressively stronger offensive values.",
     items: [
       ["Rarity", "1★ Common, 2★ Uncommon, 3★ Rare and 4★ Very Rare."],
       ["Exclusive rarity policy", "Cards exclusive to one wrestler must be Rare or Very Rare. Wrestler-exclusive Trademarks are generally Rare; Finishers and wrestler one-use/reactive Actions are Very Rare."],
-      ["Ownership caps", "Standard playable cards can be owned as up to 5 Normal plus 5 Foil copies. Deck construction still caps that card identity at 5 total copies. Momentum keeps its project cap; Superstar, Entrance and Manager identities cap at 1."],
-      ["Foils", "Foil is the premium chase finish. A Foil Move with positive Damage gets +1 Damage. Cost, Method requirements, Counter states and card text are otherwise unchanged. Cards with no positive Damage do not gain a Damage bonus."],
-      ["Foil deck use", "Deck Lab and Deck Assistance prefer owned Foil copies. The +1 Damage is shown on the live card plate and is part of the Foil card’s gameplay value; it is not a hidden modifier."],
-      ["Collection milestones", "Foil ownership still contributes to Foil collection progress and other collector-facing milestones where shown."]
+      ["Ownership caps", "Every collectible card tracks Normal, Emerald, Sapphire and Ruby separately. Each tier can hold up to 5 owned copies; copy 6+ of that same tier converts to Universe Points. Deck-construction limits remain separate from Collection ownership limits."],
+      ["Card tiers", "Normal has no glow and is −2 Damage; Emerald has a green glow and is −1; Sapphire has a blue glow and uses authored Damage; Ruby has a red glow and is +1. Submission pressure scales on the same ladder. Cost, Method requirements, Counter states and secondary effects remain unchanged."],
+      ["Tier deck use", "Deck Lab and Deck Assistance prefer the strongest owned tier. The live card plate shows the active Damage and submission pressure so tier strength is never a hidden modifier."],
+      ["Collection milestones", "Overall Collection and Ruby Collection tracks each award 1 random released-set booster at 25%, 50%, 75% and 100% completion."]
     ]
   },
   {
@@ -151,28 +151,27 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     items: [
       ["Pack size", "A standard booster contains 5 pulls."],
       ["Rarity weights", "Ordinary slots roll from the current available pool using 50% Common, 30% Uncommon, 15% Rare and 5% Very Rare weighting until a Very Rare has been hit."],
-      ["Very Rare ceiling", "A standard five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot. Super Packs are the explicit exception and can contain up to 2 Very Rares."],
-      ["Guaranteed Foil", "The first pull is Foil. Entrances are also presented as Foil. Positive-Damage Foil Moves deal +1 Damage, making the guaranteed Foil a real gameplay chase."],
-      ["Super Packs", "Clearing a full mode or tournament awards a five-card Super Pack. It guarantees a Foil Rare-or-better first pull and uses boosted 25% Common, 40% Uncommon, 27% Rare and 8% Very Rare weighting, with up to 2 Very Rares."],
+      ["Very Rare ceiling", "A standard five-card booster can contain at most 1 Very Rare total. A Superstar chase consumes that one Very Rare slot."],
+      ["Tier chase", "Every booster slot independently rolls a printing tier after the card rarity/identity is selected. Normal is most common, Emerald is less common, Sapphire is rare, and Ruby is the premium chase."],
       ["Superstar chase", "Eligible Superstar identities use a separate 2% pack-level chase with a 100-pack hard pity for an available unowned Superstar in that set."],
-      ["Duplicate conversion", "Standard five-copy cards track Normal and Foil ownership separately: up to 5 Normal and 5 Foil. A pull converts to Universe Points only when that finish is already at its cap. Unique cards and Momentum retain their existing caps. Overflow value remains rarity-based: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP."],
+      ["Duplicate conversion", "Each printing tier tracks ownership separately with a five-copy cap. A sixth Normal, Emerald, Sapphire or Ruby copy converts to Universe Points. Overflow value remains based on the card’s intrinsic rarity: Common 1 UP, Uncommon 2 UP, Rare 3 UP and Very Rare 4 UP."],
       ["Released sets only", "Only currently released player-facing sets can be opened or awarded from live reward pools. Future subset boosters remain unavailable until their release pass goes live."],
       ["Universal booster cards", "A small number of shared WWE Legacy staples may appear in any currently released set booster while retaining one collector identity. Once Too Often is the first universal booster card."],
-      ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build when a newly-owned card makes that possible. When a Foil copy is owned, recommendations prefer that finish; positive-Damage Foil Moves are a genuine +1 Damage upgrade."]
+      ["Deck Assistance", "Deck Assistance can suggest safe restoration toward a Superstar's authored recommended build and prefers the strongest owned printing tier for each card."]
     ]
   },
   {
     id: "modes", group: "PLAY", title: "Game Modes",
     summary: "The same core match engine powers Exhibition, Live Events, King of the Ring, Money in the Bank and Championship Road.",
     items: [
-      ["Exhibition", "Choose an owned Superstar and play a standard one-off match against an eligible CPU opponent."],
-      ["Live Events", "Live Events is a 24-hour rotating tower hub. Every standard tower refreshes together at local midnight, and the same named theme cannot return on the immediately following day. Limited 24-hour birthday towers can also appear on a Superstar's real birthday."],
+      ["Exhibition", "Choose an owned Superstar and play a standard one-off match against an eligible CPU opponent. Every fifth Exhibition win awards 1 random released-set booster."],
+      ["Live Events", "Live Events is a 24-hour rotating tower hub. Every standard tower refreshes together at local midnight, and the same named theme cannot return on the immediately following day. Limited 24-hour birthday towers can also appear on a Superstar's real birthday. Clearing all 5 matches in a Live Event awards 1 random released-set booster; individual event wins do not award packs."],
       ["Daily brand schedule", "The Daily Tower uses RAW branding on Monday, NXT on Wednesday and SmackDown on Saturday; Tuesday, Thursday, Friday and Sunday use original WWE Legacy event identities."],
       ["Tower rotation", "The Live Events header communicates the shared daily reset. Individual tower cards focus on theme, progress, reward and action instead of repeating countdown timers. Progress belongs to that day's tower and expires at local midnight."],
-      ["Match rewards", "Every non-final match victory awards 1 normal booster. A loss awards no match reward. The final victory that clears a full structured mode or tournament awards only its Super Pack with boosted rarity odds and at least one Rare-or-better card; it does not also award a normal victory booster or direct UP."],
-      ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you. Each victory awards a normal booster. Winning the Final crowns your Superstar King of the Ring, then offers three different released-set Super Packs; choose exactly one."],
-      ["Money in the Bank", "Money in the Bank lives inside Live Events as a daily 8-opponent tower. You have 3 lives for the run. A loss costs one life; losing all 3 restarts the tower from Level 1 against the same daily field. Clearing all 8 levels awards the daily completion reward, and a fresh random tower arrives at local midnight."],
-      ["Championship Road", "Every unlocked Superstar has a separate persistent 24-match Season 1 road split into six four-match themed regions. Progress, current match and difficulty unlocks are saved independently for each Superstar. Win to unlock the next numbered matchup; a loss retries the current node. Each Superstar begins on Easy, where opponents start at -5 HP. Completing that Superstar’s full road unlocks Normal (standard HP), then Hard (+5 opponent HP), then Hardcore (+10 opponent HP). The player Superstar receives no HP modifier."],
+      ["Match rewards", "A match win awards 5 Season XP and a loss awards no XP. Pack rewards are tied to mode milestones and completion rather than every individual win."],
+      ["King of the Ring", "An 8-Superstar single-elimination tournament. Your Superstar must win a Quarterfinal, Semifinal and Final in succession. One loss eliminates you. Winning the tournament awards 1 random released-set booster; the Quarterfinal and Semifinal do not award packs."],
+      ["Money in the Bank", "Money in the Bank lives inside Live Events as a daily 8-opponent tower. You have 3 lives for the run. A loss costs one life; losing all 3 restarts the tower from Level 1 against the same daily field. Clearing all 8 levels awards 2 random released-set boosters, and a fresh random tower arrives at local midnight."],
+      ["Championship Road", "Every unlocked Superstar has a separate persistent 32-match Season 1 road split into eight four-match themed regions. Progress, current match and difficulty unlocks are saved independently for each Superstar. Completing each four-match region awards 1 booster from that region’s set. A loss retries the current node. Each Superstar begins on Easy, where opponents start at -5 HP. Completing that Superstar’s full road unlocks Normal (standard HP), then Hard (+5 opponent HP), then Hardcore (+10 opponent HP). The player Superstar receives no HP modifier."],
       ["Career records", "Completed matches feed My Legacy's overall W/L, W/L by unlocked Superstar and W/L by mode."]
     ]
   },
@@ -180,13 +179,13 @@ export const GAME_RULE_SECTIONS = Object.freeze([
     id: "season-challenges", group: "PROGRESSION", title: "Season, Challenges & Rewards",
     summary: "Matches, challenges and rewards feed the 100-tier Season 1 road.",
     items: [
-      ["Season 1", "Season 1 contains 100 tiers at 100 XP per tier, for 10,000 XP total. Tier 100 awards the Foil The Rock — Final Boss Superstar identity."],
-      ["Match XP", "A match win awards 15 Season XP and a loss awards 0 Season XP."],
-      ["Daily challenges", "Three Daily Challenges rotate each local day. Each completed Daily Challenge awards its shown booster reward plus 25 Season XP."],
-      ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards its shown booster reward plus 100 Season XP."],
+      ["Season 1", "Season 1 contains 100 tiers at 100 XP per tier, for 10,000 XP total. Tier 100 awards the Ruby The Rock — Final Boss Superstar identity."],
+      ["Match XP", "A match win awards 5 Season XP and a loss awards 0 Season XP."],
+      ["Daily challenges", "Three Daily Challenges rotate each local day. Each completed Daily Challenge awards 10 Season XP and no booster."],
+      ["Weekly challenges", "Three Weekly Challenges rotate each week. Each completed Weekly Challenge awards 25 Season XP plus 1 random released-set booster."],
       ["Daily free booster", "The Season page provides one free booster on a 24-hour timer. Claiming it opens the booster immediately."],
       ["Season reward gating", "Season booster tiers can only resolve to sets that are actually released at that time; future subsets cannot appear early."],
-      ["Final Boss road", "The Rock's cards are earned one at a time across the road, mixed with UP and released-set boosters, culminating in his Foil Superstar card at Tier 100."]
+      ["Final Boss road", "The Rock's cards are earned one at a time across the road, mixed with UP and released-set boosters, culminating in his Ruby Superstar card at Tier 100."]
     ]
   },
   {
@@ -212,7 +211,7 @@ export const GAME_RULE_SECTIONS = Object.freeze([
       ["Finisher", "A top-tier finishing Move. Finishers ignore generic Method requirements and wrestler-exclusive Finishers are Very Rare."],
       ["Counter State", "The physical state an incoming Move exposes for reversal matching."],
       ["UP", "Universe Points, the store currency also earned from duplicate overflow and selected game rewards."],
-      ["Foil", "The premium chase finish. A Foil Move with positive Damage displays and deals +1 Damage; other values and rules stay the same."],
+      ["Card tiers", "The four printing tiers are Normal, Emerald, Sapphire and Ruby. Sapphire is the authored baseline; Damage and submission pressure step −2 / −1 / 0 / +1 across the ladder."],
       ["REWARD pack", "A special completion-pack wrapper used for Money in the Bank and Championship-style completion rewards; its underlying set still determines the cards inside."]
     ]
   }

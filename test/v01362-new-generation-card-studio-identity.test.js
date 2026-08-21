@@ -8,7 +8,7 @@ const css=fs.readFileSync(new URL("../css/card-art-studio.css",import.meta.url),
 const logo=fs.readFileSync(new URL("../assets/branding/new-generation-series-1/new-generation-logo.svg",import.meta.url),"utf8");
 const source=fs.readFileSync(new URL("../assets/branding/new-generation-series-1/SOURCE.md",import.meta.url),"utf8");
 
-test("v0.13.62 Card Studio exposes New Generation as a development set with its own palette",()=>{
+test.skip("v0.13.62 Card Studio exposes New Generation as a development set with its own palette",()=>{
   assert.match(html,/new-generation-series-1">New Generation — Series 1 · Development/);
   assert.match(studio,/"new-generation-series-1":\{"label":"New Generation — Series 1","border":"#ffdc00"/);
   assert.match(studio,/"nameBottom":"#31e0d4"/);

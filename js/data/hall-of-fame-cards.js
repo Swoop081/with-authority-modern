@@ -1,1 +1,2 @@
-import { allGameplayCards } from "./content.js?v=0.13.81"; export const hallOfFameCards=Object.fromEntries(allGameplayCards.filter(c=>c.setId==="hall-of-fame-series-1").map(c=>[c.id,c]));
+// v0.13.82: Hall of Fame — Series 1 retired. Cards migrated to Golden Era / Attitude Era.
+export const hallOfFameCards = {};

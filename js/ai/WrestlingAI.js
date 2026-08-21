@@ -1,5 +1,5 @@
-import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.81";
-import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.81";
+import { moveEligibility, counterEligibility, autoCounterEligibility, canPlaySpecial, canPlayMomentum, canPlayAction, canPlaySupport, canPlayManager, canAttemptPin, submissionThreshold } from "../engine/rules.js?v=0.13.90";
+import { healthRatio, healthZone, healthOnlyPinChance } from "../engine/health.js?v=0.13.90";
 export function decisionOwner(state){if(state.phase==="MATCH_OVER")return null;if(state.pendingTopDeckTutorChoice?.playerId)return state.pendingTopDeckTutorChoice.playerId;if(state.phase==="TRIGGER_RESPONSE")return state.pendingTriggeredSpecial?.playerId??null;if(state.phase==="COUNTER")return state.proposedMove?.defenderId??null;if(state.phase==="PIN_RESPONSE")return state.proposedPin?.defenderId??null;if(state.phase==="SUBMISSION_RESPONSE")return state.submission?.defenderId??null;if(state.phase==="SUBMISSION_MAINTAIN")return state.submission?.attackerId??null;return state.playerInControl;}
 function groundState(p){return p?.posture==='on-mat'||p?.posture==='grounded';}
 function submissionApplicationsToTap(state,pid,card){
@@ -163,6 +163,30 @@ function cpuActionPriority(state,pid,card){
    return 34+net*18+(p.hand.length<=4?12:0)+(!legal.length?16:0);
  }
  if(ef.type==='paulHeymanPromo')return 48+(!legal.length?20:0)+(p.hand.length<=4?12:0);
+ if(ef.type==='angleIntensity'){
+   const technical=p.hand.filter(x=>x.kind==='move'&&!x.defensiveOnly&&x.method==='technical');
+   if(!technical.length)return -Infinity;
+   const simP={...p,events:{...p.events,angleIntensityRemaining:Math.max(1,ef.uses??2),angleIntensityDiscount:Math.max(1,ef.discount??1)}};
+   const sim={...state,players:{...state.players,[pid]:simP}};
+   const after=technical.filter(x=>moveEligibility(sim,pid,x).legal);
+   if(!after.length)return 26;
+   const newlyLegal=after.filter(x=>!legal.includes(x)).length;
+   const chained=!!p.events?.connectedMethodsThisControl?.technical;
+   return 64+newlyLegal*14+(chained?14:0)+Math.min(12,after.length*3);
+ }
+ if(ef.type==='angleIntegrity'){
+   const method=ef.method??'technical',recyclable=(p.discard??[]).filter(x=>x.kind==='move'&&x.method===method).length;
+   if(!recyclable)return -Infinity;
+   return 34+Math.min(2,recyclable)*14+(p.hand.length<=4?14:0)+(!legal.length?12:0);
+ }
+ if(ef.type==='angleIntelligence'){
+   const look=Math.max(1,ef.look??5),seen=(p.deck??[]).slice(0,look);
+   const isCounter=x=>x?.kind==='move'&&((x.counterStates?.length??0)>0||(x.counterSubmissionTargets?.length??0)>0||(x.counters?.length??0)>0||x.defensiveOnly);
+   const targets=seen.filter(x=>x?.kind==='move'&&(x.method==='technical'||isCounter(x)));
+   if(!targets.length)return -Infinity;
+   const best=targets.reduce((score,x)=>Math.max(score,x.method==='technical'?moveScore(state,pid,x):22),0);
+   return 42+(!legal.length?22:0)+(p.hand.length<=4?10:0)+Math.min(30,Math.floor(best/3));
+ }
  return -Infinity;
 }
 function cpuBestAction(state,pid,minScore=1){
@@ -178,11 +202,42 @@ function cpuManagerChoice(state,pid){
 function cpuSpecialChoice(state,pid,movesNow=[]){
  const p=state.players[pid],def=state.players[pid==='p1'?'p2':'p1'];
  const specials=p.hand.filter(x=>canPlaySpecial(state,pid,x));
+ const hasMove=id=>p.hand.some(x=>x.id===id&&moveEligibility(state,pid,x).legal);
  for(const card of specials){
    const type=card.special?.type;
    if(type==='brassKnuckles'){
      const late=def.hp<=Math.max(15,Math.ceil(def.maxHp*.3));
      if(late||!movesNow.length)return card;
+     continue;
+   }
+   if(type==='pipersPit'){
+     const counterInHand=def.hand.some(x=>cpuCounterCoverage(x)>0||x.effect?.type==='onceTooOften');
+     if(counterInHand||(!movesNow.length&&p.hand.length<=4))return card;
+     continue;
+   }
+   if(type==='millionDollarChampionship'){
+     const target=p.deck.find(x=>(x.trademark&&x.superstarId===p.superstar.id)||x.name==='Million Dollar Dream');
+     if(target||!movesNow.length)return card;
+     continue;
+   }
+   if(type==='damien'){
+     const trademark=movesNow.find(x=>x.trademark);
+     if(trademark)return card;
+     continue;
+   }
+   if(type==='perfectRecord'){
+     const look=Math.max(1,card.special?.look??5),hit=(p.deck??[]).slice(0,look).some(x=>x.kind==='move'&&x.method==='technical');
+     if(hit&&(!movesNow.length||p.hand.length<=5))return card;
+     continue;
+   }
+   if(type==='sledgehammer'){
+     const premium=movesNow.some(x=>x.finisher||x.trademark||(x.damage??0)>=10);
+     if(premium||(!movesNow.length&&p.hand.some(x=>x.kind==='move'&&!x.defensiveOnly)))return card;
+     continue;
+   }
+   if(type==='breakTheBarrier'){
+     const target=p.deck.find(x=>x.kind==='move'&&x.method==='strength');
+     if(target&&(target.superstarId===p.superstar.id||!movesNow.length||p.hand.length<=5))return card;
      continue;
    }
    return card;
@@ -342,6 +397,50 @@ function moveScore(state,pid,card){
    if(card.method==='technical'&&hasFollow&&!p.events?.randyApexPredatorUsedThisControl)score+=18;
    if(card.id==='randy-orton-rko'&&(p.namedDiscount?.['RKO']??0)>0)score+=20;
    if(card.id==='randy-orton-punt-kick'&&groundState(def))score+=18;
+ }
+ // v0.13.82 Golden/Attitude era sequencing. Keep printed card data locked;
+ // teach CPU players to convert the authored setup cards into their payoffs.
+ if(p.superstar.id==='rowdy-roddy-piper'){
+   if((p.abilityUses??0)<2&&card.method==='strike'&&(card.damage??0)>=4)score+=18;
+   if(card.id==='rowdy-roddy-piper-bulldog'&&!p.hand.some(x=>x.id==='rowdy-roddy-piper-sleeper-hold'))score+=30;
+   if(card.id==='rowdy-roddy-piper-sleeper-hold'&&(p.namedDiscount?.['Sleeper Hold']??0)>0)score+=28;
+ }
+ if(p.superstar.id==='ted-dibiase'){
+   if((p.abilityUses??0)<2&&card.method==='technical'&&(card.cost??0)>=4)score+=18;
+   if(card.id==='ted-dibiase-million-dollar-fist-drop'&&!p.hand.some(x=>x.id==='ted-dibiase-million-dollar-dream'))score+=24;
+   if(card.id==='ted-dibiase-million-dollar-dream'&&(p.namedDiscount?.['Million Dollar Dream']??0)>0)score+=28;
+ }
+ if(p.superstar.id==='jake-roberts'){
+   if(card.method==='strike'&&!p.events?.jakePsychologyUsedThisControl)score+=14;
+   if(card.id==='jake-roberts-short-arm-clothesline'&&!p.hand.some(x=>x.id==='jake-roberts-ddt'))score+=30;
+   if(card.id==='jake-roberts-ddt'&&(p.namedDiscount?.["Jake’s DDT"]??0)>0)score+=28;
+ }
+ if(p.superstar.id==='mr-perfect'){
+   if(card.method==='technical'&&p.events?.counteredThisControl)score+=18;
+   if(card.id==='mr-perfect-dropkick'&&p.hand.some(x=>x.kind==='move'&&x.method==='technical'))score+=18;
+   if(card.id==='mr-perfect-perfect-plex')score+=16;
+ }
+ if(p.superstar.id==='triple-h'){
+   if(['strike','technical'].includes(card.method)&&!p.events?.tripleHCerebralUsedThisControl&&p.hand.some(x=>x.kind==='move'&&x.moveType==='grapple'))score+=18;
+   if(card.id==='triple-h-spinebuster'&&!p.hand.some(x=>x.id==='triple-h-the-pedigree'))score+=30;
+   if(card.id==='triple-h-the-pedigree'&&(p.namedDiscount?.['The Pedigree']??0)>0)score+=30;
+ }
+ if(p.superstar.id==='chris-jericho'){
+   if(card.method==='technical'&&card.groundOpponent&&p.hand.some(x=>x.kind==='move'&&x.method==='agility'))score+=18;
+   if(card.method==='agility'&&p.events?.connectedMethodsThisControl?.technical)score+=22;
+   if(card.id==='chris-jericho-breakdown'&&!p.hand.some(x=>x.id==='chris-jericho-walls-of-jericho'))score+=28;
+   if(card.id==='chris-jericho-walls-of-jericho'&&(p.namedDiscount?.['Walls of Jericho']??0)>0)score+=28;
+ }
+ if(p.superstar.id==='chyna'){
+   if((p.abilityUses??0)<2&&card.method==='strength'&&(card.cost??0)>=5)score+=18;
+   if(card.id==='chyna-gorilla-press-slam'&&!p.hand.some(x=>x.id==='chyna-bomb'))score+=30;
+   if(card.id==='chyna-bomb'&&(p.namedDiscount?.['Chyna Bomb']??0)>0)score+=28;
+ }
+ if(p.superstar.id==='kurt-angle'){
+   if(card.method==='technical')score+=p.events?.connectedMethodsThisControl?.technical?22:12;
+   if(card.id==='kurt-angle-slam'&&!p.hand.some(x=>x.id==='kurt-angle-ankle-lock'))score+=30;
+   if(card.id==='kurt-angle-ankle-lock'&&(p.namedDiscount?.['Ankle Lock']??0)>0)score+=30;
+   if(card.id==='kurt-angle-moonsault'&&groundState(def))score+=10;
  }
  return score;
 }

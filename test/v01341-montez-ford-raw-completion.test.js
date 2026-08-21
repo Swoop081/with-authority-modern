@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards, linkedGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { collectionCards } from '../js/data/collection.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.81';
+import { allGameplayCards, linkedGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { collectionCards } from '../js/data/collection.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.90';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const linked=id=>linkedGameplayCards.find(c=>c.id===id);
@@ -43,7 +43,7 @@ test('v0.13.41 Montez Ford completes the eight-Superstar RAW Series 1 collector 
   assert.equal(splash.method,'agility'); assert.deepEqual(splash.requirements,{agility:3}); assert.equal(splash.moveType,'aerial'); assert.equal(splash.counterState,'diving-aerial'); assert.equal(splash.groundedOnly,true);
 
   const heavens=byId('montez-ford-from-the-heavens');
-  assert.ok(heavens.finisher); assert.equal(heavens.rarity,4); assert.equal(heavens.cost,9); assert.equal(heavens.damage,16);
+  assert.ok(heavens.finisher); assert.equal(heavens.rarity,4); assert.equal(heavens.cost,8); assert.equal(heavens.damage,16);
   assert.equal(heavens.method,null); assert.deepEqual(heavens.requirements,{}); assert.equal(heavens.moveType,'aerial'); assert.equal(heavens.counterState,'diving-aerial'); assert.equal(heavens.groundedOnly,true);
 
   const angelo=byId('special-angelo-dawkins');

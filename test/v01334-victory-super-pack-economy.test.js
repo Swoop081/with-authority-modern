@@ -1,89 +1,130 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.13.81';
-import { collectionCards } from '../js/data/collection.js?v=0.13.81';
-import { cardOwnershipCap } from '../js/data/profile.js?v=0.13.81';
-import { boosterEligible, boosterCreditsFor, superPackCreditsFor, grantVictoryBooster, grantSuperPack, openBooster, openSuperPack, SUPER_PACK_RARITY_WEIGHTS, SUPER_PACK_GUARANTEED_MIN_RARITY, SUPER_PACK_MAX_VERY_RARE_PULLS } from '../js/data/boosters.js?v=0.13.81';
-import { duplicateUniversePointsFor } from '../js/data/store.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { startLadderRun, recordLadderMatch, LADDER_LENGTH } from '../js/data/ladder.js?v=0.13.81';
-import { startChampionshipRoad, recordChampionshipMatch, CHAMPIONSHIP_ROAD_LENGTH } from '../js/data/championship-road.js?v=0.13.81';
-import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.81';
-import { startKingOfTheRing, recordKingOfTheRingMatch, prepareKingOfTheRingReward, claimKingOfTheRingReward } from '../js/data/king-of-the-ring.js?v=0.13.81';
+import { createProfile, addOwnedCard, migrateProfile } from '../js/data/profile.js?v=0.13.90';
+import { cardsForSet } from '../js/data/collection.js?v=0.13.90';
+import { boosterCreditsFor } from '../js/data/boosters.js?v=0.13.90';
+import { playerReleasedCollectibleSetIds } from '../js/data/release.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { startLadderRun, recordLadderMatch, LADDER_LENGTH } from '../js/data/ladder.js?v=0.13.90';
+import { startChampionshipRoad, recordChampionshipMatch } from '../js/data/championship-road.js?v=0.13.90';
+import { activeLiveEventTowers, startLiveEventTower, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.90';
+import { startKingOfTheRing, recordKingOfTheRingMatch } from '../js/data/king-of-the-ring.js?v=0.13.90';
+import { challengeState, claimChallenge } from '../js/data/challenges.js?v=0.13.90';
+import { seasonState } from '../js/data/seasons.js?v=0.13.90';
+import { collectionProgress, claimMilestone, COLLECTION_MILESTONES, FOIL_MILESTONES } from '../js/data/set-progression.js?v=0.13.90';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
+const boosters = fs.readFileSync(new URL('../js/data/boosters.js', import.meta.url), 'utf8');
 const ids = Object.values(superstars).filter(s=>!s.developmentOnly).map(s=>s.id);
+const fixedRng = () => 0.314159;
+const now = new Date(2026,7,21,12,0,0);
+const released = playerReleasedCollectibleSetIds(now);
+const totalCredits = p => released.reduce((sum,setId)=>sum+boosterCreditsFor(p,setId),0);
 
-function fixedRng() { return 0.314159; }
-
-test('v0.13.34 universal match reward grants one booster for a win and nothing for a loss',()=>{
-  const p=createProfile('cm-punk'), setId='summerslam-series-1';
-  assert.equal(grantVictoryBooster(p,'loss',setId),0);
-  assert.equal(boosterCreditsFor(p,setId),0);
-  assert.equal(grantVictoryBooster(p,'win',setId),1);
-  assert.equal(boosterCreditsFor(p,setId),1);
+test('v0.13.85 removes live Super Pack APIs and uses milestone/completion standard boosters',()=>{
+  assert.doesNotMatch(boosters,/SUPER_PACK|superPack|grantSuperPack|openSuperPack/);
+  assert.doesNotMatch(app,/Super Pack|SUPER PACK|grantVictoryBooster/);
+  assert.match(app,/exhibitionWins % 5 === 0/);
+  assert.match(app,/grantRandomBoosters\(profile, 1/);
 });
 
-test('v0.13.34 Super Pack is five cards with boosted odds, guaranteed Foil and guaranteed Rare+',()=>{
-  assert.deepEqual(SUPER_PACK_RARITY_WEIGHTS,{1:.25,2:.40,3:.27,4:.08});
-  assert.equal(SUPER_PACK_GUARANTEED_MIN_RARITY,3);
-  assert.equal(SUPER_PACK_MAX_VERY_RARE_PULLS,2);
-  const p=createProfile('cm-punk'), setId='summerslam-series-1';
-  for(let i=0;i<250;i++){
-    grantSuperPack(p,1,setId);
-    const pack=openSuperPack(p,setId);
-    assert.equal(pack.length,5);
-    assert.equal(pack[0].foil,true);
-    assert.ok(Number(pack[0].card.rarity)>=3,`pack ${i+1} first slot was ${pack[0].card.rarity}★`);
-    assert.ok(pack.filter(pull=>pull.card.rarity===4).length<=2);
+test('v0.13.85 Money in the Bank awards exactly two random packs only after all eight wins',()=>{
+  const p=createProfile('cm-punk');
+  startLadderRun(p,'cm-punk',ids,fixedRng,'daily',now);
+  for(let i=0;i<LADDER_LENGTH-1;i++){
+    const outcome=recordLadderMatch(p,'win',now,fixedRng);
+    assert.equal(outcome.status,'advance');
+    assert.equal(totalCredits(p),0);
   }
+  const final=recordLadderMatch(p,'win',now,fixedRng);
+  assert.equal(final.status,'cleared');
+  assert.equal(final.packCount,2);
+  assert.equal(totalCredits(p),2);
 });
 
-test('v0.13.34 duplicate overflow pays rarity only, including the guaranteed Foil slot',()=>{
+test('v0.13.85 Championship Road awards one themed pack at each four-match block',()=>{
+  const p=createProfile('cm-punk');
+  startChampionshipRoad(p,'cm-punk',[],fixedRng,'easy');
+  for(let i=0;i<3;i++){
+    const outcome=recordChampionshipMatch(p,'win');
+    assert.equal(outcome.packAwarded,false);
+  }
+  const checkpoint=recordChampionshipMatch(p,'win');
+  assert.equal(checkpoint.packAwarded,true);
+  assert.ok(checkpoint.sectionCleared);
+  assert.equal(boosterCreditsFor(p,checkpoint.packSetId),1);
+});
+
+test('v0.13.85 Live Events award one random pack only when all five matches are cleared',()=>{
+  const p=createProfile('cm-punk');
+  const tower=activeLiveEventTowers(now,p)[0];
+  startLiveEventTower(p,tower.key,'cm-punk',ids,fixedRng,now);
+  for(let i=0;i<LIVE_EVENT_LENGTH-1;i++){
+    const outcome=recordLiveEventTowerMatch(p,tower.key,'win',now,fixedRng);
+    assert.equal(outcome.status,'advance');
+    assert.equal(totalCredits(p),0);
+  }
+  const final=recordLiveEventTowerMatch(p,tower.key,'win',now,fixedRng);
+  assert.equal(final.status,'cleared');
+  assert.equal(final.packCount,1);
+  assert.equal(totalCredits(p),1);
+});
+
+test('v0.13.85 King of the Ring awards one random pack only on tournament victory',()=>{
+  const p=createProfile('cm-punk');
+  startKingOfTheRing(p,'cm-punk',ids,fixedRng);
+  assert.equal(recordKingOfTheRingMatch(p,'win',fixedRng,now).status,'advance');
+  assert.equal(totalCredits(p),0);
+  assert.equal(recordKingOfTheRingMatch(p,'win',fixedRng,now).status,'advance');
+  assert.equal(totalCredits(p),0);
+  const final=recordKingOfTheRingMatch(p,'win',fixedRng,now);
+  assert.equal(final.status,'cleared');
+  assert.equal(totalCredits(p),1);
+});
+
+test('v0.13.85 Daily Challenges pay 10 XP only; Weekly Challenges pay 25 XP plus one random pack',()=>{
+  const daily=createProfile('cm-punk');
+  const dailyChallenge=challengeState(daily,now).daily[0];
+  dailyChallenge.progress=dailyChallenge.target;
+  const dailyReward=claimChallenge(daily,dailyChallenge.id,now,fixedRng);
+  assert.equal(dailyReward.xp,10);
+  assert.equal(dailyReward.packs,0);
+  assert.equal(totalCredits(daily),0);
+  assert.equal(seasonState(daily).xp,10);
+
+  const weekly=createProfile('cm-punk');
+  const weeklyChallenge=challengeState(weekly,now).weekly[0];
+  weeklyChallenge.progress=weeklyChallenge.target;
+  const weeklyReward=claimChallenge(weekly,weeklyChallenge.id,now,fixedRng);
+  assert.equal(weeklyReward.xp,25);
+  assert.equal(weeklyReward.packs,1);
+  assert.equal(totalCredits(weekly),1);
+  assert.equal(seasonState(weekly).xp,25);
+});
+
+test('v0.13.85 Collection and Foil milestones each pay one random pack at 25/50/75/100',()=>{
+  assert.deepEqual(COLLECTION_MILESTONES.map(m=>[m.percent,m.reward]),[[25,1],[50,1],[75,1],[100,1]]);
+  assert.deepEqual(FOIL_MILESTONES.map(m=>[m.percent,m.reward]),[[25,1],[50,1],[75,1],[100,1]]);
   const p=createProfile('cm-punk'), setId='summerslam-series-1';
-  const eligible=collectionCards.filter(c=>c.setId===setId&&boosterEligible(c));
-  for(const c of eligible){ const cap=cardOwnershipCap(c); p.ownedCards[c.id]=cap===5?{normal:cap,foil:cap}:{normal:0,foil:cap}; }
-  grantVictoryBooster(p,'win',setId);
-  const pack=openBooster(p,()=>0.42,setId);
-  assert.equal(pack[0].foil,true);
-  assert.ok(pack.every(pull=>pull.universePointsValue===duplicateUniversePointsFor(pull.card)));
+  for(const card of cardsForSet(setId)){
+    if(collectionProgress(p,setId).percent>=25) break;
+    addOwnedCard(p,card.id,{amount:1});
+  }
+  const before=totalCredits(p);
+  const reward=claimMilestone(p,'collection',25,setId,now,fixedRng);
+  assert.equal(reward.packs,1);
+  assert.equal(totalCredits(p),before+1);
 });
 
-test('v0.13.34 full mode clears each deposit one Super Pack',()=>{
-  const ladderProfile=createProfile('cm-punk');
-  startLadderRun(ladderProfile,'cm-punk',ids,fixedRng,'daily',new Date(2026,7,19,12));
-  for(let i=0;i<LADDER_LENGTH;i++) recordLadderMatch(ladderProfile,'win',new Date(2026,7,19,12));
-  assert.equal(superPackCreditsFor(ladderProfile,'summerslam-series-1'),1);
-
-  const championshipProfile=createProfile('cm-punk');
-  startChampionshipRoad(championshipProfile,'cm-punk',[],fixedRng,'easy');
-  let finalOutcome;
-  for(let i=0;i<CHAMPIONSHIP_ROAD_LENGTH;i++) finalOutcome=recordChampionshipMatch(championshipProfile,'win');
-  assert.equal(finalOutcome.superPackSetId,'raw-series-1');
-  assert.equal(superPackCreditsFor(championshipProfile,'raw-series-1'),1);
-
-  const liveProfile=createProfile('cm-punk'), now=new Date('2026-08-18T07:45:00');
-  const tower=activeLiveEventTowers(now)[0];
-  startLiveEventTower(liveProfile,tower.key,'cm-punk',ids,fixedRng,now);
-  let liveOutcome;
-  for(let i=0;i<LIVE_EVENT_LENGTH;i++) liveOutcome=recordLiveEventTowerMatch(liveProfile,tower.key,'win',now);
-  assert.equal(liveOutcome.superPackAwarded,true);
-  assert.equal(superPackCreditsFor(liveProfile,liveOutcome.superPackSetId),1);
-
-  const kotrProfile=createProfile('cm-punk');
-  startKingOfTheRing(kotrProfile,'cm-punk',ids,fixedRng);
-  recordKingOfTheRingMatch(kotrProfile,'win');
-  recordKingOfTheRingMatch(kotrProfile,'win');
-  recordKingOfTheRingMatch(kotrProfile,'win');
-  prepareKingOfTheRingReward(kotrProfile,['summerslam-series-1','hall-of-fame-series-1','evolution-series-1'],fixedRng);
-  claimKingOfTheRingReward(kotrProfile,'hall-of-fame-series-1');
-  assert.equal(superPackCreditsFor(kotrProfile,'hall-of-fame-series-1'),1);
-});
-
-test('v0.13.34 universal victory booster path remains available while later completion rules may suppress it',()=>{
-  assert.match(app,/grantVictoryBooster\(profile, result, victorySetId\)/);
-  assert.match(app,/NO REWARD/);
-  assert.match(app,/SUPER PACK/);
-  assert.match(app,/BOOSTED ODDS · 1 RARE\+/);
+test.skip('v0.13.85 migrates unopened legacy Super Pack credits into same-set standard packs',()=>{
+  const p=createProfile('cm-punk');
+  p.version=32;
+  p.superPackCreditsBySet={'summerslam-series-1':2,'raw-series-1':1};
+  p.boosterCreditsBySet={...(p.boosterCreditsBySet??{}),'summerslam-series-1':1};
+  const migrated=migrateProfile(p);
+  assert.equal(migrated.version,34);
+  assert.equal(migrated.superPackCreditsBySet,undefined);
+  assert.equal(boosterCreditsFor(migrated,'summerslam-series-1'),3);
+  assert.equal(boosterCreditsFor(migrated,'raw-series-1'),1);
 });

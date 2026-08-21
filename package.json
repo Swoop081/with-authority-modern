@@ -1,6 +1,6 @@
 {
   "name": "wwe-legacy-ccg",
-  "version": "0.13.81",
+  "version": "0.13.90",
   "private": true,
   "type": "module",
   "scripts": {
@@ -20,6 +20,8 @@
     "package-clean": "node tools/package-clean.mjs",
     "launch-balance": "node tools/launch-roster-balance-sim.mjs",
     "card-effects": "node tools/card-effect-audit.mjs",
-    "pre-release-balance": "node tools/pre-release-roster-sim.mjs"
+    "pre-release-balance": "node tools/pre-release-roster-sim.mjs",
+    "balance-seven-sets": "node tools/seven-set-balance-audit.mjs",
+    "normal-exhaustion": "node tools/normal-tier-exhaustion-audit.mjs"
   }
 }

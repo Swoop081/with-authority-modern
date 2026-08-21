@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { canPlaySpecial, moveEligibility } from '../js/engine/rules.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.90';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -41,7 +41,7 @@ test('v0.13.39 Roxanne Perez RAW package and collector identities are locked',()
   assert.equal(lock.method,'technical'); assert.equal(lock.groundedOnly,true); assert.equal(lock.counterState,'front-control'); assert.deepEqual(lock.submission,{bodyPart:'head',pressure:5});
 
   const pop=byId('roxanne-perez-pop-rox');
-  assert.ok(pop.finisher); assert.equal(pop.rarity,4); assert.equal(pop.cost,9); assert.equal(pop.damage,15); assert.deepEqual(pop.requirements,{}); assert.equal(pop.method,null); assert.equal(pop.counterState,'body-elevated'); assert.equal(pop.groundOpponent,true);
+  assert.ok(pop.finisher); assert.equal(pop.rarity,4); assert.equal(pop.cost,9); assert.equal(pop.damage,16); assert.deepEqual(pop.requirements,{}); assert.equal(pop.method,null); assert.equal(pop.counterState,'body-elevated'); assert.equal(pop.groundOpponent,true);
 
   const entrance=byId('entrance-roxanne-perez'),special=byId('special-roxanne-perez');
   assert.equal(entrance.name,'All Fall Down'); assert.equal(entrance.rarity,4);

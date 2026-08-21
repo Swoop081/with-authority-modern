@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { healthOnlyPinChance } from '../js/engine/health.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=(hp,maxHp=100)=>({hp,maxHp});
@@ -26,7 +26,7 @@ test('v0.12.29 elite and submission finishers retain their balance locks',()=>{
   for(const [id,pressure] of [['mankind-mandible-claw',5],['chad-gable-ankle-lock',6],['jacob-fatu-tongan-death-grip',5]]){
     const card=byId(id); assert.equal(card.finisher,true,id); assert.equal(card.submission.pressure,pressure,id);
   }
-  assert.equal(byId('andre-the-giant-sitdown-splash').cost,11);
+  assert.equal(byId('andre-the-giant-sitdown-splash').cost,12);
   assert.equal(byId('andre-the-giant-sitdown-splash').damage,18);
   assert.equal(byId('the-rock-people-s-elbow').cost,11);
   assert.equal(byId('the-rock-people-s-elbow').damage,18);

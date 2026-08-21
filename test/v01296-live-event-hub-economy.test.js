@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.81';
-import { createProfile } from '../js/data/profile.js?v=0.13.81';
-import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.81';
+import { activeLiveEventTowers, liveEventTowerState, startLiveEventTower, currentLiveEventTowerOpponent, recordLiveEventTowerMatch, LIVE_EVENT_LENGTH } from '../js/data/live-events.js?v=0.13.90';
+import { createProfile } from '../js/data/profile.js?v=0.13.90';
+import { STORE_SUPERSTAR_PRICE } from '../js/data/store.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { isLaunchLiveSetId } from '../js/data/release.js?v=0.13.90';
 
 const eligible = Object.values(superstars).filter(s=>!s.developmentOnly && isLaunchLiveSetId(s.setId)).map(s=>s.id);
 
@@ -50,7 +50,7 @@ test('v0.12.96 Play menu places Daily Tower Live Events first and labels the res
   const play = app.slice(app.indexOf('function renderPlayMenu'),app.indexOf('function renderRules'));
   assert.ok(play.indexOf('id="play-live-event"') < play.indexOf('id="play-exhibition"'));
   assert.match(play,/DAILY TOWER · \$\{liveLabel\}/);
-  assert.match(play,/SUPER PACK ON CLEAR/);
+  assert.match(play,/1 RANDOM PACK ON CLEAR/);
   assert.doesNotMatch(play,/RESETS DAILY/);
 });
 

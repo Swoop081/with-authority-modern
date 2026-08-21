@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
 
 const stars=Object.values(superstars);
 const star=id=>stars.find(s=>s.id===id);
@@ -29,7 +29,7 @@ test('v0.12.43 roster durability locks preserve prestige hierarchy and balanced 
 
 test('v0.12.43 submission-specialist identity tuning matches persistent-body-part system',()=>{
   const pressure={
-    'paige-pto':5,'charlotte-flair-figure-eight-leglock':6,'chad-gable-ankle-lock':6,
+    'paige-pto':5,'charlotte-flair-figure-eight-leglock':7,'chad-gable-ankle-lock':6,
     'gunther-gojira-clutch':6,'brock-lesnar-kimura-lock':6,'bron-breakker-steiner-recliner':6,
     'rhea-ripley-prism-trap':5
   };

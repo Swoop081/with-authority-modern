@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.81";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.90";
 const css=fs.readFileSync(new URL("../css/game.css",import.meta.url),"utf8");
 const app=fs.readFileSync(new URL("../js/ui/app.js",import.meta.url),"utf8");
-await import("../js/data/superstar-nameplates.js?v=0.13.81");
+await import("../js/data/superstar-nameplates.js?v=0.13.90");
 const profiles=globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES;
 
 test("v0.13.75 tier-up numerals scale by digit count without clipping",()=>{
@@ -34,9 +34,9 @@ test("What Do You Want to Talk About creates an explicit top-four player choice"
 });
 
 test("v0.13.75 nameplates retain unique identities with readability-first condensed stacks",()=>{
-  assert.equal(Object.keys(profiles).length,66);
+  assert.equal(Object.keys(profiles).length,74);
   const fps=new Set(Object.values(profiles).map(p=>[p.fontFamily,p.weight,p.italic,p.tracking,p.skew,p.scaleX,p.fontScale].join("|")));
-  assert.equal(fps.size,66);
+  assert.equal(fps.size,74);
   for(const p of Object.values(profiles)){ assert.match(p.fontFamily,/Bahnschrift|Avenir Next Condensed/); assert.ok(p.strokeWidth<=2); assert.ok(Math.abs(p.skew)<=1); }
 });
 

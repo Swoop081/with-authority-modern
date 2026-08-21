@@ -1,19 +1,22 @@
-import { decks } from "./decks.js?v=0.13.81";
-import { collectionCards } from "./collection.js?v=0.13.81";
-import { superstars } from "./superstars.js?v=0.13.81";
-import { isUnreleasedSetId } from "./release.js?v=0.13.81";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.81";
+import { decks } from "./decks.js?v=0.13.90";
+import { collectionCards } from "./collection.js?v=0.13.90";
+import { superstars } from "./superstars.js?v=0.13.90";
+import { isUnreleasedSetId } from "./release.js?v=0.13.90";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.90";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.13.90";
 
-export const PROFILE_KEY = "wa-modern-profile-v2";
+export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
+export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 31;
+export const PROFILE_VERSION = 36;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
-export const STARTING_MOMENTUM_COPIES = 15;
+export const STARTING_MOMENTUM_COPIES = 5;
 
 const blankSetCounters = () => ({
   "summerslam-series-1": 0,
-  "hall-of-fame-series-1": 0,
+  "golden-era-series-1": 0,
+  "attitude-era-series-1": 0,
   "evolution-series-1": 0,
   "season-1-final-boss": 0,
   "raw-series-1": 0,
@@ -23,76 +26,60 @@ const blankSetCounters = () => ({
   "smackdown-series-1": 0
 });
 const defaultSetProgress = () => ({
-  "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
-  "hall-of-fame-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
-  "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
-  "raw-series-1": { lifecycle: "featured", claimedCollection: [], claimedFoil: [] },
-  "new-generation-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
-  "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
-  "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] },
-  "smackdown-series-1": { lifecycle: "future", claimedCollection: [], claimedFoil: [] }
+  "summerslam-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "golden-era-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "attitude-era-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "evolution-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "new-generation-series-1": { lifecycle: "featured", claimedCollection: [], claimedRuby: [] },
+  "raw-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
+  "worlds-collide-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
+  "money-in-the-bank-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] },
+  "smackdown-series-1": { lifecycle: "future", claimedCollection: [], claimedRuby: [] }
 });
 const defaultSeasonState = () => ({ xp: 0, claimedTiers: [], freePackLastClaimAt: null, freePacksClaimed: 0, matchXpEarned: 0, challengeXpEarned: 0 });
 const cardById = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));
 
-export const cardOwnershipCap = card => card?.kind === "momentum" ? STARTING_MOMENTUM_COPIES : (["superstar", "entrance", "manager"].includes(card?.kind) ? 1 : 5);
+export const cardOwnershipCap = _card => 5;
 export function totalOwnedCopies(profile, id) {
   const o = profile?.ownedCards?.[id] ?? {};
-  return (o.normal ?? 0) + (o.foil ?? 0);
+  return CARD_TIERS.reduce((sum, tier) => sum + Math.max(0, Number(o[tier]) || 0), 0);
 }
-export function finishOwnedCopies(profile, id, foil = false) {
+export function tierOwnedCopies(profile, id, tier = "normal") {
   const o = profile?.ownedCards?.[id] ?? {};
-  return Math.max(0, Number(foil ? o.foil : o.normal) || 0);
+  return Math.max(0, Number(o[normalizeCardTier(tier)]) || 0);
 }
-export function hasIndependentFinishCaps(card) {
-  // Standard five-copy cards have a five-copy cap for each finish: up to
-  // 5 Normal + 5 Foil owned. Unique cards and Momentum keep their existing
-  // total ownership contracts. Deck legality still caps a card identity at 5.
-  return cardOwnershipCap(card) === 5;
+// Backward-compatible name retained for older internal callers/tests.
+export function finishOwnedCopies(profile, id, tierOrFoil = "normal") {
+  const tier = typeof tierOrFoil === "boolean" ? (tierOrFoil ? "ruby" : "normal") : tierOrFoil;
+  return tierOwnedCopies(profile, id, tier);
 }
-export function underFinishOwnershipCap(profile, card, foil = false) {
+export function hasIndependentTierCaps(card) { return !!card; }
+export const hasIndependentFinishCaps = hasIndependentTierCaps;
+export function underTierOwnershipCap(profile, card, tier = "normal") {
   if (!card) return false;
-  const cap = cardOwnershipCap(card);
-  if (hasIndependentFinishCaps(card)) return finishOwnedCopies(profile, card.id, foil) < cap;
-  return totalOwnedCopies(profile, card.id) < cap;
+  return tierOwnedCopies(profile, card.id, tier) < cardOwnershipCap(card);
+}
+export function underFinishOwnershipCap(profile, card, tierOrFoil = "normal") {
+  const tier = typeof tierOrFoil === "boolean" ? (tierOrFoil ? "ruby" : "normal") : tierOrFoil;
+  return underTierOwnershipCap(profile, card, tier);
 }
 
-export function addOwnedCard(profile, id, { foil = false, amount = 1 } = {}) {
+export function addOwnedCard(profile, id, { tier = null, foil = null, amount = 1 } = {}) {
   profile.ownedCards ??= {};
-  profile.ownedCards[id] ??= { normal: 0, foil: 0 };
-  const card = cardById.get(id), o = profile.ownedCards[id], cap = cardOwnershipCap(card);
-  let added = 0, replacedNormal = 0, overflowed = 0;
+  profile.ownedCards[id] ??= { normal: 0, emerald: 0, sapphire: 0, ruby: 0 };
+  const o = profile.ownedCards[id];
+  // Old Foil calls map to Ruby only for legacy migration/certification. New live
+  // code always supplies an explicit tier. Missing tier defaults to Normal.
+  const resolvedTier = tier != null ? normalizeCardTier(tier) : (foil === true ? "ruby" : "normal");
+  const cap = cardOwnershipCap(cardById.get(id));
+  let added = 0, overflowed = 0;
   for (let i = 0; i < amount; i += 1) {
-    if (hasIndependentFinishCaps(card)) {
-      const key = foil ? "foil" : "normal";
-      if ((o[key] ?? 0) >= cap) { overflowed += 1; continue; }
-      o[key] = (o[key] ?? 0) + 1;
-      added += 1;
-      continue;
-    }
-
-    // Unique cards and Momentum retain the legacy total-cap behaviour. This is
-    // important for Entrances/Superstars/Managers (max 1) and the 15-copy
-    // starter Momentum inventory. A Foil unique may still replace its Normal
-    // finish rather than creating a second unique copy.
-    const total = (o.normal ?? 0) + (o.foil ?? 0);
-    if (foil) {
-      if ((o.foil ?? 0) >= cap) { overflowed += 1; continue; }
-      if (total >= cap) {
-        if ((o.normal ?? 0) <= 0) { overflowed += 1; continue; }
-        o.normal -= 1;
-        replacedNormal += 1;
-      }
-      o.foil = (o.foil ?? 0) + 1;
-      added += 1;
-    } else {
-      if (total >= cap) { overflowed += 1; continue; }
-      o.normal = (o.normal ?? 0) + 1;
-      added += 1;
-    }
+    if ((o[resolvedTier] ?? 0) >= cap) { overflowed += 1; continue; }
+    o[resolvedTier] = (o[resolvedTier] ?? 0) + 1;
+    added += 1;
   }
-  return { ...o, added, replacedNormal, overflowed, cap };
+  return { ...o, added, overflowed, cap, tier: resolvedTier, replacedNormal: 0 };
 }
 
 export function addUniversePoints(profile, amount) {
@@ -109,12 +96,63 @@ export function spendUniversePoints(profile, amount) {
 }
 
 
+const MOMENTUM_METHODS = Object.freeze(["strength", "strike", "technical", "agility"]);
+
+// Fresh-start packages must be fully playable at Normal while respecting the
+// universal five-copies-per-tier ownership rule. A handful of older authored
+// blueprints intentionally used 6-10 copies of one Momentum colour, so only
+// those excess Momentum pages are redistributed; moves/actions are untouched.
+export function freshNormalDeckBlueprint(sid) {
+  const source = decks[sid] ?? [];
+  const star = starById.get(sid);
+  if (!star || source.length !== 60) return [];
+  const out = [];
+  const counts = new Map();
+  const deferred = [];
+  for (let index = 0; index < source.length; index += 1) {
+    const card = source[index];
+    const used = counts.get(card.id) ?? 0;
+    if (used < 5) {
+      out[index] = card;
+      counts.set(card.id, used + 1);
+    } else if (card.kind === "momentum") {
+      deferred.push(index);
+    } else {
+      throw new Error(`${star.name} fresh deck exceeds the five-copy cap for ${card.name}.`);
+    }
+  }
+  const methodCount = method => counts.get(`momentum-${method}`) ?? 0;
+  const chooseMomentum = () => {
+    const useful = MOMENTUM_METHODS
+      .filter(method => star.methodLimits?.[method] !== 0 && methodCount(method) < 5)
+      .sort((a,b) => methodCount(b) - methodCount(a) || MOMENTUM_METHODS.indexOf(a) - MOMENTUM_METHODS.indexOf(b));
+    const method = useful[0] ?? MOMENTUM_METHODS.find(m => methodCount(m) < 5);
+    return method ? cardById.get(`momentum-${method}`) : null;
+  };
+  for (const index of deferred) {
+    const replacement = chooseMomentum();
+    if (!replacement) throw new Error(`${star.name} fresh deck cannot be made legal under the five-copy tier cap.`);
+    out[index] = replacement;
+    counts.set(replacement.id, (counts.get(replacement.id) ?? 0) + 1);
+  }
+  return out;
+}
+
 function ensureSavedRecommendedDeck(profile, sid) {
-  const d = decks[sid] ?? [];
+  const d = freshNormalDeckBlueprint(sid);
   if (d.length !== 60) return false;
   profile.savedDecks ??= {};
-  profile.savedDecks[sid] = d.map(c => ({ id: c.id, foil: false }));
+  profile.savedDecks[sid] = d.map(c => ({ id: c.id, tier: DEFAULT_STARTER_TIER }));
   return true;
+}
+
+function topUpNormalDeckOwnership(profile, cards = []) {
+  const needed = new Map();
+  for (const card of cards) needed.set(card.id, (needed.get(card.id) ?? 0) + 1);
+  for (const [id, amount] of needed) {
+    const missing = Math.max(0, amount - tierOwnedCopies(profile, id, DEFAULT_STARTER_TIER));
+    if (missing) addOwnedCard(profile, id, { amount: missing, tier: DEFAULT_STARTER_TIER });
+  }
 }
 
 const starterExclusiveTo = (card, sid) => card?.superstarId === sid || (Array.isArray(card?.allowedSuperstarIds) && card.allowedSuperstarIds.length === 1 && card.allowedSuperstarIds[0] === sid);
@@ -136,17 +174,14 @@ function queueSuperstarUnlockCelebration(profile, sid) {
 // The player's first Superstar remains the onboarding exception: it receives
 // the complete authored 60-page deck so a brand-new profile can play instantly.
 function grantInitialStarterPackage(profile, sid, { celebrate = true } = {}) {
-  const star = starById.get(sid), d = decks[sid] ?? [];
+  const star = starById.get(sid), d = freshNormalDeckBlueprint(sid);
   if (!star || d.length !== 60) return { leadOff: [], signatures: [], rewardCards: [], deckSize: d.length, missing: 60 - d.length };
   profile.unlockedSuperstars ??= [];
   const newlyUnlocked = !profile.unlockedSuperstars.includes(sid);
   if (newlyUnlocked) profile.unlockedSuperstars.push(sid);
   ensureSavedRecommendedDeck(profile, sid);
-  for (const c of d) {
-    if (c.id === "once-too-often" && totalOwnedCopies(profile, c.id) >= 1) continue;
-    addOwnedCard(profile, c.id, { amount: 1 });
-  }
-  addOwnedCard(profile, `superstar-${sid}`, { foil: true });
+  topUpNormalDeckOwnership(profile, d);
+  addOwnedCard(profile, `superstar-${sid}`, { tier: DEFAULT_STARTER_TIER });
   profile.selectedEntrances ??= {};
   if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.deckNeedsCards ??= {};
@@ -198,7 +233,7 @@ export function grantSuperstarUnlockPackage(profile, sid, { celebrate = true } =
   profile.unlockedSuperstars ??= [];
   const newlyUnlocked = !profile.unlockedSuperstars.includes(sid);
   if (newlyUnlocked) profile.unlockedSuperstars.push(sid);
-  addOwnedCard(profile, `superstar-${sid}`, { foil: true });
+  if (totalOwnedCopies(profile, `superstar-${sid}`) < 1) addOwnedCard(profile, `superstar-${sid}`, { tier: DEFAULT_STARTER_TIER });
   profile.selectedEntrances ??= {};
   if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.savedDecks ??= {};
@@ -228,7 +263,7 @@ export function grantSuperstarIdentityUnlockPackage(profile, sid, { celebrate = 
   profile.unlockedSuperstars ??= [];
   if (profile.unlockedSuperstars.includes(sid)) return { alreadyOwned: true, superstarId: sid };
   profile.unlockedSuperstars.push(sid);
-  addOwnedCard(profile, `superstar-${sid}`, { foil: true });
+  if (totalOwnedCopies(profile, `superstar-${sid}`) < 1) addOwnedCard(profile, `superstar-${sid}`, { tier: DEFAULT_STARTER_TIER });
   profile.selectedEntrances ??= {};
   if (totalOwnedCopies(profile, DEFAULT_PLAYER_ENTRANCE_ID) > 0) profile.selectedEntrances[sid] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   profile.savedDecks ??= {};
@@ -258,7 +293,6 @@ export function createProfile(starterId) {
     deckAssistance: "ask",
     boosterCredits: 0,
     boosterCreditsBySet: blankSetCounters(),
-    superPackCreditsBySet: blankSetCounters(),
     packsOpened: 0,
     packsOpenedBySet: blankSetCounters(),
     packsSinceSuperstarUnlock: 0,
@@ -275,22 +309,60 @@ export function createProfile(starterId) {
     storePurchases: [],
     pendingUnlockCelebrations: [],
     onboarding: { complete: false, step: 0 },
+    welcomeSuperstar: { claimed: false, setId: null, superstarId: null },
     createdAt: new Date().toISOString()
   };
   // Every new Legacy begins with a reusable baseline Entrance plus enough of
   // every Method Momentum colour to build freely without booster dependence.
-  addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { foil: true, amount: 1 });
+  addOwnedCard(p, DEFAULT_PLAYER_ENTRANCE_ID, { tier: DEFAULT_STARTER_TIER, amount: 1 });
   for (const id of ["momentum-strength", "momentum-strike", "momentum-technical", "momentum-agility"]) {
-    addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES });
+    addOwnedCard(p, id, { amount: STARTING_MOMENTUM_COPIES, tier: DEFAULT_STARTER_TIER });
   }
   grantInitialStarterPackage(p, starterId, { celebrate: false });
   ensureCareerState(p);
   return p;
 }
 
+export function welcomeSuperstarState(p) {
+  return { claimed: false, setId: null, superstarId: null, ...(p?.welcomeSuperstar ?? {}) };
+}
+
+export function welcomeSuperstarCandidates(p, setId) {
+  if (!WELCOME_SUPERSTAR_SET_IDS.includes(setId)) return [];
+  const already = new Set(p?.unlockedSuperstars ?? []);
+  return Object.values(superstars).filter(star =>
+    star && !star.developmentOnly && star.setId === setId && decks[star.id]?.length === 60 && !already.has(star.id)
+  );
+}
+
+export function claimWelcomeSuperstar(p, setId, rng = Math.random) {
+  if (!p) throw new Error("Profile required");
+  const state = welcomeSuperstarState(p);
+  if (state.claimed) return { ...state, alreadyClaimed: true };
+  if (!WELCOME_SUPERSTAR_SET_IDS.includes(setId)) throw new Error("Choose Evolution, New Generation, Golden Era, Attitude Era or SummerSlam");
+  const candidates = welcomeSuperstarCandidates(p, setId);
+  if (!candidates.length) throw new Error("No eligible Welcome Superstars are available for that set");
+  const index = Math.max(0, Math.min(candidates.length - 1, Math.floor(rng() * candidates.length)));
+  const star = candidates[index];
+  const d = freshNormalDeckBlueprint(star.id);
+  if (d.length !== 60) throw new Error("That Welcome Superstar deck is not available.");
+  p.unlockedSuperstars ??= [];
+  if (!p.unlockedSuperstars.includes(star.id)) p.unlockedSuperstars.push(star.id);
+  addOwnedCard(p, `superstar-${star.id}`, { tier: DEFAULT_STARTER_TIER, amount: 1 });
+  topUpNormalDeckOwnership(p, d);
+  p.savedDecks ??= {};
+  p.savedDecks[star.id] = d.map(card => ({ id: card.id, tier: DEFAULT_STARTER_TIER }));
+  p.deckNeedsCards ??= {};
+  p.deckNeedsCards[star.id] = 0;
+  p.selectedEntrances ??= {};
+  if (totalOwnedCopies(p, DEFAULT_PLAYER_ENTRANCE_ID) > 0) p.selectedEntrances[star.id] ??= DEFAULT_PLAYER_ENTRANCE_ID;
+  p.welcomeSuperstar = { claimed: true, setId, superstarId: star.id, deckReady: true };
+  return { ...p.welcomeSuperstar, alreadyClaimed: false };
+}
+
 export function hasSuperstar(p, id) { return !!p?.unlockedSuperstars?.includes(id); }
 export function unlockSuperstar(p, id, options = {}) { grantSuperstarUnlockPackage(p, id, options); return p; }
-export function ownedCount(p, id, finish = "normal") { return p?.ownedCards?.[id]?.[finish] ?? 0; }
+export function ownedCount(p, id, tier = "normal") { return p?.ownedCards?.[id]?.[normalizeCardTier(tier)] ?? 0; }
 export function getSavedDeck(p, id) { return p?.savedDecks?.[id] ?? []; }
 export function ensureSavedDeck(p, id) { p.savedDecks ??= {}; return p.savedDecks[id] ??= []; }
 export function setDeckAssistance(p, m) { if (DECK_ASSISTANCE_MODES.includes(m)) p.deckAssistance = m; return p; }
@@ -547,6 +619,17 @@ export function migrateProfile(old) {
   p.championshipRoad = { activeRun: null, clears: 0, bestStage: 0, championshipPackCredits: 0, championshipPackCreditsBySet: blankSetCounters(), completedBy: [], ...(p.championshipRoad ?? {}) };
   p.championshipRoad.championshipPackCreditsBySet = { ...blankSetCounters(), ...(p.championshipRoad.championshipPackCreditsBySet ?? {}) };
   p.championshipRoad.completedBy ??= [];
+  // v0.13.82: Hall of Fame Series 1 retired into Golden Era / Attitude Era.
+  // Card ownership is ID-stable. Any unopened Hall of Fame pack value is moved
+  // one-for-one into Golden Era so existing profiles never lose a reward.
+  if (sourceVersion < 32) {
+    const retired = "hall-of-fame-series-1", replacement = "golden-era-series-1";
+    for (const bucket of [p.boosterCreditsBySet,p.superPackCreditsBySet,p.packsOpenedBySet,p.packsSinceSuperstarUnlockBySet,p.ladder.completionPackCreditsBySet,p.championshipRoad.championshipPackCreditsBySet]) {
+      const amount = Math.max(0, Number(bucket?.[retired]) || 0);
+      if (bucket && amount) bucket[replacement] = (Number(bucket[replacement]) || 0) + amount;
+      if (bucket) delete bucket[retired];
+    }
+  }
   if (sourceVersion < 31) {
     for (const setId of Object.keys(blankSetCounters())) {
       const legacyModePacks = (Number(p.ladder.completionPackCreditsBySet?.[setId]) || 0) + (Number(p.championshipRoad.championshipPackCreditsBySet?.[setId]) || 0);
@@ -559,6 +642,32 @@ export function migrateProfile(old) {
     p.championshipRoad.championshipPackCreditsBySet = blankSetCounters();
     p.championshipRoad.championshipPackQueue = [];
   }
+  // v0.13.85 reward-economy reset: Super Packs and legacy completion-pack
+  // variants are retired. Convert every unopened premium/completion credit
+  // one-for-one into an ordinary booster of the same set so existing saves
+  // keep all earned value without exposing a removed pack type.
+  if (sourceVersion < 33) {
+    for (const setId of Object.keys(blankSetCounters())) {
+      const premium = Math.max(0, Number(p.superPackCreditsBySet?.[setId]) || 0);
+      const ladderLegacy = Math.max(0, Number(p.ladder.completionPackCreditsBySet?.[setId]) || 0);
+      const roadLegacy = Math.max(0, Number(p.championshipRoad.championshipPackCreditsBySet?.[setId]) || 0);
+      const total = premium + ladderLegacy + roadLegacy;
+      if (total > 0) p.boosterCreditsBySet[setId] = (Number(p.boosterCreditsBySet[setId]) || 0) + total;
+    }
+    const pendingKotr = p.kingOfTheRing?.activeRun;
+    if (pendingKotr?.status === "cleared" && !pendingKotr.rewardClaimedSetId && !pendingKotr.rewardSetId) {
+      p.boosterCreditsBySet["summerslam-series-1"] = (Number(p.boosterCreditsBySet["summerslam-series-1"]) || 0) + 1;
+      pendingKotr.rewardSetId = "summerslam-series-1";
+    }
+    p.ladder.completionPackCredits = 0;
+    p.ladder.completionPackCreditsBySet = blankSetCounters();
+    p.ladder.completionPackQueue = [];
+    p.championshipRoad.championshipPackCredits = 0;
+    p.championshipRoad.championshipPackCreditsBySet = blankSetCounters();
+    p.championshipRoad.championshipPackQueue = [];
+  }
+  delete p.superPackCreditsBySet;
+  p.boosterCredits = p.boosterCreditsBySet["summerslam-series-1"] ?? 0;
   p.weeklyLiveEvents = { weekKey: null, eventId: null, activeRun: null, clearedThisWeek: false, totalClears: 0, bestStage: 0, completedWeeks: [], ...(p.weeklyLiveEvents ?? {}) };
   p.weeklyLiveEvents.completedWeeks ??= [];
   p.liveEventTowers = { states: {}, totalClears: p.weeklyLiveEvents.totalClears ?? 0, completedKeys: [], ...(p.liveEventTowers ?? {}) };
@@ -571,8 +680,14 @@ export function migrateProfile(old) {
   p.seasons["season-1"].claimedTiers ??= [];
   p.setProgress = { ...defaultSetProgress(), ...(p.setProgress ?? {}) };
   for (const [setId, state] of Object.entries(defaultSetProgress())) p.setProgress[setId] = { ...state, ...(p.setProgress[setId] ?? {}) };
+  delete p.setProgress["hall-of-fame-series-1"];
   p.storePurchases ??= [];
   p.pendingUnlockCelebrations ??= [];
+  // v0.13.87 Welcome Superstar is a fresh-start onboarding reward. Existing
+  // profiles are marked claimed so an update cannot retroactively grant it.
+  p.welcomeSuperstar = sourceVersion < 35
+    ? { claimed: true, setId: p.welcomeSuperstar?.setId ?? null, superstarId: p.welcomeSuperstar?.superstarId ?? null }
+    : { claimed: false, setId: null, superstarId: null, ...(p.welcomeSuperstar ?? {}) };
   // Existing profiles should not be forced back through the first-match coach.
   p.onboarding = { complete: true, step: 0, ...(p.onboarding ?? {}) };
   p.createdAt ??= new Date().toISOString();
@@ -585,7 +700,7 @@ export function migrateProfile(old) {
   // v0.12.55 Entrance economy migration: Superstar-specific Entrances were not
   // booster-pullable in older profiles, so any such owned copies were automatic
   // grants. Remove those grants, seed Amazing Entrance, and give every profile
-  // the new 15-copy Momentum baseline before validating saved decks.
+  // the fresh-start five-copy-per-tier Momentum baseline before validating saved decks.
   if (sourceVersion < 26) {
     for (const [id] of Object.entries(p.ownedCards)) {
       const card = cardById.get(id);
@@ -758,17 +873,13 @@ export function migrateProfile(old) {
 export function loadProfile(storage = globalThis.localStorage) {
   try {
     if (!storage) return null;
-    const raw = storage.getItem(PROFILE_KEY) ?? storage.getItem("wa-modern-profile-v1");
+    const raw = storage.getItem(PROFILE_KEY);
     return raw ? migrateProfile(JSON.parse(raw)) : null;
   } catch { return null; }
 }
 export function saveProfile(p, storage = globalThis.localStorage) {
   storage?.setItem(PROFILE_KEY, JSON.stringify(p));
-  storage?.removeItem("wa-modern-profile-v1");
   return p;
 }
-export function resetProfile(storage = globalThis.localStorage) {
-  storage?.removeItem(PROFILE_KEY);
-  storage?.removeItem("wa-modern-profile-v1");
-}
+export function resetProfile(storage = globalThis.localStorage) { storage?.removeItem(PROFILE_KEY); }
 export function buildBestOwnedDeck(_p, sid) { return decks[sid] ?? []; }

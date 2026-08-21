@@ -1,4 +1,4 @@
-export const CARD_NUMBER_MANIFEST = Object.freeze([
+export const CARD_NUMBER_MANIFEST = [
   {
     "id": "northern-lights-suplex",
     "setId": "evolution-series-1",
@@ -364,456 +364,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "evolution-series-1",
     "cardNumber": 61,
     "cardCode": "EVO1-061"
-  },
-  {
-    "id": "kick-to-the-gut",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 1,
-    "cardCode": "HOF1-001"
-  },
-  {
-    "id": "back-body-drop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 2,
-    "cardCode": "HOF1-002"
-  },
-  {
-    "id": "clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 3,
-    "cardCode": "HOF1-003"
-  },
-  {
-    "id": "stone-cold-steve-austin-pointed-elbow-drop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 4,
-    "cardCode": "HOF1-004"
-  },
-  {
-    "id": "mounted-punches",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 5,
-    "cardCode": "HOF1-005"
-  },
-  {
-    "id": "stone-cold-steve-austin-mudhole-stomps",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 6,
-    "cardCode": "HOF1-006"
-  },
-  {
-    "id": "stone-cold-steve-austin-lou-thesz-press",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 7,
-    "cardCode": "HOF1-007"
-  },
-  {
-    "id": "stone-cold-steve-austin-stone-cold-stunner",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 8,
-    "cardCode": "HOF1-008"
-  },
-  {
-    "id": "running-big-boot",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 9,
-    "cardCode": "HOF1-009"
-  },
-  {
-    "id": "sidewalk-slam",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 10,
-    "cardCode": "HOF1-010"
-  },
-  {
-    "id": "front-backbreaker",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 11,
-    "cardCode": "HOF1-011"
-  },
-  {
-    "id": "the-undertaker-snake-eyes",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 12,
-    "cardCode": "HOF1-012"
-  },
-  {
-    "id": "the-undertaker-old-school",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 13,
-    "cardCode": "HOF1-013"
-  },
-  {
-    "id": "tombstone-piledriver",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 14,
-    "cardCode": "HOF1-014"
-  },
-  {
-    "id": "uppercut",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 15,
-    "cardCode": "HOF1-015"
-  },
-  {
-    "id": "short-arm-clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 16,
-    "cardCode": "HOF1-016"
-  },
-  {
-    "id": "powerslam",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 17,
-    "cardCode": "HOF1-017"
-  },
-  {
-    "id": "backbreaker",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 18,
-    "cardCode": "HOF1-018"
-  },
-  {
-    "id": "kane-two-handed-choke-lift",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 19,
-    "cardCode": "HOF1-019"
-  },
-  {
-    "id": "flying-clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 20,
-    "cardCode": "HOF1-020"
-  },
-  {
-    "id": "kane-chokeslam-from-hell",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 21,
-    "cardCode": "HOF1-021"
-  },
-  {
-    "id": "forearm-smash",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 22,
-    "cardCode": "HOF1-022"
-  },
-  {
-    "id": "ddt",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 23,
-    "cardCode": "HOF1-023"
-  },
-  {
-    "id": "neckbreaker",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 24,
-    "cardCode": "HOF1-024"
-  },
-  {
-    "id": "piledriver",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 25,
-    "cardCode": "HOF1-025"
-  },
-  {
-    "id": "mankind-cactus-elbow",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 26,
-    "cardCode": "HOF1-026"
-  },
-  {
-    "id": "mankind-double-arm-ddt",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 27,
-    "cardCode": "HOF1-027"
-  },
-  {
-    "id": "mankind-mandible-claw",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 28,
-    "cardCode": "HOF1-028"
-  },
-  {
-    "id": "elbow-drop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 29,
-    "cardCode": "HOF1-029"
-  },
-  {
-    "id": "atomic-drop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 30,
-    "cardCode": "HOF1-030"
-  },
-  {
-    "id": "bearhug",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 31,
-    "cardCode": "HOF1-031"
-  },
-  {
-    "id": "military-press-slam",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 32,
-    "cardCode": "HOF1-032"
-  },
-  {
-    "id": "hogans-big-boot",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 33,
-    "cardCode": "HOF1-033"
-  },
-  {
-    "id": "hulk-hogan-atomic-leg-drop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 34,
-    "cardCode": "HOF1-034"
-  },
-  {
-    "id": "double-axe-handle",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 35,
-    "cardCode": "HOF1-035"
-  },
-  {
-    "id": "ultimate-warrior-diving-shoulder-block",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 36,
-    "cardCode": "HOF1-036"
-  },
-  {
-    "id": "ultimate-warrior-gorilla-press-slam",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 37,
-    "cardCode": "HOF1-037"
-  },
-  {
-    "id": "ultimate-warrior-warrior-splash",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 38,
-    "cardCode": "HOF1-038"
-  },
-  {
-    "id": "back-elbow",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 39,
-    "cardCode": "HOF1-039"
-  },
-  {
-    "id": "running-knee",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 40,
-    "cardCode": "HOF1-040"
-  },
-  {
-    "id": "hotshot",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 41,
-    "cardCode": "HOF1-041"
-  },
-  {
-    "id": "leaping-rope-clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 42,
-    "cardCode": "HOF1-042"
-  },
-  {
-    "id": "diving-body-press",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 43,
-    "cardCode": "HOF1-043"
-  },
-  {
-    "id": "randy-savage-flying-elbow-drop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 44,
-    "cardCode": "HOF1-044"
-  },
-  {
-    "id": "chop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 45,
-    "cardCode": "HOF1-045"
-  },
-  {
-    "id": "corner-avalanche",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 46,
-    "cardCode": "HOF1-046"
-  },
-  {
-    "id": "andre-the-giant-double-underhook-suplex",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 47,
-    "cardCode": "HOF1-047"
-  },
-  {
-    "id": "andre-the-giant-sitdown-splash",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 48,
-    "cardCode": "HOF1-048"
-  },
-  {
-    "id": "manager-paul-bearer",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 49,
-    "cardCode": "HOF1-049"
-  },
-  {
-    "id": "manager-bobby-heenan",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 50,
-    "cardCode": "HOF1-050"
-  },
-  {
-    "id": "manager-miss-elizabeth",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 51,
-    "cardCode": "HOF1-051"
-  },
-  {
-    "id": "entrance-stone-cold-steve-austin",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 52,
-    "cardCode": "HOF1-052"
-  },
-  {
-    "id": "entrance-the-undertaker",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 53,
-    "cardCode": "HOF1-053"
-  },
-  {
-    "id": "entrance-kane",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 54,
-    "cardCode": "HOF1-054"
-  },
-  {
-    "id": "entrance-mankind",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 55,
-    "cardCode": "HOF1-055"
-  },
-  {
-    "id": "entrance-hulk-hogan",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 56,
-    "cardCode": "HOF1-056"
-  },
-  {
-    "id": "entrance-ultimate-warrior",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 57,
-    "cardCode": "HOF1-057"
-  },
-  {
-    "id": "entrance-randy-savage",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 58,
-    "cardCode": "HOF1-058"
-  },
-  {
-    "id": "entrance-andre-the-giant",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 59,
-    "cardCode": "HOF1-059"
-  },
-  {
-    "id": "special-stone-cold-steve-austin",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 60,
-    "cardCode": "HOF1-060"
-  },
-  {
-    "id": "special-the-undertaker",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 61,
-    "cardCode": "HOF1-061"
-  },
-  {
-    "id": "special-kane",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 62,
-    "cardCode": "HOF1-062"
-  },
-  {
-    "id": "special-mankind",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 63,
-    "cardCode": "HOF1-063"
-  },
-  {
-    "id": "special-hulk-hogan",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 64,
-    "cardCode": "HOF1-064"
-  },
-  {
-    "id": "special-ultimate-warrior",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 65,
-    "cardCode": "HOF1-065"
-  },
-  {
-    "id": "special-randy-savage",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 66,
-    "cardCode": "HOF1-066"
-  },
-  {
-    "id": "special-andre-the-giant",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 67,
-    "cardCode": "HOF1-067"
-  },
-  {
-    "id": "superstar-mankind",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 68,
-    "cardCode": "HOF1-068"
-  },
-  {
-    "id": "superstar-hulk-hogan",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 69,
-    "cardCode": "HOF1-069"
-  },
-  {
-    "id": "superstar-andre-the-giant",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 70,
-    "cardCode": "HOF1-070"
-  },
-  {
-    "id": "superstar-randy-savage",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 71,
-    "cardCode": "HOF1-071"
-  },
-  {
-    "id": "superstar-kane",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 72,
-    "cardCode": "HOF1-072"
-  },
-  {
-    "id": "superstar-the-undertaker",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 73,
-    "cardCode": "HOF1-073"
-  },
-  {
-    "id": "superstar-ultimate-warrior",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 74,
-    "cardCode": "HOF1-074"
-  },
-  {
-    "id": "superstar-stone-cold-steve-austin",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 75,
-    "cardCode": "HOF1-075"
   },
   {
     "id": "running-hip-attack",
@@ -2142,18 +1692,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "SS1-105"
   },
   {
-    "id": "open-can",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 79,
-    "cardCode": "HOF1-079"
-  },
-  {
-    "id": "what",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 80,
-    "cardCode": "HOF1-080"
-  },
-  {
     "id": "momentum-strength",
     "setId": "summerslam-series-1",
     "cardNumber": 106,
@@ -2886,24 +2424,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "SS1-137"
   },
   {
-    "id": "standing-switch",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 76,
-    "cardCode": "HOF1-076"
-  },
-  {
-    "id": "rollover-counter",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 77,
-    "cardCode": "HOF1-077"
-  },
-  {
-    "id": "backflip-counter",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 78,
-    "cardCode": "HOF1-078"
-  },
-  {
     "id": "catch-the-foot",
     "setId": "evolution-series-1",
     "cardNumber": 62,
@@ -2946,12 +2466,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "cardCode": "SS1-141"
   },
   {
-    "id": "mankind-clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 81,
-    "cardCode": "HOF1-081"
-  },
-  {
     "id": "bayley-diving-elbow",
     "setId": "evolution-series-1",
     "cardNumber": 65,
@@ -2962,54 +2476,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "evolution-series-1",
     "cardNumber": 66,
     "cardCode": "EVO1-066"
-  },
-  {
-    "id": "mankind-have-a-nice-day",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 82,
-    "cardCode": "HOF1-082"
-  },
-  {
-    "id": "hulk-hogan-whatcha-gonna-do",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 83,
-    "cardCode": "HOF1-083"
-  },
-  {
-    "id": "andre-the-giant-headbutt",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 84,
-    "cardCode": "HOF1-084"
-  },
-  {
-    "id": "randy-savage-cream-of-the-crop",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 85,
-    "cardCode": "HOF1-085"
-  },
-  {
-    "id": "kane-flying-clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 86,
-    "cardCode": "HOF1-086"
-  },
-  {
-    "id": "the-undertaker-running-big-boot",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 87,
-    "cardCode": "HOF1-087"
-  },
-  {
-    "id": "ultimate-warrior-clothesline",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 88,
-    "cardCode": "HOF1-088"
-  },
-  {
-    "id": "stone-cold-give-me-a-hell-yeah",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 89,
-    "cardCode": "HOF1-089"
   },
   {
     "id": "bayley-ding-dong-hello",
@@ -3070,9 +2536,8 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "summerslam-series-1",
     "cardNumber": 145,
     "cardCode": "SS1-145"
-  }
-
-  ,{
+  },
+  {
     "id": "kevin-owens-avalanche-fishermans-buster",
     "setId": "summerslam-series-1",
     "cardNumber": 146,
@@ -3149,30 +2614,6 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "survivor-series-series-1",
     "cardNumber": 52,
     "cardCode": "SVS1-052"
-  },
-  {
-    "id": "andre-the-giant-choke",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 90,
-    "cardCode": "HOF1-090"
-  },
-  {
-    "id": "andre-the-giant-bear-hug",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 91,
-    "cardCode": "HOF1-091"
-  },
-  {
-    "id": "test-of-strength",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 92,
-    "cardCode": "HOF1-092"
-  },
-  {
-    "id": "randy-savage-machos-double-axe-handle",
-    "setId": "hall-of-fame-series-1",
-    "cardNumber": 93,
-    "cardCode": "HOF1-093"
   },
   {
     "id": "wheelbarrow-suplex",
@@ -3275,169 +2716,1892 @@ export const CARD_NUMBER_MANIFEST = Object.freeze([
     "setId": "raw-series-1",
     "cardNumber": 55,
     "cardCode": "RAW1-055"
-  }  ,
-  {"id":"austin-theory-ataxia","setId":"raw-series-1","cardNumber":56,"cardCode":"RAW1-056"},
-  {"id":"austin-theory-rolling-thunder-blockbuster","setId":"raw-series-1","cardNumber":57,"cardCode":"RAW1-057"},
-  {"id":"austin-theory-patella-brainbuster","setId":"raw-series-1","cardNumber":58,"cardCode":"RAW1-058"},
-  {"id":"austin-theory-a-town-down","setId":"raw-series-1","cardNumber":59,"cardCode":"RAW1-059"},
-  {"id":"entrance-austin-theory","setId":"raw-series-1","cardNumber":60,"cardCode":"RAW1-060"},
-  {"id":"special-austin-theory","setId":"raw-series-1","cardNumber":61,"cardCode":"RAW1-061"},
-  {"id":"manager-maxxine-dupri","setId":"raw-series-1","cardNumber":62,"cardCode":"RAW1-062"},
-  {"id":"superstar-austin-theory","setId":"raw-series-1","cardNumber":63,"cardCode":"RAW1-063"}  ,
-  {"id":"montez-ford-spinebuster","setId":"raw-series-1","cardNumber":64,"cardCode":"RAW1-064"},
-  {"id":"montez-ford-blockbuster","setId":"raw-series-1","cardNumber":65,"cardCode":"RAW1-065"},
-  {"id":"montez-ford-450-splash","setId":"raw-series-1","cardNumber":66,"cardCode":"RAW1-066"},
-  {"id":"montez-ford-from-the-heavens","setId":"raw-series-1","cardNumber":67,"cardCode":"RAW1-067"},
-  {"id":"special-angelo-dawkins","setId":"raw-series-1","cardNumber":68,"cardCode":"RAW1-068"},
-  {"id":"entrance-montez-ford","setId":"raw-series-1","cardNumber":69,"cardCode":"RAW1-069"},
-  {"id":"superstar-montez-ford","setId":"raw-series-1","cardNumber":70,"cardCode":"RAW1-070"}
-  ,
-  {"id":"spinning-heel-kick","setId":"evolution-series-1","cardNumber":73,"cardCode":"EVO1-073"},
-  {"id":"triangle-choke","setId":"evolution-series-1","cardNumber":74,"cardCode":"EVO1-074"},
-  {"id":"lola-vice-running-hip-attack","setId":"worlds-collide-series-1","cardNumber":37,"cardCode":"WC1-037"},
-  {"id":"lola-vice-spinning-heel-kick","setId":"worlds-collide-series-1","cardNumber":38,"cardCode":"WC1-038"},
-  {"id":"lola-vice-triangle-choke","setId":"worlds-collide-series-1","cardNumber":39,"cardCode":"WC1-039"},
-  {"id":"lola-vice-305","setId":"worlds-collide-series-1","cardNumber":40,"cardCode":"WC1-040"},
-  {"id":"entrance-lola-vice","setId":"worlds-collide-series-1","cardNumber":41,"cardCode":"WC1-041"},
-  {"id":"special-lola-vice","setId":"worlds-collide-series-1","cardNumber":42,"cardCode":"WC1-042"},
-  {"id":"superstar-lola-vice","setId":"worlds-collide-series-1","cardNumber":43,"cardCode":"WC1-043"}
-  ,
-  {"id":"dragon-lee-operation-dragon","setId":"worlds-collide-series-1","cardNumber":44,"cardCode":"WC1-044"},
-  {"id":"dragon-lee-incinerator","setId":"worlds-collide-series-1","cardNumber":45,"cardCode":"WC1-045"},
-  {"id":"dragon-lee-double-foot-stomp","setId":"worlds-collide-series-1","cardNumber":46,"cardCode":"WC1-046"},
-  {"id":"dragon-lee-dragon-driver","setId":"worlds-collide-series-1","cardNumber":47,"cardCode":"WC1-047"},
-  {"id":"entrance-dragon-lee","setId":"worlds-collide-series-1","cardNumber":48,"cardCode":"WC1-048"},
-  {"id":"special-dragon-lee","setId":"worlds-collide-series-1","cardNumber":49,"cardCode":"WC1-049"},
-  {"id":"superstar-dragon-lee","setId":"worlds-collide-series-1","cardNumber":50,"cardCode":"WC1-050"}
-
-  ,
-  {"id":"vikingo-mexican-destroyer","setId":"worlds-collide-series-1","cardNumber":51,"cardCode":"WC1-051"},
-  {"id":"vikingo-twisting-450-splash","setId":"worlds-collide-series-1","cardNumber":52,"cardCode":"WC1-052"},
-  {"id":"vikingo-top-rope-poison-rana","setId":"worlds-collide-series-1","cardNumber":53,"cardCode":"WC1-053"},
-  {"id":"vikingo-el-cuerno-del-vikingo","setId":"worlds-collide-series-1","cardNumber":54,"cardCode":"WC1-054"},
-  {"id":"entrance-hijo-del-vikingo","setId":"worlds-collide-series-1","cardNumber":55,"cardCode":"WC1-055"},
-  {"id":"special-hijo-del-vikingo","setId":"worlds-collide-series-1","cardNumber":56,"cardCode":"WC1-056"},
-  {"id":"superstar-hijo-del-vikingo","setId":"worlds-collide-series-1","cardNumber":57,"cardCode":"WC1-057"}
-
-
-  ,
-  {"id":"mr-iguana-iguanarana","setId":"worlds-collide-series-1","cardNumber":58,"cardCode":"WC1-058"},
-  {"id":"mr-iguana-pongase-verde","setId":"worlds-collide-series-1","cardNumber":59,"cardCode":"WC1-059"},
-  {"id":"mr-iguana-muta-lock","setId":"worlds-collide-series-1","cardNumber":60,"cardCode":"WC1-060"},
-  {"id":"mr-iguana-chalino-driver","setId":"worlds-collide-series-1","cardNumber":61,"cardCode":"WC1-061"},
-  {"id":"entrance-mr-iguana","setId":"worlds-collide-series-1","cardNumber":62,"cardCode":"WC1-062"},
-  {"id":"special-mr-iguana","setId":"worlds-collide-series-1","cardNumber":63,"cardCode":"WC1-063"},
-  {"id":"superstar-mr-iguana","setId":"worlds-collide-series-1","cardNumber":64,"cardCode":"WC1-064"}
-
-
-  ,
-  {"id":"bret-hart-inverted-atomic-drop","setId":"new-generation-series-1","cardNumber":1,"cardCode":"NG1-001"},
-  {"id":"bret-hart-pendulum-backbreaker","setId":"new-generation-series-1","cardNumber":2,"cardCode":"NG1-002"},
-  {"id":"bret-hart-second-rope-elbow-drop","setId":"new-generation-series-1","cardNumber":3,"cardCode":"NG1-003"},
-  {"id":"bret-hart-sharpshooter","setId":"new-generation-series-1","cardNumber":4,"cardCode":"NG1-004"},
-  {"id":"entrance-bret-hart","setId":"new-generation-series-1","cardNumber":5,"cardCode":"NG1-005"},
-  {"id":"special-bret-hart","setId":"new-generation-series-1","cardNumber":6,"cardCode":"NG1-006"},
-  {"id":"superstar-bret-hart","setId":"new-generation-series-1","cardNumber":7,"cardCode":"NG1-007"},
-  {"id":"shawn-michaels-flying-forearm","setId":"new-generation-series-1","cardNumber":8,"cardCode":"NG1-008"},
-  {"id":"shawn-michaels-teardrop-suplex","setId":"new-generation-series-1","cardNumber":9,"cardCode":"NG1-009"},
-  {"id":"shawn-michaels-top-rope-elbow-drop","setId":"new-generation-series-1","cardNumber":10,"cardCode":"NG1-010"},
-  {"id":"shawn-michaels-sweet-chin-music","setId":"new-generation-series-1","cardNumber":11,"cardCode":"NG1-011"},
-  {"id":"entrance-shawn-michaels","setId":"new-generation-series-1","cardNumber":12,"cardCode":"NG1-012"},
-  {"id":"special-shawn-michaels","setId":"new-generation-series-1","cardNumber":13,"cardCode":"NG1-013"},
-  {"id":"superstar-shawn-michaels","setId":"new-generation-series-1","cardNumber":14,"cardCode":"NG1-014"},
-  {"id":"razor-ramon-fallaway-slam","setId":"new-generation-series-1","cardNumber":15,"cardCode":"NG1-015"},
-  {"id":"razor-ramon-running-powerslam","setId":"new-generation-series-1","cardNumber":16,"cardCode":"NG1-016"},
-  {"id":"razor-ramon-chokeslam","setId":"new-generation-series-1","cardNumber":17,"cardCode":"NG1-017"},
-  {"id":"razor-ramon-razors-edge","setId":"new-generation-series-1","cardNumber":18,"cardCode":"NG1-018"},
-  {"id":"entrance-razor-ramon","setId":"new-generation-series-1","cardNumber":19,"cardCode":"NG1-019"},
-  {"id":"special-razor-ramon","setId":"new-generation-series-1","cardNumber":20,"cardCode":"NG1-020"},
-  {"id":"superstar-razor-ramon","setId":"new-generation-series-1","cardNumber":21,"cardCode":"NG1-021"},
-  {"id":"diesel-snake-eyes","setId":"new-generation-series-1","cardNumber":22,"cardCode":"NG1-022"},
-  {"id":"diesel-big-boot","setId":"new-generation-series-1","cardNumber":23,"cardCode":"NG1-023"},
-  {"id":"diesel-sidewalk-slam","setId":"new-generation-series-1","cardNumber":24,"cardCode":"NG1-024"},
-  {"id":"diesel-jackknife-powerbomb","setId":"new-generation-series-1","cardNumber":25,"cardCode":"NG1-025"},
-  {"id":"entrance-diesel","setId":"new-generation-series-1","cardNumber":26,"cardCode":"NG1-026"},
-  {"id":"special-diesel","setId":"new-generation-series-1","cardNumber":27,"cardCode":"NG1-027"},
-  {"id":"superstar-diesel","setId":"new-generation-series-1","cardNumber":28,"cardCode":"NG1-028"},
-  {"id":"brainbuster","setId":"money-in-the-bank-series-1","cardNumber":38,"cardCode":"MITB1-038"},
-  {"id":"side-kick","setId":"raw-series-1","cardNumber":71,"cardCode":"RAW1-071"},
-  {"id":"vertical-boston-crab","setId":"evolution-series-1","cardNumber":75,"cardCode":"EVO1-075"},
-  {"id":"diving-shoulder-block","setId":"hall-of-fame-series-1","cardNumber":94,"cardCode":"HOF1-094"},
-  {"id":"springboard-roundhouse-kick","setId":"smackdown-series-1","cardNumber":38,"cardCode":"SD1-038"},
-  {"id":"snapmare","setId":"raw-series-1","cardNumber":72,"cardCode":"RAW1-072"},
-  {"id":"scoop-slam","setId":"raw-series-1","cardNumber":73,"cardCode":"RAW1-073"},
-  {"id":"chop-block","setId":"raw-series-1","cardNumber":74,"cardCode":"RAW1-074"},
-  {"id":"spinning-backfist","setId":"raw-series-1","cardNumber":75,"cardCode":"RAW1-075"},
-  {"id":"single-leg-dropkick","setId":"raw-series-1","cardNumber":76,"cardCode":"RAW1-076"},
-  {"id":"back-rake","setId":"raw-series-1","cardNumber":77,"cardCode":"RAW1-077"},
-  {"id":"arm-wrench","setId":"raw-series-1","cardNumber":78,"cardCode":"RAW1-078"},
-  {"id":"knee-lift","setId":"raw-series-1","cardNumber":79,"cardCode":"RAW1-079"},
-  {"id":"t-bone-suplex","setId":"raw-series-1","cardNumber":80,"cardCode":"RAW1-080"},
-  {"id":"gutwrench-suplex","setId":"raw-series-1","cardNumber":81,"cardCode":"RAW1-081"},
-  {"id":"michinoku-driver","setId":"raw-series-1","cardNumber":82,"cardCode":"RAW1-082"},
-  {"id":"pumphandle-slam","setId":"raw-series-1","cardNumber":83,"cardCode":"RAW1-083"},
-  {"id":"bicycle-kick","setId":"raw-series-1","cardNumber":84,"cardCode":"RAW1-084"},
-  {"id":"rolling-elbow","setId":"raw-series-1","cardNumber":85,"cardCode":"RAW1-085"},
-  {"id":"springboard-forearm","setId":"raw-series-1","cardNumber":86,"cardCode":"RAW1-086"},
-  {"id":"dragon-sleeper","setId":"raw-series-1","cardNumber":87,"cardCode":"RAW1-087"},
-  {"id":"camel-clutch","setId":"raw-series-1","cardNumber":88,"cardCode":"RAW1-088"},
-  {"id":"slingshot-suplex","setId":"raw-series-1","cardNumber":89,"cardCode":"RAW1-089"},
-  {"id":"monkey-flip","setId":"new-generation-series-1","cardNumber":29,"cardCode":"NG1-029"},
-  {"id":"headlock-takeover","setId":"new-generation-series-1","cardNumber":30,"cardCode":"NG1-030"},
-  {"id":"eye-rake","setId":"new-generation-series-1","cardNumber":31,"cardCode":"NG1-031"},
-  {"id":"hair-pull-takedown","setId":"new-generation-series-1","cardNumber":32,"cardCode":"NG1-032"},
-  {"id":"schoolboy-roll-up","setId":"new-generation-series-1","cardNumber":33,"cardCode":"NG1-033"},
-  {"id":"reverse-chinlock","setId":"new-generation-series-1","cardNumber":34,"cardCode":"NG1-034"},
-  {"id":"doink-drop-toe-hold","setId":"new-generation-series-1","cardNumber":35,"cardCode":"NG1-035"},
-  {"id":"doink-stump-puller","setId":"new-generation-series-1","cardNumber":36,"cardCode":"NG1-036"},
-  {"id":"doink-flying-body-press","setId":"new-generation-series-1","cardNumber":37,"cardCode":"NG1-037"},
-  {"id":"doink-whoopee-cushion","setId":"new-generation-series-1","cardNumber":38,"cardCode":"NG1-038"},
-  {"id":"entrance-doink-the-clown","setId":"new-generation-series-1","cardNumber":39,"cardCode":"NG1-039"},
-  {"id":"special-doink-the-clown","setId":"new-generation-series-1","cardNumber":40,"cardCode":"NG1-040"},
-  {"id":"superstar-doink-the-clown","setId":"new-generation-series-1","cardNumber":41,"cardCode":"NG1-041"}
-
-  ,{"id":"forearm-club","setId":"new-generation-series-1","cardNumber":42,"cardCode":"NG1-042"}
-  ,{"id":"running-shoulder-block","setId":"new-generation-series-1","cardNumber":43,"cardCode":"NG1-043"}
-  ,{"id":"side-suplex","setId":"new-generation-series-1","cardNumber":44,"cardCode":"NG1-044"}
-  ,{"id":"club-to-the-back","setId":"new-generation-series-1","cardNumber":45,"cardCode":"NG1-045"}
-  ,{"id":"running-body-avalanche","setId":"new-generation-series-1","cardNumber":46,"cardCode":"NG1-046"}
-  ,{"id":"nerve-hold","setId":"new-generation-series-1","cardNumber":47,"cardCode":"NG1-047"}
-  ,{"id":"yokozuna-savate-kick","setId":"new-generation-series-1","cardNumber":48,"cardCode":"NG1-048"}
-  ,{"id":"yokozuna-belly-to-belly-suplex","setId":"new-generation-series-1","cardNumber":49,"cardCode":"NG1-049"}
-  ,{"id":"yokozuna-running-leg-drop","setId":"new-generation-series-1","cardNumber":50,"cardCode":"NG1-050"}
-  ,{"id":"yokozuna-banzai-drop","setId":"new-generation-series-1","cardNumber":51,"cardCode":"NG1-051"}
-  ,{"id":"entrance-yokozuna","setId":"new-generation-series-1","cardNumber":52,"cardCode":"NG1-052"}
-  ,{"id":"special-yokozuna","setId":"new-generation-series-1","cardNumber":53,"cardCode":"NG1-053"}
-  ,{"id":"superstar-yokozuna","setId":"new-generation-series-1","cardNumber":54,"cardCode":"NG1-054"}
-
-  ,{"id":"fisherman-suplex","setId":"new-generation-series-1","cardNumber":55,"cardCode":"NG1-055"}
-  ,{"id":"wheel-kick","setId":"new-generation-series-1","cardNumber":56,"cardCode":"NG1-056"}
-  ,{"id":"gutbuster","setId":"new-generation-series-1","cardNumber":57,"cardCode":"NG1-057"}
-  ,{"id":"dropkick-to-the-knee","setId":"new-generation-series-1","cardNumber":58,"cardCode":"NG1-058"}
-  ,{"id":"bridging-german-suplex","setId":"new-generation-series-1","cardNumber":59,"cardCode":"NG1-059"}
-  ,{"id":"step-up-enzuigiri","setId":"new-generation-series-1","cardNumber":60,"cardCode":"NG1-060"}
-  ,{"id":"owen-hart-enzuigiri","setId":"new-generation-series-1","cardNumber":61,"cardCode":"NG1-061"}
-  ,{"id":"owen-hart-dragon-suplex","setId":"new-generation-series-1","cardNumber":62,"cardCode":"NG1-062"}
-  ,{"id":"owen-hart-missile-dropkick","setId":"new-generation-series-1","cardNumber":63,"cardCode":"NG1-063"}
-  ,{"id":"owen-hart-sharpshooter","setId":"new-generation-series-1","cardNumber":64,"cardCode":"NG1-064"}
-  ,{"id":"entrance-owen-hart","setId":"new-generation-series-1","cardNumber":65,"cardCode":"NG1-065"}
-  ,{"id":"special-owen-hart","setId":"new-generation-series-1","cardNumber":66,"cardCode":"NG1-066"}
-  ,{"id":"superstar-owen-hart","setId":"new-generation-series-1","cardNumber":67,"cardCode":"NG1-067"}
-  ,{"id":"standing-dropkick","setId":"new-generation-series-1","cardNumber":68,"cardCode":"NG1-068"}
-  ,{"id":"hammerlock-takedown","setId":"new-generation-series-1","cardNumber":69,"cardCode":"NG1-069"}
-  ,{"id":"running-knee-lift","setId":"new-generation-series-1","cardNumber":70,"cardCode":"NG1-070"}
-  ,{"id":"shoulder-breaker","setId":"new-generation-series-1","cardNumber":71,"cardCode":"NG1-071"}
-  ,{"id":"front-powerslam","setId":"new-generation-series-1","cardNumber":72,"cardCode":"NG1-072"}
-  ,{"id":"full-nelson","setId":"new-generation-series-1","cardNumber":73,"cardCode":"NG1-073"}
-  ,{"id":"british-bulldog-delayed-vertical-suplex","setId":"new-generation-series-1","cardNumber":74,"cardCode":"NG1-074"}
-  ,{"id":"british-bulldog-crucifix","setId":"new-generation-series-1","cardNumber":75,"cardCode":"NG1-075"}
-  ,{"id":"british-bulldog-military-press-slam","setId":"new-generation-series-1","cardNumber":76,"cardCode":"NG1-076"}
-  ,{"id":"british-bulldog-running-powerslam","setId":"new-generation-series-1","cardNumber":77,"cardCode":"NG1-077"}
-  ,{"id":"entrance-british-bulldog","setId":"new-generation-series-1","cardNumber":78,"cardCode":"NG1-078"}
-  ,{"id":"special-british-bulldog","setId":"new-generation-series-1","cardNumber":79,"cardCode":"NG1-079"}
-  ,{"id":"superstar-british-bulldog","setId":"new-generation-series-1","cardNumber":80,"cardCode":"NG1-080"}
-
-]);
-
-export const CARD_NUMBER_BY_ID = Object.freeze(Object.fromEntries(CARD_NUMBER_MANIFEST.map(entry=>[entry.id,entry])));
-export const CARD_IDS_BY_SET = Object.freeze(Object.fromEntries([...new Set(CARD_NUMBER_MANIFEST.map(entry=>entry.setId))].map(setId=>[setId,Object.freeze(CARD_NUMBER_MANIFEST.filter(entry=>entry.setId===setId).sort((a,b)=>a.cardNumber-b.cardNumber).map(entry=>entry.id))])));
+  },
+  {
+    "id": "austin-theory-ataxia",
+    "setId": "raw-series-1",
+    "cardNumber": 56,
+    "cardCode": "RAW1-056"
+  },
+  {
+    "id": "austin-theory-rolling-thunder-blockbuster",
+    "setId": "raw-series-1",
+    "cardNumber": 57,
+    "cardCode": "RAW1-057"
+  },
+  {
+    "id": "austin-theory-patella-brainbuster",
+    "setId": "raw-series-1",
+    "cardNumber": 58,
+    "cardCode": "RAW1-058"
+  },
+  {
+    "id": "austin-theory-a-town-down",
+    "setId": "raw-series-1",
+    "cardNumber": 59,
+    "cardCode": "RAW1-059"
+  },
+  {
+    "id": "entrance-austin-theory",
+    "setId": "raw-series-1",
+    "cardNumber": 60,
+    "cardCode": "RAW1-060"
+  },
+  {
+    "id": "special-austin-theory",
+    "setId": "raw-series-1",
+    "cardNumber": 61,
+    "cardCode": "RAW1-061"
+  },
+  {
+    "id": "manager-maxxine-dupri",
+    "setId": "raw-series-1",
+    "cardNumber": 62,
+    "cardCode": "RAW1-062"
+  },
+  {
+    "id": "superstar-austin-theory",
+    "setId": "raw-series-1",
+    "cardNumber": 63,
+    "cardCode": "RAW1-063"
+  },
+  {
+    "id": "montez-ford-spinebuster",
+    "setId": "raw-series-1",
+    "cardNumber": 64,
+    "cardCode": "RAW1-064"
+  },
+  {
+    "id": "montez-ford-blockbuster",
+    "setId": "raw-series-1",
+    "cardNumber": 65,
+    "cardCode": "RAW1-065"
+  },
+  {
+    "id": "montez-ford-450-splash",
+    "setId": "raw-series-1",
+    "cardNumber": 66,
+    "cardCode": "RAW1-066"
+  },
+  {
+    "id": "montez-ford-from-the-heavens",
+    "setId": "raw-series-1",
+    "cardNumber": 67,
+    "cardCode": "RAW1-067"
+  },
+  {
+    "id": "special-angelo-dawkins",
+    "setId": "raw-series-1",
+    "cardNumber": 68,
+    "cardCode": "RAW1-068"
+  },
+  {
+    "id": "entrance-montez-ford",
+    "setId": "raw-series-1",
+    "cardNumber": 69,
+    "cardCode": "RAW1-069"
+  },
+  {
+    "id": "superstar-montez-ford",
+    "setId": "raw-series-1",
+    "cardNumber": 70,
+    "cardCode": "RAW1-070"
+  },
+  {
+    "id": "spinning-heel-kick",
+    "setId": "evolution-series-1",
+    "cardNumber": 73,
+    "cardCode": "EVO1-073"
+  },
+  {
+    "id": "triangle-choke",
+    "setId": "evolution-series-1",
+    "cardNumber": 74,
+    "cardCode": "EVO1-074"
+  },
+  {
+    "id": "lola-vice-running-hip-attack",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 37,
+    "cardCode": "WC1-037"
+  },
+  {
+    "id": "lola-vice-spinning-heel-kick",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 38,
+    "cardCode": "WC1-038"
+  },
+  {
+    "id": "lola-vice-triangle-choke",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 39,
+    "cardCode": "WC1-039"
+  },
+  {
+    "id": "lola-vice-305",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 40,
+    "cardCode": "WC1-040"
+  },
+  {
+    "id": "entrance-lola-vice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 41,
+    "cardCode": "WC1-041"
+  },
+  {
+    "id": "special-lola-vice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 42,
+    "cardCode": "WC1-042"
+  },
+  {
+    "id": "superstar-lola-vice",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 43,
+    "cardCode": "WC1-043"
+  },
+  {
+    "id": "dragon-lee-operation-dragon",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 44,
+    "cardCode": "WC1-044"
+  },
+  {
+    "id": "dragon-lee-incinerator",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 45,
+    "cardCode": "WC1-045"
+  },
+  {
+    "id": "dragon-lee-double-foot-stomp",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 46,
+    "cardCode": "WC1-046"
+  },
+  {
+    "id": "dragon-lee-dragon-driver",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 47,
+    "cardCode": "WC1-047"
+  },
+  {
+    "id": "entrance-dragon-lee",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 48,
+    "cardCode": "WC1-048"
+  },
+  {
+    "id": "special-dragon-lee",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 49,
+    "cardCode": "WC1-049"
+  },
+  {
+    "id": "superstar-dragon-lee",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 50,
+    "cardCode": "WC1-050"
+  },
+  {
+    "id": "vikingo-mexican-destroyer",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 51,
+    "cardCode": "WC1-051"
+  },
+  {
+    "id": "vikingo-twisting-450-splash",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 52,
+    "cardCode": "WC1-052"
+  },
+  {
+    "id": "vikingo-top-rope-poison-rana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 53,
+    "cardCode": "WC1-053"
+  },
+  {
+    "id": "vikingo-el-cuerno-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 54,
+    "cardCode": "WC1-054"
+  },
+  {
+    "id": "entrance-hijo-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 55,
+    "cardCode": "WC1-055"
+  },
+  {
+    "id": "special-hijo-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 56,
+    "cardCode": "WC1-056"
+  },
+  {
+    "id": "superstar-hijo-del-vikingo",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 57,
+    "cardCode": "WC1-057"
+  },
+  {
+    "id": "mr-iguana-iguanarana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 58,
+    "cardCode": "WC1-058"
+  },
+  {
+    "id": "mr-iguana-pongase-verde",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 59,
+    "cardCode": "WC1-059"
+  },
+  {
+    "id": "mr-iguana-muta-lock",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 60,
+    "cardCode": "WC1-060"
+  },
+  {
+    "id": "mr-iguana-chalino-driver",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 61,
+    "cardCode": "WC1-061"
+  },
+  {
+    "id": "entrance-mr-iguana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 62,
+    "cardCode": "WC1-062"
+  },
+  {
+    "id": "special-mr-iguana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 63,
+    "cardCode": "WC1-063"
+  },
+  {
+    "id": "superstar-mr-iguana",
+    "setId": "worlds-collide-series-1",
+    "cardNumber": 64,
+    "cardCode": "WC1-064"
+  },
+  {
+    "id": "bret-hart-inverted-atomic-drop",
+    "setId": "new-generation-series-1",
+    "cardNumber": 1,
+    "cardCode": "NG1-001"
+  },
+  {
+    "id": "bret-hart-pendulum-backbreaker",
+    "setId": "new-generation-series-1",
+    "cardNumber": 2,
+    "cardCode": "NG1-002"
+  },
+  {
+    "id": "bret-hart-second-rope-elbow-drop",
+    "setId": "new-generation-series-1",
+    "cardNumber": 3,
+    "cardCode": "NG1-003"
+  },
+  {
+    "id": "bret-hart-sharpshooter",
+    "setId": "new-generation-series-1",
+    "cardNumber": 4,
+    "cardCode": "NG1-004"
+  },
+  {
+    "id": "entrance-bret-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 5,
+    "cardCode": "NG1-005"
+  },
+  {
+    "id": "special-bret-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 6,
+    "cardCode": "NG1-006"
+  },
+  {
+    "id": "superstar-bret-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 7,
+    "cardCode": "NG1-007"
+  },
+  {
+    "id": "shawn-michaels-flying-forearm",
+    "setId": "new-generation-series-1",
+    "cardNumber": 8,
+    "cardCode": "NG1-008"
+  },
+  {
+    "id": "shawn-michaels-teardrop-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 9,
+    "cardCode": "NG1-009"
+  },
+  {
+    "id": "shawn-michaels-top-rope-elbow-drop",
+    "setId": "new-generation-series-1",
+    "cardNumber": 10,
+    "cardCode": "NG1-010"
+  },
+  {
+    "id": "shawn-michaels-sweet-chin-music",
+    "setId": "new-generation-series-1",
+    "cardNumber": 11,
+    "cardCode": "NG1-011"
+  },
+  {
+    "id": "entrance-shawn-michaels",
+    "setId": "new-generation-series-1",
+    "cardNumber": 12,
+    "cardCode": "NG1-012"
+  },
+  {
+    "id": "special-shawn-michaels",
+    "setId": "new-generation-series-1",
+    "cardNumber": 13,
+    "cardCode": "NG1-013"
+  },
+  {
+    "id": "superstar-shawn-michaels",
+    "setId": "new-generation-series-1",
+    "cardNumber": 14,
+    "cardCode": "NG1-014"
+  },
+  {
+    "id": "razor-ramon-fallaway-slam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 15,
+    "cardCode": "NG1-015"
+  },
+  {
+    "id": "razor-ramon-running-powerslam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 16,
+    "cardCode": "NG1-016"
+  },
+  {
+    "id": "razor-ramon-chokeslam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 17,
+    "cardCode": "NG1-017"
+  },
+  {
+    "id": "razor-ramon-razors-edge",
+    "setId": "new-generation-series-1",
+    "cardNumber": 18,
+    "cardCode": "NG1-018"
+  },
+  {
+    "id": "entrance-razor-ramon",
+    "setId": "new-generation-series-1",
+    "cardNumber": 19,
+    "cardCode": "NG1-019"
+  },
+  {
+    "id": "special-razor-ramon",
+    "setId": "new-generation-series-1",
+    "cardNumber": 20,
+    "cardCode": "NG1-020"
+  },
+  {
+    "id": "superstar-razor-ramon",
+    "setId": "new-generation-series-1",
+    "cardNumber": 21,
+    "cardCode": "NG1-021"
+  },
+  {
+    "id": "diesel-snake-eyes",
+    "setId": "new-generation-series-1",
+    "cardNumber": 22,
+    "cardCode": "NG1-022"
+  },
+  {
+    "id": "diesel-big-boot",
+    "setId": "new-generation-series-1",
+    "cardNumber": 23,
+    "cardCode": "NG1-023"
+  },
+  {
+    "id": "diesel-sidewalk-slam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 24,
+    "cardCode": "NG1-024"
+  },
+  {
+    "id": "diesel-jackknife-powerbomb",
+    "setId": "new-generation-series-1",
+    "cardNumber": 25,
+    "cardCode": "NG1-025"
+  },
+  {
+    "id": "entrance-diesel",
+    "setId": "new-generation-series-1",
+    "cardNumber": 26,
+    "cardCode": "NG1-026"
+  },
+  {
+    "id": "special-diesel",
+    "setId": "new-generation-series-1",
+    "cardNumber": 27,
+    "cardCode": "NG1-027"
+  },
+  {
+    "id": "superstar-diesel",
+    "setId": "new-generation-series-1",
+    "cardNumber": 28,
+    "cardCode": "NG1-028"
+  },
+  {
+    "id": "brainbuster",
+    "setId": "money-in-the-bank-series-1",
+    "cardNumber": 38,
+    "cardCode": "MITB1-038"
+  },
+  {
+    "id": "side-kick",
+    "setId": "raw-series-1",
+    "cardNumber": 71,
+    "cardCode": "RAW1-071"
+  },
+  {
+    "id": "vertical-boston-crab",
+    "setId": "evolution-series-1",
+    "cardNumber": 75,
+    "cardCode": "EVO1-075"
+  },
+  {
+    "id": "springboard-roundhouse-kick",
+    "setId": "smackdown-series-1",
+    "cardNumber": 38,
+    "cardCode": "SD1-038"
+  },
+  {
+    "id": "snapmare",
+    "setId": "raw-series-1",
+    "cardNumber": 72,
+    "cardCode": "RAW1-072"
+  },
+  {
+    "id": "scoop-slam",
+    "setId": "raw-series-1",
+    "cardNumber": 73,
+    "cardCode": "RAW1-073"
+  },
+  {
+    "id": "chop-block",
+    "setId": "raw-series-1",
+    "cardNumber": 74,
+    "cardCode": "RAW1-074"
+  },
+  {
+    "id": "spinning-backfist",
+    "setId": "raw-series-1",
+    "cardNumber": 75,
+    "cardCode": "RAW1-075"
+  },
+  {
+    "id": "single-leg-dropkick",
+    "setId": "raw-series-1",
+    "cardNumber": 76,
+    "cardCode": "RAW1-076"
+  },
+  {
+    "id": "back-rake",
+    "setId": "raw-series-1",
+    "cardNumber": 77,
+    "cardCode": "RAW1-077"
+  },
+  {
+    "id": "arm-wrench",
+    "setId": "raw-series-1",
+    "cardNumber": 78,
+    "cardCode": "RAW1-078"
+  },
+  {
+    "id": "knee-lift",
+    "setId": "raw-series-1",
+    "cardNumber": 79,
+    "cardCode": "RAW1-079"
+  },
+  {
+    "id": "t-bone-suplex",
+    "setId": "raw-series-1",
+    "cardNumber": 80,
+    "cardCode": "RAW1-080"
+  },
+  {
+    "id": "gutwrench-suplex",
+    "setId": "raw-series-1",
+    "cardNumber": 81,
+    "cardCode": "RAW1-081"
+  },
+  {
+    "id": "michinoku-driver",
+    "setId": "raw-series-1",
+    "cardNumber": 82,
+    "cardCode": "RAW1-082"
+  },
+  {
+    "id": "pumphandle-slam",
+    "setId": "raw-series-1",
+    "cardNumber": 83,
+    "cardCode": "RAW1-083"
+  },
+  {
+    "id": "bicycle-kick",
+    "setId": "raw-series-1",
+    "cardNumber": 84,
+    "cardCode": "RAW1-084"
+  },
+  {
+    "id": "rolling-elbow",
+    "setId": "raw-series-1",
+    "cardNumber": 85,
+    "cardCode": "RAW1-085"
+  },
+  {
+    "id": "springboard-forearm",
+    "setId": "raw-series-1",
+    "cardNumber": 86,
+    "cardCode": "RAW1-086"
+  },
+  {
+    "id": "dragon-sleeper",
+    "setId": "raw-series-1",
+    "cardNumber": 87,
+    "cardCode": "RAW1-087"
+  },
+  {
+    "id": "camel-clutch",
+    "setId": "raw-series-1",
+    "cardNumber": 88,
+    "cardCode": "RAW1-088"
+  },
+  {
+    "id": "slingshot-suplex",
+    "setId": "raw-series-1",
+    "cardNumber": 89,
+    "cardCode": "RAW1-089"
+  },
+  {
+    "id": "monkey-flip",
+    "setId": "new-generation-series-1",
+    "cardNumber": 29,
+    "cardCode": "NG1-029"
+  },
+  {
+    "id": "headlock-takeover",
+    "setId": "new-generation-series-1",
+    "cardNumber": 30,
+    "cardCode": "NG1-030"
+  },
+  {
+    "id": "eye-rake",
+    "setId": "new-generation-series-1",
+    "cardNumber": 31,
+    "cardCode": "NG1-031"
+  },
+  {
+    "id": "hair-pull-takedown",
+    "setId": "new-generation-series-1",
+    "cardNumber": 32,
+    "cardCode": "NG1-032"
+  },
+  {
+    "id": "schoolboy-roll-up",
+    "setId": "new-generation-series-1",
+    "cardNumber": 33,
+    "cardCode": "NG1-033"
+  },
+  {
+    "id": "reverse-chinlock",
+    "setId": "new-generation-series-1",
+    "cardNumber": 34,
+    "cardCode": "NG1-034"
+  },
+  {
+    "id": "doink-drop-toe-hold",
+    "setId": "new-generation-series-1",
+    "cardNumber": 35,
+    "cardCode": "NG1-035"
+  },
+  {
+    "id": "doink-stump-puller",
+    "setId": "new-generation-series-1",
+    "cardNumber": 36,
+    "cardCode": "NG1-036"
+  },
+  {
+    "id": "doink-flying-body-press",
+    "setId": "new-generation-series-1",
+    "cardNumber": 37,
+    "cardCode": "NG1-037"
+  },
+  {
+    "id": "doink-whoopee-cushion",
+    "setId": "new-generation-series-1",
+    "cardNumber": 38,
+    "cardCode": "NG1-038"
+  },
+  {
+    "id": "entrance-doink-the-clown",
+    "setId": "new-generation-series-1",
+    "cardNumber": 39,
+    "cardCode": "NG1-039"
+  },
+  {
+    "id": "special-doink-the-clown",
+    "setId": "new-generation-series-1",
+    "cardNumber": 40,
+    "cardCode": "NG1-040"
+  },
+  {
+    "id": "superstar-doink-the-clown",
+    "setId": "new-generation-series-1",
+    "cardNumber": 41,
+    "cardCode": "NG1-041"
+  },
+  {
+    "id": "forearm-club",
+    "setId": "new-generation-series-1",
+    "cardNumber": 42,
+    "cardCode": "NG1-042"
+  },
+  {
+    "id": "running-shoulder-block",
+    "setId": "new-generation-series-1",
+    "cardNumber": 43,
+    "cardCode": "NG1-043"
+  },
+  {
+    "id": "side-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 44,
+    "cardCode": "NG1-044"
+  },
+  {
+    "id": "club-to-the-back",
+    "setId": "new-generation-series-1",
+    "cardNumber": 45,
+    "cardCode": "NG1-045"
+  },
+  {
+    "id": "running-body-avalanche",
+    "setId": "new-generation-series-1",
+    "cardNumber": 46,
+    "cardCode": "NG1-046"
+  },
+  {
+    "id": "nerve-hold",
+    "setId": "new-generation-series-1",
+    "cardNumber": 47,
+    "cardCode": "NG1-047"
+  },
+  {
+    "id": "yokozuna-savate-kick",
+    "setId": "new-generation-series-1",
+    "cardNumber": 48,
+    "cardCode": "NG1-048"
+  },
+  {
+    "id": "yokozuna-belly-to-belly-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 49,
+    "cardCode": "NG1-049"
+  },
+  {
+    "id": "yokozuna-running-leg-drop",
+    "setId": "new-generation-series-1",
+    "cardNumber": 50,
+    "cardCode": "NG1-050"
+  },
+  {
+    "id": "yokozuna-banzai-drop",
+    "setId": "new-generation-series-1",
+    "cardNumber": 51,
+    "cardCode": "NG1-051"
+  },
+  {
+    "id": "entrance-yokozuna",
+    "setId": "new-generation-series-1",
+    "cardNumber": 52,
+    "cardCode": "NG1-052"
+  },
+  {
+    "id": "special-yokozuna",
+    "setId": "new-generation-series-1",
+    "cardNumber": 53,
+    "cardCode": "NG1-053"
+  },
+  {
+    "id": "superstar-yokozuna",
+    "setId": "new-generation-series-1",
+    "cardNumber": 54,
+    "cardCode": "NG1-054"
+  },
+  {
+    "id": "fisherman-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 55,
+    "cardCode": "NG1-055"
+  },
+  {
+    "id": "wheel-kick",
+    "setId": "new-generation-series-1",
+    "cardNumber": 56,
+    "cardCode": "NG1-056"
+  },
+  {
+    "id": "gutbuster",
+    "setId": "new-generation-series-1",
+    "cardNumber": 57,
+    "cardCode": "NG1-057"
+  },
+  {
+    "id": "dropkick-to-the-knee",
+    "setId": "new-generation-series-1",
+    "cardNumber": 58,
+    "cardCode": "NG1-058"
+  },
+  {
+    "id": "bridging-german-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 59,
+    "cardCode": "NG1-059"
+  },
+  {
+    "id": "step-up-enzuigiri",
+    "setId": "new-generation-series-1",
+    "cardNumber": 60,
+    "cardCode": "NG1-060"
+  },
+  {
+    "id": "owen-hart-enzuigiri",
+    "setId": "new-generation-series-1",
+    "cardNumber": 61,
+    "cardCode": "NG1-061"
+  },
+  {
+    "id": "owen-hart-dragon-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 62,
+    "cardCode": "NG1-062"
+  },
+  {
+    "id": "owen-hart-missile-dropkick",
+    "setId": "new-generation-series-1",
+    "cardNumber": 63,
+    "cardCode": "NG1-063"
+  },
+  {
+    "id": "owen-hart-sharpshooter",
+    "setId": "new-generation-series-1",
+    "cardNumber": 64,
+    "cardCode": "NG1-064"
+  },
+  {
+    "id": "entrance-owen-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 65,
+    "cardCode": "NG1-065"
+  },
+  {
+    "id": "special-owen-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 66,
+    "cardCode": "NG1-066"
+  },
+  {
+    "id": "superstar-owen-hart",
+    "setId": "new-generation-series-1",
+    "cardNumber": 67,
+    "cardCode": "NG1-067"
+  },
+  {
+    "id": "standing-dropkick",
+    "setId": "new-generation-series-1",
+    "cardNumber": 68,
+    "cardCode": "NG1-068"
+  },
+  {
+    "id": "hammerlock-takedown",
+    "setId": "new-generation-series-1",
+    "cardNumber": 69,
+    "cardCode": "NG1-069"
+  },
+  {
+    "id": "running-knee-lift",
+    "setId": "new-generation-series-1",
+    "cardNumber": 70,
+    "cardCode": "NG1-070"
+  },
+  {
+    "id": "shoulder-breaker",
+    "setId": "new-generation-series-1",
+    "cardNumber": 71,
+    "cardCode": "NG1-071"
+  },
+  {
+    "id": "front-powerslam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 72,
+    "cardCode": "NG1-072"
+  },
+  {
+    "id": "full-nelson",
+    "setId": "new-generation-series-1",
+    "cardNumber": 73,
+    "cardCode": "NG1-073"
+  },
+  {
+    "id": "british-bulldog-delayed-vertical-suplex",
+    "setId": "new-generation-series-1",
+    "cardNumber": 74,
+    "cardCode": "NG1-074"
+  },
+  {
+    "id": "british-bulldog-crucifix",
+    "setId": "new-generation-series-1",
+    "cardNumber": 75,
+    "cardCode": "NG1-075"
+  },
+  {
+    "id": "british-bulldog-military-press-slam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 76,
+    "cardCode": "NG1-076"
+  },
+  {
+    "id": "british-bulldog-running-powerslam",
+    "setId": "new-generation-series-1",
+    "cardNumber": 77,
+    "cardCode": "NG1-077"
+  },
+  {
+    "id": "entrance-british-bulldog",
+    "setId": "new-generation-series-1",
+    "cardNumber": 78,
+    "cardCode": "NG1-078"
+  },
+  {
+    "id": "special-british-bulldog",
+    "setId": "new-generation-series-1",
+    "cardNumber": 79,
+    "cardCode": "NG1-079"
+  },
+  {
+    "id": "superstar-british-bulldog",
+    "setId": "new-generation-series-1",
+    "cardNumber": 80,
+    "cardCode": "NG1-080"
+  },
+  {
+    "id": "back-body-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 1,
+    "cardCode": "GE1-001"
+  },
+  {
+    "id": "clothesline",
+    "setId": "golden-era-series-1",
+    "cardNumber": 2,
+    "cardCode": "GE1-002"
+  },
+  {
+    "id": "powerslam",
+    "setId": "golden-era-series-1",
+    "cardNumber": 3,
+    "cardCode": "GE1-003"
+  },
+  {
+    "id": "neckbreaker",
+    "setId": "golden-era-series-1",
+    "cardNumber": 4,
+    "cardCode": "GE1-004"
+  },
+  {
+    "id": "piledriver",
+    "setId": "golden-era-series-1",
+    "cardNumber": 5,
+    "cardCode": "GE1-005"
+  },
+  {
+    "id": "elbow-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 6,
+    "cardCode": "GE1-006"
+  },
+  {
+    "id": "atomic-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 7,
+    "cardCode": "GE1-007"
+  },
+  {
+    "id": "bearhug",
+    "setId": "golden-era-series-1",
+    "cardNumber": 8,
+    "cardCode": "GE1-008"
+  },
+  {
+    "id": "military-press-slam",
+    "setId": "golden-era-series-1",
+    "cardNumber": 9,
+    "cardCode": "GE1-009"
+  },
+  {
+    "id": "hogans-big-boot",
+    "setId": "golden-era-series-1",
+    "cardNumber": 10,
+    "cardCode": "GE1-010"
+  },
+  {
+    "id": "hulk-hogan-atomic-leg-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 11,
+    "cardCode": "GE1-011"
+  },
+  {
+    "id": "double-axe-handle",
+    "setId": "golden-era-series-1",
+    "cardNumber": 12,
+    "cardCode": "GE1-012"
+  },
+  {
+    "id": "ultimate-warrior-diving-shoulder-block",
+    "setId": "golden-era-series-1",
+    "cardNumber": 13,
+    "cardCode": "GE1-013"
+  },
+  {
+    "id": "ultimate-warrior-gorilla-press-slam",
+    "setId": "golden-era-series-1",
+    "cardNumber": 14,
+    "cardCode": "GE1-014"
+  },
+  {
+    "id": "ultimate-warrior-warrior-splash",
+    "setId": "golden-era-series-1",
+    "cardNumber": 15,
+    "cardCode": "GE1-015"
+  },
+  {
+    "id": "back-elbow",
+    "setId": "golden-era-series-1",
+    "cardNumber": 16,
+    "cardCode": "GE1-016"
+  },
+  {
+    "id": "running-knee",
+    "setId": "golden-era-series-1",
+    "cardNumber": 17,
+    "cardCode": "GE1-017"
+  },
+  {
+    "id": "hotshot",
+    "setId": "golden-era-series-1",
+    "cardNumber": 18,
+    "cardCode": "GE1-018"
+  },
+  {
+    "id": "leaping-rope-clothesline",
+    "setId": "golden-era-series-1",
+    "cardNumber": 19,
+    "cardCode": "GE1-019"
+  },
+  {
+    "id": "diving-body-press",
+    "setId": "golden-era-series-1",
+    "cardNumber": 20,
+    "cardCode": "GE1-020"
+  },
+  {
+    "id": "randy-savage-flying-elbow-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 21,
+    "cardCode": "GE1-021"
+  },
+  {
+    "id": "chop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 22,
+    "cardCode": "GE1-022"
+  },
+  {
+    "id": "corner-avalanche",
+    "setId": "golden-era-series-1",
+    "cardNumber": 23,
+    "cardCode": "GE1-023"
+  },
+  {
+    "id": "andre-the-giant-double-underhook-suplex",
+    "setId": "golden-era-series-1",
+    "cardNumber": 24,
+    "cardCode": "GE1-024"
+  },
+  {
+    "id": "andre-the-giant-sitdown-splash",
+    "setId": "golden-era-series-1",
+    "cardNumber": 25,
+    "cardCode": "GE1-025"
+  },
+  {
+    "id": "manager-bobby-heenan",
+    "setId": "golden-era-series-1",
+    "cardNumber": 26,
+    "cardCode": "GE1-026"
+  },
+  {
+    "id": "manager-miss-elizabeth",
+    "setId": "golden-era-series-1",
+    "cardNumber": 27,
+    "cardCode": "GE1-027"
+  },
+  {
+    "id": "entrance-hulk-hogan",
+    "setId": "golden-era-series-1",
+    "cardNumber": 28,
+    "cardCode": "GE1-028"
+  },
+  {
+    "id": "entrance-ultimate-warrior",
+    "setId": "golden-era-series-1",
+    "cardNumber": 29,
+    "cardCode": "GE1-029"
+  },
+  {
+    "id": "entrance-randy-savage",
+    "setId": "golden-era-series-1",
+    "cardNumber": 30,
+    "cardCode": "GE1-030"
+  },
+  {
+    "id": "entrance-andre-the-giant",
+    "setId": "golden-era-series-1",
+    "cardNumber": 31,
+    "cardCode": "GE1-031"
+  },
+  {
+    "id": "special-hulk-hogan",
+    "setId": "golden-era-series-1",
+    "cardNumber": 32,
+    "cardCode": "GE1-032"
+  },
+  {
+    "id": "special-ultimate-warrior",
+    "setId": "golden-era-series-1",
+    "cardNumber": 33,
+    "cardCode": "GE1-033"
+  },
+  {
+    "id": "special-randy-savage",
+    "setId": "golden-era-series-1",
+    "cardNumber": 34,
+    "cardCode": "GE1-034"
+  },
+  {
+    "id": "special-andre-the-giant",
+    "setId": "golden-era-series-1",
+    "cardNumber": 35,
+    "cardCode": "GE1-035"
+  },
+  {
+    "id": "superstar-hulk-hogan",
+    "setId": "golden-era-series-1",
+    "cardNumber": 36,
+    "cardCode": "GE1-036"
+  },
+  {
+    "id": "superstar-andre-the-giant",
+    "setId": "golden-era-series-1",
+    "cardNumber": 37,
+    "cardCode": "GE1-037"
+  },
+  {
+    "id": "superstar-randy-savage",
+    "setId": "golden-era-series-1",
+    "cardNumber": 38,
+    "cardCode": "GE1-038"
+  },
+  {
+    "id": "superstar-ultimate-warrior",
+    "setId": "golden-era-series-1",
+    "cardNumber": 39,
+    "cardCode": "GE1-039"
+  },
+  {
+    "id": "hulk-hogan-whatcha-gonna-do",
+    "setId": "golden-era-series-1",
+    "cardNumber": 40,
+    "cardCode": "GE1-040"
+  },
+  {
+    "id": "andre-the-giant-headbutt",
+    "setId": "golden-era-series-1",
+    "cardNumber": 41,
+    "cardCode": "GE1-041"
+  },
+  {
+    "id": "randy-savage-cream-of-the-crop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 42,
+    "cardCode": "GE1-042"
+  },
+  {
+    "id": "ultimate-warrior-clothesline",
+    "setId": "golden-era-series-1",
+    "cardNumber": 43,
+    "cardCode": "GE1-043"
+  },
+  {
+    "id": "andre-the-giant-choke",
+    "setId": "golden-era-series-1",
+    "cardNumber": 44,
+    "cardCode": "GE1-044"
+  },
+  {
+    "id": "andre-the-giant-bear-hug",
+    "setId": "golden-era-series-1",
+    "cardNumber": 45,
+    "cardCode": "GE1-045"
+  },
+  {
+    "id": "test-of-strength",
+    "setId": "golden-era-series-1",
+    "cardNumber": 46,
+    "cardCode": "GE1-046"
+  },
+  {
+    "id": "randy-savage-machos-double-axe-handle",
+    "setId": "golden-era-series-1",
+    "cardNumber": 47,
+    "cardCode": "GE1-047"
+  },
+  {
+    "id": "diving-shoulder-block",
+    "setId": "golden-era-series-1",
+    "cardNumber": 48,
+    "cardCode": "GE1-048"
+  },
+  {
+    "id": "arm-wringer",
+    "setId": "golden-era-series-1",
+    "cardNumber": 49,
+    "cardCode": "GE1-049"
+  },
+  {
+    "id": "backhand-chop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 50,
+    "cardCode": "GE1-050"
+  },
+  {
+    "id": "elbow-smash",
+    "setId": "golden-era-series-1",
+    "cardNumber": 51,
+    "cardCode": "GE1-051"
+  },
+  {
+    "id": "fist-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 52,
+    "cardCode": "GE1-052"
+  },
+  {
+    "id": "front-facelock",
+    "setId": "golden-era-series-1",
+    "cardNumber": 53,
+    "cardCode": "GE1-053"
+  },
+  {
+    "id": "knee-breaker",
+    "setId": "golden-era-series-1",
+    "cardNumber": 54,
+    "cardCode": "GE1-054"
+  },
+  {
+    "id": "turnbuckle-smash",
+    "setId": "golden-era-series-1",
+    "cardNumber": 55,
+    "cardCode": "GE1-055"
+  },
+  {
+    "id": "entrance-jake-roberts",
+    "setId": "golden-era-series-1",
+    "cardNumber": 56,
+    "cardCode": "GE1-056"
+  },
+  {
+    "id": "entrance-mr-perfect",
+    "setId": "golden-era-series-1",
+    "cardNumber": 57,
+    "cardCode": "GE1-057"
+  },
+  {
+    "id": "entrance-rowdy-roddy-piper",
+    "setId": "golden-era-series-1",
+    "cardNumber": 58,
+    "cardCode": "GE1-058"
+  },
+  {
+    "id": "entrance-ted-dibiase",
+    "setId": "golden-era-series-1",
+    "cardNumber": 59,
+    "cardCode": "GE1-059"
+  },
+  {
+    "id": "jake-roberts-ddt",
+    "setId": "golden-era-series-1",
+    "cardNumber": 60,
+    "cardCode": "GE1-060"
+  },
+  {
+    "id": "jake-roberts-gutwrench-gutbuster",
+    "setId": "golden-era-series-1",
+    "cardNumber": 61,
+    "cardCode": "GE1-061"
+  },
+  {
+    "id": "jake-roberts-running-knee-lift",
+    "setId": "golden-era-series-1",
+    "cardNumber": 62,
+    "cardCode": "GE1-062"
+  },
+  {
+    "id": "jake-roberts-short-arm-clothesline",
+    "setId": "golden-era-series-1",
+    "cardNumber": 63,
+    "cardCode": "GE1-063"
+  },
+  {
+    "id": "manager-virgil",
+    "setId": "golden-era-series-1",
+    "cardNumber": 64,
+    "cardCode": "GE1-064"
+  },
+  {
+    "id": "mr-perfect-dropkick",
+    "setId": "golden-era-series-1",
+    "cardNumber": 65,
+    "cardCode": "GE1-065"
+  },
+  {
+    "id": "mr-perfect-knee-lift",
+    "setId": "golden-era-series-1",
+    "cardNumber": 66,
+    "cardCode": "GE1-066"
+  },
+  {
+    "id": "mr-perfect-neck-snap",
+    "setId": "golden-era-series-1",
+    "cardNumber": 67,
+    "cardCode": "GE1-067"
+  },
+  {
+    "id": "mr-perfect-perfect-plex",
+    "setId": "golden-era-series-1",
+    "cardNumber": 68,
+    "cardCode": "GE1-068"
+  },
+  {
+    "id": "rowdy-roddy-piper-bulldog",
+    "setId": "golden-era-series-1",
+    "cardNumber": 69,
+    "cardCode": "GE1-069"
+  },
+  {
+    "id": "rowdy-roddy-piper-eye-poke",
+    "setId": "golden-era-series-1",
+    "cardNumber": 70,
+    "cardCode": "GE1-070"
+  },
+  {
+    "id": "rowdy-roddy-piper-punch-combination",
+    "setId": "golden-era-series-1",
+    "cardNumber": 71,
+    "cardCode": "GE1-071"
+  },
+  {
+    "id": "rowdy-roddy-piper-sleeper-hold",
+    "setId": "golden-era-series-1",
+    "cardNumber": 72,
+    "cardCode": "GE1-072"
+  },
+  {
+    "id": "special-jake-roberts",
+    "setId": "golden-era-series-1",
+    "cardNumber": 73,
+    "cardCode": "GE1-073"
+  },
+  {
+    "id": "special-mr-perfect",
+    "setId": "golden-era-series-1",
+    "cardNumber": 74,
+    "cardCode": "GE1-074"
+  },
+  {
+    "id": "special-rowdy-roddy-piper",
+    "setId": "golden-era-series-1",
+    "cardNumber": 75,
+    "cardCode": "GE1-075"
+  },
+  {
+    "id": "special-ted-dibiase",
+    "setId": "golden-era-series-1",
+    "cardNumber": 76,
+    "cardCode": "GE1-076"
+  },
+  {
+    "id": "superstar-jake-roberts",
+    "setId": "golden-era-series-1",
+    "cardNumber": 77,
+    "cardCode": "GE1-077"
+  },
+  {
+    "id": "superstar-mr-perfect",
+    "setId": "golden-era-series-1",
+    "cardNumber": 78,
+    "cardCode": "GE1-078"
+  },
+  {
+    "id": "superstar-rowdy-roddy-piper",
+    "setId": "golden-era-series-1",
+    "cardNumber": 79,
+    "cardCode": "GE1-079"
+  },
+  {
+    "id": "superstar-ted-dibiase",
+    "setId": "golden-era-series-1",
+    "cardNumber": 80,
+    "cardCode": "GE1-080"
+  },
+  {
+    "id": "ted-dibiase-backbreaker",
+    "setId": "golden-era-series-1",
+    "cardNumber": 81,
+    "cardCode": "GE1-081"
+  },
+  {
+    "id": "ted-dibiase-million-dollar-dream",
+    "setId": "golden-era-series-1",
+    "cardNumber": 82,
+    "cardCode": "GE1-082"
+  },
+  {
+    "id": "ted-dibiase-million-dollar-fist-drop",
+    "setId": "golden-era-series-1",
+    "cardNumber": 83,
+    "cardCode": "GE1-083"
+  },
+  {
+    "id": "ted-dibiase-piledriver",
+    "setId": "golden-era-series-1",
+    "cardNumber": 84,
+    "cardCode": "GE1-084"
+  },
+  {
+    "id": "kick-to-the-gut",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 1,
+    "cardCode": "AE1-001"
+  },
+  {
+    "id": "stone-cold-steve-austin-pointed-elbow-drop",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 2,
+    "cardCode": "AE1-002"
+  },
+  {
+    "id": "mounted-punches",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 3,
+    "cardCode": "AE1-003"
+  },
+  {
+    "id": "stone-cold-steve-austin-mudhole-stomps",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 4,
+    "cardCode": "AE1-004"
+  },
+  {
+    "id": "stone-cold-steve-austin-lou-thesz-press",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 5,
+    "cardCode": "AE1-005"
+  },
+  {
+    "id": "stone-cold-steve-austin-stone-cold-stunner",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 6,
+    "cardCode": "AE1-006"
+  },
+  {
+    "id": "running-big-boot",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 7,
+    "cardCode": "AE1-007"
+  },
+  {
+    "id": "sidewalk-slam",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 8,
+    "cardCode": "AE1-008"
+  },
+  {
+    "id": "front-backbreaker",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 9,
+    "cardCode": "AE1-009"
+  },
+  {
+    "id": "the-undertaker-snake-eyes",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 10,
+    "cardCode": "AE1-010"
+  },
+  {
+    "id": "the-undertaker-old-school",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 11,
+    "cardCode": "AE1-011"
+  },
+  {
+    "id": "tombstone-piledriver",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 12,
+    "cardCode": "AE1-012"
+  },
+  {
+    "id": "uppercut",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 13,
+    "cardCode": "AE1-013"
+  },
+  {
+    "id": "short-arm-clothesline",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 14,
+    "cardCode": "AE1-014"
+  },
+  {
+    "id": "backbreaker",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 15,
+    "cardCode": "AE1-015"
+  },
+  {
+    "id": "kane-two-handed-choke-lift",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 16,
+    "cardCode": "AE1-016"
+  },
+  {
+    "id": "flying-clothesline",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 17,
+    "cardCode": "AE1-017"
+  },
+  {
+    "id": "kane-chokeslam-from-hell",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 18,
+    "cardCode": "AE1-018"
+  },
+  {
+    "id": "forearm-smash",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 19,
+    "cardCode": "AE1-019"
+  },
+  {
+    "id": "ddt",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 20,
+    "cardCode": "AE1-020"
+  },
+  {
+    "id": "mankind-cactus-elbow",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 21,
+    "cardCode": "AE1-021"
+  },
+  {
+    "id": "mankind-double-arm-ddt",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 22,
+    "cardCode": "AE1-022"
+  },
+  {
+    "id": "mankind-mandible-claw",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 23,
+    "cardCode": "AE1-023"
+  },
+  {
+    "id": "manager-paul-bearer",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 24,
+    "cardCode": "AE1-024"
+  },
+  {
+    "id": "entrance-stone-cold-steve-austin",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 25,
+    "cardCode": "AE1-025"
+  },
+  {
+    "id": "entrance-the-undertaker",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 26,
+    "cardCode": "AE1-026"
+  },
+  {
+    "id": "entrance-kane",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 27,
+    "cardCode": "AE1-027"
+  },
+  {
+    "id": "entrance-mankind",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 28,
+    "cardCode": "AE1-028"
+  },
+  {
+    "id": "special-stone-cold-steve-austin",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 29,
+    "cardCode": "AE1-029"
+  },
+  {
+    "id": "special-the-undertaker",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 30,
+    "cardCode": "AE1-030"
+  },
+  {
+    "id": "special-kane",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 31,
+    "cardCode": "AE1-031"
+  },
+  {
+    "id": "special-mankind",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 32,
+    "cardCode": "AE1-032"
+  },
+  {
+    "id": "superstar-mankind",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 33,
+    "cardCode": "AE1-033"
+  },
+  {
+    "id": "superstar-kane",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 34,
+    "cardCode": "AE1-034"
+  },
+  {
+    "id": "superstar-the-undertaker",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 35,
+    "cardCode": "AE1-035"
+  },
+  {
+    "id": "superstar-stone-cold-steve-austin",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 36,
+    "cardCode": "AE1-036"
+  },
+  {
+    "id": "standing-switch",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 37,
+    "cardCode": "AE1-037"
+  },
+  {
+    "id": "rollover-counter",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 38,
+    "cardCode": "AE1-038"
+  },
+  {
+    "id": "backflip-counter",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 39,
+    "cardCode": "AE1-039"
+  },
+  {
+    "id": "open-can",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 40,
+    "cardCode": "AE1-040"
+  },
+  {
+    "id": "what",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 41,
+    "cardCode": "AE1-041"
+  },
+  {
+    "id": "mankind-clothesline",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 42,
+    "cardCode": "AE1-042"
+  },
+  {
+    "id": "mankind-have-a-nice-day",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 43,
+    "cardCode": "AE1-043"
+  },
+  {
+    "id": "kane-flying-clothesline",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 44,
+    "cardCode": "AE1-044"
+  },
+  {
+    "id": "the-undertaker-running-big-boot",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 45,
+    "cardCode": "AE1-045"
+  },
+  {
+    "id": "stone-cold-give-me-a-hell-yeah",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 46,
+    "cardCode": "AE1-046"
+  },
+  {
+    "id": "high-knee",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 47,
+    "cardCode": "AE1-047"
+  },
+  {
+    "id": "knee-facebuster",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 48,
+    "cardCode": "AE1-048"
+  },
+  {
+    "id": "single-leg-takedown",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 49,
+    "cardCode": "AE1-049"
+  },
+  {
+    "id": "springboard-dropkick",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 50,
+    "cardCode": "AE1-050"
+  },
+  {
+    "id": "tilt-a-whirl-backbreaker",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 51,
+    "cardCode": "AE1-051"
+  },
+  {
+    "id": "waistlock-takedown",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 52,
+    "cardCode": "AE1-052"
+  },
+  {
+    "id": "chris-jericho-breakdown",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 53,
+    "cardCode": "AE1-053"
+  },
+  {
+    "id": "chris-jericho-lionsault",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 54,
+    "cardCode": "AE1-054"
+  },
+  {
+    "id": "chris-jericho-one-handed-bulldog",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 55,
+    "cardCode": "AE1-055"
+  },
+  {
+    "id": "chris-jericho-walls-of-jericho",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 56,
+    "cardCode": "AE1-056"
+  },
+  {
+    "id": "chyna-bomb",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 57,
+    "cardCode": "AE1-057"
+  },
+  {
+    "id": "chyna-gorilla-press-slam",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 58,
+    "cardCode": "AE1-058"
+  },
+  {
+    "id": "chyna-handspring-back-elbow",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 59,
+    "cardCode": "AE1-059"
+  },
+  {
+    "id": "chyna-inverted-ddt",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 60,
+    "cardCode": "AE1-060"
+  },
+  {
+    "id": "entrance-chris-jericho",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 61,
+    "cardCode": "AE1-061"
+  },
+  {
+    "id": "entrance-chyna",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 62,
+    "cardCode": "AE1-062"
+  },
+  {
+    "id": "entrance-kurt-angle",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 63,
+    "cardCode": "AE1-063"
+  },
+  {
+    "id": "entrance-triple-h",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 64,
+    "cardCode": "AE1-064"
+  },
+  {
+    "id": "kurt-angle-ankle-lock",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 65,
+    "cardCode": "AE1-065"
+  },
+  {
+    "id": "kurt-angle-integrity",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 66,
+    "cardCode": "AE1-066"
+  },
+  {
+    "id": "kurt-angle-intelligence",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 67,
+    "cardCode": "AE1-067"
+  },
+  {
+    "id": "kurt-angle-intensity",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 68,
+    "cardCode": "AE1-068"
+  },
+  {
+    "id": "kurt-angle-moonsault",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 69,
+    "cardCode": "AE1-069"
+  },
+  {
+    "id": "kurt-angle-slam",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 70,
+    "cardCode": "AE1-070"
+  },
+  {
+    "id": "kurt-angle-three-german-suplexes",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 71,
+    "cardCode": "AE1-071"
+  },
+  {
+    "id": "manager-stephanie-mcmahon-helmsley",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 72,
+    "cardCode": "AE1-072"
+  },
+  {
+    "id": "special-chris-jericho",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 73,
+    "cardCode": "AE1-073"
+  },
+  {
+    "id": "special-chyna",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 74,
+    "cardCode": "AE1-074"
+  },
+  {
+    "id": "special-triple-h",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 75,
+    "cardCode": "AE1-075"
+  },
+  {
+    "id": "superstar-chris-jericho",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 76,
+    "cardCode": "AE1-076"
+  },
+  {
+    "id": "superstar-chyna",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 77,
+    "cardCode": "AE1-077"
+  },
+  {
+    "id": "superstar-kurt-angle",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 78,
+    "cardCode": "AE1-078"
+  },
+  {
+    "id": "superstar-triple-h",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 79,
+    "cardCode": "AE1-079"
+  },
+  {
+    "id": "triple-h-high-knee",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 80,
+    "cardCode": "AE1-080"
+  },
+  {
+    "id": "triple-h-knee-facebuster",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 81,
+    "cardCode": "AE1-081"
+  },
+  {
+    "id": "triple-h-spinebuster",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 82,
+    "cardCode": "AE1-082"
+  },
+  {
+    "id": "triple-h-the-pedigree",
+    "setId": "attitude-era-series-1",
+    "cardNumber": 83,
+    "cardCode": "AE1-083"
+  }
+];
+export const CARD_NUMBER_BY_ID = Object.fromEntries(CARD_NUMBER_MANIFEST.map(x=>[x.id,x]));
+export const CARD_IDS_BY_SET = {};
+for (const entry of CARD_NUMBER_MANIFEST) (CARD_IDS_BY_SET[entry.setId] ??= []).push(entry.id);

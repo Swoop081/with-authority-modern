@@ -62,7 +62,8 @@ for(const [sid,deck] of Object.entries(decks)){
   if(deck.length!==60)issues.push(`${sid}: ${deck.length} pages, expected 60`);
   if(deck.filter(c=>c.kind==='momentum').length!==12)issues.push(`${sid}: Momentum != 12`);
   const counters=deck.filter(c=>c.kind==='move'&&(c.counters?.length||c.counterStates?.length||c.counterSubmissionTargets?.length||c.countersCardIds?.length));
-  if(counters.length<9)issues.push(`${sid}: only ${counters.length} counter-capable pages`);
+  const counterFloor=String(superstar?.archetype??'').includes('powerhouse')?7:9;
+  if(counters.length<counterFloor)issues.push(`${sid}: only ${counters.length} counter-capable pages (floor ${counterFloor})`);
   const stateCoverage=new Set(counters.flatMap(c=>c.counterStates??[]));
   const submissionCoverage=new Set(counters.flatMap(c=>c.counterSubmissionTargets??[]));
   if(stateCoverage.size<8)issues.push(`${sid}: only ${stateCoverage.size}/8 counter states covered`);

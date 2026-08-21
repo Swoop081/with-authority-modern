@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.81';
-import { deckIds } from '../js/data/decks.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.90';
+import { deckIds } from '../js/data/decks.js?v=0.13.90';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const count=(ids,id)=>ids.filter(x=>x===id).length;
@@ -22,8 +22,8 @@ test('v0.13.33 locks Wheelbarrow Suplex and Test of Strength as approved shared 
     {set:'survivor-series-series-1',cost:5,damage:8,rarity:2,method:'technical',req:2,counter:'body-elevated',ground:true});
   assert.equal(CARD_NUMBER_BY_ID[wheel.id].cardCode,'SVS1-053');
   assert.deepEqual({set:testStrength.setId,cost:testStrength.cost,damage:testStrength.damage,rarity:testStrength.rarity,method:testStrength.method,req:testStrength.requirements.strength,counter:testStrength.counterState,effects:testStrength.effects},
-    {set:'hall-of-fame-series-1',cost:2,damage:3,rarity:1,method:'strength',req:1,counter:'front-control',effects:[]});
-  assert.equal(CARD_NUMBER_BY_ID[testStrength.id].cardCode,'HOF1-092');
+    {set:'golden-era-series-1',cost:2,damage:3,rarity:1,method:'strength',req:1,counter:'front-control',effects:[]});
+  assert.equal(CARD_NUMBER_BY_ID[testStrength.id].cardCode,'GE1-046');
 });
 
 test('v0.13.33 adds Andre Choke and Bear Hug trademarks and installs two copies of each in his authored deck',()=>{
@@ -32,8 +32,8 @@ test('v0.13.33 adds Andre Choke and Bear Hug trademarks and installs two copies 
     {cost:6,damage:10,rarity:3,method:'strength',req:2,counter:'torso-trapped',trademark:true,effects:[{type:'loseOpponentAdrenaline',amount:1},{type:'search',name:'André’s Bear Hug',discount:0}]});
   assert.deepEqual({cost:hug.cost,damage:hug.damage,rarity:hug.rarity,method:hug.method,req:hug.requirements.strength,counter:hug.counterState,trademark:hug.trademark,standingOnly:hug.standingOnly,submission:hug.submission},
     {cost:7,damage:0,rarity:3,method:'strength',req:2,counter:'torso-trapped',trademark:true,standingOnly:true,submission:{bodyPart:'chest',pressure:6}});
-  assert.equal(CARD_NUMBER_BY_ID[choke.id].cardCode,'HOF1-090');
-  assert.equal(CARD_NUMBER_BY_ID[hug.id].cardCode,'HOF1-091');
+  assert.equal(CARD_NUMBER_BY_ID[choke.id].cardCode,'GE1-044');
+  assert.equal(CARD_NUMBER_BY_ID[hug.id].cardCode,'GE1-045');
   const deck=deckIds['andre-the-giant'];
   assert.equal(deck.length,60);
   assert.equal(count(deck,'andre-the-giant-choke'),2);
@@ -48,7 +48,7 @@ test('v0.13.33 moves the Savage rider from generic Double Axe Handle onto Macho�
     {cost:4,damage:6,rules:'Grounds opponent.',effects:[],ground:true});
   assert.deepEqual({cost:macho.cost,damage:macho.damage,rarity:macho.rarity,method:macho.method,req:macho.requirements.agility,moveType:macho.moveType,counter:macho.counterState,ground:macho.groundOpponent,trademark:macho.trademark,effects:macho.effects},
     {cost:5,damage:9,rarity:3,method:'agility',req:2,moveType:'aerial',counter:'diving-aerial',ground:true,trademark:true,effects:[{type:'gainAdrenaline',amount:1},{type:'search',name:'Flying Elbow Drop',discount:3}]});
-  assert.equal(CARD_NUMBER_BY_ID[macho.id].cardCode,'HOF1-093');
+  assert.equal(CARD_NUMBER_BY_ID[macho.id].cardCode,'GE1-047');
   const deck=deckIds['randy-savage'];
   assert.equal(deck.length,60);
   assert.equal(count(deck,'randy-savage-machos-double-axe-handle'),3);

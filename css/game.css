@@ -380,6 +380,8 @@ body[data-screen="match"] .topbar{display:none}
 /* Set identity is visible on Superstar fronts and rules backs. */
 .ccg-card.type-superstar.set-summerslam-series-1 .ccg-card-face{border-color:#8b66bd}.ccg-card.type-superstar.set-summerslam-series-1 .ccg-card-rules{background:radial-gradient(circle at 50% 15%,#51366f,#17101f 58%,#0c0910)}
 .ccg-card.type-superstar.set-hall-of-fame-series-1 .ccg-card-face{border-color:#c2a45f}.ccg-card.type-superstar.set-hall-of-fame-series-1 .ccg-card-rules{background:radial-gradient(circle at 50% 15%,#5d4a22,#19160f 58%,#0c0b08)}
+.ccg-card.type-superstar.set-golden-era-series-1 .ccg-card-face{border-color:#d3b15a}.ccg-card.type-superstar.set-golden-era-series-1 .ccg-card-rules{background:radial-gradient(circle at 50% 15%,#72551c,#1b1509 58%,#080704)}
+.ccg-card.type-superstar.set-attitude-era-series-1 .ccg-card-face{border-color:#d7d9dc}.ccg-card.type-superstar.set-attitude-era-series-1 .ccg-card-rules{background:radial-gradient(circle at 50% 15%,#4c4f54,#17191d 55%,#07080a)}
 .ccg-card.is-foil .ccg-card-front:before{content:"";position:absolute;z-index:3;inset:-45%;background:linear-gradient(115deg,transparent 39%,rgba(176,233,255,.12) 44%,rgba(255,255,255,.52) 49%,rgba(249,195,255,.23) 53%,transparent 59%);transform:translateX(-52%) rotate(9deg);animation:foilSweep 2.2s linear infinite;pointer-events:none}
 .ccg-card.is-foil .ccg-card-title small:after{content:" · FOIL";color:#dff8ff}
 
@@ -391,6 +393,8 @@ body[data-screen="match"] .topbar{display:none}
 .ccg-superstar-nameplate small{font-size:clamp(4px,2.6cqw,8px);font-weight:900;letter-spacing:.18em;color:var(--np-bottom,#ddd);line-height:1;}
 .ccg-card.set-summerslam-series-1{--np-top:#fff;--np-bottom:#ff9d38;--np-edge:#f6a253;--np-stroke-color:#071b36;--np-glow-color:rgba(93,210,255,.72)}
 .ccg-card.set-hall-of-fame-series-1{--np-top:#fff8cf;--np-bottom:#d0a337;--np-edge:#e5b642;--np-stroke-color:#171005;--np-glow-color:rgba(230,188,75,.62)}
+.ccg-card.set-golden-era-series-1{--np-top:#fff7cf;--np-bottom:#d9ad3b;--np-edge:#f0c45e;--np-stroke-color:#1a1003;--np-glow-color:rgba(232,184,60,.68)}
+.ccg-card.set-attitude-era-series-1{--np-top:#f7f7f4;--np-bottom:#c5c8cc;--np-edge:#e7e8ea;--np-stroke-color:#08090a;--np-glow-color:rgba(218,222,226,.58)}
 .ccg-card.set-evolution-series-1{--np-top:#fff;--np-bottom:#ff54d7;--np-edge:#ff54d7;--np-stroke-color:#351044;--np-glow-color:rgba(76,221,255,.64)}
 .ccg-card.set-raw-series-1{--np-top:#fff;--np-bottom:#c7ccd2;--np-edge:#ef2637;--np-stroke-color:#110305;--np-glow-color:rgba(238,30,48,.66)}
 .ccg-card.set-worlds-collide-series-1{--np-top:#f7fff1;--np-bottom:#73ff42;--np-edge:#62f13f;--np-stroke-color:#040504;--np-glow-color:rgba(229,182,66,.58)}
@@ -1417,6 +1421,8 @@ body[data-screen="splash"] #game{padding-top:0;min-height:100svh}
 .ccg-card.is-full-art-superstar .ccg-card-front:before{display:none!important}
 .ccg-card.is-full-art-superstar.set-summerslam-series-1 .ccg-card-front{border-color:rgba(95,161,255,.62)}
 .ccg-card.is-full-art-superstar.set-hall-of-fame-series-1 .ccg-card-front{border-color:rgba(231,193,91,.68)}
+.ccg-card.is-full-art-superstar.set-golden-era-series-1 .ccg-card-front{border-color:rgba(231,193,91,.74)}
+.ccg-card.is-full-art-superstar.set-attitude-era-series-1 .ccg-card-front{border-color:rgba(220,223,226,.72)}
 .ccg-card.is-full-art-superstar.set-evolution-series-1 .ccg-card-front{border-color:rgba(230,91,215,.68)}
 .ccg-card.is-full-art-superstar.set-season-1-final-boss .ccg-card-front{border-color:rgba(232,44,57,.78)}
 .ccg-card.is-full-art-superstar.set-season-2-whos-next .ccg-card-front{border-color:rgba(226,194,96,.86);box-shadow:0 0 0 1px rgba(214,221,228,.18) inset,0 0 22px rgba(226,194,96,.12)}
@@ -1562,6 +1568,8 @@ img.superstar-card-visual{object-position:center center}
 .ccg-card.is-full-art-move .ccg-card-front:before{display:none!important}
 .ccg-card.is-full-art-move.set-summerslam-series-1 .ccg-card-front{border-color:rgba(95,161,255,.62)}
 .ccg-card.is-full-art-move.set-hall-of-fame-series-1 .ccg-card-front{border-color:rgba(231,193,91,.68)}
+.ccg-card.is-full-art-move.set-golden-era-series-1 .ccg-card-front{border-color:rgba(231,193,91,.74)}
+.ccg-card.is-full-art-move.set-attitude-era-series-1 .ccg-card-front{border-color:rgba(220,223,226,.72)}
 .ccg-card.is-full-art-move.set-evolution-series-1 .ccg-card-front{border-color:rgba(230,91,215,.68)}
 .ccg-card.is-full-art-move.set-season-1-final-boss .ccg-card-front{border-color:rgba(232,44,57,.78)}
 .ccg-card.is-full-art-move.set-season-2-whos-next .ccg-card-front{border-color:rgba(226,194,96,.86);box-shadow:0 0 0 1px rgba(214,221,228,.18) inset,0 0 22px rgba(226,194,96,.12)}
@@ -3074,7 +3082,9 @@ body[data-screen="match"] .hand-card-action button.primary:not(:disabled){text-s
   .challenge-set-stat{grid-template-columns:52px 42px minmax(0,1fr) auto!important;gap:6px!important;padding:8px!important}.challenge-set-logo{width:52px;height:38px}.challenge-progress-ring{width:40px;height:40px}.challenge-progress-ring b{font-size:.54rem}.challenge-set-copy strong{font-size:.60rem}.challenge-set-copy small{font-size:.43rem}
 }
 .generated-superstar-preview{position:relative;display:block;width:100%;height:100%;aspect-ratio:.68;overflow:hidden;border-radius:inherit;background:linear-gradient(155deg,#14253a,#351b3b 72%,#10131b);border:2px solid rgba(255,255,255,.38);box-shadow:inset 0 0 0 3px rgba(255,255,255,.06);color:#fff}
-.generated-superstar-preview.set-hall-of-fame-series-1{background:linear-gradient(155deg,#4b3915,#15100a 72%,#090807);border-color:#c7a552}.generated-superstar-preview.set-evolution-series-1{background:linear-gradient(155deg,#3b1350,#6d125d 66%,#150b1d);border-color:#ee4ecf}.generated-superstar-preview.set-raw-series-1{background:linear-gradient(155deg,#451015,#16090b 70%,#080709);border-color:#ef4452}.generated-superstar-preview.set-worlds-collide-series-1{background:linear-gradient(155deg,#0c3e43,#37102f 70%,#070a0d);border-color:#51ded9}.generated-superstar-preview.set-money-in-the-bank-series-1{background:linear-gradient(155deg,#154419,#14230d 70%,#080b07);border-color:#65dc48}.generated-superstar-preview.set-smackdown-series-1{background:linear-gradient(155deg,#0e3155,#102b58 66%,#080b13);border-color:#45aaf5}.generated-superstar-preview.set-survivor-series-series-1{background:linear-gradient(155deg,#102d4e,#3c241f 70%,#0a0c12);border-color:#f47b35}
+.generated-superstar-preview.set-hall-of-fame-series-1{background:linear-gradient(155deg,#4b3915,#15100a 72%,#090807);border-color:#c7a552}
+.generated-superstar-preview.set-golden-era-series-1{background:linear-gradient(155deg,#5b4416,#1a1308 70%,#080704);border-color:#d6b35a}
+.generated-superstar-preview.set-attitude-era-series-1{background:linear-gradient(155deg,#3a3d42,#111318 68%,#050608);border-color:#cfd3d7}.generated-superstar-preview.set-evolution-series-1{background:linear-gradient(155deg,#3b1350,#6d125d 66%,#150b1d);border-color:#ee4ecf}.generated-superstar-preview.set-raw-series-1{background:linear-gradient(155deg,#451015,#16090b 70%,#080709);border-color:#ef4452}.generated-superstar-preview.set-worlds-collide-series-1{background:linear-gradient(155deg,#0c3e43,#37102f 70%,#070a0d);border-color:#51ded9}.generated-superstar-preview.set-money-in-the-bank-series-1{background:linear-gradient(155deg,#154419,#14230d 70%,#080b07);border-color:#65dc48}.generated-superstar-preview.set-smackdown-series-1{background:linear-gradient(155deg,#0e3155,#102b58 66%,#080b13);border-color:#45aaf5}.generated-superstar-preview.set-survivor-series-series-1{background:linear-gradient(155deg,#102d4e,#3c241f 70%,#0a0c12);border-color:#f47b35}
 .generated-superstar-art{position:absolute;inset:0;display:block}.generated-superstar-art img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}.generated-superstar-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,11,.08) 35%,rgba(5,7,11,.18) 58%,rgba(4,5,8,.92) 100%)}
 .generated-superstar-stars{position:absolute;left:7%;top:5.5%;display:flex;flex-direction:column;font-size:clamp(.45rem,1.8vw,.72rem);line-height:1;color:#ffd44f;text-shadow:0 0 7px rgba(255,210,64,.65);letter-spacing:-.08em;writing-mode:vertical-rl}
 .generated-superstar-logo{position:absolute;top:4%;right:5%;width:35%;height:12%;display:grid;place-items:center}.generated-superstar-logo img{max-width:100%;max-height:100%;object-fit:contain}
@@ -3165,6 +3175,8 @@ body[data-screen="match"] .hand-card-action button.primary:not(:disabled){text-s
 .ccg-card-rules{background:linear-gradient(155deg,#18151f,#0c0d12)!important}
 .ccg-card-rules.set-summerslam-series-1{background:radial-gradient(circle at 75% 15%,rgba(255,99,55,.20),transparent 28%),linear-gradient(155deg,#142a47,#111321 58%,#251320)!important;border-color:#ef9147!important}
 .ccg-card-rules.set-hall-of-fame-series-1{background:radial-gradient(circle at 70% 12%,rgba(237,194,65,.20),transparent 30%),linear-gradient(155deg,#211b08,#0d0d0b 62%,#171205)!important;border-color:#d7b53d!important}
+.ccg-card-rules.set-golden-era-series-1{background:radial-gradient(circle at 70% 12%,rgba(237,194,65,.22),transparent 30%),linear-gradient(155deg,#261d08,#0c0b08 62%,#181105)!important;border-color:#dfba45!important}
+.ccg-card-rules.set-attitude-era-series-1{background:radial-gradient(circle at 70% 12%,rgba(218,222,226,.16),transparent 30%),linear-gradient(155deg,#25272b,#0b0d10 62%,#15171a)!important;border-color:#bfc4c9!important}
 .ccg-card-rules.set-evolution-series-1{background:radial-gradient(circle at 70% 14%,rgba(197,79,227,.24),transparent 32%),linear-gradient(155deg,#231338,#0d0d17 62%,#161027)!important;border-color:#a55ad0!important}
 .ccg-card-rules.set-raw-series-1{background:radial-gradient(circle at 70% 14%,rgba(255,42,42,.22),transparent 32%),linear-gradient(155deg,#300d0d,#100b0b 65%)!important;border-color:#e83c3c!important}
 .ccg-card-rules.set-worlds-collide-series-1{background:radial-gradient(circle at 70% 14%,rgba(45,169,255,.24),transparent 32%),linear-gradient(155deg,#0c2440,#0c1018 65%)!important;border-color:#43a9ef!important}
@@ -4164,6 +4176,14 @@ body:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="st
 .physical-booster-pack.pack-set-hall-of-fame-series-1{
   --pack-glint:rgba(255,224,121,.46);--pack-edge:rgba(232,198,83,.46);
   background:radial-gradient(circle at 68% 22%,rgba(255,215,83,.22),transparent 25%),linear-gradient(145deg,#15130b 0%,#4d3a11 48%,#111018 100%)!important;
+}
+.physical-booster-pack.pack-set-golden-era-series-1{
+  --pack-glint:rgba(255,224,121,.48);--pack-edge:rgba(239,200,76,.52);
+  background:radial-gradient(circle at 68% 22%,rgba(255,215,83,.25),transparent 25%),linear-gradient(145deg,#161109 0%,#65470e 48%,#0d0b08 100%)!important;
+}
+.physical-booster-pack.pack-set-attitude-era-series-1{
+  --pack-glint:rgba(235,238,241,.44);--pack-edge:rgba(196,202,208,.50);
+  background:radial-gradient(circle at 67% 20%,rgba(255,255,255,.17),transparent 23%),radial-gradient(circle at 26% 75%,rgba(147,153,160,.13),transparent 28%),linear-gradient(145deg,#15171a 0%,#3a3e43 48%,#08090a 100%)!important;
 }
 .physical-booster-pack.pack-set-evolution-series-1{
   --pack-glint:rgba(255,159,232,.48);--pack-edge:rgba(221,106,206,.48);
@@ -6164,7 +6184,7 @@ body[data-screen="live-events"] .premium-run-screen{--mode-accent:#54df92;--mode
 .superstar-unlock-footnote{grid-area:foot;display:block;text-align:center;color:#848d9a;font-size:.55rem;letter-spacing:.04em;animation:unlock-copy-in .48s ease-out .72s both}
 .superstar-unlock-watermark{position:absolute;z-index:0;left:50%;top:51%;transform:translate(-50%,-50%) rotate(-7deg);font-size:clamp(5rem,20vw,14rem);font-weight:1000;letter-spacing:-.08em;color:var(--unlock-accent);opacity:.035;white-space:nowrap;pointer-events:none}
 .superstar-unlock-effects{position:absolute;z-index:1;inset:0;pointer-events:none}.superstar-unlock-effects span{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--unlock-accent);box-shadow:0 0 15px var(--unlock-accent);animation:unlock-particle 2.6s ease-out infinite}.superstar-unlock-effects span:nth-child(1){left:14%;top:22%;animation-delay:.15s}.superstar-unlock-effects span:nth-child(2){left:81%;top:18%;animation-delay:.75s}.superstar-unlock-effects span:nth-child(3){left:8%;top:70%;animation-delay:1.15s}.superstar-unlock-effects span:nth-child(4){left:88%;top:64%;animation-delay:1.65s}.superstar-unlock-effects span:nth-child(5){left:52%;top:10%;animation-delay:2.05s}
-.superstar-unlock-showcase.set-evolution-series-1{--unlock-accent:#cf6cff}.superstar-unlock-showcase.set-hall-of-fame-series-1{--unlock-accent:#e6c767}.superstar-unlock-showcase.set-summerslam-series-1{--unlock-accent:#65bfff}.superstar-unlock-showcase.set-season-1-final-boss{--unlock-accent:#e04747}
+.superstar-unlock-showcase.set-evolution-series-1{--unlock-accent:#cf6cff}.superstar-unlock-showcase.set-hall-of-fame-series-1{--unlock-accent:#e6c767}.superstar-unlock-showcase.set-golden-era-series-1{--unlock-accent:#e7bd50}.superstar-unlock-showcase.set-attitude-era-series-1{--unlock-accent:#d7dadd}.superstar-unlock-showcase.set-summerslam-series-1{--unlock-accent:#65bfff}.superstar-unlock-showcase.set-season-1-final-boss{--unlock-accent:#e04747}
 @keyframes unlock-stage-in{from{opacity:0;transform:scale(.94) translateY(22px)}to{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes unlock-card-in{0%{opacity:0;transform:translateY(70px) scale(.65) rotateY(-18deg)}55%{opacity:1;transform:translateY(-8px) scale(1.05) rotateY(4deg)}100%{opacity:1;transform:translateY(0) scale(1) rotateY(0)}}
 @keyframes unlock-copy-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -6191,6 +6211,8 @@ body[data-screen="live-events"] .premium-run-screen{--mode-accent:#54df92;--mode
 }
 .ccg-card.is-layered-front.set-summerslam-series-1 .ccg-live-front-data{--lf-name:#fff;--lf-accent:#ff9d38}
 .ccg-card.is-layered-front.set-hall-of-fame-series-1 .ccg-live-front-data{--lf-name:#fff8cf;--lf-accent:#d0a337}
+.ccg-card.is-layered-front.set-golden-era-series-1 .ccg-live-front-data{--lf-name:#fff7cf;--lf-accent:#d9ad3b}
+.ccg-card.is-layered-front.set-attitude-era-series-1 .ccg-live-front-data{--lf-name:#f7f7f4;--lf-accent:#c5c8cc}
 .ccg-card.is-layered-front.set-evolution-series-1 .ccg-live-front-data{--lf-name:#fff;--lf-accent:#ff54d7}
 .ccg-card.is-layered-front.set-season-1-final-boss .ccg-live-front-data{--lf-name:#fff4c8;--lf-accent:#ef3d4c}
 .ccg-card.is-layered-front.set-season-2-whos-next .ccg-live-front-data{--lf-name:#fff;--lf-accent:#dfc160}
@@ -9102,3 +9124,28 @@ body[data-screen="boosters"] .vault-pack-quantity{
     max-height:none!important;
   }
 }
+
+/* v0.13.82 — Golden Era / Attitude Era set identities */
+.collection-feature.theme-golden,.theme-golden .feature-hero{--mode-accent:#e4b63f;--mode-accent-2:#e44236}
+.collection-feature.theme-attitude,.theme-attitude .feature-hero{--mode-accent:#ed2537;--mode-accent-2:#d7dade}
+.theme-golden .collection-hero,.theme-golden .booster-feature{background:radial-gradient(circle at 82% 15%,rgba(228,182,63,.20),transparent 30%),radial-gradient(circle at 18% 12%,rgba(34,72,156,.21),transparent 34%),linear-gradient(145deg,#071128,#35110d 70%,#08080a)!important}
+.theme-attitude .collection-hero,.theme-attitude .booster-feature{background:radial-gradient(circle at 84% 14%,rgba(237,37,55,.18),transparent 30%),radial-gradient(circle at 22% 18%,rgba(215,218,222,.09),transparent 32%),linear-gradient(145deg,#050506,#191b1e 63%,#23070b)!important}
+.theme-golden .feature-set-logo{max-height:92px}.theme-attitude .feature-set-logo{max-height:92px}
+body[data-set="golden-era-series-1"] .pack-theme-next,.theme-golden .pack-theme-next{background:linear-gradient(90deg,#173471,#e4b63f,#d13a31)!important}
+body[data-set="attitude-era-series-1"] .pack-theme-next,.theme-attitude .pack-theme-next{background:linear-gradient(90deg,#25282d,#d7dade,#ed2537)!important;color:#080808!important}
+
+/* v0.13.86 — four-tier card chase: Normal / Emerald / Sapphire / Ruby */
+.ccg-card.is-tier-glow .ccg-card-front{overflow:hidden!important}
+.ccg-card .ccg-tier-overlay{position:absolute;z-index:45;inset:-18%;pointer-events:none;mix-blend-mode:screen;opacity:.56;animation:tierSurfaceSweep 2.8s ease-in-out infinite}
+.ccg-card.tier-emerald .ccg-card-front{box-shadow:inset 0 0 0 1px rgba(92,255,152,.62),0 0 18px rgba(40,226,113,.34)!important}
+.ccg-card.tier-emerald .ccg-tier-overlay{background:linear-gradient(112deg,transparent 25%,rgba(51,220,114,.10) 35%,rgba(206,255,222,.55) 46%,rgba(40,200,98,.25) 55%,transparent 72%)}
+.ccg-card.tier-sapphire .ccg-card-front{box-shadow:inset 0 0 0 1px rgba(111,202,255,.65),0 0 18px rgba(54,146,255,.36)!important}
+.ccg-card.tier-sapphire .ccg-tier-overlay{background:linear-gradient(112deg,transparent 25%,rgba(55,147,255,.12) 35%,rgba(205,237,255,.58) 46%,rgba(51,135,235,.28) 55%,transparent 72%)}
+.ccg-card.tier-ruby .ccg-card-front{box-shadow:inset 0 0 0 1px rgba(255,105,116,.70),0 0 21px rgba(238,46,63,.42)!important}
+.ccg-card.tier-ruby .ccg-tier-overlay{background:linear-gradient(112deg,transparent 25%,rgba(238,48,65,.14) 35%,rgba(255,220,222,.62) 46%,rgba(224,38,55,.30) 55%,transparent 72%)}
+.ccg-tier-stat-override{position:absolute;z-index:60;right:5%;bottom:4%;display:grid;gap:1px;min-width:48px;padding:4px 7px;border-radius:8px;background:rgba(5,7,10,.88);border:1px solid rgba(255,255,255,.34);box-shadow:0 4px 12px rgba(0,0,0,.55);text-align:center;color:#fff;pointer-events:none}
+.ccg-tier-stat-override small{font-size:.42rem;line-height:1;font-weight:1000;letter-spacing:.08em}.ccg-tier-stat-override b{font-size:.65rem;line-height:1.05}
+.tier-summary-symbol{display:inline-flex;align-items:center;justify-content:center;min-height:20px;padding:3px 7px;border-radius:999px;font-size:.48rem;font-weight:1000;letter-spacing:.07em;border:1px solid rgba(255,255,255,.24);color:#fff;background:#14161b}
+.tier-summary-symbol.tier-emerald{box-shadow:inset 0 0 9px rgba(40,226,113,.45)}.tier-summary-symbol.tier-sapphire{box-shadow:inset 0 0 9px rgba(54,146,255,.50)}.tier-summary-symbol.tier-ruby{box-shadow:inset 0 0 9px rgba(238,46,63,.55)}
+.tier-stage.tier-emerald .booster-card-halo{filter:drop-shadow(0 0 26px rgba(40,226,113,.42))}.tier-stage.tier-sapphire .booster-card-halo{filter:drop-shadow(0 0 26px rgba(54,146,255,.44))}.tier-stage.tier-ruby .booster-card-halo{filter:drop-shadow(0 0 30px rgba(238,46,63,.52))}
+@keyframes tierSurfaceSweep{0%{transform:translateX(-55%) rotate(4deg)}100%{transform:translateX(55%) rotate(4deg)}}

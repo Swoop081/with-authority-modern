@@ -1,6 +1,6 @@
 # WWE Legacy Move card front templates
 
-These SVG files mirror Move Card Studio v0.11.18. They are optional editable references for external graphics work.
+These SVG files mirror the unified Card Art Studio and are optional editable references for external graphics work. Golden Era and Attitude Era replace the retired Hall of Fame template family as of v0.13.82.
 
 Front hierarchy is intentionally fixed:
 

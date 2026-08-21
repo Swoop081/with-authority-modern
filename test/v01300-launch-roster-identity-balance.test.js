@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=0.13.81';
-import { evaluateDeckHealth } from '../js/data/deck-health.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { moveEligibility, canPlayAction } from '../js/engine/rules.js?v=0.13.90';
+import { evaluateDeckHealth } from '../js/data/deck-health.js?v=0.13.90';
 
 const cards = new Map(allGameplayCards.map(c => [c.id, c]));
 const stars = new Map(Object.values(superstars).map(s => [s.id, s]));
@@ -23,9 +23,9 @@ const NEW_SIGNATURE_IDS = [
 ];
 
 const EXPECTED_CODES = {
-  'mankind-have-a-nice-day':'HOF1-082','hulk-hogan-whatcha-gonna-do':'HOF1-083','andre-the-giant-headbutt':'HOF1-084',
-  'randy-savage-cream-of-the-crop':'HOF1-085','kane-flying-clothesline':'HOF1-086','the-undertaker-running-big-boot':'HOF1-087',
-  'ultimate-warrior-clothesline':'HOF1-088','stone-cold-give-me-a-hell-yeah':'HOF1-089','bayley-ding-dong-hello':'EVO1-067',
+  'mankind-have-a-nice-day':'AE1-043','hulk-hogan-whatcha-gonna-do':'GE1-040','andre-the-giant-headbutt':'GE1-041',
+  'randy-savage-cream-of-the-crop':'GE1-042','kane-flying-clothesline':'AE1-044','the-undertaker-running-big-boot':'AE1-045',
+  'ultimate-warrior-clothesline':'GE1-043','stone-cold-give-me-a-hell-yeah':'AE1-046','bayley-ding-dong-hello':'EVO1-067',
   'paige-superkick':'EVO1-068','stephanie-vaquer-dragon-screw':'EVO1-069','charlotte-flair-spear':'EVO1-070',
   'rhea-ripley-mamis-always-on-top':'EVO1-071','becky-lynch-bexploder':'EVO1-072',
   'cody-rhodes-what-do-you-want-to-talk-about':'SS1-142','oba-femi-running-elbow':'SS1-143','brock-lesnar-eat-sleep-conquer-repeat':'SS1-144'
@@ -66,7 +66,7 @@ test('v0.13.0 approved first-25 balance values are locked', () => {
   assert.equal(rock.ability.trigger.maxUses, 1);
   assert.equal(andre.entrance.preMatchAdrenaline, 1);
   assert.equal(andre.ability.trigger.maxUses, 2);
-  assert.equal(andre.ability.trigger.damage, 3);
+  assert.equal(andre.ability.trigger.damage, 2);
   assert.equal(ko.ability.trigger.draw, 1);
   assert.equal(oba.hp, 68);
   assert.equal(oba.ability.trigger.maxUses, 1);

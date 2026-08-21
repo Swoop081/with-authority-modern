@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.13.81";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.81";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.81";
+import { assetUrl } from "../config/build.js?v=0.13.90";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.90";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.90";
 
 const SUMMERSLAM_ROOT = "assets/art/summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/art/wwe-profile-portraits";
@@ -39,8 +39,8 @@ const rawSuperstarArtwork = {
   "kevin-owens": `${SUMMERSLAM_ROOT}/superstars/kevin-owens.webp`,
   "gunther": `${SUMMERSLAM_ROOT}/superstars/gunther.webp`,
 
-  // Temporary Hall of Fame photos. These are intentionally easy to replace
-  // when final era/move-specific art is sourced.
+  // Temporary Golden / Attitude era photos. These are intentionally easy to replace
+  // when final era/move-specific art is sourced in Card Studio.
   "hulk-hogan": `${WWE_PROFILE_ROOT}/hulk-hogan.png`,
   "andre-the-giant": `${WWE_PROFILE_ROOT}/andre-the-giant.png`,
   "randy-savage": `${WWE_PROFILE_ROOT}/randy-savage.png`,

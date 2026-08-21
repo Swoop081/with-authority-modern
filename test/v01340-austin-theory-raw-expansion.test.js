@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { autoCounterEligibility, canPlaySpecial, counterEligibility, moveEligibility } from '../js/engine/rules.js?v=0.13.81';
-import { legalForSuperstar } from '../js/data/deck-builder.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { autoCounterEligibility, canPlaySpecial, counterEligibility, moveEligibility } from '../js/engine/rules.js?v=0.13.90';
+import { legalForSuperstar } from '../js/data/deck-builder.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.90';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -44,7 +44,7 @@ test('v0.13.40 Austin Theory RAW package and collector identities are locked',()
   assert.deepEqual(brainbuster.effects.find(e=>e.type==='loseOpponentAdrenaline'),{type:'loseOpponentAdrenaline',amount:1});
 
   const fin=byId('austin-theory-a-town-down');
-  assert.ok(fin.finisher); assert.equal(fin.rarity,4); assert.equal(fin.cost,9); assert.equal(fin.damage,15); assert.equal(fin.method,null); assert.deepEqual(fin.requirements,{}); assert.equal(fin.counterState,'body-elevated');
+  assert.ok(fin.finisher); assert.equal(fin.rarity,4); assert.equal(fin.cost,9); assert.equal(fin.damage,16); assert.equal(fin.method,null); assert.deepEqual(fin.requirements,{}); assert.equal(fin.counterState,'body-elevated');
 
   const entrance=byId('entrance-austin-theory'),special=byId('special-austin-theory'),maxxine=byId('manager-maxxine-dupri');
   assert.equal(entrance.name,'This Is Me'); assert.equal(entrance.rarity,4);

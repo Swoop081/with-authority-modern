@@ -1,18 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.81';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=0.13.81';
+import { sets } from '../js/data/sets.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.90';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=0.13.90';
 
 const doink=Object.values(superstars).find(s=>s.id==='doink-the-clown');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
-await import('../js/data/superstar-nameplates.js?v=0.13.81');
+await import('../js/data/superstar-nameplates.js?v=0.13.90');
 
 const shared=[
  ['monkey-flip','Monkey Flip','NG1-029',1,3,5,'agility',{agility:1},'front-control'],
@@ -48,9 +48,9 @@ test('v0.13.78 Doink owns NG1-035 through NG1-041 with the approved two-chain tr
   assert.deepEqual(ids.map(id=>CARD_NUMBER_BY_ID[id]?.cardCode),['NG1-035','NG1-036','NG1-037','NG1-038','NG1-039','NG1-040','NG1-041']);
   for(const id of ids.slice(0,3)){assert.equal(byId[id].rarity,3,id); assert.equal(byId[id].trademark,true,id); assert.equal(byId[id].superstarId,'doink-the-clown',id);}
   assert.deepEqual(byId['doink-drop-toe-hold'].effects,[{type:'discountNextByName',name:'Stump Puller',amount:1}]);
-  assert.deepEqual(byId['doink-stump-puller'].submission,{bodyPart:'legs',pressure:4});
+  assert.deepEqual(byId['doink-stump-puller'].submission,{bodyPart:'legs',pressure:5});
   assert.deepEqual(byId['doink-flying-body-press'].effects,[{type:'search',name:'Whoopee Cushion',discount:1}]);
-  const fin=byId['doink-whoopee-cushion']; assert.equal(fin.rarity,4); assert.equal(fin.finisher,true); assert.equal(fin.cost,10); assert.equal(fin.damage,17); assert.deepEqual(fin.requirements,{}); assert.equal(fin.method,null); assert.equal(fin.groundedOnly,true);
+  const fin=byId['doink-whoopee-cushion']; assert.equal(fin.rarity,4); assert.equal(fin.finisher,true); assert.equal(fin.cost,9); assert.equal(fin.damage,17); assert.deepEqual(fin.requirements,{}); assert.equal(fin.method,null); assert.equal(fin.groundedOnly,true);
   assert.equal(byId['entrance-doink-the-clown'].name,'Send in the Clown'); assert.deepEqual(byId['entrance-doink-the-clown'].preMatchMomentum,{technical:1,agility:1}); assert.equal(byId['entrance-doink-the-clown'].preMatchAdrenaline,1);
   assert.equal(byId['special-doink-the-clown'].name,'Clowning Around'); assert.deepEqual(byId['special-doink-the-clown'].special,{type:'doinkClowningAround',look:5});
   assert.equal(CARD_IDS_BY_SET['new-generation-series-1'].slice(0,41).at(-1),'superstar-doink-the-clown');

@@ -14,20 +14,22 @@ const checked = new Set();
 const handledMoveEffects = new Set([
   "gainAdrenaline", "gainAdrenalineIfBehind", "loseOpponentAdrenaline", "loseOpponentAdrenalineIfStreak",
   "gainStreak", "discardOpponent", "search", "searchChoice", "buffNextByName", "discountNextByName",
-  "discountNextMethod", "drawSelf", "drawThenDiscardSelf", "bodyPressure"
+  "discountNextMethod", "discountNextMoveType", "drawSelf", "drawThenDiscardSelf", "bodyPressure"
 ]);
 const handledUtilityEffects = new Set([
   "discountNext", "buffNext", "gainAdrenaline", "healSelf", "buffNextMethod", "romanOohAhh",
   "fightForever", "drawThenDiscardSelf", "topDeckTutor", "searchChoice", "onceTooOften",
-  "crowdSupport", "peopleChampionship", "what", "paulHeymanManager", "paulHeymanPromo", "visionManager"
+  "crowdSupport", "peopleChampionship", "what", "paulHeymanManager", "paulHeymanPromo", "visionManager",
+  "virgilManager", "stephanieMcMahonManager", "angleIntensity", "angleIntegrity", "angleIntelligence"
 ]);
 const handledSpecialTypes = new Set([
   "brassKnuckles", "cancelOpponentUtility", "counterChooseDiscount", "counterDiscountMethod", "counterDiscountNamed",
-  "counterDrainActionLock", "counterDrawControl", "counterKeepSequence", "counterTutorNamed", "counterTutorStrike", "counterUncounterableMethod",
+  "counterDrainActionLock", "counterDrawControl", "counterKeepSequence", "counterTutorNamed", "counterTutorNamedAny", "counterTutorStrike", "counterUncounterableMethod",
   "flairChopWooo", "headbuttDiscount", "hulkUp", "ignoreStun", "kickoutControlAdrenaline", "lowHpTutor",
-  "moveCounteredDrawDrain", "nextStrengthUncounterable", "noWipeout", "nobodySlams", "paulHeyman", "pinEscape",
+  "moveCounteredDrawDrain", "nextStrengthUncounterable", "nextStrengthNoAutoCounter", "noWipeout", "nobodySlams", "paulHeyman", "pinEscape",
   "austinTheoryAllDay", "angeloDawkinsRunIn", "luchaLibreLegend", "hammerInBoot", "fearlessAssault", "steelPlate", "lolaFistsDontLie",
-  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca", "hbkShowstopper", "exclusiveTrademarkTutor", "doinkClowningAround", "yokozunaBanzai", "owenSlammyAwards", "bulldogMadeInBritain"
+  "reduceIncomingBig", "regainAfterLoseControl", "retainOnCounter", "shakeRopes", "socko", "joeBelieve", "roxanneProdigy", "dragonLuchaLegacy", "vikingoElOjoProtection", "iguanaLaYesca", "hbkShowstopper", "exclusiveTrademarkTutor", "doinkClowningAround", "yokozunaBanzai", "owenSlammyAwards", "bulldogMadeInBritain",
+  "pipersPit", "millionDollarChampionship", "damien", "perfectRecord", "sledgehammer", "rawIsJericho", "breakTheBarrier"
 ]);
 const handledAbilityTypes = new Set([
   "agilityAfterStrike", "agilityAfterTechnical", "agilityRequirement", "codyUndeniable", "connectDamage",
@@ -35,7 +37,8 @@ const handledAbilityTypes = new Set([
   "gableOlympicPedigree", "loganViralAthlete", "momentumBuff", "moveCountered", "raquelUnmatchedPower", "reduceIncoming",
   "secondMoveInControl", "solDaredevil", "strengthReqDrain", "strikeDamageDiscountTechnical", "strikeDiscountStrength",
   "strikeDiscountTechnical", "surviveAtOne", "takeDamage", "technicalDiscountAgility", "joeCrowdBelieves", "theoryFutureIsNow", "montezTakeFlight",
-  "reyUltimateUnderdog", "dominikNuclearHeat", "pentaZeroFearZeroMercy", "lolaCounterStriker", "dragonHybridAthlete", "vikingoJineteDelAire", "iguanaPlayDead", "superHeavyweightGroundResist", "retainControlAfterFailedPin", "bulldogPowerAndTechnique"
+  "reyUltimateUnderdog", "dominikNuclearHeat", "pentaZeroFearZeroMercy", "lolaCounterStriker", "dragonHybridAthlete", "vikingoJineteDelAire", "iguanaPlayDead", "superHeavyweightGroundResist", "retainControlAfterFailedPin", "bulldogPowerAndTechnique",
+  "jakePsychology", "perfectExecution", "tripleHCerebral", "jerichoY2J", "chynaNinthWonder", "angleOlympicGold", "owenKingOfHarts"
 ]);
 const engineBackedTopLevelFields = [
   "bodyDamage", "discountAfterCounter", "discountIfNamedConnectedThisControl", "kickoutRetainControl",

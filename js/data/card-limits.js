@@ -1,13 +1,9 @@
 export const DEFAULT_CARD_OWNERSHIP_CAP = 5;
-export const UNIQUE_CARD_OWNERSHIP_CAP = 1;
-export const MOMENTUM_CARD_OWNERSHIP_CAP = 15;
+export const UNIQUE_CARD_OWNERSHIP_CAP = 5;
+export const MOMENTUM_CARD_OWNERSHIP_CAP = 5;
 
-export function ownershipCapFor(cardOrId) {
-  const id = typeof cardOrId === "string" ? cardOrId : cardOrId?.id ?? "";
-  const kind = typeof cardOrId === "object" ? cardOrId?.kind : null;
-  if (kind === "entrance" || id.startsWith("entrance-")) return UNIQUE_CARD_OWNERSHIP_CAP;
-  if (kind === "superstar" || id.startsWith("superstar-")) return UNIQUE_CARD_OWNERSHIP_CAP;
-  if (kind === "manager" || id.startsWith("hof1-manager-")) return UNIQUE_CARD_OWNERSHIP_CAP;
-  if (kind === "momentum" || id.startsWith("momentum-")) return MOMENTUM_CARD_OWNERSHIP_CAP;
+// v0.13.87: every collectible printing has the same independent ownership cap.
+// Normal, Emerald, Sapphire and Ruby each keep copies 1–5; copy 6+ overflows to UP.
+export function ownershipCapFor(_cardOrId) {
   return DEFAULT_CARD_OWNERSHIP_CAP;
 }

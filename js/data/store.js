@@ -1,10 +1,10 @@
-import { superstars } from "./superstars.js?v=0.13.81";
-import { collectionCards } from "./collection.js?v=0.13.81";
-import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.13.81";
-import { isPlayerReleasedSetId } from "./release.js?v=0.13.81";
+import { superstars } from "./superstars.js?v=0.13.90";
+import { collectionCards } from "./collection.js?v=0.13.90";
+import { grantStoreSuperstarUnlockPackage, hasSuperstar, spendUniversePoints } from "./profile.js?v=0.13.90";
+import { isPlayerReleasedSetId } from "./release.js?v=0.13.90";
 
 export const STORE_SET_ROTATION = [
-  "summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1",
+  "summerslam-series-1", "golden-era-series-1", "attitude-era-series-1", "evolution-series-1",
   "raw-series-1", "new-generation-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1",
   "smackdown-series-1", "survivor-series-series-1"
 ];

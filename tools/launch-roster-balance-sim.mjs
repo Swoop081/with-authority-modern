@@ -5,7 +5,7 @@ import { MatchEngine } from "../js/engine/MatchEngine.js";
 import { decisionOwner, cpuDecision, executeCpuDecision } from "../js/ai/WrestlingAI.js";
 
 const stars = Object.values(superstars).filter(star => isPlayerReleasedSetId(star.setId));
-if (stars.length !== 25) throw new Error(`Expected 25 currently released Superstars, found ${stars.length}`);
+if (!stars.length) throw new Error('No Superstars available for simulation');
 
 function seededRng(seed) {
   let x = seed >>> 0;

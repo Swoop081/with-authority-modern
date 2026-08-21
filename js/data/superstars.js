@@ -53,12 +53,12 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "iyo-sky",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Agility Momentum.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Agility Momentum and +2 Adrenaline.",
       "preMatchMomentum": {
         "strength": 1,
         "agility": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 2,
       "delayedTurn5": false
     },
     "special": {
@@ -70,7 +70,7 @@ export const superstars = {
     "id": "mankind",
     "name": "Mankind",
     "nickname": "The Deranged One",
-    "setId": "hall-of-fame-series-1",
+    "setId": "attitude-era-series-1",
     "era": "attitude-era",
     "seasonExclusive": false,
     "cardId": "superstar-mankind",
@@ -117,7 +117,7 @@ export const superstars = {
       "id": "entrance-mankind",
       "name": "Boiler Room Dweller",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "attitude-era-series-1",
       "rarity": 4,
       "superstarId": "mankind",
       "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline.",
@@ -202,7 +202,7 @@ export const superstars = {
     "id": "hulk-hogan",
     "name": "Hulk Hogan",
     "nickname": "Hulkster",
-    "setId": "hall-of-fame-series-1",
+    "setId": "golden-era-series-1",
     "era": "golden-era",
     "seasonExclusive": false,
     "cardId": "superstar-hulk-hogan",
@@ -248,7 +248,7 @@ export const superstars = {
       "id": "entrance-hulk-hogan",
       "name": "Real American",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "golden-era-series-1",
       "rarity": 4,
       "superstarId": "hulk-hogan",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
@@ -452,11 +452,11 @@ export const superstars = {
       "setId": "evolution-series-1",
       "rarity": 4,
       "superstarId": "paige",
-      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +2 Adrenaline.",
       "preMatchMomentum": {
         "strength": 1
       },
-      "preMatchAdrenaline": 1,
+      "preMatchAdrenaline": 2,
       "delayedTurn5": false
     },
     "special": {
@@ -536,7 +536,7 @@ export const superstars = {
     "id": "andre-the-giant",
     "name": "André the Giant",
     "nickname": "The Eighth Wonder of the World",
-    "setId": "hall-of-fame-series-1",
+    "setId": "golden-era-series-1",
     "era": "golden-era",
     "seasonExclusive": false,
     "cardId": "superstar-andre-the-giant",
@@ -568,12 +568,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Giant’s Reach",
-      "text": "The first 2 times André connects with a Strike Move, his next Strength Move during that Control sequence costs 2 less, deals +3 Damage, and André gains +1 Adrenaline.",
+      "text": "The first 2 times André connects with a Strike Move, his next Strength Move during that Control sequence costs 1 less, deals +2 Damage, and André gains +1 Adrenaline.",
       "trigger": {
         "type": "strikeDiscountStrength",
         "maxUses": 2,
-        "discount": 2,
-        "damage": 3,
+        "discount": 1,
+        "damage": 2,
         "adrenaline": 1
       },
       "maxUses": 2
@@ -582,7 +582,7 @@ export const superstars = {
       "id": "entrance-andre-the-giant",
       "name": "The Eighth Wonder",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "golden-era-series-1",
       "rarity": 4,
       "superstarId": "andre-the-giant",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
@@ -668,7 +668,7 @@ export const superstars = {
     "id": "randy-savage",
     "name": "Randy Savage",
     "nickname": "Macho Man",
-    "setId": "hall-of-fame-series-1",
+    "setId": "golden-era-series-1",
     "era": "golden-era",
     "seasonExclusive": false,
     "cardId": "superstar-randy-savage",
@@ -712,7 +712,7 @@ export const superstars = {
       "id": "entrance-randy-savage",
       "name": "Pomp and Circumstance",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "golden-era-series-1",
       "rarity": 4,
       "superstarId": "randy-savage",
       "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
@@ -764,13 +764,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Head of the Table",
-      "text": "The first time Roman connects with a Move dealing 7+ damage, draw 1 page and gain +1 Adrenaline.",
+      "text": "The first time Roman connects with a Move dealing 7+ damage, draw 1 page.",
       "trigger": {
         "type": "connectDamage",
         "minDamage": 7,
         "maxUses": 1,
-        "draw": 1,
-        "adrenaline": 1
+        "draw": 1
       },
       "maxUses": 1
     },
@@ -933,7 +932,7 @@ export const superstars = {
     "id": "kane",
     "name": "Kane",
     "nickname": "The Big Red Machine",
-    "setId": "hall-of-fame-series-1",
+    "setId": "attitude-era-series-1",
     "era": "attitude-era",
     "seasonExclusive": false,
     "cardId": "superstar-kane",
@@ -978,7 +977,7 @@ export const superstars = {
       "id": "entrance-kane",
       "name": "Hellfire and Brimstone",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "attitude-era-series-1",
       "rarity": 4,
       "superstarId": "kane",
       "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
@@ -997,7 +996,7 @@ export const superstars = {
     "id": "the-undertaker",
     "name": "The Undertaker",
     "nickname": "The Deadman",
-    "setId": "hall-of-fame-series-1",
+    "setId": "attitude-era-series-1",
     "era": "attitude-era",
     "seasonExclusive": false,
     "cardId": "superstar-the-undertaker",
@@ -1043,7 +1042,7 @@ export const superstars = {
       "id": "entrance-the-undertaker",
       "name": "Rest in Peace",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "attitude-era-series-1",
       "rarity": 4,
       "superstarId": "the-undertaker",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Adrenaline.",
@@ -1062,7 +1061,7 @@ export const superstars = {
     "id": "ultimate-warrior",
     "name": "Ultimate Warrior",
     "nickname": "The Ultimate Warrior",
-    "setId": "hall-of-fame-series-1",
+    "setId": "golden-era-series-1",
     "era": "golden-era",
     "seasonExclusive": false,
     "cardId": "superstar-ultimate-warrior",
@@ -1107,7 +1106,7 @@ export const superstars = {
       "id": "entrance-ultimate-warrior",
       "name": "Warrior’s Charge",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "golden-era-series-1",
       "rarity": 4,
       "superstarId": "ultimate-warrior",
       "rulesText": "Pre-Match: Begin with +1 Agility Momentum and +1 Adrenaline.",
@@ -1320,14 +1319,14 @@ export const superstars = {
       "delayedTurn5": false
     },
     "special": {
-      "type": "nextStrengthUncounterable"
+      "type": "nextStrengthNoAutoCounter"
     }
   },
   "stoneCold": {
     "id": "stone-cold-steve-austin",
     "name": "Stone Cold Steve Austin",
     "nickname": "Stone Cold",
-    "setId": "hall-of-fame-series-1",
+    "setId": "attitude-era-series-1",
     "era": "attitude-era",
     "seasonExclusive": false,
     "cardId": "superstar-stone-cold-steve-austin",
@@ -1372,7 +1371,7 @@ export const superstars = {
       "id": "entrance-stone-cold-steve-austin",
       "name": "Glass Shatters",
       "kind": "entrance",
-      "setId": "hall-of-fame-series-1",
+      "setId": "attitude-era-series-1",
       "rarity": 4,
       "superstarId": "stone-cold-steve-austin",
       "rulesText": "Pre-Match: Begin with +1 Strike Momentum and +1 Adrenaline.",
@@ -1652,9 +1651,9 @@ export const superstars = {
       "delayedTurn5": false
     },
     "special": {
-      "type": "counterTutorNamed",
-      "name": "Dis-arm-her",
-      "amount": 3
+      "type": "counterTutorNamedAny",
+      "names": ["Dis-arm-her", "Manhandle Slam"],
+      "amount": 2
     }
   },
   "loganPaul": {
@@ -2099,12 +2098,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Zero Fear, Zero Mercy",
-      "text": "The first 2 times each match Penta connects with a Strike Move immediately after a Technical Move in the same Control sequence, that Strike deals +2 Damage and Penta gains +1 Adrenaline.",
+      "text": "The first 2 times each match Penta connects with a Strike Move immediately after a Technical Move in the same Control sequence, that Strike deals +2 Damage.",
       "trigger": {
         "type": "pentaZeroFearZeroMercy",
         "maxUses": 2,
         "bonusDamage": 2,
-        "adrenaline": 1
+        "adrenaline": 0
       },
       "maxUses": 2
     },
@@ -2176,7 +2175,7 @@ export const superstars = {
         "draw": 1,
         "adrenaline": 1
       },
-      "maxUses": 3
+      "maxUses": 2
     },
     "entrance": {
       "id": "entrance-el-grande-americano",
@@ -3636,11 +3635,12 @@ export const superstars = {
     },
     "ability": {
       "name": "Counter Striker",
-      "text": "Once per Control sequence, after Lola successfully Counters an opponent’s Move, her next Strike Move costs 1 less and deals +1 Damage this Control sequence.",
+      "text": "Once per Control sequence, after Lola successfully Counters an opponent’s Move, gain +1 Adrenaline; her next Strike Move costs 1 less and deals +1 Damage this Control sequence.",
       "trigger": {
         "type": "lolaCounterStriker",
         "discount": 1,
-        "damage": 1
+        "damage": 1,
+        "adrenaline": 1
       }
     },
     "entrance": {
@@ -4313,9 +4313,12 @@ export const superstars = {
     },
     "ability": {
       "name": "King of Harts",
-      "text": "The first time each match Owen fails a Pin attempt, Owen retains Control instead of transferring Control to the opponent.",
-      "trigger": { "type": "retainControlAfterFailedPin", "maxUses": 1 },
-      "maxUses": 1
+      "text": "The first time each Control sequence Owen connects with a Technical or Agility Move after connecting with a different Method, draw 1 page. The first time each match Owen fails a Pin attempt, Owen retains Control.",
+      "trigger": {
+        "type": "owenKingOfHarts",
+        "draw": 1,
+        "maxPinUses": 1
+      }
     },
     "entrance": {
       "id": "entrance-owen-hart",
@@ -4325,11 +4328,19 @@ export const superstars = {
       "rarity": 4,
       "superstarId": "owen-hart",
       "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
-      "preMatchMomentum": { "technical": 1, "agility": 1 },
+      "preMatchMomentum": {
+        "technical": 1,
+        "agility": 1
+      },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
-    "special": { "type": "owenSlammyAwards", "look": 7, "maxChoices": 2, "maxRarity": 2 }
+    "special": {
+      "type": "owenSlammyAwards",
+      "look": 7,
+      "maxChoices": 2,
+      "maxRarity": 2
+    }
   },
   "britishBulldog": {
     "id": "british-bulldog",
@@ -4372,7 +4383,10 @@ export const superstars = {
     "ability": {
       "name": "Power & Technique",
       "text": "The first time each Control sequence British Bulldog Connects with a Technical Move, his next Strength Move costs 1 less that Control sequence.",
-      "trigger": { "type": "bulldogPowerAndTechnique", "discount": 1 }
+      "trigger": {
+        "type": "bulldogPowerAndTechnique",
+        "discount": 1
+      }
     },
     "entrance": {
       "id": "entrance-british-bulldog",
@@ -4382,10 +4396,542 @@ export const superstars = {
       "rarity": 4,
       "superstarId": "british-bulldog",
       "rulesText": "Pre-Match: Begin with +1 Strength Momentum, +1 Technical Momentum and +1 Adrenaline.",
-      "preMatchMomentum": { "strength": 1, "technical": 1 },
+      "preMatchMomentum": {
+        "strength": 1,
+        "technical": 1
+      },
       "preMatchAdrenaline": 1,
       "delayedTurn5": false
     },
-    "special": { "type": "bulldogMadeInBritain", "methods": ["strength", "technical"], "maxRarity": 2 }
+    "special": {
+      "type": "bulldogMadeInBritain",
+      "methods": [
+        "strength",
+        "technical"
+      ],
+      "maxRarity": 2
+    }
+  },
+  "rowdyRoddyPiper": {
+    "id": "rowdy-roddy-piper",
+    "name": "Rowdy Roddy Piper",
+    "nickname": "Hot Rod",
+    "setId": "golden-era-series-1",
+    "era": "1984–1992 Golden Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-rowdy-roddy-piper",
+    "entranceId": "entrance-rowdy-roddy-piper",
+    "specialId": "special-rowdy-roddy-piper",
+    "leadOffIds": [
+      "momentum-strike",
+      "momentum-technical",
+      "punch",
+      "running-knee",
+      "atomic-drop"
+    ],
+    "signatures": [
+      "rowdy-roddy-piper-eye-poke",
+      "rowdy-roddy-piper-punch-combination",
+      "rowdy-roddy-piper-bulldog",
+      "rowdy-roddy-piper-sleeper-hold"
+    ],
+    "archetype": "strike-technical-disruptor",
+    "hp": 65,
+    "methodLimits": {
+      "strike": null,
+      "technical": 4,
+      "strength": 2,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "strike": 6,
+      "technical": 4,
+      "strength": 2
+    },
+    "ability": {
+      "name": "Hot Rod",
+      "text": "The first 2 times each match Piper Connects with a Strike Move dealing 4+ Damage, the opponent ditches 1 page.",
+      "trigger": {
+        "type": "connectMethodDamage",
+        "method": "strike",
+        "minDamage": 4,
+        "discardOpponent": 1,
+        "maxUses": 2
+      }
+    },
+    "entrance": {
+      "id": "entrance-rowdy-roddy-piper",
+      "name": "Hot Rod",
+      "kind": "entrance",
+      "setId": "golden-era-series-1",
+      "rarity": 4,
+      "superstarId": "rowdy-roddy-piper",
+      "rulesText": "Pre-Match: Begin with +1 Strike Momentum, +1 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "strike": 1,
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "pipersPit",
+      "nextUseAdrenalineTax": 2
+    }
+  },
+  "tedDiBiase": {
+    "id": "ted-dibiase",
+    "name": "Ted DiBiase",
+    "nickname": "The Million Dollar Man",
+    "setId": "golden-era-series-1",
+    "era": "1987–1992 Golden Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-ted-dibiase",
+    "entranceId": "entrance-ted-dibiase",
+    "specialId": "special-ted-dibiase",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strength",
+      "arm-wringer",
+      "short-arm-clothesline",
+      "backbreaker"
+    ],
+    "signatures": [
+      "ted-dibiase-million-dollar-fist-drop",
+      "ted-dibiase-backbreaker",
+      "ted-dibiase-piledriver",
+      "ted-dibiase-million-dollar-dream"
+    ],
+    "archetype": "technical-strength-resource-control",
+    "hp": 65,
+    "methodLimits": {
+      "technical": null,
+      "strength": 4,
+      "strike": 3,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "technical": 7,
+      "strength": 3,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Everybody Has a Price",
+      "text": "The first 2 times each match DiBiase Connects with a Technical Move costing 4+, draw 1 page and the opponent loses 1 Adrenaline.",
+      "trigger": {
+        "type": "connectMethodCost",
+        "method": "technical",
+        "minCost": 4,
+        "draw": 1,
+        "opponentAdrenaline": -1,
+        "maxUses": 2
+      }
+    },
+    "entrance": {
+      "id": "entrance-ted-dibiase",
+      "name": "Million Dollar Entrance",
+      "kind": "entrance",
+      "setId": "golden-era-series-1",
+      "rarity": 4,
+      "superstarId": "ted-dibiase",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +2 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1
+      },
+      "preMatchAdrenaline": 2,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "millionDollarChampionship",
+      "trademarkDiscount": 2,
+      "finisherName": "Million Dollar Dream",
+      "finisherDiscount": 1
+    }
+  },
+  "jakeRoberts": {
+    "id": "jake-roberts",
+    "name": "Jake “The Snake” Roberts",
+    "nickname": "The Snake",
+    "setId": "golden-era-series-1",
+    "era": "1986–1992 Golden Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-jake-roberts",
+    "entranceId": "entrance-jake-roberts",
+    "specialId": "special-jake-roberts",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strike",
+      "short-arm-clothesline",
+      "running-knee",
+      "punch"
+    ],
+    "signatures": [
+      "jake-roberts-short-arm-clothesline",
+      "jake-roberts-running-knee-lift",
+      "jake-roberts-gutwrench-gutbuster",
+      "jake-roberts-ddt"
+    ],
+    "archetype": "technical-strike-setup",
+    "hp": 65,
+    "methodLimits": {
+      "technical": null,
+      "strike": 4,
+      "strength": 2,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "strike": 4,
+      "strength": 2
+    },
+    "ability": {
+      "name": "Master of Psychology",
+      "text": "The first time each Control sequence Jake Connects with a Strike Move, he may put 1 page from his hand on the bottom of his Playbook. If he does, draw 1 page.",
+      "trigger": {
+        "type": "jakePsychology"
+      }
+    },
+    "entrance": {
+      "id": "entrance-jake-roberts",
+      "name": "Trust Me",
+      "kind": "entrance",
+      "setId": "golden-era-series-1",
+      "rarity": 4,
+      "superstarId": "jake-roberts",
+      "rulesText": "The first time Jake gains Control, gain +2 Adrenaline.",
+      "preMatchMomentum": {},
+      "preMatchAdrenaline": 2,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "damien"
+    }
+  },
+  "mrPerfect": {
+    "id": "mr-perfect",
+    "name": "Mr. Perfect",
+    "nickname": "Absolutely Perfect",
+    "setId": "golden-era-series-1",
+    "era": "1988–1992 Golden Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-mr-perfect",
+    "entranceId": "entrance-mr-perfect",
+    "specialId": "special-mr-perfect",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strike",
+      "fisherman-suplex",
+      "standing-dropkick",
+      "knee-breaker"
+    ],
+    "signatures": [
+      "mr-perfect-dropkick",
+      "mr-perfect-neck-snap",
+      "mr-perfect-knee-lift",
+      "mr-perfect-perfect-plex"
+    ],
+    "archetype": "elite-technical-counter",
+    "hp": 64,
+    "methodLimits": {
+      "technical": null,
+      "strike": 4,
+      "agility": 3,
+      "strength": 2
+    },
+    "starterMomentum": {
+      "technical": 7,
+      "strike": 3,
+      "agility": 2
+    },
+    "ability": {
+      "name": "Perfect Execution",
+      "text": "The first time each Control sequence Mr. Perfect successfully Counters a Move, his next Technical Move costs 2 less that Control sequence.",
+      "trigger": {
+        "type": "perfectExecution",
+        "discount": 2
+      }
+    },
+    "entrance": {
+      "id": "entrance-mr-perfect",
+      "name": "Absolutely Perfect",
+      "kind": "entrance",
+      "setId": "golden-era-series-1",
+      "rarity": 4,
+      "superstarId": "mr-perfect",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum and +1 Adrenaline. The first Counter Mr. Perfect plays each match costs 1 less Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false,
+      "preMatchCounterDiscount": 1
+    },
+    "special": {
+      "type": "perfectRecord",
+      "look": 7
+    }
+  },
+  "tripleH": {
+    "id": "triple-h",
+    "name": "Triple H",
+    "nickname": "The Game",
+    "setId": "attitude-era-series-1",
+    "era": "1999–2001 Attitude Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-triple-h",
+    "entranceId": "entrance-triple-h",
+    "specialId": "special-triple-h",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strength",
+      "kick-to-the-gut",
+      "high-knee",
+      "spinebuster"
+    ],
+    "signatures": [
+      "triple-h-high-knee",
+      "triple-h-knee-facebuster",
+      "triple-h-spinebuster",
+      "triple-h-the-pedigree"
+    ],
+    "archetype": "technical-strength-methodical-combo",
+    "hp": 67,
+    "methodLimits": {
+      "technical": null,
+      "strength": 5,
+      "strike": 3,
+      "agility": 0
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "strength": 4,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Cerebral Assassin",
+      "text": "The first time each Control sequence Triple H Connects with a Strike or Technical Move and then a Grapple, gain +1 Adrenaline and that Grapple deals +1 Damage.",
+      "trigger": {
+        "type": "tripleHCerebral"
+      }
+    },
+    "entrance": {
+      "id": "entrance-triple-h",
+      "name": "My Time",
+      "kind": "entrance",
+      "setId": "attitude-era-series-1",
+      "rarity": 4,
+      "superstarId": "triple-h",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Strength Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "strength": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "sledgehammer"
+    }
+  },
+  "chrisJericho": {
+    "id": "chris-jericho",
+    "name": "Chris Jericho",
+    "nickname": "Y2J",
+    "setId": "attitude-era-series-1",
+    "era": "1999–2001 Attitude Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-chris-jericho",
+    "entranceId": "entrance-chris-jericho",
+    "specialId": "special-chris-jericho",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-agility",
+      "bulldog",
+      "enzuigiri",
+      "dropkick"
+    ],
+    "signatures": [
+      "chris-jericho-one-handed-bulldog",
+      "chris-jericho-lionsault",
+      "chris-jericho-breakdown",
+      "chris-jericho-walls-of-jericho"
+    ],
+    "archetype": "technical-agility-combo",
+    "hp": 64,
+    "methodLimits": {
+      "technical": null,
+      "agility": 5,
+      "strike": 3,
+      "strength": 0
+    },
+    "starterMomentum": {
+      "technical": 6,
+      "agility": 4,
+      "strike": 2
+    },
+    "ability": {
+      "name": "Y2J",
+      "text": "The first time each Control sequence Jericho Connects with a Technical Grapple that grounds the opponent, his next Agility Move costs 1 less; if it Connects, gain +1 Adrenaline.",
+      "trigger": {
+        "type": "jerichoY2J",
+        "discount": 1,
+        "adrenaline": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-chris-jericho",
+      "name": "Break Down the Walls",
+      "kind": "entrance",
+      "setId": "attitude-era-series-1",
+      "rarity": 4,
+      "superstarId": "chris-jericho",
+      "rulesText": "Pre-Match: Begin with +1 Technical Momentum, +1 Agility Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 1,
+        "agility": 1
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "rawIsJericho"
+    }
+  },
+  "chyna": {
+    "id": "chyna",
+    "name": "Chyna",
+    "nickname": "The Ninth Wonder of the World",
+    "setId": "attitude-era-series-1",
+    "era": "1999–2001 Attitude Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-chyna",
+    "entranceId": "entrance-chyna",
+    "specialId": "special-chyna",
+    "leadOffIds": [
+      "momentum-strength",
+      "momentum-strike",
+      "body-slam",
+      "running-clothesline",
+      "forearm-smash"
+    ],
+    "signatures": [
+      "chyna-handspring-back-elbow",
+      "chyna-inverted-ddt",
+      "chyna-gorilla-press-slam",
+      "chyna-bomb"
+    ],
+    "archetype": "strength-athletic-powerhouse",
+    "hp": 67,
+    "methodLimits": {
+      "strength": null,
+      "strike": 4,
+      "technical": 3,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "strength": 6,
+      "strike": 3,
+      "technical": 2,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Ninth Wonder of the World",
+      "text": "The first time each Control sequence Chyna Connects with a Strength Move costing 5+, it deals +1 Damage and Chyna gains +1 Adrenaline, up to 2 times each match.",
+      "trigger": {
+        "type": "chynaNinthWonder",
+        "minCost": 5,
+        "damage": 1,
+        "adrenaline": 1,
+        "maxUses": 2
+      },
+      "maxUses": 2
+    },
+    "entrance": {
+      "id": "entrance-chyna",
+      "name": "Ninth Wonder of the World",
+      "kind": "entrance",
+      "setId": "attitude-era-series-1",
+      "rarity": 4,
+      "superstarId": "chyna",
+      "rulesText": "Pre-Match: Begin with +1 Strength Momentum and +1 Strike Momentum.",
+      "preMatchMomentum": {
+        "strength": 1,
+        "strike": 1
+      },
+      "preMatchAdrenaline": 0,
+      "delayedTurn5": false
+    },
+    "special": {
+      "type": "breakTheBarrier"
+    }
+  },
+  "kurtAngle": {
+    "id": "kurt-angle",
+    "name": "Kurt Angle",
+    "nickname": "The Olympic Hero",
+    "setId": "attitude-era-series-1",
+    "era": "2000–2001 Attitude Era",
+    "developmentOnly": false,
+    "seasonExclusive": false,
+    "cardId": "superstar-kurt-angle",
+    "entranceId": "entrance-kurt-angle",
+    "specialId": "kurt-angle-intensity",
+    "leadOffIds": [
+      "momentum-technical",
+      "momentum-strength",
+      "single-leg-takedown",
+      "german-suplex",
+      "european-uppercut"
+    ],
+    "signatures": [
+      "kurt-angle-three-german-suplexes",
+      "kurt-angle-moonsault",
+      "kurt-angle-slam",
+      "kurt-angle-ankle-lock"
+    ],
+    "archetype": "pure-technical-suplex-submission",
+    "hp": 65,
+    "methodLimits": {
+      "technical": null,
+      "strength": 3,
+      "strike": 2,
+      "agility": 2
+    },
+    "starterMomentum": {
+      "technical": 8,
+      "strength": 2,
+      "strike": 1,
+      "agility": 1
+    },
+    "ability": {
+      "name": "Olympic Gold Medalist",
+      "text": "The first time each Control sequence Angle Connects with a Technical Move immediately after another connected Technical Move, draw 1 page.",
+      "trigger": {
+        "type": "angleOlympicGold",
+        "draw": 1
+      }
+    },
+    "entrance": {
+      "id": "entrance-kurt-angle",
+      "name": "Medal",
+      "kind": "entrance",
+      "setId": "attitude-era-series-1",
+      "rarity": 4,
+      "superstarId": "kurt-angle",
+      "rulesText": "Pre-Match: Begin with +2 Technical Momentum and +1 Adrenaline.",
+      "preMatchMomentum": {
+        "technical": 2
+      },
+      "preMatchAdrenaline": 1,
+      "delayedTurn5": false
+    },
+    "special": null
   }
 };

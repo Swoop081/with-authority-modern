@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { collectionCards } from '../js/data/collection.js?v=0.13.81';
-import { decks } from '../js/data/decks.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { collectionCards } from '../js/data/collection.js?v=0.13.90';
+import { decks } from '../js/data/decks.js?v=0.13.90';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 const collectorById = id => collectionCards.find(card => card.id === id);
@@ -31,6 +31,6 @@ test('v0.13.66 preserves Warrior collector identity and authored deck references
   const collector = collectorById('ultimate-warrior-diving-shoulder-block');
   assert.ok(collector);
   assert.equal(collector.name, "Warrior's Shoulder Block");
-  assert.equal(collector.cardCode, 'HOF1-036');
+  assert.equal(collector.cardCode, 'GE1-013');
   assert.ok((decks['ultimate-warrior'] ?? []).filter(card => card?.id === 'ultimate-warrior-diving-shoulder-block').length >= 1);
 });

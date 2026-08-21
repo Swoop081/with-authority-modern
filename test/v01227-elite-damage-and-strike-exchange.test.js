@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.90';
 
 const byId=id=>allGameplayCards.find(c=>c.id===id);
 const player=()=>({superstar:{id:'test'},momentum:{strength:10,strike:10,technical:10,agility:10,attitude:10},adrenaline:10,hand:[],specialUsed:false,controlMoveCount:0,events:{},posture:'standing'});
@@ -10,7 +10,7 @@ const counterState=incoming=>({phase:'COUNTER',playerInControl:'p1',turnNumber:5
 test('v0.12.28 elite 18-19 Damage Finishers carry a printed Cost premium',()=>{
   const elite=allGameplayCards.filter(c=>c.kind==='move'&&(c.damage??0)>17);
   assert.deepEqual(elite.map(c=>[c.id,c.cost,c.damage]),[
-    ['andre-the-giant-sitdown-splash',11,18],
+    ['andre-the-giant-sitdown-splash',12,18],
     ['the-rock-people-s-elbow',11,18],
     ['goldberg-jackhammer',12,19],
     ['diesel-jackknife-powerbomb',11,18],

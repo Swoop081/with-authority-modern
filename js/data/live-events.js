@@ -1,5 +1,6 @@
-import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.81";
-import { superstars } from "./superstars.js?v=0.13.81";
+import { isUnreleasedSetId, isPlayerVisibleSuperstar } from "./release.js?v=0.13.90";
+import { superstars } from "./superstars.js?v=0.13.90";
+import { grantRandomBoosters } from "./boosters.js?v=0.13.90";
 
 export const LIVE_EVENT_LENGTH = 5;
 export const LIVE_EVENT_WIN_UP = 0;
@@ -7,7 +8,8 @@ export const LIVE_EVENT_CLEAR_BOOSTERS = 1;
 
 const LIVE_REWARD_FALLBACKS = Object.freeze([
   "summerslam-series-1",
-  "hall-of-fame-series-1",
+  "golden-era-series-1",
+  "attitude-era-series-1",
   "evolution-series-1"
 ]);
 
@@ -63,7 +65,7 @@ export const DAILY_LIVE_EVENTS = Object.freeze({
     description: "Five matches where ring IQ matters as much as damage.",
     method: "technical",
     heroId: "cm-punk",
-    rewardSetId: "hall-of-fame-series-1",
+    rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
     opponentPool: ["cm-punk", "bayley", "paige", "stephanie-vaquer", "charlotte-flair", "cody-rhodes", "liv-morgan", "gunther", "becky-lynch", "randy-savage"]
   },
@@ -75,7 +77,7 @@ export const DAILY_LIVE_EVENTS = Object.freeze({
     description: "A daily tower built around WWE's hardest strikers.",
     method: "strike",
     heroId: "mankind",
-    rewardSetId: "hall-of-fame-series-1",
+    rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
     opponentPool: ["mankind", "bayley", "cm-punk", "paige", "seth-rollins", "randy-savage", "stephanie-vaquer", "stone-cold-steve-austin", "gunther", "becky-lynch"]
   },
@@ -135,7 +137,7 @@ export const THREE_DAY_TOWERS = Object.freeze([
     description: "A three-day brawl against WWE's toughest punchers and strikers.",
     method: "strike",
     heroId: "stone-cold-steve-austin",
-    rewardSetId: "hall-of-fame-series-1",
+    rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
     opponentPool: ["stone-cold-steve-austin", "mankind", "cm-punk", "seth-rollins", "becky-lynch", "gunther", "kevin-owens", "roman-reigns"]
   },
@@ -146,7 +148,7 @@ export const THREE_DAY_TOWERS = Object.freeze([
     description: "Three days against the biggest power threats in WWE Legacy.",
     method: "strength",
     heroId: "kane",
-    rewardSetId: "hall-of-fame-series-1",
+    rewardSetId: "golden-era-series-1",
     logoMode: "legacy",
     opponentPool: ["kane", "andre-the-giant", "brock-lesnar", "ultimate-warrior", "rhea-ripley", "roman-reigns", "gunther", "oba-femi"]
   }
@@ -156,7 +158,7 @@ export const RAW_LIVE_EVENT = Object.freeze({
   id: "raw-live-spotlight",
   name: "RAW LIVE",
   kicker: "RAW SERIES 1 · LIVE NOW",
-  description: "A five-match RAW Series 1 tower with RAW boosters on every victory and a RAW Super Pack on clear.",
+  description: "A five-match RAW Series 1 tower. Complete all five matches to earn one random released-set booster.",
   method: "strike",
   heroId: "logan-paul",
   rewardSetId: "raw-series-1",
@@ -169,10 +171,10 @@ export const WEEKLY_TOWERS = Object.freeze([
     id: "legends-collide",
     name: "Legends Collide",
     kicker: "SEVEN DAYS · ONE GAUNTLET",
-    description: "A weekly tower against Hall of Fame icons and all-time greats.",
+    description: "A weekly tower against Golden Era and Attitude Era icons.",
     method: "strength",
     heroId: "the-undertaker",
-    rewardSetId: "hall-of-fame-series-1",
+    rewardSetId: "attitude-era-series-1",
     logoMode: "legacy",
     opponentPool: ["the-undertaker", "stone-cold-steve-austin", "hulk-hogan", "andre-the-giant", "randy-savage", "mankind", "ultimate-warrior", "the-rock"]
   },
@@ -211,41 +213,51 @@ export const WEEKLY_TOWERS = Object.freeze([
   }
 ]);
 
-// v0.12.98 — 24-hour Birthday Bash towers for the currently released launch roster only.
-// Future authored Superstars are deliberately omitted until their sets are promoted live.
+// v0.13.82 — 24-hour Birthday Bash towers for the complete currently released launch roster.
+// Future authored Superstars remain omitted until their sets are promoted live.
 export const RELEASED_BIRTHDAY_ROSTER_IDS = Object.freeze([
   "iyo-sky", "mankind", "hulk-hogan", "bayley", "cm-punk", "paige",
   "seth-rollins", "andre-the-giant", "stephanie-vaquer", "randy-savage",
   "roman-reigns", "charlotte-flair", "kevin-owens", "kane", "the-undertaker",
   "ultimate-warrior", "rhea-ripley", "cody-rhodes", "oba-femi",
-  "stone-cold-steve-austin", "liv-morgan", "brock-lesnar", "gunther", "becky-lynch"
+  "stone-cold-steve-austin", "liv-morgan", "brock-lesnar", "gunther", "becky-lynch",
+  "rowdy-roddy-piper", "ted-dibiase", "jake-roberts", "mr-perfect",
+  "triple-h", "chris-jericho", "chyna", "kurt-angle"
 ]);
 
 const BIRTHDAY_PROFILES = Object.freeze([
+  ["ted-dibiase", "Ted DiBiase", 1, 18, "technical", "golden-era-series-1"],
   ["becky-lynch", "Becky Lynch", 1, 30, "technical", "evolution-series-1"],
-  ["the-undertaker", "The Undertaker", 3, 24, "strike", "hall-of-fame-series-1"],
+  ["the-undertaker", "The Undertaker", 3, 24, "strike", "attitude-era-series-1"],
+  ["mr-perfect", "Mr. Perfect", 3, 28, "technical", "golden-era-series-1"],
   ["stephanie-vaquer", "Stephanie Vaquer", 3, 29, "technical", "evolution-series-1"],
   ["charlotte-flair", "Charlotte Flair", 4, 5, "technical", "evolution-series-1"],
+  ["rowdy-roddy-piper", "Rowdy Roddy Piper", 4, 17, "strike", "golden-era-series-1"],
   ["oba-femi", "Oba Femi", 4, 22, "strength", "summerslam-series-1"],
-  ["kane", "Kane", 4, 26, "strength", "hall-of-fame-series-1"],
+  ["kane", "Kane", 4, 26, "strength", "attitude-era-series-1"],
   ["kevin-owens", "Kevin Owens", 5, 7, "strength", "summerslam-series-1"],
   ["iyo-sky", "IYO SKY", 5, 8, "agility", "evolution-series-1"],
-  ["andre-the-giant", "André the Giant", 5, 19, "strength", "hall-of-fame-series-1"],
+  ["andre-the-giant", "André the Giant", 5, 19, "strength", "golden-era-series-1"],
   ["roman-reigns", "Roman Reigns", 5, 25, "strength", "summerslam-series-1"],
   ["seth-rollins", "Seth Rollins", 5, 28, "strike", "summerslam-series-1"],
-  ["mankind", "Mankind", 6, 7, "strike", "hall-of-fame-series-1"],
+  ["jake-roberts", "Jake Roberts", 5, 30, "technical", "golden-era-series-1"],
+  ["mankind", "Mankind", 6, 7, "strike", "attitude-era-series-1"],
   ["liv-morgan", "Liv Morgan", 6, 8, "agility", "evolution-series-1"],
   ["bayley", "Bayley", 6, 15, "technical", "evolution-series-1"],
-  ["ultimate-warrior", "Ultimate Warrior", 6, 16, "strength", "hall-of-fame-series-1"],
+  ["ultimate-warrior", "Ultimate Warrior", 6, 16, "strength", "golden-era-series-1"],
   ["cody-rhodes", "Cody Rhodes", 6, 30, "technical", "summerslam-series-1"],
   ["brock-lesnar", "Brock Lesnar", 7, 12, "strength", "summerslam-series-1"],
-  ["hulk-hogan", "Hulk Hogan", 8, 11, "strength", "hall-of-fame-series-1"],
+  ["triple-h", "Triple H", 7, 27, "technical", "attitude-era-series-1"],
+  ["hulk-hogan", "Hulk Hogan", 8, 11, "strength", "golden-era-series-1"],
   ["paige", "Paige", 8, 17, "strike", "evolution-series-1"],
   ["gunther", "Gunther", 8, 20, "strength", "summerslam-series-1"],
   ["rhea-ripley", "Rhea Ripley", 10, 11, "strength", "evolution-series-1"],
   ["cm-punk", "CM Punk", 10, 26, "technical", "summerslam-series-1"],
-  ["randy-savage", "Randy Savage", 11, 15, "agility", "hall-of-fame-series-1"],
-  ["stone-cold-steve-austin", "Stone Cold Steve Austin", 12, 18, "strike", "hall-of-fame-series-1"]
+  ["chris-jericho", "Chris Jericho", 11, 9, "agility", "attitude-era-series-1"],
+  ["randy-savage", "Randy Savage", 11, 15, "agility", "golden-era-series-1"],
+  ["kurt-angle", "Kurt Angle", 12, 9, "technical", "attitude-era-series-1"],
+  ["stone-cold-steve-austin", "Stone Cold Steve Austin", 12, 18, "strike", "attitude-era-series-1"],
+  ["chyna", "Chyna", 12, 27, "strength", "attitude-era-series-1"]
 ]);
 
 const BIRTHDAY_MONTH_NAMES = Object.freeze(["JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"]);
@@ -575,7 +587,7 @@ export function currentLiveEventTowerStage(profile, towerKey, now = new Date()) 
   if (!entry) return null;
   return liveEventStage(entry.tower.event, entry.state.activeRun?.stage ?? 0);
 }
-export function recordLiveEventTowerMatch(profile, towerKey, result, now = new Date()) {
+export function recordLiveEventTowerMatch(profile, towerKey, result, now = new Date(), rng = Math.random) {
   const entry = liveEventTowerState(profile, towerKey, now);
   if (!entry) throw new Error("That Live Event has expired.");
   const { tower, state, aggregate } = entry;
@@ -592,10 +604,9 @@ export function recordLiveEventTowerMatch(profile, towerKey, result, now = new D
     aggregate.totalClears = (aggregate.totalClears ?? 0) + 1;
     if (!aggregate.completedKeys.includes(tower.key)) aggregate.completedKeys.push(tower.key);
     profile.weeklyLiveEvents.totalClears = aggregate.totalClears;
-    const superPackSetId = run.rewardSetId ?? tower.event.rewardSetId;
-    profile.superPackCreditsBySet ??= {};
-    profile.superPackCreditsBySet[superPackSetId] = (profile.superPackCreditsBySet[superPackSetId] ?? 0) + 1;
-    return { status: "cleared", run, tower, event: tower.event, superPackAwarded: true, superPackSetId };
+    const rewardSetIds = grantRandomBoosters(profile, LIVE_EVENT_CLEAR_BOOSTERS, rng, now);
+    run.rewardSetIds = rewardSetIds;
+    return { status: "cleared", run, tower, event: tower.event, packAwarded: true, packCount: rewardSetIds.length, rewardSetIds };
   }
   return { status: "advance", run, tower, stage: liveEventStage(tower.event, run.stage) };
 }
@@ -628,9 +639,9 @@ export function currentWeeklyLiveEventStage(profile, now = new Date()) {
   const tower = primaryDailyTower(now);
   return currentLiveEventTowerStage(profile, tower.key, now);
 }
-export function recordWeeklyLiveEventMatch(profile, result, now = new Date()) {
+export function recordWeeklyLiveEventMatch(profile, result, now = new Date(), rng = Math.random) {
   const tower = primaryDailyTower(now);
-  const outcome = recordLiveEventTowerMatch(profile, tower.key, result, now);
+  const outcome = recordLiveEventTowerMatch(profile, tower.key, result, now, rng);
   weeklyLiveEventState(profile, now);
   return outcome;
 }

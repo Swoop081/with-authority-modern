@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { collectionCards } from '../js/data/collection.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { layeredCardArtFor, superstarCardArtFor, superstarHeadshotFor } from '../js/data/artwork.js?v=0.13.81';
+import { collectionCards } from '../js/data/collection.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { layeredCardArtFor, superstarCardArtFor, superstarHeadshotFor } from '../js/data/artwork.js?v=0.13.90';
 
 const superstarCard = id => collectionCards.find(card => card.kind === 'superstar' && card.superstarId === id);
 

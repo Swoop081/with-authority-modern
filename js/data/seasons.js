@@ -1,22 +1,22 @@
-import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.81";
-import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.81";
+import { grantSuperstarIdentityUnlockPackage, addOwnedCard, addUniversePoints } from "./profile.js?v=0.13.90";
+import { isUnreleasedSetId, isPlayerReleasedSetId } from "./release.js?v=0.13.90";
 export const SEASON_ID = "season-1";
 export const SEASON_START = "2026-08-10T00:00:00";
 export const SEASON_END = "2026-11-28T00:00:00";
 export const SEASON_TIER_COUNT = 100;
 export const XP_PER_TIER = 100;
 export const MAX_SEASON_XP = SEASON_TIER_COUNT * XP_PER_TIER;
-export const MATCH_XP = { win: 15, loss: 0 };
-export const DAILY_CHALLENGE_XP = 25;
-export const WEEKLY_CHALLENGE_XP = 100;
+export const MATCH_XP = { win: 5, loss: 0 };
+export const DAILY_CHALLENGE_XP = 10;
+export const WEEKLY_CHALLENGE_XP = 25;
 export const SEASON_1_COMPLETION_SUPERSTAR = "the-rock";
 export const SEASON_2_COMPLETION_SUPERSTAR = "goldberg";
-export const FEATURED_SET_IDS = ["summerslam-series-1", "hall-of-fame-series-1", "evolution-series-1", "raw-series-1", "new-generation-series-1", "worlds-collide-series-1", "money-in-the-bank-series-1", "smackdown-series-1"];
+export const FEATURED_SET_IDS = ["summerslam-series-1", "evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1"];
 
 // Season 1 prestige chase: The Rock — Final Boss is assembled across the road
 // across a 100-tier road. Repeatable Rock cards are earned one copy at a time
 // up to the normal five-copy collection cap; his one-off Support, Action and
-// Entrance are spaced between them. Tier 100 is the Foil Superstar identity.
+// Entrance are spaced between them. Tier 100 is the Ruby Superstar identity.
 export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
   5:   { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
   10:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
@@ -35,13 +35,13 @@ export const FINAL_BOSS_TIER_REWARDS = Object.freeze({
   75:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
   80:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
   82:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
-  85:  { cardId: "entrance-the-rock", name: "Final Boss", amount: 1, rewardType: "entrance", label: "ENTRANCE", foil: true },
+  85:  { cardId: "entrance-the-rock", name: "Final Boss", amount: 1, rewardType: "entrance", label: "RUBY ENTRANCE", tier: "ruby" },
   88:  { cardId: "the-rock-lay-the-smack-down", name: "Lay The Smack Down", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
   90:  { cardId: "the-rock-rock-bottom", name: "Rock Bottom", amount: 1, rewardType: "signature", label: "SIGNATURE · TRADEMARK" },
   92:  { cardId: "the-rock-belt-whip", name: "Belt Whip", amount: 1, rewardType: "exclusive-move", label: "EXCLUSIVE MOVE" },
   94:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
   98:  { cardId: "the-rock-people-s-elbow", name: "People's Elbow", amount: 1, rewardType: "finisher", label: "FINISHER" },
-  100: { cardId: "superstar-the-rock", name: "The Rock — Final Boss", amount: 1, rewardType: "superstar", label: "FOIL SUPERSTAR", foil: true, superstarId: SEASON_1_COMPLETION_SUPERSTAR }
+  100: { cardId: "superstar-the-rock", name: "The Rock — Final Boss", amount: 1, rewardType: "superstar", label: "RUBY SUPERSTAR", tier: "ruby", superstarId: SEASON_1_COMPLETION_SUPERSTAR }
 });
 
 export const SEASON_1 = {
@@ -53,88 +53,8 @@ export const SEASON_1 = {
   end: SEASON_END,
   tierCount: SEASON_TIER_COUNT,
   xpPerTier: XP_PER_TIER,
-  rotationPreview: [
-    { setId: "summerslam-series-1", from: "featured", to: "vaulted", note: "Leaves the standard Featured pool when the Season 2 content update arrives." },
-    { setId: "hall-of-fame-series-1", from: "featured", to: "returning", note: "Moves into Legacy/event rotation rather than disappearing from owned decks." },
-    { setId: "evolution-series-1", from: "featured", to: "returning", note: "Moves into Legacy/event rotation and can return alongside future women's content." }
-  ],
-  roadmap: [
-    {
-      id: "launch",
-      date: "2026-08-10T00:00:00",
-      dateLabel: "10 AUG",
-      title: "Season 1 Launch",
-      kicker: "LIVE NOW",
-      description: "SummerSlam — Series 1, Hall of Fame — Series 1 and Evolution — Series 1 launch the collection.",
-      superstarCount: 24,
-      type: "launch"
-    },
-    {
-      id: "raw-series-1-live",
-      date: "2026-08-20T00:00:00",
-      dateLabel: "20 AUG",
-      title: "Raw — Series 1",
-      kicker: "LIVE NOW",
-      description: "Eight-Superstar RAW subset is live now and available in boosters, collection, stores and gameplay rotation.",
-      superstarCount: 8,
-      type: "subset",
-      setId: "raw-series-1"
-    },
-    {
-      id: "new-generation-series-1",
-      date: "2026-09-05T00:00:00",
-      dateLabel: "05 SEP",
-      title: "New Generation — Series 1",
-      kicker: "NEW SUBSET",
-      description: "Four-Superstar New Generation subset takes the 5 September release slot and joins Season 1. Roster reveal coming closer to release.",
-      superstarCount: 4,
-      type: "subset",
-      setId: "new-generation-series-1"
-    },
-    {
-      id: "worlds-collide",
-      date: "2026-09-26T00:00:00",
-      dateLabel: "26 SEP",
-      title: "Worlds Collide — Series 1",
-      kicker: "NEW SUBSET",
-      description: "Four-Superstar WWE × AAA lucha subset joins Season 1. Roster reveal coming closer to release.",
-      superstarCount: 4,
-      type: "subset",
-      setId: "worlds-collide-series-1"
-    },
-    {
-      id: "money-in-the-bank",
-      date: "2026-10-10T00:00:00",
-      dateLabel: "10 OCT",
-      title: "Money in the Bank — Series 1",
-      kicker: "NEW SUBSET",
-      description: "Four-Superstar Money in the Bank subset joins Season 1. Roster reveal coming closer to release.",
-      superstarCount: 4,
-      type: "subset",
-      setId: "money-in-the-bank-series-1"
-    },
-    {
-      id: "smackdown-series-1",
-      date: "2026-10-31T00:00:00",
-      dateLabel: "31 OCT",
-      title: "SmackDown — Series 1",
-      kicker: "HALLOWEEN SUBSET",
-      description: "Four-Superstar SmackDown subset joins Season 1. Roster reveal coming closer to release.",
-      superstarCount: 4,
-      type: "subset",
-      setId: "smackdown-series-1"
-    },
-    {
-      id: "season-2",
-      date: "2026-11-28T00:00:00",
-      dateLabel: "28 NOV",
-      title: "Season 2 · Survivor Series",
-      kicker: "NEXT SEASON",
-      description: "Season 2 launches with an 8-Superstar Survivor Series set and a fresh 50-tier Season Road with a new prestige reward. Selected Season 1 sets move out of the Featured pool while owned cards remain playable.",
-      superstarCount: 8,
-      type: "season"
-    }
-  ]
+  rotationPreview: [],
+  roadmap: []
 };
 
 function ensure(profile) {
@@ -171,15 +91,8 @@ export function seasonTimeRemaining(now = new Date()) {
   const ms = Math.max(0, end.getTime() - now.getTime());
   return { ms, days: Math.ceil(ms / 86400000), ended: ms <= 0, end };
 }
-export function nextRoadmapNode(now = new Date()) {
-  return SEASON_1.roadmap.find(node => new Date(node.date).getTime() > now.getTime()) ?? SEASON_1.roadmap.at(-1);
-}
-export function roadmapNodeStatus(node, now = new Date()) {
-  const time = new Date(node.date).getTime();
-  if (node.id === "launch" && now.getTime() >= time) return "live";
-  if (now.getTime() >= time) return node.id === "season-2" ? "live" : "released";
-  return "upcoming";
-}
+export function nextRoadmapNode(_now = new Date()) { return null; }
+export function roadmapNodeStatus(_node, _now = new Date()) { return "unpublished"; }
 
 export function awardSeasonXp(profile, amount, source = "other") {
   const state = ensure(profile);
@@ -198,7 +111,8 @@ export function awardMatchSeasonXp(profile, result) {
 
 const SEASON_1_PACK_SET_IDS = Object.freeze([
   "summerslam-series-1",
-  "hall-of-fame-series-1",
+  "golden-era-series-1",
+  "attitude-era-series-1",
   "evolution-series-1",
   "raw-series-1",
   "new-generation-series-1",
@@ -209,16 +123,16 @@ const SEASON_1_PACK_SET_IDS = Object.freeze([
 
 function seasonPackPoolForTier(tier, now = new Date()) {
   const authored = tier <= 20
-    ? SEASON_1_PACK_SET_IDS.slice(0, 3)
+    ? SEASON_1_PACK_SET_IDS.slice(0, 4)
     : tier <= 35
-      ? SEASON_1_PACK_SET_IDS.slice(0, 4)
+      ? SEASON_1_PACK_SET_IDS.slice(0, 5)
       : tier <= 50
-        ? SEASON_1_PACK_SET_IDS.slice(0, 5)
+        ? SEASON_1_PACK_SET_IDS.slice(0, 6)
         : tier <= 65
-          ? SEASON_1_PACK_SET_IDS.slice(0, 6)
+          ? SEASON_1_PACK_SET_IDS.slice(0, 7)
           : SEASON_1_PACK_SET_IDS;
   const released = authored.filter(setId => !isUnreleasedSetId(setId, now));
-  return released.length ? released : SEASON_1_PACK_SET_IDS.slice(0, 3);
+  return released.length ? released : SEASON_1_PACK_SET_IDS.slice(0, 4);
 }
 
 export function tierReward(tier, now = new Date()) {
@@ -248,14 +162,14 @@ export function claimSeasonTier(profile, tier, now = new Date()) {
   const reward = tierReward(n, now);
   if (reward.kind === "final-boss-card") {
     if (reward.rewardType === "superstar") {
-      // Tier 100 is the Foil Superstar identity only. Shared deck cards must come
+      // Tier 100 is the Ruby Superstar identity only. Shared deck cards must come
       // from the player's Collection; all Rock-exclusive cards are earned one
       // at a time across the preceding Season milestones.
       grantSuperstarIdentityUnlockPackage(profile, reward.superstarId);
       state.completionRewardClaimed = true;
       state.completionSuperstarId = reward.superstarId;
     } else {
-      addOwnedCard(profile, reward.cardId, { amount: reward.amount ?? 1, foil: !!reward.foil });
+      addOwnedCard(profile, reward.cardId, { amount: reward.amount ?? 1, tier: reward.tier ?? "normal" });
     }
     if (reward.bonusUniversePoints) addUniversePoints(profile, reward.bonusUniversePoints);
   } else if (reward.kind === "universe-points") addUniversePoints(profile, reward.amount);

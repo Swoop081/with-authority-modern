@@ -1,4 +1,5 @@
-import { superstars } from "./superstars.js?v=0.13.81";
+import { superstars } from "./superstars.js?v=0.13.90";
+import { grantBooster } from "./boosters.js?v=0.13.90";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 32;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";
@@ -12,14 +13,14 @@ export const CHAMPIONSHIP_DIFFICULTIES = Object.freeze({
 });
 
 export const CHAMPIONSHIP_ROAD_SECTIONS = Object.freeze([
-  { id: "golden-era", label: "Golden Era", start: 1, end: 4, accent: "gold", setId: "hall-of-fame-series-1" },
+  { id: "golden-era", label: "Golden Era", start: 1, end: 4, accent: "gold", setId: "golden-era-series-1" },
   { id: "summerslam-a", label: "SummerSlam · Part I", start: 5, end: 8, accent: "blue", setId: "summerslam-series-1" },
   { id: "evolution-a", label: "Evolution · Part I", start: 9, end: 12, accent: "violet", setId: "evolution-series-1" },
-  { id: "attitude-era", label: "Attitude Era", start: 13, end: 16, accent: "red", setId: "hall-of-fame-series-1" },
+  { id: "attitude-era", label: "Attitude Era", start: 13, end: 16, accent: "red", setId: "attitude-era-series-1" },
   { id: "summerslam-b", label: "SummerSlam · Part II", start: 17, end: 20, accent: "blue", setId: "summerslam-series-1" },
   { id: "evolution-b", label: "Evolution · Part II", start: 21, end: 24, accent: "violet", setId: "evolution-series-1" },
-  { id: "raw-a", label: "Raw · Part I", start: 25, end: 28, accent: "raw", setId: "raw-series-1" },
-  { id: "raw-b", label: "Raw · Part II", start: 29, end: 32, accent: "raw", setId: "raw-series-1" }
+  { id: "new-generation-a", label: "New Generation · Part I", start: 25, end: 28, accent: "blue", setId: "new-generation-series-1" },
+  { id: "new-generation-b", label: "New Generation · Part II", start: 29, end: 32, accent: "blue", setId: "new-generation-series-1" }
 ]);
 
 export const CHAMPIONSHIP_ROAD_OPPONENTS = Object.freeze([
@@ -29,8 +30,8 @@ export const CHAMPIONSHIP_ROAD_OPPONENTS = Object.freeze([
   "mankind", "kane", "the-undertaker", "stone-cold-steve-austin",
   "cody-rhodes", "oba-femi", "brock-lesnar", "gunther",
   "charlotte-flair", "rhea-ripley", "liv-morgan", "becky-lynch",
-  "sol-ruca", "chad-gable", "raquel-rodriguez", "logan-paul",
-  "roxanne-perez", "austin-theory", "montez-ford", "joe-hendry"
+  "bret-hart", "shawn-michaels", "razor-ramon", "diesel",
+  "doink-the-clown", "yokozuna", "owen-hart", "british-bulldog"
 ]);
 
 // Retained as a compatibility export for older source/tests. Championship Road
@@ -218,6 +219,8 @@ export function recordChampionshipMatch(profile, result) {
   state.bestStage = Math.max(state.bestStage ?? 0, run.stage);
   state.bestStageByDifficulty[run.difficultyId] = Math.max(state.bestStageByDifficulty[run.difficultyId] ?? 0, run.stage);
   const completedSection = run.stage % 4 === 0 ? CHAMPIONSHIP_ROAD_SECTIONS.find(section => section.end === run.stage) ?? null : null;
+  const packSetId = completedSection?.setId ?? null;
+  if (packSetId) grantBooster(profile, 1, packSetId);
   if (run.stage >= run.opponents.length) {
     run.status = "cleared";
     road.clears = (road.clears ?? 0) + 1;
@@ -233,13 +236,10 @@ export function recordChampionshipMatch(profile, result) {
     const idx = difficultyIndex(run.difficultyId), next = CHAMPIONSHIP_DIFFICULTY_ORDER[idx + 1];
     if (next && !road.unlockedDifficulties.includes(next)) road.unlockedDifficulties.push(next);
     state.unlockedDifficulties = [...road.unlockedDifficulties];
-    const superPackSetId = completedSection?.setId ?? CHAMPIONSHIP_SET_ID;
-    profile.superPackCreditsBySet ??= {};
-    profile.superPackCreditsBySet[superPackSetId] = (profile.superPackCreditsBySet[superPackSetId] ?? 0) + 1;
-    return { status: "cleared", run, championshipPackAwarded: false, superPackAwarded: true, superPackSetId, firstWithSuperstar, unlockedDifficulty: next ?? null, sectionCleared: completedSection };
+    return { status: "cleared", run, packAwarded: !!packSetId, packSetId, firstWithSuperstar, unlockedDifficulty: next ?? null, sectionCleared: completedSection };
   }
   state.activeRun = run;
-  return { status: "advance", run, sectionCleared: completedSection };
+  return { status: "advance", run, sectionCleared: completedSection, packAwarded: !!packSetId, packSetId };
 }
 
 export function resetChampionshipRoad(profile, superstarId = null) {

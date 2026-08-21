@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.81';
-import { deckIds, decks } from '../js/data/decks.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.81';
-import { counterEligibility } from '../js/engine/rules.js?v=0.13.81';
-import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.81';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.90';
+import { deckIds, decks } from '../js/data/decks.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.90';
+import { counterEligibility } from '../js/engine/rules.js?v=0.13.90';
+import { createProfile, migrateProfile, totalOwnedCopies, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.90';
 
 const star=id=>Object.values(superstars).find(s=>s.id===id);
 const once=allGameplayCards.find(c=>c.id==='once-too-often');
@@ -22,7 +22,7 @@ test('v0.13.2 Once Too Often is a collectible 2-star reactive Action with the no
 });
 
 test('v0.13.2 every authored 60-page deck starts with exactly one Once Too Often outside Lead Off 5',()=>{
-  assert.equal(Object.keys(deckIds).length,66);
+  assert.equal(Object.keys(deckIds).length,74);
   for(const [sid,ids] of Object.entries(deckIds)){
     assert.equal(ids.length,60,`${sid} remains 60 pages`);
     assert.equal(ids.filter(id=>id==='once-too-often').length,1,`${sid} starts with one copy`);

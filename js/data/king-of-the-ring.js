@@ -1,6 +1,7 @@
+import { grantRandomBoosters } from "./boosters.js?v=0.13.90";
+
 export const KING_OF_THE_RING_FIELD_SIZE = 8;
 export const KING_OF_THE_RING_ROUNDS = Object.freeze(["Quarterfinal", "Semifinal", "Final"]);
-export const KING_OF_THE_RING_REWARD_CHOICES = 3;
 
 function ensure(profile) {
   profile.kingOfTheRing ??= { activeRun: null, clears: 0, bestRound: 0, reigningKingId: null, reigningKingAt: null };
@@ -9,13 +10,9 @@ function ensure(profile) {
   profile.kingOfTheRing.reigningKingId ??= null;
   profile.kingOfTheRing.reigningKingAt ??= null;
   const run = profile.kingOfTheRing.activeRun;
-  // v0.13.23 compatibility: a cleared v0.13.22 run already paid its old automatic
-  // booster reward. Mark that historical reward resolved so upgrading cannot
-  // create a second reward choice for the same tournament.
-  if (run?.status === "cleared" && !("rewardChoices" in run) && run.rewardClaimedSetId == null) {
-    run.rewardChoices = [];
-    run.rewardClaimedSetId = "legacy-auto-reward";
-    run.coronationSeen = true;
+  if (run?.status === "cleared") {
+    run.coronationSeen ??= true;
+    run.rewardSetId ??= run.rewardClaimedSetId && run.rewardClaimedSetId !== "legacy-auto-reward" ? run.rewardClaimedSetId : null;
   }
   return profile.kingOfTheRing;
 }
@@ -50,8 +47,7 @@ export function startKingOfTheRing(profile, superstarId, opponentIds, rng = Math
     status: "active",
     startedAt: new Date().toISOString(),
     coronationSeen: false,
-    rewardChoices: null,
-    rewardClaimedSetId: null,
+    rewardSetId: null,
   };
   return state.activeRun;
 }
@@ -61,7 +57,7 @@ export function currentKingOfTheRingOpponent(profile) {
   return !run || run.status !== "active" ? null : run.opponents[run.stage] ?? null;
 }
 
-export function recordKingOfTheRingMatch(profile, result) {
+export function recordKingOfTheRingMatch(profile, result, rng = Math.random, now = new Date()) {
   const state = ensure(profile), run = state.activeRun;
   if (!run || run.status !== "active") throw new Error("No active King of the Ring tournament");
   if (result === "loss") { run.status = "eliminated"; return { status: "eliminated", run }; }
@@ -73,23 +69,11 @@ export function recordKingOfTheRingMatch(profile, result) {
     state.clears += 1;
     state.reigningKingId = run.superstarId;
     state.reigningKingAt = new Date().toISOString();
-    return { status: "cleared", run };
+    const rewardSetIds = grantRandomBoosters(profile, 1, rng, now);
+    run.rewardSetId = rewardSetIds[0] ?? null;
+    return { status: "cleared", run, packAwarded: !!run.rewardSetId, packSetId: run.rewardSetId };
   }
   return { status: "advance", run };
-}
-
-export function prepareKingOfTheRingReward(profile, releasedSetIds, rng = Math.random) {
-  const run = ensure(profile).activeRun;
-  if (!run || run.status !== "cleared") throw new Error("King of the Ring has not been won");
-  if (Array.isArray(run.rewardChoices)) return run.rewardChoices;
-  const pool = [...new Set(releasedSetIds)].filter(Boolean);
-  if (!pool.length) throw new Error("No released booster sets are available");
-  run.rewardChoices = pool.length <= KING_OF_THE_RING_REWARD_CHOICES
-    ? [...pool]
-    : shuffle(pool, rng).slice(0, KING_OF_THE_RING_REWARD_CHOICES);
-  run.rewardClaimedSetId = null;
-  run.coronationSeen = false;
-  return run.rewardChoices;
 }
 
 export function markKingOfTheRingCoronationSeen(profile) {
@@ -97,17 +81,6 @@ export function markKingOfTheRingCoronationSeen(profile) {
   if (!run || run.status !== "cleared") throw new Error("No King of the Ring coronation is available");
   run.coronationSeen = true;
   return run;
-}
-
-export function claimKingOfTheRingReward(profile, setId) {
-  const run = ensure(profile).activeRun;
-  if (!run || run.status !== "cleared") throw new Error("King of the Ring has not been won");
-  if (run.rewardClaimedSetId) throw new Error("King of the Ring reward already claimed");
-  if (!Array.isArray(run.rewardChoices) || !run.rewardChoices.includes(setId)) throw new Error("Choose one of the offered King of the Ring boosters");
-  run.rewardClaimedSetId = setId;
-  profile.superPackCreditsBySet ??= {};
-  profile.superPackCreditsBySet[setId] = (profile.superPackCreditsBySet[setId] ?? 0) + 1;
-  return setId;
 }
 
 export function resetKingOfTheRing(profile) { ensure(profile).activeRun = null; return ensure(profile); }

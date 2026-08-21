@@ -1,17 +1,17 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { superstars } from "../js/data/superstars.js?v=0.13.81";
-import { decks } from "../js/data/decks.js?v=0.13.81";
-import { allGameplayCards } from "../js/data/content.js?v=0.13.81";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.81";
-import { canPlayAction } from "../js/engine/rules.js?v=0.13.81";
+import { superstars } from "../js/data/superstars.js?v=0.13.90";
+import { decks } from "../js/data/decks.js?v=0.13.90";
+import { allGameplayCards } from "../js/data/content.js?v=0.13.90";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.13.90";
+import { canPlayAction } from "../js/engine/rules.js?v=0.13.90";
 
 const stars=Object.values(superstars);
 const fight=allGameplayCards.find(c=>c.id==='fight-forever');
 const rng=()=>0.42;
 
 test('v0.12.29 roster keeps the no-cap durability model after targeted rebalance',()=>{
-  assert.equal(stars.length,66);
+  assert.equal(stars.length,74);
   const expected={
     'iyo-sky':57,'mankind':67,'the-rock':67,'hulk-hogan':69,'roman-reigns':67,'cm-punk':64,
     'cody-rhodes':64,'seth-rollins':64,'brock-lesnar':70,'kevin-owens':66,'gunther':68,'oba-femi':68

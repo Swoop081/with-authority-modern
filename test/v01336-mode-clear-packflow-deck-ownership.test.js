@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=0.13.81';
-import { collectionCards } from '../js/data/collection.js?v=0.13.81';
-import { buildBestOwnedRecommendedDraft, enforceOwnedDraft, recommendedDeckDraft, validateDeckDraft, ownedTotal, cardEligibilityForSuperstar } from '../js/data/deck-builder.js?v=0.13.81';
-import { superstars } from '../js/data/superstars.js?v=0.13.81';
+import { createProfile, grantSuperstarUnlockPackage } from '../js/data/profile.js?v=0.13.90';
+import { collectionCards } from '../js/data/collection.js?v=0.13.90';
+import { buildBestOwnedRecommendedDraft, enforceOwnedDraft, recommendedDeckDraft, validateDeckDraft, ownedTotal, cardEligibilityForSuperstar } from '../js/data/deck-builder.js?v=0.13.90';
+import { superstars } from '../js/data/superstars.js?v=0.13.90';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const rules = fs.readFileSync(new URL('../js/data/game-rules.js', import.meta.url), 'utf8');
@@ -18,16 +18,16 @@ function countDraft(draft = []) {
   return counts;
 }
 
-test('v0.13.36 completing a structured mode suppresses the normal victory booster and shows only the Super Pack', () => {
-  assert.match(app, /awardNormalVictoryPack\(outcome\.status === "cleared"\)/);
-  assert.match(app, /rewardLine = `1 × Super Pack`/);
-  assert.match(app, /rewardLine = `Super Pack choice after coronation`/);
-  assert.doesNotMatch(app, /on top of the final victory booster/);
-  assert.doesNotMatch(app, /Victory Booster · 1 × Super Pack/);
-  assert.match(rules, /final victory that clears a full structured mode or tournament awards only its Super Pack/i);
+test('v0.13.85 structured modes use milestone/completion standard packs and no Super Packs', () => {
+  assert.doesNotMatch(app, /grantVictoryBooster|SUPER PACK|Super Pack/);
+  assert.match(app, /2 random released-set boosters have been awarded/);
+  assert.match(app, /One random released-set booster has been awarded/);
+  assert.match(app, /Final 4-match block complete/);
+  assert.match(rules, /Pack rewards are tied to mode milestones and completion/i);
+  assert.doesNotMatch(rules, /Super Packs/);
 });
 
-test('v0.13.36 Super Pack final-card reveal uses the explicit next/summary action path', () => {
+test('v0.13.85 standard pack final-card reveal uses the explicit next/summary action path', () => {
   assert.match(app, /flipAttr:`data-booster-next="\$\{boosterFocusIndex\}"`/);
   assert.match(app, /boosterFocusIndex===pulls\.length-1\?'TAP CARD · PACK SUMMARY'/);
   assert.match(app, /else \{\s*preparePackSummary\(\);\s*\}/);
