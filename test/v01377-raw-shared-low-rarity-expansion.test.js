@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.98';
-import { collectionCards } from '../js/data/collection.js?v=0.13.98';
-import { decks } from '../js/data/decks.js?v=0.13.98';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.98';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.98';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.00';
+import { collectionCards } from '../js/data/collection.js?v=0.14.00';
+import { decks } from '../js/data/decks.js?v=0.14.00';
+import { boosterEligible } from '../js/data/boosters.js?v=0.14.00';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.14.00';
 
 const expected = [
   ['snapmare','Snapmare',72,1,2,3,'technical',{technical:1},'grapple','front-control'],

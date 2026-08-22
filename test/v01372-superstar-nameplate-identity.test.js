@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { superstars } from '../js/data/superstars.js?v=0.13.98';
+import { superstars } from '../js/data/superstars.js?v=0.14.00';
 
-await import('../js/data/superstar-nameplates.js?v=0.13.98');
+await import('../js/data/superstar-nameplates.js?v=0.14.00');
 const profiles = globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES;
 
 test('v0.13.72 authors a nameplate identity for every current Superstar', () => {

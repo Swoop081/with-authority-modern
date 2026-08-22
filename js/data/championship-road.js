@@ -1,5 +1,5 @@
-import { superstars } from "./superstars.js?v=0.13.98";
-import { grantBooster } from "./boosters.js?v=0.13.98";
+import { superstars } from "./superstars.js?v=0.14.00";
+import { grantBooster } from "./boosters.js?v=0.14.00";
 
 export const CHAMPIONSHIP_ROAD_LENGTH = 32;
 export const CHAMPIONSHIP_SET_ID = "summerslam-series-1";

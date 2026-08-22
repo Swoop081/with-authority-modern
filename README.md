@@ -1,45 +1,25 @@
-# WWE Legacy v0.13.98 — Razor Abdominal Stretch Replacement
+# WWE Legacy v0.14.00 — Tabled UI Consolidation
 
-This build supersedes v0.13.97. Razor Ramon’s exclusive **Razor’s Running Powerslam** is retired and replaced in the same New Generation collector slot by **Razor’s Abdominal Stretch**, a Rare standing Submission. Existing ownership and saved-deck copies migrate automatically to the replacement. All v0.13.97 Card Art Studio export fixes remain intact.
+This build supersedes v0.13.99 and rolls the full outstanding WWE Legacy running-change list into one release rather than shipping only the most recently discussed item. All v0.13.99 Attitude Rock gameplay changes and every earlier locked fix remain intact.
 
-## First-time onboarding
-- New saves still choose **CM Punk or Roman Reigns** and receive a complete 60-page **Normal-tier** starter deck.
-- The starter choice now displays the actual collectible **Normal Superstar cards** for Punk and Roman rather than portrait panels.
-- The one-time Welcome choice still offers **SummerSlam, Evolution, New Generation, Golden Era, or Attitude Era**.
-- Each Welcome set is now represented by its **physical booster-pack design**. Selecting the pack awards one random eligible Superstar from that set and that Superstar's complete 60-page Normal deck.
-- SummerSlam continues to exclude the already-selected Punk/Roman starter from its random pool.
-- The awarded Welcome Superstar retains the full iPhone hero-card reveal introduced in v0.13.93.
+## Included tabled changes
+- **Season 1 splash card centering:** the John Cena completion Superstar card remains the physical reward-card presentation on the launch/continue Season 1 promo, but is now explicitly centered inside its left-side bay.
+- **Official Season 1 Cena render:** Season 1 character-hero surfaces now use the official transparent John Cena profile render sourced from WWE.com. The Home Season 1 tile and Season Road hero use the new local flat asset `assets/images/art-wwe-menu-superstars-john-cena.webp`.
+- **Superstar duplicate-nameplate cleanup:** when a layered Superstar front is unavailable and the renderer falls back to a finished flat/custom Superstar front that already contains its authored printed name, the runtime-generated nameplate is suppressed. Layered Superstar fronts with a deliberately blank nameplate keep the runtime nameplate, so cards such as Razor Ramon remain correctly labelled while finished fronts such as Cody Rhodes and Charlotte Flair no longer show a second box over the artwork.
 
 ## Current live content
-Five player-facing sets remain live: **SummerSlam — Series 1, Evolution — Series 1, New Generation — Series 1, Golden Era — Series 1, and Attitude Era — Series 1**. RAW and other banked sets remain unavailable until a later build explicitly releases them.
+Five player-facing sets remain live: **SummerSlam — Series 1, Evolution — Series 1, New Generation — Series 1, Golden Era — Series 1, and Attitude Era — Series 1**. RAW and other banked sets remain unavailable until explicitly released.
 
 ## Season 1
-Season 1 remains the **30-day / 50-tier John Cena — The Last Time Is Now** chase, with five Normal copies of each Cena-exclusive Move distributed across the road, Ruby The Time Is Now Entrance at Tier 48, and Ruby John Cena at Tier 50.
+Season 1 remains the **30-day / 50-tier John Cena — The Last Time Is Now** chase. This release changes presentation only; no Season XP, tier rewards, deck data, pack odds or progression values change.
 
-See the canonical `RELEASE-NOTES-v0.13.94.md` changelog and `BUILD-CERTIFICATION.md` for this build's exact changes and verification.
+## Verification
+- 809 tests discovered / 717 passed / 0 failed / 92 intentionally skipped historical contracts.
+- Rebuild validation: 76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues.
+- Collector ID audit: 782 cards / 782 manifest entries / 0 issues.
+- Flow audit: 76 Superstars / 0 issues.
+- Card-effect audit: 0 issues.
+- Counter/submission-state audit: 0 issues.
+- Flat asset audit: 617 images / 310 installed gameplay-card fronts / 48 headshots / 39 menu portraits.
 
-
-### Asset layout (v0.13.96)
-All runtime images are stored directly in `assets/images/`. Do not create per-card-type image subfolders. Card Studio exports should use the flat filenames shown by the Studio. Missing art intentionally uses the rules/details fallback.
-
-
-### v0.13.96 presentation hotfix
-- Card fronts no longer display separate `NORMAL D#`, `EMERALD D#`, `SAPPHIRE D#`, or `RUBY D#` stat badges over installed artwork.
-- Welcome Superstar explicitly bypasses the persistent app-chrome top padding and is top-anchored on iPhone.
-
-
-### v0.13.97 Card Art Studio export hotfix
-- Local `file://` Card Studio sessions now use export-safe embedded copies of every packaged set logo, including **Season 1 — The Last Time Is Now**, so John Cena Superstar-card exports no longer fail because the logo taints the canvas.
-- This protection applies to all set-logo assets that previously came from local files, preventing the same export failure on other sets.
-- **Export Art Plate**, **Export Card**, and **Save / Share** now name the file from the displayed install destination. Examples: `card-layered-superstar-john-cena.webp` and `card-layered-move-mr-perfect-perfect-plex.webp`.
-- PNG fallback uses the same canonical basename with `.png`.
-- No card data, artwork, gameplay values, pack odds, progression, economy or live-set availability changed.
-
-
-### v0.13.98 Razor Ramon signature replacement
-- **NG1-016** is now **Razor’s Abdominal Stretch** — 3★ Rare Trademark; Cost 5; Technical 2; Submission; standing opponent only; +5 persistent Chest damage per successful turn.
-- Razor’s authored deck keeps three copies in the same signature slot.
-- Razor’s Fallaway Slam now discounts **Razor’s Chokeslam** directly. The old chain target was removed because Fallaway Slam grounds the opponent while Abdominal Stretch is a standing-only hold.
-- Existing Normal / Emerald / Sapphire / Ruby ownership of the retired Razor’s Running Powerslam migrates one-for-one to Razor’s Abdominal Stretch, including saved Deck Lab references.
-- Card Art Studio now exports the replacement as `card-layered-move-razor-ramon-abdominal-stretch.webp`.
-- No other card values, pack odds, rewards, Season 1 progression, live-set availability or asset layout changed.
+See `RELEASE-NOTES-v0.13.94.md` for the cumulative changelog and `BUILD-CERTIFICATION.md` for release verification.

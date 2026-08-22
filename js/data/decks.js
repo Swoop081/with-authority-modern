@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.13.98";
+import { allGameplayCards } from "./content.js?v=0.14.00";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -4608,9 +4608,9 @@ export const deckIds={
     "the-rock-attitude-spinebuster",
     "the-rock-attitude-spinebuster",
     "the-rock-attitude-spinebuster",
-    "the-rock-attitude-samoan-drop",
-    "the-rock-attitude-samoan-drop",
-    "the-rock-attitude-samoan-drop",
+    "the-rock-attitude-lay-the-smack-down",
+    "the-rock-attitude-lay-the-smack-down",
+    "the-rock-attitude-lay-the-smack-down",
     "the-rock-attitude-rock-bottom",
     "the-rock-attitude-rock-bottom",
     "the-rock-attitude-rock-bottom",

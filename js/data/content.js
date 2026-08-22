@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.98";
+import { enrichCounterState } from "./counter-states.js?v=0.14.00";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -15627,55 +15627,51 @@ export const allGameplayCards = [
     "nextFinisherDiscountOnConnect": 1
   },
   {
-    "id": "the-rock-attitude-samoan-drop",
-    "name": "The Rock’s Samoan Drop",
+    "id": "the-rock-attitude-lay-the-smack-down",
+    "name": "Lay The Smack Down",
     "kind": "move",
     "setId": "attitude-era-series-1",
-    "cost": 6,
-    "damage": 10,
+    "cost": 4,
+    "damage": 7,
     "requirements": {
-      "strength": 2
+      "strike": 2
     },
-    "moveType": "grapple",
-    "method": "strength",
+    "moveType": "strike",
+    "method": "strike",
     "superstarId": "the-rock-attitude",
     "rarity": 3,
-    "rulesText": "The Rock-exclusive Trademark. Grounds opponent.",
-    "groundOpponent": true,
+    "rulesText": "The Rock-exclusive Strike. On Connect: opponent loses 1 Adrenaline.",
+    "groundOpponent": false,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "trademark": true,
-    "effects": [],
-    "counterState": "body-elevated"
+    "effects": [
+      {
+        "type": "loseOpponentAdrenaline",
+        "amount": 1
+      }
+    ],
+    "counterState": "arm-extended"
   },
   {
     "id": "the-rock-attitude-rock-bottom",
     "name": "Rock Bottom",
     "kind": "move",
     "setId": "attitude-era-series-1",
-    "cost": 8,
-    "damage": 14,
-    "requirements": {
-      "strength": 3
-    },
+    "cost": 10,
+    "damage": 17,
+    "requirements": {},
     "moveType": "grapple",
-    "method": "strength",
+    "method": null,
     "superstarId": "the-rock-attitude",
-    "rarity": 3,
-    "rulesText": "The Rock-exclusive Trademark. Grounds opponent. On Connect: search/draw People’s Elbow; it costs 2 less this Control sequence.",
+    "rarity": 4,
+    "rulesText": "The Rock-exclusive Finisher. No Method requirement. Grounds opponent.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
     "selfDamage": 0,
-    "trademark": true,
-    "effects": [
-      {
-        "type": "search",
-        "name": "People’s Elbow",
-        "discount": 2
-      }
-    ],
+    "finisher": true,
+    "effects": [],
     "counterState": "body-elevated"
   },
   {
@@ -15683,20 +15679,28 @@ export const allGameplayCards = [
     "name": "People’s Elbow",
     "kind": "move",
     "setId": "attitude-era-series-1",
-    "cost": 11,
-    "damage": 18,
-    "requirements": {},
+    "cost": 7,
+    "damage": 12,
+    "requirements": {
+      "strike": 2
+    },
     "moveType": "strike",
-    "method": null,
+    "method": "strike",
     "superstarId": "the-rock-attitude",
-    "rarity": 4,
-    "rulesText": "The Rock-exclusive Finisher. Grounded opponent only.",
+    "rarity": 3,
+    "rulesText": "The Rock-exclusive Trademark. Grounded opponent only. On Connect: search/draw Rock Bottom; it costs 2 less this Control sequence.",
     "groundOpponent": false,
     "groundedOnly": true,
     "stun": 0,
     "selfDamage": 0,
-    "finisher": true,
-    "effects": [],
+    "trademark": true,
+    "effects": [
+      {
+        "type": "search",
+        "name": "Rock Bottom",
+        "discount": 2
+      }
+    ],
     "counterState": "arm-extended"
   },
   {

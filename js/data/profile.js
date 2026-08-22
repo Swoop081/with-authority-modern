@@ -1,9 +1,9 @@
-import { decks } from "./decks.js?v=0.13.98";
-import { collectionCards } from "./collection.js?v=0.13.98";
-import { superstars } from "./superstars.js?v=0.13.98";
-import { isUnreleasedSetId } from "./release.js?v=0.13.98";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.98";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.13.98";
+import { decks } from "./decks.js?v=0.14.00";
+import { collectionCards } from "./collection.js?v=0.14.00";
+import { superstars } from "./superstars.js?v=0.14.00";
+import { isUnreleasedSetId } from "./release.js?v=0.14.00";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.00";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.00";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
@@ -354,6 +354,26 @@ export function claimWelcomeSuperstar(p, setId, rng = Math.random) {
   p.savedDecks[star.id] = d.map(card => ({ id: card.id, tier: DEFAULT_STARTER_TIER }));
   p.deckNeedsCards ??= {};
   p.deckNeedsCards[star.id] = 0;
+  // v0.13.99 Attitude Era Rock replacement: AE1-060 is now Lay The Smack Down.
+  // Preserve every printing tier and rewrite saved Deck Lab references from
+  // the retired Rock-exclusive Samoan Drop id to the replacement card id.
+  const legacyAttitudeRockSamoanDropId = "the-rock-attitude-samoan-drop";
+  const attitudeRockSmackDownId = "the-rock-attitude-lay-the-smack-down";
+  const legacyAttitudeRockSamoanDrop = p.ownedCards[legacyAttitudeRockSamoanDropId];
+  if (legacyAttitudeRockSamoanDrop) {
+    for (const tier of CARD_TIERS) {
+      const amount = Math.max(0, Number(legacyAttitudeRockSamoanDrop[tier]) || 0);
+      if (amount) addOwnedCard(p, attitudeRockSmackDownId, { tier, amount });
+    }
+    delete p.ownedCards[legacyAttitudeRockSamoanDropId];
+  }
+  for (const [sid, saved] of Object.entries(p.savedDecks)) {
+    if (!Array.isArray(saved)) continue;
+    p.savedDecks[sid] = saved.map(entry => {
+      if (typeof entry === "string") return entry === legacyAttitudeRockSamoanDropId ? attitudeRockSmackDownId : entry;
+      return entry?.id === legacyAttitudeRockSamoanDropId ? { ...entry, id: attitudeRockSmackDownId } : entry;
+    });
+  }
   p.selectedEntrances ??= {};
   if (totalOwnedCopies(p, DEFAULT_PLAYER_ENTRANCE_ID) > 0) p.selectedEntrances[star.id] ??= DEFAULT_PLAYER_ENTRANCE_ID;
   p.welcomeSuperstar = { claimed: true, setId, superstarId: star.id, deckReady: true };
@@ -621,6 +641,26 @@ export function migrateProfile(old) {
     p.savedDecks[sid] = saved.map(entry => {
       if (typeof entry === "string") return entry === legacyRazorRunningPowerslamId ? razorAbdominalStretchId : entry;
       return entry?.id === legacyRazorRunningPowerslamId ? { ...entry, id: razorAbdominalStretchId } : entry;
+    });
+  }
+  // v0.13.99 Attitude Era Rock replacement: AE1-060 is now Lay The Smack Down.
+  // Preserve every printing tier and rewrite saved Deck Lab references from
+  // the retired Rock-exclusive Samoan Drop id to the replacement card id.
+  const legacyAttitudeRockSamoanDropId = "the-rock-attitude-samoan-drop";
+  const attitudeRockSmackDownId = "the-rock-attitude-lay-the-smack-down";
+  const legacyAttitudeRockSamoanDrop = p.ownedCards[legacyAttitudeRockSamoanDropId];
+  if (legacyAttitudeRockSamoanDrop) {
+    for (const tier of CARD_TIERS) {
+      const amount = Math.max(0, Number(legacyAttitudeRockSamoanDrop[tier]) || 0);
+      if (amount) addOwnedCard(p, attitudeRockSmackDownId, { tier, amount });
+    }
+    delete p.ownedCards[legacyAttitudeRockSamoanDropId];
+  }
+  for (const [sid, saved] of Object.entries(p.savedDecks)) {
+    if (!Array.isArray(saved)) continue;
+    p.savedDecks[sid] = saved.map(entry => {
+      if (typeof entry === "string") return entry === legacyAttitudeRockSamoanDropId ? attitudeRockSmackDownId : entry;
+      return entry?.id === legacyAttitudeRockSamoanDropId ? { ...entry, id: attitudeRockSmackDownId } : entry;
     });
   }
   p.selectedEntrances ??= {};

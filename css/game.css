@@ -9237,3 +9237,66 @@ body[data-screen="welcome-superstar"] main{padding-top:0!important}
 body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 .welcome-reveal-screen{align-content:start!important}
 .welcome-reveal-screen .onboarding-brand{height:64px!important;min-height:64px!important;overflow:visible!important}
+
+/* v0.14.00 — Tabled UI consolidation.
+   1) Finished flat Superstar fronts already contain their authored nameplate,
+      so suppress the runtime plate only after a layered front falls back to
+      that finished flat asset. Layered blank-nameplate fronts keep the runtime plate.
+   2) Keep the Season 1 splash reward card visually centered in its left bay.
+   3) Use the official WWE.com John Cena render for Season 1 character hero surfaces. */
+.ccg-card.has-flat-superstar-front .ccg-superstar-nameplate{display:none!important}
+
+.season-one-ad .season-ad-rock{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:12px 0!important;
+  overflow:hidden!important;
+}
+.season-one-ad .season-ad-rock .season-ad-cena{
+  width:calc(100% - 24px)!important;
+  max-width:278px!important;
+  height:auto!important;
+  margin:0 auto!important;
+  transform:none!important;
+  flex:0 0 auto!important;
+}
+
+.legacy-season-rock{
+  right:-3%!important;
+  top:-10%!important;
+  width:43%!important;
+  height:142%!important;
+  opacity:1!important;
+  overflow:hidden!important;
+}
+.legacy-season-rock .official-wwe-cena-render{
+  position:absolute!important;
+  inset:auto 0 0 auto!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:right bottom!important;
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.40))!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 20%,#000 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 20%,#000 100%)!important;
+  transform:none!important;
+}
+.season-road-rock .official-wwe-cena-render{
+  width:100%!important;
+  height:100%!important;
+  object-fit:contain!important;
+  object-position:center bottom!important;
+  filter:drop-shadow(0 15px 26px rgba(0,0,0,.48))!important;
+  mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 100%)!important;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 17%,#000 100%)!important;
+}
+@media(max-width:600px){
+  .season-one-ad .season-ad-rock{padding:10px 0!important}
+  .season-one-ad .season-ad-rock .season-ad-cena{width:calc(100% - 18px)!important;max-width:none!important}
+  .legacy-season-rock{right:-5%!important;top:-8%!important;width:46%!important;height:138%!important}
+  .season-road-rock{right:-5%!important;width:47%!important}
+}
+@media(max-width:390px){
+  .legacy-season-rock{right:-8%!important;width:50%!important}
+}

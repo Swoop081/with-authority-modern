@@ -61,3 +61,21 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Card Art Studio uses the canonical replacement filename `card-layered-move-razor-ramon-abdominal-stretch.webp`.
 - No changes to pack odds, reward economy, Season 1 Cena, live-set availability, Superstar HP, or the flat `assets/images/` layout.
 
+
+## v0.13.99 — Attitude Rock Finisher Pass
+
+- **Rock Bottom (AE1-058)** is now Attitude Era Rock’s **4★ Very Rare Finisher**: Cost 10 / Damage 17 / no Method requirement / grounds opponent.
+- **People’s Elbow (AE1-057)** is now a **3★ Rare Trademark**: Cost 7 / Damage 12 / Strike 2 / grounded opponent only. On Connect it searches/draws Rock Bottom and gives it a 2-Cost discount for the current Control sequence.
+- Retired **The Rock’s Samoan Drop** from AE1-060 and replaced it with **Lay The Smack Down**, preserving the collector identity. Lay The Smack Down is a 3★ Rare exclusive Strike at Cost 4 / Damage 7 / Strike 2; on Connect the opponent loses 1 Adrenaline.
+- Attitude Rock’s authored 60-page deck uses three copies of Lay The Smack Down and retains two copies of the normal shared **Samoan Drop**.
+- Existing ownership of the retired AE1-060 card migrates one-for-one across Normal / Emerald / Sapphire / Ruby printings, and saved Deck Lab references migrate to Lay The Smack Down.
+- No pack odds, rewards, Season 1 progression, live-set availability, Superstar HP or unrelated card balance changed.
+
+## v0.14.00 — Tabled UI Consolidation
+
+- Rolled every outstanding item from the current WWE Legacy running/tabled change list into this build instead of shipping only the latest discussed item.
+- Centered the physical **John Cena Season 1 completion Superstar card** inside the left-side launch/continue promo bay. The card remains the reward-card presentation on that screen; only its alignment changed.
+- Added the official transparent **John Cena profile render from WWE.com** as `assets/images/art-wwe-menu-superstars-john-cena.webp` and use it for Season 1 character-hero presentation on the Home Season 1 tile and Season Road hero.
+- Fixed the extra/duplicate Superstar name box seen on Live Event route cards. The renderer now distinguishes between layered Superstar fronts with a blank nameplate area and finished flat/custom fronts that already bake the Superstar name into the image. Runtime nameplates remain on layered fronts but are automatically hidden when the layered asset falls back to a finished flat Superstar front.
+- This also prevents the same duplicate-nameplate condition on other surfaces that reuse those finished flat Superstar fronts, without stripping names from layered cards such as Razor Ramon.
+- No gameplay, balance, pack odds, rewards, Season XP, Season tier structure, live-set availability, collection ownership or authored deck data changed.

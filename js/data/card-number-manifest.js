@@ -4458,7 +4458,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "AE1-059"
   },
   {
-    "id": "the-rock-attitude-samoan-drop",
+    "id": "the-rock-attitude-lay-the-smack-down",
     "setId": "attitude-era-series-1",
     "cardNumber": 60,
     "cardCode": "AE1-060"

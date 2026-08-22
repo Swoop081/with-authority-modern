@@ -1,6 +1,6 @@
-import { assetUrl } from "../config/build.js?v=0.13.98";
-import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.13.98";
-import { finishedFrontKeys } from "./finished-front-keys.js?v=0.13.98";
+import { assetUrl } from "../config/build.js?v=0.14.00";
+import { cardArtOverrides, superstarArtOverrides } from "./card-art-overrides.js?v=0.14.00";
+import { finishedFrontKeys } from "./finished-front-keys.js?v=0.14.00";
 
 const SUMMERSLAM_ROOT = "assets/images/art-summerslam-series-1";
 const WWE_PROFILE_ROOT = "assets/images/art-wwe-profile-portraits";
@@ -25,6 +25,7 @@ const rawMenuSuperstarArtwork = {
   "rhea-ripley": `${WWE_MENU_SUPERSTAR_ROOT}-rhea-ripley.webp`,
   "paige": `${WWE_MENU_SUPERSTAR_ROOT}-paige.webp`,
   "becky-lynch": `${WWE_MENU_SUPERSTAR_ROOT}-becky-lynch.webp`,
+  "john-cena": `${WWE_MENU_SUPERSTAR_ROOT}-john-cena.webp`,
 };
 
 // Superstar art is deliberately centralized. Replacing a portrait later only
