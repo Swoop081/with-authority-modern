@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.03";
-import { deckIds } from "../js/data/decks.js?v=0.14.03";
-import { superstars } from "../js/data/superstars.js?v=0.14.03";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.03";
-import { createProfile, migrateProfile, PROFILE_VERSION } from "../js/data/profile.js?v=0.14.03";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.04";
+import { deckIds } from "../js/data/decks.js?v=0.14.04";
+import { superstars } from "../js/data/superstars.js?v=0.14.04";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.04";
+import { createProfile, migrateProfile, PROFILE_VERSION } from "../js/data/profile.js?v=0.14.04";
 
 const byId = Object.fromEntries(allGameplayCards.map(card => [card.id, card]));
 const razor = Object.values(superstars).find(star => star.id === "razor-ramon");
@@ -53,7 +53,7 @@ test("v0.14.03 migrates Chokeslam ownership and saved deck entries to Razor’s 
   ];
   const migrated = migrateProfile(p);
   assert.equal(migrated.version, PROFILE_VERSION);
-  assert.equal(PROFILE_VERSION, 38);
+  assert.ok(PROFILE_VERSION >= 38);
   assert.equal(migrated.ownedCards["razor-ramon-chokeslam"], undefined);
   assert.deepEqual(migrated.ownedCards["razor-ramon-bulldog"], { normal: 2, emerald: 1, sapphire: 1, ruby: 1 });
   assert.deepEqual(migrated.savedDecks["razor-ramon"].map(entry => entry.id), Array(4).fill("razor-ramon-bulldog"));

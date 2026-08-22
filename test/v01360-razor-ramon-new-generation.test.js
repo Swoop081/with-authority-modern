@@ -1,13 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { sets } from "../js/data/sets.js?v=0.14.03";
-import { superstars } from "../js/data/superstars.js?v=0.14.03";
-import { decks } from "../js/data/decks.js?v=0.14.03";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.03";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.03";
-import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.03";
-import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.03";
-import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.03";
+import { sets } from "../js/data/sets.js?v=0.14.04";
+import { superstars } from "../js/data/superstars.js?v=0.14.04";
+import { decks } from "../js/data/decks.js?v=0.14.04";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.04";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.04";
+import { isPlayerVisibleSuperstar, isPlayerReleasedSetId } from "../js/data/release.js?v=0.14.04";
+import { MatchEngine } from "../js/engine/MatchEngine.js?v=0.14.04";
+import { canPlaySpecial } from "../js/engine/rules.js?v=0.14.04";
 
 const razor=Object.values(superstars).find(s=>s.id==="razor-ramon");
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
@@ -17,7 +17,7 @@ test.skip("v0.13.60 Razor Ramon is an scheduled 5 September 1993-1995 New Genera
   assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2026,8,4,12)), false); assert.equal(isPlayerReleasedSetId("new-generation-series-1", new Date(2026,8,5,12)), true); assert.equal(isPlayerVisibleSuperstar(razor,{unlockedSuperstars:["razor-ramon"]},new Date(2026,8,4,12)),false); assert.equal(isPlayerVisibleSuperstar(razor,{unlockedSuperstars:["razor-ramon"]},new Date(2026,8,5,12)),true);
 });
 
-test.skip("v0.13.60 Razor has a legal 60-page Strength/Strike/Technical authored baseline — superseded by v0.14.03 Lead Off rework",()=>{
+test.skip("v0.13.60 Razor has a legal 60-page Strength/Strike/Technical authored baseline — superseded by v0.14.02 Lead Off rework",()=>{
   assert.equal(razor.hp,64); assert.deepEqual(razor.starterMomentum,{strength:6,strike:4,technical:2}); assert.equal(razor.ability.name,"Oozing Machismo"); assert.equal(razor.ability.trigger.type,"connectMethodCost"); assert.equal(razor.ability.trigger.maxUses,1);
   assert.equal(decks["razor-ramon"].length,60); assert.equal(decks["razor-ramon"].filter(c=>c.kind==="momentum").length,12); assert.ok(decks["razor-ramon"].some(c=>c.id==="once-too-often"));
 });

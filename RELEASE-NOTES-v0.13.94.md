@@ -116,3 +116,15 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Fixed-seed cross-live-set CPU comparison: **1,560 matches / 0 stalls / 51.5% Razor win rate / 24.17 average turns**.
 - No pack odds, rewards, Season progression, live-set availability, unrelated card balance, or asset-layout changes.
 - User-facing package continues to exclude the entire `assets/` directory.
+
+## v0.14.04 — Razor Lead Off Sync + Tabled UI
+
+- Fixed the reported Razor Lead Off mismatch for existing profiles. Razor’s authored first five were already correct, but a valid older saved Razor deck could override the new authored ordering. Profile schema 39 now performs a one-time saved-deck sync for pre-v0.14.04 profiles.
+- Existing Razor saves now lead with **Strength Momentum / Strike Momentum / Technical Momentum / Fallaway Slam / Punch** whenever the saved deck remains a valid 60 pages. The migration reorders the player’s existing saved entries only; it preserves card counts, printing tiers and all remaining deck choices.
+- Razor remains on the approved **6 Strength / 5 Strike / 1 Technical** plan. No Razor card stats/effects change in this build.
+- Season 1 launch/continue promo now uses the canonical John Cena collectible-card renderer so the installed authored physical Superstar front is used instead of a menu-render reconstruction. The Cena card is centered within its left reward bay.
+- Home Season 1 increases John Cena’s character-render scale to match the visual weight of the Seth Rollins Deck Lab and Becky Lynch Challenges tiles while keeping the existing copy/progress layout.
+- Pack Complete five-card summary receives responsive iPhone containment: all five pulls remain the same size, the screen can scroll vertically when needed, badges stay under their own cards, helper copy gets dedicated space, and the NEXT CTA is kept clear. Rules-fallback fronts use tighter summary-only typography to prevent text/stat clipping.
+- User-facing distribution continues to exclude the entire `assets/` directory and is intended as an overlay on the existing current flat asset library.
+- Verification against inherited v0.14.00 assets: **823 tests / 726 passed / 0 failed / 97 intentionally skipped**; validation, collector-ID, flow, card-effect and counter/submission-state audits report 0 issues.
+

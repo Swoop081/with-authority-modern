@@ -9353,3 +9353,44 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
   box-shadow:0 10px 28px rgba(18,139,203,.28)!important;
 }
 .results-actions #results-continue.live-event-result-cta:active{filter:brightness(.92)!important}
+
+
+/* v0.14.04 — Razor save sync + all currently tabled presentation fixes.
+   Season splash uses the authored John Cena physical card directly, Home Cena
+   matches the neighboring character-tile scale, and Pack Complete gets real
+   responsive containment instead of clipping five cards into a fixed viewport. */
+
+.season-one-ad .season-ad-rock .season-one-cena-actual-card{display:flex!important;align-items:center!important;justify-content:center!important;width:min(calc(100% - 18px),278px)!important;height:auto!important;aspect-ratio:.68!important;margin:0 auto!important;position:relative!important;overflow:hidden!important;border-radius:12px!important;flex:0 0 auto!important}
+.season-one-cena-actual-card>.season-one-cena-authored-collectible,.season-one-cena-actual-card>.generated-superstar-preview{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;margin:0 auto!important;transform:none!important}
+.season-one-cena-actual-card .ccg-card-inner,.season-one-cena-actual-card .ccg-card-face,.season-one-cena-actual-card .ccg-card-art{width:100%!important;height:100%!important}
+.season-one-cena-actual-card .ccg-superstar-full-art img,.season-one-cena-actual-card .ccg-layered-card-plate,.season-one-cena-actual-card .ccg-finished-card-art-image,.season-one-cena-actual-card .ccg-superstar-art-image{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important;margin:auto!important;transform:none!important}
+
+.legacy-season-rock{right:-7%!important;top:auto!important;bottom:-34%!important;width:53%!important;height:168%!important;opacity:1!important}
+.legacy-season-rock .official-wwe-cena-render{inset:auto 0 0 auto!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center bottom!important}
+@media(max-width:390px){.legacy-season-rock{right:-10%!important;width:57%!important;height:168%!important}}
+
+.streamlined-pack-summary{display:block!important;height:calc(100svh - 112px)!important;max-height:none!important;overflow-x:hidden!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important;padding:8px 10px calc(18px + env(safe-area-inset-bottom))!important;box-sizing:border-box!important}
+.streamlined-pack-summary .pack-complete-hero{margin:0 auto 12px!important}
+.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{--summary-card-w:min(38vw,154px)!important;display:grid!important;grid-template-columns:repeat(2,var(--summary-card-w))!important;grid-template-areas:"tl tr" "cc cc" "bl br"!important;justify-content:center!important;justify-items:center!important;align-items:start!important;column-gap:clamp(18px,7vw,42px)!important;row-gap:16px!important;width:100%!important;min-height:0!important;margin:0 auto!important;overflow:visible!important}
+.streamlined-pack-summary .pack-summary-card.actual-card-summary,.streamlined-pack-summary .pack-summary-card.actual-card-summary.summary-center{width:var(--summary-card-w)!important;max-width:154px!important;min-width:0!important;display:grid!important;grid-template-rows:auto minmax(28px,auto)!important;align-content:start!important;justify-self:center!important;transform:none!important;overflow:visible!important}
+.streamlined-pack-summary .pack-summary-card.summary-top-left{grid-area:tl!important}.streamlined-pack-summary .pack-summary-card.summary-top-right{grid-area:tr!important}.streamlined-pack-summary .pack-summary-card.summary-center{grid-area:cc!important}.streamlined-pack-summary .pack-summary-card.summary-bottom-left{grid-area:bl!important}.streamlined-pack-summary .pack-summary-card.summary-bottom-right{grid-area:br!important}
+.streamlined-pack-summary .pack-summary-actual-card{width:100%!important;min-width:0!important;overflow:hidden!important;border-radius:12px!important}
+.streamlined-pack-summary .pack-summary-actual-card>.ccg-card,.streamlined-pack-summary .pack-summary-actual-card>.pack-summary-ccg,.streamlined-pack-summary .pack-summary-actual-card>.summary-up-reward{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important}
+.streamlined-pack-summary .pack-summary-badges{position:static!important;inset:auto!important;width:100%!important;min-height:28px!important;margin:6px 0 0!important;padding:0 2px!important;display:flex!important;align-items:flex-start!important;justify-content:center!important;align-content:flex-start!important;flex-wrap:wrap!important;gap:4px!important;box-sizing:border-box!important;transform:none!important}
+.streamlined-pack-summary .pack-summary-badges>*{flex:0 0 auto!important;max-width:100%!important;white-space:nowrap!important}
+.streamlined-pack-summary .pack-summary-key{position:relative!important;width:min(520px,100%)!important;min-height:30px!important;margin:14px auto 0!important;padding:9px 8px 0!important;display:flex!important;justify-content:center!important;align-items:center!important;gap:12px!important;flex-wrap:wrap!important;clear:both!important;box-sizing:border-box!important}
+.streamlined-pack-summary .pack-summary-actions.pack-summary-next-row{width:min(520px,100%)!important;margin:14px auto 0!important;padding:0 0 4px!important;position:relative!important;clear:both!important}
+.streamlined-pack-summary .pack-theme-next{width:100%!important;min-height:52px!important;height:auto!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-card-rules{padding:6px!important;overflow:hidden!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-head{padding-bottom:4px!important;margin-bottom:4px!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-head small{font-size:.34rem!important;letter-spacing:.08em!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-head strong{font-size:.64rem!important;line-height:1!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-head em{font-size:.33rem!important;margin-top:2px!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-statline{gap:3px!important;margin:0 0 4px!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-statline>span{padding:3px 4px!important;border-radius:5px!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-statline small{font-size:.28rem!important}.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-statline b{font-size:.56rem!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-body{gap:2px!important;font-size:.43rem!important;line-height:1.18!important;overflow:hidden!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-effect-label{font-size:.29rem!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-requirements,.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-restriction,.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-reference{margin-top:3px!important;padding-top:3px!important;font-size:.34rem!important;line-height:1.12!important}
+.streamlined-pack-summary .pack-summary-ccg.uses-rules-fallback .ccg-rules-foot{padding-top:3px!important;font-size:.29rem!important}
+@media(max-width:390px){.streamlined-pack-summary .pack-summary-grid.pack-summary-pyramid.pack-summary-compact-grid{--summary-card-w:min(39vw,146px)!important;column-gap:18px!important;row-gap:14px!important}.streamlined-pack-summary .pack-summary-badges{gap:3px!important;margin-top:5px!important}.streamlined-pack-summary .pack-summary-key{font-size:.58rem!important}}

@@ -1,15 +1,15 @@
-import { decks } from "./decks.js?v=0.14.03";
-import { collectionCards } from "./collection.js?v=0.14.03";
-import { superstars } from "./superstars.js?v=0.14.03";
-import { isUnreleasedSetId } from "./release.js?v=0.14.03";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.03";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.03";
+import { decks } from "./decks.js?v=0.14.04";
+import { collectionCards } from "./collection.js?v=0.14.04";
+import { superstars } from "./superstars.js?v=0.14.04";
+import { isUnreleasedSetId } from "./release.js?v=0.14.04";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.14.04";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.14.04";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 38;
+export const PROFILE_VERSION = 39;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -663,6 +663,7 @@ export function migrateProfile(old) {
       return entry?.id === legacyRazorChokeslamId ? { ...entry, id: razorBulldogId } : entry;
     });
   }
+
   // v0.13.99 Attitude Era Rock replacement: AE1-060 is now Lay The Smack Down.
   // Preserve every printing tier and rewrite saved Deck Lab references from
   // the retired Rock-exclusive Samoan Drop id to the replacement card id.
@@ -932,6 +933,38 @@ export function migrateProfile(old) {
   for (const setId of Object.keys(p.ladder?.completionPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.ladder.completionPackCreditsBySet[setId] = 0;
   for (const setId of Object.keys(p.championshipRoad?.championshipPackCreditsBySet ?? {})) if (isUnreleasedSetId(setId)) p.championshipRoad.championshipPackCreditsBySet[setId] = 0;
   p.pendingUnlockCelebrations = (p.pendingUnlockCelebrations ?? []).filter(event => releasedStarIds.has(event?.superstarId));
+
+  // v0.14.04 Razor Lead Off sync: v0.14.02 changed Razor's authored opening
+  // hand, but profiles that already had a valid saved Razor deck kept their
+  // older first five pages. Run this after all saved-deck cleanup/migrations so
+  // a still-valid 60-page Razor save gets the authored Lead Off one time. This
+  // only reorders existing saved entries; it does not alter card counts, tiers,
+  // ownership, or any other Deck Lab choices.
+  if (sourceVersion < 39) {
+    const sid = "razor-ramon";
+    const saved = Array.isArray(p.savedDecks?.[sid]) ? p.savedDecks[sid] : null;
+    const desiredLead = ["momentum-strength", "momentum-strike", "momentum-technical", "fallaway-slam", "punch"];
+    if (saved?.length === 60) {
+      const idOf = entry => typeof entry === "string" ? entry : entry?.id;
+      const used = new Set();
+      const lead = [];
+      let complete = true;
+      for (const id of desiredLead) {
+        const index = saved.findIndex((entry, i) => !used.has(i) && idOf(entry) === id);
+        if (index < 0) { complete = false; break; }
+        used.add(index);
+        const entry = saved[index];
+        lead.push(typeof entry === "string" ? { id: entry, tier: DEFAULT_STARTER_TIER } : { ...entry });
+      }
+      if (complete) {
+        const tail = saved
+          .map((entry, index) => ({ entry, index }))
+          .filter(({ index }) => !used.has(index))
+          .map(({ entry }) => typeof entry === "string" ? { id: entry, tier: DEFAULT_STARTER_TIER } : { ...entry });
+        p.savedDecks[sid] = [...lead, ...tail];
+      }
+    }
+  }
 
   // v0.13.19: legacy identity-only secondary unlocks receive only the lean
   // Finisher / Trademark / Action identity grant. Never gift shared filler and
