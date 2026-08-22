@@ -10,6 +10,7 @@ const out = requested
   ? path.resolve(process.cwd(), requested)
   : path.resolve(root, `../wwe-legacy-ccg-v${version}-clean`);
 
+const releaseNotesFile = fs.readdirSync(root).find((name) => /^RELEASE-NOTES-v/i.test(name)) ?? null;
 const rootFiles = [
   ".nojekyll",
   "index.html",
@@ -17,22 +18,23 @@ const rootFiles = [
   "manifest.webmanifest",
   "package.json",
   "README.md",
-  `RELEASE-NOTES-v${version}.md`,
+  releaseNotesFile,
   "BUILD-CERTIFICATION.md",
-];
+  "ASSET-MIGRATION.csv",
+].filter(Boolean);
 const rootDirs = ["assets", "css", "js", "test", "tools"];
 
 const obsoleteAssetPaths = [
   "assets/cards/art/superstars",
-  "assets/cards/art/temp/bobby-heenan.webp",
-  "assets/cards/art/temp/generic-wrestling-action.webp",
-  "assets/cards/art/temp/miss-elizabeth.webp",
-  "assets/cards/art/temp/paul-bearer.webp",
+  "assets/images/card-temp-bobby-heenan.webp",
+  "assets/images/card-temp-generic-wrestling-action.webp",
+  "assets/images/card-temp-miss-elizabeth.webp",
+  "assets/images/card-temp-paul-bearer.webp",
   "assets/art/evolution-series-1/superstars",
-  "assets/art/summerslam-series-1/summerslam-2026-logo.webp",
-  "assets/branding/worlds-collide-series-1/worlds-collide-official.jpeg",
-  "assets/branding/money-in-the-bank-series-1/money-in-the-bank-logo-official.png",
-  "assets/branding/smackdown-series-1/smackdown-logo.svg",
+  "assets/images/art-summerslam-series-1-summerslam-2026-logo.webp",
+  "assets/images/branding-worlds-collide-series-1-worlds-collide-official.jpeg",
+  "assets/images/branding-money-in-the-bank-series-1-money-in-the-bank-logo-official.png",
+  "assets/images/branding-smackdown-series-1-smackdown-logo.svg",
 ];
 
 fs.rmSync(out, { recursive: true, force: true });
@@ -72,7 +74,7 @@ const historicalRootDebris = files.filter((file) => {
   if (path.dirname(file) !== out) return false;
   const name = path.basename(file);
   if (/^(TEST|FLOW|CARD-ID|ART|VALIDATION|BALANCE|COUNTER|DEAD-TURN|FINAL-BALANCE|ECONOMY|AI|HP|STUDIO|DEEP-MATCH|MOMENTUM|POSSESSION|CPU)-/i.test(name)) return true;
-  if (/^RELEASE-NOTES-v/i.test(name) && name !== `RELEASE-NOTES-v${version}.md`) return true;
+  if (/^RELEASE-NOTES-v/i.test(name) && name !== releaseNotesFile) return true;
   return false;
 });
 if (historicalRootDebris.length) {

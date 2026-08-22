@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.94';
-import { SAVE_FILENAME, SAVE_FORMAT, SAVE_FORMAT_VERSION, createSaveEnvelope, serializeSave, parseSaveText, saveImportRollback, loadImportRollback, clearImportRollback } from '../js/data/save-backup.js?v=0.13.94';
+import { createProfile, PROFILE_VERSION } from '../js/data/profile.js?v=0.13.95';
+import { SAVE_FILENAME, SAVE_FORMAT, SAVE_FORMAT_VERSION, createSaveEnvelope, serializeSave, parseSaveText, saveImportRollback, loadImportRollback, clearImportRollback } from '../js/data/save-backup.js?v=0.13.95';
 
 class MemoryStorage {
   constructor(){ this.map=new Map(); }

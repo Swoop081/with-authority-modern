@@ -8,7 +8,7 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 test.skip('v0.13.90 Golden Era card logo is the existing WWF block without invented GOLDEN ERA text',()=>{
-  const svg=read('assets/branding/golden-era-series-1/golden-era-wwf-logo.svg');
+  const svg=read('assets/images/branding-golden-era-series-1-golden-era-wwf-logo.svg');
   assert.match(svg,/aria-label="Golden Era WWF logo"/);
   assert.doesNotMatch(svg,/>GOLDEN ERA<\/text>/);
   assert.match(svg,/<path d="m93\.938 131\.69/);

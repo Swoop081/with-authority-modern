@@ -1,9 +1,9 @@
-import { cardsForSet, collectionCards } from "./collection.js?v=0.13.94";
-import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=0.13.94";
-import { duplicateUniversePointsFor } from "./store.js?v=0.13.94";
-import { sets } from "./sets.js?v=0.13.94";
-import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=0.13.94";
-import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=0.13.94";
+import { cardsForSet, collectionCards } from "./collection.js?v=0.13.95";
+import { addOwnedCard, addUniversePoints, cardOwnershipCap, grantSuperstarUnlockPackage, totalOwnedCopies, underTierOwnershipCap } from "./profile.js?v=0.13.95";
+import { duplicateUniversePointsFor } from "./store.js?v=0.13.95";
+import { sets } from "./sets.js?v=0.13.95";
+import { isPlayerReleasedSetId, playerReleasedCollectibleSetIds } from "./release.js?v=0.13.95";
+import { CARD_TIERS, TIER_PULL_WEIGHTS, rollCardTier } from "./variants.js?v=0.13.95";
 
 export const BOOSTER_SIZE = 5;
 export const MAX_VERY_RARE_PULLS = 1;

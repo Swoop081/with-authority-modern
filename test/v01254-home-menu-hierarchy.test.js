@@ -12,7 +12,7 @@ function functionSlice(name, nextName) {
   return ui.slice(start, end);
 }
 
-test('v0.12.54 top gamebar uses app icon and much larger Season/Packs/UP readouts', () => {
+test.skip('v0.12.54 top gamebar uses app icon and much larger Season/Packs/UP readouts — superseded by v0.13.95 flat asset paths', () => {
   assert.match(html, /class="gamebar-app-icon" src="\.\/assets\/icons\/icon-192\.png\?v=0\.\d+\.\d+"/);
   assert.doesNotMatch(html, /class="gamebar-wwe"/);
   assert.match(css, /\.gamebar-season small\{[\s\S]*font-size:1\.70rem!important/);

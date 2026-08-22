@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=0.13.94';
-import { superstars } from '../js/data/superstars.js?v=0.13.94';
-import { decks } from '../js/data/decks.js?v=0.13.94';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.94';
-import { collectionCards } from '../js/data/collection.js?v=0.13.94';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.94';
-import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.94';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.94';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.94';
-await import('../js/data/superstar-nameplates.js?v=0.13.94');
+import { sets } from '../js/data/sets.js?v=0.13.95';
+import { superstars } from '../js/data/superstars.js?v=0.13.95';
+import { decks } from '../js/data/decks.js?v=0.13.95';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.95';
+import { collectionCards } from '../js/data/collection.js?v=0.13.95';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.95';
+import { LAUNCH_LIVE_SET_IDS } from '../js/data/release.js?v=0.13.95';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.95';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.95';
+await import('../js/data/superstar-nameplates.js?v=0.13.95');
 
 const G='golden-era-series-1', A='attitude-era-series-1', H='hall-of-fame-series-1';
 const golden=['hulk-hogan','andre-the-giant','randy-savage','ultimate-warrior','rowdy-roddy-piper','ted-dibiase','jake-roberts','mr-perfect'];
@@ -100,7 +100,7 @@ test('v0.13.82 Card Studio and full-art templates expose both replacement era id
   const studioJs=fs.readFileSync(new URL('../js/tools/card-art-studio.js',import.meta.url),'utf8');
   assert.match(studio,/golden-era-series-1/); assert.match(studio,/attitude-era-series-1/); assert.doesNotMatch(studio,/value="hall-of-fame-series-1"/);
   assert.match(studioJs,/wwf-classic-block-card\.svg/); assert.match(studioJs,/wwf-scratch-logo-card\.png/);
-  for(const p of ['assets/templates/move/golden-era-series-1.svg','assets/templates/superstar/golden-era-series-1.svg','assets/templates/move/attitude-era-series-1.svg','assets/templates/superstar/attitude-era-series-1.svg']) assert.equal(fs.existsSync(new URL(`../${p}`,import.meta.url)),true,p);
-  for(const p of ['assets/templates/move/hall-of-fame-series-1.svg','assets/templates/superstar/hall-of-fame-series-1.svg','assets/art/hall-of-fame-series-1']) assert.equal(fs.existsSync(new URL(`../${p}`,import.meta.url)),false,p);
+  for(const p of ['assets/images/template-move-golden-era-series-1.svg','assets/images/template-superstar-golden-era-series-1.svg','assets/images/template-move-attitude-era-series-1.svg','assets/images/template-superstar-attitude-era-series-1.svg']) assert.equal(fs.existsSync(new URL(`../${p}`,import.meta.url)),true,p);
+  for(const p of ['assets/images/template-move-hall-of-fame-series-1.svg','assets/images/template-superstar-hall-of-fame-series-1.svg','assets/art/hall-of-fame-series-1']) assert.equal(fs.existsSync(new URL(`../${p}`,import.meta.url)),false,p);
   for(const id of [...golden,...attitude]) assert.equal(globalThis.WWE_LEGACY_SUPERSTAR_NAMEPLATES[id]?.setId,golden.includes(id)?G:A,id);
 });

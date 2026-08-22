@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Golden Era WWF logo">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2a8"/><stop offset=".48" stop-color="#f2c94c"/><stop offset="1" stop-color="#c88b22"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="7" stdDeviation="4" flood-color="#4b130f" flood-opacity=".72"/></filter>
+  </defs>
+  <g transform="translate(25 32) scale(4.65) translate(-78.664 -131.69)" fill="url(#gold)" stroke="#8f241b" stroke-width="1.25" paint-order="stroke" filter="url(#shadow)">
+    <path d="m93.938 131.69h-2.1268l15.09 48.945h5.5193l10.34-38.588h10.86l11.964 38.588h6.118l8.7122-32.203h31.04l5.2534-16.742h-42.472l-6.1816 22.53-7.1768-22.53h-24.725l-6.7804 22.53-6.1816-22.53h-5.1176"/><path d="m90.452 131.69 15.406 50.354h7.6434l10.34-38.588h8.7389l11.965 38.588h8.2354l6.7821-25.133h23.551l-3.9522 14.752h-13.097l-6.4442 24.049h-22.047l-8.6586-32.318-6.9794 32.301h-22.333l-20.937-64.006h11.788"/>
+  </g>
+  <path d="M92 294 H508" stroke="#e13c2f" stroke-width="10" stroke-linecap="round"/>
+</svg>

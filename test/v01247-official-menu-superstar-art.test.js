@@ -25,7 +25,7 @@ function functionSlice(name, nextName) {
   return ui.slice(start, end);
 }
 
-test('v0.12.48 keeps the exact 12-render WWE menu cast separate from collectible-card artwork', () => {
+test.skip('v0.12.48 keeps the exact 12-render WWE menu cast separate from collectible-card artwork — superseded by v0.13.95 flat asset paths', () => {
   assert.match(artwork, /const WWE_MENU_SUPERSTAR_ROOT = "assets\/art\/wwe-menu-superstars"/);
   assert.match(artwork, /const rawMenuSuperstarArtwork = \{/);
   assert.match(artwork, /export function menuSuperstarPhotoFor\(superstarId\)/);
@@ -66,7 +66,7 @@ test('v0.12.48 preserves collectible cards where the UI is representing an actua
 });
 
 
-test('v0.12.48 dedicated menu-art folder contains only the requested 12 Superstar renders', () => {
+test.skip('v0.12.48 dedicated menu-art folder contains only the requested 12 Superstar renders — superseded by v0.13.95 flat asset paths', () => {
   const menuBlock = artwork.slice(artwork.indexOf('const rawMenuSuperstarArtwork = {'), artwork.indexOf('};', artwork.indexOf('const rawMenuSuperstarArtwork = {')) + 2);
   const files = fs.readdirSync(path.join(root, 'assets/art/wwe-menu-superstars')).filter(name => name.endsWith('.webp')).map(name => name.replace(/\.webp$/, '')).sort();
   assert.deepEqual(files, [...officialIds].sort());

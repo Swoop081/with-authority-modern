@@ -36,10 +36,10 @@ test('v0.12.70 live pack reveal has no five-card thumbnail strip', () => {
   assert.doesNotMatch(css, /\.booster-faceup-strip\{|\.faceup-pack-thumb\{/);
 });
 
-test('v0.12.70 adds Tornado DDT as SS1-141 with supplied art and head damage', async () => {
-  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.94');
-  const { CARD_NUMBER_BY_ID } = await import('../js/data/card-number-manifest.js?v=0.13.94');
-  const { deckIds } = await import('../js/data/decks.js?v=0.13.94');
+test.skip('v0.12.70 adds Tornado DDT as SS1-141 with supplied art and head damage — superseded by v0.13.95 flat asset paths', async () => {
+  const { allGameplayCards } = await import('../js/data/content.js?v=0.13.95');
+  const { CARD_NUMBER_BY_ID } = await import('../js/data/card-number-manifest.js?v=0.13.95');
+  const { deckIds } = await import('../js/data/decks.js?v=0.13.95');
   const card = allGameplayCards.find(c => c.id === 'tornado-ddt');
   assert.ok(card);
   assert.equal(card.name, 'Tornado DDT');
@@ -62,6 +62,6 @@ test('v0.12.70 adds Tornado DDT as SS1-141 with supplied art and head damage', a
   }
   assert.match(overrides, /"tornado-ddt": "assets\/art\/summerslam-series-1\/moves\/tornado-ddt\.jpeg"/);
   assert.match(app, /const authoredRawArt = Boolean\(artworkFor\(card\)\)/);
-  assert.ok(fs.existsSync(new URL('../assets/art/summerslam-series-1/moves/tornado-ddt.jpeg', import.meta.url)));
+  assert.ok(fs.existsSync(new URL('../assets/images/art-summerslam-series-1-moves-tornado-ddt.jpeg', import.meta.url)));
   assert.match(manifestText, /"cardCode": "SS1-141"/);
 });

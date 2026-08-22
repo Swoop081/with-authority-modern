@@ -1,4 +1,4 @@
-# WWE Legacy v0.13.94 — Onboarding Card + Pack Presentation
+# WWE Legacy v0.13.95 — Onboarding Card + Pack Presentation
 
 This build supersedes v0.13.93. It changes first-time onboarding presentation only; gameplay, balance, reward economy, four-tier progression, Season 1 Cena, Attitude Era Rock, live-set availability and fresh-start grants remain unchanged.
 
@@ -16,4 +16,8 @@ Five player-facing sets remain live: **SummerSlam — Series 1, Evolution — Se
 ## Season 1
 Season 1 remains the **30-day / 50-tier John Cena — The Last Time Is Now** chase, with five Normal copies of each Cena-exclusive Move distributed across the road, Ruby The Time Is Now Entrance at Tier 48, and Ruby John Cena at Tier 50.
 
-See `RELEASE-NOTES-v0.13.94.md` and `BUILD-CERTIFICATION.md` for this build's exact changes and verification.
+See `RELEASE-NOTES-v0.13.95.md` and `BUILD-CERTIFICATION.md` for this build's exact changes and verification.
+
+
+### Asset layout (v0.13.95)
+All runtime images are stored directly in `assets/images/`. Do not create per-card-type image subfolders. Card Studio exports should use the flat filenames shown by the Studio. Missing art intentionally uses the rules/details fallback.
