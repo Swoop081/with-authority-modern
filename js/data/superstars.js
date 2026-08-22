@@ -4152,14 +4152,14 @@ export const superstars = {
     "leadOffIds": [
       "momentum-strength",
       "momentum-strike",
+      "momentum-technical",
       "fallaway-slam",
-      "punch",
-      "running-powerslam"
+      "punch"
     ],
     "signatures": [
       "razor-ramon-fallaway-slam",
       "razor-ramon-abdominal-stretch",
-      "razor-ramon-chokeslam",
+      "razor-ramon-bulldog",
       "razor-ramon-razors-edge"
     ],
     "archetype": "strength-strike-bad-guy",
@@ -4172,8 +4172,8 @@ export const superstars = {
     },
     "starterMomentum": {
       "strength": 6,
-      "strike": 4,
-      "technical": 2
+      "strike": 5,
+      "technical": 1
     },
     "ability": {
       "name": "Oozing Machismo",

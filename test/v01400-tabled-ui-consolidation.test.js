@@ -8,7 +8,7 @@ const build = JSON.parse(fs.readFileSync(new URL('../build.json', import.meta.ur
 const cenaRender = new URL('../assets/images/art-wwe-menu-superstars-john-cena.webp', import.meta.url);
 
 test('v0.14.00 packages the official WWE.com Cena presentation render and uses it on Season 1 character hero surfaces', () => {
-  assert.equal(build.version, '0.14.00');
+  assert.match(build.version, /^0\.(?:14|1[5-9]|[2-9]\d)\.\d+$/);
   assert.ok(fs.existsSync(cenaRender));
   assert.ok(fs.statSync(cenaRender).size > 20000);
   assert.match(app, /SEASON_ONE_CENA_RENDER = assetUrl\("assets\/images\/art-wwe-menu-superstars-john-cena\.webp"\)/);

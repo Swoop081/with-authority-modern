@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile } from '../js/data/profile.js?v=0.14.00';
+import { createProfile } from '../js/data/profile.js?v=0.14.03';
 import {
   CHAMPIONSHIP_ROAD_OPPONENTS,
   championshipRoadForSuperstar,
@@ -10,7 +10,7 @@ import {
   startChampionshipRoad,
   currentChampionshipOpponent,
   recordChampionshipMatch
-} from '../js/data/championship-road.js?v=0.14.00';
+} from '../js/data/championship-road.js?v=0.14.03';
 
 const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');
 const css = fs.readFileSync(new URL('../css/game.css', import.meta.url), 'utf8');

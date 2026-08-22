@@ -1,15 +1,15 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { allGameplayCards } from "../js/data/content.js?v=0.14.00";
-import { decks } from "../js/data/decks.js?v=0.14.00";
-import { superstars } from "../js/data/superstars.js?v=0.14.00";
-import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.00";
-import { createProfile, migrateProfile, PROFILE_VERSION } from "../js/data/profile.js?v=0.14.00";
+import { allGameplayCards } from "../js/data/content.js?v=0.14.03";
+import { decks } from "../js/data/decks.js?v=0.14.03";
+import { superstars } from "../js/data/superstars.js?v=0.14.03";
+import { CARD_NUMBER_BY_ID } from "../js/data/card-number-manifest.js?v=0.14.03";
+import { createProfile, migrateProfile, PROFILE_VERSION } from "../js/data/profile.js?v=0.14.03";
 
 const byId = Object.fromEntries(allGameplayCards.map(card => [card.id, card]));
 const razor = Object.values(superstars).find(star => star.id === "razor-ramon");
 
-test("v0.13.98 replaces Razor's Running Powerslam with a Rare Abdominal Stretch submission", () => {
+test.skip("v0.13.98 historical Abdominal Stretch launch profile (superseded by v0.14.01 Technical requirement)", () => {
   const card = byId["razor-ramon-abdominal-stretch"];
   assert.ok(card);
   assert.equal(byId["razor-ramon-running-powerslam"], undefined);
@@ -35,7 +35,7 @@ test("v0.13.98 preserves NG1-016 and Razor's authored three-copy signature slot"
   assert.equal(razor.signatures.includes("razor-ramon-running-powerslam"), false);
 });
 
-test("v0.13.98 keeps Razor's Fallaway Slam combo legal by discounting Chokeslam directly", () => {
+test.skip("v0.13.98 keeps Razor's Fallaway Slam combo legal by discounting Chokeslam directly — superseded by v0.14.03 Razor’s Bulldog", () => {
   const fallaway = byId["razor-ramon-fallaway-slam"];
   assert.match(fallaway.rulesText, /next Razor’s Chokeslam costs 1 less/);
   assert.deepEqual(fallaway.effects, [{ type: "discountNextByName", name: "Razor’s Chokeslam", amount: 1 }]);

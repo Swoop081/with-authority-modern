@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.14.00';
-import { collectionCards } from '../js/data/collection.js?v=0.14.00';
-import { decks } from '../js/data/decks.js?v=0.14.00';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.14.00';
+import { allGameplayCards } from '../js/data/content.js?v=0.14.03';
+import { collectionCards } from '../js/data/collection.js?v=0.14.03';
+import { decks } from '../js/data/decks.js?v=0.14.03';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.14.03';
 
 const byId = id => allGameplayCards.find(card => card.id === id);
 const collectorById = id => collectionCards.find(card => card.id === id);

@@ -3084,7 +3084,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "NG1-016"
   },
   {
-    "id": "razor-ramon-chokeslam",
+    "id": "razor-ramon-bulldog",
     "setId": "new-generation-series-1",
     "cardNumber": 17,
     "cardCode": "NG1-017"

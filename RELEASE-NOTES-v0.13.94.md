@@ -79,3 +79,40 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Fixed the extra/duplicate Superstar name box seen on Live Event route cards. The renderer now distinguishes between layered Superstar fronts with a blank nameplate area and finished flat/custom fronts that already bake the Superstar name into the image. Runtime nameplates remain on layered fronts but are automatically hidden when the layered asset falls back to a finished flat Superstar front.
 - This also prevents the same duplicate-nameplate condition on other surfaces that reuse those finished flat Superstar fronts, without stripping names from layered cards such as Razor Ramon.
 - No gameplay, balance, pack odds, rewards, Season XP, Season tier structure, live-set availability, collection ownership or authored deck data changed.
+
+## v0.14.01 — Tabled UX + Razor Technical Hotfix
+
+- Rolled every currently outstanding running/tabled WWE Legacy change into the same build.
+- Reordered **Challenges → Set Progress** to **SummerSlam → Evolution → Golden Era → New Generation → Attitude Era**. Set Milestone sections use the same order.
+- Reworked the **Deck Lab Superstar selector** into a true horizontally swipeable rail of full physical Superstar cards. Cards preserve the authored full-card aspect ratio and no longer get clipped by the previous fixed-height mobile selector.
+- Changed **Daily Tower victory → RETURN TO TOWER** from a neutral dark control to a colored primary CTA while keeping the existing placement and size.
+- Reduced **Razor’s Abdominal Stretch (NG1-016)** from **Technical 2 to Technical 1**. It remains a 3★ Rare Trademark Submission at Cost 5 with +5 persistent Chest damage per successful turn; all other stats/effects and its three-copy Razor deck slot are unchanged.
+- Regenerated Card Art Studio data so Razor’s Abdominal Stretch displays/exports with the current Technical 1 requirement.
+- Distribution packaging now follows the user’s standing rule: the supplied build ZIP **excludes the entire `assets/` folder** and is intended to overlay the existing v0.14.00 flat asset library.
+- No pack odds, rewards, Season XP/tier structure, live-set availability, collection ownership or unrelated gameplay balance changed.
+
+## v0.14.02 — Razor Lead Off Rework
+
+- Reworked Razor Ramon’s authored 60-page deck around the v0.14.01 Technical 1 requirement on **Razor’s Abdominal Stretch**.
+- Razor’s **Lead Off 5** is now **Strength Momentum / Strike Momentum / Technical Momentum / Fallaway Slam / Punch**, guaranteeing his only Technical Momentum page in the opening hand.
+- Razor’s authored Momentum distribution changes from **6 Strength / 4 Strike / 2 Technical** to **6 Strength / 5 Strike / 1 Technical**. Every Momentum page remaining in the shuffled Playbook after Lead Off is therefore Strength or Strike.
+- Removed the shared **Bulldog** from Razor’s deck because its Technical 2 requirement would be unreachable with the new one-Technical plan. Replaced it with a third **Clothesline**.
+- Razor’s remaining cards require at most Technical 1; Razor’s Abdominal Stretch itself is unchanged at Cost 5 / Technical 1 / +5 persistent Chest pressure.
+- Fixed-seed cross-live-set CPU comparison: **1,560 matches / 0 stalls / 54.7% Razor win rate**, versus **56.3%** for the v0.14.01 deck under the same seeds.
+- No pack odds, rewards, Season progression, live-set availability, collection ownership, card rarity, card cost/damage/effects, or unrelated Superstar balance changed.
+- User-facing package continues to exclude the entire `assets/` directory.
+
+
+## v0.14.03 — Razor Bulldog Replacement
+
+- Retired **Razor’s Chokeslam** and reassigned **NG1-017** to **Razor’s Bulldog**, preserving New Generation collector numbering.
+- Razor’s Bulldog is a **3★ Rare Trademark Grapple** at **Cost 5 / Damage 8 / Technical 1**. It grounds the opponent and uses Front Control as its counter state.
+- On Connect, Razor’s Bulldog searches/draws **The Razor’s Edge** and makes The Razor’s Edge cost 1 less for the current Control sequence.
+- Razor’s Fallaway Slam now discounts the next **Razor’s Bulldog** by 1 Cost, preserving the authored chain into the finisher.
+- Razor’s 60-page deck replaces all three copies of Razor’s Chokeslam with three copies of Razor’s Bulldog. His v0.14.02 Momentum plan remains 6 Strength / 5 Strike / 1 Technical with the Technical page guaranteed in Lead Off 5.
+- The shared generic Bulldog remains absent from Razor’s authored deck.
+- Existing Normal / Emerald / Sapphire / Ruby ownership and saved Deck Lab references for Razor’s Chokeslam migrate one-for-one to Razor’s Bulldog.
+- Card Art Studio uses the new canonical layered filename `card-layered-move-razor-ramon-bulldog.webp`.
+- Fixed-seed cross-live-set CPU comparison: **1,560 matches / 0 stalls / 51.5% Razor win rate / 24.17 average turns**.
+- No pack odds, rewards, Season progression, live-set availability, unrelated card balance, or asset-layout changes.
+- User-facing package continues to exclude the entire `assets/` directory.

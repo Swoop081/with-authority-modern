@@ -1,25 +1,32 @@
-# WWE Legacy v0.14.00 — Tabled UI Consolidation
+# WWE Legacy v0.14.03 — Razor Bulldog Replacement
 
-This build supersedes v0.13.99 and rolls the full outstanding WWE Legacy running-change list into one release rather than shipping only the most recently discussed item. All v0.13.99 Attitude Rock gameplay changes and every earlier locked fix remain intact.
+This build supersedes **v0.14.02 — Razor Lead Off Rework** and includes every previously completed/tablet change through v0.14.02.
 
-## Included tabled changes
-- **Season 1 splash card centering:** the John Cena completion Superstar card remains the physical reward-card presentation on the launch/continue Season 1 promo, but is now explicitly centered inside its left-side bay.
-- **Official Season 1 Cena render:** Season 1 character-hero surfaces now use the official transparent John Cena profile render sourced from WWE.com. The Home Season 1 tile and Season Road hero use the new local flat asset `assets/images/art-wwe-menu-superstars-john-cena.webp`.
-- **Superstar duplicate-nameplate cleanup:** when a layered Superstar front is unavailable and the renderer falls back to a finished flat/custom Superstar front that already contains its authored printed name, the runtime-generated nameplate is suppressed. Layered Superstar fronts with a deliberately blank nameplate keep the runtime nameplate, so cards such as Razor Ramon remain correctly labelled while finished fronts such as Cody Rhodes and Charlotte Flair no longer show a second box over the artwork.
+## Razor Ramon
 
-## Current live content
-Five player-facing sets remain live: **SummerSlam — Series 1, Evolution — Series 1, New Generation — Series 1, Golden Era — Series 1, and Attitude Era — Series 1**. RAW and other banked sets remain unavailable until explicitly released.
+- **NG1-017** is reassigned from the retired **Razor’s Chokeslam** to **Razor’s Bulldog**, preserving the collector slot.
+- **Razor’s Bulldog** is a **3★ Rare Trademark Grapple** at **Cost 5 / Damage 8 / Technical 1**. It grounds the opponent.
+- On Connect, Razor’s Bulldog **searches/draws The Razor’s Edge** and gives The Razor’s Edge a **1-Cost discount** for the current Control sequence.
+- **Razor’s Fallaway Slam** now discounts the next **Razor’s Bulldog** by 1 Cost, preserving Razor’s authored signature chain.
+- Razor’s 60-page deck replaces all three Razor’s Chokeslam copies with three Razor’s Bulldog copies.
+- Existing Normal / Emerald / Sapphire / Ruby ownership of Razor’s Chokeslam migrates one-for-one to Razor’s Bulldog, and saved Deck Lab references migrate to the new card id.
+- Razor keeps the v0.14.02 Momentum plan: **6 Strength / 5 Strike / 1 Technical**, with the sole Technical Momentum guaranteed in Lead Off 5.
+- The shared generic **Bulldog** remains absent from Razor’s deck; this change adds the separate Razor-exclusive Trademark.
 
-## Season 1
-Season 1 remains the **30-day / 50-tier John Cena — The Last Time Is Now** chase. This release changes presentation only; no Season XP, tier rewards, deck data, pack odds or progression values change.
+## Balance observation
+
+A fixed-seed comparison against the other 39 Superstars in the five currently live player-facing sets produced **51.5% Razor wins across 1,560 matches**, **24.17 average turns**, and **0 stalls**.
+
+## Packaging
+
+This distributed ZIP intentionally **does not include the `assets/` directory**. Apply/overlay it onto the existing current WWE Legacy installation that already contains the flat asset library. No existing asset is deleted or renamed by this package. Card Art Studio now targets `card-layered-move-razor-ramon-bulldog.webp` for new Razor’s Bulldog artwork.
 
 ## Verification
-- 809 tests discovered / 717 passed / 0 failed / 92 intentionally skipped historical contracts.
-- Rebuild validation: 76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues.
-- Collector ID audit: 782 cards / 782 manifest entries / 0 issues.
-- Flow audit: 76 Superstars / 0 issues.
-- Card-effect audit: 0 issues.
-- Counter/submission-state audit: 0 issues.
-- Flat asset audit: 617 images / 310 installed gameplay-card fronts / 48 headshots / 39 menu portraits.
 
-See `RELEASE-NOTES-v0.13.94.md` for the cumulative changelog and `BUILD-CERTIFICATION.md` for release verification.
+- 820 tests discovered / 723 passed / 0 failed / 97 intentionally skipped historical contracts (verified against inherited v0.14.00 assets).
+- v0.14.03 targeted tests: 4/4 passed.
+- Validation: 76 Superstars / 76 decks / 706 gameplay cards / 0 orphans / 0 issues.
+- Collector ID audit: 782 cards / 782 manifest entries / 0 issues.
+- Flow, card-effect, and counter/submission-state audits: 0 issues.
+
+See `BUILD-CERTIFICATION.md` for the complete certification and `RELEASE-NOTES-v0.13.94.md` for the cumulative changelog.

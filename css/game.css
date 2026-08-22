@@ -9300,3 +9300,56 @@ body[data-screen="welcome-superstar"] #game{padding-top:0!important}
 @media(max-width:390px){
   .legacy-season-rock{right:-8%!important;width:50%!important}
 }
+
+
+/* v0.14.01 — running-list consolidation: full Deck Lab Superstar cards + colored Daily Tower return CTA. */
+.deck-lab-roster-selector .superstar-select-carousel{
+  display:flex!important;
+  gap:12px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  scroll-snap-type:x mandatory!important;
+  padding:6px 3px 10px!important;
+  margin:0!important;
+  -webkit-overflow-scrolling:touch!important;
+}
+.deck-lab-roster-selector .select-superstar-card{
+  flex:0 0 clamp(190px,62vw,236px)!important;
+  width:clamp(190px,62vw,236px)!important;
+  height:auto!important;
+  aspect-ratio:.68!important;
+  max-width:none!important;
+  padding:0!important;
+  scroll-snap-align:center!important;
+  overflow:hidden!important;
+}
+.deck-lab-roster-selector .select-card-inner,
+.deck-lab-roster-selector .select-card-face{width:100%!important;height:100%!important}
+.deck-lab-roster-selector .select-card-front{padding:4px!important;overflow:hidden!important}
+.deck-lab-roster-selector .selection-owned-card{width:100%!important;height:100%!important;overflow:visible!important;padding:0!important}
+.deck-lab-roster-selector .selection-owned-card .selection-owned-superstar-card,
+.deck-lab-roster-selector .selection-owned-card .generated-superstar-preview{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  aspect-ratio:.68!important;
+  object-fit:contain!important;
+  object-position:center!important;
+}
+@media(max-width:600px){
+  .deck-lab-roster-selector .select-superstar-card{
+    flex-basis:min(64vw,230px)!important;
+    width:min(64vw,230px)!important;
+    height:auto!important;
+    aspect-ratio:.68!important;
+  }
+}
+.results-actions #results-continue.live-event-result-cta{
+  border:1px solid rgba(91,220,255,.72)!important;
+  background:linear-gradient(180deg,#21bff0,#117fc3)!important;
+  color:#fff!important;
+  box-shadow:0 10px 28px rgba(18,139,203,.28)!important;
+}
+.results-actions #results-continue.live-event-result-cta:active{filter:brightness(.92)!important}

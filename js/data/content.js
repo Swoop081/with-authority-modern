@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.14.00";
+import { enrichCounterState } from "./counter-states.js?v=0.14.03";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -12113,7 +12113,7 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "razor-ramon",
     "rarity": 3,
-    "rulesText": "Razor Ramon-exclusive Trademark. Grounds opponent. On Connect: your next Razor’s Chokeslam costs 1 less this Control sequence.",
+    "rulesText": "Razor Ramon-exclusive Trademark. Grounds opponent. On Connect: your next Razor’s Bulldog costs 1 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
     "stun": 0,
@@ -12122,7 +12122,7 @@ export const allGameplayCards = [
     "effects": [
       {
         "type": "discountNextByName",
-        "name": "Razor’s Chokeslam",
+        "name": "Razor’s Bulldog",
         "amount": 1
       }
     ],
@@ -12136,7 +12136,7 @@ export const allGameplayCards = [
     "cost": 5,
     "damage": 0,
     "requirements": {
-      "technical": 2
+      "technical": 1
     },
     "moveType": "submission",
     "method": "technical",
@@ -12158,17 +12158,17 @@ export const allGameplayCards = [
     "standingOnly": true
   },
   {
-    "id": "razor-ramon-chokeslam",
-    "name": "Razor’s Chokeslam",
+    "id": "razor-ramon-bulldog",
+    "name": "Razor’s Bulldog",
     "kind": "move",
     "setId": "new-generation-series-1",
-    "cost": 6,
-    "damage": 10,
+    "cost": 5,
+    "damage": 8,
     "requirements": {
-      "strength": 2
+      "technical": 1
     },
     "moveType": "grapple",
-    "method": "strength",
+    "method": "technical",
     "superstarId": "razor-ramon",
     "rarity": 3,
     "rulesText": "Razor Ramon-exclusive Trademark. Grounds opponent. On Connect: search/draw The Razor’s Edge; it costs 1 less this Control sequence.",
