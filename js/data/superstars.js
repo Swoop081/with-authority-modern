@@ -4158,7 +4158,7 @@ export const superstars = {
     ],
     "signatures": [
       "razor-ramon-fallaway-slam",
-      "razor-ramon-running-powerslam",
+      "razor-ramon-abdominal-stretch",
       "razor-ramon-chokeslam",
       "razor-ramon-razors-edge"
     ],

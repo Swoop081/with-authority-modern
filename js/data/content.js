@@ -1,4 +1,4 @@
-import { enrichCounterState } from "./counter-states.js?v=0.13.97";
+import { enrichCounterState } from "./counter-states.js?v=0.13.98";
 export const allGameplayCards = [
   {
     "id": "cody-rhodes-dropdown-uppercut",
@@ -12113,35 +12113,6 @@ export const allGameplayCards = [
     "method": "strength",
     "superstarId": "razor-ramon",
     "rarity": 3,
-    "rulesText": "Razor Ramon-exclusive Trademark. Grounds opponent. On Connect: your next Razor’s Running Powerslam costs 1 less this Control sequence.",
-    "groundOpponent": true,
-    "groundedOnly": false,
-    "stun": 0,
-    "selfDamage": 0,
-    "trademark": true,
-    "effects": [
-      {
-        "type": "discountNextByName",
-        "name": "Razor’s Running Powerslam",
-        "amount": 1
-      }
-    ],
-    "counterState": "torso-trapped"
-  },
-  {
-    "id": "razor-ramon-running-powerslam",
-    "name": "Razor’s Running Powerslam",
-    "kind": "move",
-    "setId": "new-generation-series-1",
-    "cost": 5,
-    "damage": 9,
-    "requirements": {
-      "strength": 2
-    },
-    "moveType": "grapple",
-    "method": "strength",
-    "superstarId": "razor-ramon",
-    "rarity": 3,
     "rulesText": "Razor Ramon-exclusive Trademark. Grounds opponent. On Connect: your next Razor’s Chokeslam costs 1 less this Control sequence.",
     "groundOpponent": true,
     "groundedOnly": false,
@@ -12155,7 +12126,36 @@ export const allGameplayCards = [
         "amount": 1
       }
     ],
-    "counterState": "body-elevated"
+    "counterState": "torso-trapped"
+  },
+  {
+    "id": "razor-ramon-abdominal-stretch",
+    "name": "Razor’s Abdominal Stretch",
+    "kind": "move",
+    "setId": "new-generation-series-1",
+    "cost": 5,
+    "damage": 0,
+    "requirements": {
+      "technical": 2
+    },
+    "moveType": "submission",
+    "method": "technical",
+    "superstarId": "razor-ramon",
+    "rarity": 3,
+    "rulesText": "Razor Ramon-exclusive Trademark. Standing opponent only. Submission. +5 persistent Chest damage per successful turn.",
+    "groundOpponent": false,
+    "groundedOnly": false,
+    "stun": 0,
+    "selfDamage": 0,
+    "trademark": true,
+    "submission": {
+      "bodyPart": "chest",
+      "pressure": 5
+    },
+    "effects": [],
+    "counterState": "rear-control",
+    "submissionTarget": "back",
+    "standingOnly": true
   },
   {
     "id": "razor-ramon-chokeslam",

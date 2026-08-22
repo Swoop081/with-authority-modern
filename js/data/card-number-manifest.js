@@ -3078,7 +3078,7 @@ export const CARD_NUMBER_MANIFEST = [
     "cardCode": "NG1-015"
   },
   {
-    "id": "razor-ramon-running-powerslam",
+    "id": "razor-ramon-abdominal-stretch",
     "setId": "new-generation-series-1",
     "cardNumber": 16,
     "cardCode": "NG1-016"

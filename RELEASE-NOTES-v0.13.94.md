@@ -49,3 +49,15 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - PNG fallback preserves the canonical basename and changes only the extension.
 - No gameplay, balance, card data, pack odds, rewards, progression, collection state or live-set availability changed.
 
+
+## v0.13.98 — Razor Abdominal Stretch Replacement
+
+- Retired **Razor’s Running Powerslam** from Razor Ramon’s exclusive New Generation signature block.
+- **NG1-016** now belongs to **Razor’s Abdominal Stretch**, preserving the collector identity rather than adding or renumbering the set.
+- Razor’s Abdominal Stretch is a **3★ Rare Trademark Submission**: **Cost 5**, **Technical 2**, standing opponent only, with **+5 persistent Chest damage per successful turn**.
+- Razor’s authored 60-page deck replaces all three copies of the retired exclusive Running Powerslam with three copies of Razor’s Abdominal Stretch.
+- Razor’s Fallaway Slam now discounts **Razor’s Chokeslam** directly so its combo remains legal after Fallaway Slam grounds the opponent.
+- Existing player ownership migrates every Normal / Emerald / Sapphire / Ruby copy of the retired card one-for-one to Razor’s Abdominal Stretch. Saved Deck Lab references migrate to the new id as well.
+- Card Art Studio uses the canonical replacement filename `card-layered-move-razor-ramon-abdominal-stretch.webp`.
+- No changes to pack odds, reward economy, Season 1 Cena, live-set availability, Superstar HP, or the flat `assets/images/` layout.
+

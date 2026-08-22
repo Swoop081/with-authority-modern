@@ -1,8 +1,8 @@
-import { decks } from "./decks.js?v=0.13.97";
-import { collectionCards } from "./collection.js?v=0.13.97";
-import { superstars } from "./superstars.js?v=0.13.97";
-import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.97";
-import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, normalizeCardTier, tierDamageOffsetFor, tierLabel, tierRank } from "./variants.js?v=0.13.97";
+import { decks } from "./decks.js?v=0.13.98";
+import { collectionCards } from "./collection.js?v=0.13.98";
+import { superstars } from "./superstars.js?v=0.13.98";
+import { validateDeckDraft, selectedEntranceId, setSelectedEntrance, entranceEligibilityForSuperstar, recommendedDeckMissingCount } from "./deck-builder.js?v=0.13.98";
+import { applyCardTier, CARD_TIERS, DEFAULT_AUTHORED_TIER, normalizeCardTier, tierDamageOffsetFor, tierLabel, tierRank } from "./variants.js?v=0.13.98";
 
 const byId = new Map(collectionCards.map(c => [c.id, c]));
 const starById = new Map(Object.values(superstars).map(s => [s.id, s]));

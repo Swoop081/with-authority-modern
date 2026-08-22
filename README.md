@@ -1,6 +1,6 @@
-# WWE Legacy v0.13.97 — Card Art Studio Export Hotfix
+# WWE Legacy v0.13.98 — Razor Abdominal Stretch Replacement
 
-This build supersedes v0.13.96. It fixes two Card Art Studio export regressions: John Cena / Season 1 artwork can now export safely from a locally opened Studio, and every exported file now uses the exact flat install filename shown by the Studio instead of dropping the `card-layered-` / `card-custom-` prefix. Gameplay, balance, reward economy, pack odds, four-tier progression, Season 1 Cena, Attitude Era Rock, live-set availability and grants remain unchanged.
+This build supersedes v0.13.97. Razor Ramon’s exclusive **Razor’s Running Powerslam** is retired and replaced in the same New Generation collector slot by **Razor’s Abdominal Stretch**, a Rare standing Submission. Existing ownership and saved-deck copies migrate automatically to the replacement. All v0.13.97 Card Art Studio export fixes remain intact.
 
 ## First-time onboarding
 - New saves still choose **CM Punk or Roman Reigns** and receive a complete 60-page **Normal-tier** starter deck.
@@ -34,3 +34,12 @@ All runtime images are stored directly in `assets/images/`. Do not create per-ca
 - **Export Art Plate**, **Export Card**, and **Save / Share** now name the file from the displayed install destination. Examples: `card-layered-superstar-john-cena.webp` and `card-layered-move-mr-perfect-perfect-plex.webp`.
 - PNG fallback uses the same canonical basename with `.png`.
 - No card data, artwork, gameplay values, pack odds, progression, economy or live-set availability changed.
+
+
+### v0.13.98 Razor Ramon signature replacement
+- **NG1-016** is now **Razor’s Abdominal Stretch** — 3★ Rare Trademark; Cost 5; Technical 2; Submission; standing opponent only; +5 persistent Chest damage per successful turn.
+- Razor’s authored deck keeps three copies in the same signature slot.
+- Razor’s Fallaway Slam now discounts **Razor’s Chokeslam** directly. The old chain target was removed because Fallaway Slam grounds the opponent while Abdominal Stretch is a standing-only hold.
+- Existing Normal / Emerald / Sapphire / Ruby ownership of the retired Razor’s Running Powerslam migrates one-for-one to Razor’s Abdominal Stretch, including saved Deck Lab references.
+- Card Art Studio now exports the replacement as `card-layered-move-razor-ramon-abdominal-stretch.webp`.
+- No other card values, pack odds, rewards, Season 1 progression, live-set availability or asset layout changed.

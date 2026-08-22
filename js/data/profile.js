@@ -1,15 +1,15 @@
-import { decks } from "./decks.js?v=0.13.97";
-import { collectionCards } from "./collection.js?v=0.13.97";
-import { superstars } from "./superstars.js?v=0.13.97";
-import { isUnreleasedSetId } from "./release.js?v=0.13.97";
-import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.97";
-import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.13.97";
+import { decks } from "./decks.js?v=0.13.98";
+import { collectionCards } from "./collection.js?v=0.13.98";
+import { superstars } from "./superstars.js?v=0.13.98";
+import { isUnreleasedSetId } from "./release.js?v=0.13.98";
+import { ensureCareerState, refreshCareerAchievements } from "./career.js?v=0.13.98";
+import { CARD_TIERS, DEFAULT_STARTER_TIER, normalizeCardTier } from "./variants.js?v=0.13.98";
 
 export const PROFILE_KEY = "wa-modern-profile-v3";
 export const STARTER_CHOICES = ["cm-punk", "roman-reigns"];
 export const WELCOME_SUPERSTAR_SET_IDS = Object.freeze(["evolution-series-1", "new-generation-series-1", "golden-era-series-1", "attitude-era-series-1", "summerslam-series-1"]);
 export const DECK_ASSISTANCE_MODES = ["ask", "auto", "manual"];
-export const PROFILE_VERSION = 36;
+export const PROFILE_VERSION = 37;
 export const DEFAULT_PLAYER_ENTRANCE_ID = "entrance-amazing";
 export const STARTING_MOMENTUM_COPIES = 5;
 
@@ -601,6 +601,26 @@ export function migrateProfile(old) {
     p.savedDecks[sid] = saved.map(entry => {
       if (typeof entry === "string") return entry === legacyFinalBossSlapId ? layTheSmackDownId : entry;
       return entry?.id === legacyFinalBossSlapId ? { ...entry, id: layTheSmackDownId } : entry;
+    });
+  }
+  // v0.13.98 Razor Ramon card replacement: NG1-016 is now Razor’s Abdominal Stretch.
+  // Preserve every printing tier and rewrite saved Deck Lab references from
+  // the retired Razor’s Running Powerslam id to the replacement card id.
+  const legacyRazorRunningPowerslamId = "razor-ramon-running-powerslam";
+  const razorAbdominalStretchId = "razor-ramon-abdominal-stretch";
+  const legacyRazorRunningPowerslam = p.ownedCards[legacyRazorRunningPowerslamId];
+  if (legacyRazorRunningPowerslam) {
+    for (const tier of CARD_TIERS) {
+      const amount = Math.max(0, Number(legacyRazorRunningPowerslam[tier]) || 0);
+      if (amount) addOwnedCard(p, razorAbdominalStretchId, { tier, amount });
+    }
+    delete p.ownedCards[legacyRazorRunningPowerslamId];
+  }
+  for (const [sid, saved] of Object.entries(p.savedDecks)) {
+    if (!Array.isArray(saved)) continue;
+    p.savedDecks[sid] = saved.map(entry => {
+      if (typeof entry === "string") return entry === legacyRazorRunningPowerslamId ? razorAbdominalStretchId : entry;
+      return entry?.id === legacyRazorRunningPowerslamId ? { ...entry, id: razorAbdominalStretchId } : entry;
     });
   }
   p.selectedEntrances ??= {};

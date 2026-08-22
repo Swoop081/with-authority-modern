@@ -1,16 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { collectionCards } from '../js/data/collection.js?v=0.13.97';
-import { decks } from '../js/data/decks.js?v=0.13.97';
-import { createProfile, addOwnedCard, ownedCount, cardOwnershipCap } from '../js/data/profile.js?v=0.13.97';
-import { applyCardTier, CARD_TIERS, DEFAULT_STARTER_TIER, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=0.13.97';
-import { scaleCpuDeckToPlayer } from '../js/data/cpu-tier-scaling.js?v=0.13.97';
-import { LAUNCH_LIVE_SET_IDS, BANKED_PLAYER_SET_IDS } from '../js/data/release.js?v=0.13.97';
-import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.97';
-import { SEASON_1 } from '../js/data/seasons.js?v=0.13.97';
-import { COLLECTION_MILESTONES, RUBY_MILESTONES } from '../js/data/set-progression.js?v=0.13.97';
+import { collectionCards } from '../js/data/collection.js?v=0.13.98';
+import { decks } from '../js/data/decks.js?v=0.13.98';
+import { createProfile, addOwnedCard, ownedCount, cardOwnershipCap } from '../js/data/profile.js?v=0.13.98';
+import { applyCardTier, CARD_TIERS, DEFAULT_STARTER_TIER, TIER_PULL_WEIGHTS } from '../js/data/variants.js?v=0.13.98';
+import { scaleCpuDeckToPlayer } from '../js/data/cpu-tier-scaling.js?v=0.13.98';
+import { LAUNCH_LIVE_SET_IDS, BANKED_PLAYER_SET_IDS } from '../js/data/release.js?v=0.13.98';
+import { activeLiveEventTowers } from '../js/data/live-events.js?v=0.13.98';
+import { SEASON_1 } from '../js/data/seasons.js?v=0.13.98';
+import { COLLECTION_MILESTONES, RUBY_MILESTONES } from '../js/data/set-progression.js?v=0.13.98';
 import fs from 'node:fs';
-import { CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS } from '../js/data/championship-road.js?v=0.13.97';
+import { CHAMPIONSHIP_ROAD_SECTIONS, CHAMPIONSHIP_ROAD_OPPONENTS } from '../js/data/championship-road.js?v=0.13.98';
 
 const byId = new Map(collectionCards.map(c=>[c.id,c]));
 

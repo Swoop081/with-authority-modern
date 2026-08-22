@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { createProfile, addOwnedCard, cardOwnershipCap } from '../js/data/profile.js?v=0.13.97';
-import { collectionCards } from '../js/data/collection.js?v=0.13.97';
-import { decks } from '../js/data/decks.js?v=0.13.97';
-import { applyFoilGameplay, foilDamageBonusFor } from '../js/data/foil.js?v=0.13.97';
-import { addCardToDraft, canAddCard } from '../js/data/deck-builder.js?v=0.13.97';
-import { buildPlayableDeck, findPackUpgrades } from '../js/data/deck-assistant.js?v=0.13.97';
+import { createProfile, addOwnedCard, cardOwnershipCap } from '../js/data/profile.js?v=0.13.98';
+import { collectionCards } from '../js/data/collection.js?v=0.13.98';
+import { decks } from '../js/data/decks.js?v=0.13.98';
+import { applyFoilGameplay, foilDamageBonusFor } from '../js/data/foil.js?v=0.13.98';
+import { addCardToDraft, canAddCard } from '../js/data/deck-builder.js?v=0.13.98';
+import { buildPlayableDeck, findPackUpgrades } from '../js/data/deck-assistant.js?v=0.13.98';
 
 const byId = new Map(collectionCards.map(card => [card.id, card]));
 

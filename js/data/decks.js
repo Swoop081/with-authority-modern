@@ -1,4 +1,4 @@
-import { allGameplayCards } from "./content.js?v=0.13.97";
+import { allGameplayCards } from "./content.js?v=0.13.98";
 const byId=new Map(allGameplayCards.map(c=>[c.id,c]));
 export const deckIds={
   "iyo-sky": [
@@ -3763,9 +3763,9 @@ export const deckIds={
     "razor-ramon-fallaway-slam",
     "razor-ramon-fallaway-slam",
     "razor-ramon-fallaway-slam",
-    "razor-ramon-running-powerslam",
-    "razor-ramon-running-powerslam",
-    "razor-ramon-running-powerslam",
+    "razor-ramon-abdominal-stretch",
+    "razor-ramon-abdominal-stretch",
+    "razor-ramon-abdominal-stretch",
     "razor-ramon-chokeslam",
     "razor-ramon-chokeslam",
     "razor-ramon-chokeslam",
