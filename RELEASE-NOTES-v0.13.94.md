@@ -1,4 +1,4 @@
-# WWE Legacy v0.13.95 — Onboarding Card + Pack Presentation
+# WWE Legacy v0.13.96 — Onboarding Card + Pack Presentation
 
 Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, card data, Season 1 Cena, Attitude Era Rock, four-tier progression, starter grants and live-set availability are unchanged.
 
@@ -16,7 +16,7 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 ## Welcome reveal
 - v0.13.93's full-height Welcome Superstar card reveal remains unchanged.
 
-## v0.13.95 — Asset Recovery + Flat Image Directory
+## v0.13.96 — Asset Recovery + Flat Image Directory
 
 - Recovered the user-supplied image library from the original GitHub export after the prior package omitted most card art.
 - All retained image files now live in one flat `assets/images/` directory; no image remains in a move/action/headshot/set subfolder.
@@ -26,4 +26,26 @@ Supersedes v0.13.93. Presentation-only onboarding update; gameplay, rewards, car
 - Missing card artwork still falls back to the canonical rules/details face; no obsolete image is substituted merely because an old path once existed.
 - Removed known retired/dead legacy image files while preserving the supplied current artwork library.
 - Welcome onboarding no longer inherits the persistent app-chrome top offset, removing the large black gap at the top of the iPhone Welcome screen.
+
+
+## v0.13.96 — Card Face Overlay Cleanup + Welcome Spacing Hotfix
+
+- Removed the redundant lower-right printing/stat badge from collectible Move card fronts. Labels such as `EMERALD D15` and `NORMAL D5` no longer cover the artwork/card frame.
+- Printing identity and live tier values remain available through the existing tier treatment, surrounding UI, and card rules/details face; this is a presentation-only removal of the extra front overlay.
+- Corrected the high-specificity persistent app-chrome selector so `welcome-superstar` is explicitly excluded from its top padding.
+- Welcome Superstar reveal is top-anchored and its brand row is constrained, eliminating the large black band that could still remain above the WWE Legacy logo on iPhone.
+- No gameplay, balance, collection, booster odds, tier values, rewards, deck data, live-set availability, or Season 1 progression changed.
+
+
+## v0.13.97 — Card Art Studio Export Hotfix
+
+- Fixed Card Art Studio export failure for **John Cena — Season 1: The Last Time Is Now** when the Studio is opened directly from an extracted local folder (`file://`).
+- Root cause: locally loaded set-logo files could taint the export canvas even when the user-selected artwork itself was export-safe.
+- Card Studio now embeds export-safe copies of every packaged set logo for local-file sessions, including Cena Season 1, New Generation, Attitude Era, RAW, SmackDown, Worlds Collide, Money in the Bank and Survivor Series.
+- Corrected exported filenames so they exactly match the flat install path shown in the Studio rather than using only the card art key.
+- Example Superstar layered export: `card-layered-superstar-john-cena.webp`.
+- Example Move layered export: `card-layered-move-mr-perfect-perfect-plex.webp`.
+- Legacy/custom-front and HUD-headshot exports follow the same canonical destination naming rule.
+- PNG fallback preserves the canonical basename and changes only the extension.
+- No gameplay, balance, card data, pack odds, rewards, progression, collection state or live-set availability changed.
 

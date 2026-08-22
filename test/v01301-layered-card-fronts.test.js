@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import { layeredCardArtFor } from "../js/data/artwork.js?v=0.13.95";
+import { layeredCardArtFor } from "../js/data/artwork.js?v=0.13.97";
 
 const fronts = fs.readFileSync(new URL("../js/data/card-fronts.js", import.meta.url), "utf8");
 const artwork = fs.readFileSync(new URL("../js/data/artwork.js", import.meta.url), "utf8");
@@ -10,7 +10,7 @@ const css = fs.readFileSync(new URL("../css/game.css", import.meta.url), "utf8")
 const studio = fs.readFileSync(new URL("../js/tools/card-art-studio.js", import.meta.url), "utf8");
 const studioHtml = fs.readFileSync(new URL("../tools/card-art-studio.html", import.meta.url), "utf8");
 
-test.skip("layered fronts are automatic candidates with flat-front fallback and no manual registry — superseded by v0.13.95 flat asset paths", () => {
+test.skip("layered fronts are automatic candidates with flat-front fallback and no manual registry — superseded by v0.13.96 flat asset paths", () => {
   assert.doesNotMatch(fronts, /LAYERED_FRONT_IDS/);
   assert.doesNotMatch(artwork, /usesLayeredFront/);
   const stunner = layeredCardArtFor({ id: "kevin-owens-stunner", kind: "move" });
@@ -23,7 +23,7 @@ test.skip("layered fronts are automatic candidates with flat-front fallback and 
   assert.match(css, /is-layered-front:not\(\.has-layered-asset\).*visibility:hidden/);
 });
 
-test.skip("Card Art Studio exports Layered v1 clean plates and documents automatic fallback — superseded by v0.13.95 flat asset paths", () => {
+test.skip("Card Art Studio exports Layered v1 clean plates and documents automatic fallback — superseded by v0.13.96 flat asset paths", () => {
   assert.match(studioHtml, /Layered v1 · Recommended/);
   assert.match(studioHtml, /Final Card · Live data visible/);
   assert.match(studioHtml, /Art Plate · Saved image only/);

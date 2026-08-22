@@ -16,7 +16,7 @@ test.skip("v0.13.62 Card Studio exposes New Generation as a development set with
   assert.match(css,/\.key\.new-generation\{background:linear-gradient\(110deg,#2b3990/);
 });
 
-test.skip("v0.13.62 New Generation uses the supplied WWF New Generation logo without recolouring it — superseded by v0.13.95 flat asset paths",()=>{
+test.skip("v0.13.62 New Generation uses the supplied WWF New Generation logo without recolouring it — superseded by v0.13.96 flat asset paths",()=>{
   assert.match(studio,/"new-generation-series-1":"assets\/branding\/new-generation-series-1\/new-generation-logo\.svg"/);
   assert.match(studio,/EXPORT_SAFE_SET_LOGOS\["new-generation-series-1"\]/);
   assert.match(logo,/#fd0/);

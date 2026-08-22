@@ -9143,8 +9143,6 @@ body[data-set="attitude-era-series-1"] .pack-theme-next,.theme-attitude .pack-th
 .ccg-card.tier-sapphire .ccg-tier-overlay{background:linear-gradient(112deg,transparent 25%,rgba(55,147,255,.12) 35%,rgba(205,237,255,.58) 46%,rgba(51,135,235,.28) 55%,transparent 72%)}
 .ccg-card.tier-ruby .ccg-card-front{box-shadow:inset 0 0 0 1px rgba(255,105,116,.70),0 0 21px rgba(238,46,63,.42)!important}
 .ccg-card.tier-ruby .ccg-tier-overlay{background:linear-gradient(112deg,transparent 25%,rgba(238,48,65,.14) 35%,rgba(255,220,222,.62) 46%,rgba(224,38,55,.30) 55%,transparent 72%)}
-.ccg-tier-stat-override{position:absolute;z-index:60;right:5%;bottom:4%;display:grid;gap:1px;min-width:48px;padding:4px 7px;border-radius:8px;background:rgba(5,7,10,.88);border:1px solid rgba(255,255,255,.34);box-shadow:0 4px 12px rgba(0,0,0,.55);text-align:center;color:#fff;pointer-events:none}
-.ccg-tier-stat-override small{font-size:.42rem;line-height:1;font-weight:1000;letter-spacing:.08em}.ccg-tier-stat-override b{font-size:.65rem;line-height:1.05}
 .tier-summary-symbol{display:inline-flex;align-items:center;justify-content:center;min-height:20px;padding:3px 7px;border-radius:999px;font-size:.48rem;font-weight:1000;letter-spacing:.07em;border:1px solid rgba(255,255,255,.24);color:#fff;background:#14161b}
 .tier-summary-symbol.tier-emerald{box-shadow:inset 0 0 9px rgba(40,226,113,.45)}.tier-summary-symbol.tier-sapphire{box-shadow:inset 0 0 9px rgba(54,146,255,.50)}.tier-summary-symbol.tier-ruby{box-shadow:inset 0 0 9px rgba(238,46,63,.55)}
 .tier-stage.tier-emerald .booster-card-halo{filter:drop-shadow(0 0 26px rgba(40,226,113,.42))}.tier-stage.tier-sapphire .booster-card-halo{filter:drop-shadow(0 0 26px rgba(54,146,255,.44))}.tier-stage.tier-ruby .booster-card-halo{filter:drop-shadow(0 0 30px rgba(238,46,63,.52))}
@@ -9227,7 +9225,15 @@ body[data-set="attitude-era-series-1"] .pack-theme-next,.theme-attitude .pack-th
   .welcome-pack-choice-grid{gap:5px 3px!important}.welcome-pack-choice .welcome-choice-pack{width:min(94px,100%)!important}.welcome-pack-choice>small{font-size:.39rem!important}
 }
 
-/* v0.13.95 — onboarding screens own the full iPhone viewport. Do not reserve the
+/* v0.13.96 — onboarding screens own the full iPhone viewport. Do not reserve the
    persistent app-chrome offset above Welcome selection/reveal. */
 body[data-screen="welcome-superstar"] main{padding-top:0!important;padding-bottom:0!important;width:100%!important;max-width:100%!important;margin:0 auto!important}
 body[data-screen="welcome-superstar"] .topbar,body[data-screen="welcome-superstar"] .mobile-game-nav{display:none!important}
+
+
+/* v0.13.96 — Welcome viewport + clean collectible fronts ------------------- */
+body[data-screen="welcome-superstar"]:not([data-screen="match"]):not([data-screen="splash"]):not([data-screen="starter"]):not([data-screen="matchup"]):not([data-screen="unlock-celebration"]):not([data-screen="entrance-intro"]) main{padding-top:0!important;padding-bottom:0!important;width:100%!important;max-width:100%!important;margin:0 auto!important}
+body[data-screen="welcome-superstar"] main{padding-top:0!important}
+body[data-screen="welcome-superstar"] #game{padding-top:0!important}
+.welcome-reveal-screen{align-content:start!important}
+.welcome-reveal-screen .onboarding-brand{height:64px!important;min-height:64px!important;overflow:visible!important}

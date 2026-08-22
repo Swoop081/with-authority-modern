@@ -21,7 +21,7 @@ const deadAssets = [
   "assets/images/branding-smackdown-series-1-smackdown-logo.svg",
 ];
 
-test.skip("v0.12.69 clean root ships no historical audit debris — superseded by v0.13.95 flat asset paths", () => {
+test.skip("v0.12.69 clean root ships no historical audit debris — superseded by v0.13.96 flat asset paths", () => {
   const names = fs.readdirSync(root);
   const debris = names.filter((name) =>
     /^(TEST|FLOW|CARD-ID|ART|VALIDATION|BALANCE|COUNTER|DEAD-TURN|FINAL-BALANCE|ECONOMY|AI|HP|STUDIO|DEEP-MATCH|MOMENTUM|POSSESSION|CPU)-/i.test(name)

@@ -1,17 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.95';
-import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.95';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.95';
-import { collectionCards } from '../js/data/collection.js?v=0.13.95';
-import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.13.95';
-import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.95';
-import { superstars } from '../js/data/superstars.js?v=0.13.95';
-import { decks } from '../js/data/decks.js?v=0.13.95';
-import { activeLiveEventTowers, LIVE_EVENT_WIN_UP } from '../js/data/live-events.js?v=0.13.95';
-import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.13.95';
-import { layeredCardArtFor, finishedCardArtFor } from '../js/data/artwork.js?v=0.13.95';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.97';
+import { cpuDecision } from '../js/ai/WrestlingAI.js?v=0.13.97';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.97';
+import { collectionCards } from '../js/data/collection.js?v=0.13.97';
+import { reconstructCurrentPlayPile } from '../js/ui/play-pile.js?v=0.13.97';
+import { CARD_NUMBER_BY_ID } from '../js/data/card-number-manifest.js?v=0.13.97';
+import { superstars } from '../js/data/superstars.js?v=0.13.97';
+import { decks } from '../js/data/decks.js?v=0.13.97';
+import { activeLiveEventTowers, LIVE_EVENT_WIN_UP } from '../js/data/live-events.js?v=0.13.97';
+import { isPlayerVisibleSuperstar } from '../js/data/release.js?v=0.13.97';
+import { layeredCardArtFor, finishedCardArtFor } from '../js/data/artwork.js?v=0.13.97';
 
 const card=id=>allGameplayCards.find(c=>c.id===id);
 const star=id=>Object.values(superstars).find(s=>s.id===id);
@@ -42,7 +42,7 @@ test('v0.13.35 rotating Live Events never expose unreleased Superstar opponents'
   assert.equal(LIVE_EVENT_WIN_UP,0,'victories no longer pay direct UP');
 });
 
-test.skip('v0.13.35 layered fronts are attempted for Superstars before the standard front fallback — superseded by v0.13.95 flat asset paths',()=>{
+test.skip('v0.13.35 layered fronts are attempted for Superstars before the standard front fallback — superseded by v0.13.96 flat asset paths',()=>{
   const romanCard=collectionCards.find(c=>c.kind==='superstar'&&c.superstarId==='roman-reigns');
   assert.ok(romanCard);
   assert.match(layeredCardArtFor(romanCard),/assets\/cards\/art\/layered\/superstars\/.*\.webp(?:\?v=.*)?$/);

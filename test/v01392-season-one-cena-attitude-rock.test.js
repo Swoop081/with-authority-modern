@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.95';
-import { decks } from '../js/data/decks.js?v=0.13.95';
-import { sets } from '../js/data/sets.js?v=0.13.95';
-import { superstars } from '../js/data/superstars.js?v=0.13.95';
-import { SEASON_1_CHASE_TIER_REWARDS, SEASON_1_COMPLETION_SUPERSTAR, SEASON_START, SEASON_END, SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, claimSeasonTier, claimAllSeasonTiers } from '../js/data/seasons.js?v=0.13.95';
-import { LAUNCH_LIVE_SET_IDS, LIVE_SEASON_REWARD_SET_IDS, isLaunchRosterSuperstar } from '../js/data/release.js?v=0.13.95';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.95';
-import { canPlaySpecial } from '../js/engine/rules.js?v=0.13.95';
-import { createProfile, ownedCount } from '../js/data/profile.js?v=0.13.95';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.97';
+import { decks } from '../js/data/decks.js?v=0.13.97';
+import { sets } from '../js/data/sets.js?v=0.13.97';
+import { superstars } from '../js/data/superstars.js?v=0.13.97';
+import { SEASON_1_CHASE_TIER_REWARDS, SEASON_1_COMPLETION_SUPERSTAR, SEASON_START, SEASON_END, SEASON_TIER_COUNT, MAX_SEASON_XP, tierReward, claimSeasonTier, claimAllSeasonTiers } from '../js/data/seasons.js?v=0.13.97';
+import { LAUNCH_LIVE_SET_IDS, LIVE_SEASON_REWARD_SET_IDS, isLaunchRosterSuperstar } from '../js/data/release.js?v=0.13.97';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.97';
+import { canPlaySpecial } from '../js/engine/rules.js?v=0.13.97';
+import { createProfile, ownedCount } from '../js/data/profile.js?v=0.13.97';
 
 const byId = new Map(allGameplayCards.map(card => [card.id, card]));
 const starById = new Map(Object.values(superstars).map(star => [star.id, star]));
@@ -156,7 +156,7 @@ test('v0.13.92 Cena prestige milestones grant Ruby printings without overwriting
   assert.ok(p.unlockedSuperstars.includes('john-cena'));
 });
 
-test.skip('v0.13.92 Golden and Attitude card-corner logos use the corrected assets/layout — superseded by v0.13.95 flat asset paths', () => {
+test.skip('v0.13.92 Golden and Attitude card-corner logos use the corrected assets/layout — superseded by v0.13.96 flat asset paths', () => {
   const goldenLogo = fs.readFileSync(new URL('../assets/images/branding-golden-era-series-1-wwf-classic-block-card.svg', import.meta.url), 'utf8');
   const studio = fs.readFileSync(new URL('../js/tools/card-art-studio.js', import.meta.url), 'utf8');
   const app = fs.readFileSync(new URL('../js/ui/app.js', import.meta.url), 'utf8');

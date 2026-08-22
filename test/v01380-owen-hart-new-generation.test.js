@@ -1,15 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { sets } from '../js/data/sets.js?v=0.13.95';
-import { superstars } from '../js/data/superstars.js?v=0.13.95';
-import { decks } from '../js/data/decks.js?v=0.13.95';
-import { allGameplayCards } from '../js/data/content.js?v=0.13.95';
-import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.95';
-import { boosterEligible } from '../js/data/boosters.js?v=0.13.95';
-import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.95';
-import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=0.13.95';
-await import('../js/data/superstar-nameplates.js?v=0.13.95');
+import { sets } from '../js/data/sets.js?v=0.13.97';
+import { superstars } from '../js/data/superstars.js?v=0.13.97';
+import { decks } from '../js/data/decks.js?v=0.13.97';
+import { allGameplayCards } from '../js/data/content.js?v=0.13.97';
+import { CARD_NUMBER_BY_ID, CARD_IDS_BY_SET } from '../js/data/card-number-manifest.js?v=0.13.97';
+import { boosterEligible } from '../js/data/boosters.js?v=0.13.97';
+import { MatchEngine } from '../js/engine/MatchEngine.js?v=0.13.97';
+import { canAttemptPin, canPlaySpecial } from '../js/engine/rules.js?v=0.13.97';
+await import('../js/data/superstar-nameplates.js?v=0.13.97');
 
 const owen=Object.values(superstars).find(s=>s.id==='owen-hart');
 const byId=Object.fromEntries(allGameplayCards.map(c=>[c.id,c]));
